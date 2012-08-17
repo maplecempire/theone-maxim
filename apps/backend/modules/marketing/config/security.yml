@@ -1,0 +1,34 @@
+distAdd:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_DIST_ADD ]]
+
+distList:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_DIST_LIST ]]
+
+fxGuideUpload:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_FILE_UPLOAD ]]
+
+manipulatePips:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PIPS_CALCULATOR ]]
+
+pipsUpload:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PIPS_CALCULATOR ]]
+
+sponsorTree:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_SPONSOR_TREE ]]
+
+placementTree:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PLACEMENT_TREE ]]
+
+superIbList:
+  is_secure:   on
+  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PLACEMENT_TREE ]]
+
+all:
+  is_secure:  off        # off is the default value anyway

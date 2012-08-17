@@ -1,0 +1,11 @@
+.font {
+        font-size: 14px;
+        color: #f9c81e;
+        font-family: arial;
+    }
+
+.error-font {
+        font-size: 14px;
+        color: #990033;
+        font-family: arial;
+    }

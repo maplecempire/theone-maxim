@@ -1,0 +1,40 @@
+body {
+  color: #000000;
+  font-size : 11px;
+  margin-left: 0px;
+  margin-top: 5px;
+  font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+  background-color : #FFF;
+}
+a:link, a:active, a:visited{
+	color: #4593eb;
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:underline;
+}
+
+div.error_main{
+	width:650px;
+	margin:auto;
+}
+div.error-header{
+	background:url(images/error.gif) no-repeat 20px 20px;
+	font-size:18px;
+	font-weight:bold;
+	font-family:verdana;
+	padding:90px 0 0 150px;
+	height:120px;
+}
+div.error-content{
+	margin-top:20px;
+}
+
+.msg_err{
+	width:100%;
+	margin:5px 0 10px 0;
+}
+.msg_err div{
+	color: #cc0000;
+	padding-left:15px;
+}

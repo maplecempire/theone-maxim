@@ -1,0 +1,130 @@
+announcement:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+announcementList:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+accountVerification:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+activateMember:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+bonusDetails:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+convertEcashToEpoint:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+downloadMt4:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+ecashWithdrawal:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+ecashLog:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+epointLog:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+epointPurchase:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+fetchAnnouncementById:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+fetchPackage:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+loginPassword:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+mt4Withdrawal:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+reinvestCps:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+packagePurchaseViaBankTransfer:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+packageUpgrade:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+pendingMemberList:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+pinLog:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+placePlacement:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+purchasePin:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+placementTree:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+reloadTopup:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+sponsorTree:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+summary:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+transactionPassword:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+transferPin:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+transferEcash:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+transferEpoint:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+viewProfile:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+viewBankInformation:
+  is_secure:   on
+  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+
+all:
+  is_secure:  off        # off is the default value anyway
