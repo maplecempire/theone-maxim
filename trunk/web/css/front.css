@@ -1,0 +1,248 @@
+body{
+margin:0;
+padding:0;
+font-family:arial;
+font-size:12px;
+height:100%;
+background:#b5b5b5 url(../images/theme5/bg.png) repeat-x left top;
+}
+
+h1, h2, h3, ul, li{
+padding:0;
+margin:0;
+}
+
+a{
+outline:0;
+}
+
+form{
+display:inline;
+}
+
+textarea{
+outline:0;
+resize:none;
+}
+
+#wrapper{
+margin:0 auto;
+width:638px;
+}
+
+.clear{
+clear:both;
+}
+
+.header .logo{
+float:left;
+width:223px;
+height:51px;
+/*background:url(../images/logo.png) no-repeat left top;*/
+}
+
+.header .logo a{
+float:left;
+width:100%;
+height:100%;
+}
+
+.menus{
+float:left;
+display:inline;
+margin-left:50px;
+}
+
+.menus ul{
+list-style:none;
+}
+
+.menus ul li{
+float:left;
+}
+
+.menus ul li.last{
+background:url(../images/menu-separator.png) no-repeat right center;
+}
+
+.menus ul li a{
+display:block;
+line-height:56px;
+color:#464646;
+text-decoration:none;
+text-align:center;
+width:106px;
+background:url(../images/menu-separator.png) no-repeat left center;
+}
+
+.menus ul li.last a{
+width:108px;
+}
+
+.menus ul li a.active, .menus ul li a:hover{
+color:#8e8e8e;
+}
+
+a.buttonGreen{
+float:left;
+padding:0 15px;
+line-height:34px;
+color:#fff;
+-moz-border-radius: 10px;
+-khtml-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+border:1px solid #95b453;
+text-decoration:none;
+background:url(../images/button-rep.png) repeat-x left top;
+}
+
+.header{
+float:left;
+width:100%;
+display:inline;
+margin-bottom:20px;
+}
+
+.header .logout{
+float:right;
+width:100px;
+margin-top:35px;
+}
+
+.header .logout a{
+float:right;
+}
+
+.header .language{
+    float:right;
+    width:240px;
+    margin-top:35px;
+    text-transform: uppercase;
+}
+
+.header .language h3.title {
+    font-size: 11px;
+    color: #969696;
+    cursor: pointer;
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+}
+
+.content{
+float:left;
+width:100%;
+min-height:430px;
+background:white;
+-moz-border-radius: 10px;
+-khtml-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+}
+
+.content .topBar{
+width:610px;
+padding:3px 10px;
+line-height:20px;
+margin:4px auto;
+color:#fff;
+background:#000;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+.content .topBar .userID{
+	width:220px;
+}
+
+.content .topBar .totalNetwork{
+	width:130px;
+}
+
+.content .topBar .totalPips{
+	width:110px;
+}
+
+.content .topBar .totalBonus{
+	width:220px;
+}
+
+.content .topBar .noborder{
+border:0;
+}
+
+.content .topBar span{
+float:left;
+width:151px;
+text-align:center;
+border-right:1px solid white;
+}
+
+.tablelist{
+width:100%;
+}
+
+.tablelist table  td{
+padding:15px 10px;
+border-bottom:2px solid #fff;
+}
+
+.tablelist table .caption{
+background:#e8e8e8;
+width:25%;
+}
+
+.tablelist table .value{
+background:#f4f4f4;
+width:75%;
+}
+
+.tablelist table th{
+background:#555;
+color:#fff;
+padding:7px 10px;
+text-align:left;
+}
+
+.tablelist table .tdlist{
+background:#f4f4f4;
+}
+
+.tablelist .tableActivity{
+	border-bottom:2px solid #5d5d5d;
+}
+
+.tablelist .tableActivity td{
+	padding:10px;
+}
+
+.footer {
+float:left;
+width:100%;
+margin-top:12px;
+color:#fff;
+}
+
+.footer a{
+color:#fff;
+text-decoration:none;
+}
+
+.footer a:hover{
+text-decoration:underline;
+}
+
+.footer .pc{
+float:left;
+width:200px;
+margin-left:12px;
+}
+
+.footer .copyright{
+float:right;
+width:300px;
+text-align:right;
+margin-right:12px;
+}

@@ -1,0 +1,24 @@
+delete from mlm_dist_commission
+go
+delete from mlm_dist_commission_ledger
+go
+UPDATE `app_user`
+SET `status_code`='ACTIVE'
+WHERE `user_id`=33
+go
+UPDATE `app_user`
+SET `status_code`='ACTIVE'
+WHERE `user_id`=34
+go
+UPDATE `mlm_distributor`
+SET `status_code`='PENDING', `active_datetime`=NULL, `rank_id`=NULL, `rank_code`=NULL, `tree_level`=NULL, `tree_structure`=NULL, `upline_dist_code`=NULL, `upline_dist_id`=NULL, `placement_position`=NULL, `placement_datetime`=NULL
+WHERE `distributor_id`=31
+go
+delete from mlm_account where dist_id > 30
+go
+delete from mlm_account_ledger where dist_id > 30
+go
+delete from mlm_dist_pairing
+go
+delete from mlm_dist_pairing_ledger
+go

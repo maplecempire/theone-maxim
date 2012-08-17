@@ -1,0 +1,42 @@
+.TreeMenu {                                                      /* General   */
+  font-family     : Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size       : 11px;            color           : #000000;
+  white-space     : nowrap;            }
+
+.TreeMenu a {                                                    /* Links     */
+  color           : #000000;         text-decoration : none; }
+
+.TreeMenu img {                                                  /* Images    */
+  border          : 0px;             vertical-align  : middle; }
+
+*.CreatedBy:hover {                                              /* CreatedBy */
+  color           : #0000FF;         text-decoration : underline; }
+
+*.Node_0, *.Selected_0, *.Item_0 {                               /* Indent=0  */
+  font-size       : 12px;            font-weight     : normal;
+  font-style      : normal;          padding-left    : 2px; }
+
+*.Node_0:hover, *.Selected_0:hover {
+  color           : #0000FF;         text-decoration : underline; }
+
+*.Item_0:hover { }
+
+*.Node_1, *.Selected_1, *.Item_1 {                               /* Indent=1  */
+  font-size       : 12px;            font-weight     : normal;
+  font-style      : normal;          padding-left    : 2px;  }
+
+*.Node_1:hover, *.Selected_1:hover {
+  color           : #0000FF;         text-decoration : underline; }
+
+*.Item_1:hover { }
+
+*.Node_2, *.Selected_2, *.Item_2 {                               /* Indent>1  */
+  padding-left    : 2px;  font-weight     : normal; font-size       : 12px;}
+
+*.Node_2:hover, *.Selected_2:hover {
+  color           : #0000FF;         text-decoration : underline; }
+
+*.Item_2:hover { }
+
+*.Selected_0, *.Selected_1, *.Selected_2 {                       /* Selected_ */
+  background-color: #C0D2EC; }
