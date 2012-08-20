@@ -44,7 +44,7 @@
 </script>
 
 <div class="aside">
-    <?php include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
     <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
     <!--<div class="sidenavi">
         <ul>

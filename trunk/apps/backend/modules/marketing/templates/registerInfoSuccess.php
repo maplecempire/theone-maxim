@@ -101,7 +101,7 @@
                     <p><strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                 </div>
                 <?php endif; ?>
-                <button type="submit" class="right" onclick="JavaScript:window.location.href='/home/login';return false;"><?php echo __('Login Now') ?></button>
+                <button type="submit" class="right"><?php echo __('Login Now') ?></button>
             </form>
 
         </div>
