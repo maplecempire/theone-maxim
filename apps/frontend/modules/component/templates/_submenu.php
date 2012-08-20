@@ -4,7 +4,17 @@
     border: 1px dotted red;
     outline: thin solid red;
 }
-
+.menu li {
+    float: left;
+    line-height: 20px;
+    list-style: none outside none;
+    width: 250px;
+    padding-left: 20px;
+}
+.menu_title {
+    color: #CCAD5A;
+    padding-left: 0px !important;
+}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -172,83 +182,68 @@ $(function() {
 });
 </script>
 
-<div class="sidenavi">
+<div class="menu">
     <ul>
-        <?php
-        if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) {
-        ?>
-        <li><a href="<?php echo url_for("/member/downloadMt4?q=" . rand()) ?>">Download MT4 Platform</a></li>
-        <?php } ?>
-        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>">Download Daily FX Guide</a></li>
-        <?php } ?>
-        <?php
-        if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
-            <li><a href="<?php echo url_for("/download/downloadMt4Pro") ?>"><?php echo __('Download MT4 Pro'); ?></a></li>
-        <?php } ?>
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/convertEcashToEpoint">Convert MT4 Credit to e-Point</a></li>
-        --><?php /*
-        }*/
-        ?>
+        <li class="menu_title">Home</li>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
-        <li><a href="#" id="linkPackagePurchase">Package Purchase</a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="#" id="linkPackagePurchase">Package Purchase</a></li>
         <?php } ?>
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { */?><!--
-        <li><a href="/member/packagePurchaseViaBankTransfer">Package Purchase via Bank Transfer</a></li>
-        --><?php /*
-        }*/
-        ?>
-        <?php //if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/epointPurchase">e-Point Purchase</a></li>
-        <?php //} ?>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/epointPurchase">e-Point Purchase</a></li>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/packageUpgrade">Package Upgrade</a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/packageUpgrade">Package Upgrade</a></li>
         <?php } ?>
-
-
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/transferEcash"><?php /*echo __('MT4 Credit Transfer'); */?></a></li>
-        --><?php /*
-        }*/
-        ?>
-
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/transferEpoint"><?php /*echo __('e-Point Transfer'); */?></a></li>
-        --><?php
-/*        }*/
-        ?>
-
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/epointLog"><?php echo __('e-Point Log'); ?></a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/epointLog"><?php echo __('e-Point Log'); ?></a></li>
         <?php } ?>
-
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/ecashWithdrawal">MT4 Credit Withdrawal</a></li>
-        --><?php /*
-        }*/
-        ?>
     </ul>
-</div>
-
-<div class="sidenavi">
     <ul>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/reloadTopup">Reload MT4 Fund</a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/reloadTopup">Reload MT4 Fund</a></li>
         <?php } ?>
-        <?php
-        /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/ecashLog"><?php /*echo __('MT4 Credit Log'); */?></a></li>
-        --><?php /*
-        }*/
-        ?>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/mt4Withdrawal">MT4 Withdrawal</a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/mt4Withdrawal">MT4 Withdrawal</a></li>
+        <?php } ?>
+    </ul>
+    <ul>
+        <li class="menu_title">Profile</li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/viewProfile"><span><?php echo __('Account Information'); ?></span></a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/viewBankInformation"><span><?php echo __('Bank Account Information'); ?></span></a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/loginPassword"><span><?php echo __('Change Password'); ?></span></a></li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/transactionPassword"><span><?php echo __('Change Security Password'); ?></span></a></li>
+    </ul>
+    <ul>
+        <li class="menu_title">Hierarchy</li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a></li>
+    </ul>
+    <ul>
+        <li class="menu_title">Bonus</li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a></li>
+    </ul>
+    <ul>
+        <li class="menu_title">Download</li>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="<?php echo url_for("/member/downloadMt4?q=" . rand()) ?>">Download MT4 Platform</a></li>
+        <?php } ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>">Download Daily FX Guide</a></li>
+        <?php } ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="<?php echo url_for("/download/downloadMt4Pro") ?>"><?php echo __('Download MT4 Pro'); ?></a></li>
         <?php } ?>
     </ul>
 </div>
