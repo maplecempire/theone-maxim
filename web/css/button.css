@@ -1,0 +1,220 @@
+span.button, span.button input
+, span.shortbutton, span.shortbutton input
+, span.mediumbutton, span.mediumbutton input
+, span.backbutton, span.backbutton input
+, span.buttondisabled, span.buttondisabled input
+, span.mediumbuttondisabled, span.mediumbuttondisabled input {
+    background: transparent url(../images/btn_common.png) no-repeat;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    height: 20px;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 1px;
+    width: auto;
+}
+
+span.button input, span.shortbutton input, span.mediumbutton input, span.backbutton input, span.buttondisabled input, span.mediumbuttondisabled input {
+	background-position: 100% 0;
+    margin-left: 15px;
+    padding: 0 10px 2px 2px;
+}
+
+span.shortbutton {
+    background: transparent url(../images/btn_short.png) no-repeat;
+    width: 70px;
+}
+
+span.mediumbutton, span.mediumbuttondisabled {
+    background: transparent url(../images/btn_medium.png) no-repeat;
+    width: 100px;
+}
+
+span.shortbutton input, span.mediumbutton input, span.mediumbuttondisabled input {
+    background: none;
+}
+
+span.backbutton {
+    background-position: 0 -40px;
+}
+
+span.backbutton input {
+    background-position: 100% -40px;
+}
+
+span.buttondisabled, span.mediumbuttondisabled {
+    background-position: 0 -80px;
+}
+
+span.buttondisabled input, span.mediumbuttondisabled input {
+    background-position: 100% -80px;
+}
+
+span.button:hover, span.button-behavior-hover, span.shortbutton:hover, span.shortbutton-behavior-hover, span.mediumbutton:hover, span.mediumbutton-behavior-hover {
+	background-position: 0 -20px;
+}
+
+span.button:hover input, span.button-behavior-hover input, span.shortbutton:hover input, span.shortbutton-behavior-hover input, span.mediumbutton:hover input, span.mediumbutton-behavior-hover input {
+	background-position: 100% -20px;
+}
+
+span.backbutton:hover, span.backbutton-behavior-hover {
+	background-position: 0 -60px;
+}
+
+span.backbutton:hover input, span.backbutton-behavior-hover input {
+	background-position: 100% -60px;
+}
+
+span.loginbutton, span.loginbutton input, span.disabled, span.disabled span  {
+	background-image: url(../images/button_image.gif);
+}
+
+span.loginbutton, span.disabled {
+	background-position: right -1px;
+	background-repeat:no-repeat;
+	padding-right: 1px;
+	display: inline-block;
+	cursor: pointer;
+	
+	padding-left:0px;
+	padding-top:0px;
+	padding-right:1px;
+	padding-bottom:0px;
+}
+
+span.loginbutton input, span.disabled span {
+		font-family:arial;
+		font-size:11px;
+		text-decoration: none;
+	    font-weight: bold;
+		color:#ffffff;
+	
+		background-position: left -1px;
+		background-color: #ffffff;
+		vertical-align:middle;
+	
+	    height: 20px;
+		padding-left:10px;
+		padding-top:0px;
+		padding-right:0px;
+		padding-bottom:0px;
+		margin: 0px;
+	
+		cursor: pointer;
+		border: none;
+		display: inline-block;
+	
+		white-space:nowrap;
+}
+
+span.disabled span {
+	background-position: left -74px;
+	padding-left:20px;
+	padding-top:4px;
+	padding-right:10px;
+	padding-bottom:0px;
+}
+
+span.disabled {
+	background-position: right -74px;
+}
+
+span.loginbutton:hover, span.loginbutton-behavior-hover {
+	background-position: right -36px;
+}
+
+span.loginbutton:hover input, span.loginbutton-behavior-hover input {
+	background-position: left -36px;
+}
+
+span.button input, span.shortbutton input, span.mediumbutton input {
+	_behavior: expression(
+		(function(el){
+			if( typeof( behavior_onMouseEnter) == 'undefined'){
+				behavior_onMouseEnter = function(el){
+					var dEl = this.parentNode;
+					var sClass = dEl.className;
+					dEl.__defaultClassName = sClass;
+					dEl.className = sClass + ' button-behavior-hover';
+					this.setCapture();
+				};
+
+				behavior_onMouseLeave = function(el) {
+					var dEl = this.parentNode;
+					dEl.className = dEl.__defaultClassName;
+					dEl.__defaultClassName = undefined;
+					this.releaseCapture();
+				};
+			};
+
+			el.runtimeStyle.behavior = 'none';
+			el.onmouseenter = behavior_onMouseEnter;
+			el.onmouseleave = behavior_onMouseLeave;
+		})(this));
+}
+
+span.backbutton input {
+	_behavior: expression(
+		(function(el){
+			if( typeof( behavior_onMouseEnterBack) == 'undefined'){
+				behavior_onMouseEnterBack = function(el){
+					var dEl = this.parentNode;
+					var sClass = dEl.className;
+					dEl.__defaultClassName = sClass;
+					dEl.className = sClass + ' backbutton-behavior-hover';
+					this.setCapture();
+				};
+
+				behavior_onMouseLeaveBack = function(el) {
+					var dEl = this.parentNode;
+					dEl.className = dEl.__defaultClassName;
+					dEl.__defaultClassName = undefined;
+					this.releaseCapture();
+				};
+			};
+
+			el.runtimeStyle.behavior = 'none';
+			el.onmouseenter = behavior_onMouseEnterBack;
+			el.onmouseleave = behavior_onMouseLeaveBack;
+		})(this));
+}
+
+span.loginbutton input {
+	_behavior: expression(
+		(function(el){
+			if( typeof( behavior_onMouseEnter) == 'undefined'){
+				behavior_onMouseEnter = function(el){
+					var dEl = this.parentNode;
+					var sClass = dEl.className ;
+					dEl.__defaultClassName = sClass ;
+					dEl.className = sClass + ' loginbutton-behavior-hover';
+					this.setCapture();
+				};
+
+				behavior_onMouseLeave = function(el) {
+					var dEl = this.parentNode;
+					dEl.className = dEl.__defaultClassName ;
+					dEl.__defaultClassName = undefined;
+					this.releaseCapture();
+				};
+			};
+
+			el.runtimeStyle.behavior = 'none';
+			el.onmouseenter = behavior_onMouseEnter;
+			el.onmouseleave = behavior_onMouseLeave;
+		})(this));
+}    
+			
+@-moz-document url-prefix(http) {
+    span.button input, span.shortbutton input, span.mediumbutton input, span.backbutton input, span.buttondisabled input{
+        padding-bottom: 5px;
+        text-indent: 0;
+    }
+}
