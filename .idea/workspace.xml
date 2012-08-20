@@ -71,89 +71,106 @@
     <favorites_list name="ofxglobal" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="_submenu.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_submenu.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="49" selection-start="7681" selection-end="7681" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="registerSuccess.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="304" column="71" selection-start="10121" selection-end="10121" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actions.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/backend/modules/financeList/actions/actions.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="901" column="26" selection-start="40239" selection-end="40239" vertical-scroll-proportion="0.06854839">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="67" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/backend/templates/layout.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="706" column="68" selection-start="36756" selection-end="36774" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_packageInformation.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/backend/modules/component/templates/_packageInformation.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="84" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loginSuccess.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="58" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="referralBonusSuccess.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/backend/modules/finance/templates/referralBonusSuccess.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="57" selection-start="2907" selection-end="2907" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reloadMt4FundSuccess.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/backend/modules/finance/templates/reloadMt4FundSuccess.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="35" selection-start="6061" selection-end="6061" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.6429113">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="loginSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="195" column="88" selection-start="6492" selection-end="6492" vertical-scroll-proportion="-5.72549">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="registerSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="776" column="36" selection-start="28968" selection-end="28968" vertical-scroll-proportion="-36.653847">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="forgetPasswordSuccess.php" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="188" column="61" selection-start="5656" selection-end="5656" vertical-scroll-proportion="0.2306163">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Mails.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lib/Mails.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="14" column="101" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="actions.class.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="649" column="19" selection-start="37840" selection-end="37840" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="fxGuideUploadSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="45" column="62" selection-start="1797" selection-end="1797" vertical-scroll-proportion="-10.5">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="actions.class.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="41" column="92" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="loginSuccess_bak.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess_bak.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="76" column="102" selection-start="2611" selection-end="2611" vertical-scroll-proportion="-3.490196">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="layout.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="10" column="58" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.5384617">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="forgetPasswordSuccess_bak.php" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="154" column="84" selection-start="4848" selection-end="4858" vertical-scroll-proportion="0.5431862">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -163,24 +180,27 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/apps/backend/modules/finance/templates/mt4WithdrawalSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/finance/templates/pipsBonusDetailSuccess.php" />
         <option value="$PROJECT_DIR$/lib/Globals.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/download/actions/actions.class.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/download/config/security.yml" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php" />
         <option value="$PROJECT_DIR$/web/scripts.php" />
+        <option value="$PROJECT_DIR$/web/scripts_backend.php" />
+        <option value="$PROJECT_DIR$/sql/ofx_malaysia_startup.sql" />
         <option value="$PROJECT_DIR$/web/css/style.css" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/config/security.yml" />
+        <option value="$PROJECT_DIR$/apps/backend/modules/admin/config/security.yml" />
+        <option value="$PROJECT_DIR$/apps/frontend/templates/layout_bak.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/templates/layout.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php" />
         <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/component/templates/_submenu.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php" />
-        <option value="$PROJECT_DIR$/web/backend.php" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/financeList/actions/actions.class.php" />
+        <option value="$PROJECT_DIR$/lib/Mails.php" />
+        <option value="$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php" />
+        <option value="$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="MavenRunner">
     <option name="jreName" value="#JAVA_INTERNAL" />
@@ -217,32 +237,34 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Favorites" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -252,25 +274,29 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -278,17 +304,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
+              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -296,7 +322,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
+              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -306,11 +332,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -318,7 +344,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
+              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -326,17 +352,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="financeList" />
+              <option name="myItemId" value="member" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ofxglobal_malaysia" />
+              <option name="myItemId" value="maxim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -344,7 +370,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
+              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -352,18 +378,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="financeList" />
+              <option name="myItemId" value="member" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -382,11 +420,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\member\templates" />
+      <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\home\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\config" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\backend\modules\finance\templates" />
-      <recent name="E:\xampplite\htdocs\fxmarket2you\apps\frontend\modules\member\templates" />
-      <recent name="E:\xampplite\htdocs\ofxglobal\apps\frontend\modules\download\config" />
     </key>
   </component>
   <component name="RunManager">
@@ -468,6 +506,18 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false">
+          <server_id />
+          <server_name />
+        </option>
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" />
       <module name="" />
@@ -491,18 +541,6 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="FtpUpload" enabled="false">
-          <server_id />
-          <server_name />
-        </option>
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="PhingTarget" enabled="false" />
       </method>
@@ -541,13 +579,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -555,10 +593,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29492038" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29492038" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -613,90 +651,120 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/config/view.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="51" selection-start="17574" selection-end="17574" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php">
+    <entry file="file://$PROJECT_DIR$/apps/backend/modules/admin/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="678" column="42" selection-start="32436" selection-end="32436" vertical-scroll-proportion="0.0" />
+        <state line="15" column="33" selection-start="337" selection-end="337" vertical-scroll-proportion="0.46028882">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php">
+    <entry file="file://$PROJECT_DIR$/lib/Globals.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="86" selection-start="6202" selection-end="6202" vertical-scroll-proportion="0.0" />
+        <state line="15" column="49" selection-start="345" selection-end="345" vertical-scroll-proportion="0.35664335">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/scripts.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="9" selection-start="2884" selection-end="2886" vertical-scroll-proportion="0.0" />
+        <state line="2" column="18" selection-start="50" selection-end="56" vertical-scroll-proportion="0.06137184">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/scripts_backend.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout_bak.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="12" selection-start="1038" selection-end="1038" vertical-scroll-proportion="0.0" />
+        <state line="257" column="0" selection-start="9561" selection-end="9561" vertical-scroll-proportion="0.93772894">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/backend_dev.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="29" selection-start="131" selection-end="134" vertical-scroll-proportion="0.12274368" />
+        <state line="10" column="58" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.5384617">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/backend.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="29" selection-start="167" selection-end="167" vertical-scroll-proportion="0.1534296" />
+        <state line="195" column="88" selection-start="6492" selection-end="6492" vertical-scroll-proportion="-5.72549">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_submenu.php">
+    <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="49" selection-start="7681" selection-end="7681" vertical-scroll-proportion="0.0">
+        <state line="649" column="19" selection-start="37840" selection-end="37840" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Mails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="101" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="71" selection-start="10121" selection-end="10121" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/financeList/actions/actions.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="901" column="26" selection-start="40239" selection-end="40239" vertical-scroll-proportion="0.06854839">
+        <state line="776" column="36" selection-start="28968" selection-end="28968" vertical-scroll-proportion="-36.653847">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="67" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" />
+        <state line="950" column="12" selection-start="17327" selection-end="17338" vertical-scroll-proportion="0.17202269">
+          <folding>
+            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/templates/layout.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="706" column="68" selection-start="36756" selection-end="36774" vertical-scroll-proportion="0.0" />
+        <state line="41" column="92" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/component/templates/_packageInformation.php">
+    <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="84" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" />
+        <state line="45" column="62" selection-start="1797" selection-end="1797" vertical-scroll-proportion="-10.5">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess_bak.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="58" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0" />
+        <state line="76" column="102" selection-start="2611" selection-end="2611" vertical-scroll-proportion="-3.490196">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/finance/templates/referralBonusSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="57" selection-start="2907" selection-end="2907" vertical-scroll-proportion="0.0" />
+        <state line="154" column="84" selection-start="4848" selection-end="4858" vertical-scroll-proportion="0.5431862">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/finance/templates/reloadMt4FundSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="35" selection-start="6061" selection-end="6061" vertical-scroll-proportion="0.0" />
+        <state line="188" column="61" selection-start="5656" selection-end="5656" vertical-scroll-proportion="0.2306163">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

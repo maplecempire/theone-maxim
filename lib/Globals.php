@@ -2,8 +2,8 @@
 
 
 abstract class Globals {
-    const PROJECT_NAME = "OFX_MY_";
-    const COMPANY_NAME = "OFX Global Malaysia";
+    const PROJECT_NAME = "MAXIM_";
+    const COMPANY_NAME = "Maxim Trader";
     const TOTAL_BONUS_PAYOUT = 20;
 
     const SF_ENVIRONMENT_PROD = 'prod';
@@ -44,17 +44,17 @@ abstract class Globals {
     /*************************/
     /*****    SESSION   ******/
     /*************************/
-	const SESSION_DISTID = "OFX_MY_DISTID";
-	const SESSION_ADMINID = 'OFX_MY_ADMINID';
-	const SESSION_USERNAME = 'OFX_MY_USERNAME';
-	const SESSION_USERID = 'OFX_MY_USERID';
-	const SESSION_USERTYPE = 'OFX_MY_USERTYPE';
-	const SESSION_USERSTATUS = 'OFX_MY_USERSTATUS';
-    const SESSION_CPS_PRICE = 'OFX_MY_CPS_PRICE';
-    const SESSION_GOLD_PRICE = 'OFX_MY_GOLD_PRICE';
-    const SESSION_MENU_IDX = 'OFX_MY__MENU_IDX';
-    const SESSION_ADMIN_MENU_IDX = 'OFX_MY_ADMIN_MENU_IDX';
-    const SESSION_NICKNAME = 'OFX_MY_NICKNAME';
+	const SESSION_DISTID = "MAXIM_DISTID";
+	const SESSION_ADMINID = 'MAXIM_ADMINID';
+	const SESSION_USERNAME = 'MAXIM_USERNAME';
+	const SESSION_USERID = 'MAXIM_USERID';
+	const SESSION_USERTYPE = 'MAXIM_USERTYPE';
+	const SESSION_USERSTATUS = 'MAXIM_USERSTATUS';
+    const SESSION_CPS_PRICE = 'MAXIM_CPS_PRICE';
+    const SESSION_GOLD_PRICE = 'MAXIM_GOLD_PRICE';
+    const SESSION_MENU_IDX = 'MAXIM__MENU_IDX';
+    const SESSION_ADMIN_MENU_IDX = 'MAXIM_ADMIN_MENU_IDX';
+    const SESSION_NICKNAME = 'MAXIM_NICKNAME';
 
     /*************************/
     /*****    ACCOUNT   ******/
