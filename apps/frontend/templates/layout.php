@@ -121,6 +121,10 @@
                 $(this).toggleClass("ui-icon-circle-triangle-n").toggleClass("ui-icon-circle-triangle-s");
                 $(this).parents(".portlet:first").find(".portlet-content").toggle("fast");
             });
+
+            $("#btnLogout").click(function(){
+                $("#formLogout").submit();
+            });
         });
 
         function alert(data) {
@@ -205,6 +209,7 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <img src="/images/loading.gif" class="hiddenPic">
 
+<form id="formLogout" action="/home/logout"></form>
 <div id="waitingLB" style="display:none; cursor: default">
     <h3>We are processing your request. Please be patient.</h3>
 </div>
@@ -276,7 +281,7 @@
     </th>
     <th class="tbl_heading_left">
         <span class="button" style="float: right;">
-            <input type="button" value="Logout" name="Logout">
+            <input type="button" value="Logout" name="Logout" id="btnLogout">
         </span>
     </th>
 </tr>

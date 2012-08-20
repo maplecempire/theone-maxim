@@ -8,7 +8,7 @@
     float: left;
     line-height: 20px;
     list-style: none outside none;
-    width: 250px;
+    width: 200px;
     padding-left: 20px;
 }
 .menu_title {
@@ -185,6 +185,8 @@ $(function() {
 <div class="menu">
     <ul>
         <li class="menu_title">Home</li>
+        <li><img src="/images/maxim/arrow_blue_single_tab.gif">
+            <a href="/member/summary"><?php echo __('Summary'); ?></a></li>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
         <li><img src="/images/maxim/arrow_blue_single_tab.gif">
             <a href="#" id="linkPackagePurchase">Package Purchase</a></li>

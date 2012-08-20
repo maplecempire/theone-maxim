@@ -676,22 +676,46 @@ class memberActions extends sfActions
 
         $distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distributor);
-        $this->distributor = $distributor;
-        $this->fullName = $distributor->getFullname();
-        $this->directSponsor = $distributor->getUplineDistCode();
 
-        $packageName = "";
-        $pips = "";
-        $commission = "";
-        $package = MlmPackagePeer::retrieveByPK($distributor->getRankId());
-        if ($package) {
-            $packageName = $package->getPackageName();
-            $pips = $package->getPips();
-            $commission = $package->getCommission();
+        $ecash = 0;
+        $epoint = 0;
+        $totalNetworks = 0;
+        $ranking = "";
+        $mt4Id = "";
+        $currencyCode = "";
+
+        $c = new Criteria();
+        $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SYSTEM_CURRENCY);
+        $settingDB = AppSettingPeer::doSelectOne($c);
+        if ($settingDB) {
+            $currencyCode = $settingDB->getSettingValue();
         }
-        $this->packageName = $packageName;
-        $this->pips = $pips;
-        $this->commission = $commission;
+        if ($distributor) {
+            $existUser = AppUserPeer::retrieveByPK($distributor->getUserId());
+
+            if ($existUser) {
+                $lastLogin = $existUser->getLastLoginDatetime();
+            }
+
+            $ranking = $distributor->getRankCode();
+            $mt4Id = $distributor->getMt4UserName();
+
+            $ecash = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+            $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$distributor->getDistributorCode()."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $totalNetworks = MlmDistributorPeer::doCount($c);
+        }
+
+        $this->ecash = $ecash;
+        $this->epoint = $epoint;
+        $this->totalNetworks = $totalNetworks;
+        $this->ranking = $ranking;
+        $this->mt4Id = $mt4Id;
+        $this->currencyCode = $currencyCode;
+        $this->distributor = $distributor;
     }
 
     public function executeAnnouncementList()
