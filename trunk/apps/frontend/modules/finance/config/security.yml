@@ -1,26 +1,26 @@
 ecashLogList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 ecashWithdrawalList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 epointLogList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 mt4WithdrawalList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 reloadMT4FundList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 packageUpgradeList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 all:
   is_secure:  off        # off is the default value anyway

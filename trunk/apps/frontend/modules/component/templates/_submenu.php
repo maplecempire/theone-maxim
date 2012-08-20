@@ -316,7 +316,7 @@ $(function() {
                         <tr class="">
                             <td colspan="3"><p>Below are the contractural terms and agreements that you are bound by as
                                 a client
-                                of OFX Global. We recommend that you take the time to read each of them carefully.</p>
+                                of Maxim Trader. We recommend that you take the time to read each of them carefully.</p>
 
                                 <p><strong>Please check the boxes below to acknowledge your acceptance, argeement and
                                     understanding of these terms and agreements.</strong></p></td>
@@ -357,7 +357,7 @@ $(function() {
             <td colspan="2" align="left" valign="top">
                 <p>I hereby attest and certify that the above information is complete and accurate and I agree to be
                     bound by
-                    these terms and conditions. I also authorise <strong>OFX Global</strong> to verify any or all of
+                    these terms and conditions. I also authorise <strong>Maxim Trader</strong> to verify any or all of
                     the
                     foregoing information. This electronic signature has the same validity and effect as a signature
                     affixed by
@@ -368,8 +368,8 @@ $(function() {
                 <input type='checkbox' name='term_condition' id='term_condition' value="1"
                        style="float:left; margin-right:4px;"/>
 
-                <label><p>I understand that as an OFX Global customer, it is my responsibility to review all necessary
-                    information about currency trading and the OFX Global <a href="/download/iBAgreement" style="color: blue" target="_blank">Terms and Conditions</a>. I
+                <label><p>I understand that as an Maxim Trader customer, it is my responsibility to review all necessary
+                    information about currency trading and the Maxim Trader <a href="/download/iBAgreement" style="color: blue" target="_blank">Terms and Conditions</a>. I
                     am aware of the risks associated with foreign exchange trading and will seek advice and further my education
                     on foreign exchange prior to starting any trading activity.</p></label>
             </td>

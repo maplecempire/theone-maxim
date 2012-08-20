@@ -37,9 +37,9 @@ class memberActions extends sfActions
                     /****************************/
                     $password = $existUser->getUserpassword();
 
-                    $subject = $this->getContext()->getI18N()->__("Password requested for ofxltd.com", null, 'email');
+                    $subject = $this->getContext()->getI18N()->__("Password requested for maxim.com", null, 'email');
                     $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getNickname()), 'email') . ",<p><p>
-                    <p>" . $this->getContext()->getI18N()->__("Your login password for ofxltd.com. ", null, 'email') . "</p>
+                    <p>" . $this->getContext()->getI18N()->__("Your login password for maxim.com. ", null, 'email') . "</p>
                     <p><b>" . $this->getContext()->getI18N()->__("Login ID", null) . ": " . $username . "</b>
                     <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
 

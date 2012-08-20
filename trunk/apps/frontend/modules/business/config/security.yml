@@ -1,10 +1,10 @@
 pinTransactionLogList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 placementLogList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 all:
   is_secure:  off        # off is the default value anyway

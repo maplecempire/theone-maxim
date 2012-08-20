@@ -1,14 +1,14 @@
 adminUserList:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_USER_LIST ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_USER_LIST ]]
 
 roleList:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_USER_ROLE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_USER_ROLE ]]
 
 distList:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_DIST_LIST ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
 
 all:
   is_secure:  off        # off is the default value anyway

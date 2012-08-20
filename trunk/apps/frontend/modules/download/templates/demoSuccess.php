@@ -204,7 +204,7 @@ function error(data) {
 <div id="footer" class="footer" style="position: fixed; bottom: 0">
     <div class="copy">
         <address>
-            Copyright © OFX Global, Privacy Statement | Terms and Conditions.
+            Copyright © Maxim Trader, Privacy Statement | Terms and Conditions.
         </address>
     </div>
     <div class="clear"></div>

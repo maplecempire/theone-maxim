@@ -628,11 +628,11 @@ class marketingActions extends sfActions
         echo json_encode($output);
 
         if ($this->getRequestParameter('mt4_user_name') != "" && $this->getRequestParameter('mt4_password') != "") {
-            $subject = $this->getContext()->getI18N()->__("OFX Global Accounts Team", null, 'email');
+            $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
             $body = "Dear " . $tbl_distributor->getFullName() . ",
                 <p>
                 <p>
-                Congratulations! Your live trading account with OFX Global
+                Congratulations! Your live trading account with Maxim Trader
                 has been activated! Please find the details of your trading account as
                 per below :
                 <p>
@@ -647,7 +647,7 @@ class marketingActions extends sfActions
                 liable for any activity that may occur as a result of you losing your
                 password. Therefore, if you feel that your password has been
                 compromised, you should immediately contact us by email to
-                cs@ofxltd.com to rectify the situation.<p>
+                cs@maxim.com to rectify the situation.<p>
                 We look forward to your custom in the near future. Should you have any
                 queries, please do not hesitate to get back to us.
                 <p>
@@ -655,11 +655,9 @@ class marketingActions extends sfActions
                 <p>
                 Best Regards,
                 <p>
-                OFX Global
+                Maxim Trader
                 <p>
-                (A brand of OFX Limited)
-                <p>
-                E mail : admin@ofxltd.com";
+                E mail : admin@maxim.com";
 
             $sendMailService = new SendMailService();
             $sendMailService->sendMt4UsernameAndPassword($tbl_distributor, $subject, $body);

@@ -29,7 +29,7 @@ $(function() {
             <div class="login" id="element-box">
                 <div>
                     <p>
-                        <h3><b>OFX GLOBAL MALAYSIA ADMINISTRATOR LOGIN PAGE</b></h3>
+                        <h3><b>MAXIM TRADER ADMINISTRATOR LOGIN PAGE</b></h3>
                     </p>
                     <div class="panel" id="section-box">
                         <div class="jpane-slider">

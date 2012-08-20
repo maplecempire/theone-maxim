@@ -259,7 +259,7 @@ function reassignDatagridAnnouncementEventAttr() {
     <div class="resultsWrap">
     <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" bgcolor="#f90;"
                     align="center">
-        <caption><?php echo $fullName?>, welcome to OFX Global Malaysia.</caption>
+        <caption><?php echo $fullName?>, welcome to Maxim Trader.</caption>
 
         <tr>
             <td colspan=2 align='center'>

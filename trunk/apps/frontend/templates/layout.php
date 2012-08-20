@@ -1,13 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html style="display: block;">
 <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <meta http-equiv="CACHE-CONTROL" content="NO-STORE">
+    <meta http-equiv="PRAGMA" content="NO-CACHE">
+    <meta http-equiv="EXPIRES" content="-1">
 
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
 
-    <?php include('scripts_backend.php'); date_default_timezone_set('America/New_York'); ?>
+    <?php use_helper('I18N') ?>
+    <?php include('scripts.php'); ?>
     <!-- Google WebFonts -->
     <link rel="stylesheet" href="/css/style.css">
 
@@ -208,7 +212,7 @@
     <div class="wrapper">
         <!--this is header--><!-- #BeginLibraryItem "/Library/header.lbi" -->
         <div id="header">
-            <div id="logo"><a href="/member/summary"><img src="/images/ofxglobal/logo.jpg" alt="OFX GLOBAL"></a>
+            <div id="logo"><a href="/member/summary"><img src="/images/ofxglobal/logo.jpg" alt="Maxim Trader"></a>
             </div>
             <span class="titleSpan"><strong>Serving Traders in <em class="titleEm">205</em> Countries Across <em
                     class="titleEm">6</em> Continents</strong></span>
@@ -245,7 +249,7 @@
     <!--this is footer-->
     <div id="footer" class="footer">
         <div class="copy">
-            <address>Copyright © OFX Global, Privacy Statement | Terms and Conditions.</address>
+            <address>Copyright © Maxim Trader, Privacy Statement | Terms and Conditions.</address>
         </div>
         <div class="clear"></div>
     </div>

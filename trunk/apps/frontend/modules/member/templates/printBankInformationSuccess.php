@@ -4,14 +4,14 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="title" content="OFX Global Malaysia" />
-<meta name="robots" content="OFX Global Malaysia" />
-<meta name="description" content="OFX Global Malaysia" />
-<meta name="keywords" content="OFX Global Malaysia" />
+<meta name="title" content="Maxim Trader" />
+<meta name="robots" content="Maxim Trader" />
+<meta name="description" content="Maxim Trader" />
+<meta name="keywords" content="Maxim Trader" />
 <meta name="language" content="cn" />
-<title>OFX Global Malaysia</title>
+<title>Maxim Trader</title>
 
-<!--[if lte IE 8]><script language='javascript' type='text/javascript' src='/js/jquery/excanvas.min.js'></script><![endif]--><script type='text/javascript' src='/js/jquery/jquery-1.6.2.min.js'></script><script type='text/javascript' src='/js/jquery/jquery-ui-1.8.11.custom.min.js'></script><script type='text/javascript' src='/js/jquery/jquery.flot.js'></script><script type='text/javascript' src='/js/jquery/jquery.validate.min.js'></script><script type='text/javascript' src='/js/jquery/jquery.metadata.js'></script><script type='text/javascript' src='/js/jquery/cmxforms.js'></script><script type='text/javascript' src='/js/jquery/jquery.numeric.js'></script><script type='text/javascript' src='/js/jquery/jquery.r9jason.extend.js'></script><script type='text/javascript' src='/js/jquery/jquery.blockUI.js'></script><script type='text/javascript' src='/js/jquery/autoNumeric-1.7.1.js'></script><script type='text/javascript' src='/js/jquery/jquery.dataTables.js'></script><script type='text/javascript' src='/js/jquery/jquery.r9jason.dataTables.extend.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.edit.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.async.js'></script><script type='text/javascript' src='/js/jquery/jquery.checkboxtree.min.js'></script><link rel='stylesheet' href='/css/ui-lightness/jquery-ui-1.8.17.custom.css' type='text/css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/validate/validate.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/datatables/css/table.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.treeview.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.checkboxtree.css'/><title>OFX Global Malaysia</title><link rel='shortcut icon' href='/favicon.ico' />    <!-- Google WebFonts -->
+<!--[if lte IE 8]><script language='javascript' type='text/javascript' src='/js/jquery/excanvas.min.js'></script><![endif]--><script type='text/javascript' src='/js/jquery/jquery-1.6.2.min.js'></script><script type='text/javascript' src='/js/jquery/jquery-ui-1.8.11.custom.min.js'></script><script type='text/javascript' src='/js/jquery/jquery.flot.js'></script><script type='text/javascript' src='/js/jquery/jquery.validate.min.js'></script><script type='text/javascript' src='/js/jquery/jquery.metadata.js'></script><script type='text/javascript' src='/js/jquery/cmxforms.js'></script><script type='text/javascript' src='/js/jquery/jquery.numeric.js'></script><script type='text/javascript' src='/js/jquery/jquery.r9jason.extend.js'></script><script type='text/javascript' src='/js/jquery/jquery.blockUI.js'></script><script type='text/javascript' src='/js/jquery/autoNumeric-1.7.1.js'></script><script type='text/javascript' src='/js/jquery/jquery.dataTables.js'></script><script type='text/javascript' src='/js/jquery/jquery.r9jason.dataTables.extend.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.edit.js'></script><script type='text/javascript' src='/js/jquery/jquery.treeview.async.js'></script><script type='text/javascript' src='/js/jquery/jquery.checkboxtree.min.js'></script><link rel='stylesheet' href='/css/ui-lightness/jquery-ui-1.8.17.custom.css' type='text/css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/validate/validate.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/datatables/css/table.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.treeview.css'/><link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.checkboxtree.css'/><title>Maxim Trader</title><link rel='shortcut icon' href='/favicon.ico' />    <!-- Google WebFonts -->
 <link rel="stylesheet" href="/css/style.css">
 
 <link rel="shortcut icon" href="/favicon.ico"/>
@@ -121,7 +121,7 @@
     <div class="wrapper">
         <!--this is header--><!-- #BeginLibraryItem "/Library/header.lbi" -->
         <div id="header">
-            <div id="logo"><a href="/member/summary"><img src="/images/logo.png" alt="OFX Global Malaysia"></a></div>
+            <div id="logo"><a href="/member/summary"><img src="/images/logo.png" alt="Maxim Trader"></a></div>
 
         </div>
         <!-- #EndLibraryItem --><!--header end here-->
@@ -206,7 +206,7 @@
     <!--this is footer-->
     <div id="footer" class="footer">
         <div class="copy">
-            <address>Copyright © OFX Global, Privacy Statement | Terms and Conditions.</address>
+            <address>Copyright © Maxim Trader, Privacy Statement | Terms and Conditions.</address>
         </div>
         <div class="clear"></div>
     </div>

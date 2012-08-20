@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        OFX Global Malaysia
-    robots:       OFX Global Malaysia
-    description:  OFX Global Malaysia
-    keywords:     OFX Global Malaysia
+    title:        Maxim Trader
+    robots:       Maxim Trader
+    description:  Maxim Trader
+    keywords:     Maxim Trader
     language:     cn
 
   stylesheets:    []
