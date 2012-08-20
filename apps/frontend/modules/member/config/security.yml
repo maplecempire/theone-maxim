@@ -1,130 +1,130 @@
 announcement:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 announcementList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 accountVerification:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 activateMember:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 bonusDetails:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 convertEcashToEpoint:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 downloadMt4:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 ecashWithdrawal:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 ecashLog:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 epointLog:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 epointPurchase:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 fetchAnnouncementById:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 fetchPackage:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 loginPassword:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 mt4Withdrawal:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 reinvestCps:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 packagePurchaseViaBankTransfer:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 packageUpgrade:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 pendingMemberList:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 pinLog:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 placePlacement:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 purchasePin:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 placementTree:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 reloadTopup:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 sponsorTree:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 summary:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 transactionPassword:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 transferPin:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 transferEcash:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 transferEpoint:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 viewProfile:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 viewBankInformation:
   is_secure:   on
-  credentials: [[ OFX_MY_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 all:
   is_secure:  off        # off is the default value anyway

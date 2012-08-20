@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        OFX Global Malaysia Administrator Backend
-    robots:       OFX Global Malaysia Administrator Backend
-    description:  OFX Global Malaysia Administrator Backend
-    keywords:     OFX Global Malaysia Administrator Backend
+    title:        Maxim Trader Administrator Backend
+    robots:       Maxim Trader Administrator Backend
+    description:  Maxim Trader Administrator Backend
+    keywords:     Maxim Trader Administrator Backend
     language:     en
 
   stylesheets:    []

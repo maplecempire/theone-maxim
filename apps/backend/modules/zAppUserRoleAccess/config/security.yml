@@ -1,14 +1,14 @@
 index:
   is_secure:   on
-  credentials: [OFX_MY_SUPERADMIN]
+  credentials: [MAXIM_SUPERADMIN]
 
 edit:
   is_secure:   on
-  credentials: [OFX_MY_SUPERADMIN]
+  credentials: [MAXIM_SUPERADMIN]
 
 list:
   is_secure:   on
-  credentials: [OFX_MY_SUPERADMIN]
+  credentials: [MAXIM_SUPERADMIN]
 
 all:
   is_secure:  off        # off is the default value anyway

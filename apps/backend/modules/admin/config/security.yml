@@ -1,42 +1,42 @@
 ap:
   is_secure:   on
-  credentials: [ OFX_MY_SUPERADMIN ]
+  credentials: [ MAXIM_SUPERADMIN ]
 
 applicationSetting:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_SETTING ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_SETTING ]]
 
 changePassword:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_CHANGE_PASSWORD ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CHANGE_PASSWORD ]]
 
 dashboard:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_dashboard ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_dashboard ]]
 
 packageList:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PACKAGE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE ]]
 
 packageCreate:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PACKAGE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE ]]
 
 packageEdit:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PACKAGE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE ]]
 
 packageUpdate:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_PACKAGE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE ]]
 
 userList:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_USER_LIST ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_USER_LIST ]]
 
 userRole:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_USER_ROLE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_USER_ROLE ]]
 
 all:
   is_secure:  off        # off is the default value anyway

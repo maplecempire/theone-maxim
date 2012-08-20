@@ -1,42 +1,42 @@
 convertEcashToEpoint:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_CONVERT_ECASH_TO_EPOINT ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_CONVERT_ECASH_TO_EPOINT ]]
 
 epointTransfer:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_EPOINT_TRANSFER ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_EPOINT_TRANSFER ]]
 
 groupSales:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_GROUP_SALES ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_GROUP_SALES ]]
 
 individualTraderSales:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_INDIVIDUAL_TRADER_SALES ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_INDIVIDUAL_TRADER_SALES ]]
 
 mt4Withdrawal:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_MT4_WITHDRAWAL ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_MT4_WITHDRAWAL ]]
 
 referralBonus:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_REFERRAL_BONUS ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_REFERRAL_BONUS ]]
 
 totalMt4Reload:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_TOTAL_MT4_RELOAD ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_TOTAL_MT4_RELOAD ]]
 
 totalPackagePurchase:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_PACKAGE_PURCHASE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_PACKAGE_PURCHASE ]]
 
 totalPackageUpgrade:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_PACKAGE_UPGRADE ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_PACKAGE_UPGRADE ]]
 
 totalVolumeTraded:
   is_secure:   on
-  credentials: [[ OFX_MY_SUPERADMIN, OFX_MY_AL_REPORT_TOTAL_VOLUME_TRADED ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_TOTAL_VOLUME_TRADED ]]
 
 all:
   is_secure:  off        # off is the default value anyway
