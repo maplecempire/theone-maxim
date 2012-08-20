@@ -19,7 +19,7 @@
             imageWidth: 1024,
             imageHeight: 768,
             slideDirection: 'N',
-            slideShowSpeed: 2500,
+            nextSlideDelay: 5500,
             transitionEffect: 'fade',
             anchoring: 'left center',
             anchoringImg: 'left center'
