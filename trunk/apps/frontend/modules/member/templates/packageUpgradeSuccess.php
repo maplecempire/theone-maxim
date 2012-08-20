@@ -81,7 +81,7 @@ $(function() {
         </ul>
     </div>-->
 
-    <?php include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
     <!-- #EndLibraryItem -->
 </div>
 

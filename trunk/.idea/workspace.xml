@@ -71,76 +71,22 @@
     <favorites_list name="ofxglobal" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6429113">
+    <splitter split-orientation="horizontal" split-proportion="0.570887">
       <split-first>
         <leaf>
-          <file leaf-file-name="loginSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
+          <file leaf-file-name="layout.php" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="195" column="88" selection-start="6492" selection-end="6492" vertical-scroll-proportion="-5.72549">
+                <state line="287" column="20" selection-start="9746" selection-end="9748" vertical-scroll-proportion="0.23416507">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="registerSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
+          <file leaf-file-name="bankInformationSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/bankInformationSuccess.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="776" column="36" selection-start="28968" selection-end="28968" vertical-scroll-proportion="-36.653847">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="forgetPasswordSuccess.php" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="188" column="61" selection-start="5656" selection-end="5656" vertical-scroll-proportion="0.2306163">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Mails.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/lib/Mails.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="14" column="101" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="actions.class.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="649" column="19" selection-start="37840" selection-end="37840" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="fxGuideUploadSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="45" column="62" selection-start="1797" selection-end="1797" vertical-scroll-proportion="-10.5">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="actions.class.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="41" column="92" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="loginSuccess_bak.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess_bak.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="76" column="102" selection-start="2611" selection-end="2611" vertical-scroll-proportion="-3.490196">
+                <state line="79" column="58" selection-start="2795" selection-end="2795" vertical-scroll-proportion="27.23077">
                   <folding />
                 </state>
               </provider>
@@ -150,19 +96,91 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="layout.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
+          <file leaf-file-name="loginPasswordSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="58" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.5384617">
+                <state line="49" column="12" selection-start="2007" selection-end="2007" vertical-scroll-proportion="-3.0384614">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="forgetPasswordSuccess_bak.php" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php">
+          <file leaf-file-name="mt4WithdrawalSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="154" column="84" selection-start="4848" selection-end="4858" vertical-scroll-proportion="0.5431862">
+                <state line="91" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="packagePurchaseViaBankTransferSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="35" column="12" selection-start="1043" selection-end="1043" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="packageUpgradeSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="83" column="12" selection-start="3612" selection-end="3612" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="reloadTopupSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="57" column="12" selection-start="2640" selection-end="2640" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="summarySuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="252" column="12" selection-start="9852" selection-end="9852" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="transactionPasswordSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="49" column="12" selection-start="1643" selection-end="1643" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="transferEcashSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="85" column="8" selection-start="2456" selection-end="2456" vertical-scroll-proportion="-3.0384614">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="transferEpointSuccess.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="86" column="12" selection-start="2836" selection-end="2836" vertical-scroll-proportion="-2.8076923">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="viewProfileSuccess.php" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="97" column="12" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.25203252">
                   <folding />
                 </state>
               </provider>
@@ -180,22 +198,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/Globals.php" />
-        <option value="$PROJECT_DIR$/web/scripts.php" />
-        <option value="$PROJECT_DIR$/web/scripts_backend.php" />
-        <option value="$PROJECT_DIR$/sql/ofx_malaysia_startup.sql" />
-        <option value="$PROJECT_DIR$/web/css/style.css" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/config/security.yml" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/admin/config/security.yml" />
-        <option value="$PROJECT_DIR$/apps/frontend/templates/layout_bak.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashLogSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashWithdrawalSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecreditPurchaseSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/epointLogSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/epointPurchaseSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php" />
         <option value="$PROJECT_DIR$/apps/frontend/templates/layout.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php" />
-        <option value="$PROJECT_DIR$/lib/Mails.php" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php" />
-        <option value="$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php" />
       </list>
     </option>
   </component>
@@ -268,43 +286,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="apps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -399,6 +389,24 @@
               <option name="myItemId" value="apps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -420,11 +428,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\component\templates" />
       <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\member\templates" />
       <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\home\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\config" />
-      <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\backend\modules\finance\templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -585,7 +593,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48856208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -596,7 +604,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29492038" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20773312" sideWeight="0.5114379" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -651,118 +659,114 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/config/view.yml">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashWithdrawalSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="49" column="12" selection-start="2088" selection-end="2088" vertical-scroll-proportion="-2.5769231">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/admin/config/security.yml">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/ecreditPurchaseSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="33" selection-start="337" selection-end="337" vertical-scroll-proportion="0.46028882">
+        <state line="44" column="12" selection-start="1722" selection-end="1722" vertical-scroll-proportion="-2.5769231">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Globals.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/epointLogSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="49" selection-start="345" selection-end="345" vertical-scroll-proportion="0.35664335">
+        <state line="53" column="12" selection-start="2254" selection-end="2254" vertical-scroll-proportion="-2.5769231">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/config/security.yml">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/epointPurchaseSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="18" selection-start="50" selection-end="56" vertical-scroll-proportion="0.06137184">
+        <state line="86" column="12" selection-start="2404" selection-end="2404" vertical-scroll-proportion="-2.5769231">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout_bak.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="257" column="0" selection-start="9561" selection-end="9561" vertical-scroll-proportion="0.93772894">
+        <state line="49" column="12" selection-start="2007" selection-end="2007" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="12" selection-start="1043" selection-end="1043" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="12" selection-start="3612" selection-end="3612" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="12" selection-start="2640" selection-end="2640" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="12" selection-start="9852" selection-end="9852" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="12" selection-start="1643" selection-end="1643" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="8" selection-start="2456" selection-end="2456" vertical-scroll-proportion="-3.0384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="12" selection-start="2836" selection-end="2836" vertical-scroll-proportion="-2.8076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="12" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.25203252">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/bankInformationSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="58" selection-start="2795" selection-end="2795" vertical-scroll-proportion="27.23077">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="58" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.5384617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="88" selection-start="6492" selection-end="6492" vertical-scroll-proportion="-5.72549">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/actions/actions.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="649" column="19" selection-start="37840" selection-end="37840" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Mails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="101" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="776" column="36" selection-start="28968" selection-end="28968" vertical-scroll-proportion="-36.653847">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="950" column="12" selection-start="17327" selection-end="17338" vertical-scroll-proportion="0.17202269">
-          <folding>
-            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1345442745261" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/actions/actions.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="92" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/backend/modules/marketing/templates/fxGuideUploadSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="62" selection-start="1797" selection-end="1797" vertical-scroll-proportion="-10.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess_bak.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="102" selection-start="2611" selection-end="2611" vertical-scroll-proportion="-3.490196">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess_bak.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="84" selection-start="4848" selection-end="4858" vertical-scroll-proportion="0.5431862">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/forgetPasswordSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="61" selection-start="5656" selection-end="5656" vertical-scroll-proportion="0.2306163">
+        <state line="287" column="20" selection-start="9746" selection-end="9748" vertical-scroll-proportion="0.23416507">
           <folding />
         </state>
       </provider>

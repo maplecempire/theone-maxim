@@ -1,13 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html style="display: block;">
 <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <meta http-equiv="CACHE-CONTROL" content="NO-STORE">
+    <meta http-equiv="PRAGMA" content="NO-CACHE">
+    <meta http-equiv="EXPIRES" content="-1">
 
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
 
-    <?php include('scripts_backend.php'); date_default_timezone_set('America/New_York'); ?>
+    <?php use_helper('I18N') ?>
+    <?php include('scripts.php'); ?>
     <!-- Google WebFonts -->
     <link rel="stylesheet" href="/css/style.css">
 
