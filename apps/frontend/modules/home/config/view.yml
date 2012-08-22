@@ -1,3 +1,23 @@
+companySuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+contactUsSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+indexSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+investmentSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+marketNewsSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 loginSuccess:
   has_layout:     off
   stylesheets: 	  []

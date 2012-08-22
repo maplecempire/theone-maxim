@@ -10,14 +10,31 @@
  */
 class homeActions extends sfActions
 {
-    /**
-     * Executes index action
-     *
-     */
+    /* ***********************************************************************
+     *    ~ HTML ~
+     * **********************************************************************/
+    public function executeCompany()
+    {
+    }
+
+    public function executeContactUs()
+    {
+    }
+
     public function executeIndex()
     {
     }
 
+    public function executeInvestment()
+    {
+    }
+
+    public function executeMarketNews()
+    {
+    }
+    /* ***********************************************************************
+   *    ~ END HTML END ~
+   * **********************************************************************/
     public function executeLogin()
     {
         $this->getUser()->setCulture("en");
@@ -29,7 +46,7 @@ class homeActions extends sfActions
         // '0' is left out to avoid confusion with 'O'
         $str = rand(1, 7) . rand(1, 7) . $char;
         $this->getUser()->setAttribute(Globals::SYSTEM_CAPTCHA_ID, $str);
-        
+
         $c = new Criteria();
         $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SERVER_MAINTAIN);
         $this->appSetting = AppSettingPeer::doSelectOne($c);
@@ -71,7 +88,7 @@ class homeActions extends sfActions
                 $this->getUser()->getAttributeHolder()->clear();
 
                 /*	    user      	*/
-                $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+                $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
                 $c = new Criteria();
                 $c->add(AppUserPeer::USERNAME, $username);
                 $c->add(AppUserPeer::USERPASSWORD, $password);
@@ -91,19 +108,19 @@ class homeActions extends sfActions
                 $distributors = MlmDistributorPeer::doSelect($c);
 
                 if (count($distributors) > 0) {*/
-                    $this->getUser()->setAuthenticated(true);
-                    $this->getUser()->addCredential(Globals::PROJECT_NAME.$existUser->getUserRole());
+                $this->getUser()->setAuthenticated(true);
+                $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
 
-                    $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
-                    $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
-                    $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
-                    $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
-                    $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
-                    $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
+                $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+                $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
+                $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
+                $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+                $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
+                $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
 
-                    $existUser->setLastLoginDatetime(date("Y/m/d h:i:s A"));
-                    $existUser->save();
-                    return $this->redirect('member/summary');
+                $existUser->setLastLoginDatetime(date("Y/m/d h:i:s A"));
+                $existUser->save();
+                return $this->redirect('member/summary');
                 //}
             }
 
