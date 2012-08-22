@@ -2,6 +2,10 @@
 
 class componentComponents extends sfComponents
 {
+    public function executeHomeLeftMenu()
+    {
+
+    }
     public function executeCountrySelectOption()
     {
         $this->countrySelected = $this->countrySelected;
