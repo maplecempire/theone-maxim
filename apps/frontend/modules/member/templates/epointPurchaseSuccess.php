@@ -92,7 +92,7 @@ $(function() {
     <div class="resultsWrap">
         <?php echo form_tag('member/epointPurchase', array("enctype" => "multipart/form-data", "id" => "transferForm")) ?>
         <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist">
-            <caption><?php echo __('e-Point Purchase') ?></caption>
+            <caption><?php echo __('Forex Point Purchase') ?></caption>
             <tr>
                 <td colspan=2 align='center'>
                     <?php if ($sf_flash->has('banksuccessMsg')): ?>
@@ -147,7 +147,7 @@ $(function() {
                         </tr>-->
                         <tr>
                             <td class="caption">
-                                <strong><?php echo __('Total e-Point'); ?></strong>
+                                <strong><?php echo __('Total Forex Point'); ?></strong>
                             </td>
                             <td class="value">
                                 <input name="epointAmount" id="epointAmount"/>
@@ -172,9 +172,9 @@ $(function() {
                         <tr>
                             <td colspan="1" align="right" valign="top"><font color="#dc143c">NOTE :</font>
                             </td>
-                            <td colspan="1" align="left"><font color="#dc143c">e-Point is for package purchase, package upgrade and reload mt4 fund use only.
-                                <br>e-Point is non-withdrawable.
-                                <br><?php echo $systemCurrency?> 1 : 1 e-Point.&nbsp;</font>
+                            <td colspan="1" align="left"><font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund use only.
+                                <br>Forex Point is non-withdrawable.
+                                <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
                             </td>
                         </tr>
                     </table>
@@ -286,7 +286,7 @@ $(function() {
         </script>
 
         <div class="portlet">
-            <div class="portlet-header"><?php echo __('e-Point Purchase History') ?></div>
+            <div class="portlet-header"><?php echo __('Forex Point Purchase History') ?></div>
             <div class="portlet-content" style="min-height: 300px">
 
                 <table class="display" id="datagrid" border="0" width="100%">
@@ -294,7 +294,7 @@ $(function() {
                     <tr>
                         <th></th>
                         <th><?php echo __('Date') ?></th>
-                        <th><?php echo __('e-Point purchase') ?></th>
+                        <th><?php echo __('Forex Point purchase') ?></th>
                         <th><?php echo __('Reference No') ?></th>
                         <th><?php echo __('Status') ?></th>
                         <th><?php echo __('Remarks') ?></th>

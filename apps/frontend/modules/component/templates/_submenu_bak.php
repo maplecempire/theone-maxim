@@ -82,7 +82,7 @@ $(function() {
                     error("In-sufficient fund to purchase package.");
                     $("#dgPackagePurchase_point").focus().select();
                 } else if ($("#paymentTypeEPoint").is(':checked') == true && parseFloat($("#dgPackagePurchase_point").val()) > parseFloat($("#dgPackagePurchase_pointAvail").val())) {
-                    alert("In-sufficient e-point. " + $("#dgPackagePurchase_pointAvail").val());
+                    alert("In-sufficient Forex point. " + $("#dgPackagePurchase_pointAvail").val());
                     $("#dgPackagePurchase_point").focus().select();
                 } else if ($("#paymentTypeECash").is(':checked') == true && parseFloat($("#dgPackagePurchase_point").val()) > parseFloat($("#dgPackagePurchase_ecash").val())) {
                     alert("In-sufficient MT4 Credit. " + $("#dgPackagePurchase_ecash").val());
@@ -188,7 +188,7 @@ $(function() {
         <?php } ?>
         <?php
         /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/convertEcashToEpoint">Convert MT4 Credit to e-Point</a></li>
+        <li><a href="/member/convertEcashToEpoint">Convert MT4 Credit to Forex Point</a></li>
         --><?php /*
         }*/
         ?>
@@ -202,7 +202,7 @@ $(function() {
         }*/
         ?>
         <?php //if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/epointPurchase">e-Point Purchase</a></li>
+        <li><a href="/member/epointPurchase">Forex Point Purchase</a></li>
         <?php //} ?>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li><a href="/member/packageUpgrade">Package Upgrade</a></li>
@@ -218,13 +218,13 @@ $(function() {
 
         <?php
         /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
-        <li><a href="/member/transferEpoint"><?php /*echo __('e-Point Transfer'); */?></a></li>
+        <li><a href="/member/transferEpoint"><?php /*echo __('Forex Point Transfer'); */?></a></li>
         --><?php
 /*        }*/
         ?>
 
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li><a href="/member/epointLog"><?php echo __('e-Point Log'); ?></a></li>
+        <li><a href="/member/epointLog"><?php echo __('Forex Point Log'); ?></a></li>
         <?php } ?>
 
         <?php
@@ -292,7 +292,7 @@ $(function() {
             <td>
                 <span id="submenuSpanPaymentType">
                     <input type="radio" id="submenuPaymentTypeEPoint" name="submenuPaymentType_bak"
-                           value="epoint"/><label for="submenuPaymentTypeEPoint"><?php echo __('e-Point') ?></label>
+                           value="epoint"/><label for="submenuPaymentTypeEPoint"><?php echo __('Forex Point') ?></label>
                     <input type="radio" id="submenuPaymentTypeECash" name="submenuPaymentType_bak" value="ecash"/><label
                         for="submenuPaymentTypeECash"><?php echo __('MT4 Credit') ?></label>
                 </span>

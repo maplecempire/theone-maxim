@@ -26,7 +26,7 @@ $(function() {
                 error("In-sufficient fund to upgrade package.");
                 $("#topup_packageType").focus().select();
             } else if ($("#topupPackageTypePaymentTypeEPoint").is(':checked') == true && parseFloat($("#topup_packageType").val()) > parseFloat($("#topup_pointAvail").val())){
-                alert("In-sufficient e-point. " + $("#topup_pointAvail").val());
+                alert("In-sufficient Forex point. " + $("#topup_pointAvail").val());
                 $("#topup_packageType").focus().select();
             } else if ($("#topupPackageTypePaymentTypeECash").is(':checked') == true && parseFloat($("#topup_packageType").val()) > parseFloat($("#topup_ecash").val())){
                 alert("In-sufficient MT4 Credit. " + $("#topup_ecash").val());
@@ -135,7 +135,7 @@ $(function() {
                                 <td class="caption"><label><?php echo __('Payment Type') ?></label></td>
                                 <td class="value">
                                     <span id="topupPackageTypeSpanPaymentType">
-                                        <input type="radio" id="topupPackageTypePaymentTypeEPoint" name="topupPackageTypePaymentType" value="epoint"/><label for="topupPackageTypePaymentTypeEPoint"><?php echo __('e-Point') ?></label>
+                                        <input type="radio" id="topupPackageTypePaymentTypeEPoint" name="topupPackageTypePaymentType" value="epoint"/><label for="topupPackageTypePaymentTypeEPoint"><?php echo __('Forex Point') ?></label>
                                         <input type="radio" id="topupPackageTypePaymentTypeECash" name="topupPackageTypePaymentType" value="ecash"/><label for="topupPackageTypePaymentTypeECash"><?php echo __('MT4 Credit') ?></label>
                                     </span>
                                 </td>
