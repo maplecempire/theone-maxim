@@ -956,7 +956,7 @@ class memberActions extends sfActions
                     $errorMsg = "Invalid Action.";
                 } else if ($account->getBalance() < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient e-Point.";
+                    $errorMsg = "Insufficient Forex Point.";
                 }
             } else if ("ecash" == $paymentType) {
                 $c = new Criteria();
@@ -1520,7 +1520,7 @@ class memberActions extends sfActions
 
             if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient e-Point Amount"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Forex Point Amount"));
 
             } elseif ($appUser->getUserPassword2() <> $this->getRequestParameter('transactionPassword')) {
 
@@ -1932,7 +1932,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($pointNeeded > $ledgerEpointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient e-Point amount");
+                $this->setFlash('errorMsg', "In-sufficient Forex Point amount");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -2343,7 +2343,7 @@ class memberActions extends sfActions
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("MT4 Credit convert to e-Point successful."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("MT4 Credit convert to Forex Point successful."));
 
                 return $this->redirect('/member/convertEcashToEpoint');
             }
@@ -2377,7 +2377,7 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
 
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
-                $this->setFlash('errorMsg', "In-sufficient e-Point amount");
+                $this->setFlash('errorMsg', "In-sufficient Forex Point amount");
 
             } else if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");

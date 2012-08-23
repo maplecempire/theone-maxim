@@ -57,7 +57,7 @@
 
 <div class="areaContent">
     <div class="portlet">
-        <div class="portlet-header"><?php echo __('e-Point Log') ?></div>
+        <div class="portlet-header"><?php echo __('Forex Point Log') ?></div>
         <div class="portlet-content">
             <table class="display" id="datagrid" border="0" width="100%">
                 <thead>

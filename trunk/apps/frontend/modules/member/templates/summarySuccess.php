@@ -93,7 +93,7 @@ $(function() {
                     error("In-sufficient fund to purchase package.");
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeEPoint").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_pointAvail").val())){
-                    alert("In-sufficient e-point. " + $("#dgActivateMember_pointAvail").val());
+                    alert("In-sufficient Forex point. " + $("#dgActivateMember_pointAvail").val());
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeECash").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_ecash").val())){
                     alert("In-sufficient MT4 Credit. " + $("#dgActivateMember_ecash").val());
@@ -691,7 +691,7 @@ function reassignDatagridAnnouncementEventAttr() {
             <td>:</td>
             <td>
                 <span id="spanPaymentType">
-                    <input type="radio" id="paymentTypeEPoint" name="paymentType" value="epoint"/><label for="paymentTypeEPoint"><?php echo __('e-Point') ?></label>
+                    <input type="radio" id="paymentTypeEPoint" name="paymentType" value="epoint"/><label for="paymentTypeEPoint"><?php echo __('Forex Point') ?></label>
                     <input type="radio" id="paymentTypeECash" name="paymentType" value="ecash"/><label for="paymentTypeECash"><?php echo __('MT4 Credit') ?></label>
                 </span>
             </td>
