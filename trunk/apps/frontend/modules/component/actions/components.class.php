@@ -2,6 +2,10 @@
 
 class componentComponents extends sfComponents
 {
+    public function executeFooterInformation()
+    {
+
+    }
     public function executeHomeLeftMenu()
     {
 

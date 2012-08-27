@@ -31,7 +31,7 @@
 
 	<script type="text/javascript">
 	$(function() {
-        $('BODY').bgStretcher({
+        /*$('BODY').bgStretcher({
             images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
             imageWidth: 1024,
             imageHeight: 768,
@@ -40,7 +40,7 @@
             transitionEffect: 'fade',
             anchoring: 'left center',
             anchoringImg: 'left center'
-        });
+        });*/
 	});
 	</script>
 </head>
@@ -54,7 +54,7 @@
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-            <div style=" width:450; float:left;"><h1>Investment</h1></div>
+            <div style=" width:450; float:left;"><h1>Fund Management</h1></div>
 
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
@@ -63,13 +63,16 @@
                     src="/css/maxim/large-img-1.png"></p>
 
             <div style="clear:both;"></div>
-            <h2>Spot a Golden Opportunity</h2>
+            <h2>Maxim Gold FX</h2>
 
-            <p>Investing in a Forex financial tool such as XAUUSD (gold against the American dollar) can secure the gold
-                reserve of your funds. Traditionally, gold is regarded not only as a precious metal but also as an
-                advantageous Forex instrument. Gold has always been much in demand, that’s why investing in XAUUSD can
-                be considered as profitable and reliable. Trading gold on the Forex market, you provide yourself with
-                almost the same profits you could make when investing in gold itself.</p>
+            <p align="justify">This Foreign Exchange investment strategy proposed by Maxim Trader Investments for the Maxim Gold FX fund aims at finding a performance every month around 2-10% compared with a maximum risk of 3%. The operational methodology is completely unrelated from traditional investments, from which it differs mainly for the greater liquidity of the instruments covered.</p>
+
+            <p align="justify">This type of strategy is discretionary with multiday positions rarely stay open for longer than a week. Investment process is based on finding the underlying trend on daily and weekly basis, starting with the movements of the major currencies in order to update our proprietary graphical models. It analyses key market levels and analysed the trading day, identifying any ads on fundamental and/or statistical releases to optimize risk management.</p>
+
+            <p align="justify">Continuous monitoring of market and the on-going monitoring of open positions complete this procedure.
+            The success of this program and the viability of this method are defined by the high level of experience and discipline that distinguish this operation.</p>
+
+            <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
     </div>
 

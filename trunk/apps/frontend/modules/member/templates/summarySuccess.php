@@ -317,12 +317,12 @@ function reassignDatagridAnnouncementEventAttr() {
     </tr>
 
 
-    <tr class="tbl_form_row_odd">
+    <!--<tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Total Networks') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $totalNetworks; ?>"></td>
+        <td><?php /*echo __('Total Networks') */?></td>
+        <td><input type="text" readonly="readonly" value="<?php /*echo $totalNetworks; */?>"></td>
         <td>&nbsp;</td>
-    </tr>
+    </tr>-->
 
     <tr class="tbl_listing_end">
         <td colspan="4">

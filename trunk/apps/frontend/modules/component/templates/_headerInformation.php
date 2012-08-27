@@ -15,11 +15,11 @@
             <td class="col02">:</td>
             <td class="col03"><?php echo $ranking; ?></td>
         </tr>
-        <tr class="colWrap">
-            <td class="col01"><?php echo __('Total Networks') ?></td>
+        <!--<tr class="colWrap">
+            <td class="col01"><?php /*echo __('Total Networks') */?></td>
             <td class="col02">:</td>
-            <td class="col03"><?php echo $totalNetworks; ?></td>
-        </tr>
+            <td class="col03"><?php /*echo $totalNetworks; */?></td>
+        </tr>-->
         <tr class="colWrap">
             <td class="col01"><?php echo __('Currency') ?></td>
             <td class="col02">:</td>

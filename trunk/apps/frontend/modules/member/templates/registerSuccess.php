@@ -89,9 +89,6 @@ $(function() {
                     "spread" : {
                         required : true
                     },
-                    "terms_ecn" : {
-                        required : true
-                    },
                     "deposit_amount" : {
                         required : true
                     },
@@ -523,42 +520,13 @@ function error(data) {
         <td>Spread</td>
         <td>
             <div class="td_desc">
-                <select name="spread" class='inputbox' id="spread">
-                    <option value="" selected="selected"><?php echo __('Please Select') ?></option>
+                <select id="spread" class="inputbox" name="spread">
+                    <option selected="selected" value="">Please Select</option>
                     <option value="F">Fixed Spread</option>
                     <option value="V">Variable Spread</option>
                     <option value="E">ECN Premier Spread</option>
                 </select>
-                <a name="iagree" id="iagree"></a>
-
-                <div id='ecn_agreement' style='padding-top:10px; text-align:justify;' class='none'>Our ECN Premier Account
-                    requires a minimum deposit of USD500 (Fixed and Variable spread accounts require a minimum deposit of
-                    USD250).<br/>
-                    <br/>
-                    By registering for our ECN Premier Account you agree to have a 1 pip commission deducted from your
-                    account in real-time for the equivalent of every standard lot traded. (approximately USD10 per standard
-                    lot, USD1 per mini lot and USD0.10 per micro lot).<br/>
-                    <br/>
-                    We deduct this commission at the time you exit the trade. This commission is non-refundable.<br/>
-                    <br/>
-                    Once you trade the equivalent of 250 standard lots or more in a calendar month, you will qualify for a
-                    lower commission rate of USD8 per standard lot round trip traded (or equivalent thereof.) Therefore we
-                    will credit your account USD2 for each lot traded. <br/>
-                    <br/>
-                    For example, if you trade 300 standard lots during the month, we will credit your account with USD600 at
-                    the end of that month.<br/>
-                    <br/>
-
-                    <p class='center'>
-                        <input type='checkbox' name='terms_ecn' checked='checked' id='terms_ecn' class='checkbox'/>
-                        <label for='chk_terms_ecn'><span class='bold'>I Agree</span></label>
-                    </p>
-                </div>
             </div>
-            <br/>
-            <div id='fielddesc__spread' class='td_desc'>We offer Fixed, Variable and ECN Premier spreads on our MT4 trading
-                platform. Each option has its own distinct advantages. <a href='#' class='popup_content' rel='750x680'>Click
-                    here for more information</a></div>
         </td>
         <td>&nbsp;</td>
     </tr>

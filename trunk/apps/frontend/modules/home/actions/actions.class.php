@@ -13,6 +13,15 @@ class homeActions extends sfActions
     /* ***********************************************************************
      *    ~ HTML ~
      * **********************************************************************/
+    public function executeMaximExecutor()
+    {
+    }
+    public function executeRegister()
+    {
+    }
+    public function executeRegister2()
+    {
+    }
     public function executeCompany()
     {
     }
@@ -22,6 +31,10 @@ class homeActions extends sfActions
     }
 
     public function executeIndex()
+    {
+    }
+
+    public function executeIndex2()
     {
     }
 

@@ -41,7 +41,7 @@
 
 	<script type="text/javascript">
 	$(function() {
-        $('BODY').bgStretcher({
+        /*$('BODY').bgStretcher({
             images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
             imageWidth: 1024,
             imageHeight: 768,
@@ -50,7 +50,7 @@
             transitionEffect: 'fade',
             anchoring: 'left center',
             anchoringImg: 'left center'
-        });
+        });*/
 	});
 	</script>
 </head>
@@ -121,6 +121,7 @@
             </ul>
             <div class="navigation"></div>
 
+            <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
     </div>
 
