@@ -44,28 +44,278 @@
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
-	<script type="text/javascript">
-	$(function() {
-        /*$('BODY').bgStretcher({
-            images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
-            imageWidth: 1024,
-            imageHeight: 768,
-            slideDirection: 'N',
-            nextSlideDelay: 5500,
-            transitionEffect: 'fade',
-            anchoring: 'left center',
-            anchoringImg: 'left center'
-        });*/
-	});
-	</script>
+	<script>
+$(function() {
+    $("#lang").change(function() {
+        $("#langForm").submit();
+    });
+
+    $.populateDOB({
+                dobYear : $("#dob_year")
+                ,dobMonth : $("#dob_month")
+                ,dobDay : $("#dob_day")
+                ,dobFull : $("#dob")
+            });
+
+    $("#captchaimage").bind('click', function() {
+        $.post('/captcha/newSession');
+        $("#captchaimage").load('/captcha/imageRequest');
+        return false;
+    });
+
+    $("#sponsorId").change(function() {
+        if ($.trim($('#sponsorId').val()) != "") {
+            verifySponsorId();
+        }
+    });
+
+    jQuery.validator.addMethod("noSpace", function(value, element) {
+        return value.indexOf(" ") < 0 && value != "";
+    }, "No space please and don't leave it empty");
+
+    $("#registerForm").validate({
+                messages : {
+                    confirmPassword: {
+                        equalTo: "<?php echo __('Please enter the same password as above') ?>"
+                    },
+                    userName: {
+                        remote: "<?php echo __('User Name already in use') ?>."
+                    },
+                    fullname: {
+                        remote: "<?php echo __('Full Name already in use') ?>."
+                    }
+                },
+                rules : {
+                    "sponsorId" : {
+                        required: true
+                    },
+                    "userName" : {
+                        required : true,
+                        noSpace: true,
+                        minlength : 6,
+                        remote: "/member/verifyUserName"
+                    },
+                    "userpassword" : {
+                        required : true,
+                        minlength : 6
+                    },
+                    "confirmPassword" : {
+                        required : true,
+                        minlength : 6,
+                        equalTo: "#userpassword"
+                    },
+                    "securityPassword" : {
+                        required : true,
+                        minlength : 6
+                    },
+                    "confirmSecurityPassword" : {
+                        required : true,
+                        minlength : 6,
+                        equalTo: "#securityPassword"
+                    },
+                    "leverage" : {
+                        required : true
+                    },
+                    "spread" : {
+                        required : true
+                    },
+                    "deposit_amount" : {
+                        required : true
+                    },
+                    "fullname" : {
+                        required : true,
+                        minlength : 2,
+                        remote: "/member/verifyFullName"
+                    },
+                    "dob" : {
+                        required : true
+                    },
+                    "address" : {
+                        required : true
+                    },
+                    "gender" : {
+                        required : true
+                    },
+                    "contactNumber" : {
+                        required : true
+                        , minlength : 10
+                    },
+                    "email" : {
+                        required : true
+                        , email: true
+                    },
+                    "email2" : {
+                        required : true,
+                        equalTo: "#email"
+                    },
+                    "terms_cust_agreement" : {
+                        required : true
+                    },
+                    "terms_bis" : {
+                        required : true
+                    },
+                    "terms_risk" : {
+                        required : true
+                    },
+                    "terms_aml" : {
+                        required : true
+                    },
+                    "term_condition" : {
+                        required : true
+                    },
+                    "sig_name" : {
+                        required : true
+                    }
+                },
+                submitHandler: function(form) {
+                    if ($.trim($('#sponsorId').val()) == "") {
+                        alert("<?php echo __('Referrer ID cannot be blank') ?>.");
+                        $('#sponsorId').focus();
+                    } else {
+                        waiting();
+                        $.ajax({
+                                    type : 'POST',
+                                    url : "/member/verifySponsorId",
+                                    dataType : 'json',
+                                    cache: false,
+                                    data: {
+                                        sponsorId : $('#sponsorId').val()
+                                    },
+                                    success : function(data) {
+                                        waiting();
+                                        if (data == null || data == "") {
+                                            alert("<?php echo __('Invalid Referrer ID') ?>");
+                                            $('#sponsorId').focus();
+                                            $("#sponsorName").val("");
+                                        } else {
+                                            form.submit();
+                                        }
+                                    },
+                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("Your login attempt was not successful. Please try again.");
+                                    }
+                                });
+                    }
+                },
+                success: function(label) {
+                }
+            });
+});
+
+function verifySponsorId() {
+    waiting();
+    $.ajax({
+                type : 'POST',
+                url : "/member/verifyActiveSponsorId",
+                dataType : 'json',
+                cache: false,
+                data: {
+                    sponsorId : $('#sponsorId').val()
+                },
+                success : function(data) {
+                    if (data == null || data == "") {
+                        error("<?php echo __('Invalid Referrer ID') ?>");
+                        $('#sponsorId').focus();
+                        $("#sponsorName").val("");
+                    } else {
+                        $.unblockUI();
+                        $("#sponsorName").val(data.nickname);
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Your login attempt was not successful. Please try again.");
+                }
+            });
+}
+function waiting() {
+    $("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
+
+    $.blockUI({
+                message: $("#waitingLB")
+                , css: {
+                    border: 'none',
+                    padding: '5px',
+                    'background-color': '#fff',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    'border-radius': '10px',
+                    opacity: .8,
+                    color: '#000'
+                }});
+    $(".blockOverlay").css("z-index", 1010);
+    $(".blockPage").css("z-index", 1011);
+}
+function alert(data) {
+    var msgs = "";
+    if ($.isArray(data)) {
+        jQuery.each(data, function(key, value) {
+            msgs = value + "<br>";
+        });
+    } else {
+        msgs = data + "<br>";
+    }
+
+    var alertPanel = "<div style='margin-bottom: 20px; padding: 1em;' class='ui-state-highlight ui-corner-all'><p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-info'></span>";
+    alertPanel += msgs + "</p></div>";
+    $("#waitingLB h3").html(alertPanel);
+    $.blockUI({
+                message: $("#waitingLB")
+                , css: {
+                    border: 'none',
+                    padding: '5px',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    'border-radius': '10px',
+                    opacity: .9
+                }});
+    $(".blockOverlay").css("z-index", 1010);
+    $(".blockPage").css("z-index", 1011);
+    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
+}
+function error(data) {
+    var msgs = "";
+    if ($.isArray(data)) {
+        jQuery.each(data, function(key, value) {
+            msgs = value + "<br>";
+        });
+    } else {
+        msgs = data + "<br>";
+    }
+
+    var errorPanel = "<div style='padding: 1em' class='ui-state-error ui-corner-all'>";
+    errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
+    errorPanel += msgs + "</p></div>";
+    $("#waitingLB h3").html(errorPanel);
+    $.blockUI({
+                message: $("#waitingLB")
+                , css: {
+                    border: 'none',
+                    padding: '5px',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    'border-radius': '10px',
+                    opacity: .9,
+                    'min-width': '30%',
+                    'width': '60%',
+                    left: '25%',
+                    top: '25%'
+                }});
+    $(".blockOverlay").css("z-index", 1010);
+    $(".blockPage").css("z-index", 1011);
+    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
+}
+</script>
 </head>
 
-<body class="home blog"> 
+<body class="home blog">
+<div id="waitingLB" style="display:none; cursor: default">
+    <h3>We are processing your request. Please be patient.</h3>
+</div>
 <noscript>
-	<!-- display message if java is turned off -->	
-	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>	
+	<!-- display message if java is turned off -->
+	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>
 </noscript>
-
+<form action="/member/doRegister" id="registerForm" method="post">
 <div id="wrapper">
     <div id="page">
         <div id="content">
@@ -252,7 +502,36 @@
                     <option value="V">Variable Spread</option>
                     <option value="E">ECN Premier Spread</option>
                 </select>
+                <a id="iagree" name="iagree"></a>
+
+                <div class="none" style="padding-top:10px; text-align:justify;" id="ecn_agreement">Our ECN Premier Account
+                    requires a minimum deposit of USD500 (Fixed and Variable spread accounts require a minimum deposit of
+                    USD250).
+                    <br>
+                    By registering for our ECN Premier Account you agree to have a 1 pip commission deducted from your
+                    account in real-time for the equivalent of every standard lot traded. (approximately USD10 per standard
+                    lot, USD1 per mini lot and USD0.10 per micro lot).
+                    <br>
+                    We deduct this commission at the time you exit the trade. This commission is non-refundable.
+                    <br>
+                    Once you trade the equivalent of 250 standard lots or more in a calendar month, you will qualify for a
+                    lower commission rate of USD8 per standard lot round trip traded (or equivalent thereof.) Therefore we
+                    will credit your account USD2 for each lot traded.
+                    <br>
+                    For example, if you trade 300 standard lots during the month, we will credit your account with USD600 at
+                    the end of that month.
+                    <br>
+
+                    <p class="center">
+                        <input type="checkbox" class="checkbox" id="terms_ecn" checked="checked" name="terms_ecn">
+                        <label for="chk_terms_ecn"><span class="bold">I Agree</span></label>
+                    </p>
+                </div>
             </div>
+
+            <div class="td_desc" id="fielddesc__spread">We offer Fixed, Variable and ECN Premier spreads on our MT4 trading
+                platform. Each option has its own distinct advantages. <a rel="750x680" class="popup_content" href="#">Click
+                    here for more information</a></div>
         </td>
         <td>&nbsp;</td>
     </tr>
@@ -587,6 +866,6 @@
         </div>
     </div>
 </div>
-
+</form>
 </body>
 </html>

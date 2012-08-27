@@ -55,10 +55,10 @@
 	</script>
 </head>
 
-<body class="home blog"> 
+<body class="home blog">
 <noscript>
-	<!-- display message if java is turned off -->	
-	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>	
+	<!-- display message if java is turned off -->
+	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>
 </noscript>
 
 <div id="wrapper">
@@ -114,12 +114,12 @@
     </tr>
 
 
-    <!--<tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td>Total Networks</td>
         <td><input type="text" value="2" readonly="readonly"></td>
         <td>&nbsp;</td>
-    </tr>-->
+    </tr>
 
     <tr class="tbl_listing_end">
         <td colspan="4">

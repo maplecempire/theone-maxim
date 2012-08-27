@@ -1655,7 +1655,7 @@ span.backbutton:hover input, span.backbutton-behavior-hover input {
 }
 
 span.loginbutton, span.loginbutton input, span.disabled, span.disabled span {
-    background-image: url(../images/maxim/button_image.gif);
+    background-image: url(button_image.gif);
 }
 
 span.loginbutton, span.disabled {

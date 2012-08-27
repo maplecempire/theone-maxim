@@ -16,6 +16,9 @@ class homeActions extends sfActions
     public function executeMaximExecutor()
     {
     }
+    public function executeLogin2()
+    {
+    }
     public function executeRegister()
     {
     }
