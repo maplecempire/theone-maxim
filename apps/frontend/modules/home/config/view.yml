@@ -30,6 +30,10 @@ loginSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+login2Success:
+  has_layout:     off
+  stylesheets: 	  []
+
 registerSuccess:
   has_layout:     off
   stylesheets: 	  []

@@ -98,14 +98,10 @@ h6 {
 	margin-bottom: 15px;	
 }
 
-
-
-
-
-a{
+/*a{
 	color: #333333;	
 	font-weight: bold;
-}
+}*/
 a:link {text-decoration: none;}
 a:visited {text-decoration: none;}
 a:active {text-decoration: none;}
