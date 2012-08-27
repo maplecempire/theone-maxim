@@ -18,10 +18,12 @@ body,html {
 	font-family: Arial;
 	font-size: 12px;
 	line-height: 20px;	
-	background-color: #000;
+	background-color: #333333;
 	color: #333333;
 	width: 100%;
 	height: 100%;	
+    /*background-image: url("/images/background/valbury-bg.jpg");*/
+    /*background: url("/images/background/bg.gif") repeat-x scroll 0 0 transparent;*/
 }
 
 
@@ -241,7 +243,7 @@ p img,
 	font-size: 12px;
 	font-weight: normal;
 	display: block;
-	color: #999999;	
+	color: #0080C8;
 }
 
 #menu .menu .menu-item:hover{
@@ -249,11 +251,11 @@ p img,
 }
 
 #menu .menu .menu-item  a:hover {
-	color: #ffffff; 
+	color: #b5be02;
 }
 
 #sidebar #menu .menu .current-menu-item a, #sidebar #menu  .current_page_item  a{
-	color: #ffffff; 
+	color: #ffffff;
 }
 
 #menu .menu .menu-item  ul{
@@ -425,7 +427,8 @@ p img,
 	position: fixed;
 	float: left;
 	z-index: 12;
-	background-color: #222222;
+	background-color: white;
+	/*background-color: #222222;*/
 	margin-left: 13px;
 }
 
@@ -514,7 +517,7 @@ p img,
 	width: 590px;		
 	margin-top: 30px;
 	margin-right: 40px;
-	padding-bottom: 60px;
+	padding-bottom: 0px;
 	text-align: left;
 }
 
@@ -524,15 +527,15 @@ p img,
 	margin-bottom: 30px;
 }
 
-#content ol{		
+/*#content ol{
 	clear: left;
 	list-style-position: inside;
 	list-style-type: decimal;
-}
+}*/
 
-#content ol li{	
+/*#content ol li{
 	width: 100%;
-}
+}*/
 
 #content .bullets{
 	list-style-position: inside;
@@ -1619,7 +1622,7 @@ p img,
 }
 
 #sidebar #sidebar-content .widget-area, #sidebar-bottom{
-	color: #999999;
+	color: #888888;
 }
 #sidebar #sidebar-content .widget-area a, #sidebar-bottom a{
 	color: #e0d1a9;

@@ -42,7 +42,7 @@
 
     <script type="text/javascript">
         $(function() {
-            $('BODY').bgStretcher({
+            /*$('BODY').bgStretcher({
                         images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
                         imageWidth: 1024,
                         imageHeight: 768,
@@ -51,7 +51,7 @@
                         transitionEffect: 'fade',
                         anchoring: 'left center',
                         anchoringImg: 'left center'
-                    });
+                    });*/
         });
     </script>
 </head>
@@ -65,30 +65,26 @@
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-            <div style=" width:450; float:left;"><h1>The Company</h1></div>
+            <div style=" width:450; float:left;"><h1>Who is MAXIM TRADER?</h1></div>
 
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
             <div style="clear:both;"></div>
-            <p>Maxim Trader is a private investment and wealth management company that allows international participation
-                of individuals and groups a like. Our primary focus of investment is in the Forex market. Our service
-                provides highly lucrative return on investment along with complete account privacy, top-level online
-                security, efficient account management and a fully dedicated support team. Our company’s financial
-                portfolio is backed-up by an active pool of realized profits from various high-yield assets that we hold
-                around the globe. All our investors have equal opportunity to benefit from our investment portfolios on
-                a long-term basis, with the lowest possible risk of losing the initial principle invested.</p>
+            <p align="justify">MAXIM TRADER is a privately owned financial trading facilitator and economics & finance market research house with operating and established throughout Europe and more recently in the emerging financial powerhouses of Asia like China & South East Asia. MAXIM TRADER was founded by a group of experienced and enthusiastic traders, financial analysts and actuaries whose aim was to provide the best trading conditions and solutions for the trading industry. From this unique partnership fueled by the ultimate motive of the same goal, the founders set the foundations for a trading platform that enabled professional traders to grow their business with ease of mind knowing that they are getting the most competitive rates, state-of-the-art trading technology. Additionally, beginner traders in the financial market will benefit from the experience and guidance from our trading specialists.</p>
 
             <h2>Professional Team of Traders</h2>
 
             <div><img width="272" height="128" title="small-img-5" alt=""
                       src="/css/maxim/small-img-5.png"></div>
-            <p>At Maxim Trader, we have a professional team of traders that have over 10 years of experience dealing
+            <p align="justify">At Maxim Trader, we have a professional team of traders that have over 10 years of experience dealing
                 mainly in the Forex market. Making profits from the Forex market is often considered as an acquired
                 skill with a well-balanced mix of individual intuition gain over years of experience. Our main goal is
                 to provide each investor and trader with an opportunity that is as safe as possible and at the same time
                 maximizing your potential earnings. We diminish the risks normally associated with trading investments
                 in the Forex Market by laying out a trading strategy that has been proven to work through our teams well
                 balanced and various experiences over the past years.</p>
+
+            <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
     </div>
 

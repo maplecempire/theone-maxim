@@ -10,6 +10,10 @@ indexSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+index2Success:
+  has_layout:     off
+  stylesheets: 	  []
+
 investmentSuccess:
   has_layout:     off
   stylesheets: 	  []
@@ -18,6 +22,18 @@ marketNewsSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+maximExecutorSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 loginSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+registerSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+register2Success:
   has_layout:     off
   stylesheets: 	  []

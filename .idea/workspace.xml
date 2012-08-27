@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/marketNewsSuccess.php" line="102" />
+  </component>
   <component name="CCaseConfig">
     <option name="checkoutReserved" value="false" />
     <option name="markExternalChangeAsUpToDate" value="true" />
@@ -71,124 +74,53 @@
     <favorites_list name="ofxglobal" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.570887">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="layout.php" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="287" column="20" selection-start="9746" selection-end="9748" vertical-scroll-proportion="0.23416507">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="bankInformationSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/bankInformationSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="79" column="58" selection-start="2795" selection-end="2795" vertical-scroll-proportion="27.23077">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="loginPasswordSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="49" column="12" selection-start="2007" selection-end="2007" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="mt4WithdrawalSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="91" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="packagePurchaseViaBankTransferSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="35" column="12" selection-start="1043" selection-end="1043" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="packageUpgradeSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="83" column="12" selection-start="3612" selection-end="3612" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="reloadTopupSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="57" column="12" selection-start="2640" selection-end="2640" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="summarySuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="252" column="12" selection-start="9852" selection-end="9852" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="transactionPasswordSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="49" column="12" selection-start="1643" selection-end="1643" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="transferEcashSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="85" column="8" selection-start="2456" selection-end="2456" vertical-scroll-proportion="-3.0384614">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="transferEpointSuccess.php" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="86" column="12" selection-start="2836" selection-end="2836" vertical-scroll-proportion="-2.8076923">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="viewProfileSuccess.php" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="97" column="12" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.25203252">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="indexSuccess.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/indexSuccess.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="353" column="64" selection-start="13893" selection-end="13893" vertical-scroll-proportion="0.15738964">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maximExecutorSuccess.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/maximExecutorSuccess.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="72" selection-start="2571" selection-end="2572" vertical-scroll-proportion="-2.6923077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_homeLeftMenu.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_homeLeftMenu.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="18" selection-start="1161" selection-end="1204" vertical-scroll-proportion="-7.769231">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="actions.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/actions/actions.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="72" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/config/view.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="70" selection-start="363" selection-end="363" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -198,22 +130,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashLogSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashWithdrawalSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/ecreditPurchaseSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/epointLogSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/epointPurchaseSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/component/templates/_headerInformation.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/registerSuccess.php" />
         <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php" />
-        <option value="$PROJECT_DIR$/apps/frontend/templates/layout.php" />
+        <option value="$PROJECT_DIR$/web/sf/prototype/js/prototype.js" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/index2Success.php" />
+        <option value="$PROJECT_DIR$/web/css/maxim/style.css" />
+        <option value="$PROJECT_DIR$/web/css/maxim/g3bo.css" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/contactUsSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/investmentSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/companySuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/actions/actions.class.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/config/view.yml" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/maximExecutorSuccess.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/component/templates/_homeLeftMenu.php" />
+        <option value="$PROJECT_DIR$/apps/frontend/modules/home/templates/indexSuccess.php" />
       </list>
     </option>
   </component>
@@ -256,8 +188,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Favorites" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -286,11 +216,157 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="apps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -319,30 +395,12 @@
               <option name="myItemId" value="modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="member" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -368,29 +426,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="member" />
+              <option name="myItemId" value="home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="actions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="component" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="component" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -410,6 +506,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,9 +526,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\home\templates" />
       <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\component\templates" />
       <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\member\templates" />
-      <recent name="E:\xampplite\htdocs\maxim\apps\frontend\modules\home\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\templates" />
       <recent name="E:\xampplite\htdocs\ofxglobal_malaysia\apps\frontend\modules\download\config" />
     </key>
@@ -604,7 +702,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20773312" sideWeight="0.5114379" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2903715" sideWeight="0.5114379" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -659,114 +757,114 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/ecashWithdrawalSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/loginSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="12" selection-start="2088" selection-end="2088" vertical-scroll-proportion="-2.5769231">
+        <state line="93" column="0" selection-start="3069" selection-end="3069" vertical-scroll-proportion="161.46153">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/ecreditPurchaseSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/register2Success.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="12" selection-start="1722" selection-end="1722" vertical-scroll-proportion="-2.5769231">
+        <state line="243" column="4" selection-start="8117" selection-end="8672" vertical-scroll-proportion="-2.6078432">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/epointLogSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/registerSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="12" selection-start="2254" selection-end="2254" vertical-scroll-proportion="-2.5769231">
+        <state line="531" column="135" selection-start="17885" selection-end="17885" vertical-scroll-proportion="-5.27451">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/epointPurchaseSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_headerInformation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="12" selection-start="2404" selection-end="2404" vertical-scroll-proportion="-2.5769231">
+        <state line="17" column="12" selection-start="751" selection-end="972" vertical-scroll-proportion="-2.7692308">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/loginPasswordSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/registerSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="12" selection-start="2007" selection-end="2007" vertical-scroll-proportion="-3.0384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/mt4WithdrawalSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="-3.0384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packagePurchaseViaBankTransferSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="12" selection-start="1043" selection-end="1043" vertical-scroll-proportion="-3.0384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/packageUpgradeSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="12" selection-start="3612" selection-end="3612" vertical-scroll-proportion="-3.0384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/reloadTopupSuccess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="12" selection-start="2640" selection-end="2640" vertical-scroll-proportion="-3.0384614">
+        <state line="118" column="12" selection-start="4264" selection-end="4264" vertical-scroll-proportion="-2.9230769">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/summarySuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="252" column="12" selection-start="9852" selection-end="9852" vertical-scroll-proportion="-3.0384614">
+        <state line="324" column="63" selection-start="12195" selection-end="12195" vertical-scroll-proportion="-4.8846154">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transactionPasswordSuccess.php">
+    <entry file="file://$PROJECT_DIR$/web/css/maxim/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="12" selection-start="1643" selection-end="1643" vertical-scroll-proportion="-3.0384614">
+        <state line="524" column="78" selection-start="7970" selection-end="7970" vertical-scroll-proportion="-8.88">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEcashSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/contactUsSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="8" selection-start="2456" selection-end="2456" vertical-scroll-proportion="-3.0384614">
+        <state line="97" column="77" selection-start="4207" selection-end="4207" vertical-scroll-proportion="0.41575092">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/transferEpointSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_submenu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="12" selection-start="2836" selection-end="2836" vertical-scroll-proportion="-2.8076923">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/viewProfileSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/companySuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="12" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.25203252">
+        <state line="78" column="30" selection-start="4099" selection-end="4099" vertical-scroll-proportion="-13.730769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/member/templates/bankInformationSuccess.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/config/view.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="58" selection-start="2795" selection-end="2795" vertical-scroll-proportion="27.23077">
+        <state line="22" column="70" selection-start="363" selection-end="363" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/frontend/templates/layout.php">
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/investmentSuccess.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="20" selection-start="9746" selection-end="9748" vertical-scroll-proportion="0.23416507">
+        <state line="70" column="68" selection-start="0" selection-end="5266" vertical-scroll-proportion="0.37362638">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/actions/actions.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="72" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/maximExecutorSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="72" selection-start="2571" selection-end="2572" vertical-scroll-proportion="-2.6923077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/component/templates/_homeLeftMenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="18" selection-start="1161" selection-end="1204" vertical-scroll-proportion="-7.769231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/frontend/modules/home/templates/indexSuccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="353" column="64" selection-start="13893" selection-end="13893" vertical-scroll-proportion="0.15738964">
           <folding />
         </state>
       </provider>
