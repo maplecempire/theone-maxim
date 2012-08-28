@@ -75,8 +75,6 @@
             </ul>-->
             <div class="qtrans_widget_end"></div>
             <div style="clear:both;"></div>
-            <p>
-            </p>
 
             <!--<div class="slider-nivo-holder">
                 <div class="nivoSlider" style="position: relative; no-repeat scroll 0% 0% transparent;" id="slider-nivo">
@@ -359,32 +357,32 @@ ul, ol {
                                         style="float: left; margin-bottom: 10px; margin-right: 20px;"><a class=""><img
                     style="visibility: visible; opacity: 1;" src="/css/maxim/small-img-1.png" alt=""
                     height="128" width="272"></a></span> <strong>Professional Trading Team</strong>
-                AtMaxim Trader, we have a professional team of traders that have over
+                At  Trader, we have a professional team of traders that have over
                 10 years of experience dealing mainly in the Forex market. <a
-                        href="<?php echo url_for("/home/company")?>">Learn more ?</a></div>
+                        href="<?php echo url_for("/home/company")?>" style="color: #0080C8">Learn more ?</a></div>
             <div class="one_half_last"><span class="medium_image"
                                              style="float: left; margin-bottom: 10px; margin-right: 20px;"><a
                     class=""><img style="visibility: visible; opacity: 1;" src="/css/maxim/small-img-3.png"
                                   alt="" height="128" width="272"></a></span> <strong>Investment Report</strong>
-                We estimate thatMaxim Trader investment portfolios have outperformed
+                We estimate that Maxim Trader investment portfolios have outperformed
                 the benchmark over the past 12 months with an overall +205.92% gain. <a
-                        href="<?php echo url_for("/home/investment")?>">Learn more ?</a></div>
+                        href="<?php echo url_for("/home/investment")?>" style="color: #0080C8">Learn more ?</a></div>
             <span class="vspace"></span>
 
-            <div class="one_half"><span class="medium_image"
+            <!--<div class="one_half"><span class="medium_image"
                                         style="float: left; margin-bottom: 10px; margin-right: 20px;"><a class=""><img
                     style="visibility: visible; opacity: 1;" src="/css/maxim/small-img-4.png" alt=""
                     height="128" width="272"></a></span> <strong>Market Analysis</strong>
                 Our goal is to provide investors with an investment opportunity that is
                 as safe as possible and at the same time maximizing your potential
-                earnings. <a href="<?php echo url_for("/home/investment")?>">Learn more ?</a></div>
+                earnings. <a href="<?php /*echo url_for("/home/investment")*/?>">Learn more ?</a></div>
             <div class="one_half_last"><span class="medium_image"
                                              style="float: left; margin-bottom: 10px; margin-right: 20px;"><a
                     class=""><img style="visibility: visible; opacity: 1;" src="/css/maxim/small-img-2.png"
                                   alt="" height="128" width="272"></a></span> <strong>Spot a Golden Opportunity</strong>
                 Investing in a Forex financial tool such as XAUUSD (gold against the
                 American dollar) can secure the gold reserve of your funds. <a
-                        href="<?php echo url_for("/home/investment")?>">Learn more ?</a></div>
+                        href="<?php /*echo url_for("/home/investment")*/?>">Learn more ?</a></div>-->
 
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
