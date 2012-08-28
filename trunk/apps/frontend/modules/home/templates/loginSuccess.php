@@ -110,10 +110,6 @@
     <td rowspan="3">&nbsp;</td>
 </tr>
 <tr>
-    <td><br>
-    </td>
-</tr>
-<tr>
 <td>
 <table cellspacing="0" cellpadding="0">
 <tbody>
@@ -123,7 +119,7 @@
             <tbody>
             <tr>
                 <td colspan="3">
-                    <span class="txt_error">&nbsp;</span>
+                    <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
                 </td>
             </tr>
 
@@ -144,7 +140,7 @@
                             <th class="tbl_header_right"><img border="0" src="/images/maxim/hdr-gry-right.gif"></th>
                         </tr>
 
-                        <tr height="40">
+                        <tr height="20">
                             <td></td>
                             <td></td>
                             <td></td>
