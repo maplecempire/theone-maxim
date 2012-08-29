@@ -165,6 +165,7 @@
 
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
+        <div class="logout" style="text-align: right; margin-right: 40px"><a href="/home/logout"><span style="font-weight: bold;">Logout</span></a></div>
         <div id="content">
             <?php echo $sf_data->getRaw('sf_content') ?>
 
