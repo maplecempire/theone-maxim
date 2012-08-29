@@ -121,6 +121,10 @@
                 $(this).toggleClass("ui-icon-circle-triangle-n").toggleClass("ui-icon-circle-triangle-s");
                 $(this).parents(".portlet:first").find(".portlet-content").toggle("fast");
             });
+
+            $("#btnLogout").click(function(){
+                $("#formLogout").submit();
+            });
         });
 
         function alert(data) {
@@ -205,57 +209,140 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <img src="/images/loading.gif" class="hiddenPic">
 
+<form id="formLogout" action="/home/logout"></form>
 <div id="waitingLB" style="display:none; cursor: default">
     <h3>We are processing your request. Please be patient.</h3>
 </div>
-<div id="wrapp_v2">
-    <div class="wrapper">
-        <!--this is header--><!-- #BeginLibraryItem "/Library/header.lbi" -->
-        <div id="header">
-            <div id="logo"><a href="/member/summary"><img src="/images/ofxglobal/logo.jpg" alt="Maxim Trader"></a>
-            </div>
-            <span class="titleSpan"><strong>Serving Traders in <em class="titleEm">205</em> Countries Across <em
-                    class="titleEm">6</em> Continents</strong></span>
 
-            <div class="clear"></div>
-            <div id="naviWrap">
-                <div id="navi_left"></div>
-                <div id="navi">
-                    <ul class="sf-menu">
-                        <li><a href="/member/summary" class=""><?php echo __('Home'); ?></a></li>
-                        <li><a href="/member/viewProfile" class=""><?php echo __('Profile'); ?></a></li>
-                        <li><a href="/member/sponsorTree" class=""><?php echo __('Genealogy'); ?></a></li>
-                        <li><a href="/member/bonusDetails"><?php echo __('Bonus Details'); ?></a></li>
-                        <li class="last"><a href="<?php echo url_for("/home/logout")?>"><?php echo __('Logout'); ?></a>
-                        </li>
-                    </ul>
-                </div>
-        </div>
-        <!-- #EndLibraryItem --><!--header end here-->
-        <div class="clear"></div>
-        <!--- this is content--->
-        <div class="content">
-            <!--- aside--->
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td align="left">
+<table class="tbl_layout" cellpadding="0" cellspacing="0">
+<colgroup>
+    <col width="1%">
+    <col width="49%">
+    <col width="49%">
+    <col width="1%">
+</colgroup>
+<tbody>
+<tr>
+    <td rowspan="3">&nbsp;</td>
+    <td colspan="2">
+        <table cellpadding="0" cellspacing="0">
+            <colgroup>
+                <col class="scb_colorbar1" width="20%">
+                <col class="scb_colorbar2" width="10%">
+                <col class="scb_colorbar3" width="15%">
+                <col class="scb_colorbar4" width="5%">
+                <col class="scb_colorbar5" width="50%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td class="scb_colorbar1">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="tbl_heading" cellpadding="0" cellspacing="0">
+            <colgroup>
+                <col width="17%">
+                <col width="83%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td rowspan="2">
+                    <img src="/images/logo.png" height="85">
+                </td>
+                <td class="txt_mainheading">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td class="txt_subheading"></td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+    <td rowspan="3">&nbsp;</td>
+</tr>
+<tr>
+    <th class="tbl_heading_left">
+        <span style="" id="nameLabel">
+        You are logged in as:
+        </span>
+        <span style="" id="nameTag">
+        <b><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME); ?></b>
+        </span>
+    </th>
+    <th class="tbl_heading_left">
+        <span class="button" style="float: right;">
+            <input type="button" value="Logout" name="Logout" id="btnLogout">
+        </span>
+    </th>
+</tr>
+<tr>
+    <td colspan="2">
+    <br>
+    <table cellpadding="0" cellspacing="0">
+    <colgroup>
+        <col width="15%">
+        <col width="75%">
+        <col width="10%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <td rowspan="3" valign="top">
+            <!-- ############################ -->
+            <!-- ######## LEFT PANEL ######## -->
+            <!-- ############################ -->
+            <?php include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+
+            <!-- ##################################### -->
+            <!-- ##### ~ END LEFT PANEL END ~ ######## -->
+            <!-- ##################################### -->
+        </td>
+        <td class="tbl_sprt_bottom">
             <?php echo $sf_data->getRaw('sf_content') ?>
+        </td>
+        <td rowspan="3">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="2">
+        <br>
+        <hr class="hr_heading">
+        <br>
+        Copyright © Maxim Trader
+        &nbsp;<span class="txt_seperator">|</span>&nbsp;
+        <img src="/images/maxim/arrow_blue_single_tab.gif">
 
-            <!--- contend end --->
-            <div class="push"></div>
-            <div class="clear"></div>
-        </div>
-        <!--- content end here--->
-    </div>
+        <a href="#" class="navcontainer_nav_1" id="nav_terms_conditions" target="_self">
+            Terms &amp; Conditions
+        </a>
 
-    <div class="clear"></div>
-    <!--this is footer-->
-    <div id="footer" class="footer">
-        <div class="copy">
-            <address>Copyright © Maxim Trader, Privacy Statement | Terms and Conditions.</address>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <!--footer is end here-->
-    <div class="clear"></div>
-</div>
+        &nbsp;<span class="txt_seperator">|</span>&nbsp;
+
+        <img src="/images/maxim/arrow_blue_single_tab.gif">
+        <a href="#" target="_self">
+            Data Protection and Privacy Policy
+        </a>
+    </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 </html>

@@ -150,7 +150,6 @@
                 <col width="4%">
                 <col width="51%">
             </colgroup>
-
             <tbody>
             <tr>
                 <td colspan="3">

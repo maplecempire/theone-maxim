@@ -25,15 +25,6 @@
 
     <meta http-equiv="Content-Language" content="en-US">
     <style type="text/css" media="screen">
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-        /*background: none repeat scroll 0 0 transparent;*/
-        /*border: 0 none;*/
-        /*font-size: 100%;*/
-        /*margin: 0;*/
-        /*outline: 0 none;*/
-        /*padding: 0;*/
-    }
-
     #content p {
         clear: none;
         margin-bottom: 0px !important ;
@@ -306,6 +297,7 @@ function error(data) {
 }
 </script>
 </head>
+<img src="/images/loading.gif" style="display: none;">
 
 <body class="home blog">
 <div id="waitingLB" style="display:none; cursor: default">
