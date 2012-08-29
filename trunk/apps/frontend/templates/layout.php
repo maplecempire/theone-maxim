@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <div style="margin-left: 0px;" id="sidebar">
+    <div style="margin-left: 0px; position: absolute; background-image: none;" id="sidebar">
         <div id="sidebar-color"></div>
         <div id="sidebar-border"></div>
         <div id="sidebar-light"></div>
@@ -181,19 +181,17 @@
         <div id="sidebar-content">
 
             <div id="logo"><a href="<?php echo url_for("/member/summary")?>"><img src="/images/logo.png"></a></div>
-            <div id="menu">
-                <?php include_component('component', 'homeLeftMenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-            </div>
-            <div id="primary" class="widget-area" role="complementary">
-                <ul class="xoxo">
-                </ul>
+
+            <?php include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+
+            <div id="primary" class="widget-area" role="complementary" style="margin-top: 20px">
+                <ul class="xoxo"></ul>
             </div>
             <!-- #primary .widget-area -->
-        </div>
-
-        <div id="sidebar-bottom">
-            <ul></ul>
-            <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+            <div style="display: block; width: 226px">
+                <ul></ul>
+                <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+            </div>
         </div>
     </div>
 </div>
