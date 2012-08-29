@@ -304,15 +304,36 @@ function reassignDatagridAnnouncementEventAttr() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('MT4 ID') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
+        <td><?php echo __('User Name') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getDistributorCode(); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
+        <td><?php echo __('MT4 ID') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
         <td><?php echo __('Ranking') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo $ranking; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Status') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getStatusCode(); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Last Login') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $lastLogin; ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
@@ -351,14 +372,14 @@ function reassignDatagridAnnouncementEventAttr() {
         </th>
     </tr>
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Currency') ?>:</td>
         <td><input type="text" readonly="readonly" value="<?php echo $currencyCode; ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Cash Wallet') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($ecash,2); ?>"></td>

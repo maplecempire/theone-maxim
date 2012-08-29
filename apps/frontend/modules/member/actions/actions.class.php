@@ -716,6 +716,7 @@ class memberActions extends sfActions
         $this->mt4Id = $mt4Id;
         $this->currencyCode = $currencyCode;
         $this->distributor = $distributor;
+        $this->lastLogin = $lastLogin;
     }
 
     public function executeAnnouncementList()
