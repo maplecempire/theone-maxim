@@ -27,7 +27,7 @@ if ($sf_user->getCulture() == "cn") {
     echo "<script type='text/javascript' src='/js/jquery/localization/messages_cn.js'></script>";
 }
 
-echo "<link rel='stylesheet' href='/css/redmond/jquery-ui-1.8.17.custom.css' type='text/css'/>";
+echo "<link rel='stylesheet' href='/css/smoothness/jquery-ui-1.8.17.custom.css' type='text/css'/>";
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/validate/validate.css'/>";
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/datatables/css/table.css'/>";
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.treeview.css'/>";
