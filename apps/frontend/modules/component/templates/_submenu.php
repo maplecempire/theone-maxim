@@ -19,7 +19,7 @@
 }
 </style>
 <div id="menu">
-<ul id="menu-menu" class="menu" style="list-style: none outside none; margin: 0px; padding-left: 20px;">
+<ul id="menu-menu" class="menu" style="list-style: none outside none; margin: 0px; padding-left: 40px;">
     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
         <span class="titleHead">HOME</span>
     </li>
