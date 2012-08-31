@@ -250,7 +250,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo $distributor->getFullName();?>, welcome to Maxim Trader.</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title">Summary</span></td>
 </tr>
 <tr>
     <td><br>
@@ -588,6 +588,94 @@ function reassignDatagridAnnouncementEventAttr() {
 </tr>
 </tbody>
 </table>
+
+
+<h2>Account Information</h2>
+
+    <table class="pbt_table">
+        <tbody>
+        <tr>
+            <td width="200">User Name:</td>
+            <td>fxwinner</td>
+        </tr>
+        <tr>
+            <td>Rank:</td>
+            <td>Privilege Package</td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <td>Last Login:</td>
+            <td>29/8/2012 5:11:00 PM</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="info_bottom_bg"></div>
+    <br><br>
+
+    <h2>Your Account Points</h2>
+    <table class="pbt_table">
+        <tbody>
+        <tr class="row_header">
+            <td width="200">Cash Wallet:</td>
+            <td>60.97</td>
+        </tr>
+        <tr>
+            <td width="200">Register Wallet:</td>
+            <td>0.00</td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="info_bottom_bg"></div>
+    <div class="clear"></div>
+    <br><br>
+
+    <h2>Member Purchase Record</h2>
+
+    <div>2 records.</div>
+    <table class="pbl_table">
+        <tbody>
+        <tr class="pbl_header">
+            <td>Date</td>
+            <td>Username</td>
+            <td>Package Info</td>
+        </tr>
+
+        <tr class="row0">
+            <td class="date">5/7/2012 7:25:58 PM</td>
+            <td class="date">fxwinner</td>
+            <td>
+                Package : Silver Package<br>
+                Price (USD) : 1,000.00<br>
+                Status : Confirmed<br>
+            </td>
+        </tr>
+        <tr class="row1">
+            <td class="date">4/7/2012 4:34:09 PM</td>
+            <td class="date">fxwinner</td>
+            <td>
+                Package : 7 Days Privilege Account<br>
+                Price (USD) : 0.00<br>
+                Status : <br>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>2 records. <br><br></div>
+    <div class="info_bottom_bg"></div>
+
+    <!-- announcement popup   -->
+    <br class="clear">
+    <br class="clear">
+
+    <div class="content_line"></div>
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
 
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
