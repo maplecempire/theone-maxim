@@ -227,10 +227,9 @@
 </tr>
 <tr>
     <td class="tbl_content_top" colspan="3">
-        <table cellspacing="0" cellpadding="0" class="tbl_info_green">
+        <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg">
             <colgroup>
                 <col width="1%" class="tbl_notice_left">
-
                 <col width="98%" class="tbl_notice">
                 <col width="1%" class="tbl_notice_right">
             </colgroup>
@@ -239,13 +238,9 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <th class="tbl_header_left">
-                    <div class="border_left_green">&nbsp;</div>
-                </th>
+                <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
                 <th class="tbl_content_left">Need Help?</th>
-                <th class="tbl_header_right">
-                    <div class="border_right_green">&nbsp;</div>
-                </th>
+                <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -264,10 +259,7 @@
                 </td>
                 <td>&nbsp;</td>
             </tr>
-            <tr class="tbl_info_green_bottom">
-                <td colspan="100%"><b class="green_border"><b class="green_border4"></b><b class="green_border3"></b><b class="green_border2"><b></b></b><b class="green_border1"><b></b></b></b>
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </td>
