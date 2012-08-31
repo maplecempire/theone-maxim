@@ -1,6 +1,13 @@
 <?php include('scripts.php'); ?>
 <script>
 $(function() {
+    console.log("sidebar-content", $("#sidebar-content").css("height"));
+    console.log("sidebar", $("#sidebar").css("height"));
+    console.log("sidebar-color", $("#sidebar-color").css("height"));
+    console.log("sidebar-border", $("#sidebar-border").css("height"));
+    console.log("sidebar-texture", $("#sidebar-texture").css("height"));
+    console.log("sidebar-light", $("#sidebar-light").css("height"));
+
     $("#registerForm").validate({
         messages : {
             transactionPassword: {

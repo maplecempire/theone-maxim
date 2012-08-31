@@ -84,7 +84,8 @@ top:0;
 /**NAV**/
 .nav_bg{
 float:left;
-background:url(images/sidebar_border.png) repeat-y;
+/*background:url(images/sidebar_border.png) repeat-y;*/
+background-color:white;
 width:306px;
 height:100%;
 position:absolute;
@@ -128,18 +129,15 @@ top:50px;
 z-index:19;
 }
 
-
-
-
 .logo{
-float:left;
-position:absolute;
-background:url(images/logo.png) no-repeat;
-top:40px;
-left:60px;
-width:200px;
-height:157px;
-cursor:pointer;
+    float:left;
+    position:absolute;
+    background:url(images/logo.png) no-repeat;
+    top:40px;
+    left:80px;
+    width:200px;
+    height:157px;
+    cursor:pointer;
 }
 
 .side_bar_line{
