@@ -246,39 +246,357 @@ function reassignDatagridAnnouncementEventAttr() {
 
 }
 </script>
+
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo $distributor->getFullName();?>, welcome to Maxim Trader.</span></td>
+</tr>
+<tr>
+    <td><br>
+        <?php if ($sf_flash->has('successMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-highlight ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-info"></span>
+                    <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if ($sf_flash->has('errorMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-error ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-alert"></span>
+                    <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
+
+    </td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" class="textarea1">
+<tbody>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th>Account Information</th>
+        <th class="tbl_content_right"></th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('User Name') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getDistributorCode(); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('MT4 ID') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Ranking') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $ranking; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Status') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getStatusCode(); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Last Login') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo $lastLogin; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <!--<tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php /*echo __('Total Networks') */?></td>
+        <td><input type="text" readonly="readonly" value="<?php /*echo $totalNetworks; */?>"></td>
+        <td>&nbsp;</td>
+    </tr>-->
+
+    <tr class="tbl_listing_end">
+        <td colspan="4">
+            &nbsp;
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th>Your Account Point</th>
+        <th class="tbl_content_right"></th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Currency') ?>:</td>
+        <td><input type="text" readonly="readonly" value="<?php echo $currencyCode; ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Cash Wallet') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($ecash,2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Register Wallet') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($epoint,2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_listing_end">
+        <td colspan="4">
+            &nbsp;
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!--============================================================-->
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="23%">
+        <col width="18%">
+        <col width="13%">
+        <col width="18%">
+        <col width="18%">
+        <col width="1%">
+    </colgroup>
+
+    <tbody>
+    <tr class="row_header">
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th colspan="5">
+            Transaction Limit
+        </th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td colspan="5">
+            You can change your funds transfer and bill payment limit by entering your desired limit in the "New Limit"
+            column. <br><br>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><b>Transaction Type</b></td>
+        <td><b>Maximum Limit (MYR)</b></td>
+        <td>&nbsp;</td>
+        <td><b>Existing Limit (MYR)</b></td>
+        <td><b>New Limit (MYR)</b></td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td>
+
+
+            3rd Party SCB Funds Transfer:
+
+
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="60,000.00"></td>
+        <td>
+            <a href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC"
+               target="_blank">
+                View limit detail
+            </a>
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="60,000.00"></td>
+        <td>
+
+
+            <input type="text" maxlength="10" size="20" value="60,000.00" name="customerTxnLimitList[0].newLimit"
+                   id="customerTxnLimitList[0].newLimit">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td>
+
+
+            Interbank Funds Transfer:
+
+
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
+        <td>
+            <a href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC"
+               target="_blank">
+                View limit detail
+            </a>
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
+        <td>
+
+
+            <input type="text" maxlength="10" size="20" value="5,000.00" name="customerTxnLimitList[1].newLimit"
+                   id="customerTxnLimitList[1].newLimit">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td>
+
+
+            Bill Payment:
+
+
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
+        <td>
+            <a href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC"
+               target="_blank">
+                View limit detail
+            </a>
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
+        <td>
+
+
+            <input type="text" maxlength="10" size="20" value="5,000.00" name="customerTxnLimitList[2].newLimit"
+                   id="customerTxnLimitList[2].newLimit">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td>
+
+
+            International Funds Transfer:
+
+
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="10,000.00"></td>
+        <td>
+            <a href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC"
+               target="_blank">
+                View limit detail
+            </a>
+        </td>
+        <td><input maxlength="10" size="20" readonly="readonly" value="10,000.00"></td>
+        <td>
+
+
+            <input type="text" maxlength="10" size="20" value="10,000.00" name="customerTxnLimitList[3].newLimit"
+                   id="customerTxnLimitList[3].newLimit">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_listing_end">
+        <td>&nbsp;</td>
+        <td class="tbl_content_right" colspan="5"></td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+<!--============================================================-->
+
+</td>
+</tr>
+
+<tr>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
 <!--- aside end --->
 <!--- content --->
-<div class="areaContent">
+<div class="areaContent" style="display: none;">
     <div class="resultsWrap">
-    <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" bgcolor="#f90;"
-                    align="center">
-        <caption><?php echo $fullName?>, welcome to Maxim Trader.</caption>
 
-        <tr>
-            <td colspan=2 align='center'>
-                <?php if ($sf_flash->has('successMsg')): ?>
-                <div class="ui-widget">
-                    <div style="margin-top: 20px; padding: 0 .7em;"
-                         class="ui-state-highlight ui-corner-all">
-                        <p><span style="float: left; margin-right: .3em;"
-                                 class="ui-icon ui-icon-info"></span>
-                            <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
-                    </div>
-                </div>
-                <?php endif; ?>
-                <?php if ($sf_flash->has('errorMsg')): ?>
-                <div class="ui-widget">
-                    <div style="margin-top: 20px; padding: 0 .7em;"
-                         class="ui-state-error ui-corner-all">
-                        <p><span style="float: left; margin-right: .3em;"
-                                 class="ui-icon ui-icon-alert"></span>
-                            <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
-                    </div>
-                </div>
-                <?php endif; ?>
-            </td>
-        </tr>
-    </table>
     </div>
     <div class="clear"></div>
 

@@ -11,7 +11,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 }
 
 body, table {
-    background-color: transparent;
+    /*background-color: transparent;*/
     text-align: left;
 }
 
