@@ -665,17 +665,6 @@ function reassignDatagridAnnouncementEventAttr() {
         </tbody>
     </table>
     <div>2 records. <br><br></div>
-    <div class="info_bottom_bg"></div>
-
-    <!-- announcement popup   -->
-    <br class="clear">
-    <br class="clear">
-
-    <div class="content_line"></div>
-    <br class="clear">
-    <br class="clear">
-    <br class="clear">
-    <br class="clear">
 
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
