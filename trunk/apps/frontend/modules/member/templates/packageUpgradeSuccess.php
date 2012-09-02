@@ -136,17 +136,17 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <!--<tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Payment Type'); ?></td>
+                    <td><?php /*echo __('Payment Type'); */?></td>
                     <td>
-                        <input type="radio" id="topupPackageTypePaymentTypeEPoint" name="topupPackageTypePaymentType" value="epoint"/><label for="topupPackageTypePaymentTypeEPoint"><?php echo __('Forex Point') ?></label>
-                        <input type="radio" id="topupPackageTypePaymentTypeECash" name="topupPackageTypePaymentType" value="ecash"/><label for="topupPackageTypePaymentTypeECash"><?php echo __('MT4 Credit') ?></label>
+                        <input type="radio" id="topupPackageTypePaymentTypeEPoint" name="topupPackageTypePaymentType" value="epoint"/><label for="topupPackageTypePaymentTypeEPoint"><?php /*echo __('Forex Point') */?></label>
+                        <input type="radio" id="topupPackageTypePaymentTypeECash" name="topupPackageTypePaymentType" value="ecash"/><label for="topupPackageTypePaymentTypeECash"><?php /*echo __('MT4 Credit') */?></label>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
