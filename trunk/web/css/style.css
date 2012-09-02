@@ -72,7 +72,7 @@ a {
 }
 
 a:hover {
-    color: #86c533;
+    color: #b5be02;
 }
 
 a, a:hover, a:visited {
@@ -163,12 +163,12 @@ legend, th {
 
 #parentMenu .selected {
     font-weight: bold;
-    color: #86C533;
+    color: #b5be02;
     background: #FFF url('../images/maxim/arrows.gif') no-repeat 5px -43px;
 }
 
 #parentMenu .selected:hover {
-    color: #86C533;
+    color: #b5be02;
     background: #E5EEF5 url('../images/maxim/arrows.gif') no-repeat 5px -43px;
 }
 
@@ -182,7 +182,7 @@ legend, th {
 
 #parentMenu #parentMenuHeadLinkSelected a {
     font-weight: bold;
-    color: #86C533;
+    color: #b5be02;
 }
 
 #parentMenu #parentMenuHeadLinkSelected:hover {
@@ -214,12 +214,12 @@ legend, th {
 }
 
 #parentMenu #contentLinkSelected a {
-    color: #86C533;
+    color: #b5be02;
     padding: 2px 0 2px 15px;
 }
 
 #parentMenu #contentLinkSelected a:hover {
-    color: #86C533;
+    color: #b5be02;
     background: #E5EEF5;
 }
 
@@ -271,7 +271,7 @@ legend, th {
 }
 
 .tbl_menutab_current td, .tbl_menutab_current td a, .tbl_menutab_current td a:hover {
-    color: #86c533;
+    color: #b5be02;
     font-weight: bold;
 }
 
@@ -422,7 +422,7 @@ legend, th {
 }
 
 .tbl_info_blue td a:hover {
-    background-color: #86c533;
+    background-color: #b5be02;
     color: white;
 }
 
@@ -533,7 +533,7 @@ legend, th {
 }
 
 .tbl_listing_end td, .tbl_form_end td {
-    background-color: white;
+    /*background-color: white;*/
     border: 0 solid #808080;
     border-top-width: 2px;
 }
@@ -1225,7 +1225,7 @@ td.tbl_content_top_right {
 .pl_bentitle {
     font-size: 11px;
     font-weight: bold;
-    color: #86c533;
+    color: #b5be02;
 }
 
 .pl_benlist {
@@ -1581,7 +1581,7 @@ td.tbl_content_top_right {
 h1.logout {
     font-weight: bold;
     font-size: 18px;
-    color: #86c533;
+    color: #b5be02;
     margin: 20px 0 8px 0;
 }
 

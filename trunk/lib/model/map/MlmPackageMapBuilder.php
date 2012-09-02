@@ -40,15 +40,11 @@ class MlmPackageMapBuilder {
 
 		$tMap->addColumn('COMMISSION', 'Commission', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('PIPS', 'Pips', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('GENERATION', 'Generation', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('PIPS2', 'Pips2', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('GENERATION2', 'Generation2', 'double', CreoleTypes::DECIMAL, false, 12);
-
 		$tMap->addColumn('CREDIT_REFUND', 'CreditRefund', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('PAIRING_BONUS', 'PairingBonus', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('DAILY_MAX_PAIRING', 'DailyMaxPairing', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('PUBLIC_PURCHASE', 'PublicPurchase', 'string', CreoleTypes::VARCHAR, true, 1);
 

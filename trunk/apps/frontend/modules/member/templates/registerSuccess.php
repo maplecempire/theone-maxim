@@ -584,6 +584,133 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
+        <th><?php echo __('Personal Information') ?></th>
+        <th></th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Full Name') ?></td>
+        <td>
+            <input name="fullname" type="text" id="fullname" class="inputbox"/>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Date of Birth') ?></td>
+        <td>
+            <select id="dob_year"></select>
+            <select id="dob_month"></select>
+            <select id="dob_day"></select>
+            <input name="dob" readonly="readonly" type="hidden" id="dob" class="bp_05"/>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Address') ?></td>
+        <td>
+            <input type="text" name="address" class='inputbox' value="" id="address"/>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Address') ?> 2&nbsp;</td>
+        <td>
+            <input type="text" name="address2" class='inputbox' value=""/>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('City / Town') ?></td>
+        <td>
+            <input type="text" name="city" class='inputbox' value="" id="city"/>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Zip / Postal Code') ?></td>
+        <td>
+            <input type="text" name="zip" class='inputbox' value="" id="zip"/>
+            <br>Please enter '0' if postal code is not applicable in your country.
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('State / Province') ?></td>
+        <td>
+            <input type="text" name="state" class='inputbox' value="" id="state"/>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Country') ?></td>
+        <td>
+            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "Malaysia", 'countryName' => 'country', 'countryId' => 'country')) ?>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Gender') ?></td>
+        <td>
+            <select name="gender" class='inputbox'>
+                <option value="" selected="selected">Please Select</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_listing_end">
+        <td colspan="4">
+            &nbsp;
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+
+    <tbody>
+    <tr class="row_header">
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
         <th>Contact Details</th>
         <th></th>
         <th class="tbl_header_right">
