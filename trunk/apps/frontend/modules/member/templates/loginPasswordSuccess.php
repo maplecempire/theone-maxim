@@ -35,88 +35,94 @@
     });
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
-    <div class="sidenavi">
-        <ul>
-            <li><a href="/member/viewProfile"><span><?php echo __('Account Information'); ?></span></a></li>
-            <li><a href="/member/viewBankInformation"><span><?php echo __('Bank Account Information'); ?></span></a></li>
-            <li><a href="/member/loginPassword"><span><?php echo __('Change Password'); ?></span></a></li>
-            <li><a href="/member/transactionPassword"><span><?php echo __('Change Security Password'); ?></span></a></li>
-        </ul>
-    </div>
-
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
-</div>
-
-<form action="/member/loginPassword" id="passwordForm" method="post">
-<div class="areaContent">
-    <div class="resultsWrap">
-        <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" align="center">
-            <caption><?php echo __('Change Password') ?></caption>
-            <tr>
-                <td colspan=2 align='center'>
-                    <?php if ($sf_flash->has('successMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;"
-                             class="ui-state-highlight ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;"
-                                     class="ui-icon ui-icon-info"></span>
-                                <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
-                        </div>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Change Password') ?></span></td>
+    </tr>
+    <tr>
+        <td><br>
+            <?php if ($sf_flash->has('successMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                    <?php if ($sf_flash->has('errorMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;"
-                                     class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
-                        </div>
+                </div>
+                <?php endif; ?>
+            <?php if ($sf_flash->has('errorMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-error ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-alert"></span>
+                            <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Old Login Password'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="oldPassword" type="password" id="oldPassword" tabindex="1"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('New Login Password'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="newPassword" type="password" id="newPassword" tabindex="2"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Re-enter Login Password'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="newPassword2" type="password" id="newPassword2" tabindex="3"/>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2 align='center'>
-                    <button id="btnUpdate"><?php echo __('Change Password') ?></button>
-                </td>
-            </tr>
-        </table>
-        <div class="clear"></div>
-    </div>
-</div>
+                </div>
+                <?php endif; ?>
 
-</form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="/member/loginPassword" id="passwordForm" method="post">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Change Account login Password') ?></th>
+<!--                    <th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Old Login Password'); ?></td>
+                    <td><input name="oldPassword" type="password" id="oldPassword" tabindex="1"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('New Login Password') ?></td>
+                    <td><input name="newPassword" type="password" id="newPassword" tabindex="2"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Re-enter Login Password'); ?></td>
+                    <td><input name="newPassword2" type="password" id="newPassword2" tabindex="3"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnUpdate"><?php echo __('Change Password') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
