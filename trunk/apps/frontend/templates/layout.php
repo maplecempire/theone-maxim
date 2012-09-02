@@ -163,7 +163,8 @@
             $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
         }
         function waiting() {
-            $("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
+            /*$("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");*/
+            $("#waitingLB h3").html("<h3 style='width: 100%; padding-left: 0px; background-color:inherit; color: black;; line-height:0px; margin-top: 20px;'>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
 
             $.blockUI({
                         message: $("#waitingLB")
@@ -186,7 +187,7 @@
 <img src="/images/loading.gif" style="display: none;">
 <body class="home blog">
 <div id="waitingLB" style="display:none; cursor: default">
-    <h3>We are processing your request. Please be patient.</h3>
+    <h3 style="width: 100%; padding-left: 0px; background-color:inherit; color: black; line-height:0px; margin-top: 0px">We are processing your request. Please be patient.</h3>
 </div>
 
 <noscript>
