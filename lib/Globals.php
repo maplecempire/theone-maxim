@@ -19,7 +19,7 @@ abstract class Globals {
     const SYSTEM_CAPTCHA_ID = 'captcha_id';
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
-    const BONUS_MAINTENANCE_PERCENTAGE = 0.3;
+    const BONUS_MAINTENANCE_PERCENTAGE = 0.1;
 
     /************************************/
     /*****          STATUS         ******/
@@ -62,6 +62,7 @@ abstract class Globals {
     const ACCOUNT_TYPE_RANK = 'RANK';
     const ACCOUNT_TYPE_ECASH = 'ECASH';
     const ACCOUNT_TYPE_EPOINT = 'EPOINT';
+    const ACCOUNT_TYPE_MAINTENANCE = 'MAINTENANCE';
 
     /*******************************/
     /*****    ACCOUNT LEDGER  ******/

@@ -147,25 +147,25 @@ $(function() {
 
     $("#dgAnnouncement").dialog("destroy");
     $("#dgAnnouncement").dialog({
-                autoOpen : false,
-                modal : true,
-                resizable : false,
-                hide: 'clip',
-                show: 'slide',
-                width: 700,
-                height: 500,
-                buttons: {
-                    "<?php echo __('Close') ?>": function() {
-                        $(this).dialog('close');
-                    }
-                },
-                open: function() {
+        autoOpen : false,
+        modal : true,
+        resizable : false,
+        hide: 'fade',
+        show: 'fade',
+        width: 700,
+        height: 500,
+        buttons: {
+            "<?php echo __('Close') ?>": function() {
+                $(this).dialog('close');
+            }
+        },
+        open: function() {
 
-                },
-                close: function() {
+        },
+        close: function() {
 
-                }
-            });
+        }
+    });
 
     $("#reinvestGapLink").live("click", function(event) {
         event.preventDefault();
@@ -201,16 +201,16 @@ $(function() {
 
     <?php
     if ($distributor->getFileBankPassBook() == "" || $distributor->getFileProofOfResidence() == ""  || $distributor->getFileNric() == "") {
-        $content = "You have not upload the documents below yet : <br><br><ul>";
+        $content = "You have not upload the documents below yet : <br><br><ul style='list-style:none outside none'>";
 
         if ($distributor->getFileBankPassBook() == "") {
-            $content .= "<li>Bank Pass Book</li>";
+            $content .= "<li>- Bank Pass Book</li>";
         }
         if ($distributor->getFileProofOfResidence() == "") {
-            $content .= "<li>Proof of Residence</li>";
+            $content .= "<li>- Proof of Residence</li>";
         }
         if ($distributor->getFileNric() == "") {
-            $content .= "<li>Passport/IC</li>";
+            $content .= "<li>- Passport/IC</li>";
         }
         $content .= "</ul>";
     ?>
@@ -305,35 +305,35 @@ function reassignDatagridAnnouncementEventAttr() {
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('User Name') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getDistributorCode(); ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo $distributor->getDistributorCode(); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('MT4 ID') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Ranking') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $ranking; ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo $ranking; ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Status') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $distributor->getStatusCode(); ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo $distributor->getStatusCode(); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Last Login') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo $lastLogin; ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo $lastLogin; ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
@@ -341,17 +341,21 @@ function reassignDatagridAnnouncementEventAttr() {
     <!--<tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php /*echo __('Total Networks') */?></td>
-        <td><input type="text" readonly="readonly" value="<?php /*echo $totalNetworks; */?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php /*echo $totalNetworks; */?>"></td>
         <td>&nbsp;</td>
     </tr>-->
 
-    <tr class="tbl_listing_end">
+    <!--<tr class="tbl_listing_end">
         <td colspan="4">
             &nbsp;
         </td>
-    </tr>
+    </tr>-->
     </tbody>
 </table>
+
+<div class="info_bottom_bg"></div>
+<div class="clear"></div>
+<br>
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
@@ -381,28 +385,37 @@ function reassignDatagridAnnouncementEventAttr() {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Cash Wallet') ?></td>
+        <td><?php echo __('Cash Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($ecash,2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Register Wallet') ?></td>
+        <td><?php echo __('Forex Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($epoint,2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_listing_end">
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Education Account') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($maintenancePoint,2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <!--<tr class="tbl_listing_end">
         <td colspan="4">
             &nbsp;
         </td>
-    </tr>
+    </tr>-->
     </tbody>
 </table>
-
+<div class="info_bottom_bg"></div>
+<div class="clear"></div>
+<br>
 <!--============================================================-->
-<table cellspacing="0" cellpadding="0" class="tbl_form">
+<!--<table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
         <col width="23%">
@@ -426,7 +439,6 @@ function reassignDatagridAnnouncementEventAttr() {
         </th>
     </tr>
 
-
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td colspan="5">
@@ -435,7 +447,6 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
         <td>&nbsp;</td>
     </tr>
-
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
@@ -447,15 +458,10 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 
-
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td>
-
-
             3rd Party SCB Funds Transfer:
-
-
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="60,000.00"></td>
         <td>
@@ -466,26 +472,17 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="60,000.00"></td>
         <td>
-
-
             <input type="text" maxlength="10" size="20" value="60,000.00" name="customerTxnLimitList[0].newLimit"
                    id="customerTxnLimitList[0].newLimit">
-
-
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
 
-
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td>
-
-
             Interbank Funds Transfer:
-
-
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
         <td>
@@ -496,26 +493,16 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
         <td>
-
-
             <input type="text" maxlength="10" size="20" value="5,000.00" name="customerTxnLimitList[1].newLimit"
                    id="customerTxnLimitList[1].newLimit">
-
-
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
-
-
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td>
-
-
             Bill Payment:
-
-
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
         <td>
@@ -526,26 +513,16 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="5,000.00"></td>
         <td>
-
-
             <input type="text" maxlength="10" size="20" value="5,000.00" name="customerTxnLimitList[2].newLimit"
                    id="customerTxnLimitList[2].newLimit">
-
-
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
-
-
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td>
-
-
             International Funds Transfer:
-
-
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="10,000.00"></td>
         <td>
@@ -556,29 +533,23 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
         <td><input maxlength="10" size="20" readonly="readonly" value="10,000.00"></td>
         <td>
-
-
             <input type="text" maxlength="10" size="20" value="10,000.00" name="customerTxnLimitList[3].newLimit"
                    id="customerTxnLimitList[3].newLimit">
-
-
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
-
     <tr class="tbl_listing_end">
         <td>&nbsp;</td>
         <td class="tbl_content_right" colspan="5"></td>
         <td>&nbsp;</td>
     </tr>
     </tbody>
-</table>
+</table>-->
 <!--============================================================-->
 
 </td>
 </tr>
-
 <tr>
     <td></td>
 </tr>
@@ -589,82 +560,65 @@ function reassignDatagridAnnouncementEventAttr() {
 </tbody>
 </table>
 
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <tbody>
+    <tr class="row_header">
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th colspan="5">
+            Inactive Members
+        </th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
 
-<h2>Account Information</h2>
+    <tr>
+        <td colspan="7">
+            <table class="pbl_table" cellpadding="3" cellspacing="3">
+                <tbody>
+                <tr class="pbl_header">
+                    <td>Registered Date</td>
+                    <td>Username</td>
+                    <td>Full Name</td>
+                    <td>Action</td>
+                </tr>
+                <?php
+                    if (count($pendingDistributors) > 0) {
+                        $trStyle = "1";
+                        foreach ($pendingDistributors as $dist) {
+                            if ($trStyle == "1") {
+                                $trStyle = "0";
+                            } else {
+                                $trStyle = "1";
+                            }
 
-    <table class="pbt_table">
-        <tbody>
-        <tr>
-            <td width="200">User Name:</td>
-            <td>fxwinner</td>
-        </tr>
-        <tr>
-            <td>Rank:</td>
-            <td>Privilege Package</td>
-        </tr>
-        <tr>
-            <td>Status:</td>
-            <td>Active</td>
-        </tr>
-        <tr>
-            <td>Last Login:</td>
-            <td>29/8/2012 5:11:00 PM</td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="info_bottom_bg"></div>
-    <br><br>
-
-    <h2>Your Account Points</h2>
-    <table class="pbt_table">
-        <tbody>
-        <tr class="row_header">
-            <td width="200">Cash Wallet:</td>
-            <td>60.97</td>
-        </tr>
-        <tr>
-            <td width="200">Register Wallet:</td>
-            <td>0.00</td>
-        </tr>
-
-        </tbody>
-    </table>
-    <div class="info_bottom_bg"></div>
-    <div class="clear"></div>
-    <br><br>
-
-    <h2>Member Purchase Record</h2>
-
-    <div>2 records.</div>
-    <table class="pbl_table">
-        <tbody>
-        <tr class="pbl_header">
-            <td>Date</td>
-            <td>Username</td>
-            <td>Package Info</td>
-        </tr>
-
-        <tr class="row0">
-            <td class="date">5/7/2012 7:25:58 PM</td>
-            <td class="date">fxwinner</td>
-            <td>
-                Package : Silver Package<br>
-                Price (USD) : 1,000.00<br>
-                Status : Confirmed<br>
-            </td>
-        </tr>
-        <tr class="row1">
-            <td class="date">4/7/2012 4:34:09 PM</td>
-            <td class="date">fxwinner</td>
-            <td>
-                Package : 7 Days Privilege Account<br>
-                Price (USD) : 0.00<br>
-                Status : <br>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div>2 records. <br><br></div>
+                    echo "<tr class='row" . $trStyle . "'>
+                    <td>" . $dist->getCreatedOn() . "</td>
+                    <td class='date'>" . $dist->getDistributorCode() . "</td><td>" . $dist->getFullName() . "</td>
+                    <td>" . link_to(__('Active'), '#', array(
+                                   'class' => 'activeLink',
+                                   'ref' => $dist->getDistributorId(),
+                                   'refCode' => $dist->getDistributorCode(),
+                                   'refNickname' => $dist->getFullname(),
+                                   'refCreatedDate' => $dist->getCreatedOn(),
+                              )) . "&nbsp;" . link_to(__('Delete'), 'member/delete?distid=' . $dist->getDistributorId(), array(
+                                      'class' => 'deleteLink',
+                                      'confirm=Are you sure you want to remove?'
+                                                                         )) . "</td></tr>";
+                            }
+                        } else {
+                            echo "<tr class='odd' align='center'><td colspan='4'>" . __('No data available in table') . "</td></tr>";
+                        }
+                ?>
+                </tbody>
+            </table>
+            <div><?php echo count($pendingDistributors);?> records.</div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
 <!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
@@ -682,53 +636,6 @@ function reassignDatagridAnnouncementEventAttr() {
 <!--            <input type="hidden" id="distributorId">-->
 
             <div style="padding: 10px; top: 30px; width: 98%">
-
-                <!--<div class="portlet">
-                    <div class="portlet-header"><?php /*echo __('Inactive Traders') */?></div>
-                    <div class="portlet-content">
-
-                        <table class="display" id="datagrid" border="0" width="100%" cellpadding="0" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th><?php /*echo __('Trader ID') */?></th>
-                                <th><?php /*echo __('Alias') */?></th>
-                                <th><?php /*echo __('Registered Time') */?></th>
-                                <th><?php /*echo __('Action') */?></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-/*                            if (count($pendingDistributors) > 0) {
-                                $trStyle = "even";
-                                foreach ($pendingDistributors as $dist) {
-                                    if ($trStyle == "even") {
-                                        $trStyle = "odd";
-                                    } else {
-                                        $trStyle = "even";
-                                    }
-
-                                    echo "<tr class='" . $trStyle . "'>
-				        <td>" . $dist->getDistributorCode() . "</td><td>" . $dist->getNickname() . "</td>
-				        <td>" . $dist->getCreatedOn() . "</td>
-				        <td>" . link_to(__('Active'), '#', array(
-                                       'class' => 'activeLink',
-                                       'ref' => $dist->getDistributorId(),
-                                       'refCode' => $dist->getDistributorCode(),
-                                       'refNickname' => $dist->getFullname(),
-                                       'refCreatedDate' => $dist->getCreatedOn(),
-                                  )) . "&nbsp;" . link_to(__('Delete'), 'member/delete?distid=' . $dist->getDistributorId(), array(
-                                          'class' => 'deleteLink',
-                                          'confirm=Are you sure you want to remove?'
-                                                                             )) . "</td></tr>";
-                                }
-                            } else {
-                                echo "<tr class='odd' align='center'><td colspan='4'>" . __('No data available in table') . "</td></tr>";
-                            }
-                            */?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>-->
 
                 <div class="portlet">
                     <div class="portlet-header"><?php echo __('Announcements') ?></div>

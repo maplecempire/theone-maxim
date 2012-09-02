@@ -1,59 +1,47 @@
 <?php
 
 
-abstract class BaseMlmPackagePeer {
+abstract class BaseMlmPackagePipsPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'mlm_package';
+	const TABLE_NAME = 'mlm_package_pips';
 
 	
-	const CLASS_DEFAULT = 'lib.model.MlmPackage';
+	const CLASS_DEFAULT = 'lib.model.MlmPackagePips';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const PACKAGE_ID = 'mlm_package.PACKAGE_ID';
+	const PIPS_ID = 'mlm_package_pips.PIPS_ID';
 
 	
-	const PACKAGE_NAME = 'mlm_package.PACKAGE_NAME';
+	const TOTOL_SPONSOR = 'mlm_package_pips.TOTOL_SPONSOR';
 
 	
-	const PRICE = 'mlm_package.PRICE';
+	const PIPS = 'mlm_package_pips.PIPS';
 
 	
-	const COMMISSION = 'mlm_package.COMMISSION';
+	const GENERATION = 'mlm_package_pips.GENERATION';
 
 	
-	const CREDIT_REFUND = 'mlm_package.CREDIT_REFUND';
+	const CREATED_BY = 'mlm_package_pips.CREATED_BY';
 
 	
-	const PAIRING_BONUS = 'mlm_package.PAIRING_BONUS';
+	const CREATED_ON = 'mlm_package_pips.CREATED_ON';
 
 	
-	const DAILY_MAX_PAIRING = 'mlm_package.DAILY_MAX_PAIRING';
+	const UPDATED_BY = 'mlm_package_pips.UPDATED_BY';
 
 	
-	const PUBLIC_PURCHASE = 'mlm_package.PUBLIC_PURCHASE';
-
-	
-	const CREATED_BY = 'mlm_package.CREATED_BY';
-
-	
-	const CREATED_ON = 'mlm_package.CREATED_ON';
-
-	
-	const UPDATED_BY = 'mlm_package.UPDATED_BY';
-
-	
-	const UPDATED_ON = 'mlm_package.UPDATED_ON';
+	const UPDATED_ON = 'mlm_package_pips.UPDATED_ON';
 
 	
 	private static $phpNameMap = null;
@@ -61,31 +49,31 @@ abstract class BaseMlmPackagePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId', 'PackageName', 'Price', 'Commission', 'CreditRefund', 'PairingBonus', 'DailyMaxPairing', 'PublicPurchase', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID, MlmPackagePeer::PACKAGE_NAME, MlmPackagePeer::PRICE, MlmPackagePeer::COMMISSION, MlmPackagePeer::CREDIT_REFUND, MlmPackagePeer::PAIRING_BONUS, MlmPackagePeer::DAILY_MAX_PAIRING, MlmPackagePeer::PUBLIC_PURCHASE, MlmPackagePeer::CREATED_BY, MlmPackagePeer::CREATED_ON, MlmPackagePeer::UPDATED_BY, MlmPackagePeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id', 'package_name', 'price', 'commission', 'credit_refund', 'pairing_bonus', 'daily_max_pairing', 'public_purchase', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PipsId', 'TotolSponsor', 'Pips', 'Generation', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePipsPeer::PIPS_ID, MlmPackagePipsPeer::TOTOL_SPONSOR, MlmPackagePipsPeer::PIPS, MlmPackagePipsPeer::GENERATION, MlmPackagePipsPeer::CREATED_BY, MlmPackagePipsPeer::CREATED_ON, MlmPackagePipsPeer::UPDATED_BY, MlmPackagePipsPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('pips_id', 'totol_sponsor', 'pips', 'generation', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId' => 0, 'PackageName' => 1, 'Price' => 2, 'Commission' => 3, 'CreditRefund' => 4, 'PairingBonus' => 5, 'DailyMaxPairing' => 6, 'PublicPurchase' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID => 0, MlmPackagePeer::PACKAGE_NAME => 1, MlmPackagePeer::PRICE => 2, MlmPackagePeer::COMMISSION => 3, MlmPackagePeer::CREDIT_REFUND => 4, MlmPackagePeer::PAIRING_BONUS => 5, MlmPackagePeer::DAILY_MAX_PAIRING => 6, MlmPackagePeer::PUBLIC_PURCHASE => 7, MlmPackagePeer::CREATED_BY => 8, MlmPackagePeer::CREATED_ON => 9, MlmPackagePeer::UPDATED_BY => 10, MlmPackagePeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id' => 0, 'package_name' => 1, 'price' => 2, 'commission' => 3, 'credit_refund' => 4, 'pairing_bonus' => 5, 'daily_max_pairing' => 6, 'public_purchase' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PipsId' => 0, 'TotolSponsor' => 1, 'Pips' => 2, 'Generation' => 3, 'CreatedBy' => 4, 'CreatedOn' => 5, 'UpdatedBy' => 6, 'UpdatedOn' => 7, ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePipsPeer::PIPS_ID => 0, MlmPackagePipsPeer::TOTOL_SPONSOR => 1, MlmPackagePipsPeer::PIPS => 2, MlmPackagePipsPeer::GENERATION => 3, MlmPackagePipsPeer::CREATED_BY => 4, MlmPackagePipsPeer::CREATED_ON => 5, MlmPackagePipsPeer::UPDATED_BY => 6, MlmPackagePipsPeer::UPDATED_ON => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('pips_id' => 0, 'totol_sponsor' => 1, 'pips' => 2, 'generation' => 3, 'created_by' => 4, 'created_on' => 5, 'updated_by' => 6, 'updated_on' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/MlmPackageMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.MlmPackageMapBuilder');
+		include_once 'lib/model/map/MlmPackagePipsMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.MlmPackagePipsMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = MlmPackagePeer::getTableMap();
+			$map = MlmPackagePipsPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -119,41 +107,33 @@ abstract class BaseMlmPackagePeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(MlmPackagePeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(MlmPackagePipsPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(MlmPackagePeer::PACKAGE_ID);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::PIPS_ID);
 
-		$criteria->addSelectColumn(MlmPackagePeer::PACKAGE_NAME);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
 
-		$criteria->addSelectColumn(MlmPackagePeer::PRICE);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::PIPS);
 
-		$criteria->addSelectColumn(MlmPackagePeer::COMMISSION);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::GENERATION);
 
-		$criteria->addSelectColumn(MlmPackagePeer::CREDIT_REFUND);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::CREATED_BY);
 
-		$criteria->addSelectColumn(MlmPackagePeer::PAIRING_BONUS);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::CREATED_ON);
 
-		$criteria->addSelectColumn(MlmPackagePeer::DAILY_MAX_PAIRING);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::UPDATED_BY);
 
-		$criteria->addSelectColumn(MlmPackagePeer::PUBLIC_PURCHASE);
-
-		$criteria->addSelectColumn(MlmPackagePeer::CREATED_BY);
-
-		$criteria->addSelectColumn(MlmPackagePeer::CREATED_ON);
-
-		$criteria->addSelectColumn(MlmPackagePeer::UPDATED_BY);
-
-		$criteria->addSelectColumn(MlmPackagePeer::UPDATED_ON);
+		$criteria->addSelectColumn(MlmPackagePipsPeer::UPDATED_ON);
 
 	}
 
-	const COUNT = 'COUNT(mlm_package.PACKAGE_ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT mlm_package.PACKAGE_ID)';
+	const COUNT = 'COUNT(mlm_package_pips.PIPS_ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT mlm_package_pips.PIPS_ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -164,9 +144,9 @@ abstract class BaseMlmPackagePeer {
 		
 		$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(MlmPackagePeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(MlmPackagePipsPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(MlmPackagePeer::COUNT);
+			$criteria->addSelectColumn(MlmPackagePipsPeer::COUNT);
 		}
 
 		
@@ -175,7 +155,7 @@ abstract class BaseMlmPackagePeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = MlmPackagePeer::doSelectRS($criteria, $con);
+		$rs = MlmPackagePipsPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -188,7 +168,7 @@ abstract class BaseMlmPackagePeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = MlmPackagePeer::doSelect($critcopy, $con);
+		$objects = MlmPackagePipsPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -197,7 +177,7 @@ abstract class BaseMlmPackagePeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return MlmPackagePeer::populateObjects(MlmPackagePeer::doSelectRS($criteria, $con));
+		return MlmPackagePipsPeer::populateObjects(MlmPackagePipsPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -208,7 +188,7 @@ abstract class BaseMlmPackagePeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			MlmPackagePeer::addSelectColumns($criteria);
+			MlmPackagePipsPeer::addSelectColumns($criteria);
 		}
 
 		
@@ -224,7 +204,7 @@ abstract class BaseMlmPackagePeer {
 		$results = array();
 	
 		
-		$cls = MlmPackagePeer::getOMClass();
+		$cls = MlmPackagePipsPeer::getOMClass();
 		$cls = Propel::import($cls);
 		
 		while($rs->next()) {
@@ -245,7 +225,7 @@ abstract class BaseMlmPackagePeer {
 	
 	public static function getOMClass()
 	{
-		return MlmPackagePeer::CLASS_DEFAULT;
+		return MlmPackagePipsPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -261,7 +241,7 @@ abstract class BaseMlmPackagePeer {
 			$criteria = $values->buildCriteria(); 
 		}
 
-		$criteria->remove(MlmPackagePeer::PACKAGE_ID); 
+		$criteria->remove(MlmPackagePipsPeer::PIPS_ID); 
 
 
 		
@@ -293,8 +273,8 @@ abstract class BaseMlmPackagePeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
 
-			$comparison = $criteria->getComparison(MlmPackagePeer::PACKAGE_ID);
-			$selectCriteria->add(MlmPackagePeer::PACKAGE_ID, $criteria->remove(MlmPackagePeer::PACKAGE_ID), $comparison);
+			$comparison = $criteria->getComparison(MlmPackagePipsPeer::PIPS_ID);
+			$selectCriteria->add(MlmPackagePipsPeer::PIPS_ID, $criteria->remove(MlmPackagePipsPeer::PIPS_ID), $comparison);
 
 		} else { 
 			$criteria = $values->buildCriteria(); 
@@ -318,7 +298,7 @@ abstract class BaseMlmPackagePeer {
 			
 			
 			$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(MlmPackagePeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(MlmPackagePipsPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -331,18 +311,18 @@ abstract class BaseMlmPackagePeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(MlmPackagePeer::DATABASE_NAME);
+			$con = Propel::getConnection(MlmPackagePipsPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-		} elseif ($values instanceof MlmPackage) {
+		} elseif ($values instanceof MlmPackagePips) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 			
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(MlmPackagePeer::PACKAGE_ID, (array) $values, Criteria::IN);
+			$criteria->add(MlmPackagePipsPeer::PIPS_ID, (array) $values, Criteria::IN);
 		}
 
 		
@@ -365,13 +345,13 @@ abstract class BaseMlmPackagePeer {
 	}
 
 	
-	public static function doValidate(MlmPackage $obj, $cols = null)
+	public static function doValidate(MlmPackagePips $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(MlmPackagePeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(MlmPackagePeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(MlmPackagePipsPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(MlmPackagePipsPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -387,7 +367,7 @@ abstract class BaseMlmPackagePeer {
 
 		}
 
-		return BasePeer::doValidate(MlmPackagePeer::DATABASE_NAME, MlmPackagePeer::TABLE_NAME, $columns);
+		return BasePeer::doValidate(MlmPackagePipsPeer::DATABASE_NAME, MlmPackagePipsPeer::TABLE_NAME, $columns);
 	}
 
 	
@@ -397,12 +377,12 @@ abstract class BaseMlmPackagePeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(MlmPackagePeer::DATABASE_NAME);
+		$criteria = new Criteria(MlmPackagePipsPeer::DATABASE_NAME);
 
-		$criteria->add(MlmPackagePeer::PACKAGE_ID, $pk);
+		$criteria->add(MlmPackagePipsPeer::PIPS_ID, $pk);
 
 
-		$v = MlmPackagePeer::doSelect($criteria, $con);
+		$v = MlmPackagePipsPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -419,8 +399,8 @@ abstract class BaseMlmPackagePeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(MlmPackagePeer::PACKAGE_ID, $pks, Criteria::IN);
-			$objs = MlmPackagePeer::doSelect($criteria, $con);
+			$criteria->add(MlmPackagePipsPeer::PIPS_ID, $pks, Criteria::IN);
+			$objs = MlmPackagePipsPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -432,13 +412,13 @@ if (Propel::isInit()) {
 	
 	
 	try {
-		BaseMlmPackagePeer::getMapBuilder();
+		BaseMlmPackagePipsPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
 	
 	
-	require_once 'lib/model/map/MlmPackageMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.MlmPackageMapBuilder');
+	require_once 'lib/model/map/MlmPackagePipsMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.MlmPackagePipsMapBuilder');
 }

@@ -38,12 +38,6 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('USER_ID', 'UserId', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('MT4_USER_NAME', 'Mt4UserName', 'string', CreoleTypes::VARCHAR, false, 50);
-
-		$tMap->addColumn('MT4_PASSWORD', 'Mt4Password', 'string', CreoleTypes::VARCHAR, false, 50);
-
-		$tMap->addColumn('MT4_ID', 'Mt4Id', 'int', CreoleTypes::INTEGER, false, null);
-
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('FULL_NAME', 'FullName', 'string', CreoleTypes::VARCHAR, false, 100);
@@ -88,10 +82,6 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('TREE_STRUCTURE', 'TreeStructure', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
-		$tMap->addColumn('IB_RANK_ID', 'IbRankId', 'int', CreoleTypes::INTEGER, false, null);
-
-		$tMap->addColumn('IB_RANK_CODE', 'IbRankCode', 'string', CreoleTypes::VARCHAR, false, 20);
-
 		$tMap->addColumn('INIT_RANK_ID', 'InitRankId', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('INIT_RANK_CODE', 'InitRankCode', 'string', CreoleTypes::VARCHAR, false, 20);
@@ -99,6 +89,18 @@ class MlmDistributorMapBuilder {
 		$tMap->addColumn('UPLINE_DIST_ID', 'UplineDistId', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('UPLINE_DIST_CODE', 'UplineDistCode', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('TREE_UPLINE_DIST_ID', 'TreeUplineDistId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('TREE_UPLINE_DIST_CODE', 'TreeUplineDistCode', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('TOTAL_LEFT', 'TotalLeft', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('TOTAL_RIGHT', 'TotalRight', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PLACEMENT_POSITION', 'PlacementPosition', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('PLACEMENT_DATETIME', 'PlacementDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 		$tMap->addColumn('RANK_ID', 'RankId', 'int', CreoleTypes::INTEGER, false, null);
 

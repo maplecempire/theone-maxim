@@ -374,6 +374,12 @@
             <trans-unit><source>Debit</source><target>出账</target></trans-unit>
             <trans-unit><source>Daily Max</source><target>单日封顶</target></trans-unit>
             <trans-unit><source>User Name</source><target>用户名</target></trans-unit>
+            <trans-unit><source>Elementary School</source><target>初级配套</target></trans-unit>
+            <trans-unit><source>Middle School</source><target>中级配套</target></trans-unit>
+            <trans-unit><source>High School</source><target>高级配套</target></trans-unit>
+            <trans-unit><source>Cash Account</source><target>现金户口</target></trans-unit>
+            <trans-unit><source>Forex Account</source><target>外汇户口</target></trans-unit>
+            <trans-unit><source>Education Account</source><target>教育户口</target></trans-unit>
         </body>
     </file>
 </xliff>

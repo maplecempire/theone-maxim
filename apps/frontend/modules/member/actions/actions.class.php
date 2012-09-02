@@ -668,17 +668,18 @@ class memberActions extends sfActions
         $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_PENDING);
         $this->pendingDistributors = MlmDistributorPeer::doSelect($c);
 
-        /*$c = new Criteria();
+        $c = new Criteria();
         $c->add(MlmAnnouncementPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->addDescendingOrderByColumn(MlmAnnouncementPeer::CREATED_ON);
         $c->setLimit(10);
-        $this->announcements = MlmAnnouncementPeer::doSelect($c);*/
+        $this->announcements = MlmAnnouncementPeer::doSelect($c);
 
         $distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distributor);
 
         $ecash = 0;
         $epoint = 0;
+        $maintenancePoint = 0;
         $totalNetworks = 0;
         $ranking = "";
         $mt4Id = "";
@@ -698,10 +699,20 @@ class memberActions extends sfActions
             }
 
             $ranking = $distributor->getRankCode();
-            $mt4Id = $distributor->getMt4UserName();
+
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+            foreach ($distMt4s as $distMt4) {
+                if ($mt4Id != "")
+                    $mt4Id .= ",";
+                $mt4Id .= $distMt4->getMt4UserName();
+            }
 
             $ecash = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+            $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$distributor->getDistributorCode()."%", Criteria::LIKE);
@@ -717,6 +728,7 @@ class memberActions extends sfActions
         $this->currencyCode = $currencyCode;
         $this->distributor = $distributor;
         $this->lastLogin = $lastLogin;
+        $this->maintenancePoint = $maintenancePoint;
     }
 
     public function executeAnnouncementList()
