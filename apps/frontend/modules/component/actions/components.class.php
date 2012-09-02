@@ -57,7 +57,16 @@ class componentComponents extends sfComponents
 
             $this->componentDistributor = $componentDistributor;
             $ranking = $componentDistributor->getRankCode();
-            $mt4Id = $componentDistributor->getMt4UserName();
+
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $this->param);
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+            foreach ($distMt4s as $distMt4) {
+                if ($mt4Id != "")
+                    $mt4Id .= ",";
+                $mt4Id .= $distMt4->getMt4UserName();
+            }
 
             $c = new Criteria();
             $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);

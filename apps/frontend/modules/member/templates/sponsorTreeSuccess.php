@@ -18,41 +18,42 @@
     });
 </script>
 
-<div style="padding: 10px; top: 30px; width: 98%">
-    <div style="width:565px; padding:10px 10px;">
-        <h3>
-            <strong><?php echo __('Genealogy for your Trader ID') . ": " . $distinfo->getDistributorCode(); ?></strong>
-        </h3>
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": " . $distinfo->getDistributorCode(); ?></span></td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>
+        <ul id="sponsorTree" style="background-color: #ffffff;">
+            <?php
+            $className = "";
 
-        <div class='genealogy' style="width:565px; padding:10px 10px;">
-
-            <ul id="sponsorTree" style="background-color: #ffffff;">
-                <?php
-                $className = "";
-
-                if ($hasChild) {
-                    $className = "class='hasChildren'";
-                }
-                ?>
-                <li id="<?php echo $distinfo->getDistributorId();?>" <?php echo $className;?>>
-                    <span>
-                        <?php echo "".$distinfo->getDistributorCode()
-                                   . " " . $distinfo->getFullName()
-                                   . " Joined " . date('Y-m-d', strtotime($distinfo->getActiveDatetime()))
-                                   . " " . $distinfo->getRankCode();
-                        ?>
-                    </span>
-                <?php
-                if ($hasChild) {
+            if ($hasChild) {
+                $className = "class='hasChildren'";
+            }
+            ?>
+            <li id="<?php echo $distinfo->getDistributorId();?>" <?php echo $className;?>>
+                <span>
+                    <?php echo "".$distinfo->getDistributorCode()
+                               . " " . $distinfo->getFullName()
+                               . " Joined " . date('Y-m-d', strtotime($distinfo->getActiveDatetime()))
+                               . " " . $distinfo->getRankCode();
                     ?>
-                    <ul>
-                        <li><span class="placeholder">&nbsp;</span></li>
-                    </ul>
-                    <?php } ?>
-                </li>
-            </ul>
-
-        </div>
-
-    </div>
-</div>
+                </span>
+            <?php
+            if ($hasChild) {
+                ?>
+                <ul>
+                    <li><span class="placeholder">&nbsp;</span></li>
+                </ul>
+                <?php } ?>
+            </li>
+        </ul>
+    </td>
+</tr>
+</tbody>
+</table>
