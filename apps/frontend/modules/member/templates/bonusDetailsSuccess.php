@@ -90,203 +90,267 @@
     }
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
-    <div class="sidenavi">
-        <ul>
-            <li><a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a></li>
-
-        </ul>
-    </div>
-
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
-</div>
-
 <form action="/member/bonusDetails" id="bonusForm" method="post">
     <input type="hidden" id="filterAction" value="DRB">
-<div class="areaContent">
-    <div class="resultsWrap">
-    <div class="portlet">
-        <div class="portlet-header"><?php echo __('Bonus Categories') ?></div>
-        <div class="portlet-content">
 
-            <table class="display" id="datagrid" border="0" width="100%">
-                <thead>
-                <tr align="center">
-                    <th><?php echo __('Bonus') ?></th>
-                    <th style="text-align: right;"><?php echo __('Amount') ?></th>
-                    <th style="text-align: center;"><?php echo __('View Details') ?></th>
-                </tr>
-                </thead>
+    <table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Bonus Detail') ?></span></td>
+    </tr>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
                 <tbody>
-                <?php
-
-                echo "<tr class='odd'>
-                <td>" . __('RB') . "</td>
-                <td align='right'>" . $dsb . "</td>
-                <td align='center'>" . link_to(__('Details'), '#', array(
-                                                                        'class' => 'activeLink',
-                                                                        'ref' => 'DRB'
-                                                                   )) . "</td></tr>";
-
-                echo "<tr class='even'>
-                <td>" . __('PIPS') . "</td>
-                <td align='right'>" . $pipsBonus . "</td>
-                <td align='center'>" . link_to(__('Details'), '#', array(
-                                                                        'class' => 'activeLink',
-                                                                        'ref' => Globals::COMMISSION_TYPE_PIPS_BONUS
-                                                                   ))
-                     . "</td></tr>";
-
-                echo "<tr class='odd'>
-                <td>" . __('CREDIT REFUND') . "</td>
-                <td align='right'>" . $creditRefund . "</td>
-                <td align='center'>" . link_to(__('Details'), '#', array(
-                                                                        'class' => 'activeLink',
-                                                                        'ref' => Globals::COMMISSION_TYPE_CREDIT_REFUND
-                                                                   ))
-                     . "</td></tr>";
-
-                echo "<tr class='even'>
-                <td><strong>" . __('Total') . "</strong></td>
-                <td align='right'><strong>" . $total . "</strong></td><td></td></tr>";
-                ?>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Bonus Categories') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+            <table cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
 
-    <div class="portlet">
-        <div class="portlet-header"><?php echo __('Bonus Details') ?></div>
-        <div class="portlet-content">
-            <div id="divBonusType" style="display: inline;">
-                <table class="display" id="datagridByMonth" border="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th style="text-align: center;"><?php echo __('Date') ?></th>
-                        <th style="text-align: right; width: 100px; display: none" class='tdPipsBonus'><?php echo __('Pips Bonus') ?></th>
-                        <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
-                        <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        $month = array();
-                        $month["1"] = "January";
-                        $month["2"] = "February";
-                        $month["3"] = "March";
-                        $month["4"] = "April";
-                        $month["5"] = "May";
-                        $month["6"] = "June";
-                        $month["7"] = "July";
-                        $month["8"] = "August";
-                        $month["9"] = "September";
-                        $month["10"] = "October";
-                        $month["11"] = "November";
-                        $month["12"] = "December";
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <br>
+                        <table class="display" id="datagrid" border="0" width="100%">
+                            <thead>
+                            <tr align="center">
+                                <th><?php echo __('Bonus') ?></th>
+                                <th style="text-align: right;"><?php echo __('Amount') ?></th>
+                                <th style="text-align: center;"><?php echo __('View Details') ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
 
-                        $showYear = "";
-                        $showMonth = "";
-                        foreach ($anode as $arr) {
                             echo "<tr class='odd'>
-                                <td align='center'><a href='#' refMonth='".$arr["month"]."' refYear='".$arr["year"]."' class='monthLink'>" . $arr["year"] . "-" . __($month[$arr["month"]]) ."</a></td>
-                                <td align='right' class='tdPipsBonus' style='display: none'>".number_format($arr["pips_bonus"], 2)."</td>
-                                <td align='right' class='tdCreditRefund' style='display: none'>".number_format($arr["credit_refund"], 2)."</td>
-                                <td align='right' class='tdRbBonus'>".number_format($arr["rb_bonus"], 2)."</td>
-                                </tr>";
+                            <td>" . __('RB') . "</td>
+                            <td align='right'>" . $dsb . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => 'DRB'
+                                                                               )) . "</td></tr>";
 
-                            $showYear = $arr["year"];
-                            $showMonth = $arr["month"];
-                        }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
+                            echo "<tr class='even'>
+                            <td>" . __('PIPS') . "</td>
+                            <td align='right'>" . $pipsBonus . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => Globals::COMMISSION_TYPE_PIPS_BONUS
+                                                                               ))
+                                 . "</td></tr>";
+
+                            echo "<tr class='odd'>
+                            <td>" . __('CREDIT REFUND') . "</td>
+                            <td align='right'>" . $creditRefund . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => Globals::COMMISSION_TYPE_CREDIT_REFUND
+                                                                               ))
+                                 . "</td></tr>";
+
+                            echo "<tr class='even'>
+                            <td><strong>" . __('Total') . "</strong></td>
+                            <td align='right'><strong>" . $total . "</strong></td><td></td></tr>";
+                            ?>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                </tbody>
+            </table>
+
             <br>
-            <script type="text/javascript">
-                $(function() {
-                    $(".monthLink").click(function(event){
-                        event.preventDefault();
-                        $("#search_month").val($(this).attr("refMonth"));
-                        $("#search_year").val($(this).attr("refYear"));
 
-                        if ($("#divBonusType").data("BONUS_TYPE") == "DRB")  {
-                            datagridDetail.fnDraw();
-                        } else {
-                            pipsDatagrid.fnDraw();
-                        }
-                    });
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Bonus Details') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+            <table cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
 
-                    pipsDatagrid = $("#pipsDatagrid").r9jasonDataTable({
-                        // online1DataTable extra params
-                        "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
-                        "extraParam" : function(aoData) { // pass extra params to server
-                            aoData.push({ "name": "filterMonth", "value": $("#search_month").val()  });
-                            aoData.push({ "name": "filterYear", "value": $("#search_year").val()  });
-                            /*aoData.push({ "name": "filterBonusType", "value": $("#divBonusType").data("BONUS_TYPE")  });*/
-                        },
-                        "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
-                        },
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <br>
+                        <div id="divBonusType" style="display: inline;">
+                            <table class="display" id="datagridByMonth" border="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;"><?php echo __('Date') ?></th>
+                                    <th style="text-align: right; width: 100px; display: none" class='tdPipsBonus'><?php echo __('Pips Bonus') ?></th>
+                                    <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
+                                    <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $month = array();
+                                    $month["1"] = "January";
+                                    $month["2"] = "February";
+                                    $month["3"] = "March";
+                                    $month["4"] = "April";
+                                    $month["5"] = "May";
+                                    $month["6"] = "June";
+                                    $month["7"] = "July";
+                                    $month["8"] = "August";
+                                    $month["9"] = "September";
+                                    $month["10"] = "October";
+                                    $month["11"] = "November";
+                                    $month["12"] = "December";
 
-                        // datatables params
-                        "bLengthChange": true,
-                        "bFilter": false,
-                        "bProcessing": true,
-                        "bServerSide": true,
-                        "bAutoWidth": false,
-                        "sAjaxSource": "<?php echo url_for('finance/pipsBonusList') ?>",
-                        "sPaginationType": "full_numbers",
-                        "aoColumns": [
-                            { "sName" : "bonus.commission_id", "bVisible" : false},
-                            { "sName" : "bonus.month_traded",  "bSortable": true},
-                            { "sName" : "bonus.remark",  "bSortable": false},
-                            { "sName" : "bonus.credit",  "bSortable": true}
-                        ]
-                    });
-                }); // end $(function())
+                                    $showYear = "";
+                                    $showMonth = "";
+                                    foreach ($anode as $arr) {
+                                        echo "<tr class='odd'>
+                                            <td align='center'><a href='#' refMonth='".$arr["month"]."' refYear='".$arr["year"]."' class='monthLink'>" . $arr["year"] . "-" . __($month[$arr["month"]]) ."</a></td>
+                                            <td align='right' class='tdPipsBonus' style='display: none'>".number_format($arr["pips_bonus"], 2)."</td>
+                                            <td align='right' class='tdCreditRefund' style='display: none'>".number_format($arr["credit_refund"], 2)."</td>
+                                            <td align='right' class='tdRbBonus'>".number_format($arr["rb_bonus"], 2)."</td>
+                                            </tr>";
 
-            </script>
-            <div id="divPip" style="display: none;">
-                <input type="hidden" id="search_month" value="<?php echo $showMonth;?>">
-                <input type="hidden" id="search_year" value="<?php echo $showYear;?>">
-                <table class="display" id="pipsDatagrid" border="0" width="100%" cellpadding="0" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>id [hidden]</th>
-                        <th>Month</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div id="divDRB">
-                <table class="display" id="datagridDetail" border="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Detail Id[hidden]</th>
-                        <th><?php echo __('Date') ?></th>
-                        <th><?php echo __('Commission Type') ?></th>
-                        <th><?php echo __('Credit') ?></th>
-                        <th><?php echo __('Debit') ?></th>
-                        <th><?php echo __('Remark') ?></th>
-                        <th><?php echo __('MT4 Status') ?></th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
-    </div>
-</div>
+                                        $showYear = $arr["year"];
+                                        $showMonth = $arr["month"];
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <script type="text/javascript">
+                            $(function() {
+                                $(".monthLink").click(function(event){
+                                    event.preventDefault();
+                                    $("#search_month").val($(this).attr("refMonth"));
+                                    $("#search_year").val($(this).attr("refYear"));
+
+                                    if ($("#divBonusType").data("BONUS_TYPE") == "DRB")  {
+                                        datagridDetail.fnDraw();
+                                    } else {
+                                        pipsDatagrid.fnDraw();
+                                    }
+                                });
+
+                                pipsDatagrid = $("#pipsDatagrid").r9jasonDataTable({
+                                    // online1DataTable extra params
+                                    "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
+                                    "extraParam" : function(aoData) { // pass extra params to server
+                                        aoData.push({ "name": "filterMonth", "value": $("#search_month").val()  });
+                                        aoData.push({ "name": "filterYear", "value": $("#search_year").val()  });
+                                        /*aoData.push({ "name": "filterBonusType", "value": $("#divBonusType").data("BONUS_TYPE")  });*/
+                                    },
+                                    "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
+                                    },
+
+                                    // datatables params
+                                    "bLengthChange": true,
+                                    "bFilter": false,
+                                    "bProcessing": true,
+                                    "bServerSide": true,
+                                    "bAutoWidth": false,
+                                    "sAjaxSource": "<?php echo url_for('finance/pipsBonusList') ?>",
+                                    "sPaginationType": "full_numbers",
+                                    "aoColumns": [
+                                        { "sName" : "bonus.commission_id", "bVisible" : false},
+                                        { "sName" : "bonus.month_traded",  "bSortable": true},
+                                        { "sName" : "bonus.remark",  "bSortable": false},
+                                        { "sName" : "bonus.credit",  "bSortable": true}
+                                    ]
+                                });
+                            }); // end $(function())
+
+                        </script>
+                        <div id="divPip" style="display: none;">
+                            <input type="hidden" id="search_month" value="<?php echo $showMonth;?>">
+                            <input type="hidden" id="search_year" value="<?php echo $showYear;?>">
+                            <table class="display" id="pipsDatagrid" border="0" width="100%" cellpadding="0" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>id [hidden]</th>
+                                    <th>Month</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="divDRB">
+                            <table class="display" id="datagridDetail" border="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Detail Id[hidden]</th>
+                                    <th><?php echo __('Date') ?></th>
+                                    <th><?php echo __('Commission Type') ?></th>
+                                    <th><?php echo __('Credit') ?></th>
+                                    <th><?php echo __('Debit') ?></th>
+                                    <th><?php echo __('Remark') ?></th>
+                                    <th><?php echo __('MT4 Status') ?></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </form>
