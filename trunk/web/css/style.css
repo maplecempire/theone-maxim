@@ -40,7 +40,7 @@ select {
     vertical-align: middle;
 }
 
-input {
+input[type="text"], textarea {
     height: 15px;
 }
 

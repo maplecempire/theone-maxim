@@ -561,21 +561,26 @@ function reassignDatagridAnnouncementEventAttr() {
 </table>
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
     <tbody>
-    <tr class="row_header">
+    <tr>
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th colspan="5">
-            Inactive Members
-        </th>
+        <th>Inactive Traders</th>
+        <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
     </tr>
 
     <tr>
-        <td colspan="7">
+        <td colspan="4">
             <table class="pbl_table" cellpadding="3" cellspacing="3">
                 <tbody>
                 <tr class="pbl_header">
