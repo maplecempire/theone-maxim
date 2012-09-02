@@ -20,9 +20,9 @@ class downloadActions extends sfActions
         $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
         $response->setContentType('application/exe');
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Disposition', 'attachment; filename=OFX_MT4_PRO.exe', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=MAXIM_MT4_PRO.exe', TRUE);
         $response->sendHttpHeaders();
-        readfile(sfConfig::get('sf_upload_dir')."/OFX_MT4_PRO.exe");
+        readfile(sfConfig::get('sf_upload_dir')."/MAXIM_MT4_PRO.exe");
         return sfView::NONE;
     }
     public function executeMt4ProUserGuide()
@@ -112,7 +112,7 @@ class downloadActions extends sfActions
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
         $response->setHttpHeader('Content-Disposition', 'attachment; filename=IB_Agreement.pdf', TRUE);
         $response->sendHttpHeaders();
-        readfile(sfConfig::get('sf_upload_dir')."/agreements/OFX_GLOBAL_IB_Agreement.pdf");
+        readfile(sfConfig::get('sf_upload_dir')."/agreements/MAXIM_GLOBAL_IB_Agreement.pdf");
         return sfView::NONE;
     }
     public function executeRiskDisclosureStatement()
