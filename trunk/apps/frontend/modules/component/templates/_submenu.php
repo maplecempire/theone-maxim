@@ -25,11 +25,7 @@
             <a href="/member/packageUpgrade"><span>Package Upgrade</span></a>
         </li>
     <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/epointLog"><span><?php echo __('Forex Point Log'); ?></span></a>
-        </li>
-    <?php } ?>
+
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
@@ -67,10 +63,15 @@
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">BONUS</li>
+        <li class="menu_title">STATEMENT</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a>
         </li>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/epointLog"><span><?php echo __('Forex Account'); ?></span></a>
+        </li>
+    <?php } ?>
     </ul>
     <br class="clear"><br>
     <ul>
