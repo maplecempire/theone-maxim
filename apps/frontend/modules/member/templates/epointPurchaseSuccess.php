@@ -82,116 +82,132 @@ $(function() {
 });
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
-</div>
 
-<div class="areaContent">
-    <div class="resultsWrap">
-        <?php echo form_tag('member/epointPurchase', array("enctype" => "multipart/form-data", "id" => "transferForm")) ?>
-        <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist">
-            <caption><?php echo __('Forex Point Purchase') ?></caption>
-            <tr>
-                <td colspan=2 align='center'>
-                    <?php if ($sf_flash->has('banksuccessMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;"
-                             class="ui-state-highlight ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;"
-                                     class="ui-icon ui-icon-info"></span>
-                                <strong><?php echo $sf_flash->get('banksuccessMsg') ?></strong></p>
-                        </div>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Forex Point Purchase') ?></span></td>
+    </tr>
+    <tr>
+        <td><br>
+            <?php if ($sf_flash->has('successMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                    <?php if ($sf_flash->has('errorMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
-                        </div>
+                </div>
+                <?php endif; ?>
+            <?php if ($sf_flash->has('errorMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-error ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-alert"></span>
+                            <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
-                        <tr>
-                            <td width="160px" class="caption">
-                                <strong><?php echo __('Trader ID'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="traderId" type="text" id="traderId" maxlength="50" disabled="disabled"
+                </div>
+                <?php endif; ?>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <?php echo form_tag('member/epointPurchase', array("enctype" => "multipart/form-data", "id" => "transferForm")) ?>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Forex Point Purchase') ?></th>
+<!--                    <th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Trader ID'); ?></td>
+                    <td>
+                        <input name="traderId" type="text" id="traderId" maxlength="50" disabled="disabled"
                                        value="<?php echo $distDB->getDistributorCode(); ?>"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Trader Name'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="traderName" type="text" id="traderName" maxlength="50" disabled="disabled"
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Trader Name') ?></td>
+                    <td>
+                        <input name="traderName" type="text" id="traderName" maxlength="50" disabled="disabled"
                                        value="<?php echo $distDB->getFullname(); ?>"/>
-                            </td>
-                        </tr>
-                        <!--<tr>
-                            <td class="caption">
-                                <strong><?php /*echo __('Registered Time'); */?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="registeredTime" type="text" id="registeredTime" maxlength="50"
-                                       disabled="disabled" value="<?php /*echo $distDB->getCreatedOn(); */?>"/>
-                            </td>
-                        </tr>-->
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Total Forex Point'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="epointAmount" id="epointAmount"/>
-                            </td>
-                        </tr>
-                        <!--<tr>
-                            <td class="caption">
-                                <strong><?php /*echo __('Upload Bank Transfer Slip'); */?></strong>
-                            </td>
-                            <td class="value">
-                                <?php /*echo input_file_tag('fileNew', array("id" => "bankSlip", "name" => "bankSlip")) */?>
-                            </td>
-                        </tr>-->
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Security Password'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="transactionPassword" type="password" id="transactionPassword"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="1" align="right" valign="top"><font color="#dc143c">NOTE :</font>
-                            </td>
-                            <td colspan="1" align="left"><font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund use only.
-                                <br>Forex Point is non-withdrawable.
-                                <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
 
-            <tr>
-                <td colspan='3' align='center'>
-                    <input type="submit" name="Button1" value="<?php echo __('Submit') ?>" language="javascript"
-                           id="btnTransfer" tabindex="5"/>
-                </td>
-            </tr>
-        </table>
-        </form>
-        <div class="clear"></div>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Total Forex Point'); ?></td>
+                    <td>
+                        <input name="epointAmount" id="epointAmount"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
 
-        <script type="text/javascript" language="javascript">
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password'); ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td valign="top"><font color="#dc143c">NOTE :</font></td>
+                                <td>
+                                    <font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund use only.
+                                    <br>Forex Point is non-withdrawable.
+                                    <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnTransfer"><?php echo __('Submit') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+
+            </form>
+
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <script type="text/javascript" language="javascript">
             var datagrid = null;
             $(function() {
                 datagrid = $("#datagrid").r9jasonDataTable({
@@ -285,27 +301,44 @@ $(function() {
             }
         </script>
 
-        <div class="portlet">
-            <div class="portlet-header"><?php echo __('Forex Point Purchase History') ?></div>
-            <div class="portlet-content" style="min-height: 300px">
-
-                <table class="display" id="datagrid" border="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th><?php echo __('Date') ?></th>
-                        <th><?php echo __('Forex Point purchase') ?></th>
-                        <th><?php echo __('Reference No') ?></th>
-                        <th><?php echo __('Status') ?></th>
-                        <th><?php echo __('Remarks') ?></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+        <table cellspacing="0" cellpadding="0" class="tbl_form">
+            <colgroup>
+                <col width="1%">
+                <col width="30%">
+                <col width="69%">
+                <col width="1%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th class="tbl_header_left">
+                    <div class="border_left_grey">&nbsp;</div>
+                </th>
+                <th><?php echo __('Forex Point Purchase History') ?></th>
+                <th class="tbl_content_right"></th>
+                <th class="tbl_header_right">
+                    <div class="border_right_grey">&nbsp;</div>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="display" id="datagrid" border="0" width="100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th><?php echo __('Date') ?></th>
+                <th><?php echo __('Forex Point purchase') ?></th>
+                <th><?php echo __('Reference No') ?></th>
+                <th><?php echo __('Status') ?></th>
+                <th><?php echo __('Remarks') ?></th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <div id="dgBankReceipt" title="<?php echo __('Bank Information Detail') ?>" style="display:none;">
     <?php echo form_tag('member/uploadBankReceipt', array("enctype" => "multipart/form-data", "id" => "uploadForm")) ?>
