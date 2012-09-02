@@ -83,246 +83,320 @@ $(function() {
 });
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
-    <div class="sidenavi">
-        <ul>
-            <li><a href="/member/viewProfile"><span><?php echo __('Account Information'); ?></span></a></li>
-            <li><a href="/member/viewBankInformation"><span><?php echo __('Bank Account Information'); ?></span></a></li>
-            <li><a href="/member/loginPassword"><span><?php echo __('Change Password'); ?></span></a></li>
-            <li><a href="/member/transactionPassword"><span><?php echo __('Change Security Password'); ?></span></a></li>
-        </ul>
-    </div>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Account Information') ?></span></td>
+    </tr>
+    <tr>
+        <td><br>
+            <?php if ($sf_flash->has('successMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+                    </div>
+                </div>
+                <?php endif; ?>
+            <?php if ($sf_flash->has('errorMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-error ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-alert"></span>
+                            <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+                    </div>
+                </div>
+                <?php endif; ?>
 
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
-</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form id="registerForm" method="post" action="/member/updateProfile">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Personal Detail') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
 
-<div class="areaContent">
-    <div class="resultsWrap">
-        <form id="registerForm" method="post" action="/member/updateProfile">
-            <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" bgcolor="#f90;"
-                   align="center">
-                <caption><?php echo __('Account Information') ?></caption>
-                <tr>
-                    <td colspan=2 align='center'>
-                        <?php if ($sf_flash->has('successMsg')): ?>
-                        <div class="ui-widget">
-                            <div style="margin-top: 20px; padding: 0 .7em;"
-                                 class="ui-state-highlight ui-corner-all">
-                                <p><span style="float: left; margin-right: .3em;"
-                                         class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
-                            </div>
-                        </div>
-                        <?php endif; ?>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Referrer ID') ?></td>
+                    <td><input name="sponsorId" readonly="readonly" id="sponsorId" tabindex="1" size="30"
+                               value="<?php echo $sponsor->getDistributorCode() ?>"/>
                     </td>
+                    <td>&nbsp;</td>
                 </tr>
-                <tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Referrer Name') ?></td>
+                    <td><input name="sponsorName" readonly="readonly" id="sponsorName"
+                                             tabindex="2" size="30" value="<?php echo $sponsor->getFullname() ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Full Name') ?></td>
+                    <td><input name="fullname" readonly="readonly" type="text" id="fullname" tabindex="5"
+                                             size="30" value="<?php echo $distDB->getFullName() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Country') ?></td>
+                    <td><?php include_component('component', 'countrySelectOption', array('countrySelected' => $distDB->getCountry(), 'countryName' => 'country', 'countryId' => 'country')) ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Date of Birth') ?></td>
+                    <td><select id="dob_year"></select>
+                        <select id="dob_month"></select>
+                        <select id="dob_day"></select>
+                        <input name="dob" readonly="readonly" value="<?php echo $distDB->getDob() ?>" type="hidden" id="dob" class="bp_05"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Address') ?></td>
                     <td>
-                        <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
-                            <tr>
-                                <td width="200px" class="caption"><span id="Label4"><strong><?php echo __('Referrer ID') ?></strong></span>
-                                </td>
-                                <td class="value">
-                                    <input name="sponsorId" readonly="readonly" id="sponsorId" tabindex="1" size="30"
-                                           value="<?php echo $sponsor->getDistributorCode() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption"><span id="Label25"><strong><?php echo __('Referrer Name') ?></strong></span></td>
-                                <td class="value"><input name="sponsorName" readonly="readonly" id="sponsorName"
-                                                         tabindex="2" size="30" value="<?php echo $sponsor->getFullname() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption"><span id="Label13"><strong><?php echo __('Full Name') ?></strong></span></td>
-                                <td class="value"><input name="fullname" readonly="readonly" type="text" id="fullname" tabindex="5"
-                                                         size="30" value="<?php echo $distDB->getFullName() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Country') ?></strong></span></td>
-                                <td class="value">
-                                    <?php include_component('component', 'countrySelectOption', array('countrySelected' => $distDB->getCountry(), 'countryName' => 'country', 'countryId' => 'country')) ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Date of Birth') ?></strong></span></td>
-                                <td class="value">
-                                    <select id="dob_year"></select>
-                                    <select id="dob_month"></select>
-                                    <select id="dob_day"></select>
-                                    <input name="dob" readonly="readonly" value="<?php echo $distDB->getDob() ?>" type="hidden" id="dob" class="bp_05"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Address') ?></strong></span></td>
-                                <td class="value"><input name="address" type="text" id="address" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getAddress() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Address') ?> 2</strong></span></td>
-                                <td class="value"><input name="address2" type="text" id="address2" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getAddress2() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('City / Town') ?></strong></span></td>
-                                <td class="value"><input name="city" type="text" id="city" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getCity() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('State / Province') ?></strong></span></td>
-                                <td class="value"><input name="state" type="text" id="state" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getState() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Zip / Postal Code') ?></strong></span></td>
-                                <td class="value"><input name="zip" type="text" id="zip" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getPostcode() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Email') ?></strong></span></td>
-                                <td class="value"><input name="email" type="text" id="email" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getEmail() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Alternate Email') ?></strong></span></td>
-                                <td class="value"><input name="alt_email" type="text" id="alt_email" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getAlternateEmail() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Contact Number') ?></strong></span></td>
-                                <td class="value"><input name="contactNumber" type="text" id="contactNumber" tabindex="13" size="30"
-                                                         value="<?php echo $distDB->getContact() ?>"/></td>
-                            </tr>
-                            <tr>
-                                <td class="caption" valign="top"><span><strong><?php echo __('Gender') ?></strong></span></td>
-                                <td class="value">
-                                    <table id="RadioButtonListSex" border="0">
-                                        <tr>
-                                            <td>
-                                                <input id="rdoGender_0" type="radio" name="gender" value="M"
-                                                       <?php
-                                                            if ($distDB->getGender() == "M")
-                                                                echo " checked='checked'";
-                                                        ?>
-                                                       /><label for="rdoGender_0"><font>
-                                                <?php echo __('Male') ?></font></label>
-                                            </td>
-                                            <td><input id="rdoGender_1" type="radio" name="gender" value="F"
-                                                    <?php
-                                                        if ($distDB->getGender() == "F")
-                                                            echo " checked='checked'";
-                                                    ?>
-                                                    /><label
-                                                    for="rdoGender_1"><font><?php echo __('Female') ?></font></label>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="right">
-                                    <button id="btnUpdate">Update</button>
-                                </td>
-                            </tr>
-                        </table>
+                        <input name="address" type="text" id="address" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getAddress() ?>"/>
                     </td>
+                    <td>&nbsp;</td>
                 </tr>
-            </table>
-        </form>
-        <div class="clear"></div>
-        <form id="uploadForm" method="post" action="/member/doUploadFile" enctype="multipart/form-data">
-            <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" bgcolor="#f90;"
-                   align="center">
-                <caption><?php echo __('Upload Bank Pass Book, Proof of Residence and Passport/IC') ?></caption>
-                <tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Address') ?> 2</td>
                     <td>
-                        <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
-                            <tr>
-                                <td class="caption"><span id="Label26"><strong><?php echo __('Bank Pass Book') ?></strong></span></td>
-                                <td class="value">
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php echo input_file_tag('bankPassBook', array("id" => "bankPassBook", "name" => "bankPassBook")); ?>
-                                            </td>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php
-                                                if ($distDB->getFileBankPassBook() != "") {
-                                                ?>
-                                                    <a href="<?php echo url_for("/download/bankPassBook?q=".rand()) ?>">
-                                                        <img src="/images/common/fileopen.png" alt="view file">
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="caption"><span id="Label27"><strong><?php echo __('Proof of Residence') ?></strong></span></td>
-                                <td class="value">
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence")); ?>
-                                            </td>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php
-                                                if ($distDB->getFileProofOfResidence() != "") {
-                                                ?>
-                                                    <a href="<?php echo url_for("/download/proofOfResidence?q=".rand()) ?>">
-                                                        <img src="/images/common/fileopen.png" alt="view file">
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="caption"><span id="Label28"><strong><?php echo __('Passport/IC') ?></strong></span></td>
-                                <td class="value">
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php echo input_file_tag('nric', array("id" => "nric", "name" => "nric")); ?>
-                                            </td>
-                                            <td style="background: none repeat scroll 0 0 #E9E9E9;">
-                                                <?php
-                                                if ($distDB->getFileNric() != "") {
-                                                ?>
-                                                    <a href="<?php echo url_for("/download/nric?q=".rand()) ?>">
-                                                        <img src="/images/common/fileopen.png" alt="view file">
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <font color="#dc143c">
-                                    Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.
-                                    </font>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="right">
-                                    <button id="btnUpload">Upload</button>
-                                </td>
-                            </tr>
-                        </table>
+                        <input name="address2" type="text" id="address2" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getAddress2() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('City / Town') ?></td>
+                    <td>
+                        <input name="city" type="text" id="city" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getCity() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('State / Province') ?></td>
+                    <td>
+                        <input name="state" type="text" id="state" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getState() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Zip / Postal Code') ?></td>
+                    <td>
+                        <input name="zip" type="text" id="zip" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getPostcode() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Email') ?></td>
+                    <td>
+                        <input name="email" type="text" id="email" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getEmail() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Alternate Email') ?></td>
+                    <td>
+                        <input name="alt_email" type="text" id="alt_email" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getAlternateEmail() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Contact Number') ?></td>
+                    <td>
+                        <input name="contactNumber" type="text" id="contactNumber" tabindex="13" size="30"
+                                             value="<?php echo $distDB->getContact() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Gender') ?></td>
+                    <td>
+                        <input id="rdoGender_0" type="radio" name="gender" value="M"
+                               <?php
+                                    if ($distDB->getGender() == "M")
+                                        echo " checked='checked'";
+                                ?>
+                               /><label for="rdoGender_0"><font>
+                        <?php echo __('Male') ?></font></label>
+                        &nbsp;&nbsp;
+                        <input id="rdoGender_1" type="radio" name="gender" value="F"
+                        <?php
+                            if ($distDB->getGender() == "F")
+                                echo " checked='checked'";
+                        ?>
+                        /><label
+                        for="rdoGender_1"><font><?php echo __('Female') ?></font></label>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnUpdate">Update</button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form id="uploadForm" method="post" action="/member/doUploadFile" enctype="multipart/form-data">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Upload Bank Pass Book, Proof of Residence and Passport/IC') ?></th>
+                    <!--<th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Bank Pass Book') ?>
+                    </td>
+                    <td>
+                        <?php echo input_file_tag('bankPassBook', array("id" => "bankPassBook", "name" => "bankPassBook")); ?>
+                        <?php
+                        if ($distDB->getFileBankPassBook() != "") {
+                        ?>
+                            <a href="<?php echo url_for("/download/bankPassBook?q=".rand()) ?>">
+                                <img src="/images/common/fileopen.png" alt="view file">
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Proof of Residence') ?>
+                    </td>
+                    <td>
+                        <?php echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence")); ?>
+                        <?php
+                        if ($distDB->getFileProofOfResidence() != "") {
+                        ?>
+                            <a href="<?php echo url_for("/download/proofOfResidence?q=".rand()) ?>">
+                                <img src="/images/common/fileopen.png" alt="view file">
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Passport/IC') ?>
+                    </td>
+                    <td>
+                        <?php echo input_file_tag('nric', array("id" => "nric", "name" => "nric")); ?>
+                        <?php
+                        if ($distDB->getFileNric() != "") {
+                        ?>
+                            <a href="<?php echo url_for("/download/nric?q=".rand()) ?>">
+                                <img src="/images/common/fileopen.png" alt="view file">
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td colspan="5">
+                        <font color="#dc143c">
+                        Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.
+                        </font>
                     </td>
                 </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnUpload">Upload</button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
             </table>
-        </form>
-    </div>
-</div>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
