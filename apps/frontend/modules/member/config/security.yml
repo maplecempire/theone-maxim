@@ -58,10 +58,6 @@ mt4Withdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
-reinvestCps:
-  is_secure:   on
-  credentials: [[ MAXIM_DISTRIBUTOR ]]
-
 packagePurchaseViaBankTransfer:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
@@ -82,7 +78,7 @@ placePlacement:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
-purchasePin:
+purchasePackage:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 

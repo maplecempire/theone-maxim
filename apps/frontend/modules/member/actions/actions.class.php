@@ -2363,6 +2363,25 @@ class memberActions extends sfActions
         }
     }
 
+    public function executeDoPurchasePackage()
+    {
+
+    }
+    public function executePurchasePackage()
+    {
+        $pendingDistId = $this->getRequestParameter('p');
+        $pendingDistDB = MlmDistributorPeer::retrieveByPk($pendingDistId);
+        $this->forward404Unless($pendingDistDB);
+
+        $c = new Criteria();
+        $packageDBs = MlmPackagePeer::doSelect($c);
+
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->pendingDistDB = $pendingDistDB;
+        $this->packageDBs = $packageDBs;
+    }
+
     public function executePackageUpgrade()
     {
         if ($this->getRequestParameter('packageTypeSelected') <> "" && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('topupPackageTypePaymentType') <> "") {
