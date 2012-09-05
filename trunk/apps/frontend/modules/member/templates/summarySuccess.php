@@ -43,9 +43,8 @@ $(function() {
             primary: "ui-icon-circle-check"
         }
     }).click(function(event) {
-        event.preventDefault();
+        /*event.preventDefault();
         waiting();
-//        $("#distributorId").val($(this).attr("ref"));
         $("#dgActivateMember_shareholderId").val($(this).attr("refCode"));
         $("#dgActivateMember_alias").val($(this).attr("refNickname"));
         $("#dgActivateMember_registeredTime").val($(this).attr("refCreatedDate"));
@@ -73,7 +72,7 @@ $(function() {
             error : function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Server connection error.");
             }
-        });
+        });*/
     });
 
     $("#dgActivateMember").dialog("destroy");
@@ -602,7 +601,7 @@ function reassignDatagridAnnouncementEventAttr() {
                     echo "<tr class='row" . $trStyle . "'>
                     <td>" . $dist->getCreatedOn() . "</td>
                     <td class='date'>" . $dist->getDistributorCode() . "</td><td>" . $dist->getFullName() . "</td>
-                    <td>" . link_to(__('Active'), '#', array(
+                    <td>" . link_to(__('Active'), 'member/purchasePackage?p=' . $dist->getDistributorId(), array(
                                    'class' => 'activeLink',
                                    'ref' => $dist->getDistributorId(),
                                    'refCode' => $dist->getDistributorCode(),

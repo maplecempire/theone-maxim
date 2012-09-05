@@ -140,8 +140,8 @@
                 msgs = data + "<br>";
             }
 
-            var errorPanel = "<div style='padding: 0 .7em;' class='ui-state-error ui-corner-all'>";
-            errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
+            var errorPanel = "<div style='padding: 0 .7em; line-height :normal' class='ui-state-error ui-corner-all'>";
+            errorPanel += "<p style='margin: 10px;'><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
             errorPanel += msgs + "</p></div>";
             $("#waitingLB h3").html(errorPanel);
             $.blockUI({
@@ -164,7 +164,7 @@
         }
         function waiting() {
             /*$("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");*/
-            $("#waitingLB h3").html("<h3 style='width: 100%; padding-left: 0px; background-color:inherit; color: black;; line-height:0px; margin-top: 20px;'>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
+            $("#waitingLB h3").html("<h3 style='width: 100%; padding-left: 0px; background-color:inherit; color: black; line-height:0px; margin-top: 20px;'>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
 
             $.blockUI({
                         message: $("#waitingLB")
