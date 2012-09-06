@@ -339,6 +339,18 @@ class memberActions extends sfActions
 
     public function executeDoRegister()
     {
+        require_once('recaptchalib.php');
+        $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
+        $resp = recaptcha_check_answer ($privatekey,
+                                    $_SERVER["REMOTE_ADDR"],
+                                    $_POST["recaptcha_challenge_field"],
+                                    $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+            return $this->redirect('home/login');
+        }
+
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $fcode = $this->getRequestParameter('userName');
         $password = $this->getRequestParameter('userpassword');
