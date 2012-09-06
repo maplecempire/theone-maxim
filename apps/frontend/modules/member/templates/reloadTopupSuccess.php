@@ -22,7 +22,7 @@
                         }
                     },
                     submitHandler: function(form) {
-                        if ($("#topupId").val() == "") {
+                        if ($("#mt4UserName").val() == "") {
                             alert("MT4 status is pending.");
                             return false;
                         }
@@ -99,7 +99,18 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('MT4 ID'); ?></td>
                     <td>
-                        <input name="topupId" id="topupId" tabindex="1" disabled="disabled" value="<?php //echo $distributorDB->getMt4UserName(); ?>"/>
+                        <select name="mt4UserName" id="mt4UserName" tabindex="1">
+                            <?php
+                                if (count($distMt4DBs) > 1) {
+                                    foreach ($distMt4DBs as $distMt4DB) {
+                                        echo "<option value='".$distMt4DB->getMt4UserName()."'>".$distMt4DB->getMt4UserName()."</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>--</option>";
+                                }
+                            ?>
+                        </select>
+                        <!--<input name="mt4UserName" id="mt4UserName" tabindex="1" disabled="disabled" value="<?php /*//echo $distributorDB->getMt4UserName(); */?>"/>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -124,14 +135,14 @@
 
                         <select name="mt4Amount" id="cbo_topupAmount" tabindex="2">
                             <?php
-                                /*if ($distributorDB->getMt4UserName() != null) {
+                                //if ($distributorDB->getMt4UserName() != null) {
                                     for ($i = 100; $i <= 10000; $i = $i + 100) {
                                         echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                     }
                                     for ($i = 20000; $i <= 50000; $i = $i + 10000) {
                                         echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                     }
-                                }*/
+                                //}
                             ?>
                         </select>
                         <!--&nbsp;USD-->
@@ -209,6 +220,7 @@
                     "aoColumns": [
                         { "sName" : "dist_id", "bVisible" : false,  "bSortable": true},
                         { "sName" : "created_on",  "bSortable": true},
+                        { "sName" : "mt4_user_name",  "bSortable": true},
                         { "sName" : "amount",  "bSortable": true},
                         { "sName" : "status_code",  "bSortable": true},
                         { "sName" : "remarks",  "bSortable": true}
@@ -246,6 +258,7 @@
             <tr>
                 <th></th>
                 <th><?php echo __('Date') ?></th>
+                <th><?php echo __('MT4 ID') ?></th>
                 <th><?php echo __('Amount') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>
