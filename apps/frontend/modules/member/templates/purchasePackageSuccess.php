@@ -27,8 +27,34 @@ $(function() {
                     return false;
                 }
                 waiting();
-                setTimeout(error("error action"), 5000)
-//                form.submit();
+                $.ajax({
+                    type : 'POST',
+                    url : "/member/activateMember",
+                    dataType : 'json',
+                    cache: false,
+                    data: {
+                        packageId : $('#pid').val()
+                        , transactionPassword : $('#transactionPassword').val()
+                        , sponsorId : $('#distributorId').val()
+                    },
+                    success : function(data) {
+                        if (data.error == false) {
+                            $.unblockUI();
+                            var sure = confirm("<?php echo __('Member activated successfully.').'\n'.__('Do you want to proceed to member placement?') ?>");
+                            if (sure) {
+                                window.location = "<?php echo url_for('/member/placementTree') ?>";
+                            } else {
+                                window.location = "<?php echo url_for('/member/summary') ?>";
+                            }
+                        } else {
+                            alert(data.errorMsg);
+                            $("#transactionPassword").focus().select();
+                        }
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Server connection error.");
+                    }
+                });
             }
         }
     });
@@ -39,7 +65,9 @@ $(function() {
     }).click(function(event) {
         event.preventDefault();
         var epointNeeded = $(this).attr("ref");
+        var pid = $(this).attr("pid");
         $('#epointNeeded').val(epointNeeded);
+        $('#pid').val(pid);
         $("#topupForm").submit();
     });
 });
@@ -78,7 +106,8 @@ $(function() {
     <tr>
         <td>
             <form action="/member/doPurchasePackage" id="topupForm" name="topupForm" method="post">
-            <input type="hidden" id="distributorId" value="<?php echo $pendingDistDB->getDistributorId(); ?>"/>
+            <input type="hidden" id="distributorId" name="distributorId" value="<?php echo $pendingDistDB->getDistributorId(); ?>"/>
+            <input type="hidden" id="pid" name="pid" value=""/>
             <input type="hidden" id="epointNeeded" value="0"/>
 
             <table cellspacing="0" cellpadding="0" class="tbl_form">
@@ -155,6 +184,7 @@ $(function() {
                                     <td>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                'class' => 'activeLink',
                                                'ref' => $packageDB->getPrice(),
+                                               'pid' => $packageDB->getPackageId(),
                                           )) . "</td>
                                     <td>" . $packageDB->getPackageName() . "</td>
                                     <td align='center'>" . number_format($packageDB->getPrice(),2) . "</td>
