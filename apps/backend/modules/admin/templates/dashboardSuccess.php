@@ -129,7 +129,7 @@ $(function() {
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
             aoData.push({ "name": "filterUsername", "value": $("#search_upgradeUsername").val()  });
-            aoData.push({ "name": "filterMt4Id", "value": $("#search_mt4").val()  });
+            /*aoData.push({ "name": "filterMt4Id", "value": $("#search_mt4").val()  });*/
             aoData.push({ "name": "filterStatusCode", "value": '<?php echo Globals::STATUS_ACTIVE;?>'  });
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
@@ -149,7 +149,7 @@ $(function() {
             { "sName" : "dist.distributor_code",  "bSortable": true, "fnRender": function ( oObj ) {
                 return "<a id='editLink' href='<?php echo url_for('finance/packageUpgradeHistoryEdit?q=dsf453fsdfasf1sxfsdfs&upgradeId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            /*{ "sName" : "mt4.mt4_user_name",  "bSortable": true},*/
             { "sName" : "dist.full_name",  "bVisible": false},
             { "sName" : "upgrade.amount",  "bSortable": true},
             { "sName" : "upgrade.status_code",  "bVisible": false},
@@ -223,8 +223,8 @@ $(function() {
             }},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.email",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bVisible": false},
-            { "sName" : "dist.mt4_password",  "bVisible": false},
+            { "sName" : "mt4.mt4_user_name",  "bVisible": false},
+            { "sName" : "mt4.mt4_password",  "bVisible": false},
             { "sName" : "package.package_name",  "bSortable": true},
             { "sName" : "package.price",  "bVisible": false},
             { "sName" : "dist.active_datetime",  "bVisible": false},
@@ -424,7 +424,7 @@ function reassignDatagridEventAttr(){
                         <th>id [hidden]</th>
                         <th>id [hidden]</th>
                         <th>e-Trader</th>
-                        <th>MT4</th>
+                        <!--<th>MT4</th>-->
                         <th>Fullname [hidden]</th>
                         <th>Amount</th>
                         <th>Status</th>
@@ -436,7 +436,7 @@ function reassignDatagridEventAttr(){
                         <td></td>
                         <td></td>
                         <td><input title="" size="10" type="text" id="search_upgradeUsername" value="" class="search_init"/></td>
-                        <td><input title="" size="10" type="text" id="search_mt4" value="" class="search_init"/></td>
+                        <!--<td><input title="" size="10" type="text" id="search_mt4" value="" class="search_init"/></td>-->
                         <td></td>
                         <td></td>
                         <td></td>
