@@ -56,11 +56,20 @@
                 $("#submitLink").trigger("click");
             }
         });
+        $("#captchaimage").bind('click', function() {
+            $.post('/captcha/newSession');
+            $("#captchaimage").load('/captcha/imageRequest');
+            return false;
+        });
         $("#loginForm").validate({
             rules: {
-
+                "captcha" : {
+                    required: true,
+                    remote: "/captcha/process"
+                }
             },
             messages: {
+                captcha: "<br><?php echo __('Correct captcha is required') ?>."
             },
             submitHandler: function(form) {
                 if ("" == $("#doAction").val()) {
@@ -157,6 +166,21 @@
                             <td></td>
                             <td class="txt_highlight">Password</td>
                             <td colspan="2"><input type="password" autocomplete="off" size="18" id="userpassword" name="userpassword"></td>
+                            <td></td>
+                        </tr>
+                        <tr height="24">
+                            <td></td>
+                            <td class="txt_highlight">
+
+                            </td>
+                            <td colspan="2">
+                                <!--<div id="captchaimage" style="height: 28; width: 100; display: inline-block;"><a href="<?php /*echo $_SERVER['PHP_SELF']; */?>" id="refreshimg" title="Click to refresh image"><img src="/captcha/image?<?php /*echo time(); */?>" height="26" alt="Captcha image" style="border-style: none"/></a></div><input name="captcha" type="text" id="captcha" class="login_t73" size="18"/>-->
+                                <?php
+                                  require_once('recaptchalib.php');
+                                  $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+                                  echo recaptcha_get_html($publickey);
+                                ?>
+                            </td>
                             <td></td>
                         </tr>
                         <tr height="30">
