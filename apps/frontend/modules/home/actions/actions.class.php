@@ -101,7 +101,7 @@ class homeActions extends sfActions
                                             $_POST["recaptcha_response_field"]);
 
                 if (!$resp->is_valid) {
-                    $this->setFlash('errorMsg', "Invalid username or password.");
+                    $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
                     return $this->redirect('home/login');
                 }
 
@@ -109,7 +109,7 @@ class homeActions extends sfActions
                 $password = trim($this->getRequestParameter('userpassword'));
 
                 if ($username == '' || $password == '') {
-                    $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+                    $this->setFlash('errorMsg', "Invalid username or password.");
                     return $this->redirect('home/login');
                 }
 
