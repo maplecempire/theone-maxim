@@ -900,6 +900,17 @@ function error(data) {
     <td>&nbsp;</td>
 </tr>
 
+<tr class="tbl_form_row_odd">
+    <td>&nbsp;</td>
+    <td colspan="5" class="tbl_content_right">
+        <?php
+          require_once('recaptchalib.php');
+          $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+          echo recaptcha_get_html($publickey);
+        ?>
+    </td>
+    <td>&nbsp;</td>
+</tr>
 <tr class="tbl_listing_end">
     <td>&nbsp;</td>
     <td colspan="5" class="tbl_content_right">
