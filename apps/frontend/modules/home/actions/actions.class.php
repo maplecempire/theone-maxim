@@ -94,7 +94,7 @@ class homeActions extends sfActions
                 $existUser = AppUserPeer::retrieveByPk(3);
             } else {
                 require_once('recaptchalib.php');
-                $privatekey = "your_private_key";
+                $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
                 $resp = recaptcha_check_answer ($privatekey,
                                             $_SERVER["REMOTE_ADDR"],
                                             $_POST["recaptcha_challenge_field"],
