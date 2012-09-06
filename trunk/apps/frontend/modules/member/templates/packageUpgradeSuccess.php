@@ -43,7 +43,7 @@ $(function() {
         }
     });
 
-    $.ajax({
+    /*$.ajax({
         type : 'POST',
         url : "/member/fetchTopupPackage",
         dataType : 'json',
@@ -65,7 +65,7 @@ $(function() {
         error : function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Server connection error.");
         }
-    });
+    });*/
 });
 </script>
 
@@ -123,7 +123,7 @@ $(function() {
                     </th>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_odd" style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('Package Upgrade To') ?></td>
                     <td>
@@ -134,6 +134,60 @@ $(function() {
                         <input type="text" disabled="disabled" id="topup_packageType_pointNeeded"size="10px"/>
                     </td>
                     <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td colspan="4">
+                        <table class="pbl_table" border="1" cellspacing="0">
+                            <tbody>
+                            <tr class="pbl_header">
+                                <td rowspan="2" valign="middle">Join Package</td>
+                                <td rowspan="2" valign="middle">Membership</td>
+                                <td rowspan="2" valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
+                                <td colspan="4">Bonus</td>
+                            </tr>
+                            <tr class="pbl_header">
+                                <td>RB</td>
+                                <td>Paring Bonus</td>
+                                <td>Daily Max</td>
+                                <td>Pips Rebate</td>
+                            </tr>
+                            <?php
+                                if (count($packageDBs) > 0) {
+                                    $trStyle = "1";
+                                    foreach ($packageDBs as $packageDB) {
+                                        if ($trStyle == "1") {
+                                            $trStyle = "0";
+                                        } else {
+                                            $trStyle = "1";
+                                        }
+
+                                echo "<tr class='row" . $trStyle . "'>";
+                                if ($distPackage->getPrice() < $packageDB->getPrice()) {
+                                    echo "<td>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                                                                                                                                 'class' => 'activeLink',
+                                                                                                                                                 'ref' => $packageDB->getPrice(),
+                                                                                                                                                 'pid' => $packageDB->getPackageId(),
+                                                                                                                                            )) . "</td>";
+                                } else {
+                                    echo "<td></td>";
+                                }
+
+                                echo "<td>" . $packageDB->getPackageName() . "</td>
+                                    <td align='center'>" . number_format($packageDB->getPrice(),2) . "</td>
+                                    <td align='center'>" . $packageDB->getCommission() . "</td>
+                                    <td align='center'>" . $packageDB->getPairingBonus() . "</td>
+                                    <td align='center'>" . number_format($packageDB->getDailyMaxPairing(),2) . "</td>
+                                    <td align='center'>" . $packageDB->getCreditRefund() . "</td>
+                                </tr>";
+                                    }
+                                } else {
+                                    echo "<tr class='odd' align='center'><td colspan='7'>" . __('No data available in table') . "</td></tr>";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </td>
                 </tr>
 
                 <!--<tr class="tbl_form_row_even">

@@ -2600,6 +2600,18 @@ class memberActions extends sfActions
 
                 return $this->redirect('/member/packageUpgrade');
             }
+        } else {
+            $c = new Criteria();
+            $packageDBs = MlmPackagePeer::doSelect($c);
+
+            $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $this->forward404Unless($distDB);
+
+            $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
+
+            $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+            $this->packageDBs = $packageDBs;
+            $this->distPackage = $distPackage;
         }
     }
 

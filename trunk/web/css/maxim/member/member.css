@@ -92,7 +92,7 @@ border-bottom:1px dashed #c8a046;
 .pbl_table td{
 	padding:2px;
 	/*vertical-align:top;*/
-	/*border:1px solid #434343;*/
+	border:1px solid #434343;
 	color:#000;
 }
 .pbl_table td div.title{

@@ -52,7 +52,7 @@ $(function() {
         hide: 'clip',
         show: 'slide',
         width: 700,
-        height: 550,
+        height: 490,
         buttons: {
             "<?php echo __('Print') ?>": function() {
                 var params  = 'width=891';

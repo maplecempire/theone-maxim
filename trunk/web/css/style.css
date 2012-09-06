@@ -574,7 +574,7 @@ legend, th {
 
 .tbl_form_row_even td, .tbl_form_row_odd td {
     border: 0 solid #d7d7d7;
-    border-bottom-width: 1px;
+    border-bottom-width: 0px;
 }
 
 .tbl_form_row_even {
