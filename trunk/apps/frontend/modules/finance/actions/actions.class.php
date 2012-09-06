@@ -551,6 +551,7 @@ class financeActions extends sfActions
             $arr[] = array(
                 $result->getDistId() == null ? "" : $result->getDistId(),
                 $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
+                $result->getMt4UserName() == null ? "" : $result->getMt4UserName(),
                 $result->getAmount() == null ? "" : $result->getAmount(),
                 $statusCode,
                 $result->getRemarks() == null ? "" : $result->getRemarks()

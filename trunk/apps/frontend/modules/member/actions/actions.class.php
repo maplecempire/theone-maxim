@@ -1939,9 +1939,15 @@ class memberActions extends sfActions
         $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->distributorDB = $distributorDB;
 
+        $c = new Criteria();
+        $c->add(MlmDistMt4Peer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $distMt4DBs = MlmDistMt4Peer::doSelect($c);
+        $this->distMt4DBs = $distMt4DBs;
+
         $mt4Amount = $this->getRequestParameter('mt4Amount');
         //$pointNeeded = $this->getRequestParameter('mt4Amount') * $usdToMyr;
         $pointNeeded = $this->getRequestParameter('mt4Amount');
+        $mt4UserName = $this->getRequestParameter('mt4UserName', "");
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
 
@@ -1953,6 +1959,9 @@ class memberActions extends sfActions
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
+
+            } elseif ($mt4UserName == "") {
+                $this->setFlash('errorMsg', "Invalid MT4 ID.");
 
             } else {
                 $tbl_account_ledger = new MlmAccountLedger();
@@ -1972,7 +1981,7 @@ class memberActions extends sfActions
 
                 $mlmMt4ReloadFund = new MlmMt4ReloadFund();
                 $mlmMt4ReloadFund->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $mlmMt4ReloadFund->setMt4UserName($distributorDB->getMt4UserName());
+                $mlmMt4ReloadFund->setMt4UserName($mt4UserName);
                 $mlmMt4ReloadFund->setAmount($this->getRequestParameter('mt4Amount'));
                 $mlmMt4ReloadFund->setStatusCode(Globals::STATUS_PENDING);
                 $mlmMt4ReloadFund->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
