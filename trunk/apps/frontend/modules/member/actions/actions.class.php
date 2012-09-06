@@ -1368,12 +1368,12 @@ class memberActions extends sfActions
             $arr[] = array(
                 $result->getDistributorId() == null ? "" : $result->getDistributorId(),
                 $result->getDistributorId() == null ? "" : $result->getDistributorId(),
+                $result->getCreatedOn() == null ? "" : $result->getActiveDatetime(),
                 $result->getDistributorCode() == null ? "" : $result->getDistributorCode(),
                 $result->getFullName() == null ? "" : $result->getFullName(),
                 $result->getNickname() == null ? "" : $result->getNickname(),
                 $result->getIc() == null ? "" : $result->getIc(),
                 $result->getRankCode() == null ? "" : $result->getRankCode(),
-                $result->getCreatedOn() == null ? "" : $result->getCreatedOn()
             );
         }
         $output = array(
