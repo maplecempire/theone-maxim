@@ -342,7 +342,8 @@ class financeListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
         $sql = " ,dist.tree_structure FROM mlm_distributor dist
-        INNER JOIN mlm_package package ON package.package_id = dist.init_rank_id ";
+        INNER JOIN mlm_package package ON package.package_id = dist.init_rank_id
+        LEFT JOIN mlm_dist_mt4 mt4 ON dist.distributor_id = mt4.dist_id ";
 
         /******   total records  *******/
         $sWhere = " WHERE 1=1 ";
@@ -353,7 +354,7 @@ class financeListActions extends sfActions
             $sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterUsername')) . "%'";
         }
         if ($this->getRequestParameter('filterMt4Id') != "") {
-            $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
+            $sWhere .= " AND mt4.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
         }
         if ($this->getRequestParameter('filterPurchaseFlag') != "") {
             $sWhere .= " AND dist.package_purchase_flag = '" . mysql_real_escape_string($this->getRequestParameter('filterPurchaseFlag')) . "'";
@@ -444,7 +445,8 @@ class financeListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
         $sql = " ,dist.tree_structure FROM mlm_package_upgrade_history upgrade
-        LEFT JOIN mlm_distributor dist ON upgrade.dist_id = dist.distributor_id ";
+        LEFT JOIN mlm_distributor dist ON upgrade.dist_id = dist.distributor_id";
+        /*LEFT JOIN mlm_dist_mt4 mt4 ON dist.distributor_id = mt4.dist_id ";*/
 
         /******   total records  *******/
         $sWhere = " WHERE 1=1 ";
@@ -458,7 +460,7 @@ class financeListActions extends sfActions
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
         if ($this->getRequestParameter('filterMt4Id') != "") {
-            $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
+            $sWhere .= " AND mt4.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
         }
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND upgrade.status_code = '" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "'";
@@ -509,7 +511,7 @@ class financeListActions extends sfActions
                 $resultArr['upgrade_id'] == null ? "" : $resultArr['upgrade_id'],
                 $resultArr['upgrade_id'] == null ? "" : $resultArr['upgrade_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                //$resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['amount'] == null ? "" : $resultArr['amount'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],

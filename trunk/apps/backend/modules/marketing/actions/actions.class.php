@@ -616,11 +616,19 @@ class marketingActions extends sfActions
     public function executeDoUpdatePackagePurchase()
     {
         $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
-        $tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-        $tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
+        //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+        //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
         $tbl_distributor->setPackagePurchaseFlag("N");
 
         $tbl_distributor->save();
+
+        $mlm_dist_mt4 = new MlmDistMt4();
+        $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+        $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+        $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
+        $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_dist_mt4->save();
 
         $output = array(
             "error" => false
