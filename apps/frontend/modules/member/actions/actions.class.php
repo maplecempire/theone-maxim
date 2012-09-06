@@ -2389,7 +2389,8 @@ class memberActions extends sfActions
 
     public function executePackageUpgrade()
     {
-        if ($this->getRequestParameter('packageTypeSelected') <> "" && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('topupPackageTypePaymentType') <> "") {
+        //if ($this->getRequestParameter('packageTypeSelected') <> "" && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('topupPackageTypePaymentType') <> "") {
+        if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -2399,10 +2400,11 @@ class memberActions extends sfActions
             $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
             $currentPackageAmount = $distPackage->getPrice();
 
-            $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('packageTypeSelected'));
+            $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
 
             $amountNeeded = 9999999;
-            $paymentType = $this->getRequestParameter('topupPackageTypePaymentType');
+            //$paymentType = $this->getRequestParameter('topupPackageTypePaymentType');
+            $paymentType = "epoint";
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($paymentType == 'ecash') {
@@ -2610,6 +2612,7 @@ class memberActions extends sfActions
             $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
 
             $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+            $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;
         }

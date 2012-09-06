@@ -46,6 +46,14 @@ $(function() {
                                            id="modlgn_passwd" name="modlgn_passwd">
                                 </p>
 
+                                <p id="form-login-password">
+                                    <!--<div id="captchaimage" style="height: 28; width: 100; display: inline-block;"><a href="<?php /*echo $_SERVER['PHP_SELF']; */?>" id="refreshimg" title="Click to refresh image"><img src="/captcha/image?<?php /*echo time(); */?>" height="26" alt="Captcha image" style="border-style: none"/></a></div><input name="captcha" type="text" id="captcha" class="login_t73" size="18"/>-->
+                                    <?php
+                                      require_once('recaptchalib.php');
+                                      $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+                                      echo recaptcha_get_html($publickey);
+                                    ?>
+                                </p>
                                 <p>
                                     <?php if ($sf_flash->has('errorMsg')): ?>
                                         <span class="error-font"><?php echo $sf_flash->get('errorMsg') ?></span>
