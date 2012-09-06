@@ -923,25 +923,24 @@ class memberActions extends sfActions
 
     public function executeActivateMember()
     {
-        //$sponsorId = $this->getRequestParameter('sponsorId');
-        $sponsorId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sponsorId = $this->getRequestParameter('sponsorId');
+        //$sponsorId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $transactionPassword = $this->getRequestParameter('transactionPassword');
         $packageId = $this->getRequestParameter('packageId');
-        $paymentType = $this->getRequestParameter('paymentType');
-
+        $paymentType = "epoint";
+        //$paymentType = $this->getRequestParameter('paymentType');
         $error = false;
         $errorMsg = "";
 
-        $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+        //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
         $c = new Criteria();
         $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
         $c->add(AppUserPeer::USERPASSWORD2, $transactionPassword);
         $c->add(AppUserPeer::USER_ROLE, Globals::ROLE_DISTRIBUTOR);
-        //$c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
+        $c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        //$c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
 
         $existUser = AppUserPeer::doSelectOne($c);
-
         if (!$existUser) {
             $error = true;
             $errorMsg = "Invalid Security Password.";
@@ -959,28 +958,14 @@ class memberActions extends sfActions
 
         if (!$error) {
             if ("epoint" == $paymentType) {
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->add(MlmAccountPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $account = MlmAccountPeer::doSelectOne($c);
-                $this->forward404Unless($account);
-                if (!$account) {
-                    $error = true;
-                    $errorMsg = "Invalid Action.";
-                } else if ($account->getBalance() < $packageDB->getPrice()) {
+                $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                if ($balance < $packageDB->getPrice()) {
                     $error = true;
                     $errorMsg = "Insufficient Forex Point.";
                 }
             } else if ("ecash" == $paymentType) {
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-                $c->add(MlmAccountPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $account = MlmAccountPeer::doSelectOne($c);
-                $this->forward404Unless($account);
-                if (!$account) {
-                    $error = true;
-                    $errorMsg = "Invalid Action.";
-                } else if ($account->getBalance() < $packageDB->getPrice()) {
+                $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                if ($balance < $packageDB->getPrice()) {
                     $error = true;
                     $errorMsg = "Insufficient MT4 Credit.";
                 }
@@ -1126,6 +1111,9 @@ class memberActions extends sfActions
             return $this->redirect('/member/placementTree?distcode=' . $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_USERNAME)));
         }
         $distcode = $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+        $pageDirection = $this->getRequestParameter('p', "");
+
+        $this->pageDirection = $pageDirection;
         $anode = array();
         //      0
         //  1       2
@@ -1134,7 +1122,7 @@ class memberActions extends sfActions
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $distcode . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
         $distDB = MlmDistributorPeer::doSelectOne($c);
 
         if (!$distDB) {
@@ -1322,6 +1310,10 @@ class memberActions extends sfActions
 
         $this->distcode = $distcode;
         $this->anode = $anode;
+
+        if ($pageDirection == "stat") {
+            $this->setTemplate('placementTreeStat');
+        }
     }
 
     public function executePendingMemberList()
@@ -2363,14 +2355,15 @@ class memberActions extends sfActions
         }
     }
 
-    public function executeDoPurchasePackage()
-    {
-
-    }
     public function executePurchasePackage()
     {
         $pendingDistId = $this->getRequestParameter('p');
-        $pendingDistDB = MlmDistributorPeer::retrieveByPk($pendingDistId);
+
+        $c = new Criteria();
+
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $pendingDistId);
+        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_PENDING);
+        $pendingDistDB = MlmDistributorPeer::doSelectOne($c);
         $this->forward404Unless($pendingDistDB);
 
         $c = new Criteria();
@@ -2482,7 +2475,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setDistId($uplineDistId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-                    $mlm_account_ledger->setRemark("PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . "-" . $distDB->getMt4UserName() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")");
+                    $mlm_account_ledger->setRemark("PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")");
                     $mlm_account_ledger->setCredit($directSponsorBonusAmount);
                     $mlm_account_ledger->setDebit(0);
                     $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
@@ -2533,10 +2526,10 @@ class memberActions extends sfActions
                     $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
                     //$sponsorDistCommissionledger->setRemark("PACKAGE UPGRADE BONUS AMOUNT ".$directSponsorPercentage."% (" . $distDB->getDistributorCode() . "-" . $distDB->getMt4UserName() . ")");
                     if ($firstForDRB == true) {
-                        $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode() . " - mt4 ID: " . $distDB->getMt4UserName());
+                        $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
                         $firstForDRB = false;
                     } else {
-                        $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode() . " - mt4 ID: " . $distDB->getMt4UserName());
+                        $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
                     }
                     $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -2894,7 +2887,6 @@ class memberActions extends sfActions
             $directSponsorPercentage = $uplineDistPackage->getCommission();
             $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
         }
-
         $totalBonusPayOut = $directSponsorPercentage;
 
         $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
@@ -2937,7 +2929,7 @@ class memberActions extends sfActions
             $mlm_account_ledger->setDistId($uplineDistId);
             $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . "-" . $sponsoredDistDB->getMt4UserName() . ")");
+            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")");
             $mlm_account_ledger->setCredit($directSponsorBonusAmount);
             $mlm_account_ledger->setDebit(0);
             $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
@@ -2987,10 +2979,10 @@ class memberActions extends sfActions
             $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
             $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
             if ($firstForDRB == true) {
-                $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode(). "-" . $sponsoredDistDB->getMt4UserName());
+                $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
                 $firstForDRB = false;
             } else {
-                $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode(). "-" . $sponsoredDistDB->getMt4UserName());
+                $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
             }
             $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));

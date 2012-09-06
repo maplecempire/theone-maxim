@@ -58,7 +58,13 @@
     <ul>
         <li class="menu_title">HIERARCHY</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a>
+            <a href="/member/sponsorTree"><span><?php echo __('Sponsor Genealogy'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/placementTree"><span><?php echo __('Placement Genealogy'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/placementTree?p=stat"><span><?php echo __('Downline Stats'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>

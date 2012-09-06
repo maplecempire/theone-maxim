@@ -113,7 +113,7 @@
                 msgs = data + "<br>";
             }
 
-            var alertPanel = "<div style='margin-bottom: 20px; padding: 0 .7em;' class='ui-state-highlight ui-corner-all'><p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-info'></span>";
+            var alertPanel = "<div style='padding: 10px; line-height :normal' class='ui-state-highlight ui-corner-all'><p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-info'></span>";
             alertPanel += msgs + "</p></div>";
             $("#waitingLB h3").html(alertPanel);
             $.blockUI({
@@ -141,7 +141,7 @@
             }
 
             var errorPanel = "<div style='padding: 0 .7em; line-height :normal' class='ui-state-error ui-corner-all'>";
-            errorPanel += "<p style='margin: 10px;'><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
+            errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
             errorPanel += msgs + "</p></div>";
             $("#waitingLB h3").html(errorPanel);
             $.blockUI({
