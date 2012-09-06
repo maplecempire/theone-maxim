@@ -1122,7 +1122,7 @@ class memberActions extends sfActions
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
         $distDB = MlmDistributorPeer::doSelectOne($c);
 
         if (!$distDB) {
@@ -1332,9 +1332,9 @@ class memberActions extends sfActions
         $c = new Criteria();
         $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::TREE_LEVEL, null, Criteria::ISNULL);
-        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, null, Criteria::ISNULL);
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, null, Criteria::ISNULL);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_LEVEL, null, Criteria::ISNULL);
+        $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, null, Criteria::ISNULL);
         $totalRecords = MlmDistributorPeer::doCount($c);
 
         /******   total filtered records  *******/
@@ -3109,7 +3109,7 @@ class memberActions extends sfActions
         $c = new Criteria();
         $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $position);
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode, Criteria::NOT_EQUAL);
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $distCode . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $distCode . "|%", Criteria::LIKE);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
 
         $totalDis = MlmDistributorPeer::doCount($c);
