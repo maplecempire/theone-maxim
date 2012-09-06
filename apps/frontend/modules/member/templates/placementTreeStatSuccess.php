@@ -241,7 +241,7 @@ function reassignDatagridEventAttr(){
                             <td class="header" colspan="2">
                                 <img src="/css/maxim/tree/101000.png">
                                 <div class="stats-node-header">
-                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                Username: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
                                 </div>
                             </td>
                         </tr>

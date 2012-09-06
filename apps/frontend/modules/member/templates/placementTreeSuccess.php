@@ -110,7 +110,7 @@ $(function() {
             $('#tooltip').fadeTo('10', 0.9);
         }
     }).mouseout(function() {
-        $('#tooltip').hide(500);
+        $('#tooltip').hide();
     });
     <?php
         if ($errorSearch == true) {
@@ -388,12 +388,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[1]['_left_this_month_sales'],0)." | ".number_format($anode[1]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[1]['_left_this_month_sales'],0)." | ".number_format($anode[1]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
                     }
@@ -417,12 +417,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[2]['_left_this_month_sales'],0)." | ".number_format($anode[2]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[2]['_left_this_month_sales'],0)." | ".number_format($anode[2]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
                     }
@@ -567,12 +567,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[3]['_left_this_month_sales'],0)." | ".number_format($anode[3]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[3]['_left_this_month_sales'],0)." | ".number_format($anode[3]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
                     }
@@ -596,12 +596,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[4]['_left_this_month_sales'],0)." | ".number_format($anode[4]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[4]['_left_this_month_sales'],0)." | ".number_format($anode[4]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
                     }
@@ -627,12 +627,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[5]['_left_this_month_sales'],0)." | ".number_format($anode[5]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[5]['_left_this_month_sales'],0)." | ".number_format($anode[5]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
                     }
@@ -656,12 +656,12 @@ function reassignDatagridEventAttr(){
 
                         $textStr = $distDB->getNickName();
                         $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        $textStr .= "<br>".$distDB->getCreatedOn();
-                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[6]['_left_this_month_sales'],0)." | ".number_format($anode[6]['_right_this_month_sales'],0);
-                        $textStr .= "<br>";
+//                        $textStr .= "<br>".$distDB->getCreatedOn();
+//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
+//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
+//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
+//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[6]['_left_this_month_sales'],0)." | ".number_format($anode[6]['_right_this_month_sales'],0);
+//                        $textStr .= "<br>";
                     } else if ($availableButton == true) {
                         $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
                     }

@@ -1000,8 +1000,8 @@ class memberActions extends sfActions
             $this->forward404Unless($distDB);
             $this->forward404Unless($sponsorDB);
 
-            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $sponsorDB->getDistributorCode() . "|";
-            $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+            $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $sponsorDB->getDistributorCode() . "|";
+            $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
 
             $sponsorDB->setPlacementDatetime(date("Y/m/d h:i:s A"));
             $sponsorDB->setPlacementPosition($uplinePosition);
@@ -1009,8 +1009,8 @@ class memberActions extends sfActions
             $sponsorDB->setUplineDistCode($uplineDistDB->getDistributorCode());
             $sponsorDB->setTreeStructure($treeStructure);
             $sponsorDB->setTreeLevel($treeLevel);
-            $sponsorDB->setParentId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $sponsorDB->setParentCode($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+            $sponsorDB->setTreeUplineDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $sponsorDB->setTreeUplineDistCode($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
             $sponsorDB->save();
 
             $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
@@ -1018,7 +1018,7 @@ class memberActions extends sfActions
             $pairingPoint = $sponsoredPackageDB->getPrice();
 
             // recalculate Total left and total right for $uplineDistDB
-            $arrs = explode("|", $uplineDistDB->getTreeStructure());
+            $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
             for ($x = count($arrs); $x > 0; $x--) {
                 if ($arrs[$x] == "") {
                     continue;
