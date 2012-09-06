@@ -188,6 +188,31 @@ class downloadActions extends sfActions
         return sfView::NONE;
     }
 
+    public function executeDownloadFundManagementReport()
+    {
+        $c = new Criteria();
+        $c->add(MlmFileDownloadPeer::FILE_TYPE, "FUND_MANAGEMENT_REPORT");
+        $c->add(MlmFileDownloadPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $c->addDescendingOrderByColumn(MlmFileDownloadPeer::CREATED_ON);
+        $mlmFileDownloadDB = MlmFileDownloadPeer::doSelectOne($c);
+
+        if ($mlmFileDownloadDB) {
+            $fileName = str_replace(' ', '_', $mlmFileDownloadDB->getFileName());
+
+            $response = $this->getResponse();
+            $response->clearHttpHeaders();
+            $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+            $response->setContentType($mlmFileDownloadDB->getContentType());
+            $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
+            $response->sendHttpHeaders();
+
+            readfile(sfConfig::get('sf_upload_dir')."/guide/".$mlmFileDownloadDB->getFileName());
+        }
+
+        return sfView::NONE;
+    }
+
     public function executeDownloadGuide_BAK()
     {
         $response = $this->getResponse();
