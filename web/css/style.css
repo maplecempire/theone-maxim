@@ -20,7 +20,7 @@ table {
 }
 
 th, td {
-    height: 23px;
+    /*height: 23px;*/
 }
 
 input, textarea {
