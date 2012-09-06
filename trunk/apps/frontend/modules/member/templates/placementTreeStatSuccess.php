@@ -1,5 +1,51 @@
 <?php use_helper('I18N') ?>
 <?php include('scripts.php'); ?>
+
+<style type="text/css">
+.stats-node table {
+    border-collapse: collapse;
+    width: 200px;
+}
+.stats-node-header {
+    background: none repeat scroll 0 0 #BC8F3E;
+    overflow: hidden;
+    padding: 5px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+}
+.total-downlines {
+    background: none repeat scroll 0 0 #979697;
+    overflow: hidden;
+    height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+}
+.stats-node .rank {
+    color: #BC8F3E;
+    font-weight: bold;
+}
+
+.stats-node td {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    text-align: center;
+    width: 50%;
+}
+.total-downlines {
+    background: none repeat scroll 0 0 #979697;
+    color: #FFFFFF;
+}
+.total-downlines-no {
+    background: none repeat scroll 0 0 #979697;
+    border-top: 1px solid white;
+    color: #FFFFFF;
+}
+</style>
 <script type="text/javascript">
 var packageStrings = "<option value=''></option>";
 var datagrid = null;
@@ -170,12 +216,7 @@ function reassignDatagridEventAttr(){
                 <td width="1%">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="18" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
                 <td colspan="18" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[0]['distCode'];
                     $availableButton = $anode[0]['_available'];
@@ -194,13 +235,47 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[0]['_left_this_month_sales'],0)." | ".number_format($anode[0]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[0]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[0]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -218,15 +293,9 @@ function reassignDatagridEventAttr(){
                 <td colspan="3">&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
-            <tr>
-                <td colspan="6" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td colspan="6" align="center"></td>
-                <td colspan="6" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td>&nbsp;</td>
-            </tr>
+
             <tr>
                 <td colspan="6" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[1]['distCode'];
                     $availableButton = $anode[1]['_available'];
@@ -245,17 +314,50 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[1]['_left_this_month_sales'],0)." | ".number_format($anode[1]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img rel="88508729" src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[1]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[1]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td colspan="6" align="center"></td>
                 <td colspan="6" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[2]['distCode'];
                     $availableButton = $anode[2]['_available'];
@@ -274,13 +376,47 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[2]['_left_this_month_sales'],0)." | ".number_format($anode[2]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[2]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[2]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -311,20 +447,7 @@ function reassignDatagridEventAttr(){
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"><img src="/images/logo.png" style="height:80px"></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
                 <td colspan="2" align="center" >
-                <strong>
                     <?php
                     $distCode = $anode[3]['distCode'];
                     $availableButton = $anode[3]['_available'];
@@ -343,17 +466,50 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[3]['_left_this_month_sales'],0)." | ".number_format($anode[3]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[3]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[3]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[4]['distCode'];
                     $availableButton = $anode[4]['_available'];
@@ -372,19 +528,52 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[4]['_left_this_month_sales'],0)." | ".number_format($anode[4]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[4]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[4]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[5]['distCode'];
                     $availableButton = $anode[5]['_available'];
@@ -403,17 +592,50 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[5]['_left_this_month_sales'],0)." | ".number_format($anode[5]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[5]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[5]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center">
-                    <strong>
                     <?php
                     $distCode = $anode[6]['distCode'];
                     $availableButton = $anode[6]['_available'];
@@ -432,13 +654,48 @@ function reassignDatagridEventAttr(){
                         $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
                         $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[6]['_left_this_month_sales'],0)." | ".number_format($anode[6]['_right_this_month_sales'],0);
                         $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
-                    }
 
-                    echo $textStr;
                     ?>
-                    </strong>
+                    <table cellspacing="0" cellpadding="0" border="1" class="stats-node" style="width: 150px; text-align: center">
+                        <tbody><tr>
+                            <td class="header" colspan="2">
+                                <img src="/css/maxim/tree/101000.png">
+                                <div class="stats-node-header">
+                                Username: <a href="<?php echo url_for("/member/placementTree?distcode=".$distCode)?>" style="color: white"><?php echo $distCode;?></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rank" colspan="2">
+                                Rank: <?php echo __($distDB->getRankCode())?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Carry Forward
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo number_format($distPairingLedgerDB->getLeftBalance(),0) ?></td>
+                            <td><?php echo number_format($distPairingLedgerDB->getRightBalance(),0) ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-downlines">
+                                This Month Sales
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[6]['_left_this_month_sales'],0) ?>
+                            </td>
+                            <td class="total-downlines">
+                                <?php echo number_format($anode[6]['_right_this_month_sales'],0) ?>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <?php } else {
+                        echo  "<img src='/css/maxim/tree/101000.png'>";
+                    } ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
