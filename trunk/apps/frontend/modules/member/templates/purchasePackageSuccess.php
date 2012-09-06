@@ -18,7 +18,7 @@ $(function() {
             var epoint = $('#topup_pointAvail').autoNumericGet();
             var epointPackageNeeded = $('#epointNeeded').autoNumericGet();
 
-            if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || epoint < epointPackageNeeded) {
+            if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
                 error("In-sufficient fund to upgrade package.");
             } else {
                 if ($.trim($("#transactionPassword").val()) == "") {

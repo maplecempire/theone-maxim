@@ -22,15 +22,11 @@ $(function() {
             }
         },
         submitHandler: function(form) {
-            if ($("#topup_packageType_pointNeeded").val() == 0 || $("#topup_packageType_pointNeeded").val() == "") {
+            var epoint = $('#topup_pointAvail').autoNumericGet();
+            var epointPackageNeeded = $('#epointNeeded').autoNumericGet();
+
+            if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || (parseFloat(epoint) < parseFloat(epointPackageNeeded))) {
                 error("In-sufficient fund to upgrade package.");
-                $("#topup_packageType").focus().select();
-            } else if ($("#topupPackageTypePaymentTypeEPoint").is(':checked') == true && parseFloat($("#topup_packageType").val()) > parseFloat($("#topup_pointAvail").val())){
-                alert("In-sufficient Forex point. " + $("#topup_pointAvail").val());
-                $("#topup_packageType").focus().select();
-            } else if ($("#topupPackageTypePaymentTypeECash").is(':checked') == true && parseFloat($("#topup_packageType").val()) > parseFloat($("#topup_ecash").val())){
-                alert("In-sufficient MT4 Credit. " + $("#topup_ecash").val());
-                $("#topup_packageType").focus().select();
             } else {
                 if ($.trim($("#transactionPassword").val()) == "") {
                     error("Security Password is empty");
@@ -43,6 +39,18 @@ $(function() {
         }
     });
 
+    $(".activeLink").button({
+        icons: {
+            primary: "ui-icon-circle-arrow-n"
+        }
+    }).click(function(event) {
+        event.preventDefault();
+        var epointNeeded = $(this).attr("ref");
+        var pid = $(this).attr("pid");
+        $('#epointNeeded').val(epointNeeded);
+        $('#pid').val(pid);
+        $("#topupForm").submit();
+    });
     /*$.ajax({
         type : 'POST',
         url : "/member/fetchTopupPackage",
@@ -103,7 +111,8 @@ $(function() {
         <td>
             <form action="/member/packageUpgrade" id="topupForm" name="topupForm" method="post">
             <input type="hidden" id="topup_ecash">
-            <input type="hidden" id="topup_pointAvail"/>
+            <input type="hidden" id="pid" name="pid" value=""/>
+            <input type="hidden" id="epointNeeded" value="0"/>
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -137,11 +146,24 @@ $(function() {
                 </tr>
 
                 <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Forex Account') ?></td>
+                    <td><input type="text" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Ranking') ?></td>
+                    <td><input type="text" readonly="readonly" size="20px" value="<?php echo $distPackage->getPackageName(); ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
                     <td colspan="4">
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td rowspan="2" valign="middle">Join Package</td>
+                                <td rowspan="2" valign="middle">Upgrade Package</td>
                                 <td rowspan="2" valign="middle">Membership</td>
                                 <td rowspan="2" valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
                                 <td colspan="4">Bonus</td>
@@ -162,9 +184,12 @@ $(function() {
                                             $trStyle = "1";
                                         }
 
-                                echo "<tr class='row" . $trStyle . "'>";
+                                echo "<tr class='row" . $trStyle . "' style='height:35px'>";
+
+                                $ableUpgrade = false;
                                 if ($distPackage->getPrice() < $packageDB->getPrice()) {
-                                    echo "<td>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    $ableUpgrade = true;
+                                    echo "<td>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                  'class' => 'activeLink',
                                                                                                                                                  'ref' => $packageDB->getPrice(),
                                                                                                                                                  'pid' => $packageDB->getPackageId(),
@@ -174,7 +199,14 @@ $(function() {
                                 }
 
                                 echo "<td>" . $packageDB->getPackageName() . "</td>
-                                    <td align='center'>" . number_format($packageDB->getPrice(),2) . "</td>
+                                    <td align='center'>";
+
+                                    if ($ableUpgrade) {
+                                        echo number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
+                                    } else {
+                                        echo "--";
+                                    }
+                                echo "</td>
                                     <td align='center'>" . $packageDB->getCommission() . "</td>
                                     <td align='center'>" . $packageDB->getPairingBonus() . "</td>
                                     <td align='center'>" . number_format($packageDB->getDailyMaxPairing(),2) . "</td>
@@ -214,7 +246,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnTransfer"><?php echo __('Submit') ?></button>
+                        <!--<button id="btnTransfer"><?php /*echo __('Submit') */?></button>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
