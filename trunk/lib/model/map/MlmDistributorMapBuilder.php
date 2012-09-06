@@ -82,6 +82,10 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('TREE_STRUCTURE', 'TreeStructure', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
+		$tMap->addColumn('PLACEMENT_TREE_LEVEL', 'PlacementTreeLevel', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PLACEMENT_TREE_STRUCTURE', 'PlacementTreeStructure', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 		$tMap->addColumn('INIT_RANK_ID', 'InitRankId', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('INIT_RANK_CODE', 'InitRankCode', 'string', CreoleTypes::VARCHAR, false, 20);

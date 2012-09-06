@@ -109,6 +109,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 
 	
+	protected $placement_tree_level;
+
+
+	
+	protected $placement_tree_structure;
+
+
+	
 	protected $init_rank_id;
 
 
@@ -425,6 +433,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->tree_structure;
+	}
+
+	
+	public function getPlacementTreeLevel()
+	{
+
+		return $this->placement_tree_level;
+	}
+
+	
+	public function getPlacementTreeStructure()
+	{
+
+		return $this->placement_tree_structure;
 	}
 
 	
@@ -1146,6 +1168,40 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setPlacementTreeLevel($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->placement_tree_level !== $v) {
+			$this->placement_tree_level = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PLACEMENT_TREE_LEVEL;
+		}
+
+	} 
+
+	
+	public function setPlacementTreeStructure($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->placement_tree_structure !== $v) {
+			$this->placement_tree_structure = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE;
+		}
+
+	} 
+
+	
 	public function setInitRankId($v)
 	{
 
@@ -1726,73 +1782,77 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->tree_structure = $rs->getString($startcol + 24);
 
-			$this->init_rank_id = $rs->getInt($startcol + 25);
+			$this->placement_tree_level = $rs->getInt($startcol + 25);
 
-			$this->init_rank_code = $rs->getString($startcol + 26);
+			$this->placement_tree_structure = $rs->getString($startcol + 26);
 
-			$this->upline_dist_id = $rs->getInt($startcol + 27);
+			$this->init_rank_id = $rs->getInt($startcol + 27);
 
-			$this->upline_dist_code = $rs->getString($startcol + 28);
+			$this->init_rank_code = $rs->getString($startcol + 28);
 
-			$this->tree_upline_dist_id = $rs->getInt($startcol + 29);
+			$this->upline_dist_id = $rs->getInt($startcol + 29);
 
-			$this->tree_upline_dist_code = $rs->getString($startcol + 30);
+			$this->upline_dist_code = $rs->getString($startcol + 30);
 
-			$this->total_left = $rs->getInt($startcol + 31);
+			$this->tree_upline_dist_id = $rs->getInt($startcol + 31);
 
-			$this->total_right = $rs->getInt($startcol + 32);
+			$this->tree_upline_dist_code = $rs->getString($startcol + 32);
 
-			$this->placement_position = $rs->getString($startcol + 33);
+			$this->total_left = $rs->getInt($startcol + 33);
 
-			$this->placement_datetime = $rs->getTimestamp($startcol + 34, null);
+			$this->total_right = $rs->getInt($startcol + 34);
 
-			$this->rank_id = $rs->getInt($startcol + 35);
+			$this->placement_position = $rs->getString($startcol + 35);
 
-			$this->rank_code = $rs->getString($startcol + 36);
+			$this->placement_datetime = $rs->getTimestamp($startcol + 36, null);
 
-			$this->active_datetime = $rs->getTimestamp($startcol + 37, null);
+			$this->rank_id = $rs->getInt($startcol + 37);
 
-			$this->activated_by = $rs->getInt($startcol + 38);
+			$this->rank_code = $rs->getString($startcol + 38);
 
-			$this->leverage = $rs->getString($startcol + 39);
+			$this->active_datetime = $rs->getTimestamp($startcol + 39, null);
 
-			$this->spread = $rs->getString($startcol + 40);
+			$this->activated_by = $rs->getInt($startcol + 40);
 
-			$this->deposit_currency = $rs->getString($startcol + 41);
+			$this->leverage = $rs->getString($startcol + 41);
 
-			$this->deposit_amount = $rs->getString($startcol + 42);
+			$this->spread = $rs->getString($startcol + 42);
 
-			$this->sign_name = $rs->getString($startcol + 43);
+			$this->deposit_currency = $rs->getString($startcol + 43);
 
-			$this->sign_date = $rs->getTimestamp($startcol + 44, null);
+			$this->deposit_amount = $rs->getString($startcol + 44);
 
-			$this->term_condition = $rs->getInt($startcol + 45);
+			$this->sign_name = $rs->getString($startcol + 45);
 
-			$this->ib_commission = $rs->getFloat($startcol + 46);
+			$this->sign_date = $rs->getTimestamp($startcol + 46, null);
 
-			$this->is_ib = $rs->getString($startcol + 47);
+			$this->term_condition = $rs->getInt($startcol + 47);
 
-			$this->created_by = $rs->getInt($startcol + 48);
+			$this->ib_commission = $rs->getFloat($startcol + 48);
 
-			$this->created_on = $rs->getTimestamp($startcol + 49, null);
+			$this->is_ib = $rs->getString($startcol + 49);
 
-			$this->updated_by = $rs->getInt($startcol + 50);
+			$this->created_by = $rs->getInt($startcol + 50);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 51, null);
+			$this->created_on = $rs->getTimestamp($startcol + 51, null);
 
-			$this->package_purchase_flag = $rs->getString($startcol + 52);
+			$this->updated_by = $rs->getInt($startcol + 52);
 
-			$this->file_bank_pass_book = $rs->getString($startcol + 53);
+			$this->updated_on = $rs->getTimestamp($startcol + 53, null);
 
-			$this->file_proof_of_residence = $rs->getString($startcol + 54);
+			$this->package_purchase_flag = $rs->getString($startcol + 54);
 
-			$this->file_nric = $rs->getString($startcol + 55);
+			$this->file_bank_pass_book = $rs->getString($startcol + 55);
+
+			$this->file_proof_of_residence = $rs->getString($startcol + 56);
+
+			$this->file_nric = $rs->getString($startcol + 57);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 56; 
+						return $startcol + 58; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2013,96 +2073,102 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 				return $this->getTreeStructure();
 				break;
 			case 25:
-				return $this->getInitRankId();
+				return $this->getPlacementTreeLevel();
 				break;
 			case 26:
-				return $this->getInitRankCode();
+				return $this->getPlacementTreeStructure();
 				break;
 			case 27:
-				return $this->getUplineDistId();
+				return $this->getInitRankId();
 				break;
 			case 28:
-				return $this->getUplineDistCode();
+				return $this->getInitRankCode();
 				break;
 			case 29:
-				return $this->getTreeUplineDistId();
+				return $this->getUplineDistId();
 				break;
 			case 30:
-				return $this->getTreeUplineDistCode();
+				return $this->getUplineDistCode();
 				break;
 			case 31:
-				return $this->getTotalLeft();
+				return $this->getTreeUplineDistId();
 				break;
 			case 32:
-				return $this->getTotalRight();
+				return $this->getTreeUplineDistCode();
 				break;
 			case 33:
-				return $this->getPlacementPosition();
+				return $this->getTotalLeft();
 				break;
 			case 34:
-				return $this->getPlacementDatetime();
+				return $this->getTotalRight();
 				break;
 			case 35:
-				return $this->getRankId();
+				return $this->getPlacementPosition();
 				break;
 			case 36:
-				return $this->getRankCode();
+				return $this->getPlacementDatetime();
 				break;
 			case 37:
-				return $this->getActiveDatetime();
+				return $this->getRankId();
 				break;
 			case 38:
-				return $this->getActivatedBy();
+				return $this->getRankCode();
 				break;
 			case 39:
-				return $this->getLeverage();
+				return $this->getActiveDatetime();
 				break;
 			case 40:
-				return $this->getSpread();
+				return $this->getActivatedBy();
 				break;
 			case 41:
-				return $this->getDepositCurrency();
+				return $this->getLeverage();
 				break;
 			case 42:
-				return $this->getDepositAmount();
+				return $this->getSpread();
 				break;
 			case 43:
-				return $this->getSignName();
+				return $this->getDepositCurrency();
 				break;
 			case 44:
-				return $this->getSignDate();
+				return $this->getDepositAmount();
 				break;
 			case 45:
-				return $this->getTermCondition();
+				return $this->getSignName();
 				break;
 			case 46:
-				return $this->getIbCommission();
+				return $this->getSignDate();
 				break;
 			case 47:
-				return $this->getIsIb();
+				return $this->getTermCondition();
 				break;
 			case 48:
-				return $this->getCreatedBy();
+				return $this->getIbCommission();
 				break;
 			case 49:
-				return $this->getCreatedOn();
+				return $this->getIsIb();
 				break;
 			case 50:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 51:
-				return $this->getUpdatedOn();
+				return $this->getCreatedOn();
 				break;
 			case 52:
-				return $this->getPackagePurchaseFlag();
+				return $this->getUpdatedBy();
 				break;
 			case 53:
-				return $this->getFileBankPassBook();
+				return $this->getUpdatedOn();
 				break;
 			case 54:
-				return $this->getFileProofOfResidence();
+				return $this->getPackagePurchaseFlag();
 				break;
 			case 55:
+				return $this->getFileBankPassBook();
+				break;
+			case 56:
+				return $this->getFileProofOfResidence();
+				break;
+			case 57:
 				return $this->getFileNric();
 				break;
 			default:
@@ -2140,37 +2206,39 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[22] => $this->getVisaDebitCard(),
 			$keys[23] => $this->getTreeLevel(),
 			$keys[24] => $this->getTreeStructure(),
-			$keys[25] => $this->getInitRankId(),
-			$keys[26] => $this->getInitRankCode(),
-			$keys[27] => $this->getUplineDistId(),
-			$keys[28] => $this->getUplineDistCode(),
-			$keys[29] => $this->getTreeUplineDistId(),
-			$keys[30] => $this->getTreeUplineDistCode(),
-			$keys[31] => $this->getTotalLeft(),
-			$keys[32] => $this->getTotalRight(),
-			$keys[33] => $this->getPlacementPosition(),
-			$keys[34] => $this->getPlacementDatetime(),
-			$keys[35] => $this->getRankId(),
-			$keys[36] => $this->getRankCode(),
-			$keys[37] => $this->getActiveDatetime(),
-			$keys[38] => $this->getActivatedBy(),
-			$keys[39] => $this->getLeverage(),
-			$keys[40] => $this->getSpread(),
-			$keys[41] => $this->getDepositCurrency(),
-			$keys[42] => $this->getDepositAmount(),
-			$keys[43] => $this->getSignName(),
-			$keys[44] => $this->getSignDate(),
-			$keys[45] => $this->getTermCondition(),
-			$keys[46] => $this->getIbCommission(),
-			$keys[47] => $this->getIsIb(),
-			$keys[48] => $this->getCreatedBy(),
-			$keys[49] => $this->getCreatedOn(),
-			$keys[50] => $this->getUpdatedBy(),
-			$keys[51] => $this->getUpdatedOn(),
-			$keys[52] => $this->getPackagePurchaseFlag(),
-			$keys[53] => $this->getFileBankPassBook(),
-			$keys[54] => $this->getFileProofOfResidence(),
-			$keys[55] => $this->getFileNric(),
+			$keys[25] => $this->getPlacementTreeLevel(),
+			$keys[26] => $this->getPlacementTreeStructure(),
+			$keys[27] => $this->getInitRankId(),
+			$keys[28] => $this->getInitRankCode(),
+			$keys[29] => $this->getUplineDistId(),
+			$keys[30] => $this->getUplineDistCode(),
+			$keys[31] => $this->getTreeUplineDistId(),
+			$keys[32] => $this->getTreeUplineDistCode(),
+			$keys[33] => $this->getTotalLeft(),
+			$keys[34] => $this->getTotalRight(),
+			$keys[35] => $this->getPlacementPosition(),
+			$keys[36] => $this->getPlacementDatetime(),
+			$keys[37] => $this->getRankId(),
+			$keys[38] => $this->getRankCode(),
+			$keys[39] => $this->getActiveDatetime(),
+			$keys[40] => $this->getActivatedBy(),
+			$keys[41] => $this->getLeverage(),
+			$keys[42] => $this->getSpread(),
+			$keys[43] => $this->getDepositCurrency(),
+			$keys[44] => $this->getDepositAmount(),
+			$keys[45] => $this->getSignName(),
+			$keys[46] => $this->getSignDate(),
+			$keys[47] => $this->getTermCondition(),
+			$keys[48] => $this->getIbCommission(),
+			$keys[49] => $this->getIsIb(),
+			$keys[50] => $this->getCreatedBy(),
+			$keys[51] => $this->getCreatedOn(),
+			$keys[52] => $this->getUpdatedBy(),
+			$keys[53] => $this->getUpdatedOn(),
+			$keys[54] => $this->getPackagePurchaseFlag(),
+			$keys[55] => $this->getFileBankPassBook(),
+			$keys[56] => $this->getFileProofOfResidence(),
+			$keys[57] => $this->getFileNric(),
 		);
 		return $result;
 	}
@@ -2262,96 +2330,102 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 				$this->setTreeStructure($value);
 				break;
 			case 25:
-				$this->setInitRankId($value);
+				$this->setPlacementTreeLevel($value);
 				break;
 			case 26:
-				$this->setInitRankCode($value);
+				$this->setPlacementTreeStructure($value);
 				break;
 			case 27:
-				$this->setUplineDistId($value);
+				$this->setInitRankId($value);
 				break;
 			case 28:
-				$this->setUplineDistCode($value);
+				$this->setInitRankCode($value);
 				break;
 			case 29:
-				$this->setTreeUplineDistId($value);
+				$this->setUplineDistId($value);
 				break;
 			case 30:
-				$this->setTreeUplineDistCode($value);
+				$this->setUplineDistCode($value);
 				break;
 			case 31:
-				$this->setTotalLeft($value);
+				$this->setTreeUplineDistId($value);
 				break;
 			case 32:
-				$this->setTotalRight($value);
+				$this->setTreeUplineDistCode($value);
 				break;
 			case 33:
-				$this->setPlacementPosition($value);
+				$this->setTotalLeft($value);
 				break;
 			case 34:
-				$this->setPlacementDatetime($value);
+				$this->setTotalRight($value);
 				break;
 			case 35:
-				$this->setRankId($value);
+				$this->setPlacementPosition($value);
 				break;
 			case 36:
-				$this->setRankCode($value);
+				$this->setPlacementDatetime($value);
 				break;
 			case 37:
-				$this->setActiveDatetime($value);
+				$this->setRankId($value);
 				break;
 			case 38:
-				$this->setActivatedBy($value);
+				$this->setRankCode($value);
 				break;
 			case 39:
-				$this->setLeverage($value);
+				$this->setActiveDatetime($value);
 				break;
 			case 40:
-				$this->setSpread($value);
+				$this->setActivatedBy($value);
 				break;
 			case 41:
-				$this->setDepositCurrency($value);
+				$this->setLeverage($value);
 				break;
 			case 42:
-				$this->setDepositAmount($value);
+				$this->setSpread($value);
 				break;
 			case 43:
-				$this->setSignName($value);
+				$this->setDepositCurrency($value);
 				break;
 			case 44:
-				$this->setSignDate($value);
+				$this->setDepositAmount($value);
 				break;
 			case 45:
-				$this->setTermCondition($value);
+				$this->setSignName($value);
 				break;
 			case 46:
-				$this->setIbCommission($value);
+				$this->setSignDate($value);
 				break;
 			case 47:
-				$this->setIsIb($value);
+				$this->setTermCondition($value);
 				break;
 			case 48:
-				$this->setCreatedBy($value);
+				$this->setIbCommission($value);
 				break;
 			case 49:
-				$this->setCreatedOn($value);
+				$this->setIsIb($value);
 				break;
 			case 50:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 51:
-				$this->setUpdatedOn($value);
+				$this->setCreatedOn($value);
 				break;
 			case 52:
-				$this->setPackagePurchaseFlag($value);
+				$this->setUpdatedBy($value);
 				break;
 			case 53:
-				$this->setFileBankPassBook($value);
+				$this->setUpdatedOn($value);
 				break;
 			case 54:
-				$this->setFileProofOfResidence($value);
+				$this->setPackagePurchaseFlag($value);
 				break;
 			case 55:
+				$this->setFileBankPassBook($value);
+				break;
+			case 56:
+				$this->setFileProofOfResidence($value);
+				break;
+			case 57:
 				$this->setFileNric($value);
 				break;
 		} 	}
@@ -2386,37 +2460,39 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[22], $arr)) $this->setVisaDebitCard($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setTreeLevel($arr[$keys[23]]);
 		if (array_key_exists($keys[24], $arr)) $this->setTreeStructure($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setInitRankId($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setInitRankCode($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setUplineDistId($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setUplineDistCode($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setTreeUplineDistId($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setTreeUplineDistCode($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setTotalLeft($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setTotalRight($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setPlacementPosition($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setPlacementDatetime($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setRankId($arr[$keys[35]]);
-		if (array_key_exists($keys[36], $arr)) $this->setRankCode($arr[$keys[36]]);
-		if (array_key_exists($keys[37], $arr)) $this->setActiveDatetime($arr[$keys[37]]);
-		if (array_key_exists($keys[38], $arr)) $this->setActivatedBy($arr[$keys[38]]);
-		if (array_key_exists($keys[39], $arr)) $this->setLeverage($arr[$keys[39]]);
-		if (array_key_exists($keys[40], $arr)) $this->setSpread($arr[$keys[40]]);
-		if (array_key_exists($keys[41], $arr)) $this->setDepositCurrency($arr[$keys[41]]);
-		if (array_key_exists($keys[42], $arr)) $this->setDepositAmount($arr[$keys[42]]);
-		if (array_key_exists($keys[43], $arr)) $this->setSignName($arr[$keys[43]]);
-		if (array_key_exists($keys[44], $arr)) $this->setSignDate($arr[$keys[44]]);
-		if (array_key_exists($keys[45], $arr)) $this->setTermCondition($arr[$keys[45]]);
-		if (array_key_exists($keys[46], $arr)) $this->setIbCommission($arr[$keys[46]]);
-		if (array_key_exists($keys[47], $arr)) $this->setIsIb($arr[$keys[47]]);
-		if (array_key_exists($keys[48], $arr)) $this->setCreatedBy($arr[$keys[48]]);
-		if (array_key_exists($keys[49], $arr)) $this->setCreatedOn($arr[$keys[49]]);
-		if (array_key_exists($keys[50], $arr)) $this->setUpdatedBy($arr[$keys[50]]);
-		if (array_key_exists($keys[51], $arr)) $this->setUpdatedOn($arr[$keys[51]]);
-		if (array_key_exists($keys[52], $arr)) $this->setPackagePurchaseFlag($arr[$keys[52]]);
-		if (array_key_exists($keys[53], $arr)) $this->setFileBankPassBook($arr[$keys[53]]);
-		if (array_key_exists($keys[54], $arr)) $this->setFileProofOfResidence($arr[$keys[54]]);
-		if (array_key_exists($keys[55], $arr)) $this->setFileNric($arr[$keys[55]]);
+		if (array_key_exists($keys[25], $arr)) $this->setPlacementTreeLevel($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setPlacementTreeStructure($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setInitRankId($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setInitRankCode($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setUplineDistId($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setUplineDistCode($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setTreeUplineDistId($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setTreeUplineDistCode($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setTotalLeft($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setTotalRight($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setPlacementPosition($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setPlacementDatetime($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setRankId($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setRankCode($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setActiveDatetime($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setActivatedBy($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setLeverage($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setSpread($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setDepositCurrency($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setDepositAmount($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setSignName($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setSignDate($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setTermCondition($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setIbCommission($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setIsIb($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setCreatedBy($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setCreatedOn($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setUpdatedBy($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setUpdatedOn($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setPackagePurchaseFlag($arr[$keys[54]]);
+		if (array_key_exists($keys[55], $arr)) $this->setFileBankPassBook($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setFileProofOfResidence($arr[$keys[56]]);
+		if (array_key_exists($keys[57], $arr)) $this->setFileNric($arr[$keys[57]]);
 	}
 
 	
@@ -2449,6 +2525,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::VISA_DEBIT_CARD)) $criteria->add(MlmDistributorPeer::VISA_DEBIT_CARD, $this->visa_debit_card);
 		if ($this->isColumnModified(MlmDistributorPeer::TREE_LEVEL)) $criteria->add(MlmDistributorPeer::TREE_LEVEL, $this->tree_level);
 		if ($this->isColumnModified(MlmDistributorPeer::TREE_STRUCTURE)) $criteria->add(MlmDistributorPeer::TREE_STRUCTURE, $this->tree_structure);
+		if ($this->isColumnModified(MlmDistributorPeer::PLACEMENT_TREE_LEVEL)) $criteria->add(MlmDistributorPeer::PLACEMENT_TREE_LEVEL, $this->placement_tree_level);
+		if ($this->isColumnModified(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE)) $criteria->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, $this->placement_tree_structure);
 		if ($this->isColumnModified(MlmDistributorPeer::INIT_RANK_ID)) $criteria->add(MlmDistributorPeer::INIT_RANK_ID, $this->init_rank_id);
 		if ($this->isColumnModified(MlmDistributorPeer::INIT_RANK_CODE)) $criteria->add(MlmDistributorPeer::INIT_RANK_CODE, $this->init_rank_code);
 		if ($this->isColumnModified(MlmDistributorPeer::UPLINE_DIST_ID)) $criteria->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->upline_dist_id);
@@ -2557,6 +2635,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setTreeLevel($this->tree_level);
 
 		$copyObj->setTreeStructure($this->tree_structure);
+
+		$copyObj->setPlacementTreeLevel($this->placement_tree_level);
+
+		$copyObj->setPlacementTreeStructure($this->placement_tree_structure);
 
 		$copyObj->setInitRankId($this->init_rank_id);
 
