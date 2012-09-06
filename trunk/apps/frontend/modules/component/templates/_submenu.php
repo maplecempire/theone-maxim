@@ -92,6 +92,11 @@
             <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Download Daily FX Guide</span></a>
         </li>
     <?php } ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>Download Fund Management Report</span></a>
+        </li>
+    <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/download/downloadMt4Pro") ?>"><span><?php echo __('Download MT4 Pro'); ?></span></a>
