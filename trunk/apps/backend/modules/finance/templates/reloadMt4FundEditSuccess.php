@@ -69,7 +69,7 @@ $(function() {
                 <tr>
                     <th class="caption">MT4 ID :</th>
                     <td class="value"><?php
-                        echo $existDist->getMt4UserName() ?></td>
+                        echo $mt4ReloadFund->getMt4UserName() ?></td>
                 </tr>
                 <tr>
                     <th class="caption">Amount *:</th>
