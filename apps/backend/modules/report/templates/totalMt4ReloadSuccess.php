@@ -42,7 +42,7 @@ $(function(){
             { "sName" : "reload.created_on",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "reload.mt4_user_name",  "bSortable": true},
             { "sName" : "reload.amount",  "bSortable": true},
             { "sName" : "reload.status_code",  "bSortable": true},
             { "sName" : "reload.remarks",  "bSortable": true}
