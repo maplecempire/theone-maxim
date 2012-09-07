@@ -56,6 +56,14 @@ $(function() {
                     <td class="value" style="width: 35%"><?php echo $app_setting->getSettingRemark() ?></td>
                 </tr>
                     <?php endforeach; ?>
+
+                <tr>
+                    <td class="caption" style="width: 20%">Fund Management Percentage</td>
+                    <td class="value" style="width: 45%"><?php //echo $app_setting->getValue() ?>
+                        <input type="text" name="fundManagementPercentage" value="<?php echo $fundManagementPercentage ?>" size="50"> %
+                    </td>
+                    <td class="value" style="width: 35%">Fund Management e.g 5%, 10%</td>
+                </tr>
             </table>
             <hr/>
             <button id="btnSave">Save</button>

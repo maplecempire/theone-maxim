@@ -430,6 +430,16 @@ class adminActions extends sfActions
     public function executeApplicationSetting()
     {
         $this->app_settings = AppSettingPeer::doSelect(new Criteria());
+
+        $c = new Criteria();
+        $c->addDescendingOrderByColumn(MlmFundManagementRecordPeer::CREATED_ON);
+        $mlmFundManagementRecord = MlmFundManagementRecordPeer::doSelectOne($c);
+
+        $fundManagementPercentage = 0;
+        if ($mlmFundManagementRecord) {
+            $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
+        }
+        $this->fundManagementPercentage = $fundManagementPercentage;
     }
 
     public function executeApplicationSettingUpdate()
@@ -439,6 +449,14 @@ class adminActions extends sfActions
             $app_setting->setSettingValue($this->getRequestParameter($app_setting->getSettingParameter()));
             $app_setting->save();
         endforeach;
+
+        $fundManagementPercentage = $this->getRequestParameter("fundManagementPercentage");
+        $mlm_fund_management = new MlmFundManagementRecord();
+        $mlm_fund_management->setPercentage($fundManagementPercentage);
+        $mlm_fund_management->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_fund_management->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_fund_management->save();
+
         $this->setFlash('successMsg', "Update successfully");
 
         return $this->redirect('admin/applicationSetting');
