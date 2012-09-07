@@ -260,7 +260,8 @@ $(function(){
         "aoColumns": [
             { "sName" : "bonus.commission_id", "bVisible" : false},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "dist.distributor_code",  "bSortable": true},
+            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
             { "sName" : "bonus.commission_type",  "bSortable": true},
             { "sName" : "bonus.credit",  "bSortable": true},
             { "sName" : "bonus.remark",  "bVisible": false},
@@ -293,6 +294,7 @@ $(function(){
                         <option value="">All</option>
                         <option value="PIPS_BONUS">Pips Bonus</option>
                         <option value="CREDIT_REFUND">Credit Refund</option>
+                        <option value="FUND_MANAGEMENT">Fund Management</option>
                     </select>
                 </td>
                 <td></td>
