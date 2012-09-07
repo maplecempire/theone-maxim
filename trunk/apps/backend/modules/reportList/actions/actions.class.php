@@ -22,9 +22,25 @@ class reportListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
         $sql = " FROM mlm_account_ledger ledger
-                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = ledger.dist_id
-                    WHERE ledger.account_type = '".Globals::ACCOUNT_TYPE_EPOINT."' AND ledger.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_CONVERT."' ";
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = ledger.dist_id";
 
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " INNER JOIN ";
+        } else {
+            $sql .= " LEFT JOIN ";
+        }
+
+        $sql .= " (
+                    select dist_id, mt4_user_name, mt4_password from mlm_dist_mt4";
+
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " where mt4_user_name LIKE '%" . $this->getRequestParameter('filterMt4Userame') . "%'";
+        }
+
+        $sql .= " group by dist_id
+        ) mt4 ON mt4.dist_id = dist.distributor_id ";
+
+        $sql .= " WHERE ledger.account_type = '".Globals::ACCOUNT_TYPE_EPOINT."' AND ledger.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_CONVERT."' ";
         /******   total records  *******/
         $sWhere = " ";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
@@ -36,9 +52,9 @@ class reportListActions extends sfActions
         if ($this->getRequestParameter('filterFullname') != "") {
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
-        if ($this->getRequestParameter('filterMt4Id') != "") {
+        /*if ($this->getRequestParameter('filterMt4Id') != "") {
             $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
-        }
+        }*/
         if ($this->getRequestParameter('filterDateFrom') != "") {
             $sWhere .= " AND ledger.created_on >= '" . mysql_real_escape_string($this->getRequestParameter('filterDateFrom')) . " 00:00:00'";
         }
@@ -74,12 +90,30 @@ class reportListActions extends sfActions
         {
             $resultArr = $resultset->getRow();
 
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+            $mt4Id = "";
+            $mt4Password = "";
+            if (count($distMt4s)) {
+                foreach ($distMt4s as $distMt4) {
+                    if ($mt4Id != "")
+                        $mt4Id .= ",";
+                    if ($mt4Password != "")
+                        $mt4Password .= ",";
+                    $mt4Id .= $distMt4->getMt4UserName();
+                    $mt4Password .= $distMt4->getMt4Password();
+                }
+            }
+
             $arr[] = array(
                 $resultArr['account_id'] == null ? "" : $resultArr['account_id'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                $mt4Id,
+                //$resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
                 $resultArr['credit'] == null ? "" : $resultArr['credit']
             );
         }
