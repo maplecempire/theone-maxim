@@ -1869,7 +1869,7 @@ class memberActions extends sfActions
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
-            } else if (!$this->getRequestParameter('mt4Id')) {
+            } else if ($this->getRequestParameter('mt4Id')) {
                 $this->setFlash('errorMsg', "Invalid MT4 ID.");
 
             } else {
