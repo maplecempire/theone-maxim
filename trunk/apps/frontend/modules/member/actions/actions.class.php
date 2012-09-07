@@ -1857,19 +1857,29 @@ class memberActions extends sfActions
 
         $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->distributorDB = $distributorDB;
+
+        $c = new Criteria();
+        $c->add(MlmDistMt4Peer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $distMt4DBs = MlmDistMt4Peer::doSelect($c);
+        $this->distMt4DBs = $distMt4DBs;
+
         if ($this->getRequestParameter('mt4Amount') > 0 && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('paymentType') <> "") {
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
+            } else if (!$this->getRequestParameter('mt4Id')) {
+                $this->setFlash('errorMsg', "Invalid MT4 ID.");
+
             } else {
                 $paymentType = $this->getRequestParameter('paymentType');
                 $usdAmount = $this->getRequestParameter('mt4Amount');
+                $mt4Id = $this->getRequestParameter('mt4Id');
 
                 $mt4Withdraw = new MlmMt4Withdraw();
                 $mt4Withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $mt4Withdraw->setMt4UserName($distributorDB->getMt4UserName());
+                $mt4Withdraw->setMt4UserName($mt4Id);
                 $mt4Withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
 
                 $minHandlingFee = 0;

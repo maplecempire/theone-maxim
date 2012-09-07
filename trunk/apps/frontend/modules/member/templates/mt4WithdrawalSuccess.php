@@ -133,7 +133,18 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('MT4 ID'); ?></td>
                     <td>
-                        <input name="mt4Id" id="mt4Id" disabled="disabled" value="<?php //echo $distributorDB->getMt4UserName(); ?>"/>
+                        <select name="mt4Id" id="mt4Id" tabindex="1">
+                            <?php
+                                if (count($distMt4DBs) > 1) {
+                                    foreach ($distMt4DBs as $distMt4DB) {
+                                        echo "<option value='".$distMt4DB->getMt4UserName()."'>".$distMt4DB->getMt4UserName()."</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>--</option>";
+                                }
+                            ?>
+                        </select>
+                        <!--<input name="mt4Id" id="mt4Id" disabled="disabled" value="<?php /*//echo $distributorDB->getMt4UserName(); */?>"/>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -156,14 +167,14 @@ $(function() {
                     <td>
                         <select name="mt4Amount" id="cbo_mt4Amount">
                             <?php
-                                /*if ($distributorDB->getMt4UserName() != null) {
-                                    for ($i = 100; $i <= 10000; $i = $i + 100) {
-                                        echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                    }
-                                    for ($i = 20000; $i <= 50000; $i = $i + 10000) {
-                                        echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                    }
-                                }*/
+                                //if ($distributorDB->getMt4UserName() != null) {
+                                for ($i = 100; $i <= 10000; $i = $i + 100) {
+                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
+                                }
+                                for ($i = 20000; $i <= 50000; $i = $i + 10000) {
+                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
+                                }
+                                //}
                             ?>
                         </select>
                     </td>
