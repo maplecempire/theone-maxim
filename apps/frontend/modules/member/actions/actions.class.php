@@ -2026,11 +2026,13 @@ class memberActions extends sfActions
         $dsb = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_DRB);
         $pipsBonus = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_PIPS_BONUS);
         $creditRefunds = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+        $fundManagements = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
         $this->dsb = number_format($dsb, 2);
         $this->pipsBonus = number_format($pipsBonus, 2);
         $this->creditRefund = number_format($creditRefunds, 2);
+        $this->fundManagement = number_format($fundManagements, 2);
 //        $this->total = number_format($dsb, 2);
-        $this->total = number_format($dsb + $pipsBonus + $creditRefunds, 2);
+        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements, 2);
 
         /* *************************
          *  PIPS DETAIL
@@ -2050,6 +2052,7 @@ class memberActions extends sfActions
                     $anode[$idx]["month"] = $i;
                     $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                     $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                    $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                     $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
                     $idx++;
                 }
@@ -3395,6 +3398,38 @@ class memberActions extends sfActions
                 LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
                         WHERE 1=1 "
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_CREDIT_REFUND . "'"
+                 . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
+                 //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+
+        if ($fileId != null) {
+            $query = $query." csv.file_id = ".$fileId;
+        }
+        if ($distributorId != null) {
+            $query = $query." AND bonus.dist_id = ".$distributorId;
+        }
+        //var_dump($query);
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getFundDividendDetailByMonth($distributorId, $month, $year, $fileId)
+    {
+        $query = "SELECT SUM(bonus.credit-bonus.debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger bonus
+                LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
+                        WHERE 1=1 "
+                 . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_FUND_MANAGEMENT . "'"
                  . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
                  //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 

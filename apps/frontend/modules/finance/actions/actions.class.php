@@ -118,6 +118,9 @@ class financeActions extends sfActions
             } elseif ($commissionType == Globals::COMMISSION_TYPE_CREDIT_REFUND) {
 
                 $desc = $resultArr['remark'];
+            } elseif ($commissionType == Globals::COMMISSION_TYPE_FUND_MANAGEMENT) {
+
+                $desc = $resultArr['remark'];
             }
 
 
