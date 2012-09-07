@@ -136,6 +136,7 @@ class financeActions extends sfActions
             $resultArr = $resultset->getRow();
             $bonusArr[$idx]['PIPS'] = $this->getPipsBonusDetailByMonth(null, $resultArr['month_traded'], $resultArr['year_traded'], $resultArr['file_id']);
             $bonusArr[$idx]['CREDIT'] = $this->getCreditRefundBonusDetailByMonth(null, $resultArr['month_traded'], $resultArr['year_traded'], $resultArr['file_id']);
+            $bonusArr[$idx]['FUND'] = $this->getFundManagementBonusDetailByMonth(null, $resultArr['month_traded'], $resultArr['year_traded'], $resultArr['file_id']);
             $idx++;
         }
         $this->arr = $arr;
@@ -1216,6 +1217,40 @@ class financeActions extends sfActions
                 LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
                         WHERE csv.file_id = " . $fileId
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_CREDIT_REFUND . "'"
+                 . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
+                 //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+
+        if ($distributorId != null) {
+            $query = $query." AND bonus.dist_id = ".$distributorId;
+        }
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getFundManagementBonusDetailByMonth($distributorId, $month, $year, $fileId)
+    {
+        //$dateUtil = new DateUtil();
+
+        //$d = $dateUtil->getMonth($month, $year);
+        //$firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
+        //$lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
+
+        $query = "SELECT SUM(bonus.credit-bonus.debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger bonus
+                LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
+                        WHERE csv.file_id = " . $fileId
+                 . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_FUND_MANAGEMENT . "'"
                  . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
                  //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 

@@ -942,6 +942,7 @@ class financeListActions extends sfActions
 
         $sColumns = str_replace("pipsBonus", "pips.bonusAmount AS pipsBonus", $sColumns);
         $sColumns = str_replace("creditRefund", "creditRefund.bonusAmount AS creditRefund", $sColumns);
+        $sColumns = str_replace("fundDividend", "fundManagement.bonusAmount AS fundDividend", $sColumns);
         $iColumns = $this->getRequestParameter('iColumns');
 
         $offset = $this->getRequestParameter('iDisplayStart');
@@ -968,7 +969,16 @@ class financeListActions extends sfActions
                     WHERE bonus.commission_type = 'CREDIT_REFUND'
                     AND csv.file_id = " . $this->getRequestParameter('filterReferId')
                 ." GROUP BY bonus.dist_id
-            ) creditRefund ON creditRefund.dist_id  = bonus.dist_id  ";
+            ) creditRefund ON creditRefund.dist_id  = bonus.dist_id
+        LEFT JOIN
+            (
+                SELECT SUM(bonus.credit-bonus.debit) AS bonusAmount, bonus.dist_id
+                    FROM mlm_dist_commission_ledger bonus
+                    LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
+                    WHERE bonus.commission_type = '".Globals::COMMISSION_TYPE_FUND_MANAGEMENT."'
+                    AND csv.file_id = " . $this->getRequestParameter('filterReferId')
+                ." GROUP BY bonus.dist_id
+            ) fundManagement ON fundManagement.dist_id  = bonus.dist_id  ";
 
         // mt4 id
         if ($this->getRequestParameter('filterMt4Id') != "") {
@@ -987,7 +997,7 @@ class financeListActions extends sfActions
         $sql .= " group by dist_id
         ) mt4 ON mt4.dist_id = dist.distributor_id ";
         /******   total records  *******/
-        $sWhere = " WHERE bonus.commission_type IN ('PIPS_BONUS', 'CREDIT_REFUND')  AND csv.file_id = ". $this->getRequestParameter('filterReferId');
+        $sWhere = " WHERE bonus.commission_type IN ('PIPS_BONUS', 'CREDIT_REFUND', '".Globals::COMMISSION_TYPE_FUND_MANAGEMENT."')  AND csv.file_id = ". $this->getRequestParameter('filterReferId');
 
         /******   total filtered records  *******/
         if ($this->getRequestParameter('filterUsername') != "") {
@@ -1060,7 +1070,8 @@ class financeListActions extends sfActions
 
             $pipsBonus = $resultArr['pipsBonus'] == null ? "0" : $resultArr['pipsBonus'];
             $creditRefund = $resultArr['creditRefund'] == null ? "0" : $resultArr['creditRefund'];
-            $totalAmount = $pipsBonus + $creditRefund;
+            $fund = $resultArr['fundDividend'] == null ? "0" : $resultArr['fundDividend'];
+            $totalAmount = $pipsBonus + $creditRefund + $fund;
 
             $c = new Criteria();
             $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
@@ -1087,6 +1098,7 @@ class financeListActions extends sfActions
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $pipsBonus,
                 $creditRefund,
+                $fund,
                 $totalAmount,
                 $resultArr['month_traded'] == null ? "" : $month[$resultArr['month_traded']],
                 $leader

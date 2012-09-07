@@ -15,6 +15,7 @@ use_helper('I18N');
                         <th style="text-align: left;"><?php echo __('Date') ?></th>
                         <th style="text-align: right;"><?php echo __('Pips Bonus') ?></th>
                         <th style="text-align: right;"><?php echo __('Credit Refund') ?></th>
+                        <th style="text-align: right;"><?php echo __('Fund Management') ?></th>
                     </tr>
                     </thead>
                     <tbody id="pipsTbody">
@@ -40,6 +41,7 @@ use_helper('I18N');
                                 <td align='left'><a href='#' ref='".$anode["file_id"]."' class='monthLink'>" . $anode["year_traded"] . "-" . __($month[$anode["month_traded"]]) . "</a></td>
                                 <td align='right' width='100'>" . number_format($bonusArr[$idx]['PIPS'], 2) . "</td>
                                 <td align='right' width='100'>" . number_format($bonusArr[$idx]['CREDIT'], 2) . "</td>
+                                <td align='right' width='100'>" . number_format($bonusArr[$idx]['FUND'], 2) . "</td>
                                 </tr>";
                             $refId = $anode["file_id"];
                             $idx++;
@@ -93,6 +95,9 @@ use_helper('I18N');
                             }},
                             { "sName" : "creditRefund",  "bSortable": true, "fnRender": function ( oObj ) {
                                 return "<a id='creditRefundViewLink' href='#'>" + oObj.aData[5] + "</a>";
+                            }},
+                            { "sName" : "fundDividend",  "bSortable": true, "fnRender": function ( oObj ) {
+                                return "<a id='fundManagementViewLink' href='#'>" + oObj.aData[6] + "</a>";
                             }},
                             { "sName" : "dist.distributor_id",  "bSortable": true},
                             { "sName" : "bonus.month_traded",  "bSortable": true},
@@ -156,7 +161,8 @@ use_helper('I18N');
                                 "aoColumns": [
                                     { "sName" : "bonus.commission_id", "bVisible" : false},
                                     { "sName" : "dist.distributor_code",  "bSortable": true},
-                                    { "sName" : "dist.mt4_user_name",  "bSortable": true},
+                                    { "sName" : "dist.distributor_code",  "bSortable": true},
+                                    /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
                                     { "sName" : "bonus.commission_type",  "bSortable": true},
                                     { "sName" : "bonus.credit",  "bSortable": true},
                                     { "sName" : "bonus.remark",  "bVisible": false},
@@ -210,6 +216,19 @@ use_helper('I18N');
                         datagrid.fnDraw();
                         $("#dgBonusPanel").dialog("open");
                     });
+
+                    $("a[id=fundManagementViewLink]").click(function(event){
+                        // stop event
+                        event.preventDefault();
+
+                        // event.target is <a> itself, parent() is <td>, while parent().parent() get <tr>
+                        //var id = alert("id = " +$(event.target).parent().parent().attr("id"));
+                        var id = $(event.target).parent().parent().attr("id");
+                        $("#dgDistId").val(id);
+                        $("#dgBonusType").val('<?php echo Globals::COMMISSION_TYPE_FUND_MANAGEMENT ?>');
+                        datagrid.fnDraw();
+                        $("#dgBonusPanel").dialog("open");
+                    });
                 }
                 function reassignDatagridEventAttrForCreditRefund(){
                     $("a[id=creditRefundViewLink]").click(function(event){
@@ -243,6 +262,7 @@ use_helper('I18N');
                         <th>Full Name</th>
                         <th>Pips Bonus</th>
                         <th>Credit Refund</th>
+                        <th>Fund Dividend</th>
                         <th>Total</th>
                         <th>Month</th>
                         <th>Leader</th>
@@ -252,6 +272,7 @@ use_helper('I18N');
                         <td><input title="" size="10" type="text" id="search_upgradeUsername" value="" class="search_init"/></td>
                         <td><input title="" size="10" type="text" id="search_mt4" value="" class="search_init"/></td>
                         <td><input title="" size="10" type="text" id="search_fullname" value="" class="search_init"/></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
