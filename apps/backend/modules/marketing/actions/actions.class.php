@@ -576,8 +576,9 @@ class marketingActions extends sfActions
     {
         $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
 
-        $tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-        $tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
+        //todo update mt4
+        //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+        //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
         $tbl_distributor->setFullName($this->getRequestParameter('fullname'));
         $tbl_distributor->setNickname($this->getRequestParameter('nickname'));
         $tbl_distributor->setIc($this->getRequestParameter('ic'));
