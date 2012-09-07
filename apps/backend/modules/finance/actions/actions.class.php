@@ -767,6 +767,28 @@ class financeActions extends sfActions
 
             $packageUpgradeHistory->save();
 
+            /*$tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
+            $mt4UsernameStr = "";
+            $mt4PasswordStr = "";
+
+            if ($this->getRequestParameter('mt4_user_name')) {
+                if ($tbl_distributor->getMt4UserName() != null) {
+                    $mt4UsernameStr .= ",";
+                }
+                $mt4UsernameStr .= $this->getRequestParameter('mt4_user_name');
+            }
+
+            if ($this->getRequestParameter('mt4_password')) {
+                if ($tbl_distributor->getMt4Password() != null) {
+                    $mt4PasswordStr .= ",";
+                }
+                $mt4PasswordStr .= $this->getRequestParameter('mt4_password');
+            }
+
+            $tbl_distributor->setMt4UserName($mt4UsernameStr);
+            $tbl_distributor->setMt4Password($mt4PasswordStr);
+            $tbl_distributor->save();*/
+
             $mlm_dist_mt4 = new MlmDistMt4();
             $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
             $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
