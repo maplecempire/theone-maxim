@@ -639,9 +639,23 @@ class financeListActions extends sfActions
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
-        $sql = " ,dist.tree_structure FROM mlm_dist_commission_ledger bonus
+        $sql = " ,dist.tree_structure,dist.distributor_id FROM mlm_dist_commission_ledger bonus
         LEFT JOIN mlm_distributor dist ON bonus.dist_id = dist.distributor_id ";
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " INNER JOIN ";
+        } else {
+            $sql .= " LEFT JOIN ";
+        }
 
+        $sql .= " (
+                    select dist_id, mt4_user_name, mt4_password from mlm_dist_mt4";
+
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " where mt4_user_name LIKE '%" . $this->getRequestParameter('filterMt4Userame') . "%'";
+        }
+
+        $sql .= " group by dist_id
+        ) mt4 ON mt4.dist_id = dist.distributor_id ";
         /******   total records  *******/
         $sWhere = " WHERE commission_type = '". Globals::COMMISSION_TYPE_DRB."' ";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
@@ -653,9 +667,9 @@ class financeListActions extends sfActions
         if ($this->getRequestParameter('filterFullname') != "") {
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
-        if ($this->getRequestParameter('filterMt4Id') != "") {
+        /*if ($this->getRequestParameter('filterMt4Id') != "") {
             $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
-        }
+        }*/
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND bonus.status_code = '" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "'";
         }
@@ -718,11 +732,28 @@ class financeListActions extends sfActions
                 }
             }
 
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+            $mt4Id = "";
+            $mt4Password = "";
+            if (count($distMt4s)) {
+                foreach ($distMt4s as $distMt4) {
+                    if ($mt4Id != "")
+                        $mt4Id .= ",";
+                    if ($mt4Password != "")
+                        $mt4Password .= ",";
+                    $mt4Id .= $distMt4->getMt4UserName();
+                    $mt4Password .= $distMt4->getMt4Password();
+                }
+            }
+
             $arr[] = array(
                 $resultArr['commission_id'] == null ? "" : $resultArr['commission_id'],
                 $resultArr['commission_id'] == null ? "" : $resultArr['commission_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                //$resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                $mt4Id,
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['credit'] == null ? "" : $resultArr['credit'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
@@ -900,6 +931,22 @@ class financeListActions extends sfActions
                 ." GROUP BY bonus.dist_id
             ) creditRefund ON creditRefund.dist_id  = bonus.dist_id  ";
 
+        // mt4 id
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " INNER JOIN ";
+        } else {
+            $sql .= " LEFT JOIN ";
+        }
+
+        $sql .= " (
+                    select dist_id, mt4_user_name, mt4_password from mlm_dist_mt4";
+
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sql .= " where mt4_user_name LIKE '%" . $this->getRequestParameter('filterMt4Userame') . "%'";
+        }
+
+        $sql .= " group by dist_id
+        ) mt4 ON mt4.dist_id = dist.distributor_id ";
         /******   total records  *******/
         $sWhere = " WHERE bonus.commission_type IN ('PIPS_BONUS', 'CREDIT_REFUND')  AND csv.file_id = ". $this->getRequestParameter('filterReferId');
 
@@ -907,9 +954,9 @@ class financeListActions extends sfActions
         if ($this->getRequestParameter('filterUsername') != "") {
             $sWhere .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
         }
-        if ($this->getRequestParameter('filterMt4Id') != "") {
+        /*if ($this->getRequestParameter('filterMt4Id') != "") {
             $sWhere .= " AND dist.mt4_user_name LIKE '%" . $this->getRequestParameter('filterMt4Id') . "%'";
-        }
+        }*/
         if ($this->getRequestParameter('filterFullname') != "") {
             $sWhere .= " AND dist.full_name LIKE '%" . $this->getRequestParameter('filterFullname') . "%'";
         }
@@ -976,10 +1023,28 @@ class financeListActions extends sfActions
             $creditRefund = $resultArr['creditRefund'] == null ? "0" : $resultArr['creditRefund'];
             $totalAmount = $pipsBonus + $creditRefund;
 
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+            $mt4Id = "";
+            $mt4Password = "";
+            if (count($distMt4s)) {
+                foreach ($distMt4s as $distMt4) {
+                    if ($mt4Id != "")
+                        $mt4Id .= ",";
+                    if ($mt4Password != "")
+                        $mt4Password .= ",";
+                    $mt4Id .= $distMt4->getMt4UserName();
+                    $mt4Password .= $distMt4->getMt4Password();
+                }
+            }
+
             $arr[] = array(
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                $mt4Id,
+                //$resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $pipsBonus,
                 $creditRefund,

@@ -85,7 +85,8 @@ use_helper('I18N');
                         "aoColumns": [
                             { "sName" : "dist.distributor_id", "bVisible" : false},
                             { "sName" : "dist.distributor_code",  "bSortable": true},
-                            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+                            { "sName" : "dist.distributor_code",  "bSortable": true},
+                            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
                             { "sName" : "dist.full_name",  "bSortable": true},
                             { "sName" : "pipsBonus",  "bSortable": true, "fnRender": function ( oObj ) {
                                 return "<a id='viewLink' href='#'>" + oObj.aData[4] + "</a>";

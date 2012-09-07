@@ -69,7 +69,22 @@ $(function() {
                 <tr>
                     <th class="caption">MT4 ID :</th>
                     <td class="value"><?php
-                        echo $existDist->getMt4UserName() ?></td>
+                        $c = new Criteria();
+                        $c->add(MlmDistMt4Peer::DIST_ID, $existDist->getDistributorId());
+                        $distMt4s = MlmDistMt4Peer::doSelect($c);
+                        $mt4Id = "";
+                        $mt4Password = "";
+                        if (count($distMt4s)) {
+                            foreach ($distMt4s as $distMt4) {
+                                if ($mt4Id != "")
+                                    $mt4Id .= ",";
+                                if ($mt4Password != "")
+                                    $mt4Password .= ",";
+                                $mt4Id .= $distMt4->getMt4UserName();
+                                $mt4Password .= $distMt4->getMt4Password();
+                            }
+                        }
+                        echo $mt4Id ?></td>
                 </tr>
                 <tr>
                     <th class="caption">Amount *:</th>
