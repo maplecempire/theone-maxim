@@ -50,7 +50,7 @@ $(function(){
                     return oObj.aData[2];
                 return "<a id='editLink' href='<?php echo url_for('finance/reloadMt4FundEdit?q=dsf453fsdfasf1sxfsdfs&upgradeId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "reload.mt4_user_name",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "reload.amount",  "bSortable": true},
             { "sName" : "reload.status_code",  "bSortable": true},

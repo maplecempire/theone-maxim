@@ -51,7 +51,7 @@ $(function(){
                     return oObj.aData[2];
                 return "<a id='editLink' href='<?php echo url_for('finance/packageUpgradeHistoryEdit?q=dsf453fsdfasf1sxfsdfs&upgradeId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "upgrade.mt4_user_name",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "upgrade.amount",  "bSortable": true},
             { "sName" : "upgrade.status_code",  "bSortable": true},

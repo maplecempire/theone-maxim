@@ -460,7 +460,7 @@ class financeListActions extends sfActions
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
         if ($this->getRequestParameter('filterMt4Id') != "") {
-            $sWhere .= " AND mt4.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
+            $sWhere .= " AND upgrade.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
         }
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND upgrade.status_code = '" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "'";
@@ -511,7 +511,7 @@ class financeListActions extends sfActions
                 $resultArr['upgrade_id'] == null ? "" : $resultArr['upgrade_id'],
                 $resultArr['upgrade_id'] == null ? "" : $resultArr['upgrade_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                //$resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['amount'] == null ? "" : $resultArr['amount'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
@@ -557,7 +557,7 @@ class financeListActions extends sfActions
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
         if ($this->getRequestParameter('filterMt4Id') != "") {
-            $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
+            $sWhere .= " AND reload.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
         }
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND reload.status_code = '" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "'";

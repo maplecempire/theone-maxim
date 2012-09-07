@@ -761,6 +761,30 @@ class financeActions extends sfActions
             $packageUpgradeHistory = MlmPackageUpgradeHistoryPeer::retrieveByPk($this->getRequestParameter('upgrade_id'));
             $this->forward404Unless($packageUpgradeHistory);
 
+
+            if ($this->getRequestParameter('distMt4AccountId', "") != "") {
+                $mlm_dist_mt4 = MlmDistMt4Peer::retrieveByPk($this->getRequestParameter('distMt4AccountId'));
+
+                if ($mlm_dist_mt4) {
+                    //$mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
+                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
+                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+                    //$mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
+                } else {
+                    $mlm_dist_mt4 = new MlmDistMt4();
+                    $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
+                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
+                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
+                }
+            }
+
+            $packageUpgradeHistory->setMt4UserName($this->getRequestParameter('mt4Id'));
+            $packageUpgradeHistory->setMt4Password($this->getRequestParameter('mt4Password'));
             $packageUpgradeHistory->setRemarks($remarks);
             $packageUpgradeHistory->setStatusCode($statusCode);
             $packageUpgradeHistory->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
@@ -788,14 +812,6 @@ class financeActions extends sfActions
             $tbl_distributor->setMt4UserName($mt4UsernameStr);
             $tbl_distributor->setMt4Password($mt4PasswordStr);
             $tbl_distributor->save();*/
-
-            $mlm_dist_mt4 = new MlmDistMt4();
-            $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
-            $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
-            $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
-            $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_dist_mt4->save();
 
             $con->commit();
         } catch (PropelException $e) {
