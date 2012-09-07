@@ -65,6 +65,7 @@
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
+                $(".tdPairingBonus").hide();
                 pipsDatagrid.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_CREDIT_REFUND?>") {
                 $("#divBonusType").show(500);
@@ -74,6 +75,7 @@
                 $(".tdCreditRefund").show();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
+                $(".tdPairingBonus").hide();
                 pipsDatagrid.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_FUND_MANAGEMENT?>") {
                 $("#divBonusType").show(500);
@@ -83,7 +85,18 @@
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").show();
                 $(".tdRbBonus").hide();
+                $(".tdPairingBonus").hide();
                 pipsDatagrid.fnDraw();
+            } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_GDB?>") {
+                $("#divBonusType").show(500);
+                $("#divPip").hide(500);
+                $("#divDRB").show(500);
+                $(".tdPipsBonus").hide();
+                $(".tdCreditRefund").hide();
+                $(".tdFundDividend").hide();
+                $(".tdRbBonus").hide();
+                $(".tdPairingBonus").show();
+                datagridDetail.fnDraw();
             } else {
                 $("#divBonusType").show(500);
                 $("#divPip").hide(500);
@@ -92,6 +105,7 @@
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").show();
+                $(".tdPairingBonus").hide();
                 datagridDetail.fnDraw();
             }
         });
@@ -166,9 +180,17 @@
                                                                                     'class' => 'activeLink',
                                                                                     'ref' => 'DRB'
                                                                                )) . "</td></tr>";
-
                             echo "<tr class='even'>
-                            <td>" . __('PIPS') . "</td>
+                            <td>" . __('Pairing') . "</td>
+                            <td align='right'>" . $pairingBonus . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => Globals::COMMISSION_TYPE_GDB
+                                                                               ))
+                                 . "</td></tr>";
+
+                            echo "<tr class='odd'>
+                            <td>" . __('Pips') . "</td>
                             <td align='right'>" . $pipsBonus . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -176,8 +198,8 @@
                                                                                ))
                                  . "</td></tr>";
 
-                            echo "<tr class='odd'>
-                            <td>" . __('CREDIT REFUND') . "</td>
+                            echo "<tr class='even'>
+                            <td>" . __('Credit Refund') . "</td>
                             <td align='right'>" . $creditRefund . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -186,7 +208,7 @@
                                  . "</td></tr>";
 
                             echo "<tr class='odd'>
-                            <td>" . __('FUND MANAGEMENT DIVIDEND') . "</td>
+                            <td>" . __('Fund Management Dividend') . "</td>
                             <td align='right'>" . $fundManagement . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -251,6 +273,7 @@
                                     <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Dividend') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
+                                    <th style="text-align: right; width: 100px;display: none"" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -278,6 +301,7 @@
                                             <td align='right' class='tdCreditRefund' style='display: none'>".number_format($arr["credit_refund"], 2)."</td>
                                             <td align='right' class='tdFundDividend' style='display: none'>".number_format($arr["fund_dividend"], 2)."</td>
                                             <td align='right' class='tdRbBonus'>".number_format($arr["rb_bonus"], 2)."</td>
+                                            <td align='right' class='tdPairingBonus' style='display: none'>".number_format($arr["paring_bonus"], 2)."</td>
                                             </tr>";
 
                                         $showYear = $arr["year"];
@@ -295,7 +319,7 @@
                                     $("#search_month").val($(this).attr("refMonth"));
                                     $("#search_year").val($(this).attr("refYear"));
 
-                                    if ($("#divBonusType").data("BONUS_TYPE") == "DRB")  {
+                                    if ($("#divBonusType").data("BONUS_TYPE") == "DRB" || $("#divBonusType").data("BONUS_TYPE") == "GRB")  {
                                         datagridDetail.fnDraw();
                                     } else {
                                         pipsDatagrid.fnDraw();
