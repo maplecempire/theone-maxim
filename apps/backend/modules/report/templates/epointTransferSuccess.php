@@ -44,7 +44,8 @@ $(function(){
             { "sName" : "ledger.transaction_type",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "dist.distributor_code",  "bSortable": true},
+            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
             { "sName" : "ledger.credit",  "bSortable": true},
             { "sName" : "ledger.debit",  "bSortable": true},
             { "sName" : "ledger.remark",  "bSortable": true}
