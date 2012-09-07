@@ -122,6 +122,7 @@ abstract class Globals {
     const COMMISSION_TYPE_DRB = 'DRB';
     const COMMISSION_TYPE_PIPS_BONUS = 'PIPS_BONUS';
     const COMMISSION_TYPE_CREDIT_REFUND = 'CREDIT_REFUND';
+    const COMMISSION_TYPE_FUND_MANAGEMENT = 'FUND_MANAGEMENT';
     const COMMISSION_TYPE_GDB = 'GDB';
 
     /*************************************/
@@ -133,6 +134,7 @@ abstract class Globals {
     const COMMISSION_LEDGER_WITHDRAW = 'WITHDRAW';
     const COMMISSION_LEDGER_PIPS_GAIN = 'PIPS_GAIN';
     const COMMISSION_LEDGER_PIPS_TRADED = 'TRADED';
+    const COMMISSION_LEDGER_DIVIDEND = 'DIVIDEND';
 
     /*************************************/
     /*****   WITHDRAWAL      ******/

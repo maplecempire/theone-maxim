@@ -309,17 +309,34 @@ class marketingActions extends sfActions
                 $c->add(MlmPipCsvPeer::FILE_ID, $mlmFileDownloadDB->getFileId());
                 $mlmPipsCsvDBs = MlmPipCsvPeer::doSelect($c);
 
+                $c = new Criteria();
+                $c->addDescendingOrderByColumn(MlmFundManagementRecordPeer::CREATED_ON);
+                $mlmFundManagementRecord = MlmFundManagementRecordPeer::doSelectOne($c);
+
+                $fundManagementPercentage = 0;
+                if ($mlmFundManagementRecord) {
+                    $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
+                }
+
                 foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
                     $totalVolume = $mlm_pip_csv->getVolume();
                     $mt4Id = $mlm_pip_csv->getLoginId();
                     $tradingMonth =  $mlm_pip_csv->getMonthTraded();
 
-                    $c = new Criteria();
+                    /*$c = new Criteria();
                     $c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
-                    $existDistributor = MlmDistributorPeer::doSelectOne($c);
+                    $existDistributor = MlmDistributorPeer::doSelectOne($c);*/
 
-                    if ($existDistributor) {
+                    $c = new Criteria();
+                    $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
+                    $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
+
+                    //if ($existDistributor) {
+                    if ($mlm_dist_mt4) {
                         $index = 0;
+                        $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
+                        $this->forward404Unless($existDistributor);
+
                         $treeLevel = $existDistributor->getTreeLevel();
                         $treeStructure = $existDistributor->getTreeStructure();
                         $affectedDistributorArrs = explode("|", $treeStructure);
@@ -336,13 +353,30 @@ class marketingActions extends sfActions
                             $affectedDistributorTreeLevel = $affectedDistributor->getTreeLevel();
                             $affectedDistributorPackageDB = MlmPackagePeer::retrieveByPK($affectedDistributor->getRankId());
                             if ($affectedDistributorPackageDB) {
-                                $generation = $affectedDistributorPackageDB->getGeneration();
-                                $pips = $affectedDistributorPackageDB->getPips();
-                                $generation2 = $affectedDistributorPackageDB->getGeneration2();
-                                $pips2 = $affectedDistributorPackageDB->getPips2();
+                                //$generation = $affectedDistributorPackageDB->getGeneration();
+                                //$pips = $affectedDistributorPackageDB->getPips();
+                                //$generation2 = $affectedDistributorPackageDB->getGeneration2();
+                                //$pips2 = $affectedDistributorPackageDB->getPips2();
                                 $creditRefundByPackage = $affectedDistributorPackageDB->getCreditRefund();
 
-                                $totalGeneration = $generation + $generation2;
+                                $generation = 0;
+                                $pips = 0;
+
+                                $totalSponsor = $this->getTotalSponsor($affectedDistributor->getDistributorId());
+                                if ($totalSponsor > 0) {
+                                    $c = new Criteria();
+                                    $c->add(MlmPackagePipsPeer::TOTOL_SPONSOR, $totalSponsor, Criteria::LESS_EQUAL);
+                                    $c->addDescendingOrderByColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
+                                    $packagePips = MlmPackagePipsPeer::doSelectOne($c);
+
+                                    if ($affectedDistributor) {
+                                        $generation = $packagePips->getGeneration();
+                                        $pips = $packagePips->getPips();
+                                    }
+                                }
+
+                                //$totalGeneration = $generation + $generation2;
+                                $totalGeneration = $generation;
 
                                 $gap = $treeLevel - $affectedDistributorTreeLevel;
                                 $isEntitled = false;
@@ -354,13 +388,13 @@ class marketingActions extends sfActions
                                     if ($gap <= $totalGeneration) {
                                         $isEntitled = true;
 
-                                        if ($gap > $generation) {
+                                        /*if ($gap > $generation) {
                                             $pipsAmountEntitied = $pips2 * $totalVolume;
                                             $pipsEntitied = $pips2;
-                                        } else {
+                                        } else {*/
                                             $pipsAmountEntitied = $pips * $totalVolume;
                                             $pipsEntitied = $pips;
-                                        }
+                                        //}
                                     }
                                 }
 
@@ -369,8 +403,10 @@ class marketingActions extends sfActions
 
                                         if ($gap == 0) {
                                             $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+                                            $fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
                                             $creditRefund = $totalVolume * $creditRefundByPackage;
+                                            $fundManagement = $totalVolume * $fundManagementPercentage;
 
                                             $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                             $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
@@ -387,7 +423,25 @@ class marketingActions extends sfActions
                                             $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                             $sponsorDistCommissionledger->save();
 
-                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
+                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+
+                                            // fund management
+                                            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                            $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                            $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
+                                            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                                            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                                            $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                                            $sponsorDistCommissionledger->setCredit($fundManagement);
+                                            $sponsorDistCommissionledger->setDebit(0);
+                                            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                                            $sponsorDistCommissionledger->setBalance($fundManagementBalance + $creditRefund);
+                                            $sponsorDistCommissionledger->setRemark($fundManagementPercentage."%, Volume:".$totalVolume);
+                                            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                            $sponsorDistCommissionledger->save();
+
+                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
                                         } else {
                                             $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
@@ -403,7 +457,7 @@ class marketingActions extends sfActions
                                             $sponsorDistCommissionledger->setBalance($pipsBalance + $pipsAmountEntitied);
                                             $sponsorDistCommissionledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
                                             $sponsorDistCommissionledger->setPipsDownlineUsername($existDistributor->getDistributorCode());
-                                            $sponsorDistCommissionledger->setPipsMt4Id($existDistributor->getMt4UserName());
+                                            $sponsorDistCommissionledger->setPipsMt4Id($mt4Id);
                                             $sponsorDistCommissionledger->setPipsRebate($pipsEntitied);
                                             $sponsorDistCommissionledger->setPipsLevel($gap);
                                             $sponsorDistCommissionledger->setPipsLotsTraded($totalVolume);
@@ -1291,6 +1345,24 @@ class marketingActions extends sfActions
     function getCommissionBalance($distributorId, $commissionType)
     {
         $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger WHERE dist_id = " . $distributorId . " AND commission_type = '" . $commissionType . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    function getTotalSponsor($distributorId)
+    {
+        $query = "SELECT count(1) AS SUB_TOTAL FROM mlm_distributor WHERE upline_dist_id = " . $distributorId . " AND status_code = '" . Globals::STATUS_ACTIVE . "'";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
