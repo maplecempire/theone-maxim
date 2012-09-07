@@ -42,7 +42,8 @@ $(function(){
             { "sName" : "ledger.created_on",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "dist.distributor_code",  "bSortable": true},
+            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
             { "sName" : "ledger.credit",  "bSortable": true}
         ]
     });
