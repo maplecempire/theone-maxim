@@ -42,7 +42,7 @@ $(function(){
             { "sName" : "withdraw.created_on",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "withdraw.mt4_user_name",  "bSortable": true},
             { "sName" : "withdraw.amount_requested",  "bSortable": true},
             { "sName" : "withdraw.status_code",  "bSortable": true},
             { "sName" : "withdraw.remarks",  "bSortable": true}

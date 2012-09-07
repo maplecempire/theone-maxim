@@ -42,7 +42,7 @@ $(function(){
             { "sName" : "upgrade.created_on",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "upgrade.mt4_user_name",  "bSortable": true},
             { "sName" : "upgrade.amount",  "bSortable": true},
             { "sName" : "upgrade.remarks",  "bSortable": true},
             { "sName" : "upgrade.status_code",  "bSortable": true}

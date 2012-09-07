@@ -42,7 +42,8 @@ $(function(){
             { "sName" : "dist.active_datetime",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "dist.distributor_code",  "bSortable": true},
+            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
             { "sName" : "package.package_name",  "bSortable": true},
             { "sName" : "package.price",  "bSortable": true}
         ]
