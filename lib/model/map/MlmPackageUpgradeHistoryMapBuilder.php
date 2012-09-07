@@ -36,6 +36,10 @@ class MlmPackageUpgradeHistoryMapBuilder {
 
 		$tMap->addColumn('DIST_ID', 'DistId', 'int', CreoleTypes::INTEGER, true, null);
 
+		$tMap->addColumn('MT4_USER_NAME', 'Mt4UserName', 'string', CreoleTypes::VARCHAR, false, 255);
+
+		$tMap->addColumn('MT4_PASSWORD', 'Mt4Password', 'string', CreoleTypes::VARCHAR, false, 255);
+
 		$tMap->addColumn('TRANSACTION_CODE', 'TransactionCode', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('AMOUNT', 'Amount', 'double', CreoleTypes::DECIMAL, true, 12);

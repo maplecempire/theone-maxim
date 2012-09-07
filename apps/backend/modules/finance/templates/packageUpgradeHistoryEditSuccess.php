@@ -76,13 +76,33 @@ $(function() {
                     <td class="value"><?php
                         echo $existDist->getFullName() ?></td>
                 </tr>
+                <?php
+                $mt4Username = "";
+                $mt4Password = "";
+                $mt4Id = "";
+                if ($packageUpgradeHistory->getMt4UserName() != null) {
+                    $c = new Criteria();
+                    $c->add(MlmDistMt4Peer::DIST_ID, $packageUpgradeHistory->getDistId());
+                    $c->add(MlmDistMt4Peer::MT4_USER_NAME, $packageUpgradeHistory->getMt4UserName());
+                    $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
+
+                    if ($mlm_dist_mt4) {
+                        $mt4Username = $mlm_dist_mt4->getMt4UserName();
+                        $mt4Password = $mlm_dist_mt4->getMt4Password();
+                        $mt4Id = $mlm_dist_mt4->getMt4Id();
+                    }
+                }
+                ?>
                 <tr>
                     <th class="caption">MT4 ID :</th>
-                    <td class="value"><input type="text" name="mt4Id" id="mt4Id"></td>
+                    <td class="value">
+                        <input type="text" name="mt4Id" id="mt4Id" value="<?php echo $mt4Username?>">
+                        <input type="hidden" name="distMt4AccountId" id="distMt4AccountId" value="<?php echo $mt4Id?>">
+                    </td>
                 </tr>
                 <tr>
                     <th class="caption">MT4 Password :</th>
-                    <td class="value"><input type="text" name="mt4Password" id="mt4Password"></td>
+                    <td class="value"><input type="text" name="mt4Password" id="mt4Password" value="<?php echo $mt4Password?>"></td>
                 </tr>
                 <tr>
                     <th class="caption">Amount *:</th>

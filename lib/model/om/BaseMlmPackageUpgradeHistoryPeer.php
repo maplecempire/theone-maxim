@@ -13,7 +13,7 @@ abstract class BaseMlmPackageUpgradeHistoryPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmPackageUpgradeHistory';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,12 @@ abstract class BaseMlmPackageUpgradeHistoryPeer {
 
 	
 	const DIST_ID = 'mlm_package_upgrade_history.DIST_ID';
+
+	
+	const MT4_USER_NAME = 'mlm_package_upgrade_history.MT4_USER_NAME';
+
+	
+	const MT4_PASSWORD = 'mlm_package_upgrade_history.MT4_PASSWORD';
 
 	
 	const TRANSACTION_CODE = 'mlm_package_upgrade_history.TRANSACTION_CODE';
@@ -55,18 +61,18 @@ abstract class BaseMlmPackageUpgradeHistoryPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('UpgradeId', 'DistId', 'TransactionCode', 'Amount', 'StatusCode', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmPackageUpgradeHistoryPeer::UPGRADE_ID, MlmPackageUpgradeHistoryPeer::DIST_ID, MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE, MlmPackageUpgradeHistoryPeer::AMOUNT, MlmPackageUpgradeHistoryPeer::STATUS_CODE, MlmPackageUpgradeHistoryPeer::REMARKS, MlmPackageUpgradeHistoryPeer::CREATED_BY, MlmPackageUpgradeHistoryPeer::CREATED_ON, MlmPackageUpgradeHistoryPeer::UPDATED_BY, MlmPackageUpgradeHistoryPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('upgrade_id', 'dist_id', 'transaction_code', 'amount', 'status_code', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('UpgradeId', 'DistId', 'Mt4UserName', 'Mt4Password', 'TransactionCode', 'Amount', 'StatusCode', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmPackageUpgradeHistoryPeer::UPGRADE_ID, MlmPackageUpgradeHistoryPeer::DIST_ID, MlmPackageUpgradeHistoryPeer::MT4_USER_NAME, MlmPackageUpgradeHistoryPeer::MT4_PASSWORD, MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE, MlmPackageUpgradeHistoryPeer::AMOUNT, MlmPackageUpgradeHistoryPeer::STATUS_CODE, MlmPackageUpgradeHistoryPeer::REMARKS, MlmPackageUpgradeHistoryPeer::CREATED_BY, MlmPackageUpgradeHistoryPeer::CREATED_ON, MlmPackageUpgradeHistoryPeer::UPDATED_BY, MlmPackageUpgradeHistoryPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('upgrade_id', 'dist_id', 'mt4_user_name', 'mt4_password', 'transaction_code', 'amount', 'status_code', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('UpgradeId' => 0, 'DistId' => 1, 'TransactionCode' => 2, 'Amount' => 3, 'StatusCode' => 4, 'Remarks' => 5, 'CreatedBy' => 6, 'CreatedOn' => 7, 'UpdatedBy' => 8, 'UpdatedOn' => 9, ),
-		BasePeer::TYPE_COLNAME => array (MlmPackageUpgradeHistoryPeer::UPGRADE_ID => 0, MlmPackageUpgradeHistoryPeer::DIST_ID => 1, MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE => 2, MlmPackageUpgradeHistoryPeer::AMOUNT => 3, MlmPackageUpgradeHistoryPeer::STATUS_CODE => 4, MlmPackageUpgradeHistoryPeer::REMARKS => 5, MlmPackageUpgradeHistoryPeer::CREATED_BY => 6, MlmPackageUpgradeHistoryPeer::CREATED_ON => 7, MlmPackageUpgradeHistoryPeer::UPDATED_BY => 8, MlmPackageUpgradeHistoryPeer::UPDATED_ON => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('upgrade_id' => 0, 'dist_id' => 1, 'transaction_code' => 2, 'amount' => 3, 'status_code' => 4, 'remarks' => 5, 'created_by' => 6, 'created_on' => 7, 'updated_by' => 8, 'updated_on' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('UpgradeId' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'Mt4Password' => 3, 'TransactionCode' => 4, 'Amount' => 5, 'StatusCode' => 6, 'Remarks' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
+		BasePeer::TYPE_COLNAME => array (MlmPackageUpgradeHistoryPeer::UPGRADE_ID => 0, MlmPackageUpgradeHistoryPeer::DIST_ID => 1, MlmPackageUpgradeHistoryPeer::MT4_USER_NAME => 2, MlmPackageUpgradeHistoryPeer::MT4_PASSWORD => 3, MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE => 4, MlmPackageUpgradeHistoryPeer::AMOUNT => 5, MlmPackageUpgradeHistoryPeer::STATUS_CODE => 6, MlmPackageUpgradeHistoryPeer::REMARKS => 7, MlmPackageUpgradeHistoryPeer::CREATED_BY => 8, MlmPackageUpgradeHistoryPeer::CREATED_ON => 9, MlmPackageUpgradeHistoryPeer::UPDATED_BY => 10, MlmPackageUpgradeHistoryPeer::UPDATED_ON => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('upgrade_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'mt4_password' => 3, 'transaction_code' => 4, 'amount' => 5, 'status_code' => 6, 'remarks' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -123,6 +129,10 @@ abstract class BaseMlmPackageUpgradeHistoryPeer {
 		$criteria->addSelectColumn(MlmPackageUpgradeHistoryPeer::UPGRADE_ID);
 
 		$criteria->addSelectColumn(MlmPackageUpgradeHistoryPeer::DIST_ID);
+
+		$criteria->addSelectColumn(MlmPackageUpgradeHistoryPeer::MT4_USER_NAME);
+
+		$criteria->addSelectColumn(MlmPackageUpgradeHistoryPeer::MT4_PASSWORD);
 
 		$criteria->addSelectColumn(MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE);
 
