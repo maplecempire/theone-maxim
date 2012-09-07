@@ -38,8 +38,7 @@ $(function(){
                                 <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                         </div>
                     </div>
-                    <?php endif; ?>
-
+                <?php endif; ?>
             </td>
         </tr>
 		<tr>

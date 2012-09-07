@@ -63,6 +63,7 @@
                 $("#divDRB").hide(500);
                 $(".tdPipsBonus").show();
                 $(".tdCreditRefund").hide();
+                $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
                 pipsDatagrid.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_CREDIT_REFUND?>") {
@@ -71,6 +72,16 @@
                 $("#divDRB").hide(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").show();
+                $(".tdFundDividend").hide();
+                $(".tdRbBonus").hide();
+                pipsDatagrid.fnDraw();
+            } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_FUND_MANAGEMENT?>") {
+                $("#divBonusType").show(500);
+                $("#divPip").show(500);
+                $("#divDRB").hide(500);
+                $(".tdPipsBonus").hide();
+                $(".tdCreditRefund").hide();
+                $(".tdFundDividend").show();
                 $(".tdRbBonus").hide();
                 pipsDatagrid.fnDraw();
             } else {
@@ -79,6 +90,7 @@
                 $("#divDRB").show(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").hide();
+                $(".tdFundDividend").hide();
                 $(".tdRbBonus").show();
                 datagridDetail.fnDraw();
             }
@@ -173,6 +185,15 @@
                                                                                ))
                                  . "</td></tr>";
 
+                            echo "<tr class='odd'>
+                            <td>" . __('FUND MANAGEMENT DIVIDEND') . "</td>
+                            <td align='right'>" . $fundManagement . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => Globals::COMMISSION_TYPE_FUND_MANAGEMENT
+                                                                               ))
+                                 . "</td></tr>";
+
                             echo "<tr class='even'>
                             <td><strong>" . __('Total') . "</strong></td>
                             <td align='right'><strong>" . $total . "</strong></td><td></td></tr>";
@@ -228,6 +249,7 @@
                                     <th style="text-align: center;"><?php echo __('Date') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdPipsBonus'><?php echo __('Pips Bonus') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
+                                    <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Dividend') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
                                 </tr>
                                 </thead>
@@ -254,6 +276,7 @@
                                             <td align='center'><a href='#' refMonth='".$arr["month"]."' refYear='".$arr["year"]."' class='monthLink'>" . $arr["year"] . "-" . __($month[$arr["month"]]) ."</a></td>
                                             <td align='right' class='tdPipsBonus' style='display: none'>".number_format($arr["pips_bonus"], 2)."</td>
                                             <td align='right' class='tdCreditRefund' style='display: none'>".number_format($arr["credit_refund"], 2)."</td>
+                                            <td align='right' class='tdFundDividend' style='display: none'>".number_format($arr["fund_dividend"], 2)."</td>
                                             <td align='right' class='tdRbBonus'>".number_format($arr["rb_bonus"], 2)."</td>
                                             </tr>";
 
@@ -285,7 +308,7 @@
                                     "extraParam" : function(aoData) { // pass extra params to server
                                         aoData.push({ "name": "filterMonth", "value": $("#search_month").val()  });
                                         aoData.push({ "name": "filterYear", "value": $("#search_year").val()  });
-                                        /*aoData.push({ "name": "filterBonusType", "value": $("#divBonusType").data("BONUS_TYPE")  });*/
+                                        aoData.push({ "name": "filterBonusType", "value": $("#divBonusType").data("BONUS_TYPE")  });
                                     },
                                     "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
                                     },
