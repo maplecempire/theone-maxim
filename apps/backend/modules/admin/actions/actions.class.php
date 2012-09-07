@@ -46,10 +46,9 @@ class adminActions extends sfActions
         $mlm_package->setPackageName($this->getRequestParameter('package_name'));
         $mlm_package->setPrice($this->getRequestParameter('price'));
         $mlm_package->setCommission($this->getRequestParameter('commission'));
-        $mlm_package->setPips($this->getRequestParameter('pips'));
-        $mlm_package->setGeneration($this->getRequestParameter('generation'));
-        $mlm_package->setPips2($this->getRequestParameter('pips2'));
-        $mlm_package->setGeneration2($this->getRequestParameter('generation2'));
+        $mlm_package->setCreditRefund($this->getRequestParameter('credit_refund'));
+        $mlm_package->setPairingBonus($this->getRequestParameter('pairing_bonus'));
+        $mlm_package->setDailyMaxPairing($this->getRequestParameter('daily_max_pairing'));
         $mlm_package->setPublicPurchase($this->getRequestParameter('public_purchase'));
         $mlm_package->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
         $mlm_package->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));

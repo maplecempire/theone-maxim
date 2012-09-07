@@ -11,7 +11,17 @@ $(function() {
         icons: {
             primary: "ui-icon-circle-check"
         }
-    })
+    }).click(function(event){
+        event.preventDefault();
+
+        if ($.trim($('#mt4Id').val()) == "") {
+            alert("MT4 ID is empty.");
+            $('#mt4Id').focus();
+        } else {
+            waiting();
+            $("#upgradeForm").submit();
+        }
+    });
     $("#btnCancel").button({
         icons: {
             primary: "ui-icon-circle-arrow-w"
@@ -68,8 +78,11 @@ $(function() {
                 </tr>
                 <tr>
                     <th class="caption">MT4 ID :</th>
-                    <td class="value"><?php
-                        echo $existDist->getMt4UserName() ?></td>
+                    <td class="value"><input type="text" name="mt4Id" id="mt4Id"></td>
+                </tr>
+                <tr>
+                    <th class="caption">MT4 Password :</th>
+                    <td class="value"><input type="text" name="mt4Password" id="mt4Password"></td>
                 </tr>
                 <tr>
                     <th class="caption">Amount *:</th>
