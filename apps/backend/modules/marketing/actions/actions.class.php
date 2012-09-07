@@ -19,7 +19,44 @@ class marketingActions extends sfActions
         return $this->redirect('/marketing/distList');
     }
 
+    public function executeFundManagementUpload()
+    {
+        if ($this->getRequest()->getFileName('fundManagement') != '') {
+            $uploadedFilename = $this->getRequest()->getFileName('fundManagement');
+            $ext = explode(".", $this->getRequest()->getFileName('fundManagement'));
+            $extensionName = $ext[count($ext) - 1];
+
+            $filename = "fundManagement_".date("Ymd")."_".rand(1000,9999).".".$extensionName;
+
+            // Validate the file type
+            //$fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // File extensions
+            $fileTypes = array('pdf'); // File extensions
+            $fileParts = pathinfo($uploadedFilename);
+
+            if (in_array($fileParts['extension'], $fileTypes)) {
+                $this->getRequest()->moveFile('fundManagement', sfConfig::get('sf_upload_dir') . '/fundManagement/' . $filename);
+
+                $mlm_file_download = new MlmFileDownload();
+                $mlm_file_download->setFileType("FUND_MANAGEMENT_REPORT");
+                $mlm_file_download->setFileSrc(sfConfig::get('sf_upload_dir') . '/fundManagement/' . $filename);
+                $mlm_file_download->setFileName($filename);
+                $mlm_file_download->setContentType("application/pdf");
+                $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlm_file_download->setRemarks("");
+                $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_file_download->save();
+
+                $this->setFlash('successMsg', "Upload successful.");
+            }
+        }
+        return $this->redirect('/marketing/uploadFundManagement');
+    }
+
     public function executeFxGuideUpload()
+    {
+    }
+    public function executeUploadFundManagement()
     {
     }
 

@@ -207,7 +207,7 @@ class downloadActions extends sfActions
             $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
             $response->sendHttpHeaders();
 
-            readfile(sfConfig::get('sf_upload_dir')."/guide/".$mlmFileDownloadDB->getFileName());
+            readfile(sfConfig::get('sf_upload_dir')."/fundManagement/".$mlmFileDownloadDB->getFileName());
         }
 
         return sfView::NONE;
