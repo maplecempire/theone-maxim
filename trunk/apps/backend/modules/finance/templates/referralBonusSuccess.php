@@ -54,7 +54,8 @@ $(function(){
                     return oObj.aData[2];
                 return "<a id='editLink' href='<?php echo url_for('finance/referralBonusEdit?q=dsf453fsdfasf1sxfsdfs&upgradeId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "dist.full_name",  "bSortable": true},
+            /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},*/
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "bonus.credit",  "bSortable": true},
             { "sName" : "bonus.status_code",  "bSortable": true},
