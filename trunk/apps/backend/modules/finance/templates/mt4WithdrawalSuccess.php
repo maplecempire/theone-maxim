@@ -52,7 +52,7 @@ $(function(){
                     return oObj.aData[2];
                 return "<a id='editLink' href='<?php echo url_for('finance/mt4WithdrawalEdit?q=dsf453fsdfasf1sxfsdfs&upgradeId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
-            { "sName" : "dist.mt4_user_name",  "bSortable": true},
+            { "sName" : "withdraw.mt4_user_name",  "bSortable": true},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "withdraw.currency_code",  "bSortable": true, "bVisible" : false},
             { "sName" : "withdraw.amount_requested",  "bSortable": true},

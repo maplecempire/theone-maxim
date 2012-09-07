@@ -75,7 +75,7 @@ $(function() {
                 <tr>
                     <th class="caption">MT4 ID :</th>
                     <td class="value"><?php
-                        echo $existDist->getMt4UserName() ?></td>
+                        echo $mt4Withdraw->getMt4UserName() ?></td>
                 </tr>
                 <tr>
                     <th class="caption">Amount Requested:</th>

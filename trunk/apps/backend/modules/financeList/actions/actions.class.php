@@ -1212,7 +1212,7 @@ class financeListActions extends sfActions
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
         }
         if ($this->getRequestParameter('filterMt4Id') != "") {
-            $sWhere .= " AND dist.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
+            $sWhere .= " AND withdraw.mt4_user_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterMt4Id')) . "%'";
         }
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND withdraw.status_code = '" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "'";
