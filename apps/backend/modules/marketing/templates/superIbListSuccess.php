@@ -78,8 +78,10 @@ $(function(){
 		              { "sName" : "dist.rank_code",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
-		              { "sName" : "dist.mt4_user_name",  "bSortable": true},
-		              { "sName" : "dist.mt4_password",  "bSortable": true},
+		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
+		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
+		              /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},
+		              { "sName" : "dist.mt4_password",  "bSortable": true},*/
 		              { "sName" : "dist.full_name",  "bSortable": true},
 		              { "sName" : "dist.nickname",  "bVisible": false},
 		              { "sName" : "dist.ic",  "bVisible": false},
