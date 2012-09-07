@@ -96,11 +96,16 @@ class marketingActions extends sfActions
                         $totalVolume = $mlm_pip_csv->getVolume();
                         $mt4Id = $mlm_pip_csv->getLoginId();
 
-                        $c = new Criteria();
-                        $c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
-                        $existDistributor = MlmDistributorPeer::doSelectOne($c);
+                        //$c = new Criteria();
+                        //$c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
+                        //$existDistributor = MlmDistributorPeer::doSelectOne($c);
 
-                        if ($existDistributor) {
+                        $c = new Criteria();
+                        $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
+                        $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
+
+                        if ($mlm_dist_mt4) {
+                        //if ($existDistributor) {
                             /*$index = 0;
                             $treeLevel = $existDistributor->getTreeLevel();
                             $treeStructure = $existDistributor->getTreeStructure();
