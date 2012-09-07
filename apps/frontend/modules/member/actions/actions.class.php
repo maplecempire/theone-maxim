@@ -825,7 +825,8 @@ class memberActions extends sfActions
         /******   total records  *******/
         $c = new Criteria();
         $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::ACCOUNT_LEDGER_ACTION_DRB);
+        //$c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::ACCOUNT_LEDGER_ACTION_DRB);
+        $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, $this->getRequestParameter('filterBonusType'));
         $totalRecords = MlmDistCommissionLedgerPeer::doCount($c);
 
         /******   total filtered records  *******/
@@ -2027,12 +2028,16 @@ class memberActions extends sfActions
         $pipsBonus = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_PIPS_BONUS);
         $creditRefunds = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_CREDIT_REFUND);
         $fundManagements = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+        $pairingBonus = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_GDB);
+
         $this->dsb = number_format($dsb, 2);
         $this->pipsBonus = number_format($pipsBonus, 2);
         $this->creditRefund = number_format($creditRefunds, 2);
         $this->fundManagement = number_format($fundManagements, 2);
+        $this->pairingBonus = number_format($pairingBonus, 2);
+
 //        $this->total = number_format($dsb, 2);
-        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements, 2);
+        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + pairingBonus, 2);
 
         /* *************************
          *  PIPS DETAIL
@@ -2054,6 +2059,7 @@ class memberActions extends sfActions
                     $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                     $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                     $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
+                    $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
                     $idx++;
                 }
             }
@@ -3360,6 +3366,39 @@ class memberActions extends sfActions
         $query = "SELECT SUM(bonus.credit-bonus.debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger bonus
                         WHERE 1=1 "
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_DRB . "'"
+                 . " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+
+        if ($distributorId != null) {
+            $query = $query." AND bonus.dist_id = ".$distributorId;
+        }
+        //var_dump($query);
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getPairingDetailByMonth($distributorId, $month, $year)
+    {
+        $dateUtil = new DateUtil();
+
+        $d = $dateUtil->getMonth($month, $year);
+        $firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
+        $lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
+
+        $query = "SELECT SUM(bonus.credit-bonus.debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger bonus
+                        WHERE 1=1 "
+                 . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_GDB . "'"
                  . " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 
         if ($distributorId != null) {
