@@ -2146,7 +2146,6 @@ class memberActions extends sfActions
         $c->addDescendingOrderByColumn(MlmDailyBonusLogPeer::BONUS_DATE);
         $mlmDistPairingDBs = MlmDailyBonusLogPeer::doSelectOne($c);
         print_r("Fetch Daily Bonus Log<br>");
-        //print_r(date("Y/m/d h:i:s A")."<br>");
 
         $dateUtil = new DateUtil();
         $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
@@ -2318,9 +2317,6 @@ class memberActions extends sfActions
                 $level++;
             }
         }
-        print_r("+++++ Verify +++++ share volume amount");
-        $eShareTradingService = new EShareTradingService();
-        $eShareTradingService->verifyShareAmount();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
