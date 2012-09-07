@@ -69,28 +69,23 @@
                 </tr>
                 <tr>
                     <th class="caption">Pips:</th>
-                    <td class="value"><?php echo object_input_tag($mlm_package, 'getPips', array(
+                    <td class="value"><?php echo object_input_tag($mlm_package, 'getCreditRefund', array(
                                                                                                 'size' => 7,
                                                                                            )) ?></td>
                 </tr>
                 <tr>
                     <th class="caption">Generation:</th>
-                    <td class="value"><?php echo object_input_tag($mlm_package, 'getGeneration', array(
+                    <td class="value"><?php echo object_input_tag($mlm_package, 'getPairingBonus', array(
                                                                                                       'size' => 7,
                                                                                                  )) ?></td>
                 </tr>
                 <tr>
                     <th class="caption">Pips2:</th>
-                    <td class="value"><?php echo object_input_tag($mlm_package, 'getPips2', array(
+                    <td class="value"><?php echo object_input_tag($mlm_package, 'getDailyMaxPairing', array(
                                                                                                  'size' => 7,
                                                                                             )) ?></td>
                 </tr>
-                <tr>
-                    <th class="caption">Generation2:</th>
-                    <td class="value"><?php echo object_input_tag($mlm_package, 'getGeneration2', array(
-                                                                                                       'size' => 7,
-                                                                                                  )) ?></td>
-                </tr>
+
                 <tr>
                     <th class="caption">Display on client side:</th>
                     <td class="value"><?php

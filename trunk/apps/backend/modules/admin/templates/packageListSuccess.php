@@ -19,7 +19,7 @@ $(function() {
 
 <div style="padding: 10px; top: 10px; width: 98%">
     <div class="portlet" id="sf_admin_container">
-        <div class="portlet-header">Delivery Group</div>
+        <div class="portlet-header">Package List</div>
         <div class="portlet-content" id="sf_admin_content" style="width: 98%">
             <table class="sf_admin_list" width="100%">
                 <thead>
@@ -28,11 +28,9 @@ $(function() {
                     <th>Package name</th>
                     <th>Price</th>
                     <th>Commission</th>
-                    <th>Pips</th>
-                    <th>Generation</th>
-                    <th>Pips2</th>
-                    <th>Generation2</th>
-                    <th>Display on client side</th>
+                    <th>Credit Refund</th>
+                    <th>Pairing Bonus</th>
+                    <th>Daily Max Pairing</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,19 +46,9 @@ $(function() {
                     <td><?php echo $mlm_package->getPackageName() ?></td>
                     <td><?php echo $mlm_package->getPrice() ?></td>
                     <td><?php echo $mlm_package->getCommission() ?></td>
-                    <td><?php echo $mlm_package->getPips() ?></td>
-                    <td><?php echo $mlm_package->getGeneration() ?></td>
-                    <td><?php echo $mlm_package->getPips2() ?></td>
-                    <td><?php echo $mlm_package->getGeneration2() ?></td>
-                    <td><?php
-                            if ($mlm_package->getPublicPurchase() == Globals::YES)
-                                echo "Yes";
-                            else if ($mlm_package->getPublicPurchase() == Globals::NO)
-                                echo "No";
-                            else
-                                echo $mlm_package->getPublicPurchase();
-                        ?>
-                    </td>
+                    <td><?php echo $mlm_package->getCreditRefund() ?></td>
+                    <td><?php echo $mlm_package->getPairingBonus() ?></td>
+                    <td><?php echo $mlm_package->getDailyMaxPairing() ?></td>
                 </tr>
                     <?php endforeach; ?>
                 </tbody>
