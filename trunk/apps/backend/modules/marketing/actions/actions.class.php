@@ -339,186 +339,195 @@ class marketingActions extends sfActions
             } else if ($doAction == "calc_pips" && $mlmFileDownloadDB) {
                 $this->refId = $mlmFileDownloadDB->getFileId();
             } else if ($doAction == "approve_pips" && $mlmFileDownloadDB) {
-                $this->refId = $mlmFileDownloadDB->getFileId();
+                $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $c = new Criteria();
-                $c->add(MlmPipCsvPeer::STATUS_CODE, Globals::STATUS_PIPS_CSV_ACTIVE);
-                $c->add(MlmPipCsvPeer::FILE_ID, $mlmFileDownloadDB->getFileId());
-                $mlmPipsCsvDBs = MlmPipCsvPeer::doSelect($c);
-
-                $c = new Criteria();
-                $c->addDescendingOrderByColumn(MlmFundManagementRecordPeer::CREATED_ON);
-                $mlmFundManagementRecord = MlmFundManagementRecordPeer::doSelectOne($c);
-
-                $fundManagementPercentage = 0;
-                if ($mlmFundManagementRecord) {
-                    $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
-                }
-
-                foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
-                    $totalVolume = $mlm_pip_csv->getVolume();
-                    $mt4Id = $mlm_pip_csv->getLoginId();
-                    $tradingMonth =  $mlm_pip_csv->getMonthTraded();
-
-                    /*$c = new Criteria();
-                    $c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
-                    $existDistributor = MlmDistributorPeer::doSelectOne($c);*/
+                    $this->refId = $mlmFileDownloadDB->getFileId();
 
                     $c = new Criteria();
-                    $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
-                    $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
+                    $c->add(MlmPipCsvPeer::STATUS_CODE, Globals::STATUS_PIPS_CSV_ACTIVE);
+                    $c->add(MlmPipCsvPeer::FILE_ID, $mlmFileDownloadDB->getFileId());
+                    $mlmPipsCsvDBs = MlmPipCsvPeer::doSelect($c);
 
-                    //if ($existDistributor) {
-                    if ($mlm_dist_mt4) {
-                        $index = 0;
-                        $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
-                        $this->forward404Unless($existDistributor);
+                    $c = new Criteria();
+                    $c->addDescendingOrderByColumn(MlmFundManagementRecordPeer::CREATED_ON);
+                    $mlmFundManagementRecord = MlmFundManagementRecordPeer::doSelectOne($c);
 
-                        $treeLevel = $existDistributor->getTreeLevel();
-                        $treeStructure = $existDistributor->getTreeStructure();
-                        $affectedDistributorArrs = explode("|", $treeStructure);
+                    $fundManagementPercentage = 0;
+                    if ($mlmFundManagementRecord) {
+                        $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
+                    }
 
-                        for ($y = count($affectedDistributorArrs); $y > 0; $y--) {
-                            if ($affectedDistributorArrs[$y] == "") {
-                                continue;
-                            }
-                            $affectedDistributorId = $affectedDistributorArrs[$y];
-                            $c = new Criteria();
-                            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $affectedDistributorId, Criteria::EQUAL);
-                            $affectedDistributor = MlmDistributorPeer::doSelectOne($c);
+                    foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
+                        $totalVolume = $mlm_pip_csv->getVolume();
+                        $mt4Id = $mlm_pip_csv->getLoginId();
+                        $tradingMonth =  $mlm_pip_csv->getMonthTraded();
 
-                            $affectedDistributorTreeLevel = $affectedDistributor->getTreeLevel();
-                            $affectedDistributorPackageDB = MlmPackagePeer::retrieveByPK($affectedDistributor->getRankId());
-                            if ($affectedDistributorPackageDB) {
-                                //$generation = $affectedDistributorPackageDB->getGeneration();
-                                //$pips = $affectedDistributorPackageDB->getPips();
-                                //$generation2 = $affectedDistributorPackageDB->getGeneration2();
-                                //$pips2 = $affectedDistributorPackageDB->getPips2();
-                                $creditRefundByPackage = $affectedDistributorPackageDB->getCreditRefund();
+                        /*$c = new Criteria();
+                        $c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
+                        $existDistributor = MlmDistributorPeer::doSelectOne($c);*/
 
-                                $generation = 0;
-                                $pips = 0;
+                        $c = new Criteria();
+                        $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
+                        $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
 
-                                $totalSponsor = $this->getTotalSponsor($affectedDistributor->getDistributorId());
-                                if ($totalSponsor > 0) {
-                                    $c = new Criteria();
-                                    $c->add(MlmPackagePipsPeer::TOTOL_SPONSOR, $totalSponsor, Criteria::LESS_EQUAL);
-                                    $c->addDescendingOrderByColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
-                                    $packagePips = MlmPackagePipsPeer::doSelectOne($c);
+                        //if ($existDistributor) {
+                        if ($mlm_dist_mt4) {
+                            $index = 0;
+                            $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
+                            $this->forward404Unless($existDistributor);
 
-                                    if ($affectedDistributor) {
-                                        $generation = $packagePips->getGeneration();
-                                        $pips = $packagePips->getPips();
-                                    }
+                            $treeLevel = $existDistributor->getTreeLevel();
+                            $treeStructure = $existDistributor->getTreeStructure();
+                            $affectedDistributorArrs = explode("|", $treeStructure);
+
+                            for ($y = count($affectedDistributorArrs); $y > 0; $y--) {
+                                if ($affectedDistributorArrs[$y] == "") {
+                                    continue;
                                 }
+                                $affectedDistributorId = $affectedDistributorArrs[$y];
+                                $c = new Criteria();
+                                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $affectedDistributorId, Criteria::EQUAL);
+                                $affectedDistributor = MlmDistributorPeer::doSelectOne($c);
 
-                                //$totalGeneration = $generation + $generation2;
-                                $totalGeneration = $generation;
+                                $affectedDistributorTreeLevel = $affectedDistributor->getTreeLevel();
+                                $affectedDistributorPackageDB = MlmPackagePeer::retrieveByPK($affectedDistributor->getRankId());
+                                if ($affectedDistributorPackageDB) {
+                                    //$generation = $affectedDistributorPackageDB->getGeneration();
+                                    //$pips = $affectedDistributorPackageDB->getPips();
+                                    //$generation2 = $affectedDistributorPackageDB->getGeneration2();
+                                    //$pips2 = $affectedDistributorPackageDB->getPips2();
+                                    $creditRefundByPackage = $affectedDistributorPackageDB->getCreditRefund();
 
-                                $gap = $treeLevel - $affectedDistributorTreeLevel;
-                                $isEntitled = false;
-                                $pipsAmountEntitied = 0;
-                                $pipsEntitied = 0;
-                                if ($generation == null) {
-                                    $isEntitled = true;
-                                } else {
-                                    if ($gap <= $totalGeneration) {
+                                    $generation = 0;
+                                    $pips = 0;
+
+                                    $totalSponsor = $this->getTotalSponsor($affectedDistributor->getDistributorId());
+                                    if ($totalSponsor > 0) {
+                                        $c = new Criteria();
+                                        $c->add(MlmPackagePipsPeer::TOTOL_SPONSOR, $totalSponsor, Criteria::LESS_EQUAL);
+                                        $c->addDescendingOrderByColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
+                                        $packagePips = MlmPackagePipsPeer::doSelectOne($c);
+
+                                        if ($affectedDistributor) {
+                                            $generation = $packagePips->getGeneration();
+                                            $pips = $packagePips->getPips();
+                                        }
+                                    }
+
+                                    //$totalGeneration = $generation + $generation2;
+                                    $totalGeneration = $generation;
+
+                                    $gap = $treeLevel - $affectedDistributorTreeLevel;
+                                    $isEntitled = false;
+                                    $pipsAmountEntitied = 0;
+                                    $pipsEntitied = 0;
+                                    if ($generation == null) {
                                         $isEntitled = true;
+                                    } else {
+                                        if ($gap <= $totalGeneration) {
+                                            $isEntitled = true;
 
-                                        /*if ($gap > $generation) {
-                                            $pipsAmountEntitied = $pips2 * $totalVolume;
-                                            $pipsEntitied = $pips2;
-                                        } else {*/
-                                            $pipsAmountEntitied = $pips * $totalVolume;
-                                            $pipsEntitied = $pips;
-                                        //}
+                                            /*if ($gap > $generation) {
+                                                $pipsAmountEntitied = $pips2 * $totalVolume;
+                                                $pipsEntitied = $pips2;
+                                            } else {*/
+                                                $pipsAmountEntitied = $pips * $totalVolume;
+                                                $pipsEntitied = $pips;
+                                            //}
+                                        }
                                     }
-                                }
 
-                                if ($isEntitled) {
-                                    if ($pipsAmountEntitied > 0) {
+                                    if ($isEntitled) {
+                                        if ($pipsAmountEntitied > 0) {
 
-                                        if ($gap == 0) {
-                                            $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
-                                            $fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                                            if ($gap == 0) {
+                                                $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+                                                $fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
-                                            $creditRefund = $totalVolume * $creditRefundByPackage;
-                                            $fundManagement = $totalVolume * $fundManagementPercentage;
+                                                $creditRefund = $totalVolume * $creditRefundByPackage;
+                                                $fundManagement = $totalVolume * $fundManagementPercentage;
 
-                                            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                                            $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                            $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
-                                            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_CREDIT_REFUND);
-                                            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_TRADED);
-                                            $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                                            $sponsorDistCommissionledger->setCredit($creditRefund);
-                                            $sponsorDistCommissionledger->setDebit(0);
-                                            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                                            $sponsorDistCommissionledger->setBalance($pipsBalance + $creditRefund);
-                                            $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
-                                            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->save();
+                                                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                                $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                                $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
+                                                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_CREDIT_REFUND);
+                                                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_TRADED);
+                                                $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                                                $sponsorDistCommissionledger->setCredit($creditRefund);
+                                                $sponsorDistCommissionledger->setDebit(0);
+                                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                                                $sponsorDistCommissionledger->setBalance($pipsBalance + $creditRefund);
+                                                $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
+                                                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->save();
 
-                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
 
-                                            // fund management
-                                            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                                            $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                            $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
-                                            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-                                            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
-                                            $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                                            $sponsorDistCommissionledger->setCredit($fundManagement);
-                                            $sponsorDistCommissionledger->setDebit(0);
-                                            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                                            $sponsorDistCommissionledger->setBalance($fundManagementBalance + $creditRefund);
-                                            $sponsorDistCommissionledger->setRemark($fundManagementPercentage."%, Volume:".$totalVolume);
-                                            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->save();
+                                                // fund management
+                                                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                                $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                                $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
+                                                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                                                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                                                $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                                                $sponsorDistCommissionledger->setCredit($fundManagement);
+                                                $sponsorDistCommissionledger->setDebit(0);
+                                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                                                $sponsorDistCommissionledger->setBalance($fundManagementBalance + $creditRefund);
+                                                $sponsorDistCommissionledger->setRemark($fundManagementPercentage."%, Volume:".$totalVolume);
+                                                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->save();
 
-                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-                                        } else {
-                                            $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
+                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                                            } else {
+                                                $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
-                                            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                                            $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                            $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
-                                            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_PIPS_BONUS);
-                                            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_GAIN);
-                                            $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                                            $sponsorDistCommissionledger->setCredit($pipsAmountEntitied);
-                                            $sponsorDistCommissionledger->setDebit(0);
-                                            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                                            $sponsorDistCommissionledger->setBalance($pipsBalance + $pipsAmountEntitied);
-                                            $sponsorDistCommissionledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
-                                            $sponsorDistCommissionledger->setPipsDownlineUsername($existDistributor->getDistributorCode());
-                                            $sponsorDistCommissionledger->setPipsMt4Id($mt4Id);
-                                            $sponsorDistCommissionledger->setPipsRebate($pipsEntitied);
-                                            $sponsorDistCommissionledger->setPipsLevel($gap);
-                                            $sponsorDistCommissionledger->setPipsLotsTraded($totalVolume);
-                                            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $sponsorDistCommissionledger->save();
+                                                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                                $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                                $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
+                                                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_PIPS_BONUS);
+                                                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_GAIN);
+                                                $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                                                $sponsorDistCommissionledger->setCredit($pipsAmountEntitied);
+                                                $sponsorDistCommissionledger->setDebit(0);
+                                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                                                $sponsorDistCommissionledger->setBalance($pipsBalance + $pipsAmountEntitied);
+                                                $sponsorDistCommissionledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
+                                                $sponsorDistCommissionledger->setPipsDownlineUsername($existDistributor->getDistributorCode());
+                                                $sponsorDistCommissionledger->setPipsMt4Id($mt4Id);
+                                                $sponsorDistCommissionledger->setPipsRebate($pipsEntitied);
+                                                $sponsorDistCommissionledger->setPipsLevel($gap);
+                                                $sponsorDistCommissionledger->setPipsLotsTraded($totalVolume);
+                                                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $sponsorDistCommissionledger->save();
 
-                                            $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
+                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_SUCCESS);
-                        $mlm_pip_csv->save();
-                    } else {
-                        $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
-                        $mlm_pip_csv->setRemarks("Invalid MT4 ID");
-                        $mlm_pip_csv->save();
+                            $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_SUCCESS);
+                            $mlm_pip_csv->save();
+                        } else {
+                            $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
+                            $mlm_pip_csv->setRemarks("Invalid MT4 ID");
+                            $mlm_pip_csv->save();
+                        }
                     }
+                    $mlmFileDownloadDB->setStatusCode(Globals::STATUS_COMPLETE);
+                    $mlmFileDownloadDB->save();
+
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
                 }
-                $mlmFileDownloadDB->setStatusCode(Globals::STATUS_COMPLETE);
-                $mlmFileDownloadDB->save();
                 return $this->redirect('/marketing/pipsUpload?doAction=calc_pips');
             }
         }
