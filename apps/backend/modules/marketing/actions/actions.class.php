@@ -524,6 +524,7 @@ class marketingActions extends sfActions
                     $mlmFileDownloadDB->setStatusCode(Globals::STATUS_COMPLETE);
                     $mlmFileDownloadDB->save();
 
+                    $con->commit();
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
