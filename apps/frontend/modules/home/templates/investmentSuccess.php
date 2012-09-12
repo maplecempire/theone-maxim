@@ -60,17 +60,57 @@
             <div class="hr"></div>
             <div style="clear:both;"></div>
             <p><img width="582" height="184" class="aligncenter size-full wp-image-162" title="Investment" alt=""
-                    src="/css/maxim/large-img-1.png"></p>
+                    src="/css/maxim/banner/banner-08.jpg"></p>
 
             <div style="clear:both;"></div>
-            <h2>Maxim Gold FX</h2>
+            <!--<h2>Alternative Strategies</h2>-->
 
-            <p align="justify">This Foreign Exchange investment strategy proposed by Maxim Trader Investments for the Maxim Gold FX fund aims at finding a performance every month around 2-10% compared with a maximum risk of 3%. The operational methodology is completely unrelated from traditional investments, from which it differs mainly for the greater liquidity of the instruments covered.</p>
+            <p align="justify"><strong>Fund Management Strategies</strong> are becoming an increasingly popular way of accessing the forex market for retail investors, who have neither the time nor expertise to trade their own account. An investment in a managed forex account provides investors with the ability to profit from the currency market, having their account managed by a professional money manager, whilst at the same time having complete access to their fund, 24 hours a day.</p>
 
-            <p align="justify">This type of strategy is discretionary with multiday positions rarely stay open for longer than a week. Investment process is based on finding the underlying trend on daily and weekly basis, starting with the movements of the major currencies in order to update our proprietary graphical models. It analyses key market levels and analysed the trading day, identifying any ads on fundamental and/or statistical releases to optimize risk management.</p>
+            <p align="justify">Maxim Trader have sought to structure an investment which addresses all the challenges which investors face today.
+                The Maxim Trader fund management provides investors with a low risk investment, competitive charges, aims to make absolute, positive returns irrespective of market conditions, offers immediate access to capital, safety of their investment, with added capital protection. The managed forex account is managed to very strict investment criteria, with risk management a priority, so that drawdowns and losses are minimised, and returns maximised.</p>
 
-            <p align="justify">Continuous monitoring of market and the on-going monitoring of open positions complete this procedure.
-            The success of this program and the viability of this method are defined by the high level of experience and discipline that distinguish this operation.</p>
+            <h2>Alternative Strategies</h2>
+
+            <p align="justify">The universe of fund management can be complex and are often misunderstood. Among the most common is the employment of alternative investment strategies.</p>
+
+            <p align="justify">However, not all alternative strategies are the same and each has unique characteristics that may result in out-performance or under-performance in various market conditions.</p>
+
+            <p align="justify">Maxim Trader employs a combination of strategies that take advantage of the price movements of related and correlated underlying to maximize profit potentials. To enhance profitability, we develop and incorporate highly complex high-speed frequency algorithmic trading computer modeling in our daily trading  modeling.</p>
+
+            <h2>Alternative Strategies Architecture</h2>
+
+            <p><img width="582" class="aligncenter size-full wp-image-162" title="Alternative Strategies Architecture" alt=""
+                                src="/css/maxim/banner/bg4.png"></p>
+            <div style="clear:both;"></div>
+
+            <h2>Tactical Trading</h2>
+
+            <p align="justify"><strong>Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.</strong> Often managers will combine long and/or short positions with each strategy to maximize returns.</p>
+
+            <p align="justify">Top-down approach focusing on global macroeconomic shifts in which outright and derivative positions are taken.</p>
+
+            <p align="justify">Among the myriad of financial instruments that Maxim Trader trades in are the <strong>global currency markets</strong> and <strong>cash market for gold.</strong></p>
+
+            <p align="justify">These two markets are some of most liquid and volatile in recent years owing to the global financial crisis and it is for this very reason why these instruments are chosen. Using our in-house expertise, trading models are developed and vigorously tested and incorporated into our tactical trading strategies.</p>
+
+            <h2>Managed Trading</h2>
+
+            <p style="text-align:center"><img height="300px" class="aligncenter size-full wp-image-162" title="Managed Trading" alt=""
+                                src="/css/maxim/banner/bg6.png"></p>
+            <div style="clear:both;"></div>
+
+            <h2>Implementing Alternatives</h2>
+
+            <p align="justify">By investing in Maxim Trader alternative strategies, investors may achieve additional risk mitigation and potential return enhancement in today’s volatile markets.</p>
+
+            <p align="justify">At Maxim Trader , we believe an alternative investments’ portfolio should provide exposure to both hedged strategies and private investments as a compliment to a traditional long-only portfolio like equities.</p>
+
+            <h2>Fund Structure</h2>
+
+            <p><img  height="220px" class="aligncenter size-full wp-image-162" title="Fund Structure" alt=""
+                                src="/css/maxim/banner/bg5.png"></p>
+            <div style="clear:both;"></div>
 
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>

@@ -5,7 +5,7 @@
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
     <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
-        <a href="<?php echo url_for("/home/company")?>">The Company</a>
+        <a href="<?php echo url_for("/home/company")?>">The Consortium</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
     <li id="menu-item-156"
@@ -16,6 +16,11 @@
     <li id="menu-item-157"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
             href="<?php echo url_for("/home/maximExecutor")?>">MaximTrade Executor™</a>
+        <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
+    </li>
+    <li id="menu-item-156"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
+            href="<?php echo url_for("/home/marketNews")?>">Market News</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
     <!--<li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89">

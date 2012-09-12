@@ -10,6 +10,9 @@
  */
 class downloadActions extends sfActions
 {
+    public function executeDownloadFxGuide()
+    {
+    }
     public function executeDownloadMt4Pro()
     {
     }
