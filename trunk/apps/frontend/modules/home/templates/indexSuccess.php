@@ -66,15 +66,28 @@
 <div id="wrapper">
     <div style="display: none; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-
-            <!--<ul class="qtrans_language_chooser" id="qtranslate-chooser">
-                <li class="active"><a href="http://www.maximtrader.com/" class="qtrans_flag_en qtrans_flag_and_text"
+            <style>
+                .qtrans_flag_en {
+                    background: url("/css/maxim/flag/gb.png") no-repeat scroll 0 0 transparent;
+                }
+                .qtrans_flag_jp {
+                    background: url("/css/maxim/flag/jp.png") no-repeat scroll 0 0 transparent;
+                }
+                .qtrans_flag_zh {
+                    background: url("/css/maxim/flag/cn.png") no-repeat scroll 0 0 transparent;
+                }
+            </style>
+            <ul class="qtrans_language_chooser" id="qtranslate-chooser">
+                <li class="active"><a href="http://www.maximtrader.com/" class="qtrans_flag_en qtrans_flag_and_text" style="font-weight: bold;"
                                       title="English"><span>English</span></a></li>
-                <li><a href="http://www.maximtrader.com/zh/" class="qtrans_flag_zh qtrans_flag_and_text"
+                <li><a href="http://www.maximtrader.com/zh/" class="qtrans_flag_zh qtrans_flag_and_text" style="font-weight: bold;"
                        title="中文"><span>中文</span></a></li>
-            </ul>-->
+                <li><a href="http://www.maximtrader.com/zh/" class="qtrans_flag_jp qtrans_flag_and_text" style="font-weight: bold;"
+                       title="日文"><span>日本語</span></a></li>
+
+            </ul>
             <div class="qtrans_widget_end"></div>
-            <div style="clear:both;"></div>
+            <div style="clear:both;"><br></div>
 
             <!--<div class="slider-nivo-holder">
                 <div class="nivoSlider" style="position: relative; no-repeat scroll 0% 0% transparent;" id="slider-nivo">
@@ -347,6 +360,9 @@ ul, ol {
                 </ol>
             </div>
             <!--#####################################################################-->
+
+            <div class="hr2"></div>
+            <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
 
             <div class="hr2"></div>
             <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>

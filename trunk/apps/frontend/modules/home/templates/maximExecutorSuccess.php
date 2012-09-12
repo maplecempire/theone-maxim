@@ -54,21 +54,21 @@
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-            <div style=" width:450; float:left;"><h1>MAXIMTRADE EXECUTOR™</h1></div>
+            <div style=" width:450; float:left;"><h1>MaximTrade Executor™</h1></div>
 
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
             <div style="clear:both;"></div>
-            <p><img width="582" height="184" class="aligncenter size-full wp-image-162" title="MAXIMTRADE EXECUTOR™" alt=""
+            <p><img width="582" height="184" class="aligncenter size-full wp-image-162" title="MaximTrade Executor™" alt=""
                     src="/css/maxim/banner/bg2.png"></p>
 
             <div style="clear:both;"></div>
 
             <p align="justify"><b>Maxim Trader Investments</b> offers <b>MaximTrade Executor™</b> for foreign exchange investments with low risk and maximum profitability:</p>
 
-            <p align="justify"><b>MAXIMTRADE EXECUTOR™</b> is a combination of automated trading with interventions by a team of expert fund managers with more than 15 years track record specializing in Forex investments. One and a half years of investment and tireless research by our dedicated fund managers using sophisticated programing language and advanced coding that can prevent any attempts to try and decode the logic, they developed the ultimate solution for investors.</p>
+            <p align="justify"><b>MaximTrade Executor™</b> is a combination of automated trading with interventions by a team of expert fund managers with more than 15 years track record specializing in Forex investments. One and a half years of investment and tireless research by our dedicated fund managers using sophisticated programing language and advanced coding that can prevent any attempts to try and decode the logic, they developed the ultimate solution for investors.</p>
 
-            <p align="justify">Today, <b>MAXIMTRADE EXECUTOR™</b> is an internationally recognized trading system that performs automated trading with extreme accuracy. It scans the past history of the MetaTrader4 and adjusts its strategy according to the current market conditions and recent changes. With the combination of the fund manager’s experience and constant tweaking to the market conditions, it maximizes the profits for the clients whilst minimizing the risk in trading operations.</p>
+            <p align="justify">Today, <b>MaximTrade Executor™</b> is an internationally recognized trading system that performs automated trading with extreme accuracy. It scans the past history of the MetaTrader4 and adjusts its strategy according to the current market conditions and recent changes. With the combination of the fund manager’s experience and constant tweaking to the market conditions, it maximizes the profits for the clients whilst minimizing the risk in trading operations.</p>
 
             <p align="justify">The appropriateness of this combination of instruments offers a number of advantages beyond the protection and preservation of capital, but also the optimization of current ratios of risk / return.</p>
 

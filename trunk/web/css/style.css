@@ -467,7 +467,7 @@ legend, th {
 }
 
 .tbl_login_grey_bg td {
-    background-color: #e5eef5;
+    /*background-color: #e5eef5;*/
     color: black;
     border: 0;
 }

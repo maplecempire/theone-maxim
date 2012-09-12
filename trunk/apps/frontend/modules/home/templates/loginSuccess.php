@@ -159,13 +159,13 @@
                         <tr height="24">
                             <td></td>
                             <td class="txt_highlight">Trader ID</td>
-                            <td colspan="2"><input type="text" autocomplete="off" size="18" id="username" name="username"></td>
+                            <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
                             <td></td>
                         </tr>
                         <tr height="24">
                             <td></td>
                             <td class="txt_highlight">Password</td>
-                            <td colspan="2"><input type="password" autocomplete="off" size="18" id="userpassword" name="userpassword"></td>
+                            <td colspan="2"><input type="password" autocomplete="off" size="38" id="userpassword" name="userpassword"></td>
                             <td></td>
                         </tr>
                         <tr height="24">
@@ -208,7 +208,7 @@
     </td>
 </tr>
 
-<tr>
+<!--<tr>
     <td class="tbl_content_top" colspan="3">
         <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg">
             <tbody>
@@ -245,11 +245,11 @@
             </tbody>
         </table>
     </td>
-</tr>
+</tr>-->
 <tr>
     <td>&nbsp;</td>
 </tr>
-<tr>
+<!--<tr>
     <td class="tbl_content_top" colspan="3">
         <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg">
             <colgroup>
@@ -287,7 +287,7 @@
             </tbody>
         </table>
     </td>
-</tr>
+</tr>-->
 <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -301,7 +301,7 @@
 </table>
 
 
-
+        <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
     </div>
 
