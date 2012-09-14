@@ -150,7 +150,5 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('EXCLUDED_STRUCTURE', 'ExcludedStructure', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('IS_DEMO_ACCOUNT', 'IsDemoAccount', 'string', CreoleTypes::VARCHAR, true, 1);
-
 	} 
 } 

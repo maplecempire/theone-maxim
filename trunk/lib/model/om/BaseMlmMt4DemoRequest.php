@@ -39,6 +39,14 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 	
 	protected $updated_on;
 
+
+	
+	protected $country;
+
+
+	
+	protected $phone_number;
+
 	
 	protected $alreadyInSave = false;
 
@@ -129,6 +137,20 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getCountry()
+	{
+
+		return $this->country;
+	}
+
+	
+	public function getPhoneNumber()
+	{
+
+		return $this->phone_number;
 	}
 
 	
@@ -270,6 +292,40 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setCountry($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->country !== $v) {
+			$this->country = $v;
+			$this->modifiedColumns[] = MlmMt4DemoRequestPeer::COUNTRY;
+		}
+
+	} 
+
+	
+	public function setPhoneNumber($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->phone_number !== $v) {
+			$this->phone_number = $v;
+			$this->modifiedColumns[] = MlmMt4DemoRequestPeer::PHONE_NUMBER;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -290,11 +346,15 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 
 			$this->updated_on = $rs->getTimestamp($startcol + 7, null);
 
+			$this->country = $rs->getString($startcol + 8);
+
+			$this->phone_number = $rs->getString($startcol + 9);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 10; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmMt4DemoRequest object", $e);
 		}
@@ -463,6 +523,12 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 			case 7:
 				return $this->getUpdatedOn();
 				break;
+			case 8:
+				return $this->getCountry();
+				break;
+			case 9:
+				return $this->getPhoneNumber();
+				break;
 			default:
 				return null;
 				break;
@@ -481,6 +547,8 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 			$keys[5] => $this->getCreatedOn(),
 			$keys[6] => $this->getUpdatedBy(),
 			$keys[7] => $this->getUpdatedOn(),
+			$keys[8] => $this->getCountry(),
+			$keys[9] => $this->getPhoneNumber(),
 		);
 		return $result;
 	}
@@ -520,6 +588,12 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 			case 7:
 				$this->setUpdatedOn($value);
 				break;
+			case 8:
+				$this->setCountry($value);
+				break;
+			case 9:
+				$this->setPhoneNumber($value);
+				break;
 		} 	}
 
 	
@@ -535,6 +609,8 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setCreatedOn($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setUpdatedBy($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setUpdatedOn($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCountry($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setPhoneNumber($arr[$keys[9]]);
 	}
 
 	
@@ -550,6 +626,8 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmMt4DemoRequestPeer::CREATED_ON)) $criteria->add(MlmMt4DemoRequestPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmMt4DemoRequestPeer::UPDATED_BY)) $criteria->add(MlmMt4DemoRequestPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmMt4DemoRequestPeer::UPDATED_ON)) $criteria->add(MlmMt4DemoRequestPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmMt4DemoRequestPeer::COUNTRY)) $criteria->add(MlmMt4DemoRequestPeer::COUNTRY, $this->country);
+		if ($this->isColumnModified(MlmMt4DemoRequestPeer::PHONE_NUMBER)) $criteria->add(MlmMt4DemoRequestPeer::PHONE_NUMBER, $this->phone_number);
 
 		return $criteria;
 	}
@@ -593,6 +671,10 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setCountry($this->country);
+
+		$copyObj->setPhoneNumber($this->phone_number);
 
 
 		$copyObj->setNew(true);

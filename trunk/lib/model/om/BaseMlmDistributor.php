@@ -243,10 +243,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $excluded_structure = '';
 
-
-	
-	protected $is_demo_account = '';
-
 	
 	protected $alreadyInSave = false;
 
@@ -754,13 +750,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->excluded_structure;
-	}
-
-	
-	public function getIsDemoAccount()
-	{
-
-		return $this->is_demo_account;
 	}
 
 	
@@ -1767,23 +1756,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
-	public function setIsDemoAccount($v)
-	{
-
-		
-		
-		if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->is_demo_account !== $v || $v === '') {
-			$this->is_demo_account = $v;
-			$this->modifiedColumns[] = MlmDistributorPeer::IS_DEMO_ACCOUNT;
-		}
-
-	} 
-
-	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -1906,13 +1878,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->excluded_structure = $rs->getString($startcol + 58);
 
-			$this->is_demo_account = $rs->getString($startcol + 59);
-
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 60; 
+						return $startcol + 59; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2234,9 +2204,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 58:
 				return $this->getExcludedStructure();
 				break;
-			case 59:
-				return $this->getIsDemoAccount();
-				break;
 			default:
 				return null;
 				break;
@@ -2306,7 +2273,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[56] => $this->getFileProofOfResidence(),
 			$keys[57] => $this->getFileNric(),
 			$keys[58] => $this->getExcludedStructure(),
-			$keys[59] => $this->getIsDemoAccount(),
 		);
 		return $result;
 	}
@@ -2499,9 +2465,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 58:
 				$this->setExcludedStructure($value);
 				break;
-			case 59:
-				$this->setIsDemoAccount($value);
-				break;
 		} 	}
 
 	
@@ -2568,7 +2531,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[56], $arr)) $this->setFileProofOfResidence($arr[$keys[56]]);
 		if (array_key_exists($keys[57], $arr)) $this->setFileNric($arr[$keys[57]]);
 		if (array_key_exists($keys[58], $arr)) $this->setExcludedStructure($arr[$keys[58]]);
-		if (array_key_exists($keys[59], $arr)) $this->setIsDemoAccount($arr[$keys[59]]);
 	}
 
 	
@@ -2635,7 +2597,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::FILE_PROOF_OF_RESIDENCE)) $criteria->add(MlmDistributorPeer::FILE_PROOF_OF_RESIDENCE, $this->file_proof_of_residence);
 		if ($this->isColumnModified(MlmDistributorPeer::FILE_NRIC)) $criteria->add(MlmDistributorPeer::FILE_NRIC, $this->file_nric);
 		if ($this->isColumnModified(MlmDistributorPeer::EXCLUDED_STRUCTURE)) $criteria->add(MlmDistributorPeer::EXCLUDED_STRUCTURE, $this->excluded_structure);
-		if ($this->isColumnModified(MlmDistributorPeer::IS_DEMO_ACCOUNT)) $criteria->add(MlmDistributorPeer::IS_DEMO_ACCOUNT, $this->is_demo_account);
 
 		return $criteria;
 	}
@@ -2781,8 +2742,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setFileNric($this->file_nric);
 
 		$copyObj->setExcludedStructure($this->excluded_structure);
-
-		$copyObj->setIsDemoAccount($this->is_demo_account);
 
 
 		$copyObj->setNew(true);
