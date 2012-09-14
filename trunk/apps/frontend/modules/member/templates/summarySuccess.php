@@ -217,7 +217,7 @@ $(function() {
         $("#dgAnnouncement").dialog("option", "title", "Document Upload");
         $("#dgAnnouncement").dialog("option", "height", "250");
         $("#dgAnnouncement").dialog("option", "width", "500");
-        $("#dgAnnouncement").dialog("open");
+        /*$("#dgAnnouncement").dialog("open");*/
     <?php
     }
     ?>

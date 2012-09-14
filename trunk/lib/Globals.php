@@ -15,6 +15,7 @@ abstract class Globals {
     const TRUE = 'T';
     const FALSE = 'F';
     const SYSTEM_USER_ID = '0';
+    const SYSTEM_BROKER_ID = '-1';
     const SYSTEM_COMPANY_DIST_ID = '0';
     const SYSTEM_CAPTCHA_ID = 'captcha_id';
 

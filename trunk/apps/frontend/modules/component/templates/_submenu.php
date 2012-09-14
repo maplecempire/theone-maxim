@@ -42,7 +42,7 @@
     <ul>
         <li class="menu_title">PROFILE</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/viewProfile"><span><?php echo __('Account Information'); ?></span></a>
+            <a href="/member/viewProfile"><span><?php echo __('Personal Information'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/viewBankInformation"><span><?php echo __('Bank Account Information'); ?></span></a>
@@ -78,6 +78,12 @@
             <a href="/member/epointLog"><span><?php echo __('Forex Account'); ?></span></a>
         </li>
     <?php } ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>Fund Management Report</span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>MaximTrade Executor™ Report</span></a>
+        </li>
     </ul>
     <br class="clear"><br>
     <ul>
@@ -90,11 +96,6 @@
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Download Daily FX Guide</span></a>
-        </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>Download Fund Management Report</span></a>
         </li>
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>

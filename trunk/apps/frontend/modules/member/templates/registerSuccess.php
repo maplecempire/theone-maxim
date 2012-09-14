@@ -443,7 +443,7 @@ function error(data) {
     </tbody>
 </table>
 
-<table cellspacing="0" cellpadding="0" class="tbl_form">
+<!--<table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
         <col width="30%">
@@ -569,7 +569,7 @@ function error(data) {
         </td>
     </tr>
     </tbody>
-</table>
+</table>-->
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
@@ -815,7 +815,7 @@ function error(data) {
     <td>&nbsp;</td>
     <td colspan="5">
         <p>Below are the contractural terms and agreements that you are bound by as a client
-        of OFXGlobal. We recommend that you take the time to read each of them carefully.</p>
+        of MaximTrader. We recommend that you take the time to read each of them carefully.</p>
 
         <p><strong>Please check the boxes below to acknowledge your acceptance, argeement and
             understanding of these terms and agreements.</strong></p>
@@ -869,7 +869,7 @@ function error(data) {
     <td colspan="5">
 
         <p>I hereby attest and certify that the above information is complete and accurate and I agree to be bound by
-            these terms and conditions. I also authorise <strong>OFXGlobal</strong> to verify any or all of the
+            these terms and conditions. I also authorise <strong>MaximTrader</strong> to verify any or all of the
             foregoing information. This electronic signature has the same validity and effect as a signature affixed by
             hand.</p>
 
@@ -886,8 +886,8 @@ function error(data) {
                 <td align="left" valign="top" style="border-style:hidden" colspan="2">
                     <input type="checkbox" style="float:left; margin-right:4px;" value="1" id="term_condition" name="term_condition">
 
-                    <label><p>I understand that as an OFXGlobal customer, it is my responsibility to review all necessary
-                        information about currency trading and the OFXGlobal <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I
+                    <label><p>I understand that as an MaximTrader customer, it is my responsibility to review all necessary
+                        information about currency trading and the MaximTrader <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I
                         am aware of the risks associated with foreign exchange trading and will seek advice and further my education
                         on foreign exchange prior to starting any trading activity.</p></label>
                 </td>

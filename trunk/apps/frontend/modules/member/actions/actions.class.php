@@ -413,8 +413,6 @@ class memberActions extends sfActions
 
         $mlm_distributor->setTreeLevel($treeLevel);
         $mlm_distributor->setTreeStructure($treeStructure);
-        //$mlm_distributor->setMasterIbId($masterIB->getMasterIbId());
-        //$mlm_distributor->setMasterIbCode($masterIB->getMasterIbCode());
         $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
         $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
 
@@ -469,6 +467,187 @@ class memberActions extends sfActions
         }*/
         return $this->redirect('/member/registerInfo');
     }
+
+    // **********************************************************************************************
+    // *****************************         For broker registeration          **********************
+    // **********************************************************************************************
+    function generateFcode()
+    {
+        $max_digit = 999999999;
+        $digit = 9;
+
+        while (true) {
+            $fcode = rand(0, $max_digit) . "";
+            $fcode = str_pad($fcode, $digit, "0", STR_PAD_LEFT);
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $fcode);
+            $existDist = MlmDistributorPeer::doSelectOne($c);
+
+            if (!$existDist) {
+                break;
+            }
+        }
+        return $fcode;
+    }
+    public function executeOpenDemoAccount()
+    {
+        $error = false;
+        $errorMsg = "";
+
+        if (!$this->getRequestParameter('email')) {
+            $error = true;
+            $errorMsg = "Email is required.";
+        } else if (!$this->getRequestParameter('requesterName')) {
+            $error = true;
+            $errorMsg = "Requester Name is required.";
+        } else {
+            $mlmMt4DemoRequest = new MlmMt4DemoRequest();
+            $mlmMt4DemoRequest->setFullName( $this->getRequestParameter('requesterName'));
+            $mlmMt4DemoRequest->setEmail($this->getRequestParameter('email'));
+            $mlmMt4DemoRequest->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmMt4DemoRequest->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmMt4DemoRequest->save();
+        }
+
+        $arr = array(
+            'error' => $error,
+            'errorMsg' => $errorMsg
+        );
+
+        echo json_encode($arr);
+    }
+    public function executeOpenLiveAccount()
+    {
+        $error = false;
+        $errorMsg = "";
+
+        /*require_once('recaptchalib.php');
+        $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
+        $resp = recaptcha_check_answer ($privatekey,
+                                    $_SERVER["REMOTE_ADDR"],
+                                    $_POST["recaptcha_challenge_field"],
+                                    $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            $error = true;
+            $errorMsg = "The CAPTCHA wasn't entered correctly. Go back and try it again.";*/
+        if (!$this->getRequestParameter('referralId')) {
+            $error = true;
+            $errorMsg = "Referral ID is required.";
+        } else {
+            $uplineDistDB = $this->getDistributorInformation($this->getRequestParameter('referralId'));
+            if (!$uplineDistDB) {
+                $error = true;
+                $errorMsg = "Invalid referral ID.";
+            } else {
+                //$fcode = $this->getRequestParameter('userName');
+                //$password = $this->getRequestParameter('userpassword');
+                $fcode = $this->generateFcode();
+                $password = "";
+
+                //******************* upline distributor ID
+                //$treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+                //$treeLevel = $uplineDistDB->getTreeLevel() + 1;
+                $treeStructure = "";
+                $treeLevel = 0;
+
+                // ****************************
+                $mlm_distributor = new MlmDistributor();
+                $mlm_distributor->setDistributorCode($fcode);
+                $mlm_distributor->setUserId(Globals::SYSTEM_BROKER_ID);
+                $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
+                $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
+                $mlm_distributor->setNickname($fcode);
+                $mlm_distributor->setIc($this->getRequestParameter('ic'));
+                if ($this->getRequestParameter('country') == 'China') {
+                    $mlm_distributor->setCountry('China (PRC)');
+                } else {
+                    $mlm_distributor->setCountry($this->getRequestParameter('country'));
+                }
+                $mlm_distributor->setAddress($this->getRequestParameter('address'));
+                $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+                $mlm_distributor->setCity($this->getRequestParameter('city'));
+                $mlm_distributor->setState($this->getRequestParameter('state'));
+                $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+                $mlm_distributor->setEmail($this->getRequestParameter('email'));
+                $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+                $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+                $mlm_distributor->setGender($this->getRequestParameter('gender'));
+                if ($this->getRequestParameter('dob')) {
+                    list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                    $mlm_distributor->setDob("$y-$m-$d");
+                }
+                $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+                $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+                $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+                $mlm_distributor->setTreeLevel($treeLevel);
+                $mlm_distributor->setTreeStructure($treeStructure);
+                $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+                $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+                $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+                $mlm_distributor->setSpread($this->getRequestParameter('spread'));
+                $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+                $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+                $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
+                $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+                $mlm_distributor->setExcludedStructure("Y");
+
+                $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_BROKER_ID));
+                $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_BROKER_ID));
+                $mlm_distributor->save();
+            }
+        }
+        //print_r("error:".$error.",errorMsg:".$errorMsg);
+        $arr = array(
+            'error' => $error,
+            'errorMsg' => $errorMsg
+        );
+
+        echo json_encode($arr);
+        /****************************/
+        /*****  Send email **********/
+        /****************************/
+        /*error_reporting(E_STRICT);
+
+        date_default_timezone_set(date_default_timezone_get());
+
+        include_once('class.phpmailer.php');
+
+        $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
+        $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
+
+        <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
+        <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
+        <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
+
+        $mail = new PHPMailer();
+        $mail->IsMail(); // telling the class to use SMTP
+        $mail->Host = Mails::EMAIL_HOST; // SMTP server
+        $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
+        $mail->From = Mails::EMAIL_FROM_NOREPLY;
+        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
+        $mail->Subject = $subject;
+        $mail->CharSet="utf-8";
+
+        $text_body = $body;
+
+        $mail->Body = $body;
+        $mail->AltBody = $text_body;
+        $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
+        $mail->AddBCC("r9projecthost@gmail.com", "jason");
+
+        if (!$mail->Send()) {
+            echo $mail->ErrorInfo;
+        }*/
+        return sfView::HEADER_ONLY;
+    }
+    // **********************************************************************************************
+    // *******************   ~ end      For broker registeration       end ~   **********************
+    // **********************************************************************************************
 
     public function executeVerifySponsorId()
     {
@@ -2642,73 +2821,9 @@ class memberActions extends sfActions
         }
     }
 
-    /* ************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   *************************************************************************************************************************************************************************************************************************************************************************
-   * */
     /************************************************************************************************************************
      * function
      ************************************************************************************************************************/
-    function generateFcode($country = 'China (PRC)')
-    {
-        if ($country == 'Malaysia') {
-            $max_digit = 999999;
-            $digit = 6;
-        } elseif ($country == 'Indonesia') {
-            $max_digit = 9999999;
-            $digit = 7;
-        } elseif ($country == 'China (PRC)' || $country == 'China') {
-            $max_digit = 99999999;
-            $digit = 8;
-        } else {
-            $max_digit = 999999999;
-            $digit = 9;
-        }
-
-        while (true) {
-            $fcode = rand(0, $max_digit) . "";
-            $fcode = str_pad($fcode, $digit, "0", STR_PAD_LEFT);
-            /*
-            for ($x=0; $x < ($digit - strlen($fcode)); $x++) {
-                $fcode = "0".$fcode;
-            }
-			*/
-            $c = new Criteria();
-            $c->add(AppUserPeer::USERNAME, $fcode);
-            $existUser = AppUserPeer::doSelectOne($c);
-
-            if (!$existUser) {
-                break;
-            }
-        }
-        return $fcode;
-    }
-
-    function generateFPin()
-    {
-        while (true) {
-            $fpin = rand(0, 999999999999) . "";
-            for ($x = 0; $x < (12 - strlen($fpin)); $x++) {
-                $fpin = "1" . $fpin;
-            }
-
-            $c = new Criteria();
-            $c->add(TblPinPeer::F_PIN, $fpin);
-            $existPin = TblPinPeer::doSelectOne($c);
-
-            if (!$existPin) {
-                break;
-            }
-        }
-
-        return $fpin;
-    }
-
     function getDistributorIdByCode($sponsorCode)
     {
         $userId = 0;

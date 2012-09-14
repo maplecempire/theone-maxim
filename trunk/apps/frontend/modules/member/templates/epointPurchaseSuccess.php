@@ -180,7 +180,7 @@ $(function() {
                             <tr>
                                 <td valign="top"><font color="#dc143c">NOTE :</font></td>
                                 <td>
-                                    <font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund use only.
+                                    <font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund used only.
                                     <br>Forex Point is non-withdrawable.
                                     <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
                                 </td>
