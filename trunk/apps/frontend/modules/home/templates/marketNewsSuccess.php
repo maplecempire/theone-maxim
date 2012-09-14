@@ -22,21 +22,125 @@
     <script type='text/javascript' src='/css/maxim/farbtastic.js'></script>
 
     <meta http-equiv="Content-Language" content="en-US">
-    <style type="text/css" media="screen">
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-        background: none repeat scroll 0 0 transparent;
-        border: 0 none;
-        font-size: 100%;
-        margin: 0;
-        outline: 0 none;
-        padding: 0;
-        vertical-align: baseline;
-        text-align: center !important;
-    }
-    .qtrans_flag span { display:none }
-    .qtrans_flag { height:12px; width:18px; display:block }
-    .qtrans_flag_and_text { padding-left:20px }
-    </style>
+    <style type="text/css">
+html {
+    background: none repeat scroll 0 0 -moz-dialog;
+    font: 3mm tahoma,arial,helvetica,sans-serif;
+}
+#feedBody {
+    -moz-padding-start: 30px;
+    background: none repeat scroll 0 0 -moz-field;
+    border: 1px solid threedshadow;
+    margin: 2em auto;
+    padding: 3em;
+}
+#feedHeaderContainer {
+    background-color: infobackground;
+    border: 1px solid threedshadow;
+    border-radius: 10px 10px 10px 10px;
+    margin: -4em auto 0;
+}
+#feedHeader {
+    -moz-margin-end: 1em;
+    -moz-margin-start: 1.4em;
+    -moz-padding-start: 2.9em;
+    color: infotext;
+    font-size: 110%;
+    margin-bottom: 1em;
+    margin-top: 4.9em;
+}
+#feedIntroText {
+    display: none;
+}
+#feedHeader[dir="rtl"] {
+    background-position: 100% 10%;
+}
+#feedHeader[firstrun="true"] #feedIntroText {
+    -moz-padding-start: 0.6em;
+    display: block;
+    padding-top: 0.1em;
+}
+#feedHeader[firstrun="true"] > #feedSubscribeLine {
+    -moz-padding-start: 1.8em;
+}
+#feedSubscribeLine {
+    padding-top: 0.2em;
+}
+#feedHeaderContainer {
+    display: none;
+}
+body {
+    color: -moz-fieldtext;
+    font: message-box;
+    margin: 0;
+    padding: 0 3em;
+}
+h1 {
+    border-bottom: 2px solid threedlightshadow;
+    font-size: 160%;
+    margin: 0 0 0.2em;
+}
+h2 {
+    color: threeddarkshadow;
+    font-size: 110%;
+    font-weight: normal;
+    margin: 0 0 0.6em;
+}
+#feedTitleLink {
+    -moz-margin-end: 0;
+    -moz-margin-start: 0.6em;
+    float: right;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+a[href] img {
+    border: medium none;
+}
+#feedTitleContainer {
+    -moz-margin-end: 0.6em;
+    -moz-margin-start: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#feedTitleImage {
+    -moz-margin-end: 0;
+    -moz-margin-start: 0.6em;
+    margin-bottom: 0;
+    margin-top: 0;
+    max-height: 150px;
+    max-width: 300px;
+}
+.feedEntryContent {
+    font-size: 110%;
+}
+.link {
+    color: #0000FF;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.link:hover:active {
+    color: #FF0000;
+}
+.lastUpdated {
+    font-size: 85%;
+    font-weight: normal;
+}
+.type-icon {
+    height: 16px;
+    vertical-align: bottom;
+    width: 16px;
+}
+.enclosures {
+    background: none repeat scroll 0 0 -moz-dialog;
+    border: 1px solid threedshadow;
+    margin: 1em auto;
+    padding: 1em;
+}
+.enclosure {
+    margin-left: 2px;
+    vertical-align: middle;
+}
+</style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
 	<script type="text/javascript">
@@ -66,60 +170,36 @@
         <div id="content">
 
 
-            <h1>Market News</h1>
-
-            <div class="hr"></div>
-            <ul id="blog-small" style="list-style: none outside none; margin: 0; padding: 0px">
-                <li>
-                    <div class="blog-small-image">
-                        <a href="#"
-                           class="">
-                            <div class="imghover_small_blog"
-                                 style="background-image: url(&quot;/css/maxim/image_overlay.png&quot;); opacity: 0;"></div>
-                            <img src="#"
-                                 style="visibility: visible; opacity: 1;"></a>
+            <div id="feedBody">
+                <div id="feedTitle">
+                    <div id="feedTitleContainer">
+                        <h1 id="feedTitleText" style="margin-right: 135px;">Market News</h1>
                     </div>
+                </div>
+                <div id="feedContent">
+            <?php
+                $feed_url = "http://feeds.reuters.com/reuters/businessNews";
+                $content = file_get_contents($feed_url);
 
-                    <div class="blog-small-text">
-                        <a href="#">
-                            <h1>FOREX-Euro weak on profit-taking, dollar recovers</h1></a>
-                        <p><br></p>
-                        <p class="blog-small-excerpt">The euro dipped to a one-week low against the dollar on Thursday
-                            on profit-taking after a huge injection of cash... <a
-                                    href="#">Read
-                                more</a> <br><a class="read_more"
-                                                href="#">Continue
-                                reading →</a></p>
+                $x = new SimpleXmlElement($content);
 
-                    </div>
-                </li>
-                <li class="blog-small-sep"></li>
+                foreach($x->channel->item as $entry) {
+            ?>
+            <div class="entry">
+            <h5>
+                <a href="<?php echo $entry->link; ?>"><?php echo $entry->title; ?></a>
 
-                <li>
-                    <div class="blog-small-image">
-                        <a href="#"
-                           class="">
-                            <div class="imghover_small_blog"
-                                 style="background-image: url(&quot;/css/maxim/image_overlay.png&quot;); opacity: 0;"></div>
-                            <img src="#"
-                                 style="visibility: visible; opacity: 1;"></a>
-                    </div>
-                    <div class="blog-small-text">
-                        <a href="#">
-                            <h1>“Big Four” auditors brace for big changes in China</h1></a>
-                        <p><br></p>
-                        <p class="blog-small-excerpt">The Big Four&nbsp;global audit firms, which dominate the Chinese
-                            market, are negotiating with Beijing to lessen the impact of forced... <a
-                                    href="#">Read
-                                more</a> <br><a class="read_more"
-                                                href="#">Continue
-                                reading →</a></p>
+                <div class="lastUpdated"><?php echo $entry->pubDate; ?></div>
+            </h5>
+            <div base="<?php echo $entry->link; ?>" class="feedEntryContent"><?php echo $entry->description; ?></div>
+            </div>
+            <div style="clear: both;"><hr></div>
 
-                    </div>
-                </li>
-                <li class="blog-small-sep"></li>
-            </ul>
-            <div class="navigation"></div>
+            <?php
+                    }
+            ?>
+                </div>
+            </div>
 
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>

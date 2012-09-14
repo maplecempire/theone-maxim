@@ -1,3 +1,7 @@
+rssSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 companySuccess:
   has_layout:     off
   stylesheets: 	  []

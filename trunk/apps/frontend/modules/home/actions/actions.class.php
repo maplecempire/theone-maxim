@@ -13,6 +13,9 @@ class homeActions extends sfActions
     /* ***********************************************************************
      *    ~ HTML ~
      * **********************************************************************/
+    public function executeRss()
+    {
+    }
     public function executeMaximExecutor()
     {
     }
