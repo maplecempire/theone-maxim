@@ -13,7 +13,7 @@ abstract class BaseMlmMt4DemoRequestPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmMt4DemoRequest';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,23 +44,29 @@ abstract class BaseMlmMt4DemoRequestPeer {
 	const UPDATED_ON = 'mlm_mt4_demo_request.UPDATED_ON';
 
 	
+	const COUNTRY = 'mlm_mt4_demo_request.COUNTRY';
+
+	
+	const PHONE_NUMBER = 'mlm_mt4_demo_request.PHONE_NUMBER';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('RequestId', 'FullName', 'Email', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmMt4DemoRequestPeer::REQUEST_ID, MlmMt4DemoRequestPeer::FULL_NAME, MlmMt4DemoRequestPeer::EMAIL, MlmMt4DemoRequestPeer::STATUS_CODE, MlmMt4DemoRequestPeer::CREATED_BY, MlmMt4DemoRequestPeer::CREATED_ON, MlmMt4DemoRequestPeer::UPDATED_BY, MlmMt4DemoRequestPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('request_id', 'full_name', 'email', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('RequestId', 'FullName', 'Email', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'Country', 'PhoneNumber', ),
+		BasePeer::TYPE_COLNAME => array (MlmMt4DemoRequestPeer::REQUEST_ID, MlmMt4DemoRequestPeer::FULL_NAME, MlmMt4DemoRequestPeer::EMAIL, MlmMt4DemoRequestPeer::STATUS_CODE, MlmMt4DemoRequestPeer::CREATED_BY, MlmMt4DemoRequestPeer::CREATED_ON, MlmMt4DemoRequestPeer::UPDATED_BY, MlmMt4DemoRequestPeer::UPDATED_ON, MlmMt4DemoRequestPeer::COUNTRY, MlmMt4DemoRequestPeer::PHONE_NUMBER, ),
+		BasePeer::TYPE_FIELDNAME => array ('request_id', 'full_name', 'email', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', 'country', 'phone_number', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('RequestId' => 0, 'FullName' => 1, 'Email' => 2, 'StatusCode' => 3, 'CreatedBy' => 4, 'CreatedOn' => 5, 'UpdatedBy' => 6, 'UpdatedOn' => 7, ),
-		BasePeer::TYPE_COLNAME => array (MlmMt4DemoRequestPeer::REQUEST_ID => 0, MlmMt4DemoRequestPeer::FULL_NAME => 1, MlmMt4DemoRequestPeer::EMAIL => 2, MlmMt4DemoRequestPeer::STATUS_CODE => 3, MlmMt4DemoRequestPeer::CREATED_BY => 4, MlmMt4DemoRequestPeer::CREATED_ON => 5, MlmMt4DemoRequestPeer::UPDATED_BY => 6, MlmMt4DemoRequestPeer::UPDATED_ON => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('request_id' => 0, 'full_name' => 1, 'email' => 2, 'status_code' => 3, 'created_by' => 4, 'created_on' => 5, 'updated_by' => 6, 'updated_on' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('RequestId' => 0, 'FullName' => 1, 'Email' => 2, 'StatusCode' => 3, 'CreatedBy' => 4, 'CreatedOn' => 5, 'UpdatedBy' => 6, 'UpdatedOn' => 7, 'Country' => 8, 'PhoneNumber' => 9, ),
+		BasePeer::TYPE_COLNAME => array (MlmMt4DemoRequestPeer::REQUEST_ID => 0, MlmMt4DemoRequestPeer::FULL_NAME => 1, MlmMt4DemoRequestPeer::EMAIL => 2, MlmMt4DemoRequestPeer::STATUS_CODE => 3, MlmMt4DemoRequestPeer::CREATED_BY => 4, MlmMt4DemoRequestPeer::CREATED_ON => 5, MlmMt4DemoRequestPeer::UPDATED_BY => 6, MlmMt4DemoRequestPeer::UPDATED_ON => 7, MlmMt4DemoRequestPeer::COUNTRY => 8, MlmMt4DemoRequestPeer::PHONE_NUMBER => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('request_id' => 0, 'full_name' => 1, 'email' => 2, 'status_code' => 3, 'created_by' => 4, 'created_on' => 5, 'updated_by' => 6, 'updated_on' => 7, 'country' => 8, 'phone_number' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -129,6 +135,10 @@ abstract class BaseMlmMt4DemoRequestPeer {
 		$criteria->addSelectColumn(MlmMt4DemoRequestPeer::UPDATED_BY);
 
 		$criteria->addSelectColumn(MlmMt4DemoRequestPeer::UPDATED_ON);
+
+		$criteria->addSelectColumn(MlmMt4DemoRequestPeer::COUNTRY);
+
+		$criteria->addSelectColumn(MlmMt4DemoRequestPeer::PHONE_NUMBER);
 
 	}
 

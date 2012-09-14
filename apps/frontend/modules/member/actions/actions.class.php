@@ -505,6 +505,8 @@ class memberActions extends sfActions
             $mlmMt4DemoRequest = new MlmMt4DemoRequest();
             $mlmMt4DemoRequest->setFullName( $this->getRequestParameter('requesterName'));
             $mlmMt4DemoRequest->setEmail($this->getRequestParameter('email'));
+            $mlmMt4DemoRequest->setCountry($this->getRequestParameter('country'));
+            $mlmMt4DemoRequest->setPhoneNumber($this->getRequestParameter('phoneNumber'));
             $mlmMt4DemoRequest->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmMt4DemoRequest->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmMt4DemoRequest->save();
