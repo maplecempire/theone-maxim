@@ -86,6 +86,10 @@
 
             <h2>Tactical Trading</h2>
 
+            <p><img width="582" class="aligncenter size-full wp-image-162" title="Tactical Trading" alt=""
+                                src="/css/maxim/banner/bg7.png"></p>
+            <div style="clear:both;"></div>
+
             <p align="justify"><strong>Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.</strong> Often managers will combine long and/or short positions with each strategy to maximize returns.</p>
 
             <p align="justify">Top-down approach focusing on global macroeconomic shifts in which outright and derivative positions are taken.</p>
@@ -93,6 +97,8 @@
             <p align="justify">Among the myriad of financial instruments that Maxim Trader trades in are the <strong>global currency markets</strong> and <strong>cash market for gold.</strong></p>
 
             <p align="justify">These two markets are some of most liquid and volatile in recent years owing to the global financial crisis and it is for this very reason why these instruments are chosen. Using our in-house expertise, trading models are developed and vigorously tested and incorporated into our tactical trading strategies.</p>
+
+
 
             <h2>Managed Trading</h2>
 
