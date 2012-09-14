@@ -148,5 +148,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('FILE_NRIC', 'FileNric', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('EXCLUDED_STRUCTURE', 'ExcludedStructure', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('IS_DEMO_ACCOUNT', 'IsDemoAccount', 'string', CreoleTypes::VARCHAR, true, 1);
+
 	} 
 } 

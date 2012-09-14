@@ -86,7 +86,7 @@ $(function() {
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Account Information') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Personal Information') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -310,7 +310,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Upload Bank Pass Book, Proof of Residence and Passport/IC') ?></th>
+                    <th colspan="2"><?php echo __('Upload Bank Pass Book, Proof of Residence and Passport/Photo ID') ?></th>
                     <!--<th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -360,7 +360,7 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
-                        <?php echo __('Passport/IC') ?>
+                        <?php echo __('Passport/Photo ID') ?>
                     </td>
                     <td>
                         <?php echo input_file_tag('nric', array("id" => "nric", "name" => "nric")); ?>

@@ -149,7 +149,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even" style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('Payment Type'); ?></td>
                     <td>
@@ -161,7 +161,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('MT4 Fund Withdrawal Amount In USD'); ?></td>
                     <td>
@@ -181,7 +181,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even"  style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('USD convert to MYR ').$usdToMyr; ?></td>
                     <td>
@@ -191,7 +191,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_odd" style="display: none;">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Bank Charges') ?>
@@ -202,7 +202,7 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even" style="display: none;">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Grand Amount') ?>
@@ -224,10 +224,11 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days<br>Bank charges : Minimum USD '.$handlingChargeInUsd.' depends on your corresponding banks') ?></font>
+                        <!--<font color="#dc143c"><?php /*echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days<br>Bank charges : Minimum USD '.$handlingChargeInUsd.' depends on your corresponding banks') */?></font>-->
+                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
