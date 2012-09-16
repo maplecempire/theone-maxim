@@ -31,7 +31,7 @@
             <td class="col03"><?php /*echo number_format($ecash,2); */?></td>
         </tr>-->
         <tr class="colWrap">
-            <td class="col01"><?php echo __('Forex Point Wallet') ?></td>
+            <td class="col01"><?php echo __('Deposit Fund Wallet') ?></td>
             <td class="col02">:</td>
             <td class="col03"><?php echo number_format($epoint,2); ?></td>
         </tr>

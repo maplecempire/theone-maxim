@@ -45,7 +45,7 @@
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Forex Account') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Account') ?></span></td>
     </tr>
     <tr>
         <td><br></td>
@@ -64,7 +64,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('Forex Point Statement') ?></th>
+                    <th><?php echo __('Deposit Fund Statement') ?></th>
                     <th class="tbl_content_right"></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
