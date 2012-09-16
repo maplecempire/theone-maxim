@@ -31,13 +31,24 @@
 
 	<script type="text/javascript">
 	$(function() {
+        <?php
+        if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
+        ?>
         //PAGE OPENING ANIMATION
         jQuery('#page').css({'display':'inline','width':'300px','overflow':'hidden','margin-right':'340px'});
         jQuery('#sidebar').css({'margin-left':'326px'});
 
         jQuery('#sidebar').delay(800).animate({'margin-left':'0px'},2100);
         jQuery('#page').delay(800).animate({'margin-right':'0px','width':'666px'},2100);
-
+        <?php
+            $sf_user->setAttribute(Globals::FIRST_LOGIN, 1);
+        } else {
+        ?>
+            jQuery('#sidebar').css({'margin-left':'0px'});
+            jQuery('#page').css({'display':'inline','width':'666px','overflow':'hidden','margin-right':'0px'});
+        <?php
+        }
+        ?>
 		/*jQuery('#bg_slider').bgSlider({
 			'speed' : '8000',
 			'pause' : '10000'
@@ -66,26 +77,8 @@
 <div id="wrapper">
     <div style="display: none; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-            <style>
-                .qtrans_flag_en {
-                    background: url("/css/maxim/flag/gb.png") no-repeat scroll 0 0 transparent;
-                }
-                .qtrans_flag_jp {
-                    background: url("/css/maxim/flag/jp.png") no-repeat scroll 0 0 transparent;
-                }
-                .qtrans_flag_zh {
-                    background: url("/css/maxim/flag/cn.png") no-repeat scroll 0 0 transparent;
-                }
-            </style>
-            <ul class="qtrans_language_chooser" id="qtranslate-chooser">
-                <li class="active"><a href="http://www.maximtrader.com/" class="qtrans_flag_en qtrans_flag_and_text" style="font-weight: bold;"
-                                      title="English"><span>English</span></a></li>
-                <li><a href="http://www.maximtrader.com/zh/" class="qtrans_flag_zh qtrans_flag_and_text" style="font-weight: bold;"
-                       title="中文"><span>中文</span></a></li>
-                <li><a href="http://www.maximtrader.com/zh/" class="qtrans_flag_jp qtrans_flag_and_text" style="font-weight: bold;"
-                       title="日文"><span>日本語</span></a></li>
 
-            </ul>
+            <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
             <div class="qtrans_widget_end"></div>
             <div style="clear:both;"><br></div>
 

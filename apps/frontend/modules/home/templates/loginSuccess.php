@@ -176,9 +176,11 @@
                             <td colspan="2">
                                 <!--<div id="captchaimage" style="height: 28; width: 100; display: inline-block;"><a href="<?php /*echo $_SERVER['PHP_SELF']; */?>" id="refreshimg" title="Click to refresh image"><img src="/captcha/image?<?php /*echo time(); */?>" height="26" alt="Captcha image" style="border-style: none"/></a></div><input name="captcha" type="text" id="captcha" class="login_t73" size="18"/>-->
                                 <?php
-                                  require_once('recaptchalib.php');
-                                  $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
-                                  echo recaptcha_get_html($publickey);
+                                //if ($sf_user->getAttribute(Globals::LOGIN_RETRY, 0) >= 3) {
+                                    require_once('recaptchalib.php');
+                                    $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+                                    echo recaptcha_get_html($publickey);
+                                //}
                                 ?>
                             </td>
                             <td></td>

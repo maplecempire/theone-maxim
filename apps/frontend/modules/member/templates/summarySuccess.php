@@ -92,7 +92,7 @@ $(function() {
                     error("In-sufficient fund to purchase package.");
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeEPoint").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_pointAvail").val())){
-                    alert("In-sufficient Forex point. " + $("#dgActivateMember_pointAvail").val());
+                    alert("In-sufficient deposit fund. " + $("#dgActivateMember_pointAvail").val());
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeECash").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_ecash").val())){
                     alert("In-sufficient MT4 Credit. " + $("#dgActivateMember_ecash").val());
@@ -391,7 +391,7 @@ function reassignDatagridAnnouncementEventAttr() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Forex Account') ?></td>
+        <td><?php echo __('Deposit Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($epoint,2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
@@ -700,7 +700,7 @@ function reassignDatagridAnnouncementEventAttr() {
             <td>:</td>
             <td>
                 <span id="spanPaymentType">
-                    <input type="radio" id="paymentTypeEPoint" name="paymentType" value="epoint"/><label for="paymentTypeEPoint"><?php echo __('Forex Point') ?></label>
+                    <input type="radio" id="paymentTypeEPoint" name="paymentType" value="epoint"/><label for="paymentTypeEPoint"><?php echo __('Deposit Fund') ?></label>
                     <input type="radio" id="paymentTypeECash" name="paymentType" value="ecash"/><label for="paymentTypeECash"><?php echo __('MT4 Credit') ?></label>
                 </span>
             </td>

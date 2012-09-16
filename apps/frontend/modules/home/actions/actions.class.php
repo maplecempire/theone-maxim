@@ -56,7 +56,7 @@ class homeActions extends sfActions
    * **********************************************************************/
     public function executeLogin()
     {
-        $this->getUser()->setCulture("en");
+        //$this->getUser()->setCulture("en");
 
         $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2));
 
@@ -84,7 +84,7 @@ class homeActions extends sfActions
             $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SERVER_MAINTAIN);
             $this->appSetting = AppSettingPeer::doSelectOne($c);
 
-            $this->getUser()->setCulture($this->getRequestParameter('lang'));
+            //$this->getUser()->setCulture($this->getRequestParameter('lang'));
             $this->username = $this->getRequestParameter('username');
             $this->userpassword = $this->getRequestParameter('userpassword');
 
@@ -96,17 +96,19 @@ class homeActions extends sfActions
                 // ******************* uncomment for testing purpose ****************
                 $existUser = AppUserPeer::retrieveByPk(3);
             } else {
-                require_once('recaptchalib.php');
-                $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
-                $resp = recaptcha_check_answer ($privatekey,
-                                            $_SERVER["REMOTE_ADDR"],
-                                            $_POST["recaptcha_challenge_field"],
-                                            $_POST["recaptcha_response_field"]);
+                //if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
+                    require_once('recaptchalib.php');
+                    $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
+                    $resp = recaptcha_check_answer ($privatekey,
+                                                    $_SERVER["REMOTE_ADDR"],
+                                                    $_POST["recaptcha_challenge_field"],
+                                                    $_POST["recaptcha_response_field"]);
 
-                if (!$resp->is_valid) {
-                    $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
-                    return $this->redirect('home/login');
-                }
+                    if (!$resp->is_valid) {
+                        $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+                        return $this->redirect('home/login');
+                    }
+                //}
 
                 $username = trim($this->getRequestParameter('username'));
                 $password = trim($this->getRequestParameter('userpassword'));
@@ -155,6 +157,8 @@ class homeActions extends sfActions
                 return $this->redirect('member/summary');
                 //}
             }
+
+            $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
 
             $this->setFlash('errorMsg', "Invalid username or password.");
             return $this->redirect('home/login');

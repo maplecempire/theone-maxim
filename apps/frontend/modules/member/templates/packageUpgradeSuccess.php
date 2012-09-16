@@ -147,7 +147,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Forex Account') ?></td>
+                    <td><?php echo __('Deposit Account') ?></td>
                     <td><input type="text" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>

@@ -18,7 +18,7 @@
         </li>
     <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/epointPurchase"><span>Forex Point Purchase</span></a>
+            <a href="/member/epointPurchase"><span>Deposit Fund Purchase</span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -75,7 +75,7 @@
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/epointLog"><span><?php echo __('Forex Account'); ?></span></a>
+            <a href="/member/epointLog"><span><?php echo __('Deposit Account'); ?></span></a>
         </li>
     <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">

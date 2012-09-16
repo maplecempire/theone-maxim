@@ -33,5 +33,5 @@ echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/datatable
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.treeview.css'/>";
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.checkboxtree.css'/>";
 
-echo "<title>Maxim Trader Administrator Backend</title>";
+echo "<title>Maxim Partner Administrator Backend</title>";
 echo "<link rel='shortcut icon' href='/favicon.ico' />";

@@ -232,7 +232,7 @@
     <div class="left_item"><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME)?>, Welcome to Maxim Trader.</b></div>
     <div class="right_item">
 
-        <!--<div class="language">Language: <a href="?__lang=en">English</a> / <a href="?__lang=cn">中文</a></div>-->
+        <div class="language">Language: <a href="/home/language?lang=en">English</a> / <a href="/home/language?lang=cn">中文</a> / <a href="/home/language?lang=jp">日本語</a></div>
 
         <div class="sep"></div>
         <div class="logout"><a href="/home/logout">Logout</a></div>

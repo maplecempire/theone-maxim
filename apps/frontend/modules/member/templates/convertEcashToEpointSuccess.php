@@ -52,7 +52,7 @@
 
             <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist" bgcolor="#f90;"
                     align="center">
-                <caption><?php echo __('Convert MT4 Credit To Forex Point') ?></caption>
+                <caption><?php echo __('Convert MT4 Credit To Deposit Fund') ?></caption>
                 <tr>
                     <td colspan=2 align='center'>
                         <?php if ($sf_flash->has('successMsg')): ?>
@@ -91,7 +91,7 @@
                             </tr>
                             <tr>
                                 <td class="caption">
-                                    <strong><?php echo __('Forex Point Amount'); ?></strong>
+                                    <strong><?php echo __('Deposit Fund Amount'); ?></strong>
                                 </td>
                                 <td class="value">
                                     <select name="epointAmount" id="cbo_epointAmount" tabindex="2">
@@ -127,7 +127,7 @@
                             </tr>
                             <tr>
                                 <td colspan='2' align="center">
-                                    <font color="#dc143c">NOTE: Forex Point is for package purchase, package upgrade and reload MT4 Fund use only. <br>Forex Point is non-withdrawable.</font>
+                                    <font color="#dc143c">NOTE: Deposit Fund is for package purchase, package upgrade and reload MT4 Fund use only. <br>Forex Point is non-withdrawable.</font>
                                 </td>
                             </tr>
 

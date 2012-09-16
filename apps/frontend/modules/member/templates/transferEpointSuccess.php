@@ -93,7 +93,7 @@
 <div class="areaContent">
     <div class="resultsWrap">
         <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist">
-            <caption><?php echo __('Forex Point Transfer') ?></caption>
+            <caption><?php echo __('Deposit Fund Transfer') ?></caption>
             <tr>
                 <td colspan=2 align='center'>
                     <?php if ($sf_flash->has('successMsg')): ?>
@@ -135,7 +135,7 @@
                         </tr>
                         <tr>
                             <td class="caption">
-                                <strong><?php echo __('Forex Point Balance'); ?></strong>
+                                <strong><?php echo __('Deposit Fund Balance'); ?></strong>
                             </td>
                             <td class="value">
                                 <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
@@ -144,7 +144,7 @@
                         </tr>
                         <tr>
                             <td class="caption">
-                                <strong><?php echo __('Transfer Forex Point Amount'); ?></strong>
+                                <strong><?php echo __('Transfer Deposit Fund Amount'); ?></strong>
                             </td>
                             <td class="value">
                                 <input name="epointAmount" id="epointAmount" tabindex="3"/>

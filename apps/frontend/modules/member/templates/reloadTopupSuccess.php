@@ -31,7 +31,7 @@
                         var mt4Amount = $('#cbo_topupAmount').val();
 
                         if (parseFloat(mt4Amount) > parseFloat(epointBalance)) {
-                            alert("In-sufficient Forex Point");
+                            alert("In-sufficient Deposit Fund");
                             return false;
                         }
                         waiting();
@@ -153,7 +153,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Forex Point Balance'); ?></td>
+                    <td><?php echo __('Deposit Fund Balance'); ?></td>
                     <td>
                         <input name="epointBalanceDisplay" id="epointBalanceDisplay" disabled="disabled" value=""/>
                     </td>

@@ -86,7 +86,7 @@ $(function() {
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Forex Point Purchase') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Fund Purchase') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -128,7 +128,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Forex Point Purchase') ?></th>
+                    <th colspan="2"><?php echo __('Deposit Fund Purchase') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -157,7 +157,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Total Forex Point'); ?></td>
+                    <td><?php echo __('Total Deposit Fund'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount"/>
                     </td>
@@ -180,8 +180,8 @@ $(function() {
                             <tr>
                                 <td valign="top"><font color="#dc143c">NOTE :</font></td>
                                 <td>
-                                    <font color="#dc143c">Forex Point is for package purchase, package upgrade and reload mt4 fund used only.
-                                    <br>Forex Point is non-withdrawable.
+                                    <font color="#dc143c">Deposit Fund is for package purchase, package upgrade and reload mt4 fund used only.
+                                    <br>Deposit Fund is non-withdrawable.
                                     <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
                                 </td>
                             </tr>
@@ -313,7 +313,7 @@ $(function() {
                 <th class="tbl_header_left">
                     <div class="border_left_grey">&nbsp;</div>
                 </th>
-                <th><?php echo __('Forex Point Purchase History') ?></th>
+                <th><?php echo __('Deposit Fund Purchase History') ?></th>
                 <th class="tbl_content_right"></th>
                 <th class="tbl_header_right">
                     <div class="border_right_grey">&nbsp;</div>
@@ -327,7 +327,7 @@ $(function() {
             <tr>
                 <th></th>
                 <th><?php echo __('Date') ?></th>
-                <th><?php echo __('Forex Point purchase') ?></th>
+                <th><?php echo __('Deposit Fund purchase') ?></th>
                 <th><?php echo __('Reference No') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>

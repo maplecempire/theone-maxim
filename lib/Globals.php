@@ -18,6 +18,8 @@ abstract class Globals {
     const SYSTEM_BROKER_ID = '-1';
     const SYSTEM_COMPANY_DIST_ID = '0';
     const SYSTEM_CAPTCHA_ID = 'captcha_id';
+    const LOGIN_RETRY = 0;
+    const FIRST_LOGIN = 0;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
     const BONUS_MAINTENANCE_PERCENTAGE = 0.1;

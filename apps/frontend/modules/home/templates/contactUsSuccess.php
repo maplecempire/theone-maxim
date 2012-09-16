@@ -56,6 +56,7 @@
         <div id="content">
             <div style=" width:450; float:left;"><h1>Contact Us</h1></div>
 
+            <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
             <div style="clear:both;"></div>

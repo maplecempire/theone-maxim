@@ -65,6 +65,7 @@
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
+            <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
             <div style=" width:450; float:left;"><h1>The Consortium</h1></div>
 
             <div class="qtrans_widget_end"></div>
