@@ -168,16 +168,17 @@ class homeActions extends sfActions
 
     public function executeVerifyExternalLogin()
     {
-        $success = "false";
+        $loginSuccess = false;
 
         $username = trim($this->getRequestParameter('username'));
         $password = trim($this->getRequestParameter('userpassword'));
 
         if ($username == '' || $password == '') {
-            $success = "false";
+            $loginSuccess = false;
         } else {
             /*	    user      	*/
-            $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
+            //$array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
+            $array = explode(',', Globals::STATUS_ACTIVE);
             $c = new Criteria();
             $c->add(AppUserPeer::USERNAME, $username);
             $c->add(AppUserPeer::USERPASSWORD, $password);
@@ -191,16 +192,19 @@ class homeActions extends sfActions
                 $existDist = MlmDistributorPeer::doSelectOne($c);
 
                 if ($existDist) {
-                    $success = "true";
+                    $loginSuccess = true;
                 } else {
-                    $success = "false";
+                    $loginSuccess = false;
                 }
             } else {
-                $success = "false";
+                $loginSuccess = false;
             }
         }
 
-        echo $success;
+        $arr = array(
+            'loginSuccess' => $loginSuccess
+        );
+        echo json_encode($arr);
         return sfView::HEADER_ONLY;
     }
 
