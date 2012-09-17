@@ -2078,10 +2078,7 @@ class memberActions extends sfActions
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
 
                 // ******       company account      ****************
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-                $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                $companyAccount = MlmAccountPeer::doSelectOne($c);
+                $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
 
                 $tbl_account_ledger = new MlmAccountLedger();
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
@@ -2090,7 +2087,7 @@ class memberActions extends sfActions
                 $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
                 $tbl_account_ledger->setCredit($processFee);
                 $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
+                $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
@@ -2107,7 +2104,7 @@ class memberActions extends sfActions
                 $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_ecash_withdraw->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your MT4 Credit withdrawal has been submitted."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your cash withdrawal has been submitted."));
 
                 return $this->redirect('/member/ecashWithdrawal');
             }

@@ -23,12 +23,18 @@
             <a href="#" id="linkPackagePurchase"><span>Package Purchase</span></a>
         </li>
     <?php } ?>
+
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/epointPurchase"><span>Deposit Fund Purchase</span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/packageUpgrade"><span>Package Upgrade</span></a>
+        </li>
+    <?php } ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
         </li>
     <?php } ?>
 
@@ -40,11 +46,11 @@
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/wallet"><span><?php echo __('Wallet'); ?></span></a>
+            <a href="/member/epointLog"><span><?php echo __('Wallet'); ?></span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
+            <a href="/member/mt4Withdrawal"><span>Withdrawal</span></a>
         </li>
     <?php } ?>
 

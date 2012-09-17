@@ -75,108 +75,149 @@
     }
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
-    <!--<div class="sidenavi">
-        <ul>
-            <li><a href="/member/bonusDetails"><span><?php /*echo __('Bonus Details'); */?></span></a></li>
-        </ul>
-    </div>-->
-
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
+<div class="ewallet_li">
+	<a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">
+        <?php echo __('Deposit Fund Purchase'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/convertEcashToEpoint" style="color: rgb(0, 93, 154);">
+        <?php echo __('Convert MT4 Credit To Deposit Fund'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/transferEpoint" style="color: rgb(134, 197, 51);">
+        <?php echo __('Deposit Fund Transfer'); ?>
+    </a>
 </div>
 
-<form action="/member/transferEpoint" id="transferForm" name="transferForm" method="post">
-<input type="hidden" id="processFee" value="<?php echo $processFee?>">
-<div class="areaContent">
-    <div class="resultsWrap">
-        <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist">
-            <caption><?php echo __('Deposit Fund Transfer') ?></caption>
-            <tr>
-                <td colspan=2 align='center'>
-                    <?php if ($sf_flash->has('successMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                                <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
-                        </div>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Fund Transfer') ?></span></td>
+    </tr>
+    <tr>
+        <td><br>
+            <?php if ($sf_flash->has('successMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                    <?php if ($sf_flash->has('errorMsg')): ?>
-                    <div class="ui-widget">
-                        <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
-                            <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
-                        </div>
+                </div>
+                <?php endif; ?>
+            <?php if ($sf_flash->has('errorMsg')): ?>
+                <div class="ui-widget">
+                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-error ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-alert"></span>
+                            <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                     </div>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
-                        <tr>
-                            <td width="160px" class="caption">
-                                <strong><?php echo __('Transfer To Trader ID'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Trader Name'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <strong><span id="sponsorName"></span></strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Deposit Fund Balance'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
+                </div>
+                <?php endif; ?>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="/member/transferEpoint" id="transferForm" name="transferForm" method="post">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Deposit Fund Transfer') ?></th>
+<!--                    <th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Transfer To Trader ID'); ?></td>
+                    <td>
+                        <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Trader Name'); ?></td>
+                    <td>
+                        <strong><span id="sponsorName"></span></strong>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Deposit Fund Balance'); ?></td>
+                    <td>
+                        <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
                                        value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Transfer Deposit Fund Amount'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="epointAmount" id="epointAmount" tabindex="3"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="caption">
-                                <strong><?php echo __('Security Password'); ?></strong>
-                            </td>
-                            <td class="value">
-                                <input name="transactionPassword" type="password" id="transactionPassword"
-                                       tabindex="4"/>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Transfer Deposit Fund Amount'); ?></td>
+                    <td>
+                        <input name="epointAmount" id="epointAmount" tabindex="3"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
 
-            <tr>
-                <td colspan=3><font color="#dc143c"> <?php
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password'); ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword"
+                                           tabindex="3"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td colspan="2" align="center">
+                        <font color="#dc143c"><?php
                             if ($processFee != 0)
-                    echo __('every transfer action need to pay USD%1%.00 processing fees', array('%1%' => $processFee));
-                    ?></font></td>
-            </tr>
-            <tr>
-                <td colspan='3' align='center'>
-                    <button><?php echo __('Submit') ?></button>
-                </td>
-            </tr>
-        </table>
-        <div class="clear"></div>
-    </div>
-</div>
+                                echo __('every transfer action need to pay USD%1%.00 processing fees', array('%1%' => $processFee));
+                            ?>
+                        </font>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
 
-</form>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnTransfer"><?php echo __('Submit') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>

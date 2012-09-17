@@ -42,8 +42,23 @@
     }
 </script>
 
+<div class="ewallet_li">
+	<a target="_self" class="navcontainer" href="/member/epointLog" style="color: rgb(134, 197, 51);">
+        <?php echo __('Deposit Fund Statement'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/ecashLog" style="color: rgb(0, 93, 154);">
+        <?php echo __('Cash Statement'); ?>
+    </a>
+</div>
+
 <table cellpadding="0" cellspacing="0">
     <tbody>
+    <tr>
+        <td><br></td>
+    </tr>
     <tr>
         <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Account') ?></span></td>
     </tr>
