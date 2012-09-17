@@ -163,16 +163,9 @@ $(function() {
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td rowspan="2" valign="middle">Upgrade Package</td>
-                                <td rowspan="2" valign="middle">Membership</td>
-                                <td rowspan="2" valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
-                                <td colspan="4">Bonus</td>
-                            </tr>
-                            <tr class="pbl_header">
-                                <td>RB</td>
-                                <td>Paring Bonus</td>
-                                <td>Daily Max</td>
-                                <td>Pips Rebate</td>
+                                <td valign="middle">Upgrade Package</td>
+                                <td valign="middle">Membership</td>
+                                <td valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
                             </tr>
                             <?php
                                 if (count($packageDBs) > 0) {
@@ -189,7 +182,7 @@ $(function() {
                                 $ableUpgrade = false;
                                 if ($distPackage->getPrice() < $packageDB->getPrice()) {
                                     $ableUpgrade = true;
-                                    echo "<td>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                  'class' => 'activeLink',
                                                                                                                                                  'ref' => $packageDB->getPrice(),
                                                                                                                                                  'pid' => $packageDB->getPackageId(),
@@ -198,7 +191,7 @@ $(function() {
                                     echo "<td></td>";
                                 }
 
-                                echo "<td>" . $packageDB->getPackageName() . "</td>
+                                echo "<td align='center'>" . $packageDB->getPackageName() . "</td>
                                     <td align='center'>";
 
                                     if ($ableUpgrade) {
@@ -207,10 +200,6 @@ $(function() {
                                         echo "--";
                                     }
                                 echo "</td>
-                                    <td align='center'>" . $packageDB->getCommission() . "</td>
-                                    <td align='center'>" . $packageDB->getPairingBonus() . "</td>
-                                    <td align='center'>" . number_format($packageDB->getDailyMaxPairing(),2) . "</td>
-                                    <td align='center'>" . $packageDB->getCreditRefund() . "</td>
                                 </tr>";
                                     }
                                 } else {

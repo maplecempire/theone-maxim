@@ -182,86 +182,9 @@ function verifySponsorId() {
                 }
             });
 }
-function waiting() {
-    $("#waitingLB h3").html("<h3 style='float: none; text-align: center; font-size: inherit; font-weight: bold;'>Loading...</h3><div id='loader' class='loader' style='text-align: center;'><img id='img-loader' src='/images/loading.gif' alt='Loading' style='text-align: center;'/></div>");
-
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    'background-color': '#fff',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .8,
-                    color: '#000'
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-}
-function alert(data) {
-    var msgs = "";
-    if ($.isArray(data)) {
-        jQuery.each(data, function(key, value) {
-            msgs = value + "<br>";
-        });
-    } else {
-        msgs = data + "<br>";
-    }
-
-    var alertPanel = "<div style='margin-bottom: 20px; padding: 1em;' class='ui-state-highlight ui-corner-all'><p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-info'></span>";
-    alertPanel += msgs + "</p></div>";
-    $("#waitingLB h3").html(alertPanel);
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .9
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
-}
-function error(data) {
-    var msgs = "";
-    if ($.isArray(data)) {
-        jQuery.each(data, function(key, value) {
-            msgs = value + "<br>";
-        });
-    } else {
-        msgs = data + "<br>";
-    }
-
-    var errorPanel = "<div style='padding: 1em' class='ui-state-error ui-corner-all'>";
-    errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
-    errorPanel += msgs + "</p></div>";
-    $("#waitingLB h3").html(errorPanel);
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .9,
-                    'min-width': '30%',
-                    'width': '60%',
-                    left: '25%',
-                    top: '25%'
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
-}
 </script>
 
-<form action="/member/doRegister" id="registerForm" method="post">
+<form action="/member/doMemberRegistration" id="registerForm" method="post">
 
 <table cellspacing="0" cellpadding="0">
 <colgroup>
@@ -872,17 +795,6 @@ function error(data) {
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td colspan="5" class="tbl_content_right">
-        <?php
-          require_once('recaptchalib.php');
-          $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
-          echo recaptcha_get_html($publickey);
-        ?>
-    </td>
-    <td>&nbsp;</td>
-</tr>
 <tr class="tbl_listing_end">
     <td>&nbsp;</td>
     <td colspan="5" class="tbl_content_right">
