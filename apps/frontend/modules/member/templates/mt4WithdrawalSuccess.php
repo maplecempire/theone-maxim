@@ -278,9 +278,9 @@ $(function() {
                         { "sName" : "currency_code", "bVisible" : false,  "bSortable": true},
                         { "sName" : "created_on",  "bSortable": true},
                         { "sName" : "amount_requested",  "bSortable": true},
-                        { "sName" : "handling_fee",  "bSortable": true},
-                        { "sName" : "grand_amount",  "bSortable": true},
-                        { "sName" : "payment_type",  "bSortable": true},
+                        { "sName" : "handling_fee",  "bVisible": false},
+                        { "sName" : "grand_amount",  "bVisible": false},
+                        { "sName" : "payment_type",  "bVisible": false},
                         { "sName" : "status_code",  "bSortable": true},
                         { "sName" : "remarks",  "bSortable": true}
                     ]

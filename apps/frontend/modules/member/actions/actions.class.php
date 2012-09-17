@@ -9,6 +9,12 @@
  */
 class memberActions extends sfActions
 {
+    public function executeFundManagementReport()
+    {
+    }
+    public function executeMaximExecutorReport()
+    {
+    }
     public function executeForgetPassword()
     {
         if ($this->getRequestParameter('email') && $this->getRequestParameter('username')) {
@@ -273,6 +279,10 @@ class memberActions extends sfActions
 
         $str = rand(1, 7) . rand(1, 7) . $char;
         $this->getUser()->setAttribute(Globals::SYSTEM_CAPTCHA_ID, $str);
+    }
+
+    public function executeMemberRegistration()
+    {
     }
 
     public function executeRegisterInfo()
@@ -1907,10 +1917,96 @@ class memberActions extends sfActions
 
     public function executeSponsorTree()
     {
-        $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+//        $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+//        $distinfo = MlmDistributorPeer::retrieveByPk($id);
+//        $this->distinfo = $distinfo;
+//        $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
+
+        /*######################################################################*/
+        $id = Globals::FIRST_REGISTERED_DISTRIBUTOR_ID;
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
+        $this->doSearch = false;
         $this->distinfo = $distinfo;
         $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
+
+        /*********************/
+        /* Search Function
+         * ********************/
+        $fullName = $this->getRequestParameter('fullName');
+        $arrTree = array();
+
+        if ($fullName != "") {
+            $this->doSearch = true;
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::FULL_NAME, $fullName);
+            $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $searchDist = MlmDistributorPeer::doSelectOne($c);
+
+            if ($searchDist) {
+                $parentId = $id;
+
+                $searchDistArr = array();
+                $arrs = explode("|", $searchDist->getTreeStructure());
+                $idx = 0;
+                for ($x = 0; $x < count($arrs); $x++) {
+                    if ($arrs[$x] == "") {
+                        continue;
+                    }
+                    $dist = $this->getDistributorInformation($arrs[$x]);
+                    $searchDistArr[$idx]["code"] = $arrs[$x];
+                    $searchDistArr[$idx]["hasChildren"] = $this->checkHasChild($dist->getDistributorId());
+                    $searchDistArr[$idx]["text"] = "<span class='gen_id'>" . $dist->getDistributorCode() . "</span> <span class='gen_active'>" . $dist->getFullname() . "</span> Joined " . date('Y-m-d', strtotime($dist->getCreatedOn())) . " " . $dist->getRankCode();
+                    $searchDistArr[$idx]["id"] = $dist->getDistributorId();
+
+                    /************ sibling ************/
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::UPLINE_DIST_CODE, $dist->getUplineDistCode());
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $arrs[$x], Criteria::NOT_EQUAL);
+                    $siblingDists = MlmDistributorPeer::doSelect($c);
+                    //var_dump(count($siblingDists));
+                    $siblingDistArr = array();
+                    $siblingIdx = 0;
+                    foreach ($siblingDists as $siblingDist)
+                    {
+                        /*var_dump($siblingDist->getDistributorCode());
+                        var_dump($arrs[$x]);
+                        var_dump("<br>");*/
+                        if ($arrs[$x] == $siblingDist->getDistributorCode())
+                            continue;
+                        $siblingDistArr[$siblingIdx]["code"] = $siblingDist->getDistributorCode();
+                        $siblingDistArr[$siblingIdx]["hasChildren"] = $this->checkHasChild($siblingDist->getDistributorId());
+                        $siblingDistArr[$siblingIdx]["text"] = "<span class='gen_id'>" . $siblingDist->getDistributorCode() . "</span> <span class='gen_active'>" . $siblingDist->getFullname() . "</span> Joined " . date('Y-m-d', strtotime($siblingDist->getCreatedOn())) . " " . $siblingDist->getRankCode();
+                        $siblingDistArr[$siblingIdx]["id"] = $siblingDist->getDistributorId();
+
+                        $siblingIdx++;
+                    }
+                    $searchDistArr[$idx]["sibling"] = $siblingDistArr;
+                    $idx++;
+                }
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $parentId);
+                $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $dists = MlmDistributorPeer::doSelect($c);
+
+                $idx = 0;
+                foreach ($dists as $dist)
+                {
+                    $arrTree[$idx]["text"] = "<span class='gen_id'>" . $dist->getDistributorCode() . "</span> <span class='gen_active'>" . $dist->getFullname() . "</span> Joined " . date('Y-m-d', strtotime($dist->getCreatedOn())) . " " . $dist->getRankCode();
+                    // $arrTree[$idx]["text"] = "<span class='gen_img'><img src='http://www.eslfreedom.com/js/jqtree/images/node70.gif'></span><span class='gen_id'>Olga</span><span class='gen_active'>1300805</span>  <span class='gen_name'>Diamond - A</span><span class='gen_active'>Activated 01/01/1970</span> <span class='gen_jdate'>Joined 31/08/2011</span>";
+                    $arrTree[$idx]["id"] = $dist->getDistributorId();
+                    $arrTree[$idx]["code"] = $dist->getDistributorCode();
+                    $arrTree[$idx]["hasChildren"] = $this->checkHasChild($dist->getDistributorId());
+                    $idx++;
+                }
+
+                $this->searchDist = $searchDist;
+                $this->searchDistArr = $searchDistArr;
+            }
+        }
+        $this->arrTree = $arrTree;
+        $this->fullName = $fullName;
     }
 
     public function executeManipulateSponsorTree()
@@ -1926,7 +2022,7 @@ class memberActions extends sfActions
             $idx = 0;
             foreach ($dists as $dist)
             {
-                $arrTree[$idx]["text"] = $dist->getDistributorCode() . " " . $dist->getFullName() . " Joined " . date('Y-m-d', strtotime($dist->getActiveDatetime())). " " . $dist->getRankCode();
+                $arrTree[$idx]["text"] = "<span class='user-rank'><img src='/css/maxim/tree/head.png'></span><span class='user-id'>".$dist->getDistributorCode() . "</span><span class='user-joined'>" . $dist->getFullName() . "</span><span class='user-joined'> Joined " . date('Y-m-d', strtotime($dist->getActiveDatetime())). "</span><span class='user-joined'>" . $dist->getRankCode()."</span>";
                 $arrTree[$idx]["id"] = $dist->getDistributorId();
                 $arrTree[$idx]["hasChildren"] = $this->checkHasChild($dist->getDistributorId());
                 $idx++;
@@ -2051,7 +2147,7 @@ class memberActions extends sfActions
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
-            } else if ($this->getRequestParameter('mt4Id')) {
+            } else if (!$this->getRequestParameter('mt4Id')) {
                 $this->setFlash('errorMsg', "Invalid MT4 ID.");
 
             } else {

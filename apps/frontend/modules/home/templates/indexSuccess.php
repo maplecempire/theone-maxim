@@ -357,6 +357,9 @@ ul, ol {
             <div class="hr2"></div>
             <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
 
+            <strong>MaximTrader</strong> have sought to structure an investment which addresses all the challenges which investors face today.
+            <a href="<?php echo url_for("/home/investment")?>" style="color: #0080C8">Learn more ?</a>
+
             <div class="hr2"></div>
             <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
 

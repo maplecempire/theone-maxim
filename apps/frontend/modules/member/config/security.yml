@@ -54,6 +54,10 @@ loginPassword:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+memberRegistration:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 mt4Withdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

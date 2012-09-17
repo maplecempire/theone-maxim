@@ -12,6 +12,9 @@
         <li>
             <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
         </li>
+        <li>
+            <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
+        </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="#" id="linkPackagePurchase"><span>Package Purchase</span></a>
@@ -26,17 +29,20 @@
         </li>
     <?php } ?>
 
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
-        </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
-        </li>
-    <?php } ?>
-
+    </ul>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title">ACCOUNT INFORMATION</li>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
+            </li>
+        <?php } ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
+            </li>
+        <?php } ?>
     </ul>
     <br class="clear"><br>
     <ul>
@@ -79,10 +85,10 @@
         </li>
     <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>Fund Management Report</span></a>
+            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span>Fund Management Report</span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadFundManagementReport?q=" . rand()) ?>"><span>MaximTrade Executor™ Report</span></a>
+            <a href="<?php echo url_for("/member/maximExecutorReport") ?>"><span>MaximTrade Executor™ Report</span></a>
         </li>
     </ul>
     <br class="clear"><br>
