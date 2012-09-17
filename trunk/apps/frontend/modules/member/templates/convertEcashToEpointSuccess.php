@@ -32,19 +32,19 @@
 
 <div class="ewallet_li">
 	<a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">
-        <?php echo __('Deposit Fund Purchase'); ?>
+        <?php echo __('Funds Deposit'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/convertEcashToEpoint" style="color: rgb(134, 197, 51);">
-        <?php echo __('Convert MT4 Credit To Deposit Fund'); ?>
+        <?php echo __('Convert CP1 To CP2'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/transferEpoint" style="color: rgb(0, 93, 154);">
-        <?php echo __('Deposit Fund Transfer'); ?>
+        <?php echo __('CP2 Transfer'); ?>
     </a>
 </div>
 
@@ -54,7 +54,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert MT4 Credit To Deposit Fund') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP1 To CP2') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -96,7 +96,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Convert MT4 Credit To Deposit Fund') ?></th>
+                    <th colspan="2"><?php echo __('Convert CP1 To CP2') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -115,7 +115,7 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Deposit Fund Amount'); ?></td>
+                    <td><?php echo __('CP2 Amount'); ?></td>
                     <td>
                         <select name="epointAmount" id="cbo_epointAmount" tabindex="2">
                             <option value="50">50</option>
@@ -154,7 +154,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: Deposit Fund is for package purchase, package upgrade and reload MT4 Fund use only. <br>Forex Point is non-withdrawable.</font>
+                        <font color="#dc143c">NOTE: CP2 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

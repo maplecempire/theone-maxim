@@ -488,6 +488,137 @@ class memberActions extends sfActions
         return $this->redirect('/member/registerInfo');
     }
 
+    public function executeDoMemberRegistration()
+    {
+        require_once('recaptchalib.php');
+        $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
+        $resp = recaptcha_check_answer ($privatekey,
+                                    $_SERVER["REMOTE_ADDR"],
+                                    $_POST["recaptcha_challenge_field"],
+                                    $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+            return $this->redirect('home/login');
+        }
+
+        //$fcode = $this->generateFcode($this->getRequestParameter('country'));
+        $fcode = $this->getRequestParameter('userName');
+        $password = $this->getRequestParameter('userpassword');
+
+        $c = new Criteria();
+        $c->add(AppUserPeer::USERNAME, $fcode);
+        $exist = AppUserPeer::doSelectOne($c);
+        //$this->forward404Unless(!$exist);
+        $parentId = $this->getDistributorIdByCode($this->getRequestParameter('sponsorId'));
+        $this->forward404Unless($parentId <> 0);
+
+        //******************* upline distributor ID
+        $uplineDistDB = $this->getDistributorInformation($this->getRequestParameter('sponsorId'));
+        $this->forward404Unless($uplineDistDB);
+
+        $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+        $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+
+        $app_user = new AppUser();
+        $app_user->setUsername($fcode);
+        $app_user->setKeepPassword($password);
+        $app_user->setUserpassword($password);
+        $app_user->setKeepPassword2($password);
+        $app_user->setUserpassword2($password);
+        $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
+        $app_user->setStatusCode(Globals::STATUS_PENDING);
+        $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $app_user->save();
+
+        // ****************************
+        $mlm_distributor = new MlmDistributor();
+        $mlm_distributor->setDistributorCode($fcode);
+        $mlm_distributor->setUserId($app_user->getUserId());
+        $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
+        $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
+        $mlm_distributor->setNickname($fcode);
+        $mlm_distributor->setIc($this->getRequestParameter('ic'));
+        if ($this->getRequestParameter('country') == 'China') {
+            $mlm_distributor->setCountry('China (PRC)');
+        } else {
+            $mlm_distributor->setCountry($this->getRequestParameter('country'));
+        }
+        $mlm_distributor->setAddress($this->getRequestParameter('address'));
+        $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+        $mlm_distributor->setCity($this->getRequestParameter('city'));
+        $mlm_distributor->setState($this->getRequestParameter('state'));
+        $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+        $mlm_distributor->setEmail($this->getRequestParameter('email'));
+        $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+        $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+        $mlm_distributor->setGender($this->getRequestParameter('gender'));
+        if ($this->getRequestParameter('dob')) {
+            list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+            $mlm_distributor->setDob("$y-$m-$d");
+        }
+        $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+        $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+        $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+        $mlm_distributor->setTreeLevel($treeLevel);
+        $mlm_distributor->setTreeStructure($treeStructure);
+        $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+        $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+        $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+        $mlm_distributor->setSpread($this->getRequestParameter('spread'));
+        $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+        $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+        $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
+        $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+        $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+
+        $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_distributor->save();
+
+        $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $fcode);
+
+        /****************************/
+        /*****  Send email **********/
+        /****************************/
+        /*error_reporting(E_STRICT);
+
+        date_default_timezone_set(date_default_timezone_get());
+
+        include_once('class.phpmailer.php');
+
+        $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
+        $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
+
+        <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
+        <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
+        <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
+
+        $mail = new PHPMailer();
+        $mail->IsMail(); // telling the class to use SMTP
+        $mail->Host = Mails::EMAIL_HOST; // SMTP server
+        $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
+        $mail->From = Mails::EMAIL_FROM_NOREPLY;
+        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
+        $mail->Subject = $subject;
+        $mail->CharSet="utf-8";
+
+        $text_body = $body;
+
+        $mail->Body = $body;
+        $mail->AltBody = $text_body;
+        $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
+        $mail->AddBCC("r9projecthost@gmail.com", "jason");
+
+        if (!$mail->Send()) {
+            echo $mail->ErrorInfo;
+        }*/
+        return $this->redirect('/member/registerInfo');
+    }
+
     // **********************************************************************************************
     // *****************************         For broker registeration          **********************
     // **********************************************************************************************
@@ -1175,7 +1306,7 @@ class memberActions extends sfActions
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient Deposit Fund.";
+                    $errorMsg = "Insufficient CP2.";
                 }
             } else if ("ecash" == $paymentType) {
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -1739,7 +1870,7 @@ class memberActions extends sfActions
 
             if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Deposit Fund Amount"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
 
             } elseif ($appUser->getUserPassword2() <> $this->getRequestParameter('transactionPassword')) {
 
@@ -2058,7 +2189,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient ecash amount");
+                $this->setFlash('errorMsg', "In-sufficient CP1");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -2104,7 +2235,7 @@ class memberActions extends sfActions
                 $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_ecash_withdraw->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your cash withdrawal has been submitted."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP1 withdrawal has been submitted."));
 
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -2252,7 +2383,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($pointNeeded > $ledgerEpointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient Deposit Fund amount");
+                $this->setFlash('errorMsg', "In-sufficient CP2");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -2637,7 +2768,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient ecash amount");
+                $this->setFlash('errorMsg', "In-sufficient CP1");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -2670,7 +2801,7 @@ class memberActions extends sfActions
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("MT4 Credit convert to deposit fund successful."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP1 convert to CP2 successful."));
 
                 return $this->redirect('/member/convertEcashToEpoint');
             }
@@ -2726,7 +2857,7 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
 
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
-                $this->setFlash('errorMsg', "In-sufficient deposit fund amount");
+                $this->setFlash('errorMsg', "In-sufficient CP2 amount");
 
             } else if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");

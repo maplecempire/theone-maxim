@@ -84,19 +84,19 @@ $(function() {
 
 <div class="ewallet_li">
 	<a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(134, 197, 51);">
-        <?php echo __('Deposit Fund Purchase'); ?>
+        <?php echo __('Funds Deposit'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/convertEcashToEpoint" style="color: rgb(0, 93, 154);">
-        <?php echo __('Convert MT4 Credit To Deposit Fund'); ?>
+        <?php echo __('Convert CP1 To CP2'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/transferEpoint" style="color: rgb(0, 93, 154);">
-        <?php echo __('Deposit Fund Transfer'); ?>
+        <?php echo __('CP2 Transfer'); ?>
     </a>
 </div>
 
@@ -106,7 +106,7 @@ $(function() {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Fund Purchase') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Funds Deposit') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -148,7 +148,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Deposit Fund Purchase') ?></th>
+                    <th colspan="2"><?php echo __('Funds Deposit') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -177,7 +177,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Total Deposit Fund'); ?></td>
+                    <td><?php echo __('Total Fund Deposited'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount"/>
                     </td>
@@ -200,9 +200,9 @@ $(function() {
                             <tr>
                                 <td valign="top"><font color="#dc143c">NOTE :</font></td>
                                 <td>
-                                    <font color="#dc143c">Deposit Fund is for package purchase, package upgrade and reload mt4 fund used only.
-                                    <br>Deposit Fund is non-withdrawable.
-                                    <br><?php echo $systemCurrency?> 1 : 1 Forex Point.&nbsp;</font>
+                                    <font color="#dc143c">Funds Deposited will be credited into CP2 Account.
+                                    <br>CP2 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.
+                                    <br><?php echo $systemCurrency?> 1 equals to 1 value of CP2.&nbsp;</font>
                                 </td>
                             </tr>
                         </table>
@@ -333,7 +333,7 @@ $(function() {
                 <th class="tbl_header_left">
                     <div class="border_left_grey">&nbsp;</div>
                 </th>
-                <th><?php echo __('Deposit Fund Purchase History') ?></th>
+                <th><?php echo __('Funds Deposit History') ?></th>
                 <th class="tbl_content_right"></th>
                 <th class="tbl_header_right">
                     <div class="border_right_grey">&nbsp;</div>
@@ -347,7 +347,7 @@ $(function() {
             <tr>
                 <th></th>
                 <th><?php echo __('Date') ?></th>
-                <th><?php echo __('Deposit Fund purchase') ?></th>
+                <th><?php echo __('Funds Deposit') ?></th>
                 <th><?php echo __('Reference No') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>
