@@ -69,8 +69,29 @@
     });
 </script>
 
+<div class="ewallet_li">
+	<a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(134, 197, 51);">
+        <?php echo __('Sponsor Genealogy'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(0, 93, 154);">
+        <?php echo __('Placement Genealogy'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(0, 93, 154);">
+        <?php echo __('Downline Stats'); ?>
+    </a>
+</div>
+
 <table cellpadding="0" cellspacing="0">
 <tbody>
+<tr>
+    <td><br></td>
+</tr>
 <tr>
     <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": " . $distinfo->getDistributorCode(); ?></span></td>
 </tr>
@@ -80,7 +101,7 @@
 <?php echo form_tag('member/sponsorTree', 'id=sponsorForm') ?>
 <tr>
     <td>
-<table>
+<table style="width: 50%">
     <tr>
         <td><strong>Full Name</strong></td>
         <td>:</td>

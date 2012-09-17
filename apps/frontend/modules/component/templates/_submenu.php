@@ -79,7 +79,7 @@
     <ul>
         <li class="menu_title">HIERARCHY</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/genealogy"><span><?php echo __('Genealogy'); ?></span></a>
+            <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
