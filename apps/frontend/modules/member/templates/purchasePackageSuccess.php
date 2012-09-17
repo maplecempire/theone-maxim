@@ -12,6 +12,9 @@ $(function() {
             "transactionPassword" : {
                 required : true
                 , remote: "/member/verifyTransactionPassword"
+            },
+            "privateInvestmentAgreement" : {
+                required : true
             }
         },
         submitHandler: function(form) {
@@ -159,17 +162,11 @@ $(function() {
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td rowspan="2" valign="middle">Join Package</td>
-                                <td rowspan="2" valign="middle">Membership</td>
-                                <td rowspan="2" valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
-                                <td colspan="4">Bonus</td>
+                                <td valign="middle">Join Package</td>
+                                <td valign="middle">Membership</td>
+                                <td valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
                             </tr>
-                            <tr class="pbl_header">
-                                <td>RB</td>
-                                <td>Paring Bonus</td>
-                                <td>Daily Max</td>
-                                <td>Pips Rebate</td>
-                            </tr>
+
                             <?php
                                 if (count($packageDBs) > 0) {
                                     $trStyle = "1";
@@ -181,26 +178,32 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "'>
-                                    <td>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    <td align='center'>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                'class' => 'activeLink',
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
                                           )) . "</td>
-                                    <td>" . $packageDB->getPackageName() . "</td>
-                                    <td align='center'>" . number_format($packageDB->getPrice(),2) . "</td>
-                                    <td align='center'>" . $packageDB->getCommission() . "</td>
-                                    <td align='center'>" . $packageDB->getPairingBonus() . "</td>
-                                    <td align='center'>" . number_format($packageDB->getDailyMaxPairing(),2) . "</td>
-                                    <td align='center'>" . $packageDB->getCreditRefund() . "</td>
+                                    <td align='center'>" . $packageDB->getPackageName() . "</td>
+                                    <td align='center'>" . $packageDB->getPrice() . "</td>
                                 </tr>";
                                     }
                                 } else {
-                                    echo "<tr class='odd' align='center'><td colspan='7'>" . __('No data available in table') . "</td></tr>";
+                                    echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";
                                 }
                             ?>
                             </tbody>
                         </table>
                     </td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+                    <td colspan="4">
+                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
+                    </td>
+                    <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">

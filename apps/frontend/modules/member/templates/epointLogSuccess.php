@@ -49,7 +49,7 @@
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/ecashLog" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashLog") ?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP1 Statement'); ?>
     </a>
 </div>

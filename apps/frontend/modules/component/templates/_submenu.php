@@ -25,7 +25,7 @@
     <?php } ?>
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/epointPurchase"><span>Funds Deposit</span></a>
+            <a href="<?php echo url_for("/member/epointPurchase")?>"><span>Funds Deposit</span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
