@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanise)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanese)</span></a>
                 </td>
             </tr>
             </tbody>
