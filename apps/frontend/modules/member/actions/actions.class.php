@@ -9,6 +9,9 @@
  */
 class memberActions extends sfActions
 {
+    public function executeExchange()
+    {
+    }
     public function executeDailyFxGuide()
     {
     }
