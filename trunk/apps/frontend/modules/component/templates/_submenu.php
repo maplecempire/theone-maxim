@@ -101,7 +101,7 @@
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Download Daily FX Guide</span></a>
+            <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span>Download Daily FX Guide</span></a>
         </li>
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
