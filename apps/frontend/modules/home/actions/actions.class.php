@@ -188,7 +188,7 @@ class homeActions extends sfActions
 
             if ($existUser) {
                 $md5password = md5($existUser->getUserpassword());
-
+                //var_dump($md5password);
                 if ($md5password == $password) {
                     $c = new Criteria();
                     $c->add(MlmDistributorPeer::USER_ID, $existUser->getUserId());
