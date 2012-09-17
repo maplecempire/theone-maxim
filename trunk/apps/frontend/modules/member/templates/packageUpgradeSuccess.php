@@ -19,6 +19,9 @@ $(function() {
             "transactionPassword" : {
                 required : true
                 , remote: "/member/verifyTransactionPassword"
+            },
+            "privateInvestmentAgreement" : {
+                required : true
             }
         },
         submitHandler: function(form) {
@@ -221,6 +224,16 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>-->
 
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+                    <td colspan="4">
+                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
@@ -233,9 +246,8 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td></td>
-                    <td align="right">
-                        <!--<button id="btnTransfer"><?php /*echo __('Submit') */?></button>-->
+                    <td colspan="2" align="center">
+                        <font color="#dc143c"> <?php echo __('Note : Please fill up the <I>private investment agreement</I> and send to <b>managedfund@maximtrader.com</b>') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
