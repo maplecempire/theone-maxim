@@ -103,16 +103,10 @@ $(function() {
                         required : true,
                         equalTo: "#email"
                     },
-                    "terms_cust_agreement" : {
-                        required : true
-                    },
                     "terms_bis" : {
                         required : true
                     },
                     "terms_risk" : {
-                        required : true
-                    },
-                    "terms_aml" : {
                         required : true
                     },
                     "term_condition" : {
@@ -719,16 +713,6 @@ function verifySponsorId() {
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_even">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_cust_agreement" name="terms_cust_agreement">
-        <label for="terms_cust_agreement">Customer Agreement</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/customerAgreement">Download Agreement (272 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
 <tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_bis" name="terms_bis">
@@ -742,19 +726,9 @@ function verifySponsorId() {
 <tr class="tbl_form_row_even">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">
-        <label for="terms_cust_agreement">Risk Disclosure Statement</label></td>
+        <label for="terms_risk">Risk Disclosure Statement</label></td>
     <td colspan="4">
         <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (175 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_aml" name="terms_aml">
-        <label for="terms_bis">AML Policy</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/amlPolicy">Download Agreement (228 KB PDF)</a>
     </td>
     <td>&nbsp;</td>
 </tr>
