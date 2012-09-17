@@ -31,19 +31,19 @@
 </script>
 
 <div class="ewallet_li">
-	<a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">
+	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/epointPurchase")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('Funds Deposit'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/convertEcashToEpoint" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(134, 197, 51);">
         <?php echo __('Convert CP1 To CP2'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/transferEpoint" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferEpoint")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP2 Transfer'); ?>
     </a>
 </div>
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td>
-            <form action="/member/convertEcashToEpoint" id="ecreditForm" name="ecreditForm" method="post">
+            <form action="<?php echo url_for("/member/convertEcashToEpoint") ?>" id="ecreditForm" name="ecreditForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
