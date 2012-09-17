@@ -75,6 +75,13 @@
     </ul>
     <br class="clear"><br>
     <ul>
+        <li class="menu_title">EXCHANGE RATE</li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/exchange"><span><?php echo __('Exchange Rate'); ?></span></a>
+        </li>
+    </ul>
+    <br class="clear"><br>
+    <ul>
         <li class="menu_title">STATEMENT</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a>
