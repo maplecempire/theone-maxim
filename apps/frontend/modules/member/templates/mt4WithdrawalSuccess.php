@@ -77,8 +77,23 @@ $(function() {
 });
 </script>
 
+<div class="ewallet_li">
+	<a target="_self" class="navcontainer" href="/member/mt4Withdrawal" style="color: rgb(134, 197, 51);">
+        <?php echo __('MT4 Withdrawal'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/ecashWithdrawal" style="color: rgb(0, 93, 154);">
+        <?php echo __('Cash Withdrawal'); ?>
+    </a>
+</div>
+
 <table cellpadding="0" cellspacing="0">
     <tbody>
+    <tr>
+        <td><br></td>
+    </tr>
     <tr>
         <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('MT4 Withdrawal') ?></span></td>
     </tr>

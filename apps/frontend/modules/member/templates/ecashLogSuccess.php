@@ -43,45 +43,102 @@
     }
 </script>
 
-<div class="aside">
-    <?php //include_component('component', 'headerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #BeginLibraryItem "/Library/side_navi.lbi" -->
-    <!--<div class="sidenavi">
-        <ul>
-            <li><a href="/member/bonusDetails"><span><?php /*echo __('Bonus Details'); */?></span></a></li>
-        </ul>
-    </div>-->
-
-    <?php //include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-    <!-- #EndLibraryItem -->
+<div class="ewallet_li">
+	<a target="_self" class="navcontainer" href="/member/epointLog" style="color: rgb(0, 93, 154);">
+        <?php echo __('Deposit Fund Statement'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/ecashLog" style="color: rgb(134, 197, 51);">
+        <?php echo __('Cash Statement'); ?>
+    </a>
 </div>
 
-<div class="areaContent">
-    <div class="portlet">
-        <div class="portlet-header"><?php echo __('MT4 Credit Log') ?></div>
-        <div class="portlet-content">
-            <table class="display" id="datagrid" border="0" width="100%">
-                <thead>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Cash Statement') ?></span></td>
+    </tr>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
                 <tr>
-                    <th>id</th>
-                    <th><?php echo __('In') ?></th>
-                    <th><?php echo __('Out') ?></th>
-                    <th><?php echo __('Balance') ?></th>
-                    <th><?php echo __('Transaction Type') ?></th>
-                    <th><?php echo __('Date') ?></th>
-                    <th><?php echo __('Remarks') ?></th>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Cash Statement') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><input size="15" type="text" id="search_action" value="" class="search_init"/></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </thead>
+                </tbody>
             </table>
-        </div>
-    </div>
-</div>
+            <table cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <!--<tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php /*echo __('Forex Point Statement') */?></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>-->
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <br>
+                        <table class="display" id="datagrid" border="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th><?php echo __('In') ?></th>
+                                <th><?php echo __('Out') ?></th>
+                                <th><?php echo __('Balance') ?></th>
+                                <th><?php echo __('Transaction Type') ?></th>
+                                <th><?php echo __('Date') ?></th>
+                                <th><?php echo __('Remarks') ?></th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input size="15" type="text" id="search_action" value="" class="search_init"/></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>

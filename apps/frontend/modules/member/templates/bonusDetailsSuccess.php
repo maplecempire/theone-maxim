@@ -122,7 +122,7 @@
     <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Bonus Detail') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Commission Detail') ?></span></td>
     </tr>
     <tr>
         <td><br></td>
@@ -141,7 +141,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('Bonus Categories') ?></th>
+                    <th><?php echo __('Commission Categories') ?></th>
                     <th class="tbl_content_right"></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -248,7 +248,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('Bonus Details') ?></th>
+                    <th><?php echo __('Commission Details') ?></th>
                     <th class="tbl_content_right"></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
