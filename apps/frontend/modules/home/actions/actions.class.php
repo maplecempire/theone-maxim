@@ -181,20 +181,24 @@ class homeActions extends sfActions
             $array = explode(',', Globals::STATUS_ACTIVE);
             $c = new Criteria();
             $c->add(AppUserPeer::USERNAME, $username);
-            $c->add(AppUserPeer::USERPASSWORD, $password);
+            //$c->add(AppUserPeer::USERPASSWORD, $password);
             $c->add(AppUserPeer::USER_ROLE, Globals::ROLE_DISTRIBUTOR);
             $c->add(AppUserPeer::STATUS_CODE, $array, Criteria::IN);
             $existUser = AppUserPeer::doSelectOne($c);
 
             if ($existUser) {
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::USER_ID, $existUser->getUserId());
-                $existDist = MlmDistributorPeer::doSelectOne($c);
+                $md5password = md5($existUser->getUserpassword());
 
-                if ($existDist) {
-                    $loginSuccess = true;
-                } else {
-                    $loginSuccess = false;
+                if ($md5password == $password) {
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::USER_ID, $existUser->getUserId());
+                    $existDist = MlmDistributorPeer::doSelectOne($c);
+
+                    if ($existDist) {
+                        $loginSuccess = true;
+                    } else {
+                        $loginSuccess = false;
+                    }
                 }
             } else {
                 $loginSuccess = false;
