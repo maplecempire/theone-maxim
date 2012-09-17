@@ -12,6 +12,9 @@
         <li>
             <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
+        </li>
         <li>
             <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
         </li>
@@ -43,23 +46,26 @@
                 <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
             </li>
         <?php } ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/underMaintenance"><span><?php echo __('Purchase Education Course'); ?></span></a>
+        </li>
     </ul>
-    <br class="clear"><br>
+    <!--<br class="clear"><br>
     <ul>
         <li class="menu_title">PROFILE</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/viewProfile"><span><?php echo __('Personal Information'); ?></span></a>
+            <a href="/member/viewProfile"><span><?php /*echo __('Personal Information'); */?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/viewBankInformation"><span><?php echo __('Bank Account Information'); ?></span></a>
+            <a href="/member/viewBankInformation"><span><?php /*echo __('Bank Account Information'); */?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/loginPassword"><span><?php echo __('Change Password'); ?></span></a>
+            <a href="/member/loginPassword"><span><?php /*echo __('Change Password'); */?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/transactionPassword"><span><?php echo __('Change Security Password'); ?></span></a>
+            <a href="/member/transactionPassword"><span><?php /*echo __('Change Security Password'); */?></span></a>
         </li>
-    </ul>
+    </ul>-->
     <br class="clear"><br>
     <ul>
         <li class="menu_title">HIERARCHY</li>
@@ -82,7 +88,14 @@
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">STATEMENT</li>
+        <li class="menu_title">CONTACT</li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/underMaintenance"><span><?php echo __('CS Center'); ?></span></a>
+        </li>
+    </ul>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title">ACCOUNT INFORMATION</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a>
         </li>

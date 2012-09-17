@@ -80,6 +80,110 @@ $(function() {
             primary: "ui-icon-circle-arrow-n"
         }
     });
+
+    $("#bankForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "Security Password is not valid."
+            }
+        },
+        rules : {
+            "bankName" : {
+                required : true,
+                minlength : 3
+            },
+            "bankAccNo" : {
+                required : true,
+                minlength : 3
+            },
+            "bankHolderName" : {
+                required : true,
+                minlength : 3
+            },
+            "transactionPassword" : {
+                required : true,
+                remote: "/member/verifyTransactionPassword"
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        },
+        success: function(label) {
+            //label.addClass("valid").text("Valid captcha!")
+        }
+    });
+
+    $("#btnBankUpdate").button({
+        icons: {
+            primary: "ui-icon-disk"
+        }
+    });
+
+    $("#passwordForm").validate({
+        messages : {
+            newPassword2: {
+                equalTo: "Please enter the same password as above"
+            }
+        },
+        rules : {
+            "oldPassword" : {
+                required : true,
+                minlength : 3
+            },
+            "newPassword" : {
+                required : true,
+                minlength : 3
+            },
+            "newPassword2" : {
+                required : true,
+                minlength : 3,
+                equalTo: "#newPassword"
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        }
+    });
+
+    $("#btnPasswordUpdate").button({
+        icons: {
+            primary: "ui-icon-disk"
+        }
+    });
+
+    $("#securityPasswordForm").validate({
+        messages : {
+            newSecurityPassword2: {
+                equalTo: "Please enter the same password as above"
+            }
+        },
+        rules : {
+            "oldSecurityPassword" : {
+                required : true,
+                minlength : 3
+            },
+            "newSecurityPassword" : {
+                required : true,
+                minlength : 3
+            },
+            "newSecurityPassword2" : {
+                required : true,
+                minlength : 3,
+                equalTo: "#newSecurityPassword"
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        }
+    });
+    $("#btnSecurityUpdate").button({
+        icons: {
+            primary: "ui-icon-disk"
+        }
+    });
 });
 </script>
 
@@ -138,7 +242,7 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Referrer ID') ?></td>
-                    <td><input name="sponsorId" readonly="readonly" id="sponsorId" tabindex="1" size="30"
+                    <td><input name="sponsorId" readonly="readonly" id="sponsorId" tabindexBak="1" size="30"
                                value="<?php echo $sponsor->getDistributorCode() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -148,14 +252,14 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Referrer Name') ?></td>
                     <td><input name="sponsorName" readonly="readonly" id="sponsorName"
-                                             tabindex="2" size="30" value="<?php echo $sponsor->getFullname() ?>"/></td>
+                                             tabindexBak="2" size="30" value="<?php echo $sponsor->getFullname() ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Full Name') ?></td>
-                    <td><input name="fullname" readonly="readonly" type="text" id="fullname" tabindex="5"
+                    <td><input name="fullname" readonly="readonly" type="text" id="fullname" tabindexBak="5"
                                              size="30" value="<?php echo $distDB->getFullName() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -183,7 +287,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Address') ?></td>
                     <td>
-                        <input name="address" type="text" id="address" tabindex="13" size="30"
+                        <input name="address" type="text" id="address" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getAddress() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -193,7 +297,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Address') ?> 2</td>
                     <td>
-                        <input name="address2" type="text" id="address2" tabindex="13" size="30"
+                        <input name="address2" type="text" id="address2" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getAddress2() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -203,7 +307,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('City / Town') ?></td>
                     <td>
-                        <input name="city" type="text" id="city" tabindex="13" size="30"
+                        <input name="city" type="text" id="city" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getCity() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -213,7 +317,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('State / Province') ?></td>
                     <td>
-                        <input name="state" type="text" id="state" tabindex="13" size="30"
+                        <input name="state" type="text" id="state" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getState() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -223,7 +327,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Zip / Postal Code') ?></td>
                     <td>
-                        <input name="zip" type="text" id="zip" tabindex="13" size="30"
+                        <input name="zip" type="text" id="zip" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getPostcode() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -233,7 +337,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Email') ?></td>
                     <td>
-                        <input name="email" type="text" id="email" tabindex="13" size="30"
+                        <input name="email" type="text" id="email" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getEmail() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -243,7 +347,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Alternate Email') ?></td>
                     <td>
-                        <input name="alt_email" type="text" id="alt_email" tabindex="13" size="30"
+                        <input name="alt_email" type="text" id="alt_email" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getAlternateEmail() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -253,7 +357,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Contact Number') ?></td>
                     <td>
-                        <input name="contactNumber" type="text" id="contactNumber" tabindex="13" size="30"
+                        <input name="contactNumber" type="text" id="contactNumber" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getContact() ?>"/>
                     </td>
                     <td>&nbsp;</td>
@@ -293,6 +397,237 @@ $(function() {
                 </tbody>
             </table>
             </form>
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form action="/member/loginPassword" id="passwordForm" method="post">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Change Account login Password') ?></th>
+<!--                    <th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Old Login Password'); ?></td>
+                    <td><input name="oldPassword" type="password" id="oldPassword" tabindexBak="1"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('New Login Password') ?></td>
+                    <td><input name="newPassword" type="password" id="newPassword" tabindexBak="2"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Re-enter Login Password'); ?></td>
+                    <td><input name="newPassword2" type="password" id="newPassword2" tabindexBak="3"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnPasswordUpdate"><?php echo __('Update') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form action="/member/transactionPassword" id="securityPasswordForm" method="post">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Change Security Password') ?></th>
+<!--                    <th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Old Security Password'); ?></td>
+                    <td>
+                        <input name="oldSecurityPassword" type="password" id="oldSecurityPassword" tabindexBak="1" />
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('New Security Password') ?></td>
+                    <td>
+                        <input name="newSecurityPassword" type="password" id="newSecurityPassword" tabindexBak="2" />
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Re-enter Security Password'); ?></td>
+                    <td>
+                        <input name="newSecurityPassword2" type="password" id="newSecurityPassword2" tabindexBak="3" />
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnSecurityUpdate"><?php echo __('Update') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form id="bankForm" method="post" action="/member/updateBankInformation">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Bank Account Details') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Name') ?></td>
+                    <td><input name="bankName" type="text" id="bankName"
+                             size="30" value="<?php echo $distDB->getBankName() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Account Number') ?></td>
+                    <td><input name="bankAccNo" type="text" id="bankAccNo" size="30"
+                                                         value="<?php echo $distDB->getBankAccNo() ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <!--<tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php /*echo __('Re-Confirm Bank Account Number') */?></td>
+                    <td><input name="rebankAccNo" type="text" id="rebankAccNo" size="30"
+                                                         value=""/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>-->
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Account Holder Name') ?></td>
+                    <td><input name="bankHolderName" type="text" id="bankHolderName" size="30"
+                                                         value="<?php echo $distDB->getBankHolderName() ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Swift Code / ABA') ?></td>
+                    <td><input name="bankSwiftCode" type="text" id="bankSwiftCode" size="30"
+                                                         value="<?php echo $distDB->getBankSwiftCode() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <!--<tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php /*echo __('Chinatrust Bank Visa Debit Card') */?></td>
+                    <td>
+                        <input name="visaDebitCard" type="text" id="visaDebitCard" size="30" maxlength="16"
+                                                         value="<?php /*echo $distDB->getVisaDebitCard() */?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php /*echo __('Re-Confirm Chinatrust Bank Visa Debit Card') */?></td>
+                    <td>
+                        <input name="revisaDebitCard" type="text" id="revisaDebitCard" size="30" maxlength="16"
+                                                         value=""/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>-->
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password') ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword" size="30"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnBankUpdate">Update</button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+
             <div class="info_bottom_bg"></div>
             <div class="clear"></div>
             <br>

@@ -9,6 +9,9 @@
  */
 class memberActions extends sfActions
 {
+    public function executeUnderMaintenance()
+    {
+    }
     public function executeExchange()
     {
     }
@@ -350,7 +353,8 @@ class memberActions extends sfActions
 
         $this->setFlash('successMsg', "Bank Account Information update successfully");
 
-        return $this->redirect('/member/viewBankInformation');
+        //return $this->redirect('/member/viewBankInformation');
+        return $this->redirect('/member/viewProfile');
     }
 
     public function executeDoRegister()
@@ -1886,35 +1890,37 @@ class memberActions extends sfActions
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
-                $this->setFlash('errorMsg', "Invalid password");
+                $this->setFlash('errorMsg', "Old password is not valid.");
             } else {
                 $exist->setUserpassword($this->getRequestParameter('newPassword'));
                 $exist->setKeepPassword($this->getRequestParameter('newPassword'));
                 $exist->save();
                 $this->setFlash('successMsg', "Password updated");
             }
-            return $this->redirect('/member/loginPassword');
+            //return $this->redirect('/member/loginPassword');
         }
+        return $this->redirect('/member/viewProfile');
     }
 
     public function executeTransactionPassword()
     {
-        if ($this->getRequestParameter('oldPassword')) {
+        if ($this->getRequestParameter('oldSecurityPassword')) {
             $c = new Criteria();
             $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('oldPassword'));
+            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('oldSecurityPassword'));
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', "Old Security password is not valid.");
             } else {
-                $exist->setUserpassword2($this->getRequestParameter('newPassword'));
-                $exist->setKeepPassword2($this->getRequestParameter('newPassword'));
+                $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
+                $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
                 $exist->save();
                 $this->setFlash('successMsg', "Security Password updated");
             }
-            return $this->redirect('/member/transactionPassword');
+            //return $this->redirect('/member/transactionPassword');
         }
+        return $this->redirect('/member/viewProfile');
     }
 
     public function executeAnnouncement()
