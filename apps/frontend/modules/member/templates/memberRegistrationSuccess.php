@@ -1,27 +1,11 @@
 <?php include('scripts.php'); ?>
 <script type="text/javascript">
 $(function() {
-    $("#lang").change(function() {
-        $("#langForm").submit();
-    });
-
     $.populateDOB({
-                dobYear : $("#dob_year")
-                ,dobMonth : $("#dob_month")
-                ,dobDay : $("#dob_day")
-                ,dobFull : $("#dob")
-            });
-
-    $("#captchaimage").bind('click', function() {
-        $.post('/captcha/newSession');
-        $("#captchaimage").load('/captcha/imageRequest');
-        return false;
-    });
-
-    $("#sponsorId").change(function() {
-        if ($.trim($('#sponsorId').val()) != "") {
-            verifySponsorId();
-        }
+        dobYear : $("#dob_year")
+        ,dobMonth : $("#dob_month")
+        ,dobDay : $("#dob_day")
+        ,dobFull : $("#dob")
     });
 
     jQuery.validator.addMethod("noSpace", function(value, element) {
@@ -29,153 +13,89 @@ $(function() {
     }, "No space please and don't leave it empty");
 
     $("#registerForm").validate({
-                messages : {
-                    confirmPassword: {
-                        equalTo: "<?php echo __('Please enter the same password as above') ?>"
-                    },
-                    userName: {
-                        remote: "<?php echo __('User Name already in use') ?>."
-                    },
-                    fullname: {
-                        remote: "<?php echo __('Full Name already in use') ?>."
-                    }
-                },
-                rules : {
-                    "sponsorId" : {
-                        required: true
-                    },
-                    "userName" : {
-                        required : true,
-                        noSpace: true,
-                        minlength : 6,
-                        remote: "/member/verifyUserName"
-                    },
-                    "userpassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#userpassword"
-                    },
-                    "securityPassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmSecurityPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#securityPassword"
-                    },
-                    "leverage" : {
-                        required : true
-                    },
-                    "spread" : {
-                        required : true
-                    },
-                    "deposit_amount" : {
-                        required : true
-                    },
-                    "fullname" : {
-                        required : true,
-                        minlength : 2,
-                        remote: "/member/verifyFullName"
-                    },
-                    "dob" : {
-                        required : true
-                    },
-                    "address" : {
-                        required : true
-                    },
-                    "gender" : {
-                        required : true
-                    },
-                    "contactNumber" : {
-                        required : true
-                        , minlength : 10
-                    },
-                    "email" : {
-                        required : true
-                        , email: true
-                    },
-                    "email2" : {
-                        required : true,
-                        equalTo: "#email"
-                    },
-                    "terms_bis" : {
-                        required : true
-                    },
-                    "terms_risk" : {
-                        required : true
-                    },
-                    "term_condition" : {
-                        required : true
-                    },
-                    "sig_name" : {
-                        required : true
-                    }
-                },
-                submitHandler: function(form) {
-                    if ($.trim($('#sponsorId').val()) == "") {
-                        alert("<?php echo __('Referrer ID cannot be blank') ?>.");
-                        $('#sponsorId').focus();
-                    } else {
-                        waiting();
-                        $.ajax({
-                                    type : 'POST',
-                                    url : "/member/verifySponsorId",
-                                    dataType : 'json',
-                                    cache: false,
-                                    data: {
-                                        sponsorId : $('#sponsorId').val()
-                                    },
-                                    success : function(data) {
-                                        waiting();
-                                        if (data == null || data == "") {
-                                            alert("<?php echo __('Invalid Referrer ID') ?>");
-                                            $('#sponsorId').focus();
-                                            $("#sponsorName").val("");
-                                        } else {
-                                            form.submit();
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("Your login attempt was not successful. Please try again.");
-                                    }
-                                });
-                    }
-                },
-                success: function(label) {
-                }
-            });
+        messages : {
+            confirmPassword: {
+                equalTo: "<?php echo __('Please enter the same password as above') ?>"
+            },
+            userName: {
+                remote: "<?php echo __('User Name already in use') ?>."
+            },
+            fullname: {
+                remote: "<?php echo __('Full Name already in use') ?>."
+            }
+        },
+        rules : {
+            "userName" : {
+                required : true,
+                noSpace: true,
+                minlength : 6,
+                remote: "/member/verifyUserName"
+            },
+            "userpassword" : {
+                required : true,
+                minlength : 6
+            },
+            "confirmPassword" : {
+                required : true,
+                minlength : 6,
+                equalTo: "#userpassword"
+            },
+            "securityPassword" : {
+                required : true,
+                minlength : 6
+            },
+            "confirmSecurityPassword" : {
+                required : true,
+                minlength : 6,
+                equalTo: "#securityPassword"
+            },
+            "fullname" : {
+                required : true,
+                minlength : 2,
+                remote: "/member/verifyFullName"
+            },
+            "dob" : {
+                required : true
+            },
+            "address" : {
+                required : true
+            },
+            "gender" : {
+                required : true
+            },
+            "contactNumber" : {
+                required : true
+                , minlength : 10
+            },
+            "email" : {
+                required : true
+                , email: true
+            },
+            "email2" : {
+                required : true,
+                equalTo: "#email"
+            },
+            "terms_bis" : {
+                required : true
+            },
+            "terms_risk" : {
+                required : true
+            },
+            "term_condition" : {
+                required : true
+            },
+            "sig_name" : {
+                required : true
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        },
+        success: function(label) {
+        }
+    });
 });
-
-function verifySponsorId() {
-    waiting();
-    $.ajax({
-                type : 'POST',
-                url : "/member/verifyActiveSponsorId",
-                dataType : 'json',
-                cache: false,
-                data: {
-                    sponsorId : $('#sponsorId').val()
-                },
-                success : function(data) {
-                    if (data == null || data == "") {
-                        error("<?php echo __('Invalid Referrer ID') ?>");
-                        $('#sponsorId').focus();
-                        $("#sponsorName").val("");
-                    } else {
-                        $.unblockUI();
-                        $("#sponsorName").val(data.nickname);
-                    }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Your login attempt was not successful. Please try again.");
-                }
-            });
-}
 </script>
 
 <form action="/member/doMemberRegistration" id="registerForm" method="post">
@@ -240,25 +160,6 @@ function verifySponsorId() {
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
-    </tr>
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Referrer ID</td>
-        <td>
-            <input type="text" class="inputbox" id="sponsorId" name="sponsorId">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Referrer Name</td>
-        <td>
-            <input type="text" style="background-color: #d9d9d9;" class="inputbox" readonly="readonly" id="sponsorName" name="sponsorName">
-        </td>
-        <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
