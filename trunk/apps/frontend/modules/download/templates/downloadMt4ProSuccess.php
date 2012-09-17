@@ -22,7 +22,7 @@
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Download MT4 Pro</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title">Download MT4 (Standard)</span></td>
 </tr>
 <tr>
     <td><br>
@@ -65,6 +65,41 @@
             </tr>
             <tr>
                 <td>
+                    <a href="<?php echo url_for("/member/downloadMt4?q=" . rand()) ?>">Click to DOWNLOAD Meta Trader 4 (Standard)</a>
+                    <br>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+</tbody>
+</table>
+
+<div class="info_bottom_bg"></div>
+
+<?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td><br></td>
+</tr>
+<tr>
+    <td class="tbl_sprt_bottom"><span class="txt_title">Download MT4 Pro</span></td>
+</tr>
+<tr>
+    <td>
+        <table class="pbt_table">
+            <tbody>
+            <tr>
+                <td rowspan="3"><img src="/images/mt4_ps.jpg"></td>
+                <td>The popular platform MetaTrader 4 can now be used for professional trading.</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
                     <a href="/download/mt4Pro">Click to DOWNLOAD Meta Trader 4 Pro</a>
                     <br>
                     <a href="/download/mt4ProUserGuide">Click to DOWNLOAD Meta Trader 4 Pro User Guide</a>
@@ -76,3 +111,4 @@
 </tr>
 </tbody>
 </table>
+<?php } ?>

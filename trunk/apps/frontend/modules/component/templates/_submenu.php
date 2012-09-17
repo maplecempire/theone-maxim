@@ -8,7 +8,7 @@
 
 <div class="menu" style="z-index: 20;">
     <ul>
-        <li class="menu_title">HOME</li>
+        <li class="menu_title">MAIN MENU</li>
         <li>
             <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
         </li>
@@ -36,18 +36,27 @@
     <br class="clear"><br>
     <ul>
         <li class="menu_title">ACCOUNT INFORMATION</li>
-        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-                <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
-            </li>
-        <?php } ?>
-        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-                <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
-            </li>
-        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/underMaintenance"><span><?php echo __('Purchase Education Course'); ?></span></a>
+            <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/wallet"><span><?php echo __('Wallet'); ?></span></a>
+        </li>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/mt4Withdrawal"><span>MT4 Withdrawal</span></a>
+        </li>
+    <?php } ?>
+
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+
+        </li>
+    </ul>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title">EDUCATION COURSES / EVENT</li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/underMaintenance"><span><?php echo __('Education Course Purchase'); ?></span></a>
         </li>
     </ul>
     <!--<br class="clear"><br>
@@ -70,13 +79,7 @@
     <ul>
         <li class="menu_title">HIERARCHY</li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/sponsorTree"><span><?php echo __('Sponsor Genealogy'); ?></span></a>
-        </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/placementTree"><span><?php echo __('Placement Genealogy'); ?></span></a>
-        </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/placementTree?p=stat"><span><?php echo __('Downline Stats'); ?></span></a>
+            <a href="/member/genealogy"><span><?php echo __('Genealogy'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
@@ -95,15 +98,9 @@
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">ACCOUNT INFORMATION</li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/bonusDetails"><span><?php echo __('Bonus Details'); ?></span></a>
-        </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/epointLog"><span><?php echo __('Deposit Account'); ?></span></a>
-        </li>
-    <?php } ?>
+        <li class="menu_title">REPORT</li>
+
+
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span>Fund Management Report</span></a>
         </li>
@@ -116,17 +113,12 @@
         <li class="menu_title">DOWNLOAD</li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/downloadMt4?q=" . rand()) ?>"><span>Download MT4 Platform</span></a>
+            <a href="<?php echo url_for("/download/downloadMt4Pro?q=" . rand()) ?>"><span>Download MT4 Platform</span></a>
         </li>
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span>Download Daily FX Guide</span></a>
-        </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadMt4Pro") ?>"><span><?php echo __('Download MT4 Pro'); ?></span></a>
         </li>
     <?php } ?>
     </ul>
