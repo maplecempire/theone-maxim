@@ -15,6 +15,7 @@ class downloadActions extends sfActions
     }
     public function executeDownloadMt4Pro()
     {
+        $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
     }
     public function executeMt4Pro()
     {
