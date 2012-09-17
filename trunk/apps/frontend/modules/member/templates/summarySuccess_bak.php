@@ -204,7 +204,7 @@ $(function() {
         $content = "You have not upload the documents below yet : <br><br><ul>";
 
         if ($distributor->getFileBankPassBook() == "") {
-            $content .= "<li>Bank Pass Book</li>";
+            $content .= "<li>Bank Account Proof</li>";
         }
         if ($distributor->getFileProofOfResidence() == "") {
             $content .= "<li>Proof of Residence</li>";

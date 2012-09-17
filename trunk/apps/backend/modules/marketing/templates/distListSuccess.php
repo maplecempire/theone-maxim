@@ -197,7 +197,7 @@ function reassignDatagridEventAttr(){
 								<th>Referral</th>
 								<th>Status</th>
 								<th>Add Date</th>
-								<th>Bank Pass Book</th>
+								<th>Bank Account Proof</th>
 								<th>Proof of Residence</th>
 								<th>NRIC</th>
 							</tr>
