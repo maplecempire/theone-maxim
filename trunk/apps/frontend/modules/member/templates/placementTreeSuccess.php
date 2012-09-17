@@ -277,7 +277,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[0]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="18" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="18" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -348,7 +348,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[1]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="6" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="6" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="6" align="center"></td>
                 <?php
                     $distCode = $anode[2]['distCode'];
@@ -370,7 +370,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[2]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="6" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="6" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -480,7 +480,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[3]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
 
                 <?php
@@ -503,7 +503,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[4]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
@@ -527,7 +527,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[5]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
                 <?php
                     $distCode = $anode[6]['distCode'];
@@ -549,7 +549,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[6]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/images/logo.png" <?php echo $classAndAttr;?> style="height:80px"></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
