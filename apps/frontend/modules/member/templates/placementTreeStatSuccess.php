@@ -146,23 +146,29 @@ function reassignDatagridEventAttr(){
 }
 </script>
 
-<div class="ewallet_li">
-	<a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(0, 93, 154);">
-        <?php echo __('Sponsor Genealogy'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(0, 93, 154);">
-        <?php echo __('Placement Genealogy'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(134, 197, 51);">
-        <?php echo __('Downline Stats'); ?>
-    </a>
-</div>
+<table>
+    <tr>
+        <td>
+            <div class="ewallet_li">
+                <a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(0, 93, 154);">
+                    <?php echo __('Sponsor Genealogy'); ?>
+                </a>
+                &nbsp;&nbsp;
+                <img src="/images/arrow_blue_single_tab.gif">
+                &nbsp;&nbsp;
+                <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(0, 93, 154);">
+                    <?php echo __('Placement Genealogy'); ?>
+                </a>
+                &nbsp;&nbsp;
+                <img src="/images/arrow_blue_single_tab.gif">
+                &nbsp;&nbsp;
+                <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(134, 197, 51);">
+                    <?php echo __('Downline Stats'); ?>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <form action="/member/placementTree" id="transferForm" method="post">
     <input type="hidden" name="uplineDistCode" id="uplineDistCode">

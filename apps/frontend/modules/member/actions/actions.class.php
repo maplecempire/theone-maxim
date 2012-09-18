@@ -292,6 +292,35 @@ class memberActions extends sfActions
 
     public function executeMemberRegistration()
     {
+        $c = new Criteria();
+        $packageDBs = MlmPackagePeer::doSelect($c);
+
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->packageDBs = $packageDBs;
+    }
+    public function executeMemberRegistration2()
+    {
+        if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+                $this->setFlash('errorMsg', "Invalid Security password");
+                return $this->redirect('/member/memberRegistration');
+            }
+
+            $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
+            $this->forward404Unless($selectedPackage);
+
+            $amountNeeded = $selectedPackage->getPrice();
+            if ($amountNeeded > $ledgerEPointBalance) {
+                $this->setFlash('errorMsg', "In-sufficient CP2 amount");
+                return $this->redirect('/member/memberRegistration');
+            }
+            $this->selectedPackage = $selectedPackage;
+        } else {
+            return $this->redirect('/member/memberRegistration');
+        }
     }
 
     public function executeRegisterInfo()
@@ -490,133 +519,449 @@ class memberActions extends sfActions
 
     public function executeDoMemberRegistration()
     {
-        require_once('recaptchalib.php');
-        $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
-        $resp = recaptcha_check_answer ($privatekey,
-                                    $_SERVER["REMOTE_ADDR"],
-                                    $_POST["recaptcha_challenge_field"],
-                                    $_POST["recaptcha_response_field"]);
-
-        if (!$resp->is_valid) {
-            $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
-            return $this->redirect('home/login');
-        }
-
-        //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $fcode = $this->getRequestParameter('userName');
         $password = $this->getRequestParameter('userpassword');
+        $packageId = $this->getRequestParameter('packageId');
+        $position = $this->getRequestParameter('position1');
 
-        $c = new Criteria();
-        $c->add(AppUserPeer::USERNAME, $fcode);
-        $exist = AppUserPeer::doSelectOne($c);
-        //$this->forward404Unless(!$exist);
-        $parentId = $this->getDistributorIdByCode($this->getRequestParameter('sponsorId'));
-        $this->forward404Unless($parentId <> 0);
+        $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+            //******************* upline distributor ID
+            $uplineDistId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
 
-        //******************* upline distributor ID
-        $uplineDistDB = $this->getDistributorInformation($this->getRequestParameter('sponsorId'));
-        $this->forward404Unless($uplineDistDB);
+            $uplineDistDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $this->forward404Unless($uplineDistDB);
+            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+            $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
-        $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
-        $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+            $app_user = new AppUser();
+            $app_user->setUsername($fcode);
+            $app_user->setKeepPassword($password);
+            $app_user->setUserpassword($password);
+            $app_user->setKeepPassword2($password);
+            $app_user->setUserpassword2($password);
+            $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
+            $app_user->setStatusCode(Globals::STATUS_ACTIVE);
+            $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $app_user->save();
 
-        $app_user = new AppUser();
-        $app_user->setUsername($fcode);
-        $app_user->setKeepPassword($password);
-        $app_user->setUserpassword($password);
-        $app_user->setKeepPassword2($password);
-        $app_user->setUserpassword2($password);
-        $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
-        $app_user->setStatusCode(Globals::STATUS_PENDING);
-        $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->save();
+            // ****************************
+            $packageDB = MlmPackagePeer::retrieveByPK($packageId);
+            $this->forward404Unless($packageDB);
 
-        // ****************************
-        $mlm_distributor = new MlmDistributor();
-        $mlm_distributor->setDistributorCode($fcode);
-        $mlm_distributor->setUserId($app_user->getUserId());
-        $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
-        $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-        $mlm_distributor->setNickname($fcode);
-        $mlm_distributor->setIc($this->getRequestParameter('ic'));
-        if ($this->getRequestParameter('country') == 'China') {
-            $mlm_distributor->setCountry('China (PRC)');
-        } else {
-            $mlm_distributor->setCountry($this->getRequestParameter('country'));
+            $mlm_distributor = new MlmDistributor();
+            $mlm_distributor->setDistributorCode($fcode);
+            $mlm_distributor->setUserId($app_user->getUserId());
+            $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
+            $mlm_distributor->setNickname($fcode);
+            $mlm_distributor->setIc($this->getRequestParameter('ic'));
+            if ($this->getRequestParameter('country') == 'China') {
+                $mlm_distributor->setCountry('China (PRC)');
+            } else {
+                $mlm_distributor->setCountry($this->getRequestParameter('country'));
+            }
+            $mlm_distributor->setAddress($this->getRequestParameter('address'));
+            $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+            $mlm_distributor->setCity($this->getRequestParameter('city'));
+            $mlm_distributor->setState($this->getRequestParameter('state'));
+            $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+            $mlm_distributor->setEmail($this->getRequestParameter('email'));
+            $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+            $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+            $mlm_distributor->setGender($this->getRequestParameter('gender'));
+            if ($this->getRequestParameter('dob')) {
+                list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                $mlm_distributor->setDob("$y-$m-$d");
+            }
+            $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+            $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+            $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+            $mlm_distributor->setTreeLevel($treeLevel);
+            $mlm_distributor->setTreeStructure($treeStructure);
+            $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+            $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+            $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+            $mlm_distributor->setSpread($this->getRequestParameter('spread'));
+            $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+            $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+            $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
+            $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+            $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+
+            $mlm_distributor->setRankId($packageDB->getPackageId());
+            $mlm_distributor->setRankCode($packageDB->getPackageName());
+            $mlm_distributor->setInitRankId($packageDB->getPackageId());
+            $mlm_distributor->setInitRankCode($packageDB->getPackageName());
+            $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_distributor->setPackagePurchaseFlag("Y");
+            $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
+            $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+            $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_distributor->save();
+
+            $sponsorId = $mlm_distributor->getDistributorId();
+            /* ****************************************************
+             * get distributor last account ledger epoint balance
+             * ***************************************************/
+            $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+            /**************************************/
+            /*  Direct REFERRAL Bonus For Upline
+            /**************************************/
+            if ($uplineDistDB->getIsIb() == Globals::YES) {
+                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+            } else {
+                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                $directSponsorPercentage = $uplineDistPackage->getCommission();
+                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+            }
+            $totalBonusPayOut = $directSponsorPercentage;
+
+            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+
+            /* ****************************************************
+             * Update upline distributor account
+             * ***************************************************/
+            $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($packageDB->getPrice());
+            $mlm_account_ledger->setBalance($sponsorAccountBalance);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+            /******************************/
+            /*  Direct Sponsor Bonus
+            /******************************/
+            $firstForDRB = true;
+            while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
+                $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($uplineDistId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
+                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")");
+                $mlm_account_ledger->setCredit($directSponsorBonusAmount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+
+                /******************************/
+                /*  Commission
+                /******************************/
+                $c = new Criteria();
+                $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
+                $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+
+                $commissionBalance = 0;
+                if (!$sponsorDistCommissionDB) {
+                    $sponsorDistCommissionDB = new MlmDistCommission();
+                    $sponsorDistCommissionDB->setDistId($uplineDistId);
+                    $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                    $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                } else {
+                    $commissionBalance = $sponsorDistCommissionDB->getBalance();
+                }
+                $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
+                $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionDB->save();
+
+                $c = new Criteria();
+                $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
+                $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+                $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+
+                $dsbBalance = 0;
+                if ($sponsorDistCommissionLedgerDB)
+                    $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+
+                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                $sponsorDistCommissionledger->setDistId($uplineDistId);
+                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
+                $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
+                $sponsorDistCommissionledger->setDebit(0);
+                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
+                if ($firstForDRB == true) {
+                    $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$mlm_distributor->getDistributorCode());
+                    $firstForDRB = false;
+                } else {
+                    $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$mlm_distributor->getDistributorCode());
+                }
+                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->save();
+
+                $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
+                //var_dump("==>1");
+                if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
+                    //var_dump("==>2");
+                    $checkCommission = true;
+                    $uplineDistId = $uplineDistDB->getUplineDistId();
+                    while ($checkCommission == true) {
+                        //var_dump("==>3**".$uplineDistId);
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+
+                        //var_dump("==>3$$".$uplineDistId);
+                        $this->forward404Unless($uplineDistDB);
+
+                        if ($uplineDistDB->getIsIb() == Globals::YES) {
+                            /*if ($uplineDistDB->getIbRankId() != null) {
+                                $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                            } else {
+                                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            }*/
+                            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+
+                            if ($directSponsorPercentage > $totalBonusPayOut) {
+                                //var_dump("==>6");
+                                $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                $totalBonusPayOut += $directSponsorPercentage;
+                                if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                    //var_dump("==>7");
+                                    $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                }
+                            } else {
+                                //var_dump("==>8");
+                                $uplineDistId = $uplineDistDB->getUplineDistId();
+                                continue;
+                            }
+                        } else {
+                            $uplineDistId = $uplineDistDB->getUplineDistId();
+                            continue;
+                        }
+                        $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                        $checkCommission == false;
+                        break;
+                        //var_dump("==>9");
+                    }
+                } else {
+                    break;
+                    //var_dump("==>^^");
+                }
+            }
+
+            /****************************/
+            /*****  Send email **********/
+            /****************************/
+            /*error_reporting(E_STRICT);
+
+            date_default_timezone_set(date_default_timezone_get());
+
+            include_once('class.phpmailer.php');
+
+            $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
+            $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
+
+            <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
+            <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
+            <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
+
+            $mail = new PHPMailer();
+            $mail->IsMail(); // telling the class to use SMTP
+            $mail->Host = Mails::EMAIL_HOST; // SMTP server
+            $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
+            $mail->From = Mails::EMAIL_FROM_NOREPLY;
+            $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
+            $mail->Subject = $subject;
+            $mail->CharSet="utf-8";
+
+            $text_body = $body;
+
+            $mail->Body = $body;
+            $mail->AltBody = $text_body;
+            $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
+            $mail->AddBCC("r9projecthost@gmail.com", "jason");
+
+            if (!$mail->Send()) {
+                echo $mail->ErrorInfo;
+            }*/
+            // **********************************************************************************************
+            // *****************************         tree placement          **********************
+            // **********************************************************************************************
+            if ($position == 1 || $position == 2){
+                $uplinePosition = "";
+
+                if ($position == 1) {
+                    $uplinePosition = Globals::PLACEMENT_LEFT;
+                } else if ($position == 2) {
+                    $uplinePosition = Globals::PLACEMENT_RIGHT;
+                }
+
+                $placementSuccessful = false;
+                $uplineDistId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                while ($placementSuccessful == false) {
+                    if ($placementSuccessful == true)
+                        break;
+                    //var_dump("uplineDistId=".$uplineDistId);
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
+                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                    $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
+                    $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                    if ($downlineDistDB) {
+                        $uplineDistId = $downlineDistDB->getDistributorId();
+                    } else {
+                        //var_dump("====NO===".$uplineDistId);
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+
+                        //var_dump($uplineDistDB);
+                        $placementSuccessful = true;
+                        break;
+                    }
+                }
+                //var_dump("result:::".$uplineDistId);
+                //var_dump($uplineDistDB);
+                //exit();
+                $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorCode() . "|";
+                $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
+
+                $mlm_distributor->setPlacementDatetime(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setPlacementPosition($uplinePosition);
+                //$mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+                //$mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+                $mlm_distributor->setPlacementTreeStructure($treeStructure);
+                $mlm_distributor->setPlacementTreeLevel($treeLevel);
+                $mlm_distributor->setTreeUplineDistId($uplineDistDB->getDistributorId());
+                $mlm_distributor->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
+                $mlm_distributor->save();
+
+                $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
+                $this->forward404Unless($sponsoredPackageDB);
+                $pairingPoint = $sponsoredPackageDB->getPrice();
+
+                // recalculate Total left and total right for $uplineDistDB
+                $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
+                for ($x = count($arrs); $x > 0; $x--) {
+                    if ($arrs[$x] == "") {
+                        continue;
+                    }
+                    $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
+                    $this->forward404Unless($uplineDistDB);
+                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
+                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
+                    $uplineDistDB->setTotalLeft($totalLeft);
+                    $uplineDistDB->setTotalRight($totalRight);
+                    $uplineDistDB->save();
+                }
+
+                /******************************/
+                /*  store Pairing points
+                /******************************/
+                if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
+                    $level = 0;
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
+                    $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
+                    while ($level < 100) {
+                        //var_dump($uplineDistDB->getUplineDistId());
+                        //var_dump($uplineDistDB->getUplineDistCode());
+                        //print_r("<br>");
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        $addToLeft = 0;
+                        $addToRight = 0;
+                        $leftBalance = 0;
+                        $rightBalance = 0;
+                        if (!$sponsorDistPairingDB) {
+                            $sponsorDistPairingDB = new MlmDistPairing();
+                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            $this->forward404Unless($packageDB);
+
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance);
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                        }
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingDB->save();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                        $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                        $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                        $legBalance = 0;
+                        if ($sponsorDistPairingLedgerDB) {
+                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                        }
+
+                        $sponsorDistPairingledger = new MlmDistPairingLedger();
+                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                        $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setDebit(0);
+                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->save();
+
+                        $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                        if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                            break;
+                        }
+
+                        $uplinePosition = $uplineDistDB->getPlacementPosition();
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                        $level++;
+                    }
+                }
+            }
+        $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
         }
-        $mlm_distributor->setAddress($this->getRequestParameter('address'));
-        $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
-        $mlm_distributor->setCity($this->getRequestParameter('city'));
-        $mlm_distributor->setState($this->getRequestParameter('state'));
-        $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
-        $mlm_distributor->setEmail($this->getRequestParameter('email'));
-        $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
-        $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
-        $mlm_distributor->setGender($this->getRequestParameter('gender'));
-        if ($this->getRequestParameter('dob')) {
-            list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
-            $mlm_distributor->setDob("$y-$m-$d");
+        if ($position == 0){
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
+            return $this->redirect('/member/placementTree');
+            //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
+        } else if ($position == 1){
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
+        } else if ($position == 2){
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
         }
-        $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
-        $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
-        $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
-
-        $mlm_distributor->setTreeLevel($treeLevel);
-        $mlm_distributor->setTreeStructure($treeStructure);
-        $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
-        $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
-
-        $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
-        $mlm_distributor->setSpread($this->getRequestParameter('spread'));
-        $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
-        $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
-        $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
-        $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
-        $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
-
-        $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->save();
-
-        $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $fcode);
-
-        /****************************/
-        /*****  Send email **********/
-        /****************************/
-        /*error_reporting(E_STRICT);
-
-        date_default_timezone_set(date_default_timezone_get());
-
-        include_once('class.phpmailer.php');
-
-        $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
-        $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
-
-        <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
-        <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
-        <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
-
-        $mail = new PHPMailer();
-        $mail->IsMail(); // telling the class to use SMTP
-        $mail->Host = Mails::EMAIL_HOST; // SMTP server
-        $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
-        $mail->From = Mails::EMAIL_FROM_NOREPLY;
-        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-        $mail->Subject = $subject;
-        $mail->CharSet="utf-8";
-
-        $text_body = $body;
-
-        $mail->Body = $body;
-        $mail->AltBody = $text_body;
-        $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
-
-        if (!$mail->Send()) {
-            echo $mail->ErrorInfo;
-        }*/
-        return $this->redirect('/member/registerInfo');
+        return $this->redirect('/member/summary');
     }
 
     // **********************************************************************************************
@@ -1312,7 +1657,7 @@ class memberActions extends sfActions
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient MT4 Credit.";
+                    $errorMsg = "Insufficient CP1.";
                 }
             } else {
                 $error = true;
@@ -1350,12 +1695,12 @@ class memberActions extends sfActions
 
             $sponsorDB->setPlacementDatetime(date("Y/m/d h:i:s A"));
             $sponsorDB->setPlacementPosition($uplinePosition);
-            $sponsorDB->setUplineDistId($uplineDistDB->getDistributorId());
-            $sponsorDB->setUplineDistCode($uplineDistDB->getDistributorCode());
-            $sponsorDB->setTreeStructure($treeStructure);
-            $sponsorDB->setTreeLevel($treeLevel);
-            $sponsorDB->setTreeUplineDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $sponsorDB->setTreeUplineDistCode($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+            //$sponsorDB->setUplineDistId($uplineDistDB->getDistributorId());
+            //$sponsorDB->setUplineDistCode($uplineDistDB->getDistributorCode());
+            $sponsorDB->setPlacementTreeStructure($treeStructure);
+            $sponsorDB->setPlacementTreeLevel($treeLevel);
+            $sponsorDB->setTreeUplineDistId($uplineDistDB->getDistributorId());
+            $sponsorDB->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
             $sponsorDB->save();
 
             $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
@@ -1380,9 +1725,9 @@ class memberActions extends sfActions
             /******************************/
             /*  store Pairing points
             /******************************/
-            if ($sponsorDB->getUplineDistId() != 0 && $sponsorDB->getUplineDistCode() != null) {
+            if ($sponsorDB->getTreeUplineDistId() != 0 && $sponsorDB->getTreeUplineDistCode() != null) {
                 $level = 0;
-                $uplineDistDB = MlmDistributorPeer::retrieveByPk($sponsorDB->getUplineDistId());
+                $uplineDistDB = MlmDistributorPeer::retrieveByPk($sponsorDB->getTreeUplineDistId());
                 $sponsoredDistributorCode = $sponsorDB->getDistributorCode();
                 while ($level < 100) {
                     //var_dump($uplineDistDB->getUplineDistId());
@@ -1441,12 +1786,12 @@ class memberActions extends sfActions
 
                     $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
-                    if ($uplineDistDB->getUplineDistId() == 0 || $uplineDistDB->getUplineDistCode() == null) {
+                    if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                         break;
                     }
 
                     $uplinePosition = $uplineDistDB->getPlacementPosition();
-                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getUplineDistId());
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
                     $level++;
                 }
             }
@@ -3500,7 +3845,7 @@ class memberActions extends sfActions
     function getPlacementDistributorInformation($uplineDistId, $placeLocation)
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $uplineDistId);
+        $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
         $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $placeLocation);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
 
