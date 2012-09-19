@@ -3097,9 +3097,9 @@ class memberActions extends sfActions
         $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
         $response->setContentType('application/exe');
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Disposition','attachment; filename=OFX4Setup.exe', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim4Setup.exe', TRUE);
         $response->sendHttpHeaders();
-        readfile(sfConfig::get('sf_upload_dir')."/OFX4Setup.exe");
+        readfile(sfConfig::get('sf_upload_dir')."/Maxim4Setup.exe");
         return sfView::NONE;
     }
 
