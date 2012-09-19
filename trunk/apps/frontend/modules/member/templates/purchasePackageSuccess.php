@@ -152,7 +152,7 @@ $(function() {
                 </tr>
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Deposit Account') ?></td>
+                    <td><?php echo __('CP2 Account') ?></td>
                     <td><input type="text" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>

@@ -60,7 +60,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Deposit Account') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP2 Account') ?></span></td>
     </tr>
     <tr>
         <td><br></td>

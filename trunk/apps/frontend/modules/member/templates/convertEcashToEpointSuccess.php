@@ -105,7 +105,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('MT4 Credit Balance'); ?></td>
+                    <td><?php echo __('CP1'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
                                            value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
