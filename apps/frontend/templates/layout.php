@@ -255,14 +255,24 @@
     <!-- announcement popup   -->
     <br class="clear">
     <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
 
-    <div class="content_line" style="position: absolute; bottom: 80px;"></div>
+    <div class="content_line" style="position: absolute; bottom: 170px;"></div>
     <br class="clear">
     <br class="clear">
     <br class="clear">
     <br class="clear">
     <div style="position: absolute; bottom: 10px; padding-right: 40px;">
-    <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+        <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
     </div>
 </div>
 

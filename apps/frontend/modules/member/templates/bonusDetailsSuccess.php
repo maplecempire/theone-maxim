@@ -174,14 +174,14 @@
                             <?php
 
                             echo "<tr class='odd'>
-                            <td>" . __('RB') . "</td>
+                            <td>" . __('Direct Referral Bonus') . "</td>
                             <td align='right'>" . $dsb . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
                                                                                     'ref' => 'DRB'
                                                                                )) . "</td></tr>";
                             echo "<tr class='even'>
-                            <td>" . __('Pairing') . "</td>
+                            <td>" . __('Pairing Bonus') . "</td>
                             <td align='right'>" . $pairingBonus . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -190,7 +190,7 @@
                                  . "</td></tr>";
 
                             echo "<tr class='odd'>
-                            <td>" . __('Pips') . "</td>
+                            <td>" . __('Generation Bonus') . "</td>
                             <td align='right'>" . $pipsBonus . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -199,7 +199,7 @@
                                  . "</td></tr>";
 
                             echo "<tr class='even'>
-                            <td>" . __('Credit Refund') . "</td>
+                            <td>" . __('Pips Rebate') . "</td>
                             <td align='right'>" . $creditRefund . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -208,7 +208,7 @@
                                  . "</td></tr>";
 
                             echo "<tr class='odd'>
-                            <td>" . __('Fund Management Dividend') . "</td>
+                            <td>" . __('Fund Management Profit') . "</td>
                             <td align='right'>" . $fundManagement . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
