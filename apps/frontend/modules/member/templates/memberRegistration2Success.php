@@ -696,7 +696,7 @@ $(function() {
     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
         <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
     <td colspan="4">
-        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB PDF)</a>
+        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
     </td>
     <td>&nbsp;</td>
 </tr>

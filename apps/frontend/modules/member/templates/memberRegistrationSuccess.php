@@ -153,6 +153,26 @@ $(function() {
                     </td>
                 </tr>
 
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="5">
+                        <p>Below is the contractural Private Investment Management Agreement that you are bound by signing up the package above.
+                           We recommend that you take the time to read each of them carefully.</p>
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td>
+                    </td>
+                    <td colspan="4">
+                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Private Investment Agreement (67 KB Doc)</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+
                 <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
