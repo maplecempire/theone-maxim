@@ -50,7 +50,7 @@
 <table cellpadding="0" cellspacing="5" align="center" border="0">
     <tr>
         <td>
-			<font color='white'><?php echo __('MT4 Credit Balance'); ?></font>
+			<font color='white'><?php echo __('CP1'); ?></font>
 		</td>
 		<td>
 			<input name="ecashBalance" id="ecashBalance" tabindex="-1" readonly="readonly" value="<?php echo number_format($TblAccount->getFBalance(),2,'.',''); ?>"/>

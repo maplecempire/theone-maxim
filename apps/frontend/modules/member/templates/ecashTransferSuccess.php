@@ -107,7 +107,7 @@
     </tr>
     <tr>
         <td>
-			<font color='white'><?php echo __('MT4 Credit Balance'); ?></font>
+			<font color='white'><?php echo __('CP1'); ?></font>
 		</td>
 		<td>
 			<input name="ecashBalance" id="ecashBalance" tabindex="2" />
