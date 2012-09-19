@@ -86,6 +86,9 @@ $(function() {
             },
             "sig_name" : {
                 required : true
+            },
+            "privateInvestmentAgreement" : {
+                required : true
             }
         },
         submitHandler: function(form) {
@@ -684,6 +687,16 @@ $(function() {
         <label for="terms_risk">Risk Disclosure Statement</label></td>
     <td colspan="4">
         <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (175 KB PDF)</a>
+    </td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr class="tbl_form_row_odd">
+    <td>&nbsp;</td>
+    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+    <td colspan="4">
+        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB PDF)</a>
     </td>
     <td>&nbsp;</td>
 </tr>

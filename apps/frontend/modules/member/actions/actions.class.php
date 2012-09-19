@@ -301,12 +301,13 @@ class memberActions extends sfActions
     }
     public function executeMemberRegistration2()
     {
-        if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
-            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+        //if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
+        if ($this->getRequestParameter('pid') <> "") {
+            /*$tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
                 return $this->redirect('/member/memberRegistration');
-            }
+            }*/
 
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));

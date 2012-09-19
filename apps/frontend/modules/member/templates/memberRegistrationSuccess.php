@@ -9,13 +9,13 @@ $(function() {
             }
         },
         rules : {
-            "transactionPassword" : {
+            /*"transactionPassword" : {
                 required : true
                 , remote: "/member/verifyTransactionPassword"
             },
             "privateInvestmentAgreement" : {
                 required : true
-            }
+            }*/
         },
         submitHandler: function(form) {
             var epoint = $('#topup_pointAvail').autoNumericGet();
@@ -24,6 +24,9 @@ $(function() {
             if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
                 error("In-sufficient fund to upgrade package.");
             } else {
+                waiting();
+                form.submit();
+            }/*else {
                 if ($.trim($("#transactionPassword").val()) == "") {
                     error("Security Password is empty");
                     $("#transactionPassword").focus();
@@ -31,7 +34,7 @@ $(function() {
                 }
                 waiting();
                 form.submit();
-            }
+            }*/
         }
     });
     $(".activeLink").button({
@@ -132,7 +135,7 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "'>
-                                    <td align='center'>" . link_to(__('Active'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    <td align='center'>" . link_to(__('Next'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                'class' => 'activeLink',
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
@@ -150,7 +153,7 @@ $(function() {
                     </td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
                         <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
@@ -162,12 +165,12 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Security Password'); ?></td>
+                    <td><?php /*echo __('Security Password'); */?></td>
                     <td>
                         <input name="transactionPassword" type="password" id="transactionPassword"/>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 </tbody>
             </table>
