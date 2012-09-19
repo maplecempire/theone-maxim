@@ -135,7 +135,7 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "'>
-                                    <td align='center'>" . link_to(__('Next'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    <td align='center'>" . link_to(__('Buy'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                'class' => 'activeLink',
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
