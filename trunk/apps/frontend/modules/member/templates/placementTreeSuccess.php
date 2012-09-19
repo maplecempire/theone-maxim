@@ -276,11 +276,6 @@ function reassignDatagridEventAttr(){
             </tr>
             <tr>
                 <?php
-                    $imgStr = "";
-                    if ($distDB->getRankCode())
-
-
-
                     $distCode = $anode[0]['distCode'];
                     $availableButton = $anode[0]['_available'];
                     $textStr = "";
