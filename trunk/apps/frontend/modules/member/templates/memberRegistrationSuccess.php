@@ -135,7 +135,7 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "'>
-                                    <td align='center'>" . link_to(__('Buy'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                    <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                'class' => 'activeLink',
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
@@ -156,8 +156,9 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="5">
-                        <p>Below is the contractural Private Investment Management Agreement that you are bound by signing up the package above.
-                           We recommend that you take the time to read each of them carefully.</p>
+                        <p>Below is the contractural Private Investment Management Agreement for signing up the package above.
+                           We recommend that you take the time to read each of them carefully.</p><p>Please fill up and sign the agreement to acknowledge your acceptance, argeement and
+                                understanding of these terms and agreements and send it to <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
 
                     </td>
                     <td>&nbsp;</td>
