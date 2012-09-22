@@ -65,7 +65,7 @@ class zMailActions extends sfActions
              "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>Maxim Trader Accounts Team</strong></td>".
              "          </tr>".
              "          <tr>".
-             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460' height='7'></td>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460'></td>".
              "          </tr>".
              "          <tr>".
              "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>&nbsp;</td>".
@@ -119,7 +119,7 @@ class zMailActions extends sfActions
              "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>To reply to this message, follow the link below::</strong></td>".
              "                      </tr>".
              "                      <tr>".
-             "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><a href='#'>http://hbs.hbsacm.org/main</a></td>".
+             "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><a href='mailto:cs@maximtrader.com'>cs@maximtrader.com</a></td>".
              "                      </tr>".
              "                    </table></td>".
              "                  </tr>".
@@ -134,7 +134,7 @@ class zMailActions extends sfActions
              "            <td>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460' height='7'></td>".
+             "            <td><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460'></td>".
              "          </tr>".
              "        </table></td>".
              "      </tr>".
