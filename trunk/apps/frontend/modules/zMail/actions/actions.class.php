@@ -43,12 +43,13 @@ class zMailActions extends sfActions
             <p>
             E mail : admin@maximtrader.com";
 
-        //$body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
-        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#B5BE02' style='BORDER-COLLAPSE: collapse'>".
+        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
+        //$body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#B5BE02' style='BORDER-COLLAPSE: collapse'>".
              "  <tr>".
              "    <td><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "      <tr>".
-             "        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             //"        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             "        <td height='22' bgcolor='#B5BE02'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "          <tr>".
              "            <td><span style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF; font-weight: bold;'>&nbsp;&nbsp;&nbsp;Harvard Business School </span></td>".
              "            <td><div align='right' style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF;'><em>Alumni Club of Malaysia&nbsp;&nbsp;&nbsp;</em></div></td>".
