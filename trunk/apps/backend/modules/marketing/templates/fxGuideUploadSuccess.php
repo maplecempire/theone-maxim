@@ -11,11 +11,11 @@ $(function(){
     });
     /*$('#file_upload_fxmarket2you').uploadify({
         'swf'      : '/js/uploadify-v3.1/uploadify.swf',
-        'uploader' : "http://app.fxmarket2you.com/download/uploadify"
+        'uploader' : "http://partner.fxmarket2you.com/download/uploadify"
     });
     $('#file_upload_ofxglobal').uploadify({
         'swf'      : '/js/uploadify-v3.1/uploadify.swf',
-        'uploader' : 'http://app.maxim.com/download/uploadify'
+        'uploader' : 'http://partner.maximtrader.com/download/uploadify'
     });*/
 }); // end $(function())
 

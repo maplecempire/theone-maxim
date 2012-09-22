@@ -277,7 +277,7 @@
                             <b>Local</b><br>0123456789<br>
 
                         </li>
-                        <li><a href="mailto:cs@maxim.com">Email us</a> for assistance
+                        <li><a href="mailto:cs@maximtrader.com">Email us</a> for assistance
                         </li>
                         <li><a target="_self" href="#">
                             Frequently Asked Questions </a></li>
