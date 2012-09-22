@@ -60,46 +60,29 @@
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
             <div style="clear:both;"></div>
-            <table class="pbt_table">
-                <tbody>
-                <tr class="pbt_body">
-                    <td class="td_1st"><b>Contact Number</b></td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st">+012- 3456 7890</td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st"><br clss="clear"></td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st"><b>Email</b></td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st">info@maximtrader.com</td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st">info.maximtrader@gmail.com</td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st"><br clss="clear"></td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st"><b>Our Address</b></td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st">
-                        Maxim Offices<br>
-                        Vero Centre Auckland<br>
-                        Level 31, 48 Shortland Street, Auckland<br>
-                        1010 NEW ZEALAND<br><br>
-                    </td>
-                </tr>
-                <tr class="pbt_body">
-                    <td class="td_1st"><br clss="clear"></td>
-                </tr>
-                </tbody>
-            </table>
-            <iframe width="300" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;aq=&amp;sll=-36.801038,174.768448&amp;sspn=0.137728,0.338173&amp;ie=UTF8&amp;hq=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;hnear=&amp;radius=15000&amp;t=m&amp;cid=17786362531510328297&amp;ll=-36.84659,174.768362&amp;spn=0.020606,0.025749&amp;z=14&amp;output=embed"></iframe>
+            <div><img width="582" title="small-img-5" alt=""
+                      src="/css/maxim/banner/contact-us.jpg"></div>
+
+            <p align="justify">We are available to assist you through many mediums to provide the best possible customer
+                support. Our live chat and email support team is available 24 hours a day, five days a week.</p>
+
+            <p align="justify">You can also contact us by phone and talk to one of our support staffs. Should you prefer to communicate
+                with us via traditional methods of communication, you are welcome to write to our physical address or
+                send a fax and we will be thrilled to assist you in any way we can.</p>
+
+            <p align="justify"><strong>Thailand Address</strong>: 68, Soi Suphaphong 3 Junction 8, Sinakharin 40 Road Nongbon, Prawet Shaukeiwan 10250,
+                Thailand
+                <br>Tel (+662) 207 2423</p>
+
+            <p align="justify"><strong>New Zealand Address</strong>: 13 Beechwood Road, Rothesay Bay, Auckland, 0630 , New Zealand
+                <br>Tel (+64) 9801 0373
+
+            <p align="justify"><strong>Hong Kong Adress</strong>: 165, Oi Ping House, Oi Tung Estate, Shaukeiwan V5L 3B6, Hong Kong
+                <br>Tel (+852) 5808 3536</p>
+
+            <p align="justify"><strong>Email</strong>: cs@maximtrader.com</p>
+
+            <!--<iframe width="300" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;aq=&amp;sll=-36.801038,174.768448&amp;sspn=0.137728,0.338173&amp;ie=UTF8&amp;hq=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;hnear=&amp;radius=15000&amp;t=m&amp;cid=17786362531510328297&amp;ll=-36.84659,174.768362&amp;spn=0.020606,0.025749&amp;z=14&amp;output=embed"></iframe>-->
             <br><br>
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
