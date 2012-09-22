@@ -43,6 +43,76 @@ class zMailActions extends sfActions
             <p>
             E mail : admin@maximtrader.com";
 
+        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
+             "  <tr>".
+             "    <td><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             "      <tr>".
+             "        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             "          <tr>".
+             "            <td><span style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF; font-weight: bold;'>&nbsp;&nbsp;&nbsp;Harvard Business School </span></td>".
+             "            <td><div align='right' style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF;'><em>Alumni Club of Malaysia&nbsp;&nbsp;&nbsp;</em></div></td>".
+             "          </tr>".
+             "        </table></td>".
+             "      </tr>".
+             "      <tr>".
+             "        <td><table width='460' border='0' align='center' cellpadding='0' cellspacing='0'>".
+             "          <tr>".
+             "            <td>&nbsp;</td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>".$this->getRequestParameter('emailSubject')."</strong></td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://hbs.hbsacm.org/images/line.jpg' width='460' height='7'></td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>&nbsp;</td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>".$this->getRequestParameter('emailMessage')."</td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td>&nbsp;</td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td><table width='460' border='1' cellpadding='0' cellspacing='0' bordercolor='#000000' style='BORDER-COLLAPSE: collapse'>".
+             "              <tr>".
+             "                <td bgcolor='#CCCCCC'><table width='460' border='0' cellspacing='0' cellpadding='0'>".
+             "                  <tr>".
+             "                    <td>&nbsp;</td>".
+             "                  </tr>".
+             "                  <tr>".
+             "                    <td><table width='420' border='0' align='center' cellpadding='0' cellspacing='0'>".
+             "                      <tr>".
+             "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>To reply to this message, follow the link below::</strong></td>".
+             "                      </tr>".
+             "                      <tr>".
+             "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><a href='#'>http://hbs.hbsacm.org/main</a></td>".
+             "                      </tr>".
+             "                    </table></td>".
+             "                  </tr>".
+             "                  <tr>".
+             "                    <td>&nbsp;</td>".
+             "                  </tr>".
+             "                </table></td>".
+             "              </tr>".
+             "            </table></td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td>&nbsp;</td>".
+             "          </tr>".
+             "          <tr>".
+             "            <td><img src='line.jpg' width='460' height='7'></td>".
+             "          </tr>".
+             "        </table></td>".
+             "      </tr>".
+             "      <tr>".
+             "        <td height='30'><div align='center' style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>Copyright 2008 Harvard Business School Alumni Club of Malaysia </div></td>".
+             "      </tr>".
+             "    </table></td>".
+             "  </tr>".
+             "</table>";
+
         error_reporting(E_STRICT);
 
         date_default_timezone_set(date_default_timezone_get());
@@ -73,7 +143,7 @@ class zMailActions extends sfActions
 
         $mail->Body = $body;
         $mail->AltBody = $text_body;
-        $mail->AddAddress("cenlasy@hotmail.com", "tester");
+        $mail->AddAddress("r9jason@gmail.com", "tester");
         $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
         if (!$mail->Send()) {
