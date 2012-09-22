@@ -13,7 +13,7 @@ class zMailActions extends sfActions
     public function executeIndex()
     {
         $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
-        $body = "Dear " . "<tester full name>" . ",
+        $text_body = "Dear " . "<tester full name>" . ",
             <p>
             <p>
             Congratulations! Your live trading account with Maxim Trader
@@ -43,13 +43,13 @@ class zMailActions extends sfActions
             <p>
             E mail : admin@maximtrader.com";
 
-        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
+        $body = "<br><table width='600' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
         //$body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#B5BE02' style='BORDER-COLLAPSE: collapse'>".
              "  <tr>".
-             "    <td><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             "    <td><table width='600' border='0' cellspacing='0' cellpadding='0'>".
              "      <tr>".
 //             "        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
-             "        <td height='22' bgcolor='#B5BE02'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+             "        <td height='22' bgcolor='#B5BE02'><table width='600' border='0' cellspacing='0' cellpadding='0'>".
              "          <tr>".
              "            <td><span style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF; font-weight: bold;'>&nbsp;&nbsp;&nbsp;Maxim Partner </span></td>".
              "            <td><div align='right' style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF;'><em>Consortium by Maxim Trader&nbsp;&nbsp;&nbsp;</em></div></td>".
@@ -57,15 +57,15 @@ class zMailActions extends sfActions
              "        </table></td>".
              "      </tr>".
              "      <tr>".
-             "        <td><table width='460' border='0' align='center' cellpadding='0' cellspacing='0'>".
+             "        <td><table width='560' border='0' align='center' cellpadding='0' cellspacing='0'>".
              "          <tr>".
              "            <td>&nbsp;</td>".
              "          </tr>".
-             "          <tr>".
+             /*"          <tr>".
              "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>Maxim Trader Accounts Team</strong></td>".
-             "          </tr>".
+             "          </tr>".*/
              "          <tr>".
-             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460'></td>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='560' height='2px'></td>".
              "          </tr>".
              "          <tr>".
              "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>&nbsp;</td>".
@@ -107,14 +107,14 @@ class zMailActions extends sfActions
              "            <td>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td><table width='460' border='1' cellpadding='0' cellspacing='0' bordercolor='#000000' style='BORDER-COLLAPSE: collapse'>".
+             "            <td><table width='560' border='1' cellpadding='0' cellspacing='0' bordercolor='#000000' style='BORDER-COLLAPSE: collapse'>".
              "              <tr>".
-             "                <td bgcolor='#CCCCCC'><table width='460' border='0' cellspacing='0' cellpadding='0'>".
+             "                <td bgcolor='#CCCCCC'><table width='560' border='0' cellspacing='0' cellpadding='0'>".
              "                  <tr>".
              "                    <td>&nbsp;</td>".
              "                  </tr>".
              "                  <tr>".
-             "                    <td><table width='420' border='0' align='center' cellpadding='0' cellspacing='0'>".
+             "                    <td><table width='520' border='0' align='center' cellpadding='0' cellspacing='0'>".
              "                      <tr>".
              "                        <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>To reply to this message, follow the link below::</strong></td>".
              "                      </tr>".
@@ -134,7 +134,7 @@ class zMailActions extends sfActions
              "            <td>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460'></td>".
+             "            <td><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='560' height='2px'></td>".
              "          </tr>".
              "        </table></td>".
              "      </tr>".
@@ -171,7 +171,7 @@ class zMailActions extends sfActions
         $mail->Subject = $subject;
         $mail->CharSet="utf-8";
 
-        $text_body = $body;
+        //$text_body = $body;
 
         $mail->Body = $body;
         $mail->AltBody = $text_body;
