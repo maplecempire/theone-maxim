@@ -48,11 +48,11 @@ class zMailActions extends sfActions
              "  <tr>".
              "    <td><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "      <tr>".
-             //"        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
+//             "        <td height='22' bgcolor='#9A1532'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "        <td height='22' bgcolor='#B5BE02'><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "          <tr>".
-             "            <td><span style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF; font-weight: bold;'>&nbsp;&nbsp;&nbsp;Harvard Business School </span></td>".
-             "            <td><div align='right' style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF;'><em>Alumni Club of Malaysia&nbsp;&nbsp;&nbsp;</em></div></td>".
+             "            <td><span style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF; font-weight: bold;'>&nbsp;&nbsp;&nbsp;Maxim Partner </span></td>".
+             "            <td><div align='right' style='font-family: Arial, Verdana; font-size: 11px; font-weight: normal; color: #FFFFFF;'><em>Consortium by Maxim Trader&nbsp;&nbsp;&nbsp;</em></div></td>".
              "          </tr>".
              "        </table></td>".
              "      </tr>".
@@ -62,16 +62,46 @@ class zMailActions extends sfActions
              "            <td>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>".$this->getRequestParameter('emailSubject')."</strong></td>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><strong>Maxim Trader Accounts Team</strong></td>".
              "          </tr>".
              "          <tr>".
-             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://hbs.hbsacm.org/images/line.jpg' width='460' height='7'></td>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460' height='7'></td>".
              "          </tr>".
              "          <tr>".
              "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>".$this->getRequestParameter('emailMessage')."</td>".
+             "            <td style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>
+             Dear " . "<tester full name>" . ",
+            <p>
+            <p>
+            Congratulations! Your live trading account with Maxim Trader
+            has been activated! Please find the details of your trading account as
+            per below :
+            <p>
+            <p>
+            Live MT4 Trading Account ID : <mt4 account id><p>
+            Live MT4 Trading Account password : <mt4 password><p>
+            <p>
+            <p>
+            The Login ID and Password is strictly confidential and should not be
+            disclosed to anyone. Should someone with access to your password wish,
+            all of your account information can be changed. You will be held
+            liable for any activity that may occur as a result of you losing your
+            password. Therefore, if you feel that your password has been
+            compromised, you should immediately contact us by email to
+            cs@maximtrader.com to rectify the situation.<p>
+            We look forward to your custom in the near future. Should you have any
+            queries, please do not hesitate to get back to us.
+            <p>
+            --
+            <p>
+            Best Regards,
+            <p>
+            Maxim Trader
+            <p>
+            E mail : admin@maximtrader.com
+             </td>".
              "          </tr>".
              "          <tr>".
              "            <td>&nbsp;</td>".
@@ -104,12 +134,12 @@ class zMailActions extends sfActions
              "            <td>&nbsp;</td>".
              "          </tr>".
              "          <tr>".
-             "            <td><img src='line.jpg' width='460' height='7'></td>".
+             "            <td><img src='http://partner.maximtrader.com/css/maxim/banner/line.jpg' width='460' height='7'></td>".
              "          </tr>".
              "        </table></td>".
              "      </tr>".
              "      <tr>".
-             "        <td height='30'><div align='center' style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>Copyright 2008 Harvard Business School Alumni Club of Malaysia </div></td>".
+             "        <td height='30'><div align='center' style='font-family: Arial, Verdana;font-size: 11px;font-weight: normal;color: #000000;'>Copyright @ Maxim Partner </div></td>".
              "      </tr>".
              "    </table></td>".
              "  </tr>".
