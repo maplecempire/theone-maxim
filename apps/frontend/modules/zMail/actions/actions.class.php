@@ -43,7 +43,8 @@ class zMailActions extends sfActions
             <p>
             E mail : admin@maximtrader.com";
 
-        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
+        //$body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#FFFFFF' style='BORDER-COLLAPSE: collapse'>".
+        $body .= "<br><table width='500' border='1' align='center' cellpadding='0' cellspacing='0' bordercolor='#CCCCCC' bgcolor='#B5BE02' style='BORDER-COLLAPSE: collapse'>".
              "  <tr>".
              "    <td><table width='500' border='0' cellspacing='0' cellpadding='0'>".
              "      <tr>".
