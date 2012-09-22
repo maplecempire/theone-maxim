@@ -782,7 +782,7 @@ class marketingActions extends sfActions
                 liable for any activity that may occur as a result of you losing your
                 password. Therefore, if you feel that your password has been
                 compromised, you should immediately contact us by email to
-                cs@maxim.com to rectify the situation.<p>
+                cs@maximtrader.com to rectify the situation.<p>
                 We look forward to your custom in the near future. Should you have any
                 queries, please do not hesitate to get back to us.
                 <p>
@@ -792,7 +792,7 @@ class marketingActions extends sfActions
                 <p>
                 Maxim Trader
                 <p>
-                E mail : admin@maxim.com";
+                E mail : admin@maximtrader.com";
 
             $sendMailService = new SendMailService();
             $sendMailService->sendMt4UsernameAndPassword($tbl_distributor, $subject, $body);
