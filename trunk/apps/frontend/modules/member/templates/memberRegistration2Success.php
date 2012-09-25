@@ -25,7 +25,7 @@ $(function() {
             }
         },
         rules : {
-            "userName" : {
+            /*"userName" : {
                 required : true,
                 noSpace: true,
                 minlength : 6,
@@ -89,7 +89,7 @@ $(function() {
             },
             "privateInvestmentAgreement" : {
                 required : true
-            }
+            }*/
         },
         submitHandler: function(form) {
             waiting();

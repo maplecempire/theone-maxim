@@ -9,12 +9,12 @@ $(function() {
             }
         },
         rules : {
-            "privateInvestmentAgreement" : {
+            /*"privateInvestmentAgreement" : {
                 required : "#rdoFxgold:checked"
             },
             "mteAgreement" : {
                 required : "#rdoMte:checked"
-            }
+            }*/
             /*"transactionPassword" : {
                 required : true
                 , remote: "/member/verifyTransactionPassword"
