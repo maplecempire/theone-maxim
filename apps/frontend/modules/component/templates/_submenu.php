@@ -1,4 +1,9 @@
 <style type="text/css">
+<?php if ($sf_user->getCulture() == "cn") { ?>
+html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, table, tr, th, td, button, input, textarea {
+    font-family : "Microsoft YaHei" !important;
+}
+<?php } ?>
 .menu_title {
     font-weight: bold;
     font-family: arial;
@@ -8,7 +13,7 @@
 
 <div class="menu" style="z-index: 20;">
     <ul>
-        <li class="menu_title">MAIN MENU</li>
+        <li class="menu_title"><?php echo __('MAIN MENU'); ?></li>
         <li>
             <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
         </li>
@@ -20,28 +25,28 @@
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="#" id="linkPackagePurchase"><span>Package Purchase</span></a>
+            <a href="#" id="linkPackagePurchase"><span><?php echo __('Package Purchase'); ?></span></a>
         </li>
     <?php } ?>
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/epointPurchase")?>"><span>Funds Deposit</span></a>
+            <a href="<?php echo url_for("/member/epointPurchase")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/packageUpgrade"><span>Package Upgrade</span></a>
+            <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
         </li>
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/reloadTopup"><span>Reload MT4 Fund</span></a>
+            <a href="/member/reloadTopup"><span><?php echo __('Reload MT4 Fund'); ?></span></a>
         </li>
     <?php } ?>
 
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">ACCOUNT INFORMATION</li>
+        <li class="menu_title"><?php echo __('ACCOUNT INFORMATION'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
@@ -50,7 +55,7 @@
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/mt4Withdrawal"><span>Withdrawal</span></a>
+            <a href="/member/mt4Withdrawal"><span><?php echo __('Withdrawal'); ?></span></a>
         </li>
     <?php } ?>
 
@@ -60,7 +65,7 @@
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">EDUCATION / TRAINING COURSES</li>
+        <li class="menu_title"><?php echo __('EDUCATION / TRAINING COURSES'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/underMaintenance"><span><?php echo __('Education Course'); ?></span></a>
         </li>
@@ -83,48 +88,48 @@
     </ul>-->
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">HIERARCHY</li>
+        <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">EXCHANGE RATE</li>
+        <li class="menu_title"><?php echo __('EXCHANGE RATE'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/exchange"><span><?php echo __('Exchange Rate'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">CONTACT</li>
+        <li class="menu_title"><?php echo __('CONTACT'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/underMaintenance"><span><?php echo __('CS Center'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">REPORT</li>
+        <li class="menu_title"><?php echo __('REPORT'); ?></li>
 
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span>Fund Management Report</span></a>
+            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Report'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/maximExecutorReport") ?>"><span>MaximTrade Executor™ Report</span></a>
+            <a href="<?php echo url_for("/member/maximExecutorReport") ?>"><span><?php echo __('MaximTrade Executor™ Report'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>
     <ul>
-        <li class="menu_title">DOWNLOAD</li>
+        <li class="menu_title"><?php echo __('DOWNLOAD'); ?></li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/download/downloadMt4Pro?q=" . rand()) ?>"><span>Download MT4 Platform</span></a>
+            <a href="<?php echo url_for("/download/downloadMt4Pro?q=" . rand()) ?>"><span><?php echo __('Download MT4 Platform'); ?></span></a>
         </li>
     <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span>Download Daily FX Guide</span></a>
+            <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
     <?php } ?>
     </ul>
