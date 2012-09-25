@@ -85,7 +85,7 @@ $(function() {
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/ecashWithdrawal" style="color: rgb(0, 93, 154);">
-        <?php echo __('CP1 Withdrawal'); ?>
+        <?php echo __('CP2 Withdrawal'); ?>
     </a>
 </div>
 

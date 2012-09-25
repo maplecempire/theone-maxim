@@ -43,7 +43,7 @@
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/ecashWithdrawal" style="color: rgb(134, 197, 51);">
-        <?php echo __('CP1 Withdrawal'); ?>
+        <?php echo __('CP2 Withdrawal'); ?>
     </a>
 </div>
 
@@ -53,7 +53,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP1 Withdrawal') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP2 Withdrawal') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -95,7 +95,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('CP1 Withdrawal') ?></th>
+                    <th colspan="2"><?php echo __('CP2 Withdrawal') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -104,7 +104,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Balance'); ?></td>
+                    <td><?php echo __('CP2 Balance'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
                                            value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -114,7 +114,7 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Withdrawal Amount'); ?></td>
+                    <td><?php echo __('CP2 Withdrawal Amount'); ?></td>
                     <td>
                         <select name="ecashAmount" id="cbo_ecashAmount" tabindex="2">
                             <option value="200">200</option>
@@ -165,7 +165,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Note : charge 5% handling fees when CP1 withdrawal requested. ') ?></font>
+                        <font color="#dc143c"> <?php echo __('Note : charge 5% handling fees when CP2 withdrawal requested. ') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -237,7 +237,7 @@
                 <th class="tbl_header_left">
                     <div class="border_left_grey">&nbsp;</div>
                 </th>
-                <th><?php echo __('CP1 Withdrawal Status') ?></th>
+                <th><?php echo __('CP2 Withdrawal Status') ?></th>
                 <th class="tbl_content_right"></th>
                 <th class="tbl_header_right">
                     <div class="border_right_grey">&nbsp;</div>

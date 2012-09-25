@@ -157,7 +157,7 @@
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>CP1 Wallet</td>
+        <td>CP2 Wallet</td>
         <td><input type="text" value="0.00" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>

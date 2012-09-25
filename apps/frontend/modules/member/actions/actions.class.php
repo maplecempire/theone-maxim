@@ -315,7 +315,7 @@ class memberActions extends sfActions
 
             $amountNeeded = $selectedPackage->getPrice();
             if ($amountNeeded > $ledgerEPointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP2 amount");
+                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
                 return $this->redirect('/member/memberRegistration');
             }
             $this->selectedPackage = $selectedPackage;
@@ -1667,13 +1667,13 @@ class memberActions extends sfActions
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient CP2.";
+                    $errorMsg = "Insufficient CP1.";
                 }
             } else if ("ecash" == $paymentType) {
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient CP1.";
+                    $errorMsg = "Insufficient CP2.";
                 }
             } else {
                 $error = true;
@@ -2231,7 +2231,7 @@ class memberActions extends sfActions
 
             if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
 
             } elseif ($appUser->getUserPassword2() <> $this->getRequestParameter('transactionPassword')) {
 
@@ -2550,7 +2550,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP1");
+                $this->setFlash('errorMsg', "In-sufficient CP2");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -2596,7 +2596,7 @@ class memberActions extends sfActions
                 $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_ecash_withdraw->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP1 withdrawal has been submitted."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP2 withdrawal has been submitted."));
 
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -2744,7 +2744,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($pointNeeded > $ledgerEpointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP2");
+                $this->setFlash('errorMsg', "In-sufficient CP1");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -3129,7 +3129,7 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP1");
+                $this->setFlash('errorMsg', "In-sufficient CP2");
 
             } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");
@@ -3162,7 +3162,7 @@ class memberActions extends sfActions
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP1 convert to CP2 successful."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to CP1 successful."));
 
                 return $this->redirect('/member/convertEcashToEpoint');
             }
@@ -3218,7 +3218,7 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
 
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
-                $this->setFlash('errorMsg', "In-sufficient CP2 amount");
+                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
 
             } else if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
                 $this->setFlash('errorMsg', "Invalid Security password");

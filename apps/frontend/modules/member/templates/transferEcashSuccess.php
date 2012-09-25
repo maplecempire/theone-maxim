@@ -134,7 +134,7 @@ function verifySponsorId() {
                         </tr>
                         <tr>
                             <td class="caption">
-                                <strong><?php echo __('CP1'); ?></strong>
+                                <strong><?php echo __('CP2'); ?></strong>
                             </td>
                             <td class="value">
                                 <input name="ecashBalance" id="ecashBalance" tabindex="2" disabled="disabled"

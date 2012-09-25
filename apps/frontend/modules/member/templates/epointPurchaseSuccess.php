@@ -90,13 +90,13 @@ $(function() {
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('Convert CP1 To CP2'); ?>
+        <?php echo __('Convert CP2 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferEpoint")?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('CP2 Transfer'); ?>
+        <?php echo __('CP1 Transfer'); ?>
     </a>
 </div>
 
@@ -200,9 +200,9 @@ $(function() {
                             <tr>
                                 <td valign="top"><font color="#dc143c">NOTE :</font></td>
                                 <td>
-                                    <font color="#dc143c">Funds Deposited will be credited into CP2 Account.
-                                    <br>CP2 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.
-                                    <br><?php echo $systemCurrency?> 1 equals to 1 value of CP2.&nbsp;</font>
+                                    <font color="#dc143c">Funds Deposited will be credited into CP1 Account.
+                                    <br>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.
+                                    <br><?php echo $systemCurrency?> 1 equals to 1 value of CP1.&nbsp;</font>
                                 </td>
                             </tr>
                         </table>
