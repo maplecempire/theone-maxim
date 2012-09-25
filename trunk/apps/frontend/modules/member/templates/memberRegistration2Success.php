@@ -607,6 +607,7 @@ $(function() {
         <td>
             <input type="text" class="inputbox" id="packageName" name="packageName" value="<?php echo $selectedPackage->getPackageName();?>" readonly="readonly">
             <input type="hidden" class="inputbox" id="packageId" name="packageId" value="<?php echo $selectedPackage->getPackageId();?>" readonly="readonly">
+            <input type="hidden" class="inputbox" id="productCode" name="productCode" value="<?php echo $productCode;?>" readonly="readonly">
             &nbsp;
         </td>
         <td>&nbsp;</td>
