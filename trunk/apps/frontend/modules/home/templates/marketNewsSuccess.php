@@ -173,7 +173,7 @@ a[href] img {
             <div id="feedBody">
                 <div id="feedTitle">
                     <div id="feedTitleContainer">
-                        <h1 id="feedTitleText" style="margin-right: 135px;">Market News</h1>
+                        <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Market News') ?></h1>
                     </div>
                 </div>
                 <div id="feedContent">

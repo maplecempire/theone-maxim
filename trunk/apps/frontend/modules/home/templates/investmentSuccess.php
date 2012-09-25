@@ -54,7 +54,7 @@
 <div id="wrapper">
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
-            <div style=" width:450; float:left;"><h1>Fund Management</h1></div>
+            <div style=" width:450; float:left;"><h1><?php echo __('Fund Management') ?></h1></div>
 
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
@@ -65,54 +65,53 @@
             <div style="clear:both;"></div>
             <!--<h2>Alternative Strategies</h2>-->
 
-            <p align="justify"><strong>Fund Management Strategies</strong> are becoming an increasingly popular way of accessing the forex market for retail investors, who have neither the time nor expertise to trade their own account. An investment in a managed forex account provides investors with the ability to profit from the currency market, having their account managed by a professional money manager, whilst at the same time having complete access to their fund, 24 hours a day.</p>
+            <p align="justify"><strong><?php echo __('Fund Management Strategies') ?></strong> <?php echo __('are becoming an increasingly popular way of accessing the forex market for retail investors, who have neither the time nor expertise to trade their own account. An investment in a managed forex account provides investors with the ability to profit from the currency market, having their account managed by a professional money manager, whilst at the same time having complete access to their fund, 24 hours a day.') ?></p>
 
-            <p align="justify">Maxim Trader have sought to structure an investment which addresses all the challenges which investors face today.
-                The Maxim Trader fund management provides investors with a low risk investment, competitive charges, aims to make absolute, positive returns irrespective of market conditions, offers immediate access to capital, safety of their investment, with added capital protection. The managed forex account is managed to very strict investment criteria, with risk management a priority, so that drawdowns and losses are minimised, and returns maximised.</p>
+            <p align="justify"><?php echo __('Maxim Trader have sought to structure an investment which addresses all the challenges which investors face today. The Maxim Trader fund management provides investors with a low risk investment, competitive charges, aims to make absolute, positive returns irrespective of market conditions, offers immediate access to capital, safety of their investment, with added capital protection. The managed forex account is managed to very strict investment criteria, with risk management a priority, so that drawdowns and losses are minimised, and returns maximised.') ?></p>
 
-            <h2>Alternative Strategies</h2>
+            <h2><?php echo __('Alternative Strategies') ?></h2>
 
-            <p align="justify">The universe of fund management can be complex and are often misunderstood. Among the most common is the employment of alternative investment strategies.</p>
+            <p align="justify"><?php echo __('The universe of fund management can be complex and are often misunderstood. Among the most common is the employment of alternative investment strategies.') ?></p>
 
-            <p align="justify">However, not all alternative strategies are the same and each has unique characteristics that may result in out-performance or under-performance in various market conditions.</p>
+            <p align="justify"><?php echo __('However, not all alternative strategies are the same and each has unique characteristics that may result in out-performance or under-performance in various market conditions.') ?></p>
 
-            <p align="justify">Maxim Trader employs a combination of strategies that take advantage of the price movements of related and correlated underlying to maximize profit potentials. To enhance profitability, we develop and incorporate highly complex high-speed frequency algorithmic trading computer modeling in our daily trading  modeling.</p>
+            <p align="justify"><?php echo __('Maxim Trader employs a combination of strategies that take advantage of the price movements of related and correlated underlying to maximize profit potentials. To enhance profitability, we develop and incorporate highly complex high-speed frequency algorithmic trading computer modeling in our daily trading  modeling.') ?></p>
 
-            <h2>Alternative Strategies Architecture</h2>
+            <h2><?php echo __('Alternative Strategies Architecture') ?></h2>
 
             <p><img width="582" class="aligncenter size-full wp-image-162" title="Alternative Strategies Architecture" alt=""
                                 src="/css/maxim/banner/bg4.png"></p>
             <div style="clear:both;"></div>
 
-            <h2>Tactical Trading</h2>
+            <h2><?php echo __('Tactical Trading') ?></h2>
 
             <p><img width="582" class="aligncenter size-full wp-image-162" title="Tactical Trading" alt=""
                                 src="/css/maxim/banner/bg7.png"></p>
             <div style="clear:both;"></div>
 
-            <p align="justify"><strong>Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.</strong> Often managers will combine long and/or short positions with each strategy to maximize returns.</p>
+            <p align="justify"><strong><?php echo __('Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.</strong> Often managers will combine long and/or short positions with each strategy to maximize returns.') ?></p>
 
-            <p align="justify">Top-down approach focusing on global macroeconomic shifts in which outright and derivative positions are taken.</p>
+            <p align="justify"><?php echo __('Top-down approach focusing on global macroeconomic shifts in which outright and derivative positions are taken.') ?></p>
 
-            <p align="justify">Among the myriad of financial instruments that Maxim Trader trades in are the <strong>global currency markets</strong> and <strong>cash market for gold.</strong></p>
+            <p align="justify"><?php echo __('Among the myriad of financial instruments that Maxim Trader trades in are the') ?><strong><?php echo __('global currency markets')?></strong> <?php echo __('and')?> <strong><?php echo __('cash market for gold.') ?></strong></p>
 
-            <p align="justify">These two markets are some of most liquid and volatile in recent years owing to the global financial crisis and it is for this very reason why these instruments are chosen. Using our in-house expertise, trading models are developed and vigorously tested and incorporated into our tactical trading strategies.</p>
+            <p align="justify"><?php echo __('These two markets are some of most liquid and volatile in recent years owing to the global financial crisis and it is for this very reason why these instruments are chosen. Using our in-house expertise, trading models are developed and vigorously tested and incorporated into our tactical trading strategies.') ?></p>
 
 
 
-            <h2>Managed Trading</h2>
+            <h2><?php echo __('Managed Trading') ?></h2>
 
             <p style="text-align:center"><img height="300px" class="aligncenter size-full wp-image-162" title="Managed Trading" alt=""
                                 src="/css/maxim/banner/bg6.png"></p>
             <div style="clear:both;"></div>
 
-            <h2>Implementing Alternatives</h2>
+            <h2><?php echo __('Implementing Alternatives') ?></h2>
 
-            <p align="justify">By investing in Maxim Trader alternative strategies, investors may achieve additional risk mitigation and potential return enhancement in today’s volatile markets.</p>
+            <p align="justify"><?php echo __('By investing in Maxim Trader alternative strategies, investors may achieve additional risk mitigation and potential return enhancement in today’s volatile markets.') ?></p>
 
-            <p align="justify">At Maxim Trader , we believe an alternative investments’ portfolio should provide exposure to both hedged strategies and private investments as a compliment to a traditional long-only portfolio like equities.</p>
+            <p align="justify"><?php echo __('At Maxim Trader , we believe an alternative investments’ portfolio should provide exposure to both hedged strategies and private investments as a compliment to a traditional long-only portfolio like equities.') ?></p>
 
-            <h2>Fund Structure</h2>
+            <h2><?php echo __('Fund Structure') ?></h2>
 
             <p><img  height="220px" class="aligncenter size-full wp-image-162" title="Fund Structure" alt=""
                                 src="/css/maxim/banner/bg5.png"></p>

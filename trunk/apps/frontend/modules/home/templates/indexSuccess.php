@@ -290,12 +290,12 @@ ul, ol {
                         <link type="text/css" rel="stylesheet" href="/css/maxim/g3bo.css">
                         <div id="g3boBody">
                             <div id="g3boContent">
-                                <h3 style="color: #FFFFFF;">Maxim Trader</h3>
+                                <h3 style="color: #FFFFFF;"><?php echo __('Maxim Trader') ?></h3>
 
-                                <p style="color:#26272A;font-size: 1.2em;line-height:130%; padding-right: 20px">The smart investors choice for managing funds and guaranteeing satisfaction!</p>
+                                <p style="color:#26272A;font-size: 1.2em;line-height:130%; padding-right: 20px"><?php echo __('The smart investors choice for managing funds and guaranteeing satisfaction!') ?></p>
                                 <p>
                                 <a title="open a trial account" href="/member/register"
-                                   class="g3boButton">OPEN AN ACCOUNT NOW<img
+                                   class="g3boButton"><?php echo __('OPEN AN ACCOUNT NOW') ?><img
                                         src="/css/maxim/button arrow.png"
                                         alt=""></a>
                             </div>
@@ -357,8 +357,8 @@ ul, ol {
             <div class="hr2"></div>
             <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
 
-            <strong>MaximTrader</strong> have sought to structure an investment which addresses all the challenges which investors face today.
-            <a href="<?php echo url_for("/home/investment")?>" style="color: #0080C8">Learn more ?</a>
+            <strong><?php echo __('MaximTrader') ?></strong> <?php echo __('have sought to structure an investment which addresses all the challenges which investors face today.') ?>
+            <a href="<?php echo url_for("/home/investment")?>" style="color: #0080C8"><?php echo __('Learn more') ?> ?</a>
 
             <div class="hr2"></div>
             <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
