@@ -120,7 +120,7 @@
                 <br>
                 <strong>•	<?php echo __('State-of-the art trading technology') ?></strong>
                 <br>
-                <?php echo __('Maximtrade™ Executor') ?> <?php echo __('is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader\'s research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader\'s trading expertise into your system while allowing you enough flexibility to make your own trading decisions.') ?>
+                <?php echo __('Maximtrade™ Executor is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader\'s research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader\'s trading expertise into your system while allowing you enough flexibility to make your own trading decisions.') ?>
                 <br>
                 <br>
                 <strong>•	<?php echo __('Capital enhancement') ?></strong>
