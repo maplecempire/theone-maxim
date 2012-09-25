@@ -319,6 +319,7 @@ class memberActions extends sfActions
                 return $this->redirect('/member/memberRegistration');
             }
             $this->selectedPackage = $selectedPackage;
+            $this->productCode = $this->getRequestParameter('productCode');
         } else {
             return $this->redirect('/member/memberRegistration');
         }

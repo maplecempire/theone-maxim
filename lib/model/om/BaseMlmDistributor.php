@@ -243,6 +243,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $excluded_structure = '';
 
+
+	
+	protected $product_mte = '';
+
+
+	
+	protected $product_fxgold = '';
+
 	
 	protected $alreadyInSave = false;
 
@@ -750,6 +758,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->excluded_structure;
+	}
+
+	
+	public function getProductMte()
+	{
+
+		return $this->product_mte;
+	}
+
+	
+	public function getProductFxgold()
+	{
+
+		return $this->product_fxgold;
 	}
 
 	
@@ -1756,6 +1778,40 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setProductMte($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->product_mte !== $v || $v === '') {
+			$this->product_mte = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PRODUCT_MTE;
+		}
+
+	} 
+
+	
+	public function setProductFxgold($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->product_fxgold !== $v || $v === '') {
+			$this->product_fxgold = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PRODUCT_FXGOLD;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -1878,11 +1934,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->excluded_structure = $rs->getString($startcol + 58);
 
+			$this->product_mte = $rs->getString($startcol + 59);
+
+			$this->product_fxgold = $rs->getString($startcol + 60);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 59; 
+						return $startcol + 61; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2204,6 +2264,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 58:
 				return $this->getExcludedStructure();
 				break;
+			case 59:
+				return $this->getProductMte();
+				break;
+			case 60:
+				return $this->getProductFxgold();
+				break;
 			default:
 				return null;
 				break;
@@ -2273,6 +2339,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[56] => $this->getFileProofOfResidence(),
 			$keys[57] => $this->getFileNric(),
 			$keys[58] => $this->getExcludedStructure(),
+			$keys[59] => $this->getProductMte(),
+			$keys[60] => $this->getProductFxgold(),
 		);
 		return $result;
 	}
@@ -2465,6 +2533,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 58:
 				$this->setExcludedStructure($value);
 				break;
+			case 59:
+				$this->setProductMte($value);
+				break;
+			case 60:
+				$this->setProductFxgold($value);
+				break;
 		} 	}
 
 	
@@ -2531,6 +2605,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[56], $arr)) $this->setFileProofOfResidence($arr[$keys[56]]);
 		if (array_key_exists($keys[57], $arr)) $this->setFileNric($arr[$keys[57]]);
 		if (array_key_exists($keys[58], $arr)) $this->setExcludedStructure($arr[$keys[58]]);
+		if (array_key_exists($keys[59], $arr)) $this->setProductMte($arr[$keys[59]]);
+		if (array_key_exists($keys[60], $arr)) $this->setProductFxgold($arr[$keys[60]]);
 	}
 
 	
@@ -2597,6 +2673,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::FILE_PROOF_OF_RESIDENCE)) $criteria->add(MlmDistributorPeer::FILE_PROOF_OF_RESIDENCE, $this->file_proof_of_residence);
 		if ($this->isColumnModified(MlmDistributorPeer::FILE_NRIC)) $criteria->add(MlmDistributorPeer::FILE_NRIC, $this->file_nric);
 		if ($this->isColumnModified(MlmDistributorPeer::EXCLUDED_STRUCTURE)) $criteria->add(MlmDistributorPeer::EXCLUDED_STRUCTURE, $this->excluded_structure);
+		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_MTE)) $criteria->add(MlmDistributorPeer::PRODUCT_MTE, $this->product_mte);
+		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_FXGOLD)) $criteria->add(MlmDistributorPeer::PRODUCT_FXGOLD, $this->product_fxgold);
 
 		return $criteria;
 	}
@@ -2742,6 +2820,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setFileNric($this->file_nric);
 
 		$copyObj->setExcludedStructure($this->excluded_structure);
+
+		$copyObj->setProductMte($this->product_mte);
+
+		$copyObj->setProductFxgold($this->product_fxgold);
 
 
 		$copyObj->setNew(true);

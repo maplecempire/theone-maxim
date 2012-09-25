@@ -9,6 +9,12 @@ $(function() {
             }
         },
         rules : {
+            "privateInvestmentAgreement" : {
+                required : "#rdoFxgold:checked"
+            },
+            "mteAgreement" : {
+                required : "#rdoMte:checked"
+            }
             /*"transactionPassword" : {
                 required : true
                 , remote: "/member/verifyTransactionPassword"
@@ -48,6 +54,15 @@ $(function() {
         $('#epointNeeded').val(epointNeeded);
         $('#pid').val(pid);
         $("#topupForm").submit();
+    });
+
+    $("#rdoFxgold").click(function(event){
+        $(".tdFxGold").show();
+        $(".tdMte").hide();
+    });
+    $("#rdoMte").click(function(event){
+        $(".tdFxGold").hide();
+        $(".tdMte").show();
     });
 });
 </script>
@@ -153,22 +168,56 @@ $(function() {
                     </td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="5">
-                        <p>Below is the contractural Private Investment Management Agreement for signing up the package above.
-                           We recommend that you take the time to read each of them carefully.</p><p>Please fill up and sign the agreement to acknowledge your acceptance, argeement and
-                                understanding of these terms and agreements and send it to <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
-
+                        &nbsp;<input name="productCode" type="radio" value="fxgold" id="rdoFxgold" checked="checked">&nbsp; <label for="rdoFxgold">FX Gold A</label>
+                        &nbsp;<input name="productCode" type="radio" value="mte" id="rdoMte">&nbsp; <label for="rdoMte">MaximTrade™ Executor</label>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr class="tbl_form_row_even">
+
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td>
+                    <td colspan="5">
+                        <p>Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.</p>
+                        <br>
+                        <p>Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.</p>
                     </td>
-                    <td colspan="4">
-                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Private Investment Agreement (67 KB Doc)</a>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_even tdFxGold">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+                    <td colspan="3">
+                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd tdFxGold">
+                    <td>&nbsp;</td>
+                    <td colspan="5">
+                        <br>
+                        <p>Please sign and send it to <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even tdMte" style="display: none">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="mteAgreement" name="mteAgreement">
+                        <label for="mteAgreement">MTE Agreement</label></td>
+                    <td colspan="3">
+                        <a target="_blank" href="/download/mteAgreement">Download Agreement</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd tdMte" style="display: none">
+                    <td>&nbsp;</td>
+                    <td colspan="5">
+                        <br>
+                        <p>Please sign and send it to <a href="mailto:support@maximtrader.com">support@maximtrader.com</a>.</p>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

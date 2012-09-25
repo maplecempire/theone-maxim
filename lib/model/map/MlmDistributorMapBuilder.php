@@ -150,5 +150,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('EXCLUDED_STRUCTURE', 'ExcludedStructure', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('PRODUCT_MTE', 'ProductMte', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('PRODUCT_FXGOLD', 'ProductFxgold', 'string', CreoleTypes::VARCHAR, false, 1);
+
 	} 
 } 
