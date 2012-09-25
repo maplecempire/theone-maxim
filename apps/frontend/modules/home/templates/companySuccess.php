@@ -66,7 +66,7 @@
     <div style="display: inline; width: 666px; overflow: hidden; margin-right: 0px;" id="page">
         <div id="content">
             <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
-            <div style=" width:450; float:left;"><h1>The Consortium</h1></div>
+            <div style=" width:450; float:left;"><h1><?php echo __('The Consortium') ?></h1></div>
 
             <div class="qtrans_widget_end"></div>
             <div class="hr"></div>
@@ -74,125 +74,108 @@
             <div><img width="582" title="small-img-5" alt=""
                       src="/css/maxim/banner/banner-09.jpg"></div>
 
-            <p align="justify"><strong>Consortium by Maxim Trader</strong>. Consortium is the latest project undertaken by Maxim Trader to develop a cooperative for financial leverage with a pioneering inclusion of third party individuals.</p>
-            <p align="justify">Our business model is simple and straight forward : to maximize leverage through a system of pooled resources coupled with trading technology and expertise. Our objective is clear : to profit in an exponential manner to benefit both company and clients.</p>
+            <p align="justify"><strong><?php echo __('Consortium by Maxim Trader') ?></strong>. <?php echo __('Consortium is the latest project undertaken by Maxim Trader to develop a cooperative for financial leverage with a pioneering inclusion of third party individuals.') ?></p>
+            <p align="justify"><?php echo __('Our business model is simple and straight forward : to maximize leverage through a system of pooled resources coupled with trading technology and expertise. Our objective is clear : to profit in an exponential manner to benefit both company and clients.') ?></p>
 
-            <h5>Business Model</h5>
-            <b>Identifying Forte</b><br>
+            <h5><?php echo __('Business Model') ?></h5>
+            <b><?php echo __('Identifying Forte') ?></b><br>
 
             <p align="justify">
-                One of the most powerful tools successful people use on a regular basis is leverage.
-                Leverage means utilizing the strengths of other people, processes and things, to
-                do a lot more than what you would have otherwise done alone.
+                <?php echo __('One of the most powerful tools successful people use on a regular basis is leverage. Leverage means utilizing the strengths of other people, processes and things, to do a lot more than what you would have otherwise done alone.') ?>
             </p>
             <p align="justify">
-                The famous Greek mathematician, Archimedes, said: <I>“Give me a lever long enough and
-                a place to stand, and I can move the world.”</I>
+                <?php echo __('The famous Greek mathematician, Archimedes, said') ?>: <I>“<?php echo __('Give me a lever long enough and a place to stand, and I can move the world.') ?>”</I>
             </p>
             <p align="justify">
-                The financial market is an immensely rich environment for those well endorsed enough to take advantage
-                of. While Professional traders and Portfolio managers do make an obscene amount of money, other traders
-                just experience the tip of the iceberg of wealth. For most traders, making money consistently is a
-                difficult task. There are times where your judgment will be wrong or your timing will be off, resulting
-                in loss of money. This is why the average individual is not actively trading, causing many opportunities
-                to slip by and profit potential lost. Being consistently successful at trading takes knowledge,
-                expertise and capital. The winner-takes-all nature of trading the markets explains the income disparity
-                within the industry. The difference between simply trying to be rich and becoming fabulously rich
-                traders lies in expertise, technology and systems.
+                <?php echo __('The financial market is an immensely rich environment for those well endorsed enough to take advantage of. While Professional traders and Portfolio managers do make an obscene amount of money, other traders just experience the tip of the iceberg of wealth.') ?>
+                <?php echo __('For most traders, making money consistently is a difficult task. There are times where your judgment will be wrong or your timing will be off, resulting in loss of money. This is why the average individual is not actively trading, causing many opportunities to slip by and profit potential lost.') ?>
+                <?php echo __('Being consistently successful at trading takes knowledge, expertise and capital. The winner-takes-all nature of trading the markets explains the income disparity within the industry.') ?>
+                <?php echo __('The difference between simply trying to be rich and becoming fabulously rich traders lies in expertise, technology and systems.') ?>
             </p>
             <p align="justify">
-                <strong>What makes the difference </strong>
+                <strong><?php echo __('What makes the difference') ?></strong>
                 <br>
-                Extraordinary profits are made by spotting an “incorrect” price and trading on it.
-                But this is easier said than done and not everyone can get rich using this method.
-                There is only so much money to be made in any one arbitrage opportunity. The first
-                person who acts usually gets the biggest piece of the pie.
+                <?php echo __('Extraordinary profits are made by spotting an') ?> “<?php echo __('incorrect') ?>” <?php echo __('price and trading on it.') ?>
+                <?php echo __('But this is easier said than done and not everyone can get rich using this method. There is only so much money to be made in any one arbitrage opportunity. The first person who acts usually gets the biggest piece of the pie.') ?>
             </p>
             <p align="justify">
-                There’s another reason why superior expertise is key: the “moving first” advantage.
-                Let’s say for example some news hits the market and that traders interpret this
-                news at different speeds. One trader figures out what the news means in a second,
-                while the other traders require five seconds. Still, there are some other traders
-                that require an entire day or maybe even up to a month to figure things out. The
-                early traders earn the extra money. They get into action early, at optimal prices,
-                and reap most of the gains while the other, later, slower traders pile on.
+                <?php echo __('There\'s another reason why superior expertise is key: the "moving first" advantage.') ?>
+                <?php echo __('Let\'s say for example some news hits the market and that traders interpret this news at different speeds.') ?>
+                <?php echo __('One trader figures out what the news means in a second, while the other traders require five seconds. Still, there are some other traders that require an entire day or maybe even up to a month to figure things out.') ?>
+                <?php echo __('The early traders earn the extra money. They get into action early, at optimal prices, and reap most of the gains while the other, later, slower traders pile on.') ?>
             </p>
             <p align="justify">
-                <strong>Where Maxim Trader steps in </strong>
+                <strong><?php echo __('Where Maxim Trader steps in') ?></strong>
                 <br>
-                Individual investors lack the skills, expertise and technology to consistently profit
-                from his trading. Needless to say, a more effective way is to pool resources to
-                consistently come out ahead in this ruthless pursuit for trading gains.
+                <?php echo __('Individual investors lack the skills, expertise and technology to consistently profit from his trading. Needless to say, a more effective way is to pool resources to consistently come out ahead in this ruthless pursuit for trading gains.') ?>
             </p>
             <p align="justify">
-                This is why the considerable resources of Maxim Trader is combined with those of its
-                clients/shareholders; enlarging the capital base of both to profit from the immerse
-                opportunities the financial markets of the day has to offer – the currency market.
+                <?php echo __('This is why the considerable resources of Maxim Trader is combined with those of its clients/shareholders; enlarging the capital base of both to profit from the immerse opportunities the financial markets of the day has to offer – the currency market.') ?>
             </p>
 
-            <h2>Creating Value Added</h2>
+            <h2><?php echo __('Creating Value Added') ?></h2>
             <p align="justify">
-                With the vast selection of platforms out there, the question here is ‘why choose Maxim Trader?’ An intelligent client always seeks to get his money’s worth and such is the inspiration behind the ‘Consortium Model’.
+                <?php echo __('With the vast selection of platforms out there, the question here is \'why choose Maxim Trader?\' An intelligent client always seeks to get his money\'s worth and such is the inspiration behind the \'Consortium Model\'.') ?>
                 <br>
                 <br>
-                <strong>•	State-of-the art trading technology</strong>
+                <strong>•	<?php echo __('State-of-the art trading technology') ?></strong>
                 <br>
-                Maximtrade™ Executor is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader’s research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader’s trading expertise into your system while allowing you enough flexibility to make your own trading decisions.
-                <br>
-                <br>
-                <strong>•	Capital enhancement</strong>
-                <br>
-                In line with resource pooling, Maxim Trader will match clients’ capital up to a maximum bonus of a dollar to dollar capital enhancement. This also means that you could have up to twice your original capital working for you. The reason for this is simple. With the Maximtrade™ Executor, more profits are generated not only for you, but for the company as well. Moreover, we take the risk with you so you can have peace of mind that we will do our utmost to ensure positive results.
+                <?php echo __('Maximtrade™ Executor') ?> <?php echo __('is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader\'s research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader\'s trading expertise into your system while allowing you enough flexibility to make your own trading decisions.') ?>
                 <br>
                 <br>
-                <strong>•	Our confidence</strong>
+                <strong>•	<?php echo __('Capital enhancement') ?></strong>
                 <br>
-                All clients fund are individually and severally insured in the form of a parental guarantee provided by our parent company MY Group Inc. Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.
+                <?php echo __('In line with resource pooling, Maxim Trader will match clients\' capital up to a maximum bonus of a dollar to dollar capital enhancement. This also means that you could have up to twice your original capital working for you. The reason for this is simple. With the Maximtrade™ Executor, more profits are generated not only for you, but for the company as well. Moreover, we take the risk with you so you can have peace of mind that we will do our utmost to ensure positive results.') ?>
                 <br>
                 <br>
-                <strong>Sustained Profits</strong>
+                <strong>•	<?php echo __('Our confidence') ?></strong>
                 <br>
-                With the two key elements in place, leverage through resource pooling and an automated trading machine, Maxim Trader is able to achieve even greater revenue that what is has been generating stably over the decade. As our system produced profits for you, it is simultaneously producing profits off you because Maxim Trader achieves revenue through the number of lots traded. This creates a win-win situation through a fair system that yields profits for both parties.
+                <?php echo __('All clients fund are individually and severally insured in the form of a parental guarantee provided by our parent company MY Group Inc. Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
                 <br>
-                <strong>Cashback Rewards</strong>
                 <br>
-                Maxim Trader gives credit where credit is due, often in the form of monetary rewards and incentives for our affiliates. The increase in revenue allows liquidity to be channeled towards marketing campaigns that will evidently generate more leads and business back to Maxim Trader. Our clients are happy, our affiliates are rewarded and company expands.
+                <strong><?php echo __('Sustained Profits') ?></strong>
                 <br>
-                <strong>Listing Strategy</strong>
+                <?php echo __('With the two key elements in place, leverage through resource pooling and an automated trading machine, Maxim Trader is able to achieve even greater revenue that what is has been generating stably over the decade. As our system produced profits for you, it is simultaneously producing profits off you because Maxim Trader achieves revenue through the number of lots traded. This creates a win-win situation through a fair system that yields profits for both parties.') ?>
                 <br>
-                As do all financial giants, the eventual goal is towards listing. With the capital raised, the positive growth on financial statements, the profitable trade history on our technology and the mustered support of all partners through the Consortium project, listing will be a reality. By the provision of value to our clients, we are in turn rewarded with profits which are further ploughed back into the business and eventually allows all stakeholders, partners and clients to prosper.
+                <strong><?php echo __('Cashback Rewards') ?></strong>
+                <br>
+                <?php echo __('Maxim Trader gives credit where credit is due, often in the form of monetary rewards and incentives for our affiliates. The increase in revenue allows liquidity to be channeled towards marketing campaigns that will evidently generate more leads and business back to Maxim Trader. Our clients are happy, our affiliates are rewarded and company expands.') ?>
+                <br>
+                <strong><?php echo __('Listing Strategy') ?></strong>
+                <br>
+                <?php echo __('As do all financial giants, the eventual goal is towards listing. With the capital raised, the positive growth on financial statements, the profitable trade history on our technology and the mustered support of all partners through the Consortium project, listing will be a reality. By the provision of value to our clients, we are in turn rewarded with profits which are further ploughed back into the business and eventually allows all stakeholders, partners and clients to prosper.') ?>
             </p>
 
 
-            <h2>Your wealth</h2>
-            <p align="justify"><strong>Wealth creation</strong> is a subject that intrigues most people and pervades their thoughts because whether we like it or not, money drives our lives and is a medium of exchange for basic needs to luxurious wants. Having interest in wealth is doing yourself a great service and finding Maxim Trader could possibly be the start of your financial career and freedom. The word create is defined as bringing something into existence. Wealth should be created and not competed for what already exists. Take a look around and you will notice the most successful business are build by creating value that is hard to compete with and was non existent in predecessors.</p>
+            <h2><?php echo __('Your wealth') ?></h2>
+            <p align="justify"><strong><?php echo __('Wealth creation') ?></strong> <?php echo __('is a subject that intrigues most people and pervades their thoughts because whether we like it or not, money drives our lives and is a medium of exchange for basic needs to luxurious wants. Having interest in wealth is doing yourself a great service and finding Maxim Trader could possibly be the start of your financial career and freedom. The word create is defined as bringing something into existence. Wealth should be created and not competed for what already exists. Take a look around and you will notice the most successful business are build by creating value that is hard to compete with and was non existent in predecessors.') ?></p>
 
-            <p align="justify">As a catalyst of chance, Maxim Trader has always adopted a forward looking attitude towards inducing change and creating more value for our clients, who form an integral part of our business model. With the Consortium project, clients are able to develop multiple income streams that stem from an all rounded trading experience.</p>
+            <p align="justify"><?php echo __('As a catalyst of chance, Maxim Trader has always adopted a forward looking attitude towards inducing change and creating more value for our clients, who form an integral part of our business model. With the Consortium project, clients are able to develop multiple income streams that stem from an all rounded trading experience.') ?></p>
 
-            <p align="justify"><strong>The time is now</strong>
-            <br>In this time of extreme volatility and global economic dislocations as seen by the mind-boggling public debts in both the Eurozone and U.S., the time to made superlative profits is now. After all, Baron Rothschild, an 18th century British nobleman and member of the Rothschild banking family, is credited with saying that
-            <br><I>"The time to buy is when there's blood in the streets."</I>
-            <br>So wait no longer.</p>
-            </p>
+            <p align="justify"><strong><?php echo __('The time is now') ?></strong>
+            <br><?php echo __('In this time of extreme volatility and global economic dislocations as seen by the mind-boggling public debts in both the Eurozone and U.S., the time to made superlative profits is now. After all, Baron Rothschild, an 18th century British nobleman and member of the Rothschild banking family, is credited with saying that') ?>
+            <br><I>"<?php echo __('The time to buy is when there\'s blood in the streets.') ?>"</I>
+            <br><?php echo __('So wait no longer.') ?></p>
 
-
-            <p align="justify"><strong>What Maxim Trader Offer</strong>
+            <p align="justify"><strong><?php echo __('What Maxim Trader Offer') ?></strong>
                 <br>
-               Your potential income at Maxim Trader is broadly defined in 3 main categories : Trade income, Entry package entitlements and Affiliate bonuses. This is a non exhaustive representation due to seasonal promotions and rewards through performance indicators. </p>
-
-            <p align="justify"><strong>Trade Income</strong>
-                <br>
-                With Maxim Trader, your basic income is derived from the profits generated by the trades that our fund management or algorithmic software executes. In addition, you have the full freedom to apply your own trading techniques and generate profits from trading as well.</p>
-
-            <p align="justify"><strong>Entry Package entitlements</strong>
-                <br>
-                Maxim Trader Financial offers you at attractive array of entry packages to benefit from our proprietary trading system. The entitlements derived purely from becoming a member have a value that far outweighs the costs. This income is your entitlement as a member.</p>
-
-            <p align="justify"><strong>Affiliate Bonuses</strong>
-                <br>
-                    Business synergy is a prerequisite to success and we recognise and reward all our affiliates and partners. Our business can be your business as we provide a platform for income generation.
+                <?php echo __('Your potential income at Maxim Trader is broadly defined in 3 main categories : Trade income, Entry package entitlements and Affiliate bonuses. This is a non exhaustive representation due to seasonal promotions and rewards through performance indicators.') ?>
                 </p>
 
+            <p align="justify"><strong><?php echo __('Trade Income') ?></strong>
+                <br>
+                <?php echo __('With Maxim Trader, your basic income is derived from the profits generated by the trades that our fund management or algorithmic software executes. In addition, you have the full freedom to apply your own trading techniques and generate profits from trading as well.') ?>
+                </p>
+
+            <p align="justify"><strong><?php echo __('Entry Package entitlements') ?></strong>
+                <br>
+                <?php echo __('Maxim Trader Financial offers you at attractive array of entry packages to benefit from our proprietary trading system. The entitlements derived purely from becoming a member have a value that far outweighs the costs. This income is your entitlement as a member.') ?>
+                </p>
+
+            <p align="justify"><strong><?php echo __('Affiliate Bonuses') ?></strong>
+                <br>
+                <?php echo __('Business synergy is a prerequisite to success and we recognise and reward all our affiliates and partners. Our business can be your business as we provide a platform for income generation.') ?>
+            </p>
 
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>

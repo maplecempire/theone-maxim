@@ -106,6 +106,7 @@
     <div id="page">
         <div id="content">
 
+        <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
 <table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">
@@ -115,7 +116,7 @@
 <tbody>
 <tr>
     <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Member Login</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Member Login') ?></span></td>
     <td rowspan="3">&nbsp;</td>
 </tr>
 <tr>
@@ -145,7 +146,7 @@
                         <tbody>
                         <tr>
                             <th class="tbl_header_left"><img border="0" src="/images/maxim/hdr-gry-left.gif"></th>
-                            <th class="tbl_content_left" colspan="3">Secure login &nbsp;<img src="/images/maxim/ico_secure_sml.gif"></th>
+                            <th class="tbl_content_left" colspan="3"><?php echo __('Secure login') ?> &nbsp;<img src="/images/maxim/ico_secure_sml.gif"></th>
                             <th class="tbl_header_right"><img border="0" src="/images/maxim/hdr-gry-right.gif"></th>
                         </tr>
 
@@ -158,13 +159,13 @@
                         </tr>
                         <tr height="24">
                             <td></td>
-                            <td class="txt_highlight">Trader ID</td>
+                            <td class="txt_highlight"><?php echo __('Trader ID') ?></td>
                             <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
                             <td></td>
                         </tr>
                         <tr height="24">
                             <td></td>
-                            <td class="txt_highlight">Password</td>
+                            <td class="txt_highlight"><?php echo __('Password') ?></td>
                             <td colspan="2"><input type="password" autocomplete="off" size="38" id="userpassword" name="userpassword"></td>
                             <td></td>
                         </tr>
@@ -189,13 +190,13 @@
                             <td></td>
                             <td></td>
                             <td colspan="2"><img class="arwList" src="/images/maxim/arrow_blue_single_tab.gif">
-                                <a href="<?php echo url_for("/member/forgetPassword") ?>">Forgot username / password </a></td>
+                                <a href="<?php echo url_for("/member/forgetPassword") ?>"><?php echo __('Forgot username') ?> / <?php echo __('password') ?></a></td>
                             <td></td>
                         </tr>
                         <tr height="36">
                             <td align="center" colspan="5">
                                 <span class="loginbutton">
-                                    <input type="submit" value="Login" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
+                                    <input type="submit" value="<?php echo __('Login') ?>" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
                                 </span>
                                 <br>
                                 <br>

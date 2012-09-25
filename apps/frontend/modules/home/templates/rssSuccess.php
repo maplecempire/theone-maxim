@@ -23,7 +23,7 @@
         </a>
 
         <div id="feedTitleContainer">
-            <h1 id="feedTitleText" style="margin-right: 135px;">Reuters: Business News</h1>
+            <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Reuters: Business News') ?></h1>
 
             <h2 id="feedSubtitleText">Reuters.com is your source for breaking news, business, financial and investing
                 news, including personal finance and stocks. Reuters is the leading global provider of news, financial
