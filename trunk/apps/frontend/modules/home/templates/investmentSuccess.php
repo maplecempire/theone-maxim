@@ -89,7 +89,7 @@
                                 src="/css/maxim/banner/bg7.png"></p>
             <div style="clear:both;"></div>
 
-            <p align="justify"><strong><?php echo __('Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.</strong> Often managers will combine long and/or short positions with each strategy to maximize returns.') ?></p>
+            <p align="justify"><strong><?php echo __('Tactical trading strategies generally speculate on the direction of price action of commodities, equities , bonds precious metals and currencies.')?></strong> <?php echo __('Often managers will combine long and/or short positions with each strategy to maximize returns.') ?></p>
 
             <p align="justify"><?php echo __('Top-down approach focusing on global macroeconomic shifts in which outright and derivative positions are taken.') ?></p>
 

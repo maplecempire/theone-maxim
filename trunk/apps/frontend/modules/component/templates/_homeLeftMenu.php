@@ -7,7 +7,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 </style>
 
 <ul id="menu-menu" class="menu" style="list-style: none outside none; margin: 0px; padding: 0px;">
-    <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME)) { ?>
+<?php  if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) { ?>
     <li id="menu-item-209"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209"><a
             href="<?php echo url_for("/home")?>"><?php echo __('Home') ?></a>
@@ -50,10 +50,10 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
             href="<?php echo url_for("/home/logout")?>"><?php echo __('Logout') ?></a>
     </li>
-    <?php } else {?>
+<?php } else {?>
     <li id="menu-item-142"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
             href="<?php echo url_for("/home/login")?>"><?php echo __('Member Login') ?></a>
     </li>
-    <?php }?>
+<?php }?>
 </ul>
