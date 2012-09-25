@@ -475,6 +475,13 @@ class memberActions extends sfActions
         $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
         $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
 
+        if ($this->getRequestParameter('productCode') == "fxgold") {
+            $mlm_distributor->setProductMte("Y");
+        }
+        if ($this->getRequestParameter('productCode') == "mte") {
+            $mlm_distributor->setProductFxgold("Y");
+        }
+
         $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_distributor->save();
@@ -603,6 +610,13 @@ class memberActions extends sfActions
             $mlm_distributor->setPackagePurchaseFlag("Y");
             $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
             $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+            if ($this->getRequestParameter('productCode') == "fxgold") {
+                $mlm_distributor->setProductMte("Y");
+            }
+            if ($this->getRequestParameter('productCode') == "mte") {
+                $mlm_distributor->setProductFxgold("Y");
+            }
 
             $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
