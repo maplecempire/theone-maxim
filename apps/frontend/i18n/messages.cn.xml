@@ -391,7 +391,7 @@
             <trans-unit><source>The Consortium</source><target>该联盟</target></trans-unit>
             <trans-unit><source>Fund Management</source><target>基金管理</target></trans-unit>
             <trans-unit><source>MaximTrade Executor</source><target>马胜金融执行者</target></trans-unit>
-            <trans-unit><source>MaximTrade™ Executor</source><target>马胜金融执行者</target></trans-unit>
+            <trans-unit><source>MaximTrade™ Executor</source><target>Maximtrade™ Executor</target></trans-unit>
             <trans-unit><source>Executor</source><target>执行者</target></trans-unit>
             <trans-unit><source>MaximTrade</source><target>马胜金融集团</target></trans-unit>
             <trans-unit><source>Market News</source><target>市场动态</target></trans-unit>
@@ -449,6 +449,7 @@
             <trans-unit><source>Entry Package entitlements</source><target>初级产品包的权利</target></trans-unit>
             <trans-unit><source>Maxim Trader Financial offers you at attractive array of entry packages to benefit from our proprietary trading system. The entitlements derived purely from becoming a member have a value that far outweighs the costs. This income is your entitlement as a member.</source><target>马胜金融金融为您提供有吸引力的阵列的入门套件受益于我们的专有交易系统。纯粹成为会员的权益有一个值，该值远远大于成本。这部分收入是你的权利的一员。</target></trans-unit>
             <trans-unit><source>Affiliate Bonuses</source><target>加盟奖金</target></trans-unit>
+            <trans-unit><source>Maximtrade™ Executor is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader's research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader's trading expertise into your system while allowing you enough flexibility to make your own trading decisions.</source><target>Maximtrade™ Executor是我们的一种特有算法交易技术，这是的结果，Maxim的交易的研究工作在过去的几年里。虽然主要的试验，修改和提高的结论，马克西姆交易不断监控为最佳贸易生产率的性能。我们很自豪地说，我们将会为我们的客户提供Maximtrade™执行人。一个manumatic操作系统，输入Maxim的交易“交易进入你的系统的专业知识，同时让你有足够的灵活性，以使自己的交易决策。</target></trans-unit>
             <trans-unit><source>Business synergy is a prerequisite to success and we recognise and reward all our affiliates and partners. Our business can be your business as we provide a platform for income generation.</source><target>业务协同效应是成功的先决条件，我们认识到，我们所有的分支机构和合作伙伴进行奖励。我们的业务可以是你的业务，为我们提供了一个平台，为创收。</target></trans-unit>
         </body>
     </file>
