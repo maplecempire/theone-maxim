@@ -25,7 +25,7 @@ $(function() {
             }
         },
         rules : {
-            /*"userName" : {
+            "userName" : {
                 required : true,
                 noSpace: true,
                 minlength : 6,
@@ -75,9 +75,9 @@ $(function() {
                 required : true,
                 equalTo: "#email"
             },
-            "terms_bis" : {
+            /*"terms_bis" : {
                 required : true
-            },
+            },*/
             "terms_risk" : {
                 required : true
             },
@@ -87,7 +87,7 @@ $(function() {
             "sig_name" : {
                 required : true
             },
-            "privateInvestmentAgreement" : {
+            /*"privateInvestmentAgreement" : {
                 required : true
             }*/
         },
@@ -672,7 +672,7 @@ $(function() {
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_odd">
+<!--<tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_bis" name="terms_bis">
         <label for="terms_bis">Terms Of Business, Trading Policies &amp; Procedures</label></td>
@@ -680,19 +680,19 @@ $(function() {
         <a target="_blank" href="/download/termsOfBusiness">Download Agreement (343 KB PDF)</a>
     </td>
     <td>&nbsp;</td>
-</tr>
+</tr>-->
 
 <tr class="tbl_form_row_even">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">
-        <label for="terms_risk">Risk Disclosure Statement</label></td>
+        <label for="terms_risk">MTL Risk Disclosure statement"</label></td>
     <td colspan="4">
-        <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (175 KB PDF)</a>
+        <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (381 KB PDF)</a>
     </td>
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_odd">
+<!--<tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
         <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
@@ -700,7 +700,7 @@ $(function() {
         <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
     </td>
     <td>&nbsp;</td>
-</tr>
+</tr>-->
 
 <tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
@@ -725,7 +725,8 @@ $(function() {
                     <input type="checkbox" style="float:left; margin-right:4px;" value="1" id="term_condition" name="term_condition">
 
                     <label><p>I understand that as an MaximTrader customer, it is my responsibility to review all necessary
-                        information about currency trading and the MaximTrader <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I
+                        information about currency trading and the MaximTrader <b>Terms and Conditions</b>. I
+                        <!--information about currency trading and the MaximTrader <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I-->
                         am aware of the risks associated with foreign exchange trading and will seek advice and further my education
                         on foreign exchange prior to starting any trading activity.</p></label>
                 </td>
