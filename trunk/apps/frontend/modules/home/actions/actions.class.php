@@ -154,7 +154,8 @@ class homeActions extends sfActions
 
                 $existUser->setLastLoginDatetime(date("Y/m/d h:i:s A"));
                 $existUser->save();
-                return $this->redirect('member/summary');
+                return $this->redirect('home/index');
+                //return $this->redirect('member/summary');
                 //}
             }
 

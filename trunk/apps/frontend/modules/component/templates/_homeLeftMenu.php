@@ -1,4 +1,5 @@
 <ul id="menu-menu" class="menu" style="list-style: none outside none; margin: 0px; padding: 0px;">
+    <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME)) { ?>
     <li id="menu-item-209"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209"><a
             href="<?php echo url_for("/home")?>">Home</a>
@@ -18,7 +19,7 @@
             href="<?php echo url_for("/home/maximExecutor")?>">MaximTrade Executor™</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
-    <li id="menu-item-156"
+    <li id="menu-item-158"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
             href="<?php echo url_for("/home/marketNews")?>">Market News</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
@@ -31,8 +32,20 @@
         <a href="<?php echo url_for("/home/contactUs")?>">Contact Us</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
+
     <li id="menu-item-140"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
+            href="<?php echo url_for("/member/summary")?>">Member Area</a>
+        <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
+    </li>
+    <li id="menu-item-141"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
+            href="<?php echo url_for("/home/logout")?>">Logout</a>
+    </li>
+    <?php } else {?>
+    <li id="menu-item-142"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
             href="<?php echo url_for("/home/login")?>">Member Login</a>
     </li>
+    <?php }?>
 </ul>

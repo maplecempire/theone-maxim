@@ -1,0 +1,26 @@
+index:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+company:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+investment:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+maximExecutor:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+marketNews:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+contactUs:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+all:
+  is_secure:  off        # off is the default value anyway
