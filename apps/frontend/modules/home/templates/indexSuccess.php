@@ -400,7 +400,6 @@ ul, ol {
         </div>
     </div>
 
-
     <div style="margin-left: 0px;" id="sidebar">
         <div id="sidebar-color"></div>
         <div id="sidebar-border"></div>
