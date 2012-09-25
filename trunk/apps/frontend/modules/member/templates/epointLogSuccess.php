@@ -44,13 +44,13 @@
 
 <div class="ewallet_li">
 	<a target="_self" class="navcontainer" href="/member/epointLog" style="color: rgb(134, 197, 51);">
-        <?php echo __('CP2 Statement'); ?>
+        <?php echo __('CP1 Statement'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashLog") ?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('CP1 Statement'); ?>
+        <?php echo __('CP2 Statement'); ?>
     </a>
 </div>
 
@@ -60,7 +60,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP2 Account') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP1 Account') ?></span></td>
     </tr>
     <tr>
         <td><br></td>
@@ -79,7 +79,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('CP2 Statement') ?></th>
+                    <th><?php echo __('CP1 Statement') ?></th>
                     <th class="tbl_content_right"></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>

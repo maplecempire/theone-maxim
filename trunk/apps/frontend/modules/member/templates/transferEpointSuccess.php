@@ -83,13 +83,13 @@
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('Convert CP1 To CP2'); ?>
+        <?php echo __('Convert CP2 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferEpoint")?>" style="color: rgb(134, 197, 51);">
-        <?php echo __('CP2 Transfer'); ?>
+        <?php echo __('CP1 Transfer'); ?>
     </a>
 </div>
 
@@ -99,7 +99,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP2 Transfer') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP1 Transfer') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -141,7 +141,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('CP2 Transfer') ?></th>
+                    <th colspan="2"><?php echo __('CP1 Transfer') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -167,7 +167,7 @@
                 </tr>
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Balance'); ?></td>
+                    <td><?php echo __('CP1 Balance'); ?></td>
                     <td>
                         <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
                                        value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -176,7 +176,7 @@
                 </tr>
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Transfer CP2 Amount'); ?></td>
+                    <td><?php echo __('Transfer CP1 Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
                     </td>

@@ -322,7 +322,7 @@
     <table class="pbt_table">
         <tbody>
         <tr class="row_header">
-            <td width="200">CP1 Wallet:</td>
+            <td width="200">CP2 Wallet:</td>
             <td>60.97</td>
         </tr>
         <tr>

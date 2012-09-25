@@ -16,15 +16,15 @@ ecash_log:
   param: { module: member, action: ecashLog }
 
 convert_ecash_to_epoint:
-  url:   /member/convertCp1ToCp2
+  url:   /member/convertCp2ToCp1
   param: { module: member, action: convertEcashToEpoint }
 
 transfer_epoint:
-  url:   /member/transferCp2
+  url:   /member/transferCp1
   param: { module: member, action: transferEpoint }
 
 epoint_purchase:
-  url:   /member/cp2Purchase
+  url:   /member/cp1Purchase
   param: { module: member, action: epointPurchase }
 
 default:

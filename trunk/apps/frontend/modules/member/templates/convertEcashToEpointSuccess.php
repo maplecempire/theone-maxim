@@ -38,13 +38,13 @@
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(134, 197, 51);">
-        <?php echo __('Convert CP1 To CP2'); ?>
+        <?php echo __('Convert CP2 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferEpoint")?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('CP2 Transfer'); ?>
+        <?php echo __('CP1 Transfer'); ?>
     </a>
 </div>
 
@@ -54,7 +54,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP1 To CP2') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP2 To CP1') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -96,7 +96,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Convert CP1 To CP2') ?></th>
+                    <th colspan="2"><?php echo __('Convert CP2 To CP1') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -105,7 +105,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Balance'); ?></td>
+                    <td><?php echo __('CP2 Balance'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
                                            value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -115,7 +115,7 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Amount'); ?></td>
+                    <td><?php echo __('CP1 Amount'); ?></td>
                     <td>
                         <select name="epointAmount" id="cbo_epointAmount" tabindex="2">
                             <option value="50">50</option>
@@ -154,7 +154,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: CP2 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</font>
+                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

@@ -82,7 +82,7 @@
                         <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
                             <tr>
                                 <td class="caption">
-                                    <strong><?php echo __('CP1'); ?></strong>
+                                    <strong><?php echo __('CP2'); ?></strong>
                                 </td>
                                 <td class="value">
                                     <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
