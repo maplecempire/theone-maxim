@@ -86,7 +86,7 @@ $(function() {
             },
             "sig_name" : {
                 required : true
-            },
+            }
             /*"privateInvestmentAgreement" : {
                 required : true
             }*/
