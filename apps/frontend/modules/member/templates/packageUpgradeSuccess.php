@@ -226,13 +226,50 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
-                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
-                    <td colspan="4">
-                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
+                    <td colspan="5">
+                        <p>Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.</p>
+                        <br>
+                        <p>Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.</p>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
+            <?php if ($distDB->getProductMte() == "Y") { ?>
+                <tr class="tbl_form_row_even tdMte" style="display: none">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="mteAgreement" name="mteAgreement">
+                        <label for="mteAgreement">MTE Agreement</label></td>
+                    <td colspan="3">
+                        <a target="_blank" href="/download/mteAgreement">Download Agreement</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd tdMte" style="display: none">
+                    <td>&nbsp;</td>
+                    <td colspan="5">
+                        <br>
+                        <p>Please sign and send it to <a href="mailto:support@maximtrader.com">support@maximtrader.com</a>.</p>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            <?php } else { ?>
+                <tr class="tbl_form_row_even tdFxGold">
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+                    <td colspan="3">
+                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement</a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd tdFxGold">
+                    <td>&nbsp;</td>
+                    <td colspan="5">
+                        <br>
+                        <p>Please sign and send it to <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            <?php } ?>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>

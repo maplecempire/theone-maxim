@@ -3417,6 +3417,7 @@ class memberActions extends sfActions
             $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;
+            $this->distDB = $distDB;
         }
     }
 
