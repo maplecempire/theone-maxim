@@ -4,7 +4,7 @@ var jform = null;
 
 </script>
 
-<form id="uploadForm" method="post" action="/download/doUploadChineseGuide" enctype="multipart/form-data">
+<form id="uploadForm" method="post" action="/download/doUploadEnglishGuide" enctype="multipart/form-data">
 
 <table width="100%" border="0">
     <tr>
