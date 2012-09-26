@@ -86,6 +86,12 @@ class downloadActions extends sfActions
     public function executeUploadFxGuideCN()
     {
     }
+    public function executeUploadFxGuideEN()
+    {
+    }
+    public function executeUploadFxGuideJP()
+    {
+    }
 
     public function executeDoUploadChineseGuide()
     {
@@ -108,6 +114,54 @@ class downloadActions extends sfActions
 
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideCN');
+        }
+    }
+
+    public function executeDoUploadEnglishGuide()
+    {
+        if ($this->getRequest()->getFileName('fxguide') != '') {
+            $uploadedFilename = $this->getRequest()->getFileName('fxguide');
+
+            $filename = "english_".$uploadedFilename;
+            $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("GUIDE_EN");
+            $mlm_file_download->setFileSrc(sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+            $mlm_file_download->setFileName($filename);
+            $mlm_file_download->setContentType("application/pdf");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+
+            $this->setFlash('successMsg', "Upload successful.");
+            return $this->redirect('/download/uploadFxGuideEN');
+        }
+    }
+
+    public function executeDoUploadJapaneseGuide()
+    {
+        if ($this->getRequest()->getFileName('fxguide') != '') {
+            $uploadedFilename = $this->getRequest()->getFileName('fxguide');
+
+            $filename = "japanese_".$uploadedFilename;
+            $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("GUIDE_JP");
+            $mlm_file_download->setFileSrc(sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+            $mlm_file_download->setFileName($filename);
+            $mlm_file_download->setContentType("application/pdf");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+
+            $this->setFlash('successMsg', "Upload successful.");
+            return $this->redirect('/download/uploadFxGuideJP');
         }
     }
     public function executeAmlPolicy()
