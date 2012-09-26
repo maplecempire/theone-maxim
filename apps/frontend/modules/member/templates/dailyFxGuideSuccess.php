@@ -39,17 +39,17 @@
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Chinese)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=CN&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Chinese)</span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (English)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=EN&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (English)</span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanese)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=JP&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanese)</span></a>
                 </td>
             </tr>
             </tbody>
