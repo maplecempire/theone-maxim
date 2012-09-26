@@ -383,6 +383,7 @@
             <trans-unit><source>Member Login</source><target>会员登入</target></trans-unit>
             <trans-unit><source>Secure login</source><target>安全登录</target></trans-unit>
             <trans-unit><source>Forgot username</source><target>忘记用户名</target></trans-unit>
+            <trans-unit><source>Username</source><target>用户名</target></trans-unit>
             <trans-unit><source>password</source><target>密码</target></trans-unit>
             <trans-unit><source>Warning</source><target>警告</target></trans-unit>
             <trans-unit><source>Past Performance</source><target>过往表现</target></trans-unit>
@@ -544,7 +545,7 @@
             <trans-unit><source>Hong Kong Adress</source><target>香港地址</target></trans-unit>
             <trans-unit><source>Ranking</source><target>排行</target></trans-unit>
             <trans-unit><source>Home Page</source><target>首页</target></trans-unit>
-            <trans-unit><source>Welcome to Maxim Trader.</source><target>欢迎来的马胜金融</target></trans-unit>
+            <trans-unit><source>Welcome to Maxim Trader.</source><target>欢迎来到马胜金融</target></trans-unit>
             <trans-unit><source>MAIN MENU</source><target>主要菜单</target></trans-unit>
             <trans-unit><source>User Profile</source><target>用户配置资料</target></trans-unit>
             <trans-unit><source>Registration</source><target>注册</target></trans-unit>
@@ -568,6 +569,84 @@
             <trans-unit><source>DOWNLOAD</source><target>下载</target></trans-unit>
             <trans-unit><source>Download MT4 Platform</source><target>下载MT4平台</target></trans-unit>
             <trans-unit><source>Download Daily FX Guide</source><target>每日外汇指南</target></trans-unit>
+            <trans-unit><source>Account Information</source><target>帐户信息</target></trans-unit>
+            <trans-unit><source>Your Account Point</source><target>您的帐户点</target></trans-unit>
+            <trans-unit><source>Inactive Traders</source><target>未激活的会员</target></trans-unit>
+            <trans-unit><source>Currency</source><target>货币</target></trans-unit>
+            <trans-unit><source>No data available in table</source><target>无可用的数据</target></trans-unit>
+            <trans-unit><source>records</source><target>记录</target></trans-unit>
+            <trans-unit><source>Personal Information</source><target>个人资料</target></trans-unit>
+            <trans-unit><source>Personal Detail</source><target>个人详细资料</target></trans-unit>
+            <trans-unit><source>Referrer ID</source><target>推荐人ID</target></trans-unit>
+            <trans-unit><source>Referrer Name</source><target>推荐人名称</target></trans-unit>
+            <trans-unit><source>City / Town</source><target>市/镇</target></trans-unit>
+            <trans-unit><source>State / Province</source><target>州/省</target></trans-unit>
+            <trans-unit><source>Zip / Postal Code</source><target>邮编</target></trans-unit>
+            <trans-unit><source>Alternate Email</source><target>备用电子邮件</target></trans-unit>
+            <trans-unit><source>Contact Number</source><target>联系电话</target></trans-unit>
+            <trans-unit><source>Change Account login Password</source><target>更改帐户登录密码</target></trans-unit>
+            <trans-unit><source>Old Security Password</source><target>旧的安全密码</target></trans-unit>
+            <trans-unit><source>New Security Password</source><target>新的安全密码</target></trans-unit>
+            <trans-unit><source>Re-enter Security Password</source><target>重新输入安全密码</target></trans-unit>
+            <trans-unit><source>Update</source><target>更新</target></trans-unit>
+            <trans-unit><source>Bank Account Details</source><target>银行帐户资料</target></trans-unit>
+            <trans-unit><source>Bank Account Number</source><target>银行帐户号码</target></trans-unit>
+            <trans-unit><source>Bank Account Holder Name</source><target>银行账户持有人姓名</target></trans-unit>
+            <trans-unit><source>Bank Swift Code / ABA</source><target>银行代码/ ABA</target></trans-unit>
+            <trans-unit><source>Security Password</source><target>安全密码</target></trans-unit>
+            <trans-unit><source>Upload Bank Account Proof, Proof of Residence and Passport/Photo ID</source><target>上传银行帐户证明，居住证明和护照/ ID照片</target></trans-unit>
+            <trans-unit><source>Bank Account Proof</source><target>银行帐户证明</target></trans-unit>
+            <trans-unit><source>Proof of Residence</source><target>居住证明</target></trans-unit>
+            <trans-unit><source>Passport/Photo ID</source><target>护照/照片ID</target></trans-unit>
+            <trans-unit><source>Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.</source><target>注：每个文件最大上传大小为5 MB。 PDF / BMP / JPG / JPEG / GIF / PNG / TIF / TIFF / DOC / DOCX/ XLS / XLSX格式都可以接受。</target></trans-unit>
+            <trans-unit><source>Join Package</source><target>加入配套</target></trans-unit>
+            <trans-unit><source>Membership</source><target>会籍</target></trans-unit>
+            <trans-unit><source>Price</source><target>价格</target></trans-unit>
+            <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>下面的的挛缩条款和协议，你一定会签订了包以上的客户端MaximTrader。我们建议您走的时候，他们每个人仔细阅读。</target></trans-unit>
+            <trans-unit><source>Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.</source><target>请检查下面的框，以确认您接受的条款及协议，协议和谅解。</target></trans-unit>
+            <trans-unit><source>Private Investment Agreement</source><target>私人投资协议</target></trans-unit>
+            <trans-unit><source>Agreement</source><target>协议</target></trans-unit>
+            <trans-unit><source>Download Agreement</source><target>下载协议</target></trans-unit>
+            <trans-unit><source>Please sign and send it to</source><target>请登录并将其发送到</target></trans-unit>
+            <trans-unit><source>Confirm Security Password</source><target>确认安全密码</target></trans-unit>
+            <trans-unit><source>Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.</source><target>请选择一个唯一的用户名，您的帐户。用户名接受3-32个字符，AZ ,0-9和下划线（_）。</target></trans-unit>
+            <trans-unit><source>enter your password. Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Password is also case sensitive.</source><target>输入您的密码。的密码接受4-32个字符，包括AZ，az,0-9和下划线（_），而且必须至少包含一个字母和一个数字。密码是区分大小写的。</target></trans-unit>
+            <trans-unit><source>Security Password is a separate password that is required when you withdraw money from your account. This is for security purposes to further protect your funds.</source><target>安全密码是一个独立的密码，当你需要从您的帐户中取钱。这是为了安全起见，以进一步保护您的资金。</target></trans-unit>
+            <trans-unit><source>Note: We strongly recommend that you choose a Security Password that is different from your login password.</source><target>注意：我们强烈建议您选择一个安全密码，从您的登录密码是不同的。</target></trans-unit>
+            <trans-unit><source>Security Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Security Password is also case sensitive.</source><target>安全密码接受4-32个字符，包括AZ，az,0-9和下划线（_），而且必须至少包含一个字母和一个数字。安全密码是区分大小写的。</target></trans-unit>
+            <trans-unit><source>Confirm Security Password</source><target>确认安全密码</target></trans-unit>
+            <trans-unit><source>Please enter '0' if postal code is not applicable in your country.</source><target>邮政代码是不适用的，在您的国家，请输入“0”。</target></trans-unit>
+            <trans-unit><source>Please Select</source><target>请选择</target></trans-unit>
+            <trans-unit><source>Contact Details</source><target>联系方式</target></trans-unit>
+            <trans-unit><source>Telephone Number</source><target>电话号码</target></trans-unit>
+            <trans-unit><source>Primary Email</source><target>主要电子邮件</target></trans-unit>
+            <trans-unit><source>Retype your email</source><target>请重新输入您的电子邮件</target></trans-unit>
+            <trans-unit><source>Please enter a valid Email address. Note: If you use a Yahoo! email account, please also provide an Alternate Email below.</source><target>请输入一个有效的电子邮件地址。注：如果您使用的是雅虎电子邮件帐户，请在下面提供一个备用的电子邮件。</target></trans-unit>
+            <trans-unit><source>Alternate Email is required ONLY IF you use a Yahoo! email account as your primary Email. Note: Your Alternate Email cannot be a Yahoo! account. We recommend</source><target>备用的电子邮件是必需的，只有当您使用雅虎电子邮件帐户作为您的主电子邮件。注：您的备用电子邮件不能Yahoo!帐户。我们建议</target></trans-unit>
+            <trans-unit><source>Retype alternate email</source><target>重新输入备用电子邮件</target></trans-unit>
+            <trans-unit><source>Selected Package</source><target>所选的配套</target></trans-unit>
+            <trans-unit><source>Package</source><target>配套</target></trans-unit>
+            <trans-unit><source>Placement Position</source><target>放置的位置</target></trans-unit>
+            <trans-unit><source>Manual</source><target>手工</target></trans-unit>
+            <trans-unit><source>Auto Left</source><target>自动最左</target></trans-unit>
+            <trans-unit><source>Auto Right</source><target>自动最右</target></trans-unit>
+            <trans-unit><source>Accept Terms</source><target>接受条款</target></trans-unit>
+            <trans-unit><source>Agreements</source><target>协议</target></trans-unit>
+            <trans-unit><source>Below are the contractural terms and agreements that you are bound by as a client of MaximTrader. We recommend that you take the time to read each of them carefully.</source><target>以下的的挛缩条款和协议，你一定会作为客户端的MaximTrader。我们建议您走的时候，他们每个人仔细阅读。</target></trans-unit>
+            <trans-unit><source>Please check the boxes below to acknowledge your acceptance, argeement and understanding of these terms and agreements.</source><target>请检查下面的框，以确认您的的验收，argeement和理解这些条款和协议。</target></trans-unit>
+            <trans-unit><source>MTL Risk Disclosure statement</source><target>MTL风险披露声明</target></trans-unit>
+            <trans-unit><source>I hereby attest and certify that the above information is complete and accurate and I agree to be bound by these terms and conditions.</source><target>我在此证明和证明，上述信息是完整的和准确的，我同意这些条款和条件的约束。</target></trans-unit>
+            <trans-unit><source>I also authorise</source><target>我也授权</target></trans-unit>
+            <trans-unit><source>to verify any or all of the foregoing information. This electronic signature has the same validity and effect as a signature affixed by hand.</source><target>验证上述任何或所有信息。贴的手签名，电子签名具有同等法律效力和影响。</target></trans-unit>
+            <trans-unit><source>I understand that as an MaximTrader customer, it is my responsibility to review all necessary information about currency trading and the MaximTrader</source><target>我明白作为MaximTrader客户，这是我的责任，检讨有关外汇交易的所有必要的MaximTrader的信息</target></trans-unit>
+            <trans-unit><source>Terms and Conditions</source><target>条款和条件</target></trans-unit>
+            <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>我明白与外汇交易相关联的风险，并会征询法律意见和外汇留学深造任何交易活动开始之前。</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
             <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
             <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
             <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>

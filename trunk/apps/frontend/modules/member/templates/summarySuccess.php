@@ -249,7 +249,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Summary</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Summary') ?></span></td>
 </tr>
 <tr>
     <td><br>
@@ -294,7 +294,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Account Information</th>
+        <th><?php echo __('Account Information') ?></th>
         <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -368,7 +368,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Your Account Point</th>
+        <th><?php echo __('Your Account Point') ?></th>
         <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -571,7 +571,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Inactive Traders</th>
+        <th><?php echo __('Inactive Traders') ?></th>
         <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -583,10 +583,10 @@ function reassignDatagridAnnouncementEventAttr() {
             <table class="pbl_table" cellpadding="3" cellspacing="3">
                 <tbody>
                 <tr class="pbl_header">
-                    <td>Registered Date</td>
-                    <td>Username</td>
-                    <td>Full Name</td>
-                    <td>Action</td>
+                    <td><?php echo __('Registered Date') ?></td>
+                    <td><?php echo __('Username') ?></td>
+                    <td><?php echo __('Full Name') ?></td>
+                    <td><?php echo __('Action') ?></td>
                 </tr>
                 <?php
                     if (count($pendingDistributors) > 0) {
@@ -618,7 +618,7 @@ function reassignDatagridAnnouncementEventAttr() {
                 ?>
                 </tbody>
             </table>
-            <div><?php echo count($pendingDistributors);?> records.</div>
+            <div><?php echo count($pendingDistributors);?> <?php echo __('records') ?>.</div>
         </td>
     </tr>
     </tbody>

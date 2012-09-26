@@ -72,7 +72,7 @@ $(function() {
     });
     $("#btnUpdate").button({
         icons: {
-            primary: "ui-icon-disk"
+            primary: "ui-icon-circle-arrow-n"
         }
     });
     $("#btnUpload").button({
@@ -116,7 +116,7 @@ $(function() {
 
     $("#btnBankUpdate").button({
         icons: {
-            primary: "ui-icon-disk"
+            primary: "ui-icon-circle-arrow-n"
         }
     });
 
@@ -149,7 +149,7 @@ $(function() {
 
     $("#btnPasswordUpdate").button({
         icons: {
-            primary: "ui-icon-disk"
+            primary: "ui-icon-circle-arrow-n"
         }
     });
 
@@ -181,7 +181,7 @@ $(function() {
     });
     $("#btnSecurityUpdate").button({
         icons: {
-            primary: "ui-icon-disk"
+            primary: "ui-icon-circle-arrow-n"
         }
     });
 });
@@ -390,7 +390,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnUpdate">Update</button>
+                        <button id="btnUpdate"><?php echo __('Update') ?></button>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -620,7 +620,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnBankUpdate">Update</button>
+                        <button id="btnBankUpdate"><?php echo __('Update') ?></button>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -715,7 +715,7 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td colspan="5">
                         <font color="#dc143c">
-                        Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.
+                        <?php echo __('Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.') ?>
                         </font>
                     </td>
                 </tr>
@@ -724,7 +724,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnUpload">Upload</button>
+                        <button id="btnUpload"><?php echo __('Update') ?></button>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

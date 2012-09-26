@@ -58,6 +58,10 @@ memberRegistration:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+memberRegistration2:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 mt4Withdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

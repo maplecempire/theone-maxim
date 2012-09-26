@@ -134,9 +134,9 @@ $(function() {
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td valign="middle">Join Package</td>
-                                <td valign="middle">Membership</td>
-                                <td valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
+                                <td valign="middle"><?php echo __('Join Package') ?></td>
+                                <td valign="middle"><?php echo __('Membership') ?></td>
+                                <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
                             </tr>
 
                             <?php
@@ -180,18 +180,18 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="5">
-                        <p>Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.</p>
+                        <p><?php echo __('Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.') ?></p>
                         <br>
-                        <p>Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.</p>
+                        <p><?php echo __('Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.') ?></p>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr class="tbl_form_row_even tdFxGold">
                     <td>&nbsp;</td>
                     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
-                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
+                        <label for="privateInvestmentAgreement"><?php echo __('Private Investment Agreement') ?></label></td>
                     <td colspan="3">
-                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement</a>
+                        <a target="_blank" href="/download/privateInvestmentAgreement"><?php echo __('Download Agreement') ?></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -199,7 +199,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="5">
                         <br>
-                        <p>Please sign and send it to <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
+                        <p><?php echo __('Please sign and send it to') ?> <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -207,9 +207,9 @@ $(function() {
                 <tr class="tbl_form_row_even tdMte" style="display: none">
                     <td>&nbsp;</td>
                     <td><input type="checkbox" class="checkbox" id="mteAgreement" name="mteAgreement">
-                        <label for="mteAgreement">MTE Agreement</label></td>
+                        <label for="mteAgreement">MTE <?php echo __('Agreement') ?></label></td>
                     <td colspan="3">
-                        <a target="_blank" href="/download/mteAgreement">Download Agreement</a>
+                        <a target="_blank" href="/download/mteAgreement"><?php echo __('Download Agreement') ?></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -217,7 +217,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="5">
                         <br>
-                        <p>Please sign and send it to <a href="mailto:support@maximtrader.com">support@maximtrader.com</a>.</p>
+                        <p><?php echo __('Please sign and send it to') ?> <a href="mailto:support@maximtrader.com">support@maximtrader.com</a>.</p>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
