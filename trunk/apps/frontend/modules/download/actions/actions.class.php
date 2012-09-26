@@ -115,6 +115,8 @@ class downloadActions extends sfActions
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideCN');
         }
+        $this->setFlash('successMsg', "Upload failure.");
+        return $this->redirect('/download/uploadFxGuideCN');
     }
 
     public function executeDoUploadEnglishGuide()
@@ -139,6 +141,8 @@ class downloadActions extends sfActions
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideEN');
         }
+        $this->setFlash('successMsg', "Upload failure.");
+        return $this->redirect('/download/uploadFxGuideEN');
     }
 
     public function executeDoUploadJapaneseGuide()
@@ -163,6 +167,8 @@ class downloadActions extends sfActions
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideJP');
         }
+        $this->setFlash('successMsg', "Upload failure.");
+        return $this->redirect('/download/uploadFxGuideJP');
     }
     public function executeAmlPolicy()
     {
