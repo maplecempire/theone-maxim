@@ -1,5 +1,5 @@
 <style type="text/css">
-<?php if ($sf_user->getCulture() == "cn") { ?>
+<?php if ($sf_user->getCulture() == "cn" || $sf_user->getCulture() == "jp") { ?>
 html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, table, tr, th, td, button, input, textarea {
     font-family : "Microsoft YaHei" !important;
 }

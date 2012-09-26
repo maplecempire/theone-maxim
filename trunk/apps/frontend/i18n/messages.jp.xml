@@ -4,99 +4,99 @@
         <body>
             <trans-unit id="1">
                 <source>Share Holder Login</source>
-                <target>股东登录</target>
+                <target>株主ログイン</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>Shareholder ID</source>
-                <target>股东ID</target>
+                <target>株主番号</target>
             </trans-unit>
             <trans-unit>
                 <source>Trader ID</source>
-                <target>会员ID</target>
+                <target>メンバーID</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>Password</source>
-                <target>密码</target>
+                <target>パスワード</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>Register</source>
-                <target>立即注册</target>
+                <target>今すぐ登録</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>Forget Password?</source>
-                <target>忘记密码?</target>
+                <target>パスワードを忘れた?</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>For the safest data input use the</source>
-                <target>为保证您的密码安全</target>
+                <target>パスワードのセキュリティを確保するために、</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>virtual keyboard below</source>
-                <target>请使用以下虚拟键盘</target>
+                <target>次の仮想キーボードを使用してください</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>Security Code</source>
-                <target>验证码</target>
+                <target>検証コード</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>Sponsor ID</source>
-                <target>推荐人帐号</target>
+                <target>審判アカウント</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>Sponsor Name</source>
-                <target>推荐人姓名</target>
+                <target>主審の名前</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>Set Password</source>
-                <target>密码设置</target>
+                <target>パスワードの設定</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>Confirm Password</source>
-                <target>确认密码设置</target>
+                <target>パスワードの設定を確認</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>Full Name</source>
-                <target>姓名</target>
+                <target>名前</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>Alias</source>
-                <target>昵称</target>
+                <target>ニックネーム</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>Passport/ID Card No</source>
-                <target>身份证</target>
+                <target>IDカード</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>Country</source>
-                <target>国家</target>
+                <target>カントリー</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>Address</source>
-                <target>地址</target>
+                <target>アドレス</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>Postal Code</source>
-                <target>邮编</target>
+                <target>郵便番号</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>Email</source>
-                <target>电邮</target>
+                <target>電子メール</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>Contact No</source>
-                <target>手机号码</target>
+                <target>携帯電話番号</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>Gender</source>
-                <target>性别</target>
+                <target>ジェンダー</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>Date of Birth</source>
-                <target>生日</target>
+                <target>誕生日</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>I have read and agreed to the</source>
-                <target>我已阅读同意</target>
+                <target>私は同意を読んだことがある</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>Terms &amp; Conditions</source>
@@ -104,27 +104,27 @@
             </trans-unit>
             <trans-unit id="22">
                 <source>and</source>
-                <target>和</target>
+                <target>と</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>Privacy Policy</source>
-                <target>隐私政策</target>
+                <target>個人情報保護方針</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>Male</source>
-                <target>男</target>
+                <target>男性</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>Female</source>
-                <target>女</target>
+                <target>女性</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>Member Registration</source>
-                <target>会员注册</target>
+                <target>参加する</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>Shareholder has been registered successfully.</source>
-                <target>股东注册成功</target>
+                <target>株主は正常に登録</target>
             </trans-unit>
             <trans-unit>
                 <source>Trader has been registered successfully.</source>
@@ -132,248 +132,247 @@
             </trans-unit>
             <trans-unit id="28">
                 <source>Your Shareholder ID</source>
-                <target>登陆账号为</target>
+                <target>ログインID</target>
             </trans-unit>
             <trans-unit>
                 <source>Your Trader ID</source>
-                <target>登陆账号为</target>
+                <target>ログインID</target>
             </trans-unit>
 			<trans-unit id="29">
                 <source>Bank Name</source>
-                <target>银行名称</target>
+                <target>銀行名</target>
             </trans-unit>
 			<trans-unit id="30">
                 <source>Bank Holder Name</source>
-                <target>银行账户姓名</target>
+                <target>銀行口座の名前</target>
             </trans-unit>
 			<trans-unit id="31">
                 <source>Bank Account No</source>
-                <target>银行账号</target>
+                <target>銀行預金口座</target>
             </trans-unit>
-            <trans-unit><source>Language</source><target>语言</target></trans-unit>
-            <trans-unit><source>Server Time</source><target>服务器时间</target></trans-unit>
-            <trans-unit><source>Current CPS price</source><target>当前股价</target></trans-unit>
-            <trans-unit><source>Gold Price</source><target>黄金价格</target></trans-unit>
-            <trans-unit><source>Current Location</source><target>当前位置</target></trans-unit>
-            <trans-unit><source>Account Summary</source><target>股东中心首页</target></trans-unit>
-            <trans-unit><source>Summary</source><target>首页</target></trans-unit>
-            <trans-unit><source>Home</source><target>主页</target></trans-unit>
-            <trans-unit><source>Personal Profile</source><target>个人信息</target></trans-unit>
-            <trans-unit><source>View Profile</source><target>个人资料</target></trans-unit>
-            <trans-unit><source>Change Password</source><target>登录密码修改</target></trans-unit>
-            <trans-unit><source>Change Trx Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Change Security Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Change Transaction Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Account Verification</source><target>身份资料审核</target></trans-unit>
-            <trans-unit><source>My Certificates</source><target>我的证书</target></trans-unit>
-            <trans-unit><source>Gold Trading</source><target>黄金走势</target></trans-unit>
-            <trans-unit><source>Business</source><target>业务管理</target></trans-unit>
-            <trans-unit><source>Place New Shareholder</source><target>安置股东列表</target></trans-unit>
-            <trans-unit><source>Place New Trader</source><target>安置会员列表</target></trans-unit>
-            <trans-unit><source>Reinvest CPS</source><target>追加投资</target></trans-unit>
-            <trans-unit><source>Pin Purchase</source><target>购买PIN</target></trans-unit>
-            <trans-unit><source>Transfer Pin</source><target>PIN转账</target></trans-unit>
-            <trans-unit><source>Pin Transaction Log</source><target>PIN明细</target></trans-unit>
-            <trans-unit><source>Finance</source><target>账务管理</target></trans-unit>
-            <trans-unit><source>Transfer E-Cash</source><target>现金转账</target></trans-unit>
-            <trans-unit><source>Transfer MT4 Credit</source><target>MT4 Credit 转账</target></trans-unit>
-            <trans-unit><source>E-Cash Transfer</source><target>现金转账</target></trans-unit>
-            <trans-unit><source>MT4 Credit Transfer</source><target>MT4 Credit 转账</target></trans-unit>
-            <trans-unit><source>E-Point Transfer</source><target>点数转账</target></trans-unit>
-            <trans-unit><source>Gold Redemption</source><target>提取实物黄金</target></trans-unit>
-            <trans-unit><source>Gold Withdrawal</source><target>黄金兑现</target></trans-unit>
-            <trans-unit><source>E-Cash Withdrawal</source><target>现金兑现</target></trans-unit>
-            <trans-unit><source>MT4 Credit Withdrawal</source><target>MT4 Credit 兑现</target></trans-unit>
-            <trans-unit><source>E-Cash Log</source><target>现金明细</target></trans-unit>
-            <trans-unit><source>MT4 Credit Log</source><target>MT4 Credit 明细</target></trans-unit>
-            <trans-unit><source>E-Point Log</source><target>点数明细</target></trans-unit>
-            <trans-unit><source>Bonus Details</source><target>结算明细</target></trans-unit>
-            <trans-unit><source>Bulletin</source><target>公告留言</target></trans-unit>
-            <trans-unit><source>Enquiry</source><target>留言</target></trans-unit>
-            <trans-unit><source>Announcement</source><target>公告</target></trans-unit>
-            <trans-unit><source>Announcements</source><target>公告</target></trans-unit>
-            <trans-unit><source>Genealogy</source><target>团队架购图</target></trans-unit>
-            <trans-unit><source>Sponsor</source><target>团队发展谱图</target></trans-unit>
-            <trans-unit><source>Placement</source><target>组织系谱图</target></trans-unit>
-            <trans-unit><source>Global Auto Placement</source><target>国际公排谱图</target></trans-unit>
-            <trans-unit><source>Logout</source><target>登出</target></trans-unit>
-            <trans-unit><source>Upload Document</source><target>身份证件图片</target></trans-unit>
-            <trans-unit><source>Submit</source><target>提交</target></trans-unit>
-            <trans-unit><source>Cancel</source><target>取消</target></trans-unit>
-            <trans-unit><source>Documents</source><target>资料证件</target></trans-unit>
-            <trans-unit><source>Date Submitted</source><target>提交时间</target></trans-unit>
-            <trans-unit><source>Status</source><target>审核状态</target></trans-unit>
-            <trans-unit><source>Verified by</source><target>审核人</target></trans-unit>
-            <trans-unit><source>Date Verified</source><target>审核时间</target></trans-unit>
-            <trans-unit><source>Remarks</source><target>描述</target></trans-unit>
-            <trans-unit><source>Download</source><target>下载</target></trans-unit>
-            <trans-unit><source>Title</source><target>标题</target></trans-unit>
-            <trans-unit><source>Date</source><target>时间</target></trans-unit>
-            <trans-unit><source>close</source><target>关闭</target></trans-unit>
-            <trans-unit><source>In</source><target>进账</target></trans-unit>
-            <trans-unit><source>Out</source><target>出账</target></trans-unit>
-            <trans-unit><source>Balance</source><target>余额</target></trans-unit>
-            <trans-unit><source>Action</source><target>動作</target></trans-unit>
-            <trans-unit><source>E-Cash Balance</source><target>现金余额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Balance</source><target>MT4 Credit 余额</target></trans-unit>
-            <trans-unit><source>E-Point Balance</source><target>点数余额</target></trans-unit>
-            <trans-unit><source>E-Cash Withdraw Amount</source><target>兑现金额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Withdraw Amount</source><target>MT4 Credit 兑现金额</target></trans-unit>
-            <trans-unit><source>Transaction Password</source><target>交易密码</target></trans-unit>
-            <trans-unit><source>Transaction Password is not valid</source><target>交易密码不正确</target></trans-unit>
-            <trans-unit><source>Minimum withdraw $500</source><target>兑现金额不能少过$500</target></trans-unit>
-            <trans-unit><source>withdrawal amount must be $500</source><target>兑现金额$500</target></trans-unit>
-            <trans-unit><source>redeem amount must be 100g</source><target>提取实物黄金规定100克</target></trans-unit>
-            <trans-unit><source>Gold Dividend Balance</source><target>现有黄金数量</target></trans-unit>
-            <trans-unit><source>Redeem gold success</source><target>提取实物黄金成功</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Cash</source><target>金额数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit 数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Point</source><target>点数数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient gold amount</source><target>黄金数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient Pin</source><target>Pin数量不足</target></trans-unit>
-            <trans-unit><source>Cannot transfer to own account</source><target>不可转Pin给自己户口</target></trans-unit>
-            <trans-unit><source>Gold Amount</source><target>黄金数量</target></trans-unit>
-            <trans-unit><source>Invalid trx password</source><target>请输入正确交易密码</target></trans-unit>
-            <trans-unit><source>Invalid Security password</source><target>请输入正确交易密码</target></trans-unit>
-            <trans-unit><source>System cannot get gold price, please try again</source><target>系统黄金价有误请再试一次</target></trans-unit>
-            <trans-unit><source>Withdraw gold success</source><target>黄金售卖成功</target></trans-unit>
-            <trans-unit><source>Message</source><target>内容</target></trans-unit>
-            <trans-unit><source>Reply Message</source><target>留言内容</target></trans-unit>
-            <trans-unit><source>Reply By</source><target>留言人</target></trans-unit>
-            <trans-unit><source>Reply Date</source><target>留言时间</target></trans-unit>
-            <trans-unit><source>View</source><target>检查</target></trans-unit>
-            <trans-unit><source>Shareholder Name</source><target>股东姓名</target></trans-unit>
-            <trans-unit><source>Trader Name</source><target>会员姓名</target></trans-unit>
-            <trans-unit><source>Transfer E-Cash Amount</source><target>转出金额</target></trans-unit>
-            <trans-unit><source>Transfer MT4 Credit Amount</source><target>转出 MT4 Credit</target></trans-unit>
-            <trans-unit><source>Transfer E-Point Amount</source><target>转出点数</target></trans-unit>
-            <trans-unit><source>Transfer success</source><target>成功转帐</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Cash Amount</source><target>金额不足够</target></trans-unit>
-            <trans-unit><source>In-sufficient MT4 Credit Amount</source><target>MT4 Credit 不足够</target></trans-unit>
-            <trans-unit><source>You are not allow to transfer to own account.</source><target>您只能转出金额给别的户口</target></trans-unit>
-            <trans-unit><source>Account Details</source><target>财务概况</target></trans-unit>
-            <trans-unit><source>CPS</source><target>优先股</target></trans-unit>
-            <trans-unit><source>Dividend (g)</source><target>股息(克)</target></trans-unit>
+            <trans-unit><source>Language</source><target>言語</target></trans-unit>
+            <trans-unit><source>Server Time</source><target>サーバの時刻</target></trans-unit>
+            <trans-unit><source>Current CPS price</source><target>現在の株価</target></trans-unit>
+            <trans-unit><source>Gold Price</source><target>金価格</target></trans-unit>
+            <trans-unit><source>Current Location</source><target>現在の場所</target></trans-unit>
+            <trans-unit><source>Account Summary</source><target>株主の皆様のホーム</target></trans-unit>
+            <trans-unit><source>Summary</source><target>ホーム</target></trans-unit>
+            <trans-unit><source>Home</source><target>ホーム</target></trans-unit>
+            <trans-unit><source>Personal Profile</source><target>個人情報</target></trans-unit>
+            <trans-unit><source>View Profile</source><target>個人情報</target></trans-unit>
+            <trans-unit><source>Change Password</source><target>パスワードの変更ログイン</target></trans-unit>
+            <trans-unit><source>Change Trx Password</source><target>取引パスワードの変更</target></trans-unit>
+            <trans-unit><source>Change Security Password</source><target>取引パスワードの変更</target></trans-unit>
+            <trans-unit><source>Change Transaction Password</source><target>取引パスワードの変更</target></trans-unit>
+            <trans-unit><source>Account Verification</source><target>ID情報の監査</target></trans-unit>
+            <trans-unit><source>My Certificates</source><target>私の証明書</target></trans-unit>
+            <trans-unit><source>Gold Trading</source><target>ゴールドのトレンド</target></trans-unit>
+            <trans-unit><source>Business</source><target>ビジネスマネジメント</target></trans-unit>
+            <trans-unit><source>Place New Shareholder</source><target>定住株主リスト</target></trans-unit>
+            <trans-unit><source>Place New Trader</source><target>定住メンバーリスト</target></trans-unit>
+            <trans-unit><source>Reinvest CPS</source><target>追加投資</target></trans-unit>
+            <trans-unit><source>Pin Purchase</source><target>PINを購入</target></trans-unit>
+            <trans-unit><source>Transfer Pin</source><target>ピン転写</target></trans-unit>
+            <trans-unit><source>Pin Transaction Log</source><target>ピンの詳細</target></trans-unit>
+            <trans-unit><source>Finance</source><target>アカウント管理</target></trans-unit>
+            <trans-unit><source>Transfer E-Cash</source><target>現金給付</target></trans-unit>
+            <trans-unit><source>Transfer MT4 Credit</source><target>MT4のクレジット転送</target></trans-unit>
+            <trans-unit><source>E-Cash Transfer</source><target>現金給付</target></trans-unit>
+            <trans-unit><source>MT4 Credit Transfer</source><target>MT4のクレジット転送</target></trans-unit>
+            <trans-unit><source>E-Point Transfer</source><target>ポイント転送</target></trans-unit>
+            <trans-unit><source>Gold Redemption</source><target>物理的な金を撤回</target></trans-unit>
+            <trans-unit><source>Gold Withdrawal</source><target>ゴールドキャッシュ</target></trans-unit>
+            <trans-unit><source>E-Cash Withdrawal</source><target>現金代</target></trans-unit>
+            <trans-unit><source>MT4 Credit Withdrawal</source><target>MT4のクレジット現金</target></trans-unit>
+            <trans-unit><source>E-Cash Log</source><target>現金の詳細</target></trans-unit>
+            <trans-unit><source>MT4 Credit Log</source><target>MT4のクレジットの詳細</target></trans-unit>
+            <trans-unit><source>E-Point Log</source><target>ポイントの詳細</target></trans-unit>
+            <trans-unit><source>Bonus Details</source><target>支払明細</target></trans-unit>
+            <trans-unit><source>Bulletin</source><target>アナウンスメッセージ</target></trans-unit>
+            <trans-unit><source>Enquiry</source><target>伝言を残す</target></trans-unit>
+            <trans-unit><source>Announcement</source><target>発表</target></trans-unit>
+            <trans-unit><source>Announcements</source><target>発表</target></trans-unit>
+            <trans-unit><source>Genealogy</source><target>チーム枠購入フィギュア</target></trans-unit>
+            <trans-unit><source>Placement</source><target>組織の系譜</target></trans-unit>
+            <trans-unit><source>Global Auto Placement</source><target>国際公共行スペクトル</target></trans-unit>
+            <trans-unit><source>Logout</source><target>ログアウト</target></trans-unit>
+            <trans-unit><source>Upload Document</source><target>本人確認書類の画像</target></trans-unit>
+            <trans-unit><source>Submit</source><target>提出する</target></trans-unit>
+            <trans-unit><source>Cancel</source><target>キャンセル</target></trans-unit>
+            <trans-unit><source>Documents</source><target>情報文書</target></trans-unit>
+            <trans-unit><source>Date Submitted</source><target>提出</target></trans-unit>
+            <trans-unit><source>Status</source><target>承認状況</target></trans-unit>
+            <trans-unit><source>Verified by</source><target>によるレビュー</target></trans-unit>
+            <trans-unit><source>Date Verified</source><target>監査時間</target></trans-unit>
+            <trans-unit><source>Remarks</source><target>説明</target></trans-unit>
+            <trans-unit><source>Download</source><target>ダウンロード</target></trans-unit>
+            <trans-unit><source>Title</source><target>タイトル</target></trans-unit>
+            <trans-unit><source>Date</source><target>時間</target></trans-unit>
+            <trans-unit><source>close</source><target>閉じる</target></trans-unit>
+            <trans-unit><source>In</source><target>信用に立ち</target></trans-unit>
+            <trans-unit><source>Out</source><target>アカウント</target></trans-unit>
+            <trans-unit><source>Balance</source><target>バランス</target></trans-unit>
+            <trans-unit><source>Action</source><target>アクション</target></trans-unit>
+            <trans-unit><source>E-Cash Balance</source><target>現金残高</target></trans-unit>
+            <trans-unit><source>MT4 Credit Balance</source><target>MT4のクレジット残高</target></trans-unit>
+            <trans-unit><source>E-Point Balance</source><target>クレジット残高</target></trans-unit>
+            <trans-unit><source>E-Cash Withdraw Amount</source><target>金銭の額</target></trans-unit>
+            <trans-unit><source>MT4 Credit Withdraw Amount</source><target>MT4 Credit 金銭の額</target></trans-unit>
+            <trans-unit><source>Transaction Password</source><target>トランザクションのパスワード</target></trans-unit>
+            <trans-unit><source>Transaction Password is not valid</source><target>取引パスワードが正しくありません</target></trans-unit>
+            <trans-unit><source>Minimum withdraw $500</source><target>金銭の額は、500ドル未満にすることはできません</target></trans-unit>
+            <trans-unit><source>withdrawal amount must be $500</source><target>500ドルの現金量</target></trans-unit>
+            <trans-unit><source>redeem amount must be 100g</source><target>100グラムのエキス物理的な金の規制</target></trans-unit>
+            <trans-unit><source>Gold Dividend Balance</source><target>金の既存量</target></trans-unit>
+            <trans-unit><source>Redeem gold success</source><target>物理的な金の成功を撤回</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Cash</source><target>の数が不足量</target></trans-unit>
+            <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit の数が不足</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Point</source><target>ポイント数が不足</target></trans-unit>
+            <trans-unit><source>In-sufficient gold amount</source><target>金量の不足</target></trans-unit>
+            <trans-unit><source>In-sufficient Pin</source><target>の数が不足してピン</target></trans-unit>
+            <trans-unit><source>Cannot transfer to own account</source><target>自分のアカウントにピンを入れない</target></trans-unit>
+            <trans-unit><source>Gold Amount</source><target>金の量</target></trans-unit>
+            <trans-unit><source>Invalid trx password</source><target>正しいトランザクションのパスワードを入力してください</target></trans-unit>
+            <trans-unit><source>Invalid Security password</source><target>正しいトランザクションのパスワードを入力してください</target></trans-unit>
+            <trans-unit><source>System cannot get gold price, please try again</source><target>システムの金価格が間違っている、もう一度試してください</target></trans-unit>
+            <trans-unit><source>Withdraw gold success</source><target>ゴールド販売成功</target></trans-unit>
+            <trans-unit><source>Message</source><target>コンテンツ</target></trans-unit>
+            <trans-unit><source>Reply Message</source><target>コンテンツ</target></trans-unit>
+            <trans-unit><source>Reply By</source><target>投稿者</target></trans-unit>
+            <trans-unit><source>Reply Date</source><target>メッセージのタイム</target></trans-unit>
+            <trans-unit><source>View</source><target>検査</target></trans-unit>
+            <trans-unit><source>Shareholder Name</source><target>株主の名称</target></trans-unit>
+            <trans-unit><source>Trader Name</source><target>メンバー名</target></trans-unit>
+            <trans-unit><source>Transfer E-Cash Amount</source><target>量から転送</target></trans-unit>
+            <trans-unit><source>Transfer MT4 Credit Amount</source><target>MT4のクレジットが出て転送</target></trans-unit>
+            <trans-unit><source>Transfer E-Point Amount</source><target>ロールアウトのポイント</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>転送が成功した</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Cash Amount</source><target>量は十分ではありません</target></trans-unit>
+            <trans-unit><source>In-sufficient MT4 Credit Amount</source><target>MT4のクレジットでは十分ではありません</target></trans-unit>
+            <trans-unit><source>You are not allow to transfer to own account.</source><target>あなただけの別のアカウントに金額を転送することができます</target></trans-unit>
+            <trans-unit><source>Account Details</source><target>決算概要</target></trans-unit>
+            <trans-unit><source>CPS</source><target>優先株</target></trans-unit>
+            <trans-unit><source>Dividend (g)</source><target>配当金（G）</target></trans-unit>
             <trans-unit><source>PIN</source><target>PIN</target></trans-unit>
             <trans-unit><source>Pin</source><target>PIN</target></trans-unit>
-            <trans-unit><source>E-Cash</source><target>现金</target></trans-unit>
+            <trans-unit><source>E-Cash</source><target>現金</target></trans-unit>
             <trans-unit><source>MT4 Credit</source><target>MT4 Credit</target></trans-unit>
             <trans-unit><source>e-Cash</source><target>现金</target></trans-unit>
-            <trans-unit><source>Trading Margin</source><target>交易限额</target></trans-unit>
-            <trans-unit><source>GAP</source><target>国际公排奖限度</target></trans-unit>
-            <trans-unit><source>Inactive Shareholders</source><target>未激活股东</target></trans-unit>
-            <trans-unit><source>Inactive Trader</source><target>未激活会员</target></trans-unit>
-            <trans-unit><source>Registered Time</source><target>注册时间</target></trans-unit>
-            <trans-unit><source>Activate</source><target>激活</target></trans-unit>
-            <trans-unit><source>Active</source><target>激活</target></trans-unit>
-            <trans-unit><source>Delete</source><target>删除</target></trans-unit>
-            <trans-unit><source>Login Now</source><target>现在登录</target></trans-unit>
-            <trans-unit><source>Login</source><target>登录</target></trans-unit>
-            <trans-unit><source>PIN Available</source><target>PIN余额</target></trans-unit>
-            <trans-unit><source>PIN Used to Activate</source><target>PIN用于激活</target></trans-unit>
-            <trans-unit><source>e-Point Available</source><target>点数余额</target></trans-unit>
-            <trans-unit><source>e-Point Used to Activate</source><target>点数用于激活</target></trans-unit>
-            <trans-unit><source>Activate Shareholder</source><target>激活股东</target></trans-unit>
-            <trans-unit><source>Activate Trader</source><target>激活会员</target></trans-unit>
-            <trans-unit><source>Old Login Password</source><target>旧登录密码</target></trans-unit>
+            <trans-unit><source>Trading Margin</source><target>取引制限</target></trans-unit>
+            <trans-unit><source>GAP</source><target>国際公共行賞の制限</target></trans-unit>
+            <trans-unit><source>Inactive Shareholders</source><target>アクティブになっていない株主</target></trans-unit>
+            <trans-unit><source>Inactive Trader</source><target>メンバーを有効にしていない</target></trans-unit>
+            <trans-unit><source>Registered Time</source><target>参加しました</target></trans-unit>
+            <trans-unit><source>Activate</source><target>アクティベーション</target></trans-unit>
+            <trans-unit><source>Active</source><target>アクティベーション</target></trans-unit>
+            <trans-unit><source>Delete</source><target>削除</target></trans-unit>
+            <trans-unit><source>Login Now</source><target>今すぐログイン</target></trans-unit>
+            <trans-unit><source>Login</source><target>ログイン</target></trans-unit>
+            <trans-unit><source>PIN Available</source><target>PINのバランス</target></trans-unit>
+            <trans-unit><source>PIN Used to Activate</source><target>PINが活性化するために使用される</target></trans-unit>
+            <trans-unit><source>e-Point Available</source><target>クレジット残高</target></trans-unit>
+            <trans-unit><source>e-Point Used to Activate</source><target>活性化のためのポイント</target></trans-unit>
+            <trans-unit><source>Activate Shareholder</source><target>株主総会の活性化</target></trans-unit>
+            <trans-unit><source>Activate Trader</source><target>アクティベーションのメンバー</target></trans-unit>
+            <trans-unit><source>Old Login Password</source><target>オールドログインパスワード</target></trans-unit>
             <trans-unit><source>New Login Password</source><target>新登录密码</target></trans-unit>
-            <trans-unit><source>Re-enter Login Password</source><target>确认新登录密码</target></trans-unit>
-            <trans-unit><source>Old Transaction Password</source><target>旧交易密码</target></trans-unit>
-            <trans-unit><source>New Transaction Password</source><target>新交易密码</target></trans-unit>
-            <trans-unit><source>Re-enter Transaction Password</source><target>确认新交易密码</target></trans-unit>
-            <trans-unit><source>Activation Date</source><target>激活时间</target></trans-unit>
-            <trans-unit><source>Registered Date</source><target>注册时间</target></trans-unit>
-            <trans-unit><source>Position</source><target>安置</target></trans-unit>
-            <trans-unit><source>Place Shareholder History</source><target>安置股东记录表</target></trans-unit>
-            <trans-unit><source>Place Trader History</source><target>安置会员记录表</target></trans-unit>
-            <trans-unit><source>Placement ID</source><target>组织ID</target></trans-unit>
-            <trans-unit><source>Placement Date</source><target>安置时间</target></trans-unit>
-            <trans-unit><source>No. of PIN required</source><target>追加PIN</target></trans-unit>
-            <trans-unit><source>Quantity</source><target>购买数量</target></trans-unit>
-            <trans-unit><source>Required Amount</source><target>所需金额</target></trans-unit>
-            <trans-unit><source>Transfer PIN Quantity</source><target>转出PIN数量</target></trans-unit>
-            <trans-unit><source>CPS Price</source><target>股价</target></trans-unit>
-            <trans-unit><source>Type</source><target>类型</target></trans-unit>
-            <trans-unit><source>Purchase Date</source><target>购买时间</target></trans-unit>
-            <trans-unit><source>Action Date</source><target>使用时间</target></trans-unit>
-            <trans-unit><source>Sponsor Tree</source><target>团队发展谱图</target></trans-unit>
-            <trans-unit><source>Placement Tree</source><target>组织系谱图</target></trans-unit>
-            <trans-unit><source>You are not entitle for Global Auto Placement</source><target>您不合格国际公排奖</target></trans-unit>
-            <trans-unit><source>Please accept our Terms &amp; Conditions and Privacy Policy</source><target>请勾选'我已阅读同意条款和隐私政策'再行登录</target></trans-unit>
-            <trans-unit><source>Correct captcha is required</source><target>请输入正确的验证码</target></trans-unit>
-            <trans-unit><source>Sponsor ID cannot be blank</source><target>请输入推荐人帐号</target></trans-unit>
-            <trans-unit><source>Invalid Sponsor ID</source><target>请输入正确推荐人帐号</target></trans-unit>
-            <trans-unit><source>Please enter the same password as above</source><target>密码设置输入不一致,请检查</target></trans-unit>
+            <trans-unit><source>Re-enter Login Password</source><target>新しいログインパスワード</target></trans-unit>
+            <trans-unit><source>Old Transaction Password</source><target>古い取引パスワード</target></trans-unit>
+            <trans-unit><source>New Transaction Password</source><target>新規取引パスワード</target></trans-unit>
+            <trans-unit><source>Re-enter Transaction Password</source><target>新しい取引パスワードを確認するには</target></trans-unit>
+            <trans-unit><source>Activation Date</source><target>アクティブ化時間</target></trans-unit>
+            <trans-unit><source>Registered Date</source><target>参加しました</target></trans-unit>
+            <trans-unit><source>Position</source><target>配置</target></trans-unit>
+            <trans-unit><source>Place Shareholder History</source><target>レコードテーブルの配置株主</target></trans-unit>
+            <trans-unit><source>Place Trader History</source><target>定住メンバーレコードテーブル</target></trans-unit>
+            <trans-unit><source>Placement ID</source><target>組織ID</target></trans-unit>
+            <trans-unit><source>Placement Date</source><target>配置時間</target></trans-unit>
+            <trans-unit><source>No. of PIN required</source><target>追加のピン</target></trans-unit>
+            <trans-unit><source>Quantity</source><target>量</target></trans-unit>
+            <trans-unit><source>Required Amount</source><target>必要量</target></trans-unit>
+            <trans-unit><source>Transfer PIN Quantity</source><target>のPIN番号を回し</target></trans-unit>
+            <trans-unit><source>CPS Price</source><target>株価</target></trans-unit>
+            <trans-unit><source>Type</source><target>タイプ</target></trans-unit>
+            <trans-unit><source>Purchase Date</source><target>時間を稼ぐ</target></trans-unit>
+            <trans-unit><source>Action Date</source><target>時間の使い方</target></trans-unit>
+            <trans-unit><source>Sponsor Tree</source><target>チーム開発のスペクトル</target></trans-unit>
+            <trans-unit><source>Placement Tree</source><target>組織の系譜</target></trans-unit>
+            <trans-unit><source>You are not entitle for Global Auto Placement</source><target>あなた修飾されていない国際的な公共の行賞</target></trans-unit>
+            <trans-unit><source>Please accept our Terms &amp; Conditions and Privacy Policy</source><target>再ログインし"私は読んだことがあるが、利用規約およびプライバシーポリシーに同意する"にチェックを入れてください</target></trans-unit>
+            <trans-unit><source>Correct captcha is required</source><target>確認コードを入力してください</target></trans-unit>
+            <trans-unit><source>Sponsor ID cannot be blank</source><target>リファラのアカウントを入力してください</target></trans-unit>
+            <trans-unit><source>Invalid Sponsor ID</source><target>アカウントが推奨する正しいを入力してください</target></trans-unit>
+            <trans-unit><source>Please enter the same password as above</source><target>矛盾して入力するように設定したパスワードを、確認してください</target></trans-unit>
             <trans-unit><source>left</source><target>左</target></trans-unit>
-            <trans-unit><source>Left</source><target>左边</target></trans-unit>
+            <trans-unit><source>Left</source><target>左</target></trans-unit>
             <trans-unit><source>right</source><target>右</target></trans-unit>
-            <trans-unit><source>Right</source><target>右边</target></trans-unit>
-            <trans-unit><source>Search</source><target>查寻</target></trans-unit>
-            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>提现手续费用10%</target></trans-unit>
-            <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>现金转账需付%1%元美金手续费</target></trans-unit>
-            <trans-unit><source>Refer to MGIG management</source><target>向枫叶国际管理层询问</target></trans-unit>
-            <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中。 我们很抱歉导致了您的不便。</target></trans-unit>
-            <trans-unit><source>Our web server is in the midst of maintenance until 14 December, 2011. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中，14号12月回复正常。 我们很抱歉导致了您的不便。</target></trans-unit>
-            <trans-unit><source>Gold Market Closed</source><target>黄金市场已经关闭</target></trans-unit>
-            <trans-unit><source>Withdrawal Status</source><target>兑现状态</target></trans-unit>
-            <trans-unit><source>Withdrawal</source><target>兑现</target></trans-unit>
-            <trans-unit><source>WITHDRAWAL</source><target>兑现</target></trans-unit>
-            <trans-unit><source>Amount</source><target>总数</target></trans-unit>
-            <trans-unit><source>DSB</source><target>直推奖</target></trans-unit>
-            <trans-unit><source>DRB</source><target>直推奖金</target></trans-unit>
-            <trans-unit><source>GDB</source><target>对碰奖</target></trans-unit>
-            <trans-unit><source>Total</source><target>总</target></trans-unit>
-            <trans-unit><source>Bonus Date</source><target>日期从</target></trans-unit>
-            <trans-unit><source>Bonus</source><target>奖金</target></trans-unit>
-            <trans-unit><source>to</source><target>至</target></trans-unit>
-            <trans-unit><source>From Shareholder</source><target>会员编号</target></trans-unit>
-            <trans-unit><source>From Trader</source><target>会员编号</target></trans-unit>
-            <trans-unit><source>View Details</source><target>查看内容</target></trans-unit>
-            <trans-unit><source>Details</source><target>查看</target></trans-unit>
-            <trans-unit><source>Member Id</source><target>会员编号</target></trans-unit>
-            <trans-unit><source>e-Cash Wallet</source><target>电子钱包余额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Wallet</source><target>MT4 Credit 余额</target></trans-unit>
-            <trans-unit><source>Name</source><target>用户名</target></trans-unit>
-            <trans-unit><source>e-Point Wallet</source><target>批发点数钱包</target></trans-unit>
-            <trans-unit><source>e-Point</source><target>点数</target></trans-unit>
-            <trans-unit><source>Package Rank</source><target>等级</target></trans-unit>
-            <trans-unit><source>e-Share Balance</source><target>电子股余额</target></trans-unit>
-            <trans-unit><source>Last Login</source><target>上次登入</target></trans-unit>
-            <trans-unit><source>Maintenance Balance</source><target>奖金回流余额</target></trans-unit>
-            <trans-unit><source>VVIP</source><target>超级贵宾</target></trans-unit>
-            <trans-unit><source>VIP</source><target>贵宾</target></trans-unit>
-            <trans-unit><source>Diamond</source><target>钻石</target></trans-unit>
-            <trans-unit><source>Platinum</source><target>白金</target></trans-unit>
-            <trans-unit><source>Gold</source><target>黄金</target></trans-unit>
-            <trans-unit><source>Silver</source><target>银级</target></trans-unit>
-            <trans-unit><source>Bronze</source><target>铜级</target></trans-unit>
+            <trans-unit><source>Right</source><target>右</target></trans-unit>
+            <trans-unit><source>Search</source><target>検索</target></trans-unit>
+            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>現金取扱手数料10%</target></trans-unit>
+            <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>％1$％の手数料を支払うために現金給付</target></trans-unit>
+            <trans-unit><source>Refer to MGIG management</source><target>メープルリーフインターナショナルの経営へのお問い合わせ</target></trans-unit>
+            <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>私たちのネットワークサーバーのメンテナンス。ご不便を引き起こすために我々は非常に申し訳ありません。</target></trans-unit>
+            <trans-unit><source>Our web server is in the midst of maintenance until 14 December, 2011. We are sorry for any inconvenience caused.</source><target>私たちのネットワーク·サーバーの保守、12月14日には、正常に戻った。ご不便を引き起こすために我々は非常に申し訳ありません。</target></trans-unit>
+            <trans-unit><source>Gold Market Closed</source><target>金市場はシャットダウンされました</target></trans-unit>
+            <trans-unit><source>Withdrawal Status</source><target>名誉ある地位</target></trans-unit>
+            <trans-unit><source>Withdrawal</source><target>名誉</target></trans-unit>
+            <trans-unit><source>WITHDRAWAL</source><target>名誉</target></trans-unit>
+            <trans-unit><source>Amount</source><target>合計</target></trans-unit>
+            <trans-unit><source>DSB</source><target>ダイレクトプッシュボーナス</target></trans-unit>
+            <trans-unit><source>DRB</source><target>ダイレクトプッシュボーナス</target></trans-unit>
+            <trans-unit><source>GDB</source><target>右タッチ賞</target></trans-unit>
+            <trans-unit><source>Total</source><target>合計</target></trans-unit>
+            <trans-unit><source>Bonus Date</source><target>ボーナス日から</target></trans-unit>
+            <trans-unit><source>Bonus</source><target>ボーナス</target></trans-unit>
+            <trans-unit><source>to</source><target>へ</target></trans-unit>
+            <trans-unit><source>From Shareholder</source><target>ユーザーID</target></trans-unit>
+            <trans-unit><source>From Trader</source><target>ユーザーID</target></trans-unit>
+            <trans-unit><source>View Details</source><target>ビュー</target></trans-unit>
+            <trans-unit><source>Details</source><target>ビュー</target></trans-unit>
+            <trans-unit><source>Member Id</source><target>ユーザーID</target></trans-unit>
+            <trans-unit><source>e-Cash Wallet</source><target>ウォレットの残高</target></trans-unit>
+            <trans-unit><source>MT4 Credit Wallet</source><target>MT4 Credit バランス</target></trans-unit>
+            <trans-unit><source>Name</source><target>ユーザー名</target></trans-unit>
+            <trans-unit><source>e-Point Wallet</source><target>卸売ポイントの札入れ</target></trans-unit>
+            <trans-unit><source>e-Point</source><target>カウント</target></trans-unit>
+            <trans-unit><source>Package Rank</source><target>グレード</target></trans-unit>
+            <trans-unit><source>e-Share Balance</source><target>エレクトロニクス株式の残高</target></trans-unit>
+            <trans-unit><source>Last Login</source><target>最終ログイン</target></trans-unit>
+            <trans-unit><source>Maintenance Balance</source><target>ボーナス逆流の残り</target></trans-unit>
+            <trans-unit><source>VVIP</source><target>スーパーVIP</target></trans-unit>
+            <trans-unit><source>VIP</source><target>賓客</target></trans-unit>
+            <trans-unit><source>Diamond</source><target>ダイヤモンド</target></trans-unit>
+            <trans-unit><source>Platinum</source><target>プラチナ</target></trans-unit>
+            <trans-unit><source>Gold</source><target>ゴールド</target></trans-unit>
+            <trans-unit><source>Silver</source><target>シルバー</target></trans-unit>
+            <trans-unit><source>Bronze</source><target>銅品位</target></trans-unit>
             <trans-unit><source>Basic</source><target>基本</target></trans-unit>
-            <trans-unit><source>E-Share Trading Center</source><target>原始股交易所</target></trans-unit>
-            <trans-unit><source>Package Type</source><target>配套</target></trans-unit>
-            <trans-unit><source>Payment Type</source><target>付款方式</target></trans-unit>
-            <trans-unit><source>Available</source><target>可用的</target></trans-unit>
-            <trans-unit><source>Place Here</source><target>放置位置</target></trans-unit>
-            <trans-unit><source>Member activated successfully.</source><target>会员成功被激活.</target></trans-unit>
-            <trans-unit><source>Do you want to proceed to member placement?</source><target>您要继续组织系谱图吗?</target></trans-unit>
-            <trans-unit><source>Are you sure want to place this member into this position?</source><target>您确定此会员放置在此位置吗?</target></trans-unit>
-            <trans-unit><source>Transaction Type</source><target>交易款项</target></trans-unit>
-            <trans-unit><source>PROCESS CHARGES</source><target>手续收费</target></trans-unit>
-            <trans-unit><source>REGISTER</source><target>注册</target></trans-unit>
-            <trans-unit><source>TRANSFER TO</source><target>移转给</target></trans-unit>
-            <trans-unit><source>TRANSFER FROM</source><target>转自</target></trans-unit>
-            <trans-unit><source>COMPANY</source><target>公司贷款</target></trans-unit>
-            <trans-unit><source>No records found</source><target>没有匹配结果</target></trans-unit>
-            <trans-unit><source>PENDING</source><target>未批准</target></trans-unit>
-            <trans-unit><source>APPROVE</source><target>批准</target></trans-unit>
-            <trans-unit><source>Cash Flow Point Chart</source><target>现金流点图</target></trans-unit>
-            <trans-unit><source>This Month Sales</source><target>当月销售额</target></trans-unit>
-            <trans-unit><source>This Month CPS</source><target>当月销售额</target></trans-unit>
-            <trans-unit><source>Carry Forward CPS</source><target>上期转来</target></trans-unit>
-            <trans-unit><source>Commission Type</source><target>奖金分类</target></trans-unit>
-            <trans-unit><source>Credit</source><target>进账</target></trans-unit>
-            <trans-unit><source>Debit</source><target>出账</target></trans-unit>
-            <trans-unit><source>Daily Max</source><target>单日封顶</target></trans-unit>
-            <trans-unit><source>User Name</source><target>用户名</target></trans-unit>
+            <trans-unit><source>E-Share Trading Center</source><target>IPOの為替</target></trans-unit>
+            <trans-unit><source>Package Type</source><target>支援する</target></trans-unit>
+            <trans-unit><source>Payment Type</source><target>支払条件</target></trans-unit>
+            <trans-unit><source>Available</source><target>利用できる</target></trans-unit>
+            <trans-unit><source>Place Here</source><target>配置</target></trans-unit>
+            <trans-unit><source>Member activated successfully.</source><target>会員は、有効になりました。</target></trans-unit>
+            <trans-unit><source>Do you want to proceed to member placement?</source><target>あなたは、家系図を整理するために継続すべき？</target></trans-unit>
+            <trans-unit><source>Are you sure want to place this member into this position?</source><target>あなたが決定するこのメンバは、この位置に配置されます?</target></trans-unit>
+            <trans-unit><source>Transaction Type</source><target>取引金額</target></trans-unit>
+            <trans-unit><source>PROCESS CHARGES</source><target>手続料</target></trans-unit>
+            <trans-unit><source>REGISTER</source><target>登録</target></trans-unit>
+            <trans-unit><source>TRANSFER TO</source><target>に移管</target></trans-unit>
+            <trans-unit><source>TRANSFER FROM</source><target>からの転送</target></trans-unit>
+            <trans-unit><source>COMPANY</source><target>コーポレート·ローン</target></trans-unit>
+            <trans-unit><source>No records found</source><target>一致する結果はありません</target></trans-unit>
+            <trans-unit><source>PENDING</source><target>承認されていない</target></trans-unit>
+            <trans-unit><source>APPROVE</source><target>承認する</target></trans-unit>
+            <trans-unit><source>Cash Flow Point Chart</source><target>図のキャッシュ·フローのポイント</target></trans-unit>
+            <trans-unit><source>This Month Sales</source><target>月の売上高</target></trans-unit>
+            <trans-unit><source>This Month CPS</source><target>月の売上高</target></trans-unit>
+            <trans-unit><source>Carry Forward CPS</source><target>前期に回す</target></trans-unit>
+            <trans-unit><source>Commission Type</source><target>ボーナスカテゴリー</target></trans-unit>
+            <trans-unit><source>Credit</source><target>信用に立ち</target></trans-unit>
+            <trans-unit><source>Debit</source><target>アカウント</target></trans-unit>
+            <trans-unit><source>Daily Max</source><target>シングル当日キャップ</target></trans-unit>
+            <trans-unit><source>User Name</source><target>ユーザー名</target></trans-unit>
             <trans-unit><source>Elementary School</source><target>サポートする主要な</target></trans-unit>
             <trans-unit><source>Middle School</source><target>支える中間</target></trans-unit>
             <trans-unit><source>High School</source><target>サポートする高度な</target></trans-unit>
