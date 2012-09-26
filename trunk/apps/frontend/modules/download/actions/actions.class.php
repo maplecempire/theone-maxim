@@ -83,6 +83,33 @@ class downloadActions extends sfActions
             }
         }
     }
+    public function executeUploadFxGuideCN()
+    {
+    }
+
+    public function executeDoUploadChineseGuide()
+    {
+        if ($this->getRequest()->getFileName('fxguide') != '') {
+            $uploadedFilename = $this->getRequest()->getFileName('fxguide');
+
+            $filename = "chinese_".$uploadedFilename;
+            $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("GUIDE_CN");
+            $mlm_file_download->setFileSrc(sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
+            $mlm_file_download->setFileName($filename);
+            $mlm_file_download->setContentType("application/pdf");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+
+            $this->setFlash('successMsg', "Upload successful.");
+            return $this->redirect('/download/uploadFxGuideCN');
+        }
+    }
     public function executeAmlPolicy()
     {
         $response = $this->getResponse();
