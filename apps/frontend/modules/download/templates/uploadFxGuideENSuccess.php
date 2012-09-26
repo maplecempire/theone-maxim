@@ -5,7 +5,6 @@ var jform = null;
 </script>
 
 <form id="uploadForm" method="post" action="/download/doUploadEnglishGuide" enctype="multipart/form-data">
-
 <table width="100%" border="0">
     <tr>
         <td class="value">
@@ -13,8 +12,8 @@ var jform = null;
         </td>
     </tr>
     <tr>
-        <td class="value">
-            <button id="btnUpload">Upload</button>&nbsp;<?php if ($sf_flash->has('successMsg')): ?><font color="#dc143c"><?php echo $sf_flash->get('successMsg') ?></font><?php endif; ?>
+        <td class="value" id="tdValue">
+            <button id="btnUpload">Upload</button>&nbsp;<font color="#dc143c"><?php if ($sf_flash->has('successMsg')): ?><?php echo $sf_flash->get('successMsg') ?><?php endif; ?></font>
         </td>
     </tr>
 </table>
