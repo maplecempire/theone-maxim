@@ -641,17 +641,18 @@
             <trans-unit><source>I understand that as an MaximTrader customer, it is my responsibility to review all necessary information about currency trading and the MaximTrader</source><target>我明白作为MaximTrader客户，这是我的责任，检讨有关外汇交易的所有必要的MaximTrader的信息</target></trans-unit>
             <trans-unit><source>Terms and Conditions</source><target>条款和条件</target></trans-unit>
             <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>我明白与外汇交易相关联的风险，并会征询法律意见和外汇留学深造任何交易活动开始之前。</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>了解更多</target></trans-unit>
+            <trans-unit><source>Convert CP2 To CP1</source><target>CP2转换为CP1</target></trans-unit>
+            <trans-unit><source>CP1 Transfer</source><target>CP1转让</target></trans-unit>
+            <trans-unit><source>Total Fund Deposited</source><target>缴存总额</target></trans-unit>
+            <trans-unit><source>Reference No</source><target>参考编号</target></trans-unit>
+            <trans-unit><source>Funds Deposit History</source><target>存款记录表</target></trans-unit>
+            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>存入资金，将被记入CP1的帐户。</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1只能用来收购配套，配套升级和充值MT4帐户，而不能兑现现金。</target></trans-unit>
+            <trans-unit><source>1 equals to 1 value of CP1</source><target>1等于1的值的CP1</target></trans-unit>
+            <trans-unit><source>CP1 Account</source><target>CP1 户口</target></trans-unit>
+            <trans-unit><source>Upgrade Package</source><target>升级配套</target></trans-unit>
+            <trans-unit><source>Package Upgrade History</source><target>升级配套记录表</target></trans-unit>
+            <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
         </body>
     </file>
 </xliff>

@@ -640,17 +640,18 @@
             <trans-unit><source>I understand that as an MaximTrader customer, it is my responsibility to review all necessary information about currency trading and the MaximTrader</source><target>私はMaximTraderの顧客として理解するには、外国為替取引の情報のすべての必要なMaximTraderを確認するために私の責任です</target></trans-unit>
             <trans-unit><source>Terms and Conditions</source><target>諸条件</target></trans-unit>
             <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>私は外国為替取引に伴うリスクを理解し、法的助言といかなる取引活動の開始前に、さらなる研究のために外国為替を求める。</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
-            <trans-unit><source>Learnmore</source><target>詳細はこちら</target></trans-unit>
+            <trans-unit><source>Convert CP2 To CP1</source><target>CP1、CP2用の変換</target></trans-unit>
+            <trans-unit><source>CP1 Transfer</source><target>販売のためのCP1</target></trans-unit>
+            <trans-unit><source>Total Fund Deposited</source><target>預金合計</target></trans-unit>
+            <trans-unit><source>Reference No</source><target>参照番号</target></trans-unit>
+            <trans-unit><source>Funds Deposit History</source><target>預金記録表</target></trans-unit>
+            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>預金資金はCP1口座に入金されます。</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</source><target>アップグレードをサポートし、MT4のアカウントを再充電し、現金を現金化することができず、支援の獲得のための唯一のCP1。</target></trans-unit>
+            <trans-unit><source>1 equals to 1 value of CP1</source><target>1は1 CP1の値に等しい</target></trans-unit>
+            <trans-unit><source>CP1 Account</source><target>CP1 アカウント</target></trans-unit>
+            <trans-unit><source>Upgrade Package</source><target>パッケージをアップグレードする</target></trans-unit>
+            <trans-unit><source>Package Upgrade History</source><target>レコードのテーブルをサポートしているアップグレードするには</target></trans-unit>
+            <trans-unit><source>Transaction Code</source><target>取引記号</target></trans-unit>
         </body>
     </file>
 </xliff>
