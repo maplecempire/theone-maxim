@@ -1,7 +1,9 @@
 <?php include('scripts_backend.php'); date_default_timezone_set('America/New_York'); ?>
 <script type="text/javascript">
 var jform = null;
-
+$("#btnUpload").click(function(){
+    waiting();
+});
 </script>
 
 <form id="uploadForm" method="post" action="/download/doUploadJapaneseGuide" enctype="multipart/form-data">
