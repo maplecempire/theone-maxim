@@ -281,7 +281,7 @@ class downloadActions extends sfActions
     public function executeDownloadGuide()
     {
         $c = new Criteria();
-        $c->add(MlmFileDownloadPeer::FILE_TYPE, "GUIDE");
+        $c->add(MlmFileDownloadPeer::FILE_TYPE, "GUIDE_".$this->getRequestParameter('a'));
         $c->add(MlmFileDownloadPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->addDescendingOrderByColumn(MlmFileDownloadPeer::CREATED_ON);
         $mlmFileDownloadDB = MlmFileDownloadPeer::doSelectOne($c);
