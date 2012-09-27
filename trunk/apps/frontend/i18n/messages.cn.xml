@@ -309,7 +309,7 @@
             <trans-unit><source>right</source><target>右</target></trans-unit>
             <trans-unit><source>Right</source><target>右边</target></trans-unit>
             <trans-unit><source>Search</source><target>查寻</target></trans-unit>
-            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>提现手续费用10%</target></trans-unit>
+            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>提现手续费用5%</target></trans-unit>
             <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>现金转账需付%1%元美金手续费</target></trans-unit>
             <trans-unit><source>Refer to MGIG management</source><target>向枫叶国际管理层询问</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中。 我们很抱歉导致了您的不便。</target></trans-unit>

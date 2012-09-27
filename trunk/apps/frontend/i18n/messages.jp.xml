@@ -308,7 +308,7 @@
             <trans-unit><source>right</source><target>右</target></trans-unit>
             <trans-unit><source>Right</source><target>右</target></trans-unit>
             <trans-unit><source>Search</source><target>検索</target></trans-unit>
-            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>現金取扱手数料10%</target></trans-unit>
+            <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>現金取扱手数料5%</target></trans-unit>
             <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>％1$％の手数料を支払うために現金給付</target></trans-unit>
             <trans-unit><source>Refer to MGIG management</source><target>メープルリーフインターナショナルの経営へのお問い合わせ</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>私たちのネットワークサーバーのメンテナンス。ご不便を引き起こすために我々は非常に申し訳ありません。</target></trans-unit>
