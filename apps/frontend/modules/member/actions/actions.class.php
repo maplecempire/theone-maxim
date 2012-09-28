@@ -2427,7 +2427,7 @@ class memberActions extends sfActions
 //        $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
 
         /*######################################################################*/
-        $id = Globals::FIRST_REGISTERED_DISTRIBUTOR_ID;
+        $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
         $this->doSearch = false;
         $this->distinfo = $distinfo;
