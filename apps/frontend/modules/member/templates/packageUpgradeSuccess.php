@@ -181,13 +181,13 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "' style='height:35px'>";
-
+                                $pointNeeded = number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
                                 $ableUpgrade = false;
                                 if ($distPackage->getPrice() < $packageDB->getPrice()) {
                                     $ableUpgrade = true;
                                     echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                  'class' => 'activeLink',
-                                                                                                                                                 'ref' => $packageDB->getPrice(),
+                                                                                                                                                 'ref' => $pointNeeded,
                                                                                                                                                  'pid' => $packageDB->getPackageId(),
                                                                                                                                             )) . "</td>";
                                 } else {
@@ -198,7 +198,7 @@ $(function() {
                                     <td align='center'>";
 
                                     if ($ableUpgrade) {
-                                        echo number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
+                                        echo $pointNeeded;
                                     } else {
                                         echo "--";
                                     }
