@@ -689,7 +689,7 @@ class financeActions extends sfActions
                 //var_dump($totalEpoint);
                 //exit();
                 if ($companyEpoint >= $totalEpoint) {
-                    if (Globals::STATUS_COMPLETE == $statusCode) {
+                    if (Globals::STATUS_COMPLETE == $statusCode && $mlm_dist_epoint_purchase->getStatusCode() != Globals::STATUS_COMPLETE) {
                         $mlm_account_ledger = new MlmAccountLedger();
                         $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
                         $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
