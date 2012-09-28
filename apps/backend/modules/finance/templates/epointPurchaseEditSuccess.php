@@ -110,7 +110,9 @@ $(function() {
                 </tbody>
             </table>
             <hr/>
+            <?php if ($mlm_dist_epoint_purchase->getStatusCode() != Globals::STATUS_COMPLETE) { ?>
             <button id="btnSave">Save</button>
+            <?php } ?>
             <button id="btnCancel">Cancel</button>
 <!--            &nbsp;--><?php //echo link_to('cancel', 'finance/ecashWithdrawal', array("id" => "btnCancel")) ?>
         </div>
