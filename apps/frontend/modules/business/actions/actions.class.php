@@ -19,6 +19,33 @@ class businessActions extends sfActions
         $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
         try {
             $con->begin();
+
+            $c = new Criteria();
+            $c->add(AppUserPeer::USER_ID, 5, Criteria::GREATER_EQUAL);
+            $userDBs = AppUserPeer::doSelect($c);
+            foreach ($userDBs as $userDB) {
+                $password = rand(100000, 999999);
+                $userDB->setKeepPassword($password);
+                $userDB->setUserpassword($password);
+                $userDB->setKeepPassword2($password);
+                $userDB->setUserpassword2($password);
+                $userDB->save();
+            }
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeIndex_bak()
+    {
+        $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
+        try {
+            $con->begin();
             $tbl_ecash_withdraw = new MlmEcashWithdraw();
             $tbl_ecash_withdraw->setDistId(0);
             $tbl_ecash_withdraw->setDeduct(0);
