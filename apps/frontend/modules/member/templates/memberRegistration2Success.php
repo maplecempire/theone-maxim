@@ -719,7 +719,7 @@ $(function() {
             </tr>
             <tr>
                 <td align="right" style="border-style:hidden" class="td_1st"><?php echo __('Date') ?>:</td>
-                <td style="border-style:hidden" class="td_2nd"><input type="text" style="background-color: #d9d9d9;" readonly="readonly" class="inputbox" value="2012-08-24" name="date"></td>
+                <td style="border-style:hidden" class="td_2nd"><input type="text" style="background-color: #d9d9d9;" readonly="readonly" class="inputbox" value="<?php echo date("Y-m-d")?>" name="date"></td>
             </tr>
             <tr>
                 <td align="left" valign="top" style="border-style:hidden" colspan="2">

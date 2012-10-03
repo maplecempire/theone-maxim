@@ -169,7 +169,11 @@ $(function() {
                 </tbody>
             </table>
             <hr/>
+            <?php
+            if ($mt4Withdraw->getStatusCode() == Globals::STATUS_PENDING) {
+            ?>
             <button id="btnSave">Save</button>
+            <?php } ?>
             <button id="btnCancel">Cancel</button>
 <!--            &nbsp;--><?php //echo link_to('cancel', 'finance/ecashWithdrawal', array("id" => "btnCancel")) ?>
         </div>
