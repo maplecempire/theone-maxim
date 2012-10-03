@@ -164,15 +164,17 @@ class financeActions extends sfActions
             $mt4Withdraw = MlmMt4WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
             $this->forward404Unless($mt4Withdraw);
 
-            $mt4Withdraw->setRemarks($remarks);
-            $mt4Withdraw->setStatusCode($statusCode);
-            $mt4Withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            if ($mt4Withdraw->getStatusCode() == Globals::STATUS_PENDING) {
+                $mt4Withdraw->setRemarks($remarks);
+                $mt4Withdraw->setStatusCode($statusCode);
+                $mt4Withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
-            if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
-                $mt4Withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
+                    $mt4Withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                }
+
+                $mt4Withdraw->save();
             }
-
-            $mt4Withdraw->save();
 
             $con->commit();
         } catch (PropelException $e) {
@@ -196,13 +198,17 @@ class financeActions extends sfActions
                     $mt4Withdrawal = MlmMt4WithdrawPeer::retrieveByPk($arr[$i]);
                     $this->forward404Unless($mt4Withdrawal);
 
-                    $mt4Withdrawal->setStatusCode($statusCode);
-                    $mt4Withdrawal->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                    if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
+                        if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
+                            $mt4Withdrawal->setStatusCode($statusCode);
+                            $mt4Withdrawal->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
-                    if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
-                        $mt4Withdrawal->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                            if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
+                                $mt4Withdrawal->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                            }
+                            $mt4Withdrawal->save();
+                        }
                     }
-                    $mt4Withdrawal->save();
                 }
                 $con->commit();
             } catch (PropelException $e) {
