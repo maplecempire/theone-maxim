@@ -191,7 +191,7 @@ $(function() {
                     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
                         <label for="privateInvestmentAgreement"><?php echo __('Private Investment Agreement') ?></label></td>
                     <td colspan="3">
-                        <a target="_blank" href="/download/privateInvestmentAgreement"><?php echo __('Download Agreement') ?></a>
+                        <a target="_blank" href="/download/privateInvestmentAgreement"><?php echo __('Download Private Investment Agreement') ?></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -209,7 +209,7 @@ $(function() {
                     <td><input type="checkbox" class="checkbox" id="mteAgreement" name="mteAgreement">
                         <label for="mteAgreement">MTE <?php echo __('Agreement') ?></label></td>
                     <td colspan="3">
-                        <a target="_blank" href="/download/mteAgreement"><?php echo __('Download Agreement') ?></a>
+                        <a target="_blank" href="/download/mteAgreement"><?php echo __('Download MTE Agreement') ?></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
