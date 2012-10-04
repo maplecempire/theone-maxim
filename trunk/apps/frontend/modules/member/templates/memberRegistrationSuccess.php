@@ -172,7 +172,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="5">
                         &nbsp;<input name="productCode" type="radio" value="fxgold" id="rdoFxgold" checked="checked">&nbsp; <label for="rdoFxgold">FX Gold A</label>
-                        &nbsp;<input name="productCode" type="radio" value="mte" id="rdoMte">&nbsp; <label for="rdoMte">MaximTrade™ Executor</label>
+                        <span style="display: none">&nbsp;<input name="productCode" type="radio" value="mte" id="rdoMte">&nbsp; <label for="rdoMte">MaximTrade™ Executor</label></span>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
