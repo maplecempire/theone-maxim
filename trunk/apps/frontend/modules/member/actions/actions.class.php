@@ -2544,7 +2544,8 @@ class memberActions extends sfActions
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $withdrawAmount = $this->getRequestParameter('ecashAmount');
-        $processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
+        $processFee = 0;
+        //$processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
