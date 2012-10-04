@@ -3,7 +3,8 @@
 <script type="text/javascript" language="javascript">
     $(function() {
         $("#cbo_ecashAmount").change(function(){
-            var ecashFinal = $("#cbo_ecashAmount").val() * 0.95;
+            /*var ecashFinal = $("#cbo_ecashAmount").val() * 0.95;*/
+            var ecashFinal = $("#cbo_ecashAmount").val();
 
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
@@ -139,7 +140,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_odd" style="display: none">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('After 5% handling fee'); ?>
@@ -151,7 +152,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Security Password'); ?>
@@ -162,7 +163,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_odd" style="display: none">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <font color="#dc143c"> <?php echo __('Note : charge 5% handling fees when CP2 withdrawal requested. ') ?></font>
