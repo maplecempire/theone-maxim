@@ -231,7 +231,7 @@
             <br>
             <div class="ui-widget">
                 <font color="#dc143c" style="font-size: 11px;">
-                    <?php echo __('Note: There will be no credit once mt4 credit amount finish.'); ?>
+                    <?php //echo __('Note: There will be no credit once mt4 credit amount finish.'); ?>
                     <br>&nbsp;
                 </font>
             </div>
