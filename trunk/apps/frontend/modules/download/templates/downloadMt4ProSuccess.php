@@ -101,8 +101,8 @@
             <tr>
                 <td>
                     <a href="/download/mt4Pro">Click to DOWNLOAD Meta Trader 4 Pro</a>
-                    <br>
-                    <a href="/download/mt4ProUserGuide">Click to DOWNLOAD Meta Trader 4 Pro User Guide</a>
+                    <!--<br>
+                    <a href="/download/mt4ProUserGuide">Click to DOWNLOAD Meta Trader 4 Pro User Guide</a>-->
                 </td>
             </tr>
             </tbody>
