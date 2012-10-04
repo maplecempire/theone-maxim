@@ -118,8 +118,8 @@
                                                         src="/css/maxim/flag/7.gif"><br>Malaysia Ringgit
 
                 </p></td>
-                <td valign="top"><p align="center">3.45</p></td>
-                <td valign="top"><p align="center">2.95</p></td>
+                <td valign="top"><p align="center">3.40</p></td>
+                <td valign="top"><p align="center">3.10</p></td>
             </tr>
             <tr class="row0">
                 <td valign="top"><p align="center"><img width="90" height="45" title="New Zealand Dollars" alt=""
@@ -172,8 +172,8 @@
             <tr class="row0">
                 <td valign="top"><p align="center"><img width="90" height="45" title="Thailand Baht" alt=""
                                                         src="/css/maxim/flag/14.gif"><br>Thailand Baht</p></td>
-                <td valign="top"><p align="center">33.80</p></td>
-                <td valign="top"><p align="center">29.00</p></td>
+                <td valign="top"><p align="center">340</p></td>
+                <td valign="top"><p align="center">310</p></td>
             </tr>
             <tr class="row1">
                 <td valign="top"><p align="center"><img width="90" height="45" title="Turkey" alt=""
