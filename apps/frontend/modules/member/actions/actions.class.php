@@ -3019,13 +3019,14 @@ class memberActions extends sfActions
                             /******************************/
                             /*  Account
                             /******************************/
-                            $c = new Criteria();
+                            /*$c = new Criteria();
                             $c->add(MlmAccountLedgerPeer::DIST_ID, $distId);
                             $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
                             $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
                             $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
                             $this->forward404Unless($accountLedgerDB);
-                            $distAccountEcashBalance = $accountLedgerDB->getBalance();
+                            $distAccountEcashBalance = $accountLedgerDB->getBalance();*/
+                            $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
 
                             // pairing amount
                             $ecashBalance = $distAccountEcashBalance + $pairingBonusAmount;
