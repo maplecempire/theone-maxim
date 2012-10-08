@@ -18,7 +18,7 @@
 
     });
 </script>
-
+<?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
@@ -51,7 +51,6 @@
 </tr>
 <tr>
     <td>
-        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
         <table class="pbt_table">
             <tbody>
             <tr>
@@ -72,12 +71,12 @@
             </tr>
             </tbody>
         </table>
-        <?php } ?>
+
     </td>
 </tr>
 </tbody>
 </table>
-
+<?php }  ?>
 <div class="info_bottom_bg"></div>
 
 <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
