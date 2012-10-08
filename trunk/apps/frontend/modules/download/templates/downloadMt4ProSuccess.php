@@ -51,6 +51,7 @@
 </tr>
 <tr>
     <td>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
         <table class="pbt_table">
             <tbody>
             <tr>
@@ -71,6 +72,7 @@
             </tr>
             </tbody>
         </table>
+        <?php } ?>
     </td>
 </tr>
 </tbody>

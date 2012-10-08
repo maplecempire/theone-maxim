@@ -5,7 +5,9 @@
 var jform = null;
 
 $(function(){
-
+    $("#btnUpload").click(function(){
+        waiting();
+    });
 }); // end $(function())
 
 </script>
