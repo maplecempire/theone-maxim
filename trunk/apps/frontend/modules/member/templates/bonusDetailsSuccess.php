@@ -278,7 +278,7 @@
                                     <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Dividend') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
-                                    <th style="text-align: right; width: 100px;display: none"" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
+                                    <th style="text-align: right; width: 100px;display: none" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -324,7 +324,7 @@
                                     $("#search_month").val($(this).attr("refMonth"));
                                     $("#search_year").val($(this).attr("refYear"));
 
-                                    if ($("#divBonusType").data("BONUS_TYPE") == "DRB" || $("#divBonusType").data("BONUS_TYPE") == "GRB")  {
+                                    if ($("#divBonusType").data("BONUS_TYPE") == "DRB" || $("#divBonusType").data("BONUS_TYPE") == "GDB")  {
                                         datagridDetail.fnDraw();
                                     } else {
                                         pipsDatagrid.fnDraw();

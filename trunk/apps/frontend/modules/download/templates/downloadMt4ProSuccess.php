@@ -51,7 +51,7 @@
 </tr>
 <tr>
     <td>
-        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
+        <?php //if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
         <table class="pbt_table">
             <tbody>
             <tr>
@@ -72,9 +72,9 @@
             </tr>
             </tbody>
         </table>
-        <?php } else {
+        <?php /*} else {
             echo "Demo account doesn't has the right to download MT4 Platform.";
-        }?>
+        }*/?>
     </td>
 </tr>
 </tbody>
