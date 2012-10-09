@@ -10,6 +10,19 @@
  */
 class downloadActions extends sfActions
 {
+
+    public function executeDemoMt4()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/exe');
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim4Setup.exe', TRUE);
+        $response->sendHttpHeaders();
+        readfile(sfConfig::get('sf_upload_dir')."/Maxim4Setup.exe");
+        return sfView::NONE;
+    }
     public function executeDownloadFxGuide()
     {
     }
