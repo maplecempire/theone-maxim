@@ -146,12 +146,10 @@ function reassignDatagridEventAttr(){
 					</td>
 				</tr>
 			</table>
-                <select name="upgradeStatus">
-                    <!--<option value="PROCESSING">PROCESSING</option>-->
-                    <!--<option value="REJECTED">REJECTED</option>-->
+                <!--<select name="upgradeStatus">
                     <option value="COMPLETE">COMPLETE</option>
                 </select>
-                <button id="btnUpdate">Update</button>
+                <button id="btnUpdate">Update</button>-->
 			</td>
 		</tr>
 	</table>
