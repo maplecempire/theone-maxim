@@ -32,38 +32,23 @@
 	<script type="text/javascript">
 	$(function() {
         <?php
-        if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
+        //if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
         ?>
         //PAGE OPENING ANIMATION
-        jQuery('#page').css({'display':'inline','width':'300px','overflow':'hidden','margin-right':'340px'});
+        /*jQuery('#page').css({'display':'inline','width':'300px','overflow':'hidden','margin-right':'340px'});
         jQuery('#sidebar').css({'margin-left':'326px'});
 
         jQuery('#sidebar').delay(800).animate({'margin-left':'0px'},2100);
-        jQuery('#page').delay(800).animate({'margin-right':'0px','width':'666px'},2100);
+        jQuery('#page').delay(800).animate({'margin-right':'0px','width':'666px'},2100);*/
         <?php
-            $sf_user->setAttribute(Globals::FIRST_LOGIN, 1);
-        } else {
+            //$sf_user->setAttribute(Globals::FIRST_LOGIN, 1);
+        //} else {
         ?>
             jQuery('#sidebar').css({'margin-left':'0px'});
             jQuery('#page').css({'display':'inline','width':'666px','overflow':'hidden','margin-right':'0px'});
         <?php
-        }
+        //}
         ?>
-		/*jQuery('#bg_slider').bgSlider({
-			'speed' : '8000',
-			'pause' : '10000'
-		});*/
-
-        /*$('BODY').bgStretcher({
-            images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
-            imageWidth: 1024,
-            imageHeight: 768,
-            slideDirection: 'N',
-            nextSlideDelay: 5500,
-            transitionEffect: 'fade',
-            anchoring: 'left center',
-            anchoringImg: 'left center'
-        });*/
 	});
 	</script>
 </head>
