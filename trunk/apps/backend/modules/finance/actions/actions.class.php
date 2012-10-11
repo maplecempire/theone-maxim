@@ -768,27 +768,169 @@ class financeActions extends sfActions
             $packageUpgradeHistory = MlmPackageUpgradeHistoryPeer::retrieveByPk($this->getRequestParameter('upgrade_id'));
             $this->forward404Unless($packageUpgradeHistory);
 
+            /*if ($this->getRequestParameter('distMt4AccountId', "") != "") {
+                $mlm_dist_mt4 = MlmDistMt4Peer::retrieveByPk($this->getRequestParameter('distMt4AccountId'));*/
+                $tbl_distributor = MlmDistributorPeer::retrieveByPk($packageUpgradeHistory->getDistId());
 
-            if ($this->getRequestParameter('distMt4AccountId', "") != "") {
-                $mlm_dist_mt4 = MlmDistMt4Peer::retrieveByPk($this->getRequestParameter('distMt4AccountId'));
-
-                if ($mlm_dist_mt4) {
+                /*if ($mlm_dist_mt4) {
                     //$mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
                     $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
                     $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
                     //$mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_dist_mt4->save();
-                } else {
-                    $mlm_dist_mt4 = new MlmDistMt4();
-                    $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
-                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
-                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
-                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->save();
-                }
+                } else {*/
+            if ($statusCode == Globals::STATUS_COMPLETE && $this->getRequestParameter('mt4Id') != "") {
+                $mlm_dist_mt4 = new MlmDistMt4();
+                $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
+                $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
+                $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+                $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_dist_mt4->save();
+
+                $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
+
+                $body = "<table width='800' align='center' cellpadding='0' cellspacing='0' border='0'>
+                        <tbody><tr>
+                            <td valign='top' colspan='3'>
+                                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                    <tbody><tr>
+                                        <td style='font-size:0;line-height:0' width='201' valign='top'><img src='http://partner.maximtrader.com/images/email/bg-top.png' width='201' height='226'></td>
+                                        <td valign='top' width='551'>
+                                            <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                                <tbody><tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='71'></td></tr>
+                                                <tr>
+                                                    <td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+                                                    <td valign='top' style='line-height:17px'>
+                                                        <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
+                                                            Dear <strong>" . $tbl_distributor->getFullName() . "</strong>,<br><br>
+                                                            Congratulations! Your live trading account with Maxim Trader
+                                                            has been activated! Please find the details of your trading account as
+                                                            per below :<br><br>
+                                                            Live MT4 Trading Account ID : <strong>" . $this->getRequestParameter('mt4Id') . "</strong><br><br>
+                                                            Live MT4 Trading Account password : <strong>" . $this->getRequestParameter('mt4Password') . "</strong><br><br>
+                                                            The Login ID and Password is strictly confidential and should not be
+                                                            disclosed to anyone. Should someone with access to your password wish,
+                                                            all of your account information can be changed. You will be held
+                                                            liable for any activity that may occur as a result of you losing your
+                                                            password. Therefore, if you feel that your password has been
+                                                            compromised, you should immediately contact us by email to
+                                                            <strong>cs@maximtrader.com</strong> to rectify the situation.<br><br>
+                                                            We look forward to your custom in the near future. Should you have any
+                                                            queries, please do not hesitate to get back to us.<br>
+                                                        </font>
+                                                    </td>
+                                                </tr>
+                                                <tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
+                                                <tr>
+                                                    <td valign='top' width='551' colspan='2'>
+                                                        <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                                            <tbody><tr>
+                                                                <td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+                                                                <td style='font-size:0;line-height:0' width='85'>
+
+                                                                </td>
+                                                                <td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+                                                                <td style='font-size:0;line-height:0' width='85'>
+
+                                                                </td>
+                                                                <td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+                                                                <td style='font-size:0;line-height:0' width='85'>
+
+                                                                </td>
+                                                                <td style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+
+
+                                                                <td style='font-size:0;line-height:0' width='85'>
+                                                                    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                                                        <tbody><tr>
+                                                                            <td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style='text-align:center;line-height:15px' align='center'>
+                                                                                <font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+                                                                                    <strong>MaximTrader<br> MT4 Terminal</strong>
+                                                                                </font>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+                                                                        <tr>
+                                                                            <td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+
+                                                                <td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+                                                                <td style='font-size:0;line-height:0' width='85'>
+                                                                    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                                                        <tbody><tr>
+                                                                            <td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style='text-align:center;line-height:15px' align='center'>
+                                                                                <font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+                                                                                    <strong>My<br> Account</strong>
+                                                                                </font>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+                                                                        <tr>
+                                                                            <td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-access.png' height='26' width='85' border='0'></a></td>
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                                <tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='32'></td></tr>
+                                                <tr>
+                                                    <td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+                                                    <td style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'></td>
+                                                </tr>
+                                                <tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+                                                <tr>
+                                                    <td valign='top' style='line-height:15px;text-align:right' colspan='2' align='right'>
+                                                        <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+                                                            <em>
+                                                                Best Regards,<br>
+                                                                <strong>Maxim Trader</strong><br>
+                                                                E mail : admin@maximtrader.com
+                                                            </em>
+                                                        </font>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        </td>
+                                        <td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style='font-size:0;line-height:0' width='63'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='63' height='1'></td>
+                            <td valign='top' width='689'>
+                                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                    <tbody><tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='28'></td></tr>
+                                    <tr>
+                                        <td align='right' style='text-align:right;font-size:0;line-height:0'>
+                                            <a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+                                        </td>
+                                    </tr>
+                                    <tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='16'></td></tr>
+                                </tbody></table>
+                            </td>
+                            <td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
+                        </tr>
+                        <tr><td colspan='3' style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='34'></td></tr>
+                    </tbody></table>";
+
+                $sendMailService = new SendMailService();
+                $sendMailService->sendMt4UsernameAndPassword($tbl_distributor, $subject, $body);
             }
+                /*}
+            }*/
 
             $packageUpgradeHistory->setMt4UserName($this->getRequestParameter('mt4Id'));
             $packageUpgradeHistory->setMt4Password($this->getRequestParameter('mt4Password'));

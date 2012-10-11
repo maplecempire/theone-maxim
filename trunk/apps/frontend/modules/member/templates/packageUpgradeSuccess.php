@@ -181,9 +181,10 @@ $(function() {
                                         }
 
                                 echo "<tr class='row" . $trStyle . "' style='height:35px'>";
-                                $pointNeeded = number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
+                                //$pointNeeded = number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
+                                $pointNeeded = number_format($packageDB->getPrice(),2);
                                 $ableUpgrade = false;
-                                if ($distPackage->getPrice() < $packageDB->getPrice()) {
+                                if ($distPackage->getPrice() < $packageDB->getPrice() || $highestPackageDB->getPrice() == $packageDB->getPrice()) {
                                     $ableUpgrade = true;
                                     echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                  'class' => 'activeLink',

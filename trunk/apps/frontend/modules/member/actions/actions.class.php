@@ -2114,7 +2114,7 @@ class memberActions extends sfActions
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient MT4 Credit Amount"));
 
-            } elseif ($appUser->getUserPassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
@@ -2233,7 +2233,7 @@ class memberActions extends sfActions
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
 
-            } elseif ($appUser->getUserPassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
@@ -2553,7 +2553,7 @@ class memberActions extends sfActions
             if ($withdrawAmount > $ledgerAccountBalance) {
                 $this->setFlash('errorMsg', "In-sufficient CP2");
 
-            } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
             } elseif ($withdrawAmount > 0) {
@@ -2646,7 +2646,7 @@ class memberActions extends sfActions
         if ($this->getRequestParameter('mt4Amount') > 0 && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('paymentType') <> "") {
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
-            if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+            if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
             } else if (!$this->getRequestParameter('mt4Id')) {
@@ -2747,7 +2747,7 @@ class memberActions extends sfActions
             if ($pointNeeded > $ledgerEpointBalance) {
                 $this->setFlash('errorMsg', "In-sufficient CP1");
 
-            } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
             } elseif ($mt4UserName == "") {
@@ -3133,7 +3133,7 @@ class memberActions extends sfActions
             if ($epointAmount > $ledgerAccountBalance) {
                 $this->setFlash('errorMsg', "In-sufficient CP2");
 
-            } elseif ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
             } elseif ($epointAmount > 0) {
@@ -3212,9 +3212,11 @@ class memberActions extends sfActions
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($paymentType == 'ecash') {
-                $amountNeeded = $selectedPackage->getPrice() - $currentPackageAmount;
+//                $amountNeeded = $selectedPackage->getPrice() - $currentPackageAmount;
+                $amountNeeded = $selectedPackage->getPrice();
             } else if ($paymentType == "epoint") {
-                $amountNeeded = $selectedPackage->getPrice() -  $currentPackageAmount;
+//                $amountNeeded = $selectedPackage->getPrice() -  $currentPackageAmount;
+                $amountNeeded = $selectedPackage->getPrice();
             }
             if ($amountNeeded > $ledgerECashBalance && $paymentType == "ecash") {
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
@@ -3222,7 +3224,7 @@ class memberActions extends sfActions
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
                 $this->setFlash('errorMsg', "In-sufficient CP1 amount");
 
-            } else if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
+            } else if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
 
             } else {
@@ -3282,6 +3284,82 @@ class memberActions extends sfActions
                     $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
                 }
                 $totalBonusPayOut = $directSponsorPercentage;
+
+                /******************************/
+                /*  store Pairing points
+                /******************************/
+                $pairingPoint = $amountNeeded;
+                $uplinePosition = $distDB->getPlacementPosition();
+                if ($distDB->getTreeUplineDistId() != 0 && $distDB->getTreeUplineDistCode() != null) {
+                    $level = 0;
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($distDB->getTreeUplineDistId());
+                    $sponsoredDistributorCode = $distDB->getDistributorCode();
+                    while ($level < 100) {
+                        //var_dump($uplineDistDB->getUplineDistId());
+                        //var_dump($uplineDistDB->getUplineDistCode());
+                        //print_r("<br>");
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        $addToLeft = 0;
+                        $addToRight = 0;
+                        $leftBalance = 0;
+                        $rightBalance = 0;
+                        if (!$sponsorDistPairingDB) {
+                            $sponsorDistPairingDB = new MlmDistPairing();
+                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            $this->forward404Unless($packageDB);
+
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance);
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                        }
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingDB->save();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                        $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                        $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                        $legBalance = 0;
+                        if ($sponsorDistPairingLedgerDB) {
+                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                        }
+
+                        $sponsorDistPairingledger = new MlmDistPairingLedger();
+                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                        $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setDebit(0);
+                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->save();
+
+                        $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                        if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                            break;
+                        }
+
+                        $uplinePosition = $uplineDistDB->getPlacementPosition();
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                        $level++;
+                    }
+                }
                 /******************************/
                 /*  Direct Sponsor Bonus
                 /******************************/
@@ -3359,8 +3437,13 @@ class memberActions extends sfActions
                         //var_dump("==>2");
                         $checkCommission = true;
                         $uplineDistId = $uplineDistDB->getUplineDistId();
+
                         while ($checkCommission == true) {
                             //var_dump("==>3**".$uplineDistId);
+                            if ($uplineDistId == null || $uplineDistId == 0) {
+                                $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT;
+                                break;
+                            }
                             $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
                             //var_dump("==>3$$".$uplineDistId);
@@ -3408,7 +3491,12 @@ class memberActions extends sfActions
             }
         } else {
             $c = new Criteria();
+            $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
             $packageDBs = MlmPackagePeer::doSelect($c);
+
+            $c = new Criteria();
+            $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
+            $highestPackageDB = MlmPackagePeer::doSelectOne($c);
 
             $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $this->forward404Unless($distDB);
@@ -3420,6 +3508,7 @@ class memberActions extends sfActions
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;
             $this->distDB = $distDB;
+            $this->highestPackageDB = $highestPackageDB;
         }
     }
 
