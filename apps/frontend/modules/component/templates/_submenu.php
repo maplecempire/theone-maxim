@@ -116,7 +116,8 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
             <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Report'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/maximExecutorReport") ?>"><span><?php echo __('MaximTrade Executor™ Report'); ?></span></a>
+            <span style="color: #808080;"><?php echo __('MaximTrade Executor™ Report'); ?></span>
+            <!--<a href="<?php /*echo url_for("/member/maximExecutorReport") */?>"><span><?php /*echo __('MaximTrade Executor™ Report'); */?></span></a>-->
         </li>
     </ul>
     <br class="clear"><br>

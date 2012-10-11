@@ -243,7 +243,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <!--<font color="#dc143c"><?php /*echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days<br>Bank charges : Minimum USD '.$handlingChargeInUsd.' depends on your corresponding banks') */?></font>-->
-                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Can only be withdrawn on the first working week of the month<br>Processing time : 2 working days') ?></font>
+                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 2 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

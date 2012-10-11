@@ -163,10 +163,12 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd" style="display: none">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Note : charge 5% handling fees when CP2 withdrawal requested. ') ?></font>
+                        <font color="#dc143c"> <?php echo __('NOTE : Minimum withdrawal amount : USD 200
+                        <br>Can only be withdrawn on the first working week of the month
+                        <br>Processing time : 2 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

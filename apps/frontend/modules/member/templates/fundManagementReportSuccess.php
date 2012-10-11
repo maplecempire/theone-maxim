@@ -45,9 +45,9 @@ $(function() {
             <tbody>
             <tr>
                 <td>
-                    <a id='imgGroup' href='/images/chart/mte1.png'>
+                    <!--<a id='imgGroup' href='/images/chart/mte1.png'>
                         <img src="/images/chart/mte1.png" style="width:600px">
-                    </a>
+                    </a>-->
                 </td>
             </tr>
             <tr>
