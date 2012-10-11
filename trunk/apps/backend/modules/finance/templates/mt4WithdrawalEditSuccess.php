@@ -84,28 +84,28 @@ $(function() {
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Handling Fee:</th>
                     <td class="value"><?php echo object_input_tag($mt4Withdraw, 'getHandlingFee', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Grand Amount:</th>
                     <td class="value"><?php echo object_input_tag($mt4Withdraw, 'getGrandAmount', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Currency Code:</th>
                     <td class="value"><?php echo object_input_tag($mt4Withdraw, 'getCurrencyCode', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Payment Type:</th>
                     <td class="value"><?php echo object_input_tag($mt4Withdraw, 'getPaymentType', array(
                                                                                            'size' => 30,
@@ -131,35 +131,35 @@ $(function() {
                                                                                                           'size' => '30x3',
                                                                                                      )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Bank Name:</th>
                     <td class="value"><?php echo object_input_tag($existDist, 'getBankName', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Bank Account No:</th>
                     <td class="value"><?php echo object_input_tag($existDist, 'getBankAccNo', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Bank Holder Name:</th>
                     <td class="value"><?php echo object_input_tag($existDist, 'getBankHolderName', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Swift Code:</th>
                     <td class="value"><?php echo object_input_tag($existDist, 'getBankSwiftCode', array(
                                                                                            'size' => 30,
                                                                                             'readonly' => 'readonly',
                                                                                       )) ?></td>
                 </tr>
-                <tr>
+                <tr style="display: none">
                     <th class="caption">Visa Debit Card:</th>
                     <td class="value"><?php echo object_input_tag($existDist, 'getVisaDebitCard', array(
                                                                                            'size' => 30,

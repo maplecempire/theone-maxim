@@ -161,19 +161,40 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            $mt4Withdraw = MlmMt4WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
-            $this->forward404Unless($mt4Withdraw);
+            $mt4Withdrawal = MlmMt4WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
+            $this->forward404Unless($mt4Withdrawal);
 
-            if ($mt4Withdraw->getStatusCode() == Globals::STATUS_PENDING) {
-                $mt4Withdraw->setRemarks($remarks);
-                $mt4Withdraw->setStatusCode($statusCode);
-                $mt4Withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
+                // ******** once mt4 withdrawal has been approved at backend,
+                //          the fund will be credited into ecash wallet **********
+                if (Globals::STATUS_COMPLETE == $statusCode && $mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
+                    $ecashBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+                    $mt4WithdrawalAmount = $mt4Withdrawal->getAmountRequested();
 
-                if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
-                    $mt4Withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($mt4Withdrawal->getDistId());
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MT4_WITHDRAWAL);
+                    $tbl_account_ledger->setRemark("Withdrawal Amount:". $mt4Withdrawal->getAmountRequested(). ", ID:". $mt4Withdrawal->getWithdrawId());
+                    $tbl_account_ledger->setCredit($mt4WithdrawalAmount);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($ecashBalance + $mt4WithdrawalAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                    $mt4Withdrawal->setStatusCode(Globals::STATUS_COMPLETE);
+                } else {
+                    $mt4Withdrawal->setStatusCode(Globals::STATUS_REJECT);
                 }
-
-                $mt4Withdraw->save();
+                $mt4Withdrawal->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mt4Withdrawal->setRemarks($remarks);
+                if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
+                    $mt4Withdrawal->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                }
+                $mt4Withdrawal->save();
             }
 
             $con->commit();
