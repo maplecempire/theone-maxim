@@ -150,7 +150,7 @@ $(function() {
                     <td>
                         <select name="mt4Id" id="mt4Id" tabindex="1">
                             <?php
-                                if (count($distMt4DBs) > 1) {
+                                if (count($distMt4DBs) >= 1) {
                                     foreach ($distMt4DBs as $distMt4DB) {
                                         echo "<option value='".$distMt4DB->getMt4UserName()."'>".$distMt4DB->getMt4UserName()."</option>";
                                     }
