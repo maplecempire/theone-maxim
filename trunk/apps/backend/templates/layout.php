@@ -503,6 +503,17 @@ $(function() {
                 <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::MOD_FINANCE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                 <h3><a href="#"><?php echo __('Finance'); ?></a></h3>
                 <div>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ECASH_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('finance/ecashWithdrawal') ?>"
+                       title="<?php echo __('e-Cash Withdrawal'); ?>">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('e-Cash Withdrawal'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
+
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/epointPurchase') ?>" title="e-Point Purchase">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
