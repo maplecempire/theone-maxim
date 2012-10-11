@@ -1417,14 +1417,8 @@ class financeListActions extends sfActions
 
     public function executeEcashWithdrawList()
     {
-        $status = $this->getRequestParameter('cbo_status');
-        if ($status == "") $status = "pending";
-
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
-        $sColumns = str_replace("user_name", "tblUser.f_username as user_name", $sColumns);
-        $sColumns = str_replace("dist_code", "tblDist.f_code as dist_code", $sColumns);
-        $sColumns = str_replace("dist_name", "tblDist.f_name as dist_name", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 
@@ -1432,22 +1426,30 @@ class financeListActions extends sfActions
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
-
-        $sql = "FROM tbl_ecash_withdraw tblWithdraw
-            INNER JOIN tbl_user tblUser ON withdraw.f_user_id = tblUser.f_id
-            INNER JOIN tbl_distributor tblDist ON withdraw.f_dist_id = tblDist.f_id ";
+        $sql = " FROM mlm_ecash_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN
+            (
+            SELECT SUM(credit-debit) AS _ecash, dist_id
+                FROM mlm_account_ledger accountLedger WHERE account_type = 'ECASH' GROUP BY dist_id
+            ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
+                WHERE 1=1
+        ";
 
         /******   total records  *******/
-        $sWhere = " WHERE f_status='" . $status . "' ";
+        if ($this->getRequestParameter('statusCode') != "") {
+            $sWhere = " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+        }
+
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $sWhere .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
-        if ($this->getRequestParameter('filterDistcode') != "") {
-            $sWhere .= " AND tblDist.f_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%'";
-        }
-        if ($this->getRequestParameter('filterUsername') != "") {
-            $sWhere .= " AND tblUser.f_username LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterUsername')) . "%'";
-        }
+        /*if ($this->getRequestParameter('filterUsername') != "") {
+            $sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterUsername')) . "%'";
+        }*/
         $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   sorting  *******/
@@ -1468,26 +1470,35 @@ class financeListActions extends sfActions
         /******   pagination  *******/
         $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
-        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $query = "SELECT tree_structure, accountLedger._ecash, " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
+        //var_dump($query);
 
         while ($resultset->next())
         {
             $resultArr = $resultset->getRow();
+            $distId = $resultArr['dist_id'] == null ? "" : $resultArr['dist_id'];
+            $distCode = $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'];
 
             $arr[] = array(
-                $resultArr['f_id'] == null ? "" : $resultArr['f_id'],
-                $resultArr['f_id'] == null ? "" : $resultArr['f_id'],
-                $resultArr['dist_code'] == null ? "" : $resultArr['dist_code'],
-                $resultArr['dist_name'] == null ? "" : $resultArr['dist_name'],
-                $resultArr['f_deduct'] == null ? "" : $resultArr['f_deduct'],
-                $resultArr['f_amount'] == null ? "" : $resultArr['f_amount'],
-                $resultArr['f_status'] == null ? "" : $resultArr['f_status'],
-                $resultArr['f_created_datetime'] == null ? "" : $resultArr['f_created_datetime'],
-                $resultArr['user_name'] == null ? "" : $resultArr['user_name'],
-                $resultArr['f_action_datetime'] == null ? "" : $resultArr['f_action_datetime']
+                $resultArr['withdraw_id'] == null ? "" : $resultArr['withdraw_id'],
+                $distId,
+                $distCode,
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
+                $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
+                $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['ic'] == null ? "" : $resultArr['ic'],
+                $resultArr['email'] == null ? "" : $resultArr['email'],
+                $resultArr['contact'] == null ? "" : $resultArr['contact'],
+                $resultArr['bank_name'] == null ? "" : $resultArr['bank_name'],
+                $resultArr['bank_acc_no'] == null ? "" : $resultArr['bank_acc_no'],
+                $resultArr['bank_holder_name'] == null ? "" : $resultArr['bank_holder_name'],
+                $resultArr['rank_code'] == null ? "" : $resultArr['rank_code'],
+                $resultArr['remarks'] == null ? "" : $resultArr['remarks']
             );
         }
         $output = array(
