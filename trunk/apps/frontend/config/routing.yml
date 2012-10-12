@@ -11,9 +11,17 @@ default_index:
   url:   /:module
   param: { action: index }
 
-ecash_log:
+epoint_log:
   url:   /member/cp1Log
+  param: { module: member, action: epointLog }
+
+ecash_log:
+  url:   /member/cp2Log
   param: { module: member, action: ecashLog }
+
+maintenance_log:
+  url:   /member/cp3Log
+  param: { module: member, action: maintenanceLog }
 
 convert_ecash_to_epoint:
   url:   /member/convertCp2ToCp1

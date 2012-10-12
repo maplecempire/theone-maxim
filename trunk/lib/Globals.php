@@ -95,6 +95,7 @@ abstract class Globals {
     const ACCOUNT_LEDGER_ACTION_TOPUP_MT4 = 'RELOAD MT4';
     const ACCOUNT_LEDGER_ACTION_PACKAGE_UPGRADE = 'PACKAGE UPGRADE';
     const ACCOUNT_LEDGER_ACTION_REFUND = 'REFUND';
+    const ACCOUNT_LEDGER_ACTION_MAINTENANCE = 'MAINTENANCE';
 
     /*******************************/
     /*****    RELOAD TOPUP  ******/
