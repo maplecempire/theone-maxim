@@ -13,7 +13,7 @@ abstract class BaseMlmDistMt4Peer {
 	const CLASS_DEFAULT = 'lib.model.MlmDistMt4';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,6 +30,9 @@ abstract class BaseMlmDistMt4Peer {
 
 	
 	const MT4_PASSWORD = 'mlm_dist_mt4.MT4_PASSWORD';
+
+	
+	const RANK_ID = 'mlm_dist_mt4.RANK_ID';
 
 	
 	const CREATED_BY = 'mlm_dist_mt4.CREATED_BY';
@@ -49,18 +52,18 @@ abstract class BaseMlmDistMt4Peer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Mt4Id', 'DistId', 'Mt4UserName', 'Mt4Password', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmDistMt4Peer::MT4_ID, MlmDistMt4Peer::DIST_ID, MlmDistMt4Peer::MT4_USER_NAME, MlmDistMt4Peer::MT4_PASSWORD, MlmDistMt4Peer::CREATED_BY, MlmDistMt4Peer::CREATED_ON, MlmDistMt4Peer::UPDATED_BY, MlmDistMt4Peer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('mt4_id', 'dist_id', 'mt4_user_name', 'mt4_password', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Mt4Id', 'DistId', 'Mt4UserName', 'Mt4Password', 'RankId', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmDistMt4Peer::MT4_ID, MlmDistMt4Peer::DIST_ID, MlmDistMt4Peer::MT4_USER_NAME, MlmDistMt4Peer::MT4_PASSWORD, MlmDistMt4Peer::RANK_ID, MlmDistMt4Peer::CREATED_BY, MlmDistMt4Peer::CREATED_ON, MlmDistMt4Peer::UPDATED_BY, MlmDistMt4Peer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('mt4_id', 'dist_id', 'mt4_user_name', 'mt4_password', 'rank_id', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Mt4Id' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'Mt4Password' => 3, 'CreatedBy' => 4, 'CreatedOn' => 5, 'UpdatedBy' => 6, 'UpdatedOn' => 7, ),
-		BasePeer::TYPE_COLNAME => array (MlmDistMt4Peer::MT4_ID => 0, MlmDistMt4Peer::DIST_ID => 1, MlmDistMt4Peer::MT4_USER_NAME => 2, MlmDistMt4Peer::MT4_PASSWORD => 3, MlmDistMt4Peer::CREATED_BY => 4, MlmDistMt4Peer::CREATED_ON => 5, MlmDistMt4Peer::UPDATED_BY => 6, MlmDistMt4Peer::UPDATED_ON => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('mt4_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'mt4_password' => 3, 'created_by' => 4, 'created_on' => 5, 'updated_by' => 6, 'updated_on' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Mt4Id' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'Mt4Password' => 3, 'RankId' => 4, 'CreatedBy' => 5, 'CreatedOn' => 6, 'UpdatedBy' => 7, 'UpdatedOn' => 8, ),
+		BasePeer::TYPE_COLNAME => array (MlmDistMt4Peer::MT4_ID => 0, MlmDistMt4Peer::DIST_ID => 1, MlmDistMt4Peer::MT4_USER_NAME => 2, MlmDistMt4Peer::MT4_PASSWORD => 3, MlmDistMt4Peer::RANK_ID => 4, MlmDistMt4Peer::CREATED_BY => 5, MlmDistMt4Peer::CREATED_ON => 6, MlmDistMt4Peer::UPDATED_BY => 7, MlmDistMt4Peer::UPDATED_ON => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('mt4_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'mt4_password' => 3, 'rank_id' => 4, 'created_by' => 5, 'created_on' => 6, 'updated_by' => 7, 'updated_on' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -121,6 +124,8 @@ abstract class BaseMlmDistMt4Peer {
 		$criteria->addSelectColumn(MlmDistMt4Peer::MT4_USER_NAME);
 
 		$criteria->addSelectColumn(MlmDistMt4Peer::MT4_PASSWORD);
+
+		$criteria->addSelectColumn(MlmDistMt4Peer::RANK_ID);
 
 		$criteria->addSelectColumn(MlmDistMt4Peer::CREATED_BY);
 

@@ -17,6 +17,10 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 
 
 	
+	protected $package_id;
+
+
+	
 	protected $mt4_user_name;
 
 
@@ -73,6 +77,13 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 	{
 
 		return $this->dist_id;
+	}
+
+	
+	public function getPackageId()
+	{
+
+		return $this->package_id;
 	}
 
 	
@@ -205,6 +216,23 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 		if ($this->dist_id !== $v) {
 			$this->dist_id = $v;
 			$this->modifiedColumns[] = MlmPackageUpgradeHistoryPeer::DIST_ID;
+		}
+
+	} 
+
+	
+	public function setPackageId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->package_id !== $v) {
+			$this->package_id = $v;
+			$this->modifiedColumns[] = MlmPackageUpgradeHistoryPeer::PACKAGE_ID;
 		}
 
 	} 
@@ -384,31 +412,33 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 
 			$this->dist_id = $rs->getInt($startcol + 1);
 
-			$this->mt4_user_name = $rs->getString($startcol + 2);
+			$this->package_id = $rs->getInt($startcol + 2);
 
-			$this->mt4_password = $rs->getString($startcol + 3);
+			$this->mt4_user_name = $rs->getString($startcol + 3);
 
-			$this->transaction_code = $rs->getString($startcol + 4);
+			$this->mt4_password = $rs->getString($startcol + 4);
 
-			$this->amount = $rs->getFloat($startcol + 5);
+			$this->transaction_code = $rs->getString($startcol + 5);
 
-			$this->status_code = $rs->getString($startcol + 6);
+			$this->amount = $rs->getFloat($startcol + 6);
 
-			$this->remarks = $rs->getString($startcol + 7);
+			$this->status_code = $rs->getString($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->remarks = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->created_by = $rs->getInt($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->created_on = $rs->getTimestamp($startcol + 10, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->updated_by = $rs->getInt($startcol + 11);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 12, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 13; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmPackageUpgradeHistory object", $e);
 		}
@@ -560,33 +590,36 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 				return $this->getDistId();
 				break;
 			case 2:
-				return $this->getMt4UserName();
+				return $this->getPackageId();
 				break;
 			case 3:
-				return $this->getMt4Password();
+				return $this->getMt4UserName();
 				break;
 			case 4:
-				return $this->getTransactionCode();
+				return $this->getMt4Password();
 				break;
 			case 5:
-				return $this->getAmount();
+				return $this->getTransactionCode();
 				break;
 			case 6:
-				return $this->getStatusCode();
+				return $this->getAmount();
 				break;
 			case 7:
-				return $this->getRemarks();
+				return $this->getStatusCode();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getRemarks();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 11:
+				return $this->getUpdatedBy();
+				break;
+			case 12:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -601,16 +634,17 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 		$result = array(
 			$keys[0] => $this->getUpgradeId(),
 			$keys[1] => $this->getDistId(),
-			$keys[2] => $this->getMt4UserName(),
-			$keys[3] => $this->getMt4Password(),
-			$keys[4] => $this->getTransactionCode(),
-			$keys[5] => $this->getAmount(),
-			$keys[6] => $this->getStatusCode(),
-			$keys[7] => $this->getRemarks(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[2] => $this->getPackageId(),
+			$keys[3] => $this->getMt4UserName(),
+			$keys[4] => $this->getMt4Password(),
+			$keys[5] => $this->getTransactionCode(),
+			$keys[6] => $this->getAmount(),
+			$keys[7] => $this->getStatusCode(),
+			$keys[8] => $this->getRemarks(),
+			$keys[9] => $this->getCreatedBy(),
+			$keys[10] => $this->getCreatedOn(),
+			$keys[11] => $this->getUpdatedBy(),
+			$keys[12] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -633,33 +667,36 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 				$this->setDistId($value);
 				break;
 			case 2:
-				$this->setMt4UserName($value);
+				$this->setPackageId($value);
 				break;
 			case 3:
-				$this->setMt4Password($value);
+				$this->setMt4UserName($value);
 				break;
 			case 4:
-				$this->setTransactionCode($value);
+				$this->setMt4Password($value);
 				break;
 			case 5:
-				$this->setAmount($value);
+				$this->setTransactionCode($value);
 				break;
 			case 6:
-				$this->setStatusCode($value);
+				$this->setAmount($value);
 				break;
 			case 7:
-				$this->setRemarks($value);
+				$this->setStatusCode($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setRemarks($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 11:
+				$this->setUpdatedBy($value);
+				break;
+			case 12:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -671,16 +708,17 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 
 		if (array_key_exists($keys[0], $arr)) $this->setUpgradeId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDistId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMt4UserName($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMt4Password($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setTransactionCode($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAmount($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setStatusCode($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setRemarks($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[2], $arr)) $this->setPackageId($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMt4UserName($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMt4Password($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTransactionCode($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAmount($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setStatusCode($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRemarks($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCreatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
 	}
 
 	
@@ -690,6 +728,7 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 
 		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::UPGRADE_ID)) $criteria->add(MlmPackageUpgradeHistoryPeer::UPGRADE_ID, $this->upgrade_id);
 		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::DIST_ID)) $criteria->add(MlmPackageUpgradeHistoryPeer::DIST_ID, $this->dist_id);
+		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::PACKAGE_ID)) $criteria->add(MlmPackageUpgradeHistoryPeer::PACKAGE_ID, $this->package_id);
 		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::MT4_USER_NAME)) $criteria->add(MlmPackageUpgradeHistoryPeer::MT4_USER_NAME, $this->mt4_user_name);
 		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::MT4_PASSWORD)) $criteria->add(MlmPackageUpgradeHistoryPeer::MT4_PASSWORD, $this->mt4_password);
 		if ($this->isColumnModified(MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE)) $criteria->add(MlmPackageUpgradeHistoryPeer::TRANSACTION_CODE, $this->transaction_code);
@@ -731,6 +770,8 @@ abstract class BaseMlmPackageUpgradeHistory extends BaseObject  implements Persi
 	{
 
 		$copyObj->setDistId($this->dist_id);
+
+		$copyObj->setPackageId($this->package_id);
 
 		$copyObj->setMt4UserName($this->mt4_user_name);
 

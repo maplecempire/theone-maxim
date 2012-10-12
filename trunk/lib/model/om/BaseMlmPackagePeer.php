@@ -13,7 +13,7 @@ abstract class BaseMlmPackagePeer {
 	const CLASS_DEFAULT = 'lib.model.MlmPackage';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,7 +26,16 @@ abstract class BaseMlmPackagePeer {
 	const PACKAGE_NAME = 'mlm_package.PACKAGE_NAME';
 
 	
+	const COLOR = 'mlm_package.COLOR';
+
+	
 	const PRICE = 'mlm_package.PRICE';
+
+	
+	const DIRECT_GENERATION = 'mlm_package.DIRECT_GENERATION';
+
+	
+	const DIRECT_PIPS = 'mlm_package.DIRECT_PIPS';
 
 	
 	const COMMISSION = 'mlm_package.COMMISSION';
@@ -39,6 +48,9 @@ abstract class BaseMlmPackagePeer {
 
 	
 	const DAILY_MAX_PAIRING = 'mlm_package.DAILY_MAX_PAIRING';
+
+	
+	const FUND_MGN_PROFIT_SHARING = 'mlm_package.FUND_MGN_PROFIT_SHARING';
 
 	
 	const PUBLIC_PURCHASE = 'mlm_package.PUBLIC_PURCHASE';
@@ -61,18 +73,18 @@ abstract class BaseMlmPackagePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId', 'PackageName', 'Price', 'Commission', 'CreditRefund', 'PairingBonus', 'DailyMaxPairing', 'PublicPurchase', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID, MlmPackagePeer::PACKAGE_NAME, MlmPackagePeer::PRICE, MlmPackagePeer::COMMISSION, MlmPackagePeer::CREDIT_REFUND, MlmPackagePeer::PAIRING_BONUS, MlmPackagePeer::DAILY_MAX_PAIRING, MlmPackagePeer::PUBLIC_PURCHASE, MlmPackagePeer::CREATED_BY, MlmPackagePeer::CREATED_ON, MlmPackagePeer::UPDATED_BY, MlmPackagePeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id', 'package_name', 'price', 'commission', 'credit_refund', 'pairing_bonus', 'daily_max_pairing', 'public_purchase', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PackageId', 'PackageName', 'Color', 'Price', 'DirectGeneration', 'DirectPips', 'Commission', 'CreditRefund', 'PairingBonus', 'DailyMaxPairing', 'FundMgnProfitSharing', 'PublicPurchase', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID, MlmPackagePeer::PACKAGE_NAME, MlmPackagePeer::COLOR, MlmPackagePeer::PRICE, MlmPackagePeer::DIRECT_GENERATION, MlmPackagePeer::DIRECT_PIPS, MlmPackagePeer::COMMISSION, MlmPackagePeer::CREDIT_REFUND, MlmPackagePeer::PAIRING_BONUS, MlmPackagePeer::DAILY_MAX_PAIRING, MlmPackagePeer::FUND_MGN_PROFIT_SHARING, MlmPackagePeer::PUBLIC_PURCHASE, MlmPackagePeer::CREATED_BY, MlmPackagePeer::CREATED_ON, MlmPackagePeer::UPDATED_BY, MlmPackagePeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('package_id', 'package_name', 'color', 'price', 'direct_generation', 'direct_pips', 'commission', 'credit_refund', 'pairing_bonus', 'daily_max_pairing', 'fund_mgn_profit_sharing', 'public_purchase', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId' => 0, 'PackageName' => 1, 'Price' => 2, 'Commission' => 3, 'CreditRefund' => 4, 'PairingBonus' => 5, 'DailyMaxPairing' => 6, 'PublicPurchase' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID => 0, MlmPackagePeer::PACKAGE_NAME => 1, MlmPackagePeer::PRICE => 2, MlmPackagePeer::COMMISSION => 3, MlmPackagePeer::CREDIT_REFUND => 4, MlmPackagePeer::PAIRING_BONUS => 5, MlmPackagePeer::DAILY_MAX_PAIRING => 6, MlmPackagePeer::PUBLIC_PURCHASE => 7, MlmPackagePeer::CREATED_BY => 8, MlmPackagePeer::CREATED_ON => 9, MlmPackagePeer::UPDATED_BY => 10, MlmPackagePeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id' => 0, 'package_name' => 1, 'price' => 2, 'commission' => 3, 'credit_refund' => 4, 'pairing_bonus' => 5, 'daily_max_pairing' => 6, 'public_purchase' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PackageId' => 0, 'PackageName' => 1, 'Color' => 2, 'Price' => 3, 'DirectGeneration' => 4, 'DirectPips' => 5, 'Commission' => 6, 'CreditRefund' => 7, 'PairingBonus' => 8, 'DailyMaxPairing' => 9, 'FundMgnProfitSharing' => 10, 'PublicPurchase' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID => 0, MlmPackagePeer::PACKAGE_NAME => 1, MlmPackagePeer::COLOR => 2, MlmPackagePeer::PRICE => 3, MlmPackagePeer::DIRECT_GENERATION => 4, MlmPackagePeer::DIRECT_PIPS => 5, MlmPackagePeer::COMMISSION => 6, MlmPackagePeer::CREDIT_REFUND => 7, MlmPackagePeer::PAIRING_BONUS => 8, MlmPackagePeer::DAILY_MAX_PAIRING => 9, MlmPackagePeer::FUND_MGN_PROFIT_SHARING => 10, MlmPackagePeer::PUBLIC_PURCHASE => 11, MlmPackagePeer::CREATED_BY => 12, MlmPackagePeer::CREATED_ON => 13, MlmPackagePeer::UPDATED_BY => 14, MlmPackagePeer::UPDATED_ON => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('package_id' => 0, 'package_name' => 1, 'color' => 2, 'price' => 3, 'direct_generation' => 4, 'direct_pips' => 5, 'commission' => 6, 'credit_refund' => 7, 'pairing_bonus' => 8, 'daily_max_pairing' => 9, 'fund_mgn_profit_sharing' => 10, 'public_purchase' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -130,7 +142,13 @@ abstract class BaseMlmPackagePeer {
 
 		$criteria->addSelectColumn(MlmPackagePeer::PACKAGE_NAME);
 
+		$criteria->addSelectColumn(MlmPackagePeer::COLOR);
+
 		$criteria->addSelectColumn(MlmPackagePeer::PRICE);
+
+		$criteria->addSelectColumn(MlmPackagePeer::DIRECT_GENERATION);
+
+		$criteria->addSelectColumn(MlmPackagePeer::DIRECT_PIPS);
 
 		$criteria->addSelectColumn(MlmPackagePeer::COMMISSION);
 
@@ -139,6 +157,8 @@ abstract class BaseMlmPackagePeer {
 		$criteria->addSelectColumn(MlmPackagePeer::PAIRING_BONUS);
 
 		$criteria->addSelectColumn(MlmPackagePeer::DAILY_MAX_PAIRING);
+
+		$criteria->addSelectColumn(MlmPackagePeer::FUND_MGN_PROFIT_SHARING);
 
 		$criteria->addSelectColumn(MlmPackagePeer::PUBLIC_PURCHASE);
 

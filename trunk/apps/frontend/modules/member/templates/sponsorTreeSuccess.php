@@ -232,7 +232,7 @@
             ?>
             <li id="<?php echo $distinfo->getDistributorId();?>" <?php echo $className;?>>
                 <span class="node-info">
-                    <span class="user-rank"><img src="/css/maxim/tree/head.png"></span>
+                    <span class="user-rank"><img src="/css/maxim/tree/<?php echo $colorArr[$distinfo->getRankId()]; ?>_head.png"></span>
                     <?php
                     echo "<span class='user-id'>".$distinfo->getDistributorCode()."</span>"
                                . "<span class='user-joined'>" . $distinfo->getFullName()."</span>"

@@ -17,7 +17,19 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 
 	
+	protected $color;
+
+
+	
 	protected $price;
+
+
+	
+	protected $direct_generation;
+
+
+	
+	protected $direct_pips;
 
 
 	
@@ -34,6 +46,10 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 	
 	protected $daily_max_pairing = 0;
+
+
+	
+	protected $fund_mgn_profit_sharing;
 
 
 	
@@ -76,10 +92,31 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getColor()
+	{
+
+		return $this->color;
+	}
+
+	
 	public function getPrice()
 	{
 
 		return $this->price;
+	}
+
+	
+	public function getDirectGeneration()
+	{
+
+		return $this->direct_generation;
+	}
+
+	
+	public function getDirectPips()
+	{
+
+		return $this->direct_pips;
 	}
 
 	
@@ -108,6 +145,13 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 	{
 
 		return $this->daily_max_pairing;
+	}
+
+	
+	public function getFundMgnProfitSharing()
+	{
+
+		return $this->fund_mgn_profit_sharing;
 	}
 
 	
@@ -210,12 +254,57 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setColor($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->color !== $v) {
+			$this->color = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::COLOR;
+		}
+
+	} 
+
+	
 	public function setPrice($v)
 	{
 
 		if ($this->price !== $v) {
 			$this->price = $v;
 			$this->modifiedColumns[] = MlmPackagePeer::PRICE;
+		}
+
+	} 
+
+	
+	public function setDirectGeneration($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->direct_generation !== $v) {
+			$this->direct_generation = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::DIRECT_GENERATION;
+		}
+
+	} 
+
+	
+	public function setDirectPips($v)
+	{
+
+		if ($this->direct_pips !== $v) {
+			$this->direct_pips = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::DIRECT_PIPS;
 		}
 
 	} 
@@ -260,6 +349,17 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 		if ($this->daily_max_pairing !== $v || $v === 0) {
 			$this->daily_max_pairing = $v;
 			$this->modifiedColumns[] = MlmPackagePeer::DAILY_MAX_PAIRING;
+		}
+
+	} 
+
+	
+	public function setFundMgnProfitSharing($v)
+	{
+
+		if ($this->fund_mgn_profit_sharing !== $v) {
+			$this->fund_mgn_profit_sharing = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::FUND_MGN_PROFIT_SHARING;
 		}
 
 	} 
@@ -360,31 +460,39 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 			$this->package_name = $rs->getString($startcol + 1);
 
-			$this->price = $rs->getFloat($startcol + 2);
+			$this->color = $rs->getString($startcol + 2);
 
-			$this->commission = $rs->getFloat($startcol + 3);
+			$this->price = $rs->getFloat($startcol + 3);
 
-			$this->credit_refund = $rs->getFloat($startcol + 4);
+			$this->direct_generation = $rs->getInt($startcol + 4);
 
-			$this->pairing_bonus = $rs->getFloat($startcol + 5);
+			$this->direct_pips = $rs->getFloat($startcol + 5);
 
-			$this->daily_max_pairing = $rs->getFloat($startcol + 6);
+			$this->commission = $rs->getFloat($startcol + 6);
 
-			$this->public_purchase = $rs->getString($startcol + 7);
+			$this->credit_refund = $rs->getFloat($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->pairing_bonus = $rs->getFloat($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->daily_max_pairing = $rs->getFloat($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->fund_mgn_profit_sharing = $rs->getFloat($startcol + 10);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->public_purchase = $rs->getString($startcol + 11);
+
+			$this->created_by = $rs->getInt($startcol + 12);
+
+			$this->created_on = $rs->getTimestamp($startcol + 13, null);
+
+			$this->updated_by = $rs->getInt($startcol + 14);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmPackage object", $e);
 		}
@@ -536,33 +644,45 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 				return $this->getPackageName();
 				break;
 			case 2:
-				return $this->getPrice();
+				return $this->getColor();
 				break;
 			case 3:
-				return $this->getCommission();
+				return $this->getPrice();
 				break;
 			case 4:
-				return $this->getCreditRefund();
+				return $this->getDirectGeneration();
 				break;
 			case 5:
-				return $this->getPairingBonus();
+				return $this->getDirectPips();
 				break;
 			case 6:
-				return $this->getDailyMaxPairing();
+				return $this->getCommission();
 				break;
 			case 7:
-				return $this->getPublicPurchase();
+				return $this->getCreditRefund();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getPairingBonus();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getDailyMaxPairing();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getFundMgnProfitSharing();
 				break;
 			case 11:
+				return $this->getPublicPurchase();
+				break;
+			case 12:
+				return $this->getCreatedBy();
+				break;
+			case 13:
+				return $this->getCreatedOn();
+				break;
+			case 14:
+				return $this->getUpdatedBy();
+				break;
+			case 15:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -577,16 +697,20 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getPackageId(),
 			$keys[1] => $this->getPackageName(),
-			$keys[2] => $this->getPrice(),
-			$keys[3] => $this->getCommission(),
-			$keys[4] => $this->getCreditRefund(),
-			$keys[5] => $this->getPairingBonus(),
-			$keys[6] => $this->getDailyMaxPairing(),
-			$keys[7] => $this->getPublicPurchase(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[2] => $this->getColor(),
+			$keys[3] => $this->getPrice(),
+			$keys[4] => $this->getDirectGeneration(),
+			$keys[5] => $this->getDirectPips(),
+			$keys[6] => $this->getCommission(),
+			$keys[7] => $this->getCreditRefund(),
+			$keys[8] => $this->getPairingBonus(),
+			$keys[9] => $this->getDailyMaxPairing(),
+			$keys[10] => $this->getFundMgnProfitSharing(),
+			$keys[11] => $this->getPublicPurchase(),
+			$keys[12] => $this->getCreatedBy(),
+			$keys[13] => $this->getCreatedOn(),
+			$keys[14] => $this->getUpdatedBy(),
+			$keys[15] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -609,33 +733,45 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 				$this->setPackageName($value);
 				break;
 			case 2:
-				$this->setPrice($value);
+				$this->setColor($value);
 				break;
 			case 3:
-				$this->setCommission($value);
+				$this->setPrice($value);
 				break;
 			case 4:
-				$this->setCreditRefund($value);
+				$this->setDirectGeneration($value);
 				break;
 			case 5:
-				$this->setPairingBonus($value);
+				$this->setDirectPips($value);
 				break;
 			case 6:
-				$this->setDailyMaxPairing($value);
+				$this->setCommission($value);
 				break;
 			case 7:
-				$this->setPublicPurchase($value);
+				$this->setCreditRefund($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setPairingBonus($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setDailyMaxPairing($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setFundMgnProfitSharing($value);
 				break;
 			case 11:
+				$this->setPublicPurchase($value);
+				break;
+			case 12:
+				$this->setCreatedBy($value);
+				break;
+			case 13:
+				$this->setCreatedOn($value);
+				break;
+			case 14:
+				$this->setUpdatedBy($value);
+				break;
+			case 15:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -647,16 +783,20 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setPackageId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setPackageName($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setPrice($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCommission($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCreditRefund($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setPairingBonus($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setDailyMaxPairing($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setPublicPurchase($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[2], $arr)) $this->setColor($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setPrice($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setDirectGeneration($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setDirectPips($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCommission($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCreditRefund($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setPairingBonus($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setDailyMaxPairing($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setFundMgnProfitSharing($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPublicPurchase($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
 	}
 
 	
@@ -666,11 +806,15 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(MlmPackagePeer::PACKAGE_ID)) $criteria->add(MlmPackagePeer::PACKAGE_ID, $this->package_id);
 		if ($this->isColumnModified(MlmPackagePeer::PACKAGE_NAME)) $criteria->add(MlmPackagePeer::PACKAGE_NAME, $this->package_name);
+		if ($this->isColumnModified(MlmPackagePeer::COLOR)) $criteria->add(MlmPackagePeer::COLOR, $this->color);
 		if ($this->isColumnModified(MlmPackagePeer::PRICE)) $criteria->add(MlmPackagePeer::PRICE, $this->price);
+		if ($this->isColumnModified(MlmPackagePeer::DIRECT_GENERATION)) $criteria->add(MlmPackagePeer::DIRECT_GENERATION, $this->direct_generation);
+		if ($this->isColumnModified(MlmPackagePeer::DIRECT_PIPS)) $criteria->add(MlmPackagePeer::DIRECT_PIPS, $this->direct_pips);
 		if ($this->isColumnModified(MlmPackagePeer::COMMISSION)) $criteria->add(MlmPackagePeer::COMMISSION, $this->commission);
 		if ($this->isColumnModified(MlmPackagePeer::CREDIT_REFUND)) $criteria->add(MlmPackagePeer::CREDIT_REFUND, $this->credit_refund);
 		if ($this->isColumnModified(MlmPackagePeer::PAIRING_BONUS)) $criteria->add(MlmPackagePeer::PAIRING_BONUS, $this->pairing_bonus);
 		if ($this->isColumnModified(MlmPackagePeer::DAILY_MAX_PAIRING)) $criteria->add(MlmPackagePeer::DAILY_MAX_PAIRING, $this->daily_max_pairing);
+		if ($this->isColumnModified(MlmPackagePeer::FUND_MGN_PROFIT_SHARING)) $criteria->add(MlmPackagePeer::FUND_MGN_PROFIT_SHARING, $this->fund_mgn_profit_sharing);
 		if ($this->isColumnModified(MlmPackagePeer::PUBLIC_PURCHASE)) $criteria->add(MlmPackagePeer::PUBLIC_PURCHASE, $this->public_purchase);
 		if ($this->isColumnModified(MlmPackagePeer::CREATED_BY)) $criteria->add(MlmPackagePeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmPackagePeer::CREATED_ON)) $criteria->add(MlmPackagePeer::CREATED_ON, $this->created_on);
@@ -708,7 +852,13 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 		$copyObj->setPackageName($this->package_name);
 
+		$copyObj->setColor($this->color);
+
 		$copyObj->setPrice($this->price);
+
+		$copyObj->setDirectGeneration($this->direct_generation);
+
+		$copyObj->setDirectPips($this->direct_pips);
 
 		$copyObj->setCommission($this->commission);
 
@@ -717,6 +867,8 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 		$copyObj->setPairingBonus($this->pairing_bonus);
 
 		$copyObj->setDailyMaxPairing($this->daily_max_pairing);
+
+		$copyObj->setFundMgnProfitSharing($this->fund_mgn_profit_sharing);
 
 		$copyObj->setPublicPurchase($this->public_purchase);
 

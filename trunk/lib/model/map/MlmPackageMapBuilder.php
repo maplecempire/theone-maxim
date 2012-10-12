@@ -36,7 +36,13 @@ class MlmPackageMapBuilder {
 
 		$tMap->addColumn('PACKAGE_NAME', 'PackageName', 'string', CreoleTypes::VARCHAR, true, 50);
 
+		$tMap->addColumn('COLOR', 'Color', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addColumn('PRICE', 'Price', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('DIRECT_GENERATION', 'DirectGeneration', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('DIRECT_PIPS', 'DirectPips', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('COMMISSION', 'Commission', 'double', CreoleTypes::DECIMAL, false, 12);
 
@@ -45,6 +51,8 @@ class MlmPackageMapBuilder {
 		$tMap->addColumn('PAIRING_BONUS', 'PairingBonus', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('DAILY_MAX_PAIRING', 'DailyMaxPairing', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('FUND_MGN_PROFIT_SHARING', 'FundMgnProfitSharing', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('PUBLIC_PURCHASE', 'PublicPurchase', 'string', CreoleTypes::VARCHAR, true, 1);
 

@@ -806,6 +806,7 @@ class financeActions extends sfActions
                 $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
                 $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
                 $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+                $mlm_dist_mt4->setRankId($packageUpgradeHistory->getPackageId());
                 $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_dist_mt4->save();

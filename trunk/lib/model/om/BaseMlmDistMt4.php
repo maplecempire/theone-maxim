@@ -25,6 +25,10 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 
 
 	
+	protected $rank_id;
+
+
+	
 	protected $created_by;
 
 
@@ -71,6 +75,13 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 	{
 
 		return $this->mt4_password;
+	}
+
+	
+	public function getRankId()
+	{
+
+		return $this->rank_id;
 	}
 
 	
@@ -200,6 +211,23 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setRankId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->rank_id !== $v) {
+			$this->rank_id = $v;
+			$this->modifiedColumns[] = MlmDistMt4Peer::RANK_ID;
+		}
+
+	} 
+
+	
 	public function setCreatedBy($v)
 	{
 
@@ -282,19 +310,21 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 
 			$this->mt4_password = $rs->getString($startcol + 3);
 
-			$this->created_by = $rs->getInt($startcol + 4);
+			$this->rank_id = $rs->getInt($startcol + 4);
 
-			$this->created_on = $rs->getTimestamp($startcol + 5, null);
+			$this->created_by = $rs->getInt($startcol + 5);
 
-			$this->updated_by = $rs->getInt($startcol + 6);
+			$this->created_on = $rs->getTimestamp($startcol + 6, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 7, null);
+			$this->updated_by = $rs->getInt($startcol + 7);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 8, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 9; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistMt4 object", $e);
 		}
@@ -452,15 +482,18 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 				return $this->getMt4Password();
 				break;
 			case 4:
-				return $this->getCreatedBy();
+				return $this->getRankId();
 				break;
 			case 5:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 6:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 7:
+				return $this->getUpdatedBy();
+				break;
+			case 8:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -477,10 +510,11 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDistId(),
 			$keys[2] => $this->getMt4UserName(),
 			$keys[3] => $this->getMt4Password(),
-			$keys[4] => $this->getCreatedBy(),
-			$keys[5] => $this->getCreatedOn(),
-			$keys[6] => $this->getUpdatedBy(),
-			$keys[7] => $this->getUpdatedOn(),
+			$keys[4] => $this->getRankId(),
+			$keys[5] => $this->getCreatedBy(),
+			$keys[6] => $this->getCreatedOn(),
+			$keys[7] => $this->getUpdatedBy(),
+			$keys[8] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -509,15 +543,18 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 				$this->setMt4Password($value);
 				break;
 			case 4:
-				$this->setCreatedBy($value);
+				$this->setRankId($value);
 				break;
 			case 5:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 6:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 7:
+				$this->setUpdatedBy($value);
+				break;
+			case 8:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -531,10 +568,11 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDistId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setMt4UserName($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMt4Password($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCreatedBy($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCreatedOn($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setUpdatedBy($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setUpdatedOn($arr[$keys[7]]);
+		if (array_key_exists($keys[4], $arr)) $this->setRankId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCreatedBy($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCreatedOn($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setUpdatedBy($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setUpdatedOn($arr[$keys[8]]);
 	}
 
 	
@@ -546,6 +584,7 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistMt4Peer::DIST_ID)) $criteria->add(MlmDistMt4Peer::DIST_ID, $this->dist_id);
 		if ($this->isColumnModified(MlmDistMt4Peer::MT4_USER_NAME)) $criteria->add(MlmDistMt4Peer::MT4_USER_NAME, $this->mt4_user_name);
 		if ($this->isColumnModified(MlmDistMt4Peer::MT4_PASSWORD)) $criteria->add(MlmDistMt4Peer::MT4_PASSWORD, $this->mt4_password);
+		if ($this->isColumnModified(MlmDistMt4Peer::RANK_ID)) $criteria->add(MlmDistMt4Peer::RANK_ID, $this->rank_id);
 		if ($this->isColumnModified(MlmDistMt4Peer::CREATED_BY)) $criteria->add(MlmDistMt4Peer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmDistMt4Peer::CREATED_ON)) $criteria->add(MlmDistMt4Peer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmDistMt4Peer::UPDATED_BY)) $criteria->add(MlmDistMt4Peer::UPDATED_BY, $this->updated_by);
@@ -585,6 +624,8 @@ abstract class BaseMlmDistMt4 extends BaseObject  implements Persistent {
 		$copyObj->setMt4UserName($this->mt4_user_name);
 
 		$copyObj->setMt4Password($this->mt4_password);
+
+		$copyObj->setRankId($this->rank_id);
 
 		$copyObj->setCreatedBy($this->created_by);
 

@@ -744,36 +744,40 @@ class memberActions extends sfActions
                         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
                         //var_dump("==>3$$".$uplineDistId);
-                        $this->forward404Unless($uplineDistDB);
+                        if ($uplineDistDB) {
+                            if ($uplineDistDB->getIsIb() == Globals::YES) {
+                                /*if ($uplineDistDB->getIbRankId() != null) {
+                                    $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                                } else {
+                                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                                }*/
+                                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
 
-                        if ($uplineDistDB->getIsIb() == Globals::YES) {
-                            /*if ($uplineDistDB->getIbRankId() != null) {
-                                $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
-                            } else {
-                                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                            }*/
-                            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-
-                            if ($directSponsorPercentage > $totalBonusPayOut) {
-                                //var_dump("==>6");
-                                $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                                $totalBonusPayOut += $directSponsorPercentage;
-                                if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                    //var_dump("==>7");
-                                    $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                if ($directSponsorPercentage > $totalBonusPayOut) {
+                                    //var_dump("==>6");
+                                    $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                    $totalBonusPayOut += $directSponsorPercentage;
+                                    if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                        //var_dump("==>7");
+                                        $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                    }
+                                } else {
+                                    //var_dump("==>8");
+                                    $uplineDistId = $uplineDistDB->getUplineDistId();
+                                    continue;
                                 }
                             } else {
-                                //var_dump("==>8");
                                 $uplineDistId = $uplineDistDB->getUplineDistId();
                                 continue;
                             }
+                            $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                            $checkCommission == false;
+                            break;
                         } else {
-                            $uplineDistId = $uplineDistDB->getUplineDistId();
-                            continue;
+                            $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT;
+                            break;
                         }
-                        $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-                        $checkCommission == false;
-                        break;
+
                         //var_dump("==>9");
                     }
                 } else {
@@ -879,12 +883,13 @@ class memberActions extends sfActions
                         continue;
                     }
                     $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
-                    $this->forward404Unless($uplineDistDB);
-                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
-                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
-                    $uplineDistDB->setTotalLeft($totalLeft);
-                    $uplineDistDB->setTotalRight($totalRight);
-                    $uplineDistDB->save();
+                    if ($uplineDistDB) {
+                        $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
+                        $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
+                        $uplineDistDB->setTotalLeft($totalLeft);
+                        $uplineDistDB->setTotalRight($totalRight);
+                        $uplineDistDB->save();
+                    }
                 }
 
                 /******************************/
@@ -1430,6 +1435,8 @@ class memberActions extends sfActions
         $this->totalNetworks = $totalNetworks;
         $this->ranking = $ranking;
         $this->mt4Id = $mt4Id;
+        $this->distMt4s = $distMt4s;
+        $this->colorArr = $this->getRankColorArr();
         $this->currencyCode = $currencyCode;
         $this->distributor = $distributor;
         $this->lastLogin = $lastLogin;
@@ -2016,6 +2023,7 @@ class memberActions extends sfActions
 
         $this->distcode = $distcode;
         $this->anode = $anode;
+        $this->colorArr = $this->getRankColorArr();
 
         if ($pageDirection == "stat") {
             $this->setTemplate('placementTreeStat');
@@ -2514,6 +2522,7 @@ class memberActions extends sfActions
         }
         $this->arrTree = $arrTree;
         $this->fullName = $fullName;
+        $this->colorArr = $this->getRankColorArr();
     }
 
     public function executeManipulateSponsorTree()
@@ -2527,9 +2536,11 @@ class memberActions extends sfActions
             $dists = MlmDistributorPeer::doSelect($c);
 
             $idx = 0;
+            $colorArr = $this->getRankColorArr();
+
             foreach ($dists as $dist)
             {
-                $arrTree[$idx]["text"] = "<span class='user-rank'><img src='/css/maxim/tree/head.png'></span><span class='user-id'>".$dist->getDistributorCode() . "</span><span class='user-joined'>" . $dist->getFullName() . "</span><span class='user-joined'> Joined " . date('Y-m-d', strtotime($dist->getActiveDatetime())). "</span><span class='user-joined'>" . $dist->getRankCode()."</span>";
+                $arrTree[$idx]["text"] = "<span class='user-rank'><img src='/css/maxim/tree/".$colorArr[$dist->getRankId()]."_head.png'></span><span class='user-id'>".$dist->getDistributorCode() . "</span><span class='user-joined'>" . $dist->getFullName() . "</span><span class='user-joined'> Joined " . date('Y-m-d', strtotime($dist->getActiveDatetime())). "</span><span class='user-joined'>" . $dist->getRankCode()."</span>";
                 $arrTree[$idx]["id"] = $dist->getDistributorId();
                 $arrTree[$idx]["hasChildren"] = $this->checkHasChild($dist->getDistributorId());
                 $idx++;
@@ -3318,6 +3329,7 @@ class memberActions extends sfActions
                 $mlmPackageUpgradeHistory->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                 $mlmPackageUpgradeHistory->setTransactionCode(Globals::ACCOUNT_LEDGER_ACTION_PACKAGE_UPGRADE);
                 $mlmPackageUpgradeHistory->setAmount($amountNeeded);
+                $mlmPackageUpgradeHistory->setPackageId($selectedPackage->getPackageId());
                 $mlmPackageUpgradeHistory->setStatusCode(Globals::STATUS_ACTIVE);
                 $mlmPackageUpgradeHistory->setRemarks("PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
                 $mlmPackageUpgradeHistory->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -3333,216 +3345,217 @@ class memberActions extends sfActions
                 /**************************************/
                 $uplineDistId = $distDB->getUplineDistId();
                 $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
-                $this->forward404Unless($uplineDistDB);
+                if ($uplineDistDB) {
 
-                //if ($uplineDistDB->getIbRankId() != null) {
-                if ($uplineDistDB->getIsIb() == Globals::YES) {
-                    $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                    $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
-                } else {
-                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                    $directSponsorPercentage = $uplineDistPackage->getCommission();
-                    $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
-                }
-                $totalBonusPayOut = $directSponsorPercentage;
-
-                /******************************/
-                /*  store Pairing points
-                /******************************/
-                $pairingPoint = $amountNeeded;
-                $uplinePosition = $distDB->getPlacementPosition();
-                if ($distDB->getTreeUplineDistId() != 0 && $distDB->getTreeUplineDistCode() != null) {
-                    $level = 0;
-                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($distDB->getTreeUplineDistId());
-                    $sponsoredDistributorCode = $distDB->getDistributorCode();
-                    while ($level < 100) {
-                        //var_dump($uplineDistDB->getUplineDistId());
-                        //var_dump($uplineDistDB->getUplineDistCode());
-                        //print_r("<br>");
-                        $c = new Criteria();
-                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
-
-                        $addToLeft = 0;
-                        $addToRight = 0;
-                        $leftBalance = 0;
-                        $rightBalance = 0;
-                        if (!$sponsorDistPairingDB) {
-                            $sponsorDistPairingDB = new MlmDistPairing();
-                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
-
-                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                            $this->forward404Unless($packageDB);
-
-                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
-                            $sponsorDistPairingDB->setRightBalance($rightBalance);
-                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
-                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        } else {
-                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
-                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
-                        }
-                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
-                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
-                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistPairingDB->save();
-
-                        $c = new Criteria();
-                        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
-                        $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
-                        $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
-
-                        $legBalance = 0;
-                        if ($sponsorDistPairingLedgerDB) {
-                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
-                        }
-
-                        $sponsorDistPairingledger = new MlmDistPairingLedger();
-                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
-                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
-                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
-                        $sponsorDistPairingledger->setCredit($pairingPoint);
-                        $sponsorDistPairingledger->setDebit(0);
-                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
-                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistPairingledger->save();
-
-                        $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
-
-                        if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
-                            break;
-                        }
-
-                        $uplinePosition = $uplineDistDB->getPlacementPosition();
-                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
-                        $level++;
+                    //if ($uplineDistDB->getIbRankId() != null) {
+                    if ($uplineDistDB->getIsIb() == Globals::YES) {
+                        $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                        $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
+                    } else {
+                        $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                        $directSponsorPercentage = $uplineDistPackage->getCommission();
+                        $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
                     }
-                }
-                /******************************/
-                /*  Direct Sponsor Bonus
-                /******************************/
-                $firstForDRB = true;
-                while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
-                    $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
-
-                    $mlm_account_ledger = new MlmAccountLedger();
-                    $mlm_account_ledger->setDistId($uplineDistId);
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-                    $mlm_account_ledger->setRemark("PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")");
-                    $mlm_account_ledger->setCredit($directSponsorBonusAmount);
-                    $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
-                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
-
-                    $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+                    $totalBonusPayOut = $directSponsorPercentage;
 
                     /******************************/
-                    /*  Commission
+                    /*  store Pairing points
                     /******************************/
-                    $c = new Criteria();
-                    $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
-                    $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-                    $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+                    $pairingPoint = $amountNeeded;
+                    $uplinePosition = $distDB->getPlacementPosition();
+                    if ($distDB->getTreeUplineDistId() != 0 && $distDB->getTreeUplineDistCode() != null) {
+                        $level = 0;
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($distDB->getTreeUplineDistId());
+                        $sponsoredDistributorCode = $distDB->getDistributorCode();
+                        while ($level < 100) {
+                            //var_dump($uplineDistDB->getUplineDistId());
+                            //var_dump($uplineDistDB->getUplineDistCode());
+                            //print_r("<br>");
+                            $c = new Criteria();
+                            $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                            $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
 
-                    $commissionBalance = 0;
-                    if (!$sponsorDistCommissionDB) {
-                        $sponsorDistCommissionDB = new MlmDistCommission();
-                        $sponsorDistCommissionDB->setDistId($uplineDistId);
-                        $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-                        $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    } else {
-                        $commissionBalance = $sponsorDistCommissionDB->getBalance();
-                    }
-                    $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
-                    $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistCommissionDB->save();
+                            $addToLeft = 0;
+                            $addToRight = 0;
+                            $leftBalance = 0;
+                            $rightBalance = 0;
+                            if (!$sponsorDistPairingDB) {
+                                $sponsorDistPairingDB = new MlmDistPairing();
+                                $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
 
-                    $c = new Criteria();
-                    $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
-                    $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-                    $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
-                    $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+                                $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                                $this->forward404Unless($packageDB);
 
-                    $dsbBalance = 0;
-                    if ($sponsorDistCommissionLedgerDB)
-                        $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+                                $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                                $sponsorDistPairingDB->setRightBalance($rightBalance);
+                                $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                                $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            } else {
+                                $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                                $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                            }
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                            $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingDB->save();
 
-                    $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                    $sponsorDistCommissionledger->setDistId($uplineDistId);
-                    $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-                    $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_UPGRADE);
-                    $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
-                    $sponsorDistCommissionledger->setDebit(0);
-                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
-                    $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
-                    //$sponsorDistCommissionledger->setRemark("PACKAGE UPGRADE BONUS AMOUNT ".$directSponsorPercentage."% (" . $distDB->getDistributorCode() . "-" . $distDB->getMt4UserName() . ")");
-                    if ($firstForDRB == true) {
-                        $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
-                        $firstForDRB = false;
-                    } else {
-                        $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
-                    }
-                    $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistCommissionledger->save();
+                            $c = new Criteria();
+                            $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                            $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                            $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                            $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
 
-                    $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
-                    //var_dump("==>1");
-                    if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
-                        //var_dump("==>2");
-                        $checkCommission = true;
-                        $uplineDistId = $uplineDistDB->getUplineDistId();
+                            $legBalance = 0;
+                            if ($sponsorDistPairingLedgerDB) {
+                                $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                            }
 
-                        while ($checkCommission == true) {
-                            //var_dump("==>3**".$uplineDistId);
-                            if ($uplineDistId == null || $uplineDistId == 0) {
-                                $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT;
+                            $sponsorDistPairingledger = new MlmDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                            $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+
+                            $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                            if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                                 break;
                             }
-                            $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
-                            //var_dump("==>3$$".$uplineDistId);
-                            $this->forward404Unless($uplineDistDB);
-                            //var_dump("==>4");
-                            if ($uplineDistDB->getIsIb() == Globals::YES) {
-                                /*if ($uplineDistDB->getIbRankId() != null) {
-                                    $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
-                                } else {
-                                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                                }*/
-                                //$directSponsorPercentage = $uplineDistPackage->getCommission();
-                                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                                if ($directSponsorPercentage > $totalBonusPayOut) {
-                                    //var_dump("==>6");
-                                    $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                                    $totalBonusPayOut += $directSponsorPercentage;
-                                    if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                        //var_dump("==>7");
-                                        $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                            $uplinePosition = $uplineDistDB->getPlacementPosition();
+                            $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                            $level++;
+                        }
+                    }
+                    /******************************/
+                    /*  Direct Sponsor Bonus
+                    /******************************/
+                    $firstForDRB = true;
+                    while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
+                        $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($uplineDistId);
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
+                        $mlm_account_ledger->setRemark("PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")");
+                        $mlm_account_ledger->setCredit($directSponsorBonusAmount);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+
+                        /******************************/
+                        /*  Commission
+                        /******************************/
+                        $c = new Criteria();
+                        $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
+                        $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                        $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+
+                        $commissionBalance = 0;
+                        if (!$sponsorDistCommissionDB) {
+                            $sponsorDistCommissionDB = new MlmDistCommission();
+                            $sponsorDistCommissionDB->setDistId($uplineDistId);
+                            $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                            $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $commissionBalance = $sponsorDistCommissionDB->getBalance();
+                        }
+                        $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
+                        $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionDB->save();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
+                        $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                        $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+                        $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+
+                        $dsbBalance = 0;
+                        if ($sponsorDistCommissionLedgerDB)
+                            $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+
+                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                        $sponsorDistCommissionledger->setDistId($uplineDistId);
+                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_UPGRADE);
+                        $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
+                        $sponsorDistCommissionledger->setDebit(0);
+                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                        $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
+                        //$sponsorDistCommissionledger->setRemark("PACKAGE UPGRADE BONUS AMOUNT ".$directSponsorPercentage."% (" . $distDB->getDistributorCode() . "-" . $distDB->getMt4UserName() . ")");
+                        if ($firstForDRB == true) {
+                            $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
+                            $firstForDRB = false;
+                        } else {
+                            $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE UPGRADE ".$directSponsorPercentage."% (" .$distPackage->getPackageName()."=>".$selectedPackage->getPackageName().") for " . $distDB->getDistributorCode());
+                        }
+                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->save();
+
+                        $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
+                        //var_dump("==>1");
+                        if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
+                            //var_dump("==>2");
+                            $checkCommission = true;
+                            $uplineDistId = $uplineDistDB->getUplineDistId();
+
+                            while ($checkCommission == true) {
+                                //var_dump("==>3**".$uplineDistId);
+                                if ($uplineDistId == null || $uplineDistId == 0) {
+                                    $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT;
+                                    break;
+                                }
+                                $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+
+                                //var_dump("==>3$$".$uplineDistId);
+                                $this->forward404Unless($uplineDistDB);
+                                //var_dump("==>4");
+                                if ($uplineDistDB->getIsIb() == Globals::YES) {
+                                    /*if ($uplineDistDB->getIbRankId() != null) {
+                                        $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                                    } else {
+                                        $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                                    }*/
+                                    //$directSponsorPercentage = $uplineDistPackage->getCommission();
+                                    $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                                    if ($directSponsorPercentage > $totalBonusPayOut) {
+                                        //var_dump("==>6");
+                                        $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                        $totalBonusPayOut += $directSponsorPercentage;
+                                        if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                            //var_dump("==>7");
+                                            $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                        }
+                                    } else {
+                                        //var_dump("==>8");
+                                        $uplineDistId = $uplineDistDB->getUplineDistId();
+                                        continue;
                                     }
                                 } else {
-                                    //var_dump("==>8");
                                     $uplineDistId = $uplineDistDB->getUplineDistId();
                                     continue;
                                 }
-                            } else {
-                                $uplineDistId = $uplineDistDB->getUplineDistId();
-                                continue;
+                                $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
+                                $checkCommission == false;
+                                break;
+                                //var_dump("==>9");
                             }
-                            $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
-                            $checkCommission == false;
+                        } else {
                             break;
-                            //var_dump("==>9");
+                            //var_dump("==>^^");
                         }
-                    } else {
-                        break;
-                        //var_dump("==>^^");
                     }
                 }
 
@@ -3794,166 +3807,167 @@ class memberActions extends sfActions
         /*  Direct REFERRAL Bonus For Upline
         /**************************************/
         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
-        $this->forward404Unless($uplineDistDB);
+        if ($uplineDistDB) {
+            //if ($uplineDistDB->getIbRankId() != null) {
+            if ($uplineDistDB->getIsIb() == Globals::YES) {
+                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+            } else {
+                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                $directSponsorPercentage = $uplineDistPackage->getCommission();
+                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+            }
+            $totalBonusPayOut = $directSponsorPercentage;
 
-        //if ($uplineDistDB->getIbRankId() != null) {
-        if ($uplineDistDB->getIsIb() == Globals::YES) {
-            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-            $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-        } else {
-            $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-            $directSponsorPercentage = $uplineDistPackage->getCommission();
-            $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-        }
-        $totalBonusPayOut = $directSponsorPercentage;
-
-        $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
-        $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
-        /* ****************************************************
-         * Update upline distributor account
-         * ***************************************************/
-        $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
-
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ("epoint" == $paymentType) {
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-        } else if ("ecash" == $paymentType) {
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-        }
-        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-        $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
-        $mlm_account_ledger->setCredit(0);
-        $mlm_account_ledger->setDebit($packageDB->getPrice());
-        $mlm_account_ledger->setBalance($sponsorAccountBalance);
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
-
-        if ("epoint" == $paymentType) {
-            $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
-        } else if ("ecash" == $paymentType) {
-            $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
-        }
-
-        /******************************/
-        /*  Direct Sponsor Bonus
-        /******************************/
-        $firstForDRB = true;
-        while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
-            $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+            /* ****************************************************
+           * Update upline distributor account
+           * ***************************************************/
+            $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
 
             $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($uplineDistId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")");
-            $mlm_account_ledger->setCredit($directSponsorBonusAmount);
-            $mlm_account_ledger->setDebit(0);
-            $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            if ("epoint" == $paymentType) {
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+            } else if ("ecash" == $paymentType) {
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+            }
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($packageDB->getPrice());
+            $mlm_account_ledger->setBalance($sponsorAccountBalance);
             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+            if ("epoint" == $paymentType) {
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            } else if ("ecash" == $paymentType) {
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+            }
 
             /******************************/
-            /*  Commission
+            /*  Direct Sponsor Bonus
             /******************************/
-            $c = new Criteria();
-            $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
-            $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-            $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+            $firstForDRB = true;
+            while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
+                $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
-            $commissionBalance = 0;
-            if (!$sponsorDistCommissionDB) {
-                $sponsorDistCommissionDB = new MlmDistCommission();
-                $sponsorDistCommissionDB->setDistId($uplineDistId);
-                $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-                $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            } else {
-                $commissionBalance = $sponsorDistCommissionDB->getBalance();
-            }
-            $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
-            $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $sponsorDistCommissionDB->save();
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($uplineDistId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
+                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")");
+                $mlm_account_ledger->setCredit($directSponsorBonusAmount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
 
-            $c = new Criteria();
-            $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
-            $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-            $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
-            $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+                $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
-            $dsbBalance = 0;
-            if ($sponsorDistCommissionLedgerDB)
-                $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+                /******************************/
+                /*  Commission
+                /******************************/
+                $c = new Criteria();
+                $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
+                $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
 
-            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-            $sponsorDistCommissionledger->setDistId($uplineDistId);
-            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
-            $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
-            $sponsorDistCommissionledger->setDebit(0);
-            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
-            $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
-            if ($firstForDRB == true) {
-                $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
-                $firstForDRB = false;
-            } else {
-                $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
-            }
-            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $sponsorDistCommissionledger->save();
+                $commissionBalance = 0;
+                if (!$sponsorDistCommissionDB) {
+                    $sponsorDistCommissionDB = new MlmDistCommission();
+                    $sponsorDistCommissionDB->setDistId($uplineDistId);
+                    $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                    $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                } else {
+                    $commissionBalance = $sponsorDistCommissionDB->getBalance();
+                }
+                $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
+                $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionDB->save();
 
-            $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
-            //var_dump("==>1");
-            if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
-                //var_dump("==>2");
-                $checkCommission = true;
-                $uplineDistId = $uplineDistDB->getUplineDistId();
-                while ($checkCommission == true) {
-                    //var_dump("==>3**".$uplineDistId);
-                    $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+                $c = new Criteria();
+                $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
+                $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+                $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
 
-                    //var_dump("==>3$$".$uplineDistId);
-                    $this->forward404Unless($uplineDistDB);
+                $dsbBalance = 0;
+                if ($sponsorDistCommissionLedgerDB)
+                    $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
 
-                    if ($uplineDistDB->getIsIb() == Globals::YES) {
-                        /*if ($uplineDistDB->getIbRankId() != null) {
-                            $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
-                        } else {
-                            $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                        }*/
-                        $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                $sponsorDistCommissionledger->setDistId($uplineDistId);
+                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
+                $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
+                $sponsorDistCommissionledger->setDebit(0);
+                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
+                if ($firstForDRB == true) {
+                    $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
+                    $firstForDRB = false;
+                } else {
+                    $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
+                }
+                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->save();
 
-                        if ($directSponsorPercentage > $totalBonusPayOut) {
-                            //var_dump("==>6");
-                            $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                            $totalBonusPayOut += $directSponsorPercentage;
-                            if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                //var_dump("==>7");
-                                $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
+                //var_dump("==>1");
+                if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
+                    //var_dump("==>2");
+                    $checkCommission = true;
+                    $uplineDistId = $uplineDistDB->getUplineDistId();
+                    while ($checkCommission == true) {
+                        //var_dump("==>3**".$uplineDistId);
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+
+                        //var_dump("==>3$$".$uplineDistId);
+                        $this->forward404Unless($uplineDistDB);
+
+                        if ($uplineDistDB->getIsIb() == Globals::YES) {
+                            /*if ($uplineDistDB->getIbRankId() != null) {
+                                $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                            } else {
+                                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            }*/
+                            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+
+                            if ($directSponsorPercentage > $totalBonusPayOut) {
+                                //var_dump("==>6");
+                                $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                $totalBonusPayOut += $directSponsorPercentage;
+                                if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                    //var_dump("==>7");
+                                    $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                }
+                            } else {
+                                //var_dump("==>8");
+                                $uplineDistId = $uplineDistDB->getUplineDistId();
+                                continue;
                             }
                         } else {
-                            //var_dump("==>8");
                             $uplineDistId = $uplineDistDB->getUplineDistId();
                             continue;
                         }
-                    } else {
-                        $uplineDistId = $uplineDistDB->getUplineDistId();
-                        continue;
+                        $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                        $checkCommission == false;
+                        break;
+                        //var_dump("==>9");
                     }
-                    $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-                    $checkCommission == false;
+                } else {
                     break;
-                    //var_dump("==>9");
+                    //var_dump("==>^^");
                 }
-            } else {
-                break;
-                //var_dump("==>^^");
             }
         }
+
     }
 
     function getAppSetting($parameter)
@@ -4356,5 +4370,28 @@ class memberActions extends sfActions
             }
         }
         return 0;
+    }
+
+    function getRankColor($packageId)
+    {
+        $color = "blue";
+
+        $package = MlmPackagePeer::retrieveByPK($packageId);
+        if ($package) {
+            $color = $package->getColor();
+        }
+
+        return $color;
+    }
+    function getRankColorArr()
+    {
+        $packageArray = array();
+        $c = new Criteria();
+        $packages = MlmPackagePeer::doSelect($c);
+        foreach ($packages as $package) {
+            $packageArray[$package->getPackageId()] = $package->getColor();
+        }
+
+        return $packageArray;
     }
 }
