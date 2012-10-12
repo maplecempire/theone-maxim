@@ -111,7 +111,7 @@ class downloadActions extends sfActions
         if ($this->getRequest()->getFileName('fxguide') != '') {
             $uploadedFilename = $this->getRequest()->getFileName('fxguide');
 
-            $filename = "chinese_".$uploadedFilename;
+            $filename = $uploadedFilename;
             $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
 
             $mlm_file_download = new MlmFileDownload();
@@ -154,7 +154,7 @@ class downloadActions extends sfActions
         if ($this->getRequest()->getFileName('fxguide') != '') {
             $uploadedFilename = $this->getRequest()->getFileName('fxguide');
 
-            $filename = "english_".$uploadedFilename;
+            $filename = $uploadedFilename;
             $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
 
             $mlm_file_download = new MlmFileDownload();
@@ -197,7 +197,7 @@ class downloadActions extends sfActions
         if ($this->getRequest()->getFileName('fxguide') != '') {
             $uploadedFilename = $this->getRequest()->getFileName('fxguide');
 
-            $filename = "japanese_".$uploadedFilename;
+            $filename = $uploadedFilename;
             $this->getRequest()->moveFile('fxguide', sfConfig::get('sf_upload_dir') . '/guide/' . $filename);
 
             $mlm_file_download = new MlmFileDownload();
