@@ -132,6 +132,9 @@ class downloadActions extends sfActions
             curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadChineseGuide');
             curl_exec($ch);
 
+            curl_close($ch);
+            $ch = curl_init();
+
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
             curl_setopt($ch, CURLOPT_URL, 'http://my.maplefx.com/download/doUploadChineseGuide');
@@ -172,6 +175,9 @@ class downloadActions extends sfActions
             curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadEnglishGuide');
             curl_exec($ch);
 
+            curl_close($ch);
+            $ch = curl_init();
+
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
             curl_setopt($ch, CURLOPT_URL, 'http://my.maplefx.com/download/doUploadEnglishGuide');
@@ -211,6 +217,9 @@ class downloadActions extends sfActions
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
             curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadJapaneseGuide');
             curl_exec($ch);
+
+            curl_close($ch);
+            $ch = curl_init();
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
