@@ -399,6 +399,7 @@ class marketingActions extends sfActions
                                     //$generation2 = $affectedDistributorPackageDB->getGeneration2();
                                     //$pips2 = $affectedDistributorPackageDB->getPips2();
                                     $creditRefundByPackage = $affectedDistributorPackageDB->getCreditRefund();
+                                    $fundMgnProfitSharing = $affectedDistributorPackageDB->getFundMgnProfitSharing();
 
                                     $generation = 0;
                                     $pips = 0;
@@ -452,7 +453,10 @@ class marketingActions extends sfActions
                                                 $fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
                                                 $creditRefund = $totalVolume * $creditRefundByPackage;
-                                                $fundManagement = $totalVolume * $fundManagementPercentage;
+                                                $fundManagement = $totalVolume * $fundManagementPercentage * ((100 - $fundMgnProfitSharing) / 100);
+                                                $fundMgnProfitSharingAmount = $fundManagement * $fundMgnProfitSharing / 100;
+
+                                                $fundManagement = $fundManagement - $fundMgnProfitSharingAmount;
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
@@ -464,7 +468,7 @@ class marketingActions extends sfActions
                                                 $sponsorDistCommissionledger->setDebit(0);
                                                 $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                                                 $sponsorDistCommissionledger->setBalance($pipsBalance + $creditRefund);
-                                                $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
+                                                $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume.", Sharing:".$fundMgnProfitSharingAmount);
                                                 $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                 $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                 $sponsorDistCommissionledger->save();
