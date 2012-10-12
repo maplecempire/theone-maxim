@@ -129,12 +129,12 @@ class downloadActions extends sfActions
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadChineseGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadChineseGuide');
             curl_exec($ch);
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadChineseGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://my.maplefx.com/download/doUploadChineseGuide');
             curl_exec($ch);
 
             curl_close($ch);
@@ -169,12 +169,12 @@ class downloadActions extends sfActions
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadEnglishGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadEnglishGuide');
             curl_exec($ch);
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadEnglishGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://my.maplefx.com/download/doUploadEnglishGuide');
             curl_exec($ch);
 
             curl_close($ch);
@@ -209,12 +209,12 @@ class downloadActions extends sfActions
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadJapaneseGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.maplefx.com/download/doUploadJapaneseGuide');
             curl_exec($ch);
 
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
-            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadJapaneseGuide');
+            curl_setopt($ch, CURLOPT_URL, 'http://my.maplefx.com/download/doUploadJapaneseGuide');
             curl_exec($ch);
 
             curl_close($ch);
