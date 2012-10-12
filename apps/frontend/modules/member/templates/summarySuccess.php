@@ -311,7 +311,46 @@ function reassignDatagridAnnouncementEventAttr() {
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('MT4 ID') ?></td>
-        <td><input size="40" type="text" readonly="readonly" value="<?php echo $mt4Id; ?>"></td>
+        <!-- <td><input size="40" type="text" readonly="readonly" value="--><?php //echo $mt4Id; ?><!--"></td>-->
+        <td>
+            <style>
+                .blue_tags {
+                    background-color: #0099cc;
+                    border-radius: 2px 2px 2px 2px;
+                    box-shadow: 2px #004977;
+                    border-color: transparent #0089E0 transparent transparent;
+                    border-style: solid;
+                }
+                .green_tags {
+                    background-color: #33ff33;
+                    border-radius: 2px 2px 2px 2px;
+                    box-shadow: 2px #66ff00;
+                    border-color: transparent #66ff00 transparent transparent;
+                    border-style: solid;
+                }
+                .red_tags {
+                    background-color: #ff6666;
+                    border-radius: 2px 2px 2px 2px;
+                    box-shadow: 2px #ff3333;
+                    border-color: transparent #ff3333 transparent transparent;
+                    border-style: solid;
+                }
+                .gold_tags {
+                    background-color: #ffff33;
+                    border-radius: 2px 2px 2px 2px;
+                    box-shadow: 2px #ffcc33;
+                    border-color: transparent #ffcc33 transparent transparent;
+                    border-style: solid;
+                }
+            </style>
+
+        <?php
+        foreach ($distMt4s as $distMt4) {
+            $arr = explode(" ", $distMt4->getCreatedOn());
+            echo "<span style='margin:1px;' class='".$colorArr[$distMt4->getRankId()]."_tags'>".$distMt4->getMt4UserName()." [".$arr[0]."]</span>&nbsp;";
+        }
+        ?>
+        </td>
         <td>&nbsp;</td>
     </tr>
 

@@ -280,8 +280,10 @@ function reassignDatagridEventAttr(){
                     $availableButton = $anode[0]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[0]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
                         //$timeStamp = strtotime($distDB->getCreatedOn());
                         //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
@@ -305,7 +307,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[0]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="18" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="18" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -361,8 +363,10 @@ function reassignDatagridEventAttr(){
                     $availableButton = $anode[1]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[1]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -376,15 +380,17 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[1]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="6" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="6" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="6" align="center"></td>
                 <?php
                     $distCode = $anode[2]['distCode'];
                     $availableButton = $anode[2]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[2]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -398,7 +404,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[2]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="6" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="6" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -493,8 +499,10 @@ function reassignDatagridEventAttr(){
                     $availableButton = $anode[3]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[3]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -508,7 +516,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[3]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
 
                 <?php
@@ -516,8 +524,10 @@ function reassignDatagridEventAttr(){
                     $availableButton = $anode[4]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[4]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -531,7 +541,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[4]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
                 <td colspan="2" align="center"></td>
@@ -540,8 +550,10 @@ function reassignDatagridEventAttr(){
                     $availableButton = $anode[5]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[5]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -555,15 +567,17 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[5]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td colspan="2" align="center"></td>
                 <?php
                     $distCode = $anode[6]['distCode'];
                     $availableButton = $anode[6]['_available'];
                     $textStr = "";
                     $classAndAttr = "";
+                    $headColor = "";
                     if ($distCode != "") {
                         $distDB = $anode[6]['_self'];
+                        $headColor = $colorArr[$distDB->getRankId()]."_";
                         $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
 
                         $classAndAttr .= " class='logoTooltip'";
@@ -577,7 +591,7 @@ function reassignDatagridEventAttr(){
                         $classAndAttr .= " sales_right='".number_format($anode[6]['_right_this_month_sales'],0)."'";
                     }
                 ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/head.png" <?php echo $classAndAttr;?>></td>
+                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>

@@ -403,16 +403,21 @@ class marketingActions extends sfActions
                                     $generation = 0;
                                     $pips = 0;
 
-                                    $totalSponsor = $this->getTotalSponsor($affectedDistributor->getDistributorId());
-                                    if ($totalSponsor > 0) {
-                                        $c = new Criteria();
-                                        $c->add(MlmPackagePipsPeer::TOTOL_SPONSOR, $totalSponsor, Criteria::LESS_EQUAL);
-                                        $c->addDescendingOrderByColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
-                                        $packagePips = MlmPackagePipsPeer::doSelectOne($c);
+                                    if ($affectedDistributorPackageDB->getDirectGeneration() != 0) {
+                                        $generation = $affectedDistributorPackageDB->getDirectGeneration();
+                                        $pips = $affectedDistributorPackageDB->getDirectPips();
+                                    } else {
+                                        $totalSponsor = $this->getTotalSponsor($affectedDistributor->getDistributorId());
+                                        if ($totalSponsor > 0) {
+                                            $c = new Criteria();
+                                            $c->add(MlmPackagePipsPeer::TOTOL_SPONSOR, $totalSponsor, Criteria::LESS_EQUAL);
+                                            $c->addDescendingOrderByColumn(MlmPackagePipsPeer::TOTOL_SPONSOR);
+                                            $packagePips = MlmPackagePipsPeer::doSelectOne($c);
 
-                                        if ($affectedDistributor) {
-                                            $generation = $packagePips->getGeneration();
-                                            $pips = $packagePips->getPips();
+                                            if ($affectedDistributor) {
+                                                $generation = $packagePips->getGeneration();
+                                                $pips = $packagePips->getPips();
+                                            }
                                         }
                                     }
 
@@ -751,6 +756,7 @@ class marketingActions extends sfActions
 
         $mlm_dist_mt4 = new MlmDistMt4();
         $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+        $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
         $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
         $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
         $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
