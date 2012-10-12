@@ -19,17 +19,18 @@
                     "bProcessing": true,
                     "bServerSide": true,
                     "bAutoWidth": false,
-                    "sAjaxSource": "/finance/epointLogList",
+                    "sAjaxSource": "/finance/maintenanceLogList",
                     "sPaginationType": "full_numbers",
                     "aaSorting": [
                         [0,'desc']
                     ],
                     "aoColumns": [
-                        { "sName" : "created_on",  "bSortable": true},
+                        { "sName" : "account_id", "bVisible" : false,  "bSortable": true},
                         { "sName" : "credit", "bVisible" : true,  "bSortable": true},
                         { "sName" : "debit",  "bSortable": true},
                         { "sName" : "balance",  "bSortable": true},
-                        { "sName" : "transaction_type",  "bSortable": true},
+                        { "sName" : "trnsaction_type",  "bSortable": true},
+                        { "sName" : "created_on",  "bSortable": true},
                         { "sName" : "remark",  "bSortable": true}
                     ]
                 });
@@ -43,7 +44,7 @@
 </script>
 
 <div class="ewallet_li">
-	<a target="_self" class="navcontainer" href="/member/epointLog" style="color: rgb(134, 197, 51);">
+	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/epointLog") ?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP1 Statement'); ?>
     </a>
     &nbsp;&nbsp;
@@ -55,7 +56,7 @@
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maintenanceLog") ?>" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maintenanceLog") ?>" style="color: rgb(134, 197, 51);">
         <?php echo __('CP3 Statement'); ?>
     </a>
 </div>
@@ -66,7 +67,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP1 Account') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP3 Statement') ?></span></td>
     </tr>
     <tr>
         <td><br></td>
@@ -85,7 +86,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('CP1 Statement') ?></th>
+                    <th><?php echo __('CP3 Statement') ?></th>
                     <th class="tbl_content_right"></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -118,11 +119,12 @@
                         <table class="display" id="datagrid" border="0" width="100%">
                             <thead>
                             <tr>
-                                <th><?php echo __('Date') ?></th>
+                                <th>id</th>
                                 <th><?php echo __('In') ?></th>
                                 <th><?php echo __('Out') ?></th>
                                 <th><?php echo __('Balance') ?></th>
                                 <th><?php echo __('Transaction Type') ?></th>
+                                <th><?php echo __('Date') ?></th>
                                 <th><?php echo __('Remarks') ?></th>
                             </tr>
                             <tr>
@@ -131,6 +133,7 @@
                                 <td></td>
                                 <td></td>
                                 <td><input size="15" type="text" id="search_action" value="" class="search_init"/></td>
+                                <td></td>
                                 <td></td>
                             </tr>
                             </thead>

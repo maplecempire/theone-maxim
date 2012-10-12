@@ -53,6 +53,12 @@
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashLog") ?>" style="color: rgb(134, 197, 51);">
         <?php echo __('CP2 Statement'); ?>
     </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maintenanceLog") ?>" style="color: rgb(0, 93, 154);">
+        <?php echo __('CP3 Statement'); ?>
+    </a>
 </div>
 
 <table cellpadding="0" cellspacing="0">
