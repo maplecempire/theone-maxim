@@ -125,6 +125,20 @@ class downloadActions extends sfActions
             $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_file_download->save();
 
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadChineseGuide');
+            curl_exec($ch);
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadChineseGuide');
+            curl_exec($ch);
+
+            curl_close($ch);
+
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideCN');
         }
@@ -151,6 +165,20 @@ class downloadActions extends sfActions
             $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_file_download->save();
 
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadEnglishGuide');
+            curl_exec($ch);
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadEnglishGuide');
+            curl_exec($ch);
+
+            curl_close($ch);
+
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideEN');
         }
@@ -176,6 +204,20 @@ class downloadActions extends sfActions
             $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_file_download->save();
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://cn.ofxtrader.com/download/doUploadJapaneseGuide');
+            curl_exec($ch);
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('fxguide' => '@'.sfConfig::get('sf_upload_dir') . '/guide/' . $filename));
+            curl_setopt($ch, CURLOPT_URL, 'http://my.ofxtrader.com/download/doUploadJapaneseGuide');
+            curl_exec($ch);
+
+            curl_close($ch);
 
             $this->setFlash('successMsg', "Upload successful.");
             return $this->redirect('/download/uploadFxGuideJP');
