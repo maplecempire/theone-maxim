@@ -62,7 +62,7 @@
             float: left;
             height: 100%;
             margin-left: 13px;
-            position: fixed;
+            position: absolute;
             width: 306px;
             z-index: 13;
         }
@@ -74,7 +74,7 @@
             float: left;
             height: 100%;
             margin-left: 13px;
-            position: fixed;
+            position: absolute;
             width: 306px;
             z-index: 14;
         }
