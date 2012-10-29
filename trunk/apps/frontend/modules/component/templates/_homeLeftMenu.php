@@ -4,10 +4,17 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     font-family : "Microsoft YaHei" !important;
 }
 <?php } ?>
+.menu_title {
+    font-weight: bold;
+    font-family: arial;
+    font-size: 12px;
+}
 </style>
 
-<ul id="menu-menu" class="menu" style="list-style: none outside none; margin: 0px; padding: 0px;">
-<?php  if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) { ?>
+<div class="menu" style="z-index: 20;">
+<ul>
+<?php
+if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) { ?>
     <li id="menu-item-209"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209"><a
             href="<?php echo url_for("/home")?>"><?php echo __('Home') ?></a>
@@ -57,3 +64,4 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     </li>
 <?php }?>
 </ul>
+</div>

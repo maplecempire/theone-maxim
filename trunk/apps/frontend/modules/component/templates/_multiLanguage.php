@@ -13,6 +13,11 @@ ul, ol {
     margin: 0;
     color: black;
 }
+a, a:link, a:hover, a:visited {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
 </style>
 <ul class="qtrans_language_chooser" id="qtranslate-chooser">
     <li class="active"><a href="/home/language?lang=en" class="qtrans_flag_en qtrans_flag_and_text" style="font-weight: bold;"
