@@ -73,6 +73,7 @@ class homeActions extends sfActions
 
     public function executeLogout()
     {
+        $this->getUser()->clearCredentials();
         $this->getUser()->getAttributeHolder()->clear();
         return $this->redirect('home/login');
     }

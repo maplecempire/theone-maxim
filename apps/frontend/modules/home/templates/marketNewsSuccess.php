@@ -140,6 +140,11 @@ a[href] img {
     margin-left: 2px;
     vertical-align: middle;
 }
+ul, ol {
+    list-style: none outside none;
+    margin: 0;
+    color: black;
+}
 </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 

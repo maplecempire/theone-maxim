@@ -223,11 +223,7 @@ ul, ol {
 #banner .nav li a.activeSlide {
     color: #333438;
 }
-                a, a:link, a:hover, a:visited {
-    color: inherit;
-    cursor: pointer;
-    text-decoration: none;
-}
+
             </style>
             <script type='text/javascript' src='/js/jquery.cycle.all.min.js'></script>
             <script type="text/javascript">
