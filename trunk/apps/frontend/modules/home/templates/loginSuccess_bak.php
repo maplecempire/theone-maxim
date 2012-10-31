@@ -5,14 +5,46 @@
     <meta http-equiv="CACHE-CONTROL" content="NO-STORE">
     <meta http-equiv="PRAGMA" content="NO-CACHE">
     <meta http-equiv="EXPIRES" content="-1">
+    <link rel="shortcut icon" href="/favicon.ico"/>
 
     <?php use_helper('I18N') ?>
     <?php include('scripts.php'); ?>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/css/button.css" media="all">
-    <link rel="shortcut icon" href="/favicon.ico"/>
-    <script type="text/javascript" charset="utf-8">
+    <link rel='stylesheet' id='nivocss-css'  href='/css/maxim/nivo-slider.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='styler-farbtastic-css'  href='/css/maxim/styler-farbtastic.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-paginate-css'  href='/css/maxim/wp-paginate.css' type='text/css' media='screen' />
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script type='text/javascript' src='/css/maxim/comment-reply.js'></script>
+    <script type='text/javascript' src='/css/maxim/preloader.js'></script>
+    <script type='text/javascript' src='/css/maxim/jquery.nivo.slider.js'></script>
+    <script type='text/javascript' src='/css/maxim/bottomfix.js'></script>
+    <script type='text/javascript' src='/css/maxim/jquery.quicksand.js'></script>
+    <script type='text/javascript' src='/css/maxim/farbtastic.js'></script>
+
+    <meta http-equiv="Content-Language" content="en-US">
+    <style type="text/css" media="screen">
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+        /*background: none repeat scroll 0 0 transparent;*/
+        /*border: 0 none;*/
+        /*font-size: 100%;*/
+        /*margin: 0;*/
+        /*outline: 0 none;*/
+        /*padding: 0;*/
+    }
+
+    #content p {
+        clear: none;
+        margin-bottom: 0px !important ;
+    }
+    .qtrans_flag span { display:none }
+    .qtrans_flag { height:12px; width:18px; display:block }
+    .qtrans_flag_and_text { padding-left:20px }
+    </style>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
+
+	<script type="text/javascript" charset="utf-8">
     $(function() {
         $("#submitLink").click(function(event) {
             $("#loginForm").submit();
@@ -24,11 +56,20 @@
                 $("#submitLink").trigger("click");
             }
         });
+        $("#captchaimage").bind('click', function() {
+            $.post('/captcha/newSession');
+            $("#captchaimage").load('/captcha/imageRequest');
+            return false;
+        });
         $("#loginForm").validate({
             rules: {
-
+                "captcha" : {
+                    required: true,
+                    remote: "/captcha/process"
+                }
             },
             messages: {
+                captcha: "<br><?php echo __('Correct captcha is required') ?>."
             },
             submitHandler: function(form) {
                 if ("" == $("#doAction").val()) {
@@ -51,105 +92,40 @@
     });
     </script>
 </head>
-<body>
+
+<body class="home blog">
+<div id="waitingLB" style="display:none; cursor: default">
+    <h3>We are processing your request. Please be patient.</h3>
+</div>
+<noscript>
+	<!-- display message if java is turned off -->
+	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>
+</noscript>
 <form action="/home/doLogin" id="loginForm" method="post">
-<input type="hidden" name="doAction" id="doAction" value="">
-<table cellpadding="0" cellspacing="0">
-<tbody>
-<tr>
-<td align="left">
-<table class="tbl_layout" cellpadding="0" cellspacing="0">
+<div id="wrapper">
+    <div id="page">
+        <div id="content">
+
+        <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+<table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">
-    <col width="98%">
+    <col width="99%">
     <col width="1%">
 </colgroup>
 <tbody>
 <tr>
     <td rowspan="3">&nbsp;</td>
-    <td>
-
-
-        <table cellpadding="0" cellspacing="0">
-            <colgroup>
-                <col class="scb_colorbar1" width="20%">
-                <col class="scb_colorbar2" width="10%">
-                <col class="scb_colorbar3" width="15%">
-                <col class="scb_colorbar4" width="5%">
-                <col class="scb_colorbar5" width="50%">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td class="scb_colorbar1">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <table class="tbl_heading" cellpadding="0" cellspacing="0">
-            <colgroup>
-                <col width="17%">
-                <col width="83%">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td rowspan="2">
-                    <img src="/images/logo.png" height="85">
-                </td>
-                <td class="txt_mainheading">
-                    &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td class="txt_subheading">
-
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <hr class="hr_heading">
-    </td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Member Login') ?></span></td>
     <td rowspan="3">&nbsp;</td>
-</tr>
-<tr>
-<td><br>
-<table cellpadding="0" cellspacing="0">
-<colgroup>
-    <col width="10%">
-    <col width="80%">
-    <col width="10%">
-</colgroup>
-<tbody>
-<tr>
-    <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title">MaximTrade Executor</span></td>
-    <td rowspan="3">&nbsp;</td>
-</tr>
-<tr>
-    <td><br>
-    </td>
 </tr>
 <tr>
 <td>
-<table cellpadding="0" cellspacing="0">
-<colgroup>
-    <col width="75%">
-    <col width="3%">
-    <col width="22%">
-</colgroup>
+<table cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
-    <td class="tbl_content_top">
-        <table cellpadding="0" cellspacing="0">
-            <colgroup>
-                <col width="45%">
-                <col width="4%">
-                <col width="51%">
-            </colgroup>
+    <td class="tbl_content_top" colspan="3">
+        <table cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
                 <td colspan="3">
@@ -159,7 +135,7 @@
 
             <tr>
                 <td class="tbl_content_top">
-                    <table class="tbl_login_grey_bg" cellpadding="0" cellspacing="0" width="256" border="0">
+                    <table border="0" width="256" cellspacing="0" cellpadding="0" class="tbl_login_grey_bg">
                         <colgroup>
                             <col width="1%">
                             <col width="30%">
@@ -169,13 +145,12 @@
                         </colgroup>
                         <tbody>
                         <tr>
-                            <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif" border="0"></th>
-                            <th colspan="3" class="tbl_content_left">Secure login &nbsp;<img
-                                    src="/images/maxim/ico_secure_sml.gif"></th>
-                            <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif" border="0"></th>
+                            <th class="tbl_header_left"><img border="0" src="/images/maxim/hdr-gry-left.gif"></th>
+                            <th class="tbl_content_left" colspan="3"><?php echo __('Secure login') ?> &nbsp;<img src="/images/maxim/ico_secure_sml.gif"></th>
+                            <th class="tbl_header_right"><img border="0" src="/images/maxim/hdr-gry-right.gif"></th>
                         </tr>
 
-                        <tr height="40">
+                        <tr height="20">
                             <td></td>
                             <td></td>
                             <td></td>
@@ -184,126 +159,115 @@
                         </tr>
                         <tr height="24">
                             <td></td>
-                            <td class="txt_highlight">Trader ID</td>
-                            <td colspan="2"><input name="username" id="username" size="18" autocomplete="off"
-                                                   type="text"></td>
+                            <td class="txt_highlight"><?php echo __('Trader ID') ?></td>
+                            <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
                             <td></td>
                         </tr>
                         <tr height="24">
                             <td></td>
-                            <td class="txt_highlight">Password</td>
-                            <td colspan="2"><input name="userpassword" id="userpassword" size="18" autocomplete="off"
-                                                   type="password"></td>
+                            <td class="txt_highlight"><?php echo __('Password') ?></td>
+                            <td colspan="2"><input type="password" autocomplete="off" size="38" id="userpassword" name="userpassword"></td>
+                            <td></td>
+                        </tr>
+                        <tr height="24">
+                            <td></td>
+                            <td class="txt_highlight">
+
+                            </td>
+                            <td colspan="2">
+                                <!--<div id="captchaimage" style="height: 28; width: 100; display: inline-block;"><a href="<?php /*echo $_SERVER['PHP_SELF']; */?>" id="refreshimg" title="Click to refresh image"><img src="/captcha/image?<?php /*echo time(); */?>" height="26" alt="Captcha image" style="border-style: none"/></a></div><input name="captcha" type="text" id="captcha" class="login_t73" size="18"/>-->
+                                <?php
+                                //if ($sf_user->getAttribute(Globals::LOGIN_RETRY, 0) >= 3) {
+                                    require_once('recaptchalib.php');
+                                    $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+                                    echo recaptcha_get_html($publickey);
+                                //}
+                                ?>
+                            </td>
                             <td></td>
                         </tr>
                         <tr height="30">
                             <td></td>
                             <td></td>
-                            <td colspan="2"><img src="/images/maxim/arrow_blue_single_tab.gif" class="arwList">
-                                <a href="<?php echo url_for("/member/forgetPassword")?>">Forgot username / password </a></td>
+                            <td colspan="2"><img class="arwList" src="/images/maxim/arrow_blue_single_tab.gif">
+                                <a href="<?php echo url_for("/member/forgetPassword") ?>"><?php echo __('Forgot username') ?> / <?php echo __('password') ?></a></td>
                             <td></td>
                         </tr>
                         <tr height="36">
-                            <td colspan="5" align="center">
+                            <td align="center" colspan="5">
                                 <span class="loginbutton">
-                                    <input style="width: 80px; background-color: #e5eef5" id="submitLink"
-                                       name="Login" value="Login" type="submit">
+                                    <input type="submit" value="<?php echo __('Login') ?>" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
                                 </span>
                                 <br>
                                 <br>
                             </td>
                         </tr>
-                        <tr class="tbl_form_end">
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
                         </tbody>
                     </table>
-
-                </td>
-
-                <td class="tbl_content_middle">&nbsp;</td>
-
-                <td class="tbl_content_top">
-                    <table class="tbl_info_grey_bg" cellpadding="0" cellspacing="0">
-                        <tbody>
-                        <tr>
-                            <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
-                            <th colspan="2">New to Maxim Trader?</th>
-                            <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="tbl_info_grey_bg_overall" cellpadding="0" cellspacing="0">
-                        <colgroup>
-                            <col width="1%">
-                            <col width="4%">
-                            <col width="94%">
-                            <col width="1%">
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="tbl_content_top"><br>
-                                <img src="/images/maxim/arrow_blue_single_tab.gif">
-                            </td>
-                            <td><br>
-                                <a href="<?php echo url_for("/member/register")?>"><b>Instant Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
-                                <p>
-                                    <a href="<?php echo url_for("/member/register")?>">Click
-                                        here</a> to instantly register as Maxim Trader Member. In order to login into eTrader system, you must first register.
-                                        Please enter your desired user name, your email address and other required details in the form.</p>
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <td></td>
-                            <td><br></td>
-                            <td><br></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <br>
-                                <br>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr class="tbl_notice_end">
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
                 </td>
             </tr>
             </tbody>
         </table>
     </td>
-    <td>&nbsp;</td>
-    <td class="tbl_content_top">
-        <table class="tbl_info_green" cellpadding="0" cellspacing="0">
-            <colgroup>
-                <col class="tbl_notice_left" width="1%">
+</tr>
 
-                <col class="tbl_notice" width="98%">
-                <col class="tbl_notice_right" width="1%">
+<!--<tr>
+    <td class="tbl_content_top" colspan="3">
+        <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg">
+            <tbody>
+            <tr>
+                <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
+                <th colspan="2">New to Maxim Trader?</th>
+                <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
+            </tr>
+            </tbody>
+        </table>
+
+        <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg_overall">
+            <colgroup>
+                <col width="1%">
+                <col width="4%">
+                <col width="94%">
+                <col width="1%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td></td>
+                <td class="tbl_content_top"><br>
+                    <img src="/images/maxim/arrow_blue_single_tab.gif">
+                </td>
+                <td><br>
+                    <a href="/index.php/member/register"><b>Instant Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
+                    <p>
+                        <a href="/index.php/member/register">Click
+                            here</a> to instantly register as Maxim Trader Member. In order to login into eTrader system, you must first register.
+                            Please enter your desired user name, your email address and other required details in the form.</p>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>-->
+<tr>
+    <td>&nbsp;</td>
+</tr>
+<!--<tr>
+    <td class="tbl_content_top" colspan="3">
+        <table cellspacing="0" cellpadding="0" class="tbl_info_grey_bg">
+            <colgroup>
+                <col width="1%" class="tbl_notice_left">
+                <col width="98%" class="tbl_notice">
+                <col width="1%" class="tbl_notice_right">
             </colgroup>
             <tbody>
             <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <th class="tbl_header_left">
-                    <div class="border_left_green">&nbsp;</div>
-                </th>
+                <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
                 <th class="tbl_content_left">Need Help?</th>
-                <th class="tbl_header_right">
-                    <div class="border_right_green">&nbsp;</div>
-                </th>
+                <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -316,25 +280,17 @@
                         </li>
                         <li><a href="mailto:cs@maximtrader.com">Email us</a> for assistance
                         </li>
-                        <li><a href="#" target="_self">
+                        <li><a target="_self" href="#">
                             Frequently Asked Questions </a></li>
                     </ul>
                 </td>
                 <td>&nbsp;</td>
             </tr>
-            <tr class="tbl_info_green_bottom">
-                <td colspan="100%"><b class="green_border"><b class="green_border4"></b><b class="green_border3"></b><b
-                        class="green_border2"><b></b></b><b class="green_border1"><b></b></b></b>
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </td>
-</tr>
-
-<tr>
-    <td colspan="3">&nbsp;</td>
-</tr>
+</tr>-->
 <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -346,41 +302,38 @@
 </tr>
 </tbody>
 </table>
-</td>
-</tr>
-<tr>
-    <td>
 
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <hr class="hr_heading">
-        <br>
-        Copyright © Maxim Trader
-        &nbsp;<span class="txt_seperator">|</span>&nbsp;
-        <img src="/images/maxim/arrow_blue_single_tab.gif">
+        <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+        </div>
+    </div>
 
-        <a href="#" class="navcontainer_nav_1" id="nav_terms_conditions" target="_self">
-            Terms &amp; Conditions
-        </a>
 
-        &nbsp;<span class="txt_seperator">|</span>&nbsp;
+    <div style="margin-left: 0px;" id="sidebar">
+        <div id="sidebar-color"></div>
+        <div id="sidebar-border"></div>
+        <div id="sidebar-light"></div>
+        <div id="sidebar-texture"></div>
 
-        <img src="/images/maxim/arrow_blue_single_tab.gif">
-        <a href="#" target="_self">
-            Data Protection and Privacy Policy
-        </a>
-    </td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
+        <div id="sidebar-content">
+
+            <div id="logo"><a href="<?php echo url_for("/home")?>"><img src="/images/logo.png"></a></div>
+            <div id="menu">
+                <?php include_component('component', 'homeLeftMenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+            </div>
+            <div id="primary" class="widget-area" role="complementary">
+                <ul class="xoxo">
+                </ul>
+            </div>
+            <!-- #primary .widget-area -->
+        </div>
+
+        <div id="sidebar-bottom">
+            <ul></ul>
+            <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+        </div>
+    </div>
+</div>
 </form>
-
 </body>
 </html>

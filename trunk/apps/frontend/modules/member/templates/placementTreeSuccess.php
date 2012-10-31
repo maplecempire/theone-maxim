@@ -6,13 +6,13 @@
     cursor: pointer;
 }
 .tooltip{
-    width:200px;
+    width:300px;
     border:1px solid black;
     padding:2px 5px;
     background:lightblue;
-    position:absolute;
-    top:-10px;
-    left:50px;
+    position:fixed;
+    /*top:200px;*/
+    /*right:200px;*/
     text-align:left;
     z-index:999;
     display:none;
@@ -91,10 +91,8 @@ $(function() {
 
     $(".logoTooltip").mouseover(function(e) {
         if ($('#tooltip').is(":hidden")) {
-            var position = $(this).position();
-
-            var top = position.top;
-            var left = position.left + 100;
+            var top = e.clientY - 20;
+            var left = e.screenX + 50;
 
             $("#_distCode").html($(this).attr("distCode"));
             $("#_activeDatetime").html($(this).attr("activeDatetime"));
@@ -104,10 +102,15 @@ $(function() {
             $("#_carry_right").html($(this).attr("carry_right"));
             $("#_sales_left").html($(this).attr("sales_left"));
             $("#_sales_right").html($(this).attr("sales_right"));
+            $("#_accumulate_left").html($(this).attr("accumulate_left"));
+            $("#_accumulate_right").html($(this).attr("accumulate_right"));
+            $("#_today_left").html($(this).attr("today_left"));
+            $("#_today_right").html($(this).attr("today_right"));
+            $("#_referrer_id").html($(this).attr("referrer_id"));
             $('#tooltip').css('top', top + "px");
             $('#tooltip').css('left', left + "px");
-            $('#tooltip').fadeIn('500');
-            $('#tooltip').fadeTo('10', 0.9);
+            $('#tooltip').fadeIn('10');
+//            $('#tooltip').fadeTo('10', 0.9);
         }
     }).mouseout(function() {
         $('#tooltip').hide();
@@ -144,37 +147,24 @@ function reassignDatagridEventAttr(){
 }
 </script>
 
-<table>
-    <tr>
-        <td>
-            <div class="ewallet_li">
-                <a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(0, 93, 154);">
-                    <?php echo __('Sponsor Genealogy'); ?>
-                </a>
-                &nbsp;&nbsp;
-                <img src="/images/arrow_blue_single_tab.gif">
-                &nbsp;&nbsp;
-                <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(134, 197, 51);">
-                    <?php echo __('Placement Genealogy'); ?>
-                </a>
-                &nbsp;&nbsp;
-                <img src="/images/arrow_blue_single_tab.gif">
-                &nbsp;&nbsp;
-                <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(0, 93, 154);">
-                    <?php echo __('Downline Stats'); ?>
-                </a>
-            </div>
-        </td>
-    </tr>
-</table>
 
-
-<form action="/member/placementTree" id="transferForm" method="post">
-    <input type="hidden" name="uplineDistCode" id="uplineDistCode">
-    <input type="hidden" name="uplinePosition" id="uplinePosition">
-    <input type="hidden" name="sponsorDistId" id="sponsorDistId">
-    <input type="hidden" name="doAction" id="doAction">
-    <input type="hidden" name="p" id="<?php echo $pageDirection; ?>">
+<div class="ewallet_li">
+    <a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(0, 93, 154);">
+        <?php echo __('Sponsor Genealogy'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(134, 197, 51);">
+        <?php echo __('Placement Genealogy'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(0, 93, 154);">
+        <?php echo __('Downline Stats'); ?>
+    </a>
+</div>
 
 <table cellpadding="0" cellspacing="0">
 <tbody>
@@ -209,517 +199,19 @@ function reassignDatagridEventAttr(){
 
     </td>
 </tr>
-<tr>
-    <td>
-    <div id="tooltip" class="tooltip">
-        <table class="statsNode" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-            <tr>
-                <td><b id="_distCode"></b></td>
-                <td colspan="2" id="_activeDatetime"></td>
-            </tr>
-            <tr>
-                <td><?php echo __('Package Rank');?></td>
-                <td colspan="2" id="_rankCode"></td>
-            </tr>
-            <tr>
-                <td><?php echo __('Daily Max');?></td>
-                <td colspan="2" id="_daily"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Left</td>
-                <td>Right</td>
-            </tr>
-            <tr>
-                <td><?php echo __('Carry Forward');?></td>
-                <td id="_carry_left"></td>
-                <td id="_carry_right"></td>
-            </tr>
-            <tr>
-                <td><?php echo __('This Month Sales');?></td>
-                <td id="_sales_left"></td>
-                <td id="_sales_right"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-        <table border="0" cellspacing="0" cellpadding="0" width="100%">
-            <tbody>
-                <tr>
-                    <td colspan="18" align="left"><?php echo __("Trader ID")?>&nbsp;
-                        <input size="8" type="text" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>
-                        <button id="btnSearch"><?php echo __('Search') ?></button>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-            <tr>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="5.5%">&nbsp;</td>
-                <td width="1%">&nbsp;</td>
-            </tr>
-            <tr>
-                <?php
-                    $distCode = $anode[0]['distCode'];
-                    $availableButton = $anode[0]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[0]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        //$textStr = $distDB->getNickName();
-                        //$textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        //$textStr .= "<br>".$distDB->getCreatedOn();
-                        //$textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        //$textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        //$textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        //$textStr .= "<br>".__('This Month CPS').": ".number_format($anode[0]['_left_this_month_sales'],0)." | ".number_format($anode[0]['_right_this_month_sales'],0);
-                        //$textStr .= "<br>";
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[0]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[0]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="18" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="18" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[0]['distCode'];
-                    $availableButton = $anode[0]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[0]['_self'];
-                        $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-                        //$textStr .= "<br>".$distDB->getCreatedOn();
-                        //$textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-                        //$textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-                        //$textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-                        //$textStr .= "<br>".__('This Month CPS').": ".number_format($anode[0]['_left_this_month_sales'],0)." | ".number_format($anode[0]['_right_this_month_sales'],0);
-                        //$textStr .= "<br>";
-                    ?>
-                    <?php
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="3">&nbsp;</td>
-                <td colspan="6" style="border-right:1mm solid #2284C6; border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="6" style="border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="3">&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="3">&nbsp;</td>
-                <td colspan="6" style="border-left:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="6" style="border-right:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="3">&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <?php
-                    $distCode = $anode[1]['distCode'];
-                    $availableButton = $anode[1]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[1]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[1]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[1]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="6" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td colspan="6" align="center"></td>
-                <?php
-                    $distCode = $anode[2]['distCode'];
-                    $availableButton = $anode[2]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[2]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[2]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[2]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="6" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="6" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[1]['distCode'];
-                    $availableButton = $anode[1]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[1]['_self'];
-                        $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[1]['_left_this_month_sales'],0)." | ".number_format($anode[1]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td colspan="6" align="center"></td>
-                <td colspan="6" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[2]['distCode'];
-                    $availableButton = $anode[2]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[2]['_self'];
-                        $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[2]['_left_this_month_sales'],0)." | ".number_format($anode[2]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[0]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td colspan="2" style="border-right:1mm solid #2284C6; border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2" style="border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2" style="border-right:1mm solid #2284C6; border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2" style="border-bottom:1mm solid #2284C6">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td colspan="2" style="border-left:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2" style="border-right:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                <td colspan="2" style="border-left:1mm solid #2284C6">&nbsp;</td>
-                <td colspan="2" style="border-right:1mm solid #2284C6">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <?php
-                    $distCode = $anode[3]['distCode'];
-                    $availableButton = $anode[3]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[3]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[3]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[3]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td colspan="2" align="center"></td>
-
-                <?php
-                    $distCode = $anode[4]['distCode'];
-                    $availableButton = $anode[4]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[4]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[4]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[4]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <?php
-                    $distCode = $anode[5]['distCode'];
-                    $availableButton = $anode[5]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[5]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[5]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[5]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td colspan="2" align="center"></td>
-                <?php
-                    $distCode = $anode[6]['distCode'];
-                    $availableButton = $anode[6]['_available'];
-                    $textStr = "";
-                    $classAndAttr = "";
-                    $headColor = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[6]['_self'];
-                        $headColor = $colorArr[$distDB->getRankId()]."_";
-                        $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
-
-                        $classAndAttr .= " class='logoTooltip'";
-                        $classAndAttr .= " distCode='".$distCode."'";
-                        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
-                        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-                        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
-                        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
-                        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
-                        $classAndAttr .= " sales_left='".number_format($anode[6]['_left_this_month_sales'],0)."'";
-                        $classAndAttr .= " sales_right='".number_format($anode[6]['_right_this_month_sales'],0)."'";
-                    }
-                ?>
-                <td colspan="2" align="center"><img src="/css/maxim/tree/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center" >
-                <strong>
-                    <?php
-                    $distCode = $anode[3]['distCode'];
-                    $availableButton = $anode[3]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[3]['_self'];
-                        $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[3]['_left_this_month_sales'],0)." | ".number_format($anode[3]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[4]['distCode'];
-                    $availableButton = $anode[4]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[4]['_self'];
-                        $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[4]['_left_this_month_sales'],0)." | ".number_format($anode[4]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[1]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[5]['distCode'];
-                    $availableButton = $anode[5]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[5]['_self'];
-                        $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[5]['_left_this_month_sales'],0)." | ".number_format($anode[5]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='LEFT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td colspan="2" align="center"></td>
-                <td colspan="2" align="center">
-                    <strong>
-                    <?php
-                    $distCode = $anode[6]['distCode'];
-                    $availableButton = $anode[6]['_available'];
-                    $textStr = "";
-                    if ($distCode != "") {
-                        $distDB = $anode[6]['_self'];
-                        $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
-                        //$timeStamp = strtotime($distDB->getCreatedOn());
-                        //$dateString = date(Globals::FULL_DATETIME_FORMAT, $timeStamp);
-
-                        $textStr = $distDB->getNickName();
-                        $textStr .= "<br><a href='".url_for("/member/placementTree?distcode=".$distCode)."' class='viewDetail'>".$distCode."</a>";
-//                        $textStr .= "<br>".$distDB->getCreatedOn();
-//                        $textStr .= "<br>".__('Package Rank').": ".__($distDB->getRankCode());
-//                        $textStr .= "<br>".__('Daily Max').": ".number_format($distPairingLedgerDB->getFlushLimit(),0);
-//                        $textStr .= "<br>".__('Carry Forward CPS').": ".number_format($distPairingLedgerDB->getLeftBalance(),0)." | ".number_format($distPairingLedgerDB->getRightBalance(),0);
-//                        $textStr .= "<br>".__('This Month CPS').": ".number_format($anode[6]['_left_this_month_sales'],0)." | ".number_format($anode[6]['_right_this_month_sales'],0);
-//                        $textStr .= "<br>";
-                    } else if ($availableButton == true) {
-                        $textStr .= "<br><a href='#' class='placement' uplinePosition='RIGHT' uplineDistCode='".$anode[2]['distCode']."'>".__('Available')."</a>";
-                    }
-
-                    echo $textStr;
-                    ?>
-                    </strong>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            </tbody>
-        </table>
-    </td>
-</tr>
 </tbody>
 </table>
+
+<form action="/member/placementTree" id="transferForm" method="post">
+    <input type="hidden" name="uplineDistCode" id="uplineDistCode">
+    <input type="hidden" name="uplinePosition" id="uplinePosition">
+    <input type="hidden" name="sponsorDistId" id="sponsorDistId">
+    <input type="hidden" name="doAction" id="doAction">
+    <input type="hidden" name="p" id="<?php echo $pageDirection; ?>">
+        <?php echo __("Trader ID")?>&nbsp;<input size="8" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
+        <br>
+
+
 </form>
 
 <div id="dgActivateMember" title="<?php echo __('Activate Trader') ?>" style="display:none;">
@@ -747,4 +239,432 @@ function reassignDatagridEventAttr(){
         </tr>
         </thead>
     </table>
+</div>
+
+<link rel='stylesheet' type='text/css' media='screen' href='/css/network/network.css'/>
+
+<div style="width: 600px;">
+<div style="width: 60px; margin-left: 268px; text-align:center; float:left;" class="stats-node">
+    <div id="tooltip" class="tooltip">
+        <table class="statsNode placementTree" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr>
+                <td><b id="_distCode"></b></td>
+                <td><?php echo __('Left');?></td>
+                <td><?php echo __('Right');?></td>
+            </tr>
+            <tr>
+                <td><?php echo __('Accumulate Group BV');?></td>
+                <td id="_accumulate_left"></td>
+                <td id="_accumulate_right"></td>
+            </tr>
+            <tr>
+                <td><?php echo __('Today Group BV');?></td>
+                <td id="_today_left"></td>
+                <td id="_today_right"></td>
+            </tr>
+            <tr>
+                <td><?php echo __('Carry Forward');?></td>
+                <td id="_carry_left"></td>
+                <td id="_carry_right"></td>
+            </tr>
+            <tr>
+                <td><?php echo __('Today Total Group BV');?></td>
+                <td id="_sales_left"></td>
+                <td id="_sales_right"></td>
+            </tr>
+            <tr>
+                <td><?php echo __('Referrer ID');?></td>
+                <td id="_referrer_id" colspan="2"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<?php
+    $distCode = $anode[0]['distCode'];
+    $availableButton = $anode[0]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[0]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[0]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[0]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[0]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[0]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[0]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[0]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[0]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[0]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[0]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[0]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div class="network-top-more-node">
+    <?php if ($isTop == false) { ?>
+        <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getTreeUplineDistCode()) ?>"></a>
+    <?php } ?>
+</div>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+        <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div style="width: 300px; margin-left: 148px; float:left; height: 27px;">
+    <div style="width: 2px; overflow-x: hidden; margin-left: 149px; height: 25px;"
+         class="stats-node-line-up stats-node-line"></div>
+    <div style="width: 302px; margin-left:-1px; overflow-y: hidden; height: 2px;"
+         class="stats-node-line-side stats-node-line"></div>
+</div>
+<div style="clear:both;"></div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 147px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 298px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<div style="clear:both;"></div>
+
+<?php
+    $distCode = $anode[1]['distCode'];
+    $availableButton = $anode[1]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[1]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[1]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[1]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[1]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[1]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[1]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[1]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[1]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[1]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[1]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[1]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+
+<div style="width: 60px; margin-left: 118px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        </div>
+    <?php }?>
+</div>
+
+<?php
+    $distCode = $anode[2]['distCode'];
+    $availableButton = $anode[2]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[2]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[2]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[2]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[2]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[2]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[2]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[2]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[2]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[2]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[2]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[2]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div style="width: 60px; margin-left: 240px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        </div>
+    <?php }?>
+</div>
+<div style="clear:both;"></div>
+<div style="width: 150px; margin-left: 73px; float:left; height: 27px;">
+<?php
+if ($anode[1]['distCode'] != "") { ?>
+    <div style="width: 2px; overflow-x: hidden; margin-left: 74px; height: 25px;"
+         class="stats-node-line-up stats-node-line"></div>
+    <div style="width: 152px; margin-left:-1px; overflow-y: hidden; height: 2px;"
+         class="stats-node-line-side stats-node-line"></div>
+    <?php } else { ?>
+    <div style="clear:both;">&nbsp;</div>
+    <div style="clear:both;">&nbsp;</div>
+    <?php } ?>
+</div>
+<div style="width: 150px; margin-left: 150px; float:left; height: 27px;">
+    <?php if ($anode[2]['distCode'] != "") { ?>
+    <div style="width: 2px; overflow-x: hidden; margin-left: 74px; height: 25px;"
+         class="stats-node-line-up stats-node-line"></div>
+    <div style="width: 152px; margin-left:-1px; overflow-y: hidden; height: 2px;"
+         class="stats-node-line-side stats-node-line"></div>
+    <?php } else { ?>
+    <div style="clear:both;">&nbsp;</div>
+    <div style="clear:both;">&nbsp;</div>
+    <?php } ?>
+</div>
+<div style="clear:both;"></div>
+
+<?php if ($anode[1]['distCode'] != "") { ?>
+<div style="width: 2px; overflow-x: hidden; margin-left: 72px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<?php } else { ?>
+<div style="width: 2px; overflow-x: hidden; margin-left: 72px; float:left; height: 25px;">&nbsp;</div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;">&nbsp;</div>
+<?php } ?>
+<?php if ($anode[2]['distCode'] != "") { ?>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;"
+     class="stats-node-line-up stats-node-line"></div>
+<?php } else { ?>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;">&nbsp;</div>
+<div style="width: 2px; overflow-x: hidden; margin-left: 148px; float:left; height: 25px;">&nbsp;</div>
+<?php } ?>
+<div style="clear:both;"></div>
+
+<?php
+    $distCode = $anode[3]['distCode'];
+    $availableButton = $anode[3]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[3]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[3]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[3]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[3]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[3]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[3]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[3]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[3]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[3]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[3]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[3]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div style="width: 60px; margin-left: 43px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        </div>
+    <?php } else { ?>
+        <div style="clear:both;">&nbsp;</div>
+    <?php }  ?>
+</div>
+
+<?php
+    $distCode = $anode[4]['distCode'];
+    $availableButton = $anode[4]['_available'];
+    $textStr = "";
+    $headColor = "";
+    $classAndAttr = "";
+    if ($distCode != "") {
+        $distDB = $anode[4]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[4]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[4]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[4]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[4]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[4]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[4]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[4]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[4]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[4]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[4]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        </div>
+    <?php } else { ?>
+        <div style="clear:both;">&nbsp;</div>
+    <?php }  ?>
+</div>
+
+<?php
+    $distCode = $anode[5]['distCode'];
+    $availableButton = $anode[5]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[5]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[5]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[5]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[5]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[5]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[5]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[5]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[5]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[5]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[5]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[5]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        </div>
+    <?php } else { ?>
+        <div style="clear:both;">&nbsp;</div>
+    <?php }  ?>
+</div>
+
+<?php
+    $distCode = $anode[6]['distCode'];
+    $availableButton = $anode[6]['_available'];
+    $textStr = "";
+    $classAndAttr = "";
+    $headColor = "";
+    if ($distCode != "") {
+        $distDB = $anode[6]['_self'];
+        $headColor = $colorArr[$distDB->getRankId()]."_";
+        $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
+
+        $classAndAttr .= " class='logoTooltip'";
+        $classAndAttr .= " distCode='".$distCode."'";
+        $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
+        $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
+        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+/*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
+        $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[6]['_left_this_month_sales'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[6]['_right_this_month_sales'],0)."'";*/
+        $classAndAttr .= " accumulate_left='".number_format($anode[6]['_accumulate_left'],0)."'";
+        $classAndAttr .= " accumulate_right='".number_format($anode[6]['_accumulate_right'],0)."'";
+        $classAndAttr .= " today_left='".number_format($anode[6]['_today_left'],0)."'";
+        $classAndAttr .= " today_right='".number_format($anode[6]['_today_right'],0)."'";
+        $classAndAttr .= " carry_left='".number_format($anode[6]['_carry_left'],0)."'";
+        $classAndAttr .= " carry_right='".number_format($anode[6]['_carry_right'],0)."'";
+        $classAndAttr .= " sales_left='".number_format($anode[6]['_sales_left'],0)."'";
+        $classAndAttr .= " sales_right='".number_format($anode[6]['_sales_right'],0)."'";
+        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+    }
+?>
+<div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
+    <?php if ($distCode != "") { ?>
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>">
+            <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a><br>
+
+    <div class="network-username"><?php echo $distDB->getDistributorCode()?></div>
+    <div align="center" class="network-button-wraper"><a class="network-add-investment"
+                                                         href="<?php echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) ?>">Add Investment</a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <?php } else if ($availableButton == true) { ?>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        </div>
+    <?php } else { ?>
+        <div style="clear:both;">&nbsp;</div>
+    <?php }  ?>
+</div>
+<div style="clear:both;"></div>
+
 </div>

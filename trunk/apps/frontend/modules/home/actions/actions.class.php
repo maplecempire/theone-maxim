@@ -97,7 +97,7 @@ class homeActions extends sfActions
                 // ******************* uncomment for testing purpose ****************
                 $existUser = AppUserPeer::retrieveByPk(3);
             } else {
-                //if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
+                if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
                     require_once('recaptchalib.php');
                     $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
                     $resp = recaptcha_check_answer ($privatekey,
@@ -109,12 +109,14 @@ class homeActions extends sfActions
                         $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
                         return $this->redirect('home/login');
                     }
-                //}
+                }
 
                 $username = trim($this->getRequestParameter('username'));
                 $password = trim($this->getRequestParameter('userpassword'));
 
                 if ($username == '' || $password == '') {
+                    $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
+
                     $this->setFlash('errorMsg', "Invalid username or password.");
                     return $this->redirect('home/login');
                 }

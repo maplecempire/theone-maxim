@@ -73,6 +73,7 @@ class adminActions extends sfActions
         $reloadMt4Fund = $this->getTotalReloadMt4Fund(Globals::STATUS_PENDING);
         $mt4Withdrawal = $this->getTotalMt4Withdrawal(Globals::STATUS_PENDING);
         $referralBonus = $this->getTotalRefferalBonus(Globals::STATUS_PENDING);
+        $ecashWithdrawal = $this->getTotalEcashWithdrawal(Globals::STATUS_PENDING);
 
         /*$c = new Criteria();
         $packages = MlmPackagePeer::doSelect($c);
@@ -91,6 +92,7 @@ class adminActions extends sfActions
         $this->reloadMt4Fund = $reloadMt4Fund;
         $this->mt4Withdrawal = $mt4Withdrawal;
         $this->referralBonus = $referralBonus;
+        $this->ecashWithdrawal = $ecashWithdrawal;
     }
 
     public function executeUserList()
@@ -545,6 +547,16 @@ class adminActions extends sfActions
             $c->add(MlmDistCommissionLedgerPeer::STATUS_CODE, $statusCode);
         }
         $totalNetworks = MlmDistCommissionLedgerPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getTotalEcashWithdrawal($statusCode)
+    {
+        $c = new Criteria();
+        if ($statusCode != null) {
+            $c->add(MlmEcashWithdrawPeer::STATUS_CODE, $statusCode);
+        }
+        $totalNetworks = MlmEcashWithdrawPeer::doCount($c);
 
         return $totalNetworks;
     }
