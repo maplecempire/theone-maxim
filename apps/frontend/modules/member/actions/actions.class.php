@@ -9,6 +9,102 @@
  */
 class memberActions extends sfActions
 {
+    public function executeVerifyActivePlacementDistId()
+    {
+        $sponsorId = $this->getRequestParameter('sponsorId');
+        $placementDistId = $this->getRequestParameter('placementDistId');
+
+        //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$sponsorId."%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $existUser = MlmDistributorPeer::doSelectOne($c);
+
+        $arr = "";
+        if ($existUser) {
+            //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+            $arr = array(
+                'userId' => $existUser->getDistributorId(),
+                'userName' => $existUser->getDistributorCode(),
+                'fullname' => $existUser->getFullName(),
+                'nickname' => $existUser->getNickname()
+            );
+            //}
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
+    public function executePurchasePackageViaTree()
+    {
+        $uplineDistCode = $this->getRequestParameter('distcode');
+        $position = $this->getRequestParameter('position');
+
+        $c = new Criteria();
+        $packageDBs = MlmPackagePeer::doSelect($c);
+
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->packageDBs = $packageDBs;
+
+        $this->uplineDistCode = $uplineDistCode;
+        $this->position = $position;
+    }
+    public function executePurchasePackageViaTree2()
+    {
+        $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
+        $this->position = $this->getRequestParameter('position');
+        //var_dump($this->getRequestParameter('uplineDistCode'));
+        if ($this->getRequestParameter('pid') <> "") {
+            $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
+            $this->forward404Unless($selectedPackage);
+
+            $amountNeeded = $selectedPackage->getPrice();
+
+            $existDist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTID)));
+            $this->forward404Unless($existDist);
+            $this->sponsorId = $existDist->getDistributorCode();
+            $this->sponsorName = $existDist->getFullName();
+
+            if ($amountNeeded > $ledgerEPointBalance) {
+                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
+                return $this->redirect('/member/purchasePackageViaTree');
+            }
+
+            $this->selectedPackage = $selectedPackage;
+            $this->productCode = $this->getRequestParameter('productCode');
+        } else {
+            return $this->redirect('/member/purchasePackageViaTree');
+        }
+    }
+    public function executeUpgradePackageViaTree()
+    {
+        $distCode = $this->getRequestParameter('distcode');
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
+        $packageDBs = MlmPackagePeer::doSelect($c);
+
+        $c = new Criteria();
+        $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
+        $highestPackageDB = MlmPackagePeer::doSelectOne($c);
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode);
+        $distDB = MlmDistributorPeer::doSelectOne($c);
+        $this->forward404Unless($distDB);
+
+        $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
+
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->packageDBs = $packageDBs;
+        $this->distPackage = $distPackage;
+        $this->distDB = $distDB;
+        $this->highestPackageDB = $highestPackageDB;
+        $this->distCode = $distCode;
+    }
     public function executeUnderMaintenance()
     {
     }
@@ -537,10 +633,16 @@ class memberActions extends sfActions
         try {
             $con->begin();
             //******************* upline distributor ID
-            $uplineDistId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+            $uplineDistCode = $this->getRequestParameter('sponsorId');
 
-            $uplineDistDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
             $this->forward404Unless($uplineDistDB);
+
+            $uplineDistId = $uplineDistDB->getDistributorId();
             $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
             $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
@@ -739,8 +841,14 @@ class memberActions extends sfActions
                     //var_dump("==>2");
                     $checkCommission = true;
                     $uplineDistId = $uplineDistDB->getUplineDistId();
+
+
                     while ($checkCommission == true) {
                         //var_dump("==>3**".$uplineDistId);
+                        if ($uplineDistId == null || $uplineDistId == 0) {
+                            $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT ;
+                            break;
+                        }
                         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
                         //var_dump("==>3$$".$uplineDistId);
@@ -824,36 +932,69 @@ class memberActions extends sfActions
             // **********************************************************************************************
             // *****************************         tree placement          **********************
             // **********************************************************************************************
-            if ($position == 1 || $position == 2){
+            $uplineDistCode = $this->getRequestParameter('uplineDistCode');
+            $treePosition = $this->getRequestParameter('treePosition');
+            $placementType = $this->getRequestParameter('placementType'); // 1 = auto, 0 = manual
+            $placementDistCode = $this->getRequestParameter('placementDistId'); // 1 = auto, 0 = manual
+            if ($position == 1 || $position == 2 || $treePosition != ""){
                 $uplinePosition = "";
 
-                if ($position == 1) {
-                    $uplinePosition = Globals::PLACEMENT_LEFT;
-                } else if ($position == 2) {
-                    $uplinePosition = Globals::PLACEMENT_RIGHT;
+                if ($treePosition != "") {
+                    if ($treePosition == "left") {
+                        $uplinePosition = Globals::PLACEMENT_LEFT;
+                    } else if ($treePosition == "right") {
+                        $uplinePosition = Globals::PLACEMENT_RIGHT;
+                    }
+                } else {
+                    if ($position == 1) {
+                        $uplinePosition = Globals::PLACEMENT_LEFT;
+                    } else if ($position == 2) {
+                        $uplinePosition = Globals::PLACEMENT_RIGHT;
+                    }
                 }
 
                 $placementSuccessful = false;
-                $uplineDistId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                while ($placementSuccessful == false) {
-                    if ($placementSuccessful == true)
-                        break;
-                    //var_dump("uplineDistId=".$uplineDistId);
+
+                if ($uplineDistCode != "") {
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
-                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-                    $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
-                    $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+                    $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+                } else {
+                    if ($placementType == 0) {
+                        $c = new Criteria();
+                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
+                        $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                    if ($downlineDistDB) {
-                        $uplineDistId = $downlineDistDB->getDistributorId();
+                        $uplineDistId = $uplineDistDB->getDistributorId();
                     } else {
-                        //var_dump("====NO===".$uplineDistId);
-                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+                        $uplineDistCode = $this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                        $c = new Criteria();
+                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+                        $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                        //var_dump($uplineDistDB);
-                        $placementSuccessful = true;
-                        break;
+                        $uplineDistId = $uplineDistDB->getDistributorId();
+                    }
+
+                    while ($placementSuccessful == false) {
+                        if ($placementSuccessful == true)
+                            break;
+                        //var_dump("uplineDistId=".$uplineDistId);
+                        $c = new Criteria();
+                        $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
+                        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                        $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
+                        $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                        if ($downlineDistDB) {
+                            $uplineDistId = $downlineDistDB->getDistributorId();
+                        } else {
+                            //var_dump("====NO===".$uplineDistId);
+                            $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+
+                            //var_dump($uplineDistDB);
+                            $placementSuccessful = true;
+                            break;
+                        }
                     }
                 }
                 //var_dump("result:::".$uplineDistId);
@@ -975,12 +1116,9 @@ class memberActions extends sfActions
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
             return $this->redirect('/member/placementTree');
             //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
-        } else if ($position == 1){
+        } else if ($position == 1 || $position == 2 || $treePosition != ""){
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
-            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
-        } else if ($position == 2){
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
-            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
+            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
         }
         return $this->redirect('/member/summary');
     }
@@ -1855,6 +1993,14 @@ class memberActions extends sfActions
         $anode[0]["_left_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
         $anode[0]["_right_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
         $anode[0]["_dist_pairing_ledger"] = $this->queryDistPairing($distDB->getDistributorId());
+        $anode[0]["_accumulate_left"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+        $anode[0]["_accumulate_right"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        $anode[0]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+        $anode[0]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        $anode[0]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[0]["_today_left"];
+        $anode[0]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[0]["_today_right"];
+        $anode[0]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+        $anode[0]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
 
         if ($leftOnePlacement == null) {
             $anode[1]["distCode"] = "";
@@ -1865,6 +2011,14 @@ class memberActions extends sfActions
             $anode[1]["_left_this_month_sales"] = null;
             $anode[1]["_right_this_month_sales"] = null;
             $anode[1]["_dist_pairing_ledger"] = null;
+            $anode[1]["_accumulate_left"] = null;
+            $anode[1]["_accumulate_right"] = null;
+            $anode[1]["_today_left"] = null;
+            $anode[1]["_today_right"] = null;
+            $anode[1]["_carry_left"] = null;
+            $anode[1]["_carry_right"] = null;
+            $anode[1]["_sales_left"] = null;
+            $anode[1]["_sales_right"] = null;
 
             $anode[3]["distCode"] = "";
             $anode[3]["_self"] = new MlmDistributor();
@@ -1874,6 +2028,14 @@ class memberActions extends sfActions
             $anode[3]["_left_this_month_sales"] = null;
             $anode[3]["_right_this_month_sales"] = null;
             $anode[3]["_dist_pairing_ledger"] = null;
+            $anode[3]["_accumulate_left"] = null;
+            $anode[3]["_accumulate_right"] = null;
+            $anode[3]["_today_left"] = null;
+            $anode[3]["_today_right"] = null;
+            $anode[3]["_carry_left"] = null;
+            $anode[3]["_carry_right"] = null;
+            $anode[3]["_sales_left"] = null;
+            $anode[3]["_sales_right"] = null;
 
             $anode[4]["distCode"] = "";
             $anode[4]["_self"] = new MlmDistributor();
@@ -1883,6 +2045,14 @@ class memberActions extends sfActions
             $anode[4]["_left_this_month_sales"] = null;
             $anode[4]["_right_this_month_sales"] = null;
             $anode[4]["_dist_pairing_ledger"] = null;
+            $anode[4]["_accumulate_left"] = null;
+            $anode[4]["_accumulate_right"] = null;
+            $anode[4]["_today_left"] = null;
+            $anode[4]["_today_right"] = null;
+            $anode[4]["_carry_left"] = null;
+            $anode[4]["_carry_right"] = null;
+            $anode[4]["_sales_left"] = null;
+            $anode[4]["_sales_right"] = null;
         } else {
             $distDB = $this->getDistributorInformation($leftOnePlacement->getDistributorCode());
             $leftThreePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
@@ -1896,6 +2066,14 @@ class memberActions extends sfActions
             $anode[1]["_left_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
             $anode[1]["_right_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
             $anode[1]["_dist_pairing_ledger"] = $this->queryDistPairing($leftOnePlacement->getDistributorId());
+            $anode[1]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $anode[1]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $anode[1]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $anode[1]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $anode[1]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[1]["_today_left"];
+            $anode[1]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[1]["_today_right"];
+            $anode[1]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+            $anode[1]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
 
             if ($leftThreePlacement == null) {
                 $anode[3]["distCode"] = "";
@@ -1906,6 +2084,14 @@ class memberActions extends sfActions
                 $anode[3]["_left_this_month_sales"] = null;
                 $anode[3]["_right_this_month_sales"] = null;
                 $anode[3]["_dist_pairing_ledger"] = null;
+                $anode[3]["_accumulate_left"] = null;
+                $anode[3]["_accumulate_right"] = null;
+                $anode[3]["_today_left"] = null;
+                $anode[3]["_today_right"] = null;
+                $anode[3]["_carry_left"] = null;
+                $anode[3]["_carry_right"] = null;
+                $anode[3]["_sales_left"] = null;
+                $anode[3]["_sales_right"] = null;
             } else {
                 $distDB = $this->getDistributorInformation($leftThreePlacement->getDistributorCode());
                 $anode[3]["distCode"] = $leftThreePlacement->getDistributorCode();
@@ -1916,6 +2102,14 @@ class memberActions extends sfActions
                 $anode[3]["_left_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
                 $anode[3]["_right_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
                 $anode[3]["_dist_pairing_ledger"] = $this->queryDistPairing($leftThreePlacement->getDistributorId());
+                $anode[3]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[3]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[3]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[3]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[3]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[3]["_today_left"];
+                $anode[3]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[3]["_today_right"];
+                $anode[3]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+                $anode[3]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             }
             if ($rightFourPlacement == null) {
                 $anode[4]["distCode"] = "";
@@ -1926,6 +2120,14 @@ class memberActions extends sfActions
                 $anode[4]["_left_this_month_sales"] = null;
                 $anode[4]["_right_this_month_sales"] = null;
                 $anode[4]["_dist_pairing_ledger"] = null;
+                $anode[4]["_accumulate_left"] = null;
+                $anode[4]["_accumulate_right"] = null;
+                $anode[4]["_today_left"] = null;
+                $anode[4]["_today_right"] = null;
+                $anode[4]["_carry_left"] = null;
+                $anode[4]["_carry_right"] = null;
+                $anode[4]["_sales_left"] = null;
+                $anode[4]["_sales_right"] = null;
             } else {
                 $distDB = $this->getDistributorInformation($rightFourPlacement->getDistributorCode());
                 $anode[4]["distCode"] = $rightFourPlacement->getDistributorCode();
@@ -1936,6 +2138,14 @@ class memberActions extends sfActions
                 $anode[4]["_left_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
                 $anode[4]["_right_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
                 $anode[4]["_dist_pairing_ledger"] = $this->queryDistPairing($rightFourPlacement->getDistributorId());
+                $anode[4]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[4]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[4]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[4]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[4]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[4]["_today_left"];
+                $anode[4]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[4]["_today_right"];
+                $anode[4]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+                $anode[4]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             }
         }
         if ($rightTwoPlacement == null) {
@@ -1947,6 +2157,14 @@ class memberActions extends sfActions
             $anode[2]["_left_this_month_sales"] = null;
             $anode[2]["_right_this_month_sales"] = null;
             $anode[2]["_dist_pairing_ledger"] = null;
+            $anode[2]["_accumulate_left"] = null;
+            $anode[2]["_accumulate_right"] = null;
+            $anode[2]["_today_left"] = null;
+            $anode[2]["_today_right"] = null;
+            $anode[2]["_carry_left"] = null;
+            $anode[2]["_carry_right"] = null;
+            $anode[2]["_sales_left"] = null;
+            $anode[2]["_sales_right"] = null;
 
             $anode[5]["distCode"] = "";
             $anode[5]["_self"] = new MlmDistributor();
@@ -1956,6 +2174,14 @@ class memberActions extends sfActions
             $anode[5]["_left_this_month_sales"] = null;
             $anode[5]["_right_this_month_sales"] = null;
             $anode[5]["_dist_pairing_ledger"] = null;
+            $anode[5]["_accumulate_left"] = null;
+            $anode[5]["_accumulate_right"] = null;
+            $anode[5]["_today_left"] = null;
+            $anode[5]["_today_right"] = null;
+            $anode[5]["_carry_left"] = null;
+            $anode[5]["_carry_right"] = null;
+            $anode[5]["_sales_left"] = null;
+            $anode[5]["_sales_right"] = null;
 
             $anode[6]["distCode"] = "";
             $anode[6]["_self"] = new MlmDistributor();
@@ -1965,6 +2191,14 @@ class memberActions extends sfActions
             $anode[6]["_left_this_month_sales"] = null;
             $anode[6]["_right_this_month_sales"] = null;
             $anode[6]["_dist_pairing_ledger"] = null;
+            $anode[6]["_accumulate_left"] = null;
+            $anode[6]["_accumulate_right"] = null;
+            $anode[6]["_today_left"] = null;
+            $anode[6]["_today_right"] = null;
+            $anode[6]["_carry_left"] = null;
+            $anode[6]["_carry_right"] = null;
+            $anode[6]["_sales_left"] = null;
+            $anode[6]["_sales_right"] = null;
         } else {
             $distDB = $this->getDistributorInformation($rightTwoPlacement->getDistributorCode());
             $leftFivePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
@@ -1978,6 +2212,15 @@ class memberActions extends sfActions
             $anode[2]["_left_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
             $anode[2]["_right_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
             $anode[2]["_dist_pairing_ledger"] = $this->queryDistPairing($rightTwoPlacement->getDistributorId());
+            $anode[2]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $anode[2]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $anode[2]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $anode[2]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $anode[2]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[2]["_today_left"];
+            $anode[2]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[2]["_today_right"];
+            $anode[2]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+            $anode[2]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+
 
             if ($leftFivePlacement == null) {
                 $anode[5]["distCode"] = "";
@@ -1988,6 +2231,14 @@ class memberActions extends sfActions
                 $anode[5]["_left_this_month_sales"] = null;
                 $anode[5]["_right_this_month_sales"] = null;
                 $anode[5]["_dist_pairing_ledger"] = null;
+                $anode[5]["_accumulate_left"] = null;
+                $anode[5]["_accumulate_right"] = null;
+                $anode[5]["_today_left"] = null;
+                $anode[5]["_today_right"] = null;
+                $anode[5]["_carry_left"] = null;
+                $anode[5]["_carry_right"] = null;
+                $anode[5]["_sales_left"] = null;
+                $anode[5]["_sales_right"] = null;
             } else {
                 $distDB = $this->getDistributorInformation($leftFivePlacement->getDistributorCode());
                 $anode[5]["distCode"] = $leftFivePlacement->getDistributorCode();
@@ -1998,6 +2249,14 @@ class memberActions extends sfActions
                 $anode[5]["_left_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
                 $anode[5]["_right_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
                 $anode[5]["_dist_pairing_ledger"] = $this->queryDistPairing($leftFivePlacement->getDistributorId());
+                $anode[5]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[5]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[5]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[5]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[5]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[5]["_today_left"];
+                $anode[5]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[5]["_today_right"];
+                $anode[5]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+                $anode[5]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             }
             if ($rightSixPlacement == null) {
                 $anode[6]["distCode"] = "";
@@ -2008,6 +2267,14 @@ class memberActions extends sfActions
                 $anode[6]["_left_this_month_sales"] = null;
                 $anode[6]["_right_this_month_sales"] = null;
                 $anode[6]["_dist_pairing_ledger"] = null;
+                $anode[6]["_accumulate_left"] = null;
+                $anode[6]["_accumulate_right"] = null;
+                $anode[6]["_today_left"] = null;
+                $anode[6]["_today_right"] = null;
+                $anode[6]["_carry_left"] = null;
+                $anode[6]["_carry_right"] = null;
+                $anode[6]["_sales_left"] = null;
+                $anode[6]["_sales_right"] = null;
             } else {
                 $distDB = $this->getDistributorInformation($rightSixPlacement->getDistributorCode());
                 $anode[6]["distCode"] = $rightSixPlacement->getDistributorCode();
@@ -2018,12 +2285,26 @@ class memberActions extends sfActions
                 $anode[6]["_left_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
                 $anode[6]["_right_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
                 $anode[6]["_dist_pairing_ledger"] = $this->queryDistPairing($rightSixPlacement->getDistributorId());
+                $anode[6]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[6]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[6]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+                $anode[6]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[6]["_carry_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[6]["_today_left"];
+                $anode[6]["_carry_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[6]["_today_right"];
+                $anode[6]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+                $anode[6]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             }
         }
 
         $this->distcode = $distcode;
         $this->anode = $anode;
         $this->colorArr = $this->getRankColorArr();
+
+        $isTop = false;
+        if (strtoupper($distcode) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+            $isTop = true;
+        }
+        $this->isTop = $isTop;
 
         if ($pageDirection == "stat") {
             $this->setTemplate('placementTreeStat');
@@ -2432,6 +2713,37 @@ class memberActions extends sfActions
 
     public function executeSponsorTree()
     {
+        $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $distinfo = MlmDistributorPeer::retrieveByPk($id);
+        $this->distinfo = $distinfo;
+        $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
+
+        /*********************/
+        /* Search Function
+         * ********************/
+        $fullName = $this->getRequestParameter('fullName');
+        $arrTree = array();
+
+        if ($fullName != "") {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::FULL_NAME, $fullName);
+            $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $distinfo = MlmDistributorPeer::doSelectOne($c);
+
+            if (!$distinfo) {
+                $this->setFlash('errorMsg', "Username is not exist.");
+                return $this->redirect('/member/sponsorTree');
+            }
+
+            $this->distinfo = $distinfo;
+            $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
+        }
+        $this->headColor = $this->getRankColor($distinfo->getRankId());
+        $this->arrTree = $arrTree;
+        $this->fullName = $fullName;
+    }
+    public function executeSponsorTree_old()
+    {
 //        $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
 //        $distinfo = MlmDistributorPeer::retrieveByPk($id);
 //        $this->distinfo = $distinfo;
@@ -2526,6 +2838,74 @@ class memberActions extends sfActions
     }
 
     public function executeManipulateSponsorTree()
+    {
+        $parentId = $this->getRequestParameter('root');
+        $arrTree = array();
+        $html = "";
+        if ($parentId != "") {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $parentId);
+            $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $dists = MlmDistributorPeer::doSelect($c);
+
+            $idx = 0;
+            $count = count($dists);
+            foreach ($dists as $dist)
+            {
+                $idx++;
+                $hasChild = $this->checkHasChild($dist->getDistributorId());
+
+                $treeLine = "tree-controller-lplus-line";
+                $treeLine2 = "tree-controller-lplus-right";
+                $treeLineNoChild = "tree-controller-t-line";
+                $treeLineNoChild2 = "tree-controller-t-right";
+                $treeControllerWrap = "tree-controller-wrap";
+                $img = "<img class='tree-plus-button' src='/css/network/plus.png'>";
+                if ($idx == $count) {
+                    $treeLineNoChild = "tree-controller-l-line";
+                    $treeLineNoChild2 = "tree-controller-l-right";
+                    $treeControllerWrap = "tree-controller-l-wrap";
+                }
+
+                if ($hasChild) {
+                } else {
+                    $img = "";
+                    $treeLine = $treeLineNoChild;
+                    $treeLine2 = $treeLineNoChild2;
+                }
+
+                $headColor = $this->getRankColor($dist->getRankId());
+                $html .= "<div class='".$treeControllerWrap."'>
+                        <div class='controller-node-con'>
+                            <div class='tree-controller ".$treeLine."'>
+                                <div class='tree-controller-in ".$treeLine2."'>
+                                    ".$img."
+                                </div>
+                            </div>
+                            <div class='node-info-raw' id='node-id-".$dist->getDistributorId()."'>
+                                <div class='node-info'>
+                                    <span class='user-rank'><img
+                                            src='/css/network/".$headColor."_head.png'></span>
+                                    <span class='user-id'>".$dist->getDistributorCode()."</span>
+                                    <span class='user-joined'>".$this->getContext()->getI18N()->__("Joined")." ".date('Y-m-d', strtotime($dist->getActiveDatetime()))."</span>
+                                    <span class='user-joined'>".$this->getContext()->getI18N()->__($dist->getRankCode())."</span>
+                                </div>
+                            </div>
+                        </div>";
+                if ($hasChild) {
+                    $html .= "<div id='node-wrapper-".$dist->getDistributorId()."' class='ajax-more'></div>";
+                }
+                $html .= "</div>";
+            }
+        }
+
+
+        //echo json_encode($arrTree);
+        echo $html;
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeManipulateSponsorTree_old()
     {
         $parentId = $this->getRequestParameter('root');
         $arrTree = array();
@@ -2830,7 +3210,7 @@ class memberActions extends sfActions
         $this->pairingBonus = number_format($pairingBonus, 2);
 
 //        $this->total = number_format($dsb, 2);
-        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + pairingBonus, 2);
+        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + $pairingBonus, 2);
 
         /* *************************
          *  PIPS DETAIL
@@ -3270,8 +3650,17 @@ class memberActions extends sfActions
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-            $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $distDB = null;
+            $distId = null;
+            if ($this->getRequestParameter('distCode') != "") {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('distCode'));
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+            } else {
+                $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            }
             $this->forward404Unless($distDB);
+            $distId = $distDB->getDistributorId();
 
             $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
             $currentPackageAmount = $distPackage->getPrice();
@@ -3326,7 +3715,7 @@ class memberActions extends sfActions
 
                 // ******       company account      ****************
                 $mlmPackageUpgradeHistory = new MlmPackageUpgradeHistory();
-                $mlmPackageUpgradeHistory->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $mlmPackageUpgradeHistory->setDistId($distId);
                 $mlmPackageUpgradeHistory->setTransactionCode(Globals::ACCOUNT_LEDGER_ACTION_PACKAGE_UPGRADE);
                 $mlmPackageUpgradeHistory->setAmount($amountNeeded);
                 $mlmPackageUpgradeHistory->setPackageId($selectedPackage->getPackageId());
@@ -3346,7 +3735,6 @@ class memberActions extends sfActions
                 $uplineDistId = $distDB->getUplineDistId();
                 $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
                 if ($uplineDistDB) {
-
                     //if ($uplineDistDB->getIbRankId() != null) {
                     if ($uplineDistDB->getIsIb() == Globals::YES) {
                         $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
@@ -3558,6 +3946,7 @@ class memberActions extends sfActions
                         }
                     }
                 }
+
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Package upgraded successful."));
 
@@ -4393,5 +4782,64 @@ class memberActions extends sfActions
         }
 
         return $packageArray;
+    }
+
+function getAccumulateGroupBvs($distributorId, $position)
+    {
+        $dateUtil = new DateUtil();
+
+        $d = $dateUtil->getMonth();
+        $firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
+        $lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
+
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+                 . " AND left_right = '" . $position . "'"
+                 . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'";
+
+        //var_dump($query);
+        //exit();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getTodaySales($distributorId, $position)
+    {
+        $dateUtil = new DateUtil();
+
+        $d = $dateUtil->getMonth();
+        $firstOfMonth = date('Y-m-j') . " 00:00:00";
+        $lastOfMonth = date('Y-m-j') . " 23:59:59";
+
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+                 . " AND left_right = '" . $position . "'"
+                 . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'"
+                 . " AND created_on >= '" . $firstOfMonth . "' AND created_on <= '" . $lastOfMonth . "'";
+
+        //var_dump($query);
+        //exit();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }

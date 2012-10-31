@@ -28,7 +28,7 @@ $(function() {
             "userName" : {
                 required : true,
                 noSpace: true,
-                minlength : 6,
+                minlength : 2,
                 remote: "/member/verifyUserName"
             },
             "userpassword" : {
@@ -92,79 +92,44 @@ $(function() {
             }*/
         },
         submitHandler: function(form) {
-            waiting();
-            $.ajax({
-                type : 'POST',
-                url : "/member/verifySponsorId",
-                dataType : 'json',
-                cache: false,
-                data: {
-                    sponsorId : $('#sponsorId').val()
-                },
-                success : function(data) {
-                    waiting();
-                    if (data == null || data == "") {
-                        alert("<?php echo __('Invalid Referrer ID') ?>");
-                        $('#sponsorId').focus();
-                        $("#sponsorName").val("");
-                    } else {
-                        if ($("#radio_manual").is(':checked') == true) {
-                            waiting();
-                            $.ajax({
-                                type : 'POST',
-                                url : "/member/verifyActivePlacementDistId",
-                                dataType : 'json',
-                                cache: false,
-                                data: {
-                                    sponsorId : $('#sponsorId').val()
-                                    , placementDistId : $('#placementDistId').val()
-                                },
-                                success : function(data) {
-                                    if (data == null || data == "") {
-                                        error("<?php echo __('Invalid Placement ID') ?>");
-                                        $('#placementDistId').focus();
-                                        $("#placementDistName").val("");
-                                    } else {
-                                        form.submit();
-                                    }
-                                },
-                                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                    alert("Your login attempt was not successful. Please try again.");
-                                }
-                            });
+            if ($.trim($('#sponsorId').val()) == "") {
+                alert("<?php echo __('Referrer ID cannot be blank') ?>.");
+                $('#sponsorId').focus();
+            } else {
+                waiting();
+                $.ajax({
+                    type : 'POST',
+                    url : "/member/verifySponsorId",
+                    dataType : 'json',
+                    cache: false,
+                    data: {
+                        sponsorId : $('#sponsorId').val()
+                    },
+                    success : function(data) {
+                        waiting();
+                        if (data == null || data == "") {
+                            alert("<?php echo __('Invalid Referrer ID') ?>");
+                            $('#sponsorId').focus();
+                            $("#sponsorName").val("");
                         } else {
                             form.submit();
                         }
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Your login attempt was not successful. Please try again.");
                     }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Your login attempt was not successful. Please try again.");
-                }
-            });
+                });
+            }
+            /*waiting();
+            form.submit();*/
         },
         success: function(label) {
         }
     });
 
-    $("#radio_auto").click(function(){
-        $(".tr_manualPlacement").hide();
-        $(".tr_autoPlacement").show();
-        $("#radio_position1_1").attr("checked", "checked");
-    });
-    $("#radio_manual").click(function(){
-        $(".tr_manualPlacement").show();
-        $(".tr_autoPlacement").hide();
-        $("#radio_position1_manual_1").attr("checked", "checked");
-    });
-
     $("#sponsorId").change(function() {
         if ($.trim($('#sponsorId').val()) != "") {
             verifySponsorId();
-        }
-    });
-    $("#placementDistId").change(function() {
-        if ($.trim($('#placementDistId').val()) != "") {
-            verifyPlacementDistId();
         }
     });
 });
@@ -194,35 +159,13 @@ function verifySponsorId() {
         }
     });
 }
-function verifyPlacementDistId() {
-    waiting();
-    $.ajax({
-        type : 'POST',
-        url : "/member/verifyActivePlacementDistId",
-        dataType : 'json',
-        cache: false,
-        data: {
-            sponsorId : $('#sponsorId').val()
-            , placementDistId : $('#placementDistId').val()
-        },
-        success : function(data) {
-            if (data == null || data == "") {
-                error("<?php echo __('Invalid Placement ID') ?>");
-                $('#placementDistId').focus();
-                $("#placementDistName").val("");
-            } else {
-                $.unblockUI();
-                $("#placementDistName").val(data.nickname);
-            }
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("Your login attempt was not successful. Please try again.");
-        }
-    });
-}
 </script>
 
 <form action="/member/doMemberRegistration" id="registerForm" method="post">
+<input type="hidden" class="inputbox" id="packageId" name="packageId" value="<?php echo $selectedPackage->getPackageId();?>" readonly="readonly">
+<input type="hidden" class="inputbox" id="productCode" name="productCode" value="<?php echo $productCode;?>" readonly="readonly">
+<input type="hidden" name="uplineDistCode" id="uplineDistCode" value="<?php echo $uplineDistCode;?>"/>
+<input type="hidden" name="treePosition" id="position" value="<?php echo $position;?>"/>
 
 <table cellspacing="0" cellpadding="0">
 <colgroup>
@@ -242,6 +185,7 @@ function verifyPlacementDistId() {
 </tr>
 <tr>
 <td>
+
 <?php if ($sf_flash->has('successMsg')): ?>
     <div class="ui-widget">
         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -267,7 +211,6 @@ function verifyPlacementDistId() {
 <tbody>
 <tr>
 <td>
-
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -280,8 +223,7 @@ function verifyPlacementDistId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Referrer and Placement Position') ?></th>
-        <th class="tbl_content_right"><!--Step 1 of 3--></th>
+        <th colspan="2"><?php echo __('Referrer and Placement Position') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -297,7 +239,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Referrer Name') ?></td>
         <td>
@@ -306,66 +248,9 @@ function verifyPlacementDistId() {
         </td>
         <td>&nbsp;</td>
     </tr>
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement Type') ?></td>
-        <td>
-            <div style="width:350px;">
-                <input type="radio" id="radio_auto" checked="checked" value="1" name="placementType"> <label for="radio_auto" style="display: inline; font-size: 12px !important;"><?php echo __('Auto') ?></label>&nbsp;
-                <input type="radio" id="radio_manual" value="0" name="placementType"> <label for="radio_manual" style="display: inline; font-size: 12px !important;"><?php echo __('Manual') ?></label>&nbsp;
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_even tr_autoPlacement">
-        <td>&nbsp;</td>
-        <td><?php echo __('Auto Placement') ?></td>
-        <td>
-            <div style="width:350px;">
-                <input type="radio" id="radio_position1_1" checked="checked" value="1" name="position1"> <label for="radio_position1_1" style="display: inline; font-size: 12px !important;"><?php echo __('Auto Left') ?></label>&nbsp;
-                <input type="radio" id="radio_position1_2" value="2" name="position1"> <label for="radio_position1_2" style="display: inline; font-size: 12px !important;"><?php echo __('Auto Right') ?></label>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_even tr_manualPlacement" style="display: none">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement ID') ?></td>
-        <td>
-            <input type="text" class="inputbox" id="placementDistId" name="placementDistId" value="<?php echo $placementDistId;?>">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd tr_manualPlacement" style="display: none">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement Name') ?></td>
-        <td>
-            <input type="text" class="inputbox" id="placementDistName" name="placementDistName" value="<?php echo $placementDistName;?>" readonly="readonly">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_even tr_manualPlacement" style="display: none">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement Position') ?></td>
-        <td>
-            <div style="width:350px;">
-                <input type="radio" id="radio_position1_manual_1" value="1" name="position1"> <label for="radio_position1_manual_1" style="display: inline; font-size: 12px !important;"><?php echo __('Left') ?></label>&nbsp;
-                <input type="radio" id="radio_position1_manual_2" value="2" name="position1"> <label for="radio_position1_manual_2" style="display: inline; font-size: 12px !important;"><?php echo __('Right') ?></label>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
     </tbody>
 </table>
 <br>
-
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -444,142 +329,11 @@ function verifyPlacementDistId() {
         </td>
         <td>&nbsp;</td>
     </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
     </tbody>
 </table>
 
-<!--<table cellspacing="0" cellpadding="0" class="tbl_form">
-    <colgroup>
-        <col width="1%">
-        <col width="30%">
-        <col width="69%">
-        <col width="1%">
-    </colgroup>
 
-    <tbody>
-    <tr class="row_header">
-        <th class="tbl_header_left">
-            <div class="border_left_grey">&nbsp;</div>
-        </th>
-        <th>Trading Account Details</th>
-        <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
-    </tr>
-
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Leverage</td>
-        <td>
-            <select id="leverage" class="inputbox" name="leverage">
-                <option selected="selected" value="">Please Select</option>
-                <option value="50">1:50</option>
-                <option value="100">1:100</option>
-                <option value="200">1:200</option>
-                <option value="300">1:300</option>
-                <option value="400">1:400</option>
-                <option value="500">1:500</option>
-            </select>
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Spread</td>
-        <td>
-            <div class="td_desc">
-                <select id="spread" class="inputbox" name="spread">
-                    <option selected="selected" value="">Please Select</option>
-                    <option value="F">Fixed Spread</option>
-                    <option value="V">Variable Spread</option>
-                    <option value="E">ECN Premier Spread</option>
-                </select>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<table cellspacing="0" cellpadding="0" class="tbl_form">
-    <colgroup>
-        <col width="1%">
-        <col width="30%">
-        <col width="69%">
-        <col width="1%">
-    </colgroup>
-
-    <tbody>
-    <tr class="row_header">
-        <th class="tbl_header_left">
-            <div class="border_left_grey">&nbsp;</div>
-        </th>
-        <th>Deposit Information</th>
-        <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
-    </tr>
-
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Deposit Currency</td>
-        <td>
-            <div>
-                <select id="deposit_currency" class="inputbox" name="deposit_currency">
-                    <option selected="selected" value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="AUD">AUD</option>
-                    <option value="SGD">SGD</option>
-                </select>
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_currency">If a Money Manager handles your account, the currency of
-                your account will match the currency that your Money Manager uses to make trades on your behalf. For
-                example, if your manager trades in USD, your account will be in USD regardless of which currency you choose.
-            </div>
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Deposit Amount</td>
-        <td>
-            <div>
-                <input type="text" id="deposit_amount" value="" class="inputbox" name="deposit_amount">
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_amount"></div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
-    </tbody>
-</table>-->
+<br>
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
@@ -596,9 +350,6 @@ function verifyPlacementDistId() {
         </th>
         <th><?php echo __('Personal Information') ?></th>
         <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
     </tr>
 
 
@@ -680,7 +431,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
         <td><?php echo __('Country') ?></td>
         <td>
-            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "Malaysia", 'countryName' => 'country', 'countryId' => 'country')) ?>
+            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "China (PRC)", 'countryName' => 'country', 'countryId' => 'country')) ?>
             &nbsp;
         </td>
         <td>&nbsp;</td>
@@ -700,14 +451,10 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
     </tbody>
 </table>
 
+<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -790,20 +537,17 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
     </tr>
     </tbody>
 </table>
 
+<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
         <col width="30%">
         <col width="69%">
-        <col width="1%">
+            <col width="1%">
     </colgroup>
 
     <tbody>
@@ -824,35 +568,28 @@ function verifyPlacementDistId() {
         <td><?php echo __('Package') ?></td>
         <td>
             <input type="text" class="inputbox" id="packageName" name="packageName" value="<?php echo $selectedPackage->getPackageName();?>" readonly="readonly">
-            <input type="hidden" class="inputbox" id="packageId" name="packageId" value="<?php echo $selectedPackage->getPackageId();?>" readonly="readonly">
-            <input type="hidden" class="inputbox" id="productCode" name="productCode" value="<?php echo $productCode;?>" readonly="readonly">
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
 
 
-    <!--<tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_even" style="display: none">
         <td>&nbsp;</td>
-        <td><?php /*echo __('Placement Position') */?></td>
+        <td><?php echo __('Placement Position') ?></td>
         <td>
             <div style="width:350px;">
-                <input type="radio" id="radio_position1_0" checked="checked" value="0" name="position1"><label for="radio_position1_2"><?php /*echo __('Manual') */?></label>&nbsp;
-                <input type="radio" id="radio_position1_1" value="1" name="position1"><label for="radio_position1_1"><?php /*echo __('Auto Left') */?></label>&nbsp;
-                <input type="radio" id="radio_position1_2" value="2" name="position1"> <label for="radio_position1_2"><?php /*echo __('Auto Right') */?></label>
+                <input type="radio" id="radio_position1_0" checked="checked" value="0" name="position1"><label for="radio_position1_2" style="display: inline; font-size: 12px !important;"><?php echo __('Manual') ?></label>&nbsp;
+                <input type="radio" id="radio_position1_1" value="1" name="position1"><label for="radio_position1_1" style="display: inline; font-size: 12px !important;"><?php echo __('Auto Left') ?></label>&nbsp;
+                <input type="radio" id="radio_position1_2" value="2" name="position1"> <label for="radio_position1_2" style="display: inline; font-size: 12px !important;"><?php echo __('Auto Right') ?></label>
             </div>
         </td>
         <td>&nbsp;</td>
-    </tr>-->
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
     </tr>
+
     </tbody>
 </table>
-
+<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
 <colgroup>
     <col width="1%">
@@ -871,6 +608,7 @@ function verifyPlacementDistId() {
     </th>
     <th colspan="5">
         <?php echo __('Accept Terms') ?> &amp; <?php echo __('Agreements') ?>    </th>
+    <th class="tbl_content_right"><!--Step 1 of 3--></th>
     <th class="tbl_header_right">
         <div class="border_right_grey">&nbsp;</div>
     </th>
@@ -892,13 +630,13 @@ function verifyPlacementDistId() {
 </tr>
 
 <!--<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
+    
     <td><input type="checkbox" class="checkbox" id="terms_bis" name="terms_bis">
         <label for="terms_bis">Terms Of Business, Trading Policies &amp; Procedures</label></td>
     <td colspan="4">
         <a target="_blank" href="/download/termsOfBusiness">Download Agreement (343 KB PDF)</a>
     </td>
-    <td>&nbsp;</td>
+    
 </tr>-->
 
 <tr class="tbl_form_row_even">
@@ -912,13 +650,13 @@ function verifyPlacementDistId() {
 </tr>
 
 <!--<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
+    
     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
         <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
     <td colspan="4">
         <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
     </td>
-    <td>&nbsp;</td>
+    
 </tr>-->
 
 <tr class="tbl_form_row_odd">
@@ -957,31 +695,17 @@ function verifyPlacementDistId() {
             </tr>
         </tbody></table>
     </td>
-    <td>&nbsp;</td>
+    
 </tr>
 
 <tr class="tbl_listing_end">
     <td>&nbsp;</td>
     <td colspan="5" class="tbl_content_right">
-        <span class="button">
              <input type="submit" name="" value="<?php echo __('Submit') ?>">
-        </span>
     </td>
     <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
 
-</td>
-</tr>
-
-<tr>
-    <td></td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
 </form>

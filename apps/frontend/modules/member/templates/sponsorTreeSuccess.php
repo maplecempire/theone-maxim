@@ -1,73 +1,71 @@
 <?php include('scripts.php'); ?>
 <style type="text/css">
-#footer {
-    background: none repeat scroll 0 0 #333333;
-    height: 50px;
-    margin: 10px auto 0;
-    width: 980px;
-    position: fixed;
-    bottom: 0px;
-}
 
-.user-rank {
-    border-width: 0;
-    height: auto;
-    margin: 0;
-    padding: 0;
+.clear {
+    clear: both;
 }
-
-.user-joined {
-    border-color: blue;
-    text-align: center;
-    width: 100px;
-    border-style: solid;
-    border-width: 1px;
-    display: block;
+.tree-genealogy {
+    height: 700px;
+    overflow: auto;
+    width: 600px;
+}
+.controller-node-con {
+    min-width: 413px;
+}
+.tree-controller, .tree-controller-in {
+    height: 48px;
+    width: 28px;
+}
+.tree-controller-dash, .tree-controller-dashplus, .tree-controller-dashminus {
+    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf_h.png") repeat-x scroll 0 24px transparent;
     float: left;
-    font-family: arial;
-    font-size: 11px;
-    height: 15px;
-    margin: 9px 0 0 2px;
+    margin-left: 16px;
+    width: 12px;
+}
+.tree-controller-wrap, .tree-controller-l-wrap {
+    margin-left: 28px;
+}
+.tree-controller-wrap {
+    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf.png") repeat-y scroll 16px 0 transparent;
+}
+.tree-controller-tplus-line, .tree-controller-lplus-line, .tree-controller-tminus-line, .tree-controller-lminus-line, .tree-controller-t-line, .tree-controller-l-line {
+    float: left;
+    margin-left: 16px;
+    width: 12px;
+}
+.tree-controller-lplus-line, .tree-controller-lminus-line, .tree-controller-l-line {
+    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf.png") repeat-y scroll 0 0 transparent;
+    float: left;
+    height: 24px;
+}
+.tree-controller-lplus-right, .tree-controller-tplus-right, .tree-controller-tminus-right, .tree-controller-lminus-right, .tree-controller-l-right, .tree-controller-t-right {
+    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf_h.png") repeat-x scroll 0 24px transparent;
+    float: left;
+    width: 12px;
+}
+.tree-controller-dash img, .tree-controller-dashplus img, .tree-controller-dashminus img, .tree-controller-tminus-right img, .tree-controller-lminus-right img, .tree-controller-tplus-right img, .tree-controller-lplus-right img {
+    margin-left: -4px;
+}
+img.tree-minus-button, img.tree-plus-button {
+    margin-top: 20px;
+}
+img.tree-minus-button:hover, img.tree-plus-button:hover {
+    cursor: pointer;
+}
+.node-info-raw {
+    height: 48px;
     overflow: hidden;
-    padding: 0 1px;
-}
-
-.user-id {
-    border-color: orange;
-    text-align: center;
-    width: 70px;
-    border-style: solid;
-    border-width: 1px;
-    display: block;
-    float: left;
-    font-family: arial;
-    font-size: 11px;
-    height: 15px;
-    margin: 9px 0 0 2px;
-    overflow: hidden;
-    padding: 0 1px;
-}
-.node-info span {
-    /*border-style: solid;*/
-    border-width: 1px;
-    display: block;
-    float: left;
-    font-family: arial;
-    font-size: 11px;
-    height: 15px;
-    /*margin: 9px 0 0 2px;*/
-    /*overflow: hidden;*/
-    /*padding: 0 1px;*/
+    width: 385px;
 }
 </style>
 
-<script type="text/javascript" language="javascript">
+<!--<script type="text/javascript" language="javascript">
     $(function() {
         $("#sponsorTree").treeview({
-            url: "/member/manipulateSponsorTree"
+            url: "/member/manipulateSponsorTree_old"
         });
     });
-</script>
+</script>-->
 
 <div class="ewallet_li">
 	<a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(134, 197, 51);">
@@ -87,179 +85,124 @@
     </a>
 </div>
 
-<table cellpadding="0" cellspacing="0">
-<tbody>
-<tr>
-    <td><br></td>
-</tr>
-<tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": " . $distinfo->getDistributorCode(); ?></span></td>
-</tr>
-<tr>
-    <td>&nbsp;</td>
-</tr>
+<div class="clear"></div>
+<br>
+<span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": <b>" . $distinfo->getDistributorCode(); ?></b></span>
+
+<?php if ($sf_flash->has('successMsg')): ?>
+    <div class="ui-widget">
+        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+             class="ui-state-highlight ui-corner-all">
+            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                          class="ui-icon ui-icon-info"></span>
+                <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php if ($sf_flash->has('errorMsg')): ?>
+    <div class="ui-widget">
+        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+             class="ui-state-error ui-corner-all">
+            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                          class="ui-icon ui-icon-alert"></span>
+                <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+        </div>
+    </div>
+<?php endif; ?>
+
 <?php echo form_tag('member/sponsorTree', 'id=sponsorForm') ?>
-<tr>
-    <td>
-<table style="width: 50%">
-    <tr>
-        <td><strong>Full Name</strong></td>
-        <td>:</td>
-        <td><input size="20" name="fullName" id="txtFullName" value="<?php echo $fullName?>"></td>
-        <td><button>Search</button></td>
-    </tr>
-</table>
-    </td>
-</tr>
+
+<br>
+<strong><?php echo __('Search By Username') ?></strong>&nbsp;:&nbsp; <input size="20" name="fullName" id="txtFullName" value="<?php echo $fullName?>">&nbsp;<button><?php echo __('Search') ?></button>
 </form>
-<tr>
-    <td>&nbsp;</td>
-</tr>
-<tr>
-    <td>
-        <ul id="sponsorTree" style="background-color: #ffffff;">
-            <?php
-    if ($doSearch == true && $searchDist) {
-    ?>
-        <li class="open" id="<?php echo $distinfo->getDistributorId();?>">
-            <span><?php echo "<span class='gen_id'>".$distinfo->getDistributorCode()."</span> <span class='gen_active'>".$distinfo->getNickName()."</span> Joined ".date('Y-m-d', strtotime($distinfo->getCreatedOn()));?></span>
-            <ul>
-                <?php
-                for ($i = 0; $i < count($arrTree); $i++) {
-                    $className = "";
 
-                    $totalDist = count($searchDistArr);
+<br>
 
-                    if (count($searchDistArr) > 2 && $arrTree[$i]["code"] == $searchDistArr[1]["code"]) {
-                        $endTag = "";
-                        $lastTag = false;
-                    ?>
+<link rel='stylesheet' type='text/css' media='screen' href='/css/network/gentree.css'/>
 
-                    <?php
-                        for ($x = 1; $x < count($searchDistArr); $x++) {
-                            if ($searchDistArr[$x]["hasChildren"]) {
-                                $className = "class='hasChildren'";
-                            }
+<script type="text/javascript">
+$(document).ready(function(){
+	$('img.tree-minus-button').live('click', function(){
+		$(this).attr('class', 'tree-plus-button');
+		var nodeId = $(this).parent().parent().next().attr('id').replace(/^node\-id\-/, '');
+		$('#node-wrapper-'+nodeId).slideUp(200);
+		$(this).attr('src', '/css/network/plus.png');
+	});
 
-                            if (($totalDist - 1) != $x) {
-                                $className = "class='open'";
-                            } else {
-                                $lastTag = true;
-                            }
+	$('img.tree-plus-button').live('click', function(){
+		$(this).attr('class', 'tree-minus-button');
+		var nodeId = $(this).parent().parent().next().attr('id').replace(/^node\-id\-/, '');
+		if($('#node-wrapper-'+nodeId).attr('class').match(/ajax\-more/)){
+			$('#node-wrapper-'+nodeId).removeClass('ajax-more');
+			ajaxLoadNode(nodeId);
+		}
+		$('#node-wrapper-'+nodeId).slideDown(200);
+		$(this).attr('src', '/css/network/minus.png');
+	});
 
-                            /****** Sibling ******/
-                            if ($x != 1) {
-                                $distSiblings = $searchDistArr[$x]["sibling"];
-                                foreach ($distSiblings as $distSibling) {
-                            ?>
-                                    <li id="<?php echo $distSibling["id"];?>" class='hasChildren'>
-                                        <?php echo $distSibling['text']."<-"?>
-                                        <?php if ($distSibling["hasChildren"] ) { ?>
-                                            <ul>
-                                                <li><span class="placeholder">&nbsp;</span></li>
-                                            </ul>
-                                        <?php } ?>
-                                    </li>
-                            <?php
-                                }
-                            }
-                            /****** ~ end Sibling end ~ ******/
-                ?>
-                            <li id="<?php echo $searchDistArr[$x]["id"];?>" <?php echo $className;?>>
-                                <?php echo $searchDistArr[$x]['text']?>
-                                <?php
-                                    if ($lastTag && $searchDistArr[$x]["hasChildren"]) { ?>
-                                        <ul>
-                                            <li><span class="placeholder">&nbsp;</span></li>
-                                        </ul>
-                                <?php
-                                    } else {
-                                        //echo "<ul><li><span>".$searchDistArr[$x]['text']."<<-"."</span>";
-                                        echo "<ul>";
+	function ajaxLoadNode(nodeId){
+		$('#node-wrapper-'+nodeId).html('<img src="/css/network/spinner.gif">');
+		$.ajax({
+			url: '/member/manipulateSponsorTree?root='+nodeId,
+			type: 'post',
+			dataType: 'html',
+			error: function(){
+				debug('error loading nodes for ' + nodeId);
+			},
+			success: function(data){
+				$('#node-wrapper-'+nodeId).html(data);
+			},
+			complete: function(){
+			}
+		});
+	}
 
-                                        $endTag .= "</ul>";
-                                    }
-                            $endTag .= "</li>";
-                        }
-                        echo $endTag;
-                    } else {
-                        if ($arrTree[$i]["hasChildren"]) {
-                            $className = "class='hasChildren'";
-                        }
-                ?>
-                    <li id="<?php echo $arrTree[$i]["id"];?>" <?php echo $className;?>>
-                        <?php echo $arrTree[$i]['text']?>
-                        <?php if ($arrTree[$i]["hasChildren"] ) { ?>
-                            <ul>
-                                <li><span class="placeholder">&nbsp;</span></li>
-                            </ul>
-                        <?php } ?>
-                    </li>
-                <?php
-                    }
-                }
-                ?>
-            </ul>
-
-            <!--<ul>
-                <li class="open"><span>Item 3.0</span>
-                    <ul>
-                        <li><span>Item 3.0.0</span></li>
-                        <li><span>Item 3.0.1</span>
-                            <ul>
-                                <li><span>Item 3.0.1.0</span></li>
-                                <li><span>Item 3.0.1.1</span></li>
-                            </ul>
-                        </li>
-                        <li><span>Item 3.0.2</span>
-                        <ul>
-                            <li><span>Item 3.0.2.0</span></li>
-                            <li><span>Item 3.0.2.1</span></li>
-                            <li><span>Item 3.0.2.2</span></li>
-                        </ul>
-                    </li>
-                    </ul>
-                </li>
-            </ul>-->
-        </li>
+	function debug(str){
+		alert(str);
+	}
+});
+</script>
+<div class="tree-genealogy">
     <?php
-    } else {
-            $className = "";
+        $treeLine = "tree-controller-lplus-line";
+        $treeLine2 = "tree-controller-lplus-right";
+        $treeLineNoChild = "tree-controller-t-line";
+        $treeLineNoChild2 = "tree-controller-t-right";
+        $treeControllerWrap = "tree-controller-wrap";
+        $img = "<img class='tree-plus-button' src='/css/network/plus.png'>";
+        if ($idx == $count) {
+            $treeLineNoChild = "tree-controller-l-line";
+            $treeLineNoChild2 = "tree-controller-l-right";
+            $treeControllerWrap = "tree-controller-l-wrap";
+        }
 
-            if ($hasChild) {
-                $className = "class='hasChildren'";
-            }
-            ?>
-            <li id="<?php echo $distinfo->getDistributorId();?>" <?php echo $className;?>>
-                <span class="node-info">
-                    <span class="user-rank"><img src="/css/maxim/tree/<?php echo $colorArr[$distinfo->getRankId()]; ?>_head.png"></span>
-                    <?php
-                    echo "<span class='user-id'>".$distinfo->getDistributorCode()."</span>"
-                               . "<span class='user-joined'>" . $distinfo->getFullName()."</span>"
-                               . "<span class='user-joined'> Joined " . date('Y-m-d', strtotime($distinfo->getActiveDatetime()))."</span>"
-                               . "<span class='user-joined'>" . $distinfo->getRankCode()."</span>";
-                    ?>
-
-                <!--<div id="node-id-88508729" class="node-info-raw">
-                    <div class="node-info">
-                        <span class="user-rank"><img src="http://www.abfxtrader.com/ablive/nimages/network/rank/101000.png"></span>
-                        <span class="user-id">fxwinner</span>
-                        <span class="user-joined">Joined 4/7/2012</span>
-                    </div>
-                </div>-->
-                </span>
-            <?php
-            if ($hasChild) {
-                ?>
-                <ul>
-                    <li><span class="placeholder">&nbsp;</span></li>
-                </ul>
-                <?php } ?>
-            </li>
-    <?php } ?>
-        </ul>
-    </td>
-</tr>
-</tbody>
-</table>
-
+        if ($hasChild) {
+        } else {
+            $img = "";
+            $treeLine = $treeLineNoChild;
+            $treeLine2 = $treeLineNoChild2;
+        }
+    ?>
+    <div class="<?php echo $treeControllerWrap;?>">
+        <div class="controller-node-con">
+            <div class="tree-controller <?php echo $treeLine;?>">
+                <div class="tree-controller-in <?php echo $treeLine2;?>">
+                    <?php echo $img; ?>
+                </div>
+            </div>
+            <div id="node-id-<?php echo $distinfo->getDistributorId();?>" class="node-info-raw">
+                <div class="node-info">
+                    <span class="user-rank"><img src="/css/network/<?php echo $headColor; ?>_head.png"></span>
+                    <span class="user-id"><?php echo $distinfo->getDistributorCode(); ?></span>
+                    <span class="user-joined"><?php echo __('Joined'); ?> <?php echo date('Y-m-d', strtotime($distinfo->getActiveDatetime())); ?></span>
+                    <span class="user-joined"><?php echo __($distinfo->getRankCode()); ?></span>
+                </div>
+            </div>
+        </div>
+        <?php
+        if ($hasChild) {
+        ?>
+        <div class=" ajax-more" id="node-wrapper-<?php echo $distinfo->getDistributorId();?>"></div>
+        <?php } ?>
+    </div>
+</div>

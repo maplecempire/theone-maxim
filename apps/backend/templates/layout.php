@@ -135,12 +135,12 @@ $(function(){
     $(".portlet").addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
             .find(".portlet-header")
             .addClass("ui-widget-header ui-corner-all")
-            .prepend("<a href='#' class='ui-dialog-titlebar-close ui-corner-all' role='button'><span class='ui-icon ui-icon-minusthick' style='padding-right: 3px'></span></a>")
+            .prepend("<a href='#' class='ui-dialog-titlebar-close ui-corner-all' role='button'><span class='ui-icon ui-icon-circle-triangle-n' style='padding-right: 2px'></span></a>")
             .end()
             .find(".portlet-content");
 
     $(".portlet-header .ui-icon").click(function() {
-        $(this).toggleClass("ui-icon-minusthick").toggleClass("ui-icon-plusthick");
+        $(this).toggleClass("ui-icon-circle-triangle-n").toggleClass("ui-icon-circle-triangle-s");
         $(this).parents(".portlet:first").find(".portlet-content").toggle("fast");
     });
 });

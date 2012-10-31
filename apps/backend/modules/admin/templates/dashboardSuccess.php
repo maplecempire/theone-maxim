@@ -308,6 +308,16 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td><strong>e-Cash Withdrawal</strong></td>
+                        <td align="right"><?php
+                            if ($ecashWithdrawal > 0)
+                                echo "<a id='editLink' href='".url_for('finance/ecashWithdrawal')."'>".$ecashWithdrawal."</a>";
+                            else
+                                echo $ecashWithdrawal;
+                            ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
