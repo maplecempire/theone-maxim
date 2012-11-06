@@ -44,6 +44,8 @@ class MlmDistCommissionLedgerMapBuilder {
 
 		$tMap->addColumn('MONTH_TRADED', 'MonthTraded', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('YEAR_TRADED', 'YearTraded', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addColumn('CREDIT', 'Credit', 'double', CreoleTypes::DECIMAL, true, 12);
 
 		$tMap->addColumn('DEBIT', 'Debit', 'double', CreoleTypes::DECIMAL, true, 12);

@@ -225,8 +225,8 @@ abstract class Globals {
     /************************************/
     /****    DIVIDEND STATUS       ******/
     /************************************/
-	const DIVIDEND_STATUS_ACTIVE = 'ACTIVE';
-	const DIVIDEND_STATUS_COMPLETE = 'COMPLETE';
+	const DIVIDEND_STATUS_PENDING = 'PENDING';
+	const DIVIDEND_STATUS_SUCCESS = 'SUCCESS';
 	const DIVIDEND_TIMES_ENTITLEMENT = 18;
 
     /*******************************/

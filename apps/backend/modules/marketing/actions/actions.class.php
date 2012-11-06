@@ -459,6 +459,7 @@ class marketingActions extends sfActions
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                                $sponsorDistCommissionledger->setYearTraded(date('Y'));
                                                 $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
                                                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_CREDIT_REFUND);
                                                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_TRADED);
@@ -514,6 +515,7 @@ class marketingActions extends sfActions
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
+                                                $sponsorDistCommissionledger->setYearTraded(date('Y'));
                                                 $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
                                                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_PIPS_BONUS);
                                                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_GAIN);
