@@ -727,6 +727,28 @@ class memberActions extends sfActions
             $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_distributor->save();
 
+            /* ****************************************************
+             * ROI Divident
+             * ***************************************************/
+            $dateUtil = new DateUtil();
+            $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
+            $dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+
+            $mlm_roi_dividend = new MlmRoiDividend();
+            $mlm_roi_dividend->setDistId($mlm_distributor->getDistributorId());
+            $mlm_roi_dividend->setIdx(1);
+            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+            $mlm_roi_dividend->setDividendDate($dividendDate);
+            $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
+            $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+            $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_ACTIVE);
+            $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_roi_dividend->save();
+
             $sponsorId = $mlm_distributor->getDistributorId();
             /* ****************************************************
              * get distributor last account ledger epoint balance
@@ -826,7 +848,7 @@ class memberActions extends sfActions
                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
                 $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
                 $sponsorDistCommissionledger->setDebit(0);
-                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                 $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
                 if ($firstForDRB == true) {
                     $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$mlm_distributor->getDistributorCode());
@@ -3317,15 +3339,19 @@ class memberActions extends sfActions
         $creditRefunds = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_CREDIT_REFUND);
         $fundManagements = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
         $pairingBonus = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_GDB);
+        $specialBonus = 0;
+        $totalLotTraded = 0;
 
         $this->dsb = number_format($dsb, 2);
         $this->pipsBonus = number_format($pipsBonus, 2);
         $this->creditRefund = number_format($creditRefunds, 2);
         $this->fundManagement = number_format($fundManagements, 2);
         $this->pairingBonus = number_format($pairingBonus, 2);
+        $this->specialBonus = number_format($specialBonus, 2);
+        $this->totalLotTraded = number_format($totalLotTraded, 2);
 
 //        $this->total = number_format($dsb, 2);
-        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + $pairingBonus, 2);
+        $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + $pairingBonus + $specialBonus, 2);
 
         /* *************************
          *  PIPS DETAIL
@@ -3557,7 +3583,7 @@ class memberActions extends sfActions
                                 $sponsorDistCommissionledger->setCredit($pairingBonusAmount);
                                 $sponsorDistCommissionledger->setDebit(0);
                                 $sponsorDistCommissionledger->setBalance($commissionBalance);
-                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                                 $sponsorDistCommissionledger->setRemark("GROUP PAIRING AMOUNT (" . $bonusDate . ")");
                                 $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -3586,7 +3612,7 @@ class memberActions extends sfActions
                                     $sponsorDistCommissionledger->setCredit(0);
                                     $sponsorDistCommissionledger->setDebit($flushAmount);
                                     $sponsorDistCommissionledger->setBalance($commissionBalance);
-                                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                                     $sponsorDistCommissionledger->setRemark("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
                                     $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -3653,6 +3679,64 @@ class memberActions extends sfActions
                             }
                         }
                     }
+
+                    print_r("+++++ ROI Dividend +++++<br>");
+                    $c = new Criteria();
+                    $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_ACTIVE);
+                    $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
+                    $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
+
+                    foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                        $distId = $mlmRoiDividend->getDistId();
+                        print_r("DistId " . $distId . "<br>");
+
+                        $dividendAmount = $mlmRoiDividend->getPackagePrice() * $mlmRoiDividend->getRoiPercentage() / 100;
+
+                        $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($distId);
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
+                        $mlm_account_ledger->setRemark("");
+                        $mlm_account_ledger->setCredit($dividendAmount);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
+                        $mlmRoiDividend->setDividendAmount($dividendAmount);
+                        $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_COMPLETE);
+                        //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
+                        $mlmRoiDividend->save();
+
+                        if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
+                            print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
+                            $currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
+                            $dividendDate = $dateUtil->addDate($currentDate2, 7, 0, 0);
+                            print_r("DividendDate: " . $dividendDate . "<br>");
+
+                            $mlm_roi_dividend = new MlmRoiDividend();
+                            $mlm_roi_dividend->setDistId($mlmRoiDividend->getDistId());
+                            $mlm_roi_dividend->setIdx($mlmRoiDividend->getIdx() + 1);
+                            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                            $mlm_roi_dividend->setDividendDate($dividendDate);
+                            $mlm_roi_dividend->setPackageId($mlmRoiDividend->getPackageId());
+                            $mlm_roi_dividend->setPackagePrice($mlmRoiDividend->getPackagePrice());
+                            $mlm_roi_dividend->setRoiPercentage($mlmRoiDividend->getRoiPercentage());
+                            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_ACTIVE);
+                            $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->save();
+                        }
+
+                        $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                    }
+                    // roi dividend end~
 
                     $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
                     $mlm_daily_bonus_log = new MlmDailyBonusLog();
@@ -3996,7 +4080,7 @@ class memberActions extends sfActions
                         $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_UPGRADE);
                         $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
                         $sponsorDistCommissionledger->setDebit(0);
-                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                         $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
                         //$sponsorDistCommissionledger->setRemark("PACKAGE UPGRADE BONUS AMOUNT ".$directSponsorPercentage."% (" . $distDB->getDistributorCode() . "-" . $distDB->getMt4UserName() . ")");
                         if ($firstForDRB == true) {
@@ -4412,7 +4496,7 @@ class memberActions extends sfActions
                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
                 $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
                 $sponsorDistCommissionledger->setDebit(0);
-                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_PENDING);
+                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                 $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
                 if ($firstForDRB == true) {
                     $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());

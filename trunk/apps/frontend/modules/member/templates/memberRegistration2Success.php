@@ -280,8 +280,7 @@ function verifyPlacementDistId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Referrer and Placement Position') ?></th>
-        <th class="tbl_content_right"><!--Step 1 of 3--></th>
+        <th colspan="2"><?php echo __('Referrer and Placement Position') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>

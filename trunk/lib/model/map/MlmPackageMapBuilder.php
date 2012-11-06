@@ -50,9 +50,13 @@ class MlmPackageMapBuilder {
 
 		$tMap->addColumn('PAIRING_BONUS', 'PairingBonus', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('DAILY_MAX_PAIRING', 'DailyMaxPairing', 'double', CreoleTypes::DECIMAL, false, 12);
+		$tMap->addColumn('MONTHLY_PERFORMANCE', 'MonthlyPerformance', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('FUND_MGN_PROFIT_SHARING', 'FundMgnProfitSharing', 'double', CreoleTypes::DECIMAL, false, 12);
+		$tMap->addColumn('SPECIAL_BONUS', 'SpecialBonus', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('SPECIAL_BONUS_MIN_LOT_TRADED', 'SpecialBonusMinLotTraded', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('DAILY_MAX_PAIRING', 'DailyMaxPairing', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('PUBLIC_PURCHASE', 'PublicPurchase', 'string', CreoleTypes::VARCHAR, true, 1);
 

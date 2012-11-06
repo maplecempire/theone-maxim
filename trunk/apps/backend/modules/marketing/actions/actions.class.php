@@ -450,7 +450,6 @@ class marketingActions extends sfActions
 
                                             if ($gap == 0) {
                                                 $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
-                                                $fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
                                                 $creditRefund = $totalVolume * $creditRefundByPackage;
                                                 $fundManagement = $totalVolume * $fundManagementPercentage * ((100 - $fundMgnProfitSharing) / 100);
@@ -475,8 +474,26 @@ class marketingActions extends sfActions
 
                                                 $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
 
+                                                $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                                                $mlm_account_ledger = new MlmAccountLedger();
+                                                $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                                                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
+                                                $mlm_account_ledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume.", Sharing:".$fundMgnProfitSharingAmount);
+                                                $mlm_account_ledger->setCredit($creditRefund);
+                                                $mlm_account_ledger->setDebit(0);
+                                                $mlm_account_ledger->setBalance($distAccountEcashBalance + $creditRefund);
+                                                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $mlm_account_ledger->save();
+
+                                                $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+
                                                 // fund management
-                                                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                                //$fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                                                /*$sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
                                                 $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
                                                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
@@ -491,7 +508,7 @@ class marketingActions extends sfActions
                                                 $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                 $sponsorDistCommissionledger->save();
 
-                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);*/
                                             } else {
                                                 $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
@@ -516,6 +533,22 @@ class marketingActions extends sfActions
                                                 $sponsorDistCommissionledger->save();
 
                                                 $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
+
+                                                $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                                                $mlm_account_ledger = new MlmAccountLedger();
+                                                $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                                                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
+                                                $mlm_account_ledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
+                                                $mlm_account_ledger->setCredit($pipsAmountEntitied);
+                                                $mlm_account_ledger->setDebit(0);
+                                                $mlm_account_ledger->setBalance($distAccountEcashBalance + $pipsAmountEntitied);
+                                                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                                $mlm_account_ledger->save();
+
+                                                $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
                                             }
                                         }
                                     }

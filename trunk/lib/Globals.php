@@ -96,6 +96,10 @@ abstract class Globals {
     const ACCOUNT_LEDGER_ACTION_PACKAGE_UPGRADE = 'PACKAGE UPGRADE';
     const ACCOUNT_LEDGER_ACTION_REFUND = 'REFUND';
     const ACCOUNT_LEDGER_ACTION_MAINTENANCE = 'MAINTENANCE';
+    const ACCOUNT_LEDGER_ACTION_PIPS_BONUS = 'PIPS BONUS';
+    const ACCOUNT_LEDGER_ACTION_CREDIT_REFUND = 'CREDIT REFUND';
+    const ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT = 'FUND MANAGEMENT';
+    const ACCOUNT_LEDGER_ACTION_SPECIAL_BONUS = 'SPECIAL BONUS';
 
     /*******************************/
     /*****    RELOAD TOPUP  ******/
@@ -129,8 +133,10 @@ abstract class Globals {
     const COMMISSION_TYPE_PIPS_BONUS = 'PIPS_BONUS';
     const COMMISSION_TYPE_CREDIT_REFUND = 'CREDIT_REFUND';
     const COMMISSION_TYPE_FUND_MANAGEMENT = 'FUND_MANAGEMENT';
+    const COMMISSION_TYPE_SPECIAL_BONUS = 'SPECIAL_BONUS';
     const COMMISSION_TYPE_GDB = 'GDB';
 
+    const TOTAL_LOT_TRADED = 'TOTAL_LOT_TRADED';
     /*************************************/
     /*****   COMMISSION LEDGER      ******/
     /*************************************/
@@ -215,6 +221,13 @@ abstract class Globals {
     const PACKAGE_PINS = "5,10,20,30,50,100";
     const FIRST_REGISTERED_DISTRIBUTOR_CODE = "TV1";
     const FIRST_REGISTERED_DISTRIBUTOR_ID = 1;
+
+    /************************************/
+    /****    DIVIDEND STATUS       ******/
+    /************************************/
+	const DIVIDEND_STATUS_ACTIVE = 'ACTIVE';
+	const DIVIDEND_STATUS_COMPLETE = 'COMPLETE';
+	const DIVIDEND_TIMES_ENTITLEMENT = 18;
 
     /*******************************/
     /*****   GROUP LEADER   ******/

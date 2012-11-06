@@ -45,11 +45,19 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 
 	
-	protected $daily_max_pairing = 0;
+	protected $monthly_performance;
 
 
 	
-	protected $fund_mgn_profit_sharing;
+	protected $special_bonus;
+
+
+	
+	protected $special_bonus_min_lot_traded;
+
+
+	
+	protected $daily_max_pairing = 0;
 
 
 	
@@ -141,17 +149,31 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getMonthlyPerformance()
+	{
+
+		return $this->monthly_performance;
+	}
+
+	
+	public function getSpecialBonus()
+	{
+
+		return $this->special_bonus;
+	}
+
+	
+	public function getSpecialBonusMinLotTraded()
+	{
+
+		return $this->special_bonus_min_lot_traded;
+	}
+
+	
 	public function getDailyMaxPairing()
 	{
 
 		return $this->daily_max_pairing;
-	}
-
-	
-	public function getFundMgnProfitSharing()
-	{
-
-		return $this->fund_mgn_profit_sharing;
 	}
 
 	
@@ -343,23 +365,45 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setMonthlyPerformance($v)
+	{
+
+		if ($this->monthly_performance !== $v) {
+			$this->monthly_performance = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::MONTHLY_PERFORMANCE;
+		}
+
+	} 
+
+	
+	public function setSpecialBonus($v)
+	{
+
+		if ($this->special_bonus !== $v) {
+			$this->special_bonus = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::SPECIAL_BONUS;
+		}
+
+	} 
+
+	
+	public function setSpecialBonusMinLotTraded($v)
+	{
+
+		if ($this->special_bonus_min_lot_traded !== $v) {
+			$this->special_bonus_min_lot_traded = $v;
+			$this->modifiedColumns[] = MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED;
+		}
+
+	} 
+
+	
 	public function setDailyMaxPairing($v)
 	{
 
 		if ($this->daily_max_pairing !== $v || $v === 0) {
 			$this->daily_max_pairing = $v;
 			$this->modifiedColumns[] = MlmPackagePeer::DAILY_MAX_PAIRING;
-		}
-
-	} 
-
-	
-	public function setFundMgnProfitSharing($v)
-	{
-
-		if ($this->fund_mgn_profit_sharing !== $v) {
-			$this->fund_mgn_profit_sharing = $v;
-			$this->modifiedColumns[] = MlmPackagePeer::FUND_MGN_PROFIT_SHARING;
 		}
 
 	} 
@@ -474,25 +518,29 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 			$this->pairing_bonus = $rs->getFloat($startcol + 8);
 
-			$this->daily_max_pairing = $rs->getFloat($startcol + 9);
+			$this->monthly_performance = $rs->getFloat($startcol + 9);
 
-			$this->fund_mgn_profit_sharing = $rs->getFloat($startcol + 10);
+			$this->special_bonus = $rs->getFloat($startcol + 10);
 
-			$this->public_purchase = $rs->getString($startcol + 11);
+			$this->special_bonus_min_lot_traded = $rs->getFloat($startcol + 11);
 
-			$this->created_by = $rs->getInt($startcol + 12);
+			$this->daily_max_pairing = $rs->getFloat($startcol + 12);
 
-			$this->created_on = $rs->getTimestamp($startcol + 13, null);
+			$this->public_purchase = $rs->getString($startcol + 13);
 
-			$this->updated_by = $rs->getInt($startcol + 14);
+			$this->created_by = $rs->getInt($startcol + 14);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
+			$this->created_on = $rs->getTimestamp($startcol + 15, null);
+
+			$this->updated_by = $rs->getInt($startcol + 16);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 17, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 16; 
+						return $startcol + 18; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmPackage object", $e);
 		}
@@ -665,24 +713,30 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 				return $this->getPairingBonus();
 				break;
 			case 9:
-				return $this->getDailyMaxPairing();
+				return $this->getMonthlyPerformance();
 				break;
 			case 10:
-				return $this->getFundMgnProfitSharing();
+				return $this->getSpecialBonus();
 				break;
 			case 11:
-				return $this->getPublicPurchase();
+				return $this->getSpecialBonusMinLotTraded();
 				break;
 			case 12:
-				return $this->getCreatedBy();
+				return $this->getDailyMaxPairing();
 				break;
 			case 13:
-				return $this->getCreatedOn();
+				return $this->getPublicPurchase();
 				break;
 			case 14:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 15:
+				return $this->getCreatedOn();
+				break;
+			case 16:
+				return $this->getUpdatedBy();
+				break;
+			case 17:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -704,13 +758,15 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCommission(),
 			$keys[7] => $this->getCreditRefund(),
 			$keys[8] => $this->getPairingBonus(),
-			$keys[9] => $this->getDailyMaxPairing(),
-			$keys[10] => $this->getFundMgnProfitSharing(),
-			$keys[11] => $this->getPublicPurchase(),
-			$keys[12] => $this->getCreatedBy(),
-			$keys[13] => $this->getCreatedOn(),
-			$keys[14] => $this->getUpdatedBy(),
-			$keys[15] => $this->getUpdatedOn(),
+			$keys[9] => $this->getMonthlyPerformance(),
+			$keys[10] => $this->getSpecialBonus(),
+			$keys[11] => $this->getSpecialBonusMinLotTraded(),
+			$keys[12] => $this->getDailyMaxPairing(),
+			$keys[13] => $this->getPublicPurchase(),
+			$keys[14] => $this->getCreatedBy(),
+			$keys[15] => $this->getCreatedOn(),
+			$keys[16] => $this->getUpdatedBy(),
+			$keys[17] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -754,24 +810,30 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 				$this->setPairingBonus($value);
 				break;
 			case 9:
-				$this->setDailyMaxPairing($value);
+				$this->setMonthlyPerformance($value);
 				break;
 			case 10:
-				$this->setFundMgnProfitSharing($value);
+				$this->setSpecialBonus($value);
 				break;
 			case 11:
-				$this->setPublicPurchase($value);
+				$this->setSpecialBonusMinLotTraded($value);
 				break;
 			case 12:
-				$this->setCreatedBy($value);
+				$this->setDailyMaxPairing($value);
 				break;
 			case 13:
-				$this->setCreatedOn($value);
+				$this->setPublicPurchase($value);
 				break;
 			case 14:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 15:
+				$this->setCreatedOn($value);
+				break;
+			case 16:
+				$this->setUpdatedBy($value);
+				break;
+			case 17:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -790,13 +852,15 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCommission($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCreditRefund($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPairingBonus($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setDailyMaxPairing($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setFundMgnProfitSharing($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setPublicPurchase($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMonthlyPerformance($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setSpecialBonus($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setSpecialBonusMinLotTraded($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setDailyMaxPairing($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setPublicPurchase($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCreatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCreatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setUpdatedBy($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedOn($arr[$keys[17]]);
 	}
 
 	
@@ -813,8 +877,10 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmPackagePeer::COMMISSION)) $criteria->add(MlmPackagePeer::COMMISSION, $this->commission);
 		if ($this->isColumnModified(MlmPackagePeer::CREDIT_REFUND)) $criteria->add(MlmPackagePeer::CREDIT_REFUND, $this->credit_refund);
 		if ($this->isColumnModified(MlmPackagePeer::PAIRING_BONUS)) $criteria->add(MlmPackagePeer::PAIRING_BONUS, $this->pairing_bonus);
+		if ($this->isColumnModified(MlmPackagePeer::MONTHLY_PERFORMANCE)) $criteria->add(MlmPackagePeer::MONTHLY_PERFORMANCE, $this->monthly_performance);
+		if ($this->isColumnModified(MlmPackagePeer::SPECIAL_BONUS)) $criteria->add(MlmPackagePeer::SPECIAL_BONUS, $this->special_bonus);
+		if ($this->isColumnModified(MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED)) $criteria->add(MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED, $this->special_bonus_min_lot_traded);
 		if ($this->isColumnModified(MlmPackagePeer::DAILY_MAX_PAIRING)) $criteria->add(MlmPackagePeer::DAILY_MAX_PAIRING, $this->daily_max_pairing);
-		if ($this->isColumnModified(MlmPackagePeer::FUND_MGN_PROFIT_SHARING)) $criteria->add(MlmPackagePeer::FUND_MGN_PROFIT_SHARING, $this->fund_mgn_profit_sharing);
 		if ($this->isColumnModified(MlmPackagePeer::PUBLIC_PURCHASE)) $criteria->add(MlmPackagePeer::PUBLIC_PURCHASE, $this->public_purchase);
 		if ($this->isColumnModified(MlmPackagePeer::CREATED_BY)) $criteria->add(MlmPackagePeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmPackagePeer::CREATED_ON)) $criteria->add(MlmPackagePeer::CREATED_ON, $this->created_on);
@@ -866,9 +932,13 @@ abstract class BaseMlmPackage extends BaseObject  implements Persistent {
 
 		$copyObj->setPairingBonus($this->pairing_bonus);
 
-		$copyObj->setDailyMaxPairing($this->daily_max_pairing);
+		$copyObj->setMonthlyPerformance($this->monthly_performance);
 
-		$copyObj->setFundMgnProfitSharing($this->fund_mgn_profit_sharing);
+		$copyObj->setSpecialBonus($this->special_bonus);
+
+		$copyObj->setSpecialBonusMinLotTraded($this->special_bonus_min_lot_traded);
+
+		$copyObj->setDailyMaxPairing($this->daily_max_pairing);
 
 		$copyObj->setPublicPurchase($this->public_purchase);
 

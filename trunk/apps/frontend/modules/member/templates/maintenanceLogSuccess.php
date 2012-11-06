@@ -29,7 +29,7 @@
                         { "sName" : "credit", "bVisible" : true,  "bSortable": true},
                         { "sName" : "debit",  "bSortable": true},
                         { "sName" : "balance",  "bSortable": true},
-                        { "sName" : "trnsaction_type",  "bSortable": true},
+                        { "sName" : "transaction_type",  "bSortable": true},
                         { "sName" : "created_on",  "bSortable": true},
                         { "sName" : "remark",  "bSortable": true}
                     ]

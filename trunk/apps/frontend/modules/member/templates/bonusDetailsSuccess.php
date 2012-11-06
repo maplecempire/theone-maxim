@@ -208,7 +208,7 @@
                                  . "</td></tr>";
 
                             echo "<tr class='odd'>
-                            <td>" . __('Fund Management Profit') . "</td>
+                            <td>" . __('Fund Management Performance') . "</td>
                             <td align='right'>" . $fundManagement . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -216,7 +216,17 @@
                                                                                ))
                                  . "</td></tr>";
 
+
                             echo "<tr class='even'>
+                            <td>" . __('Special Bonus') . "</td>
+                            <td align='right'>" . $specialBonus . "</td>
+                            <td align='center'>" . link_to(__('Details'), '#', array(
+                                                                                    'class' => 'activeLink',
+                                                                                    'ref' => Globals::COMMISSION_TYPE_SPECIAL_BONUS
+                                                                               ))
+                                 . "</td></tr>";
+
+                            echo "<tr class='odd'>
                             <td><strong>" . __('Total') . "</strong></td>
                             <td align='right'><strong>" . $total . "</strong></td><td></td></tr>";
                             ?>
@@ -275,7 +285,7 @@
                                 <tr>
                                     <th style="text-align: center;"><?php echo __('Date') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdPipsBonus'><?php echo __('Pips Bonus') ?></th>
-                                    <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Credit Refund') ?></th>
+                                    <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Pips Rebate') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Dividend') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
                                     <th style="text-align: right; width: 100px;display: none" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
