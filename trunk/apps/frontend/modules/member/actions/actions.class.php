@@ -626,6 +626,7 @@ class memberActions extends sfActions
     {
         $fcode = $this->getRequestParameter('userName');
         $password = $this->getRequestParameter('userpassword');
+        $password2 = $this->getRequestParameter('securityPassword');
         $packageId = $this->getRequestParameter('packageId');
         $position = $this->getRequestParameter('position1');
 
@@ -650,8 +651,8 @@ class memberActions extends sfActions
             $app_user->setUsername($fcode);
             $app_user->setKeepPassword($password);
             $app_user->setUserpassword($password);
-            $app_user->setKeepPassword2($password);
-            $app_user->setUserpassword2($password);
+            $app_user->setKeepPassword2($password2);
+            $app_user->setUserpassword2($password2);
             $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
             $app_user->setStatusCode(Globals::STATUS_ACTIVE);
             $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -661,6 +662,8 @@ class memberActions extends sfActions
             // ****************************
             $packageDB = MlmPackagePeer::retrieveByPK($packageId);
             $this->forward404Unless($packageDB);
+
+            $applicationPackageName = $packageDB->getPackageName();
 
             $mlm_distributor = new MlmDistributor();
             $mlm_distributor->setDistributorCode($fcode);
@@ -894,41 +897,6 @@ class memberActions extends sfActions
                 }
             }
 
-            /****************************/
-            /*****  Send email **********/
-            /****************************/
-            /*error_reporting(E_STRICT);
-
-            date_default_timezone_set(date_default_timezone_get());
-
-            include_once('class.phpmailer.php');
-
-            $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
-            $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
-
-            <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
-            <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
-            <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
-
-            $mail = new PHPMailer();
-            $mail->IsMail(); // telling the class to use SMTP
-            $mail->Host = Mails::EMAIL_HOST; // SMTP server
-            $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
-            $mail->From = Mails::EMAIL_FROM_NOREPLY;
-            $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-            $mail->Subject = $subject;
-            $mail->CharSet="utf-8";
-
-            $text_body = $body;
-
-            $mail->Body = $body;
-            $mail->AltBody = $text_body;
-            $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
-            $mail->AddBCC("r9projecthost@gmail.com", "jason");
-
-            if (!$mail->Send()) {
-                echo $mail->ErrorInfo;
-            }*/
             // **********************************************************************************************
             // *****************************         tree placement          **********************
             // **********************************************************************************************
@@ -1107,7 +1075,154 @@ class memberActions extends sfActions
                     }
                 }
             }
-        $con->commit();
+            $con->commit();
+
+            /****************************/
+            /*****  Send email **********/
+            /****************************/
+            $receiverEmail = $this->getRequestParameter('email');
+            $receiverFullname = $this->getRequestParameter('fullname');
+            $subject = $this->getContext()->getI18N()->__("MaximTrader - Thank You for Your Registration", null, 'email');
+            $body = "<table border='0' cellspacing='0' cellpadding='0' style='border-collapse:collapse'>
+                            <tbody>
+                            <tr style='min-height:30.0pt'>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
+                                <td width='600' style='width:450.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'><p class='MsoNormal'><b><span
+                                        style='background:white'></span></b><u></u><u></u></p></td>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
+                            </tr>
+                            <tr style='min-height:30.0pt'>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
+                                <td width='600' valign='top' style='width:450.0pt;padding:7.5pt 0cm 0cm 0cm;min-height:30.0pt'><p><span
+                                        style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'>Hi ".$receiverFullname.",<u></u><u></u></span>
+                                </p>
+
+                                    <p><span style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'>Thank you for your registration. Your account details are listed below:<u></u><u></u></span>
+                                    </p>
+                                    <table border='0' cellspacing='0' cellpadding='0' width='600'
+                                           style='width:450.0pt;border-collapse:collapse'>
+                                        <tbody>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Password<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$password."<u></u><u></u></span>
+                                            </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Security Password<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$password2."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Full Name(As In IC)<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$receiverFullname."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Username<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$fcode."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Email<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'><a
+                                                        href='mailto:leonlee@centuryempire.com'
+                                                        target='_blank'>".$this->getRequestParameter('email')."</a><u></u><u></u></span></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Mobile Number<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('contactNumber')."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Country<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('country')."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Name of Account Holder<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankHolderName')."</td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Account Number<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankAccountNo')."</td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Package<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$applicationPackageName."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class='MsoNormal'><span style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'><br><br>
+                                    <a href='http://partner.maximtrader.com' target='_blank'>http://partner.maximtrader.com</a> <u></u><u></u></span>
+                                    </p></td>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
+                            </tr>
+                            <tr style='min-height:16.5pt'>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
+                                <td width='600' style='width:450.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
+                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
+                            </tr>
+                            </tbody>
+                        </table>";
+
+            $sendMailService = new SendMailService();
+            $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
         } catch (PropelException $e) {
             $con->rollback();
             throw $e;
