@@ -483,12 +483,12 @@ $(function() {
                     }*/
                     ?>
 
-                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_FUND_MANAGEMENT_UPLOAD, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
-                    <a href="<?php echo url_for('marketing/fundManagementUpload') ?>" title="Fund Management Upload">
+                    <?php /*if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_FUND_MANAGEMENT_UPLOAD, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { */?><!--
+                    <a href="<?php /*echo url_for('marketing/fundManagementUpload') */?>" title="Fund Management Upload">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Fund Management Upload'); ?></a><br/>
-                    <?php } ?>
+                        &nbsp;<?php /*echo __('Fund Management Upload'); */?></a><br/>
+                    --><?php //} ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PIPS_CALCULATOR, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/pipsUpload') ?>" title="Pips Upload">
