@@ -3670,6 +3670,8 @@ class memberActions extends sfActions
             $con->rollback();
             throw $e;
         }
+        print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
+        $this->executeSendRemindationEmailForUploadAgreement();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
@@ -4956,5 +4958,169 @@ function getAccumulateGroupBvs($distributorId, $position)
             }
         }
         return 0;
+    }
+
+    function executeSendRemindationEmailForUploadAgreement()
+    {
+        $body = "<table width='800' align='center' cellpadding='0' cellspacing='0' border='0'>
+			<tbody><tr>
+				<td valign='top' colspan='3'>
+					<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+						<tbody>
+						<tr><td colspan='3' style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='34'></td></tr>
+						<tr>
+							<td valign='top' width='551'>
+								<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+									<tbody><tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='71'></td></tr>
+									<tr>
+										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+										<td valign='top' style='line-height:17px'>
+											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
+												亲爱的会员，
+<br><br>
+您好。
+<br><br>
+由于外汇的要求严谨，请您将您的文件包括：
+<br><br>
+1） 身份证（正反面在同一页）
+<br><br>
+2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）
+<br><br>
+-          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。
+<br><br>
+3） 下载并签署外汇合约。
+<br><br>
+上传给公司，否则这会影响您日后的提现。
+<br><br>
+注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）。
+<br><br>
+谢谢您的鼎力合作。
+<br><br>
+祝：一切顺利
+
+												<br>
+											</font>
+										</td>
+									</tr>
+									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
+
+									<tr>
+										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+										<td valign='top' style='line-height:17px'>
+											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
+												Dear our distinguished member,
+<br><br>
+Thank you for your support and faith in us!
+<br><br>
+Owning to the terms as stipulated by Forex world, please provide us your documents:
+<br><br>
+1)      Identification (IC / Passport, front and back at same page)
+<br><br>
+2)      Proof of Address (Bank / Credit Card statement, OR Water / Electric statement, OR Phone / Internet statement)
+<br><br>
+-          Your name, current address and the date of the latest 3 months must be shown at the statement.
+<br><br>
+3)      Download and sign the Forex Agreements.
+<br><br>
+And upload all the documents at website.
+<br><br>
+Note:
+<br><br>
+Please logon to http://partner.maximtrader.com. Click “User Profile” to upload all the documents at “Upload Document”.
+<br><br>
+Thank you for your highly cooperation.
+<br><br>
+Wish you all the best.
+<br><br>
+<br><br>
+
+
+											</font>
+										</td>
+									</tr>
+									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
+
+									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='32'></td></tr>
+									<tr>
+										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
+										<td style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'></td>
+									</tr>
+									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+									<tr>
+										<td valign='top' style='line-height:15px;text-align:right' colspan='2' align='right'>
+											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+												<em>
+													Best Regards,<br>
+													<strong>Maxim Trader</strong><br>
+													E mail : admin@maximtrader.com
+												</em>
+											</font>
+										</td>
+									</tr>
+								</tbody></table>
+							</td>
+							<td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+			<tr>
+				<td style='font-size:0;line-height:0' width='63'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='63' height='1'></td>
+				<td valign='top' width='689'>
+					<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+						<tbody><tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='28'></td></tr>
+						<tr>
+							<td align='right' style='text-align:right;font-size:0;line-height:0'>
+								<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							</td>
+						</tr>
+						<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='16'></td></tr>
+					</tbody></table>
+				</td>
+				<td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
+			</tr>
+			<tr><td colspan='3' style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='34'></td></tr>
+		</tbody></table>";
+
+        $sendMailService = new SendMailService();
+        $subject = "MaximTrader Forex Agreement 外汇合约";
+
+        $dateUtil = new DateUtil();
+        $date = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -7, 0, 0));
+        $arrs = $this->fetchMemberWithoutUploadDocument($date);
+        foreach ($arrs as $arr) {
+            $receiverEmail = $arr['email'];
+            $receiverFullName = $arr['full_name'];
+
+            //print_r($receiverFullName."<br>");
+            $sendMailService->sendMail($receiverEmail, $receiverFullName, $subject, $body);
+        }
+    }
+
+    function fetchMemberWithoutUploadDocument($date) {
+        $dateFrom = $date . " 00:00:00";
+        $dateTo = $date . " 23:59:59";
+
+        $query = "SELECT distributor_id, distributor_code, full_name, email
+	                    FROM mlm_distributor where (file_bank_pass_book is null or file_proof_of_residence is null or file_nric is null)
+	                    and email is not null
+	                    and active_datetime >= '" . $dateFrom . "' AND created_on <= '" . $dateTo . "'
+	                    and status_code = '".Globals::STATUS_ACTIVE."'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $resultArray[$count]["distributor_id"] = $arr["distributor_id"];
+            $resultArray[$count]["distributor_code"] = $arr["distributor_code"];
+            $resultArray[$count]["full_name"] = $arr["full_name"];
+            $resultArray[$count]["email"] = $arr["email"];
+            $count++;
+        }
+        return $resultArray;
     }
 }
