@@ -25,8 +25,8 @@
                 waiting();
                 var amount = $('#epointAmount').autoNumericGet();
                 var epointBalance = $('#epointBalance').autoNumericGet();
-                console.log(amount);
-                console.log(epointBalance);
+                //console.log(amount);
+                //console.log(epointBalance);
                 if (parseFloat(epointBalance) < (parseFloat(amount) + parseFloat($("#processFee").val()))) {
                     alert("<?php echo __("In-sufficient E-Point")?>");
                     return false;
