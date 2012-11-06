@@ -13,6 +13,57 @@ class homeActions extends sfActions
     /* ***********************************************************************
      *    ~ HTML ~
      * **********************************************************************/
+    public function executeForgetPassword()
+    {
+        if ($this->getRequestParameter('email') && $this->getRequestParameter('username')) {
+            $email = $this->getRequestParameter('email');
+            $username = $this->getRequestParameter('username');
+
+            $this->email = $email;
+            $this->username = $username;
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $username);
+            $c->add(MlmDistributorPeer::EMAIL, $email);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $existDistributor = MlmDistributorPeer::doSelectOne($c);
+
+            if ($existDistributor) {
+                $c = new Criteria();
+                $c->add(AppUserPeer::USERNAME, $username);
+                $c->add(AppUserPeer::USER_ROLE, Globals::ROLE_DISTRIBUTOR);
+                $c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $existUser = AppUserPeer::doSelectOne($c);
+
+                if ($existUser) {
+                    /****************************/
+                    /*****  Send email **********/
+                    /****************************/
+                    $password = $existUser->getUserpassword();
+                    $password2 = $existUser->getUserpassword2();
+
+                    $subject = $this->getContext()->getI18N()->__("MaximTrader - Account Password Retrieval", null, 'email');
+                    $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getFullName()), 'email') . ",<p><p>
+                    <p>" . $this->getContext()->getI18N()->__("On our record, you have requested to retrieve your forgotten password. Your account(s) detail together with the password is listed below.", null, 'email') . "</p>
+                    <p><br><b>" . $this->getContext()->getI18N()->__("Username", null) . ": " . $username . "</b>
+                    <br><b>" . $this->getContext()->getI18N()->__("Account Password", null) . ": " . $password . "</b>
+                    <br><b>" . $this->getContext()->getI18N()->__("Security Password", null) . ": " . $password2 . "</b>
+                    <p><br>" . $this->getContext()->getI18N()->__("If you do not requested for this password retrieval, you can simply ignore this email since only you will receive this email. For more information, please contact us.", null, 'email') . "</p>
+                    <p><a href='http://partner.maximtrader.com' target='_blank'>http://partner.maximtrader.com</a>";
+
+                    $sendMailService = new SendMailService();
+                    $sendMailService->sendForgetPassword($existDistributor, $subject, $body);
+
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Password already sent to your email account. Please check your inbox."));
+                } else {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Email is not matching to your username."));
+                }
+            } else {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Email is not matching to your username."));
+            }
+            return $this->redirect('/home/forgetPassword');
+        }
+    }
     public function executeRss()
     {
     }
