@@ -744,7 +744,7 @@ class memberActions extends sfActions
             $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
             //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
             //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_ACTIVE);
+            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
             $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_roi_dividend->save();
@@ -3682,7 +3682,7 @@ class memberActions extends sfActions
 
                     print_r("+++++ ROI Dividend +++++<br>");
                     $c = new Criteria();
-                    $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_ACTIVE);
+                    $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
                     $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
                     $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
@@ -3706,9 +3706,29 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
+                        $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                        $sponsorDistCommissionledger->setMonthTraded(date('m'));
+                        $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                        $sponsorDistCommissionledger->setDistId($distId);
+                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                        //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                        $sponsorDistCommissionledger->setCredit($dividendAmount);
+                        $sponsorDistCommissionledger->setDebit(0);
+                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                        $sponsorDistCommissionledger->setBalance($fundManagementBalance + $dividendAmount);
+                        $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$mlmRoiDividend->getPackagePrice());
+                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->save();
+
+                        $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
                         $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                         $mlmRoiDividend->setDividendAmount($dividendAmount);
-                        $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_COMPLETE);
+                        $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
                         //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
                         $mlmRoiDividend->save();
 
@@ -3728,7 +3748,7 @@ class memberActions extends sfActions
                             $mlm_roi_dividend->setRoiPercentage($mlmRoiDividend->getRoiPercentage());
                             //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                             //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_ACTIVE);
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
                             $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_roi_dividend->save();
@@ -3929,6 +3949,29 @@ class memberActions extends sfActions
                 $distDB->setRankId($selectedPackage->getPackageId());
                 $distDB->setRankCode($selectedPackage->getPackageName());
                 $distDB->save();
+
+                /* ****************************************************
+                 * ROI Divident
+                 * ***************************************************/
+                $dateUtil = new DateUtil();
+                $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
+                $dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+
+                $mlm_roi_dividend = new MlmRoiDividend();
+                $mlm_roi_dividend->setDistId($distId);
+                $mlm_roi_dividend->setIdx(1);
+                //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                $mlm_roi_dividend->setDividendDate($dividendDate);
+                $mlm_roi_dividend->setPackageId($selectedPackage->getPackageId());
+                $mlm_roi_dividend->setPackagePrice($selectedPackage->getPrice());
+                $mlm_roi_dividend->setRoiPercentage($selectedPackage->getMonthlyPerformance());
+                //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_roi_dividend->save();
+
 
                 /**************************************/
                 /*  Direct REFERRAL Bonus For Upline

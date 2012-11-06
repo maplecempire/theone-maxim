@@ -33,6 +33,10 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 
 
 	
+	protected $year_traded;
+
+
+	
 	protected $credit = 0;
 
 
@@ -133,6 +137,13 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 	{
 
 		return $this->month_traded;
+	}
+
+	
+	public function getYearTraded()
+	{
+
+		return $this->year_traded;
 	}
 
 	
@@ -366,6 +377,23 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 	} 
 
 	
+	public function setYearTraded($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->year_traded !== $v) {
+			$this->year_traded = $v;
+			$this->modifiedColumns[] = MlmDistCommissionLedgerPeer::YEAR_TRADED;
+		}
+
+	} 
+
+	
 	public function setCredit($v)
 	{
 
@@ -592,39 +620,41 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 
 			$this->month_traded = $rs->getInt($startcol + 5);
 
-			$this->credit = $rs->getFloat($startcol + 6);
+			$this->year_traded = $rs->getInt($startcol + 6);
 
-			$this->debit = $rs->getFloat($startcol + 7);
+			$this->credit = $rs->getFloat($startcol + 7);
 
-			$this->balance = $rs->getFloat($startcol + 8);
+			$this->debit = $rs->getFloat($startcol + 8);
 
-			$this->remark = $rs->getString($startcol + 9);
+			$this->balance = $rs->getFloat($startcol + 9);
 
-			$this->pips_downline_username = $rs->getString($startcol + 10);
+			$this->remark = $rs->getString($startcol + 10);
 
-			$this->pips_mt4_id = $rs->getString($startcol + 11);
+			$this->pips_downline_username = $rs->getString($startcol + 11);
 
-			$this->pips_rebate = $rs->getFloat($startcol + 12);
+			$this->pips_mt4_id = $rs->getString($startcol + 12);
 
-			$this->pips_level = $rs->getInt($startcol + 13);
+			$this->pips_rebate = $rs->getFloat($startcol + 13);
 
-			$this->pips_lots_traded = $rs->getFloat($startcol + 14);
+			$this->pips_level = $rs->getInt($startcol + 14);
 
-			$this->created_by = $rs->getInt($startcol + 15);
+			$this->pips_lots_traded = $rs->getFloat($startcol + 15);
 
-			$this->created_on = $rs->getTimestamp($startcol + 16, null);
+			$this->created_by = $rs->getInt($startcol + 16);
 
-			$this->updated_by = $rs->getInt($startcol + 17);
+			$this->created_on = $rs->getTimestamp($startcol + 17, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 18, null);
+			$this->updated_by = $rs->getInt($startcol + 18);
 
-			$this->status_code = $rs->getString($startcol + 19);
+			$this->updated_on = $rs->getTimestamp($startcol + 19, null);
+
+			$this->status_code = $rs->getString($startcol + 20);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 20; 
+						return $startcol + 21; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistCommissionLedger object", $e);
 		}
@@ -788,45 +818,48 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 				return $this->getMonthTraded();
 				break;
 			case 6:
-				return $this->getCredit();
+				return $this->getYearTraded();
 				break;
 			case 7:
-				return $this->getDebit();
+				return $this->getCredit();
 				break;
 			case 8:
-				return $this->getBalance();
+				return $this->getDebit();
 				break;
 			case 9:
-				return $this->getRemark();
+				return $this->getBalance();
 				break;
 			case 10:
-				return $this->getPipsDownlineUsername();
+				return $this->getRemark();
 				break;
 			case 11:
-				return $this->getPipsMt4Id();
+				return $this->getPipsDownlineUsername();
 				break;
 			case 12:
-				return $this->getPipsRebate();
+				return $this->getPipsMt4Id();
 				break;
 			case 13:
-				return $this->getPipsLevel();
+				return $this->getPipsRebate();
 				break;
 			case 14:
-				return $this->getPipsLotsTraded();
+				return $this->getPipsLevel();
 				break;
 			case 15:
-				return $this->getCreatedBy();
+				return $this->getPipsLotsTraded();
 				break;
 			case 16:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 17:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 18:
-				return $this->getUpdatedOn();
+				return $this->getUpdatedBy();
 				break;
 			case 19:
+				return $this->getUpdatedOn();
+				break;
+			case 20:
 				return $this->getStatusCode();
 				break;
 			default:
@@ -845,20 +878,21 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 			$keys[3] => $this->getTransactionType(),
 			$keys[4] => $this->getRefId(),
 			$keys[5] => $this->getMonthTraded(),
-			$keys[6] => $this->getCredit(),
-			$keys[7] => $this->getDebit(),
-			$keys[8] => $this->getBalance(),
-			$keys[9] => $this->getRemark(),
-			$keys[10] => $this->getPipsDownlineUsername(),
-			$keys[11] => $this->getPipsMt4Id(),
-			$keys[12] => $this->getPipsRebate(),
-			$keys[13] => $this->getPipsLevel(),
-			$keys[14] => $this->getPipsLotsTraded(),
-			$keys[15] => $this->getCreatedBy(),
-			$keys[16] => $this->getCreatedOn(),
-			$keys[17] => $this->getUpdatedBy(),
-			$keys[18] => $this->getUpdatedOn(),
-			$keys[19] => $this->getStatusCode(),
+			$keys[6] => $this->getYearTraded(),
+			$keys[7] => $this->getCredit(),
+			$keys[8] => $this->getDebit(),
+			$keys[9] => $this->getBalance(),
+			$keys[10] => $this->getRemark(),
+			$keys[11] => $this->getPipsDownlineUsername(),
+			$keys[12] => $this->getPipsMt4Id(),
+			$keys[13] => $this->getPipsRebate(),
+			$keys[14] => $this->getPipsLevel(),
+			$keys[15] => $this->getPipsLotsTraded(),
+			$keys[16] => $this->getCreatedBy(),
+			$keys[17] => $this->getCreatedOn(),
+			$keys[18] => $this->getUpdatedBy(),
+			$keys[19] => $this->getUpdatedOn(),
+			$keys[20] => $this->getStatusCode(),
 		);
 		return $result;
 	}
@@ -893,45 +927,48 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 				$this->setMonthTraded($value);
 				break;
 			case 6:
-				$this->setCredit($value);
+				$this->setYearTraded($value);
 				break;
 			case 7:
-				$this->setDebit($value);
+				$this->setCredit($value);
 				break;
 			case 8:
-				$this->setBalance($value);
+				$this->setDebit($value);
 				break;
 			case 9:
-				$this->setRemark($value);
+				$this->setBalance($value);
 				break;
 			case 10:
-				$this->setPipsDownlineUsername($value);
+				$this->setRemark($value);
 				break;
 			case 11:
-				$this->setPipsMt4Id($value);
+				$this->setPipsDownlineUsername($value);
 				break;
 			case 12:
-				$this->setPipsRebate($value);
+				$this->setPipsMt4Id($value);
 				break;
 			case 13:
-				$this->setPipsLevel($value);
+				$this->setPipsRebate($value);
 				break;
 			case 14:
-				$this->setPipsLotsTraded($value);
+				$this->setPipsLevel($value);
 				break;
 			case 15:
-				$this->setCreatedBy($value);
+				$this->setPipsLotsTraded($value);
 				break;
 			case 16:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 17:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 18:
-				$this->setUpdatedOn($value);
+				$this->setUpdatedBy($value);
 				break;
 			case 19:
+				$this->setUpdatedOn($value);
+				break;
+			case 20:
 				$this->setStatusCode($value);
 				break;
 		} 	}
@@ -947,20 +984,21 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		if (array_key_exists($keys[3], $arr)) $this->setTransactionType($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setRefId($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMonthTraded($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCredit($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setDebit($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setBalance($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setRemark($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setPipsDownlineUsername($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setPipsMt4Id($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setPipsRebate($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setPipsLevel($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setPipsLotsTraded($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setCreatedBy($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCreatedOn($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setUpdatedBy($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUpdatedOn($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setStatusCode($arr[$keys[19]]);
+		if (array_key_exists($keys[6], $arr)) $this->setYearTraded($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCredit($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDebit($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setBalance($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setRemark($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPipsDownlineUsername($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setPipsMt4Id($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setPipsRebate($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setPipsLevel($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setPipsLotsTraded($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCreatedBy($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCreatedOn($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUpdatedBy($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setUpdatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setStatusCode($arr[$keys[20]]);
 	}
 
 	
@@ -974,6 +1012,7 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::TRANSACTION_TYPE)) $criteria->add(MlmDistCommissionLedgerPeer::TRANSACTION_TYPE, $this->transaction_type);
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::REF_ID)) $criteria->add(MlmDistCommissionLedgerPeer::REF_ID, $this->ref_id);
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::MONTH_TRADED)) $criteria->add(MlmDistCommissionLedgerPeer::MONTH_TRADED, $this->month_traded);
+		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::YEAR_TRADED)) $criteria->add(MlmDistCommissionLedgerPeer::YEAR_TRADED, $this->year_traded);
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::CREDIT)) $criteria->add(MlmDistCommissionLedgerPeer::CREDIT, $this->credit);
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::DEBIT)) $criteria->add(MlmDistCommissionLedgerPeer::DEBIT, $this->debit);
 		if ($this->isColumnModified(MlmDistCommissionLedgerPeer::BALANCE)) $criteria->add(MlmDistCommissionLedgerPeer::BALANCE, $this->balance);
@@ -1027,6 +1066,8 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		$copyObj->setRefId($this->ref_id);
 
 		$copyObj->setMonthTraded($this->month_traded);
+
+		$copyObj->setYearTraded($this->year_traded);
 
 		$copyObj->setCredit($this->credit);
 

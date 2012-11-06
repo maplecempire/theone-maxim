@@ -4,6 +4,7 @@
     var datagrid = null;
     var datagridDetail = null;
     var pipsDatagrid = null;
+    var datagridFundManagementReturn = null;
     $(function() {
         datagridDetail = $("#datagridDetail").r9jasonDataTable({
             // online1DataTable extra params
@@ -61,51 +62,73 @@
                 $("#divBonusType").show(500);
                 $("#divPip").show(500);
                 $("#divDRB").hide(500);
+                $("#divFundManagementReturn").hide(500);
                 $(".tdPipsBonus").show();
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
                 $(".tdPairingBonus").hide();
+                $(".tdSpecialBonus").hide();
                 pipsDatagrid.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_CREDIT_REFUND?>") {
                 $("#divBonusType").show(500);
                 $("#divPip").show(500);
                 $("#divDRB").hide(500);
+                $("#divFundManagementReturn").hide(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").show();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
                 $(".tdPairingBonus").hide();
+                $(".tdSpecialBonus").hide();
                 pipsDatagrid.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_FUND_MANAGEMENT?>") {
                 $("#divBonusType").show(500);
-                $("#divPip").show(500);
+                $("#divPip").hide(500);
                 $("#divDRB").hide(500);
+                $("#divFundManagementReturn").show(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").show();
                 $(".tdRbBonus").hide();
                 $(".tdPairingBonus").hide();
-                pipsDatagrid.fnDraw();
+                $(".tdSpecialBonus").hide();
+                datagridFundManagementReturn.fnDraw();
             } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_GDB?>") {
                 $("#divBonusType").show(500);
                 $("#divPip").hide(500);
                 $("#divDRB").show(500);
+                $("#divFundManagementReturn").hide(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").hide();
                 $(".tdPairingBonus").show();
+                $(".tdSpecialBonus").hide();
+                datagridDetail.fnDraw();
+            } else if ($(this).attr("ref") == "<?php echo Globals::COMMISSION_TYPE_SPECIAL_BONUS?>") {
+                $("#divBonusType").show(500);
+                $("#divPip").hide(500);
+                $("#divDRB").show(500);
+                $("#divFundManagementReturn").hide(500);
+                $(".tdPipsBonus").hide();
+                $(".tdCreditRefund").hide();
+                $(".tdFundDividend").hide();
+                $(".tdRbBonus").hide();
+                $(".tdPairingBonus").hide();
+                $(".tdSpecialBonus").show();
                 datagridDetail.fnDraw();
             } else {
                 $("#divBonusType").show(500);
                 $("#divPip").hide(500);
                 $("#divDRB").show(500);
+                $("#divFundManagementReturn").hide(500);
                 $(".tdPipsBonus").hide();
                 $(".tdCreditRefund").hide();
                 $(".tdFundDividend").hide();
                 $(".tdRbBonus").show();
                 $(".tdPairingBonus").hide();
+                $(".tdSpecialBonus").hide();
                 datagridDetail.fnDraw();
             }
         });
@@ -286,9 +309,10 @@
                                     <th style="text-align: center;"><?php echo __('Date') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdPipsBonus'><?php echo __('Pips Bonus') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Pips Rebate') ?></th>
-                                    <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Dividend') ?></th>
+                                    <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Management Performance') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
                                     <th style="text-align: right; width: 100px;display: none" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
+                                    <th style="text-align: right; width: 100px;display: none" class='tdSpecialBonus'><?php echo __('Special Bonus') ?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -317,6 +341,7 @@
                                             <td align='right' class='tdFundDividend' style='display: none'>".number_format($arr["fund_dividend"], 2)."</td>
                                             <td align='right' class='tdRbBonus'>".number_format($arr["rb_bonus"], 2)."</td>
                                             <td align='right' class='tdPairingBonus' style='display: none'>".number_format($arr["paring_bonus"], 2)."</td>
+                                            <td align='right' class='tdSpecialBonus' style='display: none'>".number_format($arr["special_bonus"], 2)."</td>
                                             </tr>";
 
                                         $showYear = $arr["year"];
@@ -333,9 +358,11 @@
                                     event.preventDefault();
                                     $("#search_month").val($(this).attr("refMonth"));
                                     $("#search_year").val($(this).attr("refYear"));
-
+                                    //console.log($("#divBonusType").data("BONUS_TYPE"));
                                     if ($("#divBonusType").data("BONUS_TYPE") == "DRB" || $("#divBonusType").data("BONUS_TYPE") == "GDB")  {
                                         datagridDetail.fnDraw();
+                                    } else if ($("#divBonusType").data("BONUS_TYPE") == "FUND_MANAGEMENT")  {
+                                        datagridFundManagementReturn.fnDraw();
                                     } else {
                                         pipsDatagrid.fnDraw();
                                     }
@@ -365,6 +392,34 @@
                                         { "sName" : "bonus.month_traded",  "bSortable": true},
                                         { "sName" : "bonus.remark",  "bSortable": false},
                                         { "sName" : "bonus.credit",  "bSortable": true}
+                                    ]
+                                });
+
+                                datagridFundManagementReturn = $("#datagridFundManagementReturn").r9jasonDataTable({
+                                    // online1DataTable extra params
+                                    "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
+                                    "extraParam" : function(aoData) { // pass extra params to server
+                                        aoData.push({ "name": "filterMonth", "value": $("#search_month").val()  });
+                                        aoData.push({ "name": "filterYear", "value": $("#search_year").val()  });
+                                    },
+                                    "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
+                                    },
+
+                                    // datatables params
+                                    "bLengthChange": true,
+                                    "bFilter": false,
+                                    "bProcessing": true,
+                                    "bServerSide": true,
+                                    "bAutoWidth": false,
+                                    "sAjaxSource": "<?php echo url_for('finance/fundManagementReturnList') ?>",
+                                    "sPaginationType": "full_numbers",
+                                    "aoColumns": [
+                                        { "sName" : "bonus.devidend_id", "bVisible" : false},
+                                        { "sName" : "bonus.dividend_date",  "bSortable": true},
+                                        { "sName" : "bonus.package_price",  "bSortable": true},
+                                        { "sName" : "bonus.roi_percentage",  "bSortable": true},
+                                        { "sName" : "bonus.dividend_amount",  "bSortable": true},
+                                        { "sName" : "bonus.status_code",  "bSortable": true}
                                     ]
                                 });
                             }); // end $(function())
@@ -401,6 +456,20 @@
                                     <th><?php echo __('Debit') ?></th>
                                     <th><?php echo __('Remark') ?></th>
                                     <th><?php echo __('MT4 Status') ?></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="divFundManagementReturn">
+                            <table class="display" id="datagridFundManagementReturn" border="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Detail Id[hidden]</th>
+                                    <th><?php echo __('Funding Date') ?></th>
+                                    <th><?php echo __('Funds') ?></th>
+                                    <th><?php echo __('Return Percentage') ?></th>
+                                    <th><?php echo __('Total Fund Return') ?></th>
+                                    <th><?php echo __('Status') ?></th>
                                 </tr>
                                 </thead>
                             </table>

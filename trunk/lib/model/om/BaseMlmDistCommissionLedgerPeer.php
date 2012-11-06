@@ -13,7 +13,7 @@ abstract class BaseMlmDistCommissionLedgerPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDistCommissionLedger';
 
 	
-	const NUM_COLUMNS = 20;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -36,6 +36,9 @@ abstract class BaseMlmDistCommissionLedgerPeer {
 
 	
 	const MONTH_TRADED = 'mlm_dist_commission_ledger.MONTH_TRADED';
+
+	
+	const YEAR_TRADED = 'mlm_dist_commission_ledger.YEAR_TRADED';
 
 	
 	const CREDIT = 'mlm_dist_commission_ledger.CREDIT';
@@ -85,18 +88,18 @@ abstract class BaseMlmDistCommissionLedgerPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('CommissionId', 'DistId', 'CommissionType', 'TransactionType', 'RefId', 'MonthTraded', 'Credit', 'Debit', 'Balance', 'Remark', 'PipsDownlineUsername', 'PipsMt4Id', 'PipsRebate', 'PipsLevel', 'PipsLotsTraded', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'StatusCode', ),
-		BasePeer::TYPE_COLNAME => array (MlmDistCommissionLedgerPeer::COMMISSION_ID, MlmDistCommissionLedgerPeer::DIST_ID, MlmDistCommissionLedgerPeer::COMMISSION_TYPE, MlmDistCommissionLedgerPeer::TRANSACTION_TYPE, MlmDistCommissionLedgerPeer::REF_ID, MlmDistCommissionLedgerPeer::MONTH_TRADED, MlmDistCommissionLedgerPeer::CREDIT, MlmDistCommissionLedgerPeer::DEBIT, MlmDistCommissionLedgerPeer::BALANCE, MlmDistCommissionLedgerPeer::REMARK, MlmDistCommissionLedgerPeer::PIPS_DOWNLINE_USERNAME, MlmDistCommissionLedgerPeer::PIPS_MT4_ID, MlmDistCommissionLedgerPeer::PIPS_REBATE, MlmDistCommissionLedgerPeer::PIPS_LEVEL, MlmDistCommissionLedgerPeer::PIPS_LOTS_TRADED, MlmDistCommissionLedgerPeer::CREATED_BY, MlmDistCommissionLedgerPeer::CREATED_ON, MlmDistCommissionLedgerPeer::UPDATED_BY, MlmDistCommissionLedgerPeer::UPDATED_ON, MlmDistCommissionLedgerPeer::STATUS_CODE, ),
-		BasePeer::TYPE_FIELDNAME => array ('commission_id', 'dist_id', 'commission_type', 'transaction_type', 'ref_id', 'month_traded', 'credit', 'debit', 'balance', 'remark', 'pips_downline_username', 'pips_mt4_id', 'pips_rebate', 'pips_level', 'pips_lots_traded', 'created_by', 'created_on', 'updated_by', 'updated_on', 'status_code', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('CommissionId', 'DistId', 'CommissionType', 'TransactionType', 'RefId', 'MonthTraded', 'YearTraded', 'Credit', 'Debit', 'Balance', 'Remark', 'PipsDownlineUsername', 'PipsMt4Id', 'PipsRebate', 'PipsLevel', 'PipsLotsTraded', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'StatusCode', ),
+		BasePeer::TYPE_COLNAME => array (MlmDistCommissionLedgerPeer::COMMISSION_ID, MlmDistCommissionLedgerPeer::DIST_ID, MlmDistCommissionLedgerPeer::COMMISSION_TYPE, MlmDistCommissionLedgerPeer::TRANSACTION_TYPE, MlmDistCommissionLedgerPeer::REF_ID, MlmDistCommissionLedgerPeer::MONTH_TRADED, MlmDistCommissionLedgerPeer::YEAR_TRADED, MlmDistCommissionLedgerPeer::CREDIT, MlmDistCommissionLedgerPeer::DEBIT, MlmDistCommissionLedgerPeer::BALANCE, MlmDistCommissionLedgerPeer::REMARK, MlmDistCommissionLedgerPeer::PIPS_DOWNLINE_USERNAME, MlmDistCommissionLedgerPeer::PIPS_MT4_ID, MlmDistCommissionLedgerPeer::PIPS_REBATE, MlmDistCommissionLedgerPeer::PIPS_LEVEL, MlmDistCommissionLedgerPeer::PIPS_LOTS_TRADED, MlmDistCommissionLedgerPeer::CREATED_BY, MlmDistCommissionLedgerPeer::CREATED_ON, MlmDistCommissionLedgerPeer::UPDATED_BY, MlmDistCommissionLedgerPeer::UPDATED_ON, MlmDistCommissionLedgerPeer::STATUS_CODE, ),
+		BasePeer::TYPE_FIELDNAME => array ('commission_id', 'dist_id', 'commission_type', 'transaction_type', 'ref_id', 'month_traded', 'year_traded', 'credit', 'debit', 'balance', 'remark', 'pips_downline_username', 'pips_mt4_id', 'pips_rebate', 'pips_level', 'pips_lots_traded', 'created_by', 'created_on', 'updated_by', 'updated_on', 'status_code', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('CommissionId' => 0, 'DistId' => 1, 'CommissionType' => 2, 'TransactionType' => 3, 'RefId' => 4, 'MonthTraded' => 5, 'Credit' => 6, 'Debit' => 7, 'Balance' => 8, 'Remark' => 9, 'PipsDownlineUsername' => 10, 'PipsMt4Id' => 11, 'PipsRebate' => 12, 'PipsLevel' => 13, 'PipsLotsTraded' => 14, 'CreatedBy' => 15, 'CreatedOn' => 16, 'UpdatedBy' => 17, 'UpdatedOn' => 18, 'StatusCode' => 19, ),
-		BasePeer::TYPE_COLNAME => array (MlmDistCommissionLedgerPeer::COMMISSION_ID => 0, MlmDistCommissionLedgerPeer::DIST_ID => 1, MlmDistCommissionLedgerPeer::COMMISSION_TYPE => 2, MlmDistCommissionLedgerPeer::TRANSACTION_TYPE => 3, MlmDistCommissionLedgerPeer::REF_ID => 4, MlmDistCommissionLedgerPeer::MONTH_TRADED => 5, MlmDistCommissionLedgerPeer::CREDIT => 6, MlmDistCommissionLedgerPeer::DEBIT => 7, MlmDistCommissionLedgerPeer::BALANCE => 8, MlmDistCommissionLedgerPeer::REMARK => 9, MlmDistCommissionLedgerPeer::PIPS_DOWNLINE_USERNAME => 10, MlmDistCommissionLedgerPeer::PIPS_MT4_ID => 11, MlmDistCommissionLedgerPeer::PIPS_REBATE => 12, MlmDistCommissionLedgerPeer::PIPS_LEVEL => 13, MlmDistCommissionLedgerPeer::PIPS_LOTS_TRADED => 14, MlmDistCommissionLedgerPeer::CREATED_BY => 15, MlmDistCommissionLedgerPeer::CREATED_ON => 16, MlmDistCommissionLedgerPeer::UPDATED_BY => 17, MlmDistCommissionLedgerPeer::UPDATED_ON => 18, MlmDistCommissionLedgerPeer::STATUS_CODE => 19, ),
-		BasePeer::TYPE_FIELDNAME => array ('commission_id' => 0, 'dist_id' => 1, 'commission_type' => 2, 'transaction_type' => 3, 'ref_id' => 4, 'month_traded' => 5, 'credit' => 6, 'debit' => 7, 'balance' => 8, 'remark' => 9, 'pips_downline_username' => 10, 'pips_mt4_id' => 11, 'pips_rebate' => 12, 'pips_level' => 13, 'pips_lots_traded' => 14, 'created_by' => 15, 'created_on' => 16, 'updated_by' => 17, 'updated_on' => 18, 'status_code' => 19, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('CommissionId' => 0, 'DistId' => 1, 'CommissionType' => 2, 'TransactionType' => 3, 'RefId' => 4, 'MonthTraded' => 5, 'YearTraded' => 6, 'Credit' => 7, 'Debit' => 8, 'Balance' => 9, 'Remark' => 10, 'PipsDownlineUsername' => 11, 'PipsMt4Id' => 12, 'PipsRebate' => 13, 'PipsLevel' => 14, 'PipsLotsTraded' => 15, 'CreatedBy' => 16, 'CreatedOn' => 17, 'UpdatedBy' => 18, 'UpdatedOn' => 19, 'StatusCode' => 20, ),
+		BasePeer::TYPE_COLNAME => array (MlmDistCommissionLedgerPeer::COMMISSION_ID => 0, MlmDistCommissionLedgerPeer::DIST_ID => 1, MlmDistCommissionLedgerPeer::COMMISSION_TYPE => 2, MlmDistCommissionLedgerPeer::TRANSACTION_TYPE => 3, MlmDistCommissionLedgerPeer::REF_ID => 4, MlmDistCommissionLedgerPeer::MONTH_TRADED => 5, MlmDistCommissionLedgerPeer::YEAR_TRADED => 6, MlmDistCommissionLedgerPeer::CREDIT => 7, MlmDistCommissionLedgerPeer::DEBIT => 8, MlmDistCommissionLedgerPeer::BALANCE => 9, MlmDistCommissionLedgerPeer::REMARK => 10, MlmDistCommissionLedgerPeer::PIPS_DOWNLINE_USERNAME => 11, MlmDistCommissionLedgerPeer::PIPS_MT4_ID => 12, MlmDistCommissionLedgerPeer::PIPS_REBATE => 13, MlmDistCommissionLedgerPeer::PIPS_LEVEL => 14, MlmDistCommissionLedgerPeer::PIPS_LOTS_TRADED => 15, MlmDistCommissionLedgerPeer::CREATED_BY => 16, MlmDistCommissionLedgerPeer::CREATED_ON => 17, MlmDistCommissionLedgerPeer::UPDATED_BY => 18, MlmDistCommissionLedgerPeer::UPDATED_ON => 19, MlmDistCommissionLedgerPeer::STATUS_CODE => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('commission_id' => 0, 'dist_id' => 1, 'commission_type' => 2, 'transaction_type' => 3, 'ref_id' => 4, 'month_traded' => 5, 'year_traded' => 6, 'credit' => 7, 'debit' => 8, 'balance' => 9, 'remark' => 10, 'pips_downline_username' => 11, 'pips_mt4_id' => 12, 'pips_rebate' => 13, 'pips_level' => 14, 'pips_lots_traded' => 15, 'created_by' => 16, 'created_on' => 17, 'updated_by' => 18, 'updated_on' => 19, 'status_code' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -161,6 +164,8 @@ abstract class BaseMlmDistCommissionLedgerPeer {
 		$criteria->addSelectColumn(MlmDistCommissionLedgerPeer::REF_ID);
 
 		$criteria->addSelectColumn(MlmDistCommissionLedgerPeer::MONTH_TRADED);
+
+		$criteria->addSelectColumn(MlmDistCommissionLedgerPeer::YEAR_TRADED);
 
 		$criteria->addSelectColumn(MlmDistCommissionLedgerPeer::CREDIT);
 

@@ -142,6 +142,88 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeFundManagementReturnList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = "
+            FROM mlm_roi_dividend bonus
+        LEFT JOIN mlm_distributor dist ON bonus.dist_id = dist.distributor_id";
+
+        /******   total records  *******/
+        $sWhere = " WHERE bonus.dist_id=".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        /******   total filtered records  *******/
+
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        if ($this->getRequestParameter('filterMonth') != "" && $this->getRequestParameter('filterYear') != "") {
+            $filterMonth = $this->getRequestParameter('filterMonth');
+            $filterYear = $this->getRequestParameter('filterYear');
+
+            $dateUtil = new DateUtil();
+            $d = $dateUtil->getMonth($filterMonth, $filterYear);
+            $firstOfMonth = date('Y-m-j', $d["first_of_month"])." 00:00:00";
+            $lastOfMonth = date('Y-m-j', $d["last_of_month"])." 23:59:59";
+
+            $sWhere .= " AND (bonus.dividend_date >= '". $firstOfMonth . "' AND bonus.dividend_date <= '". $lastOfMonth ."'";
+            $sWhere .= " OR (bonus.status_code = '".Globals::DIVIDEND_STATUS_PENDING."' AND bonus.created_on >= '". $firstOfMonth . "' AND bonus.created_on <= '". $lastOfMonth ."'))";
+        }
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $dateUtil = new DateUtil();
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+            $arr[] = array(
+                $resultArr['devidend_id'] == null ? "" : $resultArr['devidend_id'],
+                $resultArr['dividend_date'] == null ? "" : $dateUtil->formatDate("Y-M-d", $resultArr['dividend_date']),
+                $resultArr['package_price'] == null ? "" : $resultArr['package_price'],
+                $resultArr['roi_percentage'] == null ? "" : $resultArr['roi_percentage'],
+                $resultArr['dividend_amount'] == null ? "" : $resultArr['dividend_amount'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeEcashLogList()
     {
         // request parameter *****************************
