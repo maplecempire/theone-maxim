@@ -547,7 +547,7 @@
             <trans-unit><source>Home Page</source><target>首页</target></trans-unit>
             <trans-unit><source>Welcome to Maxim Trader.</source><target>欢迎来到马胜金融</target></trans-unit>
             <trans-unit><source>MAIN MENU</source><target>主要菜单</target></trans-unit>
-            <trans-unit><source>User Profile</source><target>用户配置资料</target></trans-unit>
+            <trans-unit><source>User Profile</source><target>用户个人资料</target></trans-unit>
             <trans-unit><source>Registration</source><target>注册</target></trans-unit>
             <trans-unit><source>Package Purchase</source><target>购买配套</target></trans-unit>
             <trans-unit><source>Funds Deposit</source><target>基金存款</target></trans-unit>
