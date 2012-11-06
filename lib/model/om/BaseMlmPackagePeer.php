@@ -13,7 +13,7 @@ abstract class BaseMlmPackagePeer {
 	const CLASS_DEFAULT = 'lib.model.MlmPackage';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,10 +47,16 @@ abstract class BaseMlmPackagePeer {
 	const PAIRING_BONUS = 'mlm_package.PAIRING_BONUS';
 
 	
-	const DAILY_MAX_PAIRING = 'mlm_package.DAILY_MAX_PAIRING';
+	const MONTHLY_PERFORMANCE = 'mlm_package.MONTHLY_PERFORMANCE';
 
 	
-	const FUND_MGN_PROFIT_SHARING = 'mlm_package.FUND_MGN_PROFIT_SHARING';
+	const SPECIAL_BONUS = 'mlm_package.SPECIAL_BONUS';
+
+	
+	const SPECIAL_BONUS_MIN_LOT_TRADED = 'mlm_package.SPECIAL_BONUS_MIN_LOT_TRADED';
+
+	
+	const DAILY_MAX_PAIRING = 'mlm_package.DAILY_MAX_PAIRING';
 
 	
 	const PUBLIC_PURCHASE = 'mlm_package.PUBLIC_PURCHASE';
@@ -73,18 +79,18 @@ abstract class BaseMlmPackagePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId', 'PackageName', 'Color', 'Price', 'DirectGeneration', 'DirectPips', 'Commission', 'CreditRefund', 'PairingBonus', 'DailyMaxPairing', 'FundMgnProfitSharing', 'PublicPurchase', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID, MlmPackagePeer::PACKAGE_NAME, MlmPackagePeer::COLOR, MlmPackagePeer::PRICE, MlmPackagePeer::DIRECT_GENERATION, MlmPackagePeer::DIRECT_PIPS, MlmPackagePeer::COMMISSION, MlmPackagePeer::CREDIT_REFUND, MlmPackagePeer::PAIRING_BONUS, MlmPackagePeer::DAILY_MAX_PAIRING, MlmPackagePeer::FUND_MGN_PROFIT_SHARING, MlmPackagePeer::PUBLIC_PURCHASE, MlmPackagePeer::CREATED_BY, MlmPackagePeer::CREATED_ON, MlmPackagePeer::UPDATED_BY, MlmPackagePeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id', 'package_name', 'color', 'price', 'direct_generation', 'direct_pips', 'commission', 'credit_refund', 'pairing_bonus', 'daily_max_pairing', 'fund_mgn_profit_sharing', 'public_purchase', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('PackageId', 'PackageName', 'Color', 'Price', 'DirectGeneration', 'DirectPips', 'Commission', 'CreditRefund', 'PairingBonus', 'MonthlyPerformance', 'SpecialBonus', 'SpecialBonusMinLotTraded', 'DailyMaxPairing', 'PublicPurchase', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID, MlmPackagePeer::PACKAGE_NAME, MlmPackagePeer::COLOR, MlmPackagePeer::PRICE, MlmPackagePeer::DIRECT_GENERATION, MlmPackagePeer::DIRECT_PIPS, MlmPackagePeer::COMMISSION, MlmPackagePeer::CREDIT_REFUND, MlmPackagePeer::PAIRING_BONUS, MlmPackagePeer::MONTHLY_PERFORMANCE, MlmPackagePeer::SPECIAL_BONUS, MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED, MlmPackagePeer::DAILY_MAX_PAIRING, MlmPackagePeer::PUBLIC_PURCHASE, MlmPackagePeer::CREATED_BY, MlmPackagePeer::CREATED_ON, MlmPackagePeer::UPDATED_BY, MlmPackagePeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('package_id', 'package_name', 'color', 'price', 'direct_generation', 'direct_pips', 'commission', 'credit_refund', 'pairing_bonus', 'monthly_performance', 'special_bonus', 'special_bonus_min_lot_traded', 'daily_max_pairing', 'public_purchase', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PackageId' => 0, 'PackageName' => 1, 'Color' => 2, 'Price' => 3, 'DirectGeneration' => 4, 'DirectPips' => 5, 'Commission' => 6, 'CreditRefund' => 7, 'PairingBonus' => 8, 'DailyMaxPairing' => 9, 'FundMgnProfitSharing' => 10, 'PublicPurchase' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, ),
-		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID => 0, MlmPackagePeer::PACKAGE_NAME => 1, MlmPackagePeer::COLOR => 2, MlmPackagePeer::PRICE => 3, MlmPackagePeer::DIRECT_GENERATION => 4, MlmPackagePeer::DIRECT_PIPS => 5, MlmPackagePeer::COMMISSION => 6, MlmPackagePeer::CREDIT_REFUND => 7, MlmPackagePeer::PAIRING_BONUS => 8, MlmPackagePeer::DAILY_MAX_PAIRING => 9, MlmPackagePeer::FUND_MGN_PROFIT_SHARING => 10, MlmPackagePeer::PUBLIC_PURCHASE => 11, MlmPackagePeer::CREATED_BY => 12, MlmPackagePeer::CREATED_ON => 13, MlmPackagePeer::UPDATED_BY => 14, MlmPackagePeer::UPDATED_ON => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('package_id' => 0, 'package_name' => 1, 'color' => 2, 'price' => 3, 'direct_generation' => 4, 'direct_pips' => 5, 'commission' => 6, 'credit_refund' => 7, 'pairing_bonus' => 8, 'daily_max_pairing' => 9, 'fund_mgn_profit_sharing' => 10, 'public_purchase' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('PackageId' => 0, 'PackageName' => 1, 'Color' => 2, 'Price' => 3, 'DirectGeneration' => 4, 'DirectPips' => 5, 'Commission' => 6, 'CreditRefund' => 7, 'PairingBonus' => 8, 'MonthlyPerformance' => 9, 'SpecialBonus' => 10, 'SpecialBonusMinLotTraded' => 11, 'DailyMaxPairing' => 12, 'PublicPurchase' => 13, 'CreatedBy' => 14, 'CreatedOn' => 15, 'UpdatedBy' => 16, 'UpdatedOn' => 17, ),
+		BasePeer::TYPE_COLNAME => array (MlmPackagePeer::PACKAGE_ID => 0, MlmPackagePeer::PACKAGE_NAME => 1, MlmPackagePeer::COLOR => 2, MlmPackagePeer::PRICE => 3, MlmPackagePeer::DIRECT_GENERATION => 4, MlmPackagePeer::DIRECT_PIPS => 5, MlmPackagePeer::COMMISSION => 6, MlmPackagePeer::CREDIT_REFUND => 7, MlmPackagePeer::PAIRING_BONUS => 8, MlmPackagePeer::MONTHLY_PERFORMANCE => 9, MlmPackagePeer::SPECIAL_BONUS => 10, MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED => 11, MlmPackagePeer::DAILY_MAX_PAIRING => 12, MlmPackagePeer::PUBLIC_PURCHASE => 13, MlmPackagePeer::CREATED_BY => 14, MlmPackagePeer::CREATED_ON => 15, MlmPackagePeer::UPDATED_BY => 16, MlmPackagePeer::UPDATED_ON => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('package_id' => 0, 'package_name' => 1, 'color' => 2, 'price' => 3, 'direct_generation' => 4, 'direct_pips' => 5, 'commission' => 6, 'credit_refund' => 7, 'pairing_bonus' => 8, 'monthly_performance' => 9, 'special_bonus' => 10, 'special_bonus_min_lot_traded' => 11, 'daily_max_pairing' => 12, 'public_purchase' => 13, 'created_by' => 14, 'created_on' => 15, 'updated_by' => 16, 'updated_on' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -156,9 +162,13 @@ abstract class BaseMlmPackagePeer {
 
 		$criteria->addSelectColumn(MlmPackagePeer::PAIRING_BONUS);
 
-		$criteria->addSelectColumn(MlmPackagePeer::DAILY_MAX_PAIRING);
+		$criteria->addSelectColumn(MlmPackagePeer::MONTHLY_PERFORMANCE);
 
-		$criteria->addSelectColumn(MlmPackagePeer::FUND_MGN_PROFIT_SHARING);
+		$criteria->addSelectColumn(MlmPackagePeer::SPECIAL_BONUS);
+
+		$criteria->addSelectColumn(MlmPackagePeer::SPECIAL_BONUS_MIN_LOT_TRADED);
+
+		$criteria->addSelectColumn(MlmPackagePeer::DAILY_MAX_PAIRING);
 
 		$criteria->addSelectColumn(MlmPackagePeer::PUBLIC_PURCHASE);
 

@@ -56,7 +56,7 @@ loginPassword:
 
 maintenanceLog:
   is_secure:   on
-  credentials: [[ OFXTRADER_DISTRIBUTOR ]]
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 memberRegistration:
   is_secure:   on
