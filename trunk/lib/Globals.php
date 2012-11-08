@@ -22,7 +22,8 @@ abstract class Globals {
     const FIRST_LOGIN = 0;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
-    const BONUS_MAINTENANCE_PERCENTAGE = 0.1;
+    const BONUS_MAINTENANCE_PERCENTAGE = 0;
+    //const BONUS_MAINTENANCE_PERCENTAGE = 0.1;
 
     /************************************/
     /*****          STATUS         ******/

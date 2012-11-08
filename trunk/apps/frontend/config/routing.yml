@@ -19,6 +19,10 @@ ecash_log:
   url:   /member/cp2Log
   param: { module: member, action: ecashLog }
 
+ecash_withdrawal:
+  url:   /member/cp2Withdrawal
+  param: { module: member, action: ecashWithdrawal }
+
 maintenance_log:
   url:   /member/cp3Log
   param: { module: member, action: maintenanceLog }
