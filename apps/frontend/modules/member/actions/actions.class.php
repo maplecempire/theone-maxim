@@ -3079,6 +3079,9 @@ class memberActions extends sfActions
         //$processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
+            return $this->redirect('/member/ecashWithdrawal');
+
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
@@ -3801,6 +3804,9 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
+            return $this->redirect('/member/convertEcashToEpoint');
+
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
