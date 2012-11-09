@@ -1,10 +1,12 @@
 <?php include('scripts.php'); ?>
+
+<script type='text/javascript' src='/js/popup.js'></script>
 <script type="text/javascript">
 var packageStrings = "<option value=''></option>";
 var datagrid = null;
 var datagridAnnouncement = null;
 $(function() {
-    datagrid = $("#datagridAnnouncement").r9jasonDataTable({
+    /*datagrid = $("#datagridAnnouncement").r9jasonDataTable({
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
@@ -31,8 +33,13 @@ $(function() {
             }},
             { "sName" : "created_on",  "bSortable": false}
         ]
-    });
+    });*/
+    $(".news_desc_1").click(function(event){
+        event.preventDefault();
 
+        $("#news_desc_1").show(500);
+        $(this).hide();
+    });
     $(".deleteLink").button({
         icons: {
             primary: "ui-icon-circle-close"
@@ -766,3 +773,61 @@ function reassignDatagridAnnouncementEventAttr() {
             <td class="text" id="tdAnnouncement"></td>
     </table>
 </div>
+
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<div style="position: absolute; display: none;" id="popupContact">
+    <h1>Latest News</h1>
+    <a id="popupContactClose">CLOSE</a>
+
+    <p id="contactArea">
+        <!--<img src='http://www.abfxtrader.com/ablive/nimages/site/eidalfitr-2012.jpg' />-->
+    </p>
+
+    <div class="popdivider"></div>
+
+    <div class="popinfo1">
+        <a href="#">
+            <div class="poptitle">We will be participating in the 10th International Money Fair in Shanghai on the 23rd November 2012 – 25th November 2012! FIND US AT BOOTH NUMBER W15</div>
+        </a>
+
+        <div class="news_date">2012-11-09</div>
+        <div class="news_desc">
+            <h5 style="font-size: 14px;">Shanghai To Host International Money Fair, Nov. 23-25!</h5>
+            Asia’s leading financial trading facilitator, market research house with operations throughout Europe and more recently in the emerging financial powerhouses of Asia, like China, Hong Kong, South Korea and South East Asia, Maxim Capital Limited, has today announced the staging of the 10th International Money Fair.
+            <br>
+            <br>
+            The event will take place at Shanghai Exhibition Centre on November 23, 2012.
+
+            <span style="display: none;" id="news_desc_1">
+                The Money Fair is an event bringing together best investment and finance opportunities from nation's premier organizations along with varied insurance options available in the market.
+                <br>
+                <br>
+                Maxim Capital Limited, founded by a group of experienced and enthusiastic traders, financial analysts and actuaries whose aim is to provide the best trading solutions for the trading industry, is hosting the event which will run from November 23-25.
+                <br>
+                <br>
+                Dubbed as an iconic event that will be China's premier event on money matters, finance options, insurance and investment products, services and technology, the international money fair targets a wide range of interests, to include corporate investors, corporate account holders, mid income group, bulk account holders, new and existing investors, agents, loan seekers, foreign accounts, charted accountants, company secretaries, white collar professionals, self-employed and many more.
+                <br>
+                <br>
+                “This year the three-day exhibition will provide a greater choice of products and investment opportunities for SMEs,” says the Maxim Capital spokesperson.
+                <br>
+                <br>
+                The International Money Fair invites aspiring traders to join them at the 10th Shanghai International Finance and Money Fair taking place Shanghai, China’s flourishing international metropolis known worldwide for its highly developed industrial, commercial and financial facilities.
+                <br>
+                <br>
+                For further information, please visit the following websites:
+                <br>
+                <br>
+                www.moneyfair.org
+            </span>
+        </div>
+        <a href="#" class="news_desc_1">Read More &gt;&gt;</a>
+    </div>
+    <div class="popdivider"></div>
+
+    <p></p>
+    <a id="popupContactClose2">CLOSE</a><br>
+</div>
+<div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>

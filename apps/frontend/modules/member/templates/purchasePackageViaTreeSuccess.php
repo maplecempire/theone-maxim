@@ -167,7 +167,7 @@ $(function() {
             </td>
         </tr>
 
-        <tr class="tbl_form_row_even">
+        <tr class="tbl_form_row_even" style="display: none">
                     <td>&nbsp;</td>
                     <td colspan="5">
                         &nbsp;<input name="productCode" type="radio" value="fxgold" id="rdoFxgold" checked="checked">&nbsp; <label for="rdoFxgold">FX Gold A</label>
