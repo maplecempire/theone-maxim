@@ -12,6 +12,75 @@ class zMailActions extends sfActions
 {
     public function executeIndex()
     {
+        $body = "<table width='800' align='center' cellpadding='0' cellspacing='0' border='0'>
+            <tbody>
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-1.png' width='780'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-2.png' width='780'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-3.png' width='780'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-4.png' width='780'>
+                    </td>
+                </tr>
+            </tbody>
+        </table>";
+        $subject = "";
+
+        error_reporting(E_STRICT);
+
+        date_default_timezone_set(date_default_timezone_get());
+
+        include_once('class.phpmailer.php');
+        $mail = new PHPMailer();
+
+        if (Mails::EMAIL_SMTP == true) {
+            $mail->IsSMTP();
+            $mail->Port = Mails::EMAIL_PORT;
+            $mail->SMTPDebug = 1; // telling the class to use SMTP
+            $mail->SMTPAuth = true; // telling the class to use SMTP
+            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->Username = Mails::EMAIL_SENDER;
+            $mail->Password = Mails::EMAIL_PASSWORD;
+        } else {
+            $mail->IsMail();
+            $mail->Sender = Mails::EMAIL_SENDER;
+        }
+
+        $mail->Host = Mails::EMAIL_HOST; // SMTP server
+        $mail->From = Mails::EMAIL_FROM_NOREPLY;
+        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
+        $mail->Subject = $subject;
+        $mail->CharSet="utf-8";
+
+        //$text_body = $body;
+
+        $mail->Body = $body;
+        $mail->AltBody = $body;
+        $mail->AddAddress("r9jason@gmail.com", "tester");
+        $mail->AddBCC("r9projecthost@gmail.com", "jason");
+
+        var_dump("hehe");
+        if (!$mail->Send()) {
+            echo $mail->ErrorInfo;
+        }
+    }
+    public function executeIndex2()
+    {
         $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
         $text_body = "Dear " . "<tester full name>" . ",
             <p>

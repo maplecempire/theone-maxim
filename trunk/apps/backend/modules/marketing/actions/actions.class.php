@@ -510,7 +510,7 @@ class marketingActions extends sfActions
                                                 $sponsorDistCommissionledger->save();
 
                                                 $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);*/
-                                            } else {
+                                            } else if ($gap > 0) {
                                                 $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();

@@ -265,23 +265,23 @@ ul, ol {
                         </div>
                     </li>
 
-                    <li class="slide-content hide"
+                    <!--<li class="slide-content hide"
                         style="position: absolute; top: 0px; left: 0px; z-index: 7; opacity: 1; display: none; width: 941px; height: 1215px;">
                         <p style="display:none;"></p>
                         <link type="text/css" rel="stylesheet" href="/css/maxim/g3bo.css">
                         <div id="g3boBody">
                             <div id="g3boContent">
-                                <h3 style="color: #FFFFFF;"><?php echo __('Maxim Trader') ?></h3>
+                                <h3 style="color: #FFFFFF;"><?php /*echo __('Maxim Trader') */?></h3>
 
-                                <p style="color:#26272A;font-size: 1.2em;line-height:130%; padding-right: 20px"><?php echo __('The smart investors choice for managing funds and guaranteeing satisfaction!') ?></p>
+                                <p style="color:#26272A;font-size: 1.2em;line-height:130%; padding-right: 20px"><?php /*echo __('The smart investors choice for managing funds and guaranteeing satisfaction!') */?></p>
                                 <p>
                                 <a title="open a trial account" href="/member/register"
-                                   class="g3boButton"><?php echo __('OPEN AN ACCOUNT NOW') ?><img
+                                   class="g3boButton"><?php /*echo __('OPEN AN ACCOUNT NOW') */?><img
                                         src="/css/maxim/button arrow.png"
                                         alt=""></a>
                             </div>
-                        </div>
-                        <div id="flashContent">
+                        </div>-->
+                        <!--<div id="flashContent">
                             <object align="middle" width="940" height="405"
                                     id="/css/maxim/banner/ActiveTrader_Homepage_001_fla5"
                                     classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
@@ -296,9 +296,9 @@ ul, ol {
                                 <param value="true" name="menu">
                                 <param value="false" name="devicefont">
                                 <param value="" name="salign">
-                                <param value="sameDomain" name="allowScriptAccess">
+                                <param value="sameDomain" name="allowScriptAccess">-->
                                 <!--[if !IE]>-->
-                                <object width="940" height="405" type="application/x-shockwave-flash"
+                                <!--<object width="940" height="405" type="application/x-shockwave-flash"
                                         data="/css/maxim/banner/ActiveTrader_Homepage_001_fla5.swf">
                                     <param value="/css/maxim/banner/ActiveTrader_Homepage_001_fla5.swf"
                                            name="movie">
@@ -311,18 +311,20 @@ ul, ol {
                                     <param value="true" name="menu">
                                     <param value="false" name="devicefont">
                                     <param value="" name="salign">
-                                    <param value="sameDomain" name="allowScriptAccess">
+                                    <param value="sameDomain" name="allowScriptAccess">-->
                                     <!--<![endif]-->
-                                    <img
+                                    <!--<img
                                         src="/css/maxim/G3BO_HomepageSlideshow_Background.jpg"
-                                        alt=""> <!--[if !IE]>--></object>
-                                <!--<![endif]--></object>
+                                        alt="">--> <!--[if !IE]>-->
+                        <!--</object>-->
+                                <!--<![endif]-->
+                        <!--</object>
                         </div>
                         <div class="altImage">
                             <img src="/css/maxim/G3BO_HomepageSlideshow_Background.jpg" alt="">
 
                             </div>
-                    </li>
+                    </li>-->
 
                     <li class="slide-content hide"
                         style="position: absolute; top: 0px; z-index: 6; opacity: 1; display: none; width: 582px; height: 212px;">

@@ -209,7 +209,7 @@ display:none;
 margin-top:150px;
 padding-bottom:150px;
 width:500px;
-background:url(images/popbg.jpg) repeat-x #fff;
+background:url(images/popbg.jpg) repeat-y #fff;
 border:2px solid #044274;
 color:#333;
 z-index:10000;

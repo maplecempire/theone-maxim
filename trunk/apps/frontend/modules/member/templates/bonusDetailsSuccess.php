@@ -466,11 +466,13 @@
                                 <tr>
                                     <th>Detail Id[hidden]</th>
                                     <th><?php echo __('Funding Date') ?></th>
-                                    <th><?php echo __('Funds') ?></th>
-                                    <th><?php echo __('Return Percentage') ?></th>
-                                    <th><?php echo __('Total Fund Return') ?></th>
+                                    <th><?php echo __('MT4 Balance') ?></th>
+                                    <th><?php echo __('Performance Return %') ?></th>
+                                    <th><?php echo __('Total Profit') ?></th>
                                     <th><?php echo __('Status') ?></th>
                                 </tr>
+                                The next performance return will be paid on Dec 8th,
+                                The performance return is paid based on most up-to-date MT4 balance up to a maximum amount of initial fund invested only.
                                 </thead>
                             </table>
                         </div>

@@ -67,17 +67,53 @@
 
             <p align="justify"><?php echo __('You can also contact us by phone and talk to one of our support staffs. Should you prefer to communicate with us via traditional methods of communication, you are welcome to write to our physical address or send a fax and we will be thrilled to assist you in any way we can.') ?></p>
 
-            <p align="justify"><strong><?php echo __('Thailand Address') ?></strong>: 68, Soi Suphaphong 3 Junction 8, Sinakharin 40 Road Nongbon, Prawet Shaukeiwan 10250,
-                Thailand
+            <div class="inner_sidebar extralight-border">
+                <div class="widget widget_text" id="text-4"><h3 class="widgettitle"><span class="widget_first">Administrative</span>
+                    Office</h3>
+
+                    <div class="textwidget"><p style="text-align: justify; font-size:11px; line-height:130%"><strong>New
+                        Zealand Address: </strong>
+                        <br>Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland,
+                        1010, New Zealand.<br>
+                        <strong>Tel: </strong>(+64) 9379 1159 / 09 379 1159 (if dialed within NZ)
+                        </p>
+                    </div>
+                    <span class="seperator extralight-border"></span></div>
+
+                <div class="widget widget_text" id="text-5"><h3 class="widgettitle"><span
+                        class="widget_first">Client</span> Service Center</h3>
+
+                    <div class="textwidget"><p style="text-align: justify; font-size:11px; line-height:130%">
+                        <strong>Hong Kong Address: </strong>
+                        <br>165, Oi Ping House, Oi Tung Estate, Shaukeiwan V5L 3B6, Hong Kong.<br>
+                        <strong>Tel: </strong>(+852) 5808 3536</p>
+
+                        <p style="text-align: justify; font-size:11px; line-height:130%">
+                            <strong>Thailand Address: </strong>
+                            <br>No 1,2,3, 6th Floor, VOFFIC BUILDING, Soi 26,
+                            Ratchadaphisek Road, Huay Kwang, Bangkok 10310 Thailand<br>
+                            <strong>Tel: </strong>(+662) 207 2423</p>
+                    </div>
+                    <span class="seperator extralight-border"></span></div>
+                <div class="widget widget_text" id="text-6"><h3 class="widgettitle"><span
+                        class="widget_first">Email:</span></h3>
+
+                    <div class="textwidget"><p style="text-align: justify; font-size:11px; line-height:130%">
+                        cs@maximtrader.com</p></div>
+                    <span class="seperator extralight-border"></span></div>
+            </div>
+
+            <!--<p align="justify"><strong><?php /*echo __('New Zealand Address') */?></strong>: 13 Beechwood Road, Rothesay Bay, Auckland, 0630 , New Zealand
+            <br> Support Hotline: +64 9 379 1159
+            <br>(09 379 1159 if dialed within NZ)
+
+            <p align="justify"><strong><?php /*echo __('Thailand Address') */?></strong>: No 1,2,3, 6th Floor, VOFFIC BUILDING, Soi 26, Ratchadaphisek Road, Huay Kwang, Bangkok 10310 Thailand
                 <br>Tel (+662) 207 2423</p>
 
-            <p align="justify"><strong><?php echo __('New Zealand Address') ?></strong>: 13 Beechwood Road, Rothesay Bay, Auckland, 0630 , New Zealand
-                <br>Tel (+64) 9801 0373
-
-            <p align="justify"><strong><?php echo __('Hong Kong Adress') ?></strong>: 165, Oi Ping House, Oi Tung Estate, Shaukeiwan V5L 3B6, Hong Kong
+            <p align="justify"><strong><?php /*echo __('Hong Kong Adress') */?></strong>: 165, Oi Ping House, Oi Tung Estate, Shaukeiwan V5L 3B6, Hong Kong
                 <br>Tel (+852) 5808 3536</p>
 
-            <p align="justify"><strong>Email</strong>: cs@maximtrader.com</p>
+            <p align="justify"><strong>Email</strong>: cs@maximtrader.com</p>-->
 
             <!--<iframe width="300" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;aq=&amp;sll=-36.801038,174.768448&amp;sspn=0.137728,0.338173&amp;ie=UTF8&amp;hq=Vero+Centre+Auckland,+Level+31,+48+Shortland+Street,+Auckland&amp;hnear=&amp;radius=15000&amp;t=m&amp;cid=17786362531510328297&amp;ll=-36.84659,174.768362&amp;spn=0.020606,0.025749&amp;z=14&amp;output=embed"></iframe>-->
             <br><br>
