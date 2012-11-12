@@ -1469,7 +1469,7 @@ class memberActions extends sfActions
 						</tr>
 
 						<tr>
-							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' aligh='right'>
 							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
 								<em>
 									Best Regards,<br>
