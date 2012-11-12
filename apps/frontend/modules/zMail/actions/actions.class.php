@@ -12,34 +12,34 @@ class zMailActions extends sfActions
 {
     public function executeIndex()
     {
-        $body = "<table width='800' align='center' cellpadding='0' cellspacing='0' border='0'>
+        $body = "<table width='600' align='center' cellpadding='0' cellspacing='0' border='0'>
             <tbody>
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-1.png' width='780'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-1.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-2.png' width='780'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-2.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-3.png' width='780'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-3.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-4.png' width='780'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-4.png' width='580'>
                     </td>
                 </tr>
             </tbody>
         </table>";
-        $subject = "";
+        $subject = "Maxim";
 
         error_reporting(E_STRICT);
 

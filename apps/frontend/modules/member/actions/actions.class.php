@@ -1287,21 +1287,51 @@ class memberActions extends sfActions
         $error = false;
         $errorMsg = "";
 
-        if (!$this->getRequestParameter('email')) {
+        //_wpcf7	1264
+        //_wpcf7_is_ajax_call	1
+        //_wpcf7_unit_tag	wpcf7-f1264-p587-o1
+        //_wpcf7_version	3.3.1
+        //_wpnonce	f24ca11af2
+        //countrylist	Angola
+        //f-name	firstname
+        //l-name	last name
+        //phone-number	phonr
+        //title	Mrs
+        //your-email	test@asdff
+
+        if (!$this->getRequestParameter('your-email')) {
             $error = true;
             $errorMsg = "Email is required.";
-        } else if (!$this->getRequestParameter('requesterName')) {
+        } else if (!$this->getRequestParameter('f-name')) {
             $error = true;
-            $errorMsg = "Requester Name is required.";
+            $errorMsg = "First Name is required.";
         } else {
-            $mlmMt4DemoRequest = new MlmMt4DemoRequest();
-            $mlmMt4DemoRequest->setFullName( $this->getRequestParameter('requesterName'));
-            $mlmMt4DemoRequest->setEmail($this->getRequestParameter('email'));
-            $mlmMt4DemoRequest->setCountry($this->getRequestParameter('country'));
-            $mlmMt4DemoRequest->setPhoneNumber($this->getRequestParameter('phoneNumber'));
-            $mlmMt4DemoRequest->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlmMt4DemoRequest->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlmMt4DemoRequest->save();
+            $mlm_mt4_demo_request = new MlmMt4DemoRequest();
+            $mlm_mt4_demo_request->setFirstName($this->getRequestParameter('f-name'));
+            $mlm_mt4_demo_request->setEmail($this->getRequestParameter('your-email'));
+            $mlm_mt4_demo_request->setStatusCode($this->getRequestParameter('status_code'));
+            $mlm_mt4_demo_request->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_mt4_demo_request->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_mt4_demo_request->setCountry($this->getRequestParameter('countrylist'));
+            $mlm_mt4_demo_request->setPhoneNumber($this->getRequestParameter('phone-number'));
+            $mlm_mt4_demo_request->setLastName($this->getRequestParameter('l-name'));
+            $mlm_mt4_demo_request->setTitle($this->getRequestParameter('title'));
+            $mlm_mt4_demo_request->setLiveDemo("DEMO");
+            $mlm_mt4_demo_request->setAddress1($this->getRequestParameter('address-1'));
+            $mlm_mt4_demo_request->setAddress2($this->getRequestParameter('address-2'));
+            $mlm_mt4_demo_request->setAddressState($this->getRequestParameter('state'));
+            $mlm_mt4_demo_request->setAgreeOfBusiness($this->getRequestParameter('agreeofBusiness'));
+            $mlm_mt4_demo_request->setRiskDisclosure($this->getRequestParameter('agreeofRiskDisclosure'));
+            $mlm_mt4_demo_request->setCountryOfCitizen($this->getRequestParameter('coutrylist'));
+            $mlm_mt4_demo_request->setCity($this->getRequestParameter('city'));
+            $mlm_mt4_demo_request->setDobDay($this->getRequestParameter('menu-dob-day'));
+            $mlm_mt4_demo_request->setDobMonth($this->getRequestParameter('menu-dob-month'));
+            $mlm_mt4_demo_request->setDobYear($this->getRequestParameter('menu-dob-year'));
+            $mlm_mt4_demo_request->setRefId($this->getRequestParameter('referid'));
+            $mlm_mt4_demo_request->setPassport($this->getRequestParameter('ssnumber'));
+            $mlm_mt4_demo_request->setSubject($this->getRequestParameter('your-subject'));
+
+            $mlm_mt4_demo_request->save();
         }
 
         $arr = array(
@@ -1310,22 +1340,87 @@ class memberActions extends sfActions
         );
 
         echo json_encode($arr);
+        return sfView::HEADER_ONLY;
     }
     public function executeOpenLiveAccount()
     {
         $error = false;
         $errorMsg = "";
 
-        /*require_once('recaptchalib.php');
-        $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
-        $resp = recaptcha_check_answer ($privatekey,
-                                    $_SERVER["REMOTE_ADDR"],
-                                    $_POST["recaptcha_challenge_field"],
-                                    $_POST["recaptcha_response_field"]);
+        //_wpcf7	1266
+        //_wpcf7_is_ajax_call	1
+        //_wpcf7_unit_tag	wpcf7-f1266-p667-o1
+        //_wpcf7_version	3.3.1
+        //_wpnonce	5283ef444c
+        //address-1	address
+        //address-2	address 2
+        //agreeofBusiness	1
+        //agreeofRiskDisclosure	1
+        //city	city
+        //countrylist	Albania
+        //coutrylist	Armenia
+        //f-name	first name
+        //l-name	last name
+        //menu-dob-day	23
+        //menu-dob-month	12
+        //menu-dob-year	2000
+        //phone-number	phone
+        //referid	referral
+        //ssnumber	password
+        //state	state
+        //title	Mr.
+        //your-email	email
+        //your-subject	subject
 
-        if (!$resp->is_valid) {
+        if (!$this->getRequestParameter('your-email')) {
             $error = true;
-            $errorMsg = "The CAPTCHA wasn't entered correctly. Go back and try it again.";*/
+            $errorMsg = "Email is required.";
+        } else if (!$this->getRequestParameter('f-name')) {
+            $error = true;
+            $errorMsg = "First Name is required.";
+        } else {
+            $mlm_mt4_demo_request = new MlmMt4DemoRequest();
+            $mlm_mt4_demo_request->setFirstName($this->getRequestParameter('f-name'));
+            $mlm_mt4_demo_request->setEmail($this->getRequestParameter('your-email'));
+            $mlm_mt4_demo_request->setStatusCode($this->getRequestParameter('status_code'));
+            $mlm_mt4_demo_request->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_mt4_demo_request->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_mt4_demo_request->setCountry($this->getRequestParameter('countrylist'));
+            $mlm_mt4_demo_request->setPhoneNumber($this->getRequestParameter('phone-number'));
+            $mlm_mt4_demo_request->setLastName($this->getRequestParameter('l-name'));
+            $mlm_mt4_demo_request->setTitle($this->getRequestParameter('title'));
+            $mlm_mt4_demo_request->setLiveDemo("LIVE");
+            $mlm_mt4_demo_request->setAddress1($this->getRequestParameter('address-1'));
+            $mlm_mt4_demo_request->setAddress2($this->getRequestParameter('address-2'));
+            $mlm_mt4_demo_request->setAddressState($this->getRequestParameter('state'));
+            $mlm_mt4_demo_request->setAgreeOfBusiness($this->getRequestParameter('agreeofBusiness'));
+            $mlm_mt4_demo_request->setRiskDisclosure($this->getRequestParameter('agreeofRiskDisclosure'));
+            $mlm_mt4_demo_request->setCountryOfCitizen($this->getRequestParameter('coutrylist'));
+            $mlm_mt4_demo_request->setCity($this->getRequestParameter('city'));
+            $mlm_mt4_demo_request->setDobDay($this->getRequestParameter('menu-dob-day'));
+            $mlm_mt4_demo_request->setDobMonth($this->getRequestParameter('menu-dob-month'));
+            $mlm_mt4_demo_request->setDobYear($this->getRequestParameter('menu-dob-year'));
+            $mlm_mt4_demo_request->setRefId($this->getRequestParameter('referid'));
+            $mlm_mt4_demo_request->setPassport($this->getRequestParameter('ssnumber'));
+            $mlm_mt4_demo_request->setSubject($this->getRequestParameter('your-subject'));
+
+            $mlm_mt4_demo_request->save();
+        }
+
+        $arr = array(
+            'error' => $error,
+            'errorMsg' => $errorMsg
+        );
+
+        echo json_encode($arr);
+
+        return sfView::HEADER_ONLY;
+    }
+    public function executeOpenLiveAccount_old()
+    {
+        $error = false;
+        $errorMsg = "";
+
         if (!$this->getRequestParameter('referralId')) {
             $error = true;
             $errorMsg = "Referral ID is required.";
