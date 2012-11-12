@@ -126,20 +126,18 @@ class zMailActions extends sfActions
 										<td valign='top' style='line-height:17px'>
 											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 												Dear <strong>Jason</strong>,<br><br>
-												Congratulations! Your live trading account with Maxim Trader
-												has been activated! Please find the details of your trading account as
-												per below :<br><br>
-												Live MT4 Trading Account ID : <strong>3000112</strong><br><br>
-												Live MT4 Trading Account password : <strong>122051</strong><br><br> 
-												The Login ID and Password is strictly confidential and should not be
-												disclosed to anyone. Should someone with access to your password wish,
-												all of your account information can be changed. You will be held
-												liable for any activity that may occur as a result of you losing your
-												password. Therefore, if you feel that your password has been
-												compromised, you should immediately contact us by email to
-												<strong>cs@maximtrader.com</strong> to rectify the situation.<br><br>
-												We look forward to your custom in the near future. Should you have any
-												queries, please do not hesitate to get back to us.<br>
+                                                Your Demo account will enable you to \"paper trade\", while allowing you to develop and test your trading strategies on the award-winning MetaTrader 4.
+                                                <br><br>Your account has been opened for you with the following details:
+                                                <br><br>To start trading please download and install MT4.
+
+                                                亲爱的<STRONG>杰森</strong>，<br><br>
+                                                你的模拟帐户将使你可以进行“纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+                                                <br><br>如想立刻体验交易，请下载并安装MT4。
+											</font>
+
+											<br>
+											<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
+											买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
 											</font>
 										</td>
 									</tr>
@@ -216,7 +214,7 @@ class zMailActions extends sfActions
 											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
 												<em>
 													Best Regards,<br>
-													<strong>Maxim Trader</strong><br>
+													<strong>Maxim Capital Limited</strong><br>
 													E mail : admin@maximtrader.com
 												</em>
 											</font>
@@ -237,6 +235,16 @@ class zMailActions extends sfActions
 						<tr>
 							<td align='right' style='text-align:right;font-size:0;line-height:0'>
 								<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+
+								<br>
+								<p align='justify'>
+									<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+											Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159
+<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+									</font>
+								</p>
 							</td>
 						</tr>
 						<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='16'></td></tr>

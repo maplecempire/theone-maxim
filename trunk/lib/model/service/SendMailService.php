@@ -106,7 +106,8 @@ class SendMailService
         $mail->Host = Mails::EMAIL_HOST; // SMTP server
         $mail->From = Mails::EMAIL_FROM_NOREPLY;
         $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-        $mail->Subject = $subject;
+        //$mail->Subject = $subject;
+        $mail->Subject = "=?UTF-8?B?".base64_encode($subject)."?=";
         $mail->CharSet="utf-8";
 
         $text_body = $body;
