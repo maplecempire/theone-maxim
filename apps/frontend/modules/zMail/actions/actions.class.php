@@ -16,25 +16,25 @@ class zMailActions extends sfActions
             <tbody>
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-1.png' width='580'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-1-cn.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-2.png' width='580'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-2-cn.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-3.png' width='580'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-3-cn.png' width='580'>
                     </td>
                 </tr>
 
                 <tr>
                     <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-4.png' width='580'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-4-cn.png' width='580'>
                     </td>
                 </tr>
             </tbody>
@@ -74,7 +74,6 @@ class zMailActions extends sfActions
         $mail->AddAddress("r9jason@gmail.com", "tester");
         $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
-        var_dump("hehe");
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
         }
