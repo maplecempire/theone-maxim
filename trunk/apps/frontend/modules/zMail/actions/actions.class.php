@@ -48,38 +48,65 @@ class zMailActions extends sfActions
 
     public function executeSendBrochure()
     {
-        $body = "<table width='600' align='center' cellpadding='0' cellspacing='0' border='0'>
-            <tbody>
-                <tr>
-                    <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-1-cn.png' width='580'>
-                    </td>
-                </tr>
+        $c = new Criteria();
+        $c->add(EmailContactPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $c->add(EmailContactPeer::SEND_STATUS, "READY");
+        $emailContacts = EmailContactPeer::doSelect($c);
 
-                <tr>
-                    <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-2-cn.png' width='580'>
-                    </td>
-                </tr>
+        $idx = 0;
+        foreach ($emailContacts as $emailContact) {
+            $idx++;
+            //if ($idx == 20)
+            //    break;
 
-                <tr>
-                    <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-3-cn.png' width='580'>
-                    </td>
-                </tr>
+            $nameArrs = explode("??", $emailContact->getReceiverName());
+            $emailArrs = explode("@", $emailContact->getReceiverEmail());
+            //print_r($emailContact->getReceiverName());
+            //print_r("<br>");
+            //print_r(count($nameArrs));
+            //print_r("<br>");
+            $receiverName = $emailArrs[0];
+            if (count($nameArrs) <  2) {
+                $receiverName = $emailContact->getReceiverName();
+            }
+            print_r($idx."=".$emailContact->getReceiverEmail()." ".$receiverName);
+            print_r("<br>");
 
-                <tr>
-                    <td valign='top' colspan='3'>
-                        <img src='http://partner.maximtrader.com/images/email/file/page-4-cn.png' width='580'>
-                    </td>
-                </tr>
-            </tbody>
-        </table>";
-        $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
-        $emailContact = EmailContactPeer::retrieveByPK(99);
+            $body = "<table width='600' align='center' cellpadding='0' cellspacing='0' border='0'>
+                <tbody>
+                    <tr>
+                        <td valign='top' colspan='3'>
+                            <img src='http://partner.maximtrader.com/images/email/file/page-1-cn.png' width='580'>
+                        </td>
+                    </tr>
 
-        $sendMailService = new SendMailService();
-        $sendMailService->sendMail("r9jason@gmail.com", $emailContact->getReceiverName(), $subject, $body);
+                    <tr>
+                        <td valign='top' colspan='3'>
+                            <img src='http://partner.maximtrader.com/images/email/file/page-2-cn.png' width='580'>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign='top' colspan='3'>
+                            <img src='http://partner.maximtrader.com/images/email/file/page-3-cn.png' width='580'>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign='top' colspan='3'>
+                            <img src='http://partner.maximtrader.com/images/email/file/page-4-cn.png' width='580'>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>";
+            $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
+
+            $sendMailService = new SendMailService();
+            $sendMailService->sendMail($emailContact->getReceiverEmail(), $receiverName, $subject, $body);
+
+            $emailContact->setSendStatus("SEND");
+            $emailContact->save();
+        }
     }
 
     public function executeIndex2()

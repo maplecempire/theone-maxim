@@ -1104,25 +1104,26 @@ class memberActions extends sfActions
             /****************************/
             $receiverEmail = $this->getRequestParameter('email');
             $receiverFullname = $this->getRequestParameter('fullname');
-            $subject = $this->getContext()->getI18N()->__("MaximTrader - Thank You for Your Registration", null, 'email');
-            $body = "<table border='0' cellspacing='0' cellpadding='0' style='border-collapse:collapse'>
-                            <tbody>
-                            <tr style='min-height:30.0pt'>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
-                                <td width='600' style='width:450.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'><p class='MsoNormal'><b><span
-                                        style='background:white'></span></b><u></u><u></u></p></td>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
-                            </tr>
-                            <tr style='min-height:30.0pt'>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
-                                <td width='600' valign='top' style='width:450.0pt;padding:7.5pt 0cm 0cm 0cm;min-height:30.0pt'><p><span
-                                        style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'>Hi ".$receiverFullname.",<u></u><u></u></span>
-                                </p>
+            $subject = "Maxim Partner - Thank You for Your Registration";
 
-                                    <p><span style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'>Thank you for your registration. Your account details are listed below:<u></u><u></u></span>
-                                    </p>
-                                    <table border='0' cellspacing='0' cellpadding='0' width='600'
-                                           style='width:450.0pt;border-collapse:collapse'>
+            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
+
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table border='0' cellspacing='0' cellpadding='0' style='width:440.0pt;border-collapse:collapse'>
                                         <tbody>
                                         <tr>
                                             <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
@@ -1230,18 +1231,55 @@ class memberActions extends sfActions
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <p class='MsoNormal'><span style='font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;'><br><br>
-                                    <a href='http://partner.maximtrader.com' target='_blank'>http://partner.maximtrader.com</a> <u></u><u></u></span>
-                                    </p></td>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:30.0pt'></td>
-                            </tr>
-                            <tr style='min-height:16.5pt'>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
-                                <td width='600' style='width:450.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
-                                <td width='24' style='width:18.0pt;padding:0cm 0cm 0cm 0cm;min-height:16.5pt'></td>
-                            </tr>
-                            </tbody>
-                        </table>";
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader</strong><br>
+									E mail : admin@maximtrader.com
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
 
             $sendMailService = new SendMailService();
             $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);

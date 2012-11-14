@@ -42,7 +42,7 @@ class homeActions extends sfActions
                     $password = $existUser->getUserpassword();
                     $password2 = $existUser->getUserpassword2();
 
-                    $subject = $this->getContext()->getI18N()->__("MaximTrader - Account Password Retrieval", null, 'email');
+                    $subject = "Maxim Partner - Account Password Retrieval";
                     $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getFullName()), 'email') . ",<p><p>
                     <p>" . $this->getContext()->getI18N()->__("On our record, you have requested to retrieve your forgotten password. Your account(s) detail together with the password is listed below.", null, 'email') . "</p>
                     <p><br><b>" . $this->getContext()->getI18N()->__("Username", null) . ": " . $username . "</b>
@@ -51,6 +51,93 @@ class homeActions extends sfActions
                     <p><br>" . $this->getContext()->getI18N()->__("If you do not requested for this password retrieval, you can simply ignore this email since only you will receive this email. For more information, please contact us.", null, 'email') . "</p>
                     <p><a href='http://partner.maximtrader.com' target='_blank'>http://partner.maximtrader.com</a>";
 
+                    $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
+
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
+																	Dear <strong>".$existDistributor->getFullName()."</strong>,<br>
+																	<br>" . $this->getContext()->getI18N()->__("Username", null) . ": <b>" . $username . "</b>
+                                                                    <br>" . $this->getContext()->getI18N()->__("Account Password", null) . ": <b>" . $password . "</b>
+                                                                    <br>" . $this->getContext()->getI18N()->__("Security Password", null) . ": <b>" . $password2 . "</b>
+                                                                    <br><br>" . $this->getContext()->getI18N()->__("If you do not requested for this password retrieval, you can simply ignore this email since only you will receive this email. For more information, please contact us.", null, 'email') . "
+																</font>
+																<br>
+																<br>
+																<br>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
+																Forex, spread bets and CFDs are leveraged products. They may not be suitable for you as they carry a high degree of risk to your capital and you can lose more than your initial investment. You should ensure you understand all of the risks.
+																</font>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader</strong><br>
+									E mail : admin@maximtrader.com
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
                     $sendMailService = new SendMailService();
                     $sendMailService->sendForgetPassword($existDistributor, $subject, $body);
 

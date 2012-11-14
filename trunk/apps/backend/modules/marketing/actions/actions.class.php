@@ -808,7 +808,8 @@ class marketingActions extends sfActions
         echo json_encode($output);
 
         if ($this->getRequestParameter('mt4_user_name') != "" && $this->getRequestParameter('mt4_password') != "") {
-            $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
+            $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
+
             $body = "Dear " . $tbl_distributor->getFullName() . ",
                 <p>
                 <p>
@@ -1066,7 +1067,7 @@ class marketingActions extends sfActions
 		</tbody></table>";
 
             $sendMailService = new SendMailService();
-            $sendMailService->sendMt4UsernameAndPassword($tbl_distributor, $subject, $body);
+            $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
         }
 
         return sfView::HEADER_ONLY;
