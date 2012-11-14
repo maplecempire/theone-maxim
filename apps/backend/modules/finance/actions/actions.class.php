@@ -960,7 +960,7 @@ class financeActions extends sfActions
                     </tbody></table>";
 
                 $sendMailService = new SendMailService();
-                $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                $sendMailService->sendMt4UsernameAndPassword($tbl_distributor->getEmail(), $subject, $body);
             }
                 /*}
             }*/

@@ -1104,7 +1104,7 @@ class memberActions extends sfActions
             /****************************/
             $receiverEmail = $this->getRequestParameter('email');
             $receiverFullname = $this->getRequestParameter('fullname');
-            $subject = "Maxim Partner - Thank You for Your Registration";
+            $subject = "Maxim Trader - Thank You for Your Registration";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
 	<tbody>
@@ -5692,7 +5692,7 @@ Wish you all the best.
 </table>";
 
         $sendMailService = new SendMailService();
-        $subject = "Maxim Partner Forex Agreement 外汇合约";
+        $subject = "Maxim Trader Forex Agreement 外汇合约";
 
         $dateUtil = new DateUtil();
         $date = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -7, 0, 0));

@@ -42,7 +42,7 @@ class homeActions extends sfActions
                     $password = $existUser->getUserpassword();
                     $password2 = $existUser->getUserpassword2();
 
-                    $subject = "Maxim Partner - Account Password Retrieval";
+                    $subject = "Maxim Trader - Account Password Retrieval";
                     $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getFullName()), 'email') . ",<p><p>
                     <p>" . $this->getContext()->getI18N()->__("On our record, you have requested to retrieve your forgotten password. Your account(s) detail together with the password is listed below.", null, 'email') . "</p>
                     <p><br><b>" . $this->getContext()->getI18N()->__("Username", null) . ": " . $username . "</b>
