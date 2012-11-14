@@ -1371,7 +1371,7 @@ class memberActions extends sfActions
 
             $mlm_mt4_demo_request->save();
 
-            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐�?;
+            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐户";
             //$subject = "Thank you for register Maxim Trader Demo Account";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -1451,16 +1451,16 @@ class memberActions extends sfActions
 														<tr>
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-																	亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
-																	你的模拟帐户将使你可以进行�?纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
-																	<br><br>如想立刻体验交易，请下载并安装MT4�?
+																	亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
+																	你的模拟帐户将使你可以进行“纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+																	<br><br>如想立刻体验交易，请下载并安装MT4。
 																	<br>
 																</font>
 																<br>
 																<br>
 																<br>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-																买外汇或者期货都是一种杠杆投资�?他们可能不�?合您，因为他们具有很高的风险，您可能会失去您�?��的投资资金，�?��您必须确保你了解�?��的风险�?
+																买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
 																</font>
 															</td>
 														</tr>
@@ -1632,16 +1632,16 @@ class memberActions extends sfActions
                                                 <td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
                                                 <td valign='top' style='line-height:17px'>
                                                     <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-                                                        亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
-                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
-                                                        <br><br>如想立刻体验交易，请下载并安装MT4�?
+                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
+                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+                                                        <br><br>如想立刻体验交易，请下载并安装MT4。
                                                         <br>
                                                     </font>
                                                     <br>
                                                     <br>
                                                     <br>
                                                     <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-                                                    买外汇或者期货都是一种杠杆投资�?他们可能不�?合您，因为他们具有很高的风险，您可能会失去您�?��的投资资金，�?��您必须确保你了解�?��的风险�?
+                                                    买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
                                                     </font>
                                                 </td>
                                             </tr>
@@ -5580,7 +5580,7 @@ And upload all the documents at website.
 <br><br>
 Note:
 <br><br>
-Please logon to http://partner.maximtrader.com. Click “User Profile�?to upload all the documents at “Upload Document�?
+Please logon to http://partner.maximtrader.com. Click “User Profile” to upload all the documents at “Upload Document”.
 <br><br>
 Thank you for your highly cooperation.
 <br><br>
@@ -5615,25 +5615,25 @@ Wish you all the best.
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
 												亲爱的会员，
 <br><br>
-您好�?
+您好。
 <br><br>
 由于外汇的要求严谨，请您将您的文件包括：
 <br><br>
-1�?身份证（正反面在同一页）
+1） 身份证（正反面在同一页）
 <br><br>
-2�?地址证明（银�?信用卡明细单，或�?电明细单，或电话/网络明细单）
+2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）
 <br><br>
--          明细单必须清楚列明您的姓名，目前住址及最�?个月日期�?
+-          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。
 <br><br>
-3�?下载并签署外汇合约�?
+3） 下载并签署外汇合约。
 <br><br>
-上传给公司，否则这会影响您日后的提现�?
+上传给公司，否则这会影响您日后的提现。
 <br><br>
-注：请登入http://partner.maximtrader.com，点击�?用户个人资料”将�?��文件上传给公司（点击“上传文件�?）�?
+注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）。
 <br><br>
-谢谢您的鼎力合作�?
+谢谢您的鼎力合作。
 <br><br>
-祝：�?��顺利
+祝：一切顺利
 
 												<br>
 											</font>
