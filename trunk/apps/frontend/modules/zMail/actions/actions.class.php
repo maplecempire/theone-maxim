@@ -39,45 +39,49 @@ class zMailActions extends sfActions
                 </tr>
             </tbody>
         </table>";
-        $subject = "Maxim";
+        $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
+        $emailContact = EmailContactPeer::retrieveByPK(99);
 
-        error_reporting(E_STRICT);
-
-        date_default_timezone_set(date_default_timezone_get());
-
-        include_once('class.phpmailer.php');
-        $mail = new PHPMailer();
-
-        if (Mails::EMAIL_SMTP == true) {
-            $mail->IsSMTP();
-            $mail->Port = Mails::EMAIL_PORT;
-            $mail->SMTPDebug = 1; // telling the class to use SMTP
-            $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
-            $mail->Username = Mails::EMAIL_SENDER;
-            $mail->Password = Mails::EMAIL_PASSWORD;
-        } else {
-            $mail->IsMail();
-            $mail->Sender = Mails::EMAIL_SENDER;
-        }
-
-        $mail->Host = Mails::EMAIL_HOST; // SMTP server
-        $mail->From = Mails::EMAIL_FROM_NOREPLY;
-        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-        $mail->Subject = $subject;
-        $mail->CharSet="utf-8";
-
-        //$text_body = $body;
-
-        $mail->Body = $body;
-        $mail->AltBody = $body;
-        $mail->AddAddress("r9jason@gmail.com", "tester");
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
-
-        if (!$mail->Send()) {
-            echo $mail->ErrorInfo;
-        }
+        $sendMailService = new SendMailService();
+        $sendMailService->sendMail("r9jason@gmail.com", $emailContact->getReceiverName(), $subject, $body);
     }
+
+    public function executeSendBrochure()
+    {
+        $body = "<table width='600' align='center' cellpadding='0' cellspacing='0' border='0'>
+            <tbody>
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-1-cn.png' width='580'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-2-cn.png' width='580'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-3-cn.png' width='580'>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign='top' colspan='3'>
+                        <img src='http://partner.maximtrader.com/images/email/file/page-4-cn.png' width='580'>
+                    </td>
+                </tr>
+            </tbody>
+        </table>";
+        $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
+        $emailContact = EmailContactPeer::retrieveByPK(99);
+
+        $sendMailService = new SendMailService();
+        $sendMailService->sendMail("r9jason@gmail.com", $emailContact->getReceiverName(), $subject, $body);
+    }
+
     public function executeIndex2()
     {
         $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
