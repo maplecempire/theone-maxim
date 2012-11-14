@@ -94,7 +94,7 @@ margin-left:10px;
 
 .nav_texture{
 float:left;
-background:url(images/sidebar-light.png) repeat-y;
+/*background:url(images/sidebar-light.png) repeat-y;*/
 width:306px;
 height:285px;
 position:absolute;
@@ -112,7 +112,7 @@ position:absolute;
 
 .nav_texture_leather{
 float:left;
-background:url(images/sidebar-texture-leather.png) repeat-y;
+/*background:url(images/sidebar-texture-leather.png) repeat-y;*/
 width:306px;
 height:100%;
 margin-left:9px;

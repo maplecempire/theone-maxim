@@ -57,7 +57,7 @@
             padding-left: 20px
         }*/
         #sidebar-border {
-            background-image: url("/css/maxim/sidebar-border.png");
+            /*background-image: url("/css/maxim/sidebar-border.png");*/
             background-repeat: repeat-y;
             float: left;
             height: 100%;
