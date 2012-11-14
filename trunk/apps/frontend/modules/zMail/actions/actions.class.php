@@ -66,9 +66,9 @@ class zMailActions extends sfActions
             //print_r(count($nameArrs));
             //print_r("<br>");
             $receiverName = $emailArrs[0];
-            if (count($nameArrs) <  2) {
-                $receiverName = $emailContact->getReceiverName();
-            }
+            //if (count($nameArrs) <  2) {
+            //    $receiverName = $emailContact->getReceiverName();
+            //}
             print_r($idx."=".$emailContact->getReceiverEmail()." ".$receiverName);
             print_r("<br>");
 
@@ -100,6 +100,7 @@ class zMailActions extends sfActions
                 </tbody>
             </table>";
             $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
+            $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012";
 
             $sendMailService = new SendMailService();
             $sendMailService->sendMail($emailContact->getReceiverEmail(), $receiverName, $subject, $body);

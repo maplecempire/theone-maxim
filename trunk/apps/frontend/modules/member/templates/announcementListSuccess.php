@@ -38,7 +38,7 @@
         <div class="popinfo1">
             <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>">
                 <div class="poptitle"><?php
-                    if ($culture == "en")
+                    if ($culture == "en" || $culture == "jp")
                         echo $announcement->getTitle();
                     else
                         echo $announcement->getTitleCn();
@@ -54,7 +54,7 @@
             </div>
             <div class="news_desc">
                 <?php
-                if ($culture == "en")
+                if ($culture == "en" || $culture == "jp")
                     echo $announcement->getShortContent();
                 else
                     echo $announcement->getShortContentCn();
