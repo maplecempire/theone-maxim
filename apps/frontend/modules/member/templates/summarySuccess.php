@@ -349,6 +349,13 @@ function reassignDatagridAnnouncementEventAttr() {
                     border-color: transparent #ffcc33 transparent transparent;
                     border-style: solid;
                 }
+                .pink_tags {
+                    background-color: #ff99ff;
+                    border-radius: 2px 2px 2px 2px;
+                    box-shadow: 2px #ffcc33;
+                    border-color: transparent #cc00cc transparent transparent;
+                    border-style: solid;
+                }
                 .white_tags {
                     background-color: #ffffff;
                     border-radius: 2px 2px 2px 2px;
