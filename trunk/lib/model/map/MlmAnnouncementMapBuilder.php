@@ -42,6 +42,10 @@ class MlmAnnouncementMapBuilder {
 
 		$tMap->addColumn('CONTENT_CN', 'ContentCn', 'string', CreoleTypes::LONGVARCHAR, true, null);
 
+		$tMap->addColumn('SHORT_CONTENT', 'ShortContent', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('SHORT_CONTENT_CN', 'ShortContentCn', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);

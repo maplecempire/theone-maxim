@@ -13,7 +13,7 @@ abstract class BaseMlmAnnouncementPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmAnnouncement';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,6 +33,12 @@ abstract class BaseMlmAnnouncementPeer {
 
 	
 	const CONTENT_CN = 'mlm_announcement.CONTENT_CN';
+
+	
+	const SHORT_CONTENT = 'mlm_announcement.SHORT_CONTENT';
+
+	
+	const SHORT_CONTENT_CN = 'mlm_announcement.SHORT_CONTENT_CN';
 
 	
 	const STATUS_CODE = 'mlm_announcement.STATUS_CODE';
@@ -55,18 +61,18 @@ abstract class BaseMlmAnnouncementPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('AnnouncementId', 'Title', 'TitleCn', 'Content', 'ContentCn', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID, MlmAnnouncementPeer::TITLE, MlmAnnouncementPeer::TITLE_CN, MlmAnnouncementPeer::CONTENT, MlmAnnouncementPeer::CONTENT_CN, MlmAnnouncementPeer::STATUS_CODE, MlmAnnouncementPeer::CREATED_BY, MlmAnnouncementPeer::CREATED_ON, MlmAnnouncementPeer::UPDATED_BY, MlmAnnouncementPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('announcement_id', 'title', 'title_cn', 'content', 'content_cn', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('AnnouncementId', 'Title', 'TitleCn', 'Content', 'ContentCn', 'ShortContent', 'ShortContentCn', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID, MlmAnnouncementPeer::TITLE, MlmAnnouncementPeer::TITLE_CN, MlmAnnouncementPeer::CONTENT, MlmAnnouncementPeer::CONTENT_CN, MlmAnnouncementPeer::SHORT_CONTENT, MlmAnnouncementPeer::SHORT_CONTENT_CN, MlmAnnouncementPeer::STATUS_CODE, MlmAnnouncementPeer::CREATED_BY, MlmAnnouncementPeer::CREATED_ON, MlmAnnouncementPeer::UPDATED_BY, MlmAnnouncementPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('announcement_id', 'title', 'title_cn', 'content', 'content_cn', 'short_content', 'short_content_cn', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('AnnouncementId' => 0, 'Title' => 1, 'TitleCn' => 2, 'Content' => 3, 'ContentCn' => 4, 'StatusCode' => 5, 'CreatedBy' => 6, 'CreatedOn' => 7, 'UpdatedBy' => 8, 'UpdatedOn' => 9, ),
-		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID => 0, MlmAnnouncementPeer::TITLE => 1, MlmAnnouncementPeer::TITLE_CN => 2, MlmAnnouncementPeer::CONTENT => 3, MlmAnnouncementPeer::CONTENT_CN => 4, MlmAnnouncementPeer::STATUS_CODE => 5, MlmAnnouncementPeer::CREATED_BY => 6, MlmAnnouncementPeer::CREATED_ON => 7, MlmAnnouncementPeer::UPDATED_BY => 8, MlmAnnouncementPeer::UPDATED_ON => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('announcement_id' => 0, 'title' => 1, 'title_cn' => 2, 'content' => 3, 'content_cn' => 4, 'status_code' => 5, 'created_by' => 6, 'created_on' => 7, 'updated_by' => 8, 'updated_on' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('AnnouncementId' => 0, 'Title' => 1, 'TitleCn' => 2, 'Content' => 3, 'ContentCn' => 4, 'ShortContent' => 5, 'ShortContentCn' => 6, 'StatusCode' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
+		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID => 0, MlmAnnouncementPeer::TITLE => 1, MlmAnnouncementPeer::TITLE_CN => 2, MlmAnnouncementPeer::CONTENT => 3, MlmAnnouncementPeer::CONTENT_CN => 4, MlmAnnouncementPeer::SHORT_CONTENT => 5, MlmAnnouncementPeer::SHORT_CONTENT_CN => 6, MlmAnnouncementPeer::STATUS_CODE => 7, MlmAnnouncementPeer::CREATED_BY => 8, MlmAnnouncementPeer::CREATED_ON => 9, MlmAnnouncementPeer::UPDATED_BY => 10, MlmAnnouncementPeer::UPDATED_ON => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('announcement_id' => 0, 'title' => 1, 'title_cn' => 2, 'content' => 3, 'content_cn' => 4, 'short_content' => 5, 'short_content_cn' => 6, 'status_code' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -129,6 +135,10 @@ abstract class BaseMlmAnnouncementPeer {
 		$criteria->addSelectColumn(MlmAnnouncementPeer::CONTENT);
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::CONTENT_CN);
+
+		$criteria->addSelectColumn(MlmAnnouncementPeer::SHORT_CONTENT);
+
+		$criteria->addSelectColumn(MlmAnnouncementPeer::SHORT_CONTENT_CN);
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::STATUS_CODE);
 

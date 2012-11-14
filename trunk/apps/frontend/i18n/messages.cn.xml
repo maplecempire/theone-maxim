@@ -755,6 +755,13 @@
             <trans-unit><source>Inquiry Status</source><target>咨询状态</target></trans-unit>
             <trans-unit><source>Progress</source><target>进度</target></trans-unit>
             <trans-unit><source>Last Reply</source><target>最新回复</target></trans-unit>
+            <trans-unit><source>Latest News</source><target>最新消息</target></trans-unit>
+            <trans-unit><source>CLOSE</source><target>关闭</target></trans-unit>
+            <trans-unit><source>Withdraw</source><target>兑现</target></trans-unit>
+            <trans-unit><source>Purchase</source><target>购买</target></trans-unit>
+            <trans-unit><source>Back to announcement list</source><target>回到公告表</target></trans-unit>
+            <trans-unit><source>Announcement List</source><target>公告表</target></trans-unit>
+            <trans-unit><source>ANNOUNCEMENT</source><target>公告</target></trans-unit>
         </body>
     </file>
 </xliff>

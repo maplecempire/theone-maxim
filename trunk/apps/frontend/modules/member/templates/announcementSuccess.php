@@ -1,112 +1,67 @@
 <?php include('scripts.php'); ?>
-<script type="text/javascript">
-var packageStrings = "<option value=''></option>";
-var datagrid = null;
-var datagridAnnouncement = null;
-$(function() {
-    datagrid = $("#datagridAnnouncement").r9jasonDataTable({
-        // online1DataTable extra params
-        "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
-        "extraParam" : function(aoData){ // pass extra params to server
 
-        },
-        "reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
-            reassignDatagridAnnouncementEventAttr();
-        },
-        // datatables params
-        "bLengthChange": true,
-        "bFilter": false,
-        "bProcessing": true,
-        "bServerSide": true,
-        "bAutoWidth": false,
-        "sAjaxSource": "/member/announcementList",
-        "sPaginationType": "full_numbers",
-        "aaSorting": [[4,'desc']],
-        "aoColumns": [
-                      { "sName" : "announcement_id",  "bVisible": false},
-                        { "sName" : "title",  "bSortable": false, "fnRender": function ( oObj ) {
-                            return "<a class='announcementLink' refId='" + oObj.aData[0] + "' href='#' style='color: #0000ff;'>" + oObj.aData[1] + "</a>";
-		  		        }},
-                      { "sName" : "created_on",  "bSortable": false}
-        ]
-    });
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Announcement') ?></span></td>
+</tr>
+<tr>
+    <td><br>
+        <?php if ($sf_flash->has('successMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-highlight ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-info"></span>
+                    <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if ($sf_flash->has('errorMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-error ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-alert"></span>
+                    <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
 
-    $("#dgAnnouncement").dialog("destroy");
-    $("#dgAnnouncement").dialog({
-        autoOpen : false,
-        modal : true,
-        resizable : false,
-        hide: 'clip',
-        show: 'slide',
-        width: 700,
-        height: 500,
-        buttons: {
-            "<?php echo __('Cancel') ?>": function() {
-                $(this).dialog('close');
-            }
-        },
-        open: function() {
+    </td>
+</tr>
+<tr>
+    <td>
+        <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>">
+            <div class="poptitle"><?php
+                $culture = $sf_user->getCulture();
+                if ($culture == "en")
+                    echo $announcement->getTitle();
+                else
+                    echo $announcement->getTitleCn();
+                ?></div>
+        </a>
 
-        },
-        close: function() {
-
-        }
-    });
-
-    $(".announcementLink").live("click", function(event) {
-        event.preventDefault();
-        $("#dgAnnouncement").data("refId", $(this).attr("refId"));
-
-        waiting();
-        $.ajax({
-            type : 'POST',
-            url : "/member/fetchAnnouncementById",
-            dataType : 'json',
-            cache: false,
-            data: {
-                announcementId : $('#dgAnnouncement').data("refId")
-            },
-            success : function(data) {
-                $.unblockUI();
-                $("#dgAnnouncement").dialog("open");
-                $("#tdAnnouncement").html("<strong>" + data.content + "</strong>");
-                $("#dgAnnouncement").dialog("option", "title", data.title);
-            },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Your login attempt was not successful. Please try again.");
-            }
-        });
-    });
-    $("#paymentTypeEPoint").attr('checked', true);
-    $("#spanPaymentType").buttonset();
-});
-function reassignDatagridAnnouncementEventAttr(){
-	$("a[id=editLink]").click(function(event){
-
-	});
-}
-</script>
-
-<div style="padding: 10px; top: 30px; width: 98%">
-<div class="portlet">
-    <div class="portlet-header"><?php echo __('Announcements') ?></div>
-    <div class="portlet-content">
-            <table class="display" id="datagridAnnouncement" border="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Announcement Id[hidden]</th>
-                    <th><?php echo __('Title') ?></th>
-                    <th width="20%"><?php echo __('Date') ?></th>
-                </tr>
-                </thead>
-            </table>
-    </div>
-</div>
-</div>
-
-<div id="dgAnnouncement" title="<?php echo __('Announcements') ?>" style="display:none;">
-    <table cellspacing="5">
-        <tr>
-            <td class="text" id="tdAnnouncement"></td>
-    </table>
-</div>
+        <div class="news_date">
+        <?php
+            $dateUtil = new DateUtil();
+            $currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
+            echo $currentDate;
+            ?>
+        </div>
+        <div class="news_desc">
+            <?php
+            if ($culture == "en")
+                echo $announcement->getContent();
+            else
+                echo $announcement->getContentCn();
+            ?>
+            <br>
+            <br>
+            <br>
+            <a href="<?php echo url_for("/member/announcementList")?>"><?php echo __('Back to announcement list') ?></a>
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>

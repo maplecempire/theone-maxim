@@ -3,7 +3,7 @@
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Exchange Rate</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Exchange Rate') ?></span></td>
 </tr>
 <tr>
     <td><br>
@@ -35,9 +35,9 @@
         <table class="pbl_table" cellpadding="3" cellspacing="3">
             <tbody>
             <tr class="pbl_header">
-                <td>Country</td>
-                <td>Purchase</td>
-                <td>Withdraw</td>
+                <td><?php echo __('Country') ?></td>
+                <td><?php echo __('Purchase') ?></td>
+                <td><?php echo __('Withdraw') ?></td>
             </tr>
             <tr class="row0">
                 <td valign="top"><p align="center"><img width="90" height="45" title="Australia Dollars" alt=""

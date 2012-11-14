@@ -107,6 +107,13 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
             <a href="/member/underMaintenance"><span><?php echo __('CS Center'); ?></span></a>
         </li>
     </ul>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('ANNOUNCEMENT'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/announcementList"><span><?php echo __('Announcement List'); ?></span></a>
+        </li>
+    </ul>
     <!--<br class="clear"><br>
     <ul>
         <li class="menu_title"><?php /*echo __('REPORT'); */?></li>

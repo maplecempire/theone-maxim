@@ -2117,7 +2117,7 @@ class memberActions extends sfActions
         $c = new Criteria();
         $c->add(MlmAnnouncementPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->addDescendingOrderByColumn(MlmAnnouncementPeer::CREATED_ON);
-        $c->setLimit(10);
+        $c->setLimit(5);
         $this->announcements = MlmAnnouncementPeer::doSelect($c);
 
         $distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -2181,69 +2181,11 @@ class memberActions extends sfActions
 
     public function executeAnnouncementList()
     {
-        $sColumns = $this->getRequestParameter('sColumns');
-        $aColumns = explode(",", $sColumns);
-
-        $iColumns = $this->getRequestParameter('iColumns');
-
-        $offset = $this->getRequestParameter('iDisplayStart');
-        $sEcho = $this->getRequestParameter('sEcho');
-        $limit = $this->getRequestParameter('iDisplayLength');
-        $arr = array();
-
-        /******   total records  *******/
         $c = new Criteria();
         $c->add(MlmAnnouncementPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $totalRecords = MlmAnnouncementPeer::doCount($c);
-
-        /******   total filtered records  *******/
-        /*if ($this->getRequestParameter('filterAction') != "") {
-            $c->addAnd(MlmAnnouncementPeer::TRANSACTION_TYPE, "%" . $this->getRequestParameter('filterAction') . "%", Criteria::LIKE);
-        }*/
-        $totalFilteredRecords = MlmAnnouncementPeer::doCount($c);
-
-        /******   sorting  *******/
-        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
-        {
-            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
-                if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
-                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
-                } else {
-                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
-                }
-            }
-        }
-
-        /******   pagination  *******/
-        $pager = new sfPropelPager('MlmAnnouncement', $limit);
-        $pager->setCriteria($c);
-        $pager->setPage(($offset / $limit) + 1);
-        $pager->init();
-
-        foreach ($pager->getResults() as $result) {
-            $title = $result->getTitle();
-            $createdOn = $result->getCreatedOn();
-
-            if ($this->getUser()->getCulture() == "cn") {
-                $title = $result->getTitleCn();
-                $createdOn = $result->getCreatedOn();
-            }
-            $arr[] = array(
-                $result->getAnnouncementId(),
-                $title,
-                $createdOn
-            );
-        }
-
-        $output = array(
-            "sEcho" => intval($sEcho),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalFilteredRecords,
-            "aaData" => $arr
-        );
-        echo json_encode($output);
-
-        return sfView::HEADER_ONLY;
+        $c->addDescendingOrderByColumn(MlmAnnouncementPeer::CREATED_ON);
+        $c->setLimit(10);
+        $this->announcements = MlmAnnouncementPeer::doSelect($c);
     }
 
     public function executeBonusDetailList()
@@ -3307,6 +3249,10 @@ class memberActions extends sfActions
 
     public function executeAnnouncement()
     {
+        $announcement = MlmAnnouncementPeer::retrieveByPK($this->getRequestParameter('id'));
+        $this->forward404Unless($announcement);
+
+        $this->announcement = $announcement;
     }
 
     public function executeSponsorTree()
