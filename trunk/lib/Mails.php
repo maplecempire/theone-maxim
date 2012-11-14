@@ -13,6 +13,7 @@ abstract class Mails {
     const EMAIL_FROM_NOREPLY = "accounts@maximtrader.com";
     const EMAIL_FROM_NOREPLY_NAME = "Maxim Trader";
     const EMAIL_SENDER = "accounts@maximtrader.com";
+    const EMAIL_SENDER_INFO = "info@maximtrader.com";
     const EMAIL_PASSWORD = "maximtemp";
 
     const EMAIL_TEST_MAIL = "r9projecthost@gmail.com";

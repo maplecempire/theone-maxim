@@ -81,7 +81,7 @@ class SendMailService
     {
 
     }
-    public function sendMail($receiverEmail, $receiverFullName, $subject, $body)
+    public function sendMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER)
     {
         error_reporting(E_STRICT);
 
@@ -96,11 +96,11 @@ class SendMailService
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
             $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
-            $mail->Username = Mails::EMAIL_SENDER;
+            $mail->Username = $sendFrom;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {
             $mail->IsMail();
-            $mail->Sender = Mails::EMAIL_SENDER;
+            $mail->Sender = $sendFrom;
         }
 
         $mail->Host = Mails::EMAIL_HOST; // SMTP server

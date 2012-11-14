@@ -180,35 +180,48 @@ $(function() {
                                             $trStyle = "1";
                                         }
 
-                                echo "<tr class='row" . $trStyle . "' style='height:35px'>";
-                                //$pointNeeded = number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
-                                $pointNeeded = number_format($packageDB->getPrice(),2);
-                                $ableUpgrade = false;
-                                if ($distPackage->getPrice() < $packageDB->getPrice() || $highestPackageDB->getPrice() == $packageDB->getPrice()) {
-                                    $ableUpgrade = true;
-                                    echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
-                                                                                                                                                 'class' => 'activeLink',
-                                                                                                                                                 'ref' => $pointNeeded,
+                                        $packagePrice = number_format($packageDB->getPrice(), 2);
+                                        if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                                            $packagePrice = "<select name='specialPackagePrice' id='specialPackagePrice'>
+                                            <option value='30000'>30,000</option>
+                                            <option value='40000'>40,000</option>
+                                            <option value='50000'>50,000</option>
+                                            <option value='60000'>60,000</option>
+                                            <option value='70000'>70,000</option>
+                                            <option value='80000'>80,000</option>
+                                            <option value='90000'>90,000</option>
+                                            <option value='100000'>100,000</option>
+                                            </select>";
+                                        }
+                                        echo "<tr class='row" . $trStyle . "' style='height:35px'>";
+                                        //$pointNeeded = number_format($packageDB->getPrice() - $distPackage->getPrice(),2);
+                                        //$pointNeeded = number_format($packageDB->getPrice(),2);
+                                        $ableUpgrade = false;
+                                        if ($distPackage->getPrice() < $packageDB->getPrice() || $highestPackageDB->getPrice() == $packageDB->getPrice()) {
+                                            $ableUpgrade = true;
+                                            echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                                                                                                                                         'class' => 'activeLink',
+                                                                                                                                                         'ref' => $pointNeeded,
                                                                                                                                                  'pid' => $packageDB->getPackageId(),
                                                                                                                                             )) . "</td>";
-                                } else {
-                                    echo "<td></td>";
-                                }
-
-                                echo "<td align='center'>" . $packageDB->getPackageName() . "</td>
-                                    <td align='center'>";
-
-                                    if ($ableUpgrade) {
-                                        echo $pointNeeded;
                                     } else {
-                                        echo "--";
+                                        echo "<td></td>";
                                     }
-                                echo "</td>
-                                </tr>";
+
+                                    echo "<td align='center'>" . $packageDB->getPackageName() . "</td>
+                                        <td align='center'>";
+
+                                        if ($ableUpgrade) {
+                                            echo $packagePrice;
+                                        } else {
+                                            echo "--";
+                                        }
+                                    echo "</td>
+                                    </tr>";
+                                        }
+                                    } else {
+                                        echo "<tr class='odd' align='center'><td colspan='7'>" . __('No data available in table') . "</td></tr>";
                                     }
-                                } else {
-                                    echo "<tr class='odd' align='center'><td colspan='7'>" . __('No data available in table') . "</td></tr>";
-                                }
                             ?>
                             </tbody>
                         </table>

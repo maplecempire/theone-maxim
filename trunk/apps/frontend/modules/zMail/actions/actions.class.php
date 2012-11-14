@@ -56,7 +56,7 @@ class zMailActions extends sfActions
         $idx = 0;
         foreach ($emailContacts as $emailContact) {
             $idx++;
-            //if ($idx == 20)
+            //if ($idx == 2)
             //    break;
 
             $nameArrs = explode("??", $emailContact->getReceiverName());
@@ -103,7 +103,7 @@ class zMailActions extends sfActions
             $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012";
 
             $sendMailService = new SendMailService();
-            $sendMailService->sendMail($emailContact->getReceiverEmail(), $receiverName, $subject, $body);
+            $sendMailService->sendMail($emailContact->getReceiverEmail(), $receiverName, $subject, $body, Mails::EMAIL_SENDER_INFO);
 
             $emailContact->setSendStatus("SEND");
             $emailContact->save();

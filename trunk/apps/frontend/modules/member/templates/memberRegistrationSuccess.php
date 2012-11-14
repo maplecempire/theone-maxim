@@ -149,15 +149,28 @@ $(function() {
                                             $trStyle = "1";
                                         }
 
-                                echo "<tr class='row" . $trStyle . "'>
-                                    <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
-                                               'class' => 'activeLink',
-                                               'ref' => $packageDB->getPrice(),
-                                               'pid' => $packageDB->getPackageId(),
-                                          )) . "</td>
-                                    <td align='center'>" . $packageDB->getPackageName() . "</td>
-                                    <td align='center'>" . $packageDB->getPrice() . "</td>
-                                </tr>";
+                                        $packagePrice = number_format($packageDB->getPrice(), 2);
+                                        if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                                            $packagePrice = "<select name='specialPackagePrice' id='specialPackagePrice'>
+                                            <option value='30000'>30,000</option>
+                                            <option value='40000'>40,000</option>
+                                            <option value='50000'>50,000</option>
+                                            <option value='60000'>60,000</option>
+                                            <option value='70000'>70,000</option>
+                                            <option value='80000'>80,000</option>
+                                            <option value='90000'>90,000</option>
+                                            <option value='100000'>100,000</option>
+                                            </select>";
+                                        }
+                                        echo "<tr class='row" . $trStyle . "'>
+                                                <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                                                                                                                                                       'class' => 'activeLink',
+                                                                                                                                                                       'ref' => $packageDB->getPrice(),
+                                                                                                                                                                       'pid' => $packageDB->getPackageId(),
+                                                                                                                                                                  )) . "</td>
+                                                <td align='center'>" . $packageDB->getPackageName() . "</td>
+                                                <td align='center'>" . $packagePrice . "</td>
+                                            </tr>";
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";
@@ -168,9 +181,9 @@ $(function() {
                     </td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even" style="display: none">
                     <td>&nbsp;</td>
-                    <td colspan="5" style="display: none">
+                    <td colspan="5">
                         &nbsp;<input name="productCode" type="radio" value="fxgold" id="rdoFxgold" checked="checked">&nbsp; <label for="rdoFxgold">FX Gold A</label>
                         <span style="display: none">&nbsp;<input name="productCode" type="radio" value="mte" id="rdoMte">&nbsp; <label for="rdoMte">MaximTrade™ Executor</label></span>
                     </td>
