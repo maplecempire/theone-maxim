@@ -185,7 +185,7 @@
                                             <td></td>
                                             <td></td>
                                             <td colspan="2"><img class="arwList" src="/images/maxim/arrow_blue_single_tab.gif">
-                                                <a href="<?php echo url_for("/member/forgetPassword") ?>"><?php echo __('Forgot username') ?> / <?php echo __('password') ?></a></td>
+                                                <a href="<?php echo url_for("/home/forgetPassword") ?>"><?php echo __('Forgot username') ?> / <?php echo __('password') ?></a></td>
                                             <td></td>
                                         </tr>
                                         <tr height="36">
