@@ -341,27 +341,31 @@ class adminActions extends sfActions
             // ******************* uncomment for testing purpose ****************
             $existUser = AppUserPeer::retrieveByPk(1);
         } else {
+            if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
+                require_once('recaptchalib.php');
+                $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
+                $resp = recaptcha_check_answer ($privatekey,
+                                                $_SERVER["REMOTE_ADDR"],
+                                                $_POST["recaptcha_challenge_field"],
+                                                $_POST["recaptcha_response_field"]);
+
+                if (!$resp->is_valid) {
+                    $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+                    return $this->redirect('admin/login');
+                }
+            }
+
             $username = trim($this->getRequestParameter('modlgn_username'));
             $password = trim($this->getRequestParameter('modlgn_passwd'));
 
             if ($username == '' || $password == '') {
+                $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
+
                 $this->setFlash('errorMsg', "Invalid username or password.");
                 return $this->redirect('admin/login');
             }
 
-            require_once('recaptchalib.php');
-            $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
-            $resp = recaptcha_check_answer ($privatekey,
-                                        $_SERVER["REMOTE_ADDR"],
-                                        $_POST["recaptcha_challenge_field"],
-                                        $_POST["recaptcha_response_field"]);
-
-            if (!$resp->is_valid) {
-                $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
-                return $this->redirect('admin/login');
-            }
-
-            $this->getUser()->getAttributeHolder()->clear();
+            //$this->getUser()->getAttributeHolder()->clear();
 
             /*	    user      	*/
             $c = new Criteria();
@@ -373,6 +377,8 @@ class adminActions extends sfActions
         }
 
         if ($existUser) {
+            $this->getUser()->getAttributeHolder()->clear();
+
             $c = new Criteria();
             $c->add(MlmAdminPeer::USER_ID, $existUser->getUserId());
             $existAdmin = MlmAdminPeer::doSelectOne($c);
@@ -402,6 +408,8 @@ class adminActions extends sfActions
 
             return $this->redirect('admin/dashboard');
         }
+
+        $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
 
         $this->setFlash('errorMsg', "Invalid username or password.");
         return $this->redirect('admin/login');
