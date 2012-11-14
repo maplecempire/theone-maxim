@@ -223,6 +223,9 @@ abstract class Globals {
     const FIRST_REGISTERED_DISTRIBUTOR_CODE = "TV1";
     const FIRST_REGISTERED_DISTRIBUTOR_ID = 1;
 
+    const MAX_PACKAGE_PRICE = 30000;
+    const MAX_PACKAGE_ID = 5;
+
     /************************************/
     /****    DIVIDEND STATUS       ******/
     /************************************/

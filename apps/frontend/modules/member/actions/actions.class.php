@@ -55,6 +55,7 @@ class memberActions extends sfActions
     {
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
         $this->position = $this->getRequestParameter('position');
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
         //var_dump($this->getRequestParameter('uplineDistCode'));
         if ($this->getRequestParameter('pid') <> "") {
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -62,6 +63,10 @@ class memberActions extends sfActions
             $this->forward404Unless($selectedPackage);
 
             $amountNeeded = $selectedPackage->getPrice();
+
+            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                $amountNeeded = $this->getRequestParameter('specialPackagePrice');
+            }
 
             $existDist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTID)));
             $this->forward404Unless($existDist);
@@ -74,6 +79,7 @@ class memberActions extends sfActions
             }
 
             $this->selectedPackage = $selectedPackage;
+            $this->amountNeeded = $amountNeeded;
             $this->productCode = $this->getRequestParameter('productCode');
         } else {
             return $this->redirect('/member/purchasePackageViaTree');
@@ -398,6 +404,7 @@ class memberActions extends sfActions
     public function executeMemberRegistration2()
     {
         //if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
         if ($this->getRequestParameter('pid') <> "") {
             /*$tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
@@ -410,11 +417,17 @@ class memberActions extends sfActions
             $this->forward404Unless($selectedPackage);
 
             $amountNeeded = $selectedPackage->getPrice();
+
+            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                $amountNeeded = $this->getRequestParameter('specialPackagePrice');
+            }
+
             if ($amountNeeded > $ledgerEPointBalance) {
                 $this->setFlash('errorMsg', "In-sufficient CP1 amount");
                 return $this->redirect('/member/memberRegistration');
             }
             $this->selectedPackage = $selectedPackage;
+            $this->amountNeeded = $amountNeeded;
             $this->productCode = $this->getRequestParameter('productCode');
         } else {
             return $this->redirect('/member/memberRegistration');
@@ -629,6 +642,7 @@ class memberActions extends sfActions
         $password2 = $this->getRequestParameter('securityPassword');
         $packageId = $this->getRequestParameter('packageId');
         $position = $this->getRequestParameter('position1');
+        $amountNeeded = $this->getRequestParameter('amountNeeded');
 
         $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
         try {
@@ -664,6 +678,10 @@ class memberActions extends sfActions
             $this->forward404Unless($packageDB);
 
             $applicationPackageName = $packageDB->getPackageName();
+            $packagePrice = $packageDB->getPrice();
+            if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                $packagePrice = $amountNeeded;
+            }
 
             $mlm_distributor = new MlmDistributor();
             $mlm_distributor->setDistributorCode($fcode);
@@ -740,7 +758,7 @@ class memberActions extends sfActions
             //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
             $mlm_roi_dividend->setDividendDate($dividendDate);
             $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
-            $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+            $mlm_roi_dividend->setPackagePrice($packagePrice);
             $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
             //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
             //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
@@ -760,11 +778,11 @@ class memberActions extends sfActions
             /**************************************/
             if ($uplineDistDB->getIsIb() == Globals::YES) {
                 $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                $directSponsorBonusAmount = $directSponsorPercentage * $packagePrice / 100;
             } else {
                 $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
                 $directSponsorPercentage = $uplineDistPackage->getCommission();
-                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                $directSponsorBonusAmount = $directSponsorPercentage * $packagePrice / 100;
             }
             $totalBonusPayOut = $directSponsorPercentage;
 
@@ -774,7 +792,7 @@ class memberActions extends sfActions
             /* ****************************************************
              * Update upline distributor account
              * ***************************************************/
-            $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
+            $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
 
             $mlm_account_ledger = new MlmAccountLedger();
             $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -782,7 +800,7 @@ class memberActions extends sfActions
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
             $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
             $mlm_account_ledger->setCredit(0);
-            $mlm_account_ledger->setDebit($packageDB->getPrice());
+            $mlm_account_ledger->setDebit($packagePrice);
             $mlm_account_ledger->setBalance($sponsorAccountBalance);
             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -903,7 +921,7 @@ class memberActions extends sfActions
                                 $uplineDistId = $uplineDistDB->getUplineDistId();
                                 continue;
                             }
-                            $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                            $directSponsorBonusAmount = $directSponsorPercentage * $packagePrice / 100;
                             $checkCommission == false;
                             break;
                         } else {
@@ -4354,15 +4372,19 @@ class memberActions extends sfActions
 //                $amountNeeded = $selectedPackage->getPrice() -  $currentPackageAmount;
                 $amountNeeded = $selectedPackage->getPrice();
             }
+            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                $amountNeeded = $this->getRequestParameter('specialPackagePrice');
+            }
+
             if ($amountNeeded > $ledgerECashBalance && $paymentType == "ecash") {
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
-
+                return $this->redirect('/member/packageUpgrade');
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
                 $this->setFlash('errorMsg', "In-sufficient CP1 amount");
-
+                return $this->redirect('/member/packageUpgrade');
             } else if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', "Invalid Security password");
-
+                return $this->redirect('/member/packageUpgrade');
             } else {
                 $tbl_account_ledger = new MlmAccountLedger();
                 $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -4417,7 +4439,7 @@ class memberActions extends sfActions
                 //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
                 $mlm_roi_dividend->setDividendDate($dividendDate);
                 $mlm_roi_dividend->setPackageId($selectedPackage->getPackageId());
-                $mlm_roi_dividend->setPackagePrice($selectedPackage->getPrice());
+                $mlm_roi_dividend->setPackagePrice($amountNeeded);
                 $mlm_roi_dividend->setRoiPercentage($selectedPackage->getMonthlyPerformance());
                 //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                 //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
