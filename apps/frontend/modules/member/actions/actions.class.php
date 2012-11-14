@@ -1371,7 +1371,7 @@ class memberActions extends sfActions
 
             $mlm_mt4_demo_request->save();
 
-            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐户";
+            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐�?;
             //$subject = "Thank you for register Maxim Trader Demo Account";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -1451,16 +1451,16 @@ class memberActions extends sfActions
 														<tr>
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-																	亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-																	你的模拟帐户将使你可以进行“纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略。
-																	<br><br>如想立刻体验交易，请下载并安装MT4。
+																	亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
+																	你的模拟帐户将使你可以进行�?纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
+																	<br><br>如想立刻体验交易，请下载并安装MT4�?
 																	<br>
 																</font>
 																<br>
 																<br>
 																<br>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-																买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
+																买外汇或者期货都是一种杠杆投资�?他们可能不�?合您，因为他们具有很高的风险，您可能会失去您�?��的投资资金，�?��您必须确保你了解�?��的风险�?
 																</font>
 															</td>
 														</tr>
@@ -1632,16 +1632,16 @@ class memberActions extends sfActions
                                                 <td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
                                                 <td valign='top' style='line-height:17px'>
                                                     <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
-                                                        <br><br>如想立刻体验交易，请下载并安装MT4。
+                                                        亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
+                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
+                                                        <br><br>如想立刻体验交易，请下载并安装MT4�?
                                                         <br>
                                                     </font>
                                                     <br>
                                                     <br>
                                                     <br>
                                                     <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-                                                    买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
+                                                    买外汇或者期货都是一种杠杆投资�?他们可能不�?合您，因为他们具有很高的风险，您可能会失去您�?��的投资资金，�?��您必须确保你了解�?��的风险�?
                                                     </font>
                                                 </td>
                                             </tr>
@@ -5540,52 +5540,28 @@ function getAccumulateGroupBvs($distributorId, $position)
 
     function executeSendRemindationEmailForUploadAgreement()
     {
-        $body = "<table width='800' align='center' cellpadding='0' cellspacing='0' border='0'>
-			<tbody><tr>
-				<td valign='top' colspan='3'>
-					<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-						<tbody>
-						<tr><td colspan='3' style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='34'></td></tr>
+        $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
 						<tr>
-							<td valign='top' width='551'>
-								<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-									<tbody><tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='71'></td></tr>
-									<tr>
-										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
-										<td valign='top' style='line-height:17px'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
-												亲爱的会员，
-<br><br>
-您好。
-<br><br>
-由于外汇的要求严谨，请您将您的文件包括：
-<br><br>
-1） 身份证（正反面在同一页）
-<br><br>
-2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）
-<br><br>
--          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。
-<br><br>
-3） 下载并签署外汇合约。
-<br><br>
-上传给公司，否则这会影响您日后的提现。
-<br><br>
-注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）。
-<br><br>
-谢谢您的鼎力合作。
-<br><br>
-祝：一切顺利
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
 
-												<br>
-											</font>
-										</td>
-									</tr>
-									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
-
-									<tr>
-										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
-										<td valign='top' style='line-height:17px'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
 												Dear our distinguished member,
 <br><br>
 Thank you for your support and faith in us!
@@ -5604,7 +5580,7 @@ And upload all the documents at website.
 <br><br>
 Note:
 <br><br>
-Please logon to http://partner.maximtrader.com. Click “User Profile” to upload all the documents at “Upload Document”.
+Please logon to http://partner.maximtrader.com. Click “User Profile�?to upload all the documents at “Upload Document�?
 <br><br>
 Thank you for your highly cooperation.
 <br><br>
@@ -5614,64 +5590,109 @@ Wish you all the best.
 
 
 											</font>
-										</td>
-									</tr>
-									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
-
-									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='32'></td></tr>
-									<tr>
-										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
-										<td style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'></td>
-									</tr>
-									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
-									<tr>
-										<td valign='top' style='line-height:15px;text-align:right' colspan='2' align='right'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
-												<em>
-													Best Regards,<br>
-													<strong>Maxim Trader</strong><br>
-													E mail : admin@maximtrader.com
-												</em>
-											</font>
-										</td>
-									</tr>
-								</tbody></table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</td>
-							<td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
 						</tr>
-					</tbody></table>
-				</td>
-			</tr>
-			<tr>
-				<td style='font-size:0;line-height:0' width='63'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='63' height='1'></td>
-				<td valign='top' width='689'>
-					<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-						<tbody><tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='28'></td></tr>
+
+
 						<tr>
-							<td align='right' style='text-align:right;font-size:0;line-height:0'>
-								<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
+												亲爱的会员，
+<br><br>
+您好�?
+<br><br>
+由于外汇的要求严谨，请您将您的文件包括：
+<br><br>
+1�?身份证（正反面在同一页）
+<br><br>
+2�?地址证明（银�?信用卡明细单，或�?电明细单，或电话/网络明细单）
+<br><br>
+-          明细单必须清楚列明您的姓名，目前住址及最�?个月日期�?
+<br><br>
+3�?下载并签署外汇合约�?
+<br><br>
+上传给公司，否则这会影响您日后的提现�?
+<br><br>
+注：请登入http://partner.maximtrader.com，点击�?用户个人资料”将�?��文件上传给公司（点击“上传文件�?）�?
+<br><br>
+谢谢您的鼎力合作�?
+<br><br>
+祝：�?��顺利
 
-								<br>
-								<p align='justify'>
-									<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-											Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159
-<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
-<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
-<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
-									</font>
-								</p>
+												<br>
+											</font>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</td>
 						</tr>
-						<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='16'></td></tr>
-					</tbody></table>
-				</td>
-				<td style='font-size:0;line-height:0' width='48'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='48' height='1'></td>
-			</tr>
-			<tr><td colspan='3' style='font-size:0;line-height:0' bgcolor='#0080C8'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='34'></td></tr>
-		</tbody></table>";
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader</strong><br>
+									E mail : admin@maximtrader.com
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
 
         $sendMailService = new SendMailService();
-        $subject = "MaximTrader Forex Agreement 外汇合约";
+        $subject = "Maxim Partner Forex Agreement 外汇合约";
 
         $dateUtil = new DateUtil();
         $date = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -7, 0, 0));
@@ -5683,6 +5704,7 @@ Wish you all the best.
             //print_r($receiverFullName."<br>");
             $sendMailService->sendMail($receiverEmail, $receiverFullName, $subject, $body);
         }
+        //$sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body);
     }
 
     function fetchMemberWithoutUploadDocument($date) {
