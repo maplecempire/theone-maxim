@@ -16,7 +16,9 @@ class zMlmDistMt4Actions extends sfActions
 {
     public function executeIndex()
     {
+        $dateUtil = new DateUtil();
         $purchase_date = "2011-01-29 19:17:04";
+        $purchase_date = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
         $purchase_date_timestamp = strtotime($purchase_date);
         $purchase_date_3months = strtotime("+1 months", $purchase_date_timestamp);
 
