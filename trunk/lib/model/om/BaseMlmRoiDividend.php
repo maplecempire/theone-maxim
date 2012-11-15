@@ -29,6 +29,10 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 
 
 	
+	protected $first_dividend_date;
+
+
+	
 	protected $package_id;
 
 
@@ -113,6 +117,28 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 			}
 		} else {
 			$ts = $this->dividend_date;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getFirstDividendDate($format = 'Y-m-d')
+	{
+
+		if ($this->first_dividend_date === null || $this->first_dividend_date === '') {
+			return null;
+		} elseif (!is_int($this->first_dividend_date)) {
+						$ts = strtotime($this->first_dividend_date);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [first_dividend_date] as date/time value: " . var_export($this->first_dividend_date, true));
+			}
+		} else {
+			$ts = $this->first_dividend_date;
 		}
 		if ($format === null) {
 			return $ts;
@@ -310,6 +336,24 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setFirstDividendDate($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [first_dividend_date] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->first_dividend_date !== $ts) {
+			$this->first_dividend_date = $ts;
+			$this->modifiedColumns[] = MlmRoiDividendPeer::FIRST_DIVIDEND_DATE;
+		}
+
+	} 
+
+	
 	public function setPackageId($v)
 	{
 
@@ -478,31 +522,33 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 
 			$this->dividend_date = $rs->getTimestamp($startcol + 4, null);
 
-			$this->package_id = $rs->getInt($startcol + 5);
+			$this->first_dividend_date = $rs->getDate($startcol + 5, null);
 
-			$this->package_price = $rs->getFloat($startcol + 6);
+			$this->package_id = $rs->getInt($startcol + 6);
 
-			$this->roi_percentage = $rs->getFloat($startcol + 7);
+			$this->package_price = $rs->getFloat($startcol + 7);
 
-			$this->dividend_amount = $rs->getFloat($startcol + 8);
+			$this->roi_percentage = $rs->getFloat($startcol + 8);
 
-			$this->remarks = $rs->getString($startcol + 9);
+			$this->dividend_amount = $rs->getFloat($startcol + 9);
 
-			$this->status_code = $rs->getString($startcol + 10);
+			$this->remarks = $rs->getString($startcol + 10);
 
-			$this->created_by = $rs->getInt($startcol + 11);
+			$this->status_code = $rs->getString($startcol + 11);
 
-			$this->created_on = $rs->getTimestamp($startcol + 12, null);
+			$this->created_by = $rs->getInt($startcol + 12);
 
-			$this->updated_by = $rs->getInt($startcol + 13);
+			$this->created_on = $rs->getTimestamp($startcol + 13, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 14, null);
+			$this->updated_by = $rs->getInt($startcol + 14);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 15; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmRoiDividend object", $e);
 		}
@@ -663,33 +709,36 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 				return $this->getDividendDate();
 				break;
 			case 5:
-				return $this->getPackageId();
+				return $this->getFirstDividendDate();
 				break;
 			case 6:
-				return $this->getPackagePrice();
+				return $this->getPackageId();
 				break;
 			case 7:
-				return $this->getRoiPercentage();
+				return $this->getPackagePrice();
 				break;
 			case 8:
-				return $this->getDividendAmount();
+				return $this->getRoiPercentage();
 				break;
 			case 9:
-				return $this->getRemarks();
+				return $this->getDividendAmount();
 				break;
 			case 10:
-				return $this->getStatusCode();
+				return $this->getRemarks();
 				break;
 			case 11:
-				return $this->getCreatedBy();
+				return $this->getStatusCode();
 				break;
 			case 12:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 13:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 14:
+				return $this->getUpdatedBy();
+				break;
+			case 15:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -707,16 +756,17 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 			$keys[2] => $this->getIdx(),
 			$keys[3] => $this->getAccountLedgerId(),
 			$keys[4] => $this->getDividendDate(),
-			$keys[5] => $this->getPackageId(),
-			$keys[6] => $this->getPackagePrice(),
-			$keys[7] => $this->getRoiPercentage(),
-			$keys[8] => $this->getDividendAmount(),
-			$keys[9] => $this->getRemarks(),
-			$keys[10] => $this->getStatusCode(),
-			$keys[11] => $this->getCreatedBy(),
-			$keys[12] => $this->getCreatedOn(),
-			$keys[13] => $this->getUpdatedBy(),
-			$keys[14] => $this->getUpdatedOn(),
+			$keys[5] => $this->getFirstDividendDate(),
+			$keys[6] => $this->getPackageId(),
+			$keys[7] => $this->getPackagePrice(),
+			$keys[8] => $this->getRoiPercentage(),
+			$keys[9] => $this->getDividendAmount(),
+			$keys[10] => $this->getRemarks(),
+			$keys[11] => $this->getStatusCode(),
+			$keys[12] => $this->getCreatedBy(),
+			$keys[13] => $this->getCreatedOn(),
+			$keys[14] => $this->getUpdatedBy(),
+			$keys[15] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -748,33 +798,36 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 				$this->setDividendDate($value);
 				break;
 			case 5:
-				$this->setPackageId($value);
+				$this->setFirstDividendDate($value);
 				break;
 			case 6:
-				$this->setPackagePrice($value);
+				$this->setPackageId($value);
 				break;
 			case 7:
-				$this->setRoiPercentage($value);
+				$this->setPackagePrice($value);
 				break;
 			case 8:
-				$this->setDividendAmount($value);
+				$this->setRoiPercentage($value);
 				break;
 			case 9:
-				$this->setRemarks($value);
+				$this->setDividendAmount($value);
 				break;
 			case 10:
-				$this->setStatusCode($value);
+				$this->setRemarks($value);
 				break;
 			case 11:
-				$this->setCreatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 12:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 13:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 14:
+				$this->setUpdatedBy($value);
+				break;
+			case 15:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -789,16 +842,17 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setIdx($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setAccountLedgerId($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDividendDate($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setPackageId($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setPackagePrice($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setRoiPercentage($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setDividendAmount($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setRemarks($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setStatusCode($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCreatedBy($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCreatedOn($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setUpdatedBy($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setUpdatedOn($arr[$keys[14]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFirstDividendDate($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPackageId($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPackagePrice($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRoiPercentage($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setDividendAmount($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setRemarks($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setStatusCode($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
 	}
 
 	
@@ -811,6 +865,7 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmRoiDividendPeer::IDX)) $criteria->add(MlmRoiDividendPeer::IDX, $this->idx);
 		if ($this->isColumnModified(MlmRoiDividendPeer::ACCOUNT_LEDGER_ID)) $criteria->add(MlmRoiDividendPeer::ACCOUNT_LEDGER_ID, $this->account_ledger_id);
 		if ($this->isColumnModified(MlmRoiDividendPeer::DIVIDEND_DATE)) $criteria->add(MlmRoiDividendPeer::DIVIDEND_DATE, $this->dividend_date);
+		if ($this->isColumnModified(MlmRoiDividendPeer::FIRST_DIVIDEND_DATE)) $criteria->add(MlmRoiDividendPeer::FIRST_DIVIDEND_DATE, $this->first_dividend_date);
 		if ($this->isColumnModified(MlmRoiDividendPeer::PACKAGE_ID)) $criteria->add(MlmRoiDividendPeer::PACKAGE_ID, $this->package_id);
 		if ($this->isColumnModified(MlmRoiDividendPeer::PACKAGE_PRICE)) $criteria->add(MlmRoiDividendPeer::PACKAGE_PRICE, $this->package_price);
 		if ($this->isColumnModified(MlmRoiDividendPeer::ROI_PERCENTAGE)) $criteria->add(MlmRoiDividendPeer::ROI_PERCENTAGE, $this->roi_percentage);
@@ -858,6 +913,8 @@ abstract class BaseMlmRoiDividend extends BaseObject  implements Persistent {
 		$copyObj->setAccountLedgerId($this->account_ledger_id);
 
 		$copyObj->setDividendDate($this->dividend_date);
+
+		$copyObj->setFirstDividendDate($this->first_dividend_date);
 
 		$copyObj->setPackageId($this->package_id);
 

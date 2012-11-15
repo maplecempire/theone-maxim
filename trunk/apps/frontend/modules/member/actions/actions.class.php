@@ -750,13 +750,16 @@ class memberActions extends sfActions
              * ***************************************************/
             $dateUtil = new DateUtil();
             $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
-            $dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+            $currentDate_timestamp = strtotime($currentDate);
+            //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+            $dividendDate = strtotime("+1 months", $currentDate_timestamp);
 
             $mlm_roi_dividend = new MlmRoiDividend();
             $mlm_roi_dividend->setDistId($mlm_distributor->getDistributorId());
             $mlm_roi_dividend->setIdx(1);
             //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-            $mlm_roi_dividend->setDividendDate($dividendDate);
+            $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+            $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
             $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
             $mlm_roi_dividend->setPackagePrice($packagePrice);
             $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
@@ -4205,15 +4208,20 @@ class memberActions extends sfActions
 
                         if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
                             print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
-                            $currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
-                            $dividendDate = $dateUtil->addDate($currentDate2, 7, 0, 0);
+                            print_r("Idx: " . $mlmRoiDividend->getIdx() . "<br>");
+                            //$currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
+                            //$dividendDate = $dateUtil->addDate($currentDate2, 7, 0, 0);
+                            $idx = $mlmRoiDividend->getIdx() + 1;
+                            $firstDividendTime = strtotime($mlmRoiDividend->getFirstDividendDate());
+                            $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
                             print_r("DividendDate: " . $dividendDate . "<br>");
 
                             $mlm_roi_dividend = new MlmRoiDividend();
                             $mlm_roi_dividend->setDistId($mlmRoiDividend->getDistId());
-                            $mlm_roi_dividend->setIdx($mlmRoiDividend->getIdx() + 1);
+                            $mlm_roi_dividend->setIdx($idx);
                             //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-                            $mlm_roi_dividend->setDividendDate($dividendDate);
+                            $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                            $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividend->getFirstDividendDate());
                             $mlm_roi_dividend->setPackageId($mlmRoiDividend->getPackageId());
                             $mlm_roi_dividend->setPackagePrice($mlmRoiDividend->getPackagePrice());
                             $mlm_roi_dividend->setRoiPercentage($mlmRoiDividend->getRoiPercentage());
@@ -4435,13 +4443,16 @@ class memberActions extends sfActions
                  * ***************************************************/
                 $dateUtil = new DateUtil();
                 $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
-                $dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+                $currentDate_timestamp = strtotime($currentDate);
+                //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+                $dividendDate = strtotime("+1 months", $currentDate_timestamp);
 
                 $mlm_roi_dividend = new MlmRoiDividend();
                 $mlm_roi_dividend->setDistId($distId);
                 $mlm_roi_dividend->setIdx(1);
                 //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-                $mlm_roi_dividend->setDividendDate($dividendDate);
+                $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
                 $mlm_roi_dividend->setPackageId($selectedPackage->getPackageId());
                 $mlm_roi_dividend->setPackagePrice($amountNeeded);
                 $mlm_roi_dividend->setRoiPercentage($selectedPackage->getMonthlyPerformance());
