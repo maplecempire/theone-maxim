@@ -4211,14 +4211,14 @@ class memberActions extends sfActions
                             print_r("Idx: " . $mlmRoiDividend->getIdx() . "<br>");
                             //$currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
                             //$dividendDate = $dateUtil->addDate($currentDate2, 7, 0, 0);
-                            $idx = $mlmRoiDividend->getIdx() + 1;
+                            $idx = $mlmRoiDividend->getIdx();
                             $firstDividendTime = strtotime($mlmRoiDividend->getFirstDividendDate());
                             $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
                             print_r("DividendDate: " . $dividendDate . "<br>");
 
                             $mlm_roi_dividend = new MlmRoiDividend();
                             $mlm_roi_dividend->setDistId($mlmRoiDividend->getDistId());
-                            $mlm_roi_dividend->setIdx($idx);
+                            $mlm_roi_dividend->setIdx($idx + 1);
                             //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
                             $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
                             $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividend->getFirstDividendDate());
