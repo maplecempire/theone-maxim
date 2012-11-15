@@ -3545,8 +3545,10 @@ class memberActions extends sfActions
         //$processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
-            return $this->redirect('/member/ecashWithdrawal');
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
+                return $this->redirect('/member/ecashWithdrawal');
+            }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
@@ -4270,8 +4272,10 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
-            return $this->redirect('/member/convertEcashToEpoint');
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
+                return $this->redirect('/member/convertEcashToEpoint');
+            }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
@@ -5758,5 +5762,17 @@ Wish you all the best.
             $count++;
         }
         return $resultArray;
+    }
+
+    function checkIsDebitedAccount($distId) {
+        $c = new Criteria();
+
+        $c->add(MlmDebitAccountPeer::DIST_ID, $distId);
+        $debitAccountDB = MlmDebitAccountPeer::doSelectOne($c);
+
+        if ($debitAccountDB) {
+            return true;
+        }
+        return false;
     }
 }
