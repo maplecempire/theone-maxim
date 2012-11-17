@@ -35,8 +35,10 @@
         <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>">
             <div class="poptitle"><?php
                 $culture = $sf_user->getCulture();
-                if ($culture == "en" || $culture == "jp")
+                if ($culture == "en")
                     echo $announcement->getTitle();
+                else if ($culture == "jp")
+                    echo $announcement->getTitleJp();
                 else
                     echo $announcement->getTitleCn();
                 ?></div>
@@ -51,8 +53,10 @@
         </div>
         <div class="news_desc">
             <?php
-            if ($culture == "en" || $culture == "jp")
+            if ($culture == "en")
                 echo $announcement->getContent();
+            else if ($culture == "jp")
+                echo $announcement->getContentJp();
             else
                 echo $announcement->getContentCn();
             ?>
