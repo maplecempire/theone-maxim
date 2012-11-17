@@ -94,13 +94,13 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
         </li>
     </ul>
     <br class="clear"><br>
-    <ul>
-        <li class="menu_title"><?php echo __('EXCHANGE RATE'); ?></li>
+    <!--<ul>
+        <li class="menu_title"><?php /*echo __('EXCHANGE RATE'); */?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/exchange"><span><?php echo __('Exchange Rate'); ?></span></a>
+            <a href="/member/exchange"><span><?php /*echo __('Exchange Rate'); */?></span></a>
         </li>
     </ul>
-    <br class="clear"><br>
+    <br class="clear"><br>-->
     <ul>
         <li class="menu_title"><?php echo __('CONTACT'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
