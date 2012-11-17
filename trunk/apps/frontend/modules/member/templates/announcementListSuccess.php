@@ -38,10 +38,12 @@
         <div class="popinfo1">
             <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>">
                 <div class="poptitle"><?php
-                    if ($culture == "en" || $culture == "jp")
-                        echo $announcement->getTitle();
-                    else
-                        echo $announcement->getTitleCn();
+                    if ($culture == "en")
+                    echo $announcement->getTitle();
+                else if ($culture == "jp")
+                    echo $announcement->getTitleJp();
+                else
+                    echo $announcement->getTitleCn();
                     ?></div>
             </a>
 
@@ -54,8 +56,10 @@
             </div>
             <div class="news_desc">
                 <?php
-                if ($culture == "en" || $culture == "jp")
+                if ($culture == "en")
                     echo $announcement->getShortContent();
+                else if ($culture == "jp")
+                    echo $announcement->getShortContentJp();
                 else
                     echo $announcement->getShortContentCn();
                 ?>

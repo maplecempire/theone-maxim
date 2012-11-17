@@ -21,6 +21,10 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 
 
 	
+	protected $title_jp;
+
+
+	
 	protected $content;
 
 
@@ -29,11 +33,19 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 
 
 	
+	protected $content_jp;
+
+
+	
 	protected $short_content;
 
 
 	
 	protected $short_content_cn;
+
+
+	
+	protected $short_content_jp;
 
 
 	
@@ -83,6 +95,13 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getTitleJp()
+	{
+
+		return $this->title_jp;
+	}
+
+	
 	public function getContent()
 	{
 
@@ -97,6 +116,13 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getContentJp()
+	{
+
+		return $this->content_jp;
+	}
+
+	
 	public function getShortContent()
 	{
 
@@ -108,6 +134,13 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	{
 
 		return $this->short_content_cn;
+	}
+
+	
+	public function getShortContentJp()
+	{
+
+		return $this->short_content_jp;
 	}
 
 	
@@ -227,6 +260,23 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setTitleJp($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->title_jp !== $v) {
+			$this->title_jp = $v;
+			$this->modifiedColumns[] = MlmAnnouncementPeer::TITLE_JP;
+		}
+
+	} 
+
+	
 	public function setContent($v)
 	{
 
@@ -261,6 +311,23 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setContentJp($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->content_jp !== $v) {
+			$this->content_jp = $v;
+			$this->modifiedColumns[] = MlmAnnouncementPeer::CONTENT_JP;
+		}
+
+	} 
+
+	
 	public function setShortContent($v)
 	{
 
@@ -290,6 +357,23 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		if ($this->short_content_cn !== $v) {
 			$this->short_content_cn = $v;
 			$this->modifiedColumns[] = MlmAnnouncementPeer::SHORT_CONTENT_CN;
+		}
+
+	} 
+
+	
+	public function setShortContentJp($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->short_content_jp !== $v) {
+			$this->short_content_jp = $v;
+			$this->modifiedColumns[] = MlmAnnouncementPeer::SHORT_CONTENT_JP;
 		}
 
 	} 
@@ -392,29 +476,35 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 
 			$this->title_cn = $rs->getString($startcol + 2);
 
-			$this->content = $rs->getString($startcol + 3);
+			$this->title_jp = $rs->getString($startcol + 3);
 
-			$this->content_cn = $rs->getString($startcol + 4);
+			$this->content = $rs->getString($startcol + 4);
 
-			$this->short_content = $rs->getString($startcol + 5);
+			$this->content_cn = $rs->getString($startcol + 5);
 
-			$this->short_content_cn = $rs->getString($startcol + 6);
+			$this->content_jp = $rs->getString($startcol + 6);
 
-			$this->status_code = $rs->getString($startcol + 7);
+			$this->short_content = $rs->getString($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->short_content_cn = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->short_content_jp = $rs->getString($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->status_code = $rs->getString($startcol + 10);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->created_by = $rs->getInt($startcol + 11);
+
+			$this->created_on = $rs->getTimestamp($startcol + 12, null);
+
+			$this->updated_by = $rs->getInt($startcol + 13);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 14, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 15; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmAnnouncement object", $e);
 		}
@@ -569,30 +659,39 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 				return $this->getTitleCn();
 				break;
 			case 3:
-				return $this->getContent();
+				return $this->getTitleJp();
 				break;
 			case 4:
-				return $this->getContentCn();
+				return $this->getContent();
 				break;
 			case 5:
-				return $this->getShortContent();
+				return $this->getContentCn();
 				break;
 			case 6:
-				return $this->getShortContentCn();
+				return $this->getContentJp();
 				break;
 			case 7:
-				return $this->getStatusCode();
+				return $this->getShortContent();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getShortContentCn();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getShortContentJp();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getStatusCode();
 				break;
 			case 11:
+				return $this->getCreatedBy();
+				break;
+			case 12:
+				return $this->getCreatedOn();
+				break;
+			case 13:
+				return $this->getUpdatedBy();
+				break;
+			case 14:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -608,15 +707,18 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 			$keys[0] => $this->getAnnouncementId(),
 			$keys[1] => $this->getTitle(),
 			$keys[2] => $this->getTitleCn(),
-			$keys[3] => $this->getContent(),
-			$keys[4] => $this->getContentCn(),
-			$keys[5] => $this->getShortContent(),
-			$keys[6] => $this->getShortContentCn(),
-			$keys[7] => $this->getStatusCode(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[3] => $this->getTitleJp(),
+			$keys[4] => $this->getContent(),
+			$keys[5] => $this->getContentCn(),
+			$keys[6] => $this->getContentJp(),
+			$keys[7] => $this->getShortContent(),
+			$keys[8] => $this->getShortContentCn(),
+			$keys[9] => $this->getShortContentJp(),
+			$keys[10] => $this->getStatusCode(),
+			$keys[11] => $this->getCreatedBy(),
+			$keys[12] => $this->getCreatedOn(),
+			$keys[13] => $this->getUpdatedBy(),
+			$keys[14] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -642,30 +744,39 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 				$this->setTitleCn($value);
 				break;
 			case 3:
-				$this->setContent($value);
+				$this->setTitleJp($value);
 				break;
 			case 4:
-				$this->setContentCn($value);
+				$this->setContent($value);
 				break;
 			case 5:
-				$this->setShortContent($value);
+				$this->setContentCn($value);
 				break;
 			case 6:
-				$this->setShortContentCn($value);
+				$this->setContentJp($value);
 				break;
 			case 7:
-				$this->setStatusCode($value);
+				$this->setShortContent($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setShortContentCn($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setShortContentJp($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 11:
+				$this->setCreatedBy($value);
+				break;
+			case 12:
+				$this->setCreatedOn($value);
+				break;
+			case 13:
+				$this->setUpdatedBy($value);
+				break;
+			case 14:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -678,15 +789,18 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setAnnouncementId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setTitleCn($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setContent($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setContentCn($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setShortContent($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setShortContentCn($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setStatusCode($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[3], $arr)) $this->setTitleJp($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setContent($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setContentCn($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setContentJp($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setShortContent($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setShortContentCn($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setShortContentJp($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStatusCode($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCreatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedOn($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setUpdatedBy($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedOn($arr[$keys[14]]);
 	}
 
 	
@@ -697,10 +811,13 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmAnnouncementPeer::ANNOUNCEMENT_ID)) $criteria->add(MlmAnnouncementPeer::ANNOUNCEMENT_ID, $this->announcement_id);
 		if ($this->isColumnModified(MlmAnnouncementPeer::TITLE)) $criteria->add(MlmAnnouncementPeer::TITLE, $this->title);
 		if ($this->isColumnModified(MlmAnnouncementPeer::TITLE_CN)) $criteria->add(MlmAnnouncementPeer::TITLE_CN, $this->title_cn);
+		if ($this->isColumnModified(MlmAnnouncementPeer::TITLE_JP)) $criteria->add(MlmAnnouncementPeer::TITLE_JP, $this->title_jp);
 		if ($this->isColumnModified(MlmAnnouncementPeer::CONTENT)) $criteria->add(MlmAnnouncementPeer::CONTENT, $this->content);
 		if ($this->isColumnModified(MlmAnnouncementPeer::CONTENT_CN)) $criteria->add(MlmAnnouncementPeer::CONTENT_CN, $this->content_cn);
+		if ($this->isColumnModified(MlmAnnouncementPeer::CONTENT_JP)) $criteria->add(MlmAnnouncementPeer::CONTENT_JP, $this->content_jp);
 		if ($this->isColumnModified(MlmAnnouncementPeer::SHORT_CONTENT)) $criteria->add(MlmAnnouncementPeer::SHORT_CONTENT, $this->short_content);
 		if ($this->isColumnModified(MlmAnnouncementPeer::SHORT_CONTENT_CN)) $criteria->add(MlmAnnouncementPeer::SHORT_CONTENT_CN, $this->short_content_cn);
+		if ($this->isColumnModified(MlmAnnouncementPeer::SHORT_CONTENT_JP)) $criteria->add(MlmAnnouncementPeer::SHORT_CONTENT_JP, $this->short_content_jp);
 		if ($this->isColumnModified(MlmAnnouncementPeer::STATUS_CODE)) $criteria->add(MlmAnnouncementPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmAnnouncementPeer::CREATED_BY)) $criteria->add(MlmAnnouncementPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmAnnouncementPeer::CREATED_ON)) $criteria->add(MlmAnnouncementPeer::CREATED_ON, $this->created_on);
@@ -740,13 +857,19 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 
 		$copyObj->setTitleCn($this->title_cn);
 
+		$copyObj->setTitleJp($this->title_jp);
+
 		$copyObj->setContent($this->content);
 
 		$copyObj->setContentCn($this->content_cn);
 
+		$copyObj->setContentJp($this->content_jp);
+
 		$copyObj->setShortContent($this->short_content);
 
 		$copyObj->setShortContentCn($this->short_content_cn);
+
+		$copyObj->setShortContentJp($this->short_content_jp);
 
 		$copyObj->setStatusCode($this->status_code);
 

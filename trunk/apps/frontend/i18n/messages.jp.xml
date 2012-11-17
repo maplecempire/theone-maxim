@@ -652,6 +652,115 @@
             <trans-unit><source>Upgrade Package</source><target>パッケージをアップグレードする</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>レコードのテーブルをサポートしているアップグレードするには</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>取引記号</target></trans-unit>
+            <trans-unit><source>Downline Stats</source><target>下线统计简介</target></trans-unit>
+            <trans-unit><source>Placement Genealogy</source><target>安置组织图</target></trans-unit>
+            <trans-unit><source>Sponsor Genealogy</source><target>直推组织图</target></trans-unit>
+            <trans-unit><source>Accumulate Group BV</source><target>小组累积业绩</target></trans-unit>
+            <trans-unit><source>Today Group BV</source><target>今日小组业绩</target></trans-unit>
+            <trans-unit><source>Carry Forward</source><target>对碰余额</target></trans-unit>
+            <trans-unit><source>Today Total Group BV</source><target>今日小组总业绩</target></trans-unit>
+            <trans-unit><source>USD</source><target>美金</target></trans-unit>
+            <trans-unit><source>NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</source><target>注：CP1只能用来收购配套，配套升级和充值MT4帐户。CP1是不能兑现的。</target></trans-unit>
+            <trans-unit><source>Commission Details</source><target>奖金收益</target></trans-unit>
+            <trans-unit><source>Commission Categories</source><target>奖金总结</target></trans-unit>
+            <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4户口没有余额。</target></trans-unit>
+            <trans-unit><source>Direct Referral Bonus</source><target>直推奖金</target></trans-unit>
+            <trans-unit><source>Pairing Bonus</source><target>配对奖金</target></trans-unit>
+            <trans-unit><source>Generation Bonus</source><target>代数奖金</target></trans-unit>
+            <trans-unit><source>Pips Rebate</source><target>点数回赠</target></trans-unit>
+            <trans-unit><source>January</source><target>一月</target></trans-unit>
+            <trans-unit><source>February</source><target>二月</target></trans-unit>
+            <trans-unit><source>March</source><target>三月</target></trans-unit>
+            <trans-unit><source>April</source><target>四月</target></trans-unit>
+            <trans-unit><source>May</source><target>五月</target></trans-unit>
+            <trans-unit><source>June</source><target>六月</target></trans-unit>
+            <trans-unit><source>July</source><target>七月</target></trans-unit>
+            <trans-unit><source>August</source><target>八月</target></trans-unit>
+            <trans-unit><source>September</source><target>九月</target></trans-unit>
+            <trans-unit><source>October</source><target>十月</target></trans-unit>
+            <trans-unit><source>November</source><target>十一月</target></trans-unit>
+            <trans-unit><source>December</source><target>十二月</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Chinese)</source><target>点击下载：每日外汇指南（中文）</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (English)</source><target>点击下载：每日外汇指南（英文）</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Japanese)</source><target>点击下载：每日外汇指南（日文）</target></trans-unit>
+            <trans-unit><source>Download MT4 (Standard)</source><target>下载MT4平台（普通版）</target></trans-unit>
+            <trans-unit><source>Download MT4 Pro</source><target>下载MT4平台（专业版）</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 (Standard)</source><target>下载MT4平台（普通版）</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro</source><target>下载MT4平台（专业版）</target></trans-unit>
+            <trans-unit><source>The popular platform MetaTrader 4 can now be used for professional trading.</source><target>广受欢迎的MetaTrader 4平台，现在可以使用专业版来做交易。</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro User Guide</source><target>点击下载MT4专业版指南</target></trans-unit>
+            <trans-unit><source>Meta Trader 4 (MT4) is one of the best Forex trading platforms in the world with its advanced charting package and user-friendly interface, MT4 is ideal for traders whatever your experience.</source><target>MT4是世界最好的外汇交易平台，凭借其先进的图表工具和友好的用户界面，让你体验快捷方便的外汇交易平台</target></trans-unit>
+            <trans-unit><source>OFX Trader Academy Accounts Team</source><target>OFX 交易学院帐户小组</target></trans-unit>
+            <trans-unit><source>Welcome to OFX Trader Academy</source><target>欢迎来到OFX 交易学院</target></trans-unit>
+            <trans-unit><source>OFX Trader Academy Accounts Team Chinese</source><target>OFX 交易学院帐户小组 OFX Trader Academy Accounts Team</target></trans-unit>
+            <trans-unit><source>CP1 Statement</source><target>CP1声明</target></trans-unit>
+            <trans-unit><source>CP2 Statement</source><target>CP2声明</target></trans-unit>
+            <trans-unit><source>CP3 Statement</source><target>CP3声明</target></trans-unit>
+            <trans-unit><source>CP2 Withdrawal</source><target>CP2兑现</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal</source><target>MT4兑现</target></trans-unit>
+            <trans-unit><source>CP1 Amount</source><target>CP1金额</target></trans-unit>
+            <trans-unit><source>CP1 Balance</source><target>CP1金额</target></trans-unit>
+            <trans-unit><source>Transfer To Trader ID</source><target>转让给会员ID</target></trans-unit>
+            <trans-unit><source>Transfer CP1 Amount</source><target>转让CP1金额</target></trans-unit>
+            <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal Status</source><target>MT4兑现状态</target></trans-unit>
+            <trans-unit><source>CP2 Withdrawal Status</source><target>CP2兑现状态</target></trans-unit>
+            <trans-unit><source>Amount Requested (USD)</source><target>兑现数额（美金）</target></trans-unit>
+            <trans-unit><source>NOTE : Minimum withdrawal amount : USD 100</source><target>注：兑现数额不能少过100美金</target></trans-unit>
+            <trans-unit><source>NOTE : Minimum withdrawal amount : USD 200</source><target>注：兑现数额不能少过200美金</target></trans-unit>
+            <trans-unit><source>Can only be withdrawn on the first working week of the month</source><target>兑现只能在每个月的第一个星期</target></trans-unit>
+            <trans-unit><source>Processing time : 2 working days</source><target>处理时间：2个工作日</target></trans-unit>
+            <trans-unit><source>CP2 Balance</source><target>CP2余额</target></trans-unit>
+            <trans-unit><source>CP2 Withdrawal Amount</source><target>CP2兑现金额</target></trans-unit>
+            <trans-unit><source>After 5% handling fee</source><target>附加5％的手续费</target></trans-unit>
+            <trans-unit><source>Deduct Amount</source><target>扣除总金额</target></trans-unit>
+            <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议以签订配套。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
+            <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
+            <trans-unit><source>Sign up</source><target>签订</target></trans-unit>
+            <trans-unit><source>OFX Accumulator statement</source><target>OFX累加器声明</target></trans-unit>
+            <trans-unit><source>Download OFX Accumulator statement</source><target>下载OFX累加器声明</target></trans-unit>
+            <trans-unit><source>Referrer and Placement Position</source><target>推荐人和按置的位置</target></trans-unit>
+            <trans-unit><source>Placement Type</source><target>按置</target></trans-unit>
+            <trans-unit><source>Auto</source><target>自动</target></trans-unit>
+            <trans-unit><source>Auto Placement</source><target>自动按置</target></trans-unit>
+            <trans-unit><source>Account Login Details</source><target>户口登录配置</target></trans-unit>
+            <trans-unit><source>Search By Username</source><target>搜索用户名</target></trans-unit>
+            <trans-unit><source>Genealogy for your Trader ID</source><target>您的团队架购图户口</target></trans-unit>
+            <trans-unit><source>I understand that as an OfxTrader customer, it is my responsibility to review all necessary information about currency trading and the OfxTrader</source><target>我同意作为OfxTrader客户的责任是检讨有关外汇交易的所有必要的信息和OfxTrader的</target></trans-unit>
+            <trans-unit><source>Existing Users Login</source><target>会员登入</target></trans-unit>
+            <trans-unit><source>Great day, Trader!</source><target>您好！</target></trans-unit>
+            <trans-unit><source>Email us</source><target>电邮我们</target></trans-unit>
+            <trans-unit><source>Hello</source><target>您好</target></trans-unit>
+            <trans-unit><source>ACTIVE</source><target>激活</target></trans-unit>
+            <trans-unit><source>INACTIVE</source><target>未激活</target></trans-unit>
+            <trans-unit><source>Joined</source><target>加入于</target></trans-unit>
+            <trans-unit><source>Bank Information Detail</source><target>银行详细资料</target></trans-unit>
+            <trans-unit><source>Payment Reference</source><target>付款参考号码</target></trans-unit>
+            <trans-unit><source>Upload Bank Receipt</source><target>上传银行收据</target></trans-unit>
+            <trans-unit><source>Deposit Amount</source><target>存款金额</target></trans-unit>
+            <trans-unit><source>Bank Swift Code</source><target>银行代码</target></trans-unit>
+            <trans-unit><source>Bank Account Holder</source><target>银行账户持有人</target></trans-unit>
+            <trans-unit><source>City of Bank</source><target>银行所在城市</target></trans-unit>
+            <trans-unit><source>Print</source><target>打印</target></trans-unit>
+            <trans-unit><source>Country of Bank</source><target>银行所在国家</target></trans-unit>
+            <trans-unit><source>Trading Currency on MT4</source><target>MT4交易货币</target></trans-unit>
+            <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says NO. KERETA / CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
+            <trans-unit><source>Invalid username or password.</source><target>会员ID和密码不正确</target></trans-unit>
+            <trans-unit><source>The CAPTCHA wasn't entered correctly. Go back and try it again.</source><target>验证码输入不正确。回去再试一次。</target></trans-unit>
+            <trans-unit><source>This content is restricted to site members. If you are an existing user, please login. New users may register below.</source><target>此内容仅限于网站成员。如果您已是我们的会员，请登录。新用户可以注册。</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:</source><target>您的存款请求已提交成功，请继续进行汇款支付的帐户，详情如下表所示：</target></trans-unit>
+            <trans-unit><source>Contact Number / Email</source><target>联络号码/电邮</target></trans-unit>
+            <trans-unit><source>Subject</source><target>咨询要题</target></trans-unit>
+            <trans-unit><source>Inquiry Status</source><target>咨询状态</target></trans-unit>
+            <trans-unit><source>Progress</source><target>进度</target></trans-unit>
+            <trans-unit><source>Last Reply</source><target>最新回复</target></trans-unit>
+            <trans-unit><source>Latest News</source><target>最新消息</target></trans-unit>
+            <trans-unit><source>CLOSE</source><target>关闭</target></trans-unit>
+            <trans-unit><source>Withdraw</source><target>兑现</target></trans-unit>
+            <trans-unit><source>Purchase</source><target>购买</target></trans-unit>
+            <trans-unit><source>Back to announcement list</source><target>回到発表</target></trans-unit>
+            <trans-unit><source>Announcement List</source><target>発表</target></trans-unit>
+            <trans-unit><source>ANNOUNCEMENT</source><target>発表</target></trans-unit>
         </body>
     </file>
 </xliff>

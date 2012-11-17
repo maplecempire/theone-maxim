@@ -13,7 +13,7 @@ abstract class BaseMlmAnnouncementPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmAnnouncement';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,16 +29,25 @@ abstract class BaseMlmAnnouncementPeer {
 	const TITLE_CN = 'mlm_announcement.TITLE_CN';
 
 	
+	const TITLE_JP = 'mlm_announcement.TITLE_JP';
+
+	
 	const CONTENT = 'mlm_announcement.CONTENT';
 
 	
 	const CONTENT_CN = 'mlm_announcement.CONTENT_CN';
 
 	
+	const CONTENT_JP = 'mlm_announcement.CONTENT_JP';
+
+	
 	const SHORT_CONTENT = 'mlm_announcement.SHORT_CONTENT';
 
 	
 	const SHORT_CONTENT_CN = 'mlm_announcement.SHORT_CONTENT_CN';
+
+	
+	const SHORT_CONTENT_JP = 'mlm_announcement.SHORT_CONTENT_JP';
 
 	
 	const STATUS_CODE = 'mlm_announcement.STATUS_CODE';
@@ -61,18 +70,18 @@ abstract class BaseMlmAnnouncementPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('AnnouncementId', 'Title', 'TitleCn', 'Content', 'ContentCn', 'ShortContent', 'ShortContentCn', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID, MlmAnnouncementPeer::TITLE, MlmAnnouncementPeer::TITLE_CN, MlmAnnouncementPeer::CONTENT, MlmAnnouncementPeer::CONTENT_CN, MlmAnnouncementPeer::SHORT_CONTENT, MlmAnnouncementPeer::SHORT_CONTENT_CN, MlmAnnouncementPeer::STATUS_CODE, MlmAnnouncementPeer::CREATED_BY, MlmAnnouncementPeer::CREATED_ON, MlmAnnouncementPeer::UPDATED_BY, MlmAnnouncementPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('announcement_id', 'title', 'title_cn', 'content', 'content_cn', 'short_content', 'short_content_cn', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('AnnouncementId', 'Title', 'TitleCn', 'TitleJp', 'Content', 'ContentCn', 'ContentJp', 'ShortContent', 'ShortContentCn', 'ShortContentJp', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID, MlmAnnouncementPeer::TITLE, MlmAnnouncementPeer::TITLE_CN, MlmAnnouncementPeer::TITLE_JP, MlmAnnouncementPeer::CONTENT, MlmAnnouncementPeer::CONTENT_CN, MlmAnnouncementPeer::CONTENT_JP, MlmAnnouncementPeer::SHORT_CONTENT, MlmAnnouncementPeer::SHORT_CONTENT_CN, MlmAnnouncementPeer::SHORT_CONTENT_JP, MlmAnnouncementPeer::STATUS_CODE, MlmAnnouncementPeer::CREATED_BY, MlmAnnouncementPeer::CREATED_ON, MlmAnnouncementPeer::UPDATED_BY, MlmAnnouncementPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('announcement_id', 'title', 'title_cn', 'title_jp', 'content', 'content_cn', 'content_jp', 'short_content', 'short_content_cn', 'short_content_jp', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('AnnouncementId' => 0, 'Title' => 1, 'TitleCn' => 2, 'Content' => 3, 'ContentCn' => 4, 'ShortContent' => 5, 'ShortContentCn' => 6, 'StatusCode' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID => 0, MlmAnnouncementPeer::TITLE => 1, MlmAnnouncementPeer::TITLE_CN => 2, MlmAnnouncementPeer::CONTENT => 3, MlmAnnouncementPeer::CONTENT_CN => 4, MlmAnnouncementPeer::SHORT_CONTENT => 5, MlmAnnouncementPeer::SHORT_CONTENT_CN => 6, MlmAnnouncementPeer::STATUS_CODE => 7, MlmAnnouncementPeer::CREATED_BY => 8, MlmAnnouncementPeer::CREATED_ON => 9, MlmAnnouncementPeer::UPDATED_BY => 10, MlmAnnouncementPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('announcement_id' => 0, 'title' => 1, 'title_cn' => 2, 'content' => 3, 'content_cn' => 4, 'short_content' => 5, 'short_content_cn' => 6, 'status_code' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('AnnouncementId' => 0, 'Title' => 1, 'TitleCn' => 2, 'TitleJp' => 3, 'Content' => 4, 'ContentCn' => 5, 'ContentJp' => 6, 'ShortContent' => 7, 'ShortContentCn' => 8, 'ShortContentJp' => 9, 'StatusCode' => 10, 'CreatedBy' => 11, 'CreatedOn' => 12, 'UpdatedBy' => 13, 'UpdatedOn' => 14, ),
+		BasePeer::TYPE_COLNAME => array (MlmAnnouncementPeer::ANNOUNCEMENT_ID => 0, MlmAnnouncementPeer::TITLE => 1, MlmAnnouncementPeer::TITLE_CN => 2, MlmAnnouncementPeer::TITLE_JP => 3, MlmAnnouncementPeer::CONTENT => 4, MlmAnnouncementPeer::CONTENT_CN => 5, MlmAnnouncementPeer::CONTENT_JP => 6, MlmAnnouncementPeer::SHORT_CONTENT => 7, MlmAnnouncementPeer::SHORT_CONTENT_CN => 8, MlmAnnouncementPeer::SHORT_CONTENT_JP => 9, MlmAnnouncementPeer::STATUS_CODE => 10, MlmAnnouncementPeer::CREATED_BY => 11, MlmAnnouncementPeer::CREATED_ON => 12, MlmAnnouncementPeer::UPDATED_BY => 13, MlmAnnouncementPeer::UPDATED_ON => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('announcement_id' => 0, 'title' => 1, 'title_cn' => 2, 'title_jp' => 3, 'content' => 4, 'content_cn' => 5, 'content_jp' => 6, 'short_content' => 7, 'short_content_cn' => 8, 'short_content_jp' => 9, 'status_code' => 10, 'created_by' => 11, 'created_on' => 12, 'updated_by' => 13, 'updated_on' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -132,13 +141,19 @@ abstract class BaseMlmAnnouncementPeer {
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::TITLE_CN);
 
+		$criteria->addSelectColumn(MlmAnnouncementPeer::TITLE_JP);
+
 		$criteria->addSelectColumn(MlmAnnouncementPeer::CONTENT);
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::CONTENT_CN);
 
+		$criteria->addSelectColumn(MlmAnnouncementPeer::CONTENT_JP);
+
 		$criteria->addSelectColumn(MlmAnnouncementPeer::SHORT_CONTENT);
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::SHORT_CONTENT_CN);
+
+		$criteria->addSelectColumn(MlmAnnouncementPeer::SHORT_CONTENT_JP);
 
 		$criteria->addSelectColumn(MlmAnnouncementPeer::STATUS_CODE);
 
