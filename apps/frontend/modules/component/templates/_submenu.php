@@ -140,5 +140,10 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
     <?php } ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/download/downloadVideo") ?>"><span><?php echo __('Download Video'); ?></span></a>
+        </li>
+    <?php } ?>
     </ul>
 </div>

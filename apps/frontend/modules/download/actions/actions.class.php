@@ -26,6 +26,10 @@ class downloadActions extends sfActions
     public function executeDownloadFxGuide()
     {
     }
+    public function executeDownloadVideo()
+    {
+
+    }
     public function executeDownloadMt4Pro()
     {
         $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
