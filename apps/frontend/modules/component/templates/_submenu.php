@@ -33,7 +33,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
             <a href="<?php echo url_for("/member/epointPurchase")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
         </li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
             <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
         </li>
     <?php } ?>
