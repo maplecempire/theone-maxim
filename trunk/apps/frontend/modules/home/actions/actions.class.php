@@ -10,6 +10,26 @@
  */
 class homeActions extends sfActions
 {
+    public function executeMemberRegistration()
+    {
+
+    }
+    public function executeDoMemberRegistration()
+    {
+
+        $mlmMemberApplication = new MlmMemberApplication();
+        $mlmMemberApplication->setFullName($this->getRequestParameter('fullname'));
+        $mlmMemberApplication->setEmail($this->getRequestParameter('email'));
+        $mlmMemberApplication->setContact($this->getRequestParameter('contactNumber'));
+        $mlmMemberApplication->setQq($this->getRequestParameter('qq'));
+        $mlmMemberApplication->setStatusCode(Globals::STATUS_ACTIVE);
+        $mlmMemberApplication->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmMemberApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmMemberApplication->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+        return $this->redirect('/home/memberRegistration');
+    }
     /* ***********************************************************************
      *    ~ HTML ~
      * **********************************************************************/

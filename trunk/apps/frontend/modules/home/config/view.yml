@@ -34,6 +34,10 @@ maximExecutorSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+memberRegistrationSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 loginSuccess:
   has_layout:     off
   stylesheets: 	  []
