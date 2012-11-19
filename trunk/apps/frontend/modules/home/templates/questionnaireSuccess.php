@@ -195,10 +195,10 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
         <li class="menu_title"><?php echo __('CONTACT US'); ?></li>
         <li>
 <!--            <a href="/home/memberRegistration"><span>--><?php //echo __('Contact us if you want to know more'); ?><!--</span></a>-->
-            <span style="color: #0080C8;"><?php echo __('Contact us if you want to know more'); ?>
+            <!--<span style="color: #0080C8;"><?php /*echo __('Contact us if you want to know more'); */?>
             <br>Skype: alvinang8833
             <br>QQ: 1049052315
-            </span>
+            </span>-->
         </li>
     </ul>
 </div>
