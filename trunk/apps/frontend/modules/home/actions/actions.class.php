@@ -10,6 +10,26 @@
  */
 class homeActions extends sfActions
 {
+    public function executeDoSubmitQuestionnaire()
+    {
+        $mlmMemberQuestionnair = new MlmMemberQuestionnaire();
+        $mlmMemberQuestionnair->setMemberId($this->getRequestParameter('memberId'));
+        $mlmMemberQuestionnair->setQ1($this->getRequestParameter('q1'));
+        $mlmMemberQuestionnair->setQ2($this->getRequestParameter('q2'));
+        $mlmMemberQuestionnair->setQ3($this->getRequestParameter('q3'));
+        $mlmMemberQuestionnair->setQ4($this->getRequestParameter('q4'));
+        $mlmMemberQuestionnair->setQ5($this->getRequestParameter('q5'));
+        $mlmMemberQuestionnair->setQ6($this->getRequestParameter('q6'));
+        $mlmMemberQuestionnair->setQ7($this->getRequestParameter('q7'));
+        $mlmMemberQuestionnair->setQ8($this->getRequestParameter('q8'));
+        $mlmMemberQuestionnair->setS1($this->getRequestParameter('s1'));
+        $mlmMemberQuestionnair->setS2($this->getRequestParameter('s2'));
+        $mlmMemberQuestionnair->setS3($this->getRequestParameter('s3'));
+        $mlmMemberQuestionnair->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Thank you for the submission. Have a good day!"));
+        return $this->redirect('/home/memberRegistration');
+    }
     public function executeQuestionnaire()
     {
 
@@ -20,7 +40,6 @@ class homeActions extends sfActions
     }
     public function executeDoMemberRegistration()
     {
-
         $mlmMemberApplication = new MlmMemberApplication();
         $mlmMemberApplication->setFullName($this->getRequestParameter('fullname'));
         $mlmMemberApplication->setEmail($this->getRequestParameter('email'));
@@ -35,7 +54,10 @@ class homeActions extends sfActions
         $mlmMemberApplication->save();
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your application submit successfully. We will call u back in the soonest time."));
-        return $this->redirect('/home/memberRegistration');
+
+        $this->memberId = $mlmMemberApplication->getMemberId();
+        $this->setTemplate("questionnaire");
+        //return $this->redirect('/home/questionnaire');
     }
     /* ***********************************************************************
      *    ~ HTML ~
