@@ -232,6 +232,12 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 
     <script type="text/javascript">
 $(function() {
+    $.populateDOB({
+        dobYear : $("#dob_year")
+        ,dobMonth : $("#dob_month")
+        ,dobDay : $("#dob_day")
+        ,dobFull : $("#dob")
+    });
     $("#registerForm").validate({
         messages : {
 
@@ -381,6 +387,18 @@ $(function() {
         <td>
             <?php include_component('component', 'countrySelectOption', array('countrySelected' => "China (PRC)", 'countryName' => 'country', 'countryId' => 'country')) ?>
             &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Date of Birth') ?></td>
+        <td>
+            <select id="dob_year"></select>
+            <select id="dob_month"></select>
+            <select id="dob_day"></select>
+            <input name="dob" readonly="readonly" type="hidden" id="dob" class="bp_05"/>
         </td>
         <td>&nbsp;</td>
     </tr>

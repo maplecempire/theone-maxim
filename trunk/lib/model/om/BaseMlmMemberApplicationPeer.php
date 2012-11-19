@@ -13,7 +13,7 @@ abstract class BaseMlmMemberApplicationPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmMemberApplication';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseMlmMemberApplicationPeer {
 	const COUNTRY = 'mlm_member_application.COUNTRY';
 
 	
+	const DOB = 'mlm_member_application.DOB';
+
+	
 	const STATUS_CODE = 'mlm_member_application.STATUS_CODE';
 
 	
@@ -61,18 +64,18 @@ abstract class BaseMlmMemberApplicationPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('MemberId', 'FullName', 'Email', 'Contact', 'Qq', 'Gender', 'Country', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmMemberApplicationPeer::MEMBER_ID, MlmMemberApplicationPeer::FULL_NAME, MlmMemberApplicationPeer::EMAIL, MlmMemberApplicationPeer::CONTACT, MlmMemberApplicationPeer::QQ, MlmMemberApplicationPeer::GENDER, MlmMemberApplicationPeer::COUNTRY, MlmMemberApplicationPeer::STATUS_CODE, MlmMemberApplicationPeer::CREATED_BY, MlmMemberApplicationPeer::CREATED_ON, MlmMemberApplicationPeer::UPDATED_BY, MlmMemberApplicationPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('member_id', 'full_name', 'email', 'contact', 'qq', 'gender', 'country', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('MemberId', 'FullName', 'Email', 'Contact', 'Qq', 'Gender', 'Country', 'Dob', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmMemberApplicationPeer::MEMBER_ID, MlmMemberApplicationPeer::FULL_NAME, MlmMemberApplicationPeer::EMAIL, MlmMemberApplicationPeer::CONTACT, MlmMemberApplicationPeer::QQ, MlmMemberApplicationPeer::GENDER, MlmMemberApplicationPeer::COUNTRY, MlmMemberApplicationPeer::DOB, MlmMemberApplicationPeer::STATUS_CODE, MlmMemberApplicationPeer::CREATED_BY, MlmMemberApplicationPeer::CREATED_ON, MlmMemberApplicationPeer::UPDATED_BY, MlmMemberApplicationPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('member_id', 'full_name', 'email', 'contact', 'qq', 'gender', 'country', 'dob', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('MemberId' => 0, 'FullName' => 1, 'Email' => 2, 'Contact' => 3, 'Qq' => 4, 'Gender' => 5, 'Country' => 6, 'StatusCode' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmMemberApplicationPeer::MEMBER_ID => 0, MlmMemberApplicationPeer::FULL_NAME => 1, MlmMemberApplicationPeer::EMAIL => 2, MlmMemberApplicationPeer::CONTACT => 3, MlmMemberApplicationPeer::QQ => 4, MlmMemberApplicationPeer::GENDER => 5, MlmMemberApplicationPeer::COUNTRY => 6, MlmMemberApplicationPeer::STATUS_CODE => 7, MlmMemberApplicationPeer::CREATED_BY => 8, MlmMemberApplicationPeer::CREATED_ON => 9, MlmMemberApplicationPeer::UPDATED_BY => 10, MlmMemberApplicationPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('member_id' => 0, 'full_name' => 1, 'email' => 2, 'contact' => 3, 'qq' => 4, 'gender' => 5, 'country' => 6, 'status_code' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('MemberId' => 0, 'FullName' => 1, 'Email' => 2, 'Contact' => 3, 'Qq' => 4, 'Gender' => 5, 'Country' => 6, 'Dob' => 7, 'StatusCode' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, ),
+		BasePeer::TYPE_COLNAME => array (MlmMemberApplicationPeer::MEMBER_ID => 0, MlmMemberApplicationPeer::FULL_NAME => 1, MlmMemberApplicationPeer::EMAIL => 2, MlmMemberApplicationPeer::CONTACT => 3, MlmMemberApplicationPeer::QQ => 4, MlmMemberApplicationPeer::GENDER => 5, MlmMemberApplicationPeer::COUNTRY => 6, MlmMemberApplicationPeer::DOB => 7, MlmMemberApplicationPeer::STATUS_CODE => 8, MlmMemberApplicationPeer::CREATED_BY => 9, MlmMemberApplicationPeer::CREATED_ON => 10, MlmMemberApplicationPeer::UPDATED_BY => 11, MlmMemberApplicationPeer::UPDATED_ON => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('member_id' => 0, 'full_name' => 1, 'email' => 2, 'contact' => 3, 'qq' => 4, 'gender' => 5, 'country' => 6, 'dob' => 7, 'status_code' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -139,6 +142,8 @@ abstract class BaseMlmMemberApplicationPeer {
 		$criteria->addSelectColumn(MlmMemberApplicationPeer::GENDER);
 
 		$criteria->addSelectColumn(MlmMemberApplicationPeer::COUNTRY);
+
+		$criteria->addSelectColumn(MlmMemberApplicationPeer::DOB);
 
 		$criteria->addSelectColumn(MlmMemberApplicationPeer::STATUS_CODE);
 

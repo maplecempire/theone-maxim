@@ -46,6 +46,8 @@ class MlmMemberApplicationMapBuilder {
 
 		$tMap->addColumn('COUNTRY', 'Country', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('DOB', 'Dob', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 30);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
