@@ -766,6 +766,7 @@
             <trans-unit><source>Please fill up the personal information, We will call you back in the soonest time</source><target>请您留下您的联络方式，我们的服务员将会联络您</target></trans-unit>
             <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
             <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
+            <trans-unit><source>Thank you for the submission. Have a good day!</source><target>感谢您的合作，愿你有一个美好的一天！</target></trans-unit>
             <trans-unit><source>Your application submit successfully. We will call u back in the soonest time.</source><target>您的资料提交成功，我们的服务员将会在最短的时间内联络您。</target></trans-unit>
         </body>
     </file>

@@ -256,7 +256,7 @@ $(function() {
 </script>
 
 <form action="/home/doSubmitQuestionnaire" id="registerForm" method="post">
-
+<input type="hidden" name="memberId" id="memberId" value="<?php echo $memberId;?>">
 <table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">
@@ -403,32 +403,33 @@ $(function() {
                 echo $idx++;
                 ?></td>
             <td align="left">
-                We (One-World) will contact you for any good opportunity of investment in the future, what method you prefer us to contact you?
-                <br>如有任何好的外汇投资项目，我们一合金融集团将会联系您，您想我们用什么方式联系您？
-                <br>i. email 邮寄联系
-                <br>ii. QQ
-                <br>iii. Direct Call 播电话给您 (if choice iii, pls answer below question 如您选择 iii,请您继续回答以下问题)
+                We (Maxim Trader) will contact you for any good opportunity of investment in the future, what method you prefer us to contact you?
+                <br>如有任何好的外汇投资项目，我们马胜金融集团将会联系您，您想我们用什么方式联系您？
+                <br><br><input type="radio" name="s1" value="email" id="s1email">i. email 邮寄联系
+                <br><input type="radio" name="s1" value="qq" id="s1qq">ii. QQ
+                <br><input type="radio" name="s1" value="call" id="s1call">iii. Direct Call 播电话给您 (if choice iii, pls answer below question 如您选择 iii,请您继续回答以下问题)
             </td>
         </tr>
         <tr class="row1">
             <td><?php echo $idx++; ?></td>
             <td align="left">
                 What is the best time for us to contact you?
-                什么时间是最合适我们给您打电话？
-
-                i. 11a.m 十一点早上
-                ii. 1p.m 一点中午
-                iii. 5p.m 五点下午
-                iv. 8p.m 八点晚上
+                <br>什么时间是最合适我们给您打电话？
+                <br>
+                <br><input type="radio" name="s2" value="11" id="s2besttime11">i. 11a.m 十一点早上
+                <br><input type="radio" name="s2" value="13" id="s2besttime13">ii. 1p.m 一点中午
+                <br><input type="radio" name="s2" value="17" id="s2besttime17">iii. 5p.m 五点下午
+                <br><input type="radio" name="s2" value="20" id="s2besttime20">iv. 8p.m 八点晚上
             </td>
         </tr>
         <tr class="row0">
             <td><?php echo $idx++; ?></td>
             <td align="left">
-                One-World is providing education to train more professional financial consultant, do u interested to be 1 of our big family member?
-                一合金融集团提供高等金融教育提拔更多的专业金融顾问，请问您有兴趣成为我们的一分子吗？
-                i. yes 有
-                ii. No 没有
+                Maxim Trader is providing education to train more professional financial consultant, do u interested to be 1 of our big family member?
+                <br>马胜金融集团提供高等金融教育提拔更多的专业金融顾问，请问您有兴趣成为我们的一分子吗？
+                <br>
+                <br><input type="radio" name="s3" value="Y" id="s3joiny">i. yes 有
+                <br><input type="radio" name="s3" value="N" id="s3joinn">ii. No 没有
             </td>
         </tr>
         </tbody>
@@ -446,7 +447,7 @@ $(function() {
     </colgroup>
 
     <tbody>
-        <tr class="tbl_listing_end">
+        <tr>
             <td>&nbsp;</td>
             <td colspan="5" class="tbl_content_right">
                 <span class="button">
