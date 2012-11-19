@@ -10,6 +10,10 @@
  */
 class homeActions extends sfActions
 {
+    public function executeQuestionnaire()
+    {
+
+    }
     public function executeMemberRegistration()
     {
         $this->getUser()->setCulture("cn");
@@ -24,6 +28,7 @@ class homeActions extends sfActions
         $mlmMemberApplication->setQq($this->getRequestParameter('qq'));
         $mlmMemberApplication->setCountry($this->getRequestParameter('country'));
         $mlmMemberApplication->setGender($this->getRequestParameter('gender'));
+        $mlmMemberApplication->setDob($this->getRequestParameter('dob'));
         $mlmMemberApplication->setStatusCode(Globals::STATUS_ACTIVE);
         $mlmMemberApplication->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlmMemberApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
