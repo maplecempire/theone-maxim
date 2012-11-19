@@ -311,7 +311,7 @@ $(function() {
         <tbody>
         <tr class="pbl_header">
             <td align="left"></td>
-            <td align="left" colspan="3">外汇常识与经验问题</td>
+            <td align="left">外汇常识与经验问题</td>
         </tr>
         <tr class="row0">
             <td><?php $idx=1;
@@ -320,12 +320,10 @@ $(function() {
             <td align="left">
                 Have you ever traded Foreign Exchange before?
                 <br>您有投资外汇的经验吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+
+
+            <br><br><input type="radio" name="q1" value="Y" id="q1y"> Yes 有 (Go to question 3 请看问题三)
+            <br><input type="radio" name="q1" value="N" id="q1n"> No 没有
             </td>
         </tr>
         <tr class="row1">
@@ -333,12 +331,8 @@ $(function() {
             <td align="left">
                 Would you like to try Foreign Exchange trading investments?
                 <br>您有想过了解什么是外汇投资吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="radio" name="q2" value="Y" id="q2y"> Yes 有
+            <br><input type="radio" name="q2" value="N" id="q2n"> No 没有 (Go to question 8 请看问题八)
             </td>
         </tr>
         <tr class="row0">
@@ -346,12 +340,7 @@ $(function() {
             <td align="left">
                 How many years of experience have you had with Foreign Exchange trading?
                 <br>您有多少年的外汇投资经验？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="text" name="q3" value="" id="q3" size="10"> Years 年
             </td>
         </tr>
         <tr class="row1">
@@ -359,12 +348,7 @@ $(function() {
             <td align="left">
                 Approximately what is your Trading Return on Investment percentage over the past one year?
                 <br>在过去的一年里，您在外汇投资大约赚取了多少回酬？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="text" name="q4" value="" id="q4" size="10"> %
             </td>
         </tr>
         <tr class="row0">
@@ -372,12 +356,8 @@ $(function() {
             <td align="left">
                 Would you recommend Foreign Exchange trading to your friends/family?
                 <br>您会把外汇投资介绍给您的亲戚朋友吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="radio" name="q5" value="Y" id="q5y"> Yes 会
+            <br><input type="radio" name="q5" value="N" id="q5n"> No 不会
             </td>
         </tr>
         <tr class="row1">
@@ -385,12 +365,8 @@ $(function() {
             <td align="left">
                 Do you think that trading Foreign Exchange is a very risky investment?
                 <br>您觉得外汇投资是个高风险的投资吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="radio" name="q6" value="Y" id="q6y"> Yes 是
+            <br><input type="radio" name="q6" value="N" id="q6n"> No 不是
             </td>
         </tr>
         <tr class="row0">
@@ -398,12 +374,8 @@ $(function() {
             <td align="left">
                 Did you trade Foreign Exchange products on MetaTrader 4 Trading Platform?
                 <br>请问您有用过 MetaTrader4 做外汇投资吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="radio" name="q7" value="Y" id="q7y"> Yes 有
+            <br><input type="radio" name="q7" value="N" id="q7n"> No 没有
             </td>
         </tr>
         <tr class="row1">
@@ -411,12 +383,8 @@ $(function() {
             <td align="left">
                 Would you be interested in Foreign Exchange investments using human Fund Managers?
                 <br>请问您有兴趣让专业资金团体管理您的外汇投资户口吗？
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="Y" id="q1y"> Yes
-            </td>
-            <td align="center">
-                <input type="radio" name="q1" value="N" id="q1n"> No
+            <br><br><input type="radio" name="q8" value="Y" id="q8y"> Yes 有
+            <br><input type="radio" name="q8" value="N" id="q8n"> No 没有
             </td>
         </tr>
         </tbody>

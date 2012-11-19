@@ -144,7 +144,9 @@ class zMailActions extends sfActions
 								<br><br>
 								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
 								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
-                                Skype: alvinang8833
+								Alvin Ang
+                                <br>洪志勇
+                                <br>Skype: alvinang8833
                                 <br>QQ: 1049052315
                                 </span>
                                 </font>
