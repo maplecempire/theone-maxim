@@ -679,7 +679,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
         <td><?php echo __('Country') ?></td>
         <td>
-            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "Malaysia", 'countryName' => 'country', 'countryId' => 'country')) ?>
+            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "China (PRC)", 'countryName' => 'country', 'countryId' => 'country')) ?>
             &nbsp;
         </td>
         <td>&nbsp;</td>
