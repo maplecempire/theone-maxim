@@ -25,6 +25,7 @@ class homeActions extends sfActions
         $mlmMemberQuestionnair->setS1($this->getRequestParameter('s1'));
         $mlmMemberQuestionnair->setS2($this->getRequestParameter('s2'));
         $mlmMemberQuestionnair->setS3($this->getRequestParameter('s3'));
+        $mlmMemberQuestionnair->setStatusCode(Globals::STATUS_ACTIVE);
         $mlmMemberQuestionnair->save();
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Thank you for the submission. Have a good day!"));
