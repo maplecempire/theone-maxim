@@ -192,9 +192,13 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 
 <div class="menu" style="z-index: 20;">
     <ul>
-        <li class="menu_title"><?php echo __('MEMBER REGISTRATION'); ?></li>
+        <li class="menu_title"><?php echo __('CONTACT US'); ?></li>
         <li>
-            <a href="/home/memberRegistration"><span><?php echo __('Member Registration'); ?></span></a>
+<!--            <a href="/home/memberRegistration"><span>--><?php //echo __('Contact us if you want to know more'); ?><!--</span></a>-->
+            <span style="color: #0080C8;"><?php echo __('Contact us if you want to know more'); ?>
+            <br>Skype: alvinang8833
+            <br>QQ: 1049052315
+            </span>
         </li>
     </ul>
 </div>
@@ -234,9 +238,7 @@ $(function() {
         },
         rules : {
             "fullname" : {
-                required : true,
-                minlength : 2,
-                remote: "/member/verifyFullName"
+                required : true
             },
             "email" : {
                 required : true
@@ -264,7 +266,7 @@ $(function() {
 <tbody>
 <tr>
     <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Member Registration') ?></span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Please fill up the personal information, We will call you back in the soonest time'); ?></span></td>
     <td rowspan="3">&nbsp;</td>
 </tr>
 <tr>
@@ -355,6 +357,30 @@ $(function() {
         <td><?php echo __('Email') ?></td>
         <td>
             <input type="text" class="inputbox" id="email" name="email">
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Gender') ?></td>
+        <td>
+            <select name="gender" class='inputbox'>
+                <option value="" selected="selected"><?php echo __('Please Select') ?></option>
+                <option value="M"><?php echo __('Male') ?></option>
+                <option value="F"><?php echo __('Female') ?></option>
+            </select>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Country') ?></td>
+        <td>
+            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "China (PRC)", 'countryName' => 'country', 'countryId' => 'country')) ?>
+            &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>

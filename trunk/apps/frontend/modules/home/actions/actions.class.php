@@ -12,7 +12,7 @@ class homeActions extends sfActions
 {
     public function executeMemberRegistration()
     {
-
+        $this->getUser()->setCulture("cn");
     }
     public function executeDoMemberRegistration()
     {
@@ -22,12 +22,14 @@ class homeActions extends sfActions
         $mlmMemberApplication->setEmail($this->getRequestParameter('email'));
         $mlmMemberApplication->setContact($this->getRequestParameter('contactNumber'));
         $mlmMemberApplication->setQq($this->getRequestParameter('qq'));
+        $mlmMemberApplication->setCountry($this->getRequestParameter('country'));
+        $mlmMemberApplication->setGender($this->getRequestParameter('gender'));
         $mlmMemberApplication->setStatusCode(Globals::STATUS_ACTIVE);
         $mlmMemberApplication->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlmMemberApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlmMemberApplication->save();
 
-        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your application submit successfully. We will call u back in the soonest time."));
         return $this->redirect('/home/memberRegistration');
     }
     /* ***********************************************************************

@@ -762,6 +762,11 @@
             <trans-unit><source>Back to announcement list</source><target>回到公告表</target></trans-unit>
             <trans-unit><source>Announcement List</source><target>公告表</target></trans-unit>
             <trans-unit><source>ANNOUNCEMENT</source><target>公告</target></trans-unit>
+            <trans-unit><source>Contact us if you want to know more</source><target>若想了解更多，请直接联络我们</target></trans-unit>
+            <trans-unit><source>Please fill up the personal information, We will call you back in the soonest time</source><target>请您留下您的联络方式，我们的服务员将会联络您</target></trans-unit>
+            <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
+            <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
+            <trans-unit><source>Your application submit successfully. We will call u back in the soonest time.</source><target>您的资料提交成功，我们的服务员将会在最短的时间内联络您。</target></trans-unit>
         </body>
     </file>
 </xliff>

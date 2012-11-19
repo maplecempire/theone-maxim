@@ -16,11 +16,11 @@ class zMailActions extends sfActions
 	<tbody>
 		<tr>
 			<td style='padding:20px 0px'>
-				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+				<table width='800' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
 					<tbody>
 						<tr>
 							<td colspan='2'>
-								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner4.png' alt='Maxim Trader'></a></td>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='800' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner4.png' alt='Maxim Trader'></a></td>
 						</tr>
 
 						<tr>
@@ -82,7 +82,7 @@ class zMailActions extends sfActions
 								此图表显示出近三年来我们的资金增长了%
 								</font>
 								<br><br>
-								<img width='570' border='0' src='http://partner.maximtrader.com/images/email/file/fund_mgmt_graph.png' alt='Maxim Trader'>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/fund_mgmt_graph.png' alt='Maxim Trader'>
 
 
 
@@ -95,9 +95,9 @@ class zMailActions extends sfActions
 								仅需在我们管理的基金注册成为一位<span style='font-size:16px; font-weight: bold; color:#ff0000'>自助交易者或一位投资人</span>，就可以享受我们的<span style='font-size:16px; font-weight: bold; color:#ff0000'>经纪商推荐者计划</span>，这样您就可以通过介绍客户成为一位企业家了。
 								</font>
 								<br><br>
-								<img width='570' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_1.png' alt='Maxim Trader'>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_1.png' alt='Maxim Trader'>
 								<br><br>
-								<img width='570' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_2.png' alt='Maxim Trader'>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_2.png' alt='Maxim Trader'>
 								<br><br>
 								<img border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_3.png' alt='Maxim Trader'>
 								<br><br>
@@ -136,29 +136,42 @@ class zMailActions extends sfActions
 								</td></tr>
 								</table>
 								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
+								更详细的资料请联络我们
+								</span>
+								</font>
 								<br><br>
-								<img border='0' src='http://partner.maximtrader.com/images/email/file/bottom-banner.png' width='570' alt='Maxim Trader'>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
+                                Skype: alvinang8833
+                                <br>QQ: 1049052315
+                                </span>
+                                </font>
+								<br><br>
+								<br><br>
+								<img border='0' src='http://partner.maximtrader.com/images/email/file/bottom-banner.png' width='770' alt='Maxim Trader'>
+								<br><br>
 							</td>
 						</tr>
 
 						<tr>
-							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<td width='800' style='font-size:0;line-height:0' bgcolor='#0080C8'>
 							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
 							</td>
 						</tr>
 						<tr>
-							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+							<td width='800' style='font-size:0;line-height:0' colspan='2'>
 								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
 							</td>
 						</tr>
 
 						<tr>
-							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<td width='800' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
 							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
 								<em>
 									Best Regards,<br>
-									<strong>Maxim Trader</strong><br>
-									E mail : admin@maximtrader.com
+									<strong>Maxim Trader</strong>
 								</em>
 							</font>
 							<br>
@@ -167,7 +180,7 @@ class zMailActions extends sfActions
 						</tr>
 
 						<tr>
-							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<td width='800' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
 									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
@@ -184,7 +197,7 @@ class zMailActions extends sfActions
 		</tr>
 	</tbody>
 </table>";
-        $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 ";
+        $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012";
 
         $sendMailService = new SendMailService();
         $sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body);

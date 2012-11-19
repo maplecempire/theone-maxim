@@ -29,6 +29,14 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 
 
 	
+	protected $gender;
+
+
+	
+	protected $country;
+
+
+	
 	protected $status_code;
 
 
@@ -86,6 +94,20 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 	{
 
 		return $this->qq;
+	}
+
+	
+	public function getGender()
+	{
+
+		return $this->gender;
+	}
+
+	
+	public function getCountry()
+	{
+
+		return $this->country;
 	}
 
 	
@@ -239,6 +261,40 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 	} 
 
 	
+	public function setGender($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->gender !== $v) {
+			$this->gender = $v;
+			$this->modifiedColumns[] = MlmMemberApplicationPeer::GENDER;
+		}
+
+	} 
+
+	
+	public function setCountry($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->country !== $v) {
+			$this->country = $v;
+			$this->modifiedColumns[] = MlmMemberApplicationPeer::COUNTRY;
+		}
+
+	} 
+
+	
 	public function setStatusCode($v)
 	{
 
@@ -340,21 +396,25 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 
 			$this->qq = $rs->getString($startcol + 4);
 
-			$this->status_code = $rs->getString($startcol + 5);
+			$this->gender = $rs->getString($startcol + 5);
 
-			$this->created_by = $rs->getInt($startcol + 6);
+			$this->country = $rs->getString($startcol + 6);
 
-			$this->created_on = $rs->getTimestamp($startcol + 7, null);
+			$this->status_code = $rs->getString($startcol + 7);
 
-			$this->updated_by = $rs->getInt($startcol + 8);
+			$this->created_by = $rs->getInt($startcol + 8);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 9, null);
+			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+
+			$this->updated_by = $rs->getInt($startcol + 10);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 10; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmMemberApplication object", $e);
 		}
@@ -515,18 +575,24 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 				return $this->getQq();
 				break;
 			case 5:
-				return $this->getStatusCode();
+				return $this->getGender();
 				break;
 			case 6:
-				return $this->getCreatedBy();
+				return $this->getCountry();
 				break;
 			case 7:
-				return $this->getCreatedOn();
+				return $this->getStatusCode();
 				break;
 			case 8:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 9:
+				return $this->getCreatedOn();
+				break;
+			case 10:
+				return $this->getUpdatedBy();
+				break;
+			case 11:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -544,11 +610,13 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 			$keys[2] => $this->getEmail(),
 			$keys[3] => $this->getContact(),
 			$keys[4] => $this->getQq(),
-			$keys[5] => $this->getStatusCode(),
-			$keys[6] => $this->getCreatedBy(),
-			$keys[7] => $this->getCreatedOn(),
-			$keys[8] => $this->getUpdatedBy(),
-			$keys[9] => $this->getUpdatedOn(),
+			$keys[5] => $this->getGender(),
+			$keys[6] => $this->getCountry(),
+			$keys[7] => $this->getStatusCode(),
+			$keys[8] => $this->getCreatedBy(),
+			$keys[9] => $this->getCreatedOn(),
+			$keys[10] => $this->getUpdatedBy(),
+			$keys[11] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -580,18 +648,24 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 				$this->setQq($value);
 				break;
 			case 5:
-				$this->setStatusCode($value);
+				$this->setGender($value);
 				break;
 			case 6:
-				$this->setCreatedBy($value);
+				$this->setCountry($value);
 				break;
 			case 7:
-				$this->setCreatedOn($value);
+				$this->setStatusCode($value);
 				break;
 			case 8:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 9:
+				$this->setCreatedOn($value);
+				break;
+			case 10:
+				$this->setUpdatedBy($value);
+				break;
+			case 11:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -606,11 +680,13 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		if (array_key_exists($keys[2], $arr)) $this->setEmail($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setContact($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setQq($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setStatusCode($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCreatedBy($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCreatedOn($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setUpdatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUpdatedOn($arr[$keys[9]]);
+		if (array_key_exists($keys[5], $arr)) $this->setGender($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCountry($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setStatusCode($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
 	}
 
 	
@@ -623,6 +699,8 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		if ($this->isColumnModified(MlmMemberApplicationPeer::EMAIL)) $criteria->add(MlmMemberApplicationPeer::EMAIL, $this->email);
 		if ($this->isColumnModified(MlmMemberApplicationPeer::CONTACT)) $criteria->add(MlmMemberApplicationPeer::CONTACT, $this->contact);
 		if ($this->isColumnModified(MlmMemberApplicationPeer::QQ)) $criteria->add(MlmMemberApplicationPeer::QQ, $this->qq);
+		if ($this->isColumnModified(MlmMemberApplicationPeer::GENDER)) $criteria->add(MlmMemberApplicationPeer::GENDER, $this->gender);
+		if ($this->isColumnModified(MlmMemberApplicationPeer::COUNTRY)) $criteria->add(MlmMemberApplicationPeer::COUNTRY, $this->country);
 		if ($this->isColumnModified(MlmMemberApplicationPeer::STATUS_CODE)) $criteria->add(MlmMemberApplicationPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmMemberApplicationPeer::CREATED_BY)) $criteria->add(MlmMemberApplicationPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmMemberApplicationPeer::CREATED_ON)) $criteria->add(MlmMemberApplicationPeer::CREATED_ON, $this->created_on);
@@ -665,6 +743,10 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		$copyObj->setContact($this->contact);
 
 		$copyObj->setQq($this->qq);
+
+		$copyObj->setGender($this->gender);
+
+		$copyObj->setCountry($this->country);
 
 		$copyObj->setStatusCode($this->status_code);
 
