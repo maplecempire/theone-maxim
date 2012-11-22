@@ -10,11 +10,11 @@
 
         <div class="popinfo1">
             <a href="newsevent.php?n=89d09ac4084cc4fe69fd0395ecfed375">
-                <div class="poptitle">【System Announcement】Adjustment of Pairing Bonus System</div>
+                <div class="poptitle">【System Announcement】Adjustment of Group Development Bonus System</div>
             </a>
 
             <div class="news_date">2012-08-30</div>
-            <div class="news_desc">The Company has adjusted the Point Value of Pairing Bonus from floating to a fixed
+            <div class="news_desc">The Company has adjusted the Point Value of Group Development Bonus from floating to a fixed
                 method.
             </div>
             <a href="newsevent.php?n=">Read More &gt;&gt;</a>
