@@ -204,7 +204,7 @@
                                                                                     'ref' => 'DRB'
                                                                                )) . "</td></tr>";
                             echo "<tr class='even'>
-                            <td>" . __('Pairing Bonus') . "</td>
+                            <td>" . __('Group Development Bonus') . "</td>
                             <td align='right'>" . $pairingBonus . "</td>
                             <td align='center'>" . link_to(__('Details'), '#', array(
                                                                                     'class' => 'activeLink',
@@ -311,7 +311,7 @@
                                     <th style="text-align: right; width: 100px; display: none" class='tdCreditRefund'><?php echo __('Pips Rebate') ?></th>
                                     <th style="text-align: right; width: 100px; display: none" class='tdFundDividend'><?php echo __('Fund Management Performance') ?></th>
                                     <th style="text-align: right; width: 100px;" class='tdRbBonus'><?php echo __('RB Bonus') ?></th>
-                                    <th style="text-align: right; width: 100px;display: none" class='tdPairingBonus'><?php echo __('Pairing Bonus') ?></th>
+                                    <th style="text-align: right; width: 100px;display: none" class='tdPairingBonus'><?php echo __('Group Development Bonus') ?></th>
                                     <th style="text-align: right; width: 100px;display: none" class='tdSpecialBonus'><?php echo __('Special Bonus') ?></th>
                                 </tr>
                                 </thead>

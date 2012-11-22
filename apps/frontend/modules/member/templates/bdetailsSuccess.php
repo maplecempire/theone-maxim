@@ -18,7 +18,7 @@
 			}
 			
 			if($bonus=='gdb'){
-				echo "<tr valign='middle' style='background-color:#f1f1f1;height:32px;'><td align='center'>".__('No.')."</td><td align='center'>".__('Date')."</td><td align='center'>".__('Left Trader')."</td><td align='center'>".__('Left CPS')."</td><td align='center'>".__('Right Trader')."</td><td align='center'>".__('Right CPS')."</td><td align='center'>".__('Pairing')."</td><td align='center'>".__('CPS')."</td><td align='center'>".__('CPS Price')."</td><td align='center'>".__('Amount')."</td></tr>";
+				echo "<tr valign='middle' style='background-color:#f1f1f1;height:32px;'><td align='center'>".__('No.')."</td><td align='center'>".__('Date')."</td><td align='center'>".__('Left Trader')."</td><td align='center'>".__('Left CPS')."</td><td align='center'>".__('Right Trader')."</td><td align='center'>".__('Right CPS')."</td><td align='center'>".__('Group Development')."</td><td align='center'>".__('CPS')."</td><td align='center'>".__('CPS Price')."</td><td align='center'>".__('Amount')."</td></tr>";
 							
 				foreach($TblBonus as $bonus){
 					$i++;
