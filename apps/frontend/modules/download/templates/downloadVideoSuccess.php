@@ -58,10 +58,10 @@
                 <td rowspan="3"><img src="/images/download_video.jpg" width="160px"></td>
                 <td>The forex video's describe the 3 Minutes trading strategy.
                     <br>
-                    <br>
+                    <!--<br>
                     premium download login: workhardclub@gmail.com
                     <br>
-                    password: cm9c97fd
+                    password: cm9c97fd-->
                 </td>
             </tr>
             <tr>
