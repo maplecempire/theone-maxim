@@ -189,7 +189,7 @@
         </td>
         <td class="value"><span id="paymentReferenceSpan" style="color: red"><?php echo $paymentReference; ?></span>
         <br><br>Note: you must present this Payment Reference when making payment to the bank. THis PAYMENT
-            REFERENCE NUMBER must be placed in the section where it says NO. KERETA / CAR NO.
+            REFERENCE NUMBER must be placed in the section where it says CAR NO.
             whenever it is applicable.
         </td>
     </tr>

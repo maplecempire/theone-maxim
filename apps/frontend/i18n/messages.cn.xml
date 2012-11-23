@@ -745,7 +745,7 @@
             <trans-unit><source>Print</source><target>打印</target></trans-unit>
             <trans-unit><source>Country of Bank</source><target>银行所在国家</target></trans-unit>
             <trans-unit><source>Trading Currency on MT4</source><target>MT4交易货币</target></trans-unit>
-            <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says NO. KERETA / CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
+            <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
             <trans-unit><source>Invalid username or password.</source><target>会员ID和密码不正确</target></trans-unit>
             <trans-unit><source>The CAPTCHA wasn't entered correctly. Go back and try it again.</source><target>验证码输入不正确。回去再试一次。</target></trans-unit>
             <trans-unit><source>This content is restricted to site members. If you are an existing user, please login. New users may register below.</source><target>此内容仅限于网站成员。如果您已是我们的会员，请登录。新用户可以注册。</target></trans-unit>
