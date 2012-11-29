@@ -23,6 +23,7 @@ echo "<script type='text/javascript' src='/js/jquery/jquery.treeview.edit.js'></
 echo "<script type='text/javascript' src='/js/jquery/jquery.treeview.async.js'></script>";
 echo "<script type='text/javascript' src='/js/jquery/jquery.checkboxtree.min.js'></script>";
 echo "<script type='text/javascript' src='/js/bgstretcher/bgstretcher.js'></script>";
+echo "<script type='text/javascript' src='/js/tiny_mce/tiny_mce.js'></script>";
 
 echo "<script type='text/javascript' src='/js/fancybox/jquery.mousewheel-3.0.4.pack.js'></script>";
 echo "<script type='text/javascript' src='/js/fancybox/jquery.fancybox-1.3.4.pack.js'></script>";

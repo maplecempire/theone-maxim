@@ -10,10 +10,57 @@
  */
 class marketingActions extends sfActions
 {
-    /**
-     * Executes index action
-     *
-     */
+    public function executeCustomerEnquiryList()
+    {
+    }
+
+    public function executeCustomerEnquiryDetail()
+    {
+        $enquiryId = $this->getRequestParameter('enquiryId');
+
+        $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
+
+        if (!$mlmCustomerEnquiry) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/customerEnquiry');
+        }
+        $mlmCustomerEnquiry->setAdminRead(Globals::TRUE);
+        $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmCustomerEnquiry->save();
+
+        $c = new Criteria();
+        $c->add(MlmCustomerEnquiryDetailPeer::CUSTOMER_ENQUIRY_ID, $enquiryId);
+        $mlmCustomerEnquiryDetails = MlmCustomerEnquiryDetailPeer::doSelect($c);
+
+        $this->mlmCustomerEnquiry = $mlmCustomerEnquiry;
+        $this->mlmCustomerEnquiryDetails = $mlmCustomerEnquiryDetails;
+    }
+
+    public function executeDoCustomerEnquiryDetail()
+    {
+        $enquiryId = $this->getRequestParameter('enquiryId');
+        $message = $this->getRequestParameter('message');
+
+        $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
+        $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
+        $mlmCustomerEnquiry->setDistributorUpdated(Globals::FALSE);
+        $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
+        $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+        $mlmCustomerEnquiry->save();
+
+        $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
+        $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlmCustomerEnquiry->getEnquiryId());
+        $mlm_customer_enquiry_detail->setMessage($message);
+        $mlm_customer_enquiry_detail->setReplyFrom(Globals::ROLE_ADMIN);
+        $mlm_customer_enquiry_detail->setStatusCode(Globals::STATUS_ACTIVE);
+        $mlm_customer_enquiry_detail->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
+        return $this->redirect('/marketing/customerEnquiryDetail?enquiryId='.$enquiryId);
+    }
     public function executeIndex()
     {
         return $this->redirect('/marketing/distList');
@@ -291,6 +338,116 @@ class marketingActions extends sfActions
         }
     }
 
+    public function executeDailyPipsUpload()
+    {
+
+    }
+    public function executeDoDailyPipsUpload()
+    {
+        if ($this->getRequest()->getFileName('file_upload') != "") {
+            $uploadedFilename = $this->getRequest()->getFileName('file_upload');
+            $tradingMonth = $this->getRequestParameter('tradingMonth');
+            $ext = explode(".", $this->getRequest()->getFileName('file_upload'));
+
+            $this->getRequest()->moveFile('file_upload', sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename);
+
+            $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename;
+
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("PIPS");
+            $mlm_file_download->setFileSrc($physicalDirectory);
+            $mlm_file_download->setFileName($uploadedFilename);
+            $mlm_file_download->setContentType("application/csv");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+            /* **********************************************
+             *      Manipulate PIPS
+             * ***********************************************/
+            $file_handle = fopen($physicalDirectory, "rb");
+            while (!feof($file_handle)) {
+                $line_of_text = fgets($file_handle);
+                $parts = explode('=', $line_of_text);
+
+                $string = $parts[0] . $parts[1];
+                $arr = explode(';', $string);
+
+                $status = Globals::STATUS_PIPS_CSV_ACTIVE;
+                $remarks = "";
+                $mlm_pip_csv = new MlmPipCsv();
+                $mlm_pip_csv->setFileId($mlm_file_download->getFileId());
+                $mlm_pip_csv->setPipsString($string);
+
+                if (count($arr) == 13) {
+                    if (is_numeric($arr[0])) {
+                        $idx = 0;
+                        $mlm_pip_csv->setMonthTraded($tradingMonth);
+                        $mlm_pip_csv->setYearTraded(date('Y'));
+                        $mlm_pip_csv->setLoginId($arr[$idx++]);
+                        $mlm_pip_csv->setLoginName($arr[$idx++]);
+                        $mlm_pip_csv->setDeposit($arr[$idx++]);
+                        $mlm_pip_csv->setWithdraw($arr[$idx++]);
+                        $mlm_pip_csv->setInOut($arr[$idx++]);
+                        $mlm_pip_csv->setCredit($arr[$idx++]);
+                        $mlm_pip_csv->setVolume($arr[$idx++]);
+                        $mlm_pip_csv->setCommission($arr[$idx++]);
+                        $mlm_pip_csv->setTaxes($arr[$idx++]);
+                        $mlm_pip_csv->setAgent($arr[$idx++]);
+                        $mlm_pip_csv->setStorage($arr[$idx++]);
+                        $mlm_pip_csv->setProfit($arr[$idx++]);
+                        $mlm_pip_csv->setLastBalance($arr[$idx++]);
+                        $mlm_pip_csv->setStatusCode($status);
+                        $mlm_pip_csv->setRemarks($remarks);
+                        $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->save();
+                        /* ++++++++++++++++++++++++++++++++++++++++++++++
+                       *      Calculate Pips
+                       * +++++++++++++++++++++++++++++++++++++++++++++++*/
+                        $totalVolume = $mlm_pip_csv->getVolume();
+                        $mt4Id = $mlm_pip_csv->getLoginId();
+                        $c = new Criteria();
+                        $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
+                        $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
+
+                        if ($mlm_dist_mt4) {
+
+                        } else {
+                            $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
+                            $mlm_pip_csv->setRemarks("Invalid MT4 ID");
+                            $mlm_pip_csv->save();
+                        }
+                        /* ++++++++++++++++++++++++++++++++++++++++++++++
+                       *      ~ END Calculate Pips ~
+                       * +++++++++++++++++++++++++++++++++++++++++++++++*/
+                    } else {
+                        $status = Globals::STATUS_PIPS_CSV_ERROR;
+                        $remarks = "FIRST ELEMENT NOT NUMERIC";
+
+                        $mlm_pip_csv->setStatusCode($status);
+                        $mlm_pip_csv->setRemarks($remarks);
+                        $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->save();
+                    }
+                } else {
+                    $status = Globals::STATUS_PIPS_CSV_ERROR;
+                    $remarks = "ARRAY NOT EQUAL TO 13";
+
+                    $mlm_pip_csv->setStatusCode($status);
+                    $mlm_pip_csv->setRemarks($remarks);
+                    $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_pip_csv->save();
+                }
+            }
+
+            $this->setFlash('successMsg', "Files was successfully uploaded.");
+            return $this->redirect('/marketing/pipsUpload?doAction=show_pips');
+        }
+    }
     public function executePipsUpload()
     {
         /*$file_handle = fopen("E://xampplite/htdocs/defxm2u/web/uploads/pips/GVFpipsApril.csv", "rb");
