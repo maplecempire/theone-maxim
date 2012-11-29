@@ -3823,8 +3823,8 @@ class memberActions extends sfActions
         $this->pairingBonus = number_format($pairingBonus, 2);
         $this->specialBonus = number_format($specialBonus, 2);
         $this->totalLotTraded = number_format($totalLotTraded, 2);
+        $this->nextPerformanceDate = $this->getNextPerformanceDate($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
-//        $this->total = number_format($dsb, 2);
         $this->total = number_format($dsb + $pipsBonus + $creditRefunds + $fundManagements + $pairingBonus + $specialBonus, 2);
 
         /* *************************
@@ -5785,5 +5785,20 @@ Wish you all the best.
             return true;
         }
         return false;
+    }
+
+    function getNextPerformanceDate($distId) {
+        $c = new Criteria();
+
+        $c->add(MlmRoiDividendPeer::DIST_ID, $distId);
+        $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
+        $c->addAscendingOrderByColumn(MlmRoiDividendPeer::DIVIDEND_DATE);
+        $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+        if ($mlmRoiDividendDB) {
+            $dateUtil = new DateUtil();
+            return $dateUtil->formatDate("Y-M-d", $mlmRoiDividendDB->getDividendDate());
+        }
+        return "";
     }
 }
