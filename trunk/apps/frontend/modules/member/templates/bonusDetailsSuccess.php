@@ -471,7 +471,7 @@
                                     <th><?php echo __('Total Profit') ?></th>
                                     <th><?php echo __('Status') ?></th>
                                 </tr>
-                                The next performance return will be paid on Dec 8th,
+                                The next performance return will be paid on <?php echo $nextPerformanceDate;?>,
                                 The performance return is paid based on most up-to-date MT4 balance up to a maximum amount of initial fund invested only.
                                 </thead>
                             </table>
