@@ -177,20 +177,18 @@
         </td>
         <td class="value"><?php echo $cityOfBank; ?></td>
     </tr>
-    <tr>
+    <!--<tr>
         <td width="160px" class="caption">
-            <strong><?php echo __('Country of Bank'); ?></strong>
+            <strong><?php /*echo __('Country of Bank'); */?></strong>
         </td>
-        <td class="value"><?php echo $countryOfBank; ?></td>
-    </tr>
+        <td class="value"><?php /*echo $countryOfBank; */?></td>
+    </tr>-->
     <tr>
         <td width="160px" class="caption">
             <strong><?php echo __('Payment Reference'); ?></strong>
         </td>
         <td class="value"><span id="paymentReferenceSpan" style="color: red"><?php echo $paymentReference; ?></span>
-        <br><br>Note: you must present this Payment Reference when making payment to the bank. THis PAYMENT
-            REFERENCE NUMBER must be placed in the section where it says CAR NO.
-            whenever it is applicable.
+        <br><br>Note: <br>Please write at REFERENCE : Maxim Capital Limited - 9120028849 and payment reference number.
         </td>
     </tr>
 </table>
