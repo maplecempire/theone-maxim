@@ -42,8 +42,6 @@ class MlmRoiDividendMapBuilder {
 
 		$tMap->addColumn('DIVIDEND_DATE', 'DividendDate', 'int', CreoleTypes::TIMESTAMP, true, null);
 
-		$tMap->addColumn('FIRST_DIVIDEND_DATE', 'FirstDividendDate', 'int', CreoleTypes::DATE, false, null);
-
 		$tMap->addColumn('PACKAGE_ID', 'PackageId', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('PACKAGE_PRICE', 'PackagePrice', 'double', CreoleTypes::DECIMAL, true, 12);
@@ -63,6 +61,8 @@ class MlmRoiDividendMapBuilder {
 		$tMap->addColumn('UPDATED_BY', 'UpdatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
+
+		$tMap->addColumn('FIRST_DIVIDEND_DATE', 'FirstDividendDate', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 	} 
 } 
