@@ -142,14 +142,14 @@ class zMailActions extends sfActions
 								</span>
 								</font>
 								<br><br>
-								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<!--<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
 								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
 								Alvin Ang
                                 <br>洪志勇
                                 <br>Skype: alvinang8833
                                 <br>QQ: 1049052315
                                 </span>
-                                </font>
+                                </font>-->
 								<br><br>
 								<br><br>
 								<img border='0' src='http://partner.maximtrader.com/images/email/file/bottom-banner.png' width='770' alt='Maxim Trader'>
@@ -202,7 +202,7 @@ class zMailActions extends sfActions
         $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012";
 
         $sendMailService = new SendMailService();
-        $sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body);
+        $sendMailService->sendMail("r9jason@gmail.com", "alvin", $subject, $body);
     }
 
     public function executeIndex_version1()
@@ -267,33 +267,193 @@ class zMailActions extends sfActions
             print_r($idx."=".$emailContact->getReceiverEmail()." ".$receiverName);
             print_r("<br>");
 
-            $body = "<table width='600' align='center' cellpadding='0' cellspacing='0' border='0'>
-                <tbody>
-                    <tr>
-                        <td valign='top' colspan='3'>
-                            <img src='http://partner.maximtrader.com/images/email/file/page-1-cn.png' width='580'>
-                        </td>
-                    </tr>
+            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='800' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='800' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner4.png' alt='Maxim Trader'></a></td>
+						</tr>
 
-                    <tr>
-                        <td valign='top' colspan='3'>
-                            <img src='http://partner.maximtrader.com/images/email/file/page-2-cn.png' width='580'>
-                        </td>
-                    </tr>
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
 
-                    <tr>
-                        <td valign='top' colspan='3'>
-                            <img src='http://partner.maximtrader.com/images/email/file/page-3-cn.png' width='580'>
-                        </td>
-                    </tr>
+<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:16px;line-height:26px'>
+您想知道怎样才能睡着觉就赚钱吗？
+</font>
+<br><br>
+<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:18px;line-height:26px'>
+您希望<span style='font-weight: bold; color:#ff0000'>每一分钟</span>都能赚取一万美元吗？
+</font>
+<br><br>
+<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:20px;line-height:26px'>
+您希望拥有<span style='font-weight: bold; color:#ff0000'>奢华</span>的生活，让您能够<span style='font-weight: bold; color:#ff0000'>随时</span>都可以，<span style='font-weight: bold; color:#ff0000'>去梦想之地，做梦想之事？</span>
+</font>
+<br><br>
+<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:22px;line-height:26px'>
+<span style='font-weight: bold; color:#ff0000'>如果对以上所有问题的答案都是“是的 ”，那么您就来对了地方，在正确的时间，做了正确的选择。</span>
+</font>
+<br><br>
+<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:20px;line-height:26px'>
+接着往下看吧，接下来的2分钟能永远的改变您的生活！
+																</font>
+																<br>
+																<br>
+																<br>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style='padding:5px 15px 15px;font-weight:bold' colspan='2'>
+								<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:20px;line-height:26px'>
+								我们的基金经理们
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								今天我们骄傲的向您介绍一家帮助全世界15个国家的26000位客户成为百万富翁的公司，
+								<br><br><span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团交易商基金管理公司</span>
+								<br><br>马胜金融集团交易商拥有了最顶级的，杰出学术背景和多年交易经验相结合的投资专家。各位专家都拥有广泛的高端银行，财经院校并且在交易上有一技之长，投资组合管理和风险分析经验等专业背景。
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								此图表显示出近三年来我们的资金增长了%
+								</font>
+								<br><br>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/fund_mgmt_graph.png' alt='Maxim Trader'>
 
-                    <tr>
-                        <td valign='top' colspan='3'>
-                            <img src='http://partner.maximtrader.com/images/email/file/page-4-cn.png' width='580'>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>";
+
+
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:20px;line-height:26px'>
+								如何开始？
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								仅需在我们管理的基金注册成为一位<span style='font-size:16px; font-weight: bold; color:#ff0000'>自助交易者或一位投资人</span>，就可以享受我们的<span style='font-size:16px; font-weight: bold; color:#ff0000'>经纪商推荐者计划</span>，这样您就可以通过介绍客户成为一位企业家了。
+								</font>
+								<br><br>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_1.png' alt='Maxim Trader'>
+								<br><br>
+								<img width='770' border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_2.png' alt='Maxim Trader'>
+								<br><br>
+								<img border='0' src='http://partner.maximtrader.com/images/email/file/maxim_plan_3.png' alt='Maxim Trader'>
+								<br><br>
+
+
+								<font face='Microsoft YaHei' size='3' color='#163f68' style='font-size:20px;line-height:26px'>
+								我们的实力
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团是Royale Group Holding Inc的下属企业</span>，
+								是一家在美国上市的金融和投资信托基金公司，同时也受
+								<span style='font-size:16px; font-weight: bold; color:#ff0000'>新西兰金融服务提供商（FSP）</span>
+								的监管.拥有遍及欧洲和很多像中国，香港，韩国等和东南亚众多新型经济体的金融交易服务商和市场研究机构。马胜金融集团是由一群经验丰富，热情服务的交易员，金融分析师和精算师构成的，他们的目标就是为行业提供最佳的交易解决方案。
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								我们还与Premium Insured Limited有一份托管人协议，该保险公司是一家可以向全球提供托管人服务的领先的第三方托管管理公司。除此之外，该公司为马胜金融集团所有的客户设计了一份交易保险返利程序，这样就保证了客户资本处于极度保险状态。
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:16px; font-weight: bold; color:#ff0000'>
+								我们正试图寻找那些意气风发和具有团队精神的企业家们作为我们的经纪商介绍者（IB）和主经纪商介绍者(MIB)来加入我们的团队. 如果您是真的希望改变现有的生活，成为我们那26,000个百万富翁客户中的一员，我们非常欢迎您！我们每天都收到很多咨询，但不是每个人都能够成功入选的。我们只选择那些非常执着的追求梦想生活的人们。
+								</span>
+								</font>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:22px; font-weight: bold; color:#ff0000'>
+								不要再浪费一分钟！现在加入我们！
+								</span>
+								</font>
+								<br><br>
+								<table width=100%>
+								<tr><td align='center'>
+								<a target='_blank' href='http://partner.maximtrader.com/home/memberRegistration'><img border='0' src='http://partner.maximtrader.com/images/email/file/register-button.png' alt='Maxim Trader'></a>
+								</td></tr>
+								</table>
+								<br><br>
+								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
+								更详细的资料请联络我们
+								</span>
+								</font>
+								<br><br>
+								<!--<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
+								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
+								Alvin Ang
+                                <br>洪志勇
+                                <br>Skype: alvinang8833
+                                <br>QQ: 1049052315
+                                </span>
+                                </font>-->
+								<br><br>
+								<br><br>
+								<img border='0' src='http://partner.maximtrader.com/images/email/file/bottom-banner.png' width='770' alt='Maxim Trader'>
+								<br><br>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='800' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='800' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='800' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader</strong>
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='800' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
             $subject = "Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012 马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！";
             $subject = "马胜金融集团 - 通过世界上最强大的外汇交易平台之一跻身百万富翁！！ Maxim Trader welcome you to our participation in Shanghai Money Fair on 23-25 Nov 2012";
 

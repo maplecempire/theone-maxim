@@ -104,7 +104,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     <ul>
         <li class="menu_title"><?php echo __('CONTACT'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/underMaintenance"><span><?php echo __('CS Center'); ?></span></a>
+            <a href="/member/customerEnquiry"><span><?php echo __('CS Center'); ?></span></a>
         </li>
     </ul>
     <br class="clear"><br>

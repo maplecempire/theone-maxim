@@ -9,6 +9,122 @@
  */
 class memberActions extends sfActions
 {
+    public function executeDoCustomerEnquiry()
+    {
+        $contactNoEmail = $this->getRequestParameter('contactNoEmail');
+        $title = $this->getRequestParameter('title');
+        $message = $this->getRequestParameter('message');
+        $transactionPassword = $this->getRequestParameter('transactionPassword');
+
+        if ($this->getRequestParameter('transactionPassword') == "") {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Security password is blank."));
+            return $this->redirect('/member/customerEnquiry');
+        }
+
+        $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+        if (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+            return $this->redirect('/member/customerEnquiry');
+        }
+        //var_dump($contactNoEmail);
+        //var_dump($title);
+        //var_dump($message);
+        //var_dump($transactionPassword);
+
+        $mlm_customer_enquiry = new MlmCustomerEnquiry();
+        $mlm_customer_enquiry->setDistributorId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $mlm_customer_enquiry->setContactNo($contactNoEmail);
+        $mlm_customer_enquiry->setTitle($title);
+        $mlm_customer_enquiry->setAdminUpdated(Globals::FALSE);
+        $mlm_customer_enquiry->setDistributorUpdated(Globals::TRUE);
+        $mlm_customer_enquiry->setAdminRead(Globals::FALSE);
+        $mlm_customer_enquiry->setDistributorRead(Globals::TRUE);
+        $mlm_customer_enquiry->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+        $mlm_customer_enquiry->save();
+
+        $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
+        $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlm_customer_enquiry->getEnquiryId());
+        $mlm_customer_enquiry_detail->setMessage($message);
+        $mlm_customer_enquiry_detail->setReplyFrom(Globals::ROLE_DISTRIBUTOR);
+        $mlm_customer_enquiry_detail->setStatusCode(Globals::STATUS_ACTIVE);
+        $mlm_customer_enquiry_detail->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
+        return $this->redirect('/member/customerEnquiry');
+    }
+
+    public function executeDoCustomerEnquiryDetail()
+    {
+        $enquiryId = $this->getRequestParameter('enquiryId');
+        $message = $this->getRequestParameter('message');
+        $transactionPassword = $this->getRequestParameter('transactionPassword');
+
+        if ($this->getRequestParameter('transactionPassword') == "") {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Security password is blank."));
+            return $this->redirect('/member/customerEnquiryDetail?enquiryId='.$enquiryId);
+        }
+
+        $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+        if (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+            return $this->redirect('/member/customerEnquiryDetail?enquiryId='.$enquiryId);
+        }
+
+        $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
+        $mlmCustomerEnquiry->setDistributorUpdated(Globals::TRUE);
+        $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
+        $mlmCustomerEnquiry->setAdminRead(Globals::FALSE);
+        $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+        $mlmCustomerEnquiry->save();
+
+        $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
+        $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlmCustomerEnquiry->getEnquiryId());
+        $mlm_customer_enquiry_detail->setMessage($message);
+        $mlm_customer_enquiry_detail->setReplyFrom(Globals::ROLE_DISTRIBUTOR);
+        $mlm_customer_enquiry_detail->setStatusCode(Globals::STATUS_ACTIVE);
+        $mlm_customer_enquiry_detail->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_customer_enquiry_detail->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
+        return $this->redirect('/member/customerEnquiryDetail?enquiryId='.$enquiryId);
+    }
+    public function executeCustomerEnquiry()
+    {
+        $this->username = $this->getUser()->getAttribute(Globals::SESSION_USERNAME);
+
+    }
+    public function executeCustomerEnquiryDetail()
+    {
+        $enquiryId = $this->getRequestParameter('enquiryId');
+
+        $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
+
+        if (!$mlmCustomerEnquiry) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/customerEnquiry');
+        }
+        $mlmCustomerEnquiry->setDistributorRead(Globals::TRUE);
+        $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmCustomerEnquiry->save();
+
+        if ($mlmCustomerEnquiry->getDistributorId() != $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/customerEnquiry');
+        }
+
+        $c = new Criteria();
+        $c->add(MlmCustomerEnquiryDetailPeer::CUSTOMER_ENQUIRY_ID, $enquiryId);
+        $mlmCustomerEnquiryDetails = MlmCustomerEnquiryDetailPeer::doSelect($c);
+
+        $this->mlmCustomerEnquiry = $mlmCustomerEnquiry;
+        $this->mlmCustomerEnquiryDetails = $mlmCustomerEnquiryDetails;
+    }
     public function executeVerifyActivePlacementDistId()
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
