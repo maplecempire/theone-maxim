@@ -644,7 +644,7 @@ function verifySponsorId() {
 <tr class="tbl_form_row_even">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">
-        <label for="terms_risk"><?php echo __('MTL Risk Disclosure statement') ?> </label></td>
+        <label for="terms_risk"><?php echo __('MCL Risk Disclosure statement') ?> </label></td>
     <td colspan="4">
         <a target="_blank" href="/download/riskDisclosureStatement"><?php echo __('Download Agreement') ?> (381 KB PDF)</a>
     </td>
