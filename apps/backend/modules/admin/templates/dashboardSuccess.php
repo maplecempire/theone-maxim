@@ -318,6 +318,19 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2"><hr></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Enquiry</strong></td>
+                        <td align="right"><?php
+                            if ($customerEnquiry > 0)
+                                echo "<a id='$customerEnquiryLink' href='".url_for('marketing/customerEnquiryList')."'>".$customerEnquiry."</a>";
+                            else
+                                echo $customerEnquiry;
+                            ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
