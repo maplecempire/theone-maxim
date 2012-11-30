@@ -926,48 +926,28 @@ class marketingActions extends sfActions
         $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
         //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
         //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
-        $tbl_distributor->setPackagePurchaseFlag("N");
+        if ($tbl_distributor && $tbl_distributor->getPackagePurchaseFlag() == "Y") {
+            $tbl_distributor->setPackagePurchaseFlag("N");
+            $tbl_distributor->save();
 
-        /*$mt4UsernameStr = "";
-        $mt4PasswordStr = "";
+            $mlm_dist_mt4 = new MlmDistMt4();
+            $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+            $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
+            $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+            $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
+            $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_dist_mt4->save();
 
-        if ($this->getRequestParameter('mt4_user_name')) {
-            if ($tbl_distributor->getMt4UserName() != null) {
-                $mt4UsernameStr .= ",";
-            }
-            $mt4UsernameStr .= $this->getRequestParameter('mt4_user_name');
-        }
+            $output = array(
+                "error" => false
+            );
+            echo json_encode($output);
 
-        if ($this->getRequestParameter('mt4_password')) {
-            if ($tbl_distributor->getMt4Password() != null) {
-                $mt4PasswordStr .= ",";
-            }
-            $mt4PasswordStr .= $this->getRequestParameter('mt4_password');
-        }
+            if ($this->getRequestParameter('mt4_user_name') != "" && $this->getRequestParameter('mt4_password') != "") {
+                $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
 
-        $tbl_distributor->setMt4UserName($mt4UsernameStr);
-        $tbl_distributor->setMt4Password($mt4PasswordStr);
-        */
-        $tbl_distributor->save();
-
-        $mlm_dist_mt4 = new MlmDistMt4();
-        $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
-        $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
-        $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-        $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
-        $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_dist_mt4->save();
-
-        $output = array(
-            "error" => false
-        );
-        echo json_encode($output);
-
-        if ($this->getRequestParameter('mt4_user_name') != "" && $this->getRequestParameter('mt4_password') != "") {
-            $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
-
-            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+                $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
 	<tbody>
 		<tr>
 			<td style='padding:20px 0px'>
@@ -1223,8 +1203,9 @@ class marketingActions extends sfActions
 	</tbody>
 </table>";
 
-            $sendMailService = new SendMailService();
-            $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                $sendMailService = new SendMailService();
+                $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+            }
         }
 
         return sfView::HEADER_ONLY;
