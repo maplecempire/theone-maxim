@@ -351,8 +351,8 @@ class memberActions extends sfActions
             $mlmDistPackagePurchase->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $mlmDistPackagePurchase->setRankId($packageDB->getPackageId());
             $mlmDistPackagePurchase->setRankCode($packageDB->getPackageName());
-            $mlmDistPackagePurchase->setInitRankId($packageDB->getPackageId());
-            $mlmDistPackagePurchase->setInitRankCode($packageDB->getPackageName());
+            //$mlmDistPackagePurchase->setInitRankId($packageDB->getPackageId());
+            //$mlmDistPackagePurchase->setInitRankCode($packageDB->getPackageName());
             $mlmDistPackagePurchase->setAmount($packageDB->getPrice());
             $mlmDistPackagePurchase->setTransactionType(Globals::PURCHASE_PACKAGE_BANK_TRANSFER);
             $mlmDistPackagePurchase->setImageSrc($_SERVER['HTTP_HOST']."/uploads/bankslip/".$filename);
