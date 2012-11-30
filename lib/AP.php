@@ -16,6 +16,7 @@ abstract class AP {
     const AL_CHANGE_PASSWORD = 'AL_CHANGE_PASSWORD';
     const AL_SETTING = 'AL_SETTING';
     const AL_PACKAGE = 'AL_PACKAGE';
+    const AL_BONUS = 'AL_BONUS';
 
     const AL_DIST_ADD = 'AL_DIST_ADD';
     const AL_DIST_LIST = 'AL_DIST_LIST';

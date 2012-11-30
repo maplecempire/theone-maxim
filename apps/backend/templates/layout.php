@@ -438,6 +438,14 @@ $(function() {
                              border="0">
                         &nbsp;<?php echo __('Package'); ?></a><br/>
                     <?php } ?>
+
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_BONUS, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('admin/bonusList') ?>" title="<?php echo __('Bonus List'); ?>">
+
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Bonus List'); ?></a><br/>
+                    <?php } ?>
                 </div>
                 <?php } ?>
                 <?php
