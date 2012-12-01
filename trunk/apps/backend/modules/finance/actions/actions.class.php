@@ -801,19 +801,51 @@ class financeActions extends sfActions
                     $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_dist_mt4->save();
                 } else {*/
-            if ($statusCode == Globals::STATUS_COMPLETE && $this->getRequestParameter('mt4Id') != "") {
-                $mlm_dist_mt4 = new MlmDistMt4();
-                $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
-                $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
-                $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
-                $mlm_dist_mt4->setRankId($packageUpgradeHistory->getPackageId());
-                $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_dist_mt4->save();
+            if ($statusCode == Globals::STATUS_COMPLETE && $this->getRequestParameter('mt4Id') != "" && $packageUpgradeHistory->getStatusCode() == Globals::STATUS_ACTIVE) {
+                $c = new Criteria();
+                $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4Id'));
+                $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
 
-                $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
+                if (!$mlmDistMt4DB) {
+                    $mlm_dist_mt4 = new MlmDistMt4();
+                    $mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
+                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
+                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+                    $mlm_dist_mt4->setRankId($packageUpgradeHistory->getPackageId());
+                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
 
-            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+                    $packageDB = MlmPackagePeer::retrieveByPK($packageUpgradeHistory->getPackageId());
+                    /* ****************************************************
+                   * ROI Divident
+                   * ***************************************************/
+                    $dateUtil = new DateUtil();
+                    $currentDate = $dateUtil->formatDate("Y-m-d", $packageUpgradeHistory->getCreatedOn()) . " 00:00:00";
+                    $currentDate_timestamp = strtotime($currentDate);
+                    //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+                    $dividendDate = strtotime("+1 months", $currentDate_timestamp);
+
+                    $mlm_roi_dividend = new MlmRoiDividend();
+                    $mlm_roi_dividend->setDistId($packageUpgradeHistory->getDistId());
+                    $mlm_roi_dividend->setIdx(1);
+                    $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4Id'));
+                    //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                    $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
+                    $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+                    $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                    //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                    //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                    $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                    $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->save();
+
+                    $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
+
+                    $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
 	<tbody>
 		<tr>
 			<td style='padding:20px 0px'>
@@ -1069,8 +1101,9 @@ class financeActions extends sfActions
 	</tbody>
 </table>";
 
-            $sendMailService = new SendMailService();
-            $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                    $sendMailService = new SendMailService();
+                    $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                }
             }
                 /*}
             }*/
