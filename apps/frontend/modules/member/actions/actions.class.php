@@ -4291,7 +4291,7 @@ class memberActions extends sfActions
         $this->retrieveGmailMailAttachment();
 
         print_r("+++++ ROI Dividend +++++<br>");
-        $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
+        $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
         $c = new Criteria();
         $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
         $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
