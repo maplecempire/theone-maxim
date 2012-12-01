@@ -9,7 +9,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 
 	
-	protected $pips_id;
+	protected $pip_id;
 
 
 	
@@ -33,15 +33,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 
 	
-	protected $deposit;
-
-
-	
-	protected $withdraw;
-
-
-	
-	protected $in_out;
+	protected $balance;
 
 
 	
@@ -49,19 +41,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 
 	
-	protected $volume;
-
-
-	
-	protected $commission;
+	protected $commissions;
 
 
 	
 	protected $taxes;
-
-
-	
-	protected $agent;
 
 
 	
@@ -73,7 +57,19 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 
 	
-	protected $last_balance;
+	protected $interest;
+
+
+	
+	protected $tax;
+
+
+	
+	protected $unrealizedpl;
+
+
+	
+	protected $equity;
 
 
 	
@@ -106,10 +102,10 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	
-	public function getPipsId()
+	public function getPipId()
 	{
 
-		return $this->pips_id;
+		return $this->pip_id;
 	}
 
 	
@@ -163,24 +159,10 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getDeposit()
+	public function getBalance()
 	{
 
-		return $this->deposit;
-	}
-
-	
-	public function getWithdraw()
-	{
-
-		return $this->withdraw;
-	}
-
-	
-	public function getInOut()
-	{
-
-		return $this->in_out;
+		return $this->balance;
 	}
 
 	
@@ -191,17 +173,10 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getVolume()
+	public function getCommissions()
 	{
 
-		return $this->volume;
-	}
-
-	
-	public function getCommission()
-	{
-
-		return $this->commission;
+		return $this->commissions;
 	}
 
 	
@@ -209,13 +184,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 
 		return $this->taxes;
-	}
-
-	
-	public function getAgent()
-	{
-
-		return $this->agent;
 	}
 
 	
@@ -233,10 +201,31 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getLastBalance()
+	public function getInterest()
 	{
 
-		return $this->last_balance;
+		return $this->interest;
+	}
+
+	
+	public function getTax()
+	{
+
+		return $this->tax;
+	}
+
+	
+	public function getUnrealizedpl()
+	{
+
+		return $this->unrealizedpl;
+	}
+
+	
+	public function getEquity()
+	{
+
+		return $this->equity;
 	}
 
 	
@@ -312,7 +301,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	}
 
 	
-	public function setPipsId($v)
+	public function setPipId($v)
 	{
 
 		
@@ -321,9 +310,9 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->pips_id !== $v) {
-			$this->pips_id = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::PIPS_ID;
+		if ($this->pip_id !== $v) {
+			$this->pip_id = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::PIP_ID;
 		}
 
 	} 
@@ -415,34 +404,12 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	} 
 
 	
-	public function setDeposit($v)
+	public function setBalance($v)
 	{
 
-		if ($this->deposit !== $v) {
-			$this->deposit = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::DEPOSIT;
-		}
-
-	} 
-
-	
-	public function setWithdraw($v)
-	{
-
-		if ($this->withdraw !== $v) {
-			$this->withdraw = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::WITHDRAW;
-		}
-
-	} 
-
-	
-	public function setInOut($v)
-	{
-
-		if ($this->in_out !== $v) {
-			$this->in_out = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::IN_OUT;
+		if ($this->balance !== $v) {
+			$this->balance = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::BALANCE;
 		}
 
 	} 
@@ -459,23 +426,12 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	} 
 
 	
-	public function setVolume($v)
+	public function setCommissions($v)
 	{
 
-		if ($this->volume !== $v) {
-			$this->volume = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::VOLUME;
-		}
-
-	} 
-
-	
-	public function setCommission($v)
-	{
-
-		if ($this->commission !== $v) {
-			$this->commission = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::COMMISSION;
+		if ($this->commissions !== $v) {
+			$this->commissions = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::COMMISSIONS;
 		}
 
 	} 
@@ -487,17 +443,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		if ($this->taxes !== $v) {
 			$this->taxes = $v;
 			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::TAXES;
-		}
-
-	} 
-
-	
-	public function setAgent($v)
-	{
-
-		if ($this->agent !== $v) {
-			$this->agent = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::AGENT;
 		}
 
 	} 
@@ -525,12 +470,45 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	} 
 
 	
-	public function setLastBalance($v)
+	public function setInterest($v)
 	{
 
-		if ($this->last_balance !== $v) {
-			$this->last_balance = $v;
-			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::LAST_BALANCE;
+		if ($this->interest !== $v) {
+			$this->interest = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::INTEREST;
+		}
+
+	} 
+
+	
+	public function setTax($v)
+	{
+
+		if ($this->tax !== $v) {
+			$this->tax = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::TAX;
+		}
+
+	} 
+
+	
+	public function setUnrealizedpl($v)
+	{
+
+		if ($this->unrealizedpl !== $v) {
+			$this->unrealizedpl = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::UNREALIZEDPL;
+		}
+
+	} 
+
+	
+	public function setEquity($v)
+	{
+
+		if ($this->equity !== $v) {
+			$this->equity = $v;
+			$this->modifiedColumns[] = MlmDailyPipsCsvPeer::EQUITY;
 		}
 
 	} 
@@ -644,7 +622,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->pips_id = $rs->getInt($startcol + 0);
+			$this->pip_id = $rs->getInt($startcol + 0);
 
 			$this->traded_datetime = $rs->getTimestamp($startcol + 1, null);
 
@@ -656,45 +634,43 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 			$this->login_name = $rs->getString($startcol + 5);
 
-			$this->deposit = $rs->getFloat($startcol + 6);
+			$this->balance = $rs->getFloat($startcol + 6);
 
-			$this->withdraw = $rs->getFloat($startcol + 7);
+			$this->credit = $rs->getFloat($startcol + 7);
 
-			$this->in_out = $rs->getFloat($startcol + 8);
+			$this->commissions = $rs->getFloat($startcol + 8);
 
-			$this->credit = $rs->getFloat($startcol + 9);
+			$this->taxes = $rs->getFloat($startcol + 9);
 
-			$this->volume = $rs->getFloat($startcol + 10);
+			$this->storage = $rs->getFloat($startcol + 10);
 
-			$this->commission = $rs->getFloat($startcol + 11);
+			$this->profit = $rs->getFloat($startcol + 11);
 
-			$this->taxes = $rs->getFloat($startcol + 12);
+			$this->interest = $rs->getFloat($startcol + 12);
 
-			$this->agent = $rs->getFloat($startcol + 13);
+			$this->tax = $rs->getFloat($startcol + 13);
 
-			$this->storage = $rs->getFloat($startcol + 14);
+			$this->unrealizedpl = $rs->getFloat($startcol + 14);
 
-			$this->profit = $rs->getFloat($startcol + 15);
+			$this->equity = $rs->getFloat($startcol + 15);
 
-			$this->last_balance = $rs->getFloat($startcol + 16);
+			$this->status_code = $rs->getString($startcol + 16);
 
-			$this->status_code = $rs->getString($startcol + 17);
+			$this->remarks = $rs->getString($startcol + 17);
 
-			$this->remarks = $rs->getString($startcol + 18);
+			$this->created_by = $rs->getInt($startcol + 18);
 
-			$this->created_by = $rs->getInt($startcol + 19);
+			$this->created_on = $rs->getTimestamp($startcol + 19, null);
 
-			$this->created_on = $rs->getTimestamp($startcol + 20, null);
+			$this->updated_by = $rs->getInt($startcol + 20);
 
-			$this->updated_by = $rs->getInt($startcol + 21);
-
-			$this->updated_on = $rs->getTimestamp($startcol + 22, null);
+			$this->updated_on = $rs->getTimestamp($startcol + 21, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 23; 
+						return $startcol + 22; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDailyPipsCsv object", $e);
 		}
@@ -770,7 +746,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 										 
 										 
 
-					$this->setPipsId($pk);  
+					$this->setPipId($pk);  
 
 					$this->setNew(false);
 				} else {
@@ -840,7 +816,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getPipsId();
+				return $this->getPipId();
 				break;
 			case 1:
 				return $this->getTradedDatetime();
@@ -858,54 +834,51 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 				return $this->getLoginName();
 				break;
 			case 6:
-				return $this->getDeposit();
+				return $this->getBalance();
 				break;
 			case 7:
-				return $this->getWithdraw();
-				break;
-			case 8:
-				return $this->getInOut();
-				break;
-			case 9:
 				return $this->getCredit();
 				break;
-			case 10:
-				return $this->getVolume();
+			case 8:
+				return $this->getCommissions();
 				break;
-			case 11:
-				return $this->getCommission();
-				break;
-			case 12:
+			case 9:
 				return $this->getTaxes();
 				break;
-			case 13:
-				return $this->getAgent();
-				break;
-			case 14:
+			case 10:
 				return $this->getStorage();
 				break;
-			case 15:
+			case 11:
 				return $this->getProfit();
 				break;
-			case 16:
-				return $this->getLastBalance();
+			case 12:
+				return $this->getInterest();
 				break;
-			case 17:
+			case 13:
+				return $this->getTax();
+				break;
+			case 14:
+				return $this->getUnrealizedpl();
+				break;
+			case 15:
+				return $this->getEquity();
+				break;
+			case 16:
 				return $this->getStatusCode();
 				break;
-			case 18:
+			case 17:
 				return $this->getRemarks();
 				break;
-			case 19:
+			case 18:
 				return $this->getCreatedBy();
 				break;
-			case 20:
+			case 19:
 				return $this->getCreatedOn();
 				break;
-			case 21:
+			case 20:
 				return $this->getUpdatedBy();
 				break;
-			case 22:
+			case 21:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -918,29 +891,28 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		$keys = MlmDailyPipsCsvPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getPipsId(),
+			$keys[0] => $this->getPipId(),
 			$keys[1] => $this->getTradedDatetime(),
 			$keys[2] => $this->getFileId(),
 			$keys[3] => $this->getPipsString(),
 			$keys[4] => $this->getLoginId(),
 			$keys[5] => $this->getLoginName(),
-			$keys[6] => $this->getDeposit(),
-			$keys[7] => $this->getWithdraw(),
-			$keys[8] => $this->getInOut(),
-			$keys[9] => $this->getCredit(),
-			$keys[10] => $this->getVolume(),
-			$keys[11] => $this->getCommission(),
-			$keys[12] => $this->getTaxes(),
-			$keys[13] => $this->getAgent(),
-			$keys[14] => $this->getStorage(),
-			$keys[15] => $this->getProfit(),
-			$keys[16] => $this->getLastBalance(),
-			$keys[17] => $this->getStatusCode(),
-			$keys[18] => $this->getRemarks(),
-			$keys[19] => $this->getCreatedBy(),
-			$keys[20] => $this->getCreatedOn(),
-			$keys[21] => $this->getUpdatedBy(),
-			$keys[22] => $this->getUpdatedOn(),
+			$keys[6] => $this->getBalance(),
+			$keys[7] => $this->getCredit(),
+			$keys[8] => $this->getCommissions(),
+			$keys[9] => $this->getTaxes(),
+			$keys[10] => $this->getStorage(),
+			$keys[11] => $this->getProfit(),
+			$keys[12] => $this->getInterest(),
+			$keys[13] => $this->getTax(),
+			$keys[14] => $this->getUnrealizedpl(),
+			$keys[15] => $this->getEquity(),
+			$keys[16] => $this->getStatusCode(),
+			$keys[17] => $this->getRemarks(),
+			$keys[18] => $this->getCreatedBy(),
+			$keys[19] => $this->getCreatedOn(),
+			$keys[20] => $this->getUpdatedBy(),
+			$keys[21] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -957,7 +929,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setPipsId($value);
+				$this->setPipId($value);
 				break;
 			case 1:
 				$this->setTradedDatetime($value);
@@ -975,54 +947,51 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 				$this->setLoginName($value);
 				break;
 			case 6:
-				$this->setDeposit($value);
+				$this->setBalance($value);
 				break;
 			case 7:
-				$this->setWithdraw($value);
-				break;
-			case 8:
-				$this->setInOut($value);
-				break;
-			case 9:
 				$this->setCredit($value);
 				break;
-			case 10:
-				$this->setVolume($value);
+			case 8:
+				$this->setCommissions($value);
 				break;
-			case 11:
-				$this->setCommission($value);
-				break;
-			case 12:
+			case 9:
 				$this->setTaxes($value);
 				break;
-			case 13:
-				$this->setAgent($value);
-				break;
-			case 14:
+			case 10:
 				$this->setStorage($value);
 				break;
-			case 15:
+			case 11:
 				$this->setProfit($value);
 				break;
-			case 16:
-				$this->setLastBalance($value);
+			case 12:
+				$this->setInterest($value);
 				break;
-			case 17:
+			case 13:
+				$this->setTax($value);
+				break;
+			case 14:
+				$this->setUnrealizedpl($value);
+				break;
+			case 15:
+				$this->setEquity($value);
+				break;
+			case 16:
 				$this->setStatusCode($value);
 				break;
-			case 18:
+			case 17:
 				$this->setRemarks($value);
 				break;
-			case 19:
+			case 18:
 				$this->setCreatedBy($value);
 				break;
-			case 20:
+			case 19:
 				$this->setCreatedOn($value);
 				break;
-			case 21:
+			case 20:
 				$this->setUpdatedBy($value);
 				break;
-			case 22:
+			case 21:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -1032,29 +1001,28 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		$keys = MlmDailyPipsCsvPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setPipsId($arr[$keys[0]]);
+		if (array_key_exists($keys[0], $arr)) $this->setPipId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setTradedDatetime($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setFileId($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setPipsString($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setLoginId($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setLoginName($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setDeposit($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setWithdraw($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setInOut($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCredit($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setVolume($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCommission($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setTaxes($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setAgent($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setStorage($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setProfit($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setLastBalance($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setStatusCode($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setRemarks($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setCreatedBy($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setCreatedOn($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setUpdatedBy($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setUpdatedOn($arr[$keys[22]]);
+		if (array_key_exists($keys[6], $arr)) $this->setBalance($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCredit($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCommissions($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTaxes($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStorage($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setProfit($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setInterest($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setTax($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUnrealizedpl($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setEquity($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setStatusCode($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setRemarks($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCreatedBy($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCreatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setUpdatedBy($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setUpdatedOn($arr[$keys[21]]);
 	}
 
 	
@@ -1062,23 +1030,22 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(MlmDailyPipsCsvPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::PIPS_ID)) $criteria->add(MlmDailyPipsCsvPeer::PIPS_ID, $this->pips_id);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::PIP_ID)) $criteria->add(MlmDailyPipsCsvPeer::PIP_ID, $this->pip_id);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::TRADED_DATETIME)) $criteria->add(MlmDailyPipsCsvPeer::TRADED_DATETIME, $this->traded_datetime);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::FILE_ID)) $criteria->add(MlmDailyPipsCsvPeer::FILE_ID, $this->file_id);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::PIPS_STRING)) $criteria->add(MlmDailyPipsCsvPeer::PIPS_STRING, $this->pips_string);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::LOGIN_ID)) $criteria->add(MlmDailyPipsCsvPeer::LOGIN_ID, $this->login_id);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::LOGIN_NAME)) $criteria->add(MlmDailyPipsCsvPeer::LOGIN_NAME, $this->login_name);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::DEPOSIT)) $criteria->add(MlmDailyPipsCsvPeer::DEPOSIT, $this->deposit);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::WITHDRAW)) $criteria->add(MlmDailyPipsCsvPeer::WITHDRAW, $this->withdraw);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::IN_OUT)) $criteria->add(MlmDailyPipsCsvPeer::IN_OUT, $this->in_out);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::BALANCE)) $criteria->add(MlmDailyPipsCsvPeer::BALANCE, $this->balance);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::CREDIT)) $criteria->add(MlmDailyPipsCsvPeer::CREDIT, $this->credit);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::VOLUME)) $criteria->add(MlmDailyPipsCsvPeer::VOLUME, $this->volume);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::COMMISSION)) $criteria->add(MlmDailyPipsCsvPeer::COMMISSION, $this->commission);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::COMMISSIONS)) $criteria->add(MlmDailyPipsCsvPeer::COMMISSIONS, $this->commissions);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::TAXES)) $criteria->add(MlmDailyPipsCsvPeer::TAXES, $this->taxes);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::AGENT)) $criteria->add(MlmDailyPipsCsvPeer::AGENT, $this->agent);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::STORAGE)) $criteria->add(MlmDailyPipsCsvPeer::STORAGE, $this->storage);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::PROFIT)) $criteria->add(MlmDailyPipsCsvPeer::PROFIT, $this->profit);
-		if ($this->isColumnModified(MlmDailyPipsCsvPeer::LAST_BALANCE)) $criteria->add(MlmDailyPipsCsvPeer::LAST_BALANCE, $this->last_balance);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::INTEREST)) $criteria->add(MlmDailyPipsCsvPeer::INTEREST, $this->interest);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::TAX)) $criteria->add(MlmDailyPipsCsvPeer::TAX, $this->tax);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::UNREALIZEDPL)) $criteria->add(MlmDailyPipsCsvPeer::UNREALIZEDPL, $this->unrealizedpl);
+		if ($this->isColumnModified(MlmDailyPipsCsvPeer::EQUITY)) $criteria->add(MlmDailyPipsCsvPeer::EQUITY, $this->equity);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::STATUS_CODE)) $criteria->add(MlmDailyPipsCsvPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::REMARKS)) $criteria->add(MlmDailyPipsCsvPeer::REMARKS, $this->remarks);
 		if ($this->isColumnModified(MlmDailyPipsCsvPeer::CREATED_BY)) $criteria->add(MlmDailyPipsCsvPeer::CREATED_BY, $this->created_by);
@@ -1094,7 +1061,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(MlmDailyPipsCsvPeer::DATABASE_NAME);
 
-		$criteria->add(MlmDailyPipsCsvPeer::PIPS_ID, $this->pips_id);
+		$criteria->add(MlmDailyPipsCsvPeer::PIP_ID, $this->pip_id);
 
 		return $criteria;
 	}
@@ -1102,13 +1069,13 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getPipsId();
+		return $this->getPipId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setPipsId($key);
+		$this->setPipId($key);
 	}
 
 	
@@ -1125,27 +1092,25 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 		$copyObj->setLoginName($this->login_name);
 
-		$copyObj->setDeposit($this->deposit);
-
-		$copyObj->setWithdraw($this->withdraw);
-
-		$copyObj->setInOut($this->in_out);
+		$copyObj->setBalance($this->balance);
 
 		$copyObj->setCredit($this->credit);
 
-		$copyObj->setVolume($this->volume);
-
-		$copyObj->setCommission($this->commission);
+		$copyObj->setCommissions($this->commissions);
 
 		$copyObj->setTaxes($this->taxes);
-
-		$copyObj->setAgent($this->agent);
 
 		$copyObj->setStorage($this->storage);
 
 		$copyObj->setProfit($this->profit);
 
-		$copyObj->setLastBalance($this->last_balance);
+		$copyObj->setInterest($this->interest);
+
+		$copyObj->setTax($this->tax);
+
+		$copyObj->setUnrealizedpl($this->unrealizedpl);
+
+		$copyObj->setEquity($this->equity);
 
 		$copyObj->setStatusCode($this->status_code);
 
@@ -1162,7 +1127,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setPipsId(NULL); 
+		$copyObj->setPipId(NULL); 
 
 	}
 

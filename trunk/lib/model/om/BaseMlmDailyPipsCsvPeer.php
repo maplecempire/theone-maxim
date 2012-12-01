@@ -13,14 +13,14 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDailyPipsCsv';
 
 	
-	const NUM_COLUMNS = 23;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const PIPS_ID = 'mlm_daily_pips_csv.PIPS_ID';
+	const PIP_ID = 'mlm_daily_pips_csv.PIP_ID';
 
 	
 	const TRADED_DATETIME = 'mlm_daily_pips_csv.TRADED_DATETIME';
@@ -38,28 +38,16 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	const LOGIN_NAME = 'mlm_daily_pips_csv.LOGIN_NAME';
 
 	
-	const DEPOSIT = 'mlm_daily_pips_csv.DEPOSIT';
-
-	
-	const WITHDRAW = 'mlm_daily_pips_csv.WITHDRAW';
-
-	
-	const IN_OUT = 'mlm_daily_pips_csv.IN_OUT';
+	const BALANCE = 'mlm_daily_pips_csv.BALANCE';
 
 	
 	const CREDIT = 'mlm_daily_pips_csv.CREDIT';
 
 	
-	const VOLUME = 'mlm_daily_pips_csv.VOLUME';
-
-	
-	const COMMISSION = 'mlm_daily_pips_csv.COMMISSION';
+	const COMMISSIONS = 'mlm_daily_pips_csv.COMMISSIONS';
 
 	
 	const TAXES = 'mlm_daily_pips_csv.TAXES';
-
-	
-	const AGENT = 'mlm_daily_pips_csv.AGENT';
 
 	
 	const STORAGE = 'mlm_daily_pips_csv.STORAGE';
@@ -68,7 +56,16 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	const PROFIT = 'mlm_daily_pips_csv.PROFIT';
 
 	
-	const LAST_BALANCE = 'mlm_daily_pips_csv.LAST_BALANCE';
+	const INTEREST = 'mlm_daily_pips_csv.INTEREST';
+
+	
+	const TAX = 'mlm_daily_pips_csv.TAX';
+
+	
+	const UNREALIZEDPL = 'mlm_daily_pips_csv.UNREALIZEDPL';
+
+	
+	const EQUITY = 'mlm_daily_pips_csv.EQUITY';
 
 	
 	const STATUS_CODE = 'mlm_daily_pips_csv.STATUS_CODE';
@@ -94,18 +91,18 @@ abstract class BaseMlmDailyPipsCsvPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PipsId', 'TradedDatetime', 'FileId', 'PipsString', 'LoginId', 'LoginName', 'Deposit', 'Withdraw', 'InOut', 'Credit', 'Volume', 'Commission', 'Taxes', 'Agent', 'Storage', 'Profit', 'LastBalance', 'StatusCode', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmDailyPipsCsvPeer::PIPS_ID, MlmDailyPipsCsvPeer::TRADED_DATETIME, MlmDailyPipsCsvPeer::FILE_ID, MlmDailyPipsCsvPeer::PIPS_STRING, MlmDailyPipsCsvPeer::LOGIN_ID, MlmDailyPipsCsvPeer::LOGIN_NAME, MlmDailyPipsCsvPeer::DEPOSIT, MlmDailyPipsCsvPeer::WITHDRAW, MlmDailyPipsCsvPeer::IN_OUT, MlmDailyPipsCsvPeer::CREDIT, MlmDailyPipsCsvPeer::VOLUME, MlmDailyPipsCsvPeer::COMMISSION, MlmDailyPipsCsvPeer::TAXES, MlmDailyPipsCsvPeer::AGENT, MlmDailyPipsCsvPeer::STORAGE, MlmDailyPipsCsvPeer::PROFIT, MlmDailyPipsCsvPeer::LAST_BALANCE, MlmDailyPipsCsvPeer::STATUS_CODE, MlmDailyPipsCsvPeer::REMARKS, MlmDailyPipsCsvPeer::CREATED_BY, MlmDailyPipsCsvPeer::CREATED_ON, MlmDailyPipsCsvPeer::UPDATED_BY, MlmDailyPipsCsvPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('pips_id', 'traded_datetime', 'file_id', 'pips_string', 'login_id', 'login_name', 'deposit', 'withdraw', 'in_out', 'credit', 'volume', 'commission', 'taxes', 'agent', 'storage', 'profit', 'last_balance', 'status_code', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('PipId', 'TradedDatetime', 'FileId', 'PipsString', 'LoginId', 'LoginName', 'Balance', 'Credit', 'Commissions', 'Taxes', 'Storage', 'Profit', 'Interest', 'Tax', 'Unrealizedpl', 'Equity', 'StatusCode', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmDailyPipsCsvPeer::PIP_ID, MlmDailyPipsCsvPeer::TRADED_DATETIME, MlmDailyPipsCsvPeer::FILE_ID, MlmDailyPipsCsvPeer::PIPS_STRING, MlmDailyPipsCsvPeer::LOGIN_ID, MlmDailyPipsCsvPeer::LOGIN_NAME, MlmDailyPipsCsvPeer::BALANCE, MlmDailyPipsCsvPeer::CREDIT, MlmDailyPipsCsvPeer::COMMISSIONS, MlmDailyPipsCsvPeer::TAXES, MlmDailyPipsCsvPeer::STORAGE, MlmDailyPipsCsvPeer::PROFIT, MlmDailyPipsCsvPeer::INTEREST, MlmDailyPipsCsvPeer::TAX, MlmDailyPipsCsvPeer::UNREALIZEDPL, MlmDailyPipsCsvPeer::EQUITY, MlmDailyPipsCsvPeer::STATUS_CODE, MlmDailyPipsCsvPeer::REMARKS, MlmDailyPipsCsvPeer::CREATED_BY, MlmDailyPipsCsvPeer::CREATED_ON, MlmDailyPipsCsvPeer::UPDATED_BY, MlmDailyPipsCsvPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('pip_id', 'traded_datetime', 'file_id', 'pips_string', 'login_id', 'login_name', 'balance', 'credit', 'commissions', 'taxes', 'storage', 'profit', 'interest', 'tax', 'unrealizedPL', 'equity', 'status_code', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PipsId' => 0, 'TradedDatetime' => 1, 'FileId' => 2, 'PipsString' => 3, 'LoginId' => 4, 'LoginName' => 5, 'Deposit' => 6, 'Withdraw' => 7, 'InOut' => 8, 'Credit' => 9, 'Volume' => 10, 'Commission' => 11, 'Taxes' => 12, 'Agent' => 13, 'Storage' => 14, 'Profit' => 15, 'LastBalance' => 16, 'StatusCode' => 17, 'Remarks' => 18, 'CreatedBy' => 19, 'CreatedOn' => 20, 'UpdatedBy' => 21, 'UpdatedOn' => 22, ),
-		BasePeer::TYPE_COLNAME => array (MlmDailyPipsCsvPeer::PIPS_ID => 0, MlmDailyPipsCsvPeer::TRADED_DATETIME => 1, MlmDailyPipsCsvPeer::FILE_ID => 2, MlmDailyPipsCsvPeer::PIPS_STRING => 3, MlmDailyPipsCsvPeer::LOGIN_ID => 4, MlmDailyPipsCsvPeer::LOGIN_NAME => 5, MlmDailyPipsCsvPeer::DEPOSIT => 6, MlmDailyPipsCsvPeer::WITHDRAW => 7, MlmDailyPipsCsvPeer::IN_OUT => 8, MlmDailyPipsCsvPeer::CREDIT => 9, MlmDailyPipsCsvPeer::VOLUME => 10, MlmDailyPipsCsvPeer::COMMISSION => 11, MlmDailyPipsCsvPeer::TAXES => 12, MlmDailyPipsCsvPeer::AGENT => 13, MlmDailyPipsCsvPeer::STORAGE => 14, MlmDailyPipsCsvPeer::PROFIT => 15, MlmDailyPipsCsvPeer::LAST_BALANCE => 16, MlmDailyPipsCsvPeer::STATUS_CODE => 17, MlmDailyPipsCsvPeer::REMARKS => 18, MlmDailyPipsCsvPeer::CREATED_BY => 19, MlmDailyPipsCsvPeer::CREATED_ON => 20, MlmDailyPipsCsvPeer::UPDATED_BY => 21, MlmDailyPipsCsvPeer::UPDATED_ON => 22, ),
-		BasePeer::TYPE_FIELDNAME => array ('pips_id' => 0, 'traded_datetime' => 1, 'file_id' => 2, 'pips_string' => 3, 'login_id' => 4, 'login_name' => 5, 'deposit' => 6, 'withdraw' => 7, 'in_out' => 8, 'credit' => 9, 'volume' => 10, 'commission' => 11, 'taxes' => 12, 'agent' => 13, 'storage' => 14, 'profit' => 15, 'last_balance' => 16, 'status_code' => 17, 'remarks' => 18, 'created_by' => 19, 'created_on' => 20, 'updated_by' => 21, 'updated_on' => 22, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('PipId' => 0, 'TradedDatetime' => 1, 'FileId' => 2, 'PipsString' => 3, 'LoginId' => 4, 'LoginName' => 5, 'Balance' => 6, 'Credit' => 7, 'Commissions' => 8, 'Taxes' => 9, 'Storage' => 10, 'Profit' => 11, 'Interest' => 12, 'Tax' => 13, 'Unrealizedpl' => 14, 'Equity' => 15, 'StatusCode' => 16, 'Remarks' => 17, 'CreatedBy' => 18, 'CreatedOn' => 19, 'UpdatedBy' => 20, 'UpdatedOn' => 21, ),
+		BasePeer::TYPE_COLNAME => array (MlmDailyPipsCsvPeer::PIP_ID => 0, MlmDailyPipsCsvPeer::TRADED_DATETIME => 1, MlmDailyPipsCsvPeer::FILE_ID => 2, MlmDailyPipsCsvPeer::PIPS_STRING => 3, MlmDailyPipsCsvPeer::LOGIN_ID => 4, MlmDailyPipsCsvPeer::LOGIN_NAME => 5, MlmDailyPipsCsvPeer::BALANCE => 6, MlmDailyPipsCsvPeer::CREDIT => 7, MlmDailyPipsCsvPeer::COMMISSIONS => 8, MlmDailyPipsCsvPeer::TAXES => 9, MlmDailyPipsCsvPeer::STORAGE => 10, MlmDailyPipsCsvPeer::PROFIT => 11, MlmDailyPipsCsvPeer::INTEREST => 12, MlmDailyPipsCsvPeer::TAX => 13, MlmDailyPipsCsvPeer::UNREALIZEDPL => 14, MlmDailyPipsCsvPeer::EQUITY => 15, MlmDailyPipsCsvPeer::STATUS_CODE => 16, MlmDailyPipsCsvPeer::REMARKS => 17, MlmDailyPipsCsvPeer::CREATED_BY => 18, MlmDailyPipsCsvPeer::CREATED_ON => 19, MlmDailyPipsCsvPeer::UPDATED_BY => 20, MlmDailyPipsCsvPeer::UPDATED_ON => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('pip_id' => 0, 'traded_datetime' => 1, 'file_id' => 2, 'pips_string' => 3, 'login_id' => 4, 'login_name' => 5, 'balance' => 6, 'credit' => 7, 'commissions' => 8, 'taxes' => 9, 'storage' => 10, 'profit' => 11, 'interest' => 12, 'tax' => 13, 'unrealizedPL' => 14, 'equity' => 15, 'status_code' => 16, 'remarks' => 17, 'created_by' => 18, 'created_on' => 19, 'updated_by' => 20, 'updated_on' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -159,7 +156,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::PIPS_ID);
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::PIP_ID);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::TRADED_DATETIME);
 
@@ -171,27 +168,25 @@ abstract class BaseMlmDailyPipsCsvPeer {
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::LOGIN_NAME);
 
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::DEPOSIT);
-
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::WITHDRAW);
-
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::IN_OUT);
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::BALANCE);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::CREDIT);
 
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::VOLUME);
-
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::COMMISSION);
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::COMMISSIONS);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::TAXES);
-
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::AGENT);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::STORAGE);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::PROFIT);
 
-		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::LAST_BALANCE);
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::INTEREST);
+
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::TAX);
+
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::UNREALIZEDPL);
+
+		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::EQUITY);
 
 		$criteria->addSelectColumn(MlmDailyPipsCsvPeer::STATUS_CODE);
 
@@ -207,8 +202,8 @@ abstract class BaseMlmDailyPipsCsvPeer {
 
 	}
 
-	const COUNT = 'COUNT(mlm_daily_pips_csv.PIPS_ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT mlm_daily_pips_csv.PIPS_ID)';
+	const COUNT = 'COUNT(mlm_daily_pips_csv.PIP_ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT mlm_daily_pips_csv.PIP_ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -316,7 +311,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 			$criteria = $values->buildCriteria(); 
 		}
 
-		$criteria->remove(MlmDailyPipsCsvPeer::PIPS_ID); 
+		$criteria->remove(MlmDailyPipsCsvPeer::PIP_ID); 
 
 
 		
@@ -348,8 +343,8 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
 
-			$comparison = $criteria->getComparison(MlmDailyPipsCsvPeer::PIPS_ID);
-			$selectCriteria->add(MlmDailyPipsCsvPeer::PIPS_ID, $criteria->remove(MlmDailyPipsCsvPeer::PIPS_ID), $comparison);
+			$comparison = $criteria->getComparison(MlmDailyPipsCsvPeer::PIP_ID);
+			$selectCriteria->add(MlmDailyPipsCsvPeer::PIP_ID, $criteria->remove(MlmDailyPipsCsvPeer::PIP_ID), $comparison);
 
 		} else { 
 			$criteria = $values->buildCriteria(); 
@@ -397,7 +392,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		} else {
 			
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(MlmDailyPipsCsvPeer::PIPS_ID, (array) $values, Criteria::IN);
+			$criteria->add(MlmDailyPipsCsvPeer::PIP_ID, (array) $values, Criteria::IN);
 		}
 
 		
@@ -454,7 +449,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 
 		$criteria = new Criteria(MlmDailyPipsCsvPeer::DATABASE_NAME);
 
-		$criteria->add(MlmDailyPipsCsvPeer::PIPS_ID, $pk);
+		$criteria->add(MlmDailyPipsCsvPeer::PIP_ID, $pk);
 
 
 		$v = MlmDailyPipsCsvPeer::doSelect($criteria, $con);
@@ -474,7 +469,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(MlmDailyPipsCsvPeer::PIPS_ID, $pks, Criteria::IN);
+			$criteria->add(MlmDailyPipsCsvPeer::PIP_ID, $pks, Criteria::IN);
 			$objs = MlmDailyPipsCsvPeer::doSelect($criteria, $con);
 		}
 		return $objs;
