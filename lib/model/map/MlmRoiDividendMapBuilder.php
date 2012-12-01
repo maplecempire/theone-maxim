@@ -36,6 +36,8 @@ class MlmRoiDividendMapBuilder {
 
 		$tMap->addColumn('DIST_ID', 'DistId', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('MT4_USER_NAME', 'Mt4UserName', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addColumn('IDX', 'Idx', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('ACCOUNT_LEDGER_ID', 'AccountLedgerId', 'int', CreoleTypes::INTEGER, false, null);

@@ -13,7 +13,7 @@ abstract class BaseMlmRoiDividendPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmRoiDividend';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseMlmRoiDividendPeer {
 
 	
 	const DIST_ID = 'mlm_roi_dividend.DIST_ID';
+
+	
+	const MT4_USER_NAME = 'mlm_roi_dividend.MT4_USER_NAME';
 
 	
 	const IDX = 'mlm_roi_dividend.IDX';
@@ -73,18 +76,18 @@ abstract class BaseMlmRoiDividendPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('DevidendId', 'DistId', 'Idx', 'AccountLedgerId', 'DividendDate', 'PackageId', 'PackagePrice', 'RoiPercentage', 'DividendAmount', 'Remarks', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'FirstDividendDate', ),
-		BasePeer::TYPE_COLNAME => array (MlmRoiDividendPeer::DEVIDEND_ID, MlmRoiDividendPeer::DIST_ID, MlmRoiDividendPeer::IDX, MlmRoiDividendPeer::ACCOUNT_LEDGER_ID, MlmRoiDividendPeer::DIVIDEND_DATE, MlmRoiDividendPeer::PACKAGE_ID, MlmRoiDividendPeer::PACKAGE_PRICE, MlmRoiDividendPeer::ROI_PERCENTAGE, MlmRoiDividendPeer::DIVIDEND_AMOUNT, MlmRoiDividendPeer::REMARKS, MlmRoiDividendPeer::STATUS_CODE, MlmRoiDividendPeer::CREATED_BY, MlmRoiDividendPeer::CREATED_ON, MlmRoiDividendPeer::UPDATED_BY, MlmRoiDividendPeer::UPDATED_ON, MlmRoiDividendPeer::FIRST_DIVIDEND_DATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('devidend_id', 'dist_id', 'idx', 'account_ledger_id', 'dividend_date', 'package_id', 'package_price', 'roi_percentage', 'dividend_amount', 'remarks', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', 'first_dividend_date', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('DevidendId', 'DistId', 'Mt4UserName', 'Idx', 'AccountLedgerId', 'DividendDate', 'PackageId', 'PackagePrice', 'RoiPercentage', 'DividendAmount', 'Remarks', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'FirstDividendDate', ),
+		BasePeer::TYPE_COLNAME => array (MlmRoiDividendPeer::DEVIDEND_ID, MlmRoiDividendPeer::DIST_ID, MlmRoiDividendPeer::MT4_USER_NAME, MlmRoiDividendPeer::IDX, MlmRoiDividendPeer::ACCOUNT_LEDGER_ID, MlmRoiDividendPeer::DIVIDEND_DATE, MlmRoiDividendPeer::PACKAGE_ID, MlmRoiDividendPeer::PACKAGE_PRICE, MlmRoiDividendPeer::ROI_PERCENTAGE, MlmRoiDividendPeer::DIVIDEND_AMOUNT, MlmRoiDividendPeer::REMARKS, MlmRoiDividendPeer::STATUS_CODE, MlmRoiDividendPeer::CREATED_BY, MlmRoiDividendPeer::CREATED_ON, MlmRoiDividendPeer::UPDATED_BY, MlmRoiDividendPeer::UPDATED_ON, MlmRoiDividendPeer::FIRST_DIVIDEND_DATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('devidend_id', 'dist_id', 'mt4_user_name', 'idx', 'account_ledger_id', 'dividend_date', 'package_id', 'package_price', 'roi_percentage', 'dividend_amount', 'remarks', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', 'first_dividend_date', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('DevidendId' => 0, 'DistId' => 1, 'Idx' => 2, 'AccountLedgerId' => 3, 'DividendDate' => 4, 'PackageId' => 5, 'PackagePrice' => 6, 'RoiPercentage' => 7, 'DividendAmount' => 8, 'Remarks' => 9, 'StatusCode' => 10, 'CreatedBy' => 11, 'CreatedOn' => 12, 'UpdatedBy' => 13, 'UpdatedOn' => 14, 'FirstDividendDate' => 15, ),
-		BasePeer::TYPE_COLNAME => array (MlmRoiDividendPeer::DEVIDEND_ID => 0, MlmRoiDividendPeer::DIST_ID => 1, MlmRoiDividendPeer::IDX => 2, MlmRoiDividendPeer::ACCOUNT_LEDGER_ID => 3, MlmRoiDividendPeer::DIVIDEND_DATE => 4, MlmRoiDividendPeer::PACKAGE_ID => 5, MlmRoiDividendPeer::PACKAGE_PRICE => 6, MlmRoiDividendPeer::ROI_PERCENTAGE => 7, MlmRoiDividendPeer::DIVIDEND_AMOUNT => 8, MlmRoiDividendPeer::REMARKS => 9, MlmRoiDividendPeer::STATUS_CODE => 10, MlmRoiDividendPeer::CREATED_BY => 11, MlmRoiDividendPeer::CREATED_ON => 12, MlmRoiDividendPeer::UPDATED_BY => 13, MlmRoiDividendPeer::UPDATED_ON => 14, MlmRoiDividendPeer::FIRST_DIVIDEND_DATE => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('devidend_id' => 0, 'dist_id' => 1, 'idx' => 2, 'account_ledger_id' => 3, 'dividend_date' => 4, 'package_id' => 5, 'package_price' => 6, 'roi_percentage' => 7, 'dividend_amount' => 8, 'remarks' => 9, 'status_code' => 10, 'created_by' => 11, 'created_on' => 12, 'updated_by' => 13, 'updated_on' => 14, 'first_dividend_date' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('DevidendId' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'Idx' => 3, 'AccountLedgerId' => 4, 'DividendDate' => 5, 'PackageId' => 6, 'PackagePrice' => 7, 'RoiPercentage' => 8, 'DividendAmount' => 9, 'Remarks' => 10, 'StatusCode' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, 'FirstDividendDate' => 16, ),
+		BasePeer::TYPE_COLNAME => array (MlmRoiDividendPeer::DEVIDEND_ID => 0, MlmRoiDividendPeer::DIST_ID => 1, MlmRoiDividendPeer::MT4_USER_NAME => 2, MlmRoiDividendPeer::IDX => 3, MlmRoiDividendPeer::ACCOUNT_LEDGER_ID => 4, MlmRoiDividendPeer::DIVIDEND_DATE => 5, MlmRoiDividendPeer::PACKAGE_ID => 6, MlmRoiDividendPeer::PACKAGE_PRICE => 7, MlmRoiDividendPeer::ROI_PERCENTAGE => 8, MlmRoiDividendPeer::DIVIDEND_AMOUNT => 9, MlmRoiDividendPeer::REMARKS => 10, MlmRoiDividendPeer::STATUS_CODE => 11, MlmRoiDividendPeer::CREATED_BY => 12, MlmRoiDividendPeer::CREATED_ON => 13, MlmRoiDividendPeer::UPDATED_BY => 14, MlmRoiDividendPeer::UPDATED_ON => 15, MlmRoiDividendPeer::FIRST_DIVIDEND_DATE => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('devidend_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'idx' => 3, 'account_ledger_id' => 4, 'dividend_date' => 5, 'package_id' => 6, 'package_price' => 7, 'roi_percentage' => 8, 'dividend_amount' => 9, 'remarks' => 10, 'status_code' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, 'first_dividend_date' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -141,6 +144,8 @@ abstract class BaseMlmRoiDividendPeer {
 		$criteria->addSelectColumn(MlmRoiDividendPeer::DEVIDEND_ID);
 
 		$criteria->addSelectColumn(MlmRoiDividendPeer::DIST_ID);
+
+		$criteria->addSelectColumn(MlmRoiDividendPeer::MT4_USER_NAME);
 
 		$criteria->addSelectColumn(MlmRoiDividendPeer::IDX);
 
