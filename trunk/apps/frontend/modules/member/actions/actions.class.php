@@ -4304,6 +4304,28 @@ class memberActions extends sfActions
             print_r("DistId " . $distId . "<br>");
 
             $dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
+            $dividendDateFrom = $dividendDateStr . " 00:00:00";
+            $dividendDateTo = $dividendDateStr . " 23:59:59";
+
+            $dividendDateFromTS = strtotime($dividendDateFrom);
+            $dividendDateToTS = strtotime($dividendDateTo);
+
+            $query = "SELECT mt4_credit, credit_id FROM mlm_daily_dist_mt4_credit WHERE 1=1 "
+                 . " AND dist_id = '" . $distId . "'"
+                 . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
+
+            //var_dump($query);
+            //exit();
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+
+            if ($resultset->next()) {
+                $arr = $resultset->getRow();
+                if ($packagePrice > $arr["mt4_credit"]) {
+                    $packagePrice = $arr["mt4_credit"];
+                }
+            /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
             $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
             $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
 
@@ -4316,7 +4338,7 @@ class memberActions extends sfActions
             if ($mlmDailyDistMt4CreditDB) {
                 if ($packagePrice > $mlmDailyDistMt4CreditDB->getMt4Credit()) {
                     $packagePrice = $mlmDailyDistMt4CreditDB->getMt4Credit();
-                }
+                }*/
                 $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
 
                 $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
