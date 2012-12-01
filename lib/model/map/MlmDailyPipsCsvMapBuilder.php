@@ -32,9 +32,9 @@ class MlmDailyPipsCsvMapBuilder {
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->addPrimaryKey('PIPS_ID', 'PipsId', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addPrimaryKey('PIP_ID', 'PipId', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('TRADED_DATETIME', 'TradedDatetime', 'int', CreoleTypes::TIMESTAMP, true, null);
+		$tMap->addColumn('TRADED_DATETIME', 'TradedDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 		$tMap->addColumn('FILE_ID', 'FileId', 'int', CreoleTypes::INTEGER, false, null);
 
@@ -44,27 +44,25 @@ class MlmDailyPipsCsvMapBuilder {
 
 		$tMap->addColumn('LOGIN_NAME', 'LoginName', 'string', CreoleTypes::VARCHAR, true, 255);
 
-		$tMap->addColumn('DEPOSIT', 'Deposit', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('WITHDRAW', 'Withdraw', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('IN_OUT', 'InOut', 'double', CreoleTypes::DECIMAL, false, 12);
+		$tMap->addColumn('BALANCE', 'Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('CREDIT', 'Credit', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('VOLUME', 'Volume', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('COMMISSION', 'Commission', 'double', CreoleTypes::DECIMAL, false, 12);
+		$tMap->addColumn('COMMISSIONS', 'Commissions', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('TAXES', 'Taxes', 'double', CreoleTypes::DECIMAL, false, 12);
-
-		$tMap->addColumn('AGENT', 'Agent', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('STORAGE', 'Storage', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('PROFIT', 'Profit', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('LAST_BALANCE', 'LastBalance', 'double', CreoleTypes::DECIMAL, false, 12);
+		$tMap->addColumn('INTEREST', 'Interest', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('TAX', 'Tax', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('UNREALIZEDPL', 'Unrealizedpl', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('EQUITY', 'Equity', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 255);
 
