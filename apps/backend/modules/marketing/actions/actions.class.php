@@ -556,7 +556,7 @@ class marketingActions extends sfActions
                                     //$generation2 = $affectedDistributorPackageDB->getGeneration2();
                                     //$pips2 = $affectedDistributorPackageDB->getPips2();
                                     $creditRefundByPackage = $affectedDistributorPackageDB->getCreditRefund();
-                                    $fundMgnProfitSharing = $affectedDistributorPackageDB->getFundMgnProfitSharing();
+                                    //$fundMgnProfitSharing = $affectedDistributorPackageDB->getFundMgnProfitSharing();
 
                                     $generation = 0;
                                     $pips = 0;
@@ -609,10 +609,10 @@ class marketingActions extends sfActions
                                                 $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
 
                                                 $creditRefund = $totalVolume * $creditRefundByPackage;
-                                                $fundManagement = $totalVolume * $fundManagementPercentage * ((100 - $fundMgnProfitSharing) / 100);
-                                                $fundMgnProfitSharingAmount = $fundManagement * $fundMgnProfitSharing / 100;
+                                                //$fundManagement = $totalVolume * $fundManagementPercentage * ((100 - $fundMgnProfitSharing) / 100);
+                                                //$fundMgnProfitSharingAmount = $fundManagement * $fundMgnProfitSharing / 100;
 
-                                                $fundManagement = $fundManagement - $fundMgnProfitSharingAmount;
+                                                //$fundManagement = $fundManagement - $fundMgnProfitSharingAmount;
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
@@ -625,7 +625,7 @@ class marketingActions extends sfActions
                                                 $sponsorDistCommissionledger->setDebit(0);
                                                 $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                                                 $sponsorDistCommissionledger->setBalance($pipsBalance + $creditRefund);
-                                                $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume.", Sharing:".$fundMgnProfitSharingAmount);
+                                                $sponsorDistCommissionledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
                                                 $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                 $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                 $sponsorDistCommissionledger->save();
@@ -638,7 +638,7 @@ class marketingActions extends sfActions
                                                 $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
                                                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                                                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
-                                                $mlm_account_ledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume.", Sharing:".$fundMgnProfitSharingAmount);
+                                                $mlm_account_ledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
                                                 $mlm_account_ledger->setCredit($creditRefund);
                                                 $mlm_account_ledger->setDebit(0);
                                                 $mlm_account_ledger->setBalance($distAccountEcashBalance + $creditRefund);
@@ -647,26 +647,6 @@ class marketingActions extends sfActions
                                                 $mlm_account_ledger->save();
 
                                                 $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
-
-                                                // fund management
-                                                //$fundManagementBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-
-                                                /*$sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                                                $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                                $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
-                                                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-                                                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
-                                                $sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                                                $sponsorDistCommissionledger->setCredit($fundManagement);
-                                                $sponsorDistCommissionledger->setDebit(0);
-                                                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                                                $sponsorDistCommissionledger->setBalance($fundManagementBalance + $creditRefund);
-                                                $sponsorDistCommissionledger->setRemark($fundManagementPercentage."%, Volume:".$totalVolume);
-                                                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $sponsorDistCommissionledger->save();
-
-                                                $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);*/
                                             } else if ($gap > 0) {
                                                 $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 

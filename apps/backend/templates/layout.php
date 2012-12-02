@@ -505,12 +505,12 @@ $(function() {
                         &nbsp;<?php echo __('Pips Upload'); ?></a><br/>
                     <?php } ?>
 
-                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DAILY_PIPS_CALCULATOR, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
-                    <a href="<?php echo url_for('marketing/dailyPipsUpload') ?>" title="Daily Pips Upload">
+                    <?php /*if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DAILY_PIPS_CALCULATOR, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { */?><!--
+                    <a href="<?php /*echo url_for('marketing/dailyPipsUpload') */?>" title="Daily Pips Upload">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Daily Pips Upload'); ?></a><br/>
-                    <?php } ?>
+                        &nbsp;<?php /*echo __('Daily Pips Upload'); */?></a><br/>
+                    --><?php //} ?>
 
                     <a href="<?php echo url_for('marketing/customerEnquiryList') ?>" title="Customer Enquiry">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
