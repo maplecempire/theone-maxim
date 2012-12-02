@@ -678,7 +678,7 @@ class marketingActions extends sfActions
                                                 $mlm_account_ledger = new MlmAccountLedger();
                                                 $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
                                                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                                                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
+                                                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PIPS_BONUS);
                                                 $mlm_account_ledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
                                                 $mlm_account_ledger->setCredit($pipsAmountEntitied);
                                                 $mlm_account_ledger->setDebit(0);
