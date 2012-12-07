@@ -999,55 +999,48 @@ class memberActions extends sfActions
 
                 $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
                 //var_dump("==>1");
+                //var_dump("totalBonusPayOut=".$totalBonusPayOut);
                 if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
                     //var_dump("==>2");
                     $checkCommission = true;
                     $uplineDistId = $uplineDistDB->getUplineDistId();
-
-
                     while ($checkCommission == true) {
                         //var_dump("==>3**".$uplineDistId);
-                        if ($uplineDistId == null || $uplineDistId == 0) {
-                            $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT ;
-                            break;
-                        }
                         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
                         //var_dump("==>3$$".$uplineDistId);
-                        if ($uplineDistDB) {
-                            if ($uplineDistDB->getIsIb() == Globals::YES) {
-                                /*if ($uplineDistDB->getIbRankId() != null) {
-                                    $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
-                                } else {
-                                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                                }*/
-                                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-
-                                if ($directSponsorPercentage > $totalBonusPayOut) {
-                                    //var_dump("==>6");
-                                    $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                                    $totalBonusPayOut += $directSponsorPercentage;
-                                    if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                        //var_dump("==>7");
-                                        $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
-                                    }
-                                } else {
-                                    //var_dump("==>8");
-                                    $uplineDistId = $uplineDistDB->getUplineDistId();
-                                    continue;
-                                }
-                            } else {
-                                $uplineDistId = $uplineDistDB->getUplineDistId();
-                                continue;
-                            }
-                            $directSponsorBonusAmount = $directSponsorPercentage * $packagePrice / 100;
-                            $checkCommission == false;
-                            break;
-                        } else {
-                            $totalBonusPayOut = Globals::TOTAL_BONUS_PAYOUT;
+                        if (!$uplineDistDB) {
                             break;
                         }
 
+                        if ($uplineDistDB->getIsIb() == Globals::YES) {
+                            /*if ($uplineDistDB->getIbRankId() != null) {
+                                $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                            } else {
+                                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            }*/
+                            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                        } else {
+                            $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            $directSponsorPercentage = $uplineDistPackage->getCommission();
+                        }
+                        if ($directSponsorPercentage > $totalBonusPayOut) {
+                            //var_dump("==>6");
+                            $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                            $totalBonusPayOut += $directSponsorPercentage;
+                            if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                //var_dump("==>7");
+                                $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                            }
+                        } else {
+                            //var_dump("==>8");
+                            $uplineDistId = $uplineDistDB->getUplineDistId();
+                            continue;
+                        }
+
+                        $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                        $checkCommission == false;
+                        break;
                         //var_dump("==>9");
                     }
                 } else {
@@ -4924,6 +4917,9 @@ class memberActions extends sfActions
                     /******************************/
                     /*  Direct Sponsor Bonus
                     /******************************/
+                    $uplineDistId = $distDB->getUplineDistId();
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+
                     $firstForDRB = true;
                     while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
                         $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
@@ -5007,9 +5003,10 @@ class memberActions extends sfActions
                                 }
                                 $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
-                                //var_dump("==>3$$".$uplineDistId);
-                                $this->forward404Unless($uplineDistDB);
-                                //var_dump("==>4");
+                                if (!$uplineDistDB) {
+                                    break;
+                                }
+
                                 if ($uplineDistDB->getIsIb() == Globals::YES) {
                                     /*if ($uplineDistDB->getIbRankId() != null) {
                                         $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
@@ -5018,23 +5015,24 @@ class memberActions extends sfActions
                                     }*/
                                     //$directSponsorPercentage = $uplineDistPackage->getCommission();
                                     $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                                    if ($directSponsorPercentage > $totalBonusPayOut) {
-                                        //var_dump("==>6");
-                                        $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                                        $totalBonusPayOut += $directSponsorPercentage;
-                                        if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                            //var_dump("==>7");
-                                            $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
-                                        }
-                                    } else {
-                                        //var_dump("==>8");
-                                        $uplineDistId = $uplineDistDB->getUplineDistId();
-                                        continue;
+                                } else {
+                                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                                    $directSponsorPercentage = $uplineDistPackage->getCommission();
+                                }
+                                if ($directSponsorPercentage > $totalBonusPayOut) {
+                                    //var_dump("==>6");
+                                    $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                    $totalBonusPayOut += $directSponsorPercentage;
+                                    if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                        //var_dump("==>7");
+                                        $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
                                     }
                                 } else {
+                                    //var_dump("==>8");
                                     $uplineDistId = $uplineDistDB->getUplineDistId();
                                     continue;
                                 }
+
                                 $directSponsorBonusAmount = $directSponsorPercentage * $amountNeeded / 100;
                                 $checkCommission == false;
                                 break;
@@ -5046,7 +5044,6 @@ class memberActions extends sfActions
                         }
                     }
                 }
-
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Package upgraded successful."));
 
@@ -5427,24 +5424,24 @@ class memberActions extends sfActions
                                 $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
                             }*/
                             $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-
-                            if ($directSponsorPercentage > $totalBonusPayOut) {
-                                //var_dump("==>6");
-                                $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                                $totalBonusPayOut += $directSponsorPercentage;
-                                if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                    //var_dump("==>7");
-                                    $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
-                                }
-                            } else {
-                                //var_dump("==>8");
-                                $uplineDistId = $uplineDistDB->getUplineDistId();
-                                continue;
+                        } else {
+                            $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            $directSponsorPercentage = $uplineDistPackage->getCommission();
+                        }
+                        if ($directSponsorPercentage > $totalBonusPayOut) {
+                            //var_dump("==>6");
+                            $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                            $totalBonusPayOut += $directSponsorPercentage;
+                            if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                //var_dump("==>7");
+                                $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
                             }
                         } else {
+                            //var_dump("==>8");
                             $uplineDistId = $uplineDistDB->getUplineDistId();
                             continue;
                         }
+
                         $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
                         $checkCommission == false;
                         break;

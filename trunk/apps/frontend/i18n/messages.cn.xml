@@ -347,7 +347,7 @@
             <trans-unit><source>Gold</source><target>黄金</target></trans-unit>
             <trans-unit><source>Silver</source><target>银级</target></trans-unit>
             <trans-unit><source>Bronze</source><target>铜级</target></trans-unit>
-            <trans-unit><source>Basic</source><target>基本</target></trans-unit>
+            <trans-unit><source>Basic</source><target>初级</target></trans-unit>
             <trans-unit><source>E-Share Trading Center</source><target>原始股交易所</target></trans-unit>
             <trans-unit><source>Package Type</source><target>配套</target></trans-unit>
             <trans-unit><source>Payment Type</source><target>付款方式</target></trans-unit>

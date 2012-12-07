@@ -346,7 +346,7 @@
             <trans-unit><source>Gold</source><target>ゴールド</target></trans-unit>
             <trans-unit><source>Silver</source><target>シルバー</target></trans-unit>
             <trans-unit><source>Bronze</source><target>銅品位</target></trans-unit>
-            <trans-unit><source>Basic</source><target>基本</target></trans-unit>
+            <trans-unit><source>Basic</source><target>初级</target></trans-unit>
             <trans-unit><source>E-Share Trading Center</source><target>IPOの為替</target></trans-unit>
             <trans-unit><source>Package Type</source><target>支援する</target></trans-unit>
             <trans-unit><source>Payment Type</source><target>支払条件</target></trans-unit>
