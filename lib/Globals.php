@@ -237,4 +237,6 @@ abstract class Globals {
     /*****   GROUP LEADER   ******/
     /*******************************/
     const GROUP_LEADER = "chai_yi_kong,BLESSROY126,LIN_JIT_KHUNG,MONG_CHUNG_CHEE,MUSLIM_BIN_ABUZAR,NOOR_QOMARIAH_SAAD,MARY_NG,Lim_Zhen_Peng,DATO_Nyo_Eng_Yeo,ANG_CHEE_YOONG,CHUA_CHEE_YONG,CENTURYEMPIRE,LOO_WEE_SENG,AHSIN2611";
+    const HIDE_DIST_GROUP = "MAXCAP";
+    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,chris1,chris2,chris3,chris4,chris5,chris6	chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7";
 }

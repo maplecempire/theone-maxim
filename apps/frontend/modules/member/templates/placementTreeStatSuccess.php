@@ -249,6 +249,15 @@ function reassignDatagridEventAttr(){
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[0]['_self'];
+            if ($hideDistGroup == true) {
+                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -343,6 +352,15 @@ function reassignDatagridEventAttr(){
     $headColor = "";
     if ($distCode != "") {
         $distDB = $anode[1]['_self'];
+        if ($hideDistGroup == true) {
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -429,6 +447,15 @@ function reassignDatagridEventAttr(){
     $headColor = "";
     if ($distCode != "") {
         $distDB = $anode[2]['_self'];
+        if ($hideDistGroup == true) {
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -530,6 +557,15 @@ function reassignDatagridEventAttr(){
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[3]['_self'];
+            if ($hideDistGroup == true) {
+                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -618,6 +654,15 @@ function reassignDatagridEventAttr(){
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[4]['_self'];
+            if ($hideDistGroup == true) {
+                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -705,6 +750,15 @@ function reassignDatagridEventAttr(){
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[5]['_self'];
+            if ($hideDistGroup == true) {
+                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -792,6 +846,15 @@ function reassignDatagridEventAttr(){
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[6]['_self'];
+            if ($hideDistGroup == true) {
+                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
