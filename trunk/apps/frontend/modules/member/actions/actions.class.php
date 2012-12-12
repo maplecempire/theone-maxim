@@ -2681,6 +2681,17 @@ class memberActions extends sfActions
         //  1       2
         //3   4   5   6
 
+        // TO_HIDE_DIST_GROUP
+        $hideDistGroup = false;
+        $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $hideDistGroup = true;
+        }
+        $this->hideDistGroup = $hideDistGroup;
+        // TO_HIDE_DIST_GROUP end ~
+
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
@@ -2693,6 +2704,20 @@ class memberActions extends sfActions
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
             $distDB = MlmDistributorPeer::doSelectOne($c);
         }
+
+        // TO_HIDE_DIST_GROUP
+        if ($hideDistGroup) {
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->errorSearch = true;
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+            }
+        }
+        // TO_HIDE_DIST_GROUP end ~
 
         $leftOnePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
         $rightTwoPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
@@ -2764,6 +2789,7 @@ class memberActions extends sfActions
             $anode[4]["_carry_right"] = null;
             $anode[4]["_sales_left"] = null;
             $anode[4]["_sales_right"] = null;
+
         } else {
             $distDB = $this->getDistributorInformation($leftOnePlacement->getDistributorCode());
             $leftThreePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
@@ -2859,6 +2885,7 @@ class memberActions extends sfActions
                 $anode[4]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             }
         }
+
         if ($rightTwoPlacement == null) {
             $anode[2]["distCode"] = "";
             $anode[2]["_self"] = new MlmDistributor();
