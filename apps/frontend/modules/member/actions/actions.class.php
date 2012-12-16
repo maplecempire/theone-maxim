@@ -1467,32 +1467,6 @@ class memberActions extends sfActions
         //phone-number	phonr
         //title	Mrs
         //your-email	test@asdff
-       $mlm_mt4_demo_request = new MlmMt4DemoRequest();
-            $mlm_mt4_demo_request->setFirstName($this->getRequestParameter('f-name'));
-            $mlm_mt4_demo_request->setEmail($this->getRequestParameter('your-email'));
-            $mlm_mt4_demo_request->setStatusCode($this->getRequestParameter('status_code'));
-            $mlm_mt4_demo_request->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_mt4_demo_request->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_mt4_demo_request->setCountry($this->getRequestParameter('countrylist'));
-            $mlm_mt4_demo_request->setPhoneNumber($this->getRequestParameter('phone-number'));
-            $mlm_mt4_demo_request->setLastName($this->getRequestParameter('l-name'));
-            $mlm_mt4_demo_request->setTitle($this->getRequestParameter('title'));
-            $mlm_mt4_demo_request->setLiveDemo("DEMO");
-            $mlm_mt4_demo_request->setAddress1($this->getRequestParameter('address-1'));
-            $mlm_mt4_demo_request->setAddress2($this->getRequestParameter('address-2'));
-            $mlm_mt4_demo_request->setAddressState($this->getRequestParameter('state'));
-            $mlm_mt4_demo_request->setAgreeOfBusiness($this->getRequestParameter('agreeofBusiness'));
-            $mlm_mt4_demo_request->setRiskDisclosure($this->getRequestParameter('agreeofRiskDisclosure'));
-            $mlm_mt4_demo_request->setCountryOfCitizen($this->getRequestParameter('coutrylist'));
-            $mlm_mt4_demo_request->setCity($this->getRequestParameter('city'));
-            $mlm_mt4_demo_request->setDobDay($this->getRequestParameter('menu-dob-day'));
-            $mlm_mt4_demo_request->setDobMonth($this->getRequestParameter('menu-dob-month'));
-            $mlm_mt4_demo_request->setDobYear($this->getRequestParameter('menu-dob-year'));
-            $mlm_mt4_demo_request->setRefId($this->getRequestParameter('referid'));
-            $mlm_mt4_demo_request->setPassport($this->getRequestParameter('ssnumber'));
-            $mlm_mt4_demo_request->setSubject($this->getRequestParameter('your-subject'));
-
-            $mlm_mt4_demo_request->save();
         if (!$this->getRequestParameter('your-email')) {
             $error = true;
             $errorMsg = "Email is required.";
