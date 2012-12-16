@@ -1477,7 +1477,7 @@ class memberActions extends sfActions
             $mlm_mt4_demo_request = new MlmMt4DemoRequest();
             $mlm_mt4_demo_request->setFirstName($this->getRequestParameter('f-name'));
             $mlm_mt4_demo_request->setEmail($this->getRequestParameter('your-email'));
-            $mlm_mt4_demo_request->setStatusCode($this->getRequestParameter('status_code'));
+            $mlm_mt4_demo_request->setStatusCode(Globals::STATUS_ACTIVE);
             $mlm_mt4_demo_request->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_mt4_demo_request->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_mt4_demo_request->setCountry($this->getRequestParameter('countrylist'));
@@ -1527,7 +1527,7 @@ class memberActions extends sfActions
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 																	Dear <strong>".$this->getRequestParameter("l-name")." ".$this->getRequestParameter("f-name")."</strong>,<br><br>
-																	Your Demo account will enable you to \'paper trade\', while allowing you to develop and test your trading strategies on the award-winning MetaTrader 4.
+																	Your Demo account will enable you to 'paper trade', while allowing you to develop and test your trading strategies on the award-winning MetaTrader 4.
 																	<br><br>Your account has been opened for you with the following details:
 																	<br><br>To start trading please download and install MT4.
 																</font>
@@ -1721,7 +1721,7 @@ class memberActions extends sfActions
             $mlm_mt4_demo_request = new MlmMt4DemoRequest();
             $mlm_mt4_demo_request->setFirstName($this->getRequestParameter('f-name'));
             $mlm_mt4_demo_request->setEmail($this->getRequestParameter('your-email'));
-            $mlm_mt4_demo_request->setStatusCode($this->getRequestParameter('status_code'));
+            $mlm_mt4_demo_request->setStatusCode(Globals::STATUS_ACTIVE);
             $mlm_mt4_demo_request->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_mt4_demo_request->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_mt4_demo_request->setCountry($this->getRequestParameter('countrylist'));
