@@ -1527,9 +1527,10 @@ class memberActions extends sfActions
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 																	Dear <strong>".$this->getRequestParameter("l-name")." ".$this->getRequestParameter("f-name")."</strong>,<br><br>
-																	Your Demo account will enable you to 'paper trade', while allowing you to develop and test your trading strategies on the award-winning MetaTrader 4.
-																	<br><br>Your account has been opened for you with the following details:
-																	<br><br>To start trading please download and install MT4.
+																	Thank you for your interest in opening a Free Demo Account with Maxim Trader. We are proud to offer our cutting-edge trading platform with industry leading performance and stability. Test your market strategies and get used to our platform before starting for real.
+                                                                    <br>Your demo account has been validated with following login details :
+                                                                    <br><br>
+                                                                    Kindly download the MT4 in order to start your trading activities.
 																</font>
 																<br>
 																<br>
@@ -1582,7 +1583,8 @@ class memberActions extends sfActions
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 																	亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-																	你的模拟帐户将使你可以进行“纸上贸易”，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+																	你的免费模拟帐户将使你可以进行“纸上贸易”，我们很自豪能够提供最先进的交易平台，提供业界领先的性能和稳定性，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+
 																	<br><br>如想立刻体验交易，请下载并安装MT4。
 																	<br>
 																</font>
