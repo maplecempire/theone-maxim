@@ -373,6 +373,23 @@ class downloadActions extends sfActions
 
     public function executeDownloadFundManagementReport()
     {
+        $fileName = $this->getRequestParameter('p');
+
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType("application/pdf");
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim_Fund_Manager_Report_'.$fileName.".pdf", TRUE);
+        $response->sendHttpHeaders();
+
+        readfile(sfConfig::get('sf_upload_dir')."/fundManagement/Maxim_Fund_Manager_Report_".$fileName.".pdf");
+
+        return sfView::NONE;
+    }
+
+    public function executeDownloadFundManagementReport2()
+    {
         $c = new Criteria();
         $c->add(MlmFileDownloadPeer::FILE_TYPE, "FUND_MANAGEMENT_REPORT");
         $c->add(MlmFileDownloadPeer::STATUS_CODE, Globals::STATUS_ACTIVE);

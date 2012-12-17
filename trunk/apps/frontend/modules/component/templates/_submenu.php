@@ -114,18 +114,18 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
             <a href="/member/announcementList"><span><?php echo __('Announcement List'); ?></span></a>
         </li>
     </ul>
-    <!--<br class="clear"><br>
+    <br class="clear"><br>
     <ul>
-        <li class="menu_title"><?php /*echo __('REPORT'); */?></li>
+        <li class="menu_title"><?php echo __('REPORT'); ?></li>
 
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php /*echo url_for("/member/fundManagementReport") */?>"><span><?php /*echo __('Fund Management Report'); */?></span></a>
+            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Report'); ?></span></a>
         </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <span style="color: #808080;"><?php /*echo __('MaximTrade Executor™ Report'); */?></span>
-        </li>
-    </ul>-->
+        </li>-->
+    </ul>
     <!--<a href="<?php /*echo url_for("/member/maximExecutorReport") */?>"><span><?php /*echo __('MaximTrade Executor™ Report'); */?></span></a>-->
     <br class="clear"><br>
     <ul>
