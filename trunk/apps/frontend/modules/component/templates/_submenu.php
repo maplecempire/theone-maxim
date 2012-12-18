@@ -146,4 +146,14 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
         </li>
     <?php } ?>
     </ul>
+
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('MAXIM CAPITAL BANK DETAILS'); ?></li>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/member/bankInformation") ?>"><span><?php echo __('Bank Details'); ?></span></a>
+        </li>
+    <?php } ?>
+    </ul>
 </div>

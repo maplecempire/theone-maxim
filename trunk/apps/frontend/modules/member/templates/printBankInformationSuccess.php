@@ -183,12 +183,12 @@
         </td>
         <td class="value"><?php echo $cityOfBank; ?></td>
     </tr>
-    <!--<tr>
+    <tr>
         <td width="160px" class="caption">
-            <strong><?php /*echo __('Country of Bank'); */?></strong>
+            <strong><?php echo __('Country of Bank'); ?></strong>
         </td>
-        <td class="value"><?php /*echo $countryOfBank; */?></td>
-    </tr>-->
+        <td class="value"><?php echo $countryOfBank; ?></td>
+    </tr>
     <tr>
         <td width="160px" class="caption">
             <strong><?php echo __('Payment Reference'); ?></strong>

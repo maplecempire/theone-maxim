@@ -4150,13 +4150,28 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->sponsor = $sponsor;
         $this->distDB = $distDB;
     }
-    public function executeViewBankInformation()
+    public function executeBankInformation()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distDB);
 
         $this->distDB = $distDB;
-        $this->setTemplate('bankInformation');
+
+        $this->bankName2 = $this->getAppSetting(Globals::SETTING_BANK_NAME_2);
+        $this->bankSwiftCode2 = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE_2);
+        $this->iban2 = $this->getAppSetting(Globals::SETTING_IBAN_2);
+        $this->bankAccountHolder2 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER_2);
+        $this->bankAccountNumber2 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER_2);
+        $this->cityOfBank2 = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK_2);
+        $this->countryOfBank2 = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK_2);
+
+        $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
+        $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
+        $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
+        $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER);
+        $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
+        $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
+        $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
     }
 
     public function executeDailyBonus()
