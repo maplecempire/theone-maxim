@@ -201,7 +201,7 @@ $(function() {
                                 <td valign="top"><font color="#dc143c">NOTE :</font></td>
                                 <td>
                                     <font color="#dc143c"><?php echo __('Funds Deposited will be credited into CP1 Account.'); ?>
-                                    <br><?php echo __('CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.'); ?>
+                                    <br><?php echo __('CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.'); ?>
                                     <br><?php echo $systemCurrency?> <?php echo __('1 equals to 1 value of CP1'); ?>.&nbsp;</font>
                                 </td>
                             </tr>

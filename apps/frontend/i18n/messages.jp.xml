@@ -647,7 +647,7 @@
             <trans-unit><source>Reference No</source><target>参照番号</target></trans-unit>
             <trans-unit><source>Funds Deposit History</source><target>預金記録表</target></trans-unit>
             <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>預金資金はCP1口座に入金されます。</target></trans-unit>
-            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</source><target>アップグレードをサポートし、MT4のアカウントを再充電し、現金を現金化することができず、支援の獲得のための唯一のCP1。</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>アップグレードをサポートし、MT4のアカウントを再充電し、現金を現金化することができず、支援の獲得のための唯一のCP1。</target></trans-unit>
             <trans-unit><source>1 equals to 1 value of CP1</source><target>1は1 CP1の値に等しい</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 アカウント</target></trans-unit>
             <trans-unit><source>Upgrade Package</source><target>パッケージをアップグレードする</target></trans-unit>
@@ -661,7 +661,7 @@
             <trans-unit><source>Carry Forward</source><target>对碰余额</target></trans-unit>
             <trans-unit><source>Today Total Group BV</source><target>今日小组总业绩</target></trans-unit>
             <trans-unit><source>USD</source><target>美金</target></trans-unit>
-            <trans-unit><source>NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWABLE.</source><target>注：CP1只能用来收购配套，配套升级和充值MT4帐户。CP1是不能兑现的。</target></trans-unit>
+            <trans-unit><source>NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>注：CP1只能用来收购配套，配套升级和充值MT4帐户。CP1是不能兑现的。</target></trans-unit>
             <trans-unit><source>Commission Details</source><target>奖金收益</target></trans-unit>
             <trans-unit><source>Commission Categories</source><target>奖金总结</target></trans-unit>
             <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4户口没有余额。</target></trans-unit>
