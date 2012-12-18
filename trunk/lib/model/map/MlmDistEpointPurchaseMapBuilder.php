@@ -48,6 +48,8 @@ class MlmDistEpointPurchaseMapBuilder {
 
 		$tMap->addColumn('PAYMENT_REFERENCE', 'PaymentReference', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('BANK_ID', 'BankId', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addColumn('APPROVE_REJECT_DATETIME', 'ApproveRejectDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 		$tMap->addColumn('APPROVED_BY_USERID', 'ApprovedByUserid', 'int', CreoleTypes::INTEGER, false, null);
