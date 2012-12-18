@@ -13,7 +13,7 @@ abstract class BaseMlmDistEpointPurchasePeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDistEpointPurchase';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,6 +44,9 @@ abstract class BaseMlmDistEpointPurchasePeer {
 	const PAYMENT_REFERENCE = 'mlm_dist_epoint_purchase.PAYMENT_REFERENCE';
 
 	
+	const BANK_ID = 'mlm_dist_epoint_purchase.BANK_ID';
+
+	
 	const APPROVE_REJECT_DATETIME = 'mlm_dist_epoint_purchase.APPROVE_REJECT_DATETIME';
 
 	
@@ -67,18 +70,18 @@ abstract class BaseMlmDistEpointPurchasePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PurchaseId', 'DistId', 'Amount', 'TransactionType', 'ImageSrc', 'StatusCode', 'Remarks', 'PaymentReference', 'ApproveRejectDatetime', 'ApprovedByUserid', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID, MlmDistEpointPurchasePeer::DIST_ID, MlmDistEpointPurchasePeer::AMOUNT, MlmDistEpointPurchasePeer::TRANSACTION_TYPE, MlmDistEpointPurchasePeer::IMAGE_SRC, MlmDistEpointPurchasePeer::STATUS_CODE, MlmDistEpointPurchasePeer::REMARKS, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME, MlmDistEpointPurchasePeer::APPROVED_BY_USERID, MlmDistEpointPurchasePeer::CREATED_BY, MlmDistEpointPurchasePeer::CREATED_ON, MlmDistEpointPurchasePeer::UPDATED_BY, MlmDistEpointPurchasePeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('purchase_id', 'dist_id', 'amount', 'transaction_type', 'image_src', 'status_code', 'remarks', 'payment_reference', 'approve_reject_datetime', 'approved_by_userid', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('PurchaseId', 'DistId', 'Amount', 'TransactionType', 'ImageSrc', 'StatusCode', 'Remarks', 'PaymentReference', 'BankId', 'ApproveRejectDatetime', 'ApprovedByUserid', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID, MlmDistEpointPurchasePeer::DIST_ID, MlmDistEpointPurchasePeer::AMOUNT, MlmDistEpointPurchasePeer::TRANSACTION_TYPE, MlmDistEpointPurchasePeer::IMAGE_SRC, MlmDistEpointPurchasePeer::STATUS_CODE, MlmDistEpointPurchasePeer::REMARKS, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, MlmDistEpointPurchasePeer::BANK_ID, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME, MlmDistEpointPurchasePeer::APPROVED_BY_USERID, MlmDistEpointPurchasePeer::CREATED_BY, MlmDistEpointPurchasePeer::CREATED_ON, MlmDistEpointPurchasePeer::UPDATED_BY, MlmDistEpointPurchasePeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('purchase_id', 'dist_id', 'amount', 'transaction_type', 'image_src', 'status_code', 'remarks', 'payment_reference', 'bank_id', 'approve_reject_datetime', 'approved_by_userid', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PurchaseId' => 0, 'DistId' => 1, 'Amount' => 2, 'TransactionType' => 3, 'ImageSrc' => 4, 'StatusCode' => 5, 'Remarks' => 6, 'PaymentReference' => 7, 'ApproveRejectDatetime' => 8, 'ApprovedByUserid' => 9, 'CreatedBy' => 10, 'CreatedOn' => 11, 'UpdatedBy' => 12, 'UpdatedOn' => 13, ),
-		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID => 0, MlmDistEpointPurchasePeer::DIST_ID => 1, MlmDistEpointPurchasePeer::AMOUNT => 2, MlmDistEpointPurchasePeer::TRANSACTION_TYPE => 3, MlmDistEpointPurchasePeer::IMAGE_SRC => 4, MlmDistEpointPurchasePeer::STATUS_CODE => 5, MlmDistEpointPurchasePeer::REMARKS => 6, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE => 7, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME => 8, MlmDistEpointPurchasePeer::APPROVED_BY_USERID => 9, MlmDistEpointPurchasePeer::CREATED_BY => 10, MlmDistEpointPurchasePeer::CREATED_ON => 11, MlmDistEpointPurchasePeer::UPDATED_BY => 12, MlmDistEpointPurchasePeer::UPDATED_ON => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('purchase_id' => 0, 'dist_id' => 1, 'amount' => 2, 'transaction_type' => 3, 'image_src' => 4, 'status_code' => 5, 'remarks' => 6, 'payment_reference' => 7, 'approve_reject_datetime' => 8, 'approved_by_userid' => 9, 'created_by' => 10, 'created_on' => 11, 'updated_by' => 12, 'updated_on' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('PurchaseId' => 0, 'DistId' => 1, 'Amount' => 2, 'TransactionType' => 3, 'ImageSrc' => 4, 'StatusCode' => 5, 'Remarks' => 6, 'PaymentReference' => 7, 'BankId' => 8, 'ApproveRejectDatetime' => 9, 'ApprovedByUserid' => 10, 'CreatedBy' => 11, 'CreatedOn' => 12, 'UpdatedBy' => 13, 'UpdatedOn' => 14, ),
+		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID => 0, MlmDistEpointPurchasePeer::DIST_ID => 1, MlmDistEpointPurchasePeer::AMOUNT => 2, MlmDistEpointPurchasePeer::TRANSACTION_TYPE => 3, MlmDistEpointPurchasePeer::IMAGE_SRC => 4, MlmDistEpointPurchasePeer::STATUS_CODE => 5, MlmDistEpointPurchasePeer::REMARKS => 6, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE => 7, MlmDistEpointPurchasePeer::BANK_ID => 8, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME => 9, MlmDistEpointPurchasePeer::APPROVED_BY_USERID => 10, MlmDistEpointPurchasePeer::CREATED_BY => 11, MlmDistEpointPurchasePeer::CREATED_ON => 12, MlmDistEpointPurchasePeer::UPDATED_BY => 13, MlmDistEpointPurchasePeer::UPDATED_ON => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('purchase_id' => 0, 'dist_id' => 1, 'amount' => 2, 'transaction_type' => 3, 'image_src' => 4, 'status_code' => 5, 'remarks' => 6, 'payment_reference' => 7, 'bank_id' => 8, 'approve_reject_datetime' => 9, 'approved_by_userid' => 10, 'created_by' => 11, 'created_on' => 12, 'updated_by' => 13, 'updated_on' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -147,6 +150,8 @@ abstract class BaseMlmDistEpointPurchasePeer {
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::REMARKS);
 
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::PAYMENT_REFERENCE);
+
+		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::BANK_ID);
 
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME);
 

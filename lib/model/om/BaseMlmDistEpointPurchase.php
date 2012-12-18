@@ -41,6 +41,10 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 
 	
+	protected $bank_id = 1;
+
+
+	
 	protected $approve_reject_datetime;
 
 
@@ -123,6 +127,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	{
 
 		return $this->payment_reference;
+	}
+
+	
+	public function getBankId()
+	{
+
+		return $this->bank_id;
 	}
 
 	
@@ -343,6 +354,23 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	} 
 
 	
+	public function setBankId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->bank_id !== $v || $v === 1) {
+			$this->bank_id = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::BANK_ID;
+		}
+
+	} 
+
+	
 	public function setApproveRejectDatetime($v)
 	{
 
@@ -468,23 +496,25 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 			$this->payment_reference = $rs->getString($startcol + 7);
 
-			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 8, null);
+			$this->bank_id = $rs->getInt($startcol + 8);
 
-			$this->approved_by_userid = $rs->getInt($startcol + 9);
+			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 9, null);
 
-			$this->created_by = $rs->getInt($startcol + 10);
+			$this->approved_by_userid = $rs->getInt($startcol + 10);
 
-			$this->created_on = $rs->getTimestamp($startcol + 11, null);
+			$this->created_by = $rs->getInt($startcol + 11);
 
-			$this->updated_by = $rs->getInt($startcol + 12);
+			$this->created_on = $rs->getTimestamp($startcol + 12, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 13, null);
+			$this->updated_by = $rs->getInt($startcol + 13);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 14, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 15; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistEpointPurchase object", $e);
 		}
@@ -654,21 +684,24 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 				return $this->getPaymentReference();
 				break;
 			case 8:
-				return $this->getApproveRejectDatetime();
+				return $this->getBankId();
 				break;
 			case 9:
-				return $this->getApprovedByUserid();
+				return $this->getApproveRejectDatetime();
 				break;
 			case 10:
-				return $this->getCreatedBy();
+				return $this->getApprovedByUserid();
 				break;
 			case 11:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 12:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 13:
+				return $this->getUpdatedBy();
+				break;
+			case 14:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -689,12 +722,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 			$keys[5] => $this->getStatusCode(),
 			$keys[6] => $this->getRemarks(),
 			$keys[7] => $this->getPaymentReference(),
-			$keys[8] => $this->getApproveRejectDatetime(),
-			$keys[9] => $this->getApprovedByUserid(),
-			$keys[10] => $this->getCreatedBy(),
-			$keys[11] => $this->getCreatedOn(),
-			$keys[12] => $this->getUpdatedBy(),
-			$keys[13] => $this->getUpdatedOn(),
+			$keys[8] => $this->getBankId(),
+			$keys[9] => $this->getApproveRejectDatetime(),
+			$keys[10] => $this->getApprovedByUserid(),
+			$keys[11] => $this->getCreatedBy(),
+			$keys[12] => $this->getCreatedOn(),
+			$keys[13] => $this->getUpdatedBy(),
+			$keys[14] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -735,21 +769,24 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 				$this->setPaymentReference($value);
 				break;
 			case 8:
-				$this->setApproveRejectDatetime($value);
+				$this->setBankId($value);
 				break;
 			case 9:
-				$this->setApprovedByUserid($value);
+				$this->setApproveRejectDatetime($value);
 				break;
 			case 10:
-				$this->setCreatedBy($value);
+				$this->setApprovedByUserid($value);
 				break;
 			case 11:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 12:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 13:
+				$this->setUpdatedBy($value);
+				break;
+			case 14:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -767,12 +804,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		if (array_key_exists($keys[5], $arr)) $this->setStatusCode($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setRemarks($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setPaymentReference($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setApproveRejectDatetime($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setApprovedByUserid($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCreatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCreatedOn($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setUpdatedBy($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setUpdatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[8], $arr)) $this->setBankId($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setApproveRejectDatetime($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setApprovedByUserid($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCreatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedOn($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setUpdatedBy($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedOn($arr[$keys[14]]);
 	}
 
 	
@@ -788,6 +826,7 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::STATUS_CODE)) $criteria->add(MlmDistEpointPurchasePeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::REMARKS)) $criteria->add(MlmDistEpointPurchasePeer::REMARKS, $this->remarks);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PAYMENT_REFERENCE)) $criteria->add(MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, $this->payment_reference);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::BANK_ID)) $criteria->add(MlmDistEpointPurchasePeer::BANK_ID, $this->bank_id);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME)) $criteria->add(MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME, $this->approve_reject_datetime);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::APPROVED_BY_USERID)) $criteria->add(MlmDistEpointPurchasePeer::APPROVED_BY_USERID, $this->approved_by_userid);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::CREATED_BY)) $criteria->add(MlmDistEpointPurchasePeer::CREATED_BY, $this->created_by);
@@ -837,6 +876,8 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		$copyObj->setRemarks($this->remarks);
 
 		$copyObj->setPaymentReference($this->payment_reference);
+
+		$copyObj->setBankId($this->bank_id);
 
 		$copyObj->setApproveRejectDatetime($this->approve_reject_datetime);
 

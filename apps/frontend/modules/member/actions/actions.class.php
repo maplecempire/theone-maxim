@@ -306,19 +306,32 @@ class memberActions extends sfActions
         $c->add(MlmDistEpointPurchasePeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $distPackagePurchase = MlmDistEpointPurchasePeer::doSelectOne($c);
 
+        $bankId = 1;
         if ($distPackagePurchase) {
             $this->purchaseId = $distPackagePurchase->getPurchaseId();
             $this->amount = $distPackagePurchase->getAmount();
             $this->paymentReference = $distPackagePurchase->getPaymentReference();
+            $bankId = $distPackagePurchase->getBankId();
         }
         $this->tradingCurrencyOnMT4 = "USD";
-        $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
-        $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
-        $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
-        $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER);
-        $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
-        $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
-        $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
+        if ($bankId == 2) {
+            $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME_2);
+            $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE_2);
+            $this->iban = $this->getAppSetting(Globals::SETTING_IBAN_2);
+            $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER_2);
+            $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER_2);
+            $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK_2);
+            $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK_2);
+        } else {
+            $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
+            $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
+            $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
+            $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER);
+            $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
+            $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
+            $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
+        }
+
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
     }
 
@@ -377,6 +390,8 @@ class memberActions extends sfActions
         $this->distDB = $distDB;
 
         $this->tradingCurrencyOnMT4 = "USD";
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+
         $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
         $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
         $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
@@ -384,7 +399,14 @@ class memberActions extends sfActions
         $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
         $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
         $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+
+        $this->bankName2 = $this->getAppSetting(Globals::SETTING_BANK_NAME_2);
+        $this->bankSwiftCode2 = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE_2);
+        $this->iban2 = $this->getAppSetting(Globals::SETTING_IBAN_2);
+        $this->bankAccountHolder2 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER_2);
+        $this->bankAccountNumber2 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER_2);
+        $this->cityOfBank2 = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK_2);
+        $this->countryOfBank2 = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK_2);
 
         if ($this->getRequestParameter('epointAmount') != "") {
             $amount = $this->getRequestParameter('epointAmount');
@@ -481,6 +503,7 @@ class memberActions extends sfActions
 
             $mlmDistEpointPurchase = MlmDistEpointPurchasePeer::retrieveByPK($this->getRequestParameter('purchaseId'));
             $mlmDistEpointPurchase->setImageSrc("http://".$_SERVER['HTTP_HOST']."/uploads/bankslip/".$filename);
+            $mlmDistEpointPurchase->setBankId($this->getRequestParameter('bankId'));
             $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
             $mlmDistEpointPurchase->save();

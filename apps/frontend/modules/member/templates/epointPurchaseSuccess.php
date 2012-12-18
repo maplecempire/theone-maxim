@@ -315,6 +315,15 @@ $(function() {
                         primary: "ui-icon-circle-arrow-n"
                     }
                 });
+
+                $("#bankId").live("change", function() {
+                    $("#bankSwiftCodeText").html($("#bankId option:selected").attr("bankSwiftCodeText"));
+                    $("#ibanText").html($("#bankId option:selected").attr("ibanText"));
+                    $("#bankAccountHolderText").html($("#bankId option:selected").attr("bankAccountHolderText"));
+                    $("#bankAccountNumberText").html($("#bankId option:selected").attr("bankAccountNumberText"));
+                    $("#cityOfBankText").html($("#bankId option:selected").attr("cityOfBankText"));
+                    $("#countryOfBankText").html($("#bankId option:selected").attr("countryOfBankText"));
+                });
             }); // end function
 
             function reassignDatagridEventAttr() {
@@ -388,44 +397,51 @@ $(function() {
             <td width="160px" class="caption">
                 <strong><?php echo __('Bank Name'); ?></strong>
             </td>
-            <td class="value"><?php echo $bankName; ?></td>
+            <td class="value"><?php //echo $bankName; ?>
+                <select id="bankId" name="bankId">
+                    <option value="1" bankSwiftCodeText="<?php echo $bankSwiftCode; ?>" ibanText="<?php echo $iban; ?>" bankAccountHolderText="<?php echo $bankAccountHolder; ?>" bankAccountNumberText="<?php echo $bankAccountNumber; ?>" cityOfBankText="<?php echo $cityOfBank; ?>" countryOfBankText="<?php echo $countryOfBank; ?>"><?php echo $bankName; ?></option>
+                    <?php if ($distDB->getCountry() != "Thailand") {?>
+                        <option value="2" bankSwiftCodeText="<?php echo $bankSwiftCode2; ?>" ibanText="<?php echo $iban2; ?>" bankAccountHolderText="<?php echo $bankAccountHolder2; ?>" bankAccountNumberText="<?php echo $bankAccountNumber2; ?>" cityOfBankText="<?php echo $cityOfBank2; ?>" countryOfBankText="<?php echo $countryOfBank2; ?>"><?php echo $bankName2; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
         </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('Bank Swift Code'); ?></strong>
             </td>
-            <td class="value"><?php echo $bankSwiftCode; ?></td>
+            <td class="value" id="bankSwiftCodeText"><?php echo $bankSwiftCode; ?></td>
         </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('IBAN'); ?></strong>
             </td>
-            <td class="value"><?php echo $iban; ?></td>
+            <td class="value" id="ibanText"><?php echo $iban; ?></td>
         </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('Bank Account Holder'); ?></strong>
             </td>
-            <td class="value"><?php echo $bankAccountHolder; ?></td>
+            <td class="value" id="bankAccountHolderText"><?php echo $bankAccountHolder; ?></td>
         </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('Bank Account Number'); ?></strong>
             </td>
-            <td class="value"><?php echo $bankAccountNumber; ?></td>
+            <td class="value" id="bankAccountNumberText"><?php echo $bankAccountNumber; ?></td>
         </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('City of Bank'); ?></strong>
             </td>
-            <td class="value"><?php echo $cityOfBank; ?></td>
+            <td class="value" id="cityOfBankText"><?php echo $cityOfBank; ?></td>
         </tr>
-        <!--<tr>
+        <tr>
             <td width="160px" class="caption">
-                <strong><?php /*echo __('Country of Bank'); */?></strong>
+                <strong><?php echo __('Country of Bank'); ?></strong>
             </td>
-            <td class="value"><?php /*echo $countryOfBank; */?></td>
-        </tr>-->
+            <td class="value" id="countryOfBankText"><?php echo $countryOfBank; ?></td>
+        </tr>
         <tr>
             <td width="160px" class="caption">
                 <strong><?php echo __('Payment Reference'); ?></strong>
