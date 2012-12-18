@@ -1,59 +1,9 @@
 <?php include('scripts.php'); ?>
-<script>
-$(function() {
-    $("#registerForm").validate({
-        messages : {
-            transactionPassword: {
-                remote: "Security Password is not valid."
-            }
-        },
-        rules : {
-            "bankName" : {
-                required : true,
-                minlength : 3
-            },
-            "bankAccNo" : {
-                required : true,
-                minlength : 3
-            },
-            "rebankAccNo" : {
-                required : true,
-                minlength : 3,
-                equalTo: "#bankAccNo"
-            },
-            "bankHolderName" : {
-                required : true,
-                minlength : 3
-            },
-            "visaDebitCard" : {
-                required : "#visaDebitCard:filled",
-                minlength : 16
-            },
-            "revisaDebitCard" : {
-                required : "#visaDebitCard:filled",
-                minlength : 16,
-                equalTo: "#visaDebitCard"
-            },
-            "transactionPassword" : {
-                required : true,
-                remote: "/member/verifyTransactionPassword"
-            }
-        },
-        submitHandler: function(form) {
-            waiting();
-            form.submit();
-        },
-        success: function(label) {
-            //label.addClass("valid").text("Valid captcha!")
-        }
-    });
-    $("#btnUpdate").button({
-        icons: {
-            primary: "ui-icon-disk"
-        }
-    });
-});
-</script>
+<style type="text/css">
+.tbl_form td {
+    height: 20px;
+}
+</style>
 
 <table cellpadding="0" cellspacing="0">
     <tbody>
@@ -71,7 +21,7 @@ $(function() {
                             <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
                     </div>
                 </div>
-                <?php endif; ?>
+            <?php endif; ?>
             <?php if ($sf_flash->has('errorMsg')): ?>
                 <div class="ui-widget">
                     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -81,13 +31,11 @@ $(function() {
                             <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                     </div>
                 </div>
-                <?php endif; ?>
-
+            <?php endif; ?>
         </td>
     </tr>
     <tr>
         <td>
-            <form id="registerForm" method="post" action="/member/updateBankInformation">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -100,8 +48,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th><?php echo __('Bank Account Details') ?></th>
-                    <th class="tbl_content_right"></th>
+                    <th colspan="2"><?php echo __('Maxim Capital Limited USD Account') ?></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
                     </th>
@@ -110,86 +57,149 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Bank Name') ?></td>
-                    <td><input name="bankName" type="text" id="bankName"
-                             size="30" value="<?php echo $distDB->getBankName() ?>"/>
-                    </td>
+                    <td class="value"><?php echo $bankName; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Bank Account Number') ?></td>
-                    <td><input name="bankAccNo" type="text" id="bankAccNo" size="30"
-                                                         value="<?php echo $distDB->getBankAccNo() ?>"/></td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Swift Code'); ?>
+                    </td>
+                    <td class="value"><?php echo $bankSwiftCode; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Re-Confirm Bank Account Number') ?></td>
-                    <td><input name="rebankAccNo" type="text" id="rebankAccNo" size="30"
-                                                         value=""/>
+                    <td width="160px" class="caption">
+                        <?php echo __('IBAN'); ?>
                     </td>
+                    <td class="value"><?php echo $iban; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Bank Account Holder Name') ?></td>
-                    <td><input name="bankHolderName" type="text" id="bankHolderName" size="30"
-                                                         value="<?php echo $distDB->getBankHolderName() ?>"/></td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Account Holder'); ?>
+                    </td>
+                    <td class="value"><?php echo $bankAccountHolder; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Bank Swift Code / ABA') ?></td>
-                    <td><input name="bankSwiftCode" type="text" id="bankSwiftCode" size="30"
-                                                         value="<?php echo $distDB->getBankSwiftCode() ?>"/>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Account Number'); ?>
                     </td>
+                    <td class="value"><?php echo $bankAccountNumber; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Chinatrust Bank Visa Debit Card') ?></td>
-                    <td>
-                        <input name="visaDebitCard" type="text" id="visaDebitCard" size="30" maxlength="16"
-                                                         value="<?php echo $distDB->getVisaDebitCard() ?>"/>
+                    <td width="160px" class="caption">
+                        <?php echo __('City of Bank'); ?>
                     </td>
+                    <td class="value"><?php echo $cityOfBank; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Re-Confirm Chinatrust Bank Visa Debit Card') ?></td>
-                    <td>
-                        <input name="revisaDebitCard" type="text" id="revisaDebitCard" size="30" maxlength="16"
-                                                         value=""/>
+                    <td width="160px" class="caption">
+                        <?php echo __('Country of Bank'); ?>
                     </td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Security Password') ?></td>
-                    <td>
-                        <input name="transactionPassword" type="password" id="transactionPassword" size="30"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td></td>
-                    <td align="right">
-                        <button id="btnUpdate">Update</button>
-                    </td>
+                    <td class="value"><?php echo $countryOfBank; ?></td>
                     <td>&nbsp;</td>
                 </tr>
                 </tbody>
             </table>
-            </form>
+
+            <?php if ($distDB->getCountry() != "Thailand") { ?>
+            <br>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Maxim Capital Limited Thai Bath  Account') ?></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Name') ?></td>
+                    <td class="value"><?php echo $bankName2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Swift Code'); ?>
+                    </td>
+                    <td class="value"><?php echo $bankSwiftCode2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('IBAN'); ?>
+                    </td>
+                    <td class="value"><?php echo $iban2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Account Holder'); ?>
+                    </td>
+                    <td class="value"><?php echo $bankAccountHolder2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Bank Account Number'); ?>
+                    </td>
+                    <td class="value"><?php echo $bankAccountNumber2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('City of Bank'); ?>
+                    </td>
+                    <td class="value"><?php echo $cityOfBank2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td width="160px" class="caption">
+                        <?php echo __('Country of Bank'); ?>
+                    </td>
+                    <td class="value"><?php echo $countryOfBank2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            <?php } ?>
         </td>
     </tr>
     </tbody>
