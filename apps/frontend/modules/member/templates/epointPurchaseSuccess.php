@@ -266,9 +266,11 @@ $(function() {
                                 , status_code : oObj.aData[4]
                                 , remarks : oObj.aData[5]
                                 , image_src : oObj.aData[6]
+                                , bank_id : oObj.aData[7]
                             });
                             return "<img src='" + oObj.aData[6] + "' style='display:none'><a class='detailLink' ref='" + oObj.aData[0] + "' href='#'>Detail</a>";
-                        }}
+                        }},
+                        { "sName" : "bank_id", "bVisible" : false,  "bSortable": true}
                     ]
                 });
 
@@ -280,6 +282,9 @@ $(function() {
                     $("#purchaseId").val(data.purchase_id);
                     $("#fancyImageLink").attr("href", data.image_src);
                     $("#fancyImageImg").attr("src", data.image_src);
+
+                    $("#bankId").val(data.bank_id).change();
+
                     $("#dgBankReceipt").dialog("open");
                 });
 
@@ -360,6 +365,7 @@ $(function() {
                 <th><?php echo __('Reference No') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>
+                <th></th>
                 <th></th>
             </tr>
             </thead>

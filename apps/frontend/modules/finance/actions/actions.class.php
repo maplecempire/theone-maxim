@@ -633,7 +633,8 @@ class financeActions extends sfActions
                 $result->getPaymentReference() == null ? "" : $result->getPaymentReference(),
                 $statusCode,
                 $result->getRemarks() == null ? "" : $result->getRemarks(),
-                $result->getImageSrc()  == null ? "" : $result->getImageSrc()
+                $result->getImageSrc()  == null ? "" : $result->getImageSrc(),
+                $result->getBankId()  == null ? "" : $result->getBankId()
             );
         }
 
