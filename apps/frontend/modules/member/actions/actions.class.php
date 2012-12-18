@@ -1418,13 +1418,13 @@ class memberActions extends sfActions
             $con->rollback();
             throw $e;
         }
-        if ($position == 0){
+        if ($position == 1 || $position == 2 || $treePosition != ""){
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
+        } else if ($position == 0){
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
             return $this->redirect('/member/placementTree');
             //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
-        } else if ($position == 1 || $position == 2 || $treePosition != ""){
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
-            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
         }
         return $this->redirect('/member/summary');
     }
