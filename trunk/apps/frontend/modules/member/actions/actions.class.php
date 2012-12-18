@@ -1802,10 +1802,10 @@ class memberActions extends sfActions
 <br><br>
 为了让我们激活您的帐户，我们需要您尽快尽快提交以下的文件与资料:
 <br><br>
-请发送给我们<STRONG>1</strong>认证**文件列表（i）及<STRONG>2</strong>认证**文件列表（ii）段：
+请发送给我们<STRONG>一份</strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段：
 <br><br>
 
-（一）身份验证（未过期）
+（ii）身份验证（未过期）
 <BR>1. 护照;
 <BR>2. 驾驶执照;
 <BR>3. 国民身分证
