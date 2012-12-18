@@ -314,6 +314,7 @@ class memberActions extends sfActions
         $this->tradingCurrencyOnMT4 = "USD";
         $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
         $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
+        $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
         $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER);
         $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
         $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
@@ -378,6 +379,7 @@ class memberActions extends sfActions
         $this->tradingCurrencyOnMT4 = "USD";
         $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
         $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
+        $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
         $this->bankAccountHolder = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER);
         $this->bankAccountNumber = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER);
         $this->cityOfBank = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK);
