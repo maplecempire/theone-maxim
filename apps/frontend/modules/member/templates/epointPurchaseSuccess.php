@@ -52,7 +52,7 @@ $(function() {
         hide: 'clip',
         show: 'slide',
         width: 700,
-        height: 410,
+        height: 430,
         buttons: {
             "<?php echo __('Print') ?>": function() {
                 var params  = 'width=891';
@@ -363,6 +363,9 @@ $(function() {
 <div id="dgBankReceipt" title="<?php echo __('Bank Information Detail') ?>" style="display:none;">
     <?php echo form_tag('member/uploadBankReceipt', array("enctype" => "multipart/form-data", "id" => "uploadForm")) ?>
     <input type="hidden" id="purchaseId" name="purchaseId" value="<?php echo $sf_flash->get('purchaseId'); ?>">
+
+    <?php echo $sf_flash->get('successMsg') ?>
+    <p>
     <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
         <tr>
             <td width="160px" class="caption">
@@ -395,6 +398,12 @@ $(function() {
         </tr>
         <tr>
             <td width="160px" class="caption">
+                <strong><?php echo __('IBAN'); ?></strong>
+            </td>
+            <td class="value"><?php echo $iban; ?></td>
+        </tr>
+        <tr>
+            <td width="160px" class="caption">
                 <strong><?php echo __('Bank Account Holder'); ?></strong>
             </td>
             <td class="value"><?php echo $bankAccountHolder; ?></td>
@@ -421,8 +430,9 @@ $(function() {
             <td width="160px" class="caption">
                 <strong><?php echo __('Payment Reference'); ?></strong>
             </td>
-            <td class="value"><span id="paymentReferenceSpan" style="color: red"><?php echo $sf_flash->get('paymentReference'); ?></span>
-            <br><br>Note: <br>Please write at REFERENCE : Maxim Capital Limited - 9120028849 and payment reference number.
+            <td class="value">
+                <!--<span id="paymentReferenceSpan" style="color: red"><?php /*echo $sf_flash->get('paymentReference'); */?></span>-->
+            <!--<br><br>-->Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited - 9120028849</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $sf_flash->get('paymentReference'); ?></span>
             </td>
         </tr>
         <tr>
@@ -449,6 +459,4 @@ $(function() {
         </tr>
     </table>
     </form>
-    <p>
-    <?php echo $sf_flash->get('successMsg') ?>
 </div>
