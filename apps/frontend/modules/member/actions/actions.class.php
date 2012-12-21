@@ -1161,6 +1161,9 @@ class memberActions extends sfActions
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
                 $this->forward404Unless($sponsoredPackageDB);
                 $pairingPoint = $sponsoredPackageDB->getPrice();
+                if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                    $pairingPoint = $amountNeeded;
+                }
 
                 // recalculate Total left and total right for $uplineDistDB
                 $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
@@ -2669,7 +2672,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
             $this->forward404Unless($sponsoredPackageDB);
             $pairingPoint = $sponsoredPackageDB->getPrice();
-
+            if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                $pairingPoint = $amountNeeded;
+            }
             // recalculate Total left and total right for $uplineDistDB
             $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
             for ($x = count($arrs); $x > 0; $x--) {
