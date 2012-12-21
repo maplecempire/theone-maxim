@@ -114,6 +114,13 @@
                     <td class="value"><?php echo $countryOfBank; ?></td>
                     <td>&nbsp;</td>
                 </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td class="caption" colspan="2">
+                        <span style="color: #dc143c">PS: Please write at REFERENCE : Maxim Capital Limited - 9120028849 and payment reference number</span>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
                 </tbody>
             </table>
 
@@ -195,6 +202,17 @@
                         <?php echo __('Country of Bank'); ?>
                     </td>
                     <td class="value"><?php echo $countryOfBank2; ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td class="caption" colspan="2">
+                        <span style="color: #dc143c">
+                            PS: Please write at REFERENCE : Payment reference number
+                            <br>
+                            Note: USD1 : Bath31
+                        </span>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
                 </tbody>
