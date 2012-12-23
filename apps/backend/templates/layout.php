@@ -516,6 +516,16 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Customer Enquiry'); ?></a><br/>
+
+                    <a href="<?php echo url_for('marketing/demoAccountRequest') ?>" title="Demo Account Request">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Demo Account Request'); ?></a><br/>
+
+                    <a href="<?php echo url_for('marketing/liveAccountRequest') ?>" title="Live Account Request">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Live Account Request'); ?></a><br/>
                 </div>
                 <?php } ?>
 

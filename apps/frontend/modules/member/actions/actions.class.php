@@ -1556,7 +1556,6 @@ class memberActions extends sfActions
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 																	Dear <strong>".$this->getRequestParameter("l-name")." ".$this->getRequestParameter("f-name")."</strong>,<br><br>
 																	Thank you for your interest in opening a Free Demo Account with Maxim Trader. We are proud to offer our cutting-edge trading platform with industry leading performance and stability. Test your market strategies and get used to our platform before starting for real.
-                                                                    <br>Your demo account has been validated with following login details :
                                                                     <br><br>
                                                                     Kindly download the MT4 in order to start your trading activities.
 																</font>

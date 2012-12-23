@@ -325,9 +325,29 @@ function reassignDatagridEventAttr(){
                         <td><strong>Customer Enquiry</strong></td>
                         <td align="right"><?php
                             if ($customerEnquiry > 0)
-                                echo "<a id='$customerEnquiryLink' href='".url_for('marketing/customerEnquiryList')."'>".$customerEnquiry."</a>";
+                                echo "<a id='customerEnquiryLink' href='".url_for('marketing/customerEnquiryList')."'>".$customerEnquiry."</a>";
                             else
                                 echo $customerEnquiry;
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Demo Account Requests</strong></td>
+                        <td align="right"><?php
+                            if ($demoAccountRequest > 0)
+                                echo "<a id='demoAccountRequest' href='".url_for('marketing/demoAccountRequest')."'>".$demoAccountRequest."</a>";
+                            else
+                                echo $demoAccountRequest;
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Live Account Requests</strong></td>
+                        <td align="right"><?php
+                            if ($liveAccountRequest > 0)
+                                echo "<a id='liveAccountRequest' href='".url_for('marketing/liveAccountRequest')."'>".$liveAccountRequest."</a>";
+                            else
+                                echo $liveAccountRequest;
                             ?>
                         </td>
                     </tr>
