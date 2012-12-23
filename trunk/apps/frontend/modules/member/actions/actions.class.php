@@ -4215,12 +4215,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                         //$flushLimit = $mlmDistPairingDB->getFlushLimit() - $this->getDsbAmount($distId, $bonusDate);
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
                         print_r("DistId ".$distId."<br>");
+                        $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $bonusDate);
+                        $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
 
-                        if ($mlmDistPairingDB->getLeftBalance() > 0 && $mlmDistPairingDB->getRightBalance() > 0) {
+                        if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
                             // requery for paring ledger
-                            $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $bonusDate);
-                            $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
+
                             $minBalance = $leftBalance;
                             if ($rightBalance < $leftBalance) {
                                 $minBalance = $rightBalance;
@@ -5776,7 +5777,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function updateDistPairingLeader($distId, $position, $debit, $remark="PAIRED", $transactionType=Globals::PAIRING_LEDGER_PAIRED)
     {
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distId);
         $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $position);
         $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
@@ -5785,8 +5786,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $legBalance = 0;
         if ($sponsorDistPairingLedgerDB) {
             $legBalance = $sponsorDistPairingLedgerDB->getBalance();
-        }
-
+        }*/
+        $legBalance = $this->findPairingLedgers($distId, $position, null);
         // update pairing balance
         $distPairingledger = new MlmDistPairingLedger();
         $distPairingledger->setDistId($distId);

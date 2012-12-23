@@ -10,10 +10,19 @@
  */
 class financeActions extends sfActions
 {
-    /**
-     * Executes index action
-     *
-     */
+    public function executeUpdateDistCommission()
+    {
+        $c = new Criteria();
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        foreach ($distDBs as $distDB) {
+            //$leftBalance = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+            //$rightBalance = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+
+            $this->revalidatePairing($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $this->revalidatePairing($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        }
+    }
     public function executeIndex()
     {
         /*$mlm_account = MlmAccountPeer::retrieveByPK(2);
@@ -812,5 +821,72 @@ class financeActions extends sfActions
             }
         }
         return $count;
+    }
+
+    function findPairingLedgers($distributorId, $position, $date)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+                 . " AND left_right = '" . $position . "'";
+
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function revalidatePairing($distributorId, $leftRight)
+    {
+        $balance = $this->getPairingBalance($distributorId, $leftRight);
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingPeer::DIST_ID, $distributorId);
+        $tbl_account = MlmDistPairingPeer::doSelectOne($c);
+
+        if (!$tbl_account) {
+            $tbl_account = new MlmDistPairing();
+            $tbl_account->setDistId($distributorId);
+            $tbl_account->setLeftBalance(0);
+            $tbl_account->setRightBalance(0);
+        }
+        if (Globals::PLACEMENT_LEFT == $leftRight) {
+            $tbl_account->setLeftBalance($balance);
+        } else if (Globals::PLACEMENT_RIGHT == $leftRight) {
+            $tbl_account->setRightBalance($balance);
+        }
+
+        $tbl_account->save();
+    }
+
+    function getPairingBalance($distributorId, $leftRight)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId . " AND left_right = '" . $leftRight . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }
