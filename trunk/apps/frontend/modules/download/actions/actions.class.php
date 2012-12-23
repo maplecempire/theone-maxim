@@ -18,9 +18,9 @@ class downloadActions extends sfActions
         $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
         $response->setContentType('application/exe');
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim4Setup.exe', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=maximtrader4setup.exe', TRUE);
         $response->sendHttpHeaders();
-        readfile(sfConfig::get('sf_upload_dir')."/Maxim4Setup.exe");
+        readfile(sfConfig::get('sf_upload_dir')."/maximtrader4setup.exe");
         return sfView::NONE;
     }
     public function executeDownloadFxGuide()
@@ -338,9 +338,9 @@ class downloadActions extends sfActions
             $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
             $response->setContentType('application/exe');
             $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-            $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim4Setup.exe', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename=maximtrader4setup.exe', TRUE);
             $response->sendHttpHeaders();
-            readfile(sfConfig::get('sf_upload_dir')."/Maxim4Setup.exe");
+            readfile(sfConfig::get('sf_upload_dir')."/maximtrader4setup.exe");
         }
 
         return sfView::NONE;
