@@ -16,11 +16,39 @@ class financeActions extends sfActions
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         foreach ($distDBs as $distDB) {
-            //$leftBalance = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-            //$rightBalance = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
+            $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+            $accountLedgers = MlmAccountLedgerPeer::doSelect($c);
 
-            $this->revalidatePairing($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $this->revalidatePairing($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $balance = 0;
+            print_r("<br>");
+            foreach ($accountLedgers as $accountLedger) {
+
+                $balance = $balance + $accountLedger->getCredit() - $accountLedger->getDebit();
+                $accountLedger->setBalance($balance);
+                $accountLedger->save();
+                print_r("ecash balance=".$balance);
+                print_r("<br>");
+            }
+
+            $c = new Criteria();
+            $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, "DRB");
+            $c->addAscendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+            $commissionLedgers = MlmDistCommissionLedgerPeer::doSelect($c);
+
+            $balance = 0;
+            print_r("<br>");
+            foreach ($commissionLedgers as $commissionLedger) {
+
+                $balance = $balance + $commissionLedger->getCredit() - $commissionLedger->getDebit();
+                $commissionLedger->setBalance($balance);
+                $commissionLedger->save();
+                print_r("commission balance=".$balance);
+                print_r("<br>");
+            }
         }
     }
     public function executeIndex()
