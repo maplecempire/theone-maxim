@@ -7,7 +7,7 @@
 <?php include_metas() ?>
 <?php include_title() ?>
 
-<?php include('scripts.php'); date_default_timezone_set('America/New_York'); ?>
+<?php include('scripts_backend.php'); date_default_timezone_set('America/New_York'); ?>
 <style type="text/css">
 .caption{
 background:#e8e8e8;
