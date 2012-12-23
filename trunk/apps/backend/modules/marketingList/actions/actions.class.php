@@ -10,6 +10,86 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeLiveAccountRequestList()
+    {
+        $page = intval($this->getRequestParameter('page'));
+	    $limit = intval($this->getRequestParameter('displayLength'));
+
+        $offset = ($page-1) * $limit;
+        $result = array();
+
+        $sWhere = " WHERE live_demo = 'LIVE'";
+        $sql = " FROM mlm_mt4_demo_request ";
+
+        $result["total"] = $this->getTotalRecords($sql.$sWhere);
+
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+        $sColumns = "request_id, first_name, email, status_code, created_by, created_on, updated_by, updated_on, country, phone_number, last_name, title, live_demo, address1, address2, agree_of_business, risk_disclosure, country_of_citizen, dob_day, dob_month, dob_year, ref_id, passport, subject, city, address_state";
+        /******   sorting  *******/
+        $sOrder = " ";
+        $order = $this->getRequestParameter('order');
+        $sortField = $this->getRequestParameter('sort');
+        if ($this->getRequestParameter('sort')) {
+            $sOrder = " ORDER BY ".$sortField." ".$order;
+        }
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $items = array();
+        while ($resultset->next())
+        {
+            $row = $resultset->getRow();
+            array_push($items, $row);
+        }
+        $result["rows"] = $items;
+
+        echo json_encode($result);
+
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDemoAccountRequestList()
+    {
+        $page = intval($this->getRequestParameter('page'));
+	    $limit = intval($this->getRequestParameter('displayLength'));
+
+        $offset = ($page-1) * $limit;
+        $result = array();
+
+        $sWhere = " WHERE live_demo = 'DEMO'";
+        $sql = " FROM mlm_mt4_demo_request ";
+
+        $result["total"] = $this->getTotalRecords($sql.$sWhere);
+
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+        $sColumns = "request_id, first_name, email, status_code, created_by, created_on, updated_by, updated_on, country, phone_number, last_name, title, live_demo, address1, address2, agree_of_business, risk_disclosure, country_of_citizen, dob_day, dob_month, dob_year, ref_id, passport, subject, city, address_state";
+        /******   sorting  *******/
+        $sOrder = " ";
+        $order = $this->getRequestParameter('order');
+        $sortField = $this->getRequestParameter('sort');
+        if ($this->getRequestParameter('sort')) {
+            $sOrder = " ORDER BY ".$sortField." ".$order;
+        }
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $items = array();
+        while ($resultset->next())
+        {
+            $row = $resultset->getRow();
+            array_push($items, $row);
+        }
+        $result["rows"] = $items;
+
+        echo json_encode($result);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeCustomerEnquiryList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

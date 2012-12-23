@@ -297,6 +297,8 @@ class adminActions extends sfActions
         $referralBonus = $this->getTotalRefferalBonus(Globals::STATUS_PENDING);
         $ecashWithdrawal = $this->getTotalEcashWithdrawal(Globals::STATUS_PENDING);
         $customerEnquiry = $this->getTotalCustomerEnquiry();
+        $demoAccountRequest = $this->getDemoAccountRequest();
+        $liveAccountRequest = $this->getLiveAccountRequest();
 
         /*$c = new Criteria();
         $packages = MlmPackagePeer::doSelect($c);
@@ -317,6 +319,8 @@ class adminActions extends sfActions
         $this->referralBonus = $referralBonus;
         $this->ecashWithdrawal = $ecashWithdrawal;
         $this->customerEnquiry = $customerEnquiry;
+        $this->demoAccountRequest = $demoAccountRequest;
+        $this->liveAccountRequest = $liveAccountRequest;
     }
 
     public function executeUserList()
@@ -798,6 +802,26 @@ class adminActions extends sfActions
         $c->add(MlmCustomerEnquiryPeer::ADMIN_READ, Globals::FALSE);
 
         $totalNetworks = MlmCustomerEnquiryPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getDemoAccountRequest()
+    {
+        $c = new Criteria();
+        $c->add(MlmMt4DemoRequestPeer::LIVE_DEMO, "DEMO");
+        $c->add(MlmMt4DemoRequestPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+
+        $totalNetworks = MlmMt4DemoRequestPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getLiveAccountRequest()
+    {
+        $c = new Criteria();
+        $c->add(MlmMt4DemoRequestPeer::LIVE_DEMO, "LIVE");
+        $c->add(MlmMt4DemoRequestPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+
+        $totalNetworks = MlmMt4DemoRequestPeer::doCount($c);
 
         return $totalNetworks;
     }
