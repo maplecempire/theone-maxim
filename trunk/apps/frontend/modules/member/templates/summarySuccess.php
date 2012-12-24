@@ -825,7 +825,7 @@ if ($tempDisable == true) { ?>
                 else
                     echo $announcement->getTitleCn();*/
                 ?>
-            We wish you and your family a MERRY CHRISTMAS and a HAPPY NEW YEAR!!
+            We wish you a Merry Christmas and a Prosperous New Year!!
             </div>
         <!--</a>-->
 
@@ -851,15 +851,30 @@ if ($tempDisable == true) { ?>
             <br>
             <br>
 
-            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/SggbnTWURZI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+            <br>
+            <br>
+                Thank you for being a member at Maxim Trader and we wish you a Merry Christmas and a Prosperous New Year.
 
+
+                            <br>
+                            <br>
+We are grateful for the pleasure of serving you and meeting your needs and we look forward to serve you more in the coming year with utmost comfort and commitment valuing your growth as our main goal in mind.
+
+
+                          <br>
+                          <br>
+We wish you a splendid year filled with abundance joy, happiness, the best of health and wealth, all-wishes-granted and a special good vibe following your business and family.
+
+
+                          <br>
+                          <br>
+Happy holidays! Happy 2013!
             <br>
             <br>
+            Sincerely,
             <br>
-            <br>
-            FROM
-            <br>
-            Maxim trader Managements
+            Maxim Trader Team
         </div>
         <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>"><?php /*echo __('Read More') */?> &gt;&gt;</a>-->
     </div>
