@@ -1683,7 +1683,7 @@ class memberActions extends sfActions
 							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email accounts@maximtrader.com
 									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
@@ -1792,51 +1792,41 @@ class memberActions extends sfActions
                                                 <td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
                                                 <td valign='top' style='line-height:17px'>
                                                     <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+												Dear <strong>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>,<br><br>
 
-
-                                                        感谢您申请Maxim Trader的交易账户。
+                                                Thank you for your recent application for a trading account with Maxim Trader.
                                                 <br><br>
-我们很高兴地告诉你，你的开户申请已经被接受并已分类为零售客户。
+We are pleased to advise you that your account application has been accepted.
 <br><br>
-您已选择（个人）以美元交易的账户。
+In order for us to open your account, there are a few pieces of information we need from you as soon as possible, so you can start to enjoy trading with Maxim Trader.
 <br><br>
-为了让我们激活您的帐户，我们需要您尽快尽快提交以下的文件与资料:
-<br><br>
-请发送给我们<STRONG>一份</strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段：
+Please send us <strong>one</strong> certified** document from list (i) and <strong>two</strong> certified** documents from list (ii) below:
 <br><br>
 
-（ii）身份验证（未过期）
-<BR>1. 护照;
-<BR>2. 驾驶执照;
-<BR>3. 国民身分证
+(i) ID Verification (non-expired)
+<br>&nbsp;&nbsp;1. Passport; or
+<br>&nbsp;&nbsp;2. Photocard driving licence; or
+<br>&nbsp;&nbsp;3. National ID card
 <br><br>
-（ii）地址验证码*
-<BR>1. 银行对账单;
-<BR>2. 水电费帐单（煤气，水，电或陆地线路电话）;
-<BR>3. 信用卡对帐单。
-<br><br>
-*本文件必须是最近3个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的。
-<br><br>
-我们不接受电视牌照，电子生成的的PDF报表或文件邮政信箱地址。
-<br><br>
-*所有复印件必须由律师，银行经理或公证人作为一个<strong> “的真实副本的”</strong>，包括邮票，全名，地址，日期和签名的人进行认证。请注意，如果我们不能独立验证的认证，这可能会导致您的应用程序的延迟。
+(ii) Address Verification*
+<br>&nbsp;&nbsp;1. Bank statement; or
+<br>&nbsp;&nbsp;2. Utility bill (gas, water, electric or land line telephone); or
+<br>&nbsp;&nbsp;3. Credit card Statement.
 <br><br>
 <br><br>
-请扫描所需的文件和电子邮件发送给我们在<strong> cs@maximtrader.com </strong>
+Please scan the required documents and send them to us by email at <strong>accounts@maximtrader.com</strong>
 <br><br>
-您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码。
+Once your documents have been successfully verified, we will advise you of your account number/login and password.
 <br><br>
-我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系。
-                                                        <br>
-                                                    </font>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-                                                    买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
-                                                    </font>
+We look forward to your custom in the near future. Should you have any queries, please do not hesitate to contact us.
+											</font>
+
+											<br>
+											<br>
+											<br>
+											<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
+											Forex, spread bets and CFDs are leveraged products. They may not be suitable for you as they carry a high degree of risk to your capital and you can lose more than your initial investment. You should ensure you understand all of the risks.
+											</font>
                                                 </td>
                                             </tr>
                                             <tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
@@ -1888,50 +1878,49 @@ class memberActions extends sfActions
 									<tr>
 										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
 										<td valign='top' style='line-height:17px'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-												Dear <strong>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>,<br><br>
+										<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
+                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
+                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
 
-                                                Thank you for your recent application for a trading account with Maxim Trader.
+
+                                                        感谢您申请Maxim Trader的交易账户。
                                                 <br><br>
-We are pleased to advise you that your account application has been accepted and you have been classified as a Retail Customer.
+我们很高兴地告诉你，你的开户申请已经被接受。
 <br><br>
-You have chosen to open a (Personal) Classic Trading Account in USD.
+您已选择（个人）以美元交易的账户。
 <br><br>
-In order for us to open your account, there are a few pieces of information we need from you as soon as possible, so you can start to enjoy trading with Maxim Trader.
+为了让我们激活您的帐户，我们需要您尽快尽快提交以下的文件与资料:
 <br><br>
-Please send us <strong>one</strong> certified** document from list (i) and <strong>two</strong> certified** documents from list (ii) below:
+请发送给我们<STRONG>一份</strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段：
 <br><br>
 
-(i) ID Verification (non-expired)
-<br>&nbsp;&nbsp;1. Passport; or
-<br>&nbsp;&nbsp;2. Photocard driving licence; or
-<br>&nbsp;&nbsp;3. National ID card
+（ii）身份验证（未过期）
+<BR>1. 护照;
+<BR>2. 驾驶执照;
+<BR>3. 国民身分证
 <br><br>
-(ii) Address Verification*
-<br>&nbsp;&nbsp;1. Bank statement; or
-<br>&nbsp;&nbsp;2. Utility bill (gas, water, electric or land line telephone); or
-<br>&nbsp;&nbsp;3. Credit card Statement.
+（ii）地址验证码*
+<BR>1. 银行对账单;
+<BR>2. 水电费帐单（煤气，水，电或陆地线路电话）;
+<BR>3. 信用卡对帐单。
 <br><br>
-*The document must be dated within 3 months and include your full name and current address. The issuer and date must be visible. The document must have been sent to your address via the post.
-<br><br>
-We don't accept TV licenses, electronically generated PDF statements or documents for PO Box addresses.
-<br><br>
-** All copies must be certified by a lawyer, bank manager or Notary Public as a <strong>\"true copy of the original\"</strong>, and include the stamp, full name, address, date and signature of the person performing the certification. Please note if we cannot independently verify the certification this may result in a delay in your application.
+*本文件必须是最近3个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的。
 <br><br>
 <br><br>
-Please scan the required documents and send them to us by email at <strong>cs@maximtrader.com</strong>
+请扫描所需的文件和电子邮件发送给我们在<strong> accounts@maximtrader.com </strong>
 <br><br>
-Once your documents have been successfully verified, we will advise you of your account number/login and password.
+您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码。
 <br><br>
-We look forward to your custom in the near future. Should you have any queries, please do not hesitate to contact us.
-											</font>
+我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系。
+                                                        <br>
+                                                    </font>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
+                                                    买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
+                                                    </font>
 
-											<br>
-											<br>
-											<br>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
-											Forex, spread bets and CFDs are leveraged products. They may not be suitable for you as they carry a high degree of risk to your capital and you can lose more than your initial investment. You should ensure you understand all of the risks.
-											</font>
 										</td>
 									</tr>
 									<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
@@ -2671,9 +2660,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
             $this->forward404Unless($sponsoredPackageDB);
             $pairingPoint = $sponsoredPackageDB->getPrice();
-            if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+            /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $pairingPoint = $amountNeeded;
-            }
+            }*/
             // recalculate Total left and total right for $uplineDistDB
             $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
             for ($x = count($arrs); $x > 0; $x--) {
@@ -6217,7 +6206,7 @@ Wish you all the best.
 							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email accounts@maximtrader.com
 									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
