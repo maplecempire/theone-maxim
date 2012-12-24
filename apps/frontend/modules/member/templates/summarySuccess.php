@@ -6,6 +6,9 @@ var packageStrings = "<option value=''></option>";
 var datagrid = null;
 var datagridAnnouncement = null;
 $(function() {
+    $("#popupContactClose, #popupContactClose2").click(function(){
+        $("#youtubeFrame").remove();
+    });
     /*datagrid = $("#datagridAnnouncement").r9jasonDataTable({
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
@@ -798,7 +801,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <!--####################################################################################################-->
 <?php
 $tempDisable = true;
-if ($tempDisable == false) { ?>
+if ($tempDisable == true) { ?>
 <div style="position: absolute; display: none;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
@@ -811,37 +814,54 @@ if ($tempDisable == false) { ?>
 
     <?php
     $culture = $sf_user->getCulture();
-    foreach ($announcements as $announcement) { ?>
+    //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-        <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>">
+        <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>">-->
             <div class="poptitle"><?php
-                if ($culture == "en")
+                /*if ($culture == "en")
                     echo $announcement->getTitle();
                 else if ($culture == "jp")
                     echo $announcement->getTitleJp();
                 else
-                    echo $announcement->getTitleCn();
-                ?></div>
-        </a>
+                    echo $announcement->getTitleCn();*/
+                ?>
+            We wish you and your family a MERRY CHRISTMAS and a HAPPY NEW YEAR!!
+            </div>
+        <!--</a>-->
 
         <div class="news_date">
         <?php
             $dateUtil = new DateUtil();
-            $currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
-            echo $currentDate;
+            //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
+            //echo $currentDate;
+            echo "24 DECEMBER 2012";
             ?>
         </div>
         <div class="news_desc">
             <?php
-            if ($culture == "en")
+            /*if ($culture == "en")
                 echo $announcement->getShortContent();
             else if ($culture == "jp")
                 echo $announcement->getShortContentJp();
             else
-                echo $announcement->getShortContentCn();
+                echo $announcement->getShortContentCn();*/
+
             ?>
+
+            <br>
+            <br>
+
+            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/SggbnTWURZI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            FROM
+            <br>
+            Maxim trader Managements
         </div>
-        <a href="<?php echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())?>"><?php echo __('Read More') ?> &gt;&gt;</a>
+        <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>"><?php /*echo __('Read More') */?> &gt;&gt;</a>-->
     </div>
     <div class="popdivider"></div>
     <?php } ?>
@@ -849,4 +869,4 @@ if ($tempDisable == false) { ?>
     <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
 </div>
 <div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
-<?php } ?>
+<?php //} ?>
