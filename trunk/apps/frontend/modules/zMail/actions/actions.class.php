@@ -10,7 +10,103 @@
  */
 class zMailActions extends sfActions
 {
-    public function executeIndex()
+    public function executeIndex() {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 146, Criteria::GREATER_THAN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        foreach ($distDBs as $distDB) {
+
+
+        $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
+
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
+																	Dear <STRONG>".$distDB->getFullName()."</strong>,<br><br>
+																	Thank you for being a member at Maxim Trader and we wish you a Merry Christmas and a Prosperous New Year.
+
+
+<br>
+<br>
+We are grateful for the pleasure of serving you and meeting your needs and we look forward to serve you more in the coming year with utmost comfort and commitment valuing your growth as our main goal in mind.
+
+
+<br>
+<br>
+We wish you a splendid year filled with abundance joy, happiness, the best of health and wealth, all-wishes-granted and a special good vibe following your business and family.
+
+
+<br>
+<br>
+Happy holidays! Happy 2013!
+																</font>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Sincerely,<br>
+									<strong>Maxim Trader Team</strong><br>
+									http://www.maximtrader.com
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
+
+        $subject = "Maxim Trader Wishes our Members a Prosperous New Year - 2013";
+
+        $sendMailService = new SendMailService();
+        $sendMailService->sendMail($distDB->getEmail(), $distDB->getFullName(), $subject, $body);
+        }
+    }
+    public function executeIndex2()
     {
         $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
 	<tbody>
@@ -465,7 +561,7 @@ class zMailActions extends sfActions
         }
     }
 
-    public function executeIndex2()
+    public function executeIndex3()
     {
         $subject = $this->getContext()->getI18N()->__("Maxim Trader Accounts Team", null, 'email');
         $text_body = "Dear " . "<tester full name>" . ",
