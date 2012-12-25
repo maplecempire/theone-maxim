@@ -801,7 +801,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <!--####################################################################################################-->
 <?php
 $tempDisable = true;
-if ($tempDisable == true) { ?>
+if ($tempDisable == false) { ?>
 <div style="position: absolute; display: none;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
@@ -851,7 +851,7 @@ if ($tempDisable == true) { ?>
             <br>
             <br>
 
-            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
                 Thank you for being a member at Maxim Trader and we wish you a Merry Christmas and a Prosperous New Year.
@@ -879,9 +879,9 @@ Happy holidays! Happy 2013!
         <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>"><?php /*echo __('Read More') */?> &gt;&gt;</a>-->
     </div>
     <div class="popdivider"></div>
-    <?php } ?>
+    <?php //} ?>
     <p></p>
     <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
 </div>
 <div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
-<?php //} ?>
+<?php } ?>

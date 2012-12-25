@@ -82,7 +82,9 @@
 
 <div class="info_bottom_bg"></div>
 
-<?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123") { ?>
+<?php
+$show = false;
+if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorCode() != "demo123" && $show != false) { ?>
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
