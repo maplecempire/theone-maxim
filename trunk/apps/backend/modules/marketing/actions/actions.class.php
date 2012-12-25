@@ -1054,11 +1054,6 @@ class marketingActions extends sfActions
 
 
 													<td style='font-size:0;line-height:0' width='85'>
-
-													</td>
-
-													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
-													<td style='font-size:0;line-height:0' width='85'>
 														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
 															<tbody><tr>
 																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
@@ -1073,6 +1068,26 @@ class marketingActions extends sfActions
 															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
 																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>My<br> Account</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-access.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td>
@@ -1134,11 +1149,6 @@ class marketingActions extends sfActions
 
 
 													<td style='font-size:0;line-height:0' width='85'>
-
-													</td>
-
-													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
-													<td style='font-size:0;line-height:0' width='85'>
 														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
 															<tbody><tr>
 																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
@@ -1153,6 +1163,26 @@ class marketingActions extends sfActions
 															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
 																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>My<br> Account</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-access_cn.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td>
