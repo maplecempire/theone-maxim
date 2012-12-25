@@ -927,7 +927,7 @@ class financeActions extends sfActions
 															<tr>
 																<td style='text-align:center;line-height:15px' align='center'>
 																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
-																		<strong>MaximTrader<br> MT4 Terminal</strong>
+																		<strong>Maxim Trader<br> MT4 Terminal</strong>
 																	</font>
 																</td>
 															</tr>
@@ -984,6 +984,12 @@ class financeActions extends sfActions
 												如果您有任何疑问，请不要犹豫立即联络我们。
 												<br>
 											</font>
+											<br>
+																<br>
+																<br>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:17px'>
+																买外汇或者期货都是一种杠杆投资。他们可能不适合您，因为他们具有很高的风险，您可能会失去您最初的投资资金，所以您必须确保你了解所有的风险。
+																</font>
 															</td>
 														</tr>
 													</tbody>
