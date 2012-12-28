@@ -796,6 +796,7 @@ class memberActions extends sfActions
             $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+
             $this->forward404Unless($uplineDistDB);
 
             $uplineDistId = $uplineDistDB->getDistributorId();
@@ -881,11 +882,24 @@ class memberActions extends sfActions
             if ($this->getRequestParameter('productCode') == "mte") {
                 $mlm_distributor->setProductFxgold("Y");
             }
-
             $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_distributor->save();
 
+            // create mlm_dist_pairing
+            $sponsorDistPairingDB = MlmDistPairingPeer::retrieveByPK($mlm_distributor->getDistributorId());
+            if (!$sponsorDistPairingDB) {
+                $sponsorDistPairingDB = new MlmDistPairing();
+                $sponsorDistPairingDB->setDistId($mlm_distributor->getDistributorId());
+                $sponsorDistPairingDB->setLeftBalance(0);
+                $sponsorDistPairingDB->setRightBalance(0);
+                $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            }
+            //var_dump($packagePrice);
+            //exit();
+            $sponsorDistPairingDB->setFlushLimit($packagePrice);
+            $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sponsorDistPairingDB->save();
             /* ****************************************************
              * ROI Divident
              * ***************************************************/
@@ -4962,6 +4976,20 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $distDB->setRankCode($selectedPackage->getPackageName());
                 $distDB->save();
 
+                // create mlm_dist_pairing
+                $sponsorDistPairingDB = MlmDistPairingPeer::retrieveByPK($distId);
+                if (!$sponsorDistPairingDB) {
+                    $sponsorDistPairingDB = new MlmDistPairing();
+                    $sponsorDistPairingDB->setLeftBalance(0);
+                    $sponsorDistPairingDB->setRightBalance(0);
+                    $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistPairingDB->setFlushLimit($amountNeeded);
+                } else {
+                    if ($amountNeeded > $sponsorDistPairingDB->getFlushLimit())
+                        $sponsorDistPairingDB->setFlushLimit($amountNeeded);
+                }
+                $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingDB->save();
                 /* ****************************************************
                  * ROI Divident
                  * ***************************************************/
@@ -5704,7 +5732,6 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $c = new Criteria();
         $c->add(MlmDistPairingPeer::DIST_ID, $distributorId);
-        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $mlmDist = MlmDistPairingPeer::doSelectOne($c);
         if (!$mlmDist) {
             $distDB = MlmDistributorPeer::retrieveByPK($distributorId);
