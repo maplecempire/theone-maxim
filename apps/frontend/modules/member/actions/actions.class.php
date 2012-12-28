@@ -2157,6 +2157,33 @@ We look forward to your custom in the near future. Should you have any queries, 
     // *******************   ~ end      For broker registeration       end ~   **********************
     // **********************************************************************************************
 
+    public function executeVerifySameGroupSponsorId()
+    {
+        $sponsorId = $this->getRequestParameter('sponsorId');
+
+        $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" + $this->getUser()->getAttribute(Globals::SESSION_USERNAME) + "%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
+        $existUser = MlmDistributorPeer::doSelectOne($c);
+
+        $arr = "";
+        if ($existUser) {
+            //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+            $arr = array(
+                'userId' => $existUser->getDistributorId(),
+                'userName' => $existUser->getDistributorCode(),
+                'fullname' => $existUser->getFullName(),
+                'nickname' => $existUser->getNickname()
+            );
+            //}
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeVerifySponsorId()
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
@@ -3340,7 +3367,19 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
-            if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
+            $sponsorId = $this->getRequestParameter('sponsorId');
+
+            $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" + $this->getUser()->getAttribute(Globals::SESSION_USERNAME) + "%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
+            $existUser = MlmDistributorPeer::doSelectOne($c);
+
+            if (!$existUser) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid trader ID."));
+
+            } else if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
 

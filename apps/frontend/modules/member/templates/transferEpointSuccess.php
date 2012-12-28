@@ -52,7 +52,7 @@
         waiting();
         $.ajax({
             type : 'POST',
-            url : "/member/verifySponsorId",
+            url : "/member/verifySameGroupSponsorId",
             dataType : 'json',
             cache: false,
             data: {
@@ -60,7 +60,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    alert("Invalid sponsor ID");
+                    alert("Invalid trader ID.");
                     $('#sponsorId').focus();
                     $("#sponsorName").html("");
                 } else {
