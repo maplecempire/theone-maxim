@@ -379,6 +379,9 @@ function reassignDatagridAnnouncementEventAttr() {
 
             if ($mlmRoiDividendDB) {
                 $joinDate = $mlmRoiDividendDB->getFirstDividendDate();
+
+                $timevalue = strtotime($joinDate);
+                $joinDate = date("Y-m-d h:i:s", strtotime("-1 months", $timevalue));
             }
             $arr = explode(" ", $joinDate);
             $joinDate = $arr[0];
