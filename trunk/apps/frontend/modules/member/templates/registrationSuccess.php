@@ -151,7 +151,7 @@
                 },
                 success : function(data) {
                     if (data == null || data == "") {
-                        alert("<?php echo __('Invalid Sponsor ID') ?>");
+                        alert("<?php echo __('Invalid Trader ID.') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").html("");
                     } else {

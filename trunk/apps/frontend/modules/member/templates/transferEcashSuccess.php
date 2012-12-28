@@ -59,7 +59,7 @@ function verifySponsorId() {
         },
         success : function(data) {
             if (data == null || data == "") {
-                alert("Invalid sponsor ID");
+                alert("Invalid Trader ID.");
                 $('#sponsorId').focus();
                 $("#sponsorName").html("");
             } else {
