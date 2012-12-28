@@ -897,7 +897,7 @@ class memberActions extends sfActions
             }
             //var_dump($packagePrice);
             //exit();
-            $sponsorDistPairingDB->setFlushLimit($packagePrice);
+            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
             $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sponsorDistPairingDB->save();
             /* ****************************************************
@@ -4983,10 +4983,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingDB->setLeftBalance(0);
                     $sponsorDistPairingDB->setRightBalance(0);
                     $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingDB->setFlushLimit($amountNeeded);
-                } else {
-                    if ($amountNeeded > $sponsorDistPairingDB->getFlushLimit())
-                        $sponsorDistPairingDB->setFlushLimit($amountNeeded);
+                    $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
                 }
                 $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingDB->save();
