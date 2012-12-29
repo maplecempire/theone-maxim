@@ -180,9 +180,9 @@ class memberActions extends sfActions
 
             $amountNeeded = $selectedPackage->getPrice();
 
-            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+            /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
-            }
+            }*/
 
             $existDist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTID)));
             $this->forward404Unless($existDist);
@@ -208,9 +208,9 @@ class memberActions extends sfActions
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
-        $highestPackageDB = MlmPackagePeer::doSelectOne($c);
+        $highestPackageDB = MlmPackagePeer::doSelectOne($c);*/
 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode);
@@ -224,7 +224,7 @@ class memberActions extends sfActions
         $this->packageDBs = $packageDBs;
         $this->distPackage = $distPackage;
         $this->distDB = $distDB;
-        $this->highestPackageDB = $highestPackageDB;
+        //$this->highestPackageDB = $highestPackageDB;
         $this->distCode = $distCode;
     }
     public function executeUnderMaintenance()
@@ -559,9 +559,9 @@ class memberActions extends sfActions
 
             $amountNeeded = $selectedPackage->getPrice();
 
-            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+            /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
-            }
+            }*/
 
             if ($amountNeeded > $ledgerEPointBalance) {
                 $this->setFlash('errorMsg', "In-sufficient CP1 amount");
@@ -821,9 +821,9 @@ class memberActions extends sfActions
 
             $applicationPackageName = $packageDB->getPackageName();
             $packagePrice = $packageDB->getPrice();
-            if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+            /*if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $packagePrice = $amountNeeded;
-            }
+            }*/
 
             $mlm_distributor = new MlmDistributor();
             $mlm_distributor->setDistributorCode($fcode);
@@ -1175,9 +1175,9 @@ class memberActions extends sfActions
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
                 $this->forward404Unless($sponsoredPackageDB);
                 $pairingPoint = $sponsoredPackageDB->getPrice();
-                if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                     $pairingPoint = $amountNeeded;
-                }
+                }*/
 
                 // recalculate Total left and total right for $uplineDistDB
                 $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
@@ -4931,9 +4931,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                $amountNeeded = $selectedPackage->getPrice() -  $currentPackageAmount;
                 $amountNeeded = $selectedPackage->getPrice();
             }
-            if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
+            /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
-            }
+            }*/
 
             if ($amountNeeded > $ledgerECashBalance && $paymentType == "ecash") {
                 $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
@@ -5254,9 +5254,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
             $packageDBs = MlmPackagePeer::doSelect($c);
 
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
-            $highestPackageDB = MlmPackagePeer::doSelectOne($c);
+            $highestPackageDB = MlmPackagePeer::doSelectOne($c);*/
 
             $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $this->forward404Unless($distDB);
@@ -5268,7 +5268,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;
             $this->distDB = $distDB;
-            $this->highestPackageDB = $highestPackageDB;
+            //$this->highestPackageDB = $highestPackageDB;
         }
     }
 
