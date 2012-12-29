@@ -2173,12 +2173,14 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeVerifySameGroupSponsorId()
     {
+        //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
         $sponsorId = $this->getRequestParameter('sponsorId');
+        //var_dump($sponsorId);
 
         $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" + $this->getUser()->getAttribute(Globals::SESSION_USERNAME) + "%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|". $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
         $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
         $existUser = MlmDistributorPeer::doSelectOne($c);
 
@@ -2455,7 +2457,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$distributor->getDistributorCode()."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorCode()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $totalNetworks = MlmDistributorPeer::doCount($c);
         }
@@ -3383,27 +3385,34 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
-            $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
-            $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" + $this->getUser()->getAttribute(Globals::SESSION_USERNAME) + "%", Criteria::LIKE);
-            $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
-            $existUser = MlmDistributorPeer::doSelectOne($c);
+            if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
+                $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
+                $existUser = MlmDistributorPeer::doSelectOne($c);
 
-            if (!$existUser) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid trader ID."));
+                if (!$existUser) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid trader ID."));
+                    return $this->redirect('/member/transferEpoint');
+                }
+            }
 
-            } else if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
+            if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
+                return $this->redirect('/member/transferEpoint');
 
             } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+                return $this->redirect('/member/transferEpoint');
 
             } elseif (strtoupper($this->getRequestParameter('sponsorId')) == $this->getUser()->getAttribute(Globals::SESSION_USERNAME)) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
+                return $this->redirect('/member/transferEpoint');
 
             } elseif ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0) {
 
