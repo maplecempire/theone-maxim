@@ -785,6 +785,25 @@ class memberActions extends sfActions
         $position = $this->getRequestParameter('position1');
         $amountNeeded = $this->getRequestParameter('amountNeeded');
 
+        /* ****************************************************
+         * get distributor last account ledger epoint balance
+         * ***************************************************/
+        $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+        $packageDB = MlmPackagePeer::retrieveByPK($packageId);
+
+        if (!$packageDB) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/memberRegistration');
+        }
+        $applicationPackageName = $packageDB->getPackageName();
+        $packagePrice = $packageDB->getPrice();
+
+        if ($packagePrice > $sponsorAccountBalance) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient fund to purchase package."));
+            return $this->redirect('/member/memberRegistration');
+        }
+
         $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
         try {
             $con->begin();
@@ -816,11 +835,6 @@ class memberActions extends sfActions
             $app_user->save();
 
             // ****************************
-            $packageDB = MlmPackagePeer::retrieveByPK($packageId);
-            $this->forward404Unless($packageDB);
-
-            $applicationPackageName = $packageDB->getPackageName();
-            $packagePrice = $packageDB->getPrice();
             /*if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $packagePrice = $amountNeeded;
             }*/
@@ -926,11 +940,6 @@ class memberActions extends sfActions
             $mlm_roi_dividend->save();*/
 
             $sponsorId = $mlm_distributor->getDistributorId();
-            /* ****************************************************
-             * get distributor last account ledger epoint balance
-             * ***************************************************/
-            $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
-
             /**************************************/
             /*  Direct REFERRAL Bonus For Upline
             /**************************************/
