@@ -48,6 +48,7 @@ $(function(){
             }},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "withdraw.deduct",  "bSortable": true},
+            { "sName" : "withdraw.amount",  "bSortable": true},
             { "sName" : "accountLedger._ecash",  "bSortable": true},
             { "sName" : "withdraw.status_code",  "bSortable": true},
             { "sName" : "withdraw.created_on",  "bSortable": true}
@@ -117,7 +118,8 @@ function reassignDatagridEventAttr(){
                             <th>Shareholder</th>
                             <th>Name</th>
                             <th>Withdraw</th>
-                            <th>e-Cash</th>
+                            <th>Withdraw after Deduction</th>
+                            <th>e-Cash in wallet</th>
                             <th>Status</th>
                             <th>Date</th>
                             <th>IC</th>
@@ -133,6 +135,7 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td></td>
                             <td><input title="" size="10" type="text" id="search_username" value="" class="search_init"/></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
