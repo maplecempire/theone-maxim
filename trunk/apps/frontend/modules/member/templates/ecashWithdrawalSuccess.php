@@ -3,36 +3,36 @@
 <script type="text/javascript" language="javascript">
     $(function() {
         $("#cbo_ecashAmount").change(function(){
-            /*var ecashFinal = $("#cbo_ecashAmount").val() * 0.95;*/
-            var ecashFinal = $("#cbo_ecashAmount").val();
+            var ecashFinal = $("#cbo_ecashAmount").val() * 0.95;
+//            var ecashFinal = $("#cbo_ecashAmount").val();
 
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
-        $("#withdrawForm").validate({
-                    messages : {
-                        transactionPassword: {
-                            remote: "Security Password is not valid."
-                        }
-                    },
-                    rules : {
-                        "transactionPassword" : {
-                            required : true
-                            , remote: "/member/verifyTransactionPassword"
-                        }
-                    },
-                    submitHandler: function(form) {
-                        waiting();
-                        var ecashBalance = $('#ecashBalance').autoNumericGet();
-                        var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
-
-                        if (withdrawAmount > parseFloat(ecashBalance)) {
-                            alert("In-sufficient E-Cash");
-                            return false;
-                        }
-
-                        form.submit();
+            $("#withdrawForm").validate({
+                messages : {
+                    transactionPassword: {
+                        remote: "Security Password is not valid."
                     }
-                });
+                },
+                rules : {
+                    "transactionPassword" : {
+                        required : true
+                        , remote: "/member/verifyTransactionPassword"
+                    }
+                },
+                submitHandler: function(form) {
+                    waiting();
+                    var ecashBalance = $('#ecashBalance').autoNumericGet();
+                    var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
+
+                    if (withdrawAmount > parseFloat(ecashBalance)) {
+                        alert("In-sufficient E-Cash");
+                        return false;
+                    }
+
+                    form.submit();
+                }
+            });
     });
 </script>
 
@@ -128,7 +128,15 @@
                             <option value="800">800</option>
                             <option value="900">900</option>
                             <option value="1000">1,000</option>
+                            <option value="1100">1,100</option>
+                            <option value="1200">1,200</option>
+                            <option value="1300">1,300</option>
+                            <option value="1400">1,400</option>
                             <option value="1500">1,500</option>
+                            <option value="1600">1,600</option>
+                            <option value="1700">1,700</option>
+                            <option value="1800">1,800</option>
+                            <option value="1900">1,900</option>
                             <option value="2000">2,000</option>
                             <option value="2500">2,500</option>
                             <option value="3000">3,000</option>
@@ -147,19 +155,18 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd" style="display: none">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('After 5% handling fee'); ?>
                     </td>
                     <td>
-                        <input name="ecashFinal" type="text" id="ecashFinal" readonly="readonly"
-                                           tabindex="3"/>
+                        <input name="ecashFinal" type="text" id="ecashFinal" readonly="readonly" tabindex="3"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Security Password'); ?>
@@ -201,34 +208,34 @@
             var datagrid = null;
             $(function() {
                 datagrid = $("#datagrid").r9jasonDataTable({
-                            // online1DataTable extra params
-                            "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
-                            "extraParam" : function(aoData) { // pass extra params to server
-                            },
-                            "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
-                                reassignDatagridEventAttr();
-                            },
+                    // online1DataTable extra params
+                    "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
+                    "extraParam" : function(aoData) { // pass extra params to server
+                    },
+                    "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
+                        reassignDatagridEventAttr();
+                    },
 
-                            // datatables params
-                            "bLengthChange": true,
-                            "bFilter": false,
-                            "bProcessing": true,
-                            "bServerSide": true,
-                            "bAutoWidth": false,
-                            "sAjaxSource": "/finance/ecashWithdrawalList",
-                            "sPaginationType": "full_numbers",
-                            "aaSorting": [
-                                [5,'desc']
-                            ],
-                            "aoColumns": [
-                                { "sName" : "dist_id", "bVisible" : false,  "bSortable": true},
-                                { "sName" : "deduct",  "bSortable": true},
-                                { "sName" : "amount",  "bSortable": true},
-                                { "sName" : "status_code",  "bSortable": true},
-                                { "sName" : "remarks",  "bSortable": true},
-                                { "sName" : "created_on",  "bSortable": true}
-                            ]
-                        });
+                    // datatables params
+                    "bLengthChange": true,
+                    "bFilter": false,
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "bAutoWidth": false,
+                    "sAjaxSource": "/finance/ecashWithdrawalList",
+                    "sPaginationType": "full_numbers",
+                    "aaSorting": [
+                        [5,'desc']
+                    ],
+                    "aoColumns": [
+                        { "sName" : "dist_id", "bVisible" : false,  "bSortable": true},
+                        { "sName" : "deduct",  "bSortable": true},
+                        { "sName" : "amount",  "bSortable": true},
+                        { "sName" : "status_code",  "bSortable": true},
+                        { "sName" : "remarks",  "bSortable": true},
+                        { "sName" : "created_on",  "bSortable": true}
+                    ]
+                });
             }); // end function
 
             function reassignDatagridEventAttr() {

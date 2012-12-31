@@ -3835,8 +3835,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $withdrawAmount = $this->getRequestParameter('ecashAmount');
-        $processFee = 0;
-        //$processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
+        //$processFee = 0;
+        $processFee = $this->getRequestParameter('ecashAmount') * 5 / 100;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {

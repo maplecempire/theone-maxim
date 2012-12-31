@@ -1488,6 +1488,7 @@ class financeListActions extends sfActions
                 $distCode,
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
+                $resultArr['amount'] == null ? "" : $resultArr['amount'],
                 $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
