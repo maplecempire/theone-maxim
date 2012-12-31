@@ -1,11 +1,5 @@
 <?php include('scripts.php'); ?>
 
-<style type="text/css">
-#popupContact {
-    top: 0px !important;
-}
-</style>
-
 <script type='text/javascript' src='/js/popup.js'></script>
 <script type="text/javascript">
 var packageStrings = "<option value=''></option>";
@@ -843,7 +837,7 @@ if ($tempDisable == true) { ?>
             $dateUtil = new DateUtil();
             //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
             //echo $currentDate;
-            echo "31 DECEMBER 2012";
+            echo "24 DECEMBER 2012";
             ?>
         </div>
         <div class="news_desc">
@@ -859,8 +853,8 @@ if ($tempDisable == true) { ?>
 
             <br>
             <br>
-            <a target="_blank" href="http://partner.maximtrader.com/download/demoMt4"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/server_migration/full.jpg"></a>
-            <!--<iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+
+            <iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
                 Thank you for being a member at Maxim Trader and we wish you a Merry Christmas and a Prosperous New Year.
@@ -878,12 +872,12 @@ We wish you a splendid year filled with abundance joy, happiness, the best of he
 
                           <br>
                           <br>
-Happy holidays! Happy 2013!-->
-<!--            <br>
+Happy holidays! Happy 2013!
+            <br>
             <br>
             Sincerely,
             <br>
-            Maxim Trader Team-->
+            Maxim Trader Team
         </div>
         <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>"><?php /*echo __('Read More') */?> &gt;&gt;</a>-->
     </div>
