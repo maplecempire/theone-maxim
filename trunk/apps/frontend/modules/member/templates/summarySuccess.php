@@ -834,7 +834,7 @@ if ($tempDisable == true) { ?>
                 else
                     echo $announcement->getTitleCn();*/
                 ?>
-            We wish you a Merry Christmas and a Prosperous New Year!!
+            Trade Even Better. The Newly Upgraded Maxim Trader MT4 is here and you will love it.
             </div>
         <!--</a>-->
 
