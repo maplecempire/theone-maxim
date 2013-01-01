@@ -4733,7 +4733,19 @@ We look forward to your custom in the near future. Should you have any queries, 
                                             if (is_numeric($arr[0])) {
                                                 $idx = 0;
                                                 $mlm_pip_csv->setTradedDatetime($tradedDate);
-                                                $mlm_pip_csv->setLoginId($arr[$idx++]);
+                                                $mlm_pip_csv->setLoginId($arr[0]);
+                                                $mlm_pip_csv->setLoginName($arr[1]);
+                                                $mlm_pip_csv->setBalance($arr[12]);
+                                                $mlm_pip_csv->setCredit($arr[5]);
+                                                $mlm_pip_csv->setCommissions($arr[7]);
+                                                $mlm_pip_csv->setTaxes($arr[8]);
+                                                $mlm_pip_csv->setStorage($arr[10]);
+                                                $mlm_pip_csv->setProfit($arr[11]);
+                                                //$mlm_pip_csv->setInterest($arr[$idx++]);
+                                                //$mlm_pip_csv->setTax($arr[8]);
+                                                //$mlm_pip_csv->setUnrealizedpl($arr[$idx++]);
+                                                //$mlm_pip_csv->setEquity($arr[$idx++]);
+                                                /*$mlm_pip_csv->setLoginId($arr[$idx++]);
                                                 $mlm_pip_csv->setLoginName($arr[$idx++]);
                                                 $mlm_pip_csv->setBalance($arr[$idx++]);
                                                 $mlm_pip_csv->setCredit($arr[$idx++]);
@@ -4744,7 +4756,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                                 $mlm_pip_csv->setInterest($arr[$idx++]);
                                                 $mlm_pip_csv->setTax($arr[$idx++]);
                                                 $mlm_pip_csv->setUnrealizedpl($arr[$idx++]);
-                                                $mlm_pip_csv->setEquity($arr[$idx++]);
+                                                $mlm_pip_csv->setEquity($arr[$idx++]);*/
                                                 $mlm_pip_csv->setStatusCode($status);
                                                 $mlm_pip_csv->setRemarks($remarks);
                                                 $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
