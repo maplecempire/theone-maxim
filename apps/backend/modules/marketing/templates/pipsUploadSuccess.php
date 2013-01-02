@@ -131,6 +131,15 @@ $(function(){
                 echo select_tag('tradingMonth', options_for_select($month, date('m')), array(
                    'id' => "tradingMonth"
               ));
+             ?>
+
+              <?php
+                $year = array();
+                $year["2013"] = "2013";
+                $year["2012"] = "2012";
+                echo select_tag('tradingYear', options_for_select($year, date('y')), array(
+                   'id' => "tradingYear"
+              ));
              ?></td>
         </tr>
 		<tr>
