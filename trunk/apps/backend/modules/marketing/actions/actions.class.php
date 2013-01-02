@@ -132,6 +132,7 @@ class marketingActions extends sfActions
         if ($this->getRequest()->getFileName('file_upload') != "") {
             $uploadedFilename = $this->getRequest()->getFileName('file_upload');
             $tradingMonth = $this->getRequestParameter('tradingMonth');
+            $tradingYear = $this->getRequestParameter('tradingYear');
             $ext = explode(".", $this->getRequest()->getFileName('file_upload'));
             $extensionName = $ext[count($ext) - 1];
 
@@ -175,7 +176,7 @@ class marketingActions extends sfActions
                     if (is_numeric($arr[0])) {
                         $idx = 0;
                         $mlm_pip_csv->setMonthTraded($tradingMonth);
-                        $mlm_pip_csv->setYearTraded(date('Y'));
+                        $mlm_pip_csv->setYearTraded($tradingYear);
                         $mlm_pip_csv->setLoginId($arr[$idx++]);
                         $mlm_pip_csv->setLoginName($arr[$idx++]);
                         $mlm_pip_csv->setDeposit($arr[$idx++]);
@@ -540,6 +541,7 @@ class marketingActions extends sfActions
                         $totalVolume = $mlm_pip_csv->getVolume();
                         $mt4Id = $mlm_pip_csv->getLoginId();
                         $tradingMonth =  $mlm_pip_csv->getMonthTraded();
+                        $tradingYear =  $mlm_pip_csv->getYearTraded();
 
                         /*$c = new Criteria();
                         $c->add(MlmDistributorPeer::MT4_USER_NAME, $mt4Id);
@@ -552,6 +554,7 @@ class marketingActions extends sfActions
                         //if ($existDistributor) {
                         if ($mlm_dist_mt4) {
                             $index = 0;
+                            var_dump($mlm_dist_mt4->getDistId());
                             $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
                             $this->forward404Unless($existDistributor);
 
@@ -636,7 +639,7 @@ class marketingActions extends sfActions
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                                $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                                                $sponsorDistCommissionledger->setYearTraded($tradingYear);
                                                 $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
                                                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_CREDIT_REFUND);
                                                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_TRADED);
@@ -672,7 +675,7 @@ class marketingActions extends sfActions
 
                                                 $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                                 $sponsorDistCommissionledger->setMonthTraded($tradingMonth);
-                                                $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                                                $sponsorDistCommissionledger->setYearTraded($tradingYear);
                                                 $sponsorDistCommissionledger->setDistId($affectedDistributor->getDistributorId());
                                                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_PIPS_BONUS);
                                                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PIPS_GAIN);
