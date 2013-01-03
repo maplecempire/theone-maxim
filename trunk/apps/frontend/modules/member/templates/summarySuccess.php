@@ -810,7 +810,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <!--####################################################################################################-->
 <?php
 $tempDisable = true;
-if ($tempDisable == true) { ?>
+if ($tempDisable == false) { ?>
 <div style="position: absolute; display: none;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
