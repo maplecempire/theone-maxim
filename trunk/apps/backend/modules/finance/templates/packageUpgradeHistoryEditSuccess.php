@@ -7,7 +7,7 @@
 <!-- TinyMCE -->
 <script type="text/javascript">
 $(function() {
-    $("#btnSave").button({
+    $("#btnApprove").button({
         icons: {
             primary: "ui-icon-circle-check"
         }
@@ -19,8 +19,20 @@ $(function() {
             $('#mt4Id').focus();
         } else {
             waiting();
+            $("#statusCode").val("COMPLETE");
             $("#upgradeForm").submit();
         }
+    });
+    $("#btnReject").button({
+        icons: {
+            primary: "ui-icon-circle-close"
+        }
+    }).click(function(event){
+        event.preventDefault();
+
+        waiting();
+        $("#statusCode").val("REJECT");
+        $("#upgradeForm").submit();
     });
     $("#btnCancel").button({
         icons: {
@@ -113,13 +125,12 @@ $(function() {
                 </tr>
                 <tr>
                     <th class="caption">Status code:</th>
-                    <td class="value"><?php
-                        $arr = array();
-                        $arr['ACTIVE'] = 'ACTIVE';
-                        $arr['REJECT'] = 'REJECT';
-                        $arr['COMPLETE'] = 'COMPLETE';
-                        echo select_tag('status_code', options_for_select($arr, $packageUpgradeHistory->getStatusCode()));
-                     ?></td>
+                    <td class="value">
+                        <?php echo object_input_tag($packageUpgradeHistory, 'getStatusCode', array(
+                                                                                           'size' => 7,
+                                                                                            'readonly' => 'readonly',
+                                                                                      )) ?>
+                    </td>
                 </tr>
                 <tr>
                     <th class="caption">Remarks:</th>
@@ -131,7 +142,8 @@ $(function() {
             </table>
             <hr/>
             <?php if ($packageUpgradeHistory->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-            <button id="btnSave">Save</button>
+                <button id="btnApprove">Approve</button>
+                <button id="btnReject">Reject</button>
             <?php } ?>
             <button id="btnCancel">Cancel</button>
 <!--            &nbsp;--><?php //echo link_to('cancel', 'finance/ecashWithdrawal', array("id" => "btnCancel")) ?>
