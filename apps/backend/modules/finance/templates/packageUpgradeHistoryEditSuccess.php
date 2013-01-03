@@ -18,9 +18,12 @@ $(function() {
             alert("MT4 ID is empty.");
             $('#mt4Id').focus();
         } else {
-            waiting();
-            $("#status_code").val("COMPLETE");
-            $("#upgradeForm").submit();
+            var answer = confirm("Are you sure want to approve this member package upgrade?")
+            if (answer){
+                waiting();
+                $("#status_code").val("COMPLETE");
+                $("#upgradeForm").submit();
+            }
         }
     });
     $("#btnReject").button({
@@ -30,9 +33,12 @@ $(function() {
     }).click(function(event){
         event.preventDefault();
 
-        waiting();
-        $("#status_code").val("REJECT");
-        $("#upgradeForm").submit();
+        var answer = confirm("Are you sure want to reject this member package upgrade?")
+        if (answer){
+            waiting();
+            $("#status_code").val("REJECT");
+            $("#upgradeForm").submit();
+        }
     });
     $("#btnCancel").button({
         icons: {
