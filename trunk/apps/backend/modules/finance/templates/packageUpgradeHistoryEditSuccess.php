@@ -19,7 +19,7 @@ $(function() {
             $('#mt4Id').focus();
         } else {
             waiting();
-            $("#statusCode").val("COMPLETE");
+            $("#status_code").val("COMPLETE");
             $("#upgradeForm").submit();
         }
     });
@@ -31,7 +31,7 @@ $(function() {
         event.preventDefault();
 
         waiting();
-        $("#statusCode").val("REJECT");
+        $("#status_code").val("REJECT");
         $("#upgradeForm").submit();
     });
     $("#btnCancel").button({
@@ -126,10 +126,7 @@ $(function() {
                 <tr>
                     <th class="caption">Status code:</th>
                     <td class="value">
-                        <?php echo object_input_tag($packageUpgradeHistory, 'getStatusCode', array(
-                                                                                           'size' => 7,
-                                                                                            'readonly' => 'readonly',
-                                                                                      )) ?>
+                        <input id="status_code" name="status_code" readonly="readonly" value="<?php echo $packageUpgradeHistory->getStatusCode();?>">
                     </td>
                 </tr>
                 <tr>
