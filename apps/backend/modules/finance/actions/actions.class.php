@@ -781,7 +781,6 @@ class financeActions extends sfActions
     {
         $statusCode = $this->getRequestParameter('status_code');
         $remarks = $this->getRequestParameter('remarks');
-
         $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
         try {
             $con->begin();
@@ -1107,8 +1106,8 @@ class financeActions extends sfActions
 	</tbody>
 </table>";
 
-                    $sendMailService = new SendMailService();
-                    $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                    //$sendMailService = new SendMailService();
+                    //$sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
                 }
             }
                 /*}
