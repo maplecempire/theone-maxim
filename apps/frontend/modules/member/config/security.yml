@@ -50,6 +50,10 @@ fetchPackage:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+fundManagementReport:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 loginPassword:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
