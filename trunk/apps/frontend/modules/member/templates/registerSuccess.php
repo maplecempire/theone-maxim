@@ -64,6 +64,10 @@ $(function() {
         return value.indexOf(" ") < 0 && value != "";
     }, "No space please and don't leave it empty");
 
+    jQuery.validator.addMethod("loginRegex", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
+    }, "Username must contain only letters, numbers, or dashes.");
+
     $("#registerForm").validate({
                 messages : {
                     confirmPassword: {
@@ -83,6 +87,7 @@ $(function() {
                     "userName" : {
                         required : true,
                         noSpace: true,
+                        loginRegex: true,
                         minlength : 6,
                         remote: "/member/verifyUserName"
                     },
@@ -115,8 +120,8 @@ $(function() {
                     },
                     "fullname" : {
                         required : true,
-                        minlength : 2,
-                        remote: "/member/verifyFullName"
+                        minlength : 2
+//                        , remote: "/member/verifyFullName"
                     },
                     "dob" : {
                         required : true
