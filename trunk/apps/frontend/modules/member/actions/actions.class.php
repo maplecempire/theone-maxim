@@ -4262,15 +4262,31 @@ We look forward to your custom in the near future. Should you have any queries, 
             $joinMonth = date('m', strtotime($joinDate));
             $joinYear = date('Y', strtotime($joinDate));
             for ($x = intval($joinYear); $x <= intval($currentYear); $x++) {
-                for ($i = intval($joinMonth); $i <= intval($currentMonth); $i++) {
-                    $anode[$idx]["year"] = $x;
-                    $anode[$idx]["month"] = $i;
-                    $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
-                    $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
-                    $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
-                    $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
-                    $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
-                    $idx++;
+                if ($x != $currentYear) {
+                    for ($i = intval($joinMonth); $i <= 12; $i++) {
+                        $anode[$idx]["year"] = $x;
+                        $anode[$idx]["month"] = $i;
+                        $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
+                        $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
+                        $idx++;
+                    }
+                } else {
+                    if ($joinYear != $currentYear) {
+                        $joinMonth = 1;
+                    }
+                    for ($i = intval($joinMonth); $i <= intval($currentMonth); $i++) {
+                        $anode[$idx]["year"] = $x;
+                        $anode[$idx]["month"] = $i;
+                        $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
+                        $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
+                        $idx++;
+                    }
                 }
             }
         }

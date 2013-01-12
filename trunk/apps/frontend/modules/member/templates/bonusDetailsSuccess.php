@@ -460,7 +460,7 @@
                                 </thead>
                             </table>
                         </div>
-                        <div id="divFundManagementReturn">
+                        <div id="divFundManagementReturn" style="display: none;">
                             <table class="display" id="datagridFundManagementReturn" border="0" width="100%">
                                 <thead>
                                 <tr>
