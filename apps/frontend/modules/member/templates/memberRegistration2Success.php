@@ -13,7 +13,7 @@ $(function() {
     }, "No space please and don't leave it empty");
 
     jQuery.validator.addMethod("loginRegex", function(value, element) {
-        return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
+        return this.optional(element) || /^[a-z0-9\-\s\_]+$/i.test(value);
     }, "Username must contain only letters, numbers, or dashes.");
 
     $("#registerForm").validate({
