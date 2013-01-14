@@ -947,7 +947,10 @@ class memberActions extends sfActions
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-            $this->forward404Unless($uplineDistDB);
+            if (!$uplineDistDB) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
+                return $this->redirect('/member/memberRegistration');
+            }
 
             $uplineDistId = $uplineDistDB->getDistributorId();
             $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
@@ -1313,7 +1316,11 @@ class memberActions extends sfActions
                 $mlm_distributor->save();
 
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
-                $this->forward404Unless($sponsoredPackageDB);
+                if (!$sponsoredPackageDB) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Package selected."));
+                    return $this->redirect('/member/memberRegistration');
+                }
+
                 $pairingPoint = $sponsoredPackageDB->getPrice();
                 /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                     $pairingPoint = $amountNeeded;
@@ -1359,7 +1366,10 @@ class memberActions extends sfActions
                             $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
 
                             $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                            $this->forward404Unless($packageDB);
+                            if (!$packageDB) {
+                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+                                return $this->redirect('/member/memberRegistration');
+                            }
 
                             $sponsorDistPairingDB->setLeftBalance($leftBalance);
                             $sponsorDistPairingDB->setRightBalance($rightBalance);
