@@ -118,7 +118,6 @@
                     <td><?php echo __('CP2 Withdrawal Amount'); ?></td>
                     <td>
                         <select name="ecashAmount" id="cbo_ecashAmount" tabindex="2">
-                            <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
                             <option value="400">400</option>
