@@ -247,6 +247,9 @@ class homeActions extends sfActions
     {
         //$this->getUser()->setCulture("en");
 
+        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME.Globals::ROLE_DISTRIBUTOR), false)) {
+            return $this->redirect('home/index');
+        }
         $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2));
 
         // Concatenate the random string onto the random numbers
