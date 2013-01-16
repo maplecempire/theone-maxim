@@ -650,6 +650,8 @@
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>アップグレードをサポートし、MT4のアカウントを再充電し、現金を現金化することができず、支援の獲得のための唯一のCP1。</target></trans-unit>
             <trans-unit><source>1 equals to 1 value of CP1</source><target>1は1 CP1の値に等しい</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 アカウント</target></trans-unit>
+            <trans-unit><source>CP2 Account</source><target>CP2 アカウント</target></trans-unit>
+            <trans-unit><source>CP3 Account</source><target>CP3 アカウント</target></trans-unit>
             <trans-unit><source>Upgrade Package</source><target>パッケージをアップグレードする</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>レコードのテーブルをサポートしているアップグレードするには</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>取引記号</target></trans-unit>
@@ -762,6 +764,9 @@
             <trans-unit><source>Back to announcement list</source><target>回到発表</target></trans-unit>
             <trans-unit><source>Announcement List</source><target>発表</target></trans-unit>
             <trans-unit><source>ANNOUNCEMENT</source><target>発表</target></trans-unit>
+            <trans-unit><source>Group Development Bonus</source><target>組織開発のボーナス</target></trans-unit>
+            <trans-unit><source>Fund Management Performance</source><target>資金管理のパフォーマンス</target></trans-unit>
+            <trans-unit><source>Special Bonus</source><target>特別ボーナス</target></trans-unit>
         </body>
     </file>
 </xliff>

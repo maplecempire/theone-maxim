@@ -651,6 +651,8 @@
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>CP1只能用来收购配套，配套升级和充值MT4帐户，而不能兑现现金。</target></trans-unit>
             <trans-unit><source>1 equals to 1 value of CP1</source><target>1等于1的值的CP1</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 户口</target></trans-unit>
+            <trans-unit><source>CP2 Account</source><target>CP2 户口</target></trans-unit>
+            <trans-unit><source>CP3 Account</source><target>CP3 户口</target></trans-unit>
             <trans-unit><source>Upgrade Package</source><target>升级配套</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>升级配套记录表</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
@@ -766,9 +768,11 @@
             <trans-unit><source>Contact us if you want to know more</source><target>若想了解更多，请直接联络我们</target></trans-unit>
             <trans-unit><source>Please fill up the personal information, We will call you back in the soonest time</source><target>请您留下您的联络方式，我们的服务员将会联络您</target></trans-unit>
             <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
-            <trans-unit><source>CONTACT US</source><target>联络我们</target></trans-unit>
             <trans-unit><source>Thank you for the submission. Have a good day!</source><target>感谢您的合作，愿你有一个美好的一天！</target></trans-unit>
             <trans-unit><source>Your application submit successfully. We will call u back in the soonest time.</source><target>您的资料提交成功，我们的服务员将会在最短的时间内联络您。</target></trans-unit>
+            <trans-unit><source>Group Development Bonus</source><target>组织发展奖金</target></trans-unit>
+            <trans-unit><source>Fund Management Performance</source><target>基金管理绩效</target></trans-unit>
+            <trans-unit><source>Special Bonus</source><target>特别奖金</target></trans-unit>
         </body>
     </file>
 </xliff>

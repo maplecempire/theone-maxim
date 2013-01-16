@@ -145,7 +145,7 @@
     <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Commission Detail') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Commission Details') ?></span></td>
     </tr>
     <tr>
         <td><br></td>
