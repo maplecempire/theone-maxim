@@ -33,7 +33,7 @@ $(function() {
                 required : true,
                 noSpace: true,
                 loginRegex: true,
-                minlength : 6,
+                minlength : 4,
                 remote: "/member/verifyUserName"
             },
             "userpassword" : {

@@ -251,6 +251,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $product_fxgold = '';
 
+
+	
+	protected $remark;
+
 	
 	protected $alreadyInSave = false;
 
@@ -772,6 +776,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->product_fxgold;
+	}
+
+	
+	public function getRemark()
+	{
+
+		return $this->remark;
 	}
 
 	
@@ -1812,6 +1823,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setRemark($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->remark !== $v) {
+			$this->remark = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::REMARK;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -1938,11 +1966,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->product_fxgold = $rs->getString($startcol + 60);
 
+			$this->remark = $rs->getString($startcol + 61);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 61; 
+						return $startcol + 62; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2270,6 +2300,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 60:
 				return $this->getProductFxgold();
 				break;
+			case 61:
+				return $this->getRemark();
+				break;
 			default:
 				return null;
 				break;
@@ -2341,6 +2374,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[58] => $this->getExcludedStructure(),
 			$keys[59] => $this->getProductMte(),
 			$keys[60] => $this->getProductFxgold(),
+			$keys[61] => $this->getRemark(),
 		);
 		return $result;
 	}
@@ -2539,6 +2573,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 60:
 				$this->setProductFxgold($value);
 				break;
+			case 61:
+				$this->setRemark($value);
+				break;
 		} 	}
 
 	
@@ -2607,6 +2644,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[58], $arr)) $this->setExcludedStructure($arr[$keys[58]]);
 		if (array_key_exists($keys[59], $arr)) $this->setProductMte($arr[$keys[59]]);
 		if (array_key_exists($keys[60], $arr)) $this->setProductFxgold($arr[$keys[60]]);
+		if (array_key_exists($keys[61], $arr)) $this->setRemark($arr[$keys[61]]);
 	}
 
 	
@@ -2675,6 +2713,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::EXCLUDED_STRUCTURE)) $criteria->add(MlmDistributorPeer::EXCLUDED_STRUCTURE, $this->excluded_structure);
 		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_MTE)) $criteria->add(MlmDistributorPeer::PRODUCT_MTE, $this->product_mte);
 		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_FXGOLD)) $criteria->add(MlmDistributorPeer::PRODUCT_FXGOLD, $this->product_fxgold);
+		if ($this->isColumnModified(MlmDistributorPeer::REMARK)) $criteria->add(MlmDistributorPeer::REMARK, $this->remark);
 
 		return $criteria;
 	}
@@ -2824,6 +2863,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setProductMte($this->product_mte);
 
 		$copyObj->setProductFxgold($this->product_fxgold);
+
+		$copyObj->setRemark($this->remark);
 
 
 		$copyObj->setNew(true);
