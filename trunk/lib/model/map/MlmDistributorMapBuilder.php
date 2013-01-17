@@ -154,5 +154,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('PRODUCT_FXGOLD', 'ProductFxgold', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
+
 	} 
 } 

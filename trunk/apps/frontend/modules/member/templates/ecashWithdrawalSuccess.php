@@ -26,7 +26,7 @@
                     var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
 
                     if (withdrawAmount > parseFloat(ecashBalance)) {
-                        alert("In-sufficient E-Cash");
+                        alert("In-sufficient CP2");
                         return false;
                     }
 

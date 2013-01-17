@@ -9,8 +9,111 @@
  */
 class memberActions extends sfActions
 {
+    public function executeApplyDebitCard()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+        $mlm_debit_card_registration = new MlmDebitCardRegistration();
+        $mlm_debit_card_registration->setFullName($distDB->getFullName());
+        $mlm_debit_card_registration->setDob($distDB->getDob());
+        $mlm_debit_card_registration->setIc($distDB->getIc());
+        $mlm_debit_card_registration->setMotherMaidenName("");
+        $mlm_debit_card_registration->setNameOnCard("");
+        $mlm_debit_card_registration->setAddress($distDB->getAddress());
+        $mlm_debit_card_registration->setAddress2($distDB->getAddress2());
+        $mlm_debit_card_registration->setCity($distDB->getCity());
+        $mlm_debit_card_registration->setState($distDB->getState());
+        $mlm_debit_card_registration->setPostcode($distDB->getPostcode());
+        $mlm_debit_card_registration->setCountry($distDB->getCountry());
+        $mlm_debit_card_registration->setEmail($distDB->getEmail());
+        $mlm_debit_card_registration->setContact($distDB->getContact());
+
+        $this->mlm_debit_card_registration = $mlm_debit_card_registration;
+        $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->debitCardCharges = 50;
+    }
+
+    public function executeDoApplyDebitCard()
+    {
+        $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+        $payByOption = $this->getRequestParameter('payByOption');
+        $accountType = "";
+        $accountBalance = 0;
+        $debitCardCharges = 50;
+        if ($payByOption == "CP1") {
+            if ($this->epointBalance < $debitCardCharges) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
+                return $this->redirect('/member/applyDebitCard');
+            }
+            $accountType = Globals::ACCOUNT_TYPE_EPOINT;
+            $accountBalance = $this->epointBalance;
+        } else {
+            if ($this->epointBalance < $debitCardCharges) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+                return $this->redirect('/member/applyDebitCard');
+            }
+            $accountType = Globals::ACCOUNT_TYPE_ECASH;
+            $accountBalance = $this->ecashBalance;
+        }
+
+        $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $mlm_account_ledger->setAccountType($accountType);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_APPLY_DEBIT_CARD);
+            $mlm_account_ledger->setRemark("");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($debitCardCharges);
+            $mlm_account_ledger->setBalance($accountBalance - $debitCardCharges);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
+
+            $mlm_debit_card_registration = new MlmDebitCardRegistration();
+            $mlm_debit_card_registration->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $mlm_debit_card_registration->setAccountId($mlm_account_ledger->getAccountId());
+            $mlm_debit_card_registration->setStatusCode(Globals::STATUS_PENDING);
+            $mlm_debit_card_registration->setFullName($this->getRequestParameter('fullname'));
+            if ($this->getRequestParameter('dob')) {
+                list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                $mlm_debit_card_registration->setDob("$y-$m-$d");
+            }
+            $mlm_debit_card_registration->setIc($this->getRequestParameter('ic'));
+            $mlm_debit_card_registration->setMotherMaidenName($this->getRequestParameter('motherMaidenName'));
+            $mlm_debit_card_registration->setNameOnCard($this->getRequestParameter('nameOnCard'));
+            $mlm_debit_card_registration->setAddress($this->getRequestParameter('address'));
+            $mlm_debit_card_registration->setAddress2($this->getRequestParameter('address2'));
+            $mlm_debit_card_registration->setCity($this->getRequestParameter('city'));
+            $mlm_debit_card_registration->setState($this->getRequestParameter('state'));
+            $mlm_debit_card_registration->setPostcode($this->getRequestParameter('postcode'));
+            $mlm_debit_card_registration->setCountry($this->getRequestParameter('country'));
+            $mlm_debit_card_registration->setEmail($this->getRequestParameter('email'));
+            $mlm_debit_card_registration->setContact($this->getRequestParameter('contact'));
+            $mlm_debit_card_registration->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_debit_card_registration->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_debit_card_registration->setRemark($this->getRequestParameter('remark'));
+
+            $mlm_debit_card_registration->save();
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            //throw $e;
+        }
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your debit card application has been submitted successfully."));
+
+        return $this->redirect('/member/applyDebitCard');
+    }
     public function executeManualRetrieveGmailMailAttachment() {
-        $this->retrieveGmailMailAttachment();
+        //$this->retrieveGmailMailAttachment();
 
         print_r("+++++ ROI Dividend +++++<br>");
         $dateUtil = new DateUtil();
@@ -37,7 +140,7 @@ class memberActions extends sfActions
                  . " AND dist_id = '" . $distId . "'"
                  . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
 
-            //var_dump($query);
+            var_dump($query);
             //exit();
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
