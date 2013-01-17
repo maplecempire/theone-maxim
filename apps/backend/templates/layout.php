@@ -526,6 +526,11 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Live Account Request'); ?></a><br/>
+
+                    <a href="<?php echo url_for('marketing/debitCardApplication') ?>" title="Debit Card Application">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Debit Card Application'); ?></a><br/>
                 </div>
                 <?php } ?>
 

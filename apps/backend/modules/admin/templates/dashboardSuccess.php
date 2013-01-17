@@ -351,6 +351,16 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td><strong>Debit Card Application</strong></td>
+                        <td align="right"><?php
+                            if ($debitCardApplication > 0)
+                                echo "<a id='liveAccountRequest' href='".url_for('marketing/debitCardApplication')."'>".$debitCardApplication."</a>";
+                            else
+                                echo $debitCardApplication;
+                            ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
