@@ -24,10 +24,28 @@ class marketingActions extends sfActions
         }
         return sfView::HEADER_ONLY;
     }
+     public function executeUpdateDebitCardApplicationStatus()
+    {
+        $count = $this->getRequestParameter('count');
+        $status = $this->getRequestParameter('status');
+        for ($i= 0; $i < $count; $i++) {
+            $requestId = $this->getRequestParameter('card_id'. $i);
+
+            $mlmDebitCardRegistration = MlmDebitCardRegistrationPeer::retrieveByPK($requestId);
+            if ($mlmDebitCardRegistration) {
+                $mlmDebitCardRegistration->setStatusCode($status);
+                $mlmDebitCardRegistration->save();
+            }
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeDemoAccountRequest()
     {
     }
     public function executeLiveAccountRequest()
+    {
+    }
+    public function executeDebitCardApplication()
     {
     }
     public function executeCustomerEnquiryList()

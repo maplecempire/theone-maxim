@@ -299,6 +299,7 @@ class adminActions extends sfActions
         $customerEnquiry = $this->getTotalCustomerEnquiry();
         $demoAccountRequest = $this->getDemoAccountRequest();
         $liveAccountRequest = $this->getLiveAccountRequest();
+        $debitCardApplication = $this->getDebitCardApplication();
 
         /*$c = new Criteria();
         $packages = MlmPackagePeer::doSelect($c);
@@ -321,6 +322,7 @@ class adminActions extends sfActions
         $this->customerEnquiry = $customerEnquiry;
         $this->demoAccountRequest = $demoAccountRequest;
         $this->liveAccountRequest = $liveAccountRequest;
+        $this->debitCardApplication = $debitCardApplication;
     }
 
     public function executeUserList()
@@ -822,6 +824,15 @@ class adminActions extends sfActions
         $c->add(MlmMt4DemoRequestPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
 
         $totalNetworks = MlmMt4DemoRequestPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getDebitCardApplication()
+    {
+        $c = new Criteria();
+        $c->add(MlmDebitCardRegistrationPeer::STATUS_CODE, Globals::STATUS_PENDING);
+
+        $totalNetworks = MlmDebitCardRegistrationPeer::doCount($c);
 
         return $totalNetworks;
     }

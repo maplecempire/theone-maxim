@@ -37,6 +37,7 @@ abstract class Globals {
 	const STATUS_REJECT = 'REJECT';
 	const STATUS_APPROVE = 'APPROVE';
 	const STATUS_COMPLETE = 'COMPLETE';
+    const STATUS_SUCCESS = 'SUCCESS';
 
     /*************************/
     /*****    ROLE      ******/

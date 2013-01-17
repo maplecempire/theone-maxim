@@ -10,6 +10,49 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeDebitCardApplicationList()
+    {
+        $page = intval($this->getRequestParameter('page'));
+	    $limit = intval($this->getRequestParameter('displayLength'));
+
+        $offset = ($page-1) * $limit;
+        $result = array();
+
+        $sWhere = " WHERE 1=1";
+        $sql = " FROM mlm_debit_card_registration debit
+                    LEFT JOIN mlm_distributor dist ON debit.dist_id = dist.distributor_id";
+
+        $result["total"] = $this->getTotalRecords($sql.$sWhere);
+
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+        $sColumns = "debit.card_id, debit.dist_id, debit.account_id, debit.status_code, debit.full_name, debit.dob, debit.ic, debit.mother_maiden_name
+        , debit.name_on_card, debit.address, debit.address2, debit.city, debit.state, debit.postcode, debit.country, debit.email, debit.contact
+        , debit.created_by, debit.created_on, debit.updated_by, debit.updated_on, debit.remark, dist.distributor_code";
+        /******   sorting  *******/
+        $sOrder = " ";
+        $order = $this->getRequestParameter('order');
+        $sortField = $this->getRequestParameter('sort');
+        if ($this->getRequestParameter('sort')) {
+            $sOrder = " ORDER BY ".$sortField." ".$order;
+        }
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $items = array();
+        while ($resultset->next())
+        {
+            $row = $resultset->getRow();
+            array_push($items, $row);
+        }
+        $result["rows"] = $items;
+
+        echo json_encode($result);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeLiveAccountRequestList()
     {
         $page = intval($this->getRequestParameter('page'));
