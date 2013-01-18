@@ -255,6 +255,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $remark;
 
+
+	
+	protected $loan_account = '';
+
 	
 	protected $alreadyInSave = false;
 
@@ -783,6 +787,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->remark;
+	}
+
+	
+	public function getLoanAccount()
+	{
+
+		return $this->loan_account;
 	}
 
 	
@@ -1840,6 +1851,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setLoanAccount($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->loan_account !== $v || $v === '') {
+			$this->loan_account = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::LOAN_ACCOUNT;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -1968,11 +1996,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->remark = $rs->getString($startcol + 61);
 
+			$this->loan_account = $rs->getString($startcol + 62);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 62; 
+						return $startcol + 63; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2303,6 +2333,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 61:
 				return $this->getRemark();
 				break;
+			case 62:
+				return $this->getLoanAccount();
+				break;
 			default:
 				return null;
 				break;
@@ -2375,6 +2408,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[59] => $this->getProductMte(),
 			$keys[60] => $this->getProductFxgold(),
 			$keys[61] => $this->getRemark(),
+			$keys[62] => $this->getLoanAccount(),
 		);
 		return $result;
 	}
@@ -2576,6 +2610,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 61:
 				$this->setRemark($value);
 				break;
+			case 62:
+				$this->setLoanAccount($value);
+				break;
 		} 	}
 
 	
@@ -2645,6 +2682,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[59], $arr)) $this->setProductMte($arr[$keys[59]]);
 		if (array_key_exists($keys[60], $arr)) $this->setProductFxgold($arr[$keys[60]]);
 		if (array_key_exists($keys[61], $arr)) $this->setRemark($arr[$keys[61]]);
+		if (array_key_exists($keys[62], $arr)) $this->setLoanAccount($arr[$keys[62]]);
 	}
 
 	
@@ -2714,6 +2752,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_MTE)) $criteria->add(MlmDistributorPeer::PRODUCT_MTE, $this->product_mte);
 		if ($this->isColumnModified(MlmDistributorPeer::PRODUCT_FXGOLD)) $criteria->add(MlmDistributorPeer::PRODUCT_FXGOLD, $this->product_fxgold);
 		if ($this->isColumnModified(MlmDistributorPeer::REMARK)) $criteria->add(MlmDistributorPeer::REMARK, $this->remark);
+		if ($this->isColumnModified(MlmDistributorPeer::LOAN_ACCOUNT)) $criteria->add(MlmDistributorPeer::LOAN_ACCOUNT, $this->loan_account);
 
 		return $criteria;
 	}
@@ -2865,6 +2904,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setProductFxgold($this->product_fxgold);
 
 		$copyObj->setRemark($this->remark);
+
+		$copyObj->setLoanAccount($this->loan_account);
 
 
 		$copyObj->setNew(true);

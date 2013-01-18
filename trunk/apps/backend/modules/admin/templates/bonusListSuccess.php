@@ -36,6 +36,7 @@ $(function() {
                 <tr>
                     <th style="width: 30%">Bonus Type</th>
                     <th align="right" style="text-align:right">Qty</th>
+                    <th align="right" style="text-align:right; width: 10%;">Price</th>
                     <th align="right" style="text-align:right; width: 10%;">Total</th>
                 </tr>
                 </thead>
@@ -46,12 +47,13 @@ $(function() {
                 <tr class="sf_admin_row_1">
                     <td><?php echo $packageArr["name"] ?></td>
                     <td align="right"><?php echo $packageArr["qty"] ?></td>
+                    <td align="right"><?php echo $packageArr["price"] ?></td>
                     <td align="right" style="color: green"><?php echo ($packageArr["qty"] * $packageArr["price"]) ?></td>
                 </tr>
                 <?php } ?>
                 <tr class="sf_admin_row_0">
                     <td>Direct Referral Bonus</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($totalDrb > 0)
                             echo "(-".$totalDrb.")";
@@ -62,7 +64,7 @@ $(function() {
                 </tr>
                 <tr class="sf_admin_row_1">
                     <td>Group Development Bonus</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($totalGrb > 0)
                             echo "(-".$totalGrb.")";
@@ -73,7 +75,7 @@ $(function() {
                 </tr>
                 <tr class="sf_admin_row_0">
                     <td>Generation Bonus</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($totalGenerationBonus > 0)
                             echo "(-".$totalGenerationBonus.")";
@@ -84,7 +86,7 @@ $(function() {
                 </tr>
                 <tr class="sf_admin_row_1">
                     <td>Pips Rebate</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($pipsRebate > 0)
                             echo "(-".$pipsRebate.")";
@@ -95,7 +97,7 @@ $(function() {
                 </tr>
                 <tr class="sf_admin_row_0">
                     <td>Fund Management Performance</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($fundManagementBonus > 0)
                             echo "(-".$fundManagementBonus.")";
@@ -106,7 +108,7 @@ $(function() {
                 </tr>
                 <tr class="sf_admin_row_1">
                     <td>Special Bonus</td>
-                    <td colspan="2" align="right" style="color: red">
+                    <td colspan="3" align="right" style="color: red">
                         <?php
                         if ($specialBonus > 0)
                             echo "(-".$specialBonus.")";
