@@ -81,7 +81,7 @@ class SendMailService
     {
 
     }
-    public function sendMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER)
+    public function sendMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER, $bcc="r9projecthost@gmail.com")
     {
         error_reporting(E_STRICT);
 
@@ -115,7 +115,7 @@ class SendMailService
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress($receiverEmail, $receiverFullName);
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
+        $mail->AddBCC($bcc, "jason");
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;

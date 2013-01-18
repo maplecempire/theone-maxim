@@ -156,5 +156,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('LOAN_ACCOUNT', 'LoanAccount', 'string', CreoleTypes::VARCHAR, false, 1);
+
 	} 
 } 

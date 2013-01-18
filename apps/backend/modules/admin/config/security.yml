@@ -6,6 +6,10 @@ applicationSetting:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_SETTING ]]
 
+bonusList:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_BONUS_LIST ]]
+
 changePassword:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CHANGE_PASSWORD ]]

@@ -9,6 +9,13 @@
  */
 class memberActions extends sfActions
 {
+    public function executeTestSendReport()
+    {
+        $this->sendDailyReport();
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeApplyDebitCard()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -4867,6 +4874,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
         $this->executeSendRemindationEmailForUploadAgreement();
+        print_r("<br>executeSendDailyReport<br>");
+        $this->executeSendDailyReport();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
@@ -6589,6 +6598,120 @@ Wish you all the best.
             $sendMailService->sendMail($receiverEmail, $receiverFullName, $subject, $body);
         }
         //$sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body);
+    }
+
+    function sendDailyReport()
+    {
+        $body = "";
+        //$body .= $this->getRollingPointData();
+        $body .= $this->getRollingPointData();
+        $body .= $this->getPackageSaleData();
+
+        $sendMailService = new SendMailService();
+        $dateUtil = new DateUtil();
+        $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
+
+        $sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+    }
+
+    function getPackageSaleData() {
+        $bonusService = new BonusService();
+        $dateUtil = new DateUtil();
+        $queryDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
+        $packageArrs = $bonusService->doCalculatePackage($queryDate);
+
+        $body = "<h3>Sales for today</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
+                    <thead>
+                    <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Package Name</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Qty</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Price</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Sub Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>";
+
+        $totalAmount = 0;
+        foreach ($packageArrs as $packageArr) {
+            $totalAmount = $totalAmount + ($packageArr["qty"] * $packageArr["price"]);
+            $body .= "<tr class='sf_admin_row_1'>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['name']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['qty']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['price']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr["qty"] * $packageArr["price"]."</td>
+                    </tr>";
+        }
+        $body .= "<tr class='sf_admin_row_1'>
+            <td colspan='3' align='right' style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>Total Amount</td>
+            <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$totalAmount."</td>
+        </tr>";
+        $body .= "</tbody>
+                </table>";
+
+        return $body;
+    }
+
+    function getRollingPointData() {
+        $arrs = $this->fetchRollingPoint();
+
+        $body = "<h3>Rolling Point Table</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
+                    <thead>
+                    <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Distributor Code</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Full Name</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>e-Point Available</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Balance</th>
+                    </tr>
+                    </thead>
+                    <tbody>";
+
+        foreach ($arrs as $arr) {
+            $body .= "<tr class='sf_admin_row_1'>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['distributor_code']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['contact']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['ROLLING_POINT']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['EPOINT']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['BALANCE']."</td>
+                    </tr>";
+        }
+
+        $body .= "</tbody>
+                </table>";
+
+        return $body;
+    }
+    function fetchRollingPoint() {
+        $query = "SELECT
+            transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
+            , SUM(transferLedger.credit) AS ROLLING_POINT
+                    , account.EPOINT, (SUM(transferLedger.credit) - account.EPOINT) AS BALANCE
+                FROM mlm_account_ledger transferLedger
+                    LEFT JOIN
+                        (
+                            SELECT sum(credit - debit) AS EPOINT, account.dist_id
+                                FROM mlm_account_ledger account
+                                    where account.account_type = 'EPOINT' group by account.dist_id
+                        ) account ON account.dist_id = transferLedger.dist_id
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
+                where account_type = 'EPOINT' AND transferLedger.remark = 'TRANSFER FROM COMPANY' group by transferLedger.dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $resultArray[$count] = $arr;
+            $count++;
+        }
+        return $resultArray;
     }
 
     function fetchMemberWithoutUploadDocument($date) {
