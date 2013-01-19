@@ -4874,8 +4874,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
         $this->executeSendRemindationEmailForUploadAgreement();
-        print_r("<br>executeSendDailyReport<br>");
-        $this->executeSendDailyReport();
+        print_r("<br>sendDailyReport<br>");
+        $this->sendDailyReport();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
@@ -6612,7 +6612,7 @@ Wish you all the best.
         $dateUtil = new DateUtil();
         $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
-        $sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+        $sendMailService->sendMail("cenlasy@hotmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
     }
 
     function getAllBonusData() {
