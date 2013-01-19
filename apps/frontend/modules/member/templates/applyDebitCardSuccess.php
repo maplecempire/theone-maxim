@@ -49,12 +49,12 @@ $(function() {
             var ecashBalance = $('#txtCp2').autoNumericGet();
 
             if ($("#payByOption").val() == "CP1") {
-                if (50 > parseFloat(epointBalance)) {
+                if (35 > parseFloat(epointBalance)) {
                     alert("In-sufficient CP1");
                     return false;
                 }
             } else {
-                if (50 > parseFloat(ecashBalance)) {
+                if (35 > parseFloat(ecashBalance)) {
                     alert("In-sufficient CP2");
                     return false;
                 }
@@ -87,7 +87,7 @@ $(function() {
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Apply Debit Card') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Apply Maxim Trader Debit Card') ?></span></td>
     </tr>
     <tr>
         <td><br>
