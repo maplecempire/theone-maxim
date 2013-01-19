@@ -14,8 +14,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_SPECIAL_BONUS . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -37,8 +37,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_FUND_MANAGEMENT . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -60,8 +60,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_CREDIT_REFUND . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -83,8 +83,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_PIPS_BONUS . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -106,8 +106,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_GDB . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -129,8 +129,8 @@ class BonusService
         $query = "SELECT sum(credit - debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger";
 
         $query .= " WHERE commission_type = '" . Globals::COMMISSION_TYPE_DRB . "'";
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         //var_dump($query);
 
         $connection = Propel::getConnection();
@@ -173,8 +173,9 @@ class BonusService
         $query = "select count(rank_id) as SUB_TOTAL from mlm_distributor
                     where rank_id = ".$packageId;
 
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND loan_account = 'N'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         $query .= " group by rank_id";
         //var_dump($query);
 
@@ -197,8 +198,8 @@ class BonusService
         $query = "select count(package_id) as SUB_TOTAL from mlm_package_upgrade_history
                     where package_id = ".$packageId;
 
-        $query .= " AND created_on >= '" . mysql_real_escape_string($queryDate) . " 00:00:00'";
-        $query .= " AND created_on <= '" . mysql_real_escape_string($queryDate) . " 23:59:59'";
+        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
         $query .= " group by package_id";
         //var_dump($query);
 

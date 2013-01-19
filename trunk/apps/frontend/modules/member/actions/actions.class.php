@@ -6603,15 +6603,98 @@ Wish you all the best.
     function sendDailyReport()
     {
         $body = "";
-        //$body .= $this->getRollingPointData();
+        $body .= $this->getAllBonusData();
         $body .= $this->getRollingPointData();
         $body .= $this->getPackageSaleData();
+        $body .= $this->getUpcomingPerformanceReturn();
 
         $sendMailService = new SendMailService();
         $dateUtil = new DateUtil();
         $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
         $sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+    }
+
+    function getAllBonusData() {
+
+        $bonusService = new BonusService();
+
+        $dateUtil = new DateUtil();
+        $queryDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
+        $queryDateForGrb = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
+
+        $totalDrb = $bonusService->doCalculateDrb($queryDate);
+        $totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
+        $totalGenerationBonus = $bonusService->doCalculateGenerationBonus($queryDate);
+        $pipsRebate = $bonusService->doCalculatePipsRebateBonus($queryDate);
+        $fundManagementBonus = $bonusService->doCalculateFundManagementBonus($queryDate);
+        $specialBonus = $bonusService->doCalculateSpecialBonus($queryDate);
+
+        $body = "<h3>Upcoming 10 Fund Management pending to pay</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
+                    <thead>
+                    <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>DRB</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>GRB</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Generation Bonus</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Pips Rebate</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Fund Management Bonus</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Special Bonus</th>
+                    </tr>
+                    </thead>
+                    <tbody>";
+
+        $body .= "<tr class='sf_admin_row_1'>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalDrb,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGrb,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGenerationBonus,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($pipsRebate,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($fundManagementBonus,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($specialBonus,2)."</td>
+                </tr>";
+
+        $body .= "</tbody>
+                </table>";
+
+        return $body;
+    }
+
+    function getUpcomingPerformanceReturn() {
+        $query = "SELECT devidend_id, dist_id, mt4_user_name, idx, account_ledger_id, dividend_date, package_id, package_price, roi_percentage, dividend_amount, remarks, status_code, created_by, created_on, updated_by, updated_on, first_dividend_date
+	                FROM mlm_roi_dividend where status_code = '".Globals::DIVIDEND_STATUS_PENDING."'
+	                order by dividend_date limit 10";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+
+        $body = "<h3>Upcoming 10 Fund Management pending to pay</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
+                    <thead>
+                    <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>MT4 ID</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Idx</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Dividend Date</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Package Price</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>ROI Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>";
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $body .= "<tr class='sf_admin_row_1'>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['mt4_user_name']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['idx']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['dividend_date']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['package_price'],2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['roi_percentage']."</td>
+                    </tr>";
+        }
+
+        $body .= "</tbody>
+                </table>";
+
+        return $body;
     }
 
     function getPackageSaleData() {
@@ -6637,8 +6720,8 @@ Wish you all the best.
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['name']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['qty']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['price']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr["qty"] * $packageArr["price"]."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($packageArr['price'],2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($packageArr["qty"] * $packageArr["price"],2)."</td>
                     </tr>";
         }
         $body .= "<tr class='sf_admin_row_1'>
@@ -6663,7 +6746,7 @@ Wish you all the best.
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>e-Point Available</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Balance</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>e-Point Used</th>
                     </tr>
                     </thead>
                     <tbody>";
@@ -6674,9 +6757,9 @@ Wish you all the best.
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['contact']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['ROLLING_POINT']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['EPOINT']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['BALANCE']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['ROLLING_POINT'],2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['EPOINT'],2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['BALANCE'] - $arr['DEBIT'],2)."</td>
                     </tr>";
         }
 
@@ -6689,7 +6772,7 @@ Wish you all the best.
         $query = "SELECT
             transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
             , SUM(transferLedger.credit) AS ROLLING_POINT
-                    , account.EPOINT, (SUM(transferLedger.credit) - account.EPOINT) AS BALANCE
+                    , account.EPOINT, debitAccount.DEBIT, (SUM(transferLedger.credit) - account.EPOINT) AS BALANCE
                 FROM mlm_account_ledger transferLedger
                     LEFT JOIN
                         (
@@ -6697,6 +6780,12 @@ Wish you all the best.
                                 FROM mlm_account_ledger account
                                     where account.account_type = 'EPOINT' group by account.dist_id
                         ) account ON account.dist_id = transferLedger.dist_id
+                    LEFT JOIN
+                        (
+                            SELECT sum(credit - debit) AS DEBIT, account.dist_id
+                                FROM mlm_account_ledger account
+                                    where account.account_type = 'DEBIT' group by account.dist_id
+                        ) debitAccount ON debitAccount.dist_id = transferLedger.dist_id
                     LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
                 where account_type = 'EPOINT' AND transferLedger.remark = 'TRANSFER FROM COMPANY' group by transferLedger.dist_id";
 
