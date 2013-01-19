@@ -67,7 +67,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/applyDebitCard") ?>"><span><?php echo __('Apply Debit Card'); ?></span></a>
+            <a href="<?php echo url_for("/member/applyDebitCard") ?>"><span><?php echo __('Apply Maxim Trader Debit Card'); ?></span></a>
         </li>
     <?php } ?>
 
