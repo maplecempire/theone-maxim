@@ -12,13 +12,16 @@ class adminActions extends sfActions
 {
     public function executeBonusList()
     {
+        $dateUtil = new DateUtil();
+
         $dateFrom = $this->getRequestParameter("txtDateFrom", date('Y-m-d'));
+        $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($dateFrom, 1, 0, 0));
 
         $bonusService = new BonusService();
 
         $this->packageArrs = $bonusService->doCalculatePackage($dateFrom);
         $this->totalDrb = $bonusService->doCalculateDrb($dateFrom);
-        $this->totalGrb = $bonusService->doCalculateGrb($dateFrom);
+        $this->totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
         $this->totalGenerationBonus = $bonusService->doCalculateGenerationBonus($dateFrom);
         $this->pipsRebate = $bonusService->doCalculatePipsRebateBonus($dateFrom);
         $this->fundManagementBonus = $bonusService->doCalculateFundManagementBonus($dateFrom);
