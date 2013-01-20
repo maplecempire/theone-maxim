@@ -20,7 +20,7 @@
                 var epointAmount = parseFloat($("#cbo_epointAmount").val());
 
                 if (epointAmount > parseFloat(ecashBalance)) {
-                    alert("In-sufficient MT4 Credit");
+                    alert("In-sufficient CP2 Credit");
                     return false;
                 }
 
