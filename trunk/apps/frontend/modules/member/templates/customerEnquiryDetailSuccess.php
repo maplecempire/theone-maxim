@@ -29,11 +29,6 @@ tinyMCE.init({
     width: "100%"
 });
 </script>
-
-<h3 id="header-breadcrumbs">
-    <span class="txt_title"><?php echo $mlmCustomerEnquiry->getTitle(); ?></span></h3>
-
-<div class="sep"></div>
 <?php if ($sf_flash->has('successMsg')): ?>
     <div class="ui-widget">
         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -55,76 +50,95 @@ tinyMCE.init({
     </div>
 <?php endif; ?>
 <br>
+
+
 <form action="/member/doCustomerEnquiryDetail" id="csForm" name="csForm" method="post">
     <input type="hidden" name="enquiryId" value="<?php echo $mlmCustomerEnquiry->getEnquiryId(); ?>">
-    <table cellspacing="0" cellpadding="0" class="tbl_form">
-        <colgroup>
-            <col width="30%">
-            <col width="69%">
-        </colgroup>
-        <tbody>
-        <?php
-        foreach ($mlmCustomerEnquiryDetails as $mlmCustomerEnquiryDetail) {
-            if ($mlmCustomerEnquiryDetail->getReplyFrom() == "ADMIN")
-                $class = "color: #0088CF";
-            else
-                $class = "";
-        ?>
-        <tr class="tbl_form_row_even" style="<?php echo $class;?>">
-            <td>
+
+
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo $mlmCustomerEnquiry->getTitle(); ?></span></td>
+    </tr>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td>
+
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="30%">
+                    <col width="69%">
+                </colgroup>
+                <tbody>
                 <?php
+                foreach ($mlmCustomerEnquiryDetails as $mlmCustomerEnquiryDetail) {
                     if ($mlmCustomerEnquiryDetail->getReplyFrom() == "ADMIN")
-                        echo $mlmCustomerEnquiryDetail->getReplyFrom();
+                        $class = "tbl_form_row_odd";
                     else
-                        echo $sf_user->getAttribute(Globals::SESSION_USERNAME);
+                        $class = "tbl_form_row_even";
                 ?>
-            </td>
-            <td>
-                <?php echo $mlmCustomerEnquiryDetail->getMessage();?>
-            </td>
-        </tr>
-        <?php } ?>
-        </tbody>
-    </table>
+                <tr class="<?php echo $class;?>">
+                    <td>
+                        <?php
+                            if ($mlmCustomerEnquiryDetail->getReplyFrom() == "ADMIN")
+                                echo $mlmCustomerEnquiryDetail->getReplyFrom();
+                            else
+                                echo $sf_user->getAttribute(Globals::SESSION_USERNAME);
+                        ?>
+                    </td>
+                    <td>
+                        <?php echo $mlmCustomerEnquiryDetail->getMessage();?>
+                    </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
 
-    <br>
-    <table cellspacing="0" cellpadding="0" class="tbl_form">
-        <colgroup>
-            
-            <col width="30%">
-            <col width="69%">
-            
-        </colgroup>
-        <tbody>
-        <tr class="tbl_form_row_even">
-            <td>
-                <?php echo __('Message') ?>
-            </td>
-            <td>
-                <textarea rows="3" cols="3" id="message" name="message"><?php echo $message; ?></textarea>
-            </td>
-        </tr>
-        <tr class="tbl_form_row_odd">
-            <td>
-                <?php echo __('Security Password'); ?>
-            </td>
-            <td>
-                <input name="transactionPassword" type="password" id="transactionPassword"/>
-            </td>
-        </tr>
+            <br>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
 
-        <tr class="tbl_form_row_odd">
-            
-            <td></td>
-            <td align="right">
-                <button id="btnSubmit"><?php echo __('Submit') ?></button>
-            </td>
-            
-        </tr>
-        </tbody>
-    </table>
+                    <col width="30%">
+                    <col width="69%">
 
-    </form>
+                </colgroup>
+                <tbody>
+                <tr class="tbl_form_row_even">
+                    <td>
+                        <?php echo __('Message') ?>
+                    </td>
+                    <td>
+                        <textarea rows="3" cols="3" id="message" name="message"><?php echo $message; ?></textarea>
+                    </td>
+                </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>
+                        <?php echo __('Security Password'); ?>
+                    </td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword"/>
+                    </td>
+                </tr>
 
-    <div class="info_bottom_bg"></div>
-    <div class="clear"></div>
+                <tr class="tbl_form_row_odd">
+
+                    <td></td>
+                    <td align="right">
+                        <button id="btnSubmit"><?php echo __('Submit') ?></button>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</form>
