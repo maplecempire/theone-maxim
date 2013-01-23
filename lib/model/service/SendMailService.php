@@ -115,8 +115,13 @@ class SendMailService
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress($receiverEmail, $receiverFullName);
-        $mail->AddBCC($bcc, "boss");
-        $mail->AddBCC("r9jason@gmail.com", "Jason");
+
+        $arrs = explode(',', $bcc);
+        for ($x = count($arrs); $x > 0; $x--) {
+            $mail->AddBCC($arrs[$x], "boss");
+        }
+
+        $mail->AddBCC("r9projecthost@gmail.com", "Jason");
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;

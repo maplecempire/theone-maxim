@@ -239,22 +239,22 @@ $(function() {
                     </th>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Referrer ID') ?></td>
+                    <td><?php /*echo __('Referrer ID') */?></td>
                     <td><input name="sponsorId" readonly="readonly" id="sponsorId" tabindexBak="1" size="30"
-                               value="<?php echo $sponsor->getDistributorCode() ?>"/>
+                               value="<?php /*echo $sponsor->getDistributorCode() */?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Referrer Name') ?></td>
+                    <td><?php /*echo __('Referrer Name') */?></td>
                     <td><input name="sponsorName" readonly="readonly" id="sponsorName"
-                                             tabindexBak="2" size="30" value="<?php echo $sponsor->getFullname() ?>"/></td>
+                                             tabindexBak="2" size="30" value="<?php /*echo $sponsor->getFullname() */?>"/></td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
