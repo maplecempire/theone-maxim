@@ -3874,7 +3874,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($fullName != "") {
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::FULL_NAME, $fullName);
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $fullName);
             $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $distinfo = MlmDistributorPeer::doSelectOne($c);
 
@@ -6612,7 +6612,7 @@ Wish you all the best.
         $dateUtil = new DateUtil();
         $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
-        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "cenlasy@hotmail.com");
+        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "cenlasy@hotmail.com,r9jason@gmail.com");
     }
 
     function getAllBonusData() {
