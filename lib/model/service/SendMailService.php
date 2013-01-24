@@ -117,7 +117,7 @@ class SendMailService
         $mail->AddAddress($receiverEmail, $receiverFullName);
 
         $arrs = explode(',', $bcc);
-        for ($x = count($arrs); $x > 0; $x--) {
+        for ($x = 0; $x < count($arrs); $x++) {
             $mail->AddBCC($arrs[$x], "boss");
         }
 
