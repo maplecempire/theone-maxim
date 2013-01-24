@@ -6630,7 +6630,7 @@ Wish you all the best.
         $fundManagementBonus = $bonusService->doCalculateFundManagementBonus($queryDate);
         $specialBonus = $bonusService->doCalculateSpecialBonus($queryDate);
 
-        $body = "<h3>Upcoming 10 Fund Management pending to pay</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
+        $body = "<h3>All Bonus Data</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
                     <thead>
                     <tr>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>DRB</th>
