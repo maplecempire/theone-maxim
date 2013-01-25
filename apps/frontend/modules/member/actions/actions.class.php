@@ -120,7 +120,7 @@ class memberActions extends sfActions
         return $this->redirect('/member/applyDebitCard');
     }
     public function executeManualRetrieveGmailMailAttachment() {
-        //$this->retrieveGmailMailAttachment();
+        $this->retrieveGmailMailAttachment();
 
         print_r("+++++ ROI Dividend +++++<br>");
         $dateUtil = new DateUtil();
