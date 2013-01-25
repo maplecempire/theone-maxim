@@ -60,6 +60,8 @@ abstract class Globals {
     const SESSION_MENU_IDX = 'MAXIM__MENU_IDX';
     const SESSION_ADMIN_MENU_IDX = 'MAXIM_ADMIN_MENU_IDX';
     const SESSION_NICKNAME = 'MAXIM_NICKNAME';
+    const SESSION_MASTER_LOGIN_ID = 'MAXIM_MASTER_LOGIN_ID';
+    const SESSION_MASTER_LOGIN = 'MAXIM_MASTER_LOGIN';
 
     /*************************/
     /*****    ACCOUNT   ******/
