@@ -4757,6 +4757,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
             $distId = $mlmRoiDividend->getDistId();
+            $mt4UserName = $mlmRoiDividend->getMt4UserName();
             $packagePrice = $mlmRoiDividend->getPackagePrice();
             $dividendDate = $mlmRoiDividend->getDividendDate();
             print_r("DistId " . $distId . "<br>");
@@ -4769,7 +4770,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $dividendDateToTS = strtotime($dividendDateTo);
 
             $query = "SELECT mt4_credit, credit_id FROM mlm_daily_dist_mt4_credit WHERE 1=1 "
-                 . " AND dist_id = '" . $distId . "'"
+                 . " AND dist_id = '" . $distId . "' AND mt4_user_name = '" . $mt4UserName . "'"
                  . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
 
             //var_dump($query);
