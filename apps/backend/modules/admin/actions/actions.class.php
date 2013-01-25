@@ -10,6 +10,39 @@
  */
 class adminActions extends sfActions
 {
+    public function executeRedirectToFrontend() {
+
+    }
+    public function executeMasterLogin()
+    {
+        $existDist = MlmDistributorPeer::retrieveByPk($this->getRequestParameter("distId"));
+        $existUser = AppUserPeer::retrieveByPk($existDist->getUserId());
+
+        if ($existUser) {
+            $masterUserId = $this->getUser()->getAttribute(Globals::SESSION_USERID);
+
+            $this->getUser()->clearCredentials();
+            $this->getUser()->getAttributeHolder()->clear();
+
+            $this->getUser()->setAuthenticated(true);
+            $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+
+            $this->getUser()->setAttribute(Globals::SESSION_MASTER_LOGIN_ID, $masterUserId);
+            $this->getUser()->setAttribute(Globals::SESSION_MASTER_LOGIN, Globals::TRUE);
+
+            $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+            $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
+            $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
+            $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+            $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
+            $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
+
+            return $this->redirect('admin/redirectToFrontend');
+        }
+
+        $this->setFlash('errorMsg', "Invalid action.");
+        return $this->redirect('marketing/distList');
+    }
     public function executeBonusList()
     {
         $dateUtil = new DateUtil();

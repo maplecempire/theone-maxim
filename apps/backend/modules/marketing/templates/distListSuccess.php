@@ -75,7 +75,7 @@ $(function(){
                                 , file_proof_of_residence : oObj.aData[idx++]
                                 , file_nric : oObj.aData[idx++]
                           });
-		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>";
+		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
 		              { "sName" : "dist.rank_code",  "bSortable": true},

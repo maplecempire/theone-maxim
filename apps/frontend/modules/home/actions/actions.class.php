@@ -263,8 +263,50 @@ class homeActions extends sfActions
         $this->appSetting = AppSettingPeer::doSelectOne($c);
     }
 
+    public function executeRedirectToBackend() {
+
+    }
     public function executeLogout()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE) {
+            $existUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN_ID));
+
+            if ($existUser) {
+                $this->getUser()->clearCredentials();
+                $this->getUser()->getAttributeHolder()->clear();
+
+                $c = new Criteria();
+                $c->add(MlmAdminPeer::USER_ID, $existUser->getUserId());
+                $existAdmin = MlmAdminPeer::doSelectOne($c);
+
+                $this->getUser()->clearCredentials();
+                $this->getUser()->setAuthenticated(true);
+                $this->getUser()->addCredential(Globals::PROJECT_NAME . $existAdmin->getAdminRole());
+                $this->getUser()->addCredential(Globals::PROJECT_NAME . "dashboard");
+
+                //var_dump($existAdmin->getAdminRole());
+
+                $c = new Criteria();
+                $c->add(AppUserRolePeer::ROLE_CODE, $existAdmin->getAdminRole());
+                $exist = AppUserRolePeer::doSelectOne($c);
+                if ($exist) {
+                    $userAccessArr = $this->findUserAccessRole($exist->getRoleId());
+                    foreach ($userAccessArr as $userAccess) {
+                        $this->getUser()->addCredential(Globals::PROJECT_NAME . $userAccess);
+                        //var_dump($userAccess);
+                    }
+                }
+                //exit();
+                $this->getUser()->setAttribute(Globals::SESSION_ADMINID, $existAdmin->getAdminId());
+                $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
+                $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
+                $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existAdmin->getAdminRole());
+
+                return $this->redirect('home/redirectToBackend');
+                //}
+            }
+        }
+
         $this->getUser()->clearCredentials();
         $this->getUser()->getAttributeHolder()->clear();
         return $this->redirect('home/login');

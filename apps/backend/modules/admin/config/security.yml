@@ -18,6 +18,10 @@ dashboard:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_dashboard ]]
 
+masterLogin:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
+
 packageList:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE ]]
