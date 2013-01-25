@@ -1,3 +1,3 @@
 <script type="text/javascript">
-    window.location = "http://localhost:8087/member/summary";
+    window.location = "http://partner.maximtrader.com/member/summary";
 </script>
