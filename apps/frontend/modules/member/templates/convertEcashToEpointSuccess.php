@@ -1,33 +1,40 @@
 <?php include('scripts.php'); ?>
 
 <script type="text/javascript" language="javascript">
-    $(function() {
-        $("#ecreditForm").validate({
-            messages : {
-                transactionPassword: {
-                    remote: "Security Password is not valid."
-                }
-            },
-            rules : {
-                "transactionPassword" : {
-                    required : true
-                    , remote: "/member/verifyTransactionPassword"
-                }
-            },
-            submitHandler: function(form) {
-                waiting();
-                var ecashBalance = $('#ecashBalance').autoNumericGet();
-                var epointAmount = parseFloat($("#cbo_epointAmount").val());
-
-                if (epointAmount > parseFloat(ecashBalance)) {
-                    alert("In-sufficient CP2 Credit");
-                    return false;
-                }
-
-                form.submit();
+$(function() {
+    $("#ecreditForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "Security Password is not valid."
             }
-        });
+        },
+        rules : {
+            "transactionPassword" : {
+                required : true
+                , remote: "/member/verifyTransactionPassword"
+            },
+            "epointAmount" : {
+                required : true
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            var ecashBalance = $('#ecashBalance').autoNumericGet();
+            var epointAmount = $('#epointAmount').autoNumericGet();
+            //var epointAmount = parseFloat($("#cbo_epointAmount").val());
+
+            if (epointAmount > parseFloat(ecashBalance)) {
+                alert("In-sufficient CP2 Credit");
+                return false;
+            }
+            $("#epointAmount").val(epointAmount);
+            form.submit();
+        }
     });
+    $('#epointAmount').autoNumeric({
+        mDec: 2
+    });
+});
 </script>
 
 <div class="ewallet_li">
@@ -117,7 +124,8 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('CP1 Amount'); ?></td>
                     <td>
-                        <select name="epointAmount" id="cbo_epointAmount" tabindex="2">
+                        <input name="epointAmount" id="epointAmount" tabindex="3"/>
+                        <!--<select name="epointAmount" id="cbo_epointAmount" tabindex="2">
                             <option value="50">50</option>
                             <option value="200">200</option>
                             <option value="500">500</option>
@@ -131,12 +139,12 @@
                             <option value="4500">4,500</option>
                             <option value="5000">5,000</option>
                             <?php
-                                for ($i = 6000; $i <= 100000; $i = $i + 1000) {
+/*                                for ($i = 6000; $i <= 100000; $i = $i + 1000) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
 
-                            ?>
-                        </select>
+                            */?>
+                        </select>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
