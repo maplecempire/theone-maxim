@@ -11,7 +11,17 @@ class memberActions extends sfActions
 {
     public function executeTestSendReport()
     {
-        $this->sendDailyReport();
+        $body = "";
+        $body .= $this->getAllBonusData();
+        $body .= $this->getRollingPointData();
+        $body .= $this->getPackageSaleData();
+        $body .= $this->getUpcomingPerformanceReturn();
+
+        $sendMailService = new SendMailService();
+        $dateUtil = new DateUtil();
+        $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
+
+        $sendMailService->sendMail("r9jason@gmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
 
         print_r("Done");
         return sfView::HEADER_ONLY;
@@ -6620,20 +6630,10 @@ Wish you all the best.
 
         $bonusService = new BonusService();
 
-        $dateUtil = new DateUtil();
-        $queryDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
-        $queryDateForGrb = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
-
-        $totalDrb = $bonusService->doCalculateDrb($queryDate);
-        $totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
-        $totalGenerationBonus = $bonusService->doCalculateGenerationBonus($queryDate);
-        $pipsRebate = $bonusService->doCalculatePipsRebateBonus($queryDate);
-        $fundManagementBonus = $bonusService->doCalculateFundManagementBonus($queryDate);
-        $specialBonus = $bonusService->doCalculateSpecialBonus($queryDate);
-
         $body = "<h3>All Bonus Data</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
                     <thead>
                     <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Date</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>DRB</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>GRB</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Generation Bonus</th>
@@ -6644,7 +6644,21 @@ Wish you all the best.
                     </thead>
                     <tbody>";
 
-        $body .= "<tr class='sf_admin_row_1'>
+        $dateUtil = new DateUtil();
+
+        for ($i = 0; $i < 3; $i++) {
+            $queryDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), ($i + 1) * -1, 0, 0));
+            $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), $i, 0, 0));
+
+            $totalDrb = $bonusService->doCalculateDrb($queryDate);
+            $totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
+            $totalGenerationBonus = $bonusService->doCalculateGenerationBonus($queryDate);
+            $pipsRebate = $bonusService->doCalculatePipsRebateBonus($queryDate);
+            $fundManagementBonus = $bonusService->doCalculateFundManagementBonus($queryDate);
+            $specialBonus = $bonusService->doCalculateSpecialBonus($queryDate);
+
+            $body .= "<tr class='sf_admin_row_1'>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$queryDate."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalDrb,2)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGrb,2)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGenerationBonus,2)."</td>
@@ -6652,6 +6666,7 @@ Wish you all the best.
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($fundManagementBonus,2)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($specialBonus,2)."</td>
                 </tr>";
+        }
 
         $body .= "</tbody>
                 </table>";
