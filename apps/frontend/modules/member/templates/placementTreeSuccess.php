@@ -106,7 +106,7 @@ $(function() {
             $("#_accumulate_right").html($(this).attr("accumulate_right"));
             $("#_today_left").html($(this).attr("today_left"));
             $("#_today_right").html($(this).attr("today_right"));
-            $("#_referrer_id").html($(this).attr("referrer_id"));
+            //$("#_referrer_id").html($(this).attr("referrer_id"));
             $('#tooltip').css('top', top + "px");
             $('#tooltip').css('left', left + "px");
             $('#tooltip').fadeIn('10');
@@ -273,10 +273,10 @@ function reassignDatagridEventAttr(){
                 <td id="_sales_left"></td>
                 <td id="_sales_right"></td>
             </tr>
-            <tr>
-                <td><?php echo __('Referrer ID');?></td>
+            <!--<tr>
+                <td><?php /*echo __('Referrer ID');*/?></td>
                 <td id="_referrer_id" colspan="2"></td>
-            </tr>
+            </tr>-->
             </tbody>
         </table>
     </div>
@@ -320,7 +320,7 @@ function reassignDatagridEventAttr(){
         $classAndAttr .= " carry_right='".number_format($anode[0]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[0]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[0]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div class="network-top-more-node">
@@ -387,7 +387,7 @@ function reassignDatagridEventAttr(){
         $classAndAttr .= " carry_right='".number_format($anode[1]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[1]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[1]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 
@@ -442,7 +442,7 @@ function reassignDatagridEventAttr(){
         $classAndAttr .= " carry_right='".number_format($anode[2]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[2]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[2]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div style="width: 60px; margin-left: 240px; text-align:center; float:left;" class="stats-node">
@@ -541,7 +541,7 @@ if ($anode[1]['distCode'] != "") { ?>
         $classAndAttr .= " carry_right='".number_format($anode[3]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[3]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[3]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div style="width: 60px; margin-left: 43px; text-align:center; float:left;" class="stats-node">
@@ -598,7 +598,7 @@ if ($anode[1]['distCode'] != "") { ?>
         $classAndAttr .= " carry_right='".number_format($anode[4]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[4]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[4]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
@@ -655,7 +655,7 @@ if ($anode[1]['distCode'] != "") { ?>
         $classAndAttr .= " carry_right='".number_format($anode[5]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[5]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[5]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
@@ -712,7 +712,7 @@ if ($anode[1]['distCode'] != "") { ?>
         $classAndAttr .= " carry_right='".number_format($anode[6]['_carry_right'],0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[6]['_sales_left'],0)."'";
         $classAndAttr .= " sales_right='".number_format($anode[6]['_sales_right'],0)."'";
-        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
+//        $classAndAttr .= " referrer_id='".$distDB->getUplineDistCode()."'";
     }
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
