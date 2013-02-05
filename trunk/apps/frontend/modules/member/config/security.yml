@@ -22,6 +22,10 @@ convertEcashToEpoint:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+doMemberRegistration:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 downloadMt4:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
