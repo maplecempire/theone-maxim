@@ -46,6 +46,10 @@ fetchAnnouncementById:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+fetchTopupPackage:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 fetchPackage:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
@@ -135,6 +139,14 @@ transferEcash:
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 transferEpoint:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+upgradePackageViaTree:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+updateBankInformation:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
