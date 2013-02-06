@@ -810,7 +810,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <!--####################################################################################################-->
 <?php
 $tempDisable = true;
-if ($tempDisable == false) { ?>
+if ($tempDisable == true) { ?>
 <div style="position: absolute; display: none;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
@@ -834,7 +834,7 @@ if ($tempDisable == false) { ?>
                 else
                     echo $announcement->getTitleCn();*/
                 ?>
-            Trade Even Better. The Newly Upgraded Maxim Trader MT4 is here and you will love it.
+            Happy Chinese New Year 2013
             </div>
         <!--</a>-->
 
@@ -843,7 +843,7 @@ if ($tempDisable == false) { ?>
             $dateUtil = new DateUtil();
             //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
             //echo $currentDate;
-            echo "31 DECEMBER 2012";
+            echo "6 FEB 2013";
             ?>
         </div>
         <div class="news_desc">
@@ -859,7 +859,13 @@ if ($tempDisable == false) { ?>
 
             <br>
             <br>
-            <a target="_blank" href="http://partner.maximtrader.com/download/demoMt4"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/server_migration/full.jpg"></a>
+            <a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/CNY/chinese_new_year_2013_maxim_partner.png"></a>
+
+                <br>
+                Allow me to congratulate you on the arrival of the Snake Year and to extend to you all my best wishes for your perfect health and lasting prosperity.
+
+                <br><br>
+                恭贺新禧，祝身体健康、事业发达。
             <!--<iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
