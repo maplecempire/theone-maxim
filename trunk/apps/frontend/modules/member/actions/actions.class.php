@@ -6802,7 +6802,7 @@ Wish you all the best.
                         (
                             SELECT sum(credit - debit) AS EPOINT, account.dist_id
                                 FROM mlm_account_ledger account
-                                    where account.account_type = 'EPOINT' AND account.remark <> 'TRANSFER FROM COMPANY' group by account.dist_id
+                                    where account.account_type = 'EPOINT' AND (remark <> 'TRANSFER FROM COMPANY' or remark is null) group by account.dist_id
                         ) account ON account.dist_id = transferLedger.dist_id
                     LEFT JOIN
                         (
