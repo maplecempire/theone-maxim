@@ -866,6 +866,9 @@ if ($tempDisable == true) { ?>
 
                 <br><br>
                 恭贺新禧，祝身体健康、事业发达。
+
+                <br><br>
+                新年あけましておめでとうございます、私は健康と永続的な繁栄をお祈りしております。
             <!--<iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
