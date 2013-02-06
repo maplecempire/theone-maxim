@@ -6761,21 +6761,29 @@ Wish you all the best.
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>e-Point Available</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>e-Point Used</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Available</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Used</th>
                     </tr>
                     </thead>
                     <tbody>";
 
         foreach ($arrs as $arr) {
+            $rollingPoint = $arr['ROLLING_POINT'] - $arr['DEBIT'];
+            $rollingPointAvailable = $rollingPoint;
+            $rollingPointUsed = 0;
+            if ($arr['EPOINT'] < 0) {
+                $rollingPointAvailable = $rollingPointAvailable + $arr['EPOINT'];
+                $rollingPointUsed = $arr['EPOINT'] * -1;
+            }
+
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['distributor_code']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['contact']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['ROLLING_POINT'] - $arr['DEBIT'],2)."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['EPOINT'],2)."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($arr['BALANCE'] - $arr['DEBIT'],2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPoint,2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointAvailable,2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointUsed,2)."</td>
                     </tr>";
         }
 
@@ -6788,13 +6796,13 @@ Wish you all the best.
         $query = "SELECT
             transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
             , SUM(transferLedger.credit) AS ROLLING_POINT
-                    , account.EPOINT, debitAccount.DEBIT, (SUM(transferLedger.credit) - account.EPOINT) AS BALANCE
+                    , account.EPOINT, debitAccount.DEBIT
                 FROM mlm_account_ledger transferLedger
                     LEFT JOIN
                         (
                             SELECT sum(credit - debit) AS EPOINT, account.dist_id
                                 FROM mlm_account_ledger account
-                                    where account.account_type = 'EPOINT' group by account.dist_id
+                                    where account.account_type = 'EPOINT' AND account.remark <> 'TRANSFER FROM COMPANY' group by account.dist_id
                         ) account ON account.dist_id = transferLedger.dist_id
                     LEFT JOIN
                         (
