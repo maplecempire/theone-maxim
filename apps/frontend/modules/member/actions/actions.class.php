@@ -9,19 +9,29 @@
  */
 class memberActions extends sfActions
 {
+    public function executeTestTree() {
+        $arrs = explode("|", "|fxm1||ester||maxworld||MAXCAP||teohminhiang||kohkhengwah||ongeuzan||ongsamzen||thorsengwah||AlexSim||Kent1668||kent1688|");
+            for ($x = count($arrs); $x > 0; $x--) {
+                if ($arrs[$x] == "") {
+                    continue;
+                }
+                $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
+                if ($uplineDistDB) {
+                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
+                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
+                    $uplineDistDB->setTotalLeft($totalLeft);
+                    $uplineDistDB->setTotalRight($totalRight);
+                    $uplineDistDB->save();
+                } else {
+                    var_dump($arrs[$x]);
+                    break;
+                }
+            }
+        var_dump("DONE");
+    }
     public function executeTestSendReport()
     {
-        $body = "";
-        $body .= $this->getAllBonusData();
-        $body .= $this->getRollingPointData();
-        $body .= $this->getPackageSaleData();
-        $body .= $this->getUpcomingPerformanceReturn();
-
-        $sendMailService = new SendMailService();
-        $dateUtil = new DateUtil();
-        $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
-
-        $sendMailService->sendMail("r9jason@gmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+        $this->sendDailyReport();
 
         print_r("Done");
         return sfView::HEADER_ONLY;
