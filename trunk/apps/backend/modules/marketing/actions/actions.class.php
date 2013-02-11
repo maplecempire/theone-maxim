@@ -1927,7 +1927,7 @@ class marketingActions extends sfActions
             $response = $this->getResponse();
             $response->clearHttpHeaders();
             $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
-            $response->setContentType('application/pdf');
+            $response->setContentType('application/octet-stream');
             $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
             $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
             $response->sendHttpHeaders();
