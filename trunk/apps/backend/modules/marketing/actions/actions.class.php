@@ -1932,7 +1932,7 @@ class marketingActions extends sfActions
             $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
             $response->sendHttpHeaders();
 
-            readfile(sfConfig::get('sf_upload_dir')."/proofOfResidence/".$fileName);
+            readfile(sfConfig::get('sf_upload_dir')."/proof_of_residence/".$fileName);
         }
 
         return sfView::NONE;
