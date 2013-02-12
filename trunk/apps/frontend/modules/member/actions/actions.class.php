@@ -9,25 +9,19 @@
  */
 class memberActions extends sfActions
 {
-    public function executeTestTree() {
-        $arrs = explode("|", "|fxm1||ester||maxworld||MAXCAP||teohminhiang||kohkhengwah||ongeuzan||ongsamzen||thorsengwah||AlexSim||Kent1668||kent1688|");
-            for ($x = count($arrs); $x > 0; $x--) {
-                if ($arrs[$x] == "") {
-                    continue;
-                }
-                $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
-                if ($uplineDistDB) {
-                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
-                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
-                    $uplineDistDB->setTotalLeft($totalLeft);
-                    $uplineDistDB->setTotalRight($totalRight);
-                    $uplineDistDB->save();
-                } else {
-                    var_dump($arrs[$x]);
-                    break;
-                }
-            }
-        var_dump("DONE");
+    public function executeTest() {
+        $c = new Criteria();
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        foreach ($distDBs as $distDB) {
+            $distId = $distDB->getDistributorId();
+            print_r($distId."<br>");
+            //$leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $bonusDate);
+            //$rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
+            $this->revalidatePairing($distId, Globals::PLACEMENT_LEFT);
+            $this->revalidatePairing($distId, Globals::PLACEMENT_RIGHT);
+        }
+        print_r("Done");
     }
     public function executeTestSendReport()
     {
@@ -78,7 +72,7 @@ class memberActions extends sfActions
             $accountType = Globals::ACCOUNT_TYPE_EPOINT;
             $accountBalance = $this->epointBalance;
         } else {
-            if ($this->epointBalance < $debitCardCharges) {
+            if ($this->ecashBalance < $debitCardCharges) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
                 return $this->redirect('/member/applyDebitCard');
             }
@@ -6108,7 +6102,6 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($date != null) {
             $query .= " AND created_on <= '" . $date . " 23:59:59'";
         }
-        //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
