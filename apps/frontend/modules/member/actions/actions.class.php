@@ -4519,6 +4519,214 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
     }
 
+    public function executeTestDailyBonus()
+    {
+        $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            print_r("Start<br>");
+
+            $level = 0;
+            print_r("level start ".$level."<br><br>");
+            $c = new Criteria();
+            //$c->add(MlmDistPairingPeer::DIST_ID, 476);
+            $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
+
+            $dateUtil = new DateUtil();
+            $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
+
+            foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
+                $distId = $mlmDistPairingDB->getDistId();
+                //$flushLimit = $mlmDistPairingDB->getFlushLimit() - $this->getDsbAmount($distId, $bonusDate);
+                $flushLimit = $mlmDistPairingDB->getFlushLimit();
+                print_r("DistId ".$distId."<br>");
+                $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, null);
+                $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, null);
+
+                if ($leftBalance > 0 && $rightBalance > 0) {
+                    $minBalance = $leftBalance;
+                    if ($rightBalance < $leftBalance) {
+                        $minBalance = $rightBalance;
+                    }
+                    print_r("leftBalance ".$leftBalance."<br>");
+                    print_r("rightBalance ".$rightBalance."<br>");
+                    print_r("minBalance ".$minBalance."<br>");
+                    if ($leftBalance > 0 && $rightBalance > 0) {
+                        $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $minBalance);
+                        $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $minBalance);
+
+                        // start paring bonus
+                        $distributorDB = MlmDistributorPeer::retrieveByPK($distId);
+                        $packageDB = MlmPackagePeer::retrieveByPK($distributorDB->getRankId());
+
+                        $pairingPercentage = $packageDB->getPairingBonus();
+                        $pairingBonusAmount = $minBalance * $pairingPercentage / 100;
+                        print_r("pairingBonusAmount =".$pairingBonusAmount."<br>");
+                        $flushAmount = 0;
+                        if ($pairingBonusAmount > $flushLimit) {
+                            $flushAmount = $pairingBonusAmount - $flushLimit;
+                        }
+
+                        /******************************/
+                        /*  Commission
+                        /******************************/
+                        $c = new Criteria();
+                        $c->add(MlmDistCommissionPeer::DIST_ID, $distId);
+                        $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_GDB);
+                        $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+
+                        $commissionBalance = 0;
+                        if (!$sponsorDistCommissionDB) {
+                            $sponsorDistCommissionDB = new MlmDistCommission();
+                            $sponsorDistCommissionDB->setDistId($distId);
+                            $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_GDB);
+                            $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $commissionBalance = $sponsorDistCommissionDB->getBalance();
+                        }
+                        $sponsorDistCommissionDB->setBalance($commissionBalance + $pairingBonusAmount);
+                        $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionDB->save();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $distId);
+                        $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_GDB);
+                        $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+                        $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+
+                        $gdbBalance = 0;
+                        if ($sponsorDistCommissionLedgerDB)
+                            $gdbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+
+                        /******************************/
+                        /*  Account
+                        /******************************/
+                        $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                        // pairing amount
+                        $ecashBalance = $distAccountEcashBalance + $pairingBonusAmount;
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($distId);
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
+                        $mlm_account_ledger->setRemark("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
+                        $mlm_account_ledger->setCredit($pairingBonusAmount);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($ecashBalance);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        //commission
+                        $commissionBalance = $gdbBalance + $pairingBonusAmount;
+                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                        $sponsorDistCommissionledger->setDistId($distId);
+                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB);
+                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PAIRED);
+                        $sponsorDistCommissionledger->setCredit($pairingBonusAmount);
+                        $sponsorDistCommissionledger->setDebit(0);
+                        $sponsorDistCommissionledger->setBalance($commissionBalance);
+                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                        $sponsorDistCommissionledger->setRemark("GROUP PAIRING AMOUNT (" . $bonusDate . ")");
+                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->save();
+
+                        // flush amount
+                        if ($flushAmount != 0) {
+                            $ecashBalance = $ecashBalance - $flushAmount;
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($distId);
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
+                            $mlm_account_ledger->setRemark("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit($flushAmount);
+                            $mlm_account_ledger->setBalance($ecashBalance);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+
+                            $commissionBalance = $commissionBalance - $flushAmount;
+                            $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                            $sponsorDistCommissionledger->setDistId($distId);
+                            $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB);
+                            $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PAIRED);
+                            $sponsorDistCommissionledger->setCredit(0);
+                            $sponsorDistCommissionledger->setDebit($flushAmount);
+                            $sponsorDistCommissionledger->setBalance($commissionBalance);
+                            $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                            $sponsorDistCommissionledger->setRemark("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
+                            $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistCommissionledger->save();
+
+                            $pairingBonusAmount = $flushAmount;
+                        }
+
+                        $maintenanceBalance = $pairingBonusAmount * Globals::BONUS_MAINTENANCE_PERCENTAGE;
+                        $ecashBalance = $ecashBalance - $maintenanceBalance;
+                        $maintenanceEcashAccountLedger = new MlmAccountLedger();
+                        $maintenanceEcashAccountLedger->setDistId($distId);
+                        $maintenanceEcashAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $maintenanceEcashAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MAINTENANCE);
+                        $maintenanceEcashAccountLedger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
+                        $maintenanceEcashAccountLedger->setCredit(0);
+                        $maintenanceEcashAccountLedger->setDebit($maintenanceBalance);
+                        $maintenanceEcashAccountLedger->setBalance($ecashBalance);
+                        $maintenanceEcashAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $maintenanceEcashAccountLedger->save();
+
+                        $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                        $commissionBalance = $commissionBalance - $maintenanceBalance;
+                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                        $sponsorDistCommissionledger->setDistId($distId);
+                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB);
+                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PAIRED);
+                        $sponsorDistCommissionledger->setCredit(0);
+                        $sponsorDistCommissionledger->setDebit($maintenanceBalance);
+                        $sponsorDistCommissionledger->setBalance($commissionBalance);
+                        $sponsorDistCommissionledger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
+                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->save();
+
+                        $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_GDB);
+                        /******************************/
+                        /*  Maintenance
+                        /******************************/
+
+                        $distAccountMaintenanceBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                        $maintenanceAccountLedger = new MlmAccountLedger();
+                        $maintenanceAccountLedger->setDistId($distId);
+                        $maintenanceAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $maintenanceAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
+                        $maintenanceAccountLedger->setRemark("PAIRING BALANCE " . number_format($pairingBonusAmount, 2) . " (" . $bonusDate . ")");
+                        $maintenanceAccountLedger->setCredit($maintenanceBalance);
+                        $maintenanceAccountLedger->setDebit(0);
+                        $maintenanceAccountLedger->setBalance($distAccountMaintenanceBalance + $maintenanceBalance);
+                        $maintenanceAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $maintenanceAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $maintenanceAccountLedger->save();
+
+                        $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    }
+                }
+            }
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            //throw $e;
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDailyBonus()
     {
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
