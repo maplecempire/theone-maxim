@@ -4556,8 +4556,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         //$flushLimit = $mlmDistPairingDB->getFlushLimit() - $this->getDsbAmount($distId, $bonusDate);
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
                         print_r("DistId ".$distId."<br>");
-                        $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $bonusDate);
-                        $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
+                        $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, null);
+                        $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, null);
 
                         if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
