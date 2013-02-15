@@ -55,17 +55,12 @@ $(function() {
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Aug_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Aug 2012</span></a>
+                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Jan_2013") ?>"><span>Click to DOWNLOAD Fund Management Report Jan 2013</span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Sep_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Sep 2012</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Oct_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Oct 2012</span></a>
+                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Dec_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Dec 2012</span></a>
                 </td>
             </tr>
             <tr>
@@ -75,7 +70,17 @@ $(function() {
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Dec_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Dec 2012</span></a>
+                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Oct_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Oct 2012</span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Sep_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Sep 2012</span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="<?php echo url_for("/download/downloadFundManagementReport?p=Aug_2012") ?>"><span>Click to DOWNLOAD Fund Management Report Aug 2012</span></a>
                 </td>
             </tr>
             </tbody>
