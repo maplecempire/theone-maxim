@@ -392,12 +392,11 @@ class downloadActions extends sfActions
         $response->clearHttpHeaders();
         $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
         $response->setContentType("application/pdf");
-        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Disposition','attachment; filename=Maxim_Fund_Manager_Report_'.$fileName.".pdf", TRUE);
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary');
+        $response->setHttpHeader('Content-Disposition','inline; filename=Maxim_Fund_Manager_Report_'.$fileName.".pdf");
         $response->sendHttpHeaders();
 
         readfile(sfConfig::get('sf_upload_dir')."/fundManagement/Maxim_Fund_Manager_Report_".$fileName.".pdf");
-
         return sfView::NONE;
     }
 
