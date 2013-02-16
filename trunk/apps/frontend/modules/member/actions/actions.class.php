@@ -30,9 +30,98 @@ class memberActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
+    public function executeApplyDebitCardHistory()
+    {
+
+    }
+
+    public function executeApplyEzyCashCardHistory()
+    {
+
+    }
+
+    public function executeDoApplyEzyCashCard()
+    {
+        $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+        $payByOption = $this->getRequestParameter('payByOption');
+        $cardQty = $this->getRequestParameter('cardQty');
+        $accountType = "";
+        $accountBalance = 0;
+        $debitCardCharges = Globals::EZY_CASH_CARD_CHARGES;
+        $subTotal = $cardQty * $debitCardCharges;
+        if ($payByOption == "CP1") {
+            if ($this->epointBalance < $subTotal) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
+                return $this->redirect('/member/applyEzyCashCard');
+            }
+            $accountType = Globals::ACCOUNT_TYPE_EPOINT;
+            $accountBalance = $this->epointBalance;
+        } else {
+            if ($this->ecashBalance < $subTotal) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+                return $this->redirect('/member/applyEzyCashCard');
+            }
+            $accountType = Globals::ACCOUNT_TYPE_ECASH;
+            $accountBalance = $this->ecashBalance;
+        }
+
+        $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $mlm_account_ledger->setAccountType($accountType);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_APPLY_EZY_CASH_CARD);
+            $mlm_account_ledger->setRemark("");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($subTotal);
+            $mlm_account_ledger->setBalance($accountBalance - $subTotal);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
+
+            $mlm_ezy_cash_card = new MlmEzyCashCard();
+            $mlm_ezy_cash_card->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $mlm_ezy_cash_card->setAccountId($mlm_account_ledger->getAccountId());
+            $mlm_ezy_cash_card->setStatusCode(Globals::STATUS_PENDING);
+            $mlm_ezy_cash_card->setQty($cardQty);
+            $mlm_ezy_cash_card->setSubTotal($subTotal);
+            $mlm_ezy_cash_card->setRemark($this->getRequestParameter('remark'));
+            $mlm_ezy_cash_card->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_ezy_cash_card->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+            $mlm_ezy_cash_card->save();
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            //throw $e;
+        }
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Ezy Cash Card application has been submitted successfully."));
+
+        return $this->redirect('/member/applyEzyCashCard');
+    }
+
+    public function executeApplyEzyCashCard()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->distDB = $distDB;
+
+        $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->debitCardCharges = Globals::EZY_CASH_CARD_CHARGES;
+    }
     public function executeApplyDebitCard()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+        $this->distDB = $distDB;
 
         $mlm_debit_card_registration = new MlmDebitCardRegistration();
         $mlm_debit_card_registration->setFullName($distDB->getFullName());
@@ -52,7 +141,7 @@ class memberActions extends sfActions
         $this->mlm_debit_card_registration = $mlm_debit_card_registration;
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
-        $this->debitCardCharges = 35;
+        $this->debitCardCharges = Globals::DEBIT_CARD_CHARGES;
     }
 
     public function executeDoApplyDebitCard()
@@ -63,7 +152,7 @@ class memberActions extends sfActions
         $payByOption = $this->getRequestParameter('payByOption');
         $accountType = "";
         $accountBalance = 0;
-        $debitCardCharges = 35;
+        $debitCardCharges = Globals::DEBIT_CARD_CHARGES;
         if ($payByOption == "CP1") {
             if ($this->epointBalance < $debitCardCharges) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
@@ -129,7 +218,7 @@ class memberActions extends sfActions
             $con->rollback();
             //throw $e;
         }
-        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your debit card application has been submitted successfully."));
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your VISA debit card application has been submitted successfully."));
 
         return $this->redirect('/member/applyDebitCard');
     }
@@ -749,6 +838,12 @@ class memberActions extends sfActions
             $distDB->save();
 
             $this->setFlash('successMsg', "Upload successful.");
+        }
+        if ($this->getRequestParameter('doAction', '') == "DEBIT_CARD") {
+            return $this->redirect('/member/applyDebitCard');
+        }
+        if ($this->getRequestParameter('doAction', '') == "EZY_CASH_CARD") {
+            return $this->redirect('/member/applyEzyCashCard');
         }
         return $this->redirect('/member/viewProfile');
     }

@@ -1,5 +1,6 @@
 <?php include('scripts.php'); ?>
 <script>
+var cardCharges = <?php echo Globals::DEBIT_CARD_CHARGES; ?>;
 $(function() {
     $.populateDOB({
         dobYear : $("#dob_year")
@@ -10,6 +11,11 @@ $(function() {
     });
 
     $("#registerForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "Security Password is not valid."
+            }
+        },
         rules : {
             "fullname" : {
                 required : true,
@@ -41,6 +47,10 @@ $(function() {
             },
             "contact" : {
                 required : true
+            },
+            "transactionPassword" : {
+                required : true,
+                remote: "/member/verifyTransactionPassword"
             }
         },
         submitHandler: function(form) {
@@ -49,12 +59,12 @@ $(function() {
             var ecashBalance = $('#txtCp2').autoNumericGet();
 
             if ($("#payByOption").val() == "CP1") {
-                if (35 > parseFloat(epointBalance)) {
+                if (cardCharges > parseFloat(epointBalance)) {
                     alert("In-sufficient CP1");
                     return false;
                 }
             } else {
-                if (35 > parseFloat(ecashBalance)) {
+                if (cardCharges > parseFloat(ecashBalance)) {
                     alert("In-sufficient CP2");
                     return false;
                 }
@@ -66,11 +76,41 @@ $(function() {
             //label.addClass("valid").text("Valid captcha!")
         }
     });
+
+    $("#uploadForm").validate({
+        rules : {
+            "proofOfResidence" : {
+                required: "#bankPassBook.length > 0",
+                minlength : 3,
+                accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
+            },
+            "nric" : {
+                required: "#bankPassBook.length > 0",
+                minlength : 3,
+                accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        },
+        success: function(label) {
+            //label.addClass("valid").text("Valid captcha!")
+        }
+    });
+
     $("#btnUpdate").button({
         icons: {
             primary: "ui-icon-circle-arrow-n"
         }
     });
+
+    $("#btnUpload").button({
+        icons: {
+            primary: "ui-icon-circle-arrow-n"
+        }
+    });
+
     $("#payByOption").change(function(event){
         var value = $(this).val();
         if (value == "CP1") {
@@ -84,10 +124,25 @@ $(function() {
 });
 </script>
 
+<div class="ewallet_li">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/applyDebitCard") ?>" style="color: rgb(134, 197, 51);">
+        <?php echo __('Apply Maxim Trader VISA Debit Card'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/applyDebitCardHistory")?>" style="color: rgb(0, 93, 154);">
+        <?php echo __('Apply Maxim Trader VISA Debit Card History'); ?>
+    </a>
+</div>
+
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Apply Maxim Trader Debit Card') ?></span></td>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Apply Maxim Trader VISA Debit Card') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -322,10 +377,19 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password'); ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Kindly  submit this completed form together with (1) copy of ID/Passport (1) copy  each of 3 months proof of residency <br>to cs@maximtrader.com') ?></font>
+                        <font color="#dc143c"> <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -343,6 +407,87 @@ $(function() {
             <div class="info_bottom_bg"></div>
             <div class="clear"></div>
             <br>
+
+            <form id="uploadForm" method="post" action="/member/doUploadFile" enctype="multipart/form-data">
+                <input type="hidden" name="doAction" value="DEBIT_CARD">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Upload Proof of Residence and Passport/Photo ID') ?></th>
+                    <!--<th class="tbl_content_right"></th>-->
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Proof of Residence') ?>
+                    </td>
+                    <td>
+                        <?php echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence")); ?>
+                        <?php
+                        if ($distDB->getFileProofOfResidence() != "") {
+                        ?>
+                            <a href="<?php echo url_for("/download/proofOfResidence?q=".rand()) ?>">
+                                <img src="/images/common/fileopen.png" alt="view file">
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Passport/Photo ID') ?>
+                    </td>
+                    <td>
+                        <?php echo input_file_tag('nric', array("id" => "nric", "name" => "nric")); ?>
+                        <?php
+                        if ($distDB->getFileNric() != "") {
+                        ?>
+                            <a href="<?php echo url_for("/download/nric?q=".rand()) ?>">
+                                <img src="/images/common/fileopen.png" alt="view file">
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td colspan="5">
+                        <font color="#dc143c">
+                        <?php echo __('Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.') ?>
+                        </font>
+                    </td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnUpload"><?php echo __('Update') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
         </td>
     </tr>
     </tbody>
