@@ -450,9 +450,13 @@ class memberActions extends sfActions
             $this->sponsorId = $existDist->getDistributorCode();
             $this->sponsorName = $existDist->getFullName();
 
-            if ($amountNeeded > $ledgerEPointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
-                return $this->redirect('/member/purchasePackageViaTree');
+            if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+            } else {
+                if ($amountNeeded > $ledgerEPointBalance) {
+                    $this->setFlash('errorMsg', "In-sufficient CP1 amount");
+                    return $this->redirect('/member/purchasePackageViaTree');
+                }
             }
 
             $this->selectedPackage = $selectedPackage;
