@@ -27,12 +27,17 @@ $(function() {
             var epoint = $('#topup_pointAvail').autoNumericGet();
             var epointPackageNeeded = $('#epointNeeded').autoNumericGet();
 
-            if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
-                error("In-sufficient fund to upgrade package.");
-            } else {
-                waiting();
-                form.submit();
-            }/*else {
+            <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+            } else {?>
+                if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
+                    error("In-sufficient fund to upgrade package.");
+                    return false;
+                }
+            <?php } ?>
+            waiting();
+            form.submit();
+            /*else {
                 if ($.trim($("#transactionPassword").val()) == "") {
                     error("Security Password is empty");
                     $("#transactionPassword").focus();
