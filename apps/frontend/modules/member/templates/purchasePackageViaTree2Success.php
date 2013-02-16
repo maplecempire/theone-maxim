@@ -33,7 +33,11 @@ $(function() {
                 required : true,
                 noSpace: true,
                 loginRegex: true,
-                minlength : 4,
+                <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+                } else {?>
+                minlength : 6,
+                <?php } ?>
                 remote: "/member/verifyUserName"
             },
             "userpassword" : {

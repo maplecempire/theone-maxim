@@ -400,6 +400,22 @@ class downloadActions extends sfActions
         return sfView::NONE;
     }
 
+    public function executeDownloadEzybondsRegisterProcedure()
+    {
+        $fileName = $this->getRequestParameter('p');
+
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType("application/pdf");
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary');
+        $response->setHttpHeader('Content-Disposition','inline; filename=Ezybonds_Register_Procedure_'.$fileName.".pdf");
+        $response->sendHttpHeaders();
+
+        readfile(sfConfig::get('sf_upload_dir')."/Ezybonds_Register_Procedure/Ezybonds_Register_Procedure_".$fileName.".pdf");
+        return sfView::NONE;
+    }
+
     public function executeDownloadFundManagementReport2()
     {
         $c = new Criteria();

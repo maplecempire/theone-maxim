@@ -21,6 +21,8 @@ abstract class Globals {
     const LOAN_ACCOUNT_CREATOR_DIST_ID = 1;
     const LOGIN_RETRY = 0;
     const FIRST_LOGIN = 0;
+    const DEBIT_CARD_CHARGES = 35;
+    const EZY_CASH_CARD_CHARGES = 35;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
     const BONUS_MAINTENANCE_PERCENTAGE = 0;
@@ -106,6 +108,7 @@ abstract class Globals {
     const ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT = 'FUND MANAGEMENT';
     const ACCOUNT_LEDGER_ACTION_SPECIAL_BONUS = 'SPECIAL BONUS';
     const ACCOUNT_LEDGER_ACTION_APPLY_DEBIT_CARD = 'APPLY DEBIT CARD';
+    const ACCOUNT_LEDGER_ACTION_APPLY_EZY_CASH_CARD = 'APPLY EZY CASH CARD';
 
     /*******************************/
     /*****    RELOAD TOPUP  ******/
