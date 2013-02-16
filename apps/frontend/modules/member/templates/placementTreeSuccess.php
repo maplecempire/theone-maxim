@@ -208,7 +208,7 @@ function reassignDatagridEventAttr(){
     <input type="hidden" name="sponsorDistId" id="sponsorDistId">
     <input type="hidden" name="doAction" id="doAction">
     <input type="hidden" name="p" id="<?php echo $pageDirection; ?>">
-        <?php echo __("Trader ID")?>&nbsp;<input size="8" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
+        <?php echo __("Trader ID")?>&nbsp;<input size="20" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
         <br>
 
 
