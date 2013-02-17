@@ -660,20 +660,20 @@ $(function() {
                 <tr>
                     <td><br></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>&nbsp;</td>
                     <td colspan="2">
-                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=EzyAccount_Charges&e=pptx") ?>"><span>Click to DOWNLOAD EzyAccount Charges.pptx</span></a>
+                        <a target='_blank' href="<?php /*echo url_for("/download/downloadEzyFile?p=EzyAccount_Charges&e=pptx") */?>"><span>Click to DOWNLOAD EzyAccount Charges.pptx</span></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td colspan="2">
-                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=Ezybonds_banks&e=pdf") ?>"><span>Click to DOWNLOAD Ezybonds banks.pdf</span></a>
+                        <a target='_blank' href="<?php /*echo url_for("/download/downloadEzyFile?p=Ezybonds_banks&e=pdf") */?>"><span>Click to DOWNLOAD Ezybonds banks.pdf</span></a>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td>&nbsp;</td>
                     <td colspan="2">
@@ -681,13 +681,13 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>&nbsp;</td>
                     <td colspan="2">
-                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=Mastercard_Charges&e=pptx") ?>"><span>Click to DOWNLOAD Mastercard Charges.pptx</span></a>
+                        <a target='_blank' href="<?php /*echo url_for("/download/downloadEzyFile?p=Mastercard_Charges&e=pptx") */?>"><span>Click to DOWNLOAD Mastercard Charges.pptx</span></a>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
                 </tbody>
             </table>
 
