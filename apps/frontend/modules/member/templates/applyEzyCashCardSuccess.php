@@ -647,6 +647,50 @@ $(function() {
                 </tr>
                 </tbody>
             </table>
+
+            <br>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=EzyAccount_Charges&e=pptx") ?>"><span>Click to DOWNLOAD EzyAccount Charges.pptx</span></a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=Ezybonds_banks&e=pdf") ?>"><span>Click to DOWNLOAD Ezybonds banks.pdf</span></a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=EzyBonds_Presentation&e=ppsx") ?>"><span>Click to DOWNLOAD EzyBonds Presentation.ppsx</span></a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <a target='_blank' href="<?php echo url_for("/download/downloadEzyFile?p=Mastercard_Charges&e=pptx") ?>"><span>Click to DOWNLOAD Mastercard Charges.pptx</span></a>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+
         </td>
     </tr>
     </tbody>
