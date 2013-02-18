@@ -4525,7 +4525,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $anode[$idx]["month"] = $i;
                         $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                         $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
-                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $idx++;
@@ -4539,7 +4539,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $anode[$idx]["month"] = $i;
                         $anode[$idx]["pips_bonus"] = $this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, $x, null);
                         $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
-                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $anode[$idx]["fund_dividend"] = $this->getFundDividendDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $anode[$idx]["rb_bonus"] = $this->getRbDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $anode[$idx]["paring_bonus"] = $this->getPairingDetailByMonth($distDB->getDistributorId(), $i, $x);
                         $idx++;
@@ -6453,22 +6453,20 @@ We look forward to your custom in the near future. Should you have any queries, 
         return 0;
     }
 
-    function getFundDividendDetailByMonth($distributorId, $month, $year, $fileId)
+    function getFundDividendDetailByMonth($distributorId, $month, $year)
     {
         $query = "SELECT SUM(bonus.credit-bonus.debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger bonus
-                LEFT JOIN mlm_pip_csv csv ON csv.pip_id = bonus.ref_id
                         WHERE 1=1 "
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_FUND_MANAGEMENT . "'"
-                 . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
+                 . " AND bonus.month_traded = '" . $month . "' AND bonus.year_traded = '" . $year . "'";
                  //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 
-        if ($fileId != null) {
+        /*if ($fileId != null) {
             $query = $query." csv.file_id = ".$fileId;
-        }
+        }*/
         if ($distributorId != null) {
             $query = $query." AND bonus.dist_id = ".$distributorId;
         }
-        //var_dump($query);
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
