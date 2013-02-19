@@ -834,7 +834,7 @@ if ($tempDisable == true) { ?>
                 else
                     echo $announcement->getTitleCn();*/
                 ?>
-            Happy Chinese New Year 2013
+            Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー
             </div>
         <!--</a>-->
 
@@ -859,16 +859,10 @@ if ($tempDisable == true) { ?>
 
             <br>
             <br>
-            <a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/CNY/chinese_new_year_2013_maxim_partner.png"></a>
+            <a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/Bangkok_March_Workshop.jpg"></a>
 
                 <br>
-                Allow me to congratulate you on the arrival of the Snake Year and to extend to you all my best wishes for your perfect health and lasting prosperity.
 
-                <br><br>
-                恭贺新禧，祝身体健康、事业发达。
-
-                <br><br>
-                新年あけましておめでとうございます、私は健康と永続的な繁栄をお祈りしております。
             <!--<iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
