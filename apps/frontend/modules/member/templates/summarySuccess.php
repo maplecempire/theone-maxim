@@ -12,9 +12,9 @@ var packageStrings = "<option value=''></option>";
 var datagrid = null;
 var datagridAnnouncement = null;
 $(function() {
-    $("#popupContactClose, #popupContactClose2").click(function(){
+    /*$("#popupContactClose, #popupContactClose2").click(function(){
         $("#youtubeFrame").remove();
-    });
+    });*/
     /*datagrid = $("#datagridAnnouncement").r9jasonDataTable({
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
@@ -843,7 +843,7 @@ if ($tempDisable == true) { ?>
             $dateUtil = new DateUtil();
             //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
             //echo $currentDate;
-            echo "6 FEB 2013";
+            echo "18 FEB 2013";
             ?>
         </div>
         <div class="news_desc">
