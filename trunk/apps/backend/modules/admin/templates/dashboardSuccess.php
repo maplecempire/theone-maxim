@@ -45,8 +45,8 @@ var datagridPackageUpgradeHistory = null;
 var datagridPackagePurchase = null;
 $(function() {
     $(".column").sortable({
-                connectWith: ".column"
-            });
+        connectWith: ".column"
+    });
     //$(".column").disableSelection();
     /*datagrid = $("#datagrid").r9jasonDataTable({
         // online1DataTable extra params
@@ -358,6 +358,16 @@ function reassignDatagridEventAttr(){
                                 echo "<a id='liveAccountRequest' href='".url_for('marketing/debitCardApplication')."'>".$debitCardApplication."</a>";
                             else
                                 echo $debitCardApplication;
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>EzyCash Card Application</strong></td>
+                        <td align="right"><?php
+                            if ($ezyCashCardApplication > 0)
+                                echo "<a id='liveAccountRequest' href='".url_for('marketing/ezyCashCardApplication')."'>".$ezyCashCardApplication."</a>";
+                            else
+                                echo $ezyCashCardApplication;
                             ?>
                         </td>
                     </tr>

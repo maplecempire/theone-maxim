@@ -10,6 +10,48 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeEzyCashCardApplicationList()
+    {
+        $page = intval($this->getRequestParameter('page'));
+	    $limit = intval($this->getRequestParameter('displayLength'));
+
+        $offset = ($page-1) * $limit;
+        $result = array();
+
+        $sWhere = " WHERE 1=1";
+        $sql = " FROM mlm_ezy_cash_card debit
+                    LEFT JOIN mlm_distributor dist ON debit.dist_id = dist.distributor_id";
+
+        $result["total"] = $this->getTotalRecords($sql.$sWhere);
+
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+        $sColumns = "debit.card_id, debit.dist_id, debit.qty, debit.sub_total, debit.status_code, debit.remark, debit.created_on
+            , debit.remark, dist.distributor_code, dist.full_name, dist.email, dist.contact";
+        /******   sorting  *******/
+        $sOrder = " ";
+        $order = $this->getRequestParameter('order');
+        $sortField = $this->getRequestParameter('sort');
+        if ($this->getRequestParameter('sort')) {
+            $sOrder = " ORDER BY ".$sortField." ".$order;
+        }
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $items = array();
+        while ($resultset->next())
+        {
+            $row = $resultset->getRow();
+            array_push($items, $row);
+        }
+        $result["rows"] = $items;
+
+        echo json_encode($result);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeDebitCardApplicationList()
     {
         $page = intval($this->getRequestParameter('page'));

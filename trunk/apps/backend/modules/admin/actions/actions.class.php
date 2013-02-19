@@ -131,6 +131,7 @@ class adminActions extends sfActions
         $demoAccountRequest = $this->getDemoAccountRequest();
         $liveAccountRequest = $this->getLiveAccountRequest();
         $debitCardApplication = $this->getDebitCardApplication();
+        $ezyCashCardApplication = $this->getEzyCashCardApplication();
 
         /*$c = new Criteria();
         $packages = MlmPackagePeer::doSelect($c);
@@ -154,6 +155,7 @@ class adminActions extends sfActions
         $this->demoAccountRequest = $demoAccountRequest;
         $this->liveAccountRequest = $liveAccountRequest;
         $this->debitCardApplication = $debitCardApplication;
+        $this->ezyCashCardApplication = $ezyCashCardApplication;
     }
 
     public function executeUserList()
@@ -664,6 +666,15 @@ class adminActions extends sfActions
         $c->add(MlmDebitCardRegistrationPeer::STATUS_CODE, Globals::STATUS_PENDING);
 
         $totalNetworks = MlmDebitCardRegistrationPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getEzyCashCardApplication()
+    {
+        $c = new Criteria();
+        $c->add(MlmEzyCashCardPeer::STATUS_CODE, Globals::STATUS_PENDING);
+
+        $totalNetworks = MlmEzyCashCardPeer::doCount($c);
 
         return $totalNetworks;
     }

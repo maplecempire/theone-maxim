@@ -39,6 +39,21 @@ class marketingActions extends sfActions
         }
         return sfView::HEADER_ONLY;
     }
+     public function executeUpdateEzyCashCardApplicationStatus()
+    {
+        $count = $this->getRequestParameter('count');
+        $status = $this->getRequestParameter('status');
+        for ($i= 0; $i < $count; $i++) {
+            $requestId = $this->getRequestParameter('card_id'. $i);
+
+            $mlmEzyCashCard = MlmEzyCashCardPeer::retrieveByPK($requestId);
+            if ($mlmEzyCashCard) {
+                $mlmEzyCashCard->setStatusCode($status);
+                $mlmEzyCashCard->save();
+            }
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeDemoAccountRequest()
     {
     }
@@ -46,6 +61,9 @@ class marketingActions extends sfActions
     {
     }
     public function executeDebitCardApplication()
+    {
+    }
+    public function executeEzyCashCardApplication()
     {
     }
     public function executeCustomerEnquiryList()
