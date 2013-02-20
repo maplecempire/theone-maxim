@@ -3,7 +3,11 @@
 <script type="text/javascript" language="javascript">
     $(function() {
         $("#cbo_ecashAmount").change(function(){
-            var ecashFinal = $("#cbo_ecashAmount").val() * 0.95;
+            var ecashFinal = $("#cbo_ecashAmount").val() - 60;
+            var handlingCharge = $("#cbo_ecashAmount").val() * 0.95;
+
+            if (parseFloat(handlingCharge) < ecashFinal)
+                ecashFinal = handlingCharge;
 //            var ecashFinal = $("#cbo_ecashAmount").val();
 
             $("#ecashFinal").autoNumericSet(ecashFinal);
@@ -118,6 +122,7 @@
                     <td><?php echo __('CP2 Withdrawal Amount'); ?></td>
                     <td>
                         <select name="ecashAmount" id="cbo_ecashAmount" tabindex="2">
+                            <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
                             <option value="400">400</option>
@@ -157,7 +162,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
-                        <?php echo __('After 5% handling fee'); ?>
+                        <?php echo __('After handling fee'); ?>
                     </td>
                     <td>
                         <input name="ecashFinal" type="text" id="ecashFinal" readonly="readonly" tabindex="3"/>
@@ -178,10 +183,14 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('NOTE : Minimum withdrawal amount : USD 200
-                        <br>Can only be withdrawn on the first working week of the month
-                        <br>Processing time : 2 working days') ?></font>
+                    <td colspan="1" align="right" valign="top">
+                        <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
+                    </td>
+                    <td colspan="1" align="left">
+                        <font color="#dc143c"> <?php echo __('1. Minimum withdrawal amount : USD 100
+                        <br>2. Can only be withdrawn on the first working week of the month
+                        <br>3. Handling fee USD60 or 5% whichever is higher
+                        <br>4. Processing time : 2 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
