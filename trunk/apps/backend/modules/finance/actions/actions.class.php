@@ -16,6 +16,7 @@ class financeActions extends sfActions
     public function executeEpointTransfer()
     {
     }
+
     public function executeDoEpointTransfer()
     {
         $distId = $this->getRequestParameter('distId');
@@ -77,9 +78,10 @@ class financeActions extends sfActions
         echo json_encode($output);
         return sfView::HEADER_ONLY;
     }
+
     /* ****************************************
-     *     pipsBonus
-     * *****************************************/
+   *     pipsBonus
+   * *****************************************/
     public function executePipsBonusDetailByDist()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
@@ -111,18 +113,19 @@ class financeActions extends sfActions
 
         $longString = "";
         for ($i = intval($joinMonth); $i <= intval($currentMonth); $i++) {
-            $longString = $longString ."<tr class='odd'>
-                <td align='center'>".$month[$i]."</td>
-                <td align='right'>".number_format($this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, date('Y'), null), 2)."</td>
+            $longString = $longString . "<tr class='odd'>
+                <td align='center'>" . $month[$i] . "</td>
+                <td align='right'>" . number_format($this->getPipsBonusDetailByMonth($distDB->getDistributorId(), $i, date('Y'), null), 2) . "</td>
                 </tr>";
         }
         echo json_encode($longString);
         return sfView::HEADER_ONLY;
     }
+
     public function executePipsBonusDetail()
     {
         $query = "SELECT month_traded, year_traded, file_id
-	                FROM mlm_pip_csv where status_code = '".Globals::STATUS_PIPS_CSV_SUCCESS."' group by month_traded, year_traded, file_id";
+	                FROM mlm_pip_csv where status_code = '" . Globals::STATUS_PIPS_CSV_SUCCESS . "' group by month_traded, year_traded, file_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -142,9 +145,10 @@ class financeActions extends sfActions
         $this->arr = $arr;
         $this->bonusArr = $bonusArr;
     }
+
     /* ****************************************
-     *     Mt4Withdrawal
-     * *****************************************/
+   *     Mt4Withdrawal
+   * *****************************************/
     public function executeMt4WithdrawalEdit()
     {
         $mt4Withdraw = MlmMt4WithdrawPeer::retrieveByPk($this->getRequestParameter('upgradeId'));
@@ -152,6 +156,7 @@ class financeActions extends sfActions
 
         $this->mt4Withdraw = $mt4Withdraw;
     }
+
     public function executeUpdateMt4Withdrawal()
     {
         $statusCode = $this->getRequestParameter('status_code');
@@ -168,22 +173,21 @@ class financeActions extends sfActions
                 // ******** once mt4 withdrawal has been approved at backend,
                 //          the fund will be credited into ecash wallet **********
                 if (Globals::STATUS_COMPLETE == $statusCode && $mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
-                    $ecashBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+                    $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $mt4WithdrawalAmount = $mt4Withdrawal->getAmountRequested();
-
                     $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $tbl_account_ledger->setDistId($mt4Withdrawal->getDistId());
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MT4_WITHDRAWAL);
-                    $tbl_account_ledger->setRemark("Withdrawal Amount:". $mt4Withdrawal->getAmountRequested(). ", ID:". $mt4Withdrawal->getWithdrawId());
+                    $tbl_account_ledger->setRemark("Withdrawal Amount:" . $mt4Withdrawal->getAmountRequested() . ", ID:" . $mt4Withdrawal->getWithdrawId());
                     $tbl_account_ledger->setCredit($mt4WithdrawalAmount);
                     $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setBalance($ecashBalance + $mt4WithdrawalAmount);
+                    $tbl_account_ledger->setBalance($maintenanceBalance + $mt4WithdrawalAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
                     $mt4Withdrawal->setStatusCode(Globals::STATUS_COMPLETE);
                 } else {
@@ -204,6 +208,7 @@ class financeActions extends sfActions
         }
         return $this->redirect('finance/mt4Withdrawal');
     }
+
     public function executeMt4Withdrawal()
     {
         if ($this->getRequestParameter('upgradeStatus') && $this->getRequestParameter('upgradeId')) {
@@ -220,15 +225,33 @@ class financeActions extends sfActions
                     $this->forward404Unless($mt4Withdrawal);
 
                     if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
-                        if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
-                            $mt4Withdrawal->setStatusCode($statusCode);
-                            $mt4Withdrawal->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
-                            if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
-                                $mt4Withdrawal->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-                            }
-                            $mt4Withdrawal->save();
+                        if (Globals::STATUS_COMPLETE == $statusCode && $mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
+                            $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $mt4WithdrawalAmount = $mt4Withdrawal->getAmountRequested();
+                            $tbl_account_ledger = new MlmAccountLedger();
+                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $tbl_account_ledger->setDistId($mt4Withdrawal->getDistId());
+                            $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MT4_WITHDRAWAL);
+                            $tbl_account_ledger->setRemark("Withdrawal Amount:" . $mt4Withdrawal->getAmountRequested() . ", ID:" . $mt4Withdrawal->getWithdrawId());
+                            $tbl_account_ledger->setCredit($mt4WithdrawalAmount);
+                            $tbl_account_ledger->setDebit(0);
+                            $tbl_account_ledger->setBalance($maintenanceBalance + $mt4WithdrawalAmount);
+                            $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $tbl_account_ledger->save();
+
+                            $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                            $mt4Withdrawal->setStatusCode(Globals::STATUS_COMPLETE);
+                        } else {
+                            $mt4Withdrawal->setStatusCode(Globals::STATUS_REJECT);
                         }
+                        $mt4Withdrawal->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                        if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
+                            $mt4Withdrawal->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                        }
+                        $mt4Withdrawal->save();
                     }
                 }
                 $con->commit();
@@ -241,9 +264,10 @@ class financeActions extends sfActions
             return $this->redirect('finance/mt4Withdrawal');
         }
     }
+
     /* ****************************************
-     *     ReloadMt4Fund
-     * *****************************************/
+   *     ReloadMt4Fund
+   * *****************************************/
     public function executeReloadMt4FundEdit()
     {
         $mt4ReloadFund = MlmMt4ReloadFundPeer::retrieveByPk($this->getRequestParameter('upgradeId'));
@@ -251,6 +275,7 @@ class financeActions extends sfActions
 
         $this->mt4ReloadFund = $mt4ReloadFund;
     }
+
     public function executeUpdateReloadMt4Fund()
     {
         $statusCode = $this->getRequestParameter('status_code');
@@ -280,6 +305,7 @@ class financeActions extends sfActions
         }
         return $this->redirect('finance/reloadMt4Fund');
     }
+
     public function executeReloadMt4Fund()
     {
         if ($this->getRequestParameter('upgradeStatus') && $this->getRequestParameter('upgradeId')) {
@@ -325,6 +351,7 @@ class financeActions extends sfActions
 
         $this->distCommissionLedger = $distCommissionLedger;
     }
+
     public function executeUpdateReferralBonus()
     {
         $statusCode = $this->getRequestParameter('status_code');
@@ -350,6 +377,7 @@ class financeActions extends sfActions
         }
         return $this->redirect('finance/referralBonus');
     }
+
     public function executeReferralBonus()
     {
         if ($this->getRequestParameter('upgradeStatus') && $this->getRequestParameter('upgradeId')) {
@@ -790,16 +818,16 @@ class financeActions extends sfActions
 
             /*if ($this->getRequestParameter('distMt4AccountId', "") != "") {
                 $mlm_dist_mt4 = MlmDistMt4Peer::retrieveByPk($this->getRequestParameter('distMt4AccountId'));*/
-                $tbl_distributor = MlmDistributorPeer::retrieveByPk($packageUpgradeHistory->getDistId());
+            $tbl_distributor = MlmDistributorPeer::retrieveByPk($packageUpgradeHistory->getDistId());
 
-                /*if ($mlm_dist_mt4) {
-                    //$mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
-                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
-                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
-                    //$mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->save();
-                } else {*/
+            /*if ($mlm_dist_mt4) {
+              //$mlm_dist_mt4->setDistId($packageUpgradeHistory->getDistId());
+              $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4Id'));
+              $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4Password'));
+              //$mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+              $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+              $mlm_dist_mt4->save();
+          } else {*/
             if ($statusCode == Globals::STATUS_COMPLETE && $this->getRequestParameter('mt4Id') != "" && $packageUpgradeHistory->getStatusCode() == Globals::STATUS_ACTIVE) {
                 $c = new Criteria();
                 $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4Id'));
@@ -1110,7 +1138,7 @@ class financeActions extends sfActions
                     $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
                 }
             }
-                /*}
+            /*}
             }*/
 
             $packageUpgradeHistory->setMt4UserName($this->getRequestParameter('mt4Id'));
@@ -1212,7 +1240,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
-                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId(). ")");
+                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
                     $mlm_account_ledger->setCredit($refundEcash);
                     $mlm_account_ledger->setDebit(0);
                     $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
@@ -1263,7 +1291,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setDistId($distId);
             $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
-            $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId(). ")");
+            $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
             $mlm_account_ledger->setCredit($refundEcash);
             $mlm_account_ledger->setDebit(0);
             $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
@@ -1566,10 +1594,10 @@ class financeActions extends sfActions
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_PIPS_BONUS . "'"
                  . " AND bonus.transaction_type = '" . Globals::COMMISSION_LEDGER_PIPS_GAIN . "'"
                  . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
-                 //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+        //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 
         if ($distributorId != null) {
-            $query = $query." AND bonus.dist_id = ".$distributorId;
+            $query = $query . " AND bonus.dist_id = " . $distributorId;
         }
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -1600,10 +1628,10 @@ class financeActions extends sfActions
                         WHERE csv.file_id = " . $fileId
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_CREDIT_REFUND . "'"
                  . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
-                 //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+        //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 
         if ($distributorId != null) {
-            $query = $query." AND bonus.dist_id = ".$distributorId;
+            $query = $query . " AND bonus.dist_id = " . $distributorId;
         }
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -1634,10 +1662,10 @@ class financeActions extends sfActions
                         WHERE csv.file_id = " . $fileId
                  . " AND bonus.commission_type = '" . Globals::COMMISSION_TYPE_FUND_MANAGEMENT . "'"
                  . " AND csv.month_traded = '" . $month . "' AND csv.year_traded = '" . $year . "'";
-                 //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
+        //. " AND bonus.created_on >= '" . $firstOfMonth . "' AND bonus.created_on <= '" . $lastOfMonth . "'";
 
         if ($distributorId != null) {
-            $query = $query." AND bonus.dist_id = ".$distributorId;
+            $query = $query . " AND bonus.dist_id = " . $distributorId;
         }
         //var_dump($query);
         $connection = Propel::getConnection();

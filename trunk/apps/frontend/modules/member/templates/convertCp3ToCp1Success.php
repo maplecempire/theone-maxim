@@ -24,7 +24,7 @@ $(function() {
             //var epointAmount = parseFloat($("#cbo_epointAmount").val());
 
             if (epointAmount > parseFloat(ecashBalance)) {
-                alert("In-sufficient CP2 Credit");
+                alert("In-sufficient CP3 Credit");
                 return false;
             }
             $("#epointAmount").val(epointAmount);
@@ -32,7 +32,17 @@ $(function() {
         }
     });
     $('#epointAmount').autoNumeric({
-        mDec: 2
+        mDec: 0
+    }).keyup(function(){
+        var convertedAmount = 0;
+        var epointAmount = $('#epointAmount').autoNumericGet();
+        convertedAmount = parseFloat(epointAmount) * 1.05;
+        convertedAmount = Math.floor(convertedAmount);
+
+        $("#epointConvertedAmount").val(convertedAmount);
+    });
+    $('#epointConvertedAmount').autoNumeric({
+        mDec: 0
     });
 });
 </script>
@@ -44,7 +54,7 @@ $(function() {
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">
         <?php echo __('Convert CP2 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
@@ -56,7 +66,7 @@ $(function() {
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(134, 197, 51);">
         <?php echo __('Convert CP3 To CP1'); ?>
     </a>
 </div>
@@ -67,7 +77,7 @@ $(function() {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP2 To CP1') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP3 To CP1') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -96,7 +106,7 @@ $(function() {
     </tr>
     <tr>
         <td>
-            <form action="<?php echo url_for("/member/convertEcashToEpoint") ?>" id="ecreditForm" name="ecreditForm" method="post">
+            <form action="<?php echo url_for("/member/convertCp3ToCp1") ?>" id="ecreditForm" name="ecreditForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -109,7 +119,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Convert CP2 To CP1') ?></th>
+                    <th colspan="2"><?php echo __('Convert CP3 To CP1') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -118,7 +128,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Balance'); ?></td>
+                    <td><?php echo __('CP3 Balance'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
                                            value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -128,7 +138,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Amount'); ?></td>
+                    <td><?php echo __('CP3 Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
                         <!--<select name="epointAmount" id="cbo_epointAmount" tabindex="2">
@@ -157,6 +167,15 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
+                    <td><?php echo __('CP1 Converted Amount'); ?></td>
+                    <td>
+                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" readonly="readonly"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
                         <input name="transactionPassword" type="password" id="transactionPassword"
@@ -168,7 +187,9 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</font>
+                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.
+                        <br>CP3 convert to CP1 will get extra 5%
+                        </font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
