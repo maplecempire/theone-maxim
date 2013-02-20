@@ -31,6 +31,65 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeConvertCp3ToCp1()
+    {
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        $epointAmount = $this->getRequestParameter('epointAmount');
+
+        if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
+                return $this->redirect('/member/convertCp3ToCp1');
+            }
+
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if ($epointAmount > $ledgerAccountBalance) {
+                $this->setFlash('errorMsg', "In-sufficient CP3");
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $this->setFlash('errorMsg', "Invalid Security password");
+
+            } elseif ($epointAmount > 0) {
+                $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
+                $tbl_account_ledger->setCredit(0);
+                $tbl_account_ledger->setDebit($epointAmount);
+                $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $epointConvertedAmount = floor($epointAmount * 1.05);
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                $tbl_account_ledger->setCredit($epointConvertedAmount);
+                $tbl_account_ledger->setDebit(0);
+                $tbl_account_ledger->setRemark("CP3:".$epointAmount);
+                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to CP1 successful."));
+
+                return $this->redirect('/member/convertCp3ToCp1');
+            }
+        }
+    }
+
     public function executeApplyDebitCardHistory()
     {
 
@@ -4807,35 +4866,39 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 }
 
                                 $maintenanceBalance = $pairingBonusAmount * Globals::BONUS_MAINTENANCE_PERCENTAGE;
-                                $ecashBalance = $ecashBalance - $maintenanceBalance;
-                                $maintenanceEcashAccountLedger = new MlmAccountLedger();
-                                $maintenanceEcashAccountLedger->setDistId($distId);
-                                $maintenanceEcashAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                                $maintenanceEcashAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MAINTENANCE);
-                                $maintenanceEcashAccountLedger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
-                                $maintenanceEcashAccountLedger->setCredit(0);
-                                $maintenanceEcashAccountLedger->setDebit($maintenanceBalance);
-                                $maintenanceEcashAccountLedger->setBalance($ecashBalance);
-                                $maintenanceEcashAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $maintenanceEcashAccountLedger->save();
+                                if ($maintenanceBalance != 0) {
+                                    $ecashBalance = $ecashBalance - $maintenanceBalance;
+                                    $maintenanceEcashAccountLedger = new MlmAccountLedger();
+                                    $maintenanceEcashAccountLedger->setDistId($distId);
+                                    $maintenanceEcashAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                    $maintenanceEcashAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MAINTENANCE);
+                                    $maintenanceEcashAccountLedger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
+                                    $maintenanceEcashAccountLedger->setCredit(0);
+                                    $maintenanceEcashAccountLedger->setDebit($maintenanceBalance);
+                                    $maintenanceEcashAccountLedger->setBalance($ecashBalance);
+                                    $maintenanceEcashAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $maintenanceEcashAccountLedger->save();
+                                }
 
                                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
-                                $commissionBalance = $commissionBalance - $maintenanceBalance;
-                                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                                $sponsorDistCommissionledger->setDistId($distId);
-                                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB);
-                                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PAIRED);
-                                $sponsorDistCommissionledger->setCredit(0);
-                                $sponsorDistCommissionledger->setDebit($maintenanceBalance);
-                                $sponsorDistCommissionledger->setBalance($commissionBalance);
-                                $sponsorDistCommissionledger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
-                                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $sponsorDistCommissionledger->save();
+                                if ($maintenanceBalance != 0) {
+                                    $commissionBalance = $commissionBalance - $maintenanceBalance;
+                                    $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                                    $sponsorDistCommissionledger->setDistId($distId);
+                                    $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB);
+                                    $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_PAIRED);
+                                    $sponsorDistCommissionledger->setCredit(0);
+                                    $sponsorDistCommissionledger->setDebit($maintenanceBalance);
+                                    $sponsorDistCommissionledger->setBalance($commissionBalance);
+                                    $sponsorDistCommissionledger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
+                                    $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistCommissionledger->save();
 
-                                $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_GDB);
+                                    $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_GDB);
+                                }
                                 /******************************/
                                 /*  Maintenance
                                 /******************************/
@@ -4846,21 +4909,24 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
                                 $this->forward404Unless($accountLedgerDB);
                                 $distAccountMaintenanceBalance = $accountLedgerDB->getBalance();*/
-                                $distAccountMaintenanceBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                                $maintenanceAccountLedger = new MlmAccountLedger();
-                                $maintenanceAccountLedger->setDistId($distId);
-                                $maintenanceAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                                $maintenanceAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
-                                $maintenanceAccountLedger->setRemark("PAIRING BALANCE " . number_format($pairingBonusAmount, 2) . " (" . $bonusDate . ")");
-                                $maintenanceAccountLedger->setCredit($maintenanceBalance);
-                                $maintenanceAccountLedger->setDebit(0);
-                                $maintenanceAccountLedger->setBalance($distAccountMaintenanceBalance + $maintenanceBalance);
-                                $maintenanceAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $maintenanceAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $maintenanceAccountLedger->save();
+                                if ($maintenanceBalance != 0) {
+                                    $distAccountMaintenanceBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                                    $maintenanceAccountLedger = new MlmAccountLedger();
+                                    $maintenanceAccountLedger->setDistId($distId);
+                                    $maintenanceAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                                    $maintenanceAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
+                                    $maintenanceAccountLedger->setRemark("PAIRING BALANCE " . number_format($pairingBonusAmount, 2) . " (" . $bonusDate . ")");
+                                    $maintenanceAccountLedger->setCredit($maintenanceBalance);
+                                    $maintenanceAccountLedger->setDebit(0);
+                                    $maintenanceAccountLedger->setBalance($distAccountMaintenanceBalance + $maintenanceBalance);
+                                    $maintenanceAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $maintenanceAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $maintenanceAccountLedger->save();
+
+                                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                                }
                             }
                         }
                     }
@@ -4937,11 +5003,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }*/
                 $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
 
-                $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
                 $mlm_account_ledger->setRemark("");
                 $mlm_account_ledger->setCredit($dividendAmount);
@@ -5005,7 +5071,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_roi_dividend->save();
                 }
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
         }
         // roi dividend end~

@@ -9,11 +9,10 @@ $(function(){
     });
 	jform = $("#enquiryForm").validate({
 		submitHandler: function(form) {
-			if(isSubmitAjax){
-				datagrid.fnDraw();
-			}else {
-				form.submit();
-			}
+            var answer = confirm("Are you sure want to approve MT4 withdrawal?")
+            if (answer){
+                form.submit();
+            }
 		}
 	});
 
@@ -82,7 +81,7 @@ function reassignDatagridEventAttr(){
 
 </script>
 
-<?php echo form_tag('finance/mt4Withdrawal', 'id=loginForm') ?>
+<?php echo form_tag('finance/mt4Withdrawal', 'id=enquiryForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet">
     <div class="portlet-header">MT4 Withdrawal Listing</div>
