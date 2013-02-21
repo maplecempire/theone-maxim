@@ -563,6 +563,10 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree()
     {
+        if ($this->getRequestParameter('distcode', '') == "" || $this->getRequestParameter('position', '') == "") {
+            return $this->redirect('/member/placementTree');
+        }
+
         $uplineDistCode = $this->getRequestParameter('distcode');
         $position = $this->getRequestParameter('position');
 
@@ -578,6 +582,9 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree2()
     {
+        if ($this->getRequestParameter('uplineDistCode', '') == "" || $this->getRequestParameter('position', '') == "") {
+            return $this->redirect('/member/placementTree');
+        }
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
         $this->position = $this->getRequestParameter('position');
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
