@@ -53,37 +53,3 @@ function centerPopup(){
 	});
 
 }
-
-
-//CONTROLLING EVENTS IN jQuery
-$(document).ready(function(){
-
-	//LOADING POPUP
-	//Click the button event!
-	$(document).ready(function(){
-		//centering with css
-		centerPopup();
-		//load popup
-		loadPopup();
-	});
-
-	//CLOSING POPUP
-	//Click the x event!
-	$("#popupContactClose").click(function(){
-		disablePopup();
-	});
-	$("#popupContactClose2").click(function(){
-		disablePopup();
-	});
-	//Click out event!
-	$("#backgroundPopup").click(function(){
-		disablePopup();
-	});
-	//Press Escape event!
-	$(document).keypress(function(e){
-		if(e.keyCode==27 && popupStatus==1){
-			disablePopup();
-		}
-	});
-
-});

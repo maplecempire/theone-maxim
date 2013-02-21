@@ -249,16 +249,22 @@ ul, ol {
             <input type="hidden" name="hidPauseSlideShow" id="hidPauseSlideShow" value="0" />
             <div id="banner">
                 <ol class="slides" style="position: relative; overflow: hidden;">
+                    <li class="slide-content hide"
+                        style="position: absolute; top: 0px; z-index: 6; opacity: 1; display: none; width: 582px; height: 212px;">
+                        <div class="slide-content"
+                             style="background:#f6f7f6 url('/css/maxim/banner/bg8.png') left top no-repeat;width:582px;height:212px;">
+                        </div>
+                    </li>
 
                     <li class="slide-content hide"
                         style="position: absolute; top: 0px; left: -941px; z-index: 6; opacity: 1; display: block; width: 941px; height: 450px;">
                         <div class="slide-content slide-temp-1">
                             <div class="slide-bg">
-                                <img src="/css/maxim/banner/bg1.png"></div>
+                                <img src="/css/maxim/banner/bg1.png">
+                            </div>
                             <div class="slide-main">
                                 <img src="/css/maxim/banner/bg1-word.png"
                                      alt="We are MAXIM. A worldwide leader in currency trading.">
-
                             </div>
                             <div class="slide-tc">
                             </div>

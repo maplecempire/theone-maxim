@@ -2,7 +2,7 @@
 
 <style type="text/css">
 #popupContact {
-    top: 0px !important;
+    top: -100px !important;
 }
 </style>
 
@@ -11,7 +11,53 @@
 var packageStrings = "<option value=''></option>";
 var datagrid = null;
 var datagridAnnouncement = null;
+var annoucementArr = [];
+annoucementArr.push({
+    poptitle:'Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー',
+    news_date:'18 FEB 2013',
+    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
+});
+annoucementArr.push({
+    poptitle:'Apply EzyCash Card Now!!!',
+    news_date:'20 FEB 2013',
+    news_desc:'<br><br><a target="_self" href="/member/applyEzyCashCard"><img width="460" border="0" alt="Maxim Trader" src="/images/email/apply_ezycash_card_debit_card.png"></a>Start from today Maxim Trader clients may <a href="/member/applyEzyCashCard" style="color: #3333ff;">apply an EzyAccount</a> anytime.<br><br>EzyAccount is an extremely secure and convenient way for you to send and receive money from Maxim Trader.'
+});
+annoucementArr.push({
+    poptitle:'Maxim Trader to participate in the 10th CHINA GUANGZHOU INTERNATIONAL INVESTMENT AND FINANCE EXPO 第十届广州国际投资理财金融博览会 2013年3月5-7日',
+    news_date:'21 FEB 2013',
+    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/guangzou_international_investment.png"></a><br>'
+});
+
+
+var popIndex = 1;
 $(function() {
+    loadContent(popIndex);
+
+    centerPopup();
+    loadPopup();
+
+	$("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
+		disablePopup();
+        if ($(annoucementArr).length > popIndex) {
+            popIndex++;
+            loadContent(popIndex);
+            centerPopup();
+            loadPopup();
+        }
+	});
+	//Press Escape event!
+	$(document).keypress(function(e){
+		if(e.keyCode==27 && popupStatus==1){
+			disablePopup();
+            if ($(annoucementArr).length > popIndex) {
+                popIndex++;
+                loadContent(popIndex);
+                centerPopup();
+                loadPopup();
+            }
+        }
+	});
+
     /*$("#popupContactClose, #popupContactClose2").click(function(){
         $("#youtubeFrame").remove();
     });*/
@@ -259,6 +305,12 @@ $(function() {
 });
 function reassignDatagridAnnouncementEventAttr() {
 
+}
+function loadContent(popIndex) {
+    var obj = annoucementArr[popIndex -1];
+    $(".poptitle").html(obj.poptitle);
+    $(".news_date").html(obj.news_date);
+    $(".news_desc").html(obj.news_desc);
 }
 </script>
 
@@ -857,38 +909,8 @@ if ($tempDisable == true) { ?>
 
             ?>
 
-            <br>
-            <br>
-            <a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/Bangkok_March_Workshop.jpg"></a>
-
-                <br>
-
-            <!--<iframe id="youtubeFrame" width="460" height="259" src="http://www.youtube.com/embed/7stGVO_nn_8?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
-            <br>
-            <br>
-                Thank you for being a member at Maxim Trader and we wish you a Merry Christmas and a Prosperous New Year.
-
-
-                            <br>
-                            <br>
-We are grateful for the pleasure of serving you and meeting your needs and we look forward to serve you more in the coming year with utmost comfort and commitment valuing your growth as our main goal in mind.
-
-
-                          <br>
-                          <br>
-We wish you a splendid year filled with abundance joy, happiness, the best of health and wealth, all-wishes-granted and a special good vibe following your business and family.
-
-
-                          <br>
-                          <br>
-Happy holidays! Happy 2013!-->
-<!--            <br>
-            <br>
-            Sincerely,
-            <br>
-            Maxim Trader Team-->
+            <br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/Bangkok_March_Workshop.jpg"></a><br>
         </div>
-        <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>"><?php /*echo __('Read More') */?> &gt;&gt;</a>-->
     </div>
     <div class="popdivider"></div>
     <?php //} ?>
