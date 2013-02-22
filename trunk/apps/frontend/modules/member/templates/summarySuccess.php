@@ -28,7 +28,6 @@ annoucementArr.push({
     news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/guangzou_international_investment.png"></a><br>'
 });
 
-
 var popIndex = 1;
 $(function() {
     loadContent(popIndex);

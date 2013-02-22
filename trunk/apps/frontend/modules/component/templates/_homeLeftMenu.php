@@ -24,16 +24,16 @@ if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) 
         <a href="<?php echo url_for("/home/company")?>"><?php echo __('The Consortium') ?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
-    <li id="menu-item-156"
+    <!--<li id="menu-item-156"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
-            href="<?php echo url_for("/home/investment")?>"><?php echo __('Fund Management') ?></a>
+            href="<?php /*echo url_for("/home/investment")*/?>"><?php /*echo __('Fund Management') */?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
     <li id="menu-item-157"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
-            href="<?php echo url_for("/home/maximExecutor")?>"><?php echo __('MaximTrade™ Executor') ?></a>
+            href="<?php /*echo url_for("/home/maximExecutor")*/?>"><?php /*echo __('MaximTrade™ Executor') */?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
-    </li>
+    </li>-->
     <li id="menu-item-158"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
             href="<?php echo url_for("/home/marketNews")?>"><?php echo __('Market News') ?></a>
@@ -43,10 +43,10 @@ if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) 
         <a href="<?php /*echo url_for("/home/marketNews")*/?>">Market News</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>-->
-    <li id="menu-item-98" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-98">
-        <a href="<?php echo url_for("/home/contactUs")?>"><?php echo __('Contact Us') ?></a>
+    <!--<li id="menu-item-98" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-98">
+        <a href="<?php /*echo url_for("/home/contactUs")*/?>"><?php /*echo __('Contact Us') */?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
-    </li>
+    </li>-->
 
     <li id="menu-item-140"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a

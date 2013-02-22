@@ -656,6 +656,9 @@ class memberActions extends sfActions
     public function executeDailyFxGuide()
     {
     }
+    public function executeDailyAUGoldTradeGuide()
+    {
+    }
     public function executeFundManagementReport()
     {
     }
