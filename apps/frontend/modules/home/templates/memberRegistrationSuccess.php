@@ -204,7 +204,7 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 </div>
 
     <div class="footer_frame" style="z-index: 20;">
-        <div class="footer_content">&copy; 2012 maximtrader.com <br> All rights reserved.</div>
+        <div class="footer_content">&copy; 2013 maximtrader.com <br> All rights reserved.</div>
     </div>
 </div>
 <br class="clear">

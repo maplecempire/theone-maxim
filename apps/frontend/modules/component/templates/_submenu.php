@@ -10,6 +10,20 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     font-size: 12px;
 }
 </style>
+<script type="text/javascript" >
+
+$(function() {
+    blink('#msg');
+});
+
+function blink(selector) {
+    $(selector).fadeOut('slow', function() {
+        $(this).fadeIn('slow', function() {
+            blink(this);
+        });
+    });
+}
+</script>
 
 <div class="menu" style="z-index: 20;">
     <ul>
@@ -121,8 +135,23 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     <br class="clear"><br>-->
     <ul>
         <li class="menu_title"><?php echo __('CONTACT'); ?></li>
+        <?php
+            $style = "";
+            if ($totalUnreadCsMessage > 0) {
+                $style = "style='color: green'";
+            }
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/customerEnquiry"><span><?php echo __('CS Center'); ?></span></a>
+            <a href="/member/customerEnquiry" <?php echo $style;?>>
+            <?php
+            if ($totalUnreadCsMessage > 0) { ?>
+                <div id="msg"> <strong><?php
+                    echo __('CS Center')." (".$totalUnreadCsMessage.")"; ?></strong> </div>
+            <?php
+            } else {
+                echo __('CS Center');
+            }
+            ?></a>
         </li>
     </ul>
     <br class="clear"><br>
@@ -156,6 +185,11 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
+        </li>
+    <?php } ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/member/dailyAUGoldTradeGuide") ?>"><span><?php echo __('Download Daily AU Gold Trade Guide'); ?></span></a>
         </li>
     <?php } ?>
     <?php /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--

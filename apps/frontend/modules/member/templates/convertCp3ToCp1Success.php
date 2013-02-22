@@ -187,7 +187,7 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.
+                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.
                         <br>CP3 convert to CP1 will get extra 5%
                         </font>
                     </td>

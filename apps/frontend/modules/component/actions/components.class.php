@@ -28,8 +28,14 @@ class componentComponents extends sfComponents
         if ($distDB->getTermCondition() != null && $distDB->getTermCondition() == Globals::YES)
             $openTermCondition = false;
 
+        $c = new Criteria();
+        $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, $this->param);
+        $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, Globals::FALSE);
+        $totalUnreadCsMessage = MlmCustomerEnquiryPeer::doCount($c);
+
         $this->distDB = $distDB;
         $this->openTermCondition = $openTermCondition;
+        $this->totalUnreadCsMessage = $totalUnreadCsMessage;
     }
     public function executeHeaderInformation()
     {

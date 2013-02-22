@@ -344,13 +344,14 @@ ul, ol {
             <!--#####################################################################-->
 
             <div class="hr2"></div>
-            <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
+<!--            <a href="--><?php //echo url_for("/home/maximExecutor")?><!--"><p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>-->
+            <p><img width="582" height="184" src="/css/maxim/banner/banner-08.jpg" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p>
 
-            <strong><?php echo __('MaximTrader') ?></strong> <?php echo __('have sought to structure an investment which addresses all the challenges which investors face today.') ?>
-            <a href="<?php echo url_for("/home/investment")?>" style="color: #0080C8"><?php echo __('Learn more') ?> ?</a>
+            <strong><?php echo __('Maxim Trader') ?></strong> <?php echo __('has worked out a structured investment which addresses most of the problems investors facing today.') ?>
+            <!--<a href="<?php /*echo url_for("/home/investment")*/?>" style="color: #0080C8"><?php /*echo __('Learn more') */?> ?</a>-->
 
-            <div class="hr2"></div>
-            <a href="<?php echo url_for("/home/maximExecutor")?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>
+            <!--<div class="hr2"></div>
+            <a href="<?php /*echo url_for("/home/maximExecutor")*/?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>-->
 
             <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
             <!--<div class="hr2"></div>
@@ -410,7 +411,7 @@ ul, ol {
 
         <div id="sidebar-bottom">
             <ul></ul>
-            <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+            <p style="text-align: center;">© 2013 maximtrader.com <br> All rights reserved.</p>
         </div>
     </div>
 </div>

@@ -246,7 +246,7 @@
 
         <div id="sidebar-bottom">
             <ul></ul>
-            <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+            <p style="text-align: center;">© 2013 maximtrader.com <br> All rights reserved.</p>
         </div>
     </div>
 </div>

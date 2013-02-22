@@ -77,7 +77,7 @@
             <p align="justify"><strong><?php echo __('Consortium by Maxim Trader') ?></strong>. <?php echo __('Consortium is the latest project undertaken by Maxim Trader to develop a cooperative for financial leverage with a pioneering inclusion of third party individuals.') ?></p>
             <p align="justify"><?php echo __('Our business model is simple and straight forward : to maximize leverage through a system of pooled resources coupled with trading technology and expertise. Our objective is clear : to profit in an exponential manner to benefit both company and clients.') ?></p>
 
-            <h5><?php echo __('Business Model') ?></h5>
+            <h2><?php echo __('Business Model') ?></h2>
             <b><?php echo __('Identifying Forte') ?></b><br>
 
             <p align="justify">
@@ -118,32 +118,34 @@
                 <?php echo __('With the vast selection of platforms out there, the question here is \'why choose Maxim Trader?\' An intelligent client always seeks to get his money\'s worth and such is the inspiration behind the \'Consortium Model\'.') ?>
                 <br>
                 <br>
-                <strong>•	<?php echo __('State-of-the art trading technology') ?></strong>
+                <strong>•	<?php echo __('Profitable Fund Management') ?></strong>
                 <br>
-                <?php echo __('Maximtrade™ Executor is our proprietary algorithmic trade technology, which is the outcome of Maxim Trader\'s research efforts over the last couple of years. Although the major experimenting, modification and enhancement has concluded, Maxim Trader is constantly monitoring performance for optimum trade productivity. We are proud to say that we will be offering Maximtrade™ Executor to our clients. A manumatic operating system that inputs Maxim Trader\'s trading expertise into your system while allowing you enough flexibility to make your own trading decisions.') ?>
+                <?php echo __('We are proud to introduce our Maxim Trader fund management progamme, which has helped customers from over 15 countries to become millionaires. Maxim Trader consists of top investment professionals with outstanding academic backgrounds combined with years of vast trading experiences. Each partner has extensive experience at leading banking and financial institutions and maintains a specific expertise in trading, portfolio management  and risk analysis. Our team has an excellent track record of success which gives you an additional confidence on your Performance Return.') ?>
                 <br>
                 <br>
                 <strong>•	<?php echo __('Capital enhancement') ?></strong>
                 <br>
-                <?php echo __('In line with resource pooling, Maxim Trader will match clients\' capital up to a maximum bonus of a dollar to dollar capital enhancement. This also means that you could have up to twice your original capital working for you. The reason for this is simple. With the Maximtrade™ Executor, more profits are generated not only for you, but for the company as well. Moreover, we take the risk with you so you can have peace of mind that we will do our utmost to ensure positive results.') ?>
+                <?php echo __('In line with resource pooling, Maxim Trader will match clients’ capital up to a maximum bonus of a dollar to dollar capital enhancement. This also means that you could have up to twice your original capital working for you. The reason for this is simple. With the Maxim Trader, more profits are generated not only for you, but for the company as well. Moreover, we take the risk with you so you can have peace of mind that we will do our utmost to ensure positive results.') ?>
                 <br>
                 <br>
                 <strong>•	<?php echo __('Our confidence') ?></strong>
                 <br>
-                <?php echo __('All clients fund are individually and severally insured in the form of a parental guarantee provided by our parent company MY Group Inc. Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
+                <?php echo __('All client funds are insured in the form of a parental guarantee provided by our parent company Royale Group Holding Inc. Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
                 <br>
                 <br>
                 <strong><?php echo __('Sustained Profits') ?></strong>
                 <br>
-                <?php echo __('With the two key elements in place, leverage through resource pooling and an automated trading machine, Maxim Trader is able to achieve even greater revenue that what is has been generating stably over the decade. As our system produced profits for you, it is simultaneously producing profits off you because Maxim Trader achieves revenue through the number of lots traded. This creates a win-win situation through a fair system that yields profits for both parties.') ?>
+                <?php echo __('With the two key elements in place; leverage through resource pooling and effective Fund Management, Maxim Trader is able to achieve even greater revenue than what has been regularly attained over the past decade. As our system produces profits for you, it is simultaneously producing profits off you, because Maxim Trader achieves revenue through the number of lots traded and trading profits. This creates a win-win situation through a fair system that yields profits for both parties.') ?>
+                <br>
                 <br>
                 <strong><?php echo __('Cashback Rewards') ?></strong>
                 <br>
-                <?php echo __('Maxim Trader gives credit where credit is due, often in the form of monetary rewards and incentives for our affiliates. The increase in revenue allows liquidity to be channeled towards marketing campaigns that will evidently generate more leads and business back to Maxim Trader. Our clients are happy, our affiliates are rewarded and company expands.') ?>
+                <?php echo __('Maxim Trader gives credit where credit is due, often in the form of monetary rewards and incentives for our affiliates. The increase in revenue allows liquidity to be channeled towards marketing campaigns that will evidently generate more leads and business back to Maxim Trader. Our clients are happy, our affiliates are rewarded and company grows.') ?>
+                <br>
                 <br>
                 <strong><?php echo __('Listing Strategy') ?></strong>
                 <br>
-                <?php echo __('As do all financial giants, the eventual goal is towards listing. With the capital raised, the positive growth on financial statements, the profitable trade history on our technology and the mustered support of all partners through the Consortium project, listing will be a reality. By the provision of value to our clients, we are in turn rewarded with profits which are further ploughed back into the business and eventually allows all stakeholders, partners and clients to prosper.') ?>
+                <?php echo __('As with all financial giants, the eventual goal is towards listing. With the capital raised, the positive growth on financial statements, the profitable trade history on our technology and the mustered support of all partners through the Consortium project, listing will be a reality. By the provision of value to our clients, we are in turn rewarded with profits which are further ploughed back into the business and eventually allow all stakeholders, partners and clients to prosper.') ?>
             </p>
 
 
@@ -154,12 +156,13 @@
 
             <p align="justify"><strong><?php echo __('The time is now') ?></strong>
             <br><?php echo __('In this time of extreme volatility and global economic dislocations as seen by the mind-boggling public debts in both the Eurozone and U.S., the time to made superlative profits is now. After all, Baron Rothschild, an 18th century British nobleman and member of the Rothschild banking family, is credited with saying that') ?>
-            <br><I>"<?php echo __('The time to buy is when there\'s blood in the streets.') ?>"</I>
-            <br><?php echo __('So wait no longer.') ?></p>
+            <br><br><I>"<?php echo __('The time to buy is when there\'s blood in the streets.') ?>"</I>
+            <br><br><?php echo __('So wait no longer.') ?></p>
 
-            <p align="justify"><strong><?php echo __('What Maxim Trader Offer') ?></strong>
+            <h2><?php echo __('What Maxim Trader Offer') ?></h2>
+            <p align="justify">
                 <br>
-                <?php echo __('Your potential income at Maxim Trader is broadly defined in 3 main categories : Trade income, Entry package entitlements and Affiliate bonuses. This is a non exhaustive representation due to seasonal promotions and rewards through performance indicators.') ?>
+                <?php echo __('Your potential income at Maxim Trader is broadly defined in 3 main categories: Trade income, Entry package entitlements and Affiliate bonuses. This is a non-exhaustive representation due to seasonal promotions and rewards through performance indicators.') ?>
                 </p>
 
             <p align="justify"><strong><?php echo __('Trade Income') ?></strong>
@@ -169,12 +172,12 @@
 
             <p align="justify"><strong><?php echo __('Entry Package entitlements') ?></strong>
                 <br>
-                <?php echo __('Maxim Trader Financial offers you at attractive array of entry packages to benefit from our proprietary trading system. The entitlements derived purely from becoming a member have a value that far outweighs the costs. This income is your entitlement as a member.') ?>
+                <?php echo __('Maxim Trader offers you an attractive array of entry packages to benefit from. The entitlements derived purely from becoming a member have a value that far outweighs the costs. This income is your entitlement as a member.') ?>
                 </p>
 
             <p align="justify"><strong><?php echo __('Affiliate Bonuses') ?></strong>
                 <br>
-                <?php echo __('Business synergy is a prerequisite to success and we recognise and reward all our affiliates and partners. Our business can be your business as we provide a platform for income generation.') ?>
+                <?php echo __('Business synergy is a prerequisite of success and we recognize and reward all our affiliates and partners. Our business can be your business as we provide a platform for income generation.') ?>
             </p>
 
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
@@ -202,7 +205,7 @@
 
         <div id="sidebar-bottom">
             <ul></ul>
-            <p style="text-align: center;">© 2012 maximtrader.com <br> All rights reserved.</p>
+            <p style="text-align: center;">© 2013 maximtrader.com <br> All rights reserved.</p>
         </div>
     </div>
 </div>
