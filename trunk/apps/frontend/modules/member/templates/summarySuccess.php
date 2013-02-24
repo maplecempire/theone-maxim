@@ -22,10 +22,20 @@ annoucementArr.push({
     news_date:'20 FEB 2013',
     news_desc:'<br><br><a target="_self" href="/member/applyEzyCashCard"><img width="460" border="0" alt="Maxim Trader" src="/images/email/apply_ezycash_card_debit_card.png"></a>Start from today Maxim Trader clients may <a href="/member/applyEzyCashCard" style="color: #3333ff;">apply an EzyAccount</a> anytime.<br><br>EzyAccount is an extremely secure and convenient way for you to send and receive money from Maxim Trader.'
 });
+<?php
+$culture = $sf_user->getCulture();
+$postfix = "_english";
+if ($culture == "en")
+        $postfix = "_english";
+    else if ($culture == "jp")
+        $postfix = "_english";
+    else
+        $postfix = "_chinese";
+?>
 annoucementArr.push({
     poptitle:'Maxim Trader to participate in the 10th CHINA GUANGZHOU INTERNATIONAL INVESTMENT AND FINANCE EXPO 第十届广州国际投资理财金融博览会 2013年3月5-7日',
     news_date:'21 FEB 2013',
-    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/guangzou_international_investment.png"></a><br>'
+    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/maxim_international<?php echo $postfix;?>.jpg"></a><br>'
 });
 
 var popIndex = 1;
