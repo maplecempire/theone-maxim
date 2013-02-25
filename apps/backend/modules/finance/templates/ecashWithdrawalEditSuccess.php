@@ -72,6 +72,13 @@
                                                                                       )) ?></td>
                 </tr>
                 <tr>
+                    <th class="caption">Bank in to *:</th>
+                    <td class="value"><?php echo object_input_tag($mlm_ecash_withdraw, 'getBankInTo', array(
+                                                                                           'size' => 20,
+                                                                                            'readonly' => 'readonly',
+                                                                                      )) ?></td>
+                </tr>
+                <tr>
                     <th class="caption">Status code:</th>
                     <td class="value"><?php
                         $arr = array();
