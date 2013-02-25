@@ -13,7 +13,7 @@ abstract class BaseMlmEcashWithdrawPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmEcashWithdraw';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,6 +30,9 @@ abstract class BaseMlmEcashWithdrawPeer {
 
 	
 	const AMOUNT = 'mlm_ecash_withdraw.AMOUNT';
+
+	
+	const BANK_IN_TO = 'mlm_ecash_withdraw.BANK_IN_TO';
 
 	
 	const STATUS_CODE = 'mlm_ecash_withdraw.STATUS_CODE';
@@ -58,18 +61,18 @@ abstract class BaseMlmEcashWithdrawPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('WithdrawId', 'DistId', 'Deduct', 'Amount', 'StatusCode', 'ApproveRejectDatetime', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmEcashWithdrawPeer::WITHDRAW_ID, MlmEcashWithdrawPeer::DIST_ID, MlmEcashWithdrawPeer::DEDUCT, MlmEcashWithdrawPeer::AMOUNT, MlmEcashWithdrawPeer::STATUS_CODE, MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME, MlmEcashWithdrawPeer::REMARKS, MlmEcashWithdrawPeer::CREATED_BY, MlmEcashWithdrawPeer::CREATED_ON, MlmEcashWithdrawPeer::UPDATED_BY, MlmEcashWithdrawPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('withdraw_id', 'dist_id', 'deduct', 'amount', 'status_code', 'approve_reject_datetime', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('WithdrawId', 'DistId', 'Deduct', 'Amount', 'BankInTo', 'StatusCode', 'ApproveRejectDatetime', 'Remarks', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmEcashWithdrawPeer::WITHDRAW_ID, MlmEcashWithdrawPeer::DIST_ID, MlmEcashWithdrawPeer::DEDUCT, MlmEcashWithdrawPeer::AMOUNT, MlmEcashWithdrawPeer::BANK_IN_TO, MlmEcashWithdrawPeer::STATUS_CODE, MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME, MlmEcashWithdrawPeer::REMARKS, MlmEcashWithdrawPeer::CREATED_BY, MlmEcashWithdrawPeer::CREATED_ON, MlmEcashWithdrawPeer::UPDATED_BY, MlmEcashWithdrawPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('withdraw_id', 'dist_id', 'deduct', 'amount', 'bank_in_to', 'status_code', 'approve_reject_datetime', 'remarks', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('WithdrawId' => 0, 'DistId' => 1, 'Deduct' => 2, 'Amount' => 3, 'StatusCode' => 4, 'ApproveRejectDatetime' => 5, 'Remarks' => 6, 'CreatedBy' => 7, 'CreatedOn' => 8, 'UpdatedBy' => 9, 'UpdatedOn' => 10, ),
-		BasePeer::TYPE_COLNAME => array (MlmEcashWithdrawPeer::WITHDRAW_ID => 0, MlmEcashWithdrawPeer::DIST_ID => 1, MlmEcashWithdrawPeer::DEDUCT => 2, MlmEcashWithdrawPeer::AMOUNT => 3, MlmEcashWithdrawPeer::STATUS_CODE => 4, MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME => 5, MlmEcashWithdrawPeer::REMARKS => 6, MlmEcashWithdrawPeer::CREATED_BY => 7, MlmEcashWithdrawPeer::CREATED_ON => 8, MlmEcashWithdrawPeer::UPDATED_BY => 9, MlmEcashWithdrawPeer::UPDATED_ON => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('withdraw_id' => 0, 'dist_id' => 1, 'deduct' => 2, 'amount' => 3, 'status_code' => 4, 'approve_reject_datetime' => 5, 'remarks' => 6, 'created_by' => 7, 'created_on' => 8, 'updated_by' => 9, 'updated_on' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('WithdrawId' => 0, 'DistId' => 1, 'Deduct' => 2, 'Amount' => 3, 'BankInTo' => 4, 'StatusCode' => 5, 'ApproveRejectDatetime' => 6, 'Remarks' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
+		BasePeer::TYPE_COLNAME => array (MlmEcashWithdrawPeer::WITHDRAW_ID => 0, MlmEcashWithdrawPeer::DIST_ID => 1, MlmEcashWithdrawPeer::DEDUCT => 2, MlmEcashWithdrawPeer::AMOUNT => 3, MlmEcashWithdrawPeer::BANK_IN_TO => 4, MlmEcashWithdrawPeer::STATUS_CODE => 5, MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME => 6, MlmEcashWithdrawPeer::REMARKS => 7, MlmEcashWithdrawPeer::CREATED_BY => 8, MlmEcashWithdrawPeer::CREATED_ON => 9, MlmEcashWithdrawPeer::UPDATED_BY => 10, MlmEcashWithdrawPeer::UPDATED_ON => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('withdraw_id' => 0, 'dist_id' => 1, 'deduct' => 2, 'amount' => 3, 'bank_in_to' => 4, 'status_code' => 5, 'approve_reject_datetime' => 6, 'remarks' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -130,6 +133,8 @@ abstract class BaseMlmEcashWithdrawPeer {
 		$criteria->addSelectColumn(MlmEcashWithdrawPeer::DEDUCT);
 
 		$criteria->addSelectColumn(MlmEcashWithdrawPeer::AMOUNT);
+
+		$criteria->addSelectColumn(MlmEcashWithdrawPeer::BANK_IN_TO);
 
 		$criteria->addSelectColumn(MlmEcashWithdrawPeer::STATUS_CODE);
 

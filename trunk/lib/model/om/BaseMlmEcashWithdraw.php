@@ -25,6 +25,10 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 
 
 	
+	protected $bank_in_to;
+
+
+	
 	protected $status_code;
 
 
@@ -83,6 +87,13 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 	{
 
 		return $this->amount;
+	}
+
+	
+	public function getBankInTo()
+	{
+
+		return $this->bank_in_to;
 	}
 
 	
@@ -236,6 +247,23 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setBankInTo($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bank_in_to !== $v) {
+			$this->bank_in_to = $v;
+			$this->modifiedColumns[] = MlmEcashWithdrawPeer::BANK_IN_TO;
+		}
+
+	} 
+
+	
 	public function setStatusCode($v)
 	{
 
@@ -370,25 +398,27 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 
 			$this->amount = $rs->getFloat($startcol + 3);
 
-			$this->status_code = $rs->getString($startcol + 4);
+			$this->bank_in_to = $rs->getString($startcol + 4);
 
-			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 5, null);
+			$this->status_code = $rs->getString($startcol + 5);
 
-			$this->remarks = $rs->getString($startcol + 6);
+			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 6, null);
 
-			$this->created_by = $rs->getInt($startcol + 7);
+			$this->remarks = $rs->getString($startcol + 7);
 
-			$this->created_on = $rs->getTimestamp($startcol + 8, null);
+			$this->created_by = $rs->getInt($startcol + 8);
 
-			$this->updated_by = $rs->getInt($startcol + 9);
+			$this->created_on = $rs->getTimestamp($startcol + 9, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 10, null);
+			$this->updated_by = $rs->getInt($startcol + 10);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmEcashWithdraw object", $e);
 		}
@@ -546,24 +576,27 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 				return $this->getAmount();
 				break;
 			case 4:
-				return $this->getStatusCode();
+				return $this->getBankInTo();
 				break;
 			case 5:
-				return $this->getApproveRejectDatetime();
+				return $this->getStatusCode();
 				break;
 			case 6:
-				return $this->getRemarks();
+				return $this->getApproveRejectDatetime();
 				break;
 			case 7:
-				return $this->getCreatedBy();
+				return $this->getRemarks();
 				break;
 			case 8:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 9:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 10:
+				return $this->getUpdatedBy();
+				break;
+			case 11:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -580,13 +613,14 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDistId(),
 			$keys[2] => $this->getDeduct(),
 			$keys[3] => $this->getAmount(),
-			$keys[4] => $this->getStatusCode(),
-			$keys[5] => $this->getApproveRejectDatetime(),
-			$keys[6] => $this->getRemarks(),
-			$keys[7] => $this->getCreatedBy(),
-			$keys[8] => $this->getCreatedOn(),
-			$keys[9] => $this->getUpdatedBy(),
-			$keys[10] => $this->getUpdatedOn(),
+			$keys[4] => $this->getBankInTo(),
+			$keys[5] => $this->getStatusCode(),
+			$keys[6] => $this->getApproveRejectDatetime(),
+			$keys[7] => $this->getRemarks(),
+			$keys[8] => $this->getCreatedBy(),
+			$keys[9] => $this->getCreatedOn(),
+			$keys[10] => $this->getUpdatedBy(),
+			$keys[11] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -615,24 +649,27 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 				$this->setAmount($value);
 				break;
 			case 4:
-				$this->setStatusCode($value);
+				$this->setBankInTo($value);
 				break;
 			case 5:
-				$this->setApproveRejectDatetime($value);
+				$this->setStatusCode($value);
 				break;
 			case 6:
-				$this->setRemarks($value);
+				$this->setApproveRejectDatetime($value);
 				break;
 			case 7:
-				$this->setCreatedBy($value);
+				$this->setRemarks($value);
 				break;
 			case 8:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 9:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 10:
+				$this->setUpdatedBy($value);
+				break;
+			case 11:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -646,13 +683,14 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDistId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDeduct($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setAmount($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setStatusCode($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setApproveRejectDatetime($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setRemarks($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCreatedBy($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedOn($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[4], $arr)) $this->setBankInTo($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setStatusCode($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setApproveRejectDatetime($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setRemarks($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
 	}
 
 	
@@ -664,6 +702,7 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::DIST_ID)) $criteria->add(MlmEcashWithdrawPeer::DIST_ID, $this->dist_id);
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::DEDUCT)) $criteria->add(MlmEcashWithdrawPeer::DEDUCT, $this->deduct);
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::AMOUNT)) $criteria->add(MlmEcashWithdrawPeer::AMOUNT, $this->amount);
+		if ($this->isColumnModified(MlmEcashWithdrawPeer::BANK_IN_TO)) $criteria->add(MlmEcashWithdrawPeer::BANK_IN_TO, $this->bank_in_to);
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::STATUS_CODE)) $criteria->add(MlmEcashWithdrawPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME)) $criteria->add(MlmEcashWithdrawPeer::APPROVE_REJECT_DATETIME, $this->approve_reject_datetime);
 		if ($this->isColumnModified(MlmEcashWithdrawPeer::REMARKS)) $criteria->add(MlmEcashWithdrawPeer::REMARKS, $this->remarks);
@@ -706,6 +745,8 @@ abstract class BaseMlmEcashWithdraw extends BaseObject  implements Persistent {
 		$copyObj->setDeduct($this->deduct);
 
 		$copyObj->setAmount($this->amount);
+
+		$copyObj->setBankInTo($this->bank_in_to);
 
 		$copyObj->setStatusCode($this->status_code);
 

@@ -10,6 +10,10 @@ abstract class Globals {
     const SF_ENVIRONMENT_DEV = 'dev';
     const SF_ENVIRONMENT_TEST = 'test';
 
+    const WITHDRAWAL_LOCAL_BANK = 'LOCAL BANK';
+    const WITHDRAWAL_EZY_CASH_CARD = 'EZY CASH CARD';
+    const WITHDRAWAL_VISA_DEBIT_CARD = 'VISA DEBIT CARD';
+
     const YES = 1;
     const NO = 0;
     const TRUE = 'T';

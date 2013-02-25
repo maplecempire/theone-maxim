@@ -173,6 +173,21 @@
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
+                        <?php echo __('Credit To'); ?>
+                    </td>
+                    <td>
+                        <select name="bankInTo" id="bankInTo">
+                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>">Maxim Trader VISA DEBIT CARD</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyCash Card</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>">Local Bank</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
                         <?php echo __('Security Password'); ?>
                     </td>
                     <td>
@@ -181,7 +196,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="1" align="right" valign="top">
                         <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
@@ -195,7 +210,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
@@ -233,12 +248,13 @@
                     "sAjaxSource": "/finance/ecashWithdrawalList",
                     "sPaginationType": "full_numbers",
                     "aaSorting": [
-                        [5,'desc']
+                        [6,'desc']
                     ],
                     "aoColumns": [
                         { "sName" : "dist_id", "bVisible" : false,  "bSortable": true},
                         { "sName" : "deduct",  "bSortable": true},
                         { "sName" : "amount",  "bSortable": true},
+                        { "sName" : "bank_in_to",  "bSortable": true},
                         { "sName" : "status_code",  "bSortable": true},
                         { "sName" : "remarks",  "bSortable": true},
                         { "sName" : "created_on",  "bSortable": true}
@@ -277,6 +293,7 @@
                 <th></th>
                 <th><?php echo __('Withdrawal') ?></th>
                 <th><?php echo __('Amount') ?></th>
+                <th><?php echo __('Credit To') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>
                 <th><?php echo __('Date') ?></th>
