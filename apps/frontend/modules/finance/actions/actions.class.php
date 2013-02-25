@@ -654,6 +654,7 @@ class financeActions extends sfActions
                 $result->getDistId() == null ? "" : $result->getDistId(),
                 $result->getDeduct() == null ? "" : $result->getDeduct(),
                 $result->getAmount() == null ? "" : $result->getAmount(),
+                $result->getBankInTo() == null ? "" : $result->getBankInTo(),
                 $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode()),
                 $result->getRemarks() == null ? "" : $result->getRemarks(),
                 $result->getCreatedOn()  == null ? "" : $result->getCreatedOn()

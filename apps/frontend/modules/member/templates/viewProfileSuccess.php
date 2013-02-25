@@ -587,6 +587,26 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Maxim Trader Visa Debit Card') ?></td>
+                    <td>
+                        <input name="visaDebitCard" type="text" id="visaDebitCard" size="30" maxlength="16"
+                                                         value="<?php echo $distDB->getVisaDebitCard() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('EZY Cash Card') ?></td>
+                    <td>
+                        <input name="ezyCashCard" type="text" id="ezyCashCard" size="30" maxlength="16"
+                                                         value="<?php echo $distDB->getEzyCashCard() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <!--<tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php /*echo __('Chinatrust Bank Visa Debit Card') */?></td>
@@ -607,7 +627,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>-->
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password') ?></td>
                     <td>
@@ -616,7 +636,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">

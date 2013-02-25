@@ -40,6 +40,8 @@ class MlmEcashWithdrawMapBuilder {
 
 		$tMap->addColumn('AMOUNT', 'Amount', 'double', CreoleTypes::DECIMAL, true, 12);
 
+		$tMap->addColumn('BANK_IN_TO', 'BankInTo', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('APPROVE_REJECT_DATETIME', 'ApproveRejectDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
