@@ -6588,7 +6588,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         return $packageArray;
     }
 
-function getAccumulateGroupBvs($distributorId, $position)
+    function getAccumulateGroupBvs($distributorId, $position)
     {
         $dateUtil = new DateUtil();
 

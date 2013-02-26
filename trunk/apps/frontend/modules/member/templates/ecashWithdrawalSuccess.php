@@ -178,7 +178,7 @@
                     <td>
                         <select name="bankInTo" id="bankInTo">
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>">Maxim Trader VISA DEBIT CARD</option>
-                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyCash Card</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>">Local Bank</option>
                         </select>
                     </td>
