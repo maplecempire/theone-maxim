@@ -319,6 +319,16 @@ function reassignDatagridEventAttr(){
                         </td>
                     </tr>
                     <tr>
+                        <td><strong>CP3 Withdrawal</strong></td>
+                        <td align="right"><?php
+                            if ($cp3Withdrawal > 0)
+                                echo "<a id='editLink' href='".url_for('finance/cp3Withdrawal')."'>".$cp3Withdrawal."</a>";
+                            else
+                                echo $cp3Withdrawal;
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2"><hr></td>
                     </tr>
                     <tr>

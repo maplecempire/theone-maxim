@@ -607,6 +607,70 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeCp3WithdrawalList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        /******   total records  *******/
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $totalRecords = MlmCp3WithdrawPeer::doCount($c);
+
+        /******   total filtered records  *******/
+        /*if ($this->getRequestParameter('filterAction') != "") {
+            $c->addAnd(MlmEcashWithdrawPeer::F_ACTION, "%" . $this->getRequestParameter('filterAction') . "%", Criteria::LIKE);
+        }*/
+        $totalFilteredRecords = MlmCp3WithdrawPeer::doCount($c);
+
+        /******   sorting  *******/
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
+                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                } else {
+                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                }
+            }
+        }
+
+        /******   pagination  *******/
+        $pager = new sfPropelPager('MlmCp3Withdraw', $limit);
+        $pager->setCriteria($c);
+        $pager->setPage(($offset / $limit) + 1);
+        $pager->init();
+
+        foreach ($pager->getResults() as $result) {
+            $arr[] = array(
+                $result->getDistId() == null ? "" : $result->getDistId(),
+                $result->getDeduct() == null ? "" : $result->getDeduct(),
+                $result->getAmount() == null ? "" : $result->getAmount(),
+                $result->getBankInTo() == null ? "" : $result->getBankInTo(),
+                $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode()),
+                $result->getRemarks() == null ? "" : $result->getRemarks(),
+                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn()
+            );
+        }
+
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeEcashWithdrawalList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

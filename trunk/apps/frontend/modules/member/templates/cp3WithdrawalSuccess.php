@@ -2,14 +2,8 @@
 
 <script type="text/javascript" language="javascript">
     $(function() {
-        $("#cbo_ecashAmount").change(function(){
-            var ecashFinal = $("#cbo_ecashAmount").val() - 60;
-            var handlingCharge = $("#cbo_ecashAmount").val() * 0.95;
-
-            if (parseFloat(handlingCharge) < ecashFinal)
-                ecashFinal = handlingCharge;
-//            var ecashFinal = $("#cbo_ecashAmount").val();
-
+        $("#cbo_cp3Amount").change(function(){
+            var ecashFinal = $("#cbo_cp3Amount").val() - 60;
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
             $("#withdrawForm").validate({
@@ -27,10 +21,10 @@
                 submitHandler: function(form) {
                     waiting();
                     var ecashBalance = $('#ecashBalance').autoNumericGet();
-                    var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
+                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
 
                     if (withdrawAmount > parseFloat(ecashBalance)) {
-                        alert("In-sufficient CP2");
+                        alert("In-sufficient CP3");
                         return false;
                     }
 
@@ -47,8 +41,14 @@
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashWithdrawal");?>" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashWithdrawal");?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP2 Withdrawal'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/cp3Withdrawal");?>" style="color: rgb(134, 197, 51);">
+        <?php echo __('CP3 Withdrawal'); ?>
     </a>
 </div>
 
@@ -58,7 +58,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP2 Withdrawal') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP3 Withdrawal') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -87,7 +87,7 @@
     </tr>
     <tr>
         <td>
-            <form action="/member/ecashWithdrawal" id="withdrawForm" name="withdrawForm" method="post">
+            <form action="/member/cp3Withdrawal" id="withdrawForm" name="withdrawForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -100,7 +100,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('CP2 Withdrawal') ?></th>
+                    <th colspan="2"><?php echo __('CP3 Withdrawal') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -109,7 +109,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Balance'); ?></td>
+                    <td><?php echo __('CP3 Balance'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
                                            value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -119,9 +119,9 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Withdrawal Amount'); ?></td>
+                    <td><?php echo __('CP3 Withdrawal Amount'); ?></td>
                     <td>
-                        <select name="ecashAmount" id="cbo_ecashAmount" tabindex="2">
+                        <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2">
                             <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
@@ -173,6 +173,21 @@
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
+                        <?php echo __('Credit To'); ?>
+                    </td>
+                    <td>
+                        <select name="bankInTo" id="bankInTo">
+                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>">Maxim Trader VISA DEBIT CARD</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>">Local Bank</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
                         <?php echo __('Security Password'); ?>
                     </td>
                     <td>
@@ -181,7 +196,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="1" align="right" valign="top">
                         <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
@@ -189,13 +204,13 @@
                     <td colspan="1" align="left">
                         <font color="#dc143c"> <?php echo __('1. Minimum withdrawal amount : USD 100
                         <br>2. Can only be withdrawn on the first working week of the month
-                        <br>3. Handling fee USD60 or 5% whichever is higher
+                        <br>3. Handling fee USD60
                         <br>4. Processing time : 2 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
@@ -230,15 +245,16 @@
                     "bProcessing": true,
                     "bServerSide": true,
                     "bAutoWidth": false,
-                    "sAjaxSource": "/finance/ecashWithdrawalList",
+                    "sAjaxSource": "/finance/cp3WithdrawalList",
                     "sPaginationType": "full_numbers",
                     "aaSorting": [
-                        [5,'desc']
+                        [6,'desc']
                     ],
                     "aoColumns": [
                         { "sName" : "dist_id", "bVisible" : false,  "bSortable": true},
                         { "sName" : "deduct",  "bSortable": true},
                         { "sName" : "amount",  "bSortable": true},
+                        { "sName" : "bank_in_to",  "bSortable": true},
                         { "sName" : "status_code",  "bSortable": true},
                         { "sName" : "remarks",  "bSortable": true},
                         { "sName" : "created_on",  "bSortable": true}
@@ -262,7 +278,7 @@
                 <th class="tbl_header_left">
                     <div class="border_left_grey">&nbsp;</div>
                 </th>
-                <th><?php echo __('CP2 Withdrawal Status') ?></th>
+                <th><?php echo __('CP3 Withdrawal Status') ?></th>
                 <th class="tbl_content_right"></th>
                 <th class="tbl_header_right">
                     <div class="border_right_grey">&nbsp;</div>
@@ -277,6 +293,7 @@
                 <th></th>
                 <th><?php echo __('Withdrawal') ?></th>
                 <th><?php echo __('Amount') ?></th>
+                <th><?php echo __('Credit To') ?></th>
                 <th><?php echo __('Status') ?></th>
                 <th><?php echo __('Remarks') ?></th>
                 <th><?php echo __('Date') ?></th>

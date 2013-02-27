@@ -4287,6 +4287,76 @@ We look forward to your custom in the near future. Should you have any queries, 
         return sfView::HEADER_ONLY;
     }
 
+    public function executeCp3Withdrawal()
+    {
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        $withdrawAmount = $this->getRequestParameter('cp3Amount');
+        $processFee = 60;
+
+        if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "CP3 Withdrawal temporary out of service.");
+                return $this->redirect('/member/cp3Withdrawal');
+            }
+
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if ($withdrawAmount > $ledgerAccountBalance) {
+                $this->setFlash('errorMsg', "In-sufficient CP3");
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $this->setFlash('errorMsg', "Invalid Security password");
+
+            } elseif ($withdrawAmount > 0) {
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                $tbl_account_ledger->setCredit(0);
+                $tbl_account_ledger->setDebit($withdrawAmount);
+                $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                // ******       company account      ****************
+                $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                $tbl_account_ledger->setCredit($processFee);
+                $tbl_account_ledger->setDebit(0);
+                $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                $tbl_cp3_withdraw = new MlmCp3Withdraw();
+                $tbl_cp3_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_cp3_withdraw->setDeduct($withdrawAmount);
+                $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
+                $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
+                $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_cp3_withdraw->save();
+
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted."));
+
+                return $this->redirect('/member/cp3Withdrawal');
+            }
+        }
+    }
+
     public function executeEcashWithdrawal()
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
