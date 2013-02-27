@@ -50,6 +50,12 @@
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/ecashWithdrawal");?>" style="color: rgb(134, 197, 51);">
         <?php echo __('CP2 Withdrawal'); ?>
     </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/cp3Withdrawal");?>" style="color: rgb(0, 93, 154);">
+        <?php echo __('CP3 Withdrawal'); ?>
+    </a>
 </div>
 
 <table cellpadding="0" cellspacing="0">

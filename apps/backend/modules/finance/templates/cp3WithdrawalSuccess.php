@@ -31,7 +31,7 @@ $(function(){
 		"bServerSide": true,
         "bAutoWidth": false,
         "sScrollX": "100%",
-        "sAjaxSource": "<?php echo url_for('financeList/ecashWithdrawList') ?>",
+        "sAjaxSource": "<?php echo url_for('financeList/cp3WithdrawList') ?>",
         "sPaginationType": "full_numbers",
         "aoColumns": [
             { "sName" : "withdraw.withdraw_id", "bVisible" : false},
@@ -44,7 +44,7 @@ $(function(){
             { "sName" : "dist.distributor_code",  "bSortable": true, "fnRender": function ( oObj ) {
                 if (oObj.aData[7] == "REJECTED")
                     return oObj.aData[2];
-                return "<a id='editLink' href='<?php echo url_for('finance/ecashWithdrawalEdit?q=dsf453fsdfasf1sxfsdfs&withdrawId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
+                return "<a id='editLink' href='<?php echo url_for('finance/cp3WithdrawalEdit?q=dsf453fsdfasf1sxfsdfs&withdrawId=') ?>/" + oObj.aData[0] + "'>" + oObj.aData[2] + "</a>";
             }},
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "withdraw.deduct",  "bSortable": true},
@@ -85,10 +85,10 @@ function reassignDatagridEventAttr(){
 
 </script>
 
-<?php echo form_tag('finance/ecashWithdrawal', 'id=loginForm') ?>
+<?php echo form_tag('finance/cp3Withdrawal', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet" style="">
-    <div class="portlet-header">e-Cash Withdrawal Listing</div>
+    <div class="portlet-header">CP3 Withdrawal Listing</div>
     <div class="portlet-content">
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">

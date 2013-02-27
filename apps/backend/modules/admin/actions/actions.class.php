@@ -127,6 +127,7 @@ class adminActions extends sfActions
         $mt4Withdrawal = $this->getTotalMt4Withdrawal(Globals::STATUS_PENDING);
         $referralBonus = $this->getTotalRefferalBonus(Globals::STATUS_PENDING);
         $ecashWithdrawal = $this->getTotalEcashWithdrawal(Globals::STATUS_PENDING);
+        $cp3Withdrawal = $this->getTotalCp3Withdrawal(Globals::STATUS_PENDING);
         $customerEnquiry = $this->getTotalCustomerEnquiry();
         $demoAccountRequest = $this->getDemoAccountRequest();
         $liveAccountRequest = $this->getLiveAccountRequest();
@@ -151,6 +152,7 @@ class adminActions extends sfActions
         $this->mt4Withdrawal = $mt4Withdrawal;
         $this->referralBonus = $referralBonus;
         $this->ecashWithdrawal = $ecashWithdrawal;
+        $this->cp3Withdrawal = $cp3Withdrawal;
         $this->customerEnquiry = $customerEnquiry;
         $this->demoAccountRequest = $demoAccountRequest;
         $this->liveAccountRequest = $liveAccountRequest;
@@ -628,6 +630,16 @@ class adminActions extends sfActions
             $c->add(MlmEcashWithdrawPeer::STATUS_CODE, $statusCode);
         }
         $totalNetworks = MlmEcashWithdrawPeer::doCount($c);
+
+        return $totalNetworks;
+    }
+    function getTotalCp3Withdrawal($statusCode)
+    {
+        $c = new Criteria();
+        if ($statusCode != null) {
+            $c->add(MlmCp3WithdrawPeer::STATUS_CODE, $statusCode);
+        }
+        $totalNetworks = MlmCp3WithdrawPeer::doCount($c);
 
         return $totalNetworks;
     }
