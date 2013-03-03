@@ -457,7 +457,7 @@ class memberActions extends sfActions
         $mlm_customer_enquiry_detail->save();
 
         $sendMailService = new SendMailService();
-        $sendMailService->sendMail("support@maximtrader.com", "support", $title, $message);
+        $sendMailService->sendMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
         return $this->redirect('/member/customerEnquiry');
@@ -498,7 +498,7 @@ class memberActions extends sfActions
         $mlm_customer_enquiry_detail->save();
 
         $sendMailService = new SendMailService();
-        $sendMailService->sendMail("support@maximtrader.com", "support", $mlmCustomerEnquiry->getTitle(), $message);
+        $sendMailService->sendMail("support@maximtrader.com", "support", "[Customer Enquiry]".$mlmCustomerEnquiry->getTitle(), $message);
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
         return $this->redirect('/member/customerEnquiryDetail?enquiryId='.$enquiryId);
