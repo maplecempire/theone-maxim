@@ -282,7 +282,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -385,7 +385,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -480,7 +480,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -589,7 +589,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -685,7 +685,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -781,7 +781,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
@@ -877,7 +877,7 @@ function reassignDatagridEventAttr(){
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
         <tbody><tr>
             <td class="header" colspan="2">
-                <img rel="<?php echo $distDB->getDistributorCode()?>" src="/css/network/<?php echo $headColor; ?>head.png" <?php echo $classAndAttr;?>></a>
+                <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
                 <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
                 </div>
