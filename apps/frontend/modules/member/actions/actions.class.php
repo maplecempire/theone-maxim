@@ -336,11 +336,11 @@ class memberActions extends sfActions
                 }*/
                 $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
 
-                $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
                 $mlm_account_ledger->setRemark("");
                 $mlm_account_ledger->setCredit($dividendAmount);
@@ -404,7 +404,7 @@ class memberActions extends sfActions
                     $mlm_roi_dividend->save();
                 }
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
         }
         // roi dividend end~

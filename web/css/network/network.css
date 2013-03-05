@@ -44,6 +44,16 @@
 .network-button-wraper {
 }
 .network-register {
+    /*background: url("icon-register.png") repeat scroll 0 0 transparent;*/
+    display: block;
+    height: 48px;
+    /*text-indent: -99999px;*/
+    width: 48px;
+    font-weight: bold;
+    font-size: 14px;
+    color: red;
+}
+.network-register-backup {
     background: url("icon-register.png") repeat scroll 0 0 transparent;
     display: block;
     height: 48px;
