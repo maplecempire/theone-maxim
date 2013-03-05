@@ -221,14 +221,14 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr class="tbl_form_row_odd tdFxGold">
+                <!--<tr class="tbl_form_row_odd tdFxGold">
                     <td>&nbsp;</td>
                     <td colspan="5">
                         <br>
-                        <p><?php echo __('Please sign and send it to') ?> <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
+                        <p><?php /*echo __('Please sign and send it to') */?> <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 <tr class="tbl_form_row_even tdMte" style="display: none">
                     <td>&nbsp;</td>

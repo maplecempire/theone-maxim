@@ -289,14 +289,14 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr class="tbl_form_row_odd tdFxGold">
+                <!--<tr class="tbl_form_row_odd tdFxGold">
                     <td>&nbsp;</td>
                     <td colspan="5">
                         <br>
-                        <p><?php echo __('Please sign and send it to') ?> <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
+                        <p><?php /*echo __('Please sign and send it to') */?> <a href="mailto:managedfund@maximtrader.com">managedfund@maximtrader.com</a>.</p>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
             <?php } ?>
 
                 <tr class="tbl_form_row_even">
@@ -309,13 +309,13 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Note : Please fill up the <I>private investment agreement</I> and send to <b>managedfund@maximtrader.com</b>') ?></font>
+                        <font color="#dc143c"> <?php /*echo __('Note : Please fill up the <I>private investment agreement</I> and send to <b>managedfund@maximtrader.com</b>') */?></font>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
                 </tbody>
             </table>
 
