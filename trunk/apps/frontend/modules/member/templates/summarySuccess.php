@@ -783,7 +783,7 @@ function loadContent(popIndex) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Fund Management Listing') ?></th>
+        <th><?php echo __('Fund Management Performance') ?></th>
         <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -858,10 +858,10 @@ function loadContent(popIndex) {
                                 table += "</colgroup>";
                                 table += "<tr class='pbl_header'>";
                                 table += "<td></td>";
-                                table += "<td>Dividend Date</td>";
-                                table += "<td>Amount</td>";
-                                table += "<td>ROI Percentage</td>";
-                                table += "<td>Dividend Amount</td>";
+                                table += "<td>Funding Date</td>";
+                                table += "<td>Package</td>";
+                                table += "<td>Performance Return %</td>";
+                                table += "<td>Total Profit</td>";
                                 table += "<td>Status</td>";
                                 table += "</tr>";
 
