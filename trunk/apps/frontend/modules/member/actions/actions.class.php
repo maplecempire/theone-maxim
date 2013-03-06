@@ -10,17 +10,7 @@
 class memberActions extends sfActions
 {
     public function executeTest() {
-        $c = new Criteria();
-        $distDBs = MlmDistributorPeer::doSelect($c);
-
-        foreach ($distDBs as $distDB) {
-            $distId = $distDB->getDistributorId();
-            print_r($distId."<br>");
-            //$leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $bonusDate);
-            //$rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
-            $this->revalidatePairing($distId, Globals::PLACEMENT_LEFT);
-            $this->revalidatePairing($distId, Globals::PLACEMENT_RIGHT);
-        }
+        $this->getAllBonusData();
         print_r("Done");
     }
     public function executeTestSendReport()
@@ -6967,7 +6957,7 @@ Wish you all the best.
 
         for ($i = 0; $i < 3; $i++) {
             $queryDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), ($i + 1) * -1, 0, 0));
-            $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), $i, 0, 0));
+            $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), $i * -1, 0, 0));
 
             $totalDrb = $bonusService->doCalculateDrb($queryDate);
             $totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
