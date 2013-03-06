@@ -13,7 +13,7 @@ abstract class BaseMlmAccountLedgerPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmAccountLedger';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,6 +30,9 @@ abstract class BaseMlmAccountLedgerPeer {
 
 	
 	const TRANSACTION_TYPE = 'mlm_account_ledger.TRANSACTION_TYPE';
+
+	
+	const ROLLING_POINT = 'mlm_account_ledger.ROLLING_POINT';
 
 	
 	const CREDIT = 'mlm_account_ledger.CREDIT';
@@ -61,18 +64,18 @@ abstract class BaseMlmAccountLedgerPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('AccountId', 'DistId', 'AccountType', 'TransactionType', 'Credit', 'Debit', 'Balance', 'Remark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmAccountLedgerPeer::ACCOUNT_ID, MlmAccountLedgerPeer::DIST_ID, MlmAccountLedgerPeer::ACCOUNT_TYPE, MlmAccountLedgerPeer::TRANSACTION_TYPE, MlmAccountLedgerPeer::CREDIT, MlmAccountLedgerPeer::DEBIT, MlmAccountLedgerPeer::BALANCE, MlmAccountLedgerPeer::REMARK, MlmAccountLedgerPeer::CREATED_BY, MlmAccountLedgerPeer::CREATED_ON, MlmAccountLedgerPeer::UPDATED_BY, MlmAccountLedgerPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('account_id', 'dist_id', 'account_type', 'transaction_type', 'credit', 'debit', 'balance', 'remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('AccountId', 'DistId', 'AccountType', 'TransactionType', 'RollingPoint', 'Credit', 'Debit', 'Balance', 'Remark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmAccountLedgerPeer::ACCOUNT_ID, MlmAccountLedgerPeer::DIST_ID, MlmAccountLedgerPeer::ACCOUNT_TYPE, MlmAccountLedgerPeer::TRANSACTION_TYPE, MlmAccountLedgerPeer::ROLLING_POINT, MlmAccountLedgerPeer::CREDIT, MlmAccountLedgerPeer::DEBIT, MlmAccountLedgerPeer::BALANCE, MlmAccountLedgerPeer::REMARK, MlmAccountLedgerPeer::CREATED_BY, MlmAccountLedgerPeer::CREATED_ON, MlmAccountLedgerPeer::UPDATED_BY, MlmAccountLedgerPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('account_id', 'dist_id', 'account_type', 'transaction_type', 'rolling_point', 'credit', 'debit', 'balance', 'remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('AccountId' => 0, 'DistId' => 1, 'AccountType' => 2, 'TransactionType' => 3, 'Credit' => 4, 'Debit' => 5, 'Balance' => 6, 'Remark' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmAccountLedgerPeer::ACCOUNT_ID => 0, MlmAccountLedgerPeer::DIST_ID => 1, MlmAccountLedgerPeer::ACCOUNT_TYPE => 2, MlmAccountLedgerPeer::TRANSACTION_TYPE => 3, MlmAccountLedgerPeer::CREDIT => 4, MlmAccountLedgerPeer::DEBIT => 5, MlmAccountLedgerPeer::BALANCE => 6, MlmAccountLedgerPeer::REMARK => 7, MlmAccountLedgerPeer::CREATED_BY => 8, MlmAccountLedgerPeer::CREATED_ON => 9, MlmAccountLedgerPeer::UPDATED_BY => 10, MlmAccountLedgerPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('account_id' => 0, 'dist_id' => 1, 'account_type' => 2, 'transaction_type' => 3, 'credit' => 4, 'debit' => 5, 'balance' => 6, 'remark' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('AccountId' => 0, 'DistId' => 1, 'AccountType' => 2, 'TransactionType' => 3, 'RollingPoint' => 4, 'Credit' => 5, 'Debit' => 6, 'Balance' => 7, 'Remark' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, ),
+		BasePeer::TYPE_COLNAME => array (MlmAccountLedgerPeer::ACCOUNT_ID => 0, MlmAccountLedgerPeer::DIST_ID => 1, MlmAccountLedgerPeer::ACCOUNT_TYPE => 2, MlmAccountLedgerPeer::TRANSACTION_TYPE => 3, MlmAccountLedgerPeer::ROLLING_POINT => 4, MlmAccountLedgerPeer::CREDIT => 5, MlmAccountLedgerPeer::DEBIT => 6, MlmAccountLedgerPeer::BALANCE => 7, MlmAccountLedgerPeer::REMARK => 8, MlmAccountLedgerPeer::CREATED_BY => 9, MlmAccountLedgerPeer::CREATED_ON => 10, MlmAccountLedgerPeer::UPDATED_BY => 11, MlmAccountLedgerPeer::UPDATED_ON => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('account_id' => 0, 'dist_id' => 1, 'account_type' => 2, 'transaction_type' => 3, 'rolling_point' => 4, 'credit' => 5, 'debit' => 6, 'balance' => 7, 'remark' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -133,6 +136,8 @@ abstract class BaseMlmAccountLedgerPeer {
 		$criteria->addSelectColumn(MlmAccountLedgerPeer::ACCOUNT_TYPE);
 
 		$criteria->addSelectColumn(MlmAccountLedgerPeer::TRANSACTION_TYPE);
+
+		$criteria->addSelectColumn(MlmAccountLedgerPeer::ROLLING_POINT);
 
 		$criteria->addSelectColumn(MlmAccountLedgerPeer::CREDIT);
 

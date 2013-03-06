@@ -62,6 +62,7 @@ class financeActions extends sfActions
         $mlm_account_ledger->setDistId($distId);
         $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
         $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+        $mlm_account_ledger->setRollingPoint("Y");
         $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
         $mlm_account_ledger->setCredit($epointAmount);
         $mlm_account_ledger->setDebit(0);
