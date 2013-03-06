@@ -25,6 +25,10 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 
 
 	
+	protected $rolling_point = '';
+
+
+	
 	protected $credit = 0;
 
 
@@ -87,6 +91,13 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 	{
 
 		return $this->transaction_type;
+	}
+
+	
+	public function getRollingPoint()
+	{
+
+		return $this->rolling_point;
 	}
 
 	
@@ -244,6 +255,23 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setRollingPoint($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->rolling_point !== $v || $v === '') {
+			$this->rolling_point = $v;
+			$this->modifiedColumns[] = MlmAccountLedgerPeer::ROLLING_POINT;
+		}
+
+	} 
+
+	
 	public function setCredit($v)
 	{
 
@@ -376,27 +404,29 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 
 			$this->transaction_type = $rs->getString($startcol + 3);
 
-			$this->credit = $rs->getFloat($startcol + 4);
+			$this->rolling_point = $rs->getString($startcol + 4);
 
-			$this->debit = $rs->getFloat($startcol + 5);
+			$this->credit = $rs->getFloat($startcol + 5);
 
-			$this->balance = $rs->getFloat($startcol + 6);
+			$this->debit = $rs->getFloat($startcol + 6);
 
-			$this->remark = $rs->getString($startcol + 7);
+			$this->balance = $rs->getFloat($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->remark = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->created_by = $rs->getInt($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->created_on = $rs->getTimestamp($startcol + 10, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->updated_by = $rs->getInt($startcol + 11);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 12, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 13; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmAccountLedger object", $e);
 		}
@@ -554,27 +584,30 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 				return $this->getTransactionType();
 				break;
 			case 4:
-				return $this->getCredit();
+				return $this->getRollingPoint();
 				break;
 			case 5:
-				return $this->getDebit();
+				return $this->getCredit();
 				break;
 			case 6:
-				return $this->getBalance();
+				return $this->getDebit();
 				break;
 			case 7:
-				return $this->getRemark();
+				return $this->getBalance();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getRemark();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 11:
+				return $this->getUpdatedBy();
+				break;
+			case 12:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -591,14 +624,15 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDistId(),
 			$keys[2] => $this->getAccountType(),
 			$keys[3] => $this->getTransactionType(),
-			$keys[4] => $this->getCredit(),
-			$keys[5] => $this->getDebit(),
-			$keys[6] => $this->getBalance(),
-			$keys[7] => $this->getRemark(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[4] => $this->getRollingPoint(),
+			$keys[5] => $this->getCredit(),
+			$keys[6] => $this->getDebit(),
+			$keys[7] => $this->getBalance(),
+			$keys[8] => $this->getRemark(),
+			$keys[9] => $this->getCreatedBy(),
+			$keys[10] => $this->getCreatedOn(),
+			$keys[11] => $this->getUpdatedBy(),
+			$keys[12] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -627,27 +661,30 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 				$this->setTransactionType($value);
 				break;
 			case 4:
-				$this->setCredit($value);
+				$this->setRollingPoint($value);
 				break;
 			case 5:
-				$this->setDebit($value);
+				$this->setCredit($value);
 				break;
 			case 6:
-				$this->setBalance($value);
+				$this->setDebit($value);
 				break;
 			case 7:
-				$this->setRemark($value);
+				$this->setBalance($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setRemark($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 11:
+				$this->setUpdatedBy($value);
+				break;
+			case 12:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -661,14 +698,15 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDistId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setAccountType($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTransactionType($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCredit($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setDebit($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setBalance($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setRemark($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[4], $arr)) $this->setRollingPoint($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCredit($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDebit($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setBalance($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRemark($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCreatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
 	}
 
 	
@@ -680,6 +718,7 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmAccountLedgerPeer::DIST_ID)) $criteria->add(MlmAccountLedgerPeer::DIST_ID, $this->dist_id);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::ACCOUNT_TYPE)) $criteria->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, $this->account_type);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::TRANSACTION_TYPE)) $criteria->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, $this->transaction_type);
+		if ($this->isColumnModified(MlmAccountLedgerPeer::ROLLING_POINT)) $criteria->add(MlmAccountLedgerPeer::ROLLING_POINT, $this->rolling_point);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::CREDIT)) $criteria->add(MlmAccountLedgerPeer::CREDIT, $this->credit);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::DEBIT)) $criteria->add(MlmAccountLedgerPeer::DEBIT, $this->debit);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::BALANCE)) $criteria->add(MlmAccountLedgerPeer::BALANCE, $this->balance);
@@ -723,6 +762,8 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		$copyObj->setAccountType($this->account_type);
 
 		$copyObj->setTransactionType($this->transaction_type);
+
+		$copyObj->setRollingPoint($this->rolling_point);
 
 		$copyObj->setCredit($this->credit);
 

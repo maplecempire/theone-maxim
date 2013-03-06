@@ -40,6 +40,8 @@ class MlmAccountLedgerMapBuilder {
 
 		$tMap->addColumn('TRANSACTION_TYPE', 'TransactionType', 'string', CreoleTypes::VARCHAR, true, 20);
 
+		$tMap->addColumn('ROLLING_POINT', 'RollingPoint', 'string', CreoleTypes::VARCHAR, true, 1);
+
 		$tMap->addColumn('CREDIT', 'Credit', 'double', CreoleTypes::DECIMAL, true, 12);
 
 		$tMap->addColumn('DEBIT', 'Debit', 'double', CreoleTypes::DECIMAL, true, 12);
