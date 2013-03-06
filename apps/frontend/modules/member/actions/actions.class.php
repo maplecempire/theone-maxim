@@ -5125,14 +5125,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
-                $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
-                $mlmRoiDividend->setDividendAmount($dividendAmount);
-                $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
-                //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
-                $mlmRoiDividend->save();
-
                 $mt4Username = $mlmRoiDividend->getMt4UserName();
-                // new implement
+                // new implement ********************************************************************
                 $c = new Criteria();
                 $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
                 $totalRecords = MlmRoiDividendPeer::doCount($c);
@@ -5172,6 +5166,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                         }
                     }
                 }
+                // new implement end ~ ********************************************************************
+                $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
+                $mlmRoiDividend->setDividendAmount($dividendAmount);
+                $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
+                //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
+                $mlmRoiDividend->save();
 
                 /*if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
                     print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
