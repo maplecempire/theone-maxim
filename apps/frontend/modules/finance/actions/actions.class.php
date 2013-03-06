@@ -25,8 +25,8 @@ class financeActions extends sfActions
             $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
 
             if ($mlmRoiDividendDB) {
-                $idx = $mlmRoiDividendDB->getIdx();
-                for ($i = $totalRecords; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
+                $idx = $mlmRoiDividendDB->getIdx() + 1;
+                for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
                     $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
                     $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
 
