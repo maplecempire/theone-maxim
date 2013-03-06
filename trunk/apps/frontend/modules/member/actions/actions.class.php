@@ -5147,7 +5147,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $idx = $mlmRoiDividendDB->getIdx() + 1;
                         for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
                             $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
-                            $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
+
+                            $monthAdded = $idx - 1;
+                            $dividendDate = strtotime("+".$monthAdded." months", $firstDividendTime);
 
                             $mlm_roi_dividend = new MlmRoiDividend();
                             $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
@@ -5161,7 +5163,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
                             //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                             //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                            $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getRoiPercentage());
+                            $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
                             $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_roi_dividend->save();
@@ -5174,8 +5176,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 /*if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
                     print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
                     print_r("Idx: " . $mlmRoiDividend->getIdx() . "<br>");
-                    //$currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
-                    //$dividendDate = $dateUtil->addDate($currentDate2, 7, 0, 0);
+
                     $idx = $mlmRoiDividend->getIdx();
                     $firstDividendTime = strtotime($mlmRoiDividend->getFirstDividendDate());
                     $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
