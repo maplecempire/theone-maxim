@@ -858,9 +858,9 @@ function loadContent(popIndex) {
                                 table += "</colgroup>";
                                 table += "<tr class='pbl_header'>";
                                 table += "<td></td>";
-                                table += "<td>Funding Date</td>";
+                                table += "<td>Next Performance Return Date</td>";
                                 table += "<td>Package</td>";
-                                table += "<td>Performance Return %</td>";
+                                table += "<td>Performance %</td>";
                                 table += "<td>Total Profit</td>";
                                 table += "<td>Status</td>";
                                 table += "</tr>";
