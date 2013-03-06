@@ -2929,6 +2929,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             $totalNetworks = MlmDistributorPeer::doCount($c);
         }
 
+        $this->fundManagements = $this->findFundManagementList($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
         $this->ecash = $ecash;
         $this->epoint = $epoint;
         $this->totalNetworks = $totalNetworks;
@@ -5129,7 +5131,47 @@ We look forward to your custom in the near future. Should you have any queries, 
                 //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
                 $mlmRoiDividend->save();
 
-                if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
+                $mt4Username = $mlmRoiDividend->getMt4UserName();
+                // new implement
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+                $totalRecords = MlmRoiDividendPeer::doCount($c);
+
+                if ($totalRecords < Globals::DIVIDEND_TIMES_ENTITLEMENT) {
+                    $c = new Criteria();
+                    $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+                    $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
+                    $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+                    if ($mlmRoiDividendDB) {
+                        $idx = $mlmRoiDividendDB->getIdx();
+                        for ($i = $totalRecords; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
+                            $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
+                            $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
+
+                            $mlm_roi_dividend = new MlmRoiDividend();
+                            $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
+                            $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
+                            $mlm_roi_dividend->setIdx($idx);
+                            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                            $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                            $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
+                            $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
+                            $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
+                            $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                            $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getRoiPercentage());
+                            $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->save();
+
+                            $idx = $idx + 1;
+                        }
+                    }
+                }
+
+                /*if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
                     print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
                     print_r("Idx: " . $mlmRoiDividend->getIdx() . "<br>");
                     //$currentDate2 = $dateUtil->formatDate("Y-m-d", $mlmRoiDividend->getDividendDate()) . " 00:00:00";
@@ -5155,7 +5197,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_roi_dividend->save();
-                }
+                }*/
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
@@ -7128,6 +7170,63 @@ Wish you all the best.
             $count++;
         }
         return $resultArray;
+    }
+
+    function findFundManagementList($distId) {
+
+        $query = "SELECT DISTINCT dist_id, mt4_user_name
+	                FROM mlm_roi_dividend WHERE dist_id = ".$distId;
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $resultArray[$count]["dist_id"] = $arr["dist_id"];
+            $resultArray[$count]["mt4_user_name"] = $arr["mt4_user_name"];
+            $resultArray[$count]["unrealized_profit"] = $this->getUnrealizedProfit($arr["mt4_user_name"]);
+            $resultArray[$count]["realized_rofit"] = $this->getRealizedProfit($arr["mt4_user_name"]);
+
+            $count++;
+        }
+        return $resultArray;
+    }
+
+    function getRealizedProfit($mt4Username) {
+
+        $query = "SELECT SUM(dividend_amount) AS _SUM FROM mlm_roi_dividend
+                WHERE mt4_user_name = '".$mt4Username."' AND status_code = '".Globals::DIVIDEND_STATUS_SUCCESS."'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $result = $arr["_SUM"];
+        }
+        return $result;
+    }
+
+    function getUnrealizedProfit($mt4Username) {
+        $result = 0;
+
+        $c = new Criteria();
+
+        $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+        $c->add(MlmRoiDividendPeer::IDX, 1);
+        $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+        if ($mlmRoiDividendDB) {
+            $result = $mlmRoiDividendDB->getPackagePrice() * $mlmRoiDividendDB->getRoiPercentage() / 100 * Globals::DIVIDEND_TIMES_ENTITLEMENT;
+        }
+
+        return $result;
     }
 
     function checkIsDebitedAccount($distId) {
