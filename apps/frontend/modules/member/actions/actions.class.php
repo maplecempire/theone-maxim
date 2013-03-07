@@ -1265,6 +1265,9 @@ class memberActions extends sfActions
                 $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $app_user->save();
 
+                $fcode = $app_user->getUsername();
+                $password = $app_user->getUserpassword();
+                $password2 = $app_user->getUserpassword2();
                 $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
                 $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getUplineDistId());
