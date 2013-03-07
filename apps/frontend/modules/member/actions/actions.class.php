@@ -10,7 +10,7 @@
 class memberActions extends sfActions
 {
     public function executeTest() {
-        $this->getAllBonusData();
+        echo $this->getRollingPointData();
         print_r("Done");
     }
     public function executeTestSendReport()
@@ -51,6 +51,7 @@ class memberActions extends sfActions
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
                 $tbl_account_ledger->setCredit(0);
                 $tbl_account_ledger->setDebit($epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1");
                 $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -64,7 +65,7 @@ class memberActions extends sfActions
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
                 $tbl_account_ledger->setCredit($epointConvertedAmount);
                 $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CP3:".$epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
                 $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -5464,6 +5465,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setCredit(0);
                 $tbl_account_ledger->setDebit($epointAmount);
                 $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1");
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
@@ -5474,6 +5476,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
                 $tbl_account_ledger->setCredit($epointAmount);
                 $tbl_account_ledger->setDebit(0);
+                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1");
                 $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -7065,6 +7068,7 @@ Wish you all the best.
         $body = "<h3>Rolling Point Table</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
                     <thead>
                     <tr>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'></th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Distributor Code</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Full Name</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
@@ -7076,8 +7080,9 @@ Wish you all the best.
                     </thead>
                     <tbody>";
 
+        $idx = 1;
         foreach ($arrs as $arr) {
-            $rollingPoint = $arr['ROLLING_POINT'] - $arr['DEBIT'];
+            $rollingPoint = $arr['ROLLING_POINT'];
             $rollingPointAvailable = $rollingPoint;
             $rollingPointUsed = 0;
             if ($arr['EPOINT'] < 0) {
@@ -7086,6 +7091,7 @@ Wish you all the best.
             }
 
             $body .= "<tr class='sf_admin_row_1'>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['distributor_code']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
@@ -7104,23 +7110,17 @@ Wish you all the best.
     function fetchRollingPoint() {
         $query = "SELECT
             transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
-            , SUM(transferLedger.credit) AS ROLLING_POINT
-                    , account.EPOINT, debitAccount.DEBIT
+            , SUM(transferLedger.credit - transferLedger.debit) AS ROLLING_POINT
+                    , account.EPOINT
                 FROM mlm_account_ledger transferLedger
                     LEFT JOIN
                         (
                             SELECT sum(credit - debit) AS EPOINT, account.dist_id
                                 FROM mlm_account_ledger account
-                                    where account.account_type = 'EPOINT' AND (remark <> 'TRANSFER FROM COMPANY' or remark is null) group by account.dist_id
+                                    where account.account_type = 'EPOINT' AND rolling_point = 'N' group by account.dist_id
                         ) account ON account.dist_id = transferLedger.dist_id
-                    LEFT JOIN
-                        (
-                            SELECT sum(credit - debit) AS DEBIT, account.dist_id
-                                FROM mlm_account_ledger account
-                                    where account.account_type = 'DEBIT' group by account.dist_id
-                        ) debitAccount ON debitAccount.dist_id = transferLedger.dist_id
                     LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-                where account_type = 'EPOINT' AND transferLedger.remark = 'TRANSFER FROM COMPANY' group by transferLedger.dist_id";
+                where transferLedger.rolling_point = 'Y' group by transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);

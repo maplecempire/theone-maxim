@@ -21,6 +21,7 @@ class financeActions extends sfActions
     {
         $distId = $this->getRequestParameter('distId');
         $epointAmount = $this->getRequestParameter('epointAmount');
+        $doAction = $this->getRequestParameter('doAction');
 
         $existDist = MlmDistributorPeer::retrieveByPK($distId);
         if (!$existDist) {
@@ -34,8 +35,9 @@ class financeActions extends sfActions
 
         $companyEPointBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
         $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+        $distDebitBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_DEBIT);
 
-        if ($companyEPointBalance < $epointAmount) {
+        if ($companyEPointBalance < $epointAmount && $doAction == "transfer") {
             $output = array(
                 "error" => true,
                 "errorMsg" => "Insufficient e-Point."
@@ -44,34 +46,51 @@ class financeActions extends sfActions
             return sfView::HEADER_ONLY;
         }
 
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-        $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $existDist->getDistributorCode() . " (" . $existDist->getFullName() . ")");
-        $mlm_account_ledger->setCredit(0);
-        $mlm_account_ledger->setDebit($epointAmount);
-        $mlm_account_ledger->setBalance($companyEPointBalance - $epointAmount);
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
+        if ($doAction == "debit") {
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT);
+            $mlm_account_ledger->setRollingPoint("Y");
+            $mlm_account_ledger->setRemark("");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($epointAmount);
+            $mlm_account_ledger->setBalance($distDebitBalance + $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
 
-        $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+        } else {
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+            $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $existDist->getDistributorCode() . " (" . $existDist->getFullName() . ")");
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($epointAmount);
+            $mlm_account_ledger->setBalance($companyEPointBalance - $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
 
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId($distId);
-        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-        $mlm_account_ledger->setRollingPoint("Y");
-        $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
-        $mlm_account_ledger->setCredit($epointAmount);
-        $mlm_account_ledger->setDebit(0);
-        $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
+            $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
-        $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+            $mlm_account_ledger->setRollingPoint("Y");
+            $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
+            $mlm_account_ledger->setCredit($epointAmount);
+            $mlm_account_ledger->setDebit(0);
+            $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+        }
 
         $output = array(
             "error" => false
