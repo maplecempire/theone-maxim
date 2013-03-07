@@ -25,13 +25,13 @@
 
     <meta http-equiv="Content-Language" content="en-US">
     <style type="text/css" media="screen">
-    #content p {
-        clear: none;
-        margin-bottom: 0px !important ;
-    }
     .qtrans_flag span { display:none }
     .qtrans_flag { height:12px; width:18px; display:block }
     .qtrans_flag_and_text { padding-left:20px }
+    a {
+        background-color: transparent;
+        color: #005D9A !important;
+    }
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
@@ -42,22 +42,10 @@ $(function() {
     });
 
     $.populateDOB({
-                dobYear : $("#dob_year")
-                ,dobMonth : $("#dob_month")
-                ,dobDay : $("#dob_day")
-                ,dobFull : $("#dob")
-            });
-
-    $("#captchaimage").bind('click', function() {
-        $.post('/captcha/newSession');
-        $("#captchaimage").load('/captcha/imageRequest');
-        return false;
-    });
-
-    $("#sponsorId").change(function() {
-        if ($.trim($('#sponsorId').val()) != "") {
-            verifySponsorId();
-        }
+        dobYear : $("#dob_year")
+        ,dobMonth : $("#dob_month")
+        ,dobDay : $("#dob_day")
+        ,dobFull : $("#dob")
     });
 
     jQuery.validator.addMethod("noSpace", function(value, element) {
@@ -69,159 +57,138 @@ $(function() {
     }, "Username must contain only letters, numbers, or dashes.");
 
     $("#registerForm").validate({
-                messages : {
-                    confirmPassword: {
-                        equalTo: "<?php echo __('Please enter the same password as above') ?>"
-                    },
-                    userName: {
-                        remote: "<?php echo __('User Name already in use') ?>."
-                    },
-                    fullname: {
-                        remote: "<?php echo __('Full Name already in use') ?>."
-                    }
-                },
-                rules : {
-                    "sponsorId" : {
-                        required: true
-                    },
-                    "userName" : {
-                        required : true,
-                        noSpace: true,
-                        loginRegex: true,
-                        minlength : 6,
-                        remote: "/member/verifyUserName"
-                    },
-                    "userpassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#userpassword"
-                    },
-                    "securityPassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmSecurityPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#securityPassword"
-                    },
-                    "leverage" : {
-                        required : true
-                    },
-                    "spread" : {
-                        required : true
-                    },
-                    "deposit_amount" : {
-                        required : true
-                    },
-                    "fullname" : {
-                        required : true,
-                        minlength : 2
-//                        , remote: "/member/verifyFullName"
-                    },
-                    "dob" : {
-                        required : true
-                    },
-                    "address" : {
-                        required : true
-                    },
-                    "gender" : {
-                        required : true
-                    },
-                    "contactNumber" : {
-                        required : true
-                        , minlength : 10
-                    },
-                    "email" : {
-                        required : true
-                        , email: true
-                    },
-                    "email2" : {
-                        required : true,
-                        equalTo: "#email"
-                    },
-                    "terms_cust_agreement" : {
-                        required : true
-                    },
-                    "terms_bis" : {
-                        required : true
-                    },
-                    "terms_risk" : {
-                        required : true
-                    },
-                    "terms_aml" : {
-                        required : true
-                    },
-                    "term_condition" : {
-                        required : true
-                    },
-                    "sig_name" : {
-                        required : true
-                    }
-                },
-                submitHandler: function(form) {
-                    if ($.trim($('#sponsorId').val()) == "") {
-                        alert("<?php echo __('Referrer ID cannot be blank') ?>.");
-                        $('#sponsorId').focus();
-                    } else {
-                        waiting();
-                        $.ajax({
-                                    type : 'POST',
-                                    url : "/member/verifySponsorId",
-                                    dataType : 'json',
-                                    cache: false,
-                                    data: {
-                                        sponsorId : $('#sponsorId').val()
-                                    },
-                                    success : function(data) {
-                                        waiting();
-                                        if (data == null || data == "") {
-                                            alert("<?php echo __('Invalid Referrer ID') ?>");
-                                            $('#sponsorId').focus();
-                                            $("#sponsorName").val("");
-                                        } else {
-                                            form.submit();
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("Your login attempt was not successful. Please try again.");
-                                    }
-                                });
-                    }
-                },
-                success: function(label) {
-                }
-            });
-});
-
-function verifySponsorId() {
-    waiting();
-    $.ajax({
+        messages : {
+            confirmPassword: {
+                equalTo: "<?php echo __('Please enter the same password as above') ?>"
+            },
+            userName: {
+                remote: "<?php echo __('User Name already in use') ?>."
+            },
+            fullname: {
+                remote: "<?php echo __('Full Name already in use') ?>."
+            }
+        },
+        rules : {
+            "userName" : {
+                required : true,
+                noSpace: true,
+                loginRegex: true,
+                minlength : 6,
+                remote: "/member/verifyUserName"
+            },
+            "userpassword" : {
+                required : true,
+                minlength : 6
+            },
+            "confirmPassword" : {
+                required : true,
+                minlength : 6,
+                equalTo: "#userpassword"
+            },
+            "securityPassword" : {
+                required : true,
+                minlength : 6
+            },
+            "confirmSecurityPassword" : {
+                required : true,
+                minlength : 6,
+                equalTo: "#securityPassword"
+            },
+            "fullname" : {
+                required : true,
+                minlength : 2
+//                , remote: "/member/verifyFullName"
+            },
+            "dob" : {
+                required : true
+            },
+            "address" : {
+                required : true
+            },
+            "gender" : {
+                required : true
+            },
+            "contactNumber" : {
+                required : true
+                , minlength : 10
+            },
+            "email" : {
+                required : true
+                , email: true
+            },
+            "email2" : {
+                required : true,
+                equalTo: "#email"
+            },
+            "terms_risk" : {
+                required : true
+            },
+            "term_condition" : {
+                required : true
+            },
+            "sig_name" : {
+                required : true
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            $.ajax({
                 type : 'POST',
-                url : "/member/verifyActiveSponsorId",
+                url : "/member/verifySponsorId",
                 dataType : 'json',
                 cache: false,
                 data: {
                     sponsorId : $('#sponsorId').val()
                 },
                 success : function(data) {
+                    waiting();
                     if (data == null || data == "") {
-                        error("<?php echo __('Invalid Referrer ID') ?>");
+                        alert("<?php echo __('Invalid Referrer ID') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").val("");
                     } else {
-                        $.unblockUI();
-                        $("#sponsorName").val(data.nickname);
+                        form.submit();
                     }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("Your login attempt was not successful. Please try again.");
                 }
             });
+        },
+        success: function(label) {
+        }
+    });
+
+    $("#sponsorId").change(function() {
+        if ($.trim($('#sponsorId').val()) != "") {
+            verifySponsorId();
+        }
+    });
+});
+function verifySponsorId() {
+    waiting();
+    $.ajax({
+        type : 'POST',
+        url : "/member/verifyActiveSponsorId",
+        dataType : 'json',
+        cache: false,
+        data: {
+            sponsorId : $('#sponsorId').val()
+        },
+        success : function(data) {
+            if (data == null || data == "") {
+                error("<?php echo __('Invalid Referrer ID') ?>");
+                $('#sponsorId').focus();
+                $("#sponsorName").val("");
+            } else {
+                $.unblockUI();
+                $("#sponsorName").val(data.nickname);
+            }
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Your login attempt was not successful. Please try again.");
+        }
+    });
 }
 function waiting() {
     $("#waitingLB h3").html("<h3 style='float: none; text-align: center; font-size: inherit; font-weight: bold;'>Loading...</h3><div id='loader' class='loader' style='text-align: center;'><img id='img-loader' src='/images/loading.gif' alt='Loading' style='text-align: center;'/></div>");
@@ -312,11 +279,16 @@ function error(data) {
 	<!-- display message if java is turned off -->
 	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>
 </noscript>
-<form action="/member/doRegister" id="registerForm" method="post">
+
 <div id="wrapper">
     <div id="page">
         <div id="content">
 
+            <?php include_component('component', 'multiLanguage', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+            <div class="qtrans_widget_end"></div>
+            <div style="clear:both;"><br></div>
+
+<form action="/member/doRegister" id="registerForm" method="post">
 <table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">
@@ -326,7 +298,7 @@ function error(data) {
 <tbody>
 <tr>
     <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Member Registration</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title">Registration</span></td>
     <td rowspan="3">&nbsp;</td>
 </tr>
 <tr>
@@ -335,6 +307,69 @@ function error(data) {
 </tr>
 <tr>
 <td>
+
+<?php if ($sf_flash->has('successMsg')): ?>
+    <div class="ui-widget">
+        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+             class="ui-state-highlight ui-corner-all">
+            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                          class="ui-icon ui-icon-info"></span>
+                <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php if ($sf_flash->has('errorMsg')): ?>
+    <div class="ui-widget">
+        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+             class="ui-state-error ui-corner-all">
+            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                          class="ui-icon ui-icon-alert"></span>
+                <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+        </div>
+    </div>
+<?php endif; ?>
+
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th colspan="2"><?php echo __('Referrer') ?></th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Referrer ID') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Referrer Name') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php echo $sponsorName;?>" readonly="readonly">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
 <table cellspacing="0" cellpadding="0" class="textarea1">
 <tbody>
 <tr>
@@ -351,40 +386,21 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Account Login Details</th>
+        <th><?php echo __('Account Login Details') ?></th>
         <th class="tbl_content_right"><!--Step 1 of 3--></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
     </tr>
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Referrer ID</td>
-        <td>
-            <input type="text" class="inputbox" id="sponsorId" name="sponsorId">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Referrer Name</td>
-        <td>
-            <input type="text" style="background-color: #d9d9d9;" class="inputbox" readonly="readonly" id="sponsorName" name="sponsorName">
-        </td>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>User Name</td>
+        <td><?php echo __('User Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="userName" name="userName">
             &nbsp;
-            <br>Please choose a unique username for your account. Username accepts
-            3-32 characters, a-z, 0-9 and underscore (_) only.
+            <br>
+            <?php echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') ?>
         </td>
         <td>&nbsp;</td>
     </tr>
@@ -392,19 +408,18 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Set Password</td>
+        <td><?php echo __('Set Password') ?></td>
         <td>
             <input type="password" class="inputbox" id="userpassword" name="userpassword">
-            <br>enter your password. Password accepts 4-32 characters, A-Z,
-            a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Password is also case
-            sensitive.
+            <br>
+            <?php echo __('enter your password. Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Password is also case sensitive.') ?>
         </td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Confirm Password:</td>
+        <td><?php echo __('Confirm Password') ?></td>
         <td>
             <input type="password" class="inputbox" id="confirmPassword" name="confirmPassword">
             &nbsp;
@@ -415,166 +430,33 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Security Password</td>
+        <td><?php echo __('Security Password') ?></td>
         <td>
             <input type="password" class="inputbox" id="securityPassword" name="securityPassword">
-            <br>Security Password is a separate password that is required when
-            you withdraw money from your account. This is for security purposes to further protect your funds.
             <br>
-            Note: We strongly recommend that you choose a Security Password that is different from your login
-            password.
+            <?php echo __('Security Password is a separate password that is required when you withdraw money from your account. This is for security purposes to further protect your funds.') ?>
             <br>
-            Security Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least
-            one letter and one number. Security Password is also case sensitive.
+            <?php echo __('Note: We strongly recommend that you choose a Security Password that is different from your login password.') ?>
+            <br>
+            <?php echo __('Security Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Security Password is also case sensitive.') ?>
         </td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Confirm Security Password:</td>
+        <td><?php echo __('Confirm Security Password') ?></td>
         <td>
             <input type="password" class="inputbox" id="confirmSecurityPassword" name="confirmSecurityPassword">
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
     </tbody>
 </table>
 
-<!--<table cellspacing="0" cellpadding="0" class="tbl_form">
-    <colgroup>
-        <col width="1%">
-        <col width="30%">
-        <col width="69%">
-        <col width="1%">
-    </colgroup>
 
-    <tbody>
-    <tr class="row_header">
-        <th class="tbl_header_left">
-            <div class="border_left_grey">&nbsp;</div>
-        </th>
-        <th>Trading Account Details</th>
-        <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
-    </tr>
-
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Leverage</td>
-        <td>
-            <select id="leverage" class="inputbox" name="leverage">
-                <option selected="selected" value="">Please Select</option>
-                <option value="50">1:50</option>
-                <option value="100">1:100</option>
-                <option value="200">1:200</option>
-                <option value="300">1:300</option>
-                <option value="400">1:400</option>
-                <option value="500">1:500</option>
-            </select>
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Spread</td>
-        <td>
-            <div class="td_desc">
-                <select id="spread" class="inputbox" name="spread">
-                    <option selected="selected" value="">Please Select</option>
-                    <option value="F">Fixed Spread</option>
-                    <option value="V">Variable Spread</option>
-                    <option value="E">ECN Premier Spread</option>
-                </select>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<table cellspacing="0" cellpadding="0" class="tbl_form">
-    <colgroup>
-        <col width="1%">
-        <col width="30%">
-        <col width="69%">
-        <col width="1%">
-    </colgroup>
-
-    <tbody>
-    <tr class="row_header">
-        <th class="tbl_header_left">
-            <div class="border_left_grey">&nbsp;</div>
-        </th>
-        <th>Deposit Information</th>
-        <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
-    </tr>
-
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Deposit Currency</td>
-        <td>
-            <div>
-                <select id="deposit_currency" class="inputbox" name="deposit_currency">
-                    <option selected="selected" value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="AUD">AUD</option>
-                    <option value="SGD">SGD</option>
-                </select>
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_currency">If a Money Manager handles your account, the currency of
-                your account will match the currency that your Money Manager uses to make trades on your behalf. For
-                example, if your manager trades in USD, your account will be in USD regardless of which currency you choose.
-            </div>
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Deposit Amount</td>
-        <td>
-            <div>
-                <input type="text" id="deposit_amount" value="" class="inputbox" name="deposit_amount">
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_amount"></div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
-    </tbody>
-</table>-->
+<br>
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
@@ -591,9 +473,6 @@ function error(data) {
         </th>
         <th><?php echo __('Personal Information') ?></th>
         <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
     </tr>
 
 
@@ -655,7 +534,7 @@ function error(data) {
         <td><?php echo __('Zip / Postal Code') ?></td>
         <td>
             <input type="text" name="zip" class='inputbox' value="" id="zip"/>
-            <br>Please enter '0' if postal code is not applicable in your country.
+            <br><?php echo __('Please enter \'0\' if postal code is not applicable in your country.') ?>
             &nbsp;
         </td>
         <td>&nbsp;</td>
@@ -675,7 +554,7 @@ function error(data) {
         <td>&nbsp;</td>
         <td><?php echo __('Country') ?></td>
         <td>
-            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "Malaysia", 'countryName' => 'country', 'countryId' => 'country')) ?>
+            <?php include_component('component', 'countrySelectOption', array('countrySelected' => "China (PRC)", 'countryName' => 'country', 'countryId' => 'country')) ?>
             &nbsp;
         </td>
         <td>&nbsp;</td>
@@ -686,23 +565,19 @@ function error(data) {
         <td><?php echo __('Gender') ?></td>
         <td>
             <select name="gender" class='inputbox'>
-                <option value="" selected="selected">Please Select</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
+                <option value="" selected="selected"><?php echo __('Please Select') ?></option>
+                <option value="M"><?php echo __('Male') ?></option>
+                <option value="F"><?php echo __('Female') ?></option>
             </select>
             &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
     </tbody>
 </table>
 
+<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -716,7 +591,7 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Contact Details</th>
+        <th><?php echo __('Contact Details') ?></th>
         <th></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -726,7 +601,7 @@ function error(data) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Telephone Number</td>
+        <td><?php echo __('Telephone Number') ?></td>
         <td>
             <input type="text" class="inputbox" id="contactNumber" name="contactNumber">
             &nbsp;
@@ -737,13 +612,13 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Primary Email</td>
+        <td><?php echo __('Primary Email') ?></td>
         <td>
             <div>
                 <input type="text" class="inputbox" id="email" name="email">
             </div>
-            <div class="td_desc" id="fielddesc__email">Please enter a valid Email address. Note: If you use a Yahoo! email
-                account, please also provide an Alternate Email below.
+            <div class="td_desc" id="fielddesc__email">
+                <?php echo __('Please enter a valid Email address. Note: If you use a Yahoo! email account, please also provide an Alternate Email below.') ?>
             </div>
         </td>
         <td>&nbsp;</td>
@@ -751,7 +626,7 @@ function error(data) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Retype your email</td>
+        <td><?php echo __('Retype your email') ?></td>
         <td>
             <input type="text" id="email2" value="" class="inputbox" name="email2">
             &nbsp;
@@ -762,13 +637,14 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Alternate Email</td>
+        <td><?php echo __('Alternate Email') ?></td>
         <td>
             <div>
                 <input type="text" id="alt_email" value="" class="inputbox" name="alt_email">
             </div>
-            <div class="td_desc" id="fielddesc__alt_email">Alternate Email is required ONLY IF you use a Yahoo! email
-                account as your primary Email. Note: Your Alternate Email cannot be a Yahoo! account. We recommend <a target="_blank" href="http://mail.google.com">Gmail</a> or <a target="_blank" href="http://www.live.com">Hotmail</a>
+            <div class="td_desc" id="fielddesc__alt_email">
+                <?php echo __('Alternate Email is required ONLY IF you use a Yahoo! email account as your primary Email. Note: Your Alternate Email cannot be a Yahoo! account. We recommend') ?>
+                <a target="_blank" href="http://mail.google.com">Gmail</a> or <a target="_blank" href="http://www.live.com">Hotmail</a>
             </div>
         </td>
         <td>&nbsp;</td>
@@ -776,7 +652,7 @@ function error(data) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Retype alternate email</td>
+        <td><?php echo __('Retype alternate email') ?></td>
         <td>
             <input type="text" id="alt_email2" value="" class="inputbox" name="alt_email2">
             &nbsp;
@@ -784,14 +660,11 @@ function error(data) {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
     </tr>
     </tbody>
 </table>
 
+<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
 <colgroup>
     <col width="1%">
@@ -809,7 +682,8 @@ function error(data) {
         <div class="border_left_grey">&nbsp;</div>
     </th>
     <th colspan="5">
-        Accept Terms &amp; Agreements    </th>
+        <?php echo __('Accept Terms') ?> &amp; <?php echo __('Agreements') ?>    </th>
+    <th class="tbl_content_right"><!--Step 1 of 3--></th>
     <th class="tbl_header_right">
         <div class="border_right_grey">&nbsp;</div>
     </th>
@@ -819,82 +693,76 @@ function error(data) {
 <tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
     <td colspan="5">
-        <p>Below are the contractural terms and agreements that you are bound by as a client
-        of MaximTrader. We recommend that you take the time to read each of them carefully.</p>
+        <p>
+        <?php echo __('Below are the contractural terms and agreements that you are bound by as a client of MaximTrader. We recommend that you take the time to read each of them carefully.') ?></p>
 
-        <p><strong>Please check the boxes below to acknowledge your acceptance, argeement and
-            understanding of these terms and agreements.</strong></p>
+        <p><strong>
+            <?php echo __('Please check the boxes below to acknowledge your acceptance, agreement and understanding of these terms and agreements.') ?>
+            </strong></p>
 
     </td>
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_even">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_cust_agreement" name="terms_cust_agreement">
-        <label for="terms_cust_agreement">Customer Agreement</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/customerAgreement">Download Agreement (272 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
+<!--<tr class="tbl_form_row_odd">
 
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_bis" name="terms_bis">
         <label for="terms_bis">Terms Of Business, Trading Policies &amp; Procedures</label></td>
     <td colspan="4">
         <a target="_blank" href="/download/termsOfBusiness">Download Agreement (343 KB PDF)</a>
     </td>
-    <td>&nbsp;</td>
-</tr>
+
+</tr>-->
 
 <tr class="tbl_form_row_even">
     <td>&nbsp;</td>
     <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">
-        <label for="terms_cust_agreement">Risk Disclosure Statement</label></td>
+        <label for="terms_risk"><?php echo __('MCL Risk Disclosure statement') ?> </label></td>
     <td colspan="4">
-        <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (175 KB PDF)</a>
+        <a target="_blank" href="/download/riskDisclosureStatement"><?php echo __('Download Agreement') ?> (381 KB PDF)</a>
     </td>
     <td>&nbsp;</td>
 </tr>
 
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_aml" name="terms_aml">
-        <label for="terms_bis">AML Policy</label></td>
+<!--<tr class="tbl_form_row_odd">
+
+    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
+        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
     <td colspan="4">
-        <a target="_blank" href="/download/amlPolicy">Download Agreement (228 KB PDF)</a>
+        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
     </td>
-    <td>&nbsp;</td>
-</tr>
+
+</tr>-->
 
 <tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
     <td colspan="5">
 
-        <p>I hereby attest and certify that the above information is complete and accurate and I agree to be bound by
-            these terms and conditions. I also authorise <strong>MaximTrader</strong> to verify any or all of the
-            foregoing information. This electronic signature has the same validity and effect as a signature affixed by
-            hand.</p>
+        <p>
+            <?php echo __('I hereby attest and certify that the above information is complete and accurate and I agree to be bound by these terms and conditions.') ?>
+            <?php echo __('I also authorise') ?>
+            <strong>MaximTrader</strong>
+            <?php echo __('to verify any or all of the foregoing information. This electronic signature has the same validity and effect as a signature affixed by hand.') ?>
+        </p>
 
         <table align="center" cellspacing="0" cellpadding="0" style="border-style:hidden">
             <tbody><tr style="border-style:hidden">
-                <td align="right" style="border-style:hidden" class="td_1st">Name:</td>
+                <td align="right" style="border-style:hidden" class="td_1st"><?php echo __('Name') ?>:</td>
                 <td style="border-style:hidden" class="td_2nd"><input type="text" class="inputbox" value="" name="sig_name"></td>
             </tr>
             <tr>
-                <td align="right" style="border-style:hidden" class="td_1st">Date:</td>
-                <td style="border-style:hidden" class="td_2nd"><input type="text" style="background-color: #d9d9d9;" readonly="readonly" class="inputbox" value="2012-08-24" name="date"></td>
+                <td align="right" style="border-style:hidden" class="td_1st"><?php echo __('Date') ?>:</td>
+                <td style="border-style:hidden" class="td_2nd"><input type="text" style="background-color: #d9d9d9;" readonly="readonly" class="inputbox" value="<?php echo date("Y-m-d")?>" name="date"></td>
             </tr>
             <tr>
                 <td align="left" valign="top" style="border-style:hidden" colspan="2">
                     <input type="checkbox" style="float:left; margin-right:4px;" value="1" id="term_condition" name="term_condition">
 
-                    <label><p>I understand that as an MaximTrader customer, it is my responsibility to review all necessary
-                        information about currency trading and the MaximTrader <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I
-                        am aware of the risks associated with foreign exchange trading and will seek advice and further my education
-                        on foreign exchange prior to starting any trading activity.</p></label>
+                    <label><p>
+                        <?php echo __('I understand that as an MaximTrader customer, it is my responsibility to review all necessary information about currency trading and the MaximTrader') ?>
+                        <b><?php echo __('Terms and Conditions') ?></b>.
+                        <?php echo __('I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.') ?>
+                    </p></label>
                 </td>
             </tr>
             <tr>
@@ -902,7 +770,7 @@ function error(data) {
             </tr>
         </tbody></table>
     </td>
-    <td>&nbsp;</td>
+
 </tr>
 
 <tr class="tbl_form_row_odd">
@@ -919,8 +787,8 @@ function error(data) {
 <tr class="tbl_listing_end">
     <td>&nbsp;</td>
     <td colspan="5" class="tbl_content_right">
-        <span class="button">
-             <input type="submit" name="" value="Submit">
+         <span class="button">
+             <input type="submit" name="" value="<?php echo __('Submit') ?>">
         </span>
     </td>
     <td>&nbsp;</td>
@@ -928,6 +796,7 @@ function error(data) {
 </tbody>
 </table>
 
+</form>
 </td>
 </tr>
 
@@ -942,7 +811,28 @@ function error(data) {
 </table>
 
 
+            <!-- announcement popup   -->
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
 
+    <div class="content_line" style="position: absolute; bottom: 170px;"></div>
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <br class="clear">
+    <div style="position: absolute; bottom: 10px; padding-right: 40px;">
+        <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+    </div>
         </div>
     </div>
 
@@ -972,6 +862,6 @@ function error(data) {
         </div>
     </div>
 </div>
-</form>
+
 </body>
 </html>

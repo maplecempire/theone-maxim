@@ -358,8 +358,8 @@ class homeActions extends sfActions
                 $this->getUser()->getAttributeHolder()->clear();
 
                 /*	    user      	*/
-                //$array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
-                $array = explode(',', Globals::STATUS_ACTIVE);
+                $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
+//                $array = explode(',', Globals::STATUS_ACTIVE);
                 $c = new Criteria();
                 $c->add(AppUserPeer::USERNAME, $username);
                 $c->add(AppUserPeer::USERPASSWORD, $password);

@@ -18,6 +18,10 @@ bonusDetails:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+convertCp3ToCp1:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 convertEcashToEpoint:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
@@ -83,6 +87,10 @@ mt4Withdrawal:
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 packagePurchaseViaBankTransfer:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+packagePurchase:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 

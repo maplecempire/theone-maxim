@@ -34,12 +34,14 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
         </li>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li>
             <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
         </li>
+    <?php } ?>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="#" id="linkPackagePurchase"><span><?php echo __('Package Purchase'); ?></span></a>
+            <a href="<?php echo url_for("/member/packagePurchase")?>" id="linkPackagePurchase"><span><?php echo __('Package Purchase'); ?></span></a>
         </li>
     <?php } ?>
 
@@ -61,23 +63,20 @@ function blink(selector) {
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('ACCOUNT INFORMATION'); ?></li>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/mt4Withdrawal"><span><?php echo __('Withdrawal'); ?></span></a>
         </li>
     <?php } ?>
-
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/bankInformation") ?>"><span><?php echo __('Maxim Capital Bank Details'); ?></span></a>
         </li>
-    <?php } ?>
 
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -119,6 +118,7 @@ function blink(selector) {
         </li>
     </ul>-->
     <br class="clear"><br>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -126,6 +126,7 @@ function blink(selector) {
         </li>
     </ul>
     <br class="clear"><br>
+    <?php } ?>
     <!--<ul>
         <li class="menu_title"><?php /*echo __('EXCHANGE RATE'); */?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -162,6 +163,8 @@ function blink(selector) {
         </li>
     </ul>
     <br class="clear"><br>
+
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
     <ul>
         <li class="menu_title"><?php echo __('REPORT'); ?></li>
 
@@ -175,27 +178,27 @@ function blink(selector) {
     </ul>
     <!--<a href="<?php /*echo url_for("/member/maximExecutorReport") */?>"><span><?php /*echo __('MaximTrade Executor™ Report'); */?></span></a>-->
     <br class="clear"><br>
+    <?php } ?>
+
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
     <ul>
         <li class="menu_title"><?php echo __('DOWNLOAD'); ?></li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/download/downloadMt4Pro?q=" . rand()) ?>"><span><?php echo __('Download MT4 Platform'); ?></span></a>
         </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyAUGoldTradeGuide") ?>"><span><?php echo __('Download Daily AU Gold Trade Guide'); ?></span></a>
         </li>
-    <?php } ?>
+
     <?php /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php /*echo url_for("/download/downloadVideo") */?>"><span><?php /*echo __('Download Video'); */?></span></a>
         </li>
     --><?php /*}*/ ?>
     </ul>
+    <?php } ?>
 </div>

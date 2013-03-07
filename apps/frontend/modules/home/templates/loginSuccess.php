@@ -167,9 +167,7 @@
                                         </tr>
                                         <tr height="24">
                                             <td></td>
-                                            <td class="txt_highlight">
-
-                                            </td>
+                                            <td class="txt_highlight"></td>
                                             <td colspan="2">
                                                 <?php
                                                 if ($sf_user->getAttribute(Globals::LOGIN_RETRY, 0) >= 3) {
@@ -193,8 +191,8 @@
                                                 <span class="loginbutton">
                                                     <input type="submit" value="<?php echo __('Login') ?>" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
                                                 </span>
-                                                <br>
-                                                <br>
+                                                &nbsp;&nbsp;
+                                                <a href="<?php echo url_for("/member/register") ?>"><?php echo __('Register Now') ?></a></td>
                                             </td>
                                         </tr>
                                         </tbody>
