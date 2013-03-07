@@ -230,37 +230,47 @@ $(function(){
             } else {
             ?>
             Submit: function() {
-                waiting();
+                var doAction = $("#doAction").val();
+                var msg = "Are you sure want to Transfer Rolling Point?";
 
-                var amount = $('#epointAmount').autoNumericGet();
-                $("#epointAmount").val(amount);
+                if (doAction == "debit") {
+                    msg = "Are you sure want to Return Rolling Point?";
+                }
+                var answer = confirm(msg);
+                if (answer){
+                    waiting();
 
-                if (amount == "" || amount <= 0) {
-                    alert("Amount cannot be blank.");
-                    $("#epointAmount").focus().select();
-                } else {
-                    $.ajax({
-                        type : 'POST',
-                        url : "<?php echo url_for('finance/doEpointTransfer') ?>",
-                        dataType : 'json',
-                        cache: false,
-                        data: {
-                            distId : $('#dgAddPanelId').val()
-                            , epointAmount : $('#epointAmount').val()
-                        },
-                        success : function(data) {
-                            if (data.error) {
-                                alert(data.errorMsg);
-                            } else {
-                                $("#dgAddPanel").dialog('close');
-                                //datagrid.fnDraw();
-                                alert("Record Save Successfully.");
+                    var amount = $('#epointAmount').autoNumericGet();
+                    $("#epointAmount").val(amount);
+
+                    if (amount == "" || amount <= 0) {
+                        alert("Amount cannot be blank.");
+                        $("#epointAmount").focus().select();
+                    } else {
+                        $.ajax({
+                            type : 'POST',
+                            url : "<?php echo url_for('finance/doEpointTransfer') ?>",
+                            dataType : 'json',
+                            cache: false,
+                            data: {
+                                distId : $('#dgAddPanelId').val()
+                                , epointAmount : $('#epointAmount').val()
+                                , doAction : doAction
+                            },
+                            success : function(data) {
+                                if (data.error) {
+                                    alert(data.errorMsg);
+                                } else {
+                                    $("#dgAddPanel").dialog('close');
+                                    //datagrid.fnDraw();
+                                    alert("Record Save Successfully.");
+                                }
+                            },
+                            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                                alert("Server connection error.");
                             }
-                        },
-                        error : function(XMLHttpRequest, textStatus, errorThrown) {
-                            alert("Server connection error.");
-                        }
-                    });
+                        });
+                    }
                 }
             },
             <?php } ?>
@@ -321,10 +331,22 @@ function populateDgAddPanel() {
             <td>:</td>
             <td><input type="text" id="dgAddPanelEmail" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
         </tr>
+
         <tr>
             <td>Total e-Point</td>
             <td>:</td>
             <td><input name="epointAmount" id="epointAmount" class="text ui-widget-content ui-corner-all" size="25"/></td>
+        </tr>
+
+        <tr>
+            <td>Action</td>
+            <td>:</td>
+            <td>
+                <select id="doAction" name="doAction">
+                    <option value="transfer">Transfer Rolling Point</option>
+                    <option value="debit">Return Rolling Point</option>
+                </select>
+            </td>
         </tr>
     </table>
     </fieldset>

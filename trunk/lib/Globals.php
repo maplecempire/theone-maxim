@@ -76,11 +76,13 @@ abstract class Globals {
     const ACCOUNT_TYPE_RANK = 'RANK';
     const ACCOUNT_TYPE_ECASH = 'ECASH';
     const ACCOUNT_TYPE_EPOINT = 'EPOINT';
+    const ACCOUNT_TYPE_DEBIT = 'DEBIT';
     const ACCOUNT_TYPE_MAINTENANCE = 'MAINTENANCE';
 
     /*******************************/
     /*****    ACCOUNT LEDGER  ******/
     /*******************************/
+    const ACCOUNT_LEDGER_ACTION_DEBIT = 'DEBIT';
     const ACCOUNT_LEDGER_ACTION_REGISTER = 'REGISTER';
     const ACCOUNT_LEDGER_ACTION_PURCHASE = 'PURCHASE';
     const ACCOUNT_LEDGER_ACTION_SELL = 'SELL';
