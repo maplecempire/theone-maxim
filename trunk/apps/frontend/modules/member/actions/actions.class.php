@@ -21,6 +21,16 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executePackagePurchase()
+    {
+        $c = new Criteria();
+        $packageDBs = MlmPackagePeer::doSelect($c);
+
+        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->packageDBs = $packageDBs;
+        $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+    }
     public function executeConvertCp3ToCp1()
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -944,13 +954,6 @@ class memberActions extends sfActions
 
     public function executeRegister()
     {
-        $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2));
-        // Concatenate the random string onto the random numbers
-        // The font 'Anorexia' doesn't have a character for '8', so the numbers will only go up to 7
-        // '0' is left out to avoid confusion with 'O'
-
-        $str = rand(1, 7) . rand(1, 7) . $char;
-        $this->getUser()->setAttribute(Globals::SYSTEM_CAPTCHA_ID, $str);
     }
 
     public function executeMemberRegistration()
@@ -997,9 +1000,6 @@ class memberActions extends sfActions
 
     public function executeRegisterInfo()
     {
-        if (!$this->getUser()->hasAttribute(Globals::SESSION_USERNAME)) {
-            return $this->redirect('/member/register');
-        }
     }
 
     public function executeUpdateProfile()
@@ -1070,94 +1070,115 @@ class memberActions extends sfActions
 
         if (!$resp->is_valid) {
             $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
-            return $this->redirect('home/login');
+            return $this->redirect('/home/login');
         }
 
-        //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $fcode = $this->getRequestParameter('userName');
         $password = $this->getRequestParameter('userpassword');
 
         $c = new Criteria();
         $c->add(AppUserPeer::USERNAME, $fcode);
         $exist = AppUserPeer::doSelectOne($c);
-        //$this->forward404Unless(!$exist);
-        $parentId = $this->getDistributorIdByCode($this->getRequestParameter('sponsorId'));
-        $this->forward404Unless($parentId <> 0);
 
+        if ($exist) {
+            $this->setFlash('errorMsg', "User Name already exist.");
+            return $this->redirect('/home/login');
+        }
         //******************* upline distributor ID
-        $uplineDistDB = $this->getDistributorInformation($this->getRequestParameter('sponsorId'));
-        $this->forward404Unless($uplineDistDB);
+        $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+            //******************* upline distributor ID
+            $uplineDistCode = $this->getRequestParameter('sponsorId');
 
-        $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
-        $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-        $app_user = new AppUser();
-        $app_user->setUsername($fcode);
-        $app_user->setKeepPassword($password);
-        $app_user->setUserpassword($password);
-        $app_user->setKeepPassword2($password);
-        $app_user->setUserpassword2($password);
-        $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
-        $app_user->setStatusCode(Globals::STATUS_PENDING);
-        $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->save();
+            if (!$uplineDistDB) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
+                return $this->redirect('/home/login');
+            }
 
-        // ****************************
-        $mlm_distributor = new MlmDistributor();
-        $mlm_distributor->setDistributorCode($fcode);
-        $mlm_distributor->setUserId($app_user->getUserId());
-        $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
-        $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-        $mlm_distributor->setNickname($fcode);
-        $mlm_distributor->setIc($this->getRequestParameter('ic'));
-        if ($this->getRequestParameter('country') == 'China') {
-            $mlm_distributor->setCountry('China (PRC)');
-        } else {
-            $mlm_distributor->setCountry($this->getRequestParameter('country'));
+            $uplineDistId = $uplineDistDB->getDistributorId();
+            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+            $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+
+            $app_user = new AppUser();
+            $app_user->setUsername($fcode);
+            $app_user->setKeepPassword($password);
+            $app_user->setUserpassword($password);
+            $app_user->setKeepPassword2($password);
+            $app_user->setUserpassword2($password);
+            $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
+            $app_user->setStatusCode(Globals::STATUS_PENDING);
+            $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $app_user->save();
+
+            // ****************************
+            $mlm_distributor = new MlmDistributor();
+            $mlm_distributor->setDistributorCode($fcode);
+            $mlm_distributor->setUserId($app_user->getUserId());
+            $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
+            $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
+            $mlm_distributor->setNickname($fcode);
+            $mlm_distributor->setIc($this->getRequestParameter('ic'));
+            if ($this->getRequestParameter('country') == 'China') {
+                $mlm_distributor->setCountry('China (PRC)');
+            } else {
+                $mlm_distributor->setCountry($this->getRequestParameter('country'));
+            }
+            $mlm_distributor->setAddress($this->getRequestParameter('address'));
+            $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+            $mlm_distributor->setCity($this->getRequestParameter('city'));
+            $mlm_distributor->setState($this->getRequestParameter('state'));
+            $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+            $mlm_distributor->setEmail($this->getRequestParameter('email'));
+            $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+            $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+            $mlm_distributor->setGender($this->getRequestParameter('gender'));
+            if ($this->getRequestParameter('dob')) {
+                list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                $mlm_distributor->setDob("$y-$m-$d");
+            }
+            $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+            $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+            $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+            $mlm_distributor->setTreeLevel($treeLevel);
+            $mlm_distributor->setTreeStructure($treeStructure);
+            $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+            $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+            $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+            $mlm_distributor->setSpread($this->getRequestParameter('spread'));
+            $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+            $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+            $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
+            $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+            $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+
+            if ($this->getRequestParameter('productCode') == "fxgold") {
+                $mlm_distributor->setProductMte("Y");
+            }
+            if ($this->getRequestParameter('productCode') == "mte") {
+                $mlm_distributor->setProductFxgold("Y");
+            }
+
+            $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_distributor->save();
+
+            $con->commit();
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Username is ").$fcode);
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
         }
-        $mlm_distributor->setAddress($this->getRequestParameter('address'));
-        $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
-        $mlm_distributor->setCity($this->getRequestParameter('city'));
-        $mlm_distributor->setState($this->getRequestParameter('state'));
-        $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
-        $mlm_distributor->setEmail($this->getRequestParameter('email'));
-        $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
-        $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
-        $mlm_distributor->setGender($this->getRequestParameter('gender'));
-        if ($this->getRequestParameter('dob')) {
-            list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
-            $mlm_distributor->setDob("$y-$m-$d");
-        }
-        $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
-        $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
-        $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
-
-        $mlm_distributor->setTreeLevel($treeLevel);
-        $mlm_distributor->setTreeStructure($treeStructure);
-        $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
-        $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
-
-        $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
-        $mlm_distributor->setSpread($this->getRequestParameter('spread'));
-        $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
-        $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
-        $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
-        $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
-        $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
-
-        if ($this->getRequestParameter('productCode') == "fxgold") {
-            $mlm_distributor->setProductMte("Y");
-        }
-        if ($this->getRequestParameter('productCode') == "mte") {
-            $mlm_distributor->setProductFxgold("Y");
-        }
-
-        $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->save();
-
-        $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $fcode);
+        //$this->getUser()->setAttribute(Globals::SESSION_USERNAME, $fcode);
 
         /****************************/
         /*****  Send email **********/
@@ -1205,7 +1226,7 @@ class memberActions extends sfActions
         $packageId = $this->getRequestParameter('packageId');
         $position = $this->getRequestParameter('position1');
         $amountNeeded = $this->getRequestParameter('amountNeeded');
-
+        $doAction = $this->getRequestParameter('doAction', '');
         /* ****************************************************
          * get distributor last account ledger epoint balance
          * ***************************************************/
@@ -1233,106 +1254,137 @@ class memberActions extends sfActions
         try {
             $con->begin();
             //******************* upline distributor ID
-            $uplineDistCode = $this->getRequestParameter('sponsorId');
-
-            $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
-            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
-
-            if (!$uplineDistDB) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
-                return $this->redirect('/member/memberRegistration');
-            }
-
-            $uplineDistId = $uplineDistDB->getDistributorId();
-            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
-            $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
             $app_user = new AppUser();
-            $app_user->setUsername($fcode);
-            $app_user->setKeepPassword($password);
-            $app_user->setUserpassword($password);
-            $app_user->setKeepPassword2($password2);
-            $app_user->setUserpassword2($password2);
-            $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
-            $app_user->setStatusCode(Globals::STATUS_ACTIVE);
-            $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $app_user->save();
-
-            // ****************************
-            /*if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
-                $packagePrice = $amountNeeded;
-            }*/
-
             $mlm_distributor = new MlmDistributor();
-            $mlm_distributor->setDistributorCode($fcode);
-            $mlm_distributor->setUserId($app_user->getUserId());
-            $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
-            $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-            $mlm_distributor->setNickname($fcode);
-            $mlm_distributor->setIc($this->getRequestParameter('ic'));
-            if ($this->getRequestParameter('country') == 'China') {
-                $mlm_distributor->setCountry('China (PRC)');
-            } else {
-                $mlm_distributor->setCountry($this->getRequestParameter('country'));
-            }
-            $mlm_distributor->setAddress($this->getRequestParameter('address'));
-            $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
-            $mlm_distributor->setCity($this->getRequestParameter('city'));
-            $mlm_distributor->setState($this->getRequestParameter('state'));
-            $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
-            $mlm_distributor->setEmail($this->getRequestParameter('email'));
-            $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
-            $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
-            $mlm_distributor->setGender($this->getRequestParameter('gender'));
-            if ($this->getRequestParameter('dob')) {
-                list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
-                $mlm_distributor->setDob("$y-$m-$d");
-            }
-            $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
-            $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
-            $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+            $uplineDistDB = new MlmDistributor();
+            $uplineDistId = 0;
+            if ($doAction == "PENDING_MEMBER") {
+                $app_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $app_user->setStatusCode(Globals::STATUS_ACTIVE);
+                $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $app_user->save();
 
-            $mlm_distributor->setTreeLevel($treeLevel);
-            $mlm_distributor->setTreeStructure($treeStructure);
-            $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
-            $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+                $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
-            $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
-            $mlm_distributor->setSpread($this->getRequestParameter('spread'));
-            $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
-            $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
-            $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
-            $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
-            $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+                $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getUplineDistId());
+                $uplineDistId = $uplineDistDB->getDistributorId();
 
-            $mlm_distributor->setRankId($packageDB->getPackageId());
-            $mlm_distributor->setRankCode($packageDB->getPackageName());
-            $mlm_distributor->setInitRankId($packageDB->getPackageId());
-            $mlm_distributor->setInitRankCode($packageDB->getPackageName());
-            $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
-            if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
-                $mlm_distributor->setPackagePurchaseFlag("N");
-                $mlm_distributor->setRemark("loan account");
-                $mlm_distributor->setLoanAccount("Y");
-            } else {
+                $mlm_distributor->setRankId($packageDB->getPackageId());
+                $mlm_distributor->setRankCode($packageDB->getPackageName());
+                $mlm_distributor->setInitRankId($packageDB->getPackageId());
+                $mlm_distributor->setInitRankCode($packageDB->getPackageName());
+                $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
                 $mlm_distributor->setPackagePurchaseFlag("Y");
-            }
-            $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
-            $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
-            if ($this->getRequestParameter('productCode') == "fxgold") {
-                $mlm_distributor->setProductMte("Y");
+                if ($this->getRequestParameter('productCode') == "fxgold") {
+                    $mlm_distributor->setProductMte("Y");
+                }
+                if ($this->getRequestParameter('productCode') == "mte") {
+                    $mlm_distributor->setProductFxgold("Y");
+                }
+                $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->save();
+            } else {
+                $uplineDistCode = $this->getRequestParameter('sponsorId');
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                if (!$uplineDistDB) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
+                    return $this->redirect('/member/memberRegistration');
+                }
+
+                $uplineDistId = $uplineDistDB->getDistributorId();
+                $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+                $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+
+
+                $app_user->setUsername($fcode);
+                $app_user->setKeepPassword($password);
+                $app_user->setUserpassword($password);
+                $app_user->setKeepPassword2($password2);
+                $app_user->setUserpassword2($password2);
+                $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
+                $app_user->setStatusCode(Globals::STATUS_ACTIVE);
+                $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $app_user->save();
+
+
+                $mlm_distributor->setDistributorCode($fcode);
+                $mlm_distributor->setUserId($app_user->getUserId());
+                $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
+                $mlm_distributor->setNickname($fcode);
+                $mlm_distributor->setIc($this->getRequestParameter('ic'));
+                if ($this->getRequestParameter('country') == 'China') {
+                    $mlm_distributor->setCountry('China (PRC)');
+                } else {
+                    $mlm_distributor->setCountry($this->getRequestParameter('country'));
+                }
+                $mlm_distributor->setAddress($this->getRequestParameter('address'));
+                $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+                $mlm_distributor->setCity($this->getRequestParameter('city'));
+                $mlm_distributor->setState($this->getRequestParameter('state'));
+                $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+                $mlm_distributor->setEmail($this->getRequestParameter('email'));
+                $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+                $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+                $mlm_distributor->setGender($this->getRequestParameter('gender'));
+                if ($this->getRequestParameter('dob')) {
+                    list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                    $mlm_distributor->setDob("$y-$m-$d");
+                }
+                $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+                $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+                $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+                $mlm_distributor->setTreeLevel($treeLevel);
+                $mlm_distributor->setTreeStructure($treeStructure);
+                $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+                $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+                $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+                $mlm_distributor->setSpread($this->getRequestParameter('spread'));
+                $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+                $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+                $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
+                $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+
+                $mlm_distributor->setRankId($packageDB->getPackageId());
+                $mlm_distributor->setRankCode($packageDB->getPackageName());
+                $mlm_distributor->setInitRankId($packageDB->getPackageId());
+                $mlm_distributor->setInitRankCode($packageDB->getPackageName());
+                $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+                if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+                    $mlm_distributor->setPackagePurchaseFlag("N");
+                    $mlm_distributor->setRemark("loan account");
+                    $mlm_distributor->setLoanAccount("Y");
+                } else {
+                    $mlm_distributor->setPackagePurchaseFlag("Y");
+                }
+                $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+                if ($this->getRequestParameter('productCode') == "fxgold") {
+                    $mlm_distributor->setProductMte("Y");
+                }
+                if ($this->getRequestParameter('productCode') == "mte") {
+                    $mlm_distributor->setProductFxgold("Y");
+                }
+                $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->save();
             }
-            if ($this->getRequestParameter('productCode') == "mte") {
-                $mlm_distributor->setProductFxgold("Y");
-            }
-            $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_distributor->save();
 
             // create mlm_dist_pairing
             $sponsorDistPairingDB = MlmDistPairingPeer::retrieveByPK($mlm_distributor->getDistributorId());
@@ -1542,6 +1594,7 @@ class memberActions extends sfActions
             $treePosition = $this->getRequestParameter('treePosition');
             $placementType = $this->getRequestParameter('placementType'); // 1 = auto, 0 = manual
             $placementDistCode = $this->getRequestParameter('placementDistId'); // 1 = auto, 0 = manual
+
             if ($position == 1 || $position == 2 || $treePosition != ""){
                 $uplinePosition = "";
 
@@ -1573,12 +1626,20 @@ class memberActions extends sfActions
 
                         $uplineDistId = $uplineDistDB->getDistributorId();
                     } else {
-                        $uplineDistCode = $this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
-                        $c = new Criteria();
-                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-                        $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+                        if ($doAction == "PENDING_MEMBER") {
+                            $c = new Criteria();
+                            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('placementDistId'));
+                            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                        $uplineDistId = $uplineDistDB->getDistributorId();
+                            $uplineDistId = $uplineDistDB->getDistributorId();
+                        } else {
+                            $uplineDistCode = $this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                            $c = new Criteria();
+                            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+                            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                            $uplineDistId = $uplineDistDB->getDistributorId();
+                        }
                     }
 
                     while ($placementSuccessful == false) {
@@ -1608,7 +1669,6 @@ class memberActions extends sfActions
                 //exit();
                 $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorCode() . "|";
                 $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
-
                 $mlm_distributor->setPlacementDatetime(date("Y/m/d h:i:s A"));
                 $mlm_distributor->setPlacementPosition($uplinePosition);
                 //$mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
@@ -1732,8 +1792,8 @@ class memberActions extends sfActions
             /****************************/
             /*****  Send email **********/
             /****************************/
-            $receiverEmail = $this->getRequestParameter('email');
-            $receiverFullname = $this->getRequestParameter('fullname');
+            $receiverEmail = $this->getRequestParameter('email', $mlm_distributor->getEmail());
+            $receiverFullname = $this->getRequestParameter('fullname', $mlm_distributor->getFullName());
             $subject = "Maxim Trader - Thank You for Your Registration";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -1808,7 +1868,7 @@ class memberActions extends sfActions
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'><a
                                                         href='mailto:leonlee@centuryempire.com'
-                                                        target='_blank'>".$this->getRequestParameter('email')."</a><u></u><u></u></span></p></td>
+                                                        target='_blank'>".$this->getRequestParameter('email', $mlm_distributor->getEmail())."</a><u></u><u></u></span></p></td>
                                         </tr>
                                         <tr>
                                             <td width='180'
@@ -1818,7 +1878,7 @@ class memberActions extends sfActions
                                                 </p></td>
                                             <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
                                                 <p class='MsoNormal'><span
-                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('contactNumber')."<u></u><u></u></span>
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('contactNumber', $mlm_distributor->getContact())."<u></u><u></u></span>
                                                 </p></td>
                                         </tr>
                                         <tr>
@@ -1829,7 +1889,7 @@ class memberActions extends sfActions
                                                 </p></td>
                                             <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
                                                 <p class='MsoNormal'><span
-                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('country')."<u></u><u></u></span>
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('country', $mlm_distributor->getCountry())."<u></u><u></u></span>
                                                 </p></td>
                                         </tr>
                                         <tr>
@@ -1838,7 +1898,7 @@ class memberActions extends sfActions
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Name of Account Holder<u></u><u></u></span>
                                                 </p></td>
-                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankHolderName')."</td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankHolderName', $mlm_distributor->getBankHolderName())."</td>
                                         </tr>
                                         <tr>
                                             <td width='180'
@@ -1846,7 +1906,7 @@ class memberActions extends sfActions
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Account Number<u></u><u></u></span>
                                                 </p></td>
-                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankAccountNo')."</td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>".$this->getRequestParameter('bankAccountNo', $mlm_distributor->getBankAccNo())."</td>
                                         </tr>
                                         <tr>
                                             <td width='180'
@@ -1918,13 +1978,19 @@ class memberActions extends sfActions
             $con->rollback();
             throw $e;
         }
-        if ($position == 1 || $position == 2 || $treePosition != ""){
+
+        if ($doAction == "PENDING_MEMBER") {
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
-            return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
-        } else if ($position == 0){
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
-            return $this->redirect('/member/placementTree');
-            //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
+                return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getDistributorCode());
+        } else {
+            if ($position == 1 || $position == 2 || $treePosition != ""){
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+                return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
+            } else if ($position == 0){
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
+                return $this->redirect('/member/placementTree');
+                //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
+            }
         }
         return $this->redirect('/member/summary');
     }
