@@ -130,7 +130,7 @@
 
                             <tr>
                                 <td class="tbl_content_top">
-                                    <form action="/home/doLogin" id="loginForm" method="post">
+                                    <form action="/home/login" id="loginForm" method="post">
                                     <table border="0" width="256" cellspacing="0" cellpadding="0" class="tbl_login_grey_bg">
                                         <colgroup>
                                             <col width="1%">
