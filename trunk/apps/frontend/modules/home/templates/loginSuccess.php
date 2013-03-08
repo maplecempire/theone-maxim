@@ -192,7 +192,7 @@
                                                     <input type="submit" value="<?php echo __('Login') ?>" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
                                                 </span>
                                                 &nbsp;&nbsp;
-                                                <a href="<?php echo url_for("/member/register") ?>"><?php echo __('Register Now') ?></a></td>
+                                                <!--<a href="<?php /*echo url_for("/member/register") */?>"><?php /*echo __('Register Now') */?></a>-->
                                             </td>
                                         </tr>
                                         </tbody>
