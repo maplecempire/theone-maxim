@@ -32,11 +32,11 @@ if ($culture == "en")
     else
         $postfix = "_chinese";
 ?>
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'Maxim Trader to participate in the 10th CHINA GUANGZHOU INTERNATIONAL INVESTMENT AND FINANCE EXPO 第十届广州国际投资理财金融博览会 2013年3月5-7日',
     news_date:'21 FEB 2013',
     news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/maxim_international<?php echo $postfix;?>.jpg"></a><br>'
-});
+});*/
 
 var popIndex = 1;
 $(function() {
