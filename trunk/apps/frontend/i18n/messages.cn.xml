@@ -577,8 +577,8 @@
             <trans-unit><source>records</source><target>记录</target></trans-unit>
             <trans-unit><source>Personal Information</source><target>个人资料</target></trans-unit>
             <trans-unit><source>Personal Detail</source><target>个人详细资料</target></trans-unit>
-            <trans-unit><source>Referrer ID</source><target>推荐人ID</target></trans-unit>
-            <trans-unit><source>Referrer Name</source><target>推荐人名称</target></trans-unit>
+            <trans-unit><source>Referral ID</source><target>推荐人ID</target></trans-unit>
+            <trans-unit><source>Referral Name</source><target>推荐人名称</target></trans-unit>
             <trans-unit><source>City / Town</source><target>市/镇</target></trans-unit>
             <trans-unit><source>State / Province</source><target>州/省</target></trans-unit>
             <trans-unit><source>Zip / Postal Code</source><target>邮编</target></trans-unit>
@@ -723,7 +723,7 @@
             <trans-unit><source>Sign up</source><target>签订</target></trans-unit>
             <trans-unit><source>OFX Accumulator statement</source><target>OFX累加器声明</target></trans-unit>
             <trans-unit><source>Download OFX Accumulator statement</source><target>下载OFX累加器声明</target></trans-unit>
-            <trans-unit><source>Referrer and Placement Position</source><target>推荐人和按置的位置</target></trans-unit>
+            <trans-unit><source>Referral and Placement Position</source><target>推荐人和按置的位置</target></trans-unit>
             <trans-unit><source>Placement Type</source><target>按置</target></trans-unit>
             <trans-unit><source>Auto</source><target>自动</target></trans-unit>
             <trans-unit><source>Auto Placement</source><target>自动按置</target></trans-unit>

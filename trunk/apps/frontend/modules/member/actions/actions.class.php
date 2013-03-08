@@ -1098,7 +1098,7 @@ class memberActions extends sfActions
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
             if (!$uplineDistDB) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referral ID."));
                 return $this->redirect('/home/login');
             }
 
@@ -1301,7 +1301,7 @@ class memberActions extends sfActions
                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
                 if (!$uplineDistDB) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referral ID."));
                     return $this->redirect('/member/memberRegistration');
                 }
 

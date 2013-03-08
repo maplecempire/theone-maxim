@@ -102,7 +102,7 @@ $(function() {
         },
         submitHandler: function(form) {
             if ($.trim($('#sponsorId').val()) == "") {
-                alert("<?php echo __('Referrer ID cannot be blank') ?>.");
+                alert("<?php echo __('Referral ID cannot be blank') ?>.");
                 $('#sponsorId').focus();
             } else {
                 waiting();
@@ -117,7 +117,7 @@ $(function() {
                     success : function(data) {
                         waiting();
                         if (data == null || data == "") {
-                            alert("<?php echo __('Invalid Referrer ID') ?>");
+                            alert("<?php echo __('Invalid Referral ID') ?>");
                             $('#sponsorId').focus();
                             $("#sponsorName").val("");
                         } else {
@@ -155,7 +155,7 @@ function verifySponsorId() {
         },
         success : function(data) {
             if (data == null || data == "") {
-                error("<?php echo __('Invalid Referrer ID') ?>");
+                error("<?php echo __('Invalid Referral ID') ?>");
                 $('#sponsorId').focus();
                 $("#sponsorName").val("");
             } else {
@@ -232,7 +232,7 @@ function verifySponsorId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th colspan="2"><?php echo __('Referrer and Placement Position') ?></th>
+        <th colspan="2"><?php echo __('Referral and Placement Position') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -240,7 +240,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Referrer ID') ?></td>
+        <td><?php echo __('Referral ID') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
             &nbsp;
@@ -250,7 +250,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Referrer Name') ?></td>
+        <td><?php echo __('Referral Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php echo $sponsorName;?>" readonly="readonly">
             &nbsp;
