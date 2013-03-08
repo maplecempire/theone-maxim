@@ -109,7 +109,7 @@ $(function() {
                 success : function(data) {
                     waiting();
                     if (data == null || data == "") {
-                        alert("<?php echo __('Invalid Referrer ID') ?>");
+                        alert("<?php echo __('Invalid  ID') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").val("");
                     } else {
@@ -186,7 +186,7 @@ function verifySponsorId() {
         },
         success : function(data) {
             if (data == null || data == "") {
-                error("<?php echo __('Invalid Referrer ID') ?>");
+                error("<?php echo __('Invalid  ID') ?>");
                 $('#sponsorId').focus();
                 $("#sponsorName").val("");
             } else {
@@ -285,7 +285,7 @@ function verifyPlacementDistId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th colspan="2"><?php echo __('Referrer and Placement Position') ?></th>
+        <th colspan="2"><?php echo __(' and Placement Position') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -293,7 +293,7 @@ function verifyPlacementDistId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Referrer ID') ?></td>
+        <td><?php echo __(' ID') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
             &nbsp;
@@ -303,7 +303,7 @@ function verifyPlacementDistId() {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Referrer Name') ?></td>
+        <td><?php echo __(' Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php echo $sponsorName;?>" readonly="readonly">
             &nbsp;

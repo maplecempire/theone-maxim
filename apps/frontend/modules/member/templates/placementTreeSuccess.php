@@ -106,7 +106,7 @@ $(function() {
             $("#_accumulate_right").html($(this).attr("accumulate_right"));
             $("#_today_left").html($(this).attr("today_left"));
             $("#_today_right").html($(this).attr("today_right"));
-            //$("#_referrer_id").html($(this).attr("referrer_id"));
+            //$("#__id").html($(this).attr("_id"));
             $('#tooltip').css('top', top + "px");
             $('#tooltip').css('left', left + "px");
             $('#tooltip').fadeIn('10');

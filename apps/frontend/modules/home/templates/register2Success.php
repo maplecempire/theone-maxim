@@ -169,7 +169,7 @@ $(function() {
                 },
                 submitHandler: function(form) {
                     if ($.trim($('#sponsorId').val()) == "") {
-                        alert("<?php echo __('Referrer ID cannot be blank') ?>.");
+                        alert("<?php echo __('Referral ID cannot be blank') ?>.");
                         $('#sponsorId').focus();
                     } else {
                         waiting();
@@ -184,7 +184,7 @@ $(function() {
                                     success : function(data) {
                                         waiting();
                                         if (data == null || data == "") {
-                                            alert("<?php echo __('Invalid Referrer ID') ?>");
+                                            alert("<?php echo __('Invalid Referral ID') ?>");
                                             $('#sponsorId').focus();
                                             $("#sponsorName").val("");
                                         } else {
@@ -214,7 +214,7 @@ function verifySponsorId() {
                 },
                 success : function(data) {
                     if (data == null || data == "") {
-                        error("<?php echo __('Invalid Referrer ID') ?>");
+                        error("<?php echo __('Invalid Referral ID') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").val("");
                     } else {
@@ -362,7 +362,7 @@ function error(data) {
     </tr>
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Referrer ID</td>
+        <td>Referral ID</td>
         <td>
             <input type="text" class="inputbox" id="sponsorId" name="sponsorId">
             &nbsp;
@@ -373,7 +373,7 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Referrer Name</td>
+        <td>Referral Name</td>
         <td>
             <input type="text" style="background-color: #d9d9d9;" class="inputbox" readonly="readonly" id="sponsorName" name="sponsorName">
         </td>
