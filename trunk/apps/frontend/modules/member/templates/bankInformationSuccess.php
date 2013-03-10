@@ -125,7 +125,7 @@
             </table>
 
             <?php
-            $toHide = true;
+            $toHide = false;
             if ($distDB->getCountry() != "Thailand" && $toHide == false) { ?>
             <br>
             <table cellspacing="0" cellpadding="0" class="tbl_form">

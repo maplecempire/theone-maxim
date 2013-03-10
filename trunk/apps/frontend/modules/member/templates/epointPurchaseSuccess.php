@@ -413,7 +413,7 @@ $(function() {
                 <select id="bankId" name="bankId">
                     <option value="1" bankSwiftCodeText="<?php echo $bankSwiftCode; ?>" ibanText="<?php echo $iban; ?>" bankAccountHolderText="<?php echo $bankAccountHolder; ?>" bankAccountNumberText="<?php echo $bankAccountNumber; ?>" cityOfBankText="<?php echo $cityOfBank; ?>" countryOfBankText="<?php echo $countryOfBank; ?>"><?php echo $bankName; ?></option>
                     <?php
-                    $toHide = true;
+                    $toHide = false;
                     if ($distDB->getCountry() != "Thailand" && $toHide == false) {?>
                         <option value="2" bankSwiftCodeText="<?php echo $bankSwiftCode2; ?>" ibanText="<?php echo $iban2; ?>" bankAccountHolderText="<?php echo $bankAccountHolder2; ?>" bankAccountNumberText="<?php echo $bankAccountNumber2; ?>" cityOfBankText="<?php echo $cityOfBank2; ?>" countryOfBankText="<?php echo $countryOfBank2; ?>"><?php echo $bankName2; ?></option>
                     <?php } ?>
