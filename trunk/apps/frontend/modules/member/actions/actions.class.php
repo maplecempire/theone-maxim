@@ -21,6 +21,11 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeFundManagementContract()
+    {
+        $this->fundManagements = $this->findFundManagementList($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+    }
+
     public function executePackagePurchase()
     {
         $c = new Criteria();
@@ -3132,6 +3137,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distributor);
 
+        $rp = 0;
         $ecash = 0;
         $epoint = 0;
         $maintenancePoint = 0;
@@ -3168,14 +3174,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             $ecash = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+            $rp = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorCode()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $totalNetworks = MlmDistributorPeer::doCount($c);
         }
-
-        $this->fundManagements = $this->findFundManagementList($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $this->ecash = $ecash;
         $this->epoint = $epoint;
@@ -3188,6 +3193,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->distributor = $distributor;
         $this->lastLogin = $lastLogin;
         $this->maintenancePoint = $maintenancePoint;
+        $this->rp = $rp;
     }
 
     public function executeAnnouncementList()
