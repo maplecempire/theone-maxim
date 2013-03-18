@@ -33,6 +33,8 @@ class componentComponents extends sfComponents
         $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, Globals::FALSE);
         $totalUnreadCsMessage = MlmCustomerEnquiryPeer::doCount($c);
 
+        $this->rp = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
+
         $this->distDB = $distDB;
         $this->openTermCondition = $openTermCondition;
         $this->totalUnreadCsMessage = $totalUnreadCsMessage;
@@ -122,5 +124,24 @@ class componentComponents extends sfComponents
         $this->ranking = $ranking;
         $this->mt4Id = $mt4Id;
         $this->currencyCode = $currencyCode;
+    }
+
+    function getAccountBalance($distributorId, $accountType)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }

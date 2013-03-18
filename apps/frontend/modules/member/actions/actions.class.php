@@ -4141,7 +4141,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/transferEpoint');
 
-            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == $this->getUser()->getAttribute(Globals::SESSION_USERNAME)) {
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferEpoint');
@@ -4243,6 +4243,96 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
                 return $this->redirect('/member/transferEpoint');
+            }
+        }
+    }
+
+    public function executeTransferRP()
+    {
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            $sponsorId = $this->getRequestParameter('sponsorId');
+
+            if (($this->getRequestParameter('epointAmount')) > $ledgerAccountBalance) {
+
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient RP"));
+                return $this->redirect('/member/transferRP');
+
+            } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+                return $this->redirect('/member/transferRP');
+
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
+                return $this->redirect('/member/transferRP');
+
+            } elseif ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0) {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
+                $existDist = MlmDistributorPeer::doSelectOne($c);
+
+                $c = new Criteria();
+                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
+                $c->addAnd(MlmAccountPeer::DIST_ID, $existDist->getDistributorId());
+                $toAccount = MlmAccountPeer::doSelectOne($c);
+
+                if (!$toAccount) {
+                    $toAccount = new MlmAccount();
+
+                    $toAccount->setDistId($existDist->getDistributorId());
+                    $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $toAccount->setBalance(0);
+                    $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $toAccount->save();
+                }
+
+                $toId = $existDist->getDistributorId();
+                $toCode = $existDist->getDistributorCode();
+                $toName = $existDist->getNickname();
+                $toBalance = $toAccount->getBalance();
+                $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_USERNAME);
+                $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
+                $fromBalance = $ledgerAccountBalance;
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                $mlm_account_ledger->setDistId($fromId);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
+                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_RP);
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $tbl_account_ledger->setDistId($toId);
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                $tbl_account_ledger->setDebit(0);
+                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
+
+                return $this->redirect('/member/transferRP');
             }
         }
     }

@@ -28,7 +28,7 @@
                 //console.log(amount);
                 //console.log(epointBalance);
                 if (parseFloat(epointBalance) < (parseFloat(amount))) {
-                    alert("<?php echo __("In-sufficient E-Point")?>");
+                    alert("<?php echo __("In-sufficient RP")?>");
                     return false;
                 }
 
@@ -79,37 +79,13 @@
     }
 </script>
 
-<div class="ewallet_li">
-	<a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">
-        <?php echo __('Funds Deposit'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('Convert CP2 To CP1'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferEpoint")?>" style="color: rgb(134, 197, 51);">
-        <?php echo __('CP1 Transfer'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('Convert CP3 To CP1'); ?>
-    </a>
-</div>
-
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP1 Transfer') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('RP Transfer') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -138,7 +114,7 @@
     </tr>
     <tr>
         <td>
-            <form action="<?php echo url_for("/member/transferEpoint")?>" id="transferForm" name="transferForm" method="post">
+            <form action="<?php echo url_for("/member/transferRP")?>" id="transferForm" name="transferForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -151,7 +127,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('CP1 Transfer') ?></th>
+                    <th colspan="2"><?php echo __('RP Transfer') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -177,7 +153,7 @@
                 </tr>
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Balance'); ?></td>
+                    <td><?php echo __('RP Balance'); ?></td>
                     <td>
                         <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
                                        value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
@@ -186,7 +162,7 @@
                 </tr>
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Transfer CP1 Amount'); ?></td>
+                    <td><?php echo __('Transfer RP Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
                     </td>
@@ -206,11 +182,7 @@
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"><?php
-                            if ($processFee != 0)
-                                echo __('every transfer action need to pay USD%1%.00 processing fees', array('%1%' => $processFee));
-                            ?>
-                        </font>
+
                     </td>
                     <td>&nbsp;</td>
                 </tr>

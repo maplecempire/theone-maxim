@@ -58,6 +58,11 @@ function blink(selector) {
             <a href="/member/reloadTopup"><span><?php echo __('Reload MT4 Fund'); ?></span></a>
         </li>
     <?php } ?>
+    <?php if ($rp > 0) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
+        </li>
+    <?php } ?>
 
     </ul>
     <br class="clear"><br>
