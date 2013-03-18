@@ -181,7 +181,7 @@ function blink(selector) {
             <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Report'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Contract'); ?></span></a>
+            <a href="<?php echo url_for("/member/fundManagementContract") ?>"><span><?php echo __('Fund Management Contract'); ?></span></a>
         </li>
         <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <span style="color: #808080;"><?php /*echo __('MaximTrade Executor™ Report'); */?></span>

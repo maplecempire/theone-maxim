@@ -235,6 +235,8 @@ $(function(){
 
                 if (doAction == "debit") {
                     msg = "Are you sure want to Return Rolling Point?";
+                } else if (doAction == "epoint") {
+                    msg = "Are you sure want to Transfer e-Point?";
                 }
                 var answer = confirm(msg);
                 if (answer){
@@ -345,6 +347,7 @@ function populateDgAddPanel() {
                 <select id="doAction" name="doAction">
                     <option value="transfer">Transfer Rolling Point</option>
                     <option value="debit">Return Rolling Point</option>
+                    <option value="epoint">Transfer e-Point</option>
                 </select>
             </td>
         </tr>
