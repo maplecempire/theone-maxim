@@ -32,36 +32,7 @@ $(function() {
                 return false;
             }
             waiting();
-            $.ajax({
-                type : 'POST',
-                url : "/member/verifyActivePlacementDistId",
-                dataType : 'json',
-                cache: false,
-                data: {
-                    sponsorId : $('#sponsorId').val()
-                    , placementDistId : $('#placementDistId').val()
-                },
-                success : function(data) {
-                    if (data == null || data == "") {
-                        error("<?php echo __('Invalid Placement ID') ?>");
-                        $('#placementDistId').focus();
-                        $("#placementDistName").val("");
-                    } else {
-                        form.submit();
-                    }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Your login attempt was not successful. Please try again.");
-                }
-            });
-        }
-    });
-
-
-
-    $("#placementDistId").change(function() {
-        if ($.trim($('#placementDistId').val()) != "") {
-            verifyPlacementDistId();
+            form.submit();
         }
     });
 
@@ -93,32 +64,7 @@ $(function() {
         $(".tdMte").show();
     });
 });
-function verifyPlacementDistId() {
-    waiting();
-    $.ajax({
-        type : 'POST',
-        url : "/member/verifyActivePlacementDistId",
-        dataType : 'json',
-        cache: false,
-        data: {
-            sponsorId : $('#sponsorId').val()
-            , placementDistId : $('#placementDistId').val()
-        },
-        success : function(data) {
-            if (data == null || data == "") {
-                error("<?php echo __('Invalid Placement ID') ?>");
-                $('#placementDistId').focus();
-                $("#placementDistName").val("");
-            } else {
-                $.unblockUI();
-                $("#placementDistName").val(data.nickname);
-            }
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("Your login attempt was not successful. Please try again.");
-        }
-    });
-}
+
 </script>
 
 <table cellpadding="0" cellspacing="0">
@@ -182,51 +128,6 @@ function verifyPlacementDistId() {
             <td><input type="text" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
             <td>&nbsp;</td>
         </tr>
-
-        <tr class="tbl_form_row_even">
-            <td>&nbsp;</td>
-            <td><?php echo __('Placement Type') ?></td>
-            <td>
-                <div style="width:350px;">
-                    <input type="radio" id="radio_auto" checked="checked" value="1" name="placementType"> <label for="radio_auto" style="display: inline; font-size: 12px !important;"><?php echo __('Auto') ?></label>&nbsp;
-                    <input type="radio" id="radio_manual" value="0" name="placementType"> <label for="radio_manual" style="display: inline; font-size: 12px !important;"><?php echo __('Manual') ?></label>&nbsp;
-                </div>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-
-    <tr class="tbl_form_row_odd tr_manualPlacement">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement ID') ?></td>
-        <td>
-            <input type="text" class="inputbox" id="placementDistId" name="placementDistId" value="<?php echo $placementDistId;?>">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_even tr_manualPlacement">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement Name') ?></td>
-        <td>
-            <input type="text" class="inputbox" id="placementDistName" name="placementDistName" value="<?php echo $placementDistName;?>" readonly="readonly">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd tr_manualPlacement">
-        <td>&nbsp;</td>
-        <td><?php echo __('Placement Position') ?></td>
-        <td>
-            <div style="width:350px;">
-                <input type="radio" id="radio_position1_manual_1" value="1" name="position1"> <label for="radio_position1_manual_1" style="display: inline; font-size: 12px !important;"><?php echo __('Left') ?></label>&nbsp;
-                <input type="radio" id="radio_position1_manual_2" value="2" name="position1"> <label for="radio_position1_manual_2" style="display: inline; font-size: 12px !important;"><?php echo __('Right') ?></label>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
 
         <tr>
             <td colspan="4">

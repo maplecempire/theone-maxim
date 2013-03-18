@@ -151,7 +151,7 @@
                 },
                 success : function(data) {
                     if (data == null || data == "") {
-                        alert("<?php echo __('Invalid Trader ID.') ?>");
+                        alert("<?php echo __('Invalid Member ID.') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").html("");
                     } else {

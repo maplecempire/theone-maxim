@@ -117,7 +117,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td class="caption" colspan="2">
-                        <span style="color: #dc143c">PS: Please write at REFERENCE : Maxim Capital Limited - 9120028849 and payment reference number</span>
+                        <span style="color: #dc143c">NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</span>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -165,22 +165,13 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td width="160px" class="caption">
-                        <?php echo __('IBAN'); ?>
-                    </td>
-                    <td class="value"><?php echo $iban2; ?></td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td width="160px" class="caption">
                         <?php echo __('Bank Account Holder'); ?>
                     </td>
                     <td class="value"><?php echo $bankAccountHolder2; ?></td>
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td width="160px" class="caption">
                         <?php echo __('Bank Account Number'); ?>
@@ -189,7 +180,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td width="160px" class="caption">
                         <?php echo __('City of Bank'); ?>
@@ -198,7 +189,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td width="160px" class="caption">
                         <?php echo __('Country of Bank'); ?>
@@ -210,9 +201,7 @@
                     <td>&nbsp;</td>
                     <td class="caption" colspan="2">
                         <span style="color: #dc143c">
-                            PS: Please write at REFERENCE : Payment reference number
-                            <br>
-                            Note: USD1 : Bath31
+                            NOTE: USD1 : Bath31
                         </span>
                     </td>
                     <td>&nbsp;</td>
@@ -220,6 +209,46 @@
                 </tbody>
             </table>
             <?php } ?>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <br>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Maxim Capital Limited EzyAccount') ?></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('EzyAccount ID') ?></td>
+                    <td class="value">36496</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Email Address') ?></td>
+                    <td class="value">finance@maximtrader.com</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                </tbody>
+            </table>
         </td>
     </tr>
     </tbody>

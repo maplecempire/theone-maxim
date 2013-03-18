@@ -65,7 +65,7 @@
                 if ("" == $("#doAction").val()) {
                 <?php if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) { ?>
                     if ($.trim($("#username").val()) == "") {
-                        alert("Trader ID cannot be blank.");
+                        alert("Member ID cannot be blank.");
                         $("#username").focus();
                         return false;
                     }

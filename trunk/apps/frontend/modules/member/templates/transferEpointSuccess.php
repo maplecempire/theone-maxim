@@ -160,7 +160,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Transfer To Trader ID'); ?></td>
+                    <td><?php echo __('Transfer To Member ID'); ?></td>
                     <td>
                         <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
                     </td>

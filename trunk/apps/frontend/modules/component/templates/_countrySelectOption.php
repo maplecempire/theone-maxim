@@ -65,7 +65,7 @@ array_push($countrycodes, 'Greece@30@' . __('Greece', null, "country"));
 array_push($countrycodes, 'Greenland@299@' . __('Greenland', null, "country"));
 array_push($countrycodes, 'Guinea-Bissau@245@' . __('Guinea-Bissau', null, "country"));
 array_push($countrycodes, 'Guinea (PRP)@224@' . __('Guinea (PRP)', null, "country"));
-array_push($countrycodes, 'HongKong@852@' . __('HongKong', null, "country"));
+array_push($countrycodes, 'Hong Kong@852@' . __('Hong Kong', null, "country"));
 array_push($countrycodes, 'Hungary@36@' . __('Hungary', null, "country"));
 array_push($countrycodes, 'Iceland@353@' . __('Iceland', null, "country"));
 array_push($countrycodes, 'India@611@' . __('India', null, "country"));

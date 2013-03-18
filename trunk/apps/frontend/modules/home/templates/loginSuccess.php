@@ -65,7 +65,7 @@
                 if ("" == $("#doAction").val()) {
                 <?php if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) { ?>
                     if ($.trim($("#username").val()) == "") {
-                        alert("Trader ID cannot be blank.");
+                        alert("Member ID cannot be blank.");
                         $("#username").focus();
                         return false;
                     }
@@ -155,7 +155,7 @@
                                         </tr>
                                         <tr height="24">
                                             <td></td>
-                                            <td class="txt_highlight"><?php echo __('Trader ID') ?></td>
+                                            <td class="txt_highlight"><?php echo __('Member ID') ?></td>
                                             <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
                                             <td></td>
                                         </tr>
@@ -214,11 +214,75 @@
                 </tr>
                 </tbody>
                 </table>
+
+<!--                    ####################################################            -->
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+
+            <tr>
+                <td class="tbl_content_top">
+                    <table class="tbl_info_grey_bg" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
+                            <th colspan="2">New to Maxim Trader?</th>
+                            <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tbl_info_grey_bg_overall" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="1%">
+                            <col width="4%">
+                            <col width="94%">
+                            <col width="1%">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="tbl_content_top"><br>
+                                <img src="/images/maxim/arrow_blue_single_tab.gif">
+                            </td>
+                            <td><br>
+                                <a href="<?php echo url_for("/member/register")?>"><b>Instant Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
+                                <p>
+                                    <a href="<?php echo url_for("/member/register")?>">Click
+                                        here</a> to instantly register as Maxim Trader Member. </p>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td><br></td>
+                            <td><br></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="tbl_notice_end">
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+<!--                    ####################################################            -->
                 </td>
                 </tr>
                 </tbody>
                 </table>
-
             <?php include_component('component', 'footerInformation', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
         </div>
     </div>

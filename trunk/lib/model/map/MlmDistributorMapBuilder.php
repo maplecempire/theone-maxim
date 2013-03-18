@@ -160,5 +160,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('LOAN_ACCOUNT', 'LoanAccount', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('SELF_REGISTER', 'SelfRegister', 'string', CreoleTypes::VARCHAR, true, 1);
+
 	} 
 } 

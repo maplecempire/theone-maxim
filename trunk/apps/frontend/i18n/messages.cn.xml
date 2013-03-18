@@ -11,7 +11,7 @@
                 <target>股东ID</target>
             </trans-unit>
             <trans-unit>
-                <source>Trader ID</source>
+                <source>Member ID</source>
                 <target>会员ID</target>
             </trans-unit>
             <trans-unit id="3">
@@ -135,7 +135,7 @@
                 <target>登陆账号为</target>
             </trans-unit>
             <trans-unit>
-                <source>Your Trader ID</source>
+                <source>Your Member ID</source>
                 <target>登陆账号为</target>
             </trans-unit>
 			<trans-unit id="29">
@@ -704,7 +704,7 @@
             <trans-unit><source>MT4 Withdrawal</source><target>MT4兑现</target></trans-unit>
             <trans-unit><source>CP1 Amount</source><target>CP1金额</target></trans-unit>
             <trans-unit><source>CP1 Balance</source><target>CP1金额</target></trans-unit>
-            <trans-unit><source>Transfer To Trader ID</source><target>转让给会员ID</target></trans-unit>
+            <trans-unit><source>Transfer To Member ID</source><target>转让给会员ID</target></trans-unit>
             <trans-unit><source>Transfer CP1 Amount</source><target>转让CP1金额</target></trans-unit>
             <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal Status</source><target>MT4兑现状态</target></trans-unit>
@@ -729,7 +729,7 @@
             <trans-unit><source>Auto Placement</source><target>自动按置</target></trans-unit>
             <trans-unit><source>Account Login Details</source><target>户口登录配置</target></trans-unit>
             <trans-unit><source>Search By Username</source><target>搜索用户名</target></trans-unit>
-            <trans-unit><source>Genealogy for your Trader ID</source><target>您的团队架购图户口</target></trans-unit>
+            <trans-unit><source>Genealogy for your Member ID</source><target>您的团队架购图户口</target></trans-unit>
             <trans-unit><source>I understand that as an OfxTrader customer, it is my responsibility to review all necessary information about currency trading and the OfxTrader</source><target>我同意作为OfxTrader客户的责任是检讨有关外汇交易的所有必要的信息和OfxTrader的</target></trans-unit>
             <trans-unit><source>Existing Users Login</source><target>会员登入</target></trans-unit>
             <trans-unit><source>Great day, Trader!</source><target>您好！</target></trans-unit>

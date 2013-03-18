@@ -116,7 +116,7 @@ $(function() {
     });
     <?php
         if ($errorSearch == true) {
-            echo "alert('Invalid Trader ID.');";
+            echo "alert('Invalid Member ID.');";
         }
     ?>
 });
@@ -207,7 +207,7 @@ function reassignDatagridEventAttr(){
     <input type="hidden" name="doAction" id="doAction">
     <input type="hidden" name="p" value="<?php echo $pageDirection; ?>">
 
-    <?php echo __("Trader ID")?>&nbsp;<input size="20" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
+    <?php echo __("Member ID")?>&nbsp;<input size="20" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
 
     <br>
 </form>

@@ -193,10 +193,10 @@ class financeActions extends sfActions
                 // ******** once mt4 withdrawal has been approved at backend,
                 //          the fund will be credited into ecash wallet **********
                 if (Globals::STATUS_COMPLETE == $statusCode && $mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
-                    $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
                     $mt4WithdrawalAmount = $mt4Withdrawal->getAmountRequested();
                     $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                     $tbl_account_ledger->setDistId($mt4Withdrawal->getDistId());
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MT4_WITHDRAWAL);
                     $tbl_account_ledger->setRemark("Withdrawal Amount:" . $mt4Withdrawal->getAmountRequested() . ", ID:" . $mt4Withdrawal->getWithdrawId());
@@ -207,7 +207,7 @@ class financeActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
 
                     $mt4Withdrawal->setStatusCode(Globals::STATUS_COMPLETE);
                 } else {
@@ -247,10 +247,10 @@ class financeActions extends sfActions
                     if ($mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
 
                         if (Globals::STATUS_COMPLETE == $statusCode && $mt4Withdrawal->getStatusCode() == Globals::STATUS_PENDING) {
-                            $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $maintenanceBalance = $this->getAccountBalance($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
                             $mt4WithdrawalAmount = $mt4Withdrawal->getAmountRequested();
                             $tbl_account_ledger = new MlmAccountLedger();
-                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                             $tbl_account_ledger->setDistId($mt4Withdrawal->getDistId());
                             $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MT4_WITHDRAWAL);
                             $tbl_account_ledger->setRemark("Withdrawal Amount:" . $mt4Withdrawal->getAmountRequested() . ", ID:" . $mt4Withdrawal->getWithdrawId());
@@ -261,7 +261,7 @@ class financeActions extends sfActions
                             $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $tbl_account_ledger->save();
 
-                            $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
 
                             $mt4Withdrawal->setStatusCode(Globals::STATUS_COMPLETE);
                         } else {

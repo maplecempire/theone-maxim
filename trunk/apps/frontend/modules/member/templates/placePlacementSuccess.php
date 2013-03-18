@@ -5,7 +5,7 @@
         <td>
 			<table border='1' width='100%'>
 			<tr valign="middle" style="background-color:#f1f1f1;height:32px;">
-				<td align='center'><?php echo __('Trader ID') ?></td><td align='center'><?php echo __('Trader Name') ?></td><td align='center'><?php echo __('Activation Date') ?></td><td align='center'><?php echo __('Registered Date') ?></td><td align='center'><?php echo __('Position') ?></td>
+				<td align='center'><?php echo __('Member ID') ?></td><td align='center'><?php echo __('Trader Name') ?></td><td align='center'><?php echo __('Activation Date') ?></td><td align='center'><?php echo __('Registered Date') ?></td><td align='center'><?php echo __('Position') ?></td>
 			</tr>
 			<?php 
 			foreach($TblDist as $dist){
@@ -69,7 +69,7 @@ function reassignDatagridEventAttr(){
     <table class="display" id="datagrid" border="0" width="100%">
         <thead>
         <tr>
-            <th><?php echo __('Trader ID') ?></th>
+            <th><?php echo __('Member ID') ?></th>
             <th><?php echo __('Trader Name') ?></th>
             <th><?php echo __('Placement ID') ?></th>
             <th><?php echo __('Position') ?></th>

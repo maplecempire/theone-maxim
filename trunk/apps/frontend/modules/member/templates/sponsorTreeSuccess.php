@@ -87,7 +87,7 @@ img.tree-minus-button:hover, img.tree-plus-button:hover {
 
 <div class="clear"></div>
 <br>
-<span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": <b>" . $distinfo->getDistributorCode(); ?></b></span>
+<span class="txt_title"><?php echo __('Genealogy for your Member ID') . ": <b>" . $distinfo->getDistributorCode(); ?></b></span>
 
 <?php if ($sf_flash->has('successMsg')): ?>
     <div class="ui-widget">

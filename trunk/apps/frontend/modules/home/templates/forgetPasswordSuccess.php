@@ -183,7 +183,7 @@
                                         </tr>
                                         <tr height="24">
                                             <td></td>
-                                            <td class="txt_highlight">Trader ID</td>
+                                            <td class="txt_highlight">Member ID</td>
                                             <td colspan="2"><input name="username" id="username" size="18" autocomplete="off"
                                                                    type="text" value="<?php echo $username ?>"></td>
                                             <td></td>
