@@ -154,6 +154,10 @@ transferEpoint:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+transferRP:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 upgradePackageViaTree:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
