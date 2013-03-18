@@ -149,7 +149,7 @@ $(function() {
                 <tr>
                     <td align="center">
                         <img src="/images/ezy-cash-card.png" alt="EZY Cash Card">
-<!--                        <a href="https://www.ezybonds.com/members/join.asp?affiliateid=36496" target="_blank"><img src="http://www.ezybonds.com/images/banners/ezy_join_small.gif"></a>-->
+                        <a href="https://www.ezybonds.com/members/join.asp?affiliateid=36496" target="_blank"><img src="http://www.ezybonds.com/images/banners/ezy_join_small.gif"></a>
                     </td>
                 </tr>
             </table>

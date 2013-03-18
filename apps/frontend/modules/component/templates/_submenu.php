@@ -88,6 +88,13 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/applyEzyCashCard") ?>"><span><?php echo __('Apply EzyCash Card'); ?></span></a>
         </li>
+
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="https://www.ezybonds.com/members/join.asp?affiliateid=36496" target="_blank">
+                <span><?php echo __('EzyAccount Registration'); ?></span>
+            </a>
+        </li>
+
     <?php } ?>
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -118,7 +125,8 @@ function blink(selector) {
         </li>
     </ul>-->
     <br class="clear"><br>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php
+    if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null) { ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -166,11 +174,14 @@ function blink(selector) {
 
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
     <ul>
-        <li class="menu_title"><?php echo __('REPORT'); ?></li>
+        <li class="menu_title"><?php echo __('FUND MANAGEMENT'); ?></li>
 
 
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Report'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/member/fundManagementReport") ?>"><span><?php echo __('Fund Management Contract'); ?></span></a>
         </li>
         <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <span style="color: #808080;"><?php /*echo __('MaximTrade Executor™ Report'); */?></span>

@@ -93,7 +93,7 @@
     <td><br></td>
 </tr>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Genealogy for your Trader ID') . ": " . $distinfo->getDistributorCode(); ?></span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Genealogy for your Member ID') . ": " . $distinfo->getDistributorCode(); ?></span></td>
 </tr>
 <tr>
     <td>&nbsp;</td>

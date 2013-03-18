@@ -134,7 +134,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Trader ID') ?></td>
+                    <td><?php echo __('Member ID') ?></td>
                     <td><input type="text" readonly="readonly" id="distributorCode" size="20px" value="<?php echo $pendingDistDB->getDistributorCode(); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>

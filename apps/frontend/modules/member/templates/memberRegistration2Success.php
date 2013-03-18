@@ -29,13 +29,13 @@ $(function() {
             }
         },
         rules : {
-            "userName" : {
+            /*"userName" : {
                 required : true,
                 noSpace: true,
                 loginRegex: true,
                 minlength : 6,
                 remote: "/member/verifyUserName"
-            },
+            },*/
             "userpassword" : {
                 required : true,
                 minlength : 6
@@ -172,6 +172,11 @@ $(function() {
             verifyPlacementDistId();
         }
     });
+
+<?php if ($distributor->getStatusCode() == Globals::STATUS_ACTIVE && $distributor->getPlacementTreeStructure() == null) { ?>
+    $(".placementClass").hide();
+    $("#sponsorId").attr("readonly", "readonly");
+<?php } ?>
 });
 
 function verifySponsorId() {
@@ -228,7 +233,6 @@ function verifyPlacementDistId() {
 </script>
 
 <form action="/member/doMemberRegistration" id="registerForm" method="post">
-
 <table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">
@@ -285,7 +289,7 @@ function verifyPlacementDistId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th colspan="2"><?php echo __(' and Placement Position') ?></th>
+        <th colspan="2"><?php echo __('Referral and Placement Position') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -293,7 +297,7 @@ function verifyPlacementDistId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __(' ID') ?></td>
+        <td><?php echo __('Referral ID') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
             &nbsp;
@@ -303,7 +307,7 @@ function verifyPlacementDistId() {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __(' Name') ?></td>
+        <td><?php echo __('Referral Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php echo $sponsorName;?>" readonly="readonly">
             &nbsp;
@@ -311,7 +315,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_odd placementClass">
         <td>&nbsp;</td>
         <td><?php echo __('Placement Type') ?></td>
         <td>
@@ -323,7 +327,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even tr_autoPlacement">
+    <tr class="tbl_form_row_even tr_autoPlacement placementClass">
         <td>&nbsp;</td>
         <td><?php echo __('Auto Placement') ?></td>
         <td>
@@ -335,7 +339,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even tr_manualPlacement" style="display: none">
+    <tr class="tbl_form_row_even tr_manualPlacement placementClass" style="display: none">
         <td>&nbsp;</td>
         <td><?php echo __('Placement ID') ?></td>
         <td>
@@ -345,7 +349,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd tr_manualPlacement" style="display: none">
+    <tr class="tbl_form_row_odd tr_manualPlacement placementClass" style="display: none">
         <td>&nbsp;</td>
         <td><?php echo __('Placement Name') ?></td>
         <td>
@@ -355,7 +359,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even tr_manualPlacement" style="display: none">
+    <tr class="tbl_form_row_even tr_manualPlacement placementClass" style="display: none">
         <td>&nbsp;</td>
         <td><?php echo __('Placement Position') ?></td>
         <td>
@@ -389,20 +393,20 @@ function verifyPlacementDistId() {
         </th>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <!--<tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('User Name') ?></td>
+        <td><?php /*echo __('User Name') */?></td>
         <td>
             <input type="text" class="inputbox" id="userName" name="userName">
             &nbsp;
             <br>
-            <?php echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') ?>
+            <?php /*echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') */?>
         </td>
         <td>&nbsp;</td>
-    </tr>
+    </tr>-->
 
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Set Password') ?></td>
         <td>
@@ -413,7 +417,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Password') ?></td>
         <td>
@@ -424,7 +428,7 @@ function verifyPlacementDistId() {
     </tr>
 
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Security Password') ?></td>
         <td>
@@ -439,7 +443,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Security Password') ?></td>
         <td>

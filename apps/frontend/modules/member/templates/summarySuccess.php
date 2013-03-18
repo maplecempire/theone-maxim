@@ -15,7 +15,7 @@ var annoucementArr = [];
 annoucementArr.push({
     poptitle:'Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー',
     news_date:'18 FEB 2013',
-    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
+    news_desc:'<br><br><a href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
 });
 annoucementArr.push({
     poptitle:'Apply EzyCash Card Now!!!',
@@ -108,42 +108,19 @@ $(function() {
         icons: {
             primary: "ui-icon-circle-close"
         }
+    }).click(function(event){
+        event.preventDefault();
+        var answer = confirm("Are you sure you want to remove this member?");
+        if (answer){
+            waiting()
+            $("#distid").val($(this).attr("ref"));
+            $("#frmDeleteMember").submit();
+        }
     });
     $(".activeLink").button({
         icons: {
             primary: "ui-icon-circle-check"
         }
-    }).click(function(event) {
-        /*event.preventDefault();
-        waiting();
-        $("#dgActivateMember_shareholderId").val($(this).attr("refCode"));
-        $("#dgActivateMember_alias").val($(this).attr("refNickname"));
-        $("#dgActivateMember_registeredTime").val($(this).attr("refCreatedDate"));
-        $.ajax({
-            type : 'POST',
-            url : "/member/fetchPackage",
-            dataType : 'json',
-            cache: false,
-            data: {
-            },
-            success : function(data) {
-                $.unblockUI();
-                packageStrings = "";
-                jQuery.each(data.package, function(key, value) {
-                    packageStrings += "<option value='" + value.price + "' ref='" + value.packageId + "'>" + value.name + "</option>";
-                });
-
-                $("#dgActivateMember").dialog("open");
-
-                $("#dgActivateMember_point").html(packageStrings).trigger("change");
-
-                $("#dgActivateMember_pointAvail").val(data.point);
-                $("#dgActivateMember_ecash").val(data.ecash);
-            },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Server connection error.");
-            }
-        });*/
     });
 
     $("#dgActivateMember").dialog("destroy");
@@ -702,7 +679,8 @@ function loadContent(popIndex) {
 </tr>
 </tbody>
 </table>
-
+<?php
+    if ($distributor->getStatusCode() == Globals::STATUS_ACTIVE && $distributor->getPlacementTreeStructure() != null) { ?>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -715,8 +693,7 @@ function loadContent(popIndex) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Inactive Traders') ?></th>
-        <th class="tbl_content_right"></th>
+        <th colspan="2"><?php echo __('Immediate Member Restructuring') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -743,17 +720,18 @@ function loadContent(popIndex) {
                             }
 
                     echo "<tr class='row" . $trStyle . "'>
-                    <td>" . $dist->getCreatedOn() . "</td>
-                    <td class='date'>" . $dist->getDistributorCode() . "</td><td>" . $dist->getFullName() . "</td>
-                    <td>" . link_to(__('Active'), 'member/purchasePackage?p=' . $dist->getDistributorId(), array(
+                    <td align='center'>" . $dist->getCreatedOn() . "</td>
+                    <td align='center' class='date'>" . $dist->getDistributorCode() . "</td>
+                    <td align='center'>" . $dist->getFullName() . "</td>
+                    <td align='center'>" . link_to(__('Do Placement'), 'member/placementTree?bePlacementId=' . $dist->getDistributorId(), array(
                                    'class' => 'activeLink',
                                    'ref' => $dist->getDistributorId(),
                                    'refCode' => $dist->getDistributorCode(),
                                    'refNickname' => $dist->getFullname(),
                                    'refCreatedDate' => $dist->getCreatedOn(),
-                              )) . "&nbsp;" . link_to(__('Delete'), 'member/delete?distid=' . $dist->getDistributorId(), array(
+                              )) . "&nbsp;" . link_to(__('Delete'), 'member/delete' , array(
                                       'class' => 'deleteLink',
-                                      'confirm=Are you sure you want to remove?'
+                                      'ref' => $dist->getDistributorId()
                                                                          )) . "</td></tr>";
                             }
                         } else {
@@ -767,7 +745,10 @@ function loadContent(popIndex) {
     </tr>
     </tbody>
 </table>
-
+<?php } ?>
+<form action="/member/delete" id="frmDeleteMember" name="frmDeleteMember">
+    <input type="hidden" id="distid" name="distid">
+</form>
 <div class="info_bottom_bg"></div>
 <div class="clear"></div>
 <br>
@@ -941,7 +922,7 @@ function loadContent(popIndex) {
     <input type="hidden" id="dgActivateMember_pointAvail"/>
     <table cellspacing="5" cellpadding="3">
         <tr>
-            <td class="text" width="30%"><label><?php echo __('Trader ID') ?></label></td>
+            <td class="text" width="30%"><label><?php echo __('Member ID') ?></label></td>
             <td>:</td>
             <td><input type="text" disabled="disabled" id="dgActivateMember_shareholderId"
                        class="text ui-widget-content ui-corner-all"/></td>

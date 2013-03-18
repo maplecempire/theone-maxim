@@ -71,7 +71,7 @@
             },
                 success : function(data) {
                     if (data == null || data == "") {
-                        alert("Invalid Trader ID");
+                        alert("Invalid Member ID");
                         $('#sponsorId').focus();
                         $("#sponsorName").html("");
                     } else {
@@ -91,7 +91,7 @@
 <table cellpadding="0" cellspacing="5" align="center" border="0">
     <tr>
         <td>
-			<font color='white'><?php echo __('Trader ID'); ?></font>
+			<font color='white'><?php echo __('Member ID'); ?></font>
 		</td>
 		<td>
 			<input name="sponsorId" type="text" id="sponsorId" tabindex="1" />

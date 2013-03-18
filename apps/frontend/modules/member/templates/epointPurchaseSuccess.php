@@ -163,7 +163,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Trader ID'); ?></td>
+                    <td><?php echo __('Member ID'); ?></td>
                     <td>
                         <input name="traderId" type="text" id="traderId" maxlength="50" disabled="disabled"
                                        value="<?php echo $distDB->getDistributorCode(); ?>"/>

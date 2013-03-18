@@ -67,7 +67,7 @@ $(function() {
                         <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
                             <tr>
                                 <td width="160px" class="caption">
-                                    <strong><?php echo __('Trader ID'); ?></strong>
+                                    <strong><?php echo __('Member ID'); ?></strong>
                                 </td>
                                 <td class="value">
                                     <input name="traderId" type="text" id="traderId" tabindex="1" maxlength="50" disabled="disabled" value="<?php echo $distDB->getDistributorCode(); ?>"/>

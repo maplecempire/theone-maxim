@@ -64,17 +64,22 @@ $(function() {
             userName: {
                 remote: "<?php echo __('User Name already in use') ?>."
             },
+            captcha: "<br><?php echo __('Correct captcha is required') ?>.",
             fullname: {
                 remote: "<?php echo __('Full Name already in use') ?>."
             }
         },
         rules : {
-            "userName" : {
+            /*"userName" : {
                 required : true,
                 noSpace: true,
                 loginRegex: true,
                 minlength : 6,
                 remote: "/member/verifyUserName"
+            },*/
+            "captcha" : {
+                required: true,
+                remote: "/captcha/process"
             },
             "userpassword" : {
                 required : true,
@@ -393,20 +398,20 @@ function error(data) {
         </th>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <!--<tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('User Name') ?></td>
+        <td><?php /*echo __('User Name') */?></td>
         <td>
             <input type="text" class="inputbox" id="userName" name="userName">
             &nbsp;
             <br>
-            <?php echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') ?>
+            <?php /*echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') */?>
         </td>
         <td>&nbsp;</td>
-    </tr>
+    </tr>-->
 
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Set Password') ?></td>
         <td>
@@ -417,7 +422,7 @@ function error(data) {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Password') ?></td>
         <td>
@@ -428,7 +433,7 @@ function error(data) {
     </tr>
 
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Security Password') ?></td>
         <td>
@@ -443,7 +448,7 @@ function error(data) {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Security Password') ?></td>
         <td>
@@ -775,13 +780,18 @@ function error(data) {
 
 <tr class="tbl_form_row_odd">
     <td>&nbsp;</td>
-    <td colspan="5" class="tbl_content_right">
+    <td class="tbl_content_right">
+        <div id="captchaimage" style="height: 32; width: 100">
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" id="refreshimg" title="Click to refresh image"><img src="/captcha/image?<?php echo time(); ?>" width="90" height="30" alt="Captcha image" style="border-style: none"/></a>
+        </div>
+
         <?php
-          require_once('recaptchalib.php');
-          $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
-          echo recaptcha_get_html($publickey);
+          //require_once('recaptchalib.php');
+          //$publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+          //echo recaptcha_get_html($publickey);
         ?>
     </td>
+    <td colspan="3"><input name="captcha" type="text" id="captcha" class="login_t73" size="10"/></td>
     <td>&nbsp;</td>
 </tr>
 <tr class="tbl_listing_end">

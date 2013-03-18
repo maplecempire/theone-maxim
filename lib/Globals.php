@@ -14,6 +14,7 @@ abstract class Globals {
     const WITHDRAWAL_EZY_CASH_CARD = 'EZY CASH CARD';
     const WITHDRAWAL_VISA_DEBIT_CARD = 'VISA DEBIT CARD';
 
+    const COUNTRY_OTHER = "Others";
     const YES = 1;
     const NO = 0;
     const TRUE = 'T';

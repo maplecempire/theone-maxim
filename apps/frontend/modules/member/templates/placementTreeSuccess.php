@@ -115,9 +115,30 @@ $(function() {
     }).mouseout(function() {
         $('#tooltip').hide();
     });
+    
+    $(".network-register").click(function(event){
+        event.preventDefault();
+        var url = $(this).attr("href");
+        var bePlacementId = $("#bePlacementId").val();
+        var bePlacementDistCode = $("#bePlacementDistCode").val();
+
+        if (bePlacementDistCode != "") {
+            var sure = confirm("<?php echo __('Are you sure want to place this ');?>" + bePlacementDistCode + " <?php echo __('into this position?') ?>");
+            if (sure) {
+                waiting();
+                $("#distcode").remove();
+                $("#registerForm").attr("action", url + "&bePlacementId=" + bePlacementId);
+                $("#registerForm").submit();
+            }
+        } else {
+            $("#registerForm").attr("action", url + "&bePlacementId=" + bePlacementId);
+            $("#registerForm").submit();
+        }
+    });
+    
     <?php
         if ($errorSearch == true) {
-            echo "alert('Invalid Trader ID.');";
+            echo "alert('Invalid Member ID.');";
         }
     ?>
 });
@@ -141,7 +162,7 @@ function reassignDatagridEventAttr(){
         if (sure) {
             waiting();
             $("#doAction").val("save");
-            $("#transferForm").submit();
+            $("#registerForm").submit();
         }
 	});
 }
@@ -202,16 +223,16 @@ function reassignDatagridEventAttr(){
 </tbody>
 </table>
 
-<form action="/member/placementTree" id="transferForm" method="post">
+<form action="/member/placementTree" id="registerForm" method="post">
+    <input type="hidden" name="bePlacementId" id="bePlacementId" value="<?php echo $bePlacementId;?>">
+    <input type="hidden" name="bePlacementDistCode" id="bePlacementDistCode" value="<?php echo $bePlacementDistCode;?>">
     <input type="hidden" name="uplineDistCode" id="uplineDistCode">
     <input type="hidden" name="uplinePosition" id="uplinePosition">
     <input type="hidden" name="sponsorDistId" id="sponsorDistId">
     <input type="hidden" name="doAction" id="doAction">
     <input type="hidden" name="p" id="<?php echo $pageDirection; ?>">
-        <?php echo __("Trader ID")?>&nbsp;<input size="20" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
+        <?php echo __("Member ID")?>&nbsp;<input size="20" id="distcode" name="distcode" value="<?php echo $distcode ?>"/>&nbsp;<button id="btnSearch"><?php echo __('Search') ?></button>
         <br>
-
-
 </form>
 
 <div id="dgActivateMember" title="<?php echo __('Activate Trader') ?>" style="display:none;">
@@ -325,10 +346,10 @@ function reassignDatagridEventAttr(){
 ?>
 <div class="network-top-more-node">
     <?php if ($isTop == false) { ?>
-        <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getTreeUplineDistCode()) ?>"></a>
+        <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getTreeUplineDistCode()."&bePlacementId=".$bePlacementId) ?>"></a>
     <?php } ?>
 </div>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
         <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
         <?php echo $distDB->getDistributorCode()?>
     </a><br>
@@ -395,7 +416,7 @@ function reassignDatagridEventAttr(){
 
 <div style="width: 60px; margin-left: 118px; text-align:center; float:left;" class="stats-node">
     <?php if ($distCode != "") { ?>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
             <?php echo $distDB->getDistributorCode()?>
             </a><br>
@@ -552,7 +573,7 @@ if ($anode[1]['distCode'] != "") { ?>
 ?>
 <div style="width: 60px; margin-left: 43px; text-align:center; float:left;" class="stats-node">
     <?php if ($distCode != "") { ?>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
             <?php echo $distDB->getDistributorCode()?>
             </a><br>
@@ -560,7 +581,7 @@ if ($anode[1]['distCode'] != "") { ?>
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
-    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
         <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=left") ?>" class="network-register">Register</a>
         </div>
@@ -611,7 +632,7 @@ if ($anode[1]['distCode'] != "") { ?>
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
     <?php if ($distCode != "") { ?>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
             <?php echo $distDB->getDistributorCode()?>
             </a><br>
@@ -619,7 +640,7 @@ if ($anode[1]['distCode'] != "") { ?>
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
-    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
         <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=right") ?>" class="network-register">Register</a>
         </div>
@@ -670,7 +691,7 @@ if ($anode[1]['distCode'] != "") { ?>
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
     <?php if ($distCode != "") { ?>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
                 <?php echo $distDB->getDistributorCode()?>
             </a><br>
@@ -678,7 +699,7 @@ if ($anode[1]['distCode'] != "") { ?>
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
-    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
         <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=left") ?>" class="network-register">Register</a>
         </div>
@@ -729,7 +750,7 @@ if ($anode[1]['distCode'] != "") { ?>
 ?>
 <div style="width: 60px; margin-left: 90px; text-align:center; float:left;" class="stats-node">
     <?php if ($distCode != "") { ?>
-    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
+    <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
             <?php echo $distDB->getDistributorCode()?>
         </a><br>
@@ -737,7 +758,7 @@ if ($anode[1]['distCode'] != "") { ?>
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
-    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>"></a></div>
+    <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
         <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=right") ?>" class="network-register">Register</a>
         </div>
