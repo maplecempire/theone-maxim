@@ -98,7 +98,10 @@ class memberActions extends sfActions
 
     public function executeConvertRPToCp1()
     {
-        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+
+        $ledgerAccountBalance = $rp - $debitAccount;
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
@@ -3232,7 +3235,11 @@ We look forward to your custom in the near future. Should you have any queries, 
             $ecash = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
-            $rp = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
+
+            $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+            $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+
+            $rp = $rp - $debitAccount;
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorCode()."|%", Criteria::LIKE);
@@ -4307,7 +4314,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferRP()
     {
-        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+
+        $ledgerAccountBalance = $rp - $debitAccount;
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
@@ -7355,7 +7365,8 @@ Wish you all the best.
         $dateUtil = new DateUtil();
         $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
-        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "cenlasy@hotmail.com,r9jason@gmail.com");
+        $sendMailService->sendMail("", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+        //$sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "cenlasy@hotmail.com,r9jason@gmail.com");
     }
 
     function getAllBonusData() {
