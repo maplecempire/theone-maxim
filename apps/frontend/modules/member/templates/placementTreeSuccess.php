@@ -131,6 +131,7 @@ $(function() {
                 $("#registerForm").submit();
             }
         } else {
+            $("#distcode").remove();
             $("#registerForm").attr("action", url + "&bePlacementId=" + bePlacementId);
             $("#registerForm").submit();
         }
