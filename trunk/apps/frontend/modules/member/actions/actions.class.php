@@ -376,8 +376,6 @@ class memberActions extends sfActions
                  . " AND dist_id = '" . $distId . "'"
                  . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
 
-            var_dump($query);
-            //exit();
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
             $resultset = $statement->executeQuery();
@@ -789,7 +787,6 @@ class memberActions extends sfActions
 
         $uplineDistCode = $this->getRequestParameter('distcode');
         $position = $this->getRequestParameter('position');
-
         $c = new Criteria();
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -1602,7 +1599,7 @@ class memberActions extends sfActions
         $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
         $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
-        if (!$mail->Send()) {
+        if (!$mail->Send()) {                                                                                                               r
             echo $mail->ErrorInfo;
         }*/
         return $this->redirect('/member/registerInfo');
