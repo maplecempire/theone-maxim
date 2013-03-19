@@ -75,7 +75,7 @@ $(function() {
                             </tr>
                             <tr>
                                 <td class="caption">
-                                    <strong><?php echo __('Trader Name'); ?></strong>
+                                    <strong><?php echo __('Member Name'); ?></strong>
                                 </td>
                                 <td class="value">
                                     <input name="traderName" type="text" id="traderName" tabindex="1" maxlength="50" disabled="disabled" value="<?php echo $distDB->getFullname(); ?>"/>

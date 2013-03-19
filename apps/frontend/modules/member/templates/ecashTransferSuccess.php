@@ -99,7 +99,7 @@
     </tr>
     <tr>
         <td>
-			<font color='white'><?php echo __('Trader Name'); ?></font>
+			<font color='white'><?php echo __('Member Name'); ?></font>
 		</td>
 		<td>
 			<span id="sponsorName"></span>

@@ -111,7 +111,7 @@
                 <tbody>
                 <tr>
                     <td rowspan="3">&nbsp;</td>
-                    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Trader has been registered successfully.') ?></span></td>
+                    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Member has been registered successfully.') ?></span></td>
                     <td rowspan="3">&nbsp;</td>
                 </tr>
                 <tr>
@@ -142,7 +142,7 @@
                                         <tbody>
                                         <tr>
                                             <th class="tbl_header_left"><img border="0" src="/images/maxim/hdr-gry-left.gif"></th>
-                                            <th class="tbl_content_left" colspan="3"><?php echo __('Trader Information') ?> &nbsp;</th>
+                                            <th class="tbl_content_left" colspan="3"><?php echo __('Member Information') ?> &nbsp;</th>
                                             <th class="tbl_header_right"><img border="0" src="/images/maxim/hdr-gry-right.gif"></th>
                                         </tr>
 

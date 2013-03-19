@@ -734,7 +734,7 @@ function reassignDatagridEventAttr(){
 </table>
 </form>
 
-<div id="dgActivateMember" title="<?php echo __('Activate Trader') ?>" style="display:none;">
+<div id="dgActivateMember" title="<?php echo __('Activate Member') ?>" style="display:none;">
     <table class="display" id="datagrid" border="0" width="100%">
         <thead>
         <tr>

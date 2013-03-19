@@ -654,7 +654,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Inactive Traders') ?></th>
+        <th><?php echo __('Inactive Member') ?></th>
         <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -744,7 +744,7 @@ function reassignDatagridAnnouncementEventAttr() {
     </div>
 </div>
 
-<div id="dgActivateMember" title="<?php echo __('Activate Trader') ?>" style="display:none;">
+<div id="dgActivateMember" title="<?php echo __('Activate Member') ?>" style="display:none;">
     <input type="hidden" id="dgActivateMember_ecash">
     <input type="hidden" id="dgActivateMember_pointAvail"/>
     <table cellspacing="5" cellpadding="3">

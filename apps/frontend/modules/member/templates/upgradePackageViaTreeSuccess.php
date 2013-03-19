@@ -162,7 +162,7 @@ $(function() {
                 </tr>
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('e-Trader Code') ?></td>
+                    <td><?php echo __('Member ID') ?></td>
                     <td><input type="text" name="distCode" readonly="readonly" size="20px" value="<?php echo $distCode; ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>
