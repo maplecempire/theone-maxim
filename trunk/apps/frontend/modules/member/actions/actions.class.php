@@ -7514,8 +7514,10 @@ Wish you all the best.
         $idx = 1;
         foreach ($arrs as $arr) {
             $debitAccount = $arr['TOTAL_DEBIT'];
+            if ($debitAccount == null)
+                $debitAccount = 0;
             $rollingPoint = $arr['TOTAL_ROLLING_POINT'] - $debitAccount;
-            $rollingPointUsed = $arr['TOTAL_RP_USED'] - $debitAccount;
+            $rollingPointUsed = $arr['TOTAL_RP_USED'];
             $rollingPointAvailable = $rollingPoint - $rollingPointUsed;
 
             $body .= "<tr class='sf_admin_row_1'>
@@ -7557,16 +7559,18 @@ Wish you all the best.
             (
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
                     FROM mlm_account_ledger account
-                        where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by dist_id
+                        where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
             ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
         LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-    where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by transferLedger.dist_id";
+    where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_RP."' group by transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
         $resultArray = array();
         $count = 0;
+
+        var_dump($query);
         while ($resultset->next()) {
             $arr = $resultset->getRow();
 
