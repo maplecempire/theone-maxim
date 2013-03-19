@@ -1,92 +1,51 @@
 <?php include('scripts.php'); ?>
 
-<script type="text/javascript">
-    $(function() {
-        $("#transferForm").validate({
-            messages : {
-                transactionPassword: {
-                    remote: "Security Password is not valid."
-                }
-            },
-            rules : {
-                "sponsorId" : {
-                    required: true
-                    //, minlength : 8
-                },
-                "epointAmount" : {
-                    required : true
-                },
-                "transactionPassword" : {
-                    required : true,
-                    remote: "/member/verifyTransactionPassword"
-                }
-            },
-            submitHandler: function(form) {
-                waiting();
-                var amount = $('#epointAmount').autoNumericGet();
-                var epointBalance = $('#epointBalance').autoNumericGet();
-                //console.log(amount);
-                //console.log(epointBalance);
-                if (parseFloat(epointBalance) < (parseFloat(amount))) {
-                    alert("<?php echo __("In-sufficient RP")?>");
-                    return false;
-                }
-
-                $("#epointAmount").val(amount);
-                form.submit();
+<script type="text/javascript" language="javascript">
+$(function() {
+    $("#ecreditForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "Security Password is not valid."
             }
-        });
-
-        $("#sponsorId").change(function() {
-            if ($.trim($('#sponsorId').val()) != "") {
-                verifySponsorId();
+        },
+        rules : {
+            "transactionPassword" : {
+                required : true
+                , remote: "/member/verifyTransactionPassword"
+            },
+            "epointAmount" : {
+                required : true
             }
-        });
+        },
+        submitHandler: function(form) {
+            waiting();
+            var ecashBalance = $('#ecashBalance').autoNumericGet();
+            var epointAmount = $('#epointAmount').autoNumericGet();
+            //var epointAmount = parseFloat($("#cbo_epointAmount").val());
 
-        $('#epointAmount').autoNumeric({
-            mDec: 2
-        });
+            if (epointAmount > parseFloat(ecashBalance)) {
+                alert("In-sufficient RP Credit");
+                return false;
+            }
+            $("#epointAmount").val(epointAmount);
+            form.submit();
+        }
+    });
+    $('#epointAmount').autoNumeric({
+        mDec: 0
     });
 
-    function verifySponsorId() {
-        waiting();
-        $.ajax({
-            type : 'POST',
-    <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
-            url : "/member/verifySameGroupSponsorId",
-    <?php } else { ?>
-            url : "/member/verifySponsorId",
-    <?php } ?>
-            dataType : 'json',
-            cache: false,
-            data: {
-                sponsorId : $('#sponsorId').val()
-            },
-            success : function(data) {
-                if (data == null || data == "") {
-                    alert("Invalid trader ID.");
-                    $('#sponsorId').focus();
-                    $("#sponsorName").html("");
-                } else {
-                    $.unblockUI();
-                    $("#sponsorName").html(data.nickname);
-                }
-            },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Your login attempt was not successful. Please try again.");
-            }
-        });
-    }
+});
 </script>
 
 <div class="ewallet_li">
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferRP")?>" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferRP")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('RP Transfer'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertRPToCp1")?>" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertRPToCp1")?>" style="color: rgb(134, 197, 51);">
         <?php echo __('Convert RP To CP1'); ?>
     </a>
 </div>
@@ -97,7 +56,7 @@
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('RP Transfer') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert RP To CP1') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -126,7 +85,7 @@
     </tr>
     <tr>
         <td>
-            <form action="<?php echo url_for("/member/transferRP")?>" id="transferForm" name="transferForm" method="post">
+            <form action="<?php echo url_for("/member/convertRPToCp1") ?>" id="ecreditForm" name="ecreditForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -139,7 +98,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('RP Transfer') ?></th>
+                    <th colspan="2"><?php echo __('Convert RP To CP1') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -148,35 +107,39 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Transfer To Member ID'); ?></td>
+                    <td><?php echo __('RP Balance'); ?></td>
                     <td>
-                        <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
+                        <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
+                                           value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Trader Name'); ?></td>
-                    <td>
-                        <strong><span id="sponsorName"></span></strong>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('RP Balance'); ?></td>
-                    <td>
-                        <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
-                                       value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Transfer RP Amount'); ?></td>
+                    <td><?php echo __('RP Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
+                        <!--<select name="epointAmount" id="cbo_epointAmount" tabindex="2">
+                            <option value="50">50</option>
+                            <option value="200">200</option>
+                            <option value="500">500</option>
+                            <option value="1000">1,000</option>
+                            <option value="1500">1,500</option>
+                            <option value="2000">2,000</option>
+                            <option value="2500">2,500</option>
+                            <option value="3000">3,000</option>
+                            <option value="3500">3,500</option>
+                            <option value="4000">4,000</option>
+                            <option value="4500">4,500</option>
+                            <option value="5000">5,000</option>
+                            <?php
+/*                                for ($i = 6000; $i <= 100000; $i = $i + 1000) {
+                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
+                                }
+
+                            */?>
+                        </select>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -194,7 +157,6 @@
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-
                     </td>
                     <td>&nbsp;</td>
                 </tr>

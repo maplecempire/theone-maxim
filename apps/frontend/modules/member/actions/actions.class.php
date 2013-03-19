@@ -96,6 +96,64 @@ class memberActions extends sfActions
         }
     }
 
+    public function executeConvertRPToCp1()
+    {
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        $epointAmount = $this->getRequestParameter('epointAmount');
+
+        if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
+                return $this->redirect('/member/convertRPToCp1');
+            }
+
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if ($epointAmount > $ledgerAccountBalance) {
+                $this->setFlash('errorMsg', "In-sufficient RP");
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $this->setFlash('errorMsg', "Invalid Security password");
+
+            } elseif ($epointAmount > 0) {
+                $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
+                $tbl_account_ledger->setCredit(0);
+                $tbl_account_ledger->setDebit($epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT RP TO CP1");
+                $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                $tbl_account_ledger->setCredit($epointAmount);
+                $tbl_account_ledger->setDebit(0);
+                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
+                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->save();
+
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("RP convert to CP1 successful."));
+
+                return $this->redirect('/member/convertRPToCp1');
+            }
+        }
+    }
+
     public function executeApplyDebitCardHistory()
     {
 
@@ -4267,10 +4325,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/transferRP');
 
-            /*} elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
-                return $this->redirect('/member/transferRP');*/
+                return $this->redirect('/member/transferRP');
 
             } elseif ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0) {
                 $c = new Criteria();
