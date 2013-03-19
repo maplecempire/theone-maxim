@@ -7513,13 +7513,10 @@ Wish you all the best.
 
         $idx = 1;
         foreach ($arrs as $arr) {
-            $rollingPoint = $arr['ROLLING_POINT'];
-            $rollingPointAvailable = $rollingPoint;
-            $rollingPointUsed = 0;
-            if ($arr['EPOINT'] < 0) {
-                $rollingPointAvailable = $rollingPointAvailable + $arr['EPOINT'];
-                $rollingPointUsed = $arr['EPOINT'] * -1;
-            }
+            $debitAccount = $arr['TOTAL_DEBIT'];
+            $rollingPoint = $arr['TOTAL_ROLLING_POINT'] - $debitAccount;
+            $rollingPointUsed = $arr['TOTAL_RP_USED'] - $debitAccount;
+            $rollingPointAvailable = $rollingPoint - $rollingPointUsed;
 
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
@@ -7539,19 +7536,31 @@ Wish you all the best.
         return $body;
     }
     function fetchRollingPoint() {
-        $query = "SELECT
-            transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
-            , SUM(transferLedger.credit - transferLedger.debit) AS ROLLING_POINT
-                    , account.EPOINT
-                FROM mlm_account_ledger transferLedger
-                    LEFT JOIN
-                        (
-                            SELECT sum(credit - debit) AS EPOINT, account.dist_id
-                                FROM mlm_account_ledger account
-                                    where account.account_type = 'EPOINT' AND rolling_point = 'N' group by account.dist_id
-                        ) account ON account.dist_id = transferLedger.dist_id
-                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-                where transferLedger.rolling_point = 'Y' group by transferLedger.dist_id";
+        $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
+        , totalRollingPoint.TOTAL_ROLLING_POINT
+        , debitPoint.TOTAL_DEBIT
+        , rpUsed.TOTAL_RP_USED
+    FROM mlm_account_ledger transferLedger
+        LEFT JOIN
+            (
+                SELECT sum(credit) AS TOTAL_ROLLING_POINT, dist_id
+                    FROM mlm_account_ledger account
+                        where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
+            ) totalRollingPoint ON totalRollingPoint.dist_id = transferLedger.dist_id
+        LEFT JOIN
+            (
+                SELECT sum(credit) AS TOTAL_DEBIT, dist_id
+                    FROM mlm_account_ledger account
+                        where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by dist_id
+            ) debitPoint ON debitPoint.dist_id = transferLedger.dist_id
+        LEFT JOIN
+            (
+                SELECT sum(debit) AS TOTAL_RP_USED, dist_id
+                    FROM mlm_account_ledger account
+                        where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by dist_id
+            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
+    where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
