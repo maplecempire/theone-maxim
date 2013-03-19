@@ -12,16 +12,13 @@ var packageStrings = "<option value=''></option>";
 var datagrid = null;
 var datagridAnnouncement = null;
 var annoucementArr = [];
+
 annoucementArr.push({
-    poptitle:'Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー',
-    news_date:'18 FEB 2013',
-    news_desc:'<br><br><a href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
+    poptitle:'Implementation of System Generated Member ID',
+    news_date:'19 MARCH 2013',
+    news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company is implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
 });
-annoucementArr.push({
-    poptitle:'Apply EzyCash Card Now!!!',
-    news_date:'20 FEB 2013',
-    news_desc:'<br><br><a target="_self" href="/member/applyEzyCashCard"><img width="460" border="0" alt="Maxim Trader" src="/images/email/apply_ezycash_card_debit_card.png"></a>Start from today Maxim Trader clients may <a href="/member/applyEzyCashCard" style="color: #3333ff;">apply an EzyAccount</a> anytime.<br><br>EzyAccount is an extremely secure and convenient way for you to send and receive money from Maxim Trader.'
-});
+
 <?php
 $culture = $sf_user->getCulture();
 $postfix = "_english";
@@ -32,6 +29,32 @@ if ($culture == "en")
     else
         $postfix = "_chinese";
 ?>
+
+<?php
+if ($culture == "en" || $culture == "jp") {
+?>
+annoucementArr.push({
+    poptitle:'Owning to the terms as stipulated by Forex world, please provide us your documents!!!',
+    news_date:'18 MARCH 2013',
+    news_desc:'<br><br>Dear our distinguished member,<br><br>Thank you for your support and faith in us!<br><br>Owning to the terms as stipulated by Forex world, please provide us your documents:<br><br>1)      Identification (IC / Passport, front and back at same page)<br><br>2)      Proof of Address (Bank / Credit Card statement, OR Water / Electric statement, OR Phone / Internet statement)<br><br>-          Your name, current address and the date of the latest 3 months must be shown at the statement.<br><br>3)      Download and sign the Forex Agreements.<br><br>And upload all the documents at website.<br><br>Note:<br><br>Click "<a href="/member/viewProfile" target="_self" style="color: #3333ff;">User Profile</a>" to upload all the documents at "Upload Document".<br><br>Thank you for your highly cooperation.<br><br>Wish you all the best.'});
+<?php } else {  ?>
+annoucementArr.push({
+    poptitle:'由于外汇的要求严谨，请上载您的文件',
+    news_date:'18 MARCH 2013',
+    news_desc:'<br><br>您好。<br><br>由于外汇的要求严谨，请您将您的文件包括：<br><br>1） 身份证（正反面在同一页）<br><br>2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）<br><br>-          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。<br><br>3） 下载并签署外汇合约。<br><br>上传给公司，否则这会影响您日后的提现。<br><br>注：点击”<a href="/member/viewProfile" target="_self" style="color: #3333ff;">用户个人资料</a>“将所有文件上传给公司（点击"上传文件"）。<br><br>谢谢您的鼎力合作。<br><br>祝：一切顺利'});
+<?php } ?>
+
+annoucementArr.push({
+    poptitle:'Apply EzyCash Card Now!!!',
+    news_date:'20 FEB 2013',
+    news_desc:'<br><br><a target="_self" href="/member/applyEzyCashCard"><img width="460" border="0" alt="Maxim Trader" src="/images/email/apply_ezycash_card_debit_card.png"></a>Start from today Maxim Trader clients may <a href="/member/applyEzyCashCard" style="color: #3333ff;">apply an EzyAccount</a> anytime.<br><br>EzyAccount is an extremely secure and convenient way for you to send and receive money from Maxim Trader.'
+});
+
+/*annoucementArr.push({
+    poptitle:'Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー',
+    news_date:'18 FEB 2013',
+    news_desc:'<br><br><a href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
+});*/
 /*annoucementArr.push({
     poptitle:'Maxim Trader to participate in the 10th CHINA GUANGZHOU INTERNATIONAL INVESTMENT AND FINANCE EXPO 第十届广州国际投资理财金融博览会 2013年3月5-7日',
     news_date:'21 FEB 2013',
@@ -332,6 +355,7 @@ function loadContent(popIndex) {
 </tr>
 <tr>
 <td>
+
 <table cellspacing="0" cellpadding="0" class="textarea1">
 <tbody>
 <tr>
@@ -713,8 +737,8 @@ function loadContent(popIndex) {
                 <tbody>
                 <tr class="pbl_header">
                     <td><?php echo __('Registered Date') ?></td>
-                    <td><?php echo __('Username') ?></td>
-                    <td><?php echo __('Full Name') ?></td>
+                    <td><?php echo __('Member ID') ?></td>
+                    <td><?php echo __('Name') ?></td>
                     <td><?php echo __('Action') ?></td>
                 </tr>
                 <?php
@@ -731,7 +755,7 @@ function loadContent(popIndex) {
                     <td align='center'>" . $dist->getCreatedOn() . "</td>
                     <td align='center' class='date'>" . $dist->getDistributorCode() . "</td>
                     <td align='center'>" . $dist->getFullName() . "</td>
-                    <td align='center'>" . link_to(__('Do Placement'), 'member/placementTree?bePlacementId=' . $dist->getDistributorId(), array(
+                    <td align='center'>" . link_to(__('Restructure'), 'member/placementTree?bePlacementId=' . $dist->getDistributorId(), array(
                                    'class' => 'activeLink',
                                    'ref' => $dist->getDistributorId(),
                                    'refCode' => $dist->getDistributorCode(),
@@ -739,6 +763,7 @@ function loadContent(popIndex) {
                                    'refCreatedDate' => $dist->getCreatedOn(),
                               )) . "&nbsp;" . link_to(__('Delete'), 'member/delete' , array(
                                       'class' => 'deleteLink',
+                                      'style' => 'display:none',
                                       'ref' => $dist->getDistributorId()
                                                                          )) . "</td></tr>";
                             }
