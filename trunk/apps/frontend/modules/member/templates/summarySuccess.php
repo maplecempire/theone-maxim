@@ -823,7 +823,7 @@ function loadContent(popIndex) {
     </div>
 </div>
 
-<div id="dgActivateMember" title="<?php echo __('Activate Trader') ?>" style="display:none;">
+<div id="dgActivateMember" title="<?php echo __('Activate Member') ?>" style="display:none;">
     <input type="hidden" id="dgActivateMember_ecash">
     <input type="hidden" id="dgActivateMember_pointAvail"/>
     <table cellspacing="5" cellpadding="3">

@@ -5,13 +5,13 @@
         <td>
 			<table border='1' width='100%'>
 			<tr valign="middle" style="background-color:#f1f1f1;height:32px;">
-				<td align='center'><?php echo __('Member ID') ?></td><td align='center'><?php echo __('Trader Name') ?></td><td align='center'><?php echo __('Activation Date') ?></td><td align='center'><?php echo __('Registered Date') ?></td><td align='center'><?php echo __('Position') ?></td>
+				<td align='center'><?php echo __('Member ID') ?></td><td align='center'><?php echo __('Member Name') ?></td><td align='center'><?php echo __('Activation Date') ?></td><td align='center'><?php echo __('Registered Date') ?></td><td align='center'><?php echo __('Position') ?></td>
 			</tr>
 			<?php 
 			foreach($TblDist as $dist){
 				echo "<tr style=\"background:#ccc;\" onmouseover=\"currentcolor=this.style.backgroundColor;this.style.backgroundColor='#f1f1f1';\" onmouseout=\"this.style.backgroundColor=currentcolor\" style=\"height:25px;\">"
 				."<td align='center'>".$dist->getFCode()."</td><td align='center'>".$dist->getFName()."</td><td align='center'>".$dist->getFActiveDatetime()."</td><td align='center'>".$dist->getFCreatedDatetime()."</td>"
-				."<td align='center'>".button_to(__('Left'), 'member/doPlacement?position=1&distid='.$dist->getFId(), array ('class' => 'activeLink', 'style' => 'width:80px', 'confirm' => 'Place Trader to left leg?'))."&nbsp;&nbsp;&nbsp;".button_to(__('Right'), 'member/doPlacement?position=2&distid='.$dist->getFId(), array ('class' => 'activeLink', 'style' => 'width:80px', 'confirm' => 'Place Trader to right leg?'))
+				."<td align='center'>".button_to(__('Left'), 'member/doPlacement?position=1&distid='.$dist->getFId(), array ('class' => 'activeLink', 'style' => 'width:80px', 'confirm' => 'Place Member to left leg?'))."&nbsp;&nbsp;&nbsp;".button_to(__('Right'), 'member/doPlacement?position=2&distid='.$dist->getFId(), array ('class' => 'activeLink', 'style' => 'width:80px', 'confirm' => 'Place Trader to right leg?'))
 				."</td></tr>";
 			}	
 			?>
@@ -63,14 +63,14 @@ function reassignDatagridEventAttr(){
 </script>
 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" style="width: 800px;">
-<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dgReinvestCps"><?php echo __('Place Trader History') ?></span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dgReinvestCps"><?php echo __('Place Member History') ?></span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
     <span class="ui-icon ui-icon-closethick"><?php echo __('close') ?></span></a></div>
 <div class="ui-dialog-content ui-widget-content">
     <table class="display" id="datagrid" border="0" width="100%">
         <thead>
         <tr>
             <th><?php echo __('Member ID') ?></th>
-            <th><?php echo __('Trader Name') ?></th>
+            <th><?php echo __('Member Name') ?></th>
             <th><?php echo __('Placement ID') ?></th>
             <th><?php echo __('Position') ?></th>
             <th><?php echo __('Placement Date') ?></th>

@@ -173,7 +173,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Trader Name') ?></td>
+                    <td><?php echo __('Member Name') ?></td>
                     <td>
                         <input name="traderName" type="text" id="traderName" maxlength="50" disabled="disabled"
                                        value="<?php echo $distDB->getFullname(); ?>"/>

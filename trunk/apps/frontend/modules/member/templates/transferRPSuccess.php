@@ -64,7 +64,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    alert("Invalid trader ID.");
+                    alert("Invalid Member ID.");
                     $('#sponsorId').focus();
                     $("#sponsorName").html("");
                 } else {
@@ -157,7 +157,7 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Trader Name'); ?></td>
+                    <td><?php echo __('Member Name'); ?></td>
                     <td>
                         <strong><span id="sponsorName"></span></strong>
                     </td>
