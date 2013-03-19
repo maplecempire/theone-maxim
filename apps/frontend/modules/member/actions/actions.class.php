@@ -7507,6 +7507,7 @@ Wish you all the best.
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Available</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Used</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Debit</th>
                     </tr>
                     </thead>
                     <tbody>";
@@ -7517,8 +7518,8 @@ Wish you all the best.
             if ($debitAccount == null)
                 $debitAccount = 0;
             $rollingPoint = $arr['TOTAL_ROLLING_POINT'] - $debitAccount;
-            $rollingPointUsed = $arr['TOTAL_RP_USED'];
-            $rollingPointAvailable = $rollingPoint - $rollingPointUsed;
+            $rollingPointUsed = $arr['TOTAL_RP_USED'] - $debitAccount;
+            $rollingPointAvailable = $rollingPoint - $arr['TOTAL_RP_USED'];
 
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
@@ -7529,6 +7530,7 @@ Wish you all the best.
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPoint,2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointAvailable,2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointUsed,2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($debitAccount,2)."</td>
                     </tr>";
         }
 
@@ -7570,7 +7572,7 @@ Wish you all the best.
         $resultArray = array();
         $count = 0;
 
-        var_dump($query);
+        //var_dump($query);
         while ($resultset->next()) {
             $arr = $resultset->getRow();
 
