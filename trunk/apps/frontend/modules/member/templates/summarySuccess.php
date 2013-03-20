@@ -13,11 +13,11 @@ var datagrid = null;
 var datagridAnnouncement = null;
 var annoucementArr = [];
 
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'Implementation of System Generated Member ID',
     news_date:'19 MARCH 2013',
     news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company has implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
-});
+});*/
 
 <?php
 $culture = $sf_user->getCulture();
@@ -381,7 +381,7 @@ function loadContent(popIndex) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('User Name') ?></td>
+        <td><?php echo __('Member ID') ?></td>
         <td><input size="40" type="text" readonly="readonly" value="<?php echo $distributor->getDistributorCode(); ?>"></td>
         <td>&nbsp;</td>
     </tr>

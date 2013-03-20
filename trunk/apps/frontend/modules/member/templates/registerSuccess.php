@@ -70,13 +70,13 @@ $(function() {
             }
         },
         rules : {
-            /*"userName" : {
+            "userName" : {
                 required : true,
                 noSpace: true,
                 loginRegex: true,
                 minlength : 6,
                 remote: "/member/verifyUserName"
-            },*/
+            },
             "captcha" : {
                 required: true,
                 remote: "/captcha/process"
@@ -398,20 +398,19 @@ function error(data) {
         </th>
     </tr>
 
-    <!--<tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php /*echo __('User Name') */?></td>
+        <td><?php echo __('User Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="userName" name="userName">
             &nbsp;
             <br>
-            <?php /*echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') */?>
+            <?php echo __('Please choose a unique username for your account. Username accepts 3-32 characters, a-z, 0-9 and underscore (_) only.') ?>
         </td>
         <td>&nbsp;</td>
-    </tr>-->
+    </tr>
 
-
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Set Password') ?></td>
         <td>
@@ -422,7 +421,7 @@ function error(data) {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Password') ?></td>
         <td>
@@ -433,7 +432,7 @@ function error(data) {
     </tr>
 
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('Security Password') ?></td>
         <td>
@@ -448,7 +447,7 @@ function error(data) {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Confirm Security Password') ?></td>
         <td>

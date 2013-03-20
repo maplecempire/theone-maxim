@@ -1299,13 +1299,13 @@ class memberActions extends sfActions
             $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
             return $this->redirect('/home/login');
     	}
-        //$fcode = $this->getRequestParameter('userName');
+        $userName = $this->getRequestParameter('userName');
         $fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
 
         $c = new Criteria();
-        $c->add(AppUserPeer::USERNAME, $fcode);
+        $c->add(AppUserPeer::USERNAME, $userName);
         $exist = AppUserPeer::doSelectOne($c);
 
         if ($exist) {
@@ -1335,7 +1335,7 @@ class memberActions extends sfActions
             $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
             $app_user = new AppUser();
-            $app_user->setUsername($fcode);
+            $app_user->setUsername($userName);
             $app_user->setKeepPassword($password);
             $app_user->setUserpassword($password);
             $app_user->setKeepPassword2($password2);
@@ -1434,7 +1434,7 @@ class memberActions extends sfActions
                                                 </p></td>
                                             <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
                                                     class='MsoNormal'><span
-                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$fcode."<u></u><u></u></span>
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$userName."<u></u><u></u></span>
                                             </p></td>
                                         </tr>
                                         <tr>
@@ -1457,6 +1457,16 @@ class memberActions extends sfActions
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$password2."<u></u><u></u></span>
                                                 </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Member ID<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$fcode."<u></u><u></u></span>
+                                            </p></td>
                                         </tr>
                                         <tr>
                                             <td width='180'
@@ -1560,7 +1570,7 @@ class memberActions extends sfActions
             $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
 
             $con->commit();
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Username is ").$fcode);
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Username is ").$userName);
         } catch (PropelException $e) {
             $con->rollback();
             throw $e;
@@ -1607,7 +1617,7 @@ class memberActions extends sfActions
 
     public function executeDoMemberRegistration()
     {
-        //$fcode = $this->getRequestParameter('userName');
+        $userName = $this->getRequestParameter('userName','');
         $fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
@@ -1618,7 +1628,14 @@ class memberActions extends sfActions
         /* ****************************************************
          * get distributor last account ledger epoint balance
          * ***************************************************/
-        $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $c = new Criteria();
+        $c->add(AppUserPeer::USERNAME, $userName);
+        $exist = AppUserPeer::doSelectOne($c);
+
+        if ($exist) {
+            $this->setFlash('errorMsg', "User Name already exist.");
+            return $this->redirect('/member/memberRegistration');
+        }
 
         $packageDB = MlmPackagePeer::retrieveByPK($packageId);
 
@@ -1626,8 +1643,11 @@ class memberActions extends sfActions
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
             return $this->redirect('/member/memberRegistration');
         }
+
         $applicationPackageName = $packageDB->getPackageName();
         $packagePrice = $packageDB->getPrice();
+
+        $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
         if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
@@ -1653,7 +1673,7 @@ class memberActions extends sfActions
                 $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $app_user->save();
 
-                $fcode = $app_user->getUsername();
+                $userName = $app_user->getUsername();
                 $password = $app_user->getUserpassword();
                 $password2 = $app_user->getUserpassword2();
                 $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -1698,7 +1718,7 @@ class memberActions extends sfActions
                 $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
 
-                $app_user->setUsername($fcode);
+                $app_user->setUsername($userName);
                 $app_user->setKeepPassword($password);
                 $app_user->setUserpassword($password);
                 $app_user->setKeepPassword2($password2);
@@ -1714,7 +1734,7 @@ class memberActions extends sfActions
                 $mlm_distributor->setUserId($app_user->getUserId());
                 $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
                 $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-                $mlm_distributor->setNickname($fcode);
+                $mlm_distributor->setNickname($userName);
                 $mlm_distributor->setIc($this->getRequestParameter('ic'));
                 if ($this->getRequestParameter('country') == 'China') {
                     $mlm_distributor->setCountry('China (PRC)');
@@ -2218,7 +2238,7 @@ class memberActions extends sfActions
                                                 </p></td>
                                             <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
                                                     class='MsoNormal'><span
-                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$fcode."<u></u><u></u></span>
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$userName."<u></u><u></u></span>
                                             </p></td>
                                         </tr>
                                         <tr>
@@ -2241,6 +2261,16 @@ class memberActions extends sfActions
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$password2."<u></u><u></u></span>
                                                 </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Member ID<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$fcode."<u></u><u></u></span>
+                                            </p></td>
                                         </tr>
                                         <tr>
                                             <td width='180'
@@ -4656,6 +4686,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->distinfo = $distinfo;
             $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
         }
+        $this->userDB = AppUserPeer::retrieveByPK($distinfo->getUserId());
         $this->headColor = $this->getRankColor($distinfo->getRankId());
         $this->arrTree = $arrTree;
         $this->fullName = $fullName;
@@ -4793,6 +4824,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
 
                 $headColor = $this->getRankColor($dist->getRankId());
+
+                $userDB = AppUserPeer::retrieveByPK($dist->getUserId());
+
                 $html .= "<div class='".$treeControllerWrap."'>
                         <div class='controller-node-con'>
                             <div class='tree-controller ".$treeLine."'>
@@ -4806,7 +4840,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                             src='/css/network/".$headColor."_head.png'></span>
                                     <span class='user-id'>".$dist->getDistributorCode()."</span>
                                     <span class='user-joined'>".$this->getContext()->getI18N()->__("Joined")." ".date('Y-m-d', strtotime($dist->getActiveDatetime()))."</span>
-                                    <span class='user-joined'>".$this->getContext()->getI18N()->__($dist->getRankCode())."</span>
+                                    <span class='user-joined'>".$userDB->getUsername()." (".$this->getContext()->getI18N()->__($dist->getRankCode()).")</span>
                                 </div>
                             </div>
                         </div>";

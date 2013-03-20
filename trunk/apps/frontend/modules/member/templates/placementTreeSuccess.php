@@ -352,7 +352,9 @@ function reassignDatagridEventAttr(){
 </div>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
         <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-        <?php echo $distDB->getDistributorCode()?>
+        <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
     </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -419,7 +421,9 @@ function reassignDatagridEventAttr(){
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-            <?php echo $distDB->getDistributorCode()?>
+            <?php
+            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
             </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -475,7 +479,9 @@ function reassignDatagridEventAttr(){
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-            <?php echo $distDB->getDistributorCode()?>
+            <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
             </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -576,7 +582,9 @@ if ($anode[1]['distCode'] != "") { ?>
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-            <?php echo $distDB->getDistributorCode()?>
+            <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
             </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -635,7 +643,9 @@ if ($anode[1]['distCode'] != "") { ?>
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-            <?php echo $distDB->getDistributorCode()?>
+            <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
             </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -694,7 +704,9 @@ if ($anode[1]['distCode'] != "") { ?>
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-                <?php echo $distDB->getDistributorCode()?>
+                <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
             </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
@@ -753,7 +765,9 @@ if ($anode[1]['distCode'] != "") { ?>
     <?php if ($distCode != "") { ?>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
             <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
-            <?php echo $distDB->getDistributorCode()?>
+            <?php
+        $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+        echo $distDB->getDistributorCode()." (".$userDB->getUsername().")"?>
         </a><br>
 
     <!--<div class="network-username"><?php /*echo $distDB->getDistributorCode()*/?></div>
