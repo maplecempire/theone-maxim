@@ -16,7 +16,7 @@ var annoucementArr = [];
 annoucementArr.push({
     poptitle:'Implementation of System Generated Member ID',
     news_date:'19 MARCH 2013',
-    news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company is implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
+    news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company has implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
 });
 
 <?php
