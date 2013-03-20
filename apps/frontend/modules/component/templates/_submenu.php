@@ -207,7 +207,7 @@ function blink(selector) {
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/dailyAUGoldTradeGuide") ?>"><span><?php echo __('Download Daily AU Gold Trade Guide'); ?></span></a>
+            <a href="<?php echo url_for("/member/dailyAUGoldTradeGuide") ?>"><span><?php echo __('Download Daily XAU Gold Trade Guide'); ?></span></a>
         </li>
 
     <?php /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
