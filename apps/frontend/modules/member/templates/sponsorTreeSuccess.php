@@ -113,7 +113,7 @@ img.tree-minus-button:hover, img.tree-plus-button:hover {
 <?php echo form_tag('member/sponsorTree', 'id=sponsorForm') ?>
 
 <br>
-<strong><?php echo __('Search By Username') ?></strong>&nbsp;:&nbsp; <input size="20" name="fullName" id="txtFullName" value="<?php echo $fullName?>">&nbsp;<button><?php echo __('Search') ?></button>
+<strong><?php echo __('Search By Member ID') ?></strong>&nbsp;:&nbsp; <input size="20" name="fullName" id="txtFullName" value="<?php echo $fullName?>">&nbsp;<button><?php echo __('Search') ?></button>
 </form>
 
 <br>
@@ -195,7 +195,7 @@ $(document).ready(function(){
                     <span class="user-rank"><img src="/css/network/<?php echo $headColor; ?>_head.png"></span>
                     <span class="user-id"><?php echo $distinfo->getDistributorCode(); ?></span>
                     <span class="user-joined"><?php echo __('Joined'); ?> <?php echo date('Y-m-d', strtotime($distinfo->getActiveDatetime())); ?></span>
-                    <span class="user-joined"><?php echo __($distinfo->getRankCode()); ?></span>
+                    <span class="user-joined"><?php echo $userDB->getUsername()." (".__($distinfo->getRankCode()).")"; ?></span>
                 </div>
             </div>
         </div>
