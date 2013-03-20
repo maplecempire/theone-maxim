@@ -2360,17 +2360,17 @@ class memberActions extends sfActions
         }
 
         if ($doAction == "PENDING_MEMBER") {
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Package Purchase Successfully."));
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("(".$fcode.") Package Purchase Successfully."));
             return $this->redirect('/member/summary');
         } else if ($distributor->getPlacementTreeStructure() == null) {
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member (".$fcode.") Registered Successfully."));
             return $this->redirect('/member/summary');
         } else {
             if ($position == 1 || $position == 2 || $treePosition != ""){
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member (".$fcode.") Registered Successfully."));
                 return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getTreeUplineDistCode());
             } else if ($position == 0){
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member Registered Successfully. Please manual do placement now."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Member (".$fcode.") Registered Successfully. Please manual do placement now."));
                 return $this->redirect('/member/placementTree');
                 //return $this->redirect('/member/placementTree?distcode=' . $mlm_distributor->getUplineDistCode());
             }
