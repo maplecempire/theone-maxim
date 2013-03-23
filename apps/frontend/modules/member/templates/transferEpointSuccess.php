@@ -55,7 +55,8 @@
     <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
             url : "/member/verifySameGroupSponsorId",
     <?php } else { ?>
-            url : "/member/verifySponsorId",
+//            url : "/member/verifySponsorId",
+            url : "/member/verifySponsorUserName",
     <?php } ?>
             dataType : 'json',
             cache: false,
@@ -64,7 +65,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    alert("Invalid Member ID.");
+                    alert("Invalid User Name.");
                     $('#sponsorId').focus();
                     $("#sponsorName").html("");
                 } else {
@@ -160,7 +161,7 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Transfer To Member ID'); ?></td>
+                    <td><?php echo __('Transfer To User Name'); ?></td>
                     <td>
                         <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
                     </td>
