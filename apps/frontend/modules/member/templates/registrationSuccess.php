@@ -156,7 +156,7 @@
                         $("#sponsorName").html("");
                     } else {
                         $.unblockUI();
-                        $("#sponsorName").html(data.nickname);
+                        $("#sponsorName").html(data.fullname);
                     }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {

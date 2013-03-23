@@ -3201,10 +3201,14 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeVerifyActiveSponsorId()
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
+        $verifySameGroup = $this->getRequestParameter('verifySameGroup', "N");
 
         //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+        if ($verifySameGroup == "Y") {
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
+        }
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $existUser = MlmDistributorPeer::doSelectOne($c);
 
