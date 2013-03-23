@@ -36,7 +36,8 @@ $(function() {
     }).keyup(function(){
         var convertedAmount = 0;
         var epointAmount = $('#epointAmount').autoNumericGet();
-        convertedAmount = parseFloat(epointAmount) * 1.05;
+        //convertedAmount = parseFloat(epointAmount) * 1.05;
+        convertedAmount = parseFloat(epointAmount) * 1;
         convertedAmount = Math.floor(convertedAmount);
 
         $("#epointConvertedAmount").val(convertedAmount);
@@ -188,7 +189,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.
-                        <br>CP3 convert to CP1 will get extra 5%
+                        <!--<br>CP3 convert to CP1 will get extra 5%-->
                         </font>
                     </td>
                     <td>&nbsp;</td>
