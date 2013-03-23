@@ -33,6 +33,16 @@ $(function() {
     });
     $('#epointAmount').autoNumeric({
         mDec: 2
+    }).keyup(function(){
+        var convertedAmount = 0;
+        var epointAmount = $('#epointAmount').autoNumericGet();
+        convertedAmount = parseFloat(epointAmount) * 1.05;
+        convertedAmount = Math.floor(convertedAmount);
+
+        $("#epointConvertedAmount").val(convertedAmount);
+    });
+    $('#epointConvertedAmount').autoNumeric({
+        mDec: 0
     });
 });
 </script>
@@ -157,6 +167,15 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
+                    <td><?php echo __('CP1 Converted Amount'); ?></td>
+                    <td>
+                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" readonly="readonly"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
                         <input name="transactionPassword" type="password" id="transactionPassword"
@@ -168,7 +187,9 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</font>
+                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.
+                        <br>CP2 convert to CP1 will get extra 5%
+                        </font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

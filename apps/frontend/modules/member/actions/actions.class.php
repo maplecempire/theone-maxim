@@ -6079,14 +6079,16 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
 
+                $epointConvertedAmount = floor($epointAmount * 1.05);
+
                 $tbl_account_ledger = new MlmAccountLedger();
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                $tbl_account_ledger->setCredit($epointAmount);
+                $tbl_account_ledger->setCredit($epointConvertedAmount);
                 $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1");
-                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1, CP2:".$epointAmount);
+                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
