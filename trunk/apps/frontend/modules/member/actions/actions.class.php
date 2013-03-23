@@ -1321,7 +1321,7 @@ class memberActions extends sfActions
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
@@ -1704,7 +1704,7 @@ class memberActions extends sfActions
 
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_USERNAME)."%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
                 $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
@@ -2047,7 +2047,7 @@ class memberActions extends sfActions
 
                                 $uplineDistId = $uplineDistDB->getDistributorId();
                             } else {
-                                $uplineDistCode = $this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                                $uplineDistCode = $this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
                                 $c = new Criteria();
                                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
                                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
@@ -3128,7 +3128,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|". $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|". $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
         $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
         $existUser = MlmDistributorPeer::doSelectOne($c);
 
@@ -3753,9 +3753,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             /******************************/
             /*  Pairing             ~ END ~
             /******************************/
-            return $this->redirect('/member/placementTree?distcode=' . $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_USERNAME)));
+            return $this->redirect('/member/placementTree?distcode=' . $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_DISTCODE)));
         }
-        $distcode = $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+        $distcode = $this->getRequestParameter('distcode', $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
         $pageDirection = $this->getRequestParameter('p', "");
         $bePlacementId = $this->getRequestParameter('bePlacementId', "");
 
@@ -3777,7 +3777,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         // TO_HIDE_DIST_GROUP
         $hideDistGroup = false;
-        $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+        $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
         if ($pos === false) { // note: three equal signs
 
         } else {
@@ -3789,13 +3789,13 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
         $distDB = MlmDistributorPeer::doSelectOne($c);
 
         if (!$distDB) {
             $this->errorSearch = true;
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
             $distDB = MlmDistributorPeer::doSelectOne($c);
         }
 
@@ -3807,7 +3807,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             } else {
                 $this->errorSearch = true;
                 $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
                 $distDB = MlmDistributorPeer::doSelectOne($c);
             }
         }
@@ -4133,7 +4133,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->colorArr = $this->getRankColorArr();
 
         $isTop = false;
-        if (strtoupper($distcode) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+        if (strtoupper($distcode) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
             $isTop = true;
         }
         $this->isTop = $isTop;
@@ -4239,7 +4239,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
-            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == $this->getUser()->getAttribute(Globals::SESSION_USERNAME)) {
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == $this->getUser()->getAttribute(Globals::SESSION_DISTCODE)) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
 
@@ -4259,7 +4259,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $toName = $existDist->getNickname();
                 $toBalance = $toAccount->getBalance();
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_USERNAME);
+                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
                 $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                 $fromBalance = $ledgerAccountBalance;
 
@@ -4356,7 +4356,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
-                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" . $this->getUser()->getAttribute(Globals::SESSION_USERNAME) . "%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "%", Criteria::LIKE);
                 $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
                 $existUser = MlmDistributorPeer::doSelectOne($c);
 
@@ -4376,7 +4376,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/transferEpoint');
 
-            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferEpoint');
@@ -4408,7 +4408,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $toName = $existDist->getNickname();
                 $toBalance = $toAccount->getBalance();
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_USERNAME);
+                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
                 $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                 $fromBalance = $ledgerAccountBalance;
 
@@ -4505,7 +4505,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/transferRP');
 
-            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_USERNAME))) {
+            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferRP');
@@ -4536,7 +4536,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $toName = $existDist->getNickname();
                 $toBalance = $toAccount->getBalance();
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_USERNAME);
+                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
                 $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                 $fromBalance = $ledgerAccountBalance;
 
@@ -4927,7 +4927,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                 $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
                 $tbl_account_ledger->setCredit($processFee);
                 $tbl_account_ledger->setDebit(0);
                 $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
@@ -5002,7 +5002,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                 $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
                 $tbl_account_ledger->setCredit($processFee);
                 $tbl_account_ledger->setDebit(0);
                 $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
