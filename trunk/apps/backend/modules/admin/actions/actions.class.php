@@ -31,6 +31,7 @@ class adminActions extends sfActions
             $this->getUser()->setAttribute(Globals::SESSION_MASTER_LOGIN, Globals::TRUE);
 
             $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+            $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
             $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
             $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
             $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
