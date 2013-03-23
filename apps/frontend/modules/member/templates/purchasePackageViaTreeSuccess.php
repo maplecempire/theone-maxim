@@ -31,7 +31,7 @@ $(function() {
 
             } else {?>
                 if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
-                    error("In-sufficient fund to upgrade package.");
+                    error("In-sufficient fund to purchase package.");
                     return false;
                 }
             <?php } ?>

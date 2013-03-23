@@ -383,6 +383,7 @@ class homeActions extends sfActions
                 $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
 
                 $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+                $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
                 $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
                 $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
                 $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());

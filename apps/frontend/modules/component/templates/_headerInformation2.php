@@ -9,7 +9,7 @@
             <table cellpadding="1" cellspacing="2" border="0" width="500px">
                 <tr>
                     <td width="20%"><?php echo __('Member Id') ?>:</td>
-                    <td width="20%"><strong><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME); ?></strong></td>
+                    <td width="20%"><strong><?php echo $sf_user->getAttribute(Globals::SESSION_DISTCODE); ?></strong></td>
                     <td width="10%">&nbsp;</td>
                     <td width="20%"><?php echo __('MT4 Credit Wallet') ?>:</td>
                     <td width="30%"><strong><?php echo number_format($ecash,2) ?></strong></td>
