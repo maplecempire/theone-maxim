@@ -241,7 +241,7 @@ function reassignDatagridEventAttr(){
 
 <link rel='stylesheet' type='text/css' media='screen' href='/css/network/stat.css'/>
 
-<div style="width: 600px;"><div style="width: 140px; margin-left: 230px; float:left; overflow-x:hidden;" class="stats-node">
+<div style="width: 600px; padding-top:10px;"><div style="width: 140px; margin-left: 230px; float:left; overflow-x:hidden;" class="stats-node">
      <?php
         $distCode = $anode[0]['distCode'];
         $availableButton = $anode[0]['_available'];
@@ -284,7 +284,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -387,7 +396,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -482,7 +500,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -591,7 +618,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -687,7 +723,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -783,7 +828,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -879,7 +933,16 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Username'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"><?php echo $distDB->getDistributorCode()?></a>
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                    <?php
+                        if ($distDB->getUserId() != null) {
+                            $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
+                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                        } else {
+                            echo $distDB->getDistributorCode();
+                        }
+                    ?>
+                    </a>
                 </div>
             </td>
         </tr>
