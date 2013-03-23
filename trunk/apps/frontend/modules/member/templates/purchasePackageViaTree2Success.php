@@ -152,6 +152,7 @@ function verifySponsorId() {
         cache: false,
         data: {
             sponsorId : $('#sponsorId').val()
+            , verifySameGroup : "Y"
         },
         success : function(data) {
             if (data == null || data == "") {
@@ -160,7 +161,7 @@ function verifySponsorId() {
                 $("#sponsorName").val("");
             } else {
                 $.unblockUI();
-                $("#sponsorName").val(data.nickname);
+                $("#sponsorName").val(data.fullname);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {

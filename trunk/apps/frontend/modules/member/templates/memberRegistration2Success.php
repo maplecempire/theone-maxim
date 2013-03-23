@@ -109,7 +109,7 @@ $(function() {
                 success : function(data) {
                     waiting();
                     if (data == null || data == "") {
-                        alert("<?php echo __('Invalid  ID') ?>");
+                        alert("<?php echo __('Invalid Referral ID') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").val("");
                     } else {
@@ -188,15 +188,16 @@ function verifySponsorId() {
         cache: false,
         data: {
             sponsorId : $('#sponsorId').val()
+            , verifySameGroup : "Y"
         },
         success : function(data) {
             if (data == null || data == "") {
-                error("<?php echo __('Invalid  ID') ?>");
+                error("<?php echo __('Invalid Referral ID') ?>");
                 $('#sponsorId').focus();
                 $("#sponsorName").val("");
             } else {
                 $.unblockUI();
-                $("#sponsorName").val(data.nickname);
+                $("#sponsorName").val(data.fullname);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -222,7 +223,7 @@ function verifyPlacementDistId() {
                 $("#placementDistName").val("");
             } else {
                 $.unblockUI();
-                $("#placementDistName").val(data.nickname);
+                $("#placementDistName").val(data.fullname);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
