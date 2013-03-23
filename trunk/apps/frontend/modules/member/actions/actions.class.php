@@ -3149,6 +3149,36 @@ We look forward to your custom in the near future. Should you have any queries, 
         return sfView::HEADER_ONLY;
     }
 
+    public function executeVerifySponsorUserName()
+    {
+        $sponsorId = $this->getRequestParameter('sponsorId');
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+            FROM mlm_distributor dist
+                LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                    WHERE appUser.username = '".$sponsorId."'";
+
+        $arr = "";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $resultArr = $resultset->getRow();
+
+            $arr = array(
+                'userId' => $resultArr["distributor_id"],
+                'userName' => $resultArr["distributor_code"],
+                'fullname' => $resultArr["full_name"],
+                'nickname' => $resultArr["nickname"]
+            );
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeVerifySponsorId()
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
@@ -4360,7 +4390,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
                 $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
                 $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
                 $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "%", Criteria::LIKE);
                 $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
                 $existUser = MlmDistributorPeer::doSelectOne($c);
@@ -4381,26 +4411,51 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/transferEpoint');
 
-            } elseif (strtoupper($this->getRequestParameter('sponsorId')) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
+            } elseif (strtoupper($sponsorId) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferEpoint');
 
-            } elseif ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0) {
+            } elseif ($sponsorId <> "" && $this->getRequestParameter('epointAmount') > 0) {
 
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
-                $existDist = MlmDistributorPeer::doSelectOne($c);
+                /*$c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+                $existDist = MlmDistributorPeer::doSelectOne($c);*/
+
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+                    FROM mlm_distributor dist
+                        LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                            WHERE appUser.username = '".$sponsorId."'";
+
+
+                $connection = Propel::getConnection();
+                $statement = $connection->prepareStatement($query);
+                $resultset = $statement->executeQuery();
+
+                $toId = "";
+                $toCode = "";
+                $toName = "";
+
+                if ($resultset->next()) {
+                    $resultArr = $resultset->getRow();
+
+                    $toId = $resultArr["distributor_id"];
+                    $toCode = $resultArr["distributor_code"];
+                    $toName = $resultArr["nickname"];
+                } else {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
+                    return $this->redirect('/member/transferEpoint');
+                }
 
                 $c = new Criteria();
                 $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->addAnd(MlmAccountPeer::DIST_ID, $existDist->getDistributorId());
+                $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
                 $toAccount = MlmAccountPeer::doSelectOne($c);
 
                 if (!$toAccount) {
                     $toAccount = new MlmAccount();
 
-                    $toAccount->setDistId($existDist->getDistributorId());
+                    $toAccount->setDistId($toId);
                     $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $toAccount->setBalance(0);
                     $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -4408,9 +4463,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $toAccount->save();
                 }
 
-                $toId = $existDist->getDistributorId();
-                $toCode = $existDist->getDistributorCode();
-                $toName = $existDist->getNickname();
+
                 $toBalance = $toAccount->getBalance();
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
                 $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
