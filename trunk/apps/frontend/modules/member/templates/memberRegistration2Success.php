@@ -197,7 +197,7 @@ function verifySponsorId() {
                 $("#sponsorName").val("");
             } else {
                 $.unblockUI();
-                $("#sponsorName").val(data.fullname);
+                $("#sponsorName").val(data.userName);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -223,7 +223,7 @@ function verifyPlacementDistId() {
                 $("#placementDistName").val("");
             } else {
                 $.unblockUI();
-                $("#placementDistName").val(data.fullname);
+                $("#placementDistName").val(data.userName);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {

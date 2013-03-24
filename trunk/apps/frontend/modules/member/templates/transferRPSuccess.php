@@ -69,7 +69,7 @@
                     $("#sponsorName").html("");
                 } else {
                     $.unblockUI();
-                    $("#sponsorName").html(data.fullname);
+                    $("#sponsorName").html(data.userName);
                 }
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {

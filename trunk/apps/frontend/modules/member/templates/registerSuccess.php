@@ -187,7 +187,7 @@ function verifySponsorId() {
                 $("#sponsorName").val("");
             } else {
                 $.unblockUI();
-                $("#sponsorName").val(data.fullname);
+                $("#sponsorName").val(data.userName);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
