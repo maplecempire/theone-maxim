@@ -21,10 +21,10 @@ var annoucementArr = [];
 annoucementArr.push({
     poptitle:'International Member Exchange (IME) July 2013 @ Macau',
     news_date:'23 MARCH 2013',
-    news_desc:'<br>Early bird before 30th April 2013 : USD800 per person<br>Normal price : USD1000 per person<br>(3 night hotel accommodation (twin sharing basis) & IME full day entry)<br><br><b>IME Incentive Trip</b><br><br><b>Investor who sign up :</b>'
- + '<br><br>10k package - Free 1 person for IME<br><br>20k package - Free 1 person for IME & Airfare Reimbursement (up to USD500)<br><br><b>IB who achieve personal sales more than :</b><br><br>30k - Free 1 person for IME<br><br>40k - Free 1 person for IME & Airfare Reimbursement (up to USD500)<br><br><b>or IB who achieve small group sales more than :</b>'
- + '<br><br>60k - Free 1 person for IME<br><br>80k - Free 1 person for IME & Airfare Reimbursement (up to USD500)<br><br><b>Terms & Conditions :</b><br><br>1. Incentive period : 17th March 2013 until 20th May 2013.<br><br>2. This incentive is strictly no substitution or non-transferable or non-exchangeable for cash.'
- + '<br><br>3. Every IB only entitle for 1 incentive ticket based on either personal sales or small group sales.<br><br>4. Every new member sign up only entitle for 1 incentive ticket.<br><br>5. The organizer reserves the right to change, amend, delete or add to the terms and conditions of the incentive without prior notice at any time and the qualifiers shall be bound to such changes.'});
+    news_desc:'<br>Early bird before 30th April 2013 : USD800 per person<br>Normal price : USD1000 per person<br>(3 night hotel accommodation (twin sharing basis) & IME full day entry)<br><br><b>IME Incentive Trip</b><br><br><br><b>Investor who sign up for:</b>'
+ + '<br><br>10k package - Free 1 person entry to IME<br><br>20k package - Free 1 person entry to IME & Airfare Reimbursement (up to USD500)<br><br><br><b>IB who achieve personal sales more than :</b><br><br>30k - Free 1 person entry to IME<br><br>40k - Free 1 person entry to IME & Airfare Reimbursement (up to USD500)<br><br><br><b>or IB who achieve small group sales more than :</b>'
+ + '<br><br>60k - Free 1 person entry to IME<br><br>80k - Free 1 person entry to IME & Airfare Reimbursement (up to USD500)<br><br><br><b>Terms & Conditions :</b><br><br>1. Incentive period : 17th March 2013 until 20th May 2013.<br><br>2. This incentive is strictly no substitution or non-transferable or non-exchangeable for cash.'
+ + '<br><br>3. Every IB only entitle for 1 incentive ticket based on either personal sales or small group sales.<br><br>4. Every new member sign up only entitle for 1 incentive ticket.<br><br>5. The organizer reserves the right to change, amend, delete or make addition to the terms and conditions of the incentive without prior notice at any time and the qualifiers shall be bound to such changes.'});
 
 <?php
 $culture = $sf_user->getCulture();
