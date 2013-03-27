@@ -42,13 +42,18 @@ class marketingActions extends sfActions
     public function executeUpdateAccountStatus()
     {
         $count = $this->getRequestParameter('count');
+        $doAction = $this->getRequestParameter('doAction', 'UPDATE');
         for ($i= 0; $i < $count; $i++) {
             $requestId = $this->getRequestParameter('request_id_'. $i);
 
             $mlmMt4DemoRequest = MlmMt4DemoRequestPeer::retrieveByPK($requestId);
             if ($mlmMt4DemoRequest) {
-                $mlmMt4DemoRequest->setStatusCode("VIEWED");
-                $mlmMt4DemoRequest->save();
+                if ($doAction == "DELETE") {
+                    $mlmMt4DemoRequest->delete();
+                } else {
+                    $mlmMt4DemoRequest->setStatusCode("VIEWED");
+                    $mlmMt4DemoRequest->save();
+                }
             }
         }
         return sfView::HEADER_ONLY;
