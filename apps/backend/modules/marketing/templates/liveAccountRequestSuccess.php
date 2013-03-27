@@ -51,6 +51,47 @@ $(function () {
         }
     });
 
+    $("#btnDelete").button({
+        icons: {
+            primary: "ui-icon-trash"
+        }
+    }).click(function(event){
+        event.preventDefault();
+        var checkedArr = new Array();
+
+        var answer = confirm("Are you sure want to delete the View Status.")
+        if (answer){
+            var idString = "";
+            var rows = $('#datagrid').datagrid('getChecked');
+            var count = 0;
+            for(var i=0;i<rows.length;i++){
+                idString += "&request_id_" + i + "=" + rows[i].request_id;
+                count++ ;
+            }
+            if (idString != "") {
+                $.ajax({
+                    type:'POST',
+                    url:"<?php echo url_for('marketing/updateAccountStatus') ?>?ref=9472344" + idString,
+                    dataType:'json',
+                    cache:false,
+                    data:{
+                        count : count
+                        , doAction : "DELETE"
+                    },
+                    success:function (data) {
+                        datagridRefresh();
+                        alert("Record delete Successfully.");
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        error("Server connection error.");
+                    }
+                });
+            } else {
+                error("Please select at least one member.");
+            }
+        }
+    });
+
     $('#datagrid').datagrid({
         striped : true,
         selectOnCheck : true,
@@ -119,6 +160,7 @@ function datagridRefresh() {
 <!--toolbar="#toolbarDatagrid"-->
 <br>
 <button id="btnUpdate">Update View Status</button>
+<button id="btnDelete">Delete</button>
 
 <!--<div id="toolbarDatagrid" style="padding:5px;height:auto">
     <table cellpadding="3" cellspacing="3" style="width: 80%;">
