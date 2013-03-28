@@ -512,30 +512,51 @@ $(function() {
                         &nbsp;<?php /*echo __('Daily Pips Upload'); */?></a><br/>
                     --><?php //} ?>
 
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CUSTOMER_ENQUIRY, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/customerEnquiryList') ?>" title="Customer Enquiry">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Customer Enquiry'); ?></a><br/>
-
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DEMO_ACCOUNT_REQUEST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/demoAccountRequest') ?>" title="Demo Account Request">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Demo Account Request'); ?></a><br/>
-
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_LIVE_ACCOUNT_REQUEST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/liveAccountRequest') ?>" title="Live Account Request">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Live Account Request'); ?></a><br/>
-
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DEBIT_CARD_APPLICATION, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/debitCardApplication') ?>" title="Debit Card Application">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Debit Card Application'); ?></a><br/>
-
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EZYCASH_CARD_APPLICATION, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/ezyCashCardApplication') ?>" title="EzyCash Card Application">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('EzyCash Card Application'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <?php } ?>
 
@@ -618,8 +639,9 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('MT4 Withdrawal'); ?></a><br/>
-                    <?php } ?>
                     <br>
+                    <?php } ?>
+
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CREDIT_ROLLING_POINT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/transferRollingPoint') ?>" title="Transfer Rolling Point">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
