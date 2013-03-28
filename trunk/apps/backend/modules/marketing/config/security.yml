@@ -1,3 +1,15 @@
+customerEnquiryList:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CUSTOMER_ENQUIRY ]]
+
+debitCardApplication:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DEBIT_CARD_APPLICATION ]]
+
+demoAccountRequest:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DEMO_ACCOUNT_REQUEST ]]
+
 distAdd:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_ADD ]]
@@ -6,9 +18,17 @@ distList:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
 
+ezyCashCardApplication:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_EZYCASH_CARD_APPLICATION ]]
+
 fxGuideUpload:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_FILE_UPLOAD ]]
+
+liveAccountRequest:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_LIVE_ACCOUNT_REQUEST ]]
 
 manipulatePips:
   is_secure:   on

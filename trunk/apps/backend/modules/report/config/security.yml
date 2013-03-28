@@ -18,6 +18,10 @@ mt4Withdrawal:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_MT4_WITHDRAWAL ]]
 
+rollingPointList:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_ROLLING_POINT ]]
+
 referralBonus:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_REFERRAL_BONUS ]]
