@@ -50,6 +50,8 @@ class MlmAccountLedgerMapBuilder {
 
 		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('INTERNAL_REMARK', 'InternalRemark', 'string', CreoleTypes::VARCHAR, false, 255);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);

@@ -20,6 +20,11 @@ var annoucementArr = [];
 });*/
 
 annoucementArr.push({
+    poptitle:'CP2 convert to CP1 will get extra 5%',
+    news_date:'27 MARCH 2013',
+    news_desc:'<br>To all Concerned Member,<br><br>Please be informed that effective from 25th March 2013, <br><br>1.	CP2 convert to CP1 will get extra 5%<br>2.	CP3 convert to CP1 no longer to get extra 5%<br><br>Once again, thank you for your support.<br><br>Regards,<br>The Managements'});
+
+annoucementArr.push({
     poptitle:'International Member Exchange (IME) July 2013 @ Macau',
     news_date:'23 MARCH 2013',
     news_desc:'<br>Early bird before 30th April 2013 : USD800 per person<br>Normal price : USD1000 per person<br>(3 night hotel accommodation (twin sharing basis) & IME full day entry)<br><br><b>IME Incentive Trip</b><br><br><br><b>Investor who sign up for:</b>'
