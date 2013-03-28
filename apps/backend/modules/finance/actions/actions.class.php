@@ -11,6 +11,15 @@
 class financeActions extends sfActions
 {
     /* ****************************************
+     *     Rolling Point
+     * *****************************************/
+    public function executeTransferRollingPoint()
+    {
+    }
+    public function executeDebitRollingPoint()
+    {
+    }
+    /* ****************************************
      *     Epoint Transfer
      * *****************************************/
     public function executeEpointTransfer()
@@ -22,6 +31,7 @@ class financeActions extends sfActions
         $distId = $this->getRequestParameter('distId');
         $epointAmount = $this->getRequestParameter('epointAmount');
         $doAction = $this->getRequestParameter('doAction');
+        $internalRemark = $this->getRequestParameter('internalRemark', '');
 
         $existDist = MlmDistributorPeer::retrieveByPK($distId);
         if (!$existDist) {
@@ -53,6 +63,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT);
             $mlm_account_ledger->setRollingPoint("Y");
             $mlm_account_ledger->setRemark("");
+            $mlm_account_ledger->setInternalRemark($internalRemark);
             $mlm_account_ledger->setCredit($epointAmount);
             $mlm_account_ledger->setDebit(0);
             $mlm_account_ledger->setBalance($distDebitBalance + $epointAmount);
@@ -69,6 +80,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
             $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $existDist->getDistributorCode() . " (" . $existDist->getFullName() . ")");
+            $mlm_account_ledger->setInternalRemark($internalRemark);
             $mlm_account_ledger->setCredit(0);
             $mlm_account_ledger->setDebit($epointAmount);
             $mlm_account_ledger->setBalance($companyEPointBalance - $epointAmount);
@@ -84,6 +96,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
             $mlm_account_ledger->setRollingPoint("Y");
             $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
+            $mlm_account_ledger->setInternalRemark($internalRemark);
             $mlm_account_ledger->setCredit($epointAmount);
             $mlm_account_ledger->setDebit(0);
             $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
@@ -116,6 +129,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
             $mlm_account_ledger->setRollingPoint("Y");
             $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_RP_TRANSFER_FROM . " COMPANY");
+            $mlm_account_ledger->setInternalRemark($internalRemark);
             $mlm_account_ledger->setCredit($epointAmount);
             $mlm_account_ledger->setDebit(0);
             $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);

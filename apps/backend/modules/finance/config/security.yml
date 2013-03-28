@@ -6,6 +6,10 @@ advanceEcash:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_ADVANCE_ECASH ]]
 
+cp3Withdrawal:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CP3_WITHDRAWAL ]]
+
 dailyBonus:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DAILY_BONUS ]]
@@ -13,6 +17,10 @@ dailyBonus:
 dailySales:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DAILY_SALES ]]
+
+debitRollingPoint:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DEBIT_ROLLING_POINT ]]
 
 ecashWithdrawal:
   is_secure:   on
@@ -85,6 +93,14 @@ reloadMt4FundEdit:
 reloadMt4Fund:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_RELOAD_MT4_FUND ]]
+
+rollingPointList:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_ROLLING_POINT ]]
+
+transferRollingPoint:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CREDIT_ROLLING_POINT ]]
 
 updateReferralBonus:
   is_secure:   on

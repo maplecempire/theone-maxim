@@ -543,6 +543,17 @@ $(function() {
                 <h3><a href="#"><?php echo __('Finance'); ?></a></h3>
                 <div>
                     <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CP3_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('finance/cp3Withdrawal') ?>"
+                       title="<?php echo __('CP3 Withdrawal'); ?>">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('CP3 Withdrawal'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
+
+                    <?php
                     if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ECASH_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/ecashWithdrawal') ?>"
                        title="<?php echo __('e-Cash Withdrawal'); ?>">
@@ -552,12 +563,6 @@ $(function() {
                     <?php
                     }
                     ?>
-
-                    <a href="<?php echo url_for('finance/cp3Withdrawal') ?>"
-                       title="<?php echo __('CP3 Withdrawal'); ?>">
-                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
-                             border="0">
-                        &nbsp;<?php echo __('CP3 Withdrawal'); ?></a><br/>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/epointPurchase') ?>" title="e-Point Purchase">
@@ -614,14 +619,26 @@ $(function() {
                              border="0">
                         &nbsp;<?php echo __('MT4 Withdrawal'); ?></a><br/>
                     <?php } ?>
-
+                    <br>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CREDIT_ROLLING_POINT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('finance/transferRollingPoint') ?>" title="Transfer Rolling Point">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Transfer Rolling Point'); ?></a><br/>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DEBIT_ROLLING_POINT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('finance/debitRollingPoint') ?>" title="Debit Rolling Point">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Debit Rolling Point'); ?></a><br/>
+                    <?php } ?>
                 </div>
                 <?php } ?>
 
                 <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::MOD_REPORT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                 <h3><a href="#"><?php echo __('Report'); ?></a></h3>
                 <div>
-                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_EPOINT_TRANSFER, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_ROLLING_POINT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('report/rollingPointList') ?>"
                        title="<?php echo __('Rolling Point List'); ?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
