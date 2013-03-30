@@ -140,7 +140,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Maxim Capital Limited Thai Bath  Account') ?></th>
+                    <th colspan="2"><?php echo __('Maxim Capital Limited Thai Baht Account') ?></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
                     </th>
@@ -201,7 +201,7 @@
                     <td>&nbsp;</td>
                     <td class="caption" colspan="2">
                         <span style="color: #dc143c">
-                            NOTE: USD1 : Bath31
+                            NOTE: USD1 : Baht31
                         </span>
                     </td>
                     <td>&nbsp;</td>
