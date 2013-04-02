@@ -10,6 +10,12 @@
  */
 class homeActions extends sfActions
 {
+
+    public function executeMaintenance()
+    {
+
+    }
+
     public function executeDoSubmitQuestionnaire()
     {
         $mlmMemberQuestionnair = new MlmMemberQuestionnaire();
@@ -31,14 +37,17 @@ class homeActions extends sfActions
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Thank you for the submission. Have a good day!"));
         return $this->redirect('/home/memberRegistration');
     }
+
     public function executeQuestionnaire()
     {
 
     }
+
     public function executeMemberRegistration()
     {
         $this->getUser()->setCulture("cn");
     }
+
     public function executeDoMemberRegistration()
     {
         $mlmMemberApplication = new MlmMemberApplication();
@@ -60,9 +69,10 @@ class homeActions extends sfActions
         $this->setTemplate("questionnaire");
         //return $this->redirect('/home/questionnaire');
     }
+
     /* ***********************************************************************
-     *    ~ HTML ~
-     * **********************************************************************/
+   *    ~ HTML ~
+   * **********************************************************************/
     public function executeForgetPassword()
     {
         if ($this->getRequestParameter('email') && $this->getRequestParameter('username')) {
@@ -123,7 +133,7 @@ class homeActions extends sfActions
 														<tr>
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-																	Dear <strong>".$existDistributor->getFullName()."</strong>,<br>
+																	Dear <strong>" . $existDistributor->getFullName() . "</strong>,<br>
 																	<br>" . $this->getContext()->getI18N()->__("Username", null) . ": <b>" . $username . "</b>
                                                                     <br>" . $this->getContext()->getI18N()->__("Account Password", null) . ": <b>" . $password . "</b>
                                                                     <br>" . $this->getContext()->getI18N()->__("Security Password", null) . ": <b>" . $password2 . "</b>
@@ -202,21 +212,27 @@ class homeActions extends sfActions
             return $this->redirect('/home/forgetPassword');
         }
     }
+
     public function executeRss()
     {
     }
+
     public function executeMaximExecutor()
     {
     }
+
     public function executeLogin2()
     {
     }
+
     public function executeRegister()
     {
     }
+
     public function executeRegister2()
     {
     }
+
     public function executeCompany()
     {
     }
@@ -240,14 +256,19 @@ class homeActions extends sfActions
     public function executeMarketNews()
     {
     }
+
     /* ***********************************************************************
    *    ~ END HTML END ~
    * **********************************************************************/
     public function executeLogin()
     {
         //$this->getUser()->setCulture("en");
+        $dateUtil = new DateUtil();
+        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+            return $this->redirect('home/maintenance');
+        }
 
-        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME.Globals::ROLE_DISTRIBUTOR), false)) {
+        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR), false)) {
             return $this->redirect('home/index');
         }
         $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2));
@@ -263,9 +284,11 @@ class homeActions extends sfActions
         $this->appSetting = AppSettingPeer::doSelectOne($c);
     }
 
-    public function executeRedirectToBackend() {
+    public function executeRedirectToBackend()
+    {
 
     }
+
     public function executeLogout()
     {
         if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE) {
@@ -314,6 +337,10 @@ class homeActions extends sfActions
 
     public function executeDoLogin()
     {
+        $dateUtil = new DateUtil();
+        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+            return $this->redirect('home/maintenance');
+        }
         if ($this->getRequestParameter('doAction') == "lang") {
             $c = new Criteria();
             $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SERVER_MAINTAIN);
@@ -334,10 +361,10 @@ class homeActions extends sfActions
                 if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
                     require_once('recaptchalib.php');
                     $privatekey = "6LfhJtYSAAAAALocUxn6PpgfoWCFjRquNFOSRFdb";
-                    $resp = recaptcha_check_answer ($privatekey,
-                                                    $_SERVER["REMOTE_ADDR"],
-                                                    $_POST["recaptcha_challenge_field"],
-                                                    $_POST["recaptcha_response_field"]);
+                    $resp = recaptcha_check_answer($privatekey,
+                                                   $_SERVER["REMOTE_ADDR"],
+                                                   $_POST["recaptcha_challenge_field"],
+                                                   $_POST["recaptcha_response_field"]);
 
                     if (!$resp->is_valid) {
                         $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
@@ -359,7 +386,7 @@ class homeActions extends sfActions
 
                 /*	    user      	*/
                 $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
-//                $array = explode(',', Globals::STATUS_ACTIVE);
+                //                $array = explode(',', Globals::STATUS_ACTIVE);
                 $c = new Criteria();
                 $c->add(AppUserPeer::USERNAME, $username);
                 $c->add(AppUserPeer::USERPASSWORD, $password);
