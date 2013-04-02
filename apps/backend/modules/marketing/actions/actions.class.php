@@ -11,18 +11,16 @@
 class marketingActions extends sfActions
 {
     public function executeFindUnderLeader() {
-        $str = 'Rudy001,yanlijun2,limpohchu,VIVIAN329,khorkb1,prettyqin,HOOCHONGHAU,infiniteharvests1';
-        $str = 'fanstatictravel2683,golden_tang668,DW129,prettyqin,maruyoshi,prettyqin3,infiniteharvests2,infiniteharvests3,miracle,sby001,salim,Godblessme,rumahduit,paigit,yanhengde,fangbingshou,PCCHUA8,yeohning12,ericyong2,khorkb2,gtkhoo62,LKAng48,VIVIAN329,CANDY3J85,richardwang,tankengleong,yangxiuhong,yoikuni';
-        $str = 'kanyasorn,uncletong,CHONGLONGHONG,LEN2,Syed01,AnnChong,napatsorn,Sekkiam,tmc8828,chinwenhuang,maxim9788,chuanruoy,seokluan64,tanenkmy,MichelleHo,yanlijun,AlexSim,tengmueleng';
-        $str = 'MAXCAP,ongeuzan,thorsengwah,ongeelyn,Mike007,TanSeanYip,MAXCAP2,BRA129,Toprich,HOOCHONGHAU';
+        $str = '43,57,61,325,203,240,60,143,328,138,91,731,99,98,258,257,548,638,589,518,117,889,71,925,918,917,922,966,970,969,916,1031';
 
         $memberArrs = explode(",", $str);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $leader = "";
         for ($y = 0; $y < count($memberArrs); $y++) {
-            $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberArrs[$y]);
-            $distDB = MlmDistributorPeer::doSelectOne($c);
+            //$c = new Criteria();
+            //$c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberArrs[$y]);
+            //$distDB = MlmDistributorPeer::doSelectOne($c);
+            $distDB = MlmDistributorPeer::retrieveByPK($memberArrs[$y]);
 
             for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($distDB->getTreeStructure(), $leaderArrs[$i]);

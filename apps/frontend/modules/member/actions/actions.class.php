@@ -629,6 +629,10 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree()
     {
+        $dateUtil = new DateUtil();
+        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+            return $this->redirect('home/maintenance');
+        }
         if ($this->getRequestParameter('bePlacementId', '') != "") {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
 
@@ -1618,6 +1622,10 @@ class memberActions extends sfActions
 
     public function executeDoMemberRegistration()
     {
+        $dateUtil = new DateUtil();
+        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+            return $this->redirect('home/maintenance');
+        }
         $userName = $this->getRequestParameter('userName','');
         $fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
