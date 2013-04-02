@@ -4455,7 +4455,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
-            if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
+            /*if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
                 $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
@@ -4467,7 +4467,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid trader ID."));
                     return $this->redirect('/member/transferEpoint');
                 }
-            }
+            }*/
 
             if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
