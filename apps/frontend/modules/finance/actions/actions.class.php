@@ -80,9 +80,28 @@ class financeActions extends sfActions
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         foreach ($distDBs as $distDB) {
+            print_r("======================================================");
+            print_r("dist code=".$distDB->getDistributorId());
+            print_r("<br>");
+
             $c = new Criteria();
             $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
             $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
+            $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+            $accountLedgers = MlmAccountLedgerPeer::doSelect($c);
+
+            $balance = 0;
+            foreach ($accountLedgers as $accountLedger) {
+                $balance = $balance + $accountLedger->getCredit() - $accountLedger->getDebit();
+                $accountLedger->setBalance($balance);
+                $accountLedger->save();
+                print_r("ecash balance=".$balance);
+                print_r("<br>");
+            }
+
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
             $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
             $accountLedgers = MlmAccountLedgerPeer::doSelect($c);
 
@@ -93,11 +112,28 @@ class financeActions extends sfActions
                 $balance = $balance + $accountLedger->getCredit() - $accountLedger->getDebit();
                 $accountLedger->setBalance($balance);
                 $accountLedger->save();
-                print_r("ecash balance=".$balance);
+                print_r("epoint balance=".$balance);
                 print_r("<br>");
             }
 
             $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_MAINTENANCE);
+            $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+            $accountLedgers = MlmAccountLedgerPeer::doSelect($c);
+
+            $balance = 0;
+            print_r("<br>");
+            foreach ($accountLedgers as $accountLedger) {
+
+                $balance = $balance + $accountLedger->getCredit() - $accountLedger->getDebit();
+                $accountLedger->setBalance($balance);
+                $accountLedger->save();
+                print_r("cp3 balance=".$balance);
+                print_r("<br>");
+            }
+
+            /*$c = new Criteria();
             $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $distDB->getDistributorId());
             $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, "DRB");
             $c->addAscendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
@@ -112,7 +148,7 @@ class financeActions extends sfActions
                 $commissionLedger->save();
                 print_r("commission balance=".$balance);
                 print_r("<br>");
-            }
+            }*/
         }
     }
     public function executeIndex()
