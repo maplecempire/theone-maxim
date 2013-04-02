@@ -262,18 +262,25 @@ function reassignDatagridEventAttr(){
             <div class="portlet-header">Company Information</div>
             <div class="portlet-content">
                 <table cellpadding="3" cellspacing="3" width="100%">
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Company e-Point</strong></td>
                         <td align="right"><?php echo number_format($companyEpoint, 2); ?></td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Total Active Member</strong></td>
                         <td align="right"><?php echo $totalActiveMember; ?></td>
                     </tr>
+                    <?php } ?>
                     <tr>
                         <td><strong>Total Pending Member</strong></td>
                         <td align="right"><?php echo $totalPendingMember; ?></td>
                     </tr>
+
+
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_MT4_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td colspan="2"><hr></td>
                     </tr>
@@ -288,6 +295,8 @@ function reassignDatagridEventAttr(){
                         ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_TOTAL_MT4_RELOAD, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Reload MT4 Fund</strong></td>
                         <td align="right"><?php
@@ -298,6 +307,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REFERRAL_BONUS, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Referral Bonus</strong></td>
                         <td align="right"><?php
@@ -308,6 +319,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ECASH_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>e-Cash Withdrawal</strong></td>
                         <td align="right"><?php
@@ -318,6 +331,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CP3_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>CP3 Withdrawal</strong></td>
                         <td align="right"><?php
@@ -328,6 +343,9 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CUSTOMER_ENQUIRY, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td colspan="2"><hr></td>
                     </tr>
@@ -341,6 +359,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DEMO_ACCOUNT_REQUEST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Demo Account Requests</strong></td>
                         <td align="right"><?php
@@ -351,6 +371,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_LIVE_ACCOUNT_REQUEST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Live Account Requests</strong></td>
                         <td align="right"><?php
@@ -361,6 +383,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DEBIT_CARD_APPLICATION, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>Debit Card Application</strong></td>
                         <td align="right"><?php
@@ -371,6 +395,8 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EZYCASH_CARD_APPLICATION, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
                         <td><strong>EzyCash Card Application</strong></td>
                         <td align="right"><?php
@@ -381,10 +407,11 @@ function reassignDatagridEventAttr(){
                             ?>
                         </td>
                     </tr>
+                    <?php } ?>
                 </table>
             </div>
         </div>
-
+        <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
         <div class="portlet">
             <div class="portlet-header">e-Point Purchase</div>
             <div class="portlet-content">
@@ -422,7 +449,7 @@ function reassignDatagridEventAttr(){
                 </table>
             </div>
         </div>
-
+        <?php } ?>
     </div>
 
     <div class="column">
@@ -444,7 +471,7 @@ function reassignDatagridEventAttr(){
                 </table>
             </div>
         </div>-->
-
+        <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
         <div class="portlet">
             <div class="portlet-header">Package Purchase</div>
             <div class="portlet-content">
@@ -487,7 +514,8 @@ function reassignDatagridEventAttr(){
                 </table>
             </div>
         </div>
-
+        <?php } ?>
+        <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_UPGRADE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
         <div class="portlet">
             <div class="portlet-header">Package Upgrade History</div>
             <div class="portlet-content">
@@ -522,6 +550,7 @@ function reassignDatagridEventAttr(){
             </div>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <!--######################################################################################-->
