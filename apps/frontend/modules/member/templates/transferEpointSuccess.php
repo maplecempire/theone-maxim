@@ -52,12 +52,12 @@
         waiting();
         $.ajax({
             type : 'POST',
-    <?php //if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
-//            url : "/member/verifySameGroupSponsorId",
-    <?php //} else { ?>
+    <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
+            url : "/member/verifySameGroupSponsorId",
+    <?php } else { ?>
 //            url : "/member/verifySponsorId",
             url : "/member/verifySponsorUserName",
-    <?php //} ?>
+    <?php } ?>
             dataType : 'json',
             cache: false,
             data: {

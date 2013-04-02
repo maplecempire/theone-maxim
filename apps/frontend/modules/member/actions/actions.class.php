@@ -629,10 +629,6 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree()
     {
-        $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
-            return $this->redirect('home/maintenance');
-        }
         if ($this->getRequestParameter('bePlacementId', '') != "") {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
 
@@ -1622,10 +1618,6 @@ class memberActions extends sfActions
 
     public function executeDoMemberRegistration()
     {
-        $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
-            return $this->redirect('home/maintenance');
-        }
         $userName = $this->getRequestParameter('userName','');
         $fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
@@ -3132,25 +3124,27 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
         $sponsorId = $this->getRequestParameter('sponsorId');
-        //var_dump($sponsorId);
 
-        $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|". $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
-        $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
-        $existUser = MlmDistributorPeer::doSelectOne($c);
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+            FROM mlm_distributor dist
+                LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
 
         $arr = "";
-        if ($existUser) {
-            //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $resultArr = $resultset->getRow();
+
             $arr = array(
-                'userId' => $existUser->getDistributorId(),
-                'userName' => $existUser->getDistributorCode(),
-                'fullname' => $existUser->getFullName(),
-                'nickname' => $existUser->getNickname()
+                'userId' => $resultArr["distributor_id"],
+                'userName' => $resultArr["distributor_code"],
+                'fullname' => $resultArr["full_name"],
+                'nickname' => $resultArr["nickname"]
             );
-            //}
         }
 
         echo json_encode($arr);
@@ -3821,7 +3815,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         // TO_HIDE_DIST_GROUP
         $hideDistGroup = false;
         $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
-        if ($pos === false) { // note: three equal signs
+        if ($pos === false) { // note: oee equal signs
 
         } else {
             $hideDistGroup = true;
@@ -4455,19 +4449,23 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
-            /*if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "%", Criteria::LIKE);
-                $c->add(MlmDistributorPeer::STATUS_CODE, $array, Criteria::IN);
-                $existUser = MlmDistributorPeer::doSelectOne($c);
+            if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+                        FROM mlm_distributor dist
+                    LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
 
-                if (!$existUser) {
+                $arr = "";
+
+                $connection = Propel::getConnection();
+                $statement = $connection->prepareStatement($query);
+                $resultset = $statement->executeQuery();
+
+                if (!$resultset->next()) {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid trader ID."));
                     return $this->redirect('/member/transferEpoint');
                 }
-            }*/
+            }
 
             if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
 
