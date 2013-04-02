@@ -812,7 +812,10 @@ $(function() {
                 </div>
                 <?php } ?>
             </div>
+            <?php
+            if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
             <?php include_component('component', 'packageInformation') ?>
+            <?php } ?>
         </td>
         <td valign="top">
             <?php echo $sf_data->getRaw('sf_content') ?>
