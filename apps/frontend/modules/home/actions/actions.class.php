@@ -366,6 +366,7 @@ class homeActions extends sfActions
                 $c->add(AppUserPeer::USER_ROLE, Globals::ROLE_DISTRIBUTOR);
                 $c->add(AppUserPeer::STATUS_CODE, $array, Criteria::IN);
                 $existUser = AppUserPeer::doSelectOne($c);
+
             }
 
             if ($existUser) {
