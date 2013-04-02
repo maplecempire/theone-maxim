@@ -245,7 +245,7 @@
                                 <img src="/images/maxim/arrow_blue_single_tab.gif">
                             </td>
                             <td><br>
-                                <a href="<?php echo url_for("/member/register")?>"><b>Instant Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
+                                <a href="<?php echo url_for("/member/register")?>"><b>Self Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
                                 <p>
                                     <a href="<?php echo url_for("/member/register")?>">Click
                                         here</a> to instantly register as Maxim Trader Member. </p>
