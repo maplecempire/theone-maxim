@@ -622,7 +622,9 @@ class marketingActions extends sfActions
                         //if ($existDistributor) {
                         if ($mlm_dist_mt4) {
                             $index = 0;
-                            var_dump($mlm_dist_mt4->getDistId());
+                            if ($mlm_dist_mt4->getDistId() < 0)
+                                continue;
+                            //var_dump($mlm_dist_mt4->getDistId());
                             $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
                             $this->forward404Unless($existDistributor);
 
