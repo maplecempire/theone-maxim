@@ -119,7 +119,7 @@ function reassignDatagridEventAttr(){
                             <th>Name</th>
                             <th>Withdraw</th>
                             <th>Withdraw after Deduction</th>
-                            <th>e-Cash in wallet</th>
+                            <th>CP3 in wallet</th>
                             <th>Status</th>
                             <th>Date</th>
                             <th>IC</th>
