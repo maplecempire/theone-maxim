@@ -100,9 +100,10 @@ class memberActions extends sfActions
     public function executeConvertRPToCp1()
     {
         $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
-        $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+        //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 
-        $ledgerAccountBalance = $rp - $debitAccount;
+        //$ledgerAccountBalance = $rp - $debitAccount;
+        $ledgerAccountBalance = $rp;
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
