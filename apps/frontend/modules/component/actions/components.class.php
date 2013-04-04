@@ -34,8 +34,9 @@ class componentComponents extends sfComponents
         $totalUnreadCsMessage = MlmCustomerEnquiryPeer::doCount($c);
 
         $rp = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
-        $debitAccount = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT);
-        $this->rp = $rp - $debitAccount;
+        //$debitAccount = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT);
+        //$this->rp = $rp - $debitAccount;
+        $this->rp = $rp;
 
         $this->distDB = $distDB;
         $this->openTermCondition = $openTermCondition;
