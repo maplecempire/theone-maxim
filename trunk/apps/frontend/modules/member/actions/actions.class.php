@@ -4622,9 +4622,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeTransferRP()
     {
         $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
-        $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+        //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 
-        $ledgerAccountBalance = $rp - $debitAccount;
+        $ledgerAccountBalance = $rp;
+        //$ledgerAccountBalance = $rp - $debitAccount;
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
