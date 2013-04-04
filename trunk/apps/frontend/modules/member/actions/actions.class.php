@@ -4811,7 +4811,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($fullName != "") {
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $fullName);
-            $c->addAnd(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
             $distinfo = MlmDistributorPeer::doSelectOne($c);
 
             if (!$distinfo) {
