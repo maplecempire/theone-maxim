@@ -3452,9 +3452,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
-            $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
+            //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 
-            $rp = $rp - $debitAccount;
+            //$rp = $rp - $debitAccount;
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorCode()."|%", Criteria::LIKE);
