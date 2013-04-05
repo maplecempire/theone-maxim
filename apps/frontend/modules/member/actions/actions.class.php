@@ -1306,7 +1306,8 @@ class memberActions extends sfActions
             return $this->redirect('/home/login');
     	}
         $userName = $this->getRequestParameter('userName');
-        $fcode = $this->generateFcode($this->getRequestParameter('country'));
+        $fcode = $userName;
+        //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
 
@@ -1628,7 +1629,8 @@ class memberActions extends sfActions
             return $this->redirect('home/maintenance');
         }
         $userName = $this->getRequestParameter('userName','');
-        $fcode = $this->generateFcode($this->getRequestParameter('country'));
+        //$fcode = $this->generateFcode($this->getRequestParameter('country'));
+        $fcode = $userName;
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
         $packageId = $this->getRequestParameter('packageId');
