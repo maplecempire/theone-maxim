@@ -7746,7 +7746,7 @@ Wish you all the best.
                 $debitAccount = 0;
             $rollingPoint = $arr['TOTAL_ROLLING_POINT'] - $debitAccount;
             $rollingPointUsed = $arr['TOTAL_RP_USED'] - $debitAccount;
-            $rollingPointAvailable = $rollingPoint - $arr['TOTAL_RP_USED'];
+            $rollingPointAvailable = $arr['TOTAL_ROLLING_POINT'] - $arr['TOTAL_RP_USED'];
 
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
