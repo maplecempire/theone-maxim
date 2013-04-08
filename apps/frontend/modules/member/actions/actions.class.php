@@ -1876,7 +1876,7 @@ class memberActions extends sfActions
                 $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
+                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
                 $mlm_account_ledger->setCredit(0);
                 $mlm_account_ledger->setDebit($packagePrice);
                 $mlm_account_ledger->setBalance($sponsorAccountBalance);
@@ -6794,7 +6794,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
             }
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().")");
+            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$sponsoredDistDB->getDistributorCode());
             $mlm_account_ledger->setCredit(0);
             $mlm_account_ledger->setDebit($packageDB->getPrice());
             $mlm_account_ledger->setBalance($sponsorAccountBalance);
