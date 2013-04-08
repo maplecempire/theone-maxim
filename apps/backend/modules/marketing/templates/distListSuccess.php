@@ -75,7 +75,8 @@ $(function(){
                                 , file_proof_of_residence : oObj.aData[idx++]
                                 , file_nric : oObj.aData[idx++]
                           });
-		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>";
+		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>"
+		  				  + "<br><a id='resendPasswordLink' href='#' title='Resend Password'>Resend_Password</a><br><a id='resendMt4Link' href='#' title='Resend MT4'>Resend_MT4</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
 		              { "sName" : "dist.rank_code",  "bSortable": true},
@@ -151,6 +152,69 @@ function reassignDatagridEventAttr(){
 		var id = $(event.target).parent().parent().attr("id");
         $("#dgAddPanelId").val(id);
         $("#dgAddPanel").dialog("open");
+	});
+	$("a[id=resendPasswordLink]").click(function(event){
+		// stop event
+		event.preventDefault();
+
+		// event.target is <a> itself, parent() is <td>, while parent().parent() get <tr>
+		//var id = alert("id = " +$(event.target).parent().parent().attr("id"));
+		var id = $(event.target).parent().parent().attr("id");
+
+        var answer = confirm("Are you sure want to send Password to the member?");
+        if (answer){
+            waiting();
+            $.ajax({
+                type : 'POST',
+                url : "<?php echo url_for('marketing/doSendMemberPassword') ?>",
+                dataType : 'json',
+                cache: false,
+                data: {
+                    distId : id
+                },
+                success : function(data) {
+                    if (data.error) {
+                        alert(data.errorMsg);
+                    } else {
+                        alert("Password send Successfully.");
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Server connection error.");
+                }
+            });
+        }
+	});
+	$("a[id=resendMt4Link]").click(function(event){
+		// stop event
+		event.preventDefault();
+
+		// event.target is <a> itself, parent() is <td>, while parent().parent() get <tr>
+		//var id = alert("id = " +$(event.target).parent().parent().attr("id"));
+		var id = $(event.target).parent().parent().attr("id");
+        var answer = confirm("Are you sure want to send MT4 Password to the member?");
+        if (answer){
+            waiting();
+            $.ajax({
+                type : 'POST',
+                url : "<?php echo url_for('marketing/doSendMemberMT4') ?>",
+                dataType : 'json',
+                cache: false,
+                data: {
+                    distId : id
+                },
+                success : function(data) {
+                    if (data.error) {
+                        alert(data.errorMsg);
+                    } else {
+                        alert("Password send Successfully.");
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Server connection error.");
+                }
+            });
+        }
 	});
 }
 
