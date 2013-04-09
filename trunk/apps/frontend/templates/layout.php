@@ -279,7 +279,7 @@
     <div class="nav_texture" style="z-index: 14;"></div>
     <!--<div class="nav_texture_carbon" style="z-index: 15;"></div>-->
     <div class="nav_texture_leather" style="z-index: 16;"></div>
-    <a href="#">
+    <a href="/home/index">
         <div class="logo" style="z-index: 20;"></div>
     </a>
     <br class="clear">
@@ -299,10 +299,10 @@
     <div class="left_item"><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME)?>, <?php echo __('Welcome to Maxim Trader.') ?></b></div>
     <div class="right_item">
 
-        <div class="language"><?php echo __('Language') ?>: <a href="/home/language?lang=en">English</a> / <a href="/home/language?lang=cn">中文</a> / <a href="/home/language?lang=jp">日本語</a></div>
+        <div class="language"><?php echo __('Language') ?>: <a href="/home/language?lang=en">English</a> / <a href="/home/language?lang=cn">中文</a> / <a href="/home/language?lang=jp">日本語</a> / <a href="/home/language?lang=kr">한국의</a></div>
 
-        <div class="sep"></div>
-        <div class="logout"><a href="/home/index"><?php echo __('Home Page') ?></a></div>
+        <!--<div class="sep"></div>
+        <div class="logout"><a href="/home/index"><?php /*echo __('Home Page') */?></a></div>-->
         <div class="sep"></div>
         <div class="logout"><a href="/home/logout"><?php echo __('Logout') ?></a></div>
 
