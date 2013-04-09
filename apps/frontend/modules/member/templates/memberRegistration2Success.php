@@ -36,6 +36,9 @@ $(function() {
                 minlength : 6,
                 remote: "/member/verifyUserName"
             },
+            "sponsorId" : {
+                required : true
+            },
             "userpassword" : {
                 required : true,
                 minlength : 6
@@ -300,7 +303,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
         <td><?php echo __('Referral ID') ?></td>
         <td>
-            <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
+            <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php //echo $sponsorId;?>">
             &nbsp;
         </td>
         <td>&nbsp;</td>
@@ -310,7 +313,7 @@ function verifyPlacementDistId() {
         <td>&nbsp;</td>
         <td><?php echo __('Referral Name') ?></td>
         <td>
-            <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php echo $sponsorName;?>" readonly="readonly">
+            <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php //echo $sponsorName;?>" readonly="readonly">
             &nbsp;
         </td>
         <td>&nbsp;</td>
