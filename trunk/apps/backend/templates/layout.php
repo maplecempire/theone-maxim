@@ -666,7 +666,8 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Rolling Point List'); ?></a><br/>
-
+                    <?php } ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_EPOINT_TRANSFER, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('report/epointTransfer') ?>"
                        title="<?php echo __('e-Point Transfer'); ?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
