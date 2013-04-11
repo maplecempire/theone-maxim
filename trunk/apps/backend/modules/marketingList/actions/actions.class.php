@@ -67,7 +67,8 @@ class marketingListActions extends sfActions
                 $result->getCredit() == null ? "0" : $result->getCredit(),
                 $result->getDebit() == null ? "0" : $result->getDebit(),
                 $result->getBalance() == null ? "0" : $result->getBalance(),
-                $result->getRemark()  == null ? "" : $result->getRemark()
+                $result->getRemark()  == null ? "" : $result->getRemark(),
+                $result->getInternalRemark()  == null ? "" : $result->getInternalRemark()
             );
         }
 
