@@ -74,7 +74,9 @@ $(function(){
 		  				  return "<a id='transferEpointLink' href='#' title='Debit Rolling Point'>Debit RP</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
-		              { "sName" : "rp.TOTAL_ROLLING_POINT",  "bSortable": false},
+		              { "sName" : "rp.TOTAL_ROLLING_POINT",  "bSortable": false, "fnRender": function ( oObj ) {
+                            return "<a id='historyListLink' href='#' title='History List'>" + oObj.aData[3] + "</a>";
+                      }},
 		              { "sName" : "dist.rank_code",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
@@ -127,6 +129,16 @@ function reassignDatagridEventAttr(){
 		var id = $(event.target).parent().parent().attr("id");
         $("#dgAddPanelId").val(id);
         $("#dgAddPanel").dialog("open");
+	});
+	$("a[id=historyListLink]").click(function(event){
+		// stop event
+		event.preventDefault();
+
+		// event.target is <a> itself, parent() is <td>, while parent().parent() get <tr>
+		//var id = alert("id = " +$(event.target).parent().parent().attr("id"));
+		var id = $(event.target).parent().parent().attr("id");
+        $("#dgHistoryListId").val(id);
+        $("#dgHistoryListPanel").dialog("open");
 	});
 }
 
@@ -279,7 +291,7 @@ $(function(){
                 }
             },
             <?php } ?>
-            Cancel: function() {
+            Close: function() {
                 $(this).dialog('close');
             }
         }
@@ -365,3 +377,84 @@ function populateDgAddPanel() {
     </fieldset>
 </div>
 </form>
+
+
+<script type="text/javascript">
+$(function(){
+    var datagridHistory =  $("#datagridHistory").r9jasonDataTable({
+        // online1DataTable extra params
+        "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
+        "extraParam" : function(aoData){ // pass extra params to server
+            aoData.push( { "name": "filterDistId", "value": $("#dgHistoryListId").val()  } );
+            aoData.push( { "name": "filterAccountType", "value": $("#search_accountType").val()  } );
+            aoData.push( { "name": "filterTransactionType", "value": $("#search_transactionType").val() } );
+        },
+        "reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
+
+        },
+
+        // datatables params
+        "bLengthChange": true,
+        "bFilter": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "bAutoWidth": false,
+        "sScrollX": "100%",
+        //"sScrollXInner": "150%",
+        "sAjaxSource": "<?php echo url_for('marketingList/rpLogList') ?>",
+        "sPaginationType": "full_numbers",
+        "aaSorting": [
+            [0,'desc']
+        ],
+        "aoColumns": [
+            { "sName" : "created_on",  "bSortable": true},
+            { "sName" : "account_type",  "bSortable": true},
+            { "sName" : "transaction_type",  "bSortable": true},
+            { "sName" : "credit", "bVisible" : true,  "bSortable": true},
+            { "sName" : "debit",  "bSortable": true},
+            { "sName" : "balance",  "bSortable": true},
+            { "sName" : "remark",  "bSortable": true}
+        ]
+    });
+    $("#dgHistoryListPanel").dialog("destroy");
+    $("#dgHistoryListPanel").theoneDialog({
+        width:700,
+        open: function() {
+            datagridHistory.fnDraw();
+        },
+        close: function() {
+
+        },
+        buttons: {
+            Close: function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+});
+</script>
+<div id="dgHistoryListPanel" style="display:none; width: 850px" title="RP History List">
+    <input type="hidden" id="dgHistoryListId">
+    <table class="display" id="datagridHistory" border="0" style="width: 850px">
+        <thead>
+            <tr>
+                <th><?php echo 'Date' ?></th>
+                <th><?php echo 'Account Type' ?></th>
+                <th><?php echo 'Transaction Type' ?></th>
+                <th><?php echo 'In' ?></th>
+                <th><?php echo 'Out' ?></th>
+                <th><?php echo 'Balance' ?></th>
+                <th><?php echo 'Remarks' ?></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input size="10" type="text" id="search_accountType" value="" class="search_init"/></td>
+                <td><input size="10" type="text" id="search_transactionType" value="" class="search_init"/></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>

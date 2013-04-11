@@ -10,6 +10,77 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeRpLogList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        /******   total records  *******/
+        $accountTypeArr = array(Globals::ACCOUNT_TYPE_RP, Globals::ACCOUNT_TYPE_DEBIT);
+
+        $c = new Criteria();
+        $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, $accountTypeArr , Criteria::IN);
+        $totalRecords = MlmAccountLedgerPeer::doCount($c);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterDistId') != "") {
+            $c->addAnd(MlmAccountLedgerPeer::DIST_ID, $this->getRequestParameter('filterDistId'));
+        }
+        if ($this->getRequestParameter('filterAccountType') != "") {
+            $c->addAnd(MlmAccountLedgerPeer::ACCOUNT_TYPE, "%" . $this->getRequestParameter('filterAccountType') . "%", Criteria::LIKE);
+        }
+        if ($this->getRequestParameter('filterTransactionType') != "") {
+            $c->addAnd(MlmAccountLedgerPeer::TRANSACTION_TYPE, "%" . $this->getRequestParameter('filterTransactionType') . "%", Criteria::LIKE);
+        }
+        $totalFilteredRecords = MlmAccountLedgerPeer::doCount($c);
+
+        /******   sorting  *******/
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
+                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                } else {
+                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                }
+            }
+        }
+
+        /******   pagination  *******/
+        $pager = new sfPropelPager('MlmAccountLedger', $limit);
+        $pager->setCriteria($c);
+        $pager->setPage(($offset / $limit) + 1);
+        $pager->init();
+
+        foreach ($pager->getResults() as $result) {
+            $arr[] = array(
+                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
+                $result->getAccountType() == null ? "" : $this->getContext()->getI18N()->__($result->getAccountType()),
+                $result->getTransactionType() == null ? "" : $this->getContext()->getI18N()->__($result->getTransactionType()),
+                $result->getCredit() == null ? "0" : $result->getCredit(),
+                $result->getDebit() == null ? "0" : $result->getDebit(),
+                $result->getBalance() == null ? "0" : $result->getBalance(),
+                $result->getRemark()  == null ? "" : $result->getRemark()
+            );
+        }
+
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeRpList()
     {
         $sColumns = $this->getRequestParameter('sColumns'). ", rp.TOTAL_DEBIT ";

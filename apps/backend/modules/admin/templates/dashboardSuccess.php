@@ -273,12 +273,11 @@ function reassignDatagridEventAttr(){
                         <td><strong>Total Active Member</strong></td>
                         <td align="right"><?php echo $totalActiveMember; ?></td>
                     </tr>
-                    <?php } ?>
                     <tr>
                         <td><strong>Total Pending Member</strong></td>
                         <td align="right"><?php echo $totalPendingMember; ?></td>
                     </tr>
-
+                    <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_MT4_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
