@@ -130,6 +130,16 @@ function reassignDatagridEventAttr(){
         $("#dgAddPanelId").val(id);
         $("#dgAddPanel").dialog("open");
 	});
+    $("a[id=historyListLink]").click(function(event){
+		// stop event
+		event.preventDefault();
+
+		// event.target is <a> itself, parent() is <td>, while parent().parent() get <tr>
+		//var id = alert("id = " +$(event.target).parent().parent().attr("id"));
+		var id = $(event.target).parent().parent().attr("id");
+        $("#dgHistoryListId").val(id);
+        $("#dgHistoryListPanel").dialog("open");
+	});
 }
 
 </script>
