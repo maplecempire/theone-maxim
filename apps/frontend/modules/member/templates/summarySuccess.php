@@ -19,10 +19,12 @@ var annoucementArr = [];
     news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company has implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
 });*/
 
+/*
 annoucementArr.push({
     poptitle:'CP2 convert to CP1 will get extra 5%',
     news_date:'27 MARCH 2013',
     news_desc:'<br>To all Concerned Member,<br><br>Please be informed that effective from 25th March 2013, <br><br>1.	CP2 convert to CP1 will get extra 5%<br>2.	CP3 convert to CP1 no longer to get extra 5%<br><br>Once again, thank you for your support.<br><br>Regards,<br>The Managements'});
+*/
 
 annoucementArr.push({
     poptitle:'International Member Exchange (IME) July 2013 @ Macau',

@@ -413,7 +413,8 @@ $(function(){
             { "sName" : "credit", "bVisible" : true,  "bSortable": true},
             { "sName" : "debit",  "bSortable": true},
             { "sName" : "balance",  "bSortable": true},
-            { "sName" : "remark",  "bSortable": true}
+            { "sName" : "remark",  "bSortable": true},
+            { "sName" : "internal_remark",  "bSortable": true}
         ]
     });
     $("#dgHistoryListPanel").dialog("destroy");
@@ -445,11 +446,13 @@ $(function(){
                 <th><?php echo 'Out' ?></th>
                 <th><?php echo 'Balance' ?></th>
                 <th><?php echo 'Remarks' ?></th>
+                <th><?php echo 'Internal Remarks' ?></th>
             </tr>
             <tr>
                 <td></td>
                 <td><input size="10" type="text" id="search_accountType" value="" class="search_init"/></td>
                 <td><input size="10" type="text" id="search_transactionType" value="" class="search_init"/></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
