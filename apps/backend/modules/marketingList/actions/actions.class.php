@@ -14,6 +14,89 @@ class marketingListActions extends sfActions
     {
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
+        //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = " FROM mlm_account_ledger account
+                    LEFT JOIN app_user appUser ON appUser.user_id = account.created_by";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1 ";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        //var_dump($sql);
+        /******   total filtered records  *******/
+
+        if ($this->getRequestParameter('filterDistId') != "") {
+            $sWhere .= " AND account.dist_id = " . $this->getRequestParameter('filterDistId');
+        }
+        if ($this->getRequestParameter('filterAccountType') != "") {
+            $sWhere .= " AND account.account_type like '%" . mysql_real_escape_string($this->getRequestParameter('filterAccountType')). "%'";
+        }
+        if ($this->getRequestParameter('filterTransactionType') != "") {
+            $sWhere .= " AND account.transaction_type like '%" . mysql_real_escape_string($this->getRequestParameter('filterTransactionType')). "%'";
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['account_type'] == null ? "" : $resultArr['account_type'],
+                $resultArr['transaction_type'] == null ? "" : $resultArr['transaction_type'],
+                $resultArr['credit'] == null ? "" : $resultArr['credit'],
+                $resultArr['debit'] == null ? "" : $resultArr['debit'],
+                $resultArr['balance'] == null ? "" : $resultArr['balance'],
+                $resultArr['username'] == null ? "" : $resultArr['username']
+                , $resultArr['remark'] == null ? "" : $resultArr['remark']
+                , $resultArr['internal_remark'] == null ? "" : $resultArr['internal_remark']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+    public function executeRpLogList_bak()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 

@@ -7621,7 +7621,6 @@ Wish you all the best.
             //print_r($receiverFullName."<br>");
             $sendMailService->sendMail($receiverEmail, $receiverFullName, $subject, $body);
         }
-        //$sendMailService->sendMail("r9jason@gmail.com", "jason", $subject, $body);
     }
 
     function sendDailyReport()
