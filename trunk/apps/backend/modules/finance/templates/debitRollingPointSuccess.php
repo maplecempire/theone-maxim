@@ -407,14 +407,15 @@ $(function(){
             [0,'desc']
         ],
         "aoColumns": [
-            { "sName" : "created_on",  "bSortable": true},
-            { "sName" : "account_type",  "bSortable": true},
-            { "sName" : "transaction_type",  "bSortable": true},
-            { "sName" : "credit", "bVisible" : true,  "bSortable": true},
-            { "sName" : "debit",  "bSortable": true},
-            { "sName" : "balance",  "bSortable": true},
-            { "sName" : "remark",  "bSortable": true},
-            { "sName" : "internal_remark",  "bSortable": true}
+            { "sName" : "account.created_on",  "bSortable": true},
+            { "sName" : "account.account_type",  "bSortable": true},
+            { "sName" : "account.transaction_type",  "bSortable": true},
+            { "sName" : "account.credit", "bVisible" : true,  "bSortable": true},
+            { "sName" : "account.debit",  "bSortable": true},
+            { "sName" : "account.balance",  "bSortable": true},
+            { "sName" : "appUser.username",  "bSortable": true},
+            { "sName" : "account.remark",  "bSortable": true},
+            { "sName" : "account.internal_remark",  "bSortable": true}
         ]
     });
     $("#dgHistoryListPanel").dialog("destroy");
@@ -445,6 +446,7 @@ $(function(){
                 <th><?php echo 'In' ?></th>
                 <th><?php echo 'Out' ?></th>
                 <th><?php echo 'Balance' ?></th>
+                <th><?php echo 'Created By' ?></th>
                 <th><?php echo 'Remarks' ?></th>
                 <th><?php echo 'Internal Remarks' ?></th>
             </tr>
@@ -452,6 +454,7 @@ $(function(){
                 <td></td>
                 <td><input size="10" type="text" id="search_accountType" value="" class="search_init"/></td>
                 <td><input size="10" type="text" id="search_transactionType" value="" class="search_init"/></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
