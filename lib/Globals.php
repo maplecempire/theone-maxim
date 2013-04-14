@@ -27,6 +27,7 @@ abstract class Globals {
     const LOGIN_RETRY = 0;
     const FIRST_LOGIN = 0;
     const DEBIT_CARD_CHARGES = 35;
+    const DEBIT_CARD_ACTIVATION_CHARGES = 50;
     const EZY_CASH_CARD_CHARGES = 35;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';

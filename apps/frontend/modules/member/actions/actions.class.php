@@ -269,7 +269,7 @@ class memberActions extends sfActions
         $this->mlm_debit_card_registration = $mlm_debit_card_registration;
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
-        $this->debitCardCharges = Globals::DEBIT_CARD_CHARGES;
+        $this->debitCardCharges = Globals::DEBIT_CARD_CHARGES + Globals::DEBIT_CARD_ACTIVATION_CHARGES;
     }
 
     public function executeDoApplyDebitCard()
@@ -280,7 +280,7 @@ class memberActions extends sfActions
         $payByOption = $this->getRequestParameter('payByOption');
         $accountType = "";
         $accountBalance = 0;
-        $debitCardCharges = Globals::DEBIT_CARD_CHARGES;
+        $debitCardCharges = Globals::DEBIT_CARD_CHARGES + Globals::DEBIT_CARD_ACTIVATION_CHARGES;
         if ($payByOption == "CP1") {
             if ($this->epointBalance < $debitCardCharges) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
