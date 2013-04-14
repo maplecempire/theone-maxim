@@ -389,7 +389,12 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?></font>
+                        <font color="#dc143c">
+                            <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?><br>
+                            <?php echo __('Debit Card application : USD 35') ?><br>
+                            <?php echo __('Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)') ?>
+
+                        </font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
