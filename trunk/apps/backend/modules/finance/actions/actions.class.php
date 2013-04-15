@@ -10,6 +10,51 @@
  */
 class financeActions extends sfActions
 {
+    public function executeDoBackendAction()
+    {
+        $str = '328,61,60,138,91,99,98,258,257,240,43,325,143,638,518,117,889,925,918,917,922,966,970,203,731,589';
+
+        $memberArrs = explode(",", $str);
+        for ($y = 0; $y < count($memberArrs); $y++) {
+            $pointAvailable = $this->getAccountBalance($memberArrs[$y], Globals::ACCOUNT_TYPE_EPOINT);
+            $ecashAvailable = $this->getAccountBalance($memberArrs[$y], Globals::ACCOUNT_TYPE_ECASH);
+
+            print_r($memberArrs[$y].":".$pointAvailable.":".$ecashAvailable);
+            print_r("<br>");
+            if ($pointAvailable >= 50) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setDistId($memberArrs[$y]);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_APPLY_DEBIT_CARD);
+                $mlm_account_ledger->setRemark("ACTIVATE DEBIT CARD");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit(50);
+                $mlm_account_ledger->setBalance($pointAvailable - 50);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+            } else if ($ecashAvailable >= 50) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setDistId($memberArrs[$y]);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_APPLY_DEBIT_CARD);
+                $mlm_account_ledger->setRemark("ACTIVATE DEBIT CARD");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit(50);
+                $mlm_account_ledger->setBalance($ecashAvailable - 50);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+            } else {
+                print_r($memberArrs[$y]."<==========================================");
+                print_r("<br>");
+            }
+        }
+
+
+        return sfView::HEADER_ONLY;
+    }
+
     /* ****************************************
      *     Rolling Point
      * *****************************************/
