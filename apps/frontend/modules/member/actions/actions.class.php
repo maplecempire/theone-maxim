@@ -6311,6 +6311,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingDB->setRightBalance(0);
                     $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
+                } else {
+                    $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
                 }
                 $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingDB->save();
