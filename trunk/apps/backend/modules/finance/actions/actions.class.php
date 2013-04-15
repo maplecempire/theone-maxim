@@ -12,6 +12,14 @@ class financeActions extends sfActions
 {
     public function executeDoBackendAction()
     {
+
+
+
+        return sfView::HEADER_ONLY;
+    }
+
+    function executeDeductDebitCardActivate()
+    {
         $str = '328,61,60,138,91,99,98,258,257,240,43,325,143,638,518,117,889,925,918,917,922,966,970,203,731,589';
 
         $memberArrs = explode(",", $str);
@@ -50,9 +58,6 @@ class financeActions extends sfActions
                 print_r("<br>");
             }
         }
-
-
-        return sfView::HEADER_ONLY;
     }
 
     /* ****************************************
