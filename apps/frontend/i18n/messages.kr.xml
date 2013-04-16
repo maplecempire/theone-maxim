@@ -599,7 +599,7 @@
             <trans-unit><source>Passport/Photo ID</source><target>여권 / 사진 ID</target></trans-unit>
             <trans-unit><source>Note: Maximum upload size per file is 5 MB. Only pdf / bmp / jpg / jpeg / gif / png / tif / tiff / doc / docx / xls / xlsx formats are accepted.</source><target>참고 : 파일 당 최대 업로드 크기 5 MB입니다. 만 PDF / BMP / JPG / JPEG / GIF / PNG / TIF / 티파니 / 문서 / docx / XLS / XLSX 형식이 허용됩니다.</target></trans-unit>
             <trans-unit><source>Join Package</source><target>지원에 추가</target></trans-unit>
-            <trans-unit><source>Membership</source><target>会籍</target></trans-unit>
+            <trans-unit><source>Membership</source><target>회원</target></trans-unit>
             <trans-unit><source>Price</source><target>가격</target></trans-unit>
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of MaximTrader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>아래는 위의 패키지를 서명 MaximTrader의 클라이언트로 구속하는 contractural 조건 및 계약입니다. 우리는 당신이 그들 각각을주의 깊게 읽을 시간이 걸릴 것이 좋습니다.</target></trans-unit>
             <trans-unit><source>Please check the boxes below to acknowledge your acceptance, agreement and understanding of the terms and agreements.</source><target>조건 및 계약에 동의, 계약과 이해를 확인하려면 아래 확인란을 선택하십시오.</target></trans-unit>
