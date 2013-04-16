@@ -8,6 +8,9 @@
 .qtrans_flag_zh {
     background: url("/css/maxim/flag/cn.png") no-repeat scroll 0 0 transparent;
 }
+.qtrans_flag_kr {
+    background: url("/css/maxim/flag/kr.png") no-repeat scroll 0 0 transparent;
+}
 ul, ol {
     list-style: none outside none;
     margin: 0;
@@ -26,4 +29,6 @@ a, a:link, a:hover, a:visited {
            title="中文"><span>中文</span></a></li>
     <li><a href="/home/language?lang=jp" class="qtrans_flag_jp qtrans_flag_and_text" style="font-weight: bold;"
            title="日文"><span>日本語</span></a></li>
+    <li><a href="/home/language?lang=kr" class="qtrans_flag_kr qtrans_flag_and_text" style="font-weight: bold;"
+           title="한국의"><span>한국의</span></a></li>
 </ul>
