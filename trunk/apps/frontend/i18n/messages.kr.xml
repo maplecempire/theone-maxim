@@ -158,95 +158,95 @@
             <trans-unit><source>Account Summary</source><target>계정 요약</target></trans-unit>
             <trans-unit><source>Summary</source><target>개요</target></trans-unit>
             <trans-unit><source>Home</source><target>집</target></trans-unit>
-            <trans-unit><source>Personal Profile</source><target>个人信息</target></trans-unit>
+            <trans-unit><source>Personal Profile</source><target>개인 프로필</target></trans-unit>
             <trans-unit><source>View Profile</source><target>개인 정보</target></trans-unit>
-            <trans-unit><source>Change Password</source><target>登录密码修改</target></trans-unit>
-            <trans-unit><source>Change Trx Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Change Security Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Change Transaction Password</source><target>交易密码修改</target></trans-unit>
-            <trans-unit><source>Account Verification</source><target>身份资料审核</target></trans-unit>
-            <trans-unit><source>My Certificates</source><target>我的证书</target></trans-unit>
-            <trans-unit><source>Gold Trading</source><target>黄金走势</target></trans-unit>
-            <trans-unit><source>Business</source><target>业务管理</target></trans-unit>
-            <trans-unit><source>Place New Shareholder</source><target>安置股东列表</target></trans-unit>
-            <trans-unit><source>Place New Trader</source><target>安置会员列表</target></trans-unit>
-            <trans-unit><source>Reinvest CPS</source><target>追加投资</target></trans-unit>
-            <trans-unit><source>Pin Purchase</source><target>购买PIN</target></trans-unit>
-            <trans-unit><source>Transfer Pin</source><target>PIN转账</target></trans-unit>
-            <trans-unit><source>Pin Transaction Log</source><target>PIN明细</target></trans-unit>
-            <trans-unit><source>Finance</source><target>账务管理</target></trans-unit>
-            <trans-unit><source>Transfer E-Cash</source><target>现金转账</target></trans-unit>
-            <trans-unit><source>Transfer MT4 Credit</source><target>MT4 Credit 转账</target></trans-unit>
-            <trans-unit><source>E-Cash Transfer</source><target>现金转账</target></trans-unit>
-            <trans-unit><source>MT4 Credit Transfer</source><target>MT4 Credit 转账</target></trans-unit>
-            <trans-unit><source>E-Point Transfer</source><target>点数转账</target></trans-unit>
-            <trans-unit><source>Gold Redemption</source><target>提取实物黄金</target></trans-unit>
-            <trans-unit><source>Gold Withdrawal</source><target>黄金兑现</target></trans-unit>
-            <trans-unit><source>E-Cash Withdrawal</source><target>现金兑现</target></trans-unit>
-            <trans-unit><source>MT4 Credit Withdrawal</source><target>MT4 Credit 兑现</target></trans-unit>
-            <trans-unit><source>E-Cash Log</source><target>现金明细</target></trans-unit>
-            <trans-unit><source>MT4 Credit Log</source><target>MT4 Credit 明细</target></trans-unit>
-            <trans-unit><source>E-Point Log</source><target>点数明细</target></trans-unit>
-            <trans-unit><source>Bonus Details</source><target>结算明细</target></trans-unit>
-            <trans-unit><source>Bulletin</source><target>公告留言</target></trans-unit>
-            <trans-unit><source>Enquiry</source><target>留言</target></trans-unit>
-            <trans-unit><source>Announcement</source><target>公告</target></trans-unit>
-            <trans-unit><source>Announcements</source><target>公告</target></trans-unit>
-            <trans-unit><source>Genealogy</source><target>团队架购图</target></trans-unit>
-            <trans-unit><source>Sponsor</source><target>团队发展谱图</target></trans-unit>
-            <trans-unit><source>Placement</source><target>组织系谱图</target></trans-unit>
-            <trans-unit><source>Global Auto Placement</source><target>国际公排谱图</target></trans-unit>
-            <trans-unit><source>Logout</source><target>登出</target></trans-unit>
-            <trans-unit><source>Upload Document</source><target>身份证件图片</target></trans-unit>
-            <trans-unit><source>Submit</source><target>提交</target></trans-unit>
-            <trans-unit><source>Cancel</source><target>取消</target></trans-unit>
-            <trans-unit><source>Documents</source><target>资料证件</target></trans-unit>
-            <trans-unit><source>Date Submitted</source><target>提交时间</target></trans-unit>
-            <trans-unit><source>Status</source><target>审核状态</target></trans-unit>
-            <trans-unit><source>Verified by</source><target>审核人</target></trans-unit>
-            <trans-unit><source>Date Verified</source><target>审核时间</target></trans-unit>
-            <trans-unit><source>Remarks</source><target>描述</target></trans-unit>
-            <trans-unit><source>Download</source><target>下载</target></trans-unit>
-            <trans-unit><source>Title</source><target>标题</target></trans-unit>
-            <trans-unit><source>Date</source><target>时间</target></trans-unit>
-            <trans-unit><source>close</source><target>关闭</target></trans-unit>
-            <trans-unit><source>In</source><target>进账</target></trans-unit>
-            <trans-unit><source>Out</source><target>出账</target></trans-unit>
-            <trans-unit><source>Balance</source><target>余额</target></trans-unit>
-            <trans-unit><source>Action</source><target>動作</target></trans-unit>
-            <trans-unit><source>E-Cash Balance</source><target>现金余额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Balance</source><target>MT4 Credit 余额</target></trans-unit>
-            <trans-unit><source>E-Point Balance</source><target>点数余额</target></trans-unit>
-            <trans-unit><source>E-Cash Withdraw Amount</source><target>兑现金额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Withdraw Amount</source><target>MT4 Credit 兑现金额</target></trans-unit>
-            <trans-unit><source>Transaction Password</source><target>交易密码</target></trans-unit>
-            <trans-unit><source>Transaction Password is not valid</source><target>交易密码不正确</target></trans-unit>
-            <trans-unit><source>Minimum withdraw $500</source><target>兑现金额不能少过$500</target></trans-unit>
-            <trans-unit><source>withdrawal amount must be $500</source><target>兑现金额$500</target></trans-unit>
-            <trans-unit><source>redeem amount must be 100g</source><target>提取实物黄金规定100克</target></trans-unit>
-            <trans-unit><source>Gold Dividend Balance</source><target>现有黄金数量</target></trans-unit>
-            <trans-unit><source>Redeem gold success</source><target>提取实物黄金成功</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Cash</source><target>金额数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit 数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Point</source><target>点数数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient gold amount</source><target>黄金数量不足</target></trans-unit>
-            <trans-unit><source>In-sufficient Pin</source><target>Pin数量不足</target></trans-unit>
-            <trans-unit><source>Cannot transfer to own account</source><target>不可转Pin给自己계정</target></trans-unit>
-            <trans-unit><source>Gold Amount</source><target>黄金数量</target></trans-unit>
-            <trans-unit><source>Invalid trx password</source><target>请输入正确交易密码</target></trans-unit>
-            <trans-unit><source>Invalid Security password</source><target>请输入正确交易密码</target></trans-unit>
-            <trans-unit><source>System cannot get gold price, please try again</source><target>系统黄金价有误请再试一次</target></trans-unit>
-            <trans-unit><source>Withdraw gold success</source><target>黄金售卖成功</target></trans-unit>
-            <trans-unit><source>Message</source><target>内容</target></trans-unit>
-            <trans-unit><source>Reply Message</source><target>留言内容</target></trans-unit>
-            <trans-unit><source>Reply By</source><target>留言人</target></trans-unit>
-            <trans-unit><source>Reply Date</source><target>留言时间</target></trans-unit>
-            <trans-unit><source>View</source><target>检查</target></trans-unit>
-            <trans-unit><source>Shareholder Name</source><target>股东전체 이름</target></trans-unit>
-            <trans-unit><source>Trader Name</source><target>会员전체 이름</target></trans-unit>
+            <trans-unit><source>Change Password</source><target>비밀번호를 변경</target></trans-unit>
+            <trans-unit><source>Change Trx Password</source><target>거래 비밀번호 변경</target></trans-unit>
+            <trans-unit><source>Change Security Password</source><target>보안 암호 변경</target></trans-unit>
+            <trans-unit><source>Change Transaction Password</source><target>거래 비밀번호 변경</target></trans-unit>
+            <trans-unit><source>Account Verification</source><target>계정 확인</target></trans-unit>
+            <trans-unit><source>My Certificates</source><target>내 인증서</target></trans-unit>
+            <trans-unit><source>Gold Trading</source><target>골드 무역</target></trans-unit>
+            <trans-unit><source>Business</source><target>사업</target></trans-unit>
+            <trans-unit><source>Place New Shareholder</source><target>새 주주를 배치</target></trans-unit>
+            <trans-unit><source>Place New Trader</source><target>새로운 상인을 배치</target></trans-unit>
+            <trans-unit><source>Reinvest CPS</source><target>CPS를 재투자</target></trans-unit>
+            <trans-unit><source>Pin Purchase</source><target>매 핀</target></trans-unit>
+            <trans-unit><source>Transfer Pin</source><target>핀을 전송</target></trans-unit>
+            <trans-unit><source>Pin Transaction Log</source><target>핀 트랜잭션 로그</target></trans-unit>
+            <trans-unit><source>Finance</source><target>재원</target></trans-unit>
+            <trans-unit><source>Transfer E-Cash</source><target>현금 송금</target></trans-unit>
+            <trans-unit><source>Transfer MT4 Credit</source><target>MT4 Credit 이전</target></trans-unit>
+            <trans-unit><source>E-Cash Transfer</source><target>현금 송금</target></trans-unit>
+            <trans-unit><source>MT4 Credit Transfer</source><target>MT4 Credit 이전</target></trans-unit>
+            <trans-unit><source>E-Point Transfer</source><target>포인트 전송</target></trans-unit>
+            <trans-unit><source>Gold Redemption</source><target>실제 금을 인출</target></trans-unit>
+            <trans-unit><source>Gold Withdrawal</source><target>골드 현금</target></trans-unit>
+            <trans-unit><source>E-Cash Withdrawal</source><target>현금 현금</target></trans-unit>
+            <trans-unit><source>MT4 Credit Withdrawal</source><target>MT4 Credit 존경</target></trans-unit>
+            <trans-unit><source>E-Cash Log</source><target>현금 상세</target></trans-unit>
+            <trans-unit><source>MT4 Credit Log</source><target>MT4 Credit 로그</target></trans-unit>
+            <trans-unit><source>E-Point Log</source><target>계산로그</target></trans-unit>
+            <trans-unit><source>Bonus Details</source><target>청소로그</target></trans-unit>
+            <trans-unit><source>Bulletin</source><target>회보</target></trans-unit>
+            <trans-unit><source>Enquiry</source><target>문의</target></trans-unit>
+            <trans-unit><source>Announcement</source><target>발표</target></trans-unit>
+            <trans-unit><source>Announcements</source><target>발표</target></trans-unit>
+            <trans-unit><source>Genealogy</source><target>가계</target></trans-unit>
+            <trans-unit><source>Sponsor</source><target>팀 개발 스펙트럼</target></trans-unit>
+            <trans-unit><source>Placement</source><target>조직 계보</target></trans-unit>
+            <trans-unit><source>Global Auto Placement</source><target>국제 공공 행 스펙트럼</target></trans-unit>
+            <trans-unit><source>Logout</source><target>로그 아웃</target></trans-unit>
+            <trans-unit><source>Upload Document</source><target>문서를 업로드</target></trans-unit>
+            <trans-unit><source>Submit</source><target>제출</target></trans-unit>
+            <trans-unit><source>Cancel</source><target>취소</target></trans-unit>
+            <trans-unit><source>Documents</source><target>서류</target></trans-unit>
+            <trans-unit><source>Date Submitted</source><target>날짜 제출</target></trans-unit>
+            <trans-unit><source>Status</source><target>지위</target></trans-unit>
+            <trans-unit><source>Verified by</source><target>검증</target></trans-unit>
+            <trans-unit><source>Date Verified</source><target>확인 날짜</target></trans-unit>
+            <trans-unit><source>Remarks</source><target>비고</target></trans-unit>
+            <trans-unit><source>Download</source><target>다운로드</target></trans-unit>
+            <trans-unit><source>Title</source><target>이름</target></trans-unit>
+            <trans-unit><source>Date</source><target>날짜</target></trans-unit>
+            <trans-unit><source>close</source><target>가까운</target></trans-unit>
+            <trans-unit><source>In</source><target>신용에 서</target></trans-unit>
+            <trans-unit><source>Out</source><target>계정</target></trans-unit>
+            <trans-unit><source>Balance</source><target>잔액</target></trans-unit>
+            <trans-unit><source>Action</source><target>행동</target></trans-unit>
+            <trans-unit><source>E-Cash Balance</source><target>현금 잔고</target></trans-unit>
+            <trans-unit><source>MT4 Credit Balance</source><target>MT4 Credit 잔액</target></trans-unit>
+            <trans-unit><source>E-Point Balance</source><target>계산잔액</target></trans-unit>
+            <trans-unit><source>E-Cash Withdraw Amount</source><target>현금 금액</target></trans-unit>
+            <trans-unit><source>MT4 Credit Withdraw Amount</source><target>MT4 Credit 현금 금액</target></trans-unit>
+            <trans-unit><source>Transaction Password</source><target>거래 비밀번호</target></trans-unit>
+            <trans-unit><source>Transaction Password is not valid</source><target>거래 비밀번호가 틀립니다</target></trans-unit>
+            <trans-unit><source>Minimum withdraw $500</source><target>이하이 아닌 현금 금액$500</target></trans-unit>
+            <trans-unit><source>withdrawal amount must be $500</source><target>현금 금액$500</target></trans-unit>
+            <trans-unit><source>redeem amount must be 100g</source><target>실제 금 규정의 압축을 풉니 다100그램</target></trans-unit>
+            <trans-unit><source>Gold Dividend Balance</source><target>금 기존 수량</target></trans-unit>
+            <trans-unit><source>Redeem gold success</source><target>실제 금의 성공을 철회</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Cash</source><target>의 부족 수의 양</target></trans-unit>
+            <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit 의 부족 수</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Point</source><target>계산의 부족 수</target></trans-unit>
+            <trans-unit><source>In-sufficient gold amount</source><target>금의 부족 수</target></trans-unit>
+            <trans-unit><source>In-sufficient Pin</source><target>Pin의 부족 수</target></trans-unit>
+            <trans-unit><source>Cannot transfer to own account</source><target>자신의 계정으로 이전 할 수 없습니다</target></trans-unit>
+            <trans-unit><source>Gold Amount</source><target>금양</target></trans-unit>
+            <trans-unit><source>Invalid trx password</source><target>올바른 거래 비밀번호를 입력하세요</target></trans-unit>
+            <trans-unit><source>Invalid Security password</source><target>잘못된 보안 암호</target></trans-unit>
+            <trans-unit><source>System cannot get gold price, please try again</source><target>시스템 금 가격을받을 수 다시 시도하십시오</target></trans-unit>
+            <trans-unit><source>Withdraw gold success</source><target>금의 성공을 철회</target></trans-unit>
+            <trans-unit><source>Message</source><target>메시지</target></trans-unit>
+            <trans-unit><source>Reply Message</source><target>회신 메시지</target></trans-unit>
+            <trans-unit><source>Reply By</source><target>로 회신</target></trans-unit>
+            <trans-unit><source>Reply Date</source><target>날짜 회신</target></trans-unit>
+            <trans-unit><source>View</source><target>검사</target></trans-unit>
+            <trans-unit><source>Shareholder Name</source><target>주주 명</target></trans-unit>
+            <trans-unit><source>Trader Name</source><target>상인 이름</target></trans-unit>
             <trans-unit><source>Transfer E-Cash Amount</source><target>转出金额</target></trans-unit>
             <trans-unit><source>Transfer MT4 Credit Amount</source><target>转出 MT4 Credit</target></trans-unit>
-            <trans-unit><source>Transfer E-Point Amount</source><target>转出点数</target></trans-unit>
+            <trans-unit><source>Transfer E-Point Amount</source><target>转出계산</target></trans-unit>
             <trans-unit><source>Transfer success</source><target>成功转帐</target></trans-unit>
             <trans-unit><source>In-sufficient E-Cash Amount</source><target>金额不足够</target></trans-unit>
             <trans-unit><source>In-sufficient MT4 Credit Amount</source><target>MT4 Credit 不足够</target></trans-unit>
@@ -269,10 +269,10 @@
             <trans-unit><source>Delete</source><target>删除</target></trans-unit>
             <trans-unit><source>Login Now</source><target>现在登录</target></trans-unit>
             <trans-unit><source>Login</source><target>登录</target></trans-unit>
-            <trans-unit><source>PIN Available</source><target>PIN余额</target></trans-unit>
+            <trans-unit><source>PIN Available</source><target>PIN잔액</target></trans-unit>
             <trans-unit><source>PIN Used to Activate</source><target>PIN用于激活</target></trans-unit>
-            <trans-unit><source>e-Point Available</source><target>点数余额</target></trans-unit>
-            <trans-unit><source>e-Point Used to Activate</source><target>点数用于激活</target></trans-unit>
+            <trans-unit><source>e-Point Available</source><target>계산잔액</target></trans-unit>
+            <trans-unit><source>e-Point Used to Activate</source><target>계산用于激活</target></trans-unit>
             <trans-unit><source>Activate Shareholder</source><target>激活股东</target></trans-unit>
             <trans-unit><source>Activate Trader</source><target>激活会员</target></trans-unit>
             <trans-unit><source>Old Login Password</source><target>旧登录密码</target></trans-unit>
@@ -314,7 +314,7 @@
             <trans-unit><source>Refer to MGIG management</source><target>向枫叶国际管理层询问</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中。 我们很抱歉导致了您的不便。</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance until 14 December, 2011. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中，14号12月回复正常。 我们很抱歉导致了您的不便。</target></trans-unit>
-            <trans-unit><source>Gold Market Closed</source><target>黄金市场已经关闭</target></trans-unit>
+            <trans-unit><source>Gold Market Closed</source><target>금市场已经关闭</target></trans-unit>
             <trans-unit><source>Withdrawal Status</source><target>兑现状态</target></trans-unit>
             <trans-unit><source>Withdrawal</source><target>兑现</target></trans-unit>
             <trans-unit><source>WITHDRAWAL</source><target>兑现</target></trans-unit>
@@ -331,20 +331,20 @@
             <trans-unit><source>View Details</source><target>查看内容</target></trans-unit>
             <trans-unit><source>Details</source><target>查看</target></trans-unit>
             <trans-unit><source>Member Id</source><target>会员编号</target></trans-unit>
-            <trans-unit><source>e-Cash Wallet</source><target>电子钱包余额</target></trans-unit>
-            <trans-unit><source>MT4 Credit Wallet</source><target>MT4 Credit 余额</target></trans-unit>
+            <trans-unit><source>e-Cash Wallet</source><target>电子钱包잔액</target></trans-unit>
+            <trans-unit><source>MT4 Credit Wallet</source><target>MT4 Credit 잔액</target></trans-unit>
             <trans-unit><source>Name</source><target>사용자 이름</target></trans-unit>
-            <trans-unit><source>e-Point Wallet</source><target>批发点数钱包</target></trans-unit>
-            <trans-unit><source>e-Point</source><target>点数</target></trans-unit>
+            <trans-unit><source>e-Point Wallet</source><target>批发계산钱包</target></trans-unit>
+            <trans-unit><source>e-Point</source><target>계산</target></trans-unit>
             <trans-unit><source>Package Rank</source><target>等级</target></trans-unit>
-            <trans-unit><source>e-Share Balance</source><target>电子股余额</target></trans-unit>
+            <trans-unit><source>e-Share Balance</source><target>电子股잔액</target></trans-unit>
             <trans-unit><source>Last Login</source><target>上次登入</target></trans-unit>
-            <trans-unit><source>Maintenance Balance</source><target>奖金回流余额</target></trans-unit>
+            <trans-unit><source>Maintenance Balance</source><target>奖金回流잔액</target></trans-unit>
             <trans-unit><source>VVIP</source><target>超级贵宾</target></trans-unit>
             <trans-unit><source>VIP</source><target>贵宾</target></trans-unit>
             <trans-unit><source>Diamond</source><target>钻石</target></trans-unit>
             <trans-unit><source>Platinum</source><target>白金</target></trans-unit>
-            <trans-unit><source>Gold</source><target>黄金</target></trans-unit>
+            <trans-unit><source>Gold</source><target>금</target></trans-unit>
             <trans-unit><source>Silver</source><target>银级</target></trans-unit>
             <trans-unit><source>Bronze</source><target>铜级</target></trans-unit>
             <trans-unit><source>Basic</source><target>初级</target></trans-unit>
@@ -469,7 +469,7 @@
             <trans-unit><source>Among the myriad of financial instruments that Maxim Trader trades in are the</source><target>在错综复杂的金融工具时，Maxim Trader行业的</target></trans-unit>
             <trans-unit><source>These two markets are some of most liquid and volatile in recent years owing to the global financial crisis and it is for this very reason why these instruments are chosen. Using our in-house expertise, trading models are developed and vigorously tested and incorporated into our tactical trading strategies.</source><target>这两个市场是最具流动性和波动，近年来，由于全球金融危机的一些，这是因为这个原因，为什么这些工具的选择。使用我们的内部专业知识，交易模式的开发和严格测试，并纳入到我们的战术交易策略。</target></trans-unit>
             <trans-unit><source>global currency markets</source><target>全球货币市场</target></trans-unit>
-            <trans-unit><source>cash market for gold.</source><target>黄金现货市场。</target></trans-unit>
+            <trans-unit><source>cash market for gold.</source><target>금现货市场。</target></trans-unit>
             <trans-unit><source>and</source><target>与</target></trans-unit>
             <trans-unit><source>Managed Trading</source><target>管理贸易</target></trans-unit>
             <trans-unit><source>Implementing Alternatives</source><target>寻找替代品</target></trans-unit>
@@ -661,17 +661,17 @@
             <trans-unit><source>Sponsor Genealogy</source><target>直推组织图</target></trans-unit>
             <trans-unit><source>Accumulate Group BV</source><target>小组累积业绩</target></trans-unit>
             <trans-unit><source>Today Group BV</source><target>今日小组业绩</target></trans-unit>
-            <trans-unit><source>Carry Forward</source><target>对碰余额</target></trans-unit>
+            <trans-unit><source>Carry Forward</source><target>对碰잔액</target></trans-unit>
             <trans-unit><source>Today Total Group BV</source><target>今日小组总业绩</target></trans-unit>
             <trans-unit><source>USD</source><target>美金</target></trans-unit>
             <trans-unit><source>NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>注：CP1只能用来收购지원，지원升级和充值MT4帐户。CP1是不能兑现的。</target></trans-unit>
             <trans-unit><source>Commission Details</source><target>奖金收益</target></trans-unit>
             <trans-unit><source>Commission Categories</source><target>奖金总结</target></trans-unit>
-            <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4계정没有余额。</target></trans-unit>
+            <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4계정没有잔액。</target></trans-unit>
             <trans-unit><source>Direct Referral Bonus</source><target>直推奖金</target></trans-unit>
             <trans-unit><source>Pairing Bonus</source><target>配对奖金</target></trans-unit>
             <trans-unit><source>Generation Bonus</source><target>代数奖金</target></trans-unit>
-            <trans-unit><source>Pips Rebate</source><target>点数回赠</target></trans-unit>
+            <trans-unit><source>Pips Rebate</source><target>계산回赠</target></trans-unit>
             <trans-unit><source>January</source><target>一月</target></trans-unit>
             <trans-unit><source>February</source><target>二月</target></trans-unit>
             <trans-unit><source>March</source><target>三月</target></trans-unit>
@@ -714,7 +714,7 @@
             <trans-unit><source>NOTE : Minimum withdrawal amount : USD 200</source><target>注：兑现数额不能少过200美金</target></trans-unit>
             <trans-unit><source>Can only be withdrawn on the first working week of the month</source><target>兑现只能在每个月的第一个星期</target></trans-unit>
             <trans-unit><source>Processing time : 2 working days</source><target>处理时间：2个工作日</target></trans-unit>
-            <trans-unit><source>CP2 Balance</source><target>CP2余额</target></trans-unit>
+            <trans-unit><source>CP2 Balance</source><target>CP2잔액</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal Amount</source><target>CP2兑现金额</target></trans-unit>
             <trans-unit><source>After 5% handling fee</source><target>附加5％的手续费</target></trans-unit>
             <trans-unit><source>Deduct Amount</source><target>扣除总金额</target></trans-unit>
