@@ -244,47 +244,47 @@
             <trans-unit><source>View</source><target>검사</target></trans-unit>
             <trans-unit><source>Shareholder Name</source><target>주주 명</target></trans-unit>
             <trans-unit><source>Trader Name</source><target>상인 이름</target></trans-unit>
-            <trans-unit><source>Transfer E-Cash Amount</source><target>转出金额</target></trans-unit>
-            <trans-unit><source>Transfer MT4 Credit Amount</source><target>转出 MT4 Credit</target></trans-unit>
-            <trans-unit><source>Transfer E-Point Amount</source><target>转出계산</target></trans-unit>
-            <trans-unit><source>Transfer success</source><target>成功转帐</target></trans-unit>
-            <trans-unit><source>In-sufficient E-Cash Amount</source><target>金额不足够</target></trans-unit>
-            <trans-unit><source>In-sufficient MT4 Credit Amount</source><target>MT4 Credit 不足够</target></trans-unit>
-            <trans-unit><source>You are not allow to transfer to own account.</source><target>您只能转出金额给别的계정</target></trans-unit>
-            <trans-unit><source>Account Details</source><target>财务概况</target></trans-unit>
-            <trans-unit><source>CPS</source><target>优先股</target></trans-unit>
-            <trans-unit><source>Dividend (g)</source><target>股息(克)</target></trans-unit>
+            <trans-unit><source>Transfer E-Cash Amount</source><target>금액 아웃 전송</target></trans-unit>
+            <trans-unit><source>Transfer MT4 Credit Amount</source><target>이전 MT4 Credit</target></trans-unit>
+            <trans-unit><source>Transfer E-Point Amount</source><target>이전계산</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>성공적으로 전송</target></trans-unit>
+            <trans-unit><source>In-sufficient E-Cash Amount</source><target>금액은 충분하지 않습니다</target></trans-unit>
+            <trans-unit><source>In-sufficient MT4 Credit Amount</source><target>MT4 Credit 충분하지 않습니다</target></trans-unit>
+            <trans-unit><source>You are not allow to transfer to own account.</source><target>당신은 자신의 계정에 전송할 수 없습니다</target></trans-unit>
+            <trans-unit><source>Account Details</source><target>계정 세부 정보</target></trans-unit>
+            <trans-unit><source>CPS</source><target>우선주</target></trans-unit>
+            <trans-unit><source>Dividend (g)</source><target>배당 (g)</target></trans-unit>
             <trans-unit><source>PIN</source><target>PIN</target></trans-unit>
             <trans-unit><source>Pin</source><target>PIN</target></trans-unit>
-            <trans-unit><source>E-Cash</source><target>现金</target></trans-unit>
+            <trans-unit><source>E-Cash</source><target>현금</target></trans-unit>
             <trans-unit><source>MT4 Credit</source><target>MT4 Credit</target></trans-unit>
-            <trans-unit><source>e-Cash</source><target>现金</target></trans-unit>
-            <trans-unit><source>Trading Margin</source><target>交易限额</target></trans-unit>
-            <trans-unit><source>GAP</source><target>国际公排奖限度</target></trans-unit>
-            <trans-unit><source>Inactive Shareholders</source><target>未激活股东</target></trans-unit>
-            <trans-unit><source>Inactive Trader</source><target>未激活会员</target></trans-unit>
-            <trans-unit><source>Registered Time</source><target>注册时间</target></trans-unit>
-            <trans-unit><source>Activate</source><target>激活</target></trans-unit>
-            <trans-unit><source>Active</source><target>激活</target></trans-unit>
-            <trans-unit><source>Delete</source><target>删除</target></trans-unit>
-            <trans-unit><source>Login Now</source><target>现在登录</target></trans-unit>
-            <trans-unit><source>Login</source><target>登录</target></trans-unit>
+            <trans-unit><source>e-Cash</source><target>현금</target></trans-unit>
+            <trans-unit><source>Trading Margin</source><target>무역 제한</target></trans-unit>
+            <trans-unit><source>GAP</source><target>국제 공공 행 상 제한</target></trans-unit>
+            <trans-unit><source>Inactive Shareholders</source><target>주주는 활성화되지 않음</target></trans-unit>
+            <trans-unit><source>Inactive Trader</source><target>회원 활성화되지 않음</target></trans-unit>
+            <trans-unit><source>Registered Time</source><target>가입</target></trans-unit>
+            <trans-unit><source>Activate</source><target>활성화</target></trans-unit>
+            <trans-unit><source>Active</source><target>활성화</target></trans-unit>
+            <trans-unit><source>Delete</source><target>삭제</target></trans-unit>
+            <trans-unit><source>Login Now</source><target>지금에 로그인</target></trans-unit>
+            <trans-unit><source>Login</source><target>로그인</target></trans-unit>
             <trans-unit><source>PIN Available</source><target>PIN잔액</target></trans-unit>
-            <trans-unit><source>PIN Used to Activate</source><target>PIN用于激活</target></trans-unit>
+            <trans-unit><source>PIN Used to Activate</source><target>PIN활성화하는 데 사용</target></trans-unit>
             <trans-unit><source>e-Point Available</source><target>계산잔액</target></trans-unit>
-            <trans-unit><source>e-Point Used to Activate</source><target>계산用于激活</target></trans-unit>
-            <trans-unit><source>Activate Shareholder</source><target>激活股东</target></trans-unit>
-            <trans-unit><source>Activate Trader</source><target>激活会员</target></trans-unit>
+            <trans-unit><source>e-Point Used to Activate</source><target>PIN활성화하는 데 사용</target></trans-unit>
+            <trans-unit><source>Activate Shareholder</source><target>활성화주주</target></trans-unit>
+            <trans-unit><source>Activate Trader</source><target>활성화会员</target></trans-unit>
             <trans-unit><source>Old Login Password</source><target>旧登录密码</target></trans-unit>
             <trans-unit><source>New Login Password</source><target>新登录密码</target></trans-unit>
             <trans-unit><source>Re-enter Login Password</source><target>확인新登录密码</target></trans-unit>
             <trans-unit><source>Old Transaction Password</source><target>旧交易密码</target></trans-unit>
             <trans-unit><source>New Transaction Password</source><target>新交易密码</target></trans-unit>
             <trans-unit><source>Re-enter Transaction Password</source><target>확인新交易密码</target></trans-unit>
-            <trans-unit><source>Activation Date</source><target>激活时间</target></trans-unit>
+            <trans-unit><source>Activation Date</source><target>활성화时间</target></trans-unit>
             <trans-unit><source>Registered Date</source><target>注册时间</target></trans-unit>
             <trans-unit><source>Position</source><target>安置</target></trans-unit>
-            <trans-unit><source>Place Shareholder History</source><target>安置股东记录表</target></trans-unit>
+            <trans-unit><source>Place Shareholder History</source><target>安置주주记录表</target></trans-unit>
             <trans-unit><source>Place Trader History</source><target>安置会员记录表</target></trans-unit>
             <trans-unit><source>Placement ID</source><target>组织ID</target></trans-unit>
             <trans-unit><source>Placement Date</source><target>安置时间</target></trans-unit>
@@ -310,7 +310,7 @@
             <trans-unit><source>Right</source><target>右边</target></trans-unit>
             <trans-unit><source>Search</source><target>查寻</target></trans-unit>
             <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>提现手续费用5%</target></trans-unit>
-            <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>现金转账需付%1%元美金手续费</target></trans-unit>
+            <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>현금转账需付%1%元美金手续费</target></trans-unit>
             <trans-unit><source>Refer to MGIG management</source><target>向枫叶国际管理层询问</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中。 我们很抱歉导致了您的不便。</target></trans-unit>
             <trans-unit><source>Our web server is in the midst of maintenance until 14 December, 2011. We are sorry for any inconvenience caused.</source><target>我们的网络服务器在维护中，14号12月回复正常。 我们很抱歉导致了您的不便。</target></trans-unit>
@@ -353,7 +353,7 @@
             <trans-unit><source>Payment Type</source><target>付款方式</target></trans-unit>
             <trans-unit><source>Available</source><target>可用的</target></trans-unit>
             <trans-unit><source>Place Here</source><target>放置位置</target></trans-unit>
-            <trans-unit><source>Member activated successfully.</source><target>会员成功被激活.</target></trans-unit>
+            <trans-unit><source>Member activated successfully.</source><target>会员成功被활성화.</target></trans-unit>
             <trans-unit><source>Do you want to proceed to member placement?</source><target>您要继续组织系谱图吗?</target></trans-unit>
             <trans-unit><source>Are you sure want to place this member into this position?</source><target>您确定此会员放置在此位置吗?</target></trans-unit>
             <trans-unit><source>Transaction Type</source><target>交易款项</target></trans-unit>
@@ -365,7 +365,7 @@
             <trans-unit><source>No records found</source><target>没有匹配结果</target></trans-unit>
             <trans-unit><source>PENDING</source><target>未批准</target></trans-unit>
             <trans-unit><source>APPROVE</source><target>批准</target></trans-unit>
-            <trans-unit><source>Cash Flow Point Chart</source><target>现金流点图</target></trans-unit>
+            <trans-unit><source>Cash Flow Point Chart</source><target>현금流点图</target></trans-unit>
             <trans-unit><source>This Month Sales</source><target>当月销售额</target></trans-unit>
             <trans-unit><source>This Month CPS</source><target>当月销售额</target></trans-unit>
             <trans-unit><source>Carry Forward CPS</source><target>上期转来</target></trans-unit>
@@ -377,7 +377,7 @@
             <trans-unit><source>Elementary School</source><target>初级지원</target></trans-unit>
             <trans-unit><source>Middle School</source><target>中级지원</target></trans-unit>
             <trans-unit><source>High School</source><target>高级지원</target></trans-unit>
-            <trans-unit><source>Cash Account</source><target>现金계정</target></trans-unit>
+            <trans-unit><source>Cash Account</source><target>현금계정</target></trans-unit>
             <trans-unit><source>Forex Account</source><target>外汇계정</target></trans-unit>
             <trans-unit><source>Education Account</source><target>教育계정</target></trans-unit>
             <trans-unit><source>Member Login</source><target>회원 로그인</target></trans-unit>
@@ -421,7 +421,7 @@
             <trans-unit><source>The early traders earn the extra money. They get into action early, at optimal prices, and reap most of the gains while the other, later, slower traders pile on.</source><target>早期的商人赚取额外的钱。他们进入行动早，最优的가격，以及获得的大部分涨幅，而其他的，以后，速度较慢的商人桩上。</target></trans-unit>
             <trans-unit><source>Where Maxim Trader steps in</source><target>马胜金融步骤</target></trans-unit>
             <trans-unit><source>Individual investors lack the skills, expertise and technology to consistently profit from his trading. Needless to say, a more effective way is to pool resources to consistently come out ahead in this ruthless pursuit for trading gains.</source><target>个人投资者缺乏技能，专业知识和技术，不断从他的交易中获利。不用说，更有效的方式是集中资源，始终出人头地，无情地追求交易收益。</target></trans-unit>
-            <trans-unit><source>This is why the considerable resources of Maxim Trader is combined with those of its clients/shareholders; enlarging the capital base of both to profit from the immerse opportunities the financial markets of the day has to offer – the currency market.</source><target>这就是为什么相当多的资源马胜金融相结合，与它的客户/股东，扩大资本基础都浸泡的一天的金融市场所提供的机遇 - 货币市场中获利。</target></trans-unit>
+            <trans-unit><source>This is why the considerable resources of Maxim Trader is combined with those of its clients/shareholders; enlarging the capital base of both to profit from the immerse opportunities the financial markets of the day has to offer – the currency market.</source><target>这就是为什么相当多的资源马胜金融相结合，与它的客户/주주，扩大资本基础都浸泡的一天的金融市场所提供的机遇 - 货币市场中获利。</target></trans-unit>
             <trans-unit><source>Creating Value Added</source><target>创建增值</target></trans-unit>
             <trans-unit><source>With the vast selection of platforms out there, the question here is 'why choose Maxim Trader?' An intelligent client always seeks to get his money's worth and such is the inspiration behind the 'Consortium Model'.</source><target>有广阔的选择平台，这里的问题是“为什么选择马胜金融吗？”智能客户端总是设法得到他的钱的价值和这样的“联盟模式”背后的灵感。</target></trans-unit>
             <trans-unit><source>State-of-the art trading technology</source><target>国家先进的交易技术</target></trans-unit>
@@ -431,7 +431,7 @@
             <trans-unit><source>All clients fund are individually and severally insured in the form of a parental guarantee provided by our parent company MY Group Inc. Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.</source><target>所有的客户基金的个别和连带被保险人的父母由我们的母公司MY集团有限公司提供担保的具体形式，我们的客户每投入一美元的相应份额的母公司的支持。这种独特的安排，投资者有舒适和知识，在不太可能发生的破产马胜金融，他们必须在他们手中的股份的上市公司中，他们可以用它来减轻这种风险。</target></trans-unit>
             <trans-unit><source>Sustained Profits</source><target>持续的利润</target></trans-unit>
             <trans-unit><source>With the two key elements in place, leverage through resource pooling and an automated trading machine, Maxim Trader is able to achieve even greater revenue that what is has been generating stably over the decade. As our system produced profits for you, it is simultaneously producing profits off you because Maxim Trader achieves revenue through the number of lots traded. This creates a win-win situation through a fair system that yields profits for both parties.</source><target>随着地方的两个关键要素，充分利用通过资源池和自动贩卖机中，马克西姆交易，已产生稳定在过去的十年，能够实现更大的收入。由于我们的系统为你产生利润，同时产生掉你的利润，因为马克西姆交易实现收入通过交易手数。这将创建一个双赢的局面，产生的利润双方通过公平的制度。</target></trans-unit>
-            <trans-unit><source>Cashback Rewards</source><target>现金返还奖励</target></trans-unit>
+            <trans-unit><source>Cashback Rewards</source><target>현금返还奖励</target></trans-unit>
             <trans-unit><source>Maxim Trader gives credit where credit is due, often in the form of monetary rewards and incentives for our affiliates. The increase in revenue allows liquidity to be channeled towards marketing campaigns that will evidently generate more leads and business back to Maxim Trader. Our clients are happy, our affiliates are rewarded and company expands.</source><target>马胜金融交易者提供信贷信用，往往是由于货币奖励和激励措施，为我们的附属机构的形式。收入的增加使流动性渠道对营销活动，显然会产生更多的供应商和商业马胜金融。我们的客户很高兴，我们的分支机构给予奖励和公司扩大。</target></trans-unit>
             <trans-unit><source>Listing Strategy</source><target>上市策略</target></trans-unit>
             <trans-unit><source>As do all financial giants, the eventual goal is towards listing. With the capital raised, the positive growth on financial statements, the profitable trade history on our technology and the mustered support of all partners through the Consortium project, listing will be a reality. By the provision of value to our clients, we are in turn rewarded with profits which are further ploughed back into the business and eventually allows all stakeholders, partners and clients to prosper.</source><target>像所有的金融巨头，最终目标是向上市。募集资金，对财务报表的正增长，我们的技术和有利可图的贸易历史，纠集支持所有的合作伙伴通过联盟项目，上市将成为现实。通过为我们的客户提供的价值，我们是反过来的利润被进一步拨回的业务，并最终使所有利益相关者，客户和合作伙伴繁荣的回报。</target></trans-unit>
@@ -571,7 +571,7 @@
             <trans-unit><source>Download Daily FX Guide</source><target>每日外汇指南</target></trans-unit>
             <trans-unit><source>Account Information</source><target>帐户信息</target></trans-unit>
             <trans-unit><source>Your Account Point</source><target>您的帐户点</target></trans-unit>
-            <trans-unit><source>Inactive Traders</source><target>未激活的会员</target></trans-unit>
+            <trans-unit><source>Inactive Traders</source><target>未활성화的会员</target></trans-unit>
             <trans-unit><source>Currency</source><target>货币</target></trans-unit>
             <trans-unit><source>No data available in table</source><target>无可用的数据</target></trans-unit>
             <trans-unit><source>records</source><target>记录</target></trans-unit>
@@ -648,7 +648,7 @@
             <trans-unit><source>Reference No</source><target>参考编号</target></trans-unit>
             <trans-unit><source>Funds Deposit History</source><target>存款记录表</target></trans-unit>
             <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>存入资金，将被记入CP1的帐户。</target></trans-unit>
-            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>CP1只能用来收购지원，지원升级和充值MT4帐户，而不能兑现现金。</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>CP1只能用来收购지원，지원升级和充值MT4帐户，而不能兑现현금。</target></trans-unit>
             <trans-unit><source>1 equals to 1 value of CP1</source><target>1等于1的值的CP1</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 계정</target></trans-unit>
             <trans-unit><source>CP2 Account</source><target>CP2 계정</target></trans-unit>
@@ -715,7 +715,7 @@
             <trans-unit><source>Can only be withdrawn on the first working week of the month</source><target>兑现只能在每个月的第一个星期</target></trans-unit>
             <trans-unit><source>Processing time : 2 working days</source><target>处理时间：2个工作日</target></trans-unit>
             <trans-unit><source>CP2 Balance</source><target>CP2잔액</target></trans-unit>
-            <trans-unit><source>CP2 Withdrawal Amount</source><target>CP2兑现金额</target></trans-unit>
+            <trans-unit><source>CP2 Withdrawal Amount</source><target>CP2兑현금额</target></trans-unit>
             <trans-unit><source>After 5% handling fee</source><target>附加5％的手续费</target></trans-unit>
             <trans-unit><source>Deduct Amount</source><target>扣除总金额</target></trans-unit>
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议以로그인지원。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
@@ -735,8 +735,8 @@
             <trans-unit><source>Great day, Trader!</source><target>您好！</target></trans-unit>
             <trans-unit><source>Email us</source><target>电邮我们</target></trans-unit>
             <trans-unit><source>Hello</source><target>您好</target></trans-unit>
-            <trans-unit><source>ACTIVE</source><target>激活</target></trans-unit>
-            <trans-unit><source>INACTIVE</source><target>未激活</target></trans-unit>
+            <trans-unit><source>ACTIVE</source><target>활성화</target></trans-unit>
+            <trans-unit><source>INACTIVE</source><target>未활성화</target></trans-unit>
             <trans-unit><source>Joined</source><target>加入于</target></trans-unit>
             <trans-unit><source>Bank Information Detail</source><target>银行详细资料</target></trans-unit>
             <trans-unit><source>Payment Reference</source><target>付款参考号码</target></trans-unit>
