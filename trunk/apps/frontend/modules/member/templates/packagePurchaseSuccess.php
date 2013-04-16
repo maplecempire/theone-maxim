@@ -207,7 +207,7 @@ $(function() {
                     <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
                         <label for="privateInvestmentAgreement"><?php echo __('Private Investment Agreement') ?></label></td>
                     <td colspan="3">
-                        <a target="_blank" href="/download/privateInvestmentAgreement"><?php echo __('Download Private Investment Agreement') ?></a>
+                        <a target="_blank" href="/download/privateInvestmentAgreement"><?php echo __('Download PDF') ?></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
