@@ -756,14 +756,15 @@ class memberActions extends sfActions
                                 return $this->redirect('/member/memberRegistration');
                             }
 
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
                             $sponsorDistPairingDB->setLeftBalance($leftBalance);
                             $sponsorDistPairingDB->setRightBalance($rightBalance);
-                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
                             $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         } else {
                             $leftBalance = $sponsorDistPairingDB->getLeftBalance();
                             $rightBalance = $sponsorDistPairingDB->getRightBalance();
                         }
+
                         $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
                         $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
                         $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -5535,6 +5536,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $packageDB = MlmPackagePeer::retrieveByPK($distributorDB->getRankId());
 
                                 $pairingPercentage = $packageDB->getPairingBonus();
+                                $dailyMaxPairing = $packageDB->getDailyMaxPairing();
+                                if ($flushLimit != $dailyMaxPairing) {
+                                    $mlmDistPairingDB->setFlushLimit($dailyMaxPairing);
+                                    $mlmDistPairingDB->save();
+                                }
+
                                 $pairingBonusAmount = $minBalance * $pairingPercentage / 100;
                                 print_r("pairingBonusAmount =".$pairingBonusAmount."<br>");
                                 $flushAmount = 0;
@@ -6310,10 +6317,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingDB->setLeftBalance(0);
                     $sponsorDistPairingDB->setRightBalance(0);
                     $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
-                } else {
-                    $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
                 }
+                $sponsorDistPairingDB->setFlushLimit($selectedPackage->getDailyMaxPairing());
                 $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingDB->save();
                 /* ****************************************************
