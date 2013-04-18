@@ -599,7 +599,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('EZY Cash Card') ?></td>
+                    <td><?php echo __('EZY Account ID') ?></td>
                     <td>
                         <input name="ezyCashCard" type="text" id="ezyCashCard" size="30" maxlength="16"
                                                          value="<?php echo $distDB->getEzyCashCard() ?>"/>
