@@ -11,6 +11,19 @@
 class downloadActions extends sfActions
 {
 
+    public function executeDownloadMaximTrader4SetupV3()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/exe');
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=maxim4setup.v3.exe', TRUE);
+        $response->sendHttpHeaders();
+        readfile(sfConfig::get('sf_upload_dir')."/maxim4setup.v3.exe");
+
+        return sfView::NONE;
+    }
     public function executeDownloadMaximTrader4Setup()
     {
         $response = $this->getResponse();
