@@ -264,9 +264,9 @@ class homeActions extends sfActions
     {
         //$this->getUser()->setCulture("en");
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
 
         if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR), false)) {
             return $this->redirect('home/index');
@@ -338,9 +338,9 @@ class homeActions extends sfActions
     public function executeDoLogin()
     {
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
         if ($this->getRequestParameter('doAction') == "lang") {
             $c = new Criteria();
             $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SERVER_MAINTAIN);

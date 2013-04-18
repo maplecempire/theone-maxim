@@ -675,9 +675,9 @@ class memberActions extends sfActions
     public function executePurchasePackageViaTree()
     {
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
         if ($this->getRequestParameter('bePlacementId', '') != "") {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
 
@@ -1670,9 +1670,9 @@ class memberActions extends sfActions
     public function executeDoMemberRegistration()
     {
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
         $userName = $this->getRequestParameter('userName','');
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $fcode = $userName;
@@ -3726,9 +3726,9 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executePlacementTree()
     {
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
         if ($this->getRequestParameter('doAction') == "save") {
             $uplineDistCode = $this->getRequestParameter('uplineDistCode');
             $uplinePosition = $this->getRequestParameter('uplinePosition');
@@ -6219,9 +6219,9 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executePackageUpgrade()
     {
         $dateUtil = new DateUtil();
-        if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
+        /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }
+        }*/
         //if ($this->getRequestParameter('packageTypeSelected') <> "" && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('topupPackageTypePaymentType') <> "") {
         if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
