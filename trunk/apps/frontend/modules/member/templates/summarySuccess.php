@@ -27,6 +27,11 @@ annoucementArr.push({
 */
 
 annoucementArr.push({
+    poptitle:'OFX GLOBAL Presenting The Newly Upgraded MT4',
+    news_date:'18 APRIL 2013',
+    news_desc:'<br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "http://partner.maximtrader.com/images/email/Maxim-Trader-Announcement-201304-01.jpg" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a><br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "http://partner.maximtrader.com/images/email/Maxim-Trader-Announcement-201304-02.jpg" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a>'});
+
+annoucementArr.push({
     poptitle:'International Member Exchange (IME) July 2013 @ Macau',
     news_date:'23 MARCH 2013',
     news_desc:'<br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
