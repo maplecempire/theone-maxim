@@ -59,6 +59,14 @@
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maintenanceLog") ?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP3 Statement'); ?>
     </a>
+    <?php if ($totalRp > 0) { ?>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="/member/rpLog" style="color: rgb(0, 93, 154);">
+        <?php echo __('RP Statement'); ?>
+    </a>
+    <?php } ?>
 </div>
 
 <table cellpadding="0" cellspacing="0">
