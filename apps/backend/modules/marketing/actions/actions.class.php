@@ -1818,7 +1818,7 @@ class marketingActions extends sfActions
                                                                     liable for any activity that may occur as a result of you losing your
                                                                     password. Therefore, if you feel that your password has been
                                                                     compromised, you should immediately contact us by email to
-                                                                    <strong>cs@maximtrader.com</strong> to rectify the situation.<br><br>
+                                                                    <strong>support@maximtrader.com</strong> to rectify the situation.<br><br>
                                                                     We look forward to your custom in the near future. Should you have any
                                                                     queries, please do not hesitate to get back to us.<br>
                                                                 </font>
@@ -1866,7 +1866,7 @@ class marketingActions extends sfActions
 															</tr>
 															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
-																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+																<td style='font-size:0;line-height:0'><a href='http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
@@ -1950,7 +1950,7 @@ class marketingActions extends sfActions
 												登录ID和密码必须是严格保密及不应该向任何人透露。如果有人盗用了您的密码，
                                                 您的帐户资料是有机会被篡改。您将必须承担任何可能发生的结果如果您遗失了你的密码。
                                                 因此，如果您觉得您的密码不安全，您应该立即电邮联系我们
-												<strong>cs@maximtrader.com</strong>以纠正这种情况.<br><br>
+												<strong>support@maximtrader.com</strong>以纠正这种情况.<br><br>
 												如果您有任何疑问，请不要犹豫立即联络我们。
 												<br>
 											</font>
@@ -1998,7 +1998,7 @@ class marketingActions extends sfActions
 															</tr>
 															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
-																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+																<td style='font-size:0;line-height:0'><a href='http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
@@ -2080,8 +2080,7 @@ class marketingActions extends sfActions
 							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
 								<em>
 									Best Regards,<br>
-									<strong>Maxim Trader</strong><br>
-									E mail : admin@maximtrader.com
+									<strong>Maxim Trader Account Opening Team</strong><br>
 								</em>
 							</font>
 							<br>
@@ -2093,7 +2092,7 @@ class marketingActions extends sfActions
 							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email support@maximtrader.com
 									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
@@ -2186,8 +2185,7 @@ class marketingActions extends sfActions
                                         <font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
                                             <em>
                                                 Best Regards,<br>
-                                                <strong>Maxim Trader</strong><br>
-                                                E mail : admin@maximtrader.com
+                                                <strong>Maxim Trader Account Opening Team</strong><br>
                                             </em>
                                         </font>
                                         <br>
@@ -2199,7 +2197,7 @@ class marketingActions extends sfActions
                                         <td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
                                         <p align='justify'>
                                             <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-                                                Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
+                                                Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email support@maximtrader.com
                                                 <br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
                                                 <br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
                                                 <br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
