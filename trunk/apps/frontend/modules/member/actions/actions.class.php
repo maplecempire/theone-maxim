@@ -4505,6 +4505,11 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
+                return $this->redirect('/member/transferEpoint');
+            }
+
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             $sponsorId = $this->getRequestParameter('sponsorId');
@@ -4676,6 +4681,11 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $this->setFlash('errorMsg', "RP Transfer temporary out of service.");
+                return $this->redirect('/member/transferRP');
+            }
+
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             $sponsorId = $this->getRequestParameter('sponsorId');
