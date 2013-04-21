@@ -66,7 +66,8 @@
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/member/downloadMt4?q=" . rand()) ?>">Click to DOWNLOAD Meta Trader 4 (Standard)</a>
+                    <a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe">Click to DOWNLOAD Meta Trader 4 (Standard)</a>
+<!--                    <a href="--><?php //echo url_for("/member/downloadMt4?q=" . rand()) ?><!--">Click to DOWNLOAD Meta Trader 4 (Standard)</a>-->
                     <br>
                 </td>
             </tr>
