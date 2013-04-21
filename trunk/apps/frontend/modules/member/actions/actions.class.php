@@ -2597,23 +2597,73 @@ class memberActions extends sfActions
 						<tr>
 							<td style='padding:5px 15px 15px;font-weight:bold' colspan='2'>
 								<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-									<tbody>
-									<tr style='text-align:center;line-height:15px'>
-										<td style='font-size:0;line-height:0' align='right'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
-									</tr>
-									<tr>
-										<td style='line-height:15px' align='right'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
-												<strong>Maxim Trader<br>MT4 Terminal</strong>
-											</font>
-										</td>
-									</tr>
-									<tr><td style='line-height:15px' align='right'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
-									<tr>
-										<td style='line-height:15px' align='right'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
-									</tr>
-									</tbody>
-								</table>
+												<tbody><tr>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+
+													</td>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+
+													</td>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> MT4 Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform1.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> IOS Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://itunes.apple.com/en/app/metatrader-4/id496212596?mt=8' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='91'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform2.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> Android Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+												</tr>
+											</tbody></table>
 							</td>
 						</tr>
 
@@ -2653,23 +2703,73 @@ class memberActions extends sfActions
 						<tr>
 							<td style='padding:5px 15px 15px;font-weight:bold' colspan='2'>
 								<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-									<tbody>
-									<tr style='text-align:center;line-height:15px'>
-										<td style='font-size:0;line-height:0' align='right'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
-									</tr>
-									<tr>
-										<td style='line-height:15px' align='right'>
-											<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
-												<strong>Maxim Trader<br>MT4 Terminal</strong>
-											</font>
-										</td>
-									</tr>
-									<tr><td style='line-height:15px' align='right'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
-									<tr>
-										<td style='line-height:15px' align='right'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
-									</tr>
-									</tbody>
-								</table>
+												<tbody><tr>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+
+													</td>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+
+													</td>
+													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> MT4 Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform1.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> IOS Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://itunes.apple.com/en/app/metatrader-4/id496212596?mt=8' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='91'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform2.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> Android Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+												</tr>
+											</tbody></table>
 							</td>
 						</tr>
 
@@ -2863,15 +2963,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 													</td>
 													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
 													<td style='font-size:0;line-height:0' width='85'>
-
-													</td>
-													<td style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
-
-
-													<td style='font-size:0;line-height:0' width='85'>
 														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-															<tbody>
-															<tr style='text-align:center;line-height:15px' align='center'>
+															<tbody><tr>
 																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
 															</tr>
 															<tr>
@@ -2881,15 +2974,49 @@ We look forward to your custom in the near future. Should you have any queries, 
 																	</font>
 																</td>
 															</tr>
-															<tr><td style='text-align:center;line-height:15px' align='center'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
-																<td style='text-align:center;line-height:15px' align='center'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform1.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> IOS Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://itunes.apple.com/en/app/metatrader-4/id496212596?mt=8' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td>
-
-													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
-
+<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='91'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform2.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> Android Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download_cn.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
 												</tr>
 											</tbody></table>
 										</td>
@@ -2957,33 +3084,60 @@ We look forward to your custom in the near future. Should you have any queries, 
 													</td>
 													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
 													<td style='font-size:0;line-height:0' width='85'>
-
-													</td>
-													<td style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
-
-
-													<td style='font-size:0;line-height:0' width='85'>
 														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
-															<tbody>
-															<tr style='text-align:center;line-height:15px' align='center'>
+															<tbody><tr>
 																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform.gif' width='85' height='60'></td>
 															</tr>
 															<tr>
 																<td style='text-align:center;line-height:15px' align='center'>
 																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
-																		<strong>MaximTrader<br> MT4 Terminal</strong>
+																		<strong>Maxim Trader<br> MT4 Terminal</strong>
 																	</font>
 																</td>
 															</tr>
 															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
 															<tr>
-																<td style='text-align:center;line-height:15px' align='center'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+																<td style='font-size:0;line-height:0'><a href='http://partner.maximtrader.com/download/demoMt4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td><td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='85'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform1.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> IOS Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://itunes.apple.com/en/app/metatrader-4/id496212596?mt=8' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
 															</tr>
 														</tbody></table>
 													</td>
-
-													<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
-
+<td style='font-size:0;line-height:0' width='10'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='10' height='1'></td>
+													<td style='font-size:0;line-height:0' width='91'>
+														<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+															<tbody><tr>
+																<td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/img-platform2.gif' width='85' height='60'></td>
+															</tr>
+															<tr>
+																<td style='text-align:center;line-height:15px' align='center'>
+																	<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																		<strong>Maxim Trader<br> Android Terminal</strong>
+																	</font>
+																</td>
+															</tr>
+															<tr><td style='font-size:0;line-height:0'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'></td></tr>
+															<tr>
+																<td style='font-size:0;line-height:0'><a href='https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4' target='_blank'><img src='http://partner.maximtrader.com/images/email/btn-download.png' height='26' width='85' border='0'></a></td>
+															</tr>
+														</tbody></table>
+													</td>
 												</tr>
 											</tbody></table>
 										</td>
