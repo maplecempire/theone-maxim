@@ -69,6 +69,9 @@ class financeActions extends sfActions
     public function executeDebitRollingPoint()
     {
     }
+    public function executeRecallRollingPoint()
+    {
+    }
     /* ****************************************
      *     Epoint Transfer
      * *****************************************/
@@ -121,7 +124,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_DEBIT);
         } else if ($doAction == "epoint") {
             $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -187,7 +190,25 @@ class financeActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
+        } else if ($doAction == "RECALL") {
+            $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_RP_RECALL);
+            $mlm_account_ledger->setRollingPoint("Y");
+            $mlm_account_ledger->setRemark("");
+            $mlm_account_ledger->setInternalRemark($internalRemark);
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($epointAmount);
+            $mlm_account_ledger->setBalance($distEPointBalance - $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
         }
 
         $output = array(
