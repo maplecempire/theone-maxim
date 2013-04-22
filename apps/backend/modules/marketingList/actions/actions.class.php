@@ -27,7 +27,7 @@ class marketingListActions extends sfActions
                     LEFT JOIN app_user appUser ON appUser.user_id = account.created_by";
 
         /******   total records  *******/
-        $sWhere = " WHERE 1=1 ";
+        $sWhere = " WHERE account.account_type IN ('".Globals::ACCOUNT_TYPE_RP."','".Globals::ACCOUNT_TYPE_DEBIT."') ";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
         //var_dump($sql);
         /******   total filtered records  *******/
