@@ -5698,7 +5698,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     }
 
                     $c = new Criteria();
-                    $c->add(MlmDistPairingPeer::DIST_ID, 1260);
+                    $c->add(MlmDistPairingPeer::DIST_ID, 1261);
                     $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
                         $distId = $mlmDistPairingDB->getDistId();
