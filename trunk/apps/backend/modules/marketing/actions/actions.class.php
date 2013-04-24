@@ -1446,7 +1446,6 @@ class marketingActions extends sfActions
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;

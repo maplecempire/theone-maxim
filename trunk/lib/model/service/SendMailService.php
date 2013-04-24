@@ -121,8 +121,6 @@ class SendMailService
             $mail->AddBCC($arrs[$x], "boss");
         }
 
-        $mail->AddBCC("r9projecthost@gmail.com", "Jason");
-
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
         }
@@ -160,7 +158,6 @@ class SendMailService
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress($existDistributor->getEmail(), $existDistributor->getNickname());
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
@@ -200,7 +197,6 @@ class SendMailService
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress($existDistributor->getEmail(), $existDistributor->getNickname());
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
