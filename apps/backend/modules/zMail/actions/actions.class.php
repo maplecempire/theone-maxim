@@ -49,7 +49,6 @@ class zMailActions extends sfActions
         $mail->Body = $body;
         $mail->AltBody = $text_body;
         $mail->AddAddress("r9projecthost@gmail.com", "test");
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
         var_dump("ready");
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
