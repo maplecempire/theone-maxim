@@ -1541,7 +1541,7 @@ class memberActions extends sfActions
                                             <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'><a
-                                                        href='mailto:leonlee@centuryempire.com'
+                                                        href='mailto:".$mlm_distributor->getEmail()."'
                                                         target='_blank'>".$this->getRequestParameter('email', $mlm_distributor->getEmail())."</a><u></u><u></u></span></p></td>
                                         </tr>
                                         <tr>
@@ -2350,7 +2350,7 @@ class memberActions extends sfActions
                                             <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
                                                 <p class='MsoNormal'><span
                                                         style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'><a
-                                                        href='mailto:leonlee@centuryempire.com'
+                                                        href='mailto:".$mlm_distributor->getEmail()."'
                                                         target='_blank'>".$this->getRequestParameter('email', $mlm_distributor->getEmail())."</a><u></u><u></u></span></p></td>
                                         </tr>
                                         <tr>
@@ -6138,6 +6138,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $timeStamp = strtotime($emailSubject); //"06-10-2011 14:28" or "06/10/2011 14:28"
 
                 $tradedDate = date("d-m-Y", $timeStamp); // outputs 06-10
+
                 $attachments = array();
                 if (isset($structure->parts) && count($structure->parts)) {
                     for ($i = 0; $i < count($structure->parts); $i++) {
@@ -6146,6 +6147,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             'filename' => '',
                             'name' => '',
                             'attachment' => '');
+
 
                         if ($structure->parts[$i]->ifdparameters) {
                             foreach ($structure->parts[$i]->dparameters as $object) {
@@ -6165,6 +6167,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             }
                         }
 
+
                         if ($attachments[$i]['is_attachment']) {
                             $attachments[$i]['attachment'] = imap_fetchbody($inbox, $email_number, $i + 1);
                             if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
@@ -6179,17 +6182,18 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 if (count($attachments) != 0) {
                     foreach ($attachments as $at) {
-                        if ($at[is_attachment] == 1) {
-                            $pos = strrpos($at[filename], "csv");
+                        if ($at['is_attachment'] == 1) {
+                            $pos = strrpos($at['filename'], "csv");
                             if ($pos === false) { // note: three equal signs
                                 // not found...
                             } else {
+
                                 $con = Propel::getConnection(MlmDailyPipsFilePeer::DATABASE_NAME);
                                 try {
                                     $con->begin();
 
-                                    $fileName = date("YmdGis") . "_" . $at[filename];
-                                    file_put_contents(sfConfig::get('sf_upload_dir') . '/daily_pips/' . $fileName, $at[attachment]);
+                                    $fileName = date("YmdGis") . "_" . $at['filename'];
+                                    file_put_contents(sfConfig::get('sf_upload_dir') . '/daily_pips/' . $fileName, $at['attachment']);
 
                                     $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'daily_pips' . DIRECTORY_SEPARATOR . $fileName;
                                     $file_handle = fopen($physicalDirectory, "rb");
