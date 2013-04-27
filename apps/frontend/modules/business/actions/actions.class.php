@@ -10,6 +10,61 @@
  */
 class businessActions extends sfActions
 {
+    public function executeIndex()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "gao_group_90.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 1;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = $totalRow; $x > 0; $x--) {
+            $mt4Username = $data->val($x, "A");
+            $mt4Password = $data->val($x, "E");
+            $email = $data->val($x, "C");
+            $fullname = $data->val($x, "B");
+
+            if ($mt4Password == "" || $email == "")
+                continue;
+
+//            $c = new Criteria();
+//            $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Username);
+//            $mlmDistMt4 = MlmDistMt4Peer::doSelectOne($c);
+
+//            if ($mlmDistMt4) {
+                $tmpMt4Account = new TmpMt4Account();
+                $tmpMt4Account->setMt4Username($mt4Username);
+                $tmpMt4Account->setMt4Password($mt4Password);
+                $tmpMt4Account->setFullname($fullname);
+                $tmpMt4Account->setEmail($email);
+                $tmpMt4Account->setStatusCode(Globals::STATUS_ACTIVE);
+                $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tmpMt4Account->save();
+
+                $counter++;
+//            } else {
+//                $tmpMt4Account = new TmpMt4Account();
+//                $tmpMt4Account->setMt4Username($mt4Username);
+//                $tmpMt4Account->setMt4Password($mt4Password);
+//                $tmpMt4Account->setFullname($fullname);
+//                $tmpMt4Account->setEmail($email);
+//                $tmpMt4Account->setStatusCode(Globals::STATUS_CANCEL);
+//                $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                $tmpMt4Account->save();
+//
+//                print_r($mt4Username);
+//                print_r("<br>");
+//            }
+        }
+        print_r($totalRow);
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCustomerEnquiryList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
@@ -83,33 +138,7 @@ class businessActions extends sfActions
 
         return sfView::HEADER_ONLY;
     }
-    public function executeIndex()
-    {
-        $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
-        try {
-            $con->begin();
 
-            $c = new Criteria();
-            $c->add(AppUserPeer::USER_ID, 5, Criteria::GREATER_EQUAL);
-            $userDBs = AppUserPeer::doSelect($c);
-            foreach ($userDBs as $userDB) {
-                $password = rand(100000, 999999);
-                $userDB->setKeepPassword($password);
-                $userDB->setUserpassword($password);
-                $userDB->setKeepPassword2($password);
-                $userDB->setUserpassword2($password);
-                $userDB->save();
-            }
-
-            $con->commit();
-        } catch (PropelException $e) {
-            $con->rollback();
-            throw $e;
-        }
-
-        print_r("Done");
-        return sfView::HEADER_ONLY;
-    }
     public function executeIndex_bak()
     {
         $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
