@@ -390,6 +390,9 @@ class memberActions extends sfActions
                 if ($packagePrice > $arr["mt4_credit"]) {
                     $packagePrice = $arr["mt4_credit"];
                 }
+
+                if ($packagePrice < 0)
+                    $packagePrice = 0;
             /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
             $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
             $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
@@ -5962,6 +5965,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($packagePrice > $arr["mt4_credit"]) {
                     $packagePrice = $arr["mt4_credit"];
                 }
+
+                if ($packagePrice < 0)
+                    $packagePrice = 0;
             /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
             $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
             $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
