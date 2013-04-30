@@ -1586,11 +1586,11 @@ class financeActions extends sfActions
             /******************************/
             /*  Account
             /******************************/
-            $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+            $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $mlm_account_ledger = new MlmAccountLedger();
             $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
             $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
             $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
             $mlm_account_ledger->setCredit($refundEcash);
@@ -1600,7 +1600,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
         }
 
         $this->setFlash('successMsg', "Update successfully");
