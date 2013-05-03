@@ -57,6 +57,11 @@ $(function() {
             </tr>
             <tr>
                 <td>
+                    <a class='fundManagementLink' href="<?php echo url_for("/download/downloadFundManagementReport?p=April_2013") ?>"><span>Click to DOWNLOAD Fund Management Report April 2013</span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <a class='fundManagementLink' href="<?php echo url_for("/download/downloadFundManagementReport?p=Mar_2013") ?>"><span>Click to DOWNLOAD Fund Management Report Mar 2013</span></a>
                 </td>
             </tr>
