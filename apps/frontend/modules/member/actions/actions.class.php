@@ -109,6 +109,10 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
+                $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
+                return $this->redirect('/member/convertRPToCp1');
+            }
             /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
                 return $this->redirect('/member/convertRPToCp1');
@@ -4836,6 +4840,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
+                $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
+                return $this->redirect('/member/convertRPToCp1');
+            }
             /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', "RP Transfer temporary out of service.");
                 return $this->redirect('/member/transferRP');
