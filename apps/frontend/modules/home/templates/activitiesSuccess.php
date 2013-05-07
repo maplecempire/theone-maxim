@@ -178,12 +178,12 @@ ul, ol {
             <div id="feedBody">
                 <div id="feedTitle">
                     <div id="feedTitleContainer">
-                        <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Event / Activities') ?></h1>
+                        <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Events & Activities') ?></h1>
                     </div>
                 </div>
                 <div id="feedContent">
                     <a href="#">
-                        <div class="poptitle">Maxim Trader - Financial Market outlook and Business Preview<br>
+                        <div class="poptitle"><h3>Maxim Trader - Financial Market outlook and Business Preview</h3><br>
                         House Speaker: Mr Daniel Ang (International Financial Advisor)</div>
                     </a>
 
@@ -195,14 +195,14 @@ ul, ol {
                         <h3>马胜金融集团。五月份说明会</h3><br>
                         金融市场前景分析及创业说明会。<br>
                         主讲：Mr Daniel Ang 国际金融大师。<br>
-<br><br>
+<br>
                         1)
 Penang. Malaysia.<br>
 9th May 2013        <br>
 Penang, Eastin Hotel    <br>
 时间：7.30pm 至 10.30pm      <br>
 负责人：Alvin Tan +6016 466 5468 <br>
-<br><br>
+<br>
 穦城。马来西亚。<br>
 9th May 2013  <br>
 Eastin 酒店    <br>
@@ -210,13 +210,13 @@ Eastin 酒店    <br>
 负责人：Alvin Tan +6016 466 5468<br>
 <br><br><br>
 
-2)          <br>
+2)
 18th May 2013   <br>
 台中。全国大饭店 （贵宾厅）。<br>
 时间：14：00 至 17：00       <br>
 地址：台中市，台中港路一段257号。   <br>
 负责人：洪小姐 +886 9880 72911        <br>
-<br><br>
+<br>
 Taizhong. National Hotel<br>
 Time: 14:00 to 17:00     <br>
 Add: Taizhong, Taizhong Gang Road 1st, No 257.<br>
@@ -227,7 +227,7 @@ PIC: Ms Vivian +886 9880 72911<br>
 时间：13：00 至 17：00<br>
 地址：高雄市，五福一路。106号。<br>
 负责人：洪小姐 +886 9880 72911 <br>
-<br><br>
+<br>
 Kaohsiung. The Lees Hotel<br>
 Time: 13:00 to 17:00<br>
 Add: 106 WuFu 1st Road, Kaohsiung.<br>
@@ -238,7 +238,7 @@ PIC: Ms Vivian +886 9880 72911<br>
 时间：13：00 至 17：00<br>
 地址：台北市，中正区徐州路2号。<br>
 负责人：Ms Lisa +886980508662<br>
-<br><br>
+<br>
 Taipei. NTUH International Convention Center.<br>
 Time: 13:00 to 17:00<br>
 Add: No 2,  Xuzhou Road, ZhongZhen Area, Taipei.<br>
