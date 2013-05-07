@@ -3,7 +3,7 @@
 <script type="text/javascript" language="javascript">
     $(function() {
         $("#cbo_cp3Amount").change(function(){
-            var ecashFinal = $("#cbo_cp3Amount").val() - 60;
+            var ecashFinal = $("#cbo_cp3Amount").val() - 30;
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
             $("#withdrawForm").validate({
@@ -204,7 +204,7 @@
                     <td colspan="1" align="left">
                         <font color="#dc143c"> <?php echo __('1. Minimum withdrawal amount : USD 100
                         <br>2. Can only be withdrawn on the first working week of the month
-                        <br>3. Handling fee USD60
+                        <br>3. Handling fee USD30
                         <br>4. Processing time : 2 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>

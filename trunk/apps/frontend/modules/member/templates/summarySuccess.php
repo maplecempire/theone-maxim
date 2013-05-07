@@ -45,8 +45,12 @@ if ($culture == "en")
 ?>
 
 <?php
-if ($culture == "en" || $culture == "jp") {
+if ($culture == "en") {
 ?>
+annoucementArr.push({
+    poptitle:'Superb News!!!',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});
 /*
 annoucementArr.push({
     poptitle:'Maxim Trader Presenting The Newly Upgraded MT4',
@@ -58,7 +62,17 @@ annoucementArr.push({
     poptitle:'Owning to the terms as stipulated by Forex world, please provide us your documents!!!',
     news_date:'18 MARCH 2013',
     news_desc:'<br><br>Dear our distinguished member,<br><br>Thank you for your support and faith in us!<br><br>Owning to the terms as stipulated by Forex world, please provide us your documents:<br><br>1)      Identification (IC / Passport, front and back at same page)<br><br>2)      Proof of Address (Bank / Credit Card statement, OR Water / Electric statement, OR Phone / Internet statement)<br><br>-          Your name, current address and the date of the latest 3 months must be shown at the statement.<br><br>3)      Download and sign the Forex Agreements.<br><br>And upload all the documents at website.<br><br>Note:<br><br>Click "<a href="/member/viewProfile" target="_self" style="color: #3333ff;">User Profile</a>" to upload all the documents at "Upload Document".<br><br>Thank you for your highly cooperation.<br><br>Wish you all the best.'});*/
+<?php } else if ($culture == "jp") {  ?>
+annoucementArr.push({
+    poptitle:'最新ニュース！',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>マシンムトレーダーのCP3口座からの出金手数料は今までの$60から$30に引き下げられました。よろしくお願いいたします。<br><br><br><br><br><br>'});
+
 <?php } else {  ?>
+annoucementArr.push({
+    poptitle:'好消息!!!',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>马胜金融集团欣然宣布从2013年5月8日起CP3提款手续费将从60美元减少至30美元<br><br>Thank you.<br><br><br><br><br><br>'});
 /*
 annoucementArr.push({
     poptitle:'马胜金融诚意呈现最新升级版MT4平台',

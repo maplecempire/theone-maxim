@@ -392,8 +392,8 @@ $(function() {
                         <font color="#dc143c">
                             <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?><br>
                             <?php echo __('Debit Card application : USD 35') ?><br>
-                            <?php echo __('Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)') ?>
-
+                            <?php echo __('Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)') ?><br>
+                            <?php echo __('The card will be delivered within 30 working days') ?>
                         </font>
                     </td>
                     <td>&nbsp;</td>

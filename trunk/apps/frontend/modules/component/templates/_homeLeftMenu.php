@@ -39,6 +39,16 @@ if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) 
             href="<?php echo url_for("/home/marketNews")?>"><?php echo __('Market News') ?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
+    <li id="menu-item-158"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
+            href="<?php echo url_for("/home/activities")?>"><?php echo __('Event / Activities') ?></a>
+        <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
+    </li>
+    <li id="menu-item-158"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
+            href="<?php echo url_for("/home/announcementList")?>"><?php echo __('Announcement') ?></a>
+        <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
+    </li>
     <!--<li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89">
         <a href="<?php /*echo url_for("/home/marketNews")*/?>">Market News</a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
