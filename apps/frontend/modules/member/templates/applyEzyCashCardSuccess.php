@@ -250,7 +250,7 @@ $(function() {
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"> <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency<br>The card will be delivered within 14 working days') ?></font>
+                        <font color="#dc143c"> <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency<br>The card will be delivered within 30 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

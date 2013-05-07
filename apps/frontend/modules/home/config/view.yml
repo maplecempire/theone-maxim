@@ -1,3 +1,15 @@
+activitiesSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+announcementListSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+announcementSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 companySuccess:
   has_layout:     off
   stylesheets: 	  []

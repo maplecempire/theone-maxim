@@ -10,6 +10,26 @@
  */
 class homeActions extends sfActions
 {
+    public function executeActivities()
+    {
+    }
+
+    public function executeAnnouncementList()
+    {
+        $c = new Criteria();
+        $c->add(MlmAnnouncementPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $c->addDescendingOrderByColumn(MlmAnnouncementPeer::CREATED_ON);
+        $c->setLimit(10);
+        $this->announcements = MlmAnnouncementPeer::doSelect($c);
+    }
+
+    public function executeAnnouncement()
+    {
+        $announcement = MlmAnnouncementPeer::retrieveByPK($this->getRequestParameter('id'));
+        $this->forward404Unless($announcement);
+
+        $this->announcement = $announcement;
+    }
 
     public function executeMaintenance()
     {
