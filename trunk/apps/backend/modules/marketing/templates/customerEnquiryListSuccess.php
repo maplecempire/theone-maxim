@@ -50,6 +50,8 @@ $(function(){
             }}
         ]
     });
+
+    $("#btnNewMessage").button();
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -92,6 +94,11 @@ function reassignDatagridEventAttr(){
                     </table>
 					</td>
 				</tr>
+                <tr>
+                    <td>
+                        <a href="<?php echo url_for("/marketing/customerEnquiryAdd");?>" id="btnNewMessage">New Message</a>
+                    </td>
+                </tr>
 			</table>
 			</td>
 		</tr>

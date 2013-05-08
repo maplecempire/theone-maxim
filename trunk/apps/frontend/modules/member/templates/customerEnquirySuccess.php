@@ -107,7 +107,7 @@ tinyMCE.init({
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Subject') ?>
