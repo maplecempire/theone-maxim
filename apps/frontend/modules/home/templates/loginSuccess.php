@@ -65,7 +65,7 @@
                 if ("" == $("#doAction").val()) {
                 <?php if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) { ?>
                     if ($.trim($("#username").val()) == "") {
-                        alert("Member ID cannot be blank.");
+                        alert("Username cannot be blank.");
                         $("#username").focus();
                         return false;
                     }
@@ -155,7 +155,7 @@
                                         </tr>
                                         <tr height="24">
                                             <td></td>
-                                            <td class="txt_highlight"><?php echo __('Member ID') ?></td>
+                                            <td class="txt_highlight"><?php echo __('Username') ?></td>
                                             <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
                                             <td></td>
                                         </tr>

@@ -48,6 +48,11 @@ if ($culture == "en")
 if ($culture == "en") {
 ?>
 annoucementArr.push({
+    poptitle:'2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
+
+annoucementArr.push({
     poptitle:'Superb News!!!',
     news_date:'8th MAY 2013',
     news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});
@@ -68,11 +73,24 @@ annoucementArr.push({
     news_date:'8th MAY 2013',
     news_desc:'<br>マシンムトレーダーのCP3口座からの出金手数料は今までの$60から$30に引き下げられました。よろしくお願いいたします。<br><br><br><br><br><br>'});
 
+annoucementArr.push({
+    poptitle:'2013年 第九回 上海投資理財金融博覧会',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4_Japanese-01.jpg" alt = "2013年 第九回 上海投資理財金融博覧会‏"></a><br>'});
+
 <?php } else {  ?>
+
+annoucementArr.push({
+    poptitle:'2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
+
 annoucementArr.push({
     poptitle:'好消息!!!',
     news_date:'8th MAY 2013',
     news_desc:'<br>马胜金融集团欣然宣布从2013年5月8日起CP3提款手续费将从60美元减少至30美元<br><br>Thank you.<br><br><br><br><br><br>'});
+
+
 /*
 annoucementArr.push({
     poptitle:'马胜金融诚意呈现最新升级版MT4平台',
