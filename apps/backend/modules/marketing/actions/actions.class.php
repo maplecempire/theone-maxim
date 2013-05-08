@@ -10,6 +10,12 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeCustomerEnquiryAdd()
+    {
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $this->dists = MlmDistributorPeer::doSelect($c);
+    }
     public function executeDoSendMt4()
     {
 
@@ -197,13 +203,33 @@ class marketingActions extends sfActions
         $enquiryId = $this->getRequestParameter('enquiryId');
         $message = $this->getRequestParameter('message');
 
-        $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
-        $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
-        $mlmCustomerEnquiry->setDistributorUpdated(Globals::FALSE);
-        $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
-        $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmCustomerEnquiry = new MlmCustomerEnquiry();
+        if ($enquiryId == "") {
+            $distId = $this->getRequestParameter('distId');
+            $title = $this->getRequestParameter('title');
 
-        $mlmCustomerEnquiry->save();
+            $mlmCustomerEnquiry->setDistributorId($distId);
+            $mlmCustomerEnquiry->setContactNo("");
+            $mlmCustomerEnquiry->setTitle($title);
+            $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
+            $mlmCustomerEnquiry->setDistributorUpdated(Globals::FALSE);
+            $mlmCustomerEnquiry->setAdminRead(Globals::TRUE);
+            $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
+            $mlmCustomerEnquiry->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+            $mlmCustomerEnquiry->save();
+
+            $enquiryId = $mlmCustomerEnquiry->getEnquiryId();
+        } else {
+            $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
+            $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
+            $mlmCustomerEnquiry->setDistributorUpdated(Globals::FALSE);
+            $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
+            $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+            $mlmCustomerEnquiry->save();
+        }
 
         $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
         $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlmCustomerEnquiry->getEnquiryId());

@@ -184,7 +184,7 @@ ul, ol {
                 <div id="feedContent">
                     <a href="#">
                         <div class="poptitle"><h3>Maxim Trader - Financial Market outlook and Business Preview</h3><br>
-                        House Speaker: Mr Daniel Ang (International Financial Advisor)</div>
+                        House Speaker: Mr Daniel Ang (International Financial Guru)</div>
                     </a>
 
                     <div class="news_date">
