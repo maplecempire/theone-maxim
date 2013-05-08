@@ -102,6 +102,10 @@
                 <source>Terms &amp; Conditions</source>
                 <target>条款</target>
             </trans-unit>
+            <trans-unit id="21">
+                <source>Events &amp; Activities</source>
+                <target>活动</target>
+            </trans-unit>
             <trans-unit id="22">
                 <source>and</source>
                 <target>和</target>
