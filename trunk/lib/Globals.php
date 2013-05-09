@@ -263,6 +263,12 @@ abstract class Globals {
 	const DIVIDEND_STATUS_SUCCESS = 'SUCCESS';
 	const DIVIDEND_TIMES_ENTITLEMENT = 18;
 
+    /************************************/
+    /****    DIVIDEND STATUS       ******/
+    /************************************/
+    const APPLY_DEBITCARD_ENABLE = false;
+    const APPLY_EZYCASHCARD_ENABLE = false;
+
     /*******************************/
     /*****   GROUP LEADER   ******/
     /*******************************/
