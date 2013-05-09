@@ -175,6 +175,10 @@ class memberActions extends sfActions
 
     public function executeDoApplyEzyCashCard()
     {
+        if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
+            $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
+            return $this->redirect('/member/applyEzyCashCard');
+        }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -242,6 +246,9 @@ class memberActions extends sfActions
 
     public function executeApplyEzyCashCard()
     {
+        if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
+            $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
+        }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->distDB = $distDB;
 
@@ -251,6 +258,9 @@ class memberActions extends sfActions
     }
     public function executeApplyDebitCard()
     {
+        if (Globals::APPLY_DEBITCARD_ENABLE == false) {
+            $this->setFlash('errorMsg', "Apply Maxim Trader VISA Debit Card temporary out of service.");
+        }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $this->distDB = $distDB;
@@ -278,6 +288,10 @@ class memberActions extends sfActions
 
     public function executeDoApplyDebitCard()
     {
+        if (Globals::APPLY_DEBITCARD_ENABLE == false) {
+            $this->setFlash('errorMsg', "Apply Maxim Trader VISA Debit Card temporary out of service.");
+            return $this->redirect('/member/applyDebitCard');
+        }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
