@@ -183,8 +183,12 @@
                     </td>
                     <td>
                         <select name="bankInTo" id="bankInTo">
+                            <?php if (Globals::APPLY_DEBITCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>">Maxim Trader VISA DEBIT CARD</option>
+                            <?php } ?>
+                            <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
+                            <?php } ?>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>">Local Bank</option>
                         </select>
                     </td>
