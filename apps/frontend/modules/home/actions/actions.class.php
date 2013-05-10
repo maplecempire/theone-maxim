@@ -10,6 +10,12 @@
  */
 class homeActions extends sfActions
 {
+    public function executeActivitiesShanghaiInvestmentManagement()
+    {
+    }
+    public function executeActivitiesFinancialMarketOutlook()
+    {
+    }
     public function executeActivities()
     {
     }
