@@ -1,3 +1,11 @@
+activitiesFinancialMarketOutlookSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+activitiesShanghaiInvestmentManagementSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 activitiesSuccess:
   has_layout:     off
   stylesheets: 	  []
