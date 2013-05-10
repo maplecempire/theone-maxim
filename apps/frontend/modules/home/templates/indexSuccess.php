@@ -28,9 +28,248 @@
     .qtrans_flag_and_text { padding-left:20px }
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
+    <style type="text/css">
+    #popupContact {
+        top: -100px !important;
+    }
 
+    .poptitle {
+        color: #bc9c48;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .poptitle:hover {
+        color: #CCAD5A;
+    }
+
+    .popinfo1 {
+        color: #333;
+        font-size: 12px;
+        padding: 0px 10px;
+    }
+
+    .popinfo2 {
+        color: #000;
+        font-weight: bold;
+        font-size: 16px;
+        background-color: #fbe91d;
+        width: 500px;
+    }
+
+    .popdivider {
+        border-top: 1px dotted #999;
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    .news_date {
+        font-style: italic;
+        font-size: 10px;
+    }
+
+    #backgroundPopup {
+        display: none;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: #000000;
+        border: 1px solid #cecece;
+        z-index: 100;
+    }
+
+    #popupContact {
+        display: none;
+        margin-top: 150px;
+        padding-bottom: 150px;
+        width: 500px;
+        background: url(images/popbg.jpg) repeat-y #fff;
+        border: 2px solid #999999;
+        color: #333;
+        z-index: 10000;
+        font-size: 13px;
+        padding: 5px 5px;
+    }
+
+#popupContact a{
+	color:#CCAD5A;
+	text-decoration:none;
+}
+
+#popupContact a:hover{color:#dabd71;}
+
+    #popupContact h1 {
+        text-align: center;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 700;
+        padding: 10px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        background-color: #CCAD5A;
+    }
+
+    #popupContactClose, #popupContactClose2 {
+        line-height: 14px;
+        font-weight: 700;
+        display: block;
+        width: 80px;
+        margin: auto;
+        cursor: pointer;
+        border: 1px solid #8ec1da;
+        background-color: #ddeef6;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
+        -o-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
+        -webkit-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
+        -moz-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
+        color: #3985a8;
+        text-align: center;
+        text-shadow: 0 1px #fff;
+        padding: 5px 30px;
+    }
+
+    #button {
+        text-align: center;
+        margin: 100px;
+    }
+    </style>
+    <script type='text/javascript' src='/js/popup.js'></script>
 	<script type="text/javascript">
+    var annoucementArr = [];
+
+/*annoucementArr.push({
+    poptitle:'Implementation of System Generated Member ID',
+    news_date:'19 MARCH 2013',
+    news_desc:'<br><br>Due to the expansion of the company, to strengthen the protection of the privacy of member confidentiality, company has implemented auto generated member ID instead of input by member own self. <br><br>Start effective by today.'
+});*/
+
+/*
+annoucementArr.push({
+    poptitle:'CP2 convert to CP1 will get extra 5%',
+    news_date:'27 MARCH 2013',
+    news_desc:'<br>To all Concerned Member,<br><br>Please be informed that effective from 25th March 2013, <br><br>1.	CP2 convert to CP1 will get extra 5%<br>2.	CP3 convert to CP1 no longer to get extra 5%<br><br>Once again, thank you for your support.<br><br>Regards,<br>The Managements'});
+*/
+
+/*
+annoucementArr.push({
+    poptitle:'Today (24/4) 9pm Maxim Trader will stop using the existing server. ',
+    news_date:'24 APRIL 2013',
+    news_desc:'<br>Dear Valued member,  <br><br>Kindly be informed today (24/4) 9pm Maxim Trader will stop using the existing server. After 10pm company will start using newly upgraded server. <br><br>Please download new terminal & start using the new terminal from 10pm onwards using the existing login & same password. Therefore all must stop trading by 9pm at old server. No need close floating. Just stop trading by 9pm, start new terminal after 10pm. <br><br>The floating order will be synchronized to new terminal. <br><br>For downloading new mt4 terminal you may download the new link at <a href="http://www.maximtrader.com/trading-2/maxim-trader-metatrader-4/" target="_blank">http://www.maximtrader.com/trading-2/maxim-trader-metatrader-4/</a>. <br><br>Sorry for the inconvenience caused. Thank you. <br><br>'});
+*/
+
+<?php
+$culture = $sf_user->getCulture();
+$postfix = "_english";
+if ($culture == "en")
+        $postfix = "_english";
+    else if ($culture == "jp")
+        $postfix = "_english";
+    else
+        $postfix = "_chinese";
+?>
+
+<?php
+if ($culture == "en") {
+?>
+annoucementArr.push({
+    poptitle:'2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
+
+annoucementArr.push({
+    poptitle:'Superb News!!!',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});
+/*
+annoucementArr.push({
+    poptitle:'Maxim Trader Presenting The Newly Upgraded MT4',
+    news_date:'18 APRIL 2013',
+    news_desc:'<br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "http://partner.maximtrader.com/images/email/Maxim-Trader-Announcement-201304-01.jpg" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a><br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "http://partner.maximtrader.com/images/email/Maxim-Trader-Announcement-201304-02.jpg" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a>'});
+*/
+
+/*annoucementArr.push({
+    poptitle:'Owning to the terms as stipulated by Forex world, please provide us your documents!!!',
+    news_date:'18 MARCH 2013',
+    news_desc:'<br><br>Dear our distinguished member,<br><br>Thank you for your support and faith in us!<br><br>Owning to the terms as stipulated by Forex world, please provide us your documents:<br><br>1)      Identification (IC / Passport, front and back at same page)<br><br>2)      Proof of Address (Bank / Credit Card statement, OR Water / Electric statement, OR Phone / Internet statement)<br><br>-          Your name, current address and the date of the latest 3 months must be shown at the statement.<br><br>3)      Download and sign the Forex Agreements.<br><br>And upload all the documents at website.<br><br>Note:<br><br>Click "<a href="/member/viewProfile" target="_self" style="color: #3333ff;">User Profile</a>" to upload all the documents at "Upload Document".<br><br>Thank you for your highly cooperation.<br><br>Wish you all the best.'});*/
+<?php } else if ($culture == "jp") {  ?>
+annoucementArr.push({
+    poptitle:'最新ニュース！',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>マシンムトレーダーのCP3口座からの出金手数料は今までの$60から$30に引き下げられました。よろしくお願いいたします。<br><br><br><br><br><br>'});
+
+annoucementArr.push({
+    poptitle:'2013年 第九回 上海投資理財金融博覧会',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4_Japanese-01.jpg" alt = "2013年 第九回 上海投資理財金融博覧会‏"></a><br>'});
+
+<?php } else {  ?>
+
+annoucementArr.push({
+    poptitle:'2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO',
+    news_date:'8th MAY 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
+
+annoucementArr.push({
+    poptitle:'好消息!!!',
+    news_date:'8th MAY 2013',
+    news_desc:'<br>马胜金融集团欣然宣布从2013年5月8日起CP3提款手续费将从60美元减少至30美元<br><br>Thank you.<br><br><br><br><br><br>'});
+
+
+/*
+annoucementArr.push({
+    poptitle:'马胜金融诚意呈现最新升级版MT4平台',
+    news_date:'18 APRIL 2013',
+    news_desc:'<br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "/images/email/Chinese_Maxim_Trader_Announcement_Ad_A4_pg1.png" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a><br><a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe" target="_blank"><img width = "460"  src = "/images/email/Chinese_Maxim_Trader_Announcement_Ad_A4_pg2.png" alt = "Maxim Trader Presenting The Newly Upgraded MT4‏"></a>'});
+*/
+
+/*annoucementArr.push({
+    poptitle:'由于外汇的要求严谨，请上载您的文件',
+    news_date:'18 MARCH 2013',
+    news_desc:'<br><br>您好。<br><br>由于外汇的要求严谨，请您将您的文件包括：<br><br>1） 身份证（正反面在同一页）<br><br>2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）<br><br>-          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。<br><br>3） 下载并签署外汇合约。<br><br>上传给公司，否则这会影响您日后的提现。<br><br>注：点击”<a href="/member/viewProfile" target="_self" style="color: #3333ff;">用户个人资料</a>“将所有文件上传给公司（点击"上传文件"）。<br><br>谢谢您的鼎力合作。<br><br>祝：一切顺利'});*/
+<?php } ?>
+
+annoucementArr.push({
+    poptitle:'International Member Exchange (IME) July 2013 @ Macau',
+    news_date:'23 MARCH 2013',
+    news_desc:'<br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
+
+
+/*annoucementArr.push({
+    poptitle:'Apply EzyCash Card Now!!!',
+    news_date:'20 FEB 2013',
+    news_desc:'<br><br><a target="_self" href="/member/applyEzyCashCard"><img width="460" border="0" alt="Maxim Trader" src="/images/email/apply_ezycash_card_debit_card.png"></a>Start from today Maxim Trader clients may <a href="/member/applyEzyCashCard" style="color: #3333ff;">apply an EzyAccount</a> anytime.<br><br>EzyAccount is an extremely secure and convenient way for you to send and receive money from Maxim Trader.'
+});*/
+
+/*annoucementArr.push({
+    poptitle:'Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー',
+    news_date:'18 FEB 2013',
+    news_desc:'<br><br><a href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/Bangkok_March_Workshop.jpg"></a><br>'
+});*/
+/*annoucementArr.push({
+    poptitle:'Maxim Trader to participate in the 10th CHINA GUANGZHOU INTERNATIONAL INVESTMENT AND FINANCE EXPO 第十届广州国际投资理财金融博览会 2013年3月5-7日',
+    news_date:'21 FEB 2013',
+    news_desc:'<br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="/images/email/maxim_international<?php echo $postfix;?>.jpg"></a><br>'
+});*/
+
+var popIndex = 1;
 	$(function() {
+        loadContent(popIndex);
+
+        centerPopup();
+        loadPopup();
+
+        $("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
+            disablePopup();
+            if ($(annoucementArr).length > popIndex) {
+                popIndex++;
+                loadContent(popIndex);
+                centerPopup();
+                loadPopup();
+            }
+        });
         <?php
         //if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
         ?>
@@ -50,6 +289,33 @@
         //}
         ?>
 	});
+    function loadContent(popIndex) {
+        var obj = annoucementArr[popIndex -1];
+        $(".poptitle").html(obj.poptitle);
+        $(".news_date").html(obj.news_date);
+        $(".news_desc").html(obj.news_desc);
+    }
+        //centering popup
+    function centerPopup(){
+        //request data for centering
+        var windowWidth = document.documentElement.clientWidth;
+        var windowHeight = document.documentElement.clientHeight;
+        var popupHeight = $("#popupContact").height();
+        var popupWidth = $("#popupContact").width();
+        //centering
+        $("#popupContact").css({
+            "position": "absolute",
+            "top": windowHeight/3-popupHeight/2,
+            "left": windowWidth/3-popupWidth/2,
+            "margin-left": windowWidth/3-popupWidth/2
+        });
+        //only need force for IE6
+
+        $("#backgroundPopup").css({
+            "height": windowHeight
+        });
+
+    }
 	</script>
 </head>
 
@@ -416,5 +682,165 @@ ul, ol {
     </div>
 </div>
 
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
+<!--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --->
+<!--- aside end --->
+<!--- content --->
+<div class="areaContent" style="display: none;">
+    <div class="resultsWrap">
+
+    </div>
+    <div class="clear"></div>
+
+    <div class="resultsViewer">
+        <form action="/member/activateMember" method="post" id="memberForm">
+<!--            <input type="hidden" id="distributorId">-->
+
+            <div style="padding: 10px; top: 30px; width: 98%">
+
+                <div class="portlet">
+                    <div class="portlet-header"><?php echo __('Announcements') ?></div>
+                    <div class="portlet-content">
+                        <table class="display" id="datagridAnnouncement" border="0" width="100%" cellpadding="0"
+                               cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Announcement Id[hidden]</th>
+                                <th><?php echo __('Title') ?></th>
+                                <th width="25%"><?php echo __('Date') ?></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="dgActivateMember" title="<?php echo __('Activate Member') ?>" style="display:none;">
+    <input type="hidden" id="dgActivateMember_ecash">
+    <input type="hidden" id="dgActivateMember_pointAvail"/>
+    <table cellspacing="5" cellpadding="3">
+        <tr>
+            <td class="text" width="30%"><label><?php echo __('Member ID') ?></label></td>
+            <td>:</td>
+            <td><input type="text" disabled="disabled" id="dgActivateMember_shareholderId"
+                       class="text ui-widget-content ui-corner-all"/></td>
+        </tr>
+        <tr>
+            <td class="text"><label><?php echo __('Full Name') ?></label></td>
+            <td>:</td>
+            <td><input type="text" disabled="disabled" id="dgActivateMember_alias"
+                       class="text ui-widget-content ui-corner-all"/></td>
+        </tr>
+        <tr>
+            <td class="text"><label><?php echo __('Registered Time') ?></label></td>
+            <td>:</td>
+            <td><input type="text" disabled="disabled" id="dgActivateMember_registeredTime"
+                       class="text ui-widget-content ui-corner-all"/></td>
+        </tr>
+        <tr>
+            <td class="text"><label><?php echo __('Package Type') ?></label></td>
+            <td>:</td>
+            <td>
+                <select name="dgActivateMember_point" id="dgActivateMember_point"
+                        class='text ui-widget-content ui-corner-all'>
+
+                </select>
+                <input type="text" disabled="disabled" id="dgActivateMember_pointNeeded"
+                       class="text ui-widget-content ui-corner-all" size="10px"/>
+            </td>
+        </tr>
+        <tr style="display: none">
+            <td class="text"><label><?php echo __('Payment Type') ?></label></td>
+            <td>:</td>
+            <td>
+                <span id="spanPaymentType">
+                    <input type="radio" id="paymentTypeEPoint" name="paymentType" value="epoint"/><label for="paymentTypeEPoint"><?php echo __('CP1') ?></label>
+                    <input type="radio" id="paymentTypeECash" name="paymentType" value="ecash"/><label for="paymentTypeECash"><?php echo __('MT4 Credit') ?></label>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text"><label><?php echo __('Security Password') ?></label></td>
+            <td>:</td>
+            <td><input type="password" id="dgActivateMember_transactionPassword"
+                       class="text ui-widget-content ui-corner-all"/></td>
+        </tr>
+    </table>
+</div>
+
+<div id="dgAnnouncement" title="<?php echo __('Announcements') ?>" style="display:none;">
+    <table cellspacing="5">
+        <tr>
+            <td class="text" id="tdAnnouncement"></td>
+    </table>
+</div>
+
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<!--####################################################################################################-->
+<?php
+$tempDisable = true;
+if ($tempDisable == true) { ?>
+<div style="position: absolute; display: none;" id="popupContact">
+    <h1><?php echo __('Latest News') ?></h1>
+    <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
+
+    <p id="contactArea">
+        <!--<img src='http://www.abfxtrader.com/ablive/nimages/site/eidalfitr-2012.jpg' />-->
+    </p>
+
+    <div class="popdivider"></div>
+
+    <?php
+    $culture = $sf_user->getCulture();
+    //foreach ($announcements as $announcement) { ?>
+    <div class="popinfo1">
+        <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>">-->
+            <div class="poptitle"><?php
+                /*if ($culture == "en")
+                    echo $announcement->getTitle();
+                else if ($culture == "jp")
+                    echo $announcement->getTitleJp();
+                else
+                    echo $announcement->getTitleCn();*/
+                ?>
+            Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー
+            </div>
+        <!--</a>-->
+
+        <div class="news_date">
+        <?php
+            $dateUtil = new DateUtil();
+            //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
+            //echo $currentDate;
+            echo "18 FEB 2013";
+            ?>
+        </div>
+        <div class="news_desc">
+            <?php
+            /*if ($culture == "en")
+                echo $announcement->getShortContent();
+            else if ($culture == "jp")
+                echo $announcement->getShortContentJp();
+            else
+                echo $announcement->getShortContentCn();*/
+
+            ?>
+
+            <br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/Bangkok_March_Workshop.jpg"></a><br>
+        </div>
+    </div>
+    <div class="popdivider"></div>
+    <?php //} ?>
+    <p></p>
+    <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
+</div>
+<div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
+<?php } ?>
 </body>
 </html>
