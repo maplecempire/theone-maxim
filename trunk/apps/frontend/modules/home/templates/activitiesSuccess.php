@@ -182,67 +182,48 @@ ul, ol {
                     </div>
                 </div>
                 <div id="feedContent">
-                    <a href="#">
+                    <a href="/home/activitiesShanghaiInvestmentManagement">
+                        <?php
+                        $culture = $sf_user->getCulture();
+                        ?>
+                        <div class="poptitle">
+                        <?php if ($culture == "en") { ?>
+                        <h3>2013 The 9th Shanghai Investment Management & Financial Expo</h3>
+                        <?php } else if ($culture == "cn") {  ?>
+                        <h3>2013上海第九届投资理财金融博览会</h3>
+                        <?php } else if ($culture == "jp") {  ?>
+                        <h3>上海フェアー 2013</h3>
+                        <?php }  ?>
+                        <br>
+
+                        <?php if ($culture == "en") { ?>
+                        <br>Maxim Trader is pleased to announce that we have been invited to participate in the prestigious 9th Shanghai Investment Management & Financial Expo which will be held on 31 May 2013 - 2 June 2013 in West Hall Gate 2, Shanghai Everbright Convention & Exhibition Centre (SECEC) Address: No. 88 Caobao Road, Xuhui District, Shanghai (booth Number : A153, A155, A169 , A170 )
+                        <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
+                        <?php } else if ($culture == "cn") {  ?>
+                        <br>马胜金融集团很高兴地宣布我司已荣幸受邀参加即将于2013.5.31-6.2日在中国上海光大会展中心举行的2013(上海)第九届投资理财金融博览会. 展馆地址为：中国上海徐汇区漕宝路88号光大会展中心西厅2号门；届时请莅临A153,A155，A169，A170
+                        <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
+                        <?php } else if ($culture == "jp") {  ?>
+                        <br>2013年5月31日~6月2日の第九回 上海投資理財金融博覧会 にマシンムトレーダー金融グループが招かれ、とても喜びを感じております。
+                        <br>場所 : 上海光大会展センター
+                        <br>ブース番号:A153,A155,A169,A170
+                        <?php }  ?>
+
+                        </div>
+                    </a>
+
+                    <div class="news_date">
+                    31 May 2013 - 2 June 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="/home/activitiesFinancialMarketOutlook">
                         <div class="poptitle"><h3>Maxim Trader - Financial Market outlook and Business Preview</h3><br>
                         House Speaker: Mr Daniel Ang (International Financial Guru)</div>
                     </a>
 
                     <div class="news_date">
                     May 2013 Activities.
-                    </div>
-                    <br>
-                    <div class="news_desc">
-                        <h3>马胜金融集团。五月份说明会</h3><br>
-                        金融市场前景分析及创业说明会。<br>
-                        主讲：Mr Daniel Ang 国际金融大师。<br>
-<br>
-                        1)
-Penang. Malaysia.<br>
-9th May 2013        <br>
-Penang, Eastin Hotel    <br>
-时间：7.30pm 至 10.30pm      <br>
-负责人：Alvin Tan +6016 466 5468 <br>
-<br>
-穦城。马来西亚。<br>
-9th May 2013  <br>
-Eastin 酒店    <br>
-时间：7.30pm 至 10.30pm <br>
-负责人：Alvin Tan +6016 466 5468<br>
-<br><br><br>
-
-2)
-18th May 2013   <br>
-台中。全国大饭店 （贵宾厅）。<br>
-时间：14：00 至 17：00       <br>
-地址：台中市，台中港路一段257号。   <br>
-负责人：洪小姐 +886 9880 72911        <br>
-<br>
-Taizhong. National Hotel<br>
-Time: 14:00 to 17:00     <br>
-Add: Taizhong, Taizhong Gang Road 1st, No 257.<br>
-PIC: Ms Vivian +886 9880 72911<br>
-<br><br>
-3) 19th May 2013<br>
-高雄。丽尊酒店 （大洋厅）。<br>
-时间：13：00 至 17：00<br>
-地址：高雄市，五福一路。106号。<br>
-负责人：洪小姐 +886 9880 72911 <br>
-<br>
-Kaohsiung. The Lees Hotel<br>
-Time: 13:00 to 17:00<br>
-Add: 106 WuFu 1st Road, Kaohsiung.<br>
-PIC: Ms Vivian +886 9880 72911<br>
-<br><br>
-4) 20th May 2013<br>
-台北。台大医院国际会议中心。<br>
-时间：13：00 至 17：00<br>
-地址：台北市，中正区徐州路2号。<br>
-负责人：Ms Lisa +886980508662<br>
-<br>
-Taipei. NTUH International Convention Center.<br>
-Time: 13:00 to 17:00<br>
-Add: No 2,  Xuzhou Road, ZhongZhen Area, Taipei.<br>
-PIC: Ms Lisa +886980508662<br>
                     </div>
                 </div>
             </div>
