@@ -17,7 +17,7 @@
     width: 28px;
 }
 .tree-controller-dash, .tree-controller-dashplus, .tree-controller-dashminus {
-    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf_h.png") repeat-x scroll 0 24px transparent;
+    background: url("/css/network/leaf_h.png") repeat-x scroll 0 24px transparent;
     float: left;
     margin-left: 16px;
     width: 12px;
@@ -26,7 +26,7 @@
     margin-left: 28px;
 }
 .tree-controller-wrap {
-    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf.png") repeat-y scroll 16px 0 transparent;
+    background: url("/css/network/leaf.png") repeat-y scroll 16px 0 transparent;
 }
 .tree-controller-tplus-line, .tree-controller-lplus-line, .tree-controller-tminus-line, .tree-controller-lminus-line, .tree-controller-t-line, .tree-controller-l-line {
     float: left;
@@ -34,12 +34,12 @@
     width: 12px;
 }
 .tree-controller-lplus-line, .tree-controller-lminus-line, .tree-controller-l-line {
-    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf.png") repeat-y scroll 0 0 transparent;
+    background: url("/css/network/leaf.png") repeat-y scroll 0 0 transparent;
     float: left;
     height: 24px;
 }
 .tree-controller-lplus-right, .tree-controller-tplus-right, .tree-controller-tminus-right, .tree-controller-lminus-right, .tree-controller-l-right, .tree-controller-t-right {
-    background: url("http://www.abfxtrader.com/ablive/nimages/network/gentree/images/leaf_h.png") repeat-x scroll 0 24px transparent;
+    background: url("/css/network/leaf_h.png") repeat-x scroll 0 24px transparent;
     float: left;
     width: 12px;
 }
