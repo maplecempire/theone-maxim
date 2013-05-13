@@ -266,7 +266,7 @@ abstract class Globals {
     /***********************************************/
     /****    DEBIT CARD & EZY CASH CARD       ******/
     /***********************************************/
-    const APPLY_DEBITCARD_ENABLE = false;
+    const APPLY_DEBITCARD_ENABLE = true;
     const APPLY_EZYCASHCARD_ENABLE = false;
     const APPLY_DEBITCARD_VISIBLE = true;
     const APPLY_EZYCASHCARD_VISIBLE = false;
