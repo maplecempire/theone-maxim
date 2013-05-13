@@ -89,17 +89,19 @@ function blink(selector) {
         </li>
     <?php } ?>
 
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if (Globals::APPLY_EZYCASHCARD_VISIBLE == true) { ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/applyEzyCashCard") ?>"><span><?php echo __('Apply EzyCash Card'); ?></span></a>
         </li>
-    <?php } ?>
+        <?php } ?>
+
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="https://www.ezybonds.com/members/join.asp?affiliateid=36496" target="_blank">
                 <span><?php echo __('EzyAccount Registration'); ?></span>
             </a>
         </li>
-
+    <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
 
         </li>

@@ -268,6 +268,8 @@ abstract class Globals {
     /***********************************************/
     const APPLY_DEBITCARD_ENABLE = false;
     const APPLY_EZYCASHCARD_ENABLE = false;
+    const APPLY_DEBITCARD_VISIBLE = true;
+    const APPLY_EZYCASHCARD_VISIBLE = false;
 
     /*******************************/
     /*****   GROUP LEADER   ******/
