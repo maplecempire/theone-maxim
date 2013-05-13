@@ -175,6 +175,9 @@ class memberActions extends sfActions
 
     public function executeDoApplyEzyCashCard()
     {
+        if (Globals::APPLY_EZYCASHCARD_VISIBLE == false) {
+            return $this->redirect('/member/summary');
+        }
         if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
             $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
             return $this->redirect('/member/applyEzyCashCard');
@@ -246,6 +249,9 @@ class memberActions extends sfActions
 
     public function executeApplyEzyCashCard()
     {
+        if (Globals::APPLY_EZYCASHCARD_VISIBLE == false) {
+            return $this->redirect('/member/summary');
+        }
         if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
             $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
         }
