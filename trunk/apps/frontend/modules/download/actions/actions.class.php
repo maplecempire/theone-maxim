@@ -24,6 +24,30 @@ class downloadActions extends sfActions
 
         return sfView::NONE;
     }
+    public function executePrivateInvestmentAgreementContract()
+    {
+        $mt4Id = $this->getRequestParameter('q');
+        $distId = $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID);
+
+        $c = new Criteria();
+        $c->add(MlmPackageContractPeer::MT4_ID, $mt4Id);
+        $c->add(MlmPackageContractPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $c->add(MlmPackageContractPeer::STATUS_CODE, Globals::STATUS_COMPLETE);
+        $mlmPackageContract = MlmPackageContractPeer::doSelectOne($c);
+
+        if ($mlmPackageContract) {
+            $response = $this->getResponse();
+            $response->clearHttpHeaders();
+            $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+            $response->setContentType('application/pdf');
+            $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename=Private_Investment_Agreement.pdf', TRUE);
+            $response->sendHttpHeaders();
+            readfile(sfConfig::get('sf_upload_dir')."/private_investment_agreement/".$mt4Id."_Private_Investment_Agreement.pdf");
+        }
+
+        return sfView::NONE;
+    }
     public function executeDownloadMaximTrader4Setup()
     {
         $response = $this->getResponse();

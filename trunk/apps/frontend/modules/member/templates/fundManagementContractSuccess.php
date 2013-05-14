@@ -61,7 +61,8 @@
                                         <tbody>
                                         <colgroup>
                                             <col width="5%">
-                                            <col width="45%">
+                                            <col width="20%">
+                                            <col width="25%">
                                             <col width="25%">
                                             <col width="25%">
                                         </colgroup>
@@ -70,6 +71,7 @@
                                             <td><?php echo __('MT4 ID') ?></td>
                                             <td><?php echo __('Unrealized Profit') ?></td>
                                             <td><?php echo __('Realized Profit') ?></td>
+                                            <td><?php echo __('Private Investment Agreement') ?></td>
                                         </tr>
                                         <?php
                                                             if (count($fundManagements) > 0) {
@@ -85,9 +87,22 @@
                                                 echo "<tr class='row" . $trStyle . "'>
                                 <td align='center'>" . $idx++ . "</td>
                                 <td align='center'><a href='#' class='linkMt4' ref='" . $fundManagement['mt4_user_name'] . "'>" . $fundManagement['mt4_user_name'] . "</a></td>
-                                <td align='right'>" . number_format($fundManagement['unrealized_profit'], 2) . "</td>
-                                <td align='right'>" . number_format($fundManagement['realized_rofit'], 2) . "</td>
-                                </tr>";
+                                <td align='center'>" . number_format($fundManagement['unrealized_profit'], 2) . "</td>
+                                <td align='center'>" . number_format($fundManagement['realized_rofit'], 2) . "</td>";
+
+                                            if ($fundManagement['contract'] != "") {
+                                            ?>
+                                                <td align='center'>
+                                                    <a href="<?php echo url_for("/download/privateInvestmentAgreementContract?q=".$fundManagement['contract']) ?>">
+                                                        <img src="/images/common/fileopen.png" alt="view file">
+                                                    </a>
+                                                </td>
+                                            <?php
+                                                } else {
+                                                    echo "<td align='center'></td>";
+                                                }
+
+                                echo "</tr>";
                                             }
                                         } else {
                                             echo "<tr class='odd' align='center'><td colspan='4'>" . __('No data available in table') . "</td></tr>";
