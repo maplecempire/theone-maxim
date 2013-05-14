@@ -172,6 +172,8 @@
                                                             }
                                                         });
                                             });
+
+                                            $(".linkMt4:first").trigger("click");
                                         });
 
                                     </script>
