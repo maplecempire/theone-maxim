@@ -1010,6 +1010,25 @@ class financeActions extends sfActions
                     $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_roi_dividend->save();
 
+                    $distDB = MlmDistributorPeer::retrieveByPK($packageUpgradeHistory->getDistId());
+                    $userDB = AppUserPeer::retrieveByPK($distDB->getUserId());
+
+                    $mlmPackageContract = new MlmPackageContract();
+                    $mlmPackageContract->setDistId($packageUpgradeHistory->getDistId());
+                    $mlmPackageContract->setFullName($distDB->getFullName());
+                    $mlmPackageContract->setUsername($userDB->getUsername());
+                    $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
+                    $mlmPackageContract->setPackagePrice($distDB->getFullName());
+                    $mlmPackageContract->setSignDateDay(date("d"));
+                    $mlmPackageContract->setSignDateMonth(date("F"));
+                    $mlmPackageContract->setSignDateYear(date("Y"));
+                    $mlmPackageContract->setInitialSignature($distDB->getSignName());
+                    $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
+                    $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                    $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->save();
+
                     $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
 
                     $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
