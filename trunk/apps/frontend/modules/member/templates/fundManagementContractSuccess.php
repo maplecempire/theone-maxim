@@ -105,7 +105,7 @@
                                 echo "</tr>";
                                             }
                                         } else {
-                                            echo "<tr class='odd' align='center'><td colspan='4'>" . __('No data available in table') . "</td></tr>";
+                                            echo "<tr class='odd' align='center'><td colspan='5'>" . __('No data available in table') . "</td></tr>";
                                         }
                                         ?>
                                         </tbody>
