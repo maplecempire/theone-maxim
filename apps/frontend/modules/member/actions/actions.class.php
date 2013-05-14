@@ -8181,6 +8181,18 @@ Wish you all the best.
             $resultArray[$count]["unrealized_profit"] = $this->getUnrealizedProfit($arr["mt4_user_name"]);
             $resultArray[$count]["realized_rofit"] = $this->getRealizedProfit($arr["mt4_user_name"]);
 
+            $c = new Criteria();
+            $c->add(MlmPackageContractPeer::MT4_ID, $arr["mt4_user_name"]);
+            $c->add(MlmPackageContractPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $c->add(MlmPackageContractPeer::STATUS_CODE, Globals::STATUS_COMPLETE);
+            $mlmPackageContract = MlmPackageContractPeer::doSelectOne($c);
+
+            if ($mlmPackageContract) {
+                $resultArray[$count]["contract"] = $arr["mt4_user_name"];
+            } else {
+                $resultArray[$count]["contract"] = "";
+            }
+
             $count++;
         }
         return $resultArray;
