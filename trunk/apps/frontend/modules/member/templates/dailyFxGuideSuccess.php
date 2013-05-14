@@ -52,6 +52,11 @@
                     <a href="<?php echo url_for("/download/downloadGuide?a=JP&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanese)</span></a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=KR&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Korean)</span></a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </td>
