@@ -1140,13 +1140,31 @@ class marketingActions extends sfActions
                 $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_roi_dividend->save();
 
-                $output = array(
-                    "error" => false
-                );
-                echo json_encode($output);
+                $userDB = AppUserPeer::retrieveByPK($tbl_distributor->getUserId());
+
+                $mlmPackageContract = new MlmPackageContract();
+                $mlmPackageContract->setDistId($tbl_distributor->getDistributorId());
+                $mlmPackageContract->setFullName($tbl_distributor->getFullName());
+                $mlmPackageContract->setUsername($userDB->getUsername());
+                $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
+                $mlmPackageContract->setPackagePrice($tbl_distributor->getFullName());
+                $mlmPackageContract->setSignDateDay(date("d"));
+                $mlmPackageContract->setSignDateMonth(date("F"));
+                $mlmPackageContract->setSignDateYear(date("Y"));
+                $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
+                $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
+                $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmPackageContract->save();
 
                 $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
             }
+
+            $output = array(
+                "error" => false
+            );
+            echo json_encode($output);
         }
 
         return sfView::HEADER_ONLY;
