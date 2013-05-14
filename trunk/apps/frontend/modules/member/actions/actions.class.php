@@ -8183,10 +8183,11 @@ Wish you all the best.
 
             $c = new Criteria();
             $c->add(MlmPackageContractPeer::MT4_ID, $arr["mt4_user_name"]);
-            $c->add(MlmPackageContractPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $c->add(MlmPackageContractPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0));
             $c->add(MlmPackageContractPeer::STATUS_CODE, Globals::STATUS_COMPLETE);
             $mlmPackageContract = MlmPackageContractPeer::doSelectOne($c);
 
+            //var_dump($mlmPackageContract);
             if ($mlmPackageContract) {
                 $resultArray[$count]["contract"] = $arr["mt4_user_name"];
             } else {
