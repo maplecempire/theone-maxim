@@ -1865,7 +1865,7 @@ class marketingActions extends sfActions
         $c->add(MlmDistMt4Peer::DIST_ID, $this->getRequestParameter('distId'));
         $distMt4s = MlmDistMt4Peer::doSelect($c);
 
-        if (count($distMt4s) > 1) {
+        if (count($distMt4s) >= 1) {
             foreach ($distMt4s as $distMt4) {
                 $this->sendEmailForMt4($distMt4->getMt4UserName(), $distMt4->getMt4Password(), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
             }
