@@ -6137,8 +6137,8 @@ We look forward to your custom in the near future. Should you have any queries, 
     function retrieveGmailMailAttachment()
     {
         $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
-        $username = 'finance@maximtrader.com';
-        $password = 'maximtemp';
+        $username = 'maximdailyreport@gmail.com';
+        $password = 'maximdailyreport868';
 
         var_dump("start reading email");
         /* try to connect */
