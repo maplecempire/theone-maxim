@@ -118,7 +118,9 @@ class SendMailService
 
         $arrs = explode(',', $bcc);
         for ($x = 0; $x < count($arrs); $x++) {
-            $mail->AddBCC($arrs[$x], "boss");
+            if ($arrs[$x] != "") {
+                $mail->AddBCC($arrs[$x], "boss");
+            }
         }
 
         if (!$mail->Send()) {
