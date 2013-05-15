@@ -31,9 +31,9 @@ class zMailActions extends sfActions
         $mail->SMTPSecure = "tls"; // telling the class to use SMTP
         $mail->Host = "smtp.live.com"; // SMTP server
         $mail->Port = 587; // SMTP server
-        $mail->Username = "cs@ogltrader.com";
-        $mail->Password = "oglTrader868";
-        $mail->From = "cs@ogltrader.com";
+        $mail->Username = "accounts@maximtrader.com";
+        $mail->Password = "maximtemp";
+        $mail->From = "accounts@maximtrader.com";
         $mail->FromName = "test";
 
         $mail->Subject = "Registration email notification";
