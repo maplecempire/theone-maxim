@@ -17,3 +17,7 @@ uploadFxGuideENSuccess:
 uploadFxGuideJPSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+uploadFxGuideKRSuccess:
+  has_layout:     off
+  stylesheets: 	  []
