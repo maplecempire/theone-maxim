@@ -6,8 +6,9 @@ abstract class Mails {
     /*****    Email  ******/
     /*******************************/
     const EMAIL_SMTP = true;
-    const EMAIL_PORT = 465;
-    const EMAIL_HOST = "smtp.gmail.com";
+    const EMAIL_SMTP_SECURE = "tls";
+    const EMAIL_PORT = 587;
+    const EMAIL_HOST = "smtp.live.com";
     const EMAIL_FROM = "accounts@maximtrader.com";
     const EMAIL_FROM_NAME = "Maxim Trader";
     const EMAIL_FROM_NOREPLY = "accounts@maximtrader.com";

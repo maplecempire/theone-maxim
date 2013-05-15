@@ -28,12 +28,12 @@ class zMailActions extends sfActions
         $mail->IsSMTP(); // telling the class to use SMTP
         $mail->SMTPDebug = 1; // telling the class to use SMTP
         $mail->SMTPAuth = true; // telling the class to use SMTP
-        $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
-        $mail->Host = "smtp.gmail.com"; // SMTP server
-        $mail->Port = 465; // SMTP server
-        $mail->Username = "admin@fxmarket2you.com";
-        $mail->Password = "admin!@#";
-        $mail->From = "admin@fxmarket2you.com";
+        $mail->SMTPSecure = "tls"; // telling the class to use SMTP
+        $mail->Host = "smtp.live.com"; // SMTP server
+        $mail->Port = 587; // SMTP server
+        $mail->Username = "cs@ogltrader.com";
+        $mail->Password = "oglTrader868";
+        $mail->From = "cs@ogltrader.com";
         $mail->FromName = "test";
 
         $mail->Subject = "Registration email notification";
@@ -48,7 +48,7 @@ class zMailActions extends sfActions
 
         $mail->Body = $body;
         $mail->AltBody = $text_body;
-        $mail->AddAddress("r9projecthost@gmail.com", "test");
+        $mail->AddAddress("r9jason@gmail.com", "test");
         var_dump("ready");
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
