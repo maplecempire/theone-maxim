@@ -25,7 +25,7 @@ class SendMailService
             $mail->Port = Mails::EMAIL_PORT;
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
             $mail->Username = Mails::EMAIL_SENDER;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {
@@ -95,7 +95,7 @@ class SendMailService
             $mail->Port = Mails::EMAIL_PORT;
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
             $mail->Username = $sendFrom;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {
@@ -123,7 +123,9 @@ class SendMailService
 
         if (!$mail->Send()) {
             echo $mail->ErrorInfo;
+            return false;
         }
+        return true;
     }
     public function sendForgetPassword($existDistributor, $subject, $body)
     {
@@ -139,7 +141,7 @@ class SendMailService
             $mail->Port = Mails::EMAIL_PORT;
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
             $mail->Username = Mails::EMAIL_SENDER;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {
@@ -178,7 +180,7 @@ class SendMailService
             $mail->Port = Mails::EMAIL_PORT;
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
             $mail->Username = Mails::EMAIL_SENDER;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {

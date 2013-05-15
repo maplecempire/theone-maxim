@@ -908,7 +908,7 @@ class zMailActions extends sfActions
             $mail->Port = Mails::EMAIL_PORT;
             $mail->SMTPDebug = 1; // telling the class to use SMTP
             $mail->SMTPAuth = true; // telling the class to use SMTP
-            $mail->SMTPSecure = "ssl"; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
             $mail->Username = Mails::EMAIL_SENDER;
             $mail->Password = Mails::EMAIL_PASSWORD;
         } else {
