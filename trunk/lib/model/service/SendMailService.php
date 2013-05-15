@@ -81,7 +81,7 @@ class SendMailService
     {
 
     }
-    public function sendMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER, $bcc="r9projecthost@gmail.com")
+    public function sendMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER, $bcc="")
     {
         error_reporting(E_STRICT);
 
