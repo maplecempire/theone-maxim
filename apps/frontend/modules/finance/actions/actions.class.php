@@ -76,7 +76,11 @@ class financeActions extends sfActions
     }
     public function executeUpdateDistCommission()
     {
+        $distId = $this->getRequestParameter('distId');
         $c = new Criteria();
+        if ($distId != null) {
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
+        }
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         foreach ($distDBs as $distDB) {
