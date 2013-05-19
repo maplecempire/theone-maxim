@@ -174,8 +174,8 @@ class BonusService
                     where rank_id = ".$packageId;
 
         $query .= " AND loan_account = 'N'";
-        $query .= " AND created_on >= '" . $queryDate . " 00:00:00'";
-        $query .= " AND created_on <= '" . $queryDate . " 23:59:59'";
+        $query .= " AND active_datetime >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND active_datetime <= '" . $queryDate . " 23:59:59'";
         $query .= " group by rank_id";
         //var_dump($query);
 
