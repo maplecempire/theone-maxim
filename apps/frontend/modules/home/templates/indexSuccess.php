@@ -245,7 +245,7 @@ annoucementArr.push({
 annoucementArr.push({
     poptitle:'International Member Exchange (IME) July 2013 @ Macau',
     news_date:'23 MARCH 2013',
-    news_desc:'<br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
+    news_desc:'<div class="poptitle">Great news! IME incentive challenge period will be extended till 31st May 2013. Go for it!!!</div><br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
 
 
 /*annoucementArr.push({
