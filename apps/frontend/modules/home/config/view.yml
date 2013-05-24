@@ -1,4 +1,8 @@
-activitiesFinancialMarketOutlookSuccess:
+activitiesShanghaiFudanSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+    activitiesFinancialMarketOutlookSuccess:
   has_layout:     off
   stylesheets: 	  []
 

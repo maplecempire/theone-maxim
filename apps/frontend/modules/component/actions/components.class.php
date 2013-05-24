@@ -95,6 +95,8 @@ class componentComponents extends sfComponents
                 $account->setDistId($componentDistributor->getDistributorId());
                 $account->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                 $account->setBalance(0);
+                $account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $account->save();
             }
 
@@ -110,6 +112,8 @@ class componentComponents extends sfComponents
                 $account->setDistId($componentDistributor->getDistributorId());
                 $account->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $account->setBalance(0);
+                $account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $account->save();
             }
 
