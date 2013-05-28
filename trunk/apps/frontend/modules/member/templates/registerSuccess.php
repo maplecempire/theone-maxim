@@ -151,7 +151,7 @@ $(function() {
                 success : function(data) {
                     waiting();
                     if (data == null || data == "") {
-                        alert("<?php echo __('Invalid Referral ID') ?>");
+                        alert("<?php echo __('Invalid Referrer ID') ?>");
                         $('#sponsorId').focus();
                         $("#sponsorName").val("");
                     } else {
@@ -185,7 +185,7 @@ function verifySponsorId() {
         },
         success : function(data) {
             if (data == null || data == "") {
-                error("<?php echo __('Invalid Referral ID') ?>");
+                error("<?php echo __('Invalid Referrer ID') ?>");
                 $('#sponsorId').focus();
                 $("#sponsorName").val("");
             } else {
@@ -349,7 +349,7 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th colspan="2"><?php echo __('Referral') ?></th>
+        <th colspan="2"><?php echo __('Referrer') ?></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -357,7 +357,7 @@ function error(data) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Referral ID') ?></td>
+        <td><?php echo __('Referrer ID') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php //echo $sponsorId;?>">
             &nbsp;
@@ -367,7 +367,7 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Referral Name') ?></td>
+        <td><?php echo __('Referrer Name') ?></td>
         <td>
             <input type="text" class="inputbox" id="sponsorName" name="sponsorName" value="<?php //echo $sponsorName;?>" readonly="readonly">
             &nbsp;
