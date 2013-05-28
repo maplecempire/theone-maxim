@@ -6207,7 +6207,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         // roi dividend end~
 
         print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
-        $this->executeSendRemindationEmailForUploadAgreement();
+        //$this->executeSendRemindationEmailForUploadAgreement();
         print_r("<br>sendDailyReport<br>");
         $this->sendDailyReport();
         print_r("Done");
