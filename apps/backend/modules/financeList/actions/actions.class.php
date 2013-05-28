@@ -88,6 +88,90 @@ class financeListActions extends sfActions
 
         return sfView::HEADER_ONLY;
     }
+
+    public function executeWalletList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " 	FROM mlm_account_ledger account
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = account.dist_id ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterSearch_walletType') != "") {
+            $sWhere .= " AND account.account_type ='" . $this->getRequestParameter('filterSearch_walletType') . "'";
+        }
+        if ($this->getRequestParameter('filterSearch_distCode') != "") {
+            $sWhere .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterSearch_distCode') . "%'";
+        }
+        if ($this->getRequestParameter('filterSearch_fullname') != "") {
+            $sWhere .= " AND dist.full_name LIKE'%" . $this->getRequestParameter('filterSearch_fullname') . "%'";
+        }
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+            $arr[] = array(
+                $resultArr['account_id'] == null ? "" : $resultArr['account_id'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
+                $resultArr['transaction_type'] == null ? "" : $resultArr['transaction_type'],
+                $resultArr['credit'] == null ? "" : number_format($resultArr['credit'],2),
+                $resultArr['debit'] == null ? "" : number_format($resultArr['debit'],2),
+                $resultArr['balance'] == null ? "" : number_format($resultArr['balance'],2),
+                $resultArr['remark'] == null ? "" : $resultArr['remark'],
+                $resultArr['internal_remark'] == null ? "" : $resultArr['internal_remark'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on']
+            );
+        }
+
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeEPointTransactionList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

@@ -267,6 +267,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $self_register = '';
 
+
+	
+	protected $debit_account = '';
+
+
+	
+	protected $debit_rank_id;
+
+
+	
+	protected $debit_status_code;
+
 	
 	protected $alreadyInSave = false;
 
@@ -816,6 +828,27 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->self_register;
+	}
+
+	
+	public function getDebitAccount()
+	{
+
+		return $this->debit_account;
+	}
+
+	
+	public function getDebitRankId()
+	{
+
+		return $this->debit_rank_id;
+	}
+
+	
+	public function getDebitStatusCode()
+	{
+
+		return $this->debit_status_code;
 	}
 
 	
@@ -1924,6 +1957,57 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setDebitAccount($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->debit_account !== $v || $v === '') {
+			$this->debit_account = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::DEBIT_ACCOUNT;
+		}
+
+	} 
+
+	
+	public function setDebitRankId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->debit_rank_id !== $v) {
+			$this->debit_rank_id = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::DEBIT_RANK_ID;
+		}
+
+	} 
+
+	
+	public function setDebitStatusCode($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->debit_status_code !== $v) {
+			$this->debit_status_code = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::DEBIT_STATUS_CODE;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2058,11 +2142,17 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->self_register = $rs->getString($startcol + 64);
 
+			$this->debit_account = $rs->getString($startcol + 65);
+
+			$this->debit_rank_id = $rs->getInt($startcol + 66);
+
+			$this->debit_status_code = $rs->getString($startcol + 67);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 65; 
+						return $startcol + 68; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2402,6 +2492,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 64:
 				return $this->getSelfRegister();
 				break;
+			case 65:
+				return $this->getDebitAccount();
+				break;
+			case 66:
+				return $this->getDebitRankId();
+				break;
+			case 67:
+				return $this->getDebitStatusCode();
+				break;
 			default:
 				return null;
 				break;
@@ -2477,6 +2576,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[62] => $this->getRemark(),
 			$keys[63] => $this->getLoanAccount(),
 			$keys[64] => $this->getSelfRegister(),
+			$keys[65] => $this->getDebitAccount(),
+			$keys[66] => $this->getDebitRankId(),
+			$keys[67] => $this->getDebitStatusCode(),
 		);
 		return $result;
 	}
@@ -2687,6 +2789,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 64:
 				$this->setSelfRegister($value);
 				break;
+			case 65:
+				$this->setDebitAccount($value);
+				break;
+			case 66:
+				$this->setDebitRankId($value);
+				break;
+			case 67:
+				$this->setDebitStatusCode($value);
+				break;
 		} 	}
 
 	
@@ -2759,6 +2870,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[62], $arr)) $this->setRemark($arr[$keys[62]]);
 		if (array_key_exists($keys[63], $arr)) $this->setLoanAccount($arr[$keys[63]]);
 		if (array_key_exists($keys[64], $arr)) $this->setSelfRegister($arr[$keys[64]]);
+		if (array_key_exists($keys[65], $arr)) $this->setDebitAccount($arr[$keys[65]]);
+		if (array_key_exists($keys[66], $arr)) $this->setDebitRankId($arr[$keys[66]]);
+		if (array_key_exists($keys[67], $arr)) $this->setDebitStatusCode($arr[$keys[67]]);
 	}
 
 	
@@ -2831,6 +2945,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::REMARK)) $criteria->add(MlmDistributorPeer::REMARK, $this->remark);
 		if ($this->isColumnModified(MlmDistributorPeer::LOAN_ACCOUNT)) $criteria->add(MlmDistributorPeer::LOAN_ACCOUNT, $this->loan_account);
 		if ($this->isColumnModified(MlmDistributorPeer::SELF_REGISTER)) $criteria->add(MlmDistributorPeer::SELF_REGISTER, $this->self_register);
+		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_ACCOUNT)) $criteria->add(MlmDistributorPeer::DEBIT_ACCOUNT, $this->debit_account);
+		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_RANK_ID)) $criteria->add(MlmDistributorPeer::DEBIT_RANK_ID, $this->debit_rank_id);
+		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_STATUS_CODE)) $criteria->add(MlmDistributorPeer::DEBIT_STATUS_CODE, $this->debit_status_code);
 
 		return $criteria;
 	}
@@ -2988,6 +3105,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setLoanAccount($this->loan_account);
 
 		$copyObj->setSelfRegister($this->self_register);
+
+		$copyObj->setDebitAccount($this->debit_account);
+
+		$copyObj->setDebitRankId($this->debit_rank_id);
+
+		$copyObj->setDebitStatusCode($this->debit_status_code);
 
 
 		$copyObj->setNew(true);

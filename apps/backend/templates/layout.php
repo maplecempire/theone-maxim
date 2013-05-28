@@ -653,6 +653,18 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Debit Rolling Point'); ?></a><br/>
+
+                    <a href="<?php echo url_for('finance/recallRollingPoint') ?>" title="Recall Rolling Point">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Recall Rolling Point'); ?></a><br/>
+                    <?php } ?>
+
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('finance/debitAccountManagement') ?>" title="Debit Account">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Debit Account'); ?></a><br/>
                     <?php } ?>
                 </div>
                 <?php } ?>

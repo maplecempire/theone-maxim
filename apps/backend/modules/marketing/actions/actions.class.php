@@ -16,6 +16,34 @@ class marketingActions extends sfActions
         $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
         $this->dists = MlmDistributorPeer::doSelect($c);
     }
+    public function executeSendLuckyDraw()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "Maxim_Luck_Draw_Listing_2013.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 1;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = $totalRow; $x > 0; $x--) {
+            $mt4Username = $data->val($x, "B");
+            $mt4Password = $data->val($x, "A");
+            $email = $data->val($x, "E");
+            $fullname = $data->val($x, "C");
+
+            if ($mt4Password == "" || $email == "")
+                continue;
+
+            $result = $this->sendEmailForMt4($mt4Username, $mt4Password, $fullname, $email);
+
+            $counter++;
+        }
+        print_r($totalRow);
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoSendMt4()
     {
 
@@ -85,7 +113,7 @@ class marketingActions extends sfActions
         return sfView::HEADER_ONLY;
     }
     public function executeFindUnderLeader() {
-        $str = '276';
+        $str = '889';
 
         $memberArrs = explode(",", $str);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -834,6 +862,11 @@ class marketingActions extends sfActions
                                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                     $mlm_account_ledger->save();
 
+                                                    $bonusService = new BonusService();
+                                                    if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
+                                                        $debitAccountRemark = "USD ".$creditRefundByPackage.", Volume:".$totalVolume;
+                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark);
+                                                    }
                                                     $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
                                                 } else if ($gap > 0) {
                                                     $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
@@ -875,6 +908,11 @@ class marketingActions extends sfActions
                                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                     $mlm_account_ledger->save();
 
+                                                    $bonusService = new BonusService();
+                                                    if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
+                                                        $debitAccountRemark = "e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied;
+                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark);
+                                                    }
                                                     $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
                                                 }
                                             }
@@ -1500,6 +1538,7 @@ class marketingActions extends sfActions
             $uplineDistCommissionDB->setDistId($uplineDistDB->getDistributorId());
             $uplineDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
             $uplineDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $uplineDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         } else {
             $commissionBalance = $uplineDistCommissionDB->getBalance();
         }
@@ -1713,6 +1752,8 @@ class marketingActions extends sfActions
             $tbl_account = new MlmAccount();
             $tbl_account->setDistId($distributorId);
             $tbl_account->setAccountType($accountType);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         }
 
         $tbl_account->setBalance($balance);
@@ -1732,6 +1773,8 @@ class marketingActions extends sfActions
             $tbl_account = new MlmDistCommission();
             $tbl_account->setDistId($distributorId);
             $tbl_account->setCommissionType($commissionType);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         }
 
         $tbl_account->setBalance($balance);
