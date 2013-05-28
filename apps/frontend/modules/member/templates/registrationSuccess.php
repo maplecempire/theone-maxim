@@ -99,7 +99,7 @@
                         return false;
                     }
                     if ($.trim($('#sponsorId').val()) == "") {
-                        alert("<?php echo __('Referral ID cannot be blank') ?>.");
+                        alert("<?php echo __('Referrer ID cannot be blank') ?>.");
                         $('#sponsorId').focus();
                     } else {
                         waiting();
@@ -114,7 +114,7 @@
                             success : function(data) {
                                 waiting();
                                 if (data == null || data == "") {
-                                    alert("<?php echo __('Invalid Referral ID') ?>");
+                                    alert("<?php echo __('Invalid Referrer ID') ?>");
                                     $('#sponsorId').focus();
                                     $("#sponsorName").html("");
                                 } else {
@@ -174,7 +174,7 @@
     <table cellspacing="5" cellpadding="0" width="50%">
         <tr>
             <td class="login_t74">
-                <span id="Label4"><font color='white'><?php echo __('Referral ID') ?></font></span>
+                <span id="Label4"><font color='white'><?php echo __('Referrer ID') ?></font></span>
             </td>
             <td width="400px">
                 <input name="sponsorId" type="text" id="sponsorId" tabindex="1" class="login_t73" />
@@ -182,7 +182,7 @@
         </tr>
         <tr>
             <td class="login_t74">
-				<span id="Label25"><font color='white'><?php echo __('Referral Name') ?></font></span>
+				<span id="Label25"><font color='white'><?php echo __('Referrer Name') ?></font></span>
             </td>
             <td>
                 <span id="sponsorName" class="fullname"></span>

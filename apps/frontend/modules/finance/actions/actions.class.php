@@ -10,6 +10,205 @@
  */
 class financeActions extends sfActions
 {
+    public function executeBonusDetailLogList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = "SELECT commission.created_on
+, Coalesce(ob._GDB, 0) AS _GDB
+, Coalesce(drb._DRB, 0) AS _DRB
+, Coalesce(sales._PIPS_BONUS, 0) AS _PIPS_BONUS
+, Coalesce(leader._SPECIAL_BONUS, 0) AS _SPECIAL_BONUS
+, (Coalesce(ob._GDB, 0) + Coalesce(drb._DRB,0) + Coalesce(sales._PIPS_BONUS, 0) + Coalesce(leader._SPECIAL_BONUS, 0)) AS SUB_TOTAL
+    FROM (
+        SELECT DATE(created_on) AS created_on FROM mlm_dist_commission_ledger WHERE dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) commission
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _GDB, DATE(created_on) as ob_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) ob ON commission.created_on = ob.ob_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _DRB, DATE(created_on) as drb_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_DRB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) drb ON commission.created_on = drb.drb_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _SPECIAL_BONUS, DATE(created_on) as leader_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_SPECIAL_BONUS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) leader ON commission.created_on = leader.leader_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _PIPS_BONUS, DATE(created_on) as sales_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) sales ON commission.created_on = sales.sales_created_on";
+
+        /******   total records  *******/
+        $sWhere = "";
+        /******   total filtered records  *******/
+
+        $countSql = " FROM (
+        SELECT DATE(created_on) AS created_on FROM mlm_dist_commission_ledger WHERE dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) commission
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _GDB, DATE(created_on) as ob_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) ob ON commission.created_on = ob.ob_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _DRB, DATE(created_on) as drb_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_DRB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) drb ON commission.created_on = drb.drb_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _SPECIAL_BONUS, DATE(created_on) as leader_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_SPECIAL_BONUS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) leader ON commission.created_on = leader.leader_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _PIPS_BONUS, DATE(created_on) as sales_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) sales ON commission.created_on = sales.sales_created_on";
+        $totalRecords = $this->getTotalRecords($countSql . $sWhere);
+        $totalFilteredRecords = $totalRecords;
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+            $arr[] = array(
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['_DRB'] == null ? "" : $resultArr['_DRB'],
+                $resultArr['_GDB'] == null ? "" : $resultArr['_GDB'],
+                $resultArr['_PIPS_BONUS'] == null ? "" : $resultArr['_PIPS_BONUS'],
+                $resultArr['_SPECIAL_BONUS'] == null ? "" : $resultArr['_SPECIAL_BONUS'],
+                $resultArr['SUB_TOTAL'] == null ? "" : $resultArr['SUB_TOTAL'],
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeBonusDetailList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " credit, debit, balance, remark, created_on
+	        FROM mlm_dist_commission_ledger ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE dist_id =".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sWhere .= " AND commission_type = '".$this->getRequestParameter('filterAction')."'";
+        $sWhere .= " AND created_on >= '".$this->getRequestParameter('filterDate')." 00:00:00' AND created_on <= '".$this->getRequestParameter('filterDate')." 23:59:59'";
+        /******   total filtered records  *******/
+
+        $ssql = " FROM mlm_dist_commission_ledger";
+
+        if ("MAINTENANCE" == $this->getRequestParameter('filterAction')) {
+            $sql = " credit, debit, balance, remark, created_on
+	                FROM mlm_account_ledger ";
+
+            /******   total records  *******/
+            $sWhere = " WHERE dist_id =".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+            $sWhere .= " AND account_type = 'ECASH'";
+            $sWhere .= " AND transaction_type = 'SYSTEM MAINTENANCE'";
+            $sWhere .= " AND created_on >= '".$this->getRequestParameter('filterDate')." 00:00:00' AND created_on <= '".$this->getRequestParameter('filterDate')." 23:59:59'";
+            /******   total filtered records  *******/
+
+            $ssql = " FROM mlm_account_ledger";
+        }
+
+        $totalRecords = $this->getTotalRecords($ssql . $sWhere);
+        $totalFilteredRecords = $totalRecords;
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+//        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $query = "SELECT " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $remark = $resultArr['remark'];
+
+            $arr[] = array(
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['credit'] == null ? "0" : $resultArr['credit'],
+                $resultArr['debit'] == null ? "0" : $resultArr['debit'],
+                $resultArr['balance'] == null ? "0" : $resultArr['balance'],
+                $remark
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeFetchRoiList()
     {
         $mt4Username = $this->getRequestParameter('mt4UserId');

@@ -73,6 +73,9 @@ function blink(selector) {
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/pipsRebate"><span><?php echo __('Pips Rebate'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">

@@ -5561,7 +5561,57 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->TblBonus = TblMemberCommPeer::doSelect($c);
     }
 
-    public function executeBonusDetails()
+    public function executeBonusDetails() {
+
+    }
+    public function executePipsRebate()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->forward404Unless($distDB);
+
+        $joinDate = $distDB->getActiveDatetime();
+
+        $creditRefunds = $this->getCommissionBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::COMMISSION_TYPE_CREDIT_REFUND);
+
+        $this->creditRefund = number_format($creditRefunds, 2);
+
+        /* *************************
+         *  PIPS DETAIL
+         * **************************/
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+
+        $anode = array();
+
+        $idx = 0;
+        if ($joinDate != null) {
+            $joinMonth = date('m', strtotime($joinDate));
+            $joinYear = date('Y', strtotime($joinDate));
+            for ($x = intval($joinYear); $x <= intval($currentYear); $x++) {
+                if ($x != $currentYear) {
+                    for ($i = intval($joinMonth); $i <= 12; $i++) {
+                        $anode[$idx]["year"] = $x;
+                        $anode[$idx]["month"] = $i;
+                        $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $idx++;
+                    }
+                } else {
+                    if ($joinYear != $currentYear) {
+                        $joinMonth = 1;
+                    }
+                    for ($i = intval($joinMonth); $i <= intval($currentMonth); $i++) {
+                        $anode[$idx]["year"] = $x;
+                        $anode[$idx]["month"] = $i;
+                        $anode[$idx]["credit_refund"] = $this->getCreditRefundDetailByMonth($distDB->getDistributorId(), $i, $x, null);
+                        $idx++;
+                    }
+                }
+            }
+        }
+        $this->anode = $anode;
+    }
+
+    public function executeBonusDetails2()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distDB);
