@@ -50,6 +50,8 @@ class MlmRoiDividendMapBuilder {
 
 		$tMap->addColumn('ROI_PERCENTAGE', 'RoiPercentage', 'double', CreoleTypes::DECIMAL, true, 12);
 
+		$tMap->addColumn('MT4_BALANCE', 'Mt4Balance', 'double', CreoleTypes::DECIMAL, false, 12);
+
 		$tMap->addColumn('DIVIDEND_AMOUNT', 'DividendAmount', 'double', CreoleTypes::DECIMAL, true, 12);
 
 		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, true, 255);

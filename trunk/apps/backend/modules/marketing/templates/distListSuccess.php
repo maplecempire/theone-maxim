@@ -75,7 +75,7 @@ $(function(){
                                 , file_proof_of_residence : oObj.aData[idx++]
                                 , file_nric : oObj.aData[idx++]
                           });
-		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>"
+		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<br><a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>"
 		  				  + "<br><a id='resendPasswordLink' href='#' title='Resend Password'>Resend_Password</a><br><a id='resendMt4Link' href='#' title='Resend MT4'>Resend_MT4</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},

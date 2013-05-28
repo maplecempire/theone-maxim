@@ -44,7 +44,7 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
             }
@@ -109,7 +109,8 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
+            //if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::TRUE, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
                 return $this->redirect('/member/convertRPToCp1');
             }
@@ -1936,10 +1937,11 @@ class memberActions extends sfActions
 
             $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
             $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
-
             /* ****************************************************
              * Update upline distributor account
              * ***************************************************/
+            $bonusService = new BonusService();
+
             $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
             if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
@@ -1977,6 +1979,12 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    if ($bonusService->checkDebitAccount($uplineDistId) == true) {
+                        $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
+                        $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                    }
+                    //var_dump($bonusService->checkDebitAccount($uplineDistId));
+                    //exit();
                     $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
                     /******************************/
@@ -1993,6 +2001,7 @@ class memberActions extends sfActions
                         $sponsorDistCommissionDB->setDistId($uplineDistId);
                         $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
                         $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     } else {
                         $commissionBalance = $sponsorDistCommissionDB->getBalance();
                     }
@@ -2031,7 +2040,7 @@ class memberActions extends sfActions
                     $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
                     //var_dump("==>1");
                     //var_dump("totalBonusPayOut=".$totalBonusPayOut);
-                    if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
+                    if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT && $uplineDistDB) {
                         //var_dump("==>2");
                         $checkCommission = true;
                         $uplineDistId = $uplineDistDB->getUplineDistId();
@@ -2080,7 +2089,6 @@ class memberActions extends sfActions
                     }
                 }
             }
-
             $distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             if ($doAction == "PENDING_MEMBER" || $distributor->getPlacementTreeStructure() == null) {
 
@@ -2190,11 +2198,13 @@ class memberActions extends sfActions
                     }*/
 
                     // recalculate Total left and total right for $uplineDistDB
+                    //var_dump("===========");
                     $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
                     for ($x = count($arrs); $x > 0; $x--) {
                         if ($arrs[$x] == "") {
                             continue;
                         }
+                        //var_dump("+++".$arrs[$x]);
                         $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
                         if ($uplineDistDB) {
                             $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
@@ -2208,6 +2218,7 @@ class memberActions extends sfActions
                     /******************************/
                     /*  store Pairing points
                     /******************************/
+                    //var_dump("===========");
                     if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
                     } else {
@@ -2218,7 +2229,7 @@ class memberActions extends sfActions
                             while ($level < 100) {
                                 //var_dump($uplineDistDB->getUplineDistId());
                                 //var_dump($uplineDistDB->getUplineDistCode());
-                                //print_r("<br>");
+                                print_r("<br>");
                                 $c = new Criteria();
                                 $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
                                 $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
@@ -3641,6 +3652,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->forward404Unless($distributor);
 
         $rp = 0;
+        $debitAccount = 0;
         $ecash = 0;
         $epoint = 0;
         $maintenancePoint = 0;
@@ -3679,6 +3691,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+            $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
             //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 
             //$rp = $rp - $debitAccount;
@@ -3701,6 +3714,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->lastLogin = $lastLogin;
         $this->maintenancePoint = $maintenancePoint;
         $this->rp = $rp;
+        $this->debitAccount = $debitAccount;
     }
 
     public function executeAnnouncementList()
@@ -5208,7 +5222,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::TRUE, null, null)) {
+            //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', "CP3 Withdrawal temporary out of service.");
                 return $this->redirect('/member/cp3Withdrawal');
             }
@@ -5283,7 +5298,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::TRUE)) {
                 $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -5788,6 +5803,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $sponsorDistCommissionDB->setDistId($distId);
                                     $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_GDB);
                                     $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 } else {
                                     $commissionBalance = $sponsorDistCommissionDB->getBalance();
                                 }
@@ -5887,6 +5903,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $maintenanceEcashAccountLedger->save();
                                 }
 
+                                $bonusService = new BonusService();
+                                if ($bonusService->checkDebitAccount($distId) == true) {
+                                    $debitAccountRemark = "GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")";
+                                    $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+                                }
                                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
                                 if ($maintenanceBalance != 0) {
@@ -6376,7 +6397,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
                 $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
             }
@@ -6693,6 +6714,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
+                        $bonusService = new BonusService();
+                        if ($bonusService->checkDebitAccount($uplineDistId) == true) {
+                            $debitAccountRemark = "PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")";
+                            $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                        }
                         $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
                         /******************************/
@@ -6709,6 +6735,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $sponsorDistCommissionDB->setDistId($uplineDistId);
                             $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
                             $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         } else {
                             $commissionBalance = $sponsorDistCommissionDB->getBalance();
                         }
@@ -6861,6 +6888,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             $tbl_account = new MlmAccount();
             $tbl_account->setDistId($distributorId);
             $tbl_account->setAccountType($accountType);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         }
 
         $tbl_account->setBalance($balance);
@@ -6880,6 +6909,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             $tbl_account = new MlmDistCommission();
             $tbl_account->setDistId($distributorId);
             $tbl_account->setCommissionType($commissionType);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         }
 
         $tbl_account->setBalance($balance);
@@ -7110,6 +7141,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
+                $bonusService = new BonusService();
+                if ($bonusService->checkDebitAccount($uplineDistId) == true) {
+                    $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")";
+                    $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                }
                 $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
                 /******************************/
@@ -7126,6 +7162,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistCommissionDB->setDistId($uplineDistId);
                     $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
                     $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 } else {
                     $commissionBalance = $sponsorDistCommissionDB->getBalance();
                 }
@@ -8233,10 +8270,25 @@ Wish you all the best.
         return $result;
     }
 
-    function checkIsDebitedAccount($distId) {
+    function checkIsDebitedAccount($distId, $convertRpToCp1, $convertCp3ToCp1, $cp3Withdrawal, $convertCp2ToCp1, $ecashWithdrawal) {
         $c = new Criteria();
 
         $c->add(MlmDebitAccountPeer::DIST_ID, $distId);
+        if ($convertRpToCp1 != null) {
+            $c->add(MlmDebitAccountPeer::CONVERT_RP_TO_CP1, $convertRpToCp1);
+        }
+        if ($convertCp3ToCp1 != null) {
+            $c->add(MlmDebitAccountPeer::CONVERT_CP3_TO_CP1, $convertCp3ToCp1);
+        }
+        if ($convertCp2ToCp1 != null) {
+            $c->add(MlmDebitAccountPeer::CONVERT_CP2_TO_CP1, $convertCp2ToCp1);
+        }
+        if ($ecashWithdrawal != null) {
+            $c->add(MlmDebitAccountPeer::ECASH_WITHDRAWAL, $ecashWithdrawal);
+        }
+        if ($cp3Withdrawal != null) {
+            $c->add(MlmDebitAccountPeer::CP3_WITHDRAWAL, $cp3Withdrawal);
+        }
         $debitAccountDB = MlmDebitAccountPeer::doSelectOne($c);
 
         if ($debitAccountDB) {

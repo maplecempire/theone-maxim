@@ -480,6 +480,14 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 <?php } ?>
+<?php if ($distributor->getDebitAccount() == "Y") { ?>
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Debit Account') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($debitAccount,2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+<?php } ?>
     <!--<tr class="tbl_listing_end">
         <td colspan="4">
             &nbsp;

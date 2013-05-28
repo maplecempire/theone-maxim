@@ -162,5 +162,11 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('SELF_REGISTER', 'SelfRegister', 'string', CreoleTypes::VARCHAR, true, 1);
 
+		$tMap->addColumn('DEBIT_ACCOUNT', 'DebitAccount', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('DEBIT_RANK_ID', 'DebitRankId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('DEBIT_STATUS_CODE', 'DebitStatusCode', 'string', CreoleTypes::VARCHAR, false, 10);
+
 	} 
 } 

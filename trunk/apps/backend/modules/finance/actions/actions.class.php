@@ -10,11 +10,97 @@
  */
 class financeActions extends sfActions
 {
+    public function executeDebitAccountManagement()
+    {
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $this->dists = MlmDistributorPeer::doSelect($c);
+
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
+        $this->packages = MlmPackagePeer::doSelect($c);
+    }
+
+    public function executeDoUpdateDebitAccount()
+    {
+        $distId = $this->getRequestParameter('distId');
+        $walletType = $this->getRequestParameter('walletType');
+        $amount = $this->getRequestParameter('amount');
+        $externalRemark = $this->getRequestParameter('externalRemark');
+        $internalRemark = $this->getRequestParameter('internalRemark');
+        $packageId = $this->getRequestParameter('packageId');
+
+        $accountBalance = $this->getAccountBalance($distId, $walletType);
+        $distDB = MlmDistributorPeer::retrieveByPK($distId);
+        $packageDB = MlmPackagePeer::retrieveByPK($packageId);
+
+        $amount = $packageDB->getPrice();
+
+        $mlm_account_ledger = new MlmAccountLedger();
+        $mlm_account_ledger->setDistId($distId);
+        $mlm_account_ledger->setAccountType($walletType);
+        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT_ACCOUNT);
+        $mlm_account_ledger->setRemark($externalRemark);
+        $mlm_account_ledger->setInternalRemark($internalRemark);
+        $mlm_account_ledger->setCredit($amount);
+        $mlm_account_ledger->setDebit(0);
+        $mlm_account_ledger->setBalance($accountBalance + $amount);
+        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_account_ledger->save();
+
+        $distDB->setRankId($packageId);
+        $distDB->setDebitAccount("Y");
+        $distDB->setDebitRankId($packageId);
+        $distDB->setDebitStatusCode(Globals::STATUS_ACTIVE);
+        $distDB->save();
+
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoUpdateWallet()
+    {
+        $distId = $this->getRequestParameter('distId');
+        $walletType = $this->getRequestParameter('walletType');
+        $amount = $this->getRequestParameter('amount');
+        $externalRemark = $this->getRequestParameter('externalRemark');
+        $internalRemark = $this->getRequestParameter('internalRemark');
+        $creditDebit = $this->getRequestParameter('creditDebit');
+
+        $accountBalance = $this->getAccountBalance($distId, $walletType);
+
+        if ($creditDebit == "CREDIT") {
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType($walletType);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ADVANCE);
+            $mlm_account_ledger->setRemark($externalRemark);
+            $mlm_account_ledger->setInternalRemark($internalRemark);
+            $mlm_account_ledger->setCredit($amount);
+            $mlm_account_ledger->setDebit(0);
+            $mlm_account_ledger->setBalance($accountBalance + $amount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+        } else {
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType($walletType);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ADJUSTMENT);
+            $mlm_account_ledger->setRemark($externalRemark);
+            $mlm_account_ledger->setInternalRemark($internalRemark);
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($amount);
+            $mlm_account_ledger->setBalance($accountBalance - $amount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+        }
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeDoBackendAction()
     {
-
-
-
         return sfView::HEADER_ONLY;
     }
 
@@ -194,21 +280,25 @@ class financeActions extends sfActions
         } else if ($doAction == "RECALL") {
             $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_RP_RECALL);
-            $mlm_account_ledger->setRollingPoint("Y");
-            $mlm_account_ledger->setRemark("");
-            $mlm_account_ledger->setInternalRemark($internalRemark);
-            $mlm_account_ledger->setCredit(0);
-            $mlm_account_ledger->setDebit($epointAmount);
-            $mlm_account_ledger->setBalance($distEPointBalance - $epointAmount);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
+            if ($distEPointBalance >= $epointAmount) {
+                $epointAmount = $epointAmount * -1;
 
-            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_RP_RECALL);
+                $mlm_account_ledger->setRollingPoint("Y");
+                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setInternalRemark($internalRemark);
+                $mlm_account_ledger->setCredit($epointAmount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
+            }
         }
 
         $output = array(
@@ -1468,6 +1558,11 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $bonusService = new BonusService();
+                    if ($bonusService->checkDebitAccount($distId) == true) {
+                        $debitAccountRemark = "REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")";
+                        $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+                    }
                     $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
                 }
 
@@ -1519,6 +1614,11 @@ class financeActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
+            $bonusService = new BonusService();
+            if ($bonusService->checkDebitAccount($distId) == true) {
+                $debitAccountRemark = "REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")";
+                $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+            }
             $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
         }
 
@@ -1856,6 +1956,8 @@ class financeActions extends sfActions
             $tbl_account = new MlmAccount();
             $tbl_account->setDistId($distributorId);
             $tbl_account->setAccountType($accountType);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         }
 
         $tbl_account->setBalance($balance);
