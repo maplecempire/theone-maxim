@@ -865,7 +865,7 @@ class marketingActions extends sfActions
                                                     $bonusService = new BonusService();
                                                     if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
                                                         $debitAccountRemark = "USD ".$creditRefundByPackage.", Volume:".$totalVolume;
-                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark);
+                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $creditRefund);
                                                     }
                                                     $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
                                                 } else if ($gap > 0) {
@@ -911,7 +911,7 @@ class marketingActions extends sfActions
                                                     $bonusService = new BonusService();
                                                     if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
                                                         $debitAccountRemark = "e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied;
-                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark);
+                                                        $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $pipsAmountEntitied);
                                                     }
                                                     $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
                                                 }

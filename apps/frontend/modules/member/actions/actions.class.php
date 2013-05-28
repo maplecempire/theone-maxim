@@ -1981,7 +1981,7 @@ class memberActions extends sfActions
 
                     if ($bonusService->checkDebitAccount($uplineDistId) == true) {
                         $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
-                        $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                        $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
                     }
                     //var_dump($bonusService->checkDebitAccount($uplineDistId));
                     //exit();
@@ -5906,7 +5906,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $bonusService = new BonusService();
                                 if ($bonusService->checkDebitAccount($distId) == true) {
                                     $debitAccountRemark = "GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")";
-                                    $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+                                    $bonusService->contraDebitAccount($distId, $debitAccountRemark, $pairingBonusAmount - $flushAmount);
                                 }
                                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -6717,7 +6717,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $bonusService = new BonusService();
                         if ($bonusService->checkDebitAccount($uplineDistId) == true) {
                             $debitAccountRemark = "PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")";
-                            $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                            $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
                         }
                         $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -7144,7 +7144,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $bonusService = new BonusService();
                 if ($bonusService->checkDebitAccount($uplineDistId) == true) {
                     $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")";
-                    $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark);
+                    $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
                 }
                 $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 

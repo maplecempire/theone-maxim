@@ -33,21 +33,37 @@ class BonusService
 
         return $isDebit;
     }
-    function contraDebitAccount($distId, $debitAccountRemark)
+    function contraDebitAccount($distId, $debitAccountRemark, $deductAmount)
     {
         $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
         $distAccountDebitBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
 
-        $totalDebit = 0;
-        if ($distAccountDebitBalance > $distAccountEcashBalance) {
-            $totalDebit = $distAccountEcashBalance;
-        } else {
-            $totalDebit = $distAccountDebitBalance;
+        $distDB = MlmDistributorPeer::retrieveByPK($distId);
 
-            $distDB = MlmDistributorPeer::retrieveByPK($distId);
-            $distDB->setPackagePurchaseFlag("Y");
-            $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
-            $distDB->save();
+        $totalDebit = 0;
+
+        if ($distDB->getDebitRankId() >= 3) {
+            $totalDebit = $deductAmount / 2;
+
+            if ($distAccountDebitBalance > $totalDebit) {
+
+            } else {
+                $totalDebit = $distAccountDebitBalance;
+
+                $distDB->setPackagePurchaseFlag("Y");
+                $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
+                $distDB->save();
+            }
+        } else {
+            if ($distAccountDebitBalance > $distAccountEcashBalance) {
+                $totalDebit = $distAccountEcashBalance;
+            } else {
+                $totalDebit = $distAccountDebitBalance;
+
+                $distDB->setPackagePurchaseFlag("Y");
+                $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
+                $distDB->save();
+            }
         }
 
         $mlm_account_ledger = new MlmAccountLedger();
