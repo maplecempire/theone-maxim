@@ -279,6 +279,18 @@ abstract class Globals {
     /*******************************/
     /*const GROUP_LEADER = "thorsengwah,kaseong,maximthai1,MAXCAP,maxworld,MaximIndon,Dynasty,MaximChina,datoheng";*/
     const GROUP_LEADER = "SUPERA,TWOSASA,Diana,Jchooi,CN777,Rudy001,AlexSim,kaseong,Dynasty,MaximTaiwan,thorsengwah,MaximIndon,maximthai1,ongeuzan,MaximChina,uncletong,MAXCAP,maxworld,BRA129,kinowaiming,alvinang1,datoheng,amz001";
-    const HIDE_DIST_GROUP = "MAXCAP";
-    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,chris1,chris2,chris3,chris4,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,CHRIS1,CHRIS2,CHRIS3,CHRIS4,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
+
+//    const HIDE_DIST_GROUP = "MAXCAP";
+//    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
+    const HIDE_DIST_GROUP = "MAXCAP,law01,Law001,BRF129,maxworld";
+    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,BRA129,BRB129,BRF129,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
+
+    const HIDE_DIST_GROUP_2 = "law01";
+    const TO_HIDE_DIST_GROUP_2 = "alvinang1,alvinang2,alvinang4";
+    const HIDE_DIST_GROUP_3 = "Law001";
+    const TO_HIDE_DIST_GROUP_3 = "law01,law1";
+    const HIDE_DIST_GROUP_4 = "BRF129";
+    const TO_HIDE_DIST_GROUP_4 = "Law001";
+    const HIDE_DIST_GROUP_5 = "maxworld";
+    const TO_HIDE_DIST_GROUP_5 = "alvinang1,alvinang2,alvinang4,BRA129,BRB129,BRF129,Law001,law01,law1";
 }
