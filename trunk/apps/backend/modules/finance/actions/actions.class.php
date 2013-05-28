@@ -1561,7 +1561,7 @@ class financeActions extends sfActions
                     $bonusService = new BonusService();
                     if ($bonusService->checkDebitAccount($distId) == true) {
                         $debitAccountRemark = "REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")";
-                        $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+                        $bonusService->contraDebitAccount($distId, $debitAccountRemark, $refundEcash);
                     }
                     $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
                 }
@@ -1617,7 +1617,7 @@ class financeActions extends sfActions
             $bonusService = new BonusService();
             if ($bonusService->checkDebitAccount($distId) == true) {
                 $debitAccountRemark = "REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")";
-                $bonusService->contraDebitAccount($distId, $debitAccountRemark);
+                $bonusService->contraDebitAccount($distId, $debitAccountRemark, $refundEcash);
             }
             $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
         }
