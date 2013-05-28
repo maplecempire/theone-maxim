@@ -279,6 +279,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $debit_status_code;
 
+
+	
+	protected $hide_genealogy = '1';
+
 	
 	protected $alreadyInSave = false;
 
@@ -849,6 +853,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->debit_status_code;
+	}
+
+	
+	public function getHideGenealogy()
+	{
+
+		return $this->hide_genealogy;
 	}
 
 	
@@ -2008,6 +2019,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setHideGenealogy($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->hide_genealogy !== $v || $v === '1') {
+			$this->hide_genealogy = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::HIDE_GENEALOGY;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2148,11 +2176,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->debit_status_code = $rs->getString($startcol + 67);
 
+			$this->hide_genealogy = $rs->getString($startcol + 68);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 68; 
+						return $startcol + 69; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2501,6 +2531,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 67:
 				return $this->getDebitStatusCode();
 				break;
+			case 68:
+				return $this->getHideGenealogy();
+				break;
 			default:
 				return null;
 				break;
@@ -2579,6 +2612,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[65] => $this->getDebitAccount(),
 			$keys[66] => $this->getDebitRankId(),
 			$keys[67] => $this->getDebitStatusCode(),
+			$keys[68] => $this->getHideGenealogy(),
 		);
 		return $result;
 	}
@@ -2798,6 +2832,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 67:
 				$this->setDebitStatusCode($value);
 				break;
+			case 68:
+				$this->setHideGenealogy($value);
+				break;
 		} 	}
 
 	
@@ -2873,6 +2910,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[65], $arr)) $this->setDebitAccount($arr[$keys[65]]);
 		if (array_key_exists($keys[66], $arr)) $this->setDebitRankId($arr[$keys[66]]);
 		if (array_key_exists($keys[67], $arr)) $this->setDebitStatusCode($arr[$keys[67]]);
+		if (array_key_exists($keys[68], $arr)) $this->setHideGenealogy($arr[$keys[68]]);
 	}
 
 	
@@ -2948,6 +2986,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_ACCOUNT)) $criteria->add(MlmDistributorPeer::DEBIT_ACCOUNT, $this->debit_account);
 		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_RANK_ID)) $criteria->add(MlmDistributorPeer::DEBIT_RANK_ID, $this->debit_rank_id);
 		if ($this->isColumnModified(MlmDistributorPeer::DEBIT_STATUS_CODE)) $criteria->add(MlmDistributorPeer::DEBIT_STATUS_CODE, $this->debit_status_code);
+		if ($this->isColumnModified(MlmDistributorPeer::HIDE_GENEALOGY)) $criteria->add(MlmDistributorPeer::HIDE_GENEALOGY, $this->hide_genealogy);
 
 		return $criteria;
 	}
@@ -3111,6 +3150,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setDebitRankId($this->debit_rank_id);
 
 		$copyObj->setDebitStatusCode($this->debit_status_code);
+
+		$copyObj->setHideGenealogy($this->hide_genealogy);
 
 
 		$copyObj->setNew(true);
