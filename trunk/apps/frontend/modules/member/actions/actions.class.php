@@ -3918,6 +3918,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executePlacementTree()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($distDB->getHideGenealogy() == "Y") {
+            return $this->redirect('/member/summary');
+        }
         $dateUtil = new DateUtil();
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
@@ -5085,6 +5089,11 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
+
+        if ($distinfo->getHideGenealogy() == "Y") {
+            return $this->redirect('/member/summary');
+        }
+
         $this->distinfo = $distinfo;
         $this->hasChild = $this->checkHasChild($distinfo->getDistributorId());
 

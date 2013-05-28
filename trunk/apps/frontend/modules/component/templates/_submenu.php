@@ -131,7 +131,7 @@ function blink(selector) {
     </ul>-->
     <br class="clear"><br>
     <?php
-    if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null) { ?>
+    if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $distDB->getHideGenealogy() == "N") { ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
