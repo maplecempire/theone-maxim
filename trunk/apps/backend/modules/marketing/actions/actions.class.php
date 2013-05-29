@@ -1185,7 +1185,7 @@ class marketingActions extends sfActions
                 $mlmPackageContract->setFullName($tbl_distributor->getFullName());
                 $mlmPackageContract->setUsername($userDB->getUsername());
                 $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
-                $mlmPackageContract->setPackagePrice($tbl_distributor->getFullName());
+                $mlmPackageContract->setPackagePrice($packageDB->getPrice());
                 $mlmPackageContract->setSignDateDay(date("d"));
                 $mlmPackageContract->setSignDateMonth(date("F"));
                 $mlmPackageContract->setSignDateYear(date("Y"));
