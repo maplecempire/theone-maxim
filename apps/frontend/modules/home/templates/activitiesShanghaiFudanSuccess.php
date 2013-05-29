@@ -255,6 +255,12 @@ ul, ol {
                         </p>
                         <br>
                         <br>
+                        <h1>会议流程</h1>
+
+                        <a href="<?php echo url_for("/home/downloadFudan")?>" target="_blank">Download</a>
+
+                        <br>
+                        <br>
                         <div style="float: right"><a href="/home/activities">Go Back</a></div>
                     </div>
                 </div>

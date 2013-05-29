@@ -21,8 +21,45 @@
     <script type='text/javascript' src='/css/maxim/jquery.quicksand.js'></script>
     <script type='text/javascript' src='/css/maxim/farbtastic.js'></script>
 
+    <script type="text/javascript">
+    $(document).ready(function() {
+        /*
+         *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+         */
+        $('.fancybox-thumbs').fancybox({
+            prevEffect : 'none',
+            nextEffect : 'none',
+
+            closeBtn  : false,
+            arrows    : false,
+            nextClick : true,
+            "autoScale": false,
+             // if fancybox 2.x
+            fitToView: false,
+            helpers : {
+                thumbs : {
+                    width  : 50,
+                    height : 50
+                }
+            }
+        });
+    });
+    </script>
+
     <meta http-equiv="Content-Language" content="en-US">
     <style type="text/css">
+.fancybox-custom .fancybox-skin {
+    box-shadow: 0 0 50px #222;
+}
+
+.fancybox-thumbs img {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #BBBBBB;
+    margin: 7px 14px 7px 0;
+    padding: 5px;
+    width: 160px;
+}
+
 html {
     background: none repeat scroll 0 0 -moz-dialog;
     font: 3mm tahoma,arial,helvetica,sans-serif;
@@ -93,9 +130,7 @@ h2 {
     margin-bottom: 0;
     margin-top: 0;
 }
-a[href] img {
-    border: medium none;
-}
+
 #feedTitleContainer {
     -moz-margin-end: 0.6em;
     -moz-margin-start: 0;
@@ -182,15 +217,21 @@ ul, ol {
                     </div>
                 </div>
                 <div id="feedContent">
-                    <a href="/home/activitiesShanghaiInternationalDinnerGathering">
+                    <a href="#">
                         <?php
                         $culture = $sf_user->getCulture();
                         ?>
                         <div class="poptitle">
-                        <h3>马胜金融国际交流晚宴</h3>
-                        <br>
+                            <h3>马胜金融国际交流晚宴</h3>
+                            <br>
                         </div>
                     </a>
+
+                    <div class="news_date">
+                    1 June 2013
+                    </div>
+                    <br>
+                    <div class="news_desc">
                         <?php if ($culture == "cn") {  ?>
                         <br>亲爱的领导人及伙伴们：
                         <br><br>
@@ -221,98 +262,9 @@ ul, ol {
                         <br>P/S : 请在7pm点30-5-2013之前联系您的领导预订人数，座位有限，谢谢合作。
                         <br>
 
-
-
-
-                    <div class="news_date">
-                    1 June 2013
-                    </div>
-
-
-                    <div class="hr"></div>
-
-                    <a href="/home/activitiesShanghaiFudan">
-                        <?php
-                        $culture = $sf_user->getCulture();
-                        ?>
-                        <div class="poptitle">
-                        <?php if ($culture == "cn") {  ?>
-                        <h3>马胜上海复旦大学国际金融论坛</h3>
-                        <?php } else if ($culture == "jp") {  ?>
-                        <h3>上海フダン大学国際金融フォーラム</h3>
-                        <?php } else if ($culture == "kr") {  ?>
-                        <h3>맥심 트레이더 상해 복단 대학교 국제 금융 포럼</h3>
-                        <?php } else {  ?>
-                        <h3>Maxim Trader Shanghai Fudan University International Financial Forum</h3>
-                        <?php }  ?>
                         <br>
-                    </div>
-                    </a>
-                        <?php if ($culture == "cn") {  ?>
-                        <br>马胜金融集团很荣幸地宣布我们即将于2013.6.2日参加由上海复旦大学传媒学院举办、且只接受邀请的金融研讨论坛!届时我们进一步了解复旦大学有关外汇市场交易的经典基金管理课程，并会与众学院教授、讲师以及学生们深度交流有关外汇交易领域的案例与经验。马胜金融集团受此邀请，无上荣誉。我们相信复旦的学生将会成长为中国未来新一代的商业领袖与企业家，我们也非常高兴能够在塑造学生思维方面贡献自己的一份力量！我们无限珍惜此次无价的荣誉！
-                        <?php } else if ($culture == "jp") {  ?>
-                        <br>Maxim Traderはフダン大学ジャーナリズム学院が主催した招待制金融フォーラムに招待されたことを報告します。今回の金融フォーラムは2013年6月2日上海にて行われ、参加者のこれまでに為替市場において提案したファンドマネジメントプログラムを共有し、大学の教員および生徒と為替市場の経験を議論する。Maxim traderはこの金融フォーラムに招待されたこと、更に中国の次世帯ビジネスリーダーや企業家となる生徒たちの思考力形成に貢献できることを、誇り高く感じ、無上な栄誉と考えっております。
-                        <?php } else if ($culture == "kr") {  ?>
-                        <br>맥심트레이더가 중국 상해 복단 저널리즘 대학교가 주관하는 금융포럼에 초청되었음을 기쁘게 알려드립니다.  이는 포렉스 분야의 자산 운용 프로그램의 전문 지식과 경험을 대학 교수, 부교수, 학생들과 공유하기 위해서입니다.  이러한 초청을 받는 다는 사실은 맥심으로서는 굉장한 특권이자 영광이며 미래의 비즈니스 리더이자 사업가가 될 학생들의 생각에 많은 영향을 미칠것이라 생각됩니다. 소중한 영예라고 확신힙니다.
-                        <?php } else {  ?>
-                        <br>We are proud to announce that Maxim Trader has been invited to participate in the invitation-only Financial Forum organized by The School of Journalism Fudan University, Shanghai, China on 2 June 2013 to share their dedicated fund management program on the foreign exchange market, as well as to discuss experiences in this field to the University Professors, Associates and students.   It is indeed a privilege and an honor for Maxim Trader  to receive such an invite and to be able to shape the thinking of these students who one day  will be the future business leaders and entrepreneurs of China. This is an invaluable accolade indeed.
-                        <?php }  ?>
-
-
-                    <div class="news_date">
-                    2 June 2013
-                    </div>
-
-
-                    <div class="hr"></div>
-
-                    <a href="/home/activitiesShanghaiInvestmentManagement">
-                        <?php
-                        $culture = $sf_user->getCulture();
-                        ?>
-                        <div class="poptitle">
-                        <?php if ($culture == "en") { ?>
-                        <h3>2013 The 9th Shanghai Investment Management & Financial Expo</h3>
-                        <?php } else if ($culture == "cn") {  ?>
-                        <h3>2013上海第九届投资理财金融博览会</h3>
-                        <?php } else if ($culture == "jp") {  ?>
-                        <h3>上海フェアー 2013</h3>
-                        <?php } else {  ?>
-                        <h3>2013 The 9th Shanghai Investment Management & Financial Expo</h3>
-                        <?php } ?>
                         <br>
-                    </div>
-                    </a>
-                        <?php if ($culture == "en") { ?>
-                        <br>Maxim Trader is pleased to announce that we have been invited to participate in the prestigious 9th Shanghai Investment Management & Financial Expo which will be held on 31 May 2013 - 2 June 2013 in West Hall Gate 2, Shanghai Everbright Convention & Exhibition Centre (SECEC) Address: No. 88 Caobao Road, Xuhui District, Shanghai (booth Number : A153, A155, A169 , A170 )
-                        <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
-                        <?php } else if ($culture == "cn") {  ?>
-                        <br>马胜金融集团很高兴地宣布我司已荣幸受邀参加即将于2013.5.31-6.2日在中国上海光大会展中心举行的2013(上海)第九届投资理财金融博览会. 展馆地址为：中国上海徐汇区漕宝路88号光大会展中心西厅2号门；届时请莅临A153,A155，A169，A170
-                        <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
-                        <?php } else if ($culture == "jp") {  ?>
-                        <br>2013年5月31日~6月2日の第九回 上海投資理財金融博覧会 にマシンムトレーダー金融グループが招かれ、とても喜びを感じております。
-                        <br>場所 : 上海光大会展センター
-                        <br>ブース番号:A153,A155,A169,A170
-                        <?php } else {  ?>
-                        <br>Maxim Trader is pleased to announce that we have been invited to participate in the prestigious 9th Shanghai Investment Management & Financial Expo which will be held on 31 May 2013 - 2 June 2013 in West Hall Gate 2, Shanghai Everbright Convention & Exhibition Centre (SECEC) Address: No. 88 Caobao Road, Xuhui District, Shanghai (booth Number : A153, A155, A169 , A170 )
-                        <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
-                        <?php } ?>
-
-
-                    <div class="news_date">
-                    31 May 2013 - 2 June 2013
-                    </div>
-
-                    <div class="hr"></div>
-
-                    <a href="/home/activitiesFinancialMarketOutlook">
-                        <div class="poptitle"><h3>Maxim Trader - Financial Market outlook and Business Preview</h3><br>
-                    </div>
-                    </a>
-                        House Speaker: Mr Daniel Ang (International Financial Guru)
-
-                    <div class="news_date">
-                    May 2013 Activities.
+                        <div style="float: right"><a href="/home/activities">Go Back</a></div>
                     </div>
                 </div>
             </div>
