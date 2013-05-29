@@ -184,10 +184,10 @@ annoucementArr.push({
     news_date:'8th MAY 2013',
     news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
 
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'Superb News!!!',
     news_date:'8th MAY 2013',
-    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});
+    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});*/
 /*
 annoucementArr.push({
     poptitle:'Maxim Trader Presenting The Newly Upgraded MT4',
@@ -211,10 +211,10 @@ annoucementArr.push({
     news_date:'8th MAY 2013',
     news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4_Korean-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
 
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'Superb News!!!',
     news_date:'8th MAY 2013',
-    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});
+    news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});*/
 
 <?php } else if ($culture == "jp") {  ?>
 annoucementArr.push({
@@ -222,10 +222,10 @@ annoucementArr.push({
     news_date:'22 MAY 2013',
     news_desc:'<div class="poptitle">Dear Member,<br><br>ニュース：IMEマカオチャレンジ奨励期間は2013年5月31日まで延長と決定！！世界中のMaxim Traderパートナーが集め、意見を交換し、互いに学びそして経験を共有するこのチャンスを是非見逃すことなく、ご参加ください！<br><br>Regards,<br>Maxim Trader Information Department</div><br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
 
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'最新ニュース！',
     news_date:'8th MAY 2013',
-    news_desc:'<br>マシンムトレーダーのCP3口座からの出金手数料は今までの$60から$30に引き下げられました。よろしくお願いいたします。<br><br><br><br><br><br>'});
+    news_desc:'<br>マシンムトレーダーのCP3口座からの出金手数料は今までの$60から$30に引き下げられました。よろしくお願いいたします。<br><br><br><br><br><br>'});*/
 
 annoucementArr.push({
     poptitle:'2013年 第九回 上海投資理財金融博覧会',
@@ -243,10 +243,10 @@ annoucementArr.push({
     news_date:'8th MAY 2013',
     news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4-01.jpg" alt = "2013 THE NINTH SHANGHAI INVESTMENT MANAGEMENT FINANCIAL EXPO‏"></a><br>'});
 
-annoucementArr.push({
+/*annoucementArr.push({
     poptitle:'好消息!!!',
     news_date:'8th MAY 2013',
-    news_desc:'<br>马胜金融集团欣然宣布从2013年5月8日起CP3提款手续费将从60美元减少至30美元<br><br>Thank you.<br><br><br><br><br><br>'});
+    news_desc:'<br>马胜金融集团欣然宣布从2013年5月8日起CP3提款手续费将从60美元减少至30美元<br><br>Thank you.<br><br><br><br><br><br>'});*/
 
 
 /*
