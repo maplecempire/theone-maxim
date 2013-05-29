@@ -10,6 +10,32 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeGenealogyManagement()
+    {
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $this->dists = MlmDistributorPeer::doSelect($c);
+    }
+    public function executeDoUpdateHideGenealogy()
+    {
+        $dist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
+        $dist->setHideGenealogy($this->getRequestParameter('toHideGenealogy'));
+        $dist->save();
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoCheckGenealogy()
+    {
+        $dist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
+        if ($dist) {
+            $arr = array(
+                'result' => $dist->getHideGenealogy()
+            );
+            //}
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
     public function executeCustomerEnquiryAdd()
     {
         $c = new Criteria();
