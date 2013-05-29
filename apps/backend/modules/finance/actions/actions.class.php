@@ -1108,7 +1108,7 @@ class financeActions extends sfActions
                     $mlmPackageContract->setFullName($distDB->getFullName());
                     $mlmPackageContract->setUsername($userDB->getUsername());
                     $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
-                    $mlmPackageContract->setPackagePrice($distDB->getFullName());
+                    $mlmPackageContract->setPackagePrice($packageDB->getPrice());
                     $mlmPackageContract->setSignDateDay(date("d"));
                     $mlmPackageContract->setSignDateMonth(date("F"));
                     $mlmPackageContract->setSignDateYear(date("Y"));
