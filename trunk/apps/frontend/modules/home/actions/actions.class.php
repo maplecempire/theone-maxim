@@ -10,6 +10,21 @@
  */
 class homeActions extends sfActions
 {
+    public function executeDownloadFudan()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/docx');
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=fudan_university_international_financial_forum.docx', TRUE);
+        $response->sendHttpHeaders();
+        readfile(sfConfig::get('sf_upload_dir')."/fudan_university_international_financial_forum.docx");
+        return sfView::NONE;
+    }
+    public function executeActivitiesShanghaiInternationalDinnerGathering()
+    {
+    }
     public function executeActivitiesShanghaiFudan()
     {
     }
