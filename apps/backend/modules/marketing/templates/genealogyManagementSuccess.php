@@ -24,6 +24,7 @@ $(function() {
             success : function(data) {
                 $.unblockUI();
                 $("#hideGenealogy").val(data.result);
+                $("#placementTreeStructure").val(data.placementTreeStructure);
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Your login attempt was not successful. Please try again.");
@@ -87,7 +88,13 @@ $(function() {
                     <tr>
                         <td class="caption" style="width: 25%">Hide Genealogy</td>
                         <td class="value">
-                            <input type="text" name="hideGenealogy" id="hideGenealogy" value="0" size="20">
+                            <input type="text" name="hideGenealogy" id="hideGenealogy" value="" size="20">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="caption" style="width: 25%">Placement Tree Structure</td>
+                        <td class="value">
+                            <input type="text" name="placementTreeStructure" id="placementTreeStructure" value="" size="200">
                         </td>
                     </tr>
                     <tr>
