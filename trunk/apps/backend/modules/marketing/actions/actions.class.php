@@ -29,6 +29,7 @@ class marketingActions extends sfActions
         if ($dist) {
             $arr = array(
                 'result' => $dist->getHideGenealogy()
+                , 'placementTreeStructure' => $dist->getPlacementTreeStructure()
             );
             //}
         }
