@@ -94,7 +94,7 @@ $(function() {
                     <tr>
                         <td class="caption" style="width: 25%">Placement Tree Structure</td>
                         <td class="value">
-                            <input type="text" name="placementTreeStructure" id="placementTreeStructure" value="" size="200">
+                            <input type="text" name="placementTreeStructure" id="placementTreeStructure" value="" size="150">
                         </td>
                     </tr>
                     <tr>
