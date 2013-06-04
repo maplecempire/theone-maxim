@@ -425,7 +425,7 @@ class financeListActions extends sfActions
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
-        $sql = " ,dist.tree_structure FROM mlm_distributor dist
+        $sql = " ,dist.tree_structure, dist.debit_account, dist.debit_rank_id FROM mlm_distributor dist
         INNER JOIN mlm_package package ON package.package_id = dist.init_rank_id
         LEFT JOIN mlm_dist_mt4 mt4 ON dist.distributor_id = mt4.dist_id ";
 
@@ -491,6 +491,19 @@ class financeListActions extends sfActions
                 }
             }
 
+            $packageName = $resultArr['package_name'] == null ? "" : $resultArr['package_name'];
+            if ($resultArr['debit_account'] == "Y") {
+                $debitRankId = $resultArr['debit_rank_id'];
+                if ($debitRankId != null) {
+
+                    $mlmPackage = MlmPackagePeer::retrieveByPK($debitRankId);
+
+                    if ($mlmPackage) {
+                        $packageName = $mlmPackage->getPackageName();
+                    }
+                }
+            }
+
             $arr[] = array(
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
@@ -499,7 +512,7 @@ class financeListActions extends sfActions
                 $resultArr['email'] == null ? "" : $resultArr['email'],
                 $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
                 $resultArr['mt4_password'] == null ? "" : $resultArr['mt4_password'],
-                $resultArr['package_name'] == null ? "" : $resultArr['package_name'],
+                $packageName,
                 $resultArr['price'] == null ? "" : $resultArr['price'],
                 $resultArr['active_datetime'] == null ? "" : $resultArr['active_datetime'],
                 $userStatus,
