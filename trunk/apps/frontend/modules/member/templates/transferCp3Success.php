@@ -1,51 +1,83 @@
 <?php include('scripts.php'); ?>
 
-<script type="text/javascript" language="javascript">
-$(function() {
-    $("#ecreditForm").validate({
-        messages : {
-            transactionPassword: {
-                remote: "Security Password is not valid."
-            }
-        },
-        rules : {
-            "transactionPassword" : {
-                required : true
-                , remote: "/member/verifyTransactionPassword"
+<script type="text/javascript">
+    $(function() {
+        $("#transferForm").validate({
+            messages : {
+                transactionPassword: {
+                    remote: "Security Password is not valid."
+                }
             },
-            "epointAmount" : {
-                required : true
-            }
-        },
-        submitHandler: function(form) {
-            waiting();
-            var ecashBalance = $('#ecashBalance').autoNumericGet();
-            var epointAmount = $('#epointAmount').autoNumericGet();
-            //var epointAmount = parseFloat($("#cbo_epointAmount").val());
+            rules : {
+                "sponsorId" : {
+                    required: true
+                    //, minlength : 8
+                },
+                "epointAmount" : {
+                    required : true
+                },
+                "transactionPassword" : {
+                    required : true,
+                    remote: "/member/verifyTransactionPassword"
+                }
+            },
+            submitHandler: function(form) {
+                waiting();
+                var amount = $('#epointAmount').autoNumericGet();
+                var epointBalance = $('#epointBalance').autoNumericGet();
+                //console.log(amount);
+                //console.log(epointBalance);
+                if (parseFloat(epointBalance) < (parseFloat(amount))) {
+                    alert("<?php echo __("In-sufficient E-Point")?>");
+                    return false;
+                }
 
-            if (epointAmount > parseFloat(ecashBalance)) {
-                alert("In-sufficient CP3 Credit");
-                return false;
+                $("#epointAmount").val(amount);
+                form.submit();
             }
-            $("#epointAmount").val(epointAmount);
-            form.submit();
-        }
-    });
-    $('#epointAmount').autoNumeric({
-        mDec: 0
-    }).keyup(function(){
-        var convertedAmount = 0;
-        var epointAmount = $('#epointAmount').autoNumericGet();
-        //convertedAmount = parseFloat(epointAmount) * 1.05;
-        convertedAmount = parseFloat(epointAmount) * 1;
-        convertedAmount = Math.floor(convertedAmount);
+        });
 
-        $("#epointConvertedAmount").val(convertedAmount);
+        $("#sponsorId").change(function() {
+            if ($.trim($('#sponsorId').val()) != "") {
+                verifySponsorId();
+            }
+        });
+
+        $('#epointAmount').autoNumeric({
+            mDec: 2
+        });
     });
-    $('#epointConvertedAmount').autoNumeric({
-        mDec: 0
-    });
-});
+
+    function verifySponsorId() {
+        waiting();
+        $.ajax({
+            type : 'POST',
+    <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
+            url : "/member/verifySameGroupSponsorId",
+    <?php } else { ?>
+//            url : "/member/verifySponsorId",
+            url : "/member/verifySponsorUserName",
+    <?php } ?>
+            dataType : 'json',
+            cache: false,
+            data: {
+                sponsorId : $('#sponsorId').val()
+            },
+            success : function(data) {
+                if (data == null || data == "") {
+                    alert("Invalid User Name.");
+                    $('#sponsorId').focus();
+                    $("#sponsorName").html("");
+                } else {
+                    $.unblockUI();
+                    $("#sponsorName").html(data.userName);
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Your login attempt was not successful. Please try again.");
+            }
+        });
+    }
 </script>
 
 <div class="ewallet_li">
@@ -61,7 +93,7 @@ $(function() {
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp3")?>" style="color: rgb(0, 93, 154);">
+	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp3")?>" style="color: rgb(134, 197, 51);">
         <?php echo __('CP3 Transfer'); ?>
     </a>
     &nbsp;&nbsp;
@@ -73,13 +105,13 @@ $(function() {
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('Convert CP3 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/epointPurchase")?>" style="color: rgb(0, 93, 154);">
+    <a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">
         <?php echo __('Funds Deposit'); ?>
     </a>
 </div>
@@ -90,7 +122,7 @@ $(function() {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Convert CP3 To CP1') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP3 Transfer') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -119,7 +151,7 @@ $(function() {
     </tr>
     <tr>
         <td>
-            <form action="<?php echo url_for("/member/convertCp3ToCp1") ?>" id="ecreditForm" name="ecreditForm" method="post">
+            <form action="<?php echo url_for("/member/transferCp3")?>" id="transferForm" name="transferForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -132,7 +164,7 @@ $(function() {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Convert CP3 To CP1') ?></th>
+                    <th colspan="2"><?php echo __('CP3 Transfer') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -141,53 +173,40 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP3 Balance'); ?></td>
+                    <td><?php echo __('Transfer To User Name'); ?></td>
                     <td>
-                        <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
-                                           value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
+                        <input name="sponsorId" type="text" id="sponsorId" tabindex="1"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP3 Amount'); ?></td>
+                    <td><?php echo __('Member Name'); ?></td>
+                    <td>
+                        <strong><span id="sponsorName"></span></strong>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('CP3 Balance'); ?></td>
+                    <td>
+                        <input name="epointBalance" id="epointBalance" tabindex="2" disabled="disabled"
+                                       value="<?php echo number_format($ledgerAccountBalance, 2); ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Transfer CP3 Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
-                        <!--<select name="epointAmount" id="cbo_epointAmount" tabindex="2">
-                            <option value="50">50</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1,000</option>
-                            <option value="1500">1,500</option>
-                            <option value="2000">2,000</option>
-                            <option value="2500">2,500</option>
-                            <option value="3000">3,000</option>
-                            <option value="3500">3,500</option>
-                            <option value="4000">4,000</option>
-                            <option value="4500">4,500</option>
-                            <option value="5000">5,000</option>
-                            <?php
-/*                                for ($i = 6000; $i <= 100000; $i = $i + 1000) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-
-                            */?>
-                        </select>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Converted Amount'); ?></td>
-                    <td>
-                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" readonly="readonly"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
@@ -197,11 +216,13 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c">NOTE: CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.
-                        <!--<br>CP3 convert to CP1 will get extra 5%-->
+                        <font color="#dc143c"><?php
+                            if ($processFee != 0)
+                                echo __('every transfer action need to pay USD%1%.00 processing fees', array('%1%' => $processFee));
+                            ?>
                         </font>
                     </td>
                     <td>&nbsp;</td>
