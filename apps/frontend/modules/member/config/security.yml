@@ -154,6 +154,14 @@ transferEpoint:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+transferCp2:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+transferCp3:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 transferRP:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
