@@ -107,6 +107,44 @@
             <?php } ?>
             <button id="btnCancel">Cancel</button>
             &nbsp;<?php //echo link_to('cancel', 'finance/ecashWithdrawal', array("id" => "btnCancel")) ?>
+
+            <br>
+            <br>
+            <table class="sf_admin_list" cellpadding="3" width="100%">
+                <tbody>
+
+                <tr>
+                    <th class="caption">Bank Name :</th>
+                    <td class="value"><?php
+                        echo $existDist->getBankName() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">Bank Account Number :</th>
+                    <td class="value"><?php
+                        echo $existDist->getBankAccNo() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">Bank Account Holder Name :</th>
+                    <td class="value"><?php
+                        echo $existDist->getBankHolderName() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">Bank Swift Code / ABA :</th>
+                    <td class="value"><?php
+                        echo $existDist->getBankSwiftCode() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">Maxim Trader Visa Debit Card :</th>
+                    <td class="value"><?php
+                        echo $existDist->getVisaDebitCard() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">EZY Account ID :</th>
+                    <td class="value"><?php
+                        echo $existDist->getEzyCashCard() ?></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
