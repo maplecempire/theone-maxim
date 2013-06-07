@@ -57,9 +57,10 @@ class marketingActions extends sfActions
             $mt4Username = $data->val($x, "B");
             $mt4Password = $data->val($x, "A");
             $email = $data->val($x, "E");
+            $status = $data->val($x, "D");
             $fullname = $data->val($x, "C");
 
-            if ($mt4Password == "" || $email == "")
+            if ($mt4Password == "" || $email == "" || $status != "ACTIVE")
                 continue;
 
             $result = $this->sendEmailForMt4($mt4Username, $mt4Password, $fullname, $email);
