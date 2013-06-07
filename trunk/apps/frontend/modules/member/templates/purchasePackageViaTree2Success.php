@@ -694,7 +694,7 @@ function verifySponsorId() {
         <table align="center" cellspacing="0" cellpadding="0" style="border-style:hidden">
             <tbody><tr style="border-style:hidden">
                 <td align="right" style="border-style:hidden" class="td_1st"><?php echo __('Name') ?>:</td>
-                <td style="border-style:hidden" class="td_2nd"><input type="text" class="inputbox" value="" name="sign_name"></td>
+                <td style="border-style:hidden" class="td_2nd"><input type="text" class="inputbox" value="" name="sign_name" id="sign_name"></td>
             </tr>
             <tr>
                 <td align="right" style="border-style:hidden" class="td_1st"><?php echo __('Date') ?>:</td>
