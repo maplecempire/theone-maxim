@@ -18,7 +18,7 @@ abstract class Mails {
 //    const EMAIL_SENDER = "account@maximtrader.com";
     const EMAIL_SENDER = "noreply@maximtrader.com";
     const EMAIL_SENDER_INFO = "noreply@maximtrader.com";
-    const EMAIL_PASSWORD = "maximtemp";
+    const EMAIL_PASSWORD = "maxim!@#$";
 //    const EMAIL_PASSWORD = "Maximtemp868";
 
     const EMAIL_TEST_MAIL = "r9projecthost@gmail.com";
