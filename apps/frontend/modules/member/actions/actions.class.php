@@ -2841,7 +2841,7 @@ class memberActions extends sfActions
 							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email accounts@maximtrader.com
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email account@maximtrader.com
 									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
@@ -2972,7 +2972,7 @@ Please send us <strong>one</strong> certified** document from list (i) and <stro
 <br>&nbsp;&nbsp;3. Credit card Statement.
 <br><br>
 <br><br>
-Please scan the required documents and send them to us by email at <strong>accounts@maximtrader.com</strong>
+Please scan the required documents and send them to us by email at <strong>account@maximtrader.com</strong>
 <br><br>
 Once your documents have been successfully verified, we will advise you of your account number/login and password.
 <br><br>
@@ -3092,7 +3092,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 *本文件必须是最近3个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的。
 <br><br>
 <br><br>
-请扫描所需的文件和电子邮件发送给我们在<strong> accounts@maximtrader.com </strong>
+请扫描所需的文件和电子邮件发送给我们在<strong> account@maximtrader.com </strong>
 <br><br>
 您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码。
 <br><br>
@@ -8337,7 +8337,7 @@ Wish you all the best.
 							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email accounts@maximtrader.com
+									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email account@maximtrader.com
 									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
