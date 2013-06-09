@@ -4889,6 +4889,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
             }*/
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
+                $this->setFlash('errorMsg', "Transfer CP2 temporary out of service.");
+                return $this->redirect('/member/transferCp2');
+            }
 
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
@@ -5070,6 +5074,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
             }*/
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
+                $this->setFlash('errorMsg', "Transfer CP3 temporary out of service.");
+                return $this->redirect('/member/transferCp3');
+            }
 
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
