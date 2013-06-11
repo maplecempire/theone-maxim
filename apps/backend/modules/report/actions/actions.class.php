@@ -20,8 +20,40 @@ class reportActions extends sfActions
     public function executeEpointTransfer()
     {
     }
+    public function executeDoReportPayout()
+    {
+        $bonusDate = date("Y-m-d", strtotime("9 November 2012"));
+
+        $dateUtil = new DateUtil();
+        $bonusService = new BonusService();
+
+        print_r($bonusDate."<br>");
+        while($bonusDate < date("Y-m-d")) {
+            $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
+            print_r($bonusDate."<br>");
+
+            $totalSales = $bonusService->doCalculateTotalSales($bonusDate);
+            $totalDrb = $bonusService->doCalculateDrb($bonusDate);
+            $totalGdb = $bonusService->doCalculateGrb($queryDateForGrb);
+
+            $reportPayoutBonus = new ReportPayoutBonus();
+            $reportPayoutBonus->setBonusDate($bonusDate);
+            $reportPayoutBonus->setTotalSales($totalSales);
+            $reportPayoutBonus->setTotalDrb($totalDrb);
+            $reportPayoutBonus->setTotalGdb($totalGdb);
+            $reportPayoutBonus->setGdbPercentage($totalGdb / $totalSales);
+            $reportPayoutBonus->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $reportPayoutBonus->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $reportPayoutBonus->save();
+
+            $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeGroupSales()
     {
+        $c = new Criteria();
+        $this->reports = ReportPayoutBonusPeer::doSelect($c);
     }
     public function executeIndividualTraderSales()
     {
