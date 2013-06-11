@@ -166,7 +166,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('DEBIT_RANK_ID', 'DebitRankId', 'int', CreoleTypes::INTEGER, false, null);
 
-		$tMap->addColumn('DEBIT_STATUS_CODE', 'DebitStatusCode', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('DEBIT_STATUS_CODE', 'DebitStatusCode', 'string', CreoleTypes::VARCHAR, false, 25);
 
 		$tMap->addColumn('HIDE_GENEALOGY', 'HideGenealogy', 'string', CreoleTypes::VARCHAR, false, 1);
 
