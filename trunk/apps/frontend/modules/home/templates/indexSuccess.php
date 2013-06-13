@@ -179,14 +179,22 @@ if ($culture == "en")
         $postfix = "_chinese";
 ?>
 
+/*
 annoucementArr.push({
     poptitle:'Investor Macau IME Promotion (August 2013)',
     news_date:'04 JUNE 2013',
     news_desc:'<div class="poptitle"><br>Due to POPULAR REQUEST from our Partners and Leaders...!!!  The company has relented to absolutely, positively, definitely extend the qualifying date for the LAST TIME. Macau IME FINAL Challenge Period will be extended till 30th June 2013. </div><br><br><div class="poptitle2">INVESTOR who sign up for:<br>$10K package - FOC 1 ticket to IME              <br>$20K package - FOC 1 ticket to IME plus airfare reimbursement (up to $500)<br><br>Additional Promotion:<br>$50K package - FOC 2 ticket to IME plus airfare reimbursement (up to $1000)<br><br>Regards,<br>Maxim Trader Information Department</div><br><img width="460" border="0" alt="Maxim Trader Incentive" src="/images/email/incentive_201304.jpg">'});
+*/
 
 <?php
 if ($culture == "en") {
+
 ?>
+annoucementArr.push({
+    poptitle:'Investor Macau IME Promotion (August 2013)',
+    news_date:'13 JUNE 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
+
 /*annoucementArr.push({
     poptitle:'I.M.E Macau Incentive challenge period has been extended till 31st May 2013',
     news_date:'22 MAY 2013',
@@ -213,6 +221,10 @@ annoucementArr.push({
     news_date:'18 MARCH 2013',
     news_desc:'<br><br>Dear our distinguished member,<br><br>Thank you for your support and faith in us!<br><br>Owning to the terms as stipulated by Forex world, please provide us your documents:<br><br>1)      Identification (IC / Passport, front and back at same page)<br><br>2)      Proof of Address (Bank / Credit Card statement, OR Water / Electric statement, OR Phone / Internet statement)<br><br>-          Your name, current address and the date of the latest 3 months must be shown at the statement.<br><br>3)      Download and sign the Forex Agreements.<br><br>And upload all the documents at website.<br><br>Note:<br><br>Click "<a href="/member/viewProfile" target="_self" style="color: #3333ff;">User Profile</a>" to upload all the documents at "Upload Document".<br><br>Thank you for your highly cooperation.<br><br>Wish you all the best.'});*/
 <?php } else if ($culture == "kr") {  ?>
+annoucementArr.push({
+poptitle:'Investor Macau IME Promotion (August 2013)',
+news_date:'13 JUNE 2013',
+news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'I.M.E 마카오 인센티브 도전 기간이 2013년 5월 31일로 연장되었습니다',
     news_date:'22 MAY 2013',
@@ -230,6 +242,10 @@ annoucementArr.push({
     news_desc:'<br>Maxim Trader is pleased to announce a reduction of the CP3 Withdrawal handling fee from USD60 to USD30 effective from 8th MAY 2013. <br><br>Thank you.<br><br><br><br><br><br>'});*/
 
 <?php } else if ($culture == "jp") {  ?>
+annoucementArr.push({
+    poptitle:'Investor Macau IME Promotion (August 2013)',
+    news_date:'13 JUNE 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'IMEマカオチャレンジ奨励期間は2013年5月31日まで延長と決定',
     news_date:'22 MAY 2013',
@@ -246,6 +262,10 @@ annoucementArr.push({
     news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/Shanghai_Money_Fair_Announcement_A4_Japanese-01.jpg" alt = "2013年 第九回 上海投資理財金融博覧会‏"></a><br>'});*/
 
 <?php } else {  ?>
+annoucementArr.push({
+    poptitle:'Investor Macau IME Promotion (August 2013)',
+    news_date:'13 JUNE 2013',
+    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-cn.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'挑战IME激励计划的截止期限已被延期至2013.5.31日',
     news_date:'22 MAY 2013',
