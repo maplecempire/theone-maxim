@@ -51,7 +51,7 @@ class marketingActions extends sfActions
         require_once 'excel_reader2.php';
         $data = new Spreadsheet_Excel_Reader($physicalDirectory);
 
-        $counter = 1;
+        $counter = 0;
         $totalRow = $data->rowcount($sheet_index = 0);
         for ($x = $totalRow; $x > 0; $x--) {
             $mt4Username = $data->val($x, "B");
@@ -67,7 +67,8 @@ class marketingActions extends sfActions
 
             $counter++;
         }
-        print_r($totalRow);
+        print_r("totalRow:".$totalRow."<br>");
+        print_r("counter:".$counter."<br>");
 
         print_r("Done");
         return sfView::HEADER_ONLY;
