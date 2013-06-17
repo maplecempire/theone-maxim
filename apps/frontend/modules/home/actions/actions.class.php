@@ -25,6 +25,9 @@ class homeActions extends sfActions
     public function executeActivitiesShanghaiInternationalDinnerGathering()
     {
     }
+    public function executeActivitiesBusinessPreview()
+    {
+    }
     public function executeActivitiesShanghaiFudan()
     {
     }
