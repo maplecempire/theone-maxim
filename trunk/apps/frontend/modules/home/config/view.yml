@@ -2,6 +2,10 @@ activitiesShanghaiFudanSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+activitiesBusinessPreviewSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 activitiesFinancialMarketOutlookSuccess:
   has_layout:     off
   stylesheets: 	  []

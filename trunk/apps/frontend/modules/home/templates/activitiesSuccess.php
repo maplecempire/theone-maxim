@@ -182,6 +182,18 @@ ul, ol {
                     </div>
                 </div>
                 <div id="feedContent">
+
+                    <a href="/home/activitiesBusinessPreview">
+                        <div class="poptitle"><h3>Maxim Trader - Business Preview</h3><br>
+                    </div>
+                    </a>
+
+                    <div class="news_date">
+                    June 2013 Activities.
+                    </div>
+
+                    <div class="hr"></div>
+
                     <a href="/home/activitiesShanghaiInternationalDinnerGathering">
                         <?php
                         $culture = $sf_user->getCulture();
