@@ -288,7 +288,7 @@
 
                                 <tr class="tbl_form_row_even">
                                     <td>&nbsp;</td>
-                                    <td><?php echo __('Total Cards Applied') ?></td>
+                                    <td><?php echo __('Total Ticket Applied') ?></td>
                                     <td>
                                         <select id="cardQty" name="cardQty">
                                             <?php for ($i=1; $i<=10; $i++) { ?>
