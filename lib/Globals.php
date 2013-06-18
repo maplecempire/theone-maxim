@@ -29,6 +29,7 @@ abstract class Globals {
     const DEBIT_CARD_CHARGES = 35;
     const DEBIT_CARD_ACTIVATION_CHARGES = 50;
     const EZY_CASH_CARD_CHARGES = 35;
+    const IME_CHARGES = 800;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
     const BONUS_MAINTENANCE_PERCENTAGE = 0;
@@ -125,6 +126,7 @@ abstract class Globals {
     const ACCOUNT_LEDGER_ACTION_SPECIAL_BONUS = 'SPECIAL BONUS';
     const ACCOUNT_LEDGER_ACTION_APPLY_DEBIT_CARD = 'APPLY DEBIT CARD';
     const ACCOUNT_LEDGER_ACTION_APPLY_EZY_CASH_CARD = 'APPLY EZY CASH CARD';
+    const ACCOUNT_LEDGER_ACTION_IME_REGISTRATION = 'IME REGISTRATION';
 
     /*******************************/
     /*****    RELOAD TOPUP  ******/
@@ -273,6 +275,9 @@ abstract class Globals {
     const APPLY_EZYCASHCARD_ENABLE = false;
     const APPLY_DEBITCARD_VISIBLE = true;
     const APPLY_EZYCASHCARD_VISIBLE = false;
+
+    const APPLY_IME_VISIBLE = true;
+    const APPLY_IME_ENABLE = true;
 
     /*******************************/
     /*****   GROUP LEADER   ******/

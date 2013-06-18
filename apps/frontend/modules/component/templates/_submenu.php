@@ -92,6 +92,12 @@ function blink(selector) {
         </li>
     <?php } ?>
 
+    <?php if (Globals::APPLY_IME_VISIBLE == true) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/imeRegistration") ?>"><span><?php echo __('IME Registration'); ?></span></a>
+        </li>
+    <?php } ?>
+
     <?php if (Globals::APPLY_EZYCASHCARD_VISIBLE == true) { ?>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
