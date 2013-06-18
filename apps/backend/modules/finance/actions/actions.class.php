@@ -1764,7 +1764,7 @@ class financeActions extends sfActions
                     }
                     $affectedDistributorId = $affectedDistributorArrs[$y];
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $affectedDistributorId, Criteria::EQUAL);
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $affectedDistributorId, Criteria::EQUAL);
                     $affectedDistributor = MlmDistributorPeer::doSelectOne($c);
 
                     $affectedDistributorTreeLevel = $affectedDistributor->getTreeLevel();

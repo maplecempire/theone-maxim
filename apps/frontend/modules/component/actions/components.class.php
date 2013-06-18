@@ -118,7 +118,7 @@ class componentComponents extends sfComponents
             }
 
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$componentDistributor->getDistributorCode()."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$componentDistributor->getDistributorId()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $totalNetworks = MlmDistributorPeer::doCount($c);
         } else {
