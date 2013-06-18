@@ -680,12 +680,18 @@ class memberActions extends sfActions
         $sponsorId = $this->getRequestParameter('sponsorId');
         $placementDistId = $this->getRequestParameter('placementDistId');
 
-        //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$sponsorId."%", Criteria::LIKE);
-        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
         $existUser = MlmDistributorPeer::doSelectOne($c);
+
+        if ($existUser) {
+            //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$existUser->getDistributorId()."%|", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $existUser = MlmDistributorPeer::doSelectOne($c);
+        }
 
         $arr = "";
         if ($existUser) {
@@ -727,7 +733,7 @@ class memberActions extends sfActions
                 $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorCode() . "|";
+                $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
                 $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
                 $mlm_distributor->setPlacementDatetime(date("Y/m/d h:i:s A"));
                 $mlm_distributor->setPlacementPosition($treePositione);
@@ -1403,7 +1409,7 @@ class memberActions extends sfActions
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
@@ -1413,7 +1419,7 @@ class memberActions extends sfActions
             }
 
             $uplineDistId = $uplineDistDB->getDistributorId();
-            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
+
             $treeLevel = $uplineDistDB->getTreeLevel() + 1;
 
             $app_user = new AppUser();
@@ -1459,7 +1465,6 @@ class memberActions extends sfActions
             $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
 
             $mlm_distributor->setTreeLevel($treeLevel);
-            $mlm_distributor->setTreeStructure($treeStructure);
             $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
             $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
 
@@ -1483,6 +1488,9 @@ class memberActions extends sfActions
             $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_distributor->save();
 
+            $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
+            $mlm_distributor->setTreeStructure($treeStructure);
+            $mlm_distributor->save();
             /****************************/
             /*****  Send email **********/
             /****************************/
@@ -1791,7 +1799,7 @@ class memberActions extends sfActions
 
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
                 $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
@@ -1801,9 +1809,7 @@ class memberActions extends sfActions
                 }
 
                 $uplineDistId = $uplineDistDB->getDistributorId();
-                $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
                 $treeLevel = $uplineDistDB->getTreeLevel() + 1;
-
 
                 $app_user->setUsername($userName);
                 $app_user->setKeepPassword($password);
@@ -1846,7 +1852,6 @@ class memberActions extends sfActions
                 $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
 
                 $mlm_distributor->setTreeLevel($treeLevel);
-                $mlm_distributor->setTreeStructure($treeStructure);
                 $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
                 $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
 
@@ -1882,6 +1887,11 @@ class memberActions extends sfActions
                 $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->save();
+
+                $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
+                $mlm_distributor->setTreeStructure($treeStructure);
+                $mlm_distributor->save();
+
             }
 
             // create mlm_dist_pairing
@@ -2175,7 +2185,7 @@ class memberActions extends sfActions
                     //var_dump("result:::".$uplineDistId);
                     //var_dump($uplineDistDB);
                     //exit();
-                    $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorCode() . "|";
+                    $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
                     $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
                     $mlm_distributor->setPlacementDatetime(date("Y/m/d h:i:s A"));
                     $mlm_distributor->setPlacementPosition($uplinePosition);
@@ -2207,7 +2217,7 @@ class memberActions extends sfActions
                             continue;
                         }
                         //var_dump("+++".$arrs[$x]);
-                        $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
                         if ($uplineDistDB) {
                             $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
                             $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
@@ -3376,7 +3386,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
+                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
         $arr = "";
 
@@ -3488,7 +3498,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
         if ($verifySameGroup == "Y") {
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
         }
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $existUser = MlmDistributorPeer::doSelectOne($c);
@@ -3699,7 +3709,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             //$rp = $rp - $debitAccount;
 
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorCode()."|%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorId()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $totalNetworks = MlmDistributorPeer::doCount($c);
         }
@@ -3964,7 +3974,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($arrs[$x] == "") {
                     continue;
                 }
-                $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
+                $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
                 $this->forward404Unless($uplineDistDB);
                 $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
                 $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
@@ -4085,7 +4095,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
         $distDB = MlmDistributorPeer::doSelectOne($c);
 
         if (!$distDB) {
@@ -4717,7 +4727,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                         FROM mlm_distributor dist
                     LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
+                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
@@ -4902,7 +4912,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                         FROM mlm_distributor dist
                     LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
+                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
@@ -5087,7 +5097,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                         FROM mlm_distributor dist
                     LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."%|'";
+                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
@@ -5479,7 +5489,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $fullName);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE) . "|%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
             $distinfo = MlmDistributorPeer::doSelectOne($c);
 
             if (!$distinfo) {
@@ -7747,12 +7757,12 @@ We look forward to your custom in the near future. Should you have any queries, 
         return $placeDB;
     }
 
-    function getTotalPosition($distCode, $position)
+    function getTotalPosition($distId, $position)
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $position);
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode, Criteria::NOT_EQUAL);
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $distCode . "|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId, Criteria::NOT_EQUAL);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $distId . "|%", Criteria::LIKE);
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
 
         $totalDis = MlmDistributorPeer::doCount($c);

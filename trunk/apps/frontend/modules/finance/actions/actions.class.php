@@ -356,6 +356,22 @@ class financeActions extends sfActions
     }
     public function executeIndex()
     {
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leaderArrs = explode(",", Globals::HIDE_DIST_GROUP);
+        $leaderArrs = explode(",", Globals::TO_HIDE_DIST_GROUP);
+        $groupLeaderId = "";
+
+        for  ($i = 0; $i < count($leaderArrs); $i++) {
+            $c = new Criteria();
+            var_dump($leaderArrs[$i]);
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $leaderArrs[$i]);
+            $existDist = MlmDistributorPeer::doSelectOne($c);
+
+            if ($existDist)
+                $groupLeaderId .= $existDist->getDistributorId(). ",";
+        }
+        print_r($groupLeaderId);
+        return sfView::HEADER_ONLY;
         /*$mlm_account = MlmAccountPeer::retrieveByPK(2);
         $mlm_account->setBalance(9900000);
         $mlm_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));

@@ -789,9 +789,9 @@ class marketingActions extends sfActions
                                         continue;
                                     }
                                     $affectedDistributorId = $affectedDistributorArrs[$y];
-                                    $c = new Criteria();
-                                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $affectedDistributorId, Criteria::EQUAL);
-                                    $affectedDistributor = MlmDistributorPeer::doSelectOne($c);
+                                    //$c = new Criteria();
+                                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $affectedDistributorId, Criteria::EQUAL);
+                                    $affectedDistributor = MlmDistributorPeer::retrieveByPK($affectedDistributorId);
 
                                     $affectedDistributorTreeLevel = $affectedDistributor->getTreeLevel();
                                     $affectedDistributorPackageDB = MlmPackagePeer::retrieveByPK($affectedDistributor->getRankId());
