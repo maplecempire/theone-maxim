@@ -1,0 +1,6 @@
+index:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+all:
+  is_secure:  off        # off is the default value anyway
