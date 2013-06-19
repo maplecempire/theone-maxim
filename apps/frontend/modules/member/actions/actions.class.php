@@ -746,12 +746,12 @@ class memberActions extends sfActions
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
                 $pairingPoint = $sponsoredPackageDB->getPrice();
                 // recalculate Total left and total right for $uplineDistDB
-                $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
+                /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
                 for ($x = count($arrs); $x > 0; $x--) {
                     if ($arrs[$x] == "") {
                         continue;
                     }
-                    $uplineDistDB = $this->getDistributorInformation($arrs[$x]);
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
                     if ($uplineDistDB) {
                         $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
                         $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
@@ -759,7 +759,7 @@ class memberActions extends sfActions
                         $uplineDistDB->setTotalRight($totalRight);
                         $uplineDistDB->save();
                     }
-                }
+                }*/
 
                 if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
                     $level = 0;
@@ -2211,7 +2211,7 @@ class memberActions extends sfActions
 
                     // recalculate Total left and total right for $uplineDistDB
                     //var_dump("===========");
-                    $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
+                    /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
                     for ($x = count($arrs); $x > 0; $x--) {
                         if ($arrs[$x] == "") {
                             continue;
@@ -2225,7 +2225,7 @@ class memberActions extends sfActions
                             $uplineDistDB->setTotalRight($totalRight);
                             $uplineDistDB->save();
                         }
-                    }
+                    }*/
 
                     /******************************/
                     /*  store Pairing points
@@ -3969,7 +3969,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $pairingPoint = $amountNeeded;
             }*/
             // recalculate Total left and total right for $uplineDistDB
-            $arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
+            /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
             for ($x = count($arrs); $x > 0; $x--) {
                 if ($arrs[$x] == "") {
                     continue;
@@ -3981,7 +3981,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $uplineDistDB->setTotalLeft($totalLeft);
                 $uplineDistDB->setTotalRight($totalRight);
                 $uplineDistDB->save();
-            }
+            }*/
 
             /******************************/
             /*  store Pairing points
