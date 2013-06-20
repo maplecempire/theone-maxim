@@ -1,65 +1,56 @@
 <?php
 
 
-abstract class BaseAppUserPeer {
+abstract class BaseLuckyDrawPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'app_user';
+	const TABLE_NAME = 'lucky_draw';
 
 	
-	const CLASS_DEFAULT = 'lib.model.AppUser';
+	const CLASS_DEFAULT = 'lib.model.LuckyDraw';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const USER_ID = 'app_user.USER_ID';
+	const LUCKY_ID = 'lucky_draw.LUCKY_ID';
 
 	
-	const USERNAME = 'app_user.USERNAME';
+	const FULL_NAME = 'lucky_draw.FULL_NAME';
 
 	
-	const KEEP_PASSWORD = 'app_user.KEEP_PASSWORD';
+	const EMAIL = 'lucky_draw.EMAIL';
 
 	
-	const USERPASSWORD = 'app_user.USERPASSWORD';
+	const MT4_USERNAME = 'lucky_draw.MT4_USERNAME';
 
 	
-	const KEEP_PASSWORD2 = 'app_user.KEEP_PASSWORD2';
+	const MT4_PASSWORD = 'lucky_draw.MT4_PASSWORD';
 
 	
-	const USERPASSWORD2 = 'app_user.USERPASSWORD2';
+	const AMOUNT = 'lucky_draw.AMOUNT';
 
 	
-	const USER_ROLE = 'app_user.USER_ROLE';
+	const STATUS_CODE = 'lucky_draw.STATUS_CODE';
 
 	
-	const STATUS_CODE = 'app_user.STATUS_CODE';
+	const CREATED_BY = 'lucky_draw.CREATED_BY';
 
 	
-	const LAST_LOGIN_DATETIME = 'app_user.LAST_LOGIN_DATETIME';
+	const CREATED_ON = 'lucky_draw.CREATED_ON';
 
 	
-	const CREATED_BY = 'app_user.CREATED_BY';
+	const UPDATED_BY = 'lucky_draw.UPDATED_BY';
 
 	
-	const CREATED_ON = 'app_user.CREATED_ON';
-
-	
-	const UPDATED_BY = 'app_user.UPDATED_BY';
-
-	
-	const UPDATED_ON = 'app_user.UPDATED_ON';
-
-	
-	const FROM_ABFX = 'app_user.FROM_ABFX';
+	const UPDATED_ON = 'lucky_draw.UPDATED_ON';
 
 	
 	private static $phpNameMap = null;
@@ -67,31 +58,31 @@ abstract class BaseAppUserPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('UserId', 'Username', 'KeepPassword', 'Userpassword', 'KeepPassword2', 'Userpassword2', 'UserRole', 'StatusCode', 'LastLoginDatetime', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'FromAbfx', ),
-		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID, AppUserPeer::USERNAME, AppUserPeer::KEEP_PASSWORD, AppUserPeer::USERPASSWORD, AppUserPeer::KEEP_PASSWORD2, AppUserPeer::USERPASSWORD2, AppUserPeer::USER_ROLE, AppUserPeer::STATUS_CODE, AppUserPeer::LAST_LOGIN_DATETIME, AppUserPeer::CREATED_BY, AppUserPeer::CREATED_ON, AppUserPeer::UPDATED_BY, AppUserPeer::UPDATED_ON, AppUserPeer::FROM_ABFX, ),
-		BasePeer::TYPE_FIELDNAME => array ('user_id', 'username', 'keep_password', 'userpassword', 'keep_password2', 'userpassword2', 'user_role', 'status_code', 'last_login_datetime', 'created_by', 'created_on', 'updated_by', 'updated_on', 'from_abfx', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('LuckyId', 'FullName', 'Email', 'Mt4Username', 'Mt4Password', 'Amount', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID, LuckyDrawPeer::FULL_NAME, LuckyDrawPeer::EMAIL, LuckyDrawPeer::MT4_USERNAME, LuckyDrawPeer::MT4_PASSWORD, LuckyDrawPeer::AMOUNT, LuckyDrawPeer::STATUS_CODE, LuckyDrawPeer::CREATED_BY, LuckyDrawPeer::CREATED_ON, LuckyDrawPeer::UPDATED_BY, LuckyDrawPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('lucky_id', 'full_name', 'email', 'mt4_username', 'mt4_password', 'amount', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('UserId' => 0, 'Username' => 1, 'KeepPassword' => 2, 'Userpassword' => 3, 'KeepPassword2' => 4, 'Userpassword2' => 5, 'UserRole' => 6, 'StatusCode' => 7, 'LastLoginDatetime' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, 'FromAbfx' => 13, ),
-		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID => 0, AppUserPeer::USERNAME => 1, AppUserPeer::KEEP_PASSWORD => 2, AppUserPeer::USERPASSWORD => 3, AppUserPeer::KEEP_PASSWORD2 => 4, AppUserPeer::USERPASSWORD2 => 5, AppUserPeer::USER_ROLE => 6, AppUserPeer::STATUS_CODE => 7, AppUserPeer::LAST_LOGIN_DATETIME => 8, AppUserPeer::CREATED_BY => 9, AppUserPeer::CREATED_ON => 10, AppUserPeer::UPDATED_BY => 11, AppUserPeer::UPDATED_ON => 12, AppUserPeer::FROM_ABFX => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('user_id' => 0, 'username' => 1, 'keep_password' => 2, 'userpassword' => 3, 'keep_password2' => 4, 'userpassword2' => 5, 'user_role' => 6, 'status_code' => 7, 'last_login_datetime' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, 'from_abfx' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('LuckyId' => 0, 'FullName' => 1, 'Email' => 2, 'Mt4Username' => 3, 'Mt4Password' => 4, 'Amount' => 5, 'StatusCode' => 6, 'CreatedBy' => 7, 'CreatedOn' => 8, 'UpdatedBy' => 9, 'UpdatedOn' => 10, ),
+		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID => 0, LuckyDrawPeer::FULL_NAME => 1, LuckyDrawPeer::EMAIL => 2, LuckyDrawPeer::MT4_USERNAME => 3, LuckyDrawPeer::MT4_PASSWORD => 4, LuckyDrawPeer::AMOUNT => 5, LuckyDrawPeer::STATUS_CODE => 6, LuckyDrawPeer::CREATED_BY => 7, LuckyDrawPeer::CREATED_ON => 8, LuckyDrawPeer::UPDATED_BY => 9, LuckyDrawPeer::UPDATED_ON => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('lucky_id' => 0, 'full_name' => 1, 'email' => 2, 'mt4_username' => 3, 'mt4_password' => 4, 'amount' => 5, 'status_code' => 6, 'created_by' => 7, 'created_on' => 8, 'updated_by' => 9, 'updated_on' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/AppUserMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.AppUserMapBuilder');
+		include_once 'lib/model/map/LuckyDrawMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.LuckyDrawMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = AppUserPeer::getTableMap();
+			$map = LuckyDrawPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -125,45 +116,39 @@ abstract class BaseAppUserPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(AppUserPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(LuckyDrawPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(AppUserPeer::USER_ID);
+		$criteria->addSelectColumn(LuckyDrawPeer::LUCKY_ID);
 
-		$criteria->addSelectColumn(AppUserPeer::USERNAME);
+		$criteria->addSelectColumn(LuckyDrawPeer::FULL_NAME);
 
-		$criteria->addSelectColumn(AppUserPeer::KEEP_PASSWORD);
+		$criteria->addSelectColumn(LuckyDrawPeer::EMAIL);
 
-		$criteria->addSelectColumn(AppUserPeer::USERPASSWORD);
+		$criteria->addSelectColumn(LuckyDrawPeer::MT4_USERNAME);
 
-		$criteria->addSelectColumn(AppUserPeer::KEEP_PASSWORD2);
+		$criteria->addSelectColumn(LuckyDrawPeer::MT4_PASSWORD);
 
-		$criteria->addSelectColumn(AppUserPeer::USERPASSWORD2);
+		$criteria->addSelectColumn(LuckyDrawPeer::AMOUNT);
 
-		$criteria->addSelectColumn(AppUserPeer::USER_ROLE);
+		$criteria->addSelectColumn(LuckyDrawPeer::STATUS_CODE);
 
-		$criteria->addSelectColumn(AppUserPeer::STATUS_CODE);
+		$criteria->addSelectColumn(LuckyDrawPeer::CREATED_BY);
 
-		$criteria->addSelectColumn(AppUserPeer::LAST_LOGIN_DATETIME);
+		$criteria->addSelectColumn(LuckyDrawPeer::CREATED_ON);
 
-		$criteria->addSelectColumn(AppUserPeer::CREATED_BY);
+		$criteria->addSelectColumn(LuckyDrawPeer::UPDATED_BY);
 
-		$criteria->addSelectColumn(AppUserPeer::CREATED_ON);
-
-		$criteria->addSelectColumn(AppUserPeer::UPDATED_BY);
-
-		$criteria->addSelectColumn(AppUserPeer::UPDATED_ON);
-
-		$criteria->addSelectColumn(AppUserPeer::FROM_ABFX);
+		$criteria->addSelectColumn(LuckyDrawPeer::UPDATED_ON);
 
 	}
 
-	const COUNT = 'COUNT(app_user.USER_ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT app_user.USER_ID)';
+	const COUNT = 'COUNT(lucky_draw.LUCKY_ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT lucky_draw.LUCKY_ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -174,9 +159,9 @@ abstract class BaseAppUserPeer {
 		
 		$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AppUserPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(LuckyDrawPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(AppUserPeer::COUNT);
+			$criteria->addSelectColumn(LuckyDrawPeer::COUNT);
 		}
 
 		
@@ -185,7 +170,7 @@ abstract class BaseAppUserPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = AppUserPeer::doSelectRS($criteria, $con);
+		$rs = LuckyDrawPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -198,7 +183,7 @@ abstract class BaseAppUserPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = AppUserPeer::doSelect($critcopy, $con);
+		$objects = LuckyDrawPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -207,7 +192,7 @@ abstract class BaseAppUserPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return AppUserPeer::populateObjects(AppUserPeer::doSelectRS($criteria, $con));
+		return LuckyDrawPeer::populateObjects(LuckyDrawPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -218,7 +203,7 @@ abstract class BaseAppUserPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			AppUserPeer::addSelectColumns($criteria);
+			LuckyDrawPeer::addSelectColumns($criteria);
 		}
 
 		
@@ -234,7 +219,7 @@ abstract class BaseAppUserPeer {
 		$results = array();
 	
 		
-		$cls = AppUserPeer::getOMClass();
+		$cls = LuckyDrawPeer::getOMClass();
 		$cls = Propel::import($cls);
 		
 		while($rs->next()) {
@@ -255,7 +240,7 @@ abstract class BaseAppUserPeer {
 	
 	public static function getOMClass()
 	{
-		return AppUserPeer::CLASS_DEFAULT;
+		return LuckyDrawPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -271,7 +256,7 @@ abstract class BaseAppUserPeer {
 			$criteria = $values->buildCriteria(); 
 		}
 
-		$criteria->remove(AppUserPeer::USER_ID); 
+		$criteria->remove(LuckyDrawPeer::LUCKY_ID); 
 
 
 		
@@ -303,8 +288,8 @@ abstract class BaseAppUserPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
 
-			$comparison = $criteria->getComparison(AppUserPeer::USER_ID);
-			$selectCriteria->add(AppUserPeer::USER_ID, $criteria->remove(AppUserPeer::USER_ID), $comparison);
+			$comparison = $criteria->getComparison(LuckyDrawPeer::LUCKY_ID);
+			$selectCriteria->add(LuckyDrawPeer::LUCKY_ID, $criteria->remove(LuckyDrawPeer::LUCKY_ID), $comparison);
 
 		} else { 
 			$criteria = $values->buildCriteria(); 
@@ -328,7 +313,7 @@ abstract class BaseAppUserPeer {
 			
 			
 			$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(AppUserPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(LuckyDrawPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -341,18 +326,18 @@ abstract class BaseAppUserPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(AppUserPeer::DATABASE_NAME);
+			$con = Propel::getConnection(LuckyDrawPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-		} elseif ($values instanceof AppUser) {
+		} elseif ($values instanceof LuckyDraw) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 			
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(AppUserPeer::USER_ID, (array) $values, Criteria::IN);
+			$criteria->add(LuckyDrawPeer::LUCKY_ID, (array) $values, Criteria::IN);
 		}
 
 		
@@ -375,13 +360,13 @@ abstract class BaseAppUserPeer {
 	}
 
 	
-	public static function doValidate(AppUser $obj, $cols = null)
+	public static function doValidate(LuckyDraw $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(AppUserPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(AppUserPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(LuckyDrawPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(LuckyDrawPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -397,7 +382,7 @@ abstract class BaseAppUserPeer {
 
 		}
 
-		return BasePeer::doValidate(AppUserPeer::DATABASE_NAME, AppUserPeer::TABLE_NAME, $columns);
+		return BasePeer::doValidate(LuckyDrawPeer::DATABASE_NAME, LuckyDrawPeer::TABLE_NAME, $columns);
 	}
 
 	
@@ -407,12 +392,12 @@ abstract class BaseAppUserPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(AppUserPeer::DATABASE_NAME);
+		$criteria = new Criteria(LuckyDrawPeer::DATABASE_NAME);
 
-		$criteria->add(AppUserPeer::USER_ID, $pk);
+		$criteria->add(LuckyDrawPeer::LUCKY_ID, $pk);
 
 
-		$v = AppUserPeer::doSelect($criteria, $con);
+		$v = LuckyDrawPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -429,8 +414,8 @@ abstract class BaseAppUserPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(AppUserPeer::USER_ID, $pks, Criteria::IN);
-			$objs = AppUserPeer::doSelect($criteria, $con);
+			$criteria->add(LuckyDrawPeer::LUCKY_ID, $pks, Criteria::IN);
+			$objs = LuckyDrawPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -442,13 +427,13 @@ if (Propel::isInit()) {
 	
 	
 	try {
-		BaseAppUserPeer::getMapBuilder();
+		BaseLuckyDrawPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
 	
 	
-	require_once 'lib/model/map/AppUserMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.AppUserMapBuilder');
+	require_once 'lib/model/map/LuckyDrawMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.LuckyDrawMapBuilder');
 }

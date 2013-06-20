@@ -39,6 +39,7 @@ abstract class Globals {
     /*****          STATUS         ******/
     /************************************/
 	const STATUS_ACTIVE = 'ACTIVE';
+	const STATUS_ERROR = 'ERROR';
 	const STATUS_INACTIVE = 'INACTIVE';
 	const STATUS_PENDING = 'PENDING';
 	const STATUS_PROCESSING = 'PROCESSING';

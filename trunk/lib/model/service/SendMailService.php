@@ -124,10 +124,10 @@ class SendMailService
         }
 
         if (!$mail->Send()) {
-            echo $mail->ErrorInfo;
-            return false;
+            return $mail->ErrorInfo;
+            //return false;
         }
-        return true;
+        return "";
     }
     public function sendForgetPassword($existDistributor, $subject, $body)
     {
