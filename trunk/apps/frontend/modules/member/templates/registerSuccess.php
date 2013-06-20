@@ -54,7 +54,7 @@ $(function() {
 
     jQuery.validator.addMethod("loginRegex", function(value, element) {
         return this.optional(element) || /^[a-z0-9\-\s\_]+$/i.test(value);
-    }, "Username must contain only letters, numbers, or dashes.");
+    }, "This field only accept latin word, numbers, or dashes.");
 
     $("#registerForm").validate({
         messages : {
@@ -104,6 +104,7 @@ $(function() {
             },
             "fullname" : {
                 required : true,
+                loginRegex: true,
                 minlength : 2
 //                , remote: "/member/verifyFullName"
             },
@@ -135,6 +136,7 @@ $(function() {
                 required : true
             },
             "sign_name" : {
+                loginRegex: true,
                 required : true
             }
         },
