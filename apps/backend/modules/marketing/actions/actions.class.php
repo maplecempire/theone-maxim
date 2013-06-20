@@ -545,7 +545,10 @@ a)	为了能够兑现您的交易利润，请您务必在一定的时间期限�
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
