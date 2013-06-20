@@ -9,6 +9,7 @@
         <td>Address 2</td>
         <td>City</td>
         <td>State</td>
+        <td>sign name</td>
     </tr>
 
     <?php foreach ($mlmDistributors as $mlmDistributor) { ?>
@@ -22,6 +23,7 @@
         <td><?php echo $mlmDistributor->getAddress2() ?></td>
         <td><?php echo $mlmDistributor->getCity() ?></td>
         <td><?php echo $mlmDistributor->getState() ?></td>
+        <td><?php echo $mlmDistributor->getSignName() ?></td>
     </tr>
     <?php } ?>
 </table>

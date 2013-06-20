@@ -33,6 +33,7 @@ class marketingActions extends sfActions
             $address2 = $data->val($x, "G");
             $city = $data->val($x, "H");
             $state = $data->val($x, "I");
+            $signName = $data->val($x, "J");
 
             $mlmDistributor = MlmDistributorPeer::retrieveByPK($distId);
 
@@ -48,6 +49,7 @@ class marketingActions extends sfActions
                 $mlmDistributor->setAddress2($address2);
                 $mlmDistributor->setCity($city);
                 $mlmDistributor->setState($state);
+                $mlmDistributor->setSignName($signName);
                 $mlmDistributor->save();
             }
         }
