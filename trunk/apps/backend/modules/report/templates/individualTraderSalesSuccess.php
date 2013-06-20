@@ -464,9 +464,7 @@
     <td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
         <p align='justify'>
             <font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-                Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by
-                the Financial Services Provider. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City
-                Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email support@maximtrader.com
+                Maxim Trader is managed by Maxim Capital Limited. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email support@maximtrader.com
                 <br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in
                 USA.
                 <br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended
