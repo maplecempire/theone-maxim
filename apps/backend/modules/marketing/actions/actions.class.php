@@ -14,6 +14,44 @@ class marketingActions extends sfActions
     {
 
     }
+
+    public function executeUpdateMemberData() {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "distList.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = $totalRow; $x > 0; $x--) {
+            $distId = $data->val($x, "A");
+            $fullName = $data->val($x, "B");
+            $nickName = $data->val($x, "C");
+            $bankName = $data->val($x, "D");
+            $bankHolderName = $data->val($x, "E");
+            $address = $data->val($x, "F");
+            $address2 = $data->val($x, "G");
+            $city = $data->val($x, "H");
+            $state = $data->val($x, "I");
+
+            $mlmDistributor = MlmDistributorPeer::retrieveByPK($distId);
+
+            if ($mlmDistributor) {
+                print_r($x . ":" . $fullName);
+                print_r("<br>");
+
+                $mlmDistributor->setFullName($fullName);
+                $mlmDistributor->setNickname($nickName);
+                $mlmDistributor->setBankName($bankName);
+                $mlmDistributor->setBankHolderName($bankHolderName);
+                $mlmDistributor->setAddress($address);
+                $mlmDistributor->setAddress2($address2);
+                $mlmDistributor->setCity($city);
+                $mlmDistributor->setState($state);
+                $mlmDistributor->save();
+            }
+        }
+    }
     public function executeDoSendLuckyDraw()
     {
 

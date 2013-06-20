@@ -57,6 +57,8 @@ class reportActions extends sfActions
     }
     public function executeIndividualTraderSales()
     {
+        $c = new Criteria();
+        $this->mlmDistributors = MlmDistributorPeer::doSelect($c);
     }
     public function executeMt4Withdrawal()
     {
