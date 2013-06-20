@@ -383,7 +383,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -486,7 +489,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -599,7 +605,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -696,7 +705,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -824,7 +836,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -1160,7 +1175,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
@@ -1474,7 +1492,10 @@ class financeListActions extends sfActions
                 if ($pos === false) { // note: three equal signs
 
                 } else {
-                    $leader = $leaderArrs[$i];
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
                     break;
                 }
             }
