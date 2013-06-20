@@ -365,7 +365,7 @@ a)	为了能够兑现您的交易利润，请您务必在一定的时间期限�
         $sendMailService = new SendMailService();
         $sendMessage = $sendMailService->sendMail($email, $fullName, $subject, $body);
 
-        $statusCode = Globals::STATUS_ACTIVE;
+        $statusCode = Globals::STATUS_COMPLETE;
         if ($sendMessage != "") {
             $statusCode = Globals::STATUS_ERROR;
         }
