@@ -68,7 +68,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('DOB', 'Dob', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('BANK_NAME', 'BankName', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('BANK_NAME', 'BankName', 'string', CreoleTypes::VARCHAR, false, 255);
+
+		$tMap->addColumn('BANK_BRANCH_NAME', 'BankBranchName', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('BANK_ACC_NO', 'BankAccNo', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -169,6 +171,12 @@ class MlmDistributorMapBuilder {
 		$tMap->addColumn('DEBIT_STATUS_CODE', 'DebitStatusCode', 'string', CreoleTypes::VARCHAR, false, 25);
 
 		$tMap->addColumn('HIDE_GENEALOGY', 'HideGenealogy', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('FROM_ABFX', 'FromAbfx', 'string', CreoleTypes::VARCHAR, true, 1);
+
+		$tMap->addColumn('ABFX_USER_ID', 'AbfxUserId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('ABFX_REMARK', 'AbfxRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 	} 
 } 

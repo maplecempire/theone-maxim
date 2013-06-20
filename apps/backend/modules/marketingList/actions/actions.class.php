@@ -10,6 +10,87 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeLuckydrawList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+        //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = " FROM lucky_draw";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        //var_dump($sql);
+        /******   total filtered records  *******/
+
+        if ($this->getRequestParameter('filterSearch_email') != "") {
+            $sWhere .= " AND email like '%" . $this->getRequestParameter('filterSearch_email') ."%'";
+        }
+        if ($this->getRequestParameter('filterSearch_mt4Username') != "") {
+            $sWhere .= " AND mt4_username like '%" . $this->getRequestParameter('filterSearch_mt4Username') ."%'";
+        }
+        if ($this->getRequestParameter('filterSearch_fullname') != "") {
+            $sWhere .= " AND full_name like '%" . $this->getRequestParameter('filterSearch_fullname') ."%'";
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['account_id'] == null ? "" : $resultArr['account_id'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
+                $resultArr['email'] == null ? "" : $resultArr['email'],
+                $resultArr['mt4_username'] == null ? "" : $resultArr['mt4_username'],
+                $resultArr['mt4_password'] == null ? "" : $resultArr['mt4_password'],
+                $resultArr['amount'] == null ? "" : $resultArr['amount']
+                , $resultArr['status_code'] == null ? "" : $resultArr['status_code']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeRpLogList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

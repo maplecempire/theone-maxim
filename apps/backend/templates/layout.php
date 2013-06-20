@@ -557,6 +557,11 @@ $(function() {
                     <?php
                     }
                     ?>
+
+                    <a href="<?php echo url_for('marketing/luckyDraw') ?>" title="Send Lucky Draw">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Send Lucky Draw'); ?></a><br/>
                 </div>
                 <?php } ?>
 
