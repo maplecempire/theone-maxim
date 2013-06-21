@@ -1593,71 +1593,78 @@ a)	为了能够兑现您的交易利润，请您务必在一定的时间期限�
         //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
         //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
         if ($tbl_distributor && $tbl_distributor->getPackagePurchaseFlag() == "Y") {
-            $tbl_distributor->setPackagePurchaseFlag("N");
-            $tbl_distributor->save();
+            $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                $tbl_distributor->setPackagePurchaseFlag("N");
+                $tbl_distributor->save();
 
-            $c = new Criteria();
-            $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4_user_name'));
-            $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
+                $c = new Criteria();
+                $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4_user_name'));
+                $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
 
-            if (!$mlmDistMt4DB) {
-                $mlm_dist_mt4 = new MlmDistMt4();
-                $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
-                $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
-                $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-                $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
-                $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_dist_mt4->save();
+                if (!$mlmDistMt4DB) {
+                    $mlm_dist_mt4 = new MlmDistMt4();
+                    $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+                    $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
+                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
+                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
 
-                $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getInitRankId());
-                /* ****************************************************
-               * ROI Divident
-               * ***************************************************/
-                $dateUtil = new DateUtil();
-                $currentDate = $dateUtil->formatDate("Y-m-d", $tbl_distributor->getCreatedOn()) . " 00:00:00";
-                $currentDate_timestamp = strtotime($currentDate);
-                //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
-                $dividendDate = strtotime("+1 months", $currentDate_timestamp);
+                    $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getInitRankId());
+                    /* ****************************************************
+                   * ROI Divident
+                   * ***************************************************/
+                    $dateUtil = new DateUtil();
+                    $currentDate = $dateUtil->formatDate("Y-m-d", $tbl_distributor->getCreatedOn()) . " 00:00:00";
+                    $currentDate_timestamp = strtotime($currentDate);
+                    //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+                    $dividendDate = strtotime("+1 months", $currentDate_timestamp);
 
-                $mlm_roi_dividend = new MlmRoiDividend();
-                $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
-                $mlm_roi_dividend->setIdx(1);
-                $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-                //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-                $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
-                $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
-                $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
-                $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
-                $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
-                //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
-                //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
-                $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_roi_dividend->save();
+                    $mlm_roi_dividend = new MlmRoiDividend();
+                    $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
+                    $mlm_roi_dividend->setIdx(1);
+                    $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+                    //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                    $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
+                    $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+                    $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                    //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                    //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                    $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                    $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->save();
 
-                $userDB = AppUserPeer::retrieveByPK($tbl_distributor->getUserId());
+                    $userDB = AppUserPeer::retrieveByPK($tbl_distributor->getUserId());
 
-                $mlmPackageContract = new MlmPackageContract();
-                $mlmPackageContract->setDistId($tbl_distributor->getDistributorId());
-                $mlmPackageContract->setFullName($tbl_distributor->getFullName());
-                $mlmPackageContract->setUsername($userDB->getUsername());
-                $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
-                $mlmPackageContract->setPackagePrice($packageDB->getPrice());
-                $mlmPackageContract->setSignDateDay(date("d"));
-                $mlmPackageContract->setSignDateMonth(date("F"));
-                $mlmPackageContract->setSignDateYear(date("Y"));
-                $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
-                $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
-                $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
-                $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlmPackageContract->save();
+                    $mlmPackageContract = new MlmPackageContract();
+                    $mlmPackageContract->setDistId($tbl_distributor->getDistributorId());
+                    $mlmPackageContract->setFullName($tbl_distributor->getFullName());
+                    $mlmPackageContract->setUsername($userDB->getUsername());
+                    $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
+                    $mlmPackageContract->setPackagePrice($packageDB->getPrice());
+                    $mlmPackageContract->setSignDateDay(date("d"));
+                    $mlmPackageContract->setSignDateMonth(date("F"));
+                    $mlmPackageContract->setSignDateYear(date("Y"));
+                    $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
+                    $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
+                    $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                    $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->save();
 
-                $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
+                    $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
             }
-
             $output = array(
                 "error" => false
             );
