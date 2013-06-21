@@ -440,6 +440,7 @@ a)	为了能够兑现您的交易利润，请您务必在一定的时间期限�
     public function executeGenealogyManagement()
     {
         $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
         $this->dists = MlmDistributorPeer::doSelect($c);
     }
