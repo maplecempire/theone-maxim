@@ -60,6 +60,16 @@ class reportActions extends sfActions
         $c = new Criteria();
         $this->mlmDistributors = MlmDistributorPeer::doSelect($c);
     }
+    public function executeCustomerService()
+    {
+        $c = new Criteria();
+        $this->mlmCustomerEnquirys = MlmCustomerEnquiryPeer::doSelect($c);
+    }
+    public function executeCustomerServiceDetail()
+    {
+        $c = new Criteria();
+        $this->mlmCustomerEnquiryDetails = MlmCustomerEnquiryDetailPeer::doSelect($c);
+    }
     public function executeMt4Withdrawal()
     {
     }
