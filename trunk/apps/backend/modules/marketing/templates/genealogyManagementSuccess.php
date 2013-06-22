@@ -25,6 +25,13 @@ $(function() {
                 $.unblockUI();
                 $("#hideGenealogy").val(data.result);
                 $("#placementTreeStructure").val(data.placementTreeStructure);
+
+                var n = data.placementTreeStructure.indexOf("|203|");
+                if (n > 0) {
+                    $("#blockGroup").val("Y");
+                } else {
+                    $("#blockGroup").val("N");
+                }
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Your login attempt was not successful. Please try again.");
@@ -95,6 +102,12 @@ $(function() {
                         <td class="caption" style="width: 25%">Placement Tree Structure</td>
                         <td class="value">
                             <input type="text" name="placementTreeStructure" id="placementTreeStructure" value="" size="150">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="caption" style="width: 25%">Block Group</td>
+                        <td class="value">
+                            <input type="text" name="blockGroup" id="blockGroup" value="" size="150">
                         </td>
                     </tr>
                     <tr>
