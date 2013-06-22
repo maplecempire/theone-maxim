@@ -193,7 +193,7 @@ if ($culture == "en") {
 annoucementArr.push({
     poptitle:'Investor Macau IME Promotion (August 2013)',
     news_date:'13 JUNE 2013',
-    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
+    news_desc:'<br>Good News!<br>IME Early Bird Promotional has been extended to June 25th. Last chance to get your tickets at USD800 which is inclusive of 3 nights accommodation at the Venetian Hotel Macau, an evening with Jim Rogers on Aug 5th plus financial talks by industry leaders on Aug 6th. Go to members area now, click on IME registration to buy tickets for yourself and for your prospects<img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 
 /*annoucementArr.push({
     poptitle:'I.M.E Macau Incentive challenge period has been extended till 31st May 2013',
@@ -224,7 +224,7 @@ annoucementArr.push({
 annoucementArr.push({
 poptitle:'Investor Macau IME Promotion (August 2013)',
 news_date:'13 JUNE 2013',
-news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
+news_desc:'<br>좋은 소식을 전해드립니다.<br>IME 부지런한 새 프로모션이 마지막으로 6월 25일 까지로 연장되었습니다.  마카오의 베네시안 호텔에서의 3박과 8월 5일 짐 로저스와의 저녁 대화의 시간과 이 분야의 리더들과의 금융관련 대화를 포함한 티켓을 800달러에 구입할 수 있는 마지막 기회입니다.  홈 페이지에서 멤버스(회원) 페이지로 가셔서 IME 등록을 클릭하시면 본인과 귀한 분들을 위한 티켓을 구입할 수 있습니다<img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'I.M.E 마카오 인센티브 도전 기간이 2013년 5월 31일로 연장되었습니다',
     news_date:'22 MAY 2013',
@@ -245,7 +245,7 @@ news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/emai
 annoucementArr.push({
     poptitle:'Investor Macau IME Promotion (August 2013)',
     news_date:'13 JUNE 2013',
-    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
+    news_desc:'<br>Good News!<br>IME Early Bird Promotional has been extended to June 25th. Last chance to get your tickets at USD800 which is inclusive of 3 nights accommodation at the Venetian Hotel Macau, an evening with Jim Rogers on Aug 5th plus financial talks by industry leaders on Aug 6th. Go to members area now, click on IME registration to buy tickets for yourself and for your prospects<img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-en.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'IMEマカオチャレンジ奨励期間は2013年5月31日まで延長と決定',
     news_date:'22 MAY 2013',
@@ -265,7 +265,7 @@ annoucementArr.push({
 annoucementArr.push({
     poptitle:'Investor Macau IME Promotion (August 2013)',
     news_date:'13 JUNE 2013',
-    news_desc:'<br><img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-cn.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
+    news_desc:'<br>好消息!<br>很高兴的告诉大家: 马胜IME早起鸟计划截止日期已被延至6.25日. 此次活动我们为您提供澳门威尼斯人度假村酒店4天3夜住宿安排, 8.5日晚由国际著名的吉姆.罗杰斯(Jim Rogers)先生带来的独家讲座,以及8.6日由众多业界精英领袖们共同参与的金融研讨会. 这一切的费用只需要800美金, 且这将是您最后享此优惠的机会! 马上进入马胜官网会员专区, 点击IME字样注册购买, 为了您和您的美好未来投资吧! <img width="460"  src="http://partner.maximtrader.com/images/email/MACAU-Incentive-cn.jpg" alt = "Investor Macau IME Promotion (August 2013)‏"></a><br>'});
 /*annoucementArr.push({
     poptitle:'挑战IME激励计划的截止期限已被延期至2013.5.31日',
     news_date:'22 MAY 2013',
