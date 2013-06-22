@@ -143,7 +143,6 @@ class reportActions extends sfActions
     function fetchRollingPoint() {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
         , totalRollingPoint.TOTAL_ROLLING_POINT
-        , debitPoint.TOTAL_DEBIT
         , rpUsed.TOTAL_RP_USED
     FROM mlm_account_ledger transferLedger
         LEFT JOIN
@@ -152,12 +151,6 @@ class reportActions extends sfActions
                     FROM mlm_account_ledger account
                         where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
             ) totalRollingPoint ON totalRollingPoint.dist_id = transferLedger.dist_id
-        LEFT JOIN
-            (
-                SELECT sum(credit) AS TOTAL_DEBIT, dist_id
-                    FROM mlm_account_ledger account
-                        where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' group by dist_id
-            ) debitPoint ON debitPoint.dist_id = transferLedger.dist_id
         LEFT JOIN
             (
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
@@ -178,8 +171,27 @@ class reportActions extends sfActions
             $arr = $resultset->getRow();
 
             $resultArray[$count] = $arr;
+            $resultArray[$count]['TOTAL_DEBIT'] = $this->fetchTotalDebit($arr['dist_id']);
             $count++;
         }
         return $resultArray;
+    }
+    function fetchTotalDebit($distId) {
+        $query = "SELECT sum(credit) AS TOTAL_DEBIT, dist_id
+                    FROM mlm_account_ledger
+                where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' AND dist_id = ".$distId." group by dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["TOTAL_DEBIT"];
+        }
+        return $result;
     }
 }
