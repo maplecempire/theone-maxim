@@ -411,6 +411,60 @@
                     <tr><td>•</td><td>	This ticket does not include airline ticket</td></tr>
                 </table>
 
+                <h3>IME Guide</h3>
+                <br>
+                <p>
+                    We do recommend that members arrange their flight to arrive no later than <strong>2pm on August 5th 2013.</strong>
+                    <br>
+                    <br>
+                    Upon arrival, please look for our Maxim Hostess who will arrange your airport transfer to Venetian Macau Hotel. If you cannot find our Maxim Hostess, please look for the Venetian Macau Hotel counter and take the free transfer to the hotel.
+                    <br>
+                    <br>
+                    <strong>Day 1 (Aug 5th)</strong>
+                    <br>
+                    <br>
+                    Registration and issuance of IME ID Tag & Assigning of Rooms
+                    <br>
+                    7.30 – 9.30	An Evening with Jim Rogers
+                    <br>
+                    <br>
+                    <strong>Day 2 (Aug 6th)</strong>
+                    <br>
+                    <br>
+                </p>
+                <table cellpadding="3" cellspacing="3">
+                    <tr><td>11.00am</td><td>Arrival of Guests & Registration</td></tr>
+                    <tr><td>12.00noon</td><td>Buffet Lunch</td></tr>
+                    <tr><td>2.00pm</td><td>Starting MC on Stage</td></tr>
+                    <tr><td>2.15pm</td><td>Speech by COO</td></tr>
+                    <tr><td>2.30pm</td><td>Speech by CTO</td></tr>
+                    <tr><td>3.00pm</td><td>Prof Larry Lang Xian Ping</td></tr>
+                    <tr><td>3.55pm</td><td>Tea Break</td></tr>
+                    <tr><td>4.30pm</td><td>International Motivational Speaker Yuan Ya Shen</td></tr>
+                    <tr><td>5.30pm</td><td>Live Trade by Daniel Ang</td></tr>
+                    <tr><td>6.30pm</td><td>End</td></tr>
+                    <tr><td>8.00pm</td><td>Gala Celebration Dinner</td></td></tr>
+                    <tr><td colspan="2">Launching of New Product AIA and Signing of MOU</td></tr>
+                </table>
+                <br>
+                <br>
+                <strong>Day 3 (Aug 7th)</strong>
+                <br>
+                <br>
+                - Free & Easy
+                <br>
+                <br>
+                <strong>Day 4 (Aug 8th)</strong>
+                <br>
+                <br>
+                - Sending off
+                <br>
+                <br>
+
+                Dressing is Smart Casual for Day 1 & 2 and Formal (national costume) for Gala Celebration Dinner.
+                <br>
+                <br>
+                Do make sure that you have the necessary visa to visit Macau SAR, China
 
             </td>
         </tr>
