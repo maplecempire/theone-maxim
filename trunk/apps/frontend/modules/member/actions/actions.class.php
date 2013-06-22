@@ -10,7 +10,34 @@
 class memberActions extends sfActions
 {
     public function executeTest() {
-        echo $this->getRollingPointData();
+        //echo $this->getRollingPointData();
+
+        print_r("Start<br>");
+        $c = new Criteria();
+        $c->add(MlmDailyBonusLogPeer::BONUS_TYPE, Globals::DAILY_BONUS_LOG_TYPE_DAILY);
+        $c->addDescendingOrderByColumn(MlmDailyBonusLogPeer::BONUS_DATE);
+        $mlmDailyBonusLogDB = MlmDailyBonusLogPeer::doSelectOne($c);
+        print_r("Fetch Daily Bonus Log<br>");
+
+        $dateUtil = new DateUtil();
+        $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
+        print_r("currentDate=".$currentDate."<br>");
+
+        if ($mlmDailyBonusLogDB) {
+            $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
+            print_r("bonusDate=".$bonusDate."<br>");
+
+            $level = 0;
+            while ($level < 10) {
+                print_r("level start ".$level."<br><br>");
+                if ($bonusDate == $currentDate) {
+                    print_r("break<br>");
+                    break;
+                }
+
+                $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
+            }
+        }
         print_r("Done");
     }
     public function executeTestSendReport()
@@ -6177,15 +6204,15 @@ We look forward to your custom in the near future. Should you have any queries, 
             $c = new Criteria();
             $c->add(MlmDailyBonusLogPeer::BONUS_TYPE, Globals::DAILY_BONUS_LOG_TYPE_DAILY);
             $c->addDescendingOrderByColumn(MlmDailyBonusLogPeer::BONUS_DATE);
-            $mlmDistPairingDBs = MlmDailyBonusLogPeer::doSelectOne($c);
+            $mlmDailyBonusLogDB = MlmDailyBonusLogPeer::doSelectOne($c);
             print_r("Fetch Daily Bonus Log<br>");
 
             $dateUtil = new DateUtil();
             $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
             print_r("currentDate=".$currentDate."<br>");
 
-            if ($mlmDistPairingDBs) {
-                $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDistPairingDBs->getBonusDate());
+            if ($mlmDailyBonusLogDB) {
+                $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
                 print_r("bonusDate=".$bonusDate."<br>");
 
                 $level = 0;
