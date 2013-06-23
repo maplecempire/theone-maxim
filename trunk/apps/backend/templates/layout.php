@@ -557,11 +557,15 @@ $(function() {
                     <?php
                     }
                     ?>
-
-                    <a href="<?php echo url_for('marketing/luckyDraw') ?>" title="Send Lucky Draw">
+                    <br>
+                    <a href="<?php echo url_for('marketing/luckyDraw?doAction=WOF') ?>" title="Send Lucky Draw - Wheel of Fortune Million Dollar">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Send Lucky Draw'); ?></a><br/>
+                        &nbsp;<?php echo __('Send Lucky Draw - Wheel of Fortune Million Dollar'); ?></a><br/>
+                    <a href="<?php echo url_for('marketing/luckyDraw?doAction=EVENT') ?>" title="Send Lucky Draw - Event">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Send Lucky Draw - Event'); ?></a><br/>
                 </div>
                 <?php } ?>
 

@@ -44,6 +44,8 @@ class LuckyDrawMapBuilder {
 
 		$tMap->addColumn('AMOUNT', 'Amount', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('DRAW_TYPE', 'DrawType', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);

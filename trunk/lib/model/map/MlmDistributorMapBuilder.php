@@ -178,5 +178,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('ABFX_REMARK', 'AbfxRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
+		$tMap->addColumn('MIGRATED_STATUS', 'MigratedStatus', 'string', CreoleTypes::VARCHAR, true, 10);
+
+		$tMap->addColumn('MIGRATED_PLACEMENT_STATUS', 'MigratedPlacementStatus', 'string', CreoleTypes::VARCHAR, true, 10);
+
 	} 
 } 

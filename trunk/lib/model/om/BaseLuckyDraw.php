@@ -33,6 +33,10 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 
 
 	
+	protected $draw_type = 'WOF';
+
+
+	
 	protected $status_code;
 
 
@@ -97,6 +101,13 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 	{
 
 		return $this->amount;
+	}
+
+	
+	public function getDrawType()
+	{
+
+		return $this->draw_type;
 	}
 
 	
@@ -267,6 +278,23 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setDrawType($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->draw_type !== $v || $v === 'WOF') {
+			$this->draw_type = $v;
+			$this->modifiedColumns[] = LuckyDrawPeer::DRAW_TYPE;
+		}
+
+	} 
+
+	
 	public function setStatusCode($v)
 	{
 
@@ -370,21 +398,23 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 
 			$this->amount = $rs->getString($startcol + 5);
 
-			$this->status_code = $rs->getString($startcol + 6);
+			$this->draw_type = $rs->getString($startcol + 6);
 
-			$this->created_by = $rs->getInt($startcol + 7);
+			$this->status_code = $rs->getString($startcol + 7);
 
-			$this->created_on = $rs->getTimestamp($startcol + 8, null);
+			$this->created_by = $rs->getInt($startcol + 8);
 
-			$this->updated_by = $rs->getInt($startcol + 9);
+			$this->created_on = $rs->getTimestamp($startcol + 9, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 10, null);
+			$this->updated_by = $rs->getInt($startcol + 10);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating LuckyDraw object", $e);
 		}
@@ -548,18 +578,21 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 				return $this->getAmount();
 				break;
 			case 6:
-				return $this->getStatusCode();
+				return $this->getDrawType();
 				break;
 			case 7:
-				return $this->getCreatedBy();
+				return $this->getStatusCode();
 				break;
 			case 8:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 9:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 10:
+				return $this->getUpdatedBy();
+				break;
+			case 11:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -578,11 +611,12 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 			$keys[3] => $this->getMt4Username(),
 			$keys[4] => $this->getMt4Password(),
 			$keys[5] => $this->getAmount(),
-			$keys[6] => $this->getStatusCode(),
-			$keys[7] => $this->getCreatedBy(),
-			$keys[8] => $this->getCreatedOn(),
-			$keys[9] => $this->getUpdatedBy(),
-			$keys[10] => $this->getUpdatedOn(),
+			$keys[6] => $this->getDrawType(),
+			$keys[7] => $this->getStatusCode(),
+			$keys[8] => $this->getCreatedBy(),
+			$keys[9] => $this->getCreatedOn(),
+			$keys[10] => $this->getUpdatedBy(),
+			$keys[11] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -617,18 +651,21 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 				$this->setAmount($value);
 				break;
 			case 6:
-				$this->setStatusCode($value);
+				$this->setDrawType($value);
 				break;
 			case 7:
-				$this->setCreatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 8:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 9:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 10:
+				$this->setUpdatedBy($value);
+				break;
+			case 11:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -644,11 +681,12 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setMt4Username($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMt4Password($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setAmount($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setStatusCode($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCreatedBy($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedOn($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDrawType($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setStatusCode($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
 	}
 
 	
@@ -662,6 +700,7 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LuckyDrawPeer::MT4_USERNAME)) $criteria->add(LuckyDrawPeer::MT4_USERNAME, $this->mt4_username);
 		if ($this->isColumnModified(LuckyDrawPeer::MT4_PASSWORD)) $criteria->add(LuckyDrawPeer::MT4_PASSWORD, $this->mt4_password);
 		if ($this->isColumnModified(LuckyDrawPeer::AMOUNT)) $criteria->add(LuckyDrawPeer::AMOUNT, $this->amount);
+		if ($this->isColumnModified(LuckyDrawPeer::DRAW_TYPE)) $criteria->add(LuckyDrawPeer::DRAW_TYPE, $this->draw_type);
 		if ($this->isColumnModified(LuckyDrawPeer::STATUS_CODE)) $criteria->add(LuckyDrawPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(LuckyDrawPeer::CREATED_BY)) $criteria->add(LuckyDrawPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(LuckyDrawPeer::CREATED_ON)) $criteria->add(LuckyDrawPeer::CREATED_ON, $this->created_on);
@@ -706,6 +745,8 @@ abstract class BaseLuckyDraw extends BaseObject  implements Persistent {
 		$copyObj->setMt4Password($this->mt4_password);
 
 		$copyObj->setAmount($this->amount);
+
+		$copyObj->setDrawType($this->draw_type);
 
 		$copyObj->setStatusCode($this->status_code);
 

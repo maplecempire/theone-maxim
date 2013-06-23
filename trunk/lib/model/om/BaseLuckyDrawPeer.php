@@ -13,7 +13,7 @@ abstract class BaseLuckyDrawPeer {
 	const CLASS_DEFAULT = 'lib.model.LuckyDraw';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseLuckyDrawPeer {
 	const AMOUNT = 'lucky_draw.AMOUNT';
 
 	
+	const DRAW_TYPE = 'lucky_draw.DRAW_TYPE';
+
+	
 	const STATUS_CODE = 'lucky_draw.STATUS_CODE';
 
 	
@@ -58,18 +61,18 @@ abstract class BaseLuckyDrawPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LuckyId', 'FullName', 'Email', 'Mt4Username', 'Mt4Password', 'Amount', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID, LuckyDrawPeer::FULL_NAME, LuckyDrawPeer::EMAIL, LuckyDrawPeer::MT4_USERNAME, LuckyDrawPeer::MT4_PASSWORD, LuckyDrawPeer::AMOUNT, LuckyDrawPeer::STATUS_CODE, LuckyDrawPeer::CREATED_BY, LuckyDrawPeer::CREATED_ON, LuckyDrawPeer::UPDATED_BY, LuckyDrawPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('lucky_id', 'full_name', 'email', 'mt4_username', 'mt4_password', 'amount', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('LuckyId', 'FullName', 'Email', 'Mt4Username', 'Mt4Password', 'Amount', 'DrawType', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID, LuckyDrawPeer::FULL_NAME, LuckyDrawPeer::EMAIL, LuckyDrawPeer::MT4_USERNAME, LuckyDrawPeer::MT4_PASSWORD, LuckyDrawPeer::AMOUNT, LuckyDrawPeer::DRAW_TYPE, LuckyDrawPeer::STATUS_CODE, LuckyDrawPeer::CREATED_BY, LuckyDrawPeer::CREATED_ON, LuckyDrawPeer::UPDATED_BY, LuckyDrawPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('lucky_id', 'full_name', 'email', 'mt4_username', 'mt4_password', 'amount', 'draw_type', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LuckyId' => 0, 'FullName' => 1, 'Email' => 2, 'Mt4Username' => 3, 'Mt4Password' => 4, 'Amount' => 5, 'StatusCode' => 6, 'CreatedBy' => 7, 'CreatedOn' => 8, 'UpdatedBy' => 9, 'UpdatedOn' => 10, ),
-		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID => 0, LuckyDrawPeer::FULL_NAME => 1, LuckyDrawPeer::EMAIL => 2, LuckyDrawPeer::MT4_USERNAME => 3, LuckyDrawPeer::MT4_PASSWORD => 4, LuckyDrawPeer::AMOUNT => 5, LuckyDrawPeer::STATUS_CODE => 6, LuckyDrawPeer::CREATED_BY => 7, LuckyDrawPeer::CREATED_ON => 8, LuckyDrawPeer::UPDATED_BY => 9, LuckyDrawPeer::UPDATED_ON => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('lucky_id' => 0, 'full_name' => 1, 'email' => 2, 'mt4_username' => 3, 'mt4_password' => 4, 'amount' => 5, 'status_code' => 6, 'created_by' => 7, 'created_on' => 8, 'updated_by' => 9, 'updated_on' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('LuckyId' => 0, 'FullName' => 1, 'Email' => 2, 'Mt4Username' => 3, 'Mt4Password' => 4, 'Amount' => 5, 'DrawType' => 6, 'StatusCode' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
+		BasePeer::TYPE_COLNAME => array (LuckyDrawPeer::LUCKY_ID => 0, LuckyDrawPeer::FULL_NAME => 1, LuckyDrawPeer::EMAIL => 2, LuckyDrawPeer::MT4_USERNAME => 3, LuckyDrawPeer::MT4_PASSWORD => 4, LuckyDrawPeer::AMOUNT => 5, LuckyDrawPeer::DRAW_TYPE => 6, LuckyDrawPeer::STATUS_CODE => 7, LuckyDrawPeer::CREATED_BY => 8, LuckyDrawPeer::CREATED_ON => 9, LuckyDrawPeer::UPDATED_BY => 10, LuckyDrawPeer::UPDATED_ON => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('lucky_id' => 0, 'full_name' => 1, 'email' => 2, 'mt4_username' => 3, 'mt4_password' => 4, 'amount' => 5, 'draw_type' => 6, 'status_code' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -134,6 +137,8 @@ abstract class BaseLuckyDrawPeer {
 		$criteria->addSelectColumn(LuckyDrawPeer::MT4_PASSWORD);
 
 		$criteria->addSelectColumn(LuckyDrawPeer::AMOUNT);
+
+		$criteria->addSelectColumn(LuckyDrawPeer::DRAW_TYPE);
 
 		$criteria->addSelectColumn(LuckyDrawPeer::STATUS_CODE);
 

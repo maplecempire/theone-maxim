@@ -54,7 +54,7 @@ class MlmRoiDividendMapBuilder {
 
 		$tMap->addColumn('DIVIDEND_AMOUNT', 'DividendAmount', 'double', CreoleTypes::DECIMAL, true, 12);
 
-		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, true, 255);
+		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
