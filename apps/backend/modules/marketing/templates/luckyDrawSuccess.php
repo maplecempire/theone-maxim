@@ -4,6 +4,7 @@ use_helper('I18N');
 
 <script type="text/javascript">
 var walletDatagrid = null;
+var drawType = "<?php echo $doAction;?>";
 $(function() {
     /*$('#debitAccountAmount').autoNumeric({
         mDec: 2
@@ -44,6 +45,7 @@ $(function() {
                     , mt4Username : $('#mt4Username').val()
                     , mt4Password : $('#mt4Password').val()
                     , optPackage : $('#optPackage').val()
+                    , drawType : drawType
                 },
                 success : function(data) {
                     alert(data.message);
@@ -65,7 +67,7 @@ $(function() {
 <input type="hidden" id="distId" value="0">
 <div style="padding: 10px; top: 30px; position: absolute; width: 1000px">
     <div class="portlet">
-        <div class="portlet-header"><?php echo __('Debit Account Management') ?></div>
+        <div class="portlet-header"><?php echo $screenLebel ?></div>
         <div class="portlet-content">
             <div id="divPIPS">
                 <form id="registerForm" name="registerForm">
@@ -98,6 +100,16 @@ $(function() {
                     <tr>
                         <td class="caption" style="width: 25%">Amount</td>
                         <td class="value">
+                            <?php if ($doAction == "EVENT") { ?>
+                            <select id="optPackage">
+                                <option value="300">300</option>
+                                <option value="500">500</option>
+                                <option value="1,000">1,000</option>
+                                <option value="2,000">2,000</option>
+                                <option value="3,000">3,000</option>
+                                <option value="5,000">5,000</option>
+                            </select>
+                            <?php } else { ?>
                             <select id="optPackage">
                                 <option value="100">100</option>
                                 <option value="300">300</option>
@@ -108,6 +120,7 @@ $(function() {
                                 <option value="10,000">10,000</option>
                                 <option value="30,000">30,000</option>
                             </select>
+                            <?php } ?>
                         </td>
                     </tr>
 
@@ -132,6 +145,7 @@ $(function() {
                             aoData.push({ "name": "filterSearch_email", "value": $("#search_email").val()  });
                             aoData.push({ "name": "filterSearch_mt4Username", "value": $("#search_mt4Username").val()  });
                             aoData.push({ "name": "filterSearch_fullname", "value": $("#search_fullname").val()  });
+                            aoData.push({ "name": "filterSearch_drawType", "value": drawType  });
                         },
                         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
                         },

@@ -26,7 +26,7 @@ class marketingListActions extends sfActions
         $sql = " FROM lucky_draw";
 
         /******   total records  *******/
-        $sWhere = " WHERE 1=1";
+        $sWhere = " WHERE draw_type = '".$this->getRequestParameter('filterSearch_drawType')."'";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
         //var_dump($sql);
         /******   total filtered records  *******/

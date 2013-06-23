@@ -299,6 +299,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $abfx_remark;
 
+
+	
+	protected $migrated_status = 'PEND';
+
+
+	
+	protected $migrated_placement_status = 'PEND';
+
 	
 	protected $alreadyInSave = false;
 
@@ -904,6 +912,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->abfx_remark;
+	}
+
+	
+	public function getMigratedStatus()
+	{
+
+		return $this->migrated_status;
+	}
+
+	
+	public function getMigratedPlacementStatus()
+	{
+
+		return $this->migrated_placement_status;
 	}
 
 	
@@ -2148,6 +2170,40 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setMigratedStatus($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->migrated_status !== $v || $v === 'PEND') {
+			$this->migrated_status = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MIGRATED_STATUS;
+		}
+
+	} 
+
+	
+	public function setMigratedPlacementStatus($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->migrated_placement_status !== $v || $v === 'PEND') {
+			$this->migrated_placement_status = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2298,11 +2354,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->abfx_remark = $rs->getString($startcol + 72);
 
+			$this->migrated_status = $rs->getString($startcol + 73);
+
+			$this->migrated_placement_status = $rs->getString($startcol + 74);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 73; 
+						return $startcol + 75; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2666,6 +2726,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 72:
 				return $this->getAbfxRemark();
 				break;
+			case 73:
+				return $this->getMigratedStatus();
+				break;
+			case 74:
+				return $this->getMigratedPlacementStatus();
+				break;
 			default:
 				return null;
 				break;
@@ -2749,6 +2815,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[70] => $this->getFromAbfx(),
 			$keys[71] => $this->getAbfxUserId(),
 			$keys[72] => $this->getAbfxRemark(),
+			$keys[73] => $this->getMigratedStatus(),
+			$keys[74] => $this->getMigratedPlacementStatus(),
 		);
 		return $result;
 	}
@@ -2983,6 +3051,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 72:
 				$this->setAbfxRemark($value);
 				break;
+			case 73:
+				$this->setMigratedStatus($value);
+				break;
+			case 74:
+				$this->setMigratedPlacementStatus($value);
+				break;
 		} 	}
 
 	
@@ -3063,6 +3137,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[70], $arr)) $this->setFromAbfx($arr[$keys[70]]);
 		if (array_key_exists($keys[71], $arr)) $this->setAbfxUserId($arr[$keys[71]]);
 		if (array_key_exists($keys[72], $arr)) $this->setAbfxRemark($arr[$keys[72]]);
+		if (array_key_exists($keys[73], $arr)) $this->setMigratedStatus($arr[$keys[73]]);
+		if (array_key_exists($keys[74], $arr)) $this->setMigratedPlacementStatus($arr[$keys[74]]);
 	}
 
 	
@@ -3143,6 +3219,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::FROM_ABFX)) $criteria->add(MlmDistributorPeer::FROM_ABFX, $this->from_abfx);
 		if ($this->isColumnModified(MlmDistributorPeer::ABFX_USER_ID)) $criteria->add(MlmDistributorPeer::ABFX_USER_ID, $this->abfx_user_id);
 		if ($this->isColumnModified(MlmDistributorPeer::ABFX_REMARK)) $criteria->add(MlmDistributorPeer::ABFX_REMARK, $this->abfx_remark);
+		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_STATUS, $this->migrated_status);
+		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS, $this->migrated_placement_status);
 
 		return $criteria;
 	}
@@ -3316,6 +3394,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setAbfxUserId($this->abfx_user_id);
 
 		$copyObj->setAbfxRemark($this->abfx_remark);
+
+		$copyObj->setMigratedStatus($this->migrated_status);
+
+		$copyObj->setMigratedPlacementStatus($this->migrated_placement_status);
 
 
 		$copyObj->setNew(true);

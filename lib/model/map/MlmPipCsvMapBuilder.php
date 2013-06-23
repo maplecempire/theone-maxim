@@ -36,7 +36,7 @@ class MlmPipCsvMapBuilder {
 
 		$tMap->addColumn('MONTH_TRADED', 'MonthTraded', 'int', CreoleTypes::INTEGER, false, null);
 
-		$tMap->addColumn('YEAR_TRADED', 'YearTraded', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('YEAR_TRADED', 'YearTraded', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('FILE_ID', 'FileId', 'int', CreoleTypes::INTEGER, false, null);
 
@@ -44,7 +44,7 @@ class MlmPipCsvMapBuilder {
 
 		$tMap->addColumn('LOGIN_ID', 'LoginId', 'int', CreoleTypes::INTEGER, false, null);
 
-		$tMap->addColumn('LOGIN_NAME', 'LoginName', 'string', CreoleTypes::VARCHAR, true, 255);
+		$tMap->addColumn('LOGIN_NAME', 'LoginName', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('DEPOSIT', 'Deposit', 'double', CreoleTypes::DECIMAL, false, 12);
 
@@ -68,7 +68,7 @@ class MlmPipCsvMapBuilder {
 
 		$tMap->addColumn('LAST_BALANCE', 'LastBalance', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 255);
+		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
 

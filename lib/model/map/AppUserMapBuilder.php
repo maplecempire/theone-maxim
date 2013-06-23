@@ -58,7 +58,7 @@ class AppUserMapBuilder {
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
-		$tMap->addColumn('FROM_ABFX', 'FromAbfx', 'string', CreoleTypes::VARCHAR, true, 1);
+		$tMap->addColumn('FROM_ABFX', 'FromAbfx', 'string', CreoleTypes::VARCHAR, false, 1);
 
 	} 
 } 
