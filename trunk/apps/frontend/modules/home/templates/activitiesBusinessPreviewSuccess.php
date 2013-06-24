@@ -196,70 +196,85 @@ ul, ol {
                     </div>
                     <br>
                     <div class="news_desc">
-                        1) Prai, Penang, Malaysia<br>
-Date: 15th June 2013                             <br>
-Time: 7:30pm to 10:30pm                              <br>
-Venue: Pearl View Hotel                                  <br>
-Speaker: Jason Lim (MCL CTO)                                 <br>
-PIC: Miss Fion +6017-4000836                                     <br>
-                                                                     <br>
-北海, 马来西亚                  <br>
-日期: 2013年6月15日                 <br>
-时间: 1930 ~ 2230                      <br>
-会场: Pearl View Hotel                     <br>
-负责人: Fion +6017-4000836                     <br>
-                  <br>
-2) Klang, Malaysia    <br>
-Date: 19th June 2013      <br>
-Time: 7:30pm to 10:30pm       <br>
-Venue: Premiere Hotel             <br>
-Speaker: Dato Mervis Heng             <br>
-PIC: Jen +60163228282                     <br>
-                                              <br>
-吧生, 马来西亚                                      <br>
-日期: 2013年6月19日                                     <br>
-时间: 1930 ~ 2230                                          <br>
-会场: Premiere Hotel                                           <br>
-负责人: Jen +60163228282                                           <br>
-                                                                      <br>
-3) Kampar, Perak, Malaysia                                                <br>
-Date: 20th June 2013                                                          <br>
-Time: 7:30pm to 10:30pm                                                           <br>
-Venue: Grand Kampar Hotel                                                             <br>
-Speaker: Daniel Ang (International Financial Guru)                                        <br>
-PIC: Miss Fion +6017-4000836                                                                  <br>
-                                                                                                  <br>
-金宝, 马来西亚                                                                                          <br>
-日期: 2013年6月20日     <br>
-时间: 1930 ~ 2230          <br>
-会场: Grand Kampar Hotel       <br>
-负责人: Fion +6017-4000836         <br>
-                                      <br>
-4) Guangzhou, China                       <br>
-Date: 30th June 2013                          <br>
-Time: TBC                                         <br>
-Venue: TBC                                            <br>
-Speaker: Daniel Ang (International Financial Guru)        <br>
-PIC:                                                          <br>
-                                                                  <br>
-广州, 中国                                                             <br>
-日期: 2013年6月30日                                                        <br>
-时间:                               <br>
-会场:                                   <br>
-负责人:                                     <br>
-                                               <br>
-5) Taipei, Taiwan                                  <br>
-Date: 6th July 2013                                    <br>
-Time: TBC                                                  <br>
-Venue: TBC                                                     <br>
-Speaker: Daniel Ang (International Financial Guru)                 <br>
-PIC: Lisa +886980508662                                                <br>
-                                                                           <br>
-台北, 台湾               <br>
-日期: 2013年7月6日           <br>
-时间:                           <br>
-会场:                               <br>
-负责人: Lisa +886980508662              <br>
+                        <table cellpadding="3" cellspacing="3">
+                            <tr>
+                                <td valign="top">1)</td><td>Prai, Penang, Malaysia<br>
+                                                        Date: 15th June 2013                             <br>
+                                                        Time: 7:30pm to 10:30pm                              <br>
+                                                        Venue: Pearl View Hotel                                  <br>
+                                                        Speaker: Jason Lim (MCL CTO)                                 <br>
+                                                        PIC: Miss Fion +6017-4000836                                     <br>
+                                                                                                                             <br>
+                                                        北海, 马来西亚                  <br>
+                                                        日期: 2013年6月15日                 <br>
+                                                        时间: 1930 ~ 2230                      <br>
+                                                        会场: Pearl View Hotel                     <br>
+                                                        负责人: Fion +6017-4000836                     <br></td>
+                            </tr>
+                            <tr>
+                                <td valign="top">2)</td><td>Klang, Malaysia    <br>
+                                            Date: 19th June 2013      <br>
+                                            Time: 7:30pm to 10:30pm       <br>
+                                            Venue: Premiere Hotel             <br>
+                                            Speaker: Dato Mervis Heng             <br>
+                                            PIC: Jen +60163228282                     <br>
+                                                                                          <br>
+                                            吧生, 马来西亚                                      <br>
+                                            日期: 2013年6月19日                                     <br>
+                                            时间: 1930 ~ 2230                                          <br>
+                                            会场: Premiere Hotel                                           <br>
+                                            负责人: Jen +60163228282</td>
+                            </tr>
+                            <tr>
+                                <td valign="top">3)</td><td>Kampar, Perak, Malaysia                                                <br>
+                                        Date: 20th June 2013                                                          <br>
+                                        Time: 7:30pm to 10:30pm                                                           <br>
+                                        Venue: Grand Kampar Hotel                                                             <br>
+                                        Speaker: Daniel Ang (International Financial Guru)                                        <br>
+                                        PIC: Miss Fion +6017-4000836                                                                  <br>
+                                                                                                                                          <br>
+                                        金宝, 马来西亚                                                                                          <br>
+                                        日期: 2013年6月20日     <br>
+                                        时间: 1930 ~ 2230          <br>
+                                        会场: Grand Kampar Hotel       <br>
+                                        负责人: Fion +6017-4000836         <br></td>
+                            </tr>
+                            <tr>
+                                <td valign="top">4)</td><td>Guangzhou, China                       <br>
+                                        Date: 30th June 2013                          <br>
+                                        Time: TBC                                         <br>
+                                        Venue: TBC                                            <br>
+                                        Speaker: Daniel Ang (International Financial Guru)        <br>
+                                        PIC:                                                          <br>
+                                                                                                          <br>
+                                        广州, 中国                                                             <br>
+                                        日期: 2013年6月30日                                                        <br>
+                                        时间:                               <br>
+                                        会场:                                   <br>
+                                        负责人:                                     <br></td>
+                            </tr>
+                            <tr>
+                                <td valign="top">5)</td><td>Taipei, Taiwan                                  <br>
+                                            Date: 6th July 2013                                    <br>
+                                            Time: TBC                                                  <br>
+                                            Venue: TBC                                                     <br>
+                                            Speaker: Daniel Ang (International Financial Guru)                 <br>
+                                            PIC: Lisa +886980508662                                                <br>
+                                                                                                                       <br>
+                                            台北, 台湾               <br>
+                                            日期: 2013年7月6日           <br>
+                                            时间:                           <br>
+                                            会场:                               <br>
+                                            负责人: Lisa +886980508662              <br></td>
+                            </tr>
+                            <tr>
+                                <td valign="top">6)</td><td>Tittle: 外汇投资和资产配置研讨会<br>
+                                    Venue: 广州礼顿阳光酒店<br>
+                                    地址：广州天河区珠江新城华成路6号（西塔）<br>
+                                    Date: 30 June 2013,<br>
+                                    Time: 1:30pm</td>
+                            </tr>
+                        </table>
                         <br>
                         <br>
                         <div style="float: right"><a href="/home/activities">Go Back</a></div>
