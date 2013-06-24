@@ -22,6 +22,9 @@ class homeActions extends sfActions
         readfile(sfConfig::get('sf_upload_dir')."/fudan_university_international_financial_forum.docx");
         return sfView::NONE;
     }
+    public function executeActivities_26062013()
+    {
+    }
     public function executeActivitiesShanghaiInternationalDinnerGathering()
     {
     }
