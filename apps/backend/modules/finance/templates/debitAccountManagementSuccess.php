@@ -33,6 +33,7 @@ $(function() {
             	, externalRemark : $('#externalRemark').val()
             	, internalRemark : $('#internalRemark').val()
                 , packageId : $('#optPackage').val()
+                , debitUpgraded : $('#debitUpgraded').val()
             },
             success : function(data) {
                 alert("Update Successful");
@@ -88,6 +89,15 @@ $(function() {
                             <select id="creditDebit" name="creditDebit">
                                 <option value="CREDIT">CREDIT</option>
                                 <!--<option value="DEBIT">DEBIT</option>-->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="caption">Debit Upgraded</td>
+                        <td class="value">
+                            <select id="debitUpgraded" name="debitUpgraded">
+                                <option value="N">NO</option>
+                                <option value="Y">YES</option>
                             </select>
                         </td>
                     </tr>

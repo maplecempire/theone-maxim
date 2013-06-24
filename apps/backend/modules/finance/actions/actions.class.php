@@ -29,6 +29,7 @@ class financeActions extends sfActions
         $externalRemark = $this->getRequestParameter('externalRemark');
         $internalRemark = $this->getRequestParameter('internalRemark');
         $packageId = $this->getRequestParameter('packageId');
+        $debitUpgraded = $this->getRequestParameter('debitUpgraded');
 
         $accountBalance = $this->getAccountBalance($distId, $walletType);
         $distDB = MlmDistributorPeer::retrieveByPK($distId);
@@ -49,7 +50,11 @@ class financeActions extends sfActions
         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_account_ledger->save();
 
-        $distDB->setRankId($packageId);
+        if ("Y" == $debitUpgraded) {
+
+        } else {
+            $distDB->setRankId($packageId);
+        }
         $distDB->setDebitAccount("Y");
         $distDB->setDebitRankId($packageId);
         $distDB->setDebitStatusCode(Globals::STATUS_ACTIVE);
