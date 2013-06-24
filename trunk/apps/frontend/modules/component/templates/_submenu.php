@@ -115,13 +115,13 @@ function blink(selector) {
 
         </li>
     </ul>
-    <br class="clear"><br>
+    <!--<br class="clear"><br>
     <ul>
-        <li class="menu_title"><?php echo __('EDUCATION / TRAINING COURSES'); ?></li>
+        <li class="menu_title"><?php /*echo __('EDUCATION / TRAINING COURSES'); */?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/underMaintenance"><span><?php echo __('Education Course'); ?></span></a>
+            <a href="/member/underMaintenance"><span><?php /*echo __('Education Course'); */?></span></a>
         </li>
-    </ul>
+    </ul>-->
     <!--<br class="clear"><br>
     <ul>
         <li class="menu_title">PROFILE</li>
@@ -215,9 +215,9 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/dailyAUGoldTradeGuide") ?>"><span><?php echo __('Download Daily XAU Gold Trade Guide (Coming Soon)'); ?></span></a>
-        </li>
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php /*echo url_for("/member/dailyAUGoldTradeGuide") */?>"><span><?php /*echo __('Download Daily XAU Gold Trade Guide (Coming Soon)'); */?></span></a>
+        </li>-->
 
     <?php /*if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { */?><!--
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
