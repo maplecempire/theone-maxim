@@ -308,6 +308,11 @@ class zMailActions extends sfActions
 接着往下看吧，接下来的2分钟能永远的改变您的生活！
 																</font>
 																<br>
+
+												<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+                                                Note: Trading credit of 70% from initial deposit will only be utilized for self trading with a variable of approximately 5%. The remaining 30% cannot be used as trading margin and the amount is to strictly WITHHOLD for fund management program.
+                                                </font>
+                                                <br>
 																<br>
 																<br>
 															</td>
@@ -396,6 +401,11 @@ class zMailActions extends sfActions
 								</span>
 								</font>
 								<br><br>
+
+												<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+                                                Note: Trading credit of 70% from initial deposit will only be utilized for self trading with a variable of approximately 5%. The remaining 30% cannot be used as trading margin and the amount is to strictly WITHHOLD for fund management program.
+                                                </font>
+                                                <br>
 								<!--<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
 								<span style='font-size:14px; font-weight: bold; color:#ff0000'>
 								Alvin Ang

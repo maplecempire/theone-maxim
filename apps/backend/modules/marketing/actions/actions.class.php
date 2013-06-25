@@ -2823,6 +2823,11 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                                                                     queries, please do not hesitate to get back to us.<br>
                                                                 </font>
 																<br>
+
+												<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+                                                Note: Trading credit of 70% from initial deposit will only be utilized for self trading with a variable of approximately 5%. The remaining 30% cannot be used as trading margin and the amount is to strictly WITHHOLD for fund management program.
+                                                </font>
+                                                <br>
 															</td>
 														</tr>
 													</tbody>
@@ -2950,6 +2955,11 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 												<br>
 											</font>
 											<br>
+
+												<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+                                                Note: Trading credit of 70% from initial deposit will only be utilized for self trading with a variable of approximately 5%. The remaining 30% cannot be used as trading margin and the amount is to strictly WITHHOLD for fund management program.
+                                                </font>
+                                                <br>
 															</td>
 														</tr>
 													</tbody>
