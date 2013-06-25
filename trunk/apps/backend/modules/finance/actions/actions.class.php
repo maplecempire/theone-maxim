@@ -1296,7 +1296,7 @@ class financeActions extends sfActions
 												如果您有任何疑问，请不要犹豫立即联络我们。
 												<br>
 												<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
-                                                Note: Trading credit of 70% from initial deposit will only be utilized for self trading with a variable of approximately 5%. The remaining 30% cannot be used as trading margin and the amount is to strictly WITHHOLD for fund management program.
+                                                会员账户中只有70%的初始投资及与之等额的MT4交易点数（附+-5%变化），才能用于会员自主交易. 剩余的初始资金的30%必须严格用于公司常规基金管理计划. 该规定所有会员均需遵守.
                                                 </font>
                                                 <br>
 											</font>
