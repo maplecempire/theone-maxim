@@ -222,7 +222,11 @@ ul, ol {
                         $culture = $sf_user->getCulture();
                         ?>
                         <div class="poptitle">
+                            <?php if ($culture == "cn") {  ?>
                             <h3>马胜金融：三赢策略「全球金融精明投资的前景＂概念、创新＂」</h3>
+                            <?php } else {  ?>
+                            <h3>Maxim Trader : Three-Win Strategy [ Global Financial Savvy Investment Outlook The Concept of The Innovation ]</h3>
+                            <?php } ?>
                             <br>
                         </div>
                     </a>
@@ -233,13 +237,35 @@ ul, ol {
                     <br>
                     <div class="news_desc">
 
-                        <br>地点：待定（在酒店进行）
-                        <br>时间：上午7：30PM
-                        <br>日期：26/06/2013  星期三
-                        <br><br>
-                        <br>马胜金融集团御用金融投资大师Mr.Daniel Ang(超过20年经验在金融经济市场)为您讲解当今的世界在变，天也已经变了，很多人受困于，对于新兴事物，第一看不见，第二看不起，第三看不懂，第四来不及，马胜金融三赢策略的概念，创新。
-                        <br><br>
-                        <br>请邀请您的朋友到来参与，请预早报名。请联系：Dennis Chai, +60122222305
+                    <?php if ($culture == "cn") {  ?>
+                    <br>地点：Furama Hotel Bukit Bintang
+                    <br>地址：136, Jalan Changkat Thambi Dollah, Bukit Bintang Kuala Lumpur.
+                    <br>时间：上午7：30PM
+                    <br>日期：26/06/2013  星期三
+                    <br><br>
+                    <br>马胜金融集团御用金融投资大师Mr.Daniel Ang(超过20年经验在金融经济市场)为您讲解当今的世界在变，天也已经变了，很多人受困于，对于新兴事物，第一看不见，第二看不起，第三看不懂，第四来不及，马胜金融三赢策略的概念，创新。
+                    <br><br>
+                    <br>请邀请您的朋友到来参与，当晚出席名额只限200位，请预早报名。
+                    <br>请联系：Dennis Chai, +60122222305, +60108368888
+                    <?php } else {  ?>
+                    <br>Venue：Furama Hotel Bukit Bintang
+                    <br>Address：136, Jalan Changkat Thambi Dollah, Bukit Bintang Kuala Lumpur.
+                    <br>Time：7：30PM
+                    <br>Date：26/06/2013  Wednesday
+                    <br><br>
+                    <br>Senior Invest Professor, Mr.Daniel Ang (who possessed 0ver 20years in Finance Investment)
+will elaborate how the world and economic environments have changed, and are in the process. When it comes to newly sprouted things, many people would always find themselves in the following dilemmas:
+<br>
+<br>- They have problem identifying one when it firstly sprouts.
+<br>- They look down upon on them.
+<br>- They lack proper and specialized expertise to fully understand one even after identification.
+<br>- They keep running behind and end up letting opportunities slip through their fingers.
+<br>
+<br>Come and know more about Maxim’s “Three-Win” strategy. We help you manage your wealth in a better way!
+                    <br><br>
+                    <br>Please invite your friend to attend together, the talk is free, but seat is limited (only 200 seats). Please register early as you can.
+                    <br>Dennis Chai, +60122222305, +60108368888
+                    <?php } ?>
 
                         <br>
                         <br>
