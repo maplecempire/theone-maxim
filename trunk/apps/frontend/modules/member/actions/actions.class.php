@@ -71,6 +71,14 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/convertCp3ToCp1');
+            }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
@@ -741,6 +749,15 @@ class memberActions extends sfActions
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
         }*/
+
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->setFlash('errorMsg', "This function temporary out of service.");
+        }
+
         if ($this->getRequestParameter('bePlacementId', '') != "") {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
 
@@ -913,6 +930,14 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree2()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->setFlash('errorMsg', "This function temporary out of service.");
+            return $this->redirect('/member/placementTree');
+        }
         if ($this->getRequestParameter('uplineDistCode', '') == "" || $this->getRequestParameter('position', '') == "") {
             return $this->redirect('/member/placementTree');
         }
@@ -1305,6 +1330,14 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "Invalid Security password");
                 return $this->redirect('/member/memberRegistration');
             }*/
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/memberRegistration');
+            }
 
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
@@ -1746,6 +1779,16 @@ class memberActions extends sfActions
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
         }*/
+
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->setFlash('errorMsg', "This function temporary out of service.");
+            return $this->redirect('/member/memberRegistration');
+        }
+
         $userName = $this->getRequestParameter('userName','');
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $fcode = $userName;
@@ -3970,6 +4013,15 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executePlacementTree()
     {
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->setFlash('errorMsg', "This function temporary out of service.");
+            return $this->redirect('/member/summary');
+        }
+
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($distDB->getHideGenealogy() == "Y") {
             return $this->redirect('/member/summary');
         }
@@ -4634,6 +4686,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/transferEcash');
+            }
+
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if (($this->getRequestParameter('ecashAmount') + $processFee) > $ledgerAccountBalance) {
@@ -4758,6 +4819,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/transferEpoint');
             }*/
 
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/transferEpoint');
+            }
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             $sponsorId = $this->getRequestParameter('sponsorId');
@@ -4938,6 +5007,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
             }*/
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/transferCp2');
+            }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
                 $this->setFlash('errorMsg', "Transfer CP2 temporary out of service.");
                 return $this->redirect('/member/transferCp2');
@@ -5123,6 +5200,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
             }*/
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/transferCp3');
+            }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
                 $this->setFlash('errorMsg', "Transfer CP3 temporary out of service.");
                 return $this->redirect('/member/transferCp3');
@@ -6877,6 +6962,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/convertEcashToEpoint');
+            }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
                 $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
