@@ -13,7 +13,7 @@ abstract class BaseMlmDebitAccountPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDebitAccount';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,23 +53,32 @@ abstract class BaseMlmDebitAccountPeer {
 	const CONVERT_CP2_TO_CP1 = 'mlm_debit_account.CONVERT_CP2_TO_CP1';
 
 	
+	const TRANSFER_CP1 = 'mlm_debit_account.TRANSFER_CP1';
+
+	
+	const TRANSFER_CP2 = 'mlm_debit_account.TRANSFER_CP2';
+
+	
+	const TRANSFER_CP3 = 'mlm_debit_account.TRANSFER_CP3';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('DebitId', 'DistId', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'ConvertRpToCp1', 'ConvertCp3ToCp1', 'Cp3Withdrawal', 'EcashWithdrawal', 'ConvertCp2ToCp1', ),
-		BasePeer::TYPE_COLNAME => array (MlmDebitAccountPeer::DEBIT_ID, MlmDebitAccountPeer::DIST_ID, MlmDebitAccountPeer::CREATED_BY, MlmDebitAccountPeer::CREATED_ON, MlmDebitAccountPeer::UPDATED_BY, MlmDebitAccountPeer::UPDATED_ON, MlmDebitAccountPeer::CONVERT_RP_TO_CP1, MlmDebitAccountPeer::CONVERT_CP3_TO_CP1, MlmDebitAccountPeer::CP3_WITHDRAWAL, MlmDebitAccountPeer::ECASH_WITHDRAWAL, MlmDebitAccountPeer::CONVERT_CP2_TO_CP1, ),
-		BasePeer::TYPE_FIELDNAME => array ('debit_id', 'dist_id', 'created_by', 'created_on', 'updated_by', 'updated_on', 'convert_rp_to_cp1', 'convert_cp3_to_cp1', 'cp3_withdrawal', 'ecash_withdrawal', 'convert_cp2_to_cp1', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('DebitId', 'DistId', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'ConvertRpToCp1', 'ConvertCp3ToCp1', 'Cp3Withdrawal', 'EcashWithdrawal', 'ConvertCp2ToCp1', 'TransferCp1', 'TransferCp2', 'TransferCp3', ),
+		BasePeer::TYPE_COLNAME => array (MlmDebitAccountPeer::DEBIT_ID, MlmDebitAccountPeer::DIST_ID, MlmDebitAccountPeer::CREATED_BY, MlmDebitAccountPeer::CREATED_ON, MlmDebitAccountPeer::UPDATED_BY, MlmDebitAccountPeer::UPDATED_ON, MlmDebitAccountPeer::CONVERT_RP_TO_CP1, MlmDebitAccountPeer::CONVERT_CP3_TO_CP1, MlmDebitAccountPeer::CP3_WITHDRAWAL, MlmDebitAccountPeer::ECASH_WITHDRAWAL, MlmDebitAccountPeer::CONVERT_CP2_TO_CP1, MlmDebitAccountPeer::TRANSFER_CP1, MlmDebitAccountPeer::TRANSFER_CP2, MlmDebitAccountPeer::TRANSFER_CP3, ),
+		BasePeer::TYPE_FIELDNAME => array ('debit_id', 'dist_id', 'created_by', 'created_on', 'updated_by', 'updated_on', 'convert_rp_to_cp1', 'convert_cp3_to_cp1', 'cp3_withdrawal', 'ecash_withdrawal', 'convert_cp2_to_cp1', 'transfer_cp1', 'transfer_cp2', 'transfer_cp3', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('DebitId' => 0, 'DistId' => 1, 'CreatedBy' => 2, 'CreatedOn' => 3, 'UpdatedBy' => 4, 'UpdatedOn' => 5, 'ConvertRpToCp1' => 6, 'ConvertCp3ToCp1' => 7, 'Cp3Withdrawal' => 8, 'EcashWithdrawal' => 9, 'ConvertCp2ToCp1' => 10, ),
-		BasePeer::TYPE_COLNAME => array (MlmDebitAccountPeer::DEBIT_ID => 0, MlmDebitAccountPeer::DIST_ID => 1, MlmDebitAccountPeer::CREATED_BY => 2, MlmDebitAccountPeer::CREATED_ON => 3, MlmDebitAccountPeer::UPDATED_BY => 4, MlmDebitAccountPeer::UPDATED_ON => 5, MlmDebitAccountPeer::CONVERT_RP_TO_CP1 => 6, MlmDebitAccountPeer::CONVERT_CP3_TO_CP1 => 7, MlmDebitAccountPeer::CP3_WITHDRAWAL => 8, MlmDebitAccountPeer::ECASH_WITHDRAWAL => 9, MlmDebitAccountPeer::CONVERT_CP2_TO_CP1 => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('debit_id' => 0, 'dist_id' => 1, 'created_by' => 2, 'created_on' => 3, 'updated_by' => 4, 'updated_on' => 5, 'convert_rp_to_cp1' => 6, 'convert_cp3_to_cp1' => 7, 'cp3_withdrawal' => 8, 'ecash_withdrawal' => 9, 'convert_cp2_to_cp1' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('DebitId' => 0, 'DistId' => 1, 'CreatedBy' => 2, 'CreatedOn' => 3, 'UpdatedBy' => 4, 'UpdatedOn' => 5, 'ConvertRpToCp1' => 6, 'ConvertCp3ToCp1' => 7, 'Cp3Withdrawal' => 8, 'EcashWithdrawal' => 9, 'ConvertCp2ToCp1' => 10, 'TransferCp1' => 11, 'TransferCp2' => 12, 'TransferCp3' => 13, ),
+		BasePeer::TYPE_COLNAME => array (MlmDebitAccountPeer::DEBIT_ID => 0, MlmDebitAccountPeer::DIST_ID => 1, MlmDebitAccountPeer::CREATED_BY => 2, MlmDebitAccountPeer::CREATED_ON => 3, MlmDebitAccountPeer::UPDATED_BY => 4, MlmDebitAccountPeer::UPDATED_ON => 5, MlmDebitAccountPeer::CONVERT_RP_TO_CP1 => 6, MlmDebitAccountPeer::CONVERT_CP3_TO_CP1 => 7, MlmDebitAccountPeer::CP3_WITHDRAWAL => 8, MlmDebitAccountPeer::ECASH_WITHDRAWAL => 9, MlmDebitAccountPeer::CONVERT_CP2_TO_CP1 => 10, MlmDebitAccountPeer::TRANSFER_CP1 => 11, MlmDebitAccountPeer::TRANSFER_CP2 => 12, MlmDebitAccountPeer::TRANSFER_CP3 => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('debit_id' => 0, 'dist_id' => 1, 'created_by' => 2, 'created_on' => 3, 'updated_by' => 4, 'updated_on' => 5, 'convert_rp_to_cp1' => 6, 'convert_cp3_to_cp1' => 7, 'cp3_withdrawal' => 8, 'ecash_withdrawal' => 9, 'convert_cp2_to_cp1' => 10, 'transfer_cp1' => 11, 'transfer_cp2' => 12, 'transfer_cp3' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -144,6 +153,12 @@ abstract class BaseMlmDebitAccountPeer {
 		$criteria->addSelectColumn(MlmDebitAccountPeer::ECASH_WITHDRAWAL);
 
 		$criteria->addSelectColumn(MlmDebitAccountPeer::CONVERT_CP2_TO_CP1);
+
+		$criteria->addSelectColumn(MlmDebitAccountPeer::TRANSFER_CP1);
+
+		$criteria->addSelectColumn(MlmDebitAccountPeer::TRANSFER_CP2);
+
+		$criteria->addSelectColumn(MlmDebitAccountPeer::TRANSFER_CP3);
 
 	}
 

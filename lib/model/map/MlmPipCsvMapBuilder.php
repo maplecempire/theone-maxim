@@ -68,7 +68,7 @@ class MlmPipCsvMapBuilder {
 
 		$tMap->addColumn('LAST_BALANCE', 'LastBalance', 'double', CreoleTypes::DECIMAL, false, 12);
 
-		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 255);
 
 		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
 
