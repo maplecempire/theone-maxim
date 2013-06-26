@@ -79,7 +79,7 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
             }
@@ -145,7 +145,7 @@ class memberActions extends sfActions
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             //if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::TRUE, null, null, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
                 return $this->redirect('/member/convertRPToCp1');
             }
@@ -5015,7 +5015,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/transferCp2');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null)) {
                 $this->setFlash('errorMsg', "Transfer CP2 temporary out of service.");
                 return $this->redirect('/member/transferCp2');
             }
@@ -5208,7 +5208,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/transferCp3');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::TRUE, null, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null)) {
                 $this->setFlash('errorMsg', "Transfer CP3 temporary out of service.");
                 return $this->redirect('/member/transferCp3');
             }
@@ -5737,7 +5737,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::TRUE, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', "CP3 Withdrawal temporary out of service.");
                 return $this->redirect('/member/cp3Withdrawal');
@@ -5813,7 +5813,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::TRUE)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y)) {
                 $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -6970,7 +6970,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::TRUE, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null)) {
                 $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
             }
