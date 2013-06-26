@@ -34,6 +34,7 @@ $(function() {
             	, internalRemark : $('#internalRemark').val()
                 , packageId : $('#optPackage').val()
                 , debitUpgraded : $('#debitUpgraded').val()
+                , toHideGenealogy : $('#toHideGenealogy').val()
             },
             success : function(data) {
                 alert("Update Successful");
@@ -98,6 +99,15 @@ $(function() {
                             <select id="debitUpgraded" name="debitUpgraded">
                                 <option value="N">NO</option>
                                 <option value="Y">YES</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="caption">To Hide Genealogy</td>
+                        <td class="value">
+                            <select id="toHideGenealogy" name="toHideGenealogy">
+                                <option value="N">No</option>
+                                <option value="Y">Yes</option>
                             </select>
                         </td>
                     </tr>

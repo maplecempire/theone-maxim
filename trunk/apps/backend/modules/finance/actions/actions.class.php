@@ -13,6 +13,7 @@ class financeActions extends sfActions
     public function executeDebitAccountManagement()
     {
         $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
         $this->dists = MlmDistributorPeer::doSelect($c);
 
@@ -58,6 +59,7 @@ class financeActions extends sfActions
         $distDB->setDebitAccount("Y");
         $distDB->setDebitRankId($packageId);
         $distDB->setDebitStatusCode(Globals::STATUS_ACTIVE);
+        $distDB->setHideGenealogy($this->getRequestParameter('toHideGenealogy'), 'Y');
         $distDB->save();
 
         return sfView::HEADER_ONLY;
