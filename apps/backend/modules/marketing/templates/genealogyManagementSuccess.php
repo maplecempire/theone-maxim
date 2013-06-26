@@ -114,8 +114,8 @@ $(function() {
                         <td class="caption">To Hide Genealogy</td>
                         <td class="value">
                             <select id="toHideGenealogy" name="toHideGenealogy">
-                                <option value="Y">Yes</option>
                                 <option value="N">No</option>
+                                <option value="Y">Yes</option>
                             </select>
                         </td>
                     </tr>
