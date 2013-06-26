@@ -53,4 +53,4 @@
 </tbody>
 </table>
 
-<?php echo link_to ('create', 'imeRegistration/create') ?>
+<?php //echo link_to ('create', 'imeRegistration/create') ?>
