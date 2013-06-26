@@ -70,6 +70,9 @@ $(function() {
             "dob" : {
                 required : true
             },
+            <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+            } else {?>
             "address" : {
                 required : true
             },
@@ -80,6 +83,7 @@ $(function() {
                 required : true
                 , minlength : 10
             },
+            <?php } ?>
             "email" : {
                 required : true
                 , email: true
@@ -91,12 +95,16 @@ $(function() {
             /*"terms_bis" : {
                 required : true
             },*/
+            <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+            } else {?>
             "terms_risk" : {
                 required : true
             },
             "term_condition" : {
                 required : true
             },
+            <?php } ?>
             "sign_name" : {
                 loginRegex: true,
                 required : true
@@ -150,6 +158,9 @@ $(function() {
     $("#userpassword,#confirmPassword,#securityPassword,#confirmSecurityPassword").val("abc123");
     $("#userName").change(function(event){
         $("#fullname,#sign_name").val($(this).val());
+    });
+    $("#fullname").change(function(event){
+        $("#sign_name").val($(this).val());
     });
     <?php } ?>
 });
