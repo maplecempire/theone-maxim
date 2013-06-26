@@ -53,9 +53,11 @@ foreach ($ime_registrations as $ime_registration): ?>
 <!--      <td>--><?php //echo $ime_registration->getUpdatedBy() ?><!--</td>-->
 <!--      <td>--><?php //echo $ime_registration->getUpdatedOn() ?><!--</td>-->
       <td><?php
+            $distDB = MlmDistributorPeer::retrieveByPK($ime_registration->getDistId());
             $leader = "";
+            $leaderArrs = explode(",", Globals::GROUP_LEADER);
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($distDB->getTreeStructure(), $leaderArrs[$i]);
                 if ($pos === false) { // note: three equal signs
 
                 } else {
