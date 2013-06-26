@@ -4013,15 +4013,6 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executePlacementTree()
     {
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
-        if ($pos === false) { // note: three equal signs
-
-        } else {
-            $this->setFlash('errorMsg', "This function temporary out of service.");
-            return $this->redirect('/member/summary');
-        }
-
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($distDB->getHideGenealogy() == "Y") {
             return $this->redirect('/member/summary');
         }
@@ -4030,6 +4021,15 @@ We look forward to your custom in the near future. Should you have any queries, 
             return $this->redirect('home/maintenance');
         }*/
         if ($this->getRequestParameter('doAction') == "save") {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->setFlash('errorMsg', "This function temporary out of service.");
+                return $this->redirect('/member/summary');
+            }
+
             $uplineDistCode = $this->getRequestParameter('uplineDistCode');
             $uplinePosition = $this->getRequestParameter('uplinePosition');
             $sponsorDistId = $this->getRequestParameter('sponsorDistId');
