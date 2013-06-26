@@ -17,6 +17,7 @@ abstract class Globals {
     const COUNTRY_OTHER = "Others";
     const YES = 1;
     const NO = 0;
+    const YES_Y = 'Y';
     const TRUE = 'T';
     const FALSE = 'F';
     const SYSTEM_USER_ID = '0';
