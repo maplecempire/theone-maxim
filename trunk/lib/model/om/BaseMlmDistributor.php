@@ -297,7 +297,35 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 
 	
+	protected $abfx_ref;
+
+
+	
+	protected $abfx_upline1;
+
+
+	
+	protected $abfx_position;
+
+
+	
 	protected $abfx_remark;
+
+
+	
+	protected $abfx_ewallet = 0;
+
+
+	
+	protected $abfx_epoint = 0;
+
+
+	
+	protected $abfx_pairing_left = 0;
+
+
+	
+	protected $abfx_pairing_right = 0;
 
 
 	
@@ -306,6 +334,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 	
 	protected $migrated_placement_status = 'PEND';
+
+
+	
+	protected $migrate_retry = 0;
 
 	
 	protected $alreadyInSave = false;
@@ -908,10 +940,59 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getAbfxRef()
+	{
+
+		return $this->abfx_ref;
+	}
+
+	
+	public function getAbfxUpline1()
+	{
+
+		return $this->abfx_upline1;
+	}
+
+	
+	public function getAbfxPosition()
+	{
+
+		return $this->abfx_position;
+	}
+
+	
 	public function getAbfxRemark()
 	{
 
 		return $this->abfx_remark;
+	}
+
+	
+	public function getAbfxEwallet()
+	{
+
+		return $this->abfx_ewallet;
+	}
+
+	
+	public function getAbfxEpoint()
+	{
+
+		return $this->abfx_epoint;
+	}
+
+	
+	public function getAbfxPairingLeft()
+	{
+
+		return $this->abfx_pairing_left;
+	}
+
+	
+	public function getAbfxPairingRight()
+	{
+
+		return $this->abfx_pairing_right;
 	}
 
 	
@@ -926,6 +1007,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->migrated_placement_status;
+	}
+
+	
+	public function getMigrateRetry()
+	{
+
+		return $this->migrate_retry;
 	}
 
 	
@@ -2153,6 +2241,57 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setAbfxRef($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->abfx_ref !== $v) {
+			$this->abfx_ref = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_REF;
+		}
+
+	} 
+
+	
+	public function setAbfxUpline1($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->abfx_upline1 !== $v) {
+			$this->abfx_upline1 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_UPLINE1;
+		}
+
+	} 
+
+	
+	public function setAbfxPosition($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->abfx_position !== $v) {
+			$this->abfx_position = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_POSITION;
+		}
+
+	} 
+
+	
 	public function setAbfxRemark($v)
 	{
 
@@ -2165,6 +2304,50 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->abfx_remark !== $v) {
 			$this->abfx_remark = $v;
 			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_REMARK;
+		}
+
+	} 
+
+	
+	public function setAbfxEwallet($v)
+	{
+
+		if ($this->abfx_ewallet !== $v || $v === 0) {
+			$this->abfx_ewallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_EWALLET;
+		}
+
+	} 
+
+	
+	public function setAbfxEpoint($v)
+	{
+
+		if ($this->abfx_epoint !== $v || $v === 0) {
+			$this->abfx_epoint = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_EPOINT;
+		}
+
+	} 
+
+	
+	public function setAbfxPairingLeft($v)
+	{
+
+		if ($this->abfx_pairing_left !== $v || $v === 0) {
+			$this->abfx_pairing_left = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_PAIRING_LEFT;
+		}
+
+	} 
+
+	
+	public function setAbfxPairingRight($v)
+	{
+
+		if ($this->abfx_pairing_right !== $v || $v === 0) {
+			$this->abfx_pairing_right = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ABFX_PAIRING_RIGHT;
 		}
 
 	} 
@@ -2199,6 +2382,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->migrated_placement_status !== $v || $v === 'PEND') {
 			$this->migrated_placement_status = $v;
 			$this->modifiedColumns[] = MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS;
+		}
+
+	} 
+
+	
+	public function setMigrateRetry($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->migrate_retry !== $v || $v === 0) {
+			$this->migrate_retry = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MIGRATE_RETRY;
 		}
 
 	} 
@@ -2352,17 +2552,33 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->abfx_user_id = $rs->getInt($startcol + 71);
 
-			$this->abfx_remark = $rs->getString($startcol + 72);
+			$this->abfx_ref = $rs->getInt($startcol + 72);
 
-			$this->migrated_status = $rs->getString($startcol + 73);
+			$this->abfx_upline1 = $rs->getInt($startcol + 73);
 
-			$this->migrated_placement_status = $rs->getString($startcol + 74);
+			$this->abfx_position = $rs->getString($startcol + 74);
+
+			$this->abfx_remark = $rs->getString($startcol + 75);
+
+			$this->abfx_ewallet = $rs->getFloat($startcol + 76);
+
+			$this->abfx_epoint = $rs->getFloat($startcol + 77);
+
+			$this->abfx_pairing_left = $rs->getFloat($startcol + 78);
+
+			$this->abfx_pairing_right = $rs->getFloat($startcol + 79);
+
+			$this->migrated_status = $rs->getString($startcol + 80);
+
+			$this->migrated_placement_status = $rs->getString($startcol + 81);
+
+			$this->migrate_retry = $rs->getInt($startcol + 82);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 75; 
+						return $startcol + 83; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2724,13 +2940,37 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 				return $this->getAbfxUserId();
 				break;
 			case 72:
-				return $this->getAbfxRemark();
+				return $this->getAbfxRef();
 				break;
 			case 73:
-				return $this->getMigratedStatus();
+				return $this->getAbfxUpline1();
 				break;
 			case 74:
+				return $this->getAbfxPosition();
+				break;
+			case 75:
+				return $this->getAbfxRemark();
+				break;
+			case 76:
+				return $this->getAbfxEwallet();
+				break;
+			case 77:
+				return $this->getAbfxEpoint();
+				break;
+			case 78:
+				return $this->getAbfxPairingLeft();
+				break;
+			case 79:
+				return $this->getAbfxPairingRight();
+				break;
+			case 80:
+				return $this->getMigratedStatus();
+				break;
+			case 81:
 				return $this->getMigratedPlacementStatus();
+				break;
+			case 82:
+				return $this->getMigrateRetry();
 				break;
 			default:
 				return null;
@@ -2814,9 +3054,17 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[69] => $this->getHideGenealogy(),
 			$keys[70] => $this->getFromAbfx(),
 			$keys[71] => $this->getAbfxUserId(),
-			$keys[72] => $this->getAbfxRemark(),
-			$keys[73] => $this->getMigratedStatus(),
-			$keys[74] => $this->getMigratedPlacementStatus(),
+			$keys[72] => $this->getAbfxRef(),
+			$keys[73] => $this->getAbfxUpline1(),
+			$keys[74] => $this->getAbfxPosition(),
+			$keys[75] => $this->getAbfxRemark(),
+			$keys[76] => $this->getAbfxEwallet(),
+			$keys[77] => $this->getAbfxEpoint(),
+			$keys[78] => $this->getAbfxPairingLeft(),
+			$keys[79] => $this->getAbfxPairingRight(),
+			$keys[80] => $this->getMigratedStatus(),
+			$keys[81] => $this->getMigratedPlacementStatus(),
+			$keys[82] => $this->getMigrateRetry(),
 		);
 		return $result;
 	}
@@ -3049,13 +3297,37 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 				$this->setAbfxUserId($value);
 				break;
 			case 72:
-				$this->setAbfxRemark($value);
+				$this->setAbfxRef($value);
 				break;
 			case 73:
-				$this->setMigratedStatus($value);
+				$this->setAbfxUpline1($value);
 				break;
 			case 74:
+				$this->setAbfxPosition($value);
+				break;
+			case 75:
+				$this->setAbfxRemark($value);
+				break;
+			case 76:
+				$this->setAbfxEwallet($value);
+				break;
+			case 77:
+				$this->setAbfxEpoint($value);
+				break;
+			case 78:
+				$this->setAbfxPairingLeft($value);
+				break;
+			case 79:
+				$this->setAbfxPairingRight($value);
+				break;
+			case 80:
+				$this->setMigratedStatus($value);
+				break;
+			case 81:
 				$this->setMigratedPlacementStatus($value);
+				break;
+			case 82:
+				$this->setMigrateRetry($value);
 				break;
 		} 	}
 
@@ -3136,9 +3408,17 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[69], $arr)) $this->setHideGenealogy($arr[$keys[69]]);
 		if (array_key_exists($keys[70], $arr)) $this->setFromAbfx($arr[$keys[70]]);
 		if (array_key_exists($keys[71], $arr)) $this->setAbfxUserId($arr[$keys[71]]);
-		if (array_key_exists($keys[72], $arr)) $this->setAbfxRemark($arr[$keys[72]]);
-		if (array_key_exists($keys[73], $arr)) $this->setMigratedStatus($arr[$keys[73]]);
-		if (array_key_exists($keys[74], $arr)) $this->setMigratedPlacementStatus($arr[$keys[74]]);
+		if (array_key_exists($keys[72], $arr)) $this->setAbfxRef($arr[$keys[72]]);
+		if (array_key_exists($keys[73], $arr)) $this->setAbfxUpline1($arr[$keys[73]]);
+		if (array_key_exists($keys[74], $arr)) $this->setAbfxPosition($arr[$keys[74]]);
+		if (array_key_exists($keys[75], $arr)) $this->setAbfxRemark($arr[$keys[75]]);
+		if (array_key_exists($keys[76], $arr)) $this->setAbfxEwallet($arr[$keys[76]]);
+		if (array_key_exists($keys[77], $arr)) $this->setAbfxEpoint($arr[$keys[77]]);
+		if (array_key_exists($keys[78], $arr)) $this->setAbfxPairingLeft($arr[$keys[78]]);
+		if (array_key_exists($keys[79], $arr)) $this->setAbfxPairingRight($arr[$keys[79]]);
+		if (array_key_exists($keys[80], $arr)) $this->setMigratedStatus($arr[$keys[80]]);
+		if (array_key_exists($keys[81], $arr)) $this->setMigratedPlacementStatus($arr[$keys[81]]);
+		if (array_key_exists($keys[82], $arr)) $this->setMigrateRetry($arr[$keys[82]]);
 	}
 
 	
@@ -3218,9 +3498,17 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::HIDE_GENEALOGY)) $criteria->add(MlmDistributorPeer::HIDE_GENEALOGY, $this->hide_genealogy);
 		if ($this->isColumnModified(MlmDistributorPeer::FROM_ABFX)) $criteria->add(MlmDistributorPeer::FROM_ABFX, $this->from_abfx);
 		if ($this->isColumnModified(MlmDistributorPeer::ABFX_USER_ID)) $criteria->add(MlmDistributorPeer::ABFX_USER_ID, $this->abfx_user_id);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_REF)) $criteria->add(MlmDistributorPeer::ABFX_REF, $this->abfx_ref);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_UPLINE1)) $criteria->add(MlmDistributorPeer::ABFX_UPLINE1, $this->abfx_upline1);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_POSITION)) $criteria->add(MlmDistributorPeer::ABFX_POSITION, $this->abfx_position);
 		if ($this->isColumnModified(MlmDistributorPeer::ABFX_REMARK)) $criteria->add(MlmDistributorPeer::ABFX_REMARK, $this->abfx_remark);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_EWALLET)) $criteria->add(MlmDistributorPeer::ABFX_EWALLET, $this->abfx_ewallet);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_EPOINT)) $criteria->add(MlmDistributorPeer::ABFX_EPOINT, $this->abfx_epoint);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_PAIRING_LEFT)) $criteria->add(MlmDistributorPeer::ABFX_PAIRING_LEFT, $this->abfx_pairing_left);
+		if ($this->isColumnModified(MlmDistributorPeer::ABFX_PAIRING_RIGHT)) $criteria->add(MlmDistributorPeer::ABFX_PAIRING_RIGHT, $this->abfx_pairing_right);
 		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_STATUS, $this->migrated_status);
 		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS, $this->migrated_placement_status);
+		if ($this->isColumnModified(MlmDistributorPeer::MIGRATE_RETRY)) $criteria->add(MlmDistributorPeer::MIGRATE_RETRY, $this->migrate_retry);
 
 		return $criteria;
 	}
@@ -3393,11 +3681,27 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 		$copyObj->setAbfxUserId($this->abfx_user_id);
 
+		$copyObj->setAbfxRef($this->abfx_ref);
+
+		$copyObj->setAbfxUpline1($this->abfx_upline1);
+
+		$copyObj->setAbfxPosition($this->abfx_position);
+
 		$copyObj->setAbfxRemark($this->abfx_remark);
+
+		$copyObj->setAbfxEwallet($this->abfx_ewallet);
+
+		$copyObj->setAbfxEpoint($this->abfx_epoint);
+
+		$copyObj->setAbfxPairingLeft($this->abfx_pairing_left);
+
+		$copyObj->setAbfxPairingRight($this->abfx_pairing_right);
 
 		$copyObj->setMigratedStatus($this->migrated_status);
 
 		$copyObj->setMigratedPlacementStatus($this->migrated_placement_status);
+
+		$copyObj->setMigrateRetry($this->migrate_retry);
 
 
 		$copyObj->setNew(true);

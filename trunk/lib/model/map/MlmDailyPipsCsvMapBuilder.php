@@ -42,7 +42,7 @@ class MlmDailyPipsCsvMapBuilder {
 
 		$tMap->addColumn('LOGIN_ID', 'LoginId', 'int', CreoleTypes::INTEGER, false, null);
 
-		$tMap->addColumn('LOGIN_NAME', 'LoginName', 'string', CreoleTypes::VARCHAR, true, 255);
+		$tMap->addColumn('LOGIN_NAME', 'LoginName', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('BALANCE', 'Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 

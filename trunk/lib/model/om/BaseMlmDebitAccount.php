@@ -51,6 +51,18 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	
 	protected $convert_cp2_to_cp1 = '1';
 
+
+	
+	protected $transfer_cp1 = '1';
+
+
+	
+	protected $transfer_cp2 = '1';
+
+
+	
+	protected $transfer_cp3 = '1';
+
 	
 	protected $alreadyInSave = false;
 
@@ -162,6 +174,27 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	{
 
 		return $this->convert_cp2_to_cp1;
+	}
+
+	
+	public function getTransferCp1()
+	{
+
+		return $this->transfer_cp1;
+	}
+
+	
+	public function getTransferCp2()
+	{
+
+		return $this->transfer_cp2;
+	}
+
+	
+	public function getTransferCp3()
+	{
+
+		return $this->transfer_cp3;
 	}
 
 	
@@ -354,6 +387,57 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setTransferCp1($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->transfer_cp1 !== $v || $v === '1') {
+			$this->transfer_cp1 = $v;
+			$this->modifiedColumns[] = MlmDebitAccountPeer::TRANSFER_CP1;
+		}
+
+	} 
+
+	
+	public function setTransferCp2($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->transfer_cp2 !== $v || $v === '1') {
+			$this->transfer_cp2 = $v;
+			$this->modifiedColumns[] = MlmDebitAccountPeer::TRANSFER_CP2;
+		}
+
+	} 
+
+	
+	public function setTransferCp3($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->transfer_cp3 !== $v || $v === '1') {
+			$this->transfer_cp3 = $v;
+			$this->modifiedColumns[] = MlmDebitAccountPeer::TRANSFER_CP3;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -380,11 +464,17 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 
 			$this->convert_cp2_to_cp1 = $rs->getString($startcol + 10);
 
+			$this->transfer_cp1 = $rs->getString($startcol + 11);
+
+			$this->transfer_cp2 = $rs->getString($startcol + 12);
+
+			$this->transfer_cp3 = $rs->getString($startcol + 13);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 14; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDebitAccount object", $e);
 		}
@@ -562,6 +652,15 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			case 10:
 				return $this->getConvertCp2ToCp1();
 				break;
+			case 11:
+				return $this->getTransferCp1();
+				break;
+			case 12:
+				return $this->getTransferCp2();
+				break;
+			case 13:
+				return $this->getTransferCp3();
+				break;
 			default:
 				return null;
 				break;
@@ -583,6 +682,9 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			$keys[8] => $this->getCp3Withdrawal(),
 			$keys[9] => $this->getEcashWithdrawal(),
 			$keys[10] => $this->getConvertCp2ToCp1(),
+			$keys[11] => $this->getTransferCp1(),
+			$keys[12] => $this->getTransferCp2(),
+			$keys[13] => $this->getTransferCp3(),
 		);
 		return $result;
 	}
@@ -631,6 +733,15 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			case 10:
 				$this->setConvertCp2ToCp1($value);
 				break;
+			case 11:
+				$this->setTransferCp1($value);
+				break;
+			case 12:
+				$this->setTransferCp2($value);
+				break;
+			case 13:
+				$this->setTransferCp3($value);
+				break;
 		} 	}
 
 	
@@ -649,6 +760,9 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setCp3Withdrawal($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setEcashWithdrawal($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setConvertCp2ToCp1($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setTransferCp1($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setTransferCp2($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setTransferCp3($arr[$keys[13]]);
 	}
 
 	
@@ -667,6 +781,9 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDebitAccountPeer::CP3_WITHDRAWAL)) $criteria->add(MlmDebitAccountPeer::CP3_WITHDRAWAL, $this->cp3_withdrawal);
 		if ($this->isColumnModified(MlmDebitAccountPeer::ECASH_WITHDRAWAL)) $criteria->add(MlmDebitAccountPeer::ECASH_WITHDRAWAL, $this->ecash_withdrawal);
 		if ($this->isColumnModified(MlmDebitAccountPeer::CONVERT_CP2_TO_CP1)) $criteria->add(MlmDebitAccountPeer::CONVERT_CP2_TO_CP1, $this->convert_cp2_to_cp1);
+		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP1)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP1, $this->transfer_cp1);
+		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP2)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP2, $this->transfer_cp2);
+		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP3)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP3, $this->transfer_cp3);
 
 		return $criteria;
 	}
@@ -716,6 +833,12 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		$copyObj->setEcashWithdrawal($this->ecash_withdrawal);
 
 		$copyObj->setConvertCp2ToCp1($this->convert_cp2_to_cp1);
+
+		$copyObj->setTransferCp1($this->transfer_cp1);
+
+		$copyObj->setTransferCp2($this->transfer_cp2);
+
+		$copyObj->setTransferCp3($this->transfer_cp3);
 
 
 		$copyObj->setNew(true);

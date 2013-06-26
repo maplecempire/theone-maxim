@@ -79,7 +79,7 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
             }
@@ -145,7 +145,7 @@ class memberActions extends sfActions
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             //if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
                 return $this->redirect('/member/convertRPToCp1');
             }
@@ -4814,10 +4814,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, Globals::YES_Y, null, null)) {
                 $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
-            }*/
+            }
 
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
@@ -5003,20 +5003,16 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
-                $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
-                return $this->redirect('/member/transferEpoint');
-            }*/
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, Globals::YES_Y, null)) {
+                $this->setFlash('errorMsg', "CP2 Transfer temporary out of service.");
+                return $this->redirect('/member/transferCp2');
+            }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
-                return $this->redirect('/member/transferCp2');
-            }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null)) {
-                $this->setFlash('errorMsg', "Transfer CP2 temporary out of service.");
                 return $this->redirect('/member/transferCp2');
             }
 
@@ -5196,20 +5192,16 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
-                $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
-                return $this->redirect('/member/transferEpoint');
-            }*/
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, null, Globals::YES_Y)) {
+                $this->setFlash('errorMsg', "CP3 Transfer temporary out of service.");
+                return $this->redirect('/member/transferCp3');
+            }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
-                return $this->redirect('/member/transferCp3');
-            }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null)) {
-                $this->setFlash('errorMsg', "Transfer CP3 temporary out of service.");
                 return $this->redirect('/member/transferCp3');
             }
 
@@ -5737,7 +5729,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', "CP3 Withdrawal temporary out of service.");
                 return $this->redirect('/member/cp3Withdrawal');
@@ -5813,7 +5805,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
                 $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -6970,7 +6962,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null)) {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
             }
@@ -8862,7 +8854,7 @@ Wish you all the best.
         return $result;
     }
 
-    function checkIsDebitedAccount($distId, $convertRpToCp1, $convertCp3ToCp1, $cp3Withdrawal, $convertCp2ToCp1, $ecashWithdrawal) {
+    function checkIsDebitedAccount($distId, $convertRpToCp1, $convertCp3ToCp1, $cp3Withdrawal, $convertCp2ToCp1, $ecashWithdrawal, $transferCp1, $transferCp2, $transferCp3) {
         $c = new Criteria();
 
         $c->add(MlmDebitAccountPeer::DIST_ID, $distId);
@@ -8880,6 +8872,15 @@ Wish you all the best.
         }
         if ($cp3Withdrawal != null) {
             $c->add(MlmDebitAccountPeer::CP3_WITHDRAWAL, $cp3Withdrawal);
+        }
+        if ($transferCp1 != null) {
+            $c->add(MlmDebitAccountPeer::TRANSFER_CP1, $transferCp1);
+        }
+        if ($transferCp2 != null) {
+            $c->add(MlmDebitAccountPeer::TRANSFER_CP2, $transferCp2);
+        }
+        if ($transferCp3 != null) {
+            $c->add(MlmDebitAccountPeer::TRANSFER_CP3, $transferCp3);
         }
         $debitAccountDB = MlmDebitAccountPeer::doSelectOne($c);
 

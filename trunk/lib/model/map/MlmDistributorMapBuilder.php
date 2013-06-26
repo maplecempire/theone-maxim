@@ -176,11 +176,27 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('ABFX_USER_ID', 'AbfxUserId', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('ABFX_REF', 'AbfxRef', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('ABFX_UPLINE1', 'AbfxUpline1', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('ABFX_POSITION', 'AbfxPosition', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addColumn('ABFX_REMARK', 'AbfxRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('ABFX_EWALLET', 'AbfxEwallet', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('ABFX_EPOINT', 'AbfxEpoint', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('ABFX_PAIRING_LEFT', 'AbfxPairingLeft', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('ABFX_PAIRING_RIGHT', 'AbfxPairingRight', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('MIGRATED_STATUS', 'MigratedStatus', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('MIGRATED_PLACEMENT_STATUS', 'MigratedPlacementStatus', 'string', CreoleTypes::VARCHAR, true, 10);
+
+		$tMap->addColumn('MIGRATE_RETRY', 'MigrateRetry', 'int', CreoleTypes::INTEGER, false, null);
 
 	} 
 } 
