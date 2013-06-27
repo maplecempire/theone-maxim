@@ -218,14 +218,14 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <!--<tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Desired Name On Card') ?></td>
+                    <td><?php /*echo __('Desired Name On Card') */?></td>
                     <td><input name="nameOnCard"  type="text" id="nameOnCard"
-                                             size="30" value="<?php echo $mlm_debit_card_registration->getNameOnCard() ?>"/>
+                                             size="30" value="<?php /*echo $mlm_debit_card_registration->getNameOnCard() */?>"/>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
