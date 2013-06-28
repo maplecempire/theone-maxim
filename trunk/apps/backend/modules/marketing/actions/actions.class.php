@@ -2000,7 +2000,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                    * ROI Divident
                    * ***************************************************/
                     $dateUtil = new DateUtil();
-                    $currentDate = $dateUtil->formatDate("Y-m-d", $tbl_distributor->getCreatedOn()) . " 00:00:00";
+                    $currentDate = $dateUtil->formatDate("Y-m-d", $tbl_distributor->getActiveDatetime()) . " 00:00:00";
                     $currentDate_timestamp = strtotime($currentDate);
                     //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
                     $dividendDate = strtotime("+1 months", $currentDate_timestamp);
