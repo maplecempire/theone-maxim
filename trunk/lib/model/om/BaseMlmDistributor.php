@@ -339,6 +339,22 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $migrate_retry = 0;
 
+
+	
+	protected $nominee_name;
+
+
+	
+	protected $nominee_ic;
+
+
+	
+	protected $nominee_relationship;
+
+
+	
+	protected $nominee_contactno;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1014,6 +1030,34 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->migrate_retry;
+	}
+
+	
+	public function getNomineeName()
+	{
+
+		return $this->nominee_name;
+	}
+
+	
+	public function getNomineeIc()
+	{
+
+		return $this->nominee_ic;
+	}
+
+	
+	public function getNomineeRelationship()
+	{
+
+		return $this->nominee_relationship;
+	}
+
+	
+	public function getNomineeContactno()
+	{
+
+		return $this->nominee_contactno;
 	}
 
 	
@@ -2404,6 +2448,74 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setNomineeName($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->nominee_name !== $v) {
+			$this->nominee_name = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NOMINEE_NAME;
+		}
+
+	} 
+
+	
+	public function setNomineeIc($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->nominee_ic !== $v) {
+			$this->nominee_ic = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NOMINEE_IC;
+		}
+
+	} 
+
+	
+	public function setNomineeRelationship($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->nominee_relationship !== $v) {
+			$this->nominee_relationship = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NOMINEE_RELATIONSHIP;
+		}
+
+	} 
+
+	
+	public function setNomineeContactno($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->nominee_contactno !== $v) {
+			$this->nominee_contactno = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NOMINEE_CONTACTNO;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2574,11 +2686,19 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->migrate_retry = $rs->getInt($startcol + 82);
 
+			$this->nominee_name = $rs->getString($startcol + 83);
+
+			$this->nominee_ic = $rs->getString($startcol + 84);
+
+			$this->nominee_relationship = $rs->getString($startcol + 85);
+
+			$this->nominee_contactno = $rs->getString($startcol + 86);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 83; 
+						return $startcol + 87; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -2972,6 +3092,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 82:
 				return $this->getMigrateRetry();
 				break;
+			case 83:
+				return $this->getNomineeName();
+				break;
+			case 84:
+				return $this->getNomineeIc();
+				break;
+			case 85:
+				return $this->getNomineeRelationship();
+				break;
+			case 86:
+				return $this->getNomineeContactno();
+				break;
 			default:
 				return null;
 				break;
@@ -3065,6 +3197,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[80] => $this->getMigratedStatus(),
 			$keys[81] => $this->getMigratedPlacementStatus(),
 			$keys[82] => $this->getMigrateRetry(),
+			$keys[83] => $this->getNomineeName(),
+			$keys[84] => $this->getNomineeIc(),
+			$keys[85] => $this->getNomineeRelationship(),
+			$keys[86] => $this->getNomineeContactno(),
 		);
 		return $result;
 	}
@@ -3329,6 +3465,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 82:
 				$this->setMigrateRetry($value);
 				break;
+			case 83:
+				$this->setNomineeName($value);
+				break;
+			case 84:
+				$this->setNomineeIc($value);
+				break;
+			case 85:
+				$this->setNomineeRelationship($value);
+				break;
+			case 86:
+				$this->setNomineeContactno($value);
+				break;
 		} 	}
 
 	
@@ -3419,6 +3567,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[80], $arr)) $this->setMigratedStatus($arr[$keys[80]]);
 		if (array_key_exists($keys[81], $arr)) $this->setMigratedPlacementStatus($arr[$keys[81]]);
 		if (array_key_exists($keys[82], $arr)) $this->setMigrateRetry($arr[$keys[82]]);
+		if (array_key_exists($keys[83], $arr)) $this->setNomineeName($arr[$keys[83]]);
+		if (array_key_exists($keys[84], $arr)) $this->setNomineeIc($arr[$keys[84]]);
+		if (array_key_exists($keys[85], $arr)) $this->setNomineeRelationship($arr[$keys[85]]);
+		if (array_key_exists($keys[86], $arr)) $this->setNomineeContactno($arr[$keys[86]]);
 	}
 
 	
@@ -3509,6 +3661,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_STATUS, $this->migrated_status);
 		if ($this->isColumnModified(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS)) $criteria->add(MlmDistributorPeer::MIGRATED_PLACEMENT_STATUS, $this->migrated_placement_status);
 		if ($this->isColumnModified(MlmDistributorPeer::MIGRATE_RETRY)) $criteria->add(MlmDistributorPeer::MIGRATE_RETRY, $this->migrate_retry);
+		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_NAME)) $criteria->add(MlmDistributorPeer::NOMINEE_NAME, $this->nominee_name);
+		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_IC)) $criteria->add(MlmDistributorPeer::NOMINEE_IC, $this->nominee_ic);
+		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_RELATIONSHIP)) $criteria->add(MlmDistributorPeer::NOMINEE_RELATIONSHIP, $this->nominee_relationship);
+		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_CONTACTNO)) $criteria->add(MlmDistributorPeer::NOMINEE_CONTACTNO, $this->nominee_contactno);
 
 		return $criteria;
 	}
@@ -3702,6 +3858,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setMigratedPlacementStatus($this->migrated_placement_status);
 
 		$copyObj->setMigrateRetry($this->migrate_retry);
+
+		$copyObj->setNomineeName($this->nominee_name);
+
+		$copyObj->setNomineeIc($this->nominee_ic);
+
+		$copyObj->setNomineeRelationship($this->nominee_relationship);
+
+		$copyObj->setNomineeContactno($this->nominee_contactno);
 
 
 		$copyObj->setNew(true);

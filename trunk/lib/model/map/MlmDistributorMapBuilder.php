@@ -158,7 +158,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('PRODUCT_FXGOLD', 'ProductFxgold', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('LOAN_ACCOUNT', 'LoanAccount', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -197,6 +197,14 @@ class MlmDistributorMapBuilder {
 		$tMap->addColumn('MIGRATED_PLACEMENT_STATUS', 'MigratedPlacementStatus', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('MIGRATE_RETRY', 'MigrateRetry', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('NOMINEE_NAME', 'NomineeName', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMINEE_IC', 'NomineeIc', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMINEE_RELATIONSHIP', 'NomineeRelationship', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMINEE_CONTACTNO', 'NomineeContactno', 'string', CreoleTypes::VARCHAR, false, 100);
 
 	} 
 } 

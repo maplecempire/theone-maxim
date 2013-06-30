@@ -1427,6 +1427,23 @@ class memberActions extends sfActions
         return $this->redirect('/member/viewProfile');
     }
 
+    public function executeUpdateBeneficiary()
+    {
+        $mlm_distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->forward404Unless($mlm_distributor);
+
+        $mlm_distributor->setNomineeName($this->getRequestParameter('nomineeName'));
+        $mlm_distributor->setNomineeIc($this->getRequestParameter('nomineeIc'));
+        $mlm_distributor->setNomineeRelationship($this->getRequestParameter('nomineeRelationship'));
+        $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
+        $mlm_distributor->save();
+
+        $this->setFlash('successMsg', "Beneficiary update successfully");
+
+        //return $this->redirect('/member/viewBankInformation');
+        return $this->redirect('/member/viewProfile');
+    }
+
     public function executeDoRegister()
     {
         /*require_once('recaptchalib.php');
@@ -1469,7 +1486,7 @@ class memberActions extends sfActions
 
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+            //$c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
@@ -1536,6 +1553,11 @@ class memberActions extends sfActions
             $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
             $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
             $mlm_distributor->setSelfRegister("Y");
+
+            $mlm_distributor->setNomineeName($this->getRequestParameter('nomineeName'));
+            $mlm_distributor->setNomineeIc($this->getRequestParameter('nomineeIc'));
+            $mlm_distributor->setNomineeRelationship($this->getRequestParameter('nomineeRelationship'));
+            $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
 
             if ($this->getRequestParameter('productCode') == "fxgold") {
                 $mlm_distributor->setProductMte("Y");
@@ -1962,6 +1984,12 @@ class memberActions extends sfActions
                 if ($this->getRequestParameter('productCode') == "mte") {
                     $mlm_distributor->setProductFxgold("Y");
                 }
+
+                $mlm_distributor->setNomineeName($this->getRequestParameter('nomineeName'));
+                $mlm_distributor->setNomineeIc($this->getRequestParameter('nomineeIc'));
+                $mlm_distributor->setNomineeRelationship($this->getRequestParameter('nomineeRelationship'));
+                $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
+
                 $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->save();
