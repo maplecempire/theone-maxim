@@ -72,7 +72,7 @@ $(function() {
     });
     $("#btnUpdate").button({
         icons: {
-            primary: "ui-icon-circle-arrow-n"
+            primary: "ui-icon-circle-check"
         }
     });
     $("#btnUpload").button({
@@ -116,7 +116,7 @@ $(function() {
 
     $("#btnBankUpdate").button({
         icons: {
-            primary: "ui-icon-circle-arrow-n"
+            primary: "ui-icon-circle-check"
         }
     });
 
@@ -149,7 +149,13 @@ $(function() {
 
     $("#btnPasswordUpdate").button({
         icons: {
-            primary: "ui-icon-circle-arrow-n"
+            primary: "ui-icon-circle-check"
+        }
+    });
+
+    $("#btnBeneficiaryUpdate").button({
+        icons: {
+            primary: "ui-icon-circle-check"
         }
     });
 
@@ -181,7 +187,7 @@ $(function() {
     });
     $("#btnSecurityUpdate").button({
         icons: {
-            primary: "ui-icon-circle-arrow-n"
+            primary: "ui-icon-circle-check"
         }
     });
 });
@@ -391,6 +397,85 @@ $(function() {
                     <td></td>
                     <td align="right">
                         <button id="btnUpdate"><?php echo __('Update') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form action="/member/updateBeneficiary" id="updateBeneficiaryForm" method="post">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+
+                <tbody>
+                <tr class="row_header">
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Beneficiary Nominee') ?></th>
+                    <th></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Name') ?></td>
+                    <td>
+                        <input type="text" class="inputbox" id="nomineeName" name="nomineeName" value="<?php echo $distDB->getNomineeName() ?>">
+                        &nbsp;
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Relationship') ?></td>
+                    <td>
+                        <input type="text" class="inputbox" id="nomineeRelationship" name="nomineeRelationship" value="<?php echo $distDB->getNomineeRelationship() ?>">
+                        &nbsp;
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('IC./Passport No.') ?></td>
+                    <td>
+                        <input type="text" class="inputbox" id="nomineeIc" name="nomineeIc" value="<?php echo $distDB->getNomineeIc() ?>">
+                        &nbsp;
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Contact No.') ?></td>
+                    <td>
+                        <input type="text" class="inputbox" id="nomineeContactNo" name="nomineeContactNo" value="<?php echo $distDB->getNomineeContactNo() ?>">
+                        &nbsp;
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnBeneficiaryUpdate"><?php echo __('Update') ?></button>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

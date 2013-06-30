@@ -870,6 +870,74 @@ function verifyPlacementDistId() {
 </table>
 
 <table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+
+    <tbody>
+    <tr class="row_header">
+        <th class="tbl_header_left">
+            <div class="border_left_grey">&nbsp;</div>
+        </th>
+        <th><?php echo __('Beneficiary Nominee') ?></th>
+        <th></th>
+        <th class="tbl_header_right">
+            <div class="border_right_grey">&nbsp;</div>
+        </th>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('Name') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="nomineeName" name="nomineeName">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Relationship') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="nomineeRelationship" name="nomineeRelationship">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('IC./Passport No.') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="nomineeIc" name="nomineeIc">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('Contact No.') ?></td>
+        <td>
+            <input type="text" class="inputbox" id="nomineeContactNo" name="nomineeContactNo">
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+    </tbody>
+</table>
+<br>
+
+
+<table cellspacing="0" cellpadding="0" class="tbl_form">
 <colgroup>
     <col width="1%">
     <col width="53%">
