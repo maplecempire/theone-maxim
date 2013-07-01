@@ -3,7 +3,7 @@
         <td></td>
         <td>Member Id</td>
         <td>Full Name</td>
-        <td>Group Amount</td>
+        <td>Personal Sales Amount</td>
         <td>Email</td>
         <td>Contact Number</td>
         <td>Country</td>

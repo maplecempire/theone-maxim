@@ -57,7 +57,7 @@ class reportActions extends sfActions
         }
         return sfView::HEADER_ONLY;
     }
-    public function executeGroupSales()
+    public function executeGroupSales_bak()
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
@@ -98,6 +98,93 @@ class reportActions extends sfActions
             }
         }
 
+        $this->resultArray = $resultArray;
+    }
+    public function executeGroupSales()
+    {
+        $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right, dist.full_name, dist.email, dist.contact
+                    FROM mlm_dist_pairing_ledger pairing
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+                where dist.from_abfx = 'N'
+                    AND pairing.created_on >= '2013-03-17 00:00:00'
+                    and pairing.created_on <= '2013-06-30 23:59:59'
+                group by pairing.dist_id, pairing.left_right
+                    Having SUM(pairing.credit) >= 60000 order by 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        //var_dump($query);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $resultArray[$count] = $arr;
+            $resultArray[$count]['LEADER'] = $leader;
+            $count++;
+        }
+        $this->resultArray = $resultArray;
+    }
+    public function executePersonalSales()
+    {
+        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
+                            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM mlm_distributor newDist
+                        LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                where newDist.loan_account = 'N'
+                    AND newDist.from_abfx = 'N'
+                    AND newDist.created_on >= '2013-03-17 00:00:00'
+                    and newDist.created_on <= '2013-06-30 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        //var_dump($query);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $resultArray[$count] = $arr;
+            $resultArray[$count]['LEADER'] = $leader;
+            $count++;
+        }
         $this->resultArray = $resultArray;
     }
     public function executeIndividualTraderSales()
