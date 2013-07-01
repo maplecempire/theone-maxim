@@ -8,6 +8,7 @@
         <td>Contact Number</td>
         <td>Country</td>
         <td>Leader</td>
+        <td>Created On</td>
     </tr>
 
     <?php
@@ -22,6 +23,7 @@
         <td><?php echo $arr['contact'] ?></td>
         <td><?php echo $arr['country'] ?></td>
         <td><?php echo $arr['LEADER'] ?></td>
+        <td><?php echo $arr['created_on'] ?></td>
     </tr>
     <?php } ?>
 </table>
