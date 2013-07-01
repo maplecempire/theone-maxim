@@ -103,7 +103,7 @@ class reportActions extends sfActions
     public function executeIndividualTraderSales()
     {
         $query = "SELECT dist.distributor_code, package.price
-            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
+            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
 	FROM mlm_distributor dist
         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
 where dist.loan_account = 'N'
