@@ -102,15 +102,31 @@ class reportActions extends sfActions
     }
     public function executeGroupSales()
     {
-        $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right
-                        , dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
-                    FROM mlm_dist_pairing_ledger pairing
-                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
-                where dist.from_abfx = 'N'
-                    AND pairing.created_on >= '2013-03-17 00:00:00'
-                    and pairing.created_on <= '2013-06-30 23:59:59'
-                group by pairing.dist_id, pairing.left_right
-                    Having SUM(pairing.credit) >= 60000 order by 1";
+        $query = "SELECT dist.distributor_code, leftgroup._SUM as left_sum, rightgroup._SUM as right_sum
+        , dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+            FROM mlm_distributor dist
+LEFT JOIN (
+    SELECT sum(pairing.credit) AS _SUM, pairing.dist_id
+        FROM mlm_dist_pairing_ledger pairing
+            LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+    where dist.from_abfx = 'N'
+        AND pairing.left_right = 'LEFT'
+        AND pairing.created_on >= '2013-03-17 00:00:00'
+        AND pairing.created_on <= '2013-06-30 23:59:59'
+    group by pairing.dist_id
+) leftgroup ON leftgroup.dist_id = dist.distributor_id
+LEFT JOIN (
+    SELECT sum(pairing.credit) AS _SUM, pairing.dist_id
+        FROM mlm_dist_pairing_ledger pairing
+            LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+    where dist.from_abfx = 'N'
+        AND pairing.left_right = 'RIGHT'
+        AND pairing.created_on >= '2013-03-17 00:00:00'
+        AND pairing.created_on <= '2013-06-30 23:59:59'
+    group by pairing.dist_id
+) rightgroup ON rightgroup.dist_id = dist.distributor_id
+    where dist.from_abfx = 'N'
+    Having (left_sum >= 60000 AND right_sum >= 60000) order by 2,3";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
