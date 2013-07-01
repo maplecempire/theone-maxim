@@ -959,7 +959,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             $distDB = MlmDistributorPeer::retrieveByPK($memberArrs[$y]);
 
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($distDB->getTreeStructure(), $leaderArrs[$i]);
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {

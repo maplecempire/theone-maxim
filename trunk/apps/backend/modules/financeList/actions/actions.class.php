@@ -379,7 +379,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -485,7 +485,7 @@ class financeListActions extends sfActions
             }*/
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -601,7 +601,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -701,7 +701,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -832,7 +832,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -1171,7 +1171,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -1488,7 +1488,7 @@ class financeListActions extends sfActions
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
