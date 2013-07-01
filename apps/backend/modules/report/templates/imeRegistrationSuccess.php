@@ -57,7 +57,7 @@ foreach ($ime_registrations as $ime_registration): ?>
             $leader = "";
             $leaderArrs = explode(",", Globals::GROUP_LEADER);
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($distDB->getTreeStructure(), $leaderArrs[$i]);
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {

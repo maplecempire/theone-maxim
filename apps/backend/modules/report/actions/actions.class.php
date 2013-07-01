@@ -17,6 +17,13 @@ class reportActions extends sfActions
     public function executeConvertEcashToEpoint()
     {
     }
+    public function executeReferrerList()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, 71);
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+    }
     public function executeEpointTransfer()
     {
     }
@@ -75,7 +82,7 @@ class reportActions extends sfActions
 
                 $leader = "";
                 for ($i = 0; $i < count($leaderArrs); $i++) {
-                    $pos = strrpos($mlmDistributor->getTreeStructure(), $leaderArrs[$i]);
+                    $pos = strrpos($mlmDistributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
                     if ($pos === false) { // note: three equal signs
 
                     } else {
@@ -119,7 +126,7 @@ and dist.created_on <= '2013-06-30 23:59:59' AND package.price >= 10000 order by
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($arr['tree_structure'], $leaderArrs[$i]);
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
