@@ -102,7 +102,8 @@ class reportActions extends sfActions
     }
     public function executeGroupSales()
     {
-        $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right, dist.full_name, dist.email, dist.contact
+        $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right
+                        , dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
                     FROM mlm_dist_pairing_ledger pairing
                         LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
                 where dist.from_abfx = 'N'
