@@ -109,7 +109,7 @@ class reportActions extends sfActions
 where dist.loan_account = 'N'
 AND dist.from_abfx = 'N'
 AND dist.created_on >= '2013-03-17 00:00:00'
-and dist.created_on <= '2013-06-30 23:59:59' AND package.price >= 10000 order by 4";
+and dist.created_on <= '2013-06-30 23:59:59' AND package.price >= 10000 order by 2";
 
         //var_dump($query);
         $connection = Propel::getConnection();
