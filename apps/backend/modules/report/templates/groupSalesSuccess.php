@@ -1,25 +1,29 @@
-<h3>Bonus Payout</h3>
-<table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
-<thead>
-<tr>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'></th>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Date</th>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Sales</th>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>DRB</th>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>GDB</th>
-    <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>GDB Payout Percentage</th>
-</tr>
-<?php
-$idx = 1;
-foreach ($reports as $report) { ?>
-<tr class='sf_admin_row_1'>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo $idx;?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo $report->getBonusDate();?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalSales(),2);?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalDrb(),2);?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalGdb(),2);?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getGdbPercentage(),2);?></td>
-</tr>
-<?php } ?>
-</thead>
-<tbody>
+<table>
+    <tr>
+        <td></td>
+        <td>Member Id</td>
+        <td>Full Name</td>
+        <td>Personal Amount</td>
+        <td>Group Amount</td>
+        <td>Email</td>
+        <td>Contact Number</td>
+        <td>Country</td>
+        <td>Leader</td>
+    </tr>
+
+    <?php
+    $idx = 1;
+    foreach ($resultArray as $arr) { ?>
+    <tr>
+        <td><?php echo $idx++; ?></td>
+        <td><?php echo $arr['distributor_code'] ?></td>
+        <td><?php echo $arr['full_name'] ?></td>
+        <td><?php echo number_format($arr['personal_sales'],2) ?></td>
+        <td><?php echo number_format($arr['group_sales'],2) ?></td>
+        <td><?php echo $arr['email'] ?></td>
+        <td><?php echo $arr['contact'] ?></td>
+        <td><?php echo $arr['country'] ?></td>
+        <td><?php echo $arr['LEADER'] ?></td>
+    </tr>
+    <?php } ?>
+</table>

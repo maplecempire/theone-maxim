@@ -53,12 +53,89 @@ class reportActions extends sfActions
     public function executeGroupSales()
     {
         $c = new Criteria();
-        $this->reports = ReportPayoutBonusPeer::doSelect($c);
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+
+        $count = 0;
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $resultArray = array();
+        foreach ($mlmDistributors as $mlmDistributor) {
+            $personalSales = $this->getPersonalSales($mlmDistributor->getDistributorId());
+            $groupSales = $this->getGroupSales($mlmDistributor->getDistributorId());
+
+            if ($personalSales >= 30000 || $groupSales >= 60000) {
+                $resultArray[$count]['personal_sales'] = $personalSales;
+                $resultArray[$count]['group_sales'] = $groupSales;
+
+                $resultArray[$count]['distributor_code'] = $mlmDistributor->getDistributorCode();
+                $resultArray[$count]['full_name'] = $mlmDistributor->getFullName();
+                $resultArray[$count]['email'] = $mlmDistributor->getEmail();
+                $resultArray[$count]['contact'] = $mlmDistributor->getContact();
+                $resultArray[$count]['country'] = $mlmDistributor->getCountry();
+
+                $leader = "";
+                for ($i = 0; $i < count($leaderArrs); $i++) {
+                    $pos = strrpos($mlmDistributor->getTreeStructure(), $leaderArrs[$i]);
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                        if ($dist) {
+                            $leader = $dist->getDistributorCode();
+                        }
+                        break;
+                    }
+                }
+                $resultArray[$count]['LEADER'] = $leader;
+                $count++;
+            }
+        }
+
+        $this->resultArray = $resultArray;
     }
     public function executeIndividualTraderSales()
     {
-        $c = new Criteria();
-        $this->mlmDistributors = MlmDistributorPeer::doSelect($c);
+        $query = "SELECT dist.distributor_code, package.price
+            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
+	FROM mlm_distributor dist
+        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+where dist.loan_account = 'N'
+AND dist.from_abfx = 'N'
+AND dist.created_on >= '2013-03-17 00:00:00'
+and dist.created_on <= '2013-06-30 23:59:59' AND package.price >= 10000 order by 4";
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        //var_dump($query);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], $leaderArrs[$i]);
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $resultArray[$count] = $arr;
+            $resultArray[$count]['LEADER'] = $leader;
+            $count++;
+        }
+        $this->resultArray = $resultArray;
     }
     public function executeCustomerService()
     {
@@ -80,6 +157,8 @@ class reportActions extends sfActions
     }
     public function executeReferralBonus()
     {
+        $c = new Criteria();
+        $this->reports = ReportPayoutBonusPeer::doSelect($c);
     }
     public function executeTotalMt4Reload()
     {
@@ -191,6 +270,55 @@ class reportActions extends sfActions
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             $result = $arr["TOTAL_DEBIT"];
+        }
+        return $result;
+    }
+    function getPersonalSales($distId) {
+        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
+            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
+	FROM mlm_distributor newDist
+        LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+where newDist.loan_account = 'N'
+AND newDist.upline_dist_id = ".$distId."
+AND newDist.from_abfx = 'N'
+AND newDist.created_on >= '2013-03-17 00:00:00'
+and newDist.created_on <= '2013-06-30 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["_SUM"];
+        }
+        return $result;
+    }
+    function getGroupSales($distId) {
+        $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right, dist.full_name, dist.email, dist.contact
+                    FROM mlm_dist_pairing_ledger pairing
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+                where pairing.dist_id = ".$distId."
+                    AND dist.from_abfx = 'N'
+                    AND pairing.created_on >= '2013-03-17 00:00:00'
+                    and pairing.created_on <= '2013-06-30 23:59:59'
+                group by pairing.dist_id, pairing.left_right
+                    Having SUM(pairing.credit) >= 60000 order by 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["_SUM"];
         }
         return $result;
     }
