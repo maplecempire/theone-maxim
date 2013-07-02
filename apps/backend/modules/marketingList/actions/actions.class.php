@@ -309,6 +309,13 @@ class marketingListActions extends sfActions
 
         /******   total records  *******/
         $sWhere = " WHERE 1=1 ";
+
+        if ($this->getUser()->getAttribute(Globals::SESSION_USERID) == 1015 || $this->getUser()->getAttribute(Globals::SESSION_USERID) == 1016 || $this->getUser()->getAttribute(Globals::SESSION_USERID) == 1017) {
+
+        } else {
+            $sWhere .= " AND dist.distributor_code NOT IN ('bra129', 'bre129', 'dca1491', 'chris5', 'datoheng', 'boing1491a', 'boing1491b', 'amz001', 'klm76', 'kl6', 'vision1', 'fyl188')";
+        }
+
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
         //var_dump($sql);
         /******   total filtered records  *******/
