@@ -310,6 +310,7 @@ class marketingListActions extends sfActions
         /******   total records  *******/
         $sWhere = " WHERE 1=1 ";
 
+        var_dump($this->getUser()->getAttribute(Globals::SESSION_USERID));
         if ($this->getUser()->getAttribute(Globals::SESSION_USERID) == 1015 || $this->getUser()->getAttribute(Globals::SESSION_USERID) == 1016 || $this->getUser()->getAttribute(Globals::SESSION_USERID) == 1017) {
 
         } else {
