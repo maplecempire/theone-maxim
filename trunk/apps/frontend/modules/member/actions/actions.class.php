@@ -919,6 +919,7 @@ class memberActions extends sfActions
         $uplineDistCode = $this->getRequestParameter('distcode');
         $position = $this->getRequestParameter('position');
         $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
@@ -1314,6 +1315,7 @@ class memberActions extends sfActions
     public function executeMemberRegistration()
     {
         $c = new Criteria();
+        $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
