@@ -155,7 +155,7 @@ $(function() {
         }
     });
     <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) { ?>
-    $("#userpassword,#confirmPassword,#securityPassword,#confirmSecurityPassword").val("abc123");
+    $("#userpassword,#confirmPassword,#securityPassword,#confirmSecurityPassword").val("111111");
     $("#userName").change(function(event){
         $("#fullname,#sign_name").val($(this).val());
     });
