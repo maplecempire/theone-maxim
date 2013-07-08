@@ -278,8 +278,8 @@ abstract class Globals {
     const APPLY_DEBITCARD_VISIBLE = true;
     const APPLY_EZYCASHCARD_VISIBLE = false;
 
-    const APPLY_IME_VISIBLE = true;
-    const APPLY_IME_ENABLE = true;
+    const APPLY_IME_VISIBLE = false;
+    const APPLY_IME_ENABLE = false;
 
     /*******************************/
     /*****   GROUP LEADER   ******/
