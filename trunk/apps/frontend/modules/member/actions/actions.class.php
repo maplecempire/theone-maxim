@@ -6563,10 +6563,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
 
         print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
-        //$this->retrieveGmailMailAttachment();
+        $this->retrieveGmailMailAttachment();
 
         print_r("+++++ ROI Dividend +++++<br>");
-        /*$bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
+        $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
         $c = new Criteria();
         $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
         $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
@@ -6590,6 +6590,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                  . " AND dist_id = '" . $distId . "' AND mt4_user_name = '" . $mt4UserName . "'"
                  . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
 
+            //var_dump($query);
+            //exit();
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
             $resultset = $statement->executeQuery();
@@ -6602,7 +6604,20 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 if ($packagePrice < 0)
                     $packagePrice = 0;
+            /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
+            $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
+            $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
 
+            $c = new Criteria();
+            $c->add(MlmDailyDistMt4CreditPeer::DIST_ID, $distId);
+            $c->add(MlmDailyDistMt4CreditPeer::TRADED_DATETIME, $dividendDateFrom, Criteria::GREATER_EQUAL);
+            $c->add(MlmDailyDistMt4CreditPeer::TRADED_DATETIME, $dividendDateTo, Criteria::LESS_EQUAL);
+            $mlmDailyDistMt4CreditDB = MlmDailyDistMt4CreditPeer::doSelectOne($c);
+
+            if ($mlmDailyDistMt4CreditDB) {
+                if ($packagePrice > $mlmDailyDistMt4CreditDB->getMt4Credit()) {
+                    $packagePrice = $mlmDailyDistMt4CreditDB->getMt4Credit();
+                }*/
                 $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
 
                 $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -6627,6 +6642,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $sponsorDistCommissionledger->setDistId($distId);
                 $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
                 $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
                 $sponsorDistCommissionledger->setCredit($dividendAmount);
                 $sponsorDistCommissionledger->setDebit(0);
                 $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
@@ -6662,11 +6678,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
                             $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
                             $mlm_roi_dividend->setIdx($idx);
+                            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
                             $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
                             $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
                             $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
                             $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
                             $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                             $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
                             $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -6680,17 +6699,45 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                 $mlmRoiDividend->setDividendAmount($dividendAmount);
                 $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
+                //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
                 $mlmRoiDividend->save();
+
+                /*if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
+                    print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
+                    print_r("Idx: " . $mlmRoiDividend->getIdx() . "<br>");
+
+                    $idx = $mlmRoiDividend->getIdx();
+                    $firstDividendTime = strtotime($mlmRoiDividend->getFirstDividendDate());
+                    $dividendDate = strtotime("+".$idx." months", $firstDividendTime);
+                    print_r("DividendDate: " . $dividendDate . "<br>");
+
+                    $mlm_roi_dividend = new MlmRoiDividend();
+                    $mlm_roi_dividend->setDistId($mlmRoiDividend->getDistId());
+                    $mlm_roi_dividend->setMt4UserName($mlmRoiDividend->getMt4UserName());
+                    $mlm_roi_dividend->setIdx($idx + 1);
+                    //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                    $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividend->getFirstDividendDate());
+                    $mlm_roi_dividend->setPackageId($mlmRoiDividend->getPackageId());
+                    $mlm_roi_dividend->setPackagePrice($mlmRoiDividend->getPackagePrice());
+                    $mlm_roi_dividend->setRoiPercentage($mlmRoiDividend->getRoiPercentage());
+                    //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                    //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                    $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                    $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->save();
+                }*/
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
-        }*/
+        }
         // roi dividend end~
 
         print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
         //$this->executeSendRemindationEmailForUploadAgreement();
         print_r("<br>sendDailyReport<br>");
-        //$this->sendDailyReport();
+        $this->sendDailyReport();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
