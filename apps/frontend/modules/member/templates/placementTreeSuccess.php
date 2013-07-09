@@ -346,8 +346,13 @@ function reassignDatagridEventAttr(){
     }
 ?>
 <div class="network-top-more-node">
-    <?php if ($isTop == false) { ?>
-        <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getTreeUplineDistCode()."&bePlacementId=".$bePlacementId) ?>"></a>
+    <?php if ($isTop == false) {
+        $topDist = MlmDistributorPeer::retrieveByPK($distDB->getTreeUplineDistId());
+        if (!$topDist) {
+            $topDist = new MlmDistributor();
+        }
+    ?>
+        <a href="<?php echo url_for("/member/placementTree?distcode=".$topDist->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a>
     <?php } ?>
 </div>
     <a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>" style="font-size: 14px; font-weight: bold;">
