@@ -72,7 +72,7 @@ class memberActions extends sfActions
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -753,7 +753,7 @@ class memberActions extends sfActions
         }*/
 
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
@@ -934,7 +934,7 @@ class memberActions extends sfActions
     public function executePurchasePackageViaTree2()
     {
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
@@ -1335,7 +1335,7 @@ class memberActions extends sfActions
                 return $this->redirect('/member/memberRegistration');
             }*/
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -1807,7 +1807,7 @@ class memberActions extends sfActions
         }*/
 
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+        $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
@@ -4054,7 +4054,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         }*/
         if ($this->getRequestParameter('doAction') == "save") {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -4719,7 +4719,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -4852,7 +4852,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
 
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -5040,7 +5040,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/transferCp2');
             }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -5229,7 +5229,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/transferCp3');
             }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
@@ -6987,7 +6987,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $pos = strrpos($distDB->getPlacementTreeStructure(), "|1763|");
+            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {

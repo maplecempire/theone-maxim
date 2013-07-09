@@ -286,14 +286,14 @@ abstract class Globals {
     /*******************************/
     /*const GROUP_LEADER = "thorsengwah,kaseong,maximthai1,MAXCAP,maxworld,MaximIndon,Dynasty,MaximChina,datoheng";*/
     //const GROUP_LEADER = "SUPERA,TWOSASA,Diana,Jchooi,CN777,Rudy001,AlexSim,kaseong,Dynasty,MaximTaiwan,thorsengwah,MaximIndon,maximthai1,ongeuzan,MaximChina,uncletong,MAXCAP,maxworld,BRA129,kinowaiming,alvinang1,datoheng,amz001,klm76,vision1,chris5,KL6,FYL188";
-    const GROUP_LEADER = "595,763,665,715,554,142,61,143,283,60,240,71,57,161,262,43,175,104,557,124,203,1458,1561,1984,135,1763,1770";
+    const GROUP_LEADER = "595,763,665,715,554,142,61,143,283,60,240,71,57,161,262,43,175,104,557,124,203,1458,1561,1984,135,1763,1770,129";
 
 //    const HIDE_DIST_GROUP = "MAXCAP";
 //    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
 //    const HIDE_DIST_GROUP = "MAXCAP,law01,Law001,BRF129,maxworld";
     const HIDE_DIST_GROUP = "43,128,129,402,175";
 //    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,BRA129,BRB129,BRF129,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
-    const TO_HIDE_DIST_GROUP = "124,125,130,126,131,132,133,104,105,402,127,128,134,129,135,136,137,124,125,130,126,131,132,133,127,128,134,129,135,136,137";
+    const TO_HIDE_DIST_GROUP = "124,125,130,126,131,132,133,104,105,402,127,128,134,129,135,136,137,124,125,130,126,131,132,133";
 
     const HIDE_DIST_GROUP_2 = "law01";
     const TO_HIDE_DIST_GROUP_2 = "alvinang1,alvinang2,alvinang4";
@@ -303,4 +303,6 @@ abstract class Globals {
     const TO_HIDE_DIST_GROUP_4 = "Law001";
     const HIDE_DIST_GROUP_5 = "maxworld";
     const TO_HIDE_DIST_GROUP_5 = "alvinang1,alvinang2,alvinang4,BRA129,BRB129,BRF129,Law001,law01,law1";
+
+    const ABFX_GROUP = "|129|"; // Law001
 }
