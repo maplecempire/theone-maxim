@@ -184,7 +184,87 @@ $culture = $sf_user->getCulture();
                     </div>
                 </div>
                 <div id="feedContent">
+                    <a href="#">
+                        <?php if ($culture == "cn") {  ?>
+                        <div class="poptitle"><h3>马胜交易员工作仿限于所有马胜注册10k usd以上的伙伴</h3><br>
+                        <?php } else {  ?>
+                        <div class="poptitle"><h3>Maxim Trader "Forex Price Action" Workshop for members with investment of USD 10k and above</h3><br>
+                        <?php } ?>
+                    </div>
+                    </a>
 
+                    <?php if ($culture == "cn") {  ?>
+                    <br>报名截止：2013年7月10日 (Ms Fion 0174000830)
+                    <br>人数：只限150人
+                    <br>请自备已安装MT4平台的电脑。
+                    <br><br>工作仿详情如下：
+                    <br>日期：2013年7月14日
+                    <br>时间：上午9点至下午5点
+                    <br>地点: 槟城Gurney酒店
+                    <br>语言：中英
+                    <br>*中间午休时午餐自理
+                    <br><br>请向各自的团队领导报名。
+                    <br>1. 全名
+                    <br>2. MT4户口号码
+                    <br>4. 手机号码
+                    <br>5. 电邮信箱
+                    <?php } else {  ?>
+                    <br>Registration before 10th July 2013 (Ms Fion 0174000830)
+                    <br>No of seats : 150 pax
+                    <br>Please arrange your own PC or Tablet with MT4 installed
+                    <br><br>
+                    <br>Date 14th July 2013
+                    <br>Time  9am to 5pm
+                    <br><br>
+                    <br>Venue Penang Gurney Hotel
+                    <br>Medium English
+                    <br>Note Meal not provide
+                    <br><br>Please register with following details
+                    <br>1 Name
+                    <br>2 User ID
+                    <br>3 MT4 No.
+                    <br>4 Email
+                    <br>5 Contact No.
+
+                    <?php } ?>
+                    <div class="news_date">
+                    9 July 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="#">
+                        <?php if ($culture == "cn") {  ?>
+                        <div class="poptitle"><h3>马胜金融讲座</h3><br>
+                        <?php } else {  ?>
+                        <div class="poptitle"><h3>Maxim Financial Seminar</h3><br>
+                        <?php } ?>
+                    </div>
+                    </a>
+
+                    <?php if ($culture == "cn") {  ?>
+                    <br>由马胜特聘讲师兼亚洲著名金融分析师Mr. Daniel Ang为你讲解最新巿场走势与货币／贵金属交易的基本优势，幇肋你开拓新的投资视野。欢迎马胜伙伴帯新朋友来参与这知性之旅及探讨新商机。
+                    <br><br>日期：2013年7月13日
+                    <br>时间：晚上7时30分
+                    <br>地点：槟城Gurney酒店
+                    <br>语言：英为主，中为补
+                    <?php } else {  ?>
+                    <br>Maxim Consultant and Famous Asia Financial Analyst, Mr. Daniel Ang will be sharing with you the latest market outlook, basic advantages about precious metal/currency trading and broaden your investment prospective. All Maxim partners are welcome to invite new guests to participate and learn about new business opportunity.
+                    <br><br>Date: 13 July 2013
+                    <br>Time: 7:30pm
+                    <br>Venue: Penang Gurney Hotel
+                    <br>Medium: English
+
+                    <?php } ?>
+                    <br><br>Pls pledge your group seat with Miss Fion 0174000830 by 10 July before 5pm. Limited seat!!!
+                    <div class="news_date">
+                    9 July 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+
+                    <!--+++++++++++++++++++++++++++++++++++++++++++++++++-->
                     <a href="/home/activities_26062013">
                         <?php if ($culture == "cn") {  ?>
                         <div class="poptitle"><h3>马胜金融：三赢策略「全球金融精明投资的前景＂概念、创新＂」</h3><br>
