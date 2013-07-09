@@ -630,7 +630,8 @@ class memberActions extends sfActions
         $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_customer_enquiry_detail->save();
 
-        $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Contact No: ".$contactNoEmail."<br><br>Message: ".$message;
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Full Name: ".$distDB->getFullName()."<br>Contact No: ".$contactNoEmail."<br><br>Message: ".$message;
 
         $sendMailService = new SendMailService();
         $sendMailService->sendMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
@@ -673,7 +674,8 @@ class memberActions extends sfActions
         $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_customer_enquiry_detail->save();
 
-        $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br><br>Message: ".$message;
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Full Name: ".$distDB->getFullName()."<br><br>Message: ".$message;
 
         $sendMailService = new SendMailService();
         $sendMailService->sendMail("support@maximtrader.com", "support", "[Customer Enquiry]".$mlmCustomerEnquiry->getTitle(), $message);
