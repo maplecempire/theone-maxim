@@ -7232,7 +7232,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 while ($level < 100) {
                                     //var_dump($uplineDistDB->getUplineDistId());
                                     //var_dump($uplineDistDB->getUplineDistCode());
-                                    //print_r("<br>");
+                                    print_r($uplineDistDB->getDistributorId()."<br>");
                                     $c = new Criteria();
                                     $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
                                     $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
