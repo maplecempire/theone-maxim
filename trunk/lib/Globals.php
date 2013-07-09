@@ -304,5 +304,5 @@ abstract class Globals {
     const HIDE_DIST_GROUP_5 = "maxworld";
     const TO_HIDE_DIST_GROUP_5 = "alvinang1,alvinang2,alvinang4,BRA129,BRB129,BRF129,Law001,law01,law1";
 
-    const ABFX_GROUP = "|129|"; // Law001
+    const ABFX_GROUP = "|1763|"; // Law001
 }
