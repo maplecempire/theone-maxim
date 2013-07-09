@@ -215,7 +215,7 @@
                         <font color="#dc143c"> <?php echo __('1. Minimum withdrawal amount : USD 100
                         <br>2. Can only be withdrawn on the first working week of the month
                         <br>3. Handling fee USD60 or 5% whichever is higher
-                        <br>4. Processing time : 2 working days') ?></font>
+                        <br>4. Processing time : 3-5 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
