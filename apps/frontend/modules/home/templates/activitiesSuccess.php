@@ -145,6 +145,11 @@ ul, ol {
     margin: 0;
     color: black;
 }
+.news_date {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 13px;
+}
 </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
@@ -184,6 +189,29 @@ $culture = $sf_user->getCulture();
                     </div>
                 </div>
                 <div id="feedContent">
+                    <a href="#">
+                        <div class="poptitle"><h3>金汇融资商讨会 Dual Currency Investment (DCI)</h3><br>
+                    </div>
+                    </a>
+
+                    <br>
+                    <br>地点： Furama Hotel Bukit Bintang
+                    <br>地址：136, Jalan Changkat Thambi Dollah, Bukit Bintang Kuala Lumpur.
+                    <br>Event hall 会场 : Saffron l,ll&lll, Level 27楼
+                    <br>时间：下午7：30PM
+                    <br>日期：19/07/2013  星期五
+                    <br><br>
+                    <br>当然，最重要的是，我们邀请了一名神秘国际金融师来与我们分享接下来的 10 年里最红的投资项目，DCI
+                    <br><br>
+                    <br>The most important event for the night, we have invited an International Financial Advisor to share with us why DCI will be the best investment opportunity in next 10 years.
+                    <br><br>
+                    <br>Pledge ticket before 15July @ 5pm Ms. Jennifer  +60163228282
+                    <br>
+                    <div class="news_date">
+                    10 July 2013
+                    </div>
+
+                    <div class="hr"></div>
                     <a href="#">
                         <?php if ($culture == "cn") {  ?>
                         <div class="poptitle"><h3>马胜交易员工作仿限于所有马胜注册10k usd以上的伙伴</h3><br>
@@ -227,6 +255,7 @@ $culture = $sf_user->getCulture();
                     <br>5 Contact No.
 
                     <?php } ?>
+                    <br>
                     <div class="news_date">
                     9 July 2013
                     </div>
@@ -257,6 +286,7 @@ $culture = $sf_user->getCulture();
 
                     <?php } ?>
                     <br><br>Pls pledge your group seat with Miss Fion 0174000830 by 10 July before 5pm. Limited seat!!!
+                    <br>
                     <div class="news_date">
                     9 July 2013
                     </div>
@@ -303,6 +333,7 @@ will elaborate how the world and economic environments have changed, and are in 
                     <br>Please invite your friend to attend together, the talk is free, but seat is limited (only 200 seats). Please register early as you can.
                     <br>Dennis Chai, +60122222305, +60108368888
                     <?php } ?>
+                    <br>
                     <div class="news_date">
                     26 June 2013
                     </div>
@@ -313,7 +344,7 @@ will elaborate how the world and economic environments have changed, and are in 
                         <div class="poptitle"><h3>Maxim Trader - Business Preview</h3><br>
                     </div>
                     </a>
-
+                    <br>
                     <div class="news_date">
                     June 2013 Activities.
                     </div>
@@ -361,7 +392,7 @@ will elaborate how the world and economic environments have changed, and are in 
 
 
 
-
+                    <br>
                     <div class="news_date">
                     1 June 2013
                     </div>
@@ -393,7 +424,7 @@ will elaborate how the world and economic environments have changed, and are in 
                         <br>We are proud to announce that Maxim Trader has been invited to participate in the invitation-only Financial Forum organized by The School of Journalism Fudan University, Shanghai, China on 2 June 2013 to share their dedicated fund management program on the foreign exchange market, as well as to discuss experiences in this field to the University Professors, Associates and students.   It is indeed a privilege and an honor for Maxim Trader  to receive such an invite and to be able to shape the thinking of these students who one day  will be the future business leaders and entrepreneurs of China. This is an invaluable accolade indeed.
                         <?php }  ?>
 
-
+                    <br>
                     <div class="news_date">
                     2 June 2013
                     </div>
@@ -433,7 +464,7 @@ will elaborate how the world and economic environments have changed, and are in 
                         <br>住所 : 中国上海徐江区漕宝路88号，西館2号門
                         <?php } ?>
 
-
+                    <br>
                     <div class="news_date">
                     31 May 2013 - 2 June 2013
                     </div>
@@ -445,7 +476,7 @@ will elaborate how the world and economic environments have changed, and are in 
                     </div>
                     </a>
                         House Speaker: Mr Daniel Ang (International Financial Guru)
-
+                    <br>
                     <div class="news_date">
                     May 2013 Activities.
                     </div>
