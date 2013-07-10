@@ -102,7 +102,9 @@ $(function() {
                         <td class="value">
                             <?php if ($doAction == "EVENT") { ?>
                             <select id="optPackage">
+                                <option value="100">100</option>
                                 <option value="300">300</option>
+                                <option value="400">400</option>
                                 <option value="500">500</option>
                                 <option value="1,000">1,000</option>
                                 <option value="2,000">2,000</option>
@@ -113,6 +115,7 @@ $(function() {
                             <select id="optPackage">
                                 <option value="100">100</option>
                                 <option value="300">300</option>
+                                <option value="400">400</option>
                                 <option value="500">500</option>
                                 <option value="1,000">1,000</option>
                                 <option value="3,000">3,000</option>
