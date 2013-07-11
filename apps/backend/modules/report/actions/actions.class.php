@@ -112,7 +112,7 @@ LEFT JOIN (
     where dist.from_abfx = 'N'
         AND pairing.left_right = 'LEFT'
         AND pairing.created_on >= '2013-03-17 00:00:00'
-        AND pairing.created_on <= '2013-06-30 23:59:59'
+        AND pairing.created_on <= '2013-07-10 23:59:59'
     group by pairing.dist_id
 ) leftgroup ON leftgroup.dist_id = dist.distributor_id
 LEFT JOIN (
@@ -122,7 +122,7 @@ LEFT JOIN (
     where dist.from_abfx = 'N'
         AND pairing.left_right = 'RIGHT'
         AND pairing.created_on >= '2013-03-17 00:00:00'
-        AND pairing.created_on <= '2013-06-30 23:59:59'
+        AND pairing.created_on <= '2013-07-10 23:59:59'
     group by pairing.dist_id
 ) rightgroup ON rightgroup.dist_id = dist.distributor_id
     where dist.from_abfx = 'N'
@@ -170,7 +170,7 @@ LEFT JOIN (
                 where newDist.loan_account = 'N'
                     AND newDist.from_abfx = 'N'
                     AND newDist.created_on >= '2013-03-17 00:00:00'
-                    and newDist.created_on <= '2013-06-30 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
+                    and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -213,7 +213,7 @@ LEFT JOIN (
 where dist.loan_account = 'N'
 AND dist.from_abfx = 'N'
 AND dist.created_on >= '2013-03-17 00:00:00'
-and dist.created_on <= '2013-06-30 23:59:59' AND package.price >= 10000 order by 2";
+and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by 2";
 
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -394,7 +394,7 @@ where newDist.loan_account = 'N'
 AND newDist.upline_dist_id = ".$distId."
 AND newDist.from_abfx = 'N'
 AND newDist.created_on >= '2013-03-17 00:00:00'
-and newDist.created_on <= '2013-06-30 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
+and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -416,7 +416,7 @@ and newDist.created_on <= '2013-06-30 23:59:59' group by upline_dist_id Having S
                 where pairing.dist_id = ".$distId."
                     AND dist.from_abfx = 'N'
                     AND pairing.created_on >= '2013-03-17 00:00:00'
-                    and pairing.created_on <= '2013-06-30 23:59:59'
+                    and pairing.created_on <= '2013-07-10 23:59:59'
                 group by pairing.dist_id, pairing.left_right
                     Having SUM(pairing.credit) >= 60000 order by 1";
 
