@@ -18,6 +18,7 @@ abstract class Globals {
     const YES = 1;
     const NO = 0;
     const YES_Y = 'Y';
+    const NO_N = 'N';
     const TRUE = 'T';
     const FALSE = 'F';
     const SYSTEM_USER_ID = '0';

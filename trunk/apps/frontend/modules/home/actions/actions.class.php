@@ -42,6 +42,11 @@ class homeActions extends sfActions
     }
     public function executeActivities()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($distDB) {
+            $distDB->setNewActivityFlag(Globals::NO_N);
+            $distDB->save();
+        }
     }
 
     public function executeAnnouncementList()
