@@ -355,6 +355,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $nominee_contactno;
 
+
+	
+	protected $new_activity_flag = '1';
+
+
+	
+	protected $new_report_flag = '1';
+
 	
 	protected $alreadyInSave = false;
 
@@ -1058,6 +1066,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->nominee_contactno;
+	}
+
+	
+	public function getNewActivityFlag()
+	{
+
+		return $this->new_activity_flag;
+	}
+
+	
+	public function getNewReportFlag()
+	{
+
+		return $this->new_report_flag;
 	}
 
 	
@@ -2516,6 +2538,40 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setNewActivityFlag($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->new_activity_flag !== $v || $v === '1') {
+			$this->new_activity_flag = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NEW_ACTIVITY_FLAG;
+		}
+
+	} 
+
+	
+	public function setNewReportFlag($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->new_report_flag !== $v || $v === '1') {
+			$this->new_report_flag = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NEW_REPORT_FLAG;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2694,11 +2750,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->nominee_contactno = $rs->getString($startcol + 86);
 
+			$this->new_activity_flag = $rs->getString($startcol + 87);
+
+			$this->new_report_flag = $rs->getString($startcol + 88);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 87; 
+						return $startcol + 89; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3104,6 +3164,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 86:
 				return $this->getNomineeContactno();
 				break;
+			case 87:
+				return $this->getNewActivityFlag();
+				break;
+			case 88:
+				return $this->getNewReportFlag();
+				break;
 			default:
 				return null;
 				break;
@@ -3201,6 +3267,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[84] => $this->getNomineeIc(),
 			$keys[85] => $this->getNomineeRelationship(),
 			$keys[86] => $this->getNomineeContactno(),
+			$keys[87] => $this->getNewActivityFlag(),
+			$keys[88] => $this->getNewReportFlag(),
 		);
 		return $result;
 	}
@@ -3477,6 +3545,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 86:
 				$this->setNomineeContactno($value);
 				break;
+			case 87:
+				$this->setNewActivityFlag($value);
+				break;
+			case 88:
+				$this->setNewReportFlag($value);
+				break;
 		} 	}
 
 	
@@ -3571,6 +3645,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[84], $arr)) $this->setNomineeIc($arr[$keys[84]]);
 		if (array_key_exists($keys[85], $arr)) $this->setNomineeRelationship($arr[$keys[85]]);
 		if (array_key_exists($keys[86], $arr)) $this->setNomineeContactno($arr[$keys[86]]);
+		if (array_key_exists($keys[87], $arr)) $this->setNewActivityFlag($arr[$keys[87]]);
+		if (array_key_exists($keys[88], $arr)) $this->setNewReportFlag($arr[$keys[88]]);
 	}
 
 	
@@ -3665,6 +3741,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_IC)) $criteria->add(MlmDistributorPeer::NOMINEE_IC, $this->nominee_ic);
 		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_RELATIONSHIP)) $criteria->add(MlmDistributorPeer::NOMINEE_RELATIONSHIP, $this->nominee_relationship);
 		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_CONTACTNO)) $criteria->add(MlmDistributorPeer::NOMINEE_CONTACTNO, $this->nominee_contactno);
+		if ($this->isColumnModified(MlmDistributorPeer::NEW_ACTIVITY_FLAG)) $criteria->add(MlmDistributorPeer::NEW_ACTIVITY_FLAG, $this->new_activity_flag);
+		if ($this->isColumnModified(MlmDistributorPeer::NEW_REPORT_FLAG)) $criteria->add(MlmDistributorPeer::NEW_REPORT_FLAG, $this->new_report_flag);
 
 		return $criteria;
 	}
@@ -3866,6 +3944,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setNomineeRelationship($this->nominee_relationship);
 
 		$copyObj->setNomineeContactno($this->nominee_contactno);
+
+		$copyObj->setNewActivityFlag($this->new_activity_flag);
+
+		$copyObj->setNewReportFlag($this->new_report_flag);
 
 
 		$copyObj->setNew(true);

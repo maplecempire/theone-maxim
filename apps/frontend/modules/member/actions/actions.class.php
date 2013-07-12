@@ -1022,6 +1022,11 @@ class memberActions extends sfActions
     }
     public function executeFundManagementReport()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($distDB) {
+            $distDB->setNewReportFlag(Globals::NO_N);
+            $distDB->save();
+        }
     }
     public function executeMaximExecutorReport()
     {

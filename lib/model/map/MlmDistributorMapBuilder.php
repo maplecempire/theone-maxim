@@ -206,5 +206,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('NOMINEE_CONTACTNO', 'NomineeContactno', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('NEW_ACTIVITY_FLAG', 'NewActivityFlag', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('NEW_REPORT_FLAG', 'NewReportFlag', 'string', CreoleTypes::VARCHAR, false, 1);
+
 	} 
 } 
