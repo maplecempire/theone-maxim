@@ -212,7 +212,7 @@
         </td>
     </tr>
 
-    <tr>
+    <!--<tr>
         <td>
             <br>
             <table cellspacing="0" cellpadding="0" class="tbl_form">
@@ -227,7 +227,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Maxim Capital Limited EzyAccount') ?></th>
+                    <th colspan="2"><?php /*echo __('Maxim Capital Limited EzyAccount') */?></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
                     </th>
@@ -235,14 +235,14 @@
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('EzyAccount ID') ?></td>
+                    <td><?php /*echo __('EzyAccount ID') */?></td>
                     <td class="value">36496</td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Email Address') ?></td>
+                    <td><?php /*echo __('Email Address') */?></td>
                     <td class="value">finance@maximtrader.com</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -250,6 +250,6 @@
                 </tbody>
             </table>
         </td>
-    </tr>
+    </tr>-->
     </tbody>
 </table>

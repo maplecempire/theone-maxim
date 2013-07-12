@@ -193,6 +193,28 @@ $culture = $sf_user->getCulture();
                         <div class="poptitle"><h3>金汇融资商讨会 Dual Currency Investment (DCI)</h3><br>
                     </div>
                     </a>
+                    <br>
+                    <br>地点： Kinta Riverfront Hotel
+                    <br>地址 : Sultes, Level 3, Tronoh Hall, Jalan Lim Bo Seng, 30000 Ipoh, Perak.
+                    <br>时间：下午7：30PM
+                    <br>日期：17/07/2013  星期三
+                    <br><br>
+                    <br>当然，最重要的是，我们邀请了一名神秘国际金融师来与我们分享接下来的 10 年里最红的投资项目，DCI
+                    <br><br>
+                    <br>The most important event for the night, we have invited an International Financial Advisor to share with us why DCI will be the best investment opportunity in next 10 years.
+                    <br><br>
+                    <br>Pledge ticket before 14July @ 5pm Ms. Vicky  01111112616
+                    <div class="news_date">
+                    12 June 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+
+                    <a href="#">
+                        <div class="poptitle"><h3>金汇融资商讨会 Dual Currency Investment (DCI)</h3><br>
+                    </div>
+                    </a>
 
                     <br>
                     <br>地点： Furama Hotel Bukit Bintang
