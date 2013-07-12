@@ -682,15 +682,15 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('EZY Account ID') ?></td>
+                    <td><?php /*echo __('EZY Account ID') */?></td>
                     <td>
                         <input name="ezyCashCard" type="text" id="ezyCashCard" size="30" maxlength="16"
-                                                         value="<?php echo $distDB->getEzyCashCard() ?>"/>
+                                                         value="<?php /*echo $distDB->getEzyCashCard() */?>"/>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 <!--<tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
@@ -712,7 +712,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>-->
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password') ?></td>
                     <td>
@@ -721,7 +721,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
