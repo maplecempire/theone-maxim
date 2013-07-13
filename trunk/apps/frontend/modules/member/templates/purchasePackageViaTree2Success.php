@@ -623,7 +623,7 @@ function verifySponsorId() {
 
     </tbody>
 </table>
-<br>
+<!--<br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
@@ -637,7 +637,7 @@ function verifySponsorId() {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th><?php echo __('Beneficiary Nominee') ?></th>
+        <th><?php /*echo __('Beneficiary Nominee') */?></th>
         <th></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
@@ -647,7 +647,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('Name') ?></td>
+        <td><?php /*echo __('Name') */?></td>
         <td>
             <input type="text" class="inputbox" id="nomineeName" name="nomineeName">
             &nbsp;
@@ -658,7 +658,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Relationship') ?></td>
+        <td><?php /*echo __('Relationship') */?></td>
         <td>
             <input type="text" class="inputbox" id="nomineeRelationship" name="nomineeRelationship">
             &nbsp;
@@ -668,7 +668,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td><?php echo __('IC./Passport No.') ?></td>
+        <td><?php /*echo __('IC./Passport No.') */?></td>
         <td>
             <input type="text" class="inputbox" id="nomineeIc" name="nomineeIc">
             &nbsp;
@@ -679,7 +679,7 @@ function verifySponsorId() {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Contact No.') ?></td>
+        <td><?php /*echo __('Contact No.') */?></td>
         <td>
             <input type="text" class="inputbox" id="nomineeContactNo" name="nomineeContactNo">
             &nbsp;
@@ -688,7 +688,7 @@ function verifySponsorId() {
     </tr>
 
     </tbody>
-</table>
+</table>-->
 <br>
 <table cellspacing="0" cellpadding="0" class="tbl_form">
 <colgroup>

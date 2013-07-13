@@ -655,9 +655,9 @@
             <trans-unit><source>Upgrade Package</source><target>パッケージをアップグレードする</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>レコードのテーブルをサポートしているアップグレードするには</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>取引記号</target></trans-unit>
-            <trans-unit><source>Downline Stats</source><target>下线统计简介</target></trans-unit>
-            <trans-unit><source>Placement Genealogy</source><target>安置组织图</target></trans-unit>
-            <trans-unit><source>Sponsor Genealogy</source><target>直推组织图</target></trans-unit>
+            <trans-unit><source>Downline Stats</source><target>ダウンライン統計</target></trans-unit>
+            <trans-unit><source>Placement Genealogy</source><target>配置系譜</target></trans-unit>
+            <trans-unit><source>Sponsor Genealogy</source><target>スポンサー系譜</target></trans-unit>
             <trans-unit><source>Accumulate Group BV</source><target>小组累积业绩</target></trans-unit>
             <trans-unit><source>Today Group BV</source><target>今日小组业绩</target></trans-unit>
             <trans-unit><source>Carry Forward</source><target>对碰余额</target></trans-unit>
@@ -767,6 +767,10 @@
             <trans-unit><source>Group Development Bonus</source><target>組織開発のボーナス</target></trans-unit>
             <trans-unit><source>Fund Management Performance</source><target>資金管理のパフォーマンス</target></trans-unit>
             <trans-unit><source>Special Bonus</source><target>特別ボーナス</target></trans-unit>
+            <trans-unit><source>Referrer and Placement Position</source><target>リファラーと配置位置</target></trans-unit>
+            <trans-unit><source>Referrer ID</source><target>リファラID</target></trans-unit>
+            <trans-unit><source>Referrer Name</source><target>リファラ名</target></trans-unit>
+            <trans-unit><source>Placement</source><target>リファラ名</target></trans-unit>
         </body>
     </file>
 </xliff>
