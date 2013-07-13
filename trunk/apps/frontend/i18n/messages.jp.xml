@@ -777,6 +777,10 @@
             <trans-unit><source>Click here</source><target>ここをクリック</target></trans-unit>
             <trans-unit><source>to instantly register as Maxim Trader Member</source><target>瞬時にマキシムトレーダーメンバーとして登録する</target></trans-unit>
             <trans-unit><source>Referrer</source><target>リファラ</target></trans-unit>
+            <trans-unit><source>Beneficiary Nominee</source><target>受益ノミネート</target></trans-unit>
+            <trans-unit><source>Relationship</source><target>関係</target></trans-unit>
+            <trans-unit><source>IC./Passport No.</source><target>IC。/パスポート番号</target></trans-unit>
+            <trans-unit><source>Contact No.</source><target>番号にお問い合わせください</target></trans-unit>
         </body>
     </file>
 </xliff>
