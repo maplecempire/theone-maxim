@@ -225,7 +225,7 @@
                         <tbody>
                         <tr>
                             <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
-                            <th colspan="2">New to Maxim Trader?</th>
+                            <th colspan="2"><?php echo __('New to Maxim Trader') ?>?</th>
                             <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
                         </tr>
                         </tbody>
@@ -245,10 +245,10 @@
                                 <img src="/images/maxim/arrow_blue_single_tab.gif">
                             </td>
                             <td><br>
-                                <a href="<?php echo url_for("/member/register")?>"><b>Self Registration</b></a> <span class="txt_new">IT'S EASY!!</span>
+                                <a href="<?php echo url_for("/member/register")?>"><b><?php echo __('Self Registration') ?></b></a> <span class="txt_new"><?php echo __("IT'S EASY!!") ?></span>
                                 <p>
-                                    <a href="<?php echo url_for("/member/register")?>">Click
-                                        here</a> to instantly register as Maxim Trader Member. </p>
+                                    <a href="<?php echo url_for("/member/register")?>">
+                                        <?php echo __('Click here') ?></a> <?php echo __('to instantly register as Maxim Trader Member') ?>. </p>
                             </td>
                             <td></td>
                         </tr>
