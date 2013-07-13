@@ -10,13 +10,89 @@
  */
 class reportActions extends sfActions
 {
+    public function executeRunImeReport()
+    {
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+
+        foreach ($mlmDistributors as $mlmDistributor) {
+            $smallLeg = $this->getGroupSales($mlmDistributor->getDistributorId());
+            $personalSales = $this->getPersonalSales($mlmDistributor->getDistributorId());
+            $ticketQty = 0;
+            $bonusType = "";
+
+            if ($smallLeg >= 60000 && $personalSales >= 40000) {
+                $bonusType = "SL60 and PS40";
+                $ticketQty = 1;
+            } else if ($smallLeg >= 80000 && $personalSales >= 30000) {
+                $bonusType = "SL80 and PS30";
+                $ticketQty = 1;
+            } else if ($smallLeg >= 80000 && $personalSales >= 40000) {
+                $bonusType = "SL60 and PS40";
+                $ticketQty = 1;
+            } else if ($smallLeg >= 80000 || $personalSales >= 40000) {
+                $bonusType = "SL80 or PS40";
+                $ticketQty = 1;
+            } else if ($smallLeg >= 60000 || $personalSales >= 30000) {
+                $bonusType = "SL60 or PS30";
+                $ticketQty = 0.5;
+            }
+
+            $ime_report = new ImeReport();
+            $ime_report->setDistId($mlmDistributor->getDistributorId());
+            $ime_report->setBonusType($bonusType);
+            $ime_report->setSmallLeg($smallLeg);
+            $ime_report->setPersonalSales($personalSales);
+            $ime_report->setTicketQty($ticketQty);
+            $ime_report->setDistributorCode($mlmDistributor->getDistributorCode());
+            $ime_report->setFullName($mlmDistributor->getFullName());
+            $ime_report->setEmail($mlmDistributor->getEmail());
+            $ime_report->setContact($mlmDistributor->getContact());
+            $ime_report->setCountry($mlmDistributor->getCountry());
+            $ime_report->setRegisteredOn($mlmDistributor->getCreatedOn());
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($mlmDistributor->getTreeStructure(), "|" . $leaderArrs[$i] . "|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $ime_report->setLeader($leader);
+            $ime_report->setRemark("");
+            $ime_report->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $ime_report->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+            $ime_report->save();
+        }
+    }
+
+    public function executeImeReport()
+    {
+        $c = new Criteria();
+        $c->add(ImeReportPeer::BONUS_TYPE, "", Criteria::NOT_EQUAL);
+        $this->imeReports = ImeReportPeer::doSelect($c);
+    }
+
     public function executeRollingPointList()
     {
         $this->rollingPointTable = $this->getRollingPointData();
     }
+
     public function executeConvertEcashToEpoint()
     {
     }
+
     public function executeReferrerList()
     {
         $c = new Criteria();
@@ -24,9 +100,11 @@ class reportActions extends sfActions
         $c->add(MlmDistributorPeer::UPLINE_DIST_ID, 71);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
     }
+
     public function executeEpointTransfer()
     {
     }
+
     public function executeDoReportPayout()
     {
         $bonusDate = date("Y-m-d", strtotime("9 November 2012"));
@@ -34,10 +112,10 @@ class reportActions extends sfActions
         $dateUtil = new DateUtil();
         $bonusService = new BonusService();
 
-        print_r($bonusDate."<br>");
-        while($bonusDate < date("Y-m-d")) {
+        print_r($bonusDate . "<br>");
+        while ($bonusDate < date("Y-m-d")) {
             $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
-            print_r($bonusDate."<br>");
+            print_r($bonusDate . "<br>");
 
             $totalSales = $bonusService->doCalculateTotalSales($bonusDate);
             $totalDrb = $bonusService->doCalculateDrb($bonusDate);
@@ -57,6 +135,7 @@ class reportActions extends sfActions
         }
         return sfView::HEADER_ONLY;
     }
+
     public function executeGroupSales_bak()
     {
         $c = new Criteria();
@@ -82,7 +161,7 @@ class reportActions extends sfActions
 
                 $leader = "";
                 for ($i = 0; $i < count($leaderArrs); $i++) {
-                    $pos = strrpos($mlmDistributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                    $pos = strrpos($mlmDistributor->getTreeStructure(), "|" . $leaderArrs[$i] . "|");
                     if ($pos === false) { // note: three equal signs
 
                     } else {
@@ -100,6 +179,7 @@ class reportActions extends sfActions
 
         $this->resultArray = $resultArray;
     }
+
     public function executeGroupSales()
     {
         $query = "SELECT dist.distributor_code, leftgroup._SUM as left_sum, rightgroup._SUM as right_sum
@@ -142,7 +222,7 @@ LEFT JOIN (
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                $pos = strrpos($arr['tree_structure'], "|" . $leaderArrs[$i] . "|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -160,6 +240,7 @@ LEFT JOIN (
         }
         $this->resultArray = $resultArray;
     }
+
     public function executePersonalSales()
     {
         $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
@@ -186,7 +267,7 @@ LEFT JOIN (
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                $pos = strrpos($arr['tree_structure'], "|" . $leaderArrs[$i] . "|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -204,6 +285,7 @@ LEFT JOIN (
         }
         $this->resultArray = $resultArray;
     }
+
     public function executeIndividualTraderSales()
     {
         $query = "SELECT dist.distributor_code, package.price
@@ -230,7 +312,7 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                $pos = strrpos($arr['tree_structure'], "|" . $leaderArrs[$i] . "|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -248,43 +330,53 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
         }
         $this->resultArray = $resultArray;
     }
+
     public function executeCustomerService()
     {
         $c = new Criteria();
         $this->mlmCustomerEnquirys = MlmCustomerEnquiryPeer::doSelect($c);
     }
+
     public function executeCustomerServiceDetail()
     {
         $c = new Criteria();
         $this->mlmCustomerEnquiryDetails = MlmCustomerEnquiryDetailPeer::doSelect($c);
     }
+
     public function executeImeRegistration()
     {
         $c = new Criteria();
         $this->ime_registrations = ImeRegistrationPeer::doSelect($c);
     }
+
     public function executeMt4Withdrawal()
     {
     }
+
     public function executeReferralBonus()
     {
         $c = new Criteria();
         $this->reports = ReportPayoutBonusPeer::doSelect($c);
     }
+
     public function executeTotalMt4Reload()
     {
     }
+
     public function executeTotalPackagePurchase()
     {
     }
+
     public function executeTotalPackageUpgrade()
     {
     }
+
     public function executeTotalVolumeTraded()
     {
     }
 
-    function getRollingPointData() {
+    function getRollingPointData()
+    {
         $arrs = $this->fetchRollingPoint();
 
         $body = "<h3>Rolling Point Table</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
@@ -313,15 +405,15 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
             $rollingPointAvailable = $arr['TOTAL_ROLLING_POINT'] - $arr['TOTAL_RP_USED'];
 
             $body .= "<tr class='sf_admin_row_1'>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['distributor_code']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['contact']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPoint,2)."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointAvailable,2)."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointUsed,2)."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($debitAccount,2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $idx++ . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['distributor_code'] . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['full_name'] . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['email'] . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['contact'] . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPoint, 2) . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointAvailable, 2) . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointUsed, 2) . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($debitAccount, 2) . "</td>
                     </tr>";
         }
 
@@ -330,7 +422,9 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
 
         return $body;
     }
-    function fetchRollingPoint() {
+
+    function fetchRollingPoint()
+    {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
         , totalRollingPoint.TOTAL_ROLLING_POINT
         , rpUsed.TOTAL_RP_USED
@@ -339,16 +433,16 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
             (
                 SELECT sum(credit) AS TOTAL_ROLLING_POINT, dist_id
                     FROM mlm_account_ledger account
-                        where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
+                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by dist_id
             ) totalRollingPoint ON totalRollingPoint.dist_id = transferLedger.dist_id
         LEFT JOIN
             (
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
                     FROM mlm_account_ledger account
-                        where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
+                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by dist_id
             ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
         LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-    where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_RP."' group by transferLedger.dist_id";
+    where transferLedger.account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by transferLedger.dist_id";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -366,10 +460,12 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
         }
         return $resultArray;
     }
-    function fetchTotalDebit($distId) {
+
+    function fetchTotalDebit($distId)
+    {
         $query = "SELECT sum(credit) AS TOTAL_DEBIT, dist_id
                     FROM mlm_account_ledger
-                where account_type = '".Globals::ACCOUNT_TYPE_DEBIT."' AND dist_id = ".$distId." group by dist_id";
+                where account_type = '" . Globals::ACCOUNT_TYPE_DEBIT . "' AND dist_id = " . $distId . " group by dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -384,14 +480,16 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
         }
         return $result;
     }
-    function getPersonalSales($distId) {
+
+    function getPersonalSales($distId)
+    {
         $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
             , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
 	FROM mlm_distributor newDist
         LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
         LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
 where newDist.loan_account = 'N'
-AND newDist.upline_dist_id = ".$distId."
+AND newDist.upline_dist_id = " . $distId . "
 AND newDist.from_abfx = 'N'
 AND newDist.created_on >= '2013-03-17 00:00:00'
 and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
@@ -409,11 +507,13 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         }
         return $result;
     }
-    function getGroupSales($distId) {
+
+    function getGroupSales($distId)
+    {
         $query = "SELECT sum(pairing.credit) AS _SUM, pairing.dist_id, dist.distributor_code, pairing.left_right, dist.full_name, dist.email, dist.contact
                     FROM mlm_dist_pairing_ledger pairing
                         LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
-                where pairing.dist_id = ".$distId."
+                where pairing.dist_id = " . $distId . "
                     AND dist.from_abfx = 'N'
                     AND pairing.created_on >= '2013-03-17 00:00:00'
                     and pairing.created_on <= '2013-07-10 23:59:59'
