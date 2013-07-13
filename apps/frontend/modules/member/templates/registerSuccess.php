@@ -308,7 +308,7 @@ function error(data) {
 <tbody>
 <tr>
     <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Registration</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Registration') ?></span></td>
     <td rowspan="3">&nbsp;</td>
 </tr>
 <tr>

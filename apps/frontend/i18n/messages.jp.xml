@@ -771,6 +771,12 @@
             <trans-unit><source>Referrer ID</source><target>リファラID</target></trans-unit>
             <trans-unit><source>Referrer Name</source><target>リファラ名</target></trans-unit>
             <trans-unit><source>Placement</source><target>リファラ名</target></trans-unit>
+            <trans-unit><source>New to Maxim Trader</source><target>への新たなMaxim Trader</target></trans-unit>
+            <trans-unit><source>Self Registration</source><target>自己登録</target></trans-unit>
+            <trans-unit><source>IT'S EASY!!</source><target>それは簡単です！</target></trans-unit>
+            <trans-unit><source>Click here</source><target>ここをクリック</target></trans-unit>
+            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>瞬時にマキシムトレーダーメンバーとして登録する</target></trans-unit>
+            <trans-unit><source>Referrer</source><target>リファラ</target></trans-unit>
         </body>
     </file>
 </xliff>
