@@ -20,7 +20,7 @@
         <td><?php echo $idx++; ?></td>
         <td><?php echo $imeReport->getDistributorCode(); ?></td>
         <td><?php echo $imeReport->getFullName() ?></td>
-        <td><?php echo $imeReport->getBunusType() ?></td>
+        <td><?php echo $imeReport->getBonusType() ?></td>
         <td><?php echo number_format($imeReport->getSmallLeg(),2) ?></td>
         <td><?php echo number_format($imeReport->getPersonalSales(),2) ?></td>
         <td><?php echo $imeReport->getTicketQty() ?></td>
