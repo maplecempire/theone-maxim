@@ -41,7 +41,7 @@ if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) 
     </li>
     <li id="menu-item-158"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
-            href="<?php echo url_for("/home/activities")?>"><?php echo __('Events & Activities') ?>
+            href="<?php echo url_for("/home/activities")?>"><?php echo __('Events') ?> & <?php echo __('Activities') ?>
         <?php if ($distDB->getNewActivityFlag() == Globals::YES_Y) { ?>
         <img src="/images/new_icon.gif">
         <?php } ?>
