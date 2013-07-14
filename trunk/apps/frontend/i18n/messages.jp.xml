@@ -790,6 +790,8 @@
             <trans-unit><source>Bank Account Information</source><target>銀行口座情報</target></trans-unit>
             <trans-unit><source>Maxim Capital Limited USD Account</source><target>Maxim Capital Limited USD アカウント</target></trans-unit>
             <trans-unit><source>NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</source><target>注：リファレンスに書いてください : Maxim Capital Limited - 9120028849</target></trans-unit>
+            <trans-unit><source>Events</source><target>イベント</target></trans-unit>
+            <trans-unit><source>Activities</source><target>活動</target></trans-unit>
         </body>
     </file>
 </xliff>
