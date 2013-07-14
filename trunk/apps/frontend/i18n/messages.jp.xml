@@ -551,7 +551,7 @@
             <trans-unit><source>User Profile</source><target>ユーザ設定情報</target></trans-unit>
             <trans-unit><source>Registration</source><target>登録</target></trans-unit>
             <trans-unit><source>Package Purchase</source><target>サブスクリプションを購入する</target></trans-unit>
-            <trans-unit><source>Funds Deposit</source><target>基金預金</target></trans-unit>
+            <trans-unit><source>Funds Deposit</source><target>ファンド預金</target></trans-unit>
             <trans-unit><source>Package Upgrade</source><target>アップグレードをサポート</target></trans-unit>
             <trans-unit><source>Reload MT4 Fund</source><target>MT4の基金を充值</target></trans-unit>
             <trans-unit><source>Commission</source><target>コミッション</target></trans-unit>
@@ -643,8 +643,11 @@
             <trans-unit><source>I understand that as an MaximTrader customer, it is my responsibility to review all necessary information about currency trading and the MaximTrader</source><target>私はMaximTraderの顧客として理解するには、外国為替取引の情報のすべての必要なMaximTraderを確認するために私の責任です</target></trans-unit>
             <trans-unit><source>Terms and Conditions</source><target>諸条件</target></trans-unit>
             <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>私は外国為替取引に伴うリスクを理解し、法的助言といかなる取引活動の開始前に、さらなる研究のために外国為替を求める。</target></trans-unit>
-            <trans-unit><source>Convert CP2 To CP1</source><target>CP1、CP2用の変換</target></trans-unit>
-            <trans-unit><source>CP1 Transfer</source><target>販売のためのCP1</target></trans-unit>
+            <trans-unit><source>Convert CP2 To CP1</source><target>変換CP2へCP1</target></trans-unit>
+            <trans-unit><source>Convert CP3 To CP1</source><target>変換CP3へCP1</target></trans-unit>
+            <trans-unit><source>CP1 Transfer</source><target>CP1移転</target></trans-unit>
+            <trans-unit><source>CP2 Transfer</source><target>CP2移転</target></trans-unit>
+            <trans-unit><source>CP3 Transfer</source><target>CP3移転</target></trans-unit>
             <trans-unit><source>Total Fund Deposited</source><target>預金合計</target></trans-unit>
             <trans-unit><source>Reference No</source><target>参照番号</target></trans-unit>
             <trans-unit><source>Funds Deposit History</source><target>預金記録表</target></trans-unit>
