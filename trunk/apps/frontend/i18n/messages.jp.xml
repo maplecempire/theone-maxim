@@ -804,6 +804,9 @@
             <trans-unit><source>CP1 Converted Amount</source><target>CP1変換量</target></trans-unit>
             <trans-unit><source>CP2 Converted Amount</source><target>CP2変換量</target></trans-unit>
             <trans-unit><source>CP3 Converted Amount</source><target>CP3変換量</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful</source><target>CP3はCP1成功に変換</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RPはCP1成功に変換</target></trans-unit>
+            <trans-unit><source>Your Ezy Cash Card application has been submitted successfully.</source><target>あなたのEzy Cashカードのアプリケーションが正常に送信されました。</target></trans-unit>
         </body>
     </file>
 </xliff>
