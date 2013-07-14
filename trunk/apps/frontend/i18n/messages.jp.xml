@@ -573,7 +573,7 @@
             <trans-unit><source>Account Information</source><target>アカウント情報</target></trans-unit>
             <trans-unit><source>Your Account Point</source><target>あなたのアカウントを指す</target></trans-unit>
             <trans-unit><source>Inactive Traders</source><target>活性化されていないメンバー</target></trans-unit>
-            <trans-unit><source>Currency</source><target>通貨</target></trans-unit>
+            <trans-unit><source>Currency</source><target>カレンシー</target></trans-unit>
             <trans-unit><source>No data available in table</source><target>データは入手できません</target></trans-unit>
             <trans-unit><source>records</source><target>記録</target></trans-unit>
             <trans-unit><source>Personal Information</source><target>個人情報</target></trans-unit>
@@ -708,10 +708,12 @@
             <trans-unit><source>MT4 Withdrawal</source><target>MT4取り下げる</target></trans-unit>
             <trans-unit><source>CP1 Amount</source><target>CP1の額</target></trans-unit>
             <trans-unit><source>CP1 Balance</source><target>CP1バランス</target></trans-unit>
+            <trans-unit><source>RP Balance</source><target>RPバランス</target></trans-unit>
             <trans-unit><source>Transfer To Member ID</source><target>移転给会员ID</target></trans-unit>
             <trans-unit><source>Transfer CP1 Amount</source><target>移転CP1の額</target></trans-unit>
             <trans-unit><source>Transfer CP2 Amount</source><target>移転CP2の額</target></trans-unit>
             <trans-unit><source>Transfer CP3 Amount</source><target>移転CP3の額</target></trans-unit>
+            <trans-unit><source>Transfer RP Amount</source><target>移転RPの額</target></trans-unit>
             <trans-unit><source>CP3 Amount</source><target>CP3の額</target></trans-unit>
             <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal Status</source><target>MT4兑现状态</target></trans-unit>
@@ -756,7 +758,7 @@
             <trans-unit><source>City of Bank</source><target>銀行の都市</target></trans-unit>
             <trans-unit><source>Print</source><target>印刷</target></trans-unit>
             <trans-unit><source>Country of Bank</source><target>銀行の国</target></trans-unit>
-            <trans-unit><source>Trading Currency on MT4</source><target>MT4交易货币</target></trans-unit>
+            <trans-unit><source>Trading Currency on MT4</source><target>MT4上の取引通貨</target></trans-unit>
             <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
             <trans-unit><source>Invalid username or password.</source><target>会员ID和密码不正确</target></trans-unit>
             <trans-unit><source>The CAPTCHA wasn't entered correctly. Go back and try it again.</source><target>验证码输入不正确。回去再试一次。</target></trans-unit>
@@ -837,6 +839,10 @@
             <trans-unit><source>NOTE :</source><target>注：</target></trans-unit>
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1は、パッケージの購入、パッケージのアップグレード、MT4口座のリロードのみであること、非引き出しです</target></trans-unit>
             <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP1 CP2へ変換、余分な5％を取得します</target></trans-unit>
+            <trans-unit><source>Immediate Member Restructuring</source><target>即時メンバー再編</target></trans-unit>
+            <trans-unit><source>Restructure</source><target>再構築する</target></trans-unit>
+            <trans-unit><source>Member has been registered successfully.</source><target>メンバーが正常に登録されている</target></trans-unit>
+            <trans-unit><source>Member Information</source><target>会員情報</target></trans-unit>
         </body>
     </file>
 </xliff>
