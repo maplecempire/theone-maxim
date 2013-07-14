@@ -807,6 +807,31 @@
             <trans-unit><source>CP3 convert to CP1 successful</source><target>CP3はCP1成功に変換</target></trans-unit>
             <trans-unit><source>RP convert to CP1 successful.</source><target>RPはCP1成功に変換</target></trans-unit>
             <trans-unit><source>Your Ezy Cash Card application has been submitted successfully.</source><target>あなたのEzy Cashカードのアプリケーションが正常に送信されました。</target></trans-unit>
+            <trans-unit><source>Your VISA debit Card application has been submitted successfully.</source><target>あなたのVISA debitカードのアプリケーションが正常に送信されました。</target></trans-unit>
+            <trans-unit><source>Your inquiry has been submitted.</source><target>あなたの照会が送信されました。</target></trans-unit>
+            <trans-unit><source>Member placement Successfully.</source><target>成功しましたメンバーの配置。</target></trans-unit>
+            <trans-unit><source>Password already sent to your email account. Please check your inbox.</source><target>パスワードは、すでにあなたのメールアカウントに送信されます。あなたの受信トレイを確認してください。</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted.</source><target>あなたの要求が送信されました。</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:</source><target>あなたの要求は資金調達を完了するには、送信されました、以下に示すように詳細で、送金の口座への入金をを行ってください：</target></trans-unit>
+            <trans-unit><source>Upload successful.</source><target>成功しアップロードします。</target></trans-unit>
+            <trans-unit><source>Bank receipt upload successful.</source><target>銀行の領収書は成功したアップロード。</target></trans-unit>
+            <trans-unit><source>Profile update successfully</source><target>首尾よく更新プロファイリング</target></trans-unit>
+            <trans-unit><source>Bank Account Information update successfully</source><target>銀行口座情報が正常に更新</target></trans-unit>
+            <trans-unit><source>Beneficiary update successfully</source><target>首尾受益アップデート</target></trans-unit>
+            <trans-unit><source>Your Username is</source><target>あなたのユーザーネームは</target></trans-unit>
+            <trans-unit><source>(%1%) Package Purchase Successfully.</source><target>(%1%) 成功しましたパッケージの購入</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully.</source><target>メンバー(%1%)が正常に登録。</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>メンバー(%1%)が正常に登録。マニュアルは現在配置をしてください。</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>成功を転送</target></trans-unit>
+            <trans-unit><source>Password updated</source><target>パスワードの更新</target></trans-unit>
+            <trans-unit><source>Security Password updated</source><target>セキュリティパスワードは、更新</target></trans-unit>
+            <trans-unit><source>Your CP3 withdrawal has been submitted.</source><target>あなたのCP3引き下がるが送信されました。</target></trans-unit>
+            <trans-unit><source>Your CP2 withdrawal has been submitted.</source><target>あなたのCP2引き下がるが送信されました。</target></trans-unit>
+            <trans-unit><source>Your MT4 Fund Reload has been submitted.</source><target>あなたのMT4基金リロードが送信されました。</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 successful.</source><target>CP2は成功CP1に変換。</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful.</source><target>CP3は成功CP1に変換。</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RPは成功CP1に変換。</target></trans-unit>
+            <trans-unit><source>Package upgraded successful.</source><target>パッケージには、成功したアップグレード。</target></trans-unit>
         </body>
     </file>
 </xliff>
