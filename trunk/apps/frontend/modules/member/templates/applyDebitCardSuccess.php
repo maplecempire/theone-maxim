@@ -257,7 +257,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Address') ?> 2</td>
+                    <td></td>
                     <td>
                         <input name="address2" type="text" id="address2" size="30"
                                              value="<?php echo $mlm_debit_card_registration->getAddress2() ?>"/>

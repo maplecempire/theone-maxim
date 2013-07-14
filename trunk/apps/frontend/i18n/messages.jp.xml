@@ -845,6 +845,7 @@
             <trans-unit><source>Member Information</source><target>会員情報</target></trans-unit>
             <trans-unit><source>Forget Password</source><target>パスワードを忘れる</target></trans-unit>
             <trans-unit><source>Request Password</source><target>リクエストパスワード</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>2013年6月ファンド管理レポートをダウンロードするにはクリック</target></trans-unit>
         </body>
     </file>
 </xliff>

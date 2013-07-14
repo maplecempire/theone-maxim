@@ -301,7 +301,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Address') ?> 2</td>
+                    <td></td>
                     <td>
                         <input name="address2" type="text" id="address2" tabindexBak="13" size="30"
                                              value="<?php echo $distDB->getAddress2() ?>"/>
