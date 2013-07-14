@@ -1761,7 +1761,7 @@ class memberActions extends sfActions
             $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
 
             $con->commit();
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Username is ").$userName);
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your Username is")." ".$userName);
         } catch (PropelException $e) {
             $con->rollback();
             throw $e;

@@ -20,7 +20,7 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>Register</source>
-                <target>今すぐ登録</target>
+                <target>注册</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>Forget Password?</source>
@@ -72,7 +72,7 @@
             </trans-unit>
             <trans-unit id="16">
                 <source>Address</source>
-                <target>アドレス</target>
+                <target>住所</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>Postal Code</source>
@@ -124,7 +124,7 @@
             </trans-unit>
             <trans-unit id="27">
                 <source>Shareholder has been registered successfully.</source>
-                <target>株主は正常に登録</target>
+                <target>株主は正常に注册</target>
             </trans-unit>
             <trans-unit>
                 <source>Trader has been registered successfully.</source>
@@ -357,7 +357,7 @@
             <trans-unit><source>Are you sure want to place this member into this position?</source><target>あなたが決定するこのメンバは、この位置に配置されます?</target></trans-unit>
             <trans-unit><source>Transaction Type</source><target>トランザクションタイプ</target></trans-unit>
             <trans-unit><source>PROCESS CHARGES</source><target>手続料</target></trans-unit>
-            <trans-unit><source>REGISTER</source><target>登録</target></trans-unit>
+            <trans-unit><source>REGISTER</source><target>注册</target></trans-unit>
             <trans-unit><source>TRANSFER TO</source><target>に移管</target></trans-unit>
             <trans-unit><source>TRANSFER FROM</source><target>からの転送</target></trans-unit>
             <trans-unit><source>COMPANY</source><target>コーポレート·ローン</target></trans-unit>
@@ -549,7 +549,7 @@
             <trans-unit><source>Welcome to Maxim Trader.</source><target>へようこそ马胜金融</target></trans-unit>
             <trans-unit><source>MAIN MENU</source><target>メインメニュー</target></trans-unit>
             <trans-unit><source>User Profile</source><target>ユーザ設定情報</target></trans-unit>
-            <trans-unit><source>Registration</source><target>登録</target></trans-unit>
+            <trans-unit><source>Registration</source><target>注册</target></trans-unit>
             <trans-unit><source>Package Purchase</source><target>サブスクリプションを購入する</target></trans-unit>
             <trans-unit><source>Funds Deposit</source><target>ファンド預金</target></trans-unit>
             <trans-unit><source>Package Upgrade</source><target>アップグレードをサポート</target></trans-unit>
@@ -784,10 +784,10 @@
             <trans-unit><source>Referrer Name</source><target>リファラ名</target></trans-unit>
             <trans-unit><source>Placement</source><target>リファラ名</target></trans-unit>
             <trans-unit><source>New to Maxim Trader</source><target>への新たなMaxim Trader</target></trans-unit>
-            <trans-unit><source>Self Registration</source><target>自己登録</target></trans-unit>
+            <trans-unit><source>Self Registration</source><target>自己注册</target></trans-unit>
             <trans-unit><source>IT'S EASY!!</source><target>それは簡単です！</target></trans-unit>
             <trans-unit><source>Click here</source><target>ここをクリック</target></trans-unit>
-            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>瞬時にマキシムトレーダーメンバーとして登録する</target></trans-unit>
+            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>瞬時にマキシムトレーダーメンバーとして注册する</target></trans-unit>
             <trans-unit><source>Referrer</source><target>リファラ</target></trans-unit>
             <trans-unit><source>Beneficiary Nominee</source><target>受益ノミネート</target></trans-unit>
             <trans-unit><source>Relationship</source><target>関係</target></trans-unit>
@@ -822,8 +822,8 @@
             <trans-unit><source>Beneficiary update successfully</source><target>首尾受益アップデート</target></trans-unit>
             <trans-unit><source>Your Username is</source><target>あなたのユーザーネームは</target></trans-unit>
             <trans-unit><source>(%1%) Package Purchase Successfully.</source><target>(%1%) 成功しましたパッケージの購入</target></trans-unit>
-            <trans-unit><source>Member (%1%) Registered Successfully.</source><target>メンバー(%1%)が正常に登録。</target></trans-unit>
-            <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>メンバー(%1%)が正常に登録。マニュアルは現在配置をしてください。</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully.</source><target>メンバー(%1%)が正常に注册。</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>メンバー(%1%)が正常に注册。マニュアルは現在配置をしてください。</target></trans-unit>
             <trans-unit><source>Transfer success</source><target>成功を転送</target></trans-unit>
             <trans-unit><source>Password updated</source><target>パスワードの更新</target></trans-unit>
             <trans-unit><source>Security Password updated</source><target>セキュリティパスワードは、更新</target></trans-unit>
@@ -841,8 +841,10 @@
             <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP1 CP2へ変換、余分な5％を取得します</target></trans-unit>
             <trans-unit><source>Immediate Member Restructuring</source><target>即時メンバー再編</target></trans-unit>
             <trans-unit><source>Restructure</source><target>再構築する</target></trans-unit>
-            <trans-unit><source>Member has been registered successfully.</source><target>メンバーが正常に登録されている</target></trans-unit>
+            <trans-unit><source>Member has been registered successfully.</source><target>メンバーが正常に注册されている</target></trans-unit>
             <trans-unit><source>Member Information</source><target>会員情報</target></trans-unit>
+            <trans-unit><source>Forget Password</source><target>パスワードを忘れる</target></trans-unit>
+            <trans-unit><source>Request Password</source><target>リクエストパスワード</target></trans-unit>
         </body>
     </file>
 </xliff>
