@@ -213,9 +213,9 @@
             <trans-unit><source>Out</source><target>アカウント</target></trans-unit>
             <trans-unit><source>Balance</source><target>バランス</target></trans-unit>
             <trans-unit><source>Action</source><target>アクション</target></trans-unit>
-            <trans-unit><source>E-Cash Balance</source><target>現金残高</target></trans-unit>
-            <trans-unit><source>MT4 Credit Balance</source><target>MT4のクレジット残高</target></trans-unit>
-            <trans-unit><source>E-Point Balance</source><target>クレジット残高</target></trans-unit>
+            <trans-unit><source>E-Cash Balance</source><target>現金バランス</target></trans-unit>
+            <trans-unit><source>MT4 Credit Balance</source><target>MT4のクレジットバランス</target></trans-unit>
+            <trans-unit><source>E-Point Balance</source><target>クレジットバランス</target></trans-unit>
             <trans-unit><source>E-Cash Withdraw Amount</source><target>金銭の額</target></trans-unit>
             <trans-unit><source>MT4 Credit Withdraw Amount</source><target>MT4 Credit 金銭の額</target></trans-unit>
             <trans-unit><source>Transaction Password</source><target>トランザクションのパスワード</target></trans-unit>
@@ -706,10 +706,13 @@
             <trans-unit><source>CP3 Statement</source><target>CP3声明</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal</source><target>CP2取り下げる</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal</source><target>MT4取り下げる</target></trans-unit>
-            <trans-unit><source>CP1 Amount</source><target>CP1金额</target></trans-unit>
-            <trans-unit><source>CP1 Balance</source><target>CP1金额</target></trans-unit>
-            <trans-unit><source>Transfer To Member ID</source><target>转让给会员ID</target></trans-unit>
-            <trans-unit><source>Transfer CP1 Amount</source><target>转让CP1金额</target></trans-unit>
+            <trans-unit><source>CP1 Amount</source><target>CP1の額</target></trans-unit>
+            <trans-unit><source>CP1 Balance</source><target>CP1バランス</target></trans-unit>
+            <trans-unit><source>Transfer To Member ID</source><target>移転给会员ID</target></trans-unit>
+            <trans-unit><source>Transfer CP1 Amount</source><target>移転CP1の額</target></trans-unit>
+            <trans-unit><source>Transfer CP2 Amount</source><target>移転CP2の額</target></trans-unit>
+            <trans-unit><source>Transfer CP3 Amount</source><target>移転CP3の額</target></trans-unit>
+            <trans-unit><source>CP3 Amount</source><target>CP3の額</target></trans-unit>
             <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal Status</source><target>MT4兑现状态</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal Status</source><target>CP2兑现状态</target></trans-unit>
@@ -718,7 +721,8 @@
             <trans-unit><source>NOTE : Minimum withdrawal amount : USD 200</source><target>注：兑现数额不能少过200美金</target></trans-unit>
             <trans-unit><source>Can only be withdrawn on the first working week of the month</source><target>兑现只能在每个月的第一个星期</target></trans-unit>
             <trans-unit><source>Processing time : 2 working days</source><target>处理时间：2个工作日</target></trans-unit>
-            <trans-unit><source>CP2 Balance</source><target>CP2余额</target></trans-unit>
+            <trans-unit><source>CP2 Balance</source><target>CP2バランス</target></trans-unit>
+            <trans-unit><source>CP3 Balance</source><target>CP3バランス</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal Amount</source><target>CP2兑现金额</target></trans-unit>
             <trans-unit><source>After 5% handling fee</source><target>附加5％的手续费</target></trans-unit>
             <trans-unit><source>Deduct Amount</source><target>扣除总金额</target></trans-unit>
@@ -795,6 +799,11 @@
             <trans-unit><source>NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</source><target>注：リファレンスに書いてください : Maxim Capital Limited - 9120028849</target></trans-unit>
             <trans-unit><source>Events</source><target>イベント</target></trans-unit>
             <trans-unit><source>Activities</source><target>活動</target></trans-unit>
+            <trans-unit><source>Transfer To User Name</source><target>ユーザー名に転送</target></trans-unit>
+            <trans-unit><source>Member Name</source><target>メンバーネーム</target></trans-unit>
+            <trans-unit><source>CP1 Converted Amount</source><target>CP1変換量</target></trans-unit>
+            <trans-unit><source>CP2 Converted Amount</source><target>CP2変換量</target></trans-unit>
+            <trans-unit><source>CP3 Converted Amount</source><target>CP3変換量</target></trans-unit>
         </body>
     </file>
 </xliff>
