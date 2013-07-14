@@ -218,7 +218,7 @@ $(function() {
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td valign="top"><font color="#dc143c">NOTE :</font></td>
+                                <td valign="top"><font color="#dc143c"><?php echo __('NOTE :'); ?></font></td>
                                 <td>
                                     <font color="#dc143c"><?php echo __('Funds Deposited will be credited into CP1 Account.'); ?>
                                     <br><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.'); ?>

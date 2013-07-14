@@ -651,9 +651,9 @@
             <trans-unit><source>Total Fund Deposited</source><target>預金合計</target></trans-unit>
             <trans-unit><source>Reference No</source><target>参照番号</target></trans-unit>
             <trans-unit><source>Funds Deposit History</source><target>預金記録表</target></trans-unit>
-            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>預金資金はCP1口座に入金されます。</target></trans-unit>
+            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>資金はCP1口座に入金され堆積。</target></trans-unit>
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>アップグレードをサポートし、MT4のアカウントを再充電し、現金を現金化することができず、支援の獲得のための唯一のCP1。</target></trans-unit>
-            <trans-unit><source>1 equals to 1 value of CP1</source><target>1は1 CP1の値に等しい</target></trans-unit>
+            <trans-unit><source>1 equals to 1 value of CP1</source><target>図1は、CP1の1の値に等しい</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 アカウント</target></trans-unit>
             <trans-unit><source>CP2 Account</source><target>CP2 アカウント</target></trans-unit>
             <trans-unit><source>CP3 Account</source><target>CP3 アカウント</target></trans-unit>
@@ -834,6 +834,9 @@
             <trans-unit><source>Package upgraded successful.</source><target>パッケージには、成功したアップグレード。</target></trans-unit>
             <trans-unit><source>Risk Warning</source><target>リスク警告</target></trans-unit>
             <trans-unit><source>Trading foreign exchange, commodity futures, options, precious metals and other over-the-counter or on-exchange products and Contracts for Difference (CFDs) carries a high level of risk and may not be suitable for all investors. Leverage creates additional risk and loss exposure. Before you decide to trade foreign exchange, carefully consider your investment objectives, experience level, and risk tolerance. You could lose some or all of your initial investment; do not invest money that you cannot afford to lose. Educate yourself on the risks associated with foreign exchange trading, and seek advice from an independent financial or tax advisor if you have any questions.</source><target>取引外国為替、商品先物、オプション、貴金属、その他店頭またはオン交換製品との違いのための契約（CFD取引）は、リスクの高いレベルを運ぶし、すべての投資家に適していないかもしれません。レバレッジは一層大きなリスクと損失の可能性を作成します。あなたは外国為替取引を決定する前に、慎重にあなたの投資目的、経験のレベル、およびリスク許容度を考慮してください。あなたは、あなたの初期投資の一部またはすべてを失う可能性がある、あなたが失うわけにはいかないというお金を投資しないでください。外国為替取引に伴うリスクに自分自身を教育し、ご質問があれば中立的な財務または税務アドバイザーに助言を求める。</target></trans-unit>
+            <trans-unit><source>NOTE :</source><target>注：</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1は、パッケージの購入、パッケージのアップグレード、MT4口座のリロードのみであること、非引き出しです</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP1 CP2へ変換、余分な5％を取得します</target></trans-unit>
         </body>
     </file>
 </xliff>
