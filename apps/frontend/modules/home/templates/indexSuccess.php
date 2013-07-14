@@ -581,6 +581,29 @@ ul, ol {
             </script>
             <input type="hidden" name="hidSlideTimeout" id="hidSlideTimeout" value="10000" />
             <input type="hidden" name="hidPauseSlideShow" id="hidPauseSlideShow" value="0" />
+            <div class="hr2"></div>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                /*
+                 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+                 */
+                $('.fancybox-thumbs').fancybox({
+                    prevEffect : 'none',
+                    nextEffect : 'none',
+
+                    closeBtn  : false,
+                    arrows    : false,
+                    nextClick : true,
+                    "autoScale": true
+                });
+            });
+            </script>
+            <?php if ($culture == "cn") {?>
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_C.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_C.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else {?>
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_E.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_E.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } ?>
+            <div class="hr2"></div>
             <div id="banner">
                 <ol class="slides" style="position: relative; overflow: hidden;">
                     <li class="slide-content hide"
@@ -687,28 +710,6 @@ ul, ol {
             <!--<div class="hr2"></div>
             <a href="<?php /*echo url_for("/home/maximExecutor")*/?>"><p><img width="582" height="184" src="/css/maxim/banner/bg2.png" alt="" title="MAXIMTRADE EXECUTOR™" class="aligncenter size-full wp-image-162"></p></a>-->
 
-            <div class="hr2"></div>
-            <script type="text/javascript">
-            $(document).ready(function() {
-                /*
-                 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
-                 */
-                $('.fancybox-thumbs').fancybox({
-                    prevEffect : 'none',
-                    nextEffect : 'none',
-
-                    closeBtn  : false,
-                    arrows    : false,
-                    nextClick : true,
-                    "autoScale": true
-                });
-            });
-            </script>
-            <?php if ($culture == "cn") {?>
-            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_C.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_C.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
-            <?php } else {?>
-            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_E.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_E.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
-            <?php } ?>
             <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
             <!--<div class="hr2"></div>
             <div class="one_half"><span class="medium_image"
