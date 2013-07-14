@@ -521,7 +521,7 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td><?php echo __('Address') ?> 2&nbsp;</td>
+        <td></td>
         <td>
             <input type="text" name="address2" class='inputbox' value=""/>
         </td>
