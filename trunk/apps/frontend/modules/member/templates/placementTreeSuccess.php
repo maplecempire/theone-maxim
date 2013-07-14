@@ -435,7 +435,7 @@ function reassignDatagridEventAttr(){
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=left") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php }?>
 </div>
@@ -493,7 +493,7 @@ function reassignDatagridEventAttr(){
     <div align="center" class="network-button-wraper"><a class="network-add-investment"
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[0]['distCode']."&position=right") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php }?>
 </div>
@@ -597,7 +597,7 @@ if ($anode[1]['distCode'] != "") { ?>
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=left") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php } else { ?>
         <div style="clear:both;">&nbsp;</div>
@@ -658,7 +658,7 @@ if ($anode[1]['distCode'] != "") { ?>
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[1]['distCode']."&position=right") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php } else { ?>
         <div style="clear:both;">&nbsp;</div>
@@ -719,7 +719,7 @@ if ($anode[1]['distCode'] != "") { ?>
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=left") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=left") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php } else { ?>
         <div style="clear:both;">&nbsp;</div>
@@ -780,7 +780,7 @@ if ($anode[1]['distCode'] != "") { ?>
                                                          href="<?php /*echo url_for("/member/upgradePackageViaTree?distcode=".$distDB->getDistributorCode()) */?>">Add Investment</a></div>-->
     <div class="network-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?distcode=".$distDB->getDistributorCode()."&bePlacementId=".$bePlacementId) ?>"></a></div>
     <?php } else if ($availableButton == true) { ?>
-        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=right") ?>" class="network-register">Register</a>
+        <div align="center" class="network-button-wraper"><a href="<?php echo url_for("/member/purchasePackageViaTree?distcode=".$anode[2]['distCode']."&position=right") ?>" class="network-register"><?php echo __('Register') ?></a>
         </div>
     <?php } else { ?>
         <div style="clear:both;">&nbsp;</div>
