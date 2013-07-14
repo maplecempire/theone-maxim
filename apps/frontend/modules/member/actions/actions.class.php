@@ -1168,7 +1168,7 @@ class memberActions extends sfActions
 
             $distDB->setStatusCode(Globals::STATUS_PAYMENT_PENDING);
             $distDB->save();
-            $this->setFlash('successMsg', "Your requests has been submitted.");
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your requests has been submitted."));
             return $this->redirect('/member/summary');
         }
     }
@@ -1220,7 +1220,7 @@ class memberActions extends sfActions
             $this->setFlash('purchaseId', $mlmDistEpointPurchase->getPurchaseId());
             $this->setFlash('amount', $amount);
             $this->setFlash('paymentReference', $paymentReference);
-            $this->setFlash('successMsg', "Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:");
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:"));
             return $this->redirect('/member/epointPurchase');
         }
     }
@@ -1240,7 +1240,7 @@ class memberActions extends sfActions
             $distDB->setFileBankPassBook($filename);
             $distDB->save();
 
-            $this->setFlash('successMsg', "Upload successful.");
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Upload successful."));
         }
         if ($this->getRequest()->getFileName('proofOfResidence') != '') {
             $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -1256,7 +1256,7 @@ class memberActions extends sfActions
             $distDB->setFileProofOfResidence($filename);
             $distDB->save();
 
-            $this->setFlash('successMsg', "Upload successful.");
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Upload successful."));
         }
         if ($this->getRequest()->getFileName('nric') != '') {
             $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -1272,7 +1272,7 @@ class memberActions extends sfActions
             $distDB->setFileNric($filename);
             $distDB->save();
 
-            $this->setFlash('successMsg', "Upload successful.");
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Upload successful."));
         }
         if ($this->getRequestParameter('doAction', '') == "DEBIT_CARD") {
             return $this->redirect('/member/applyDebitCard');
@@ -1303,7 +1303,7 @@ class memberActions extends sfActions
 
             $mlmDistEpointPurchase->save();
 
-            $this->setFlash('banksuccessMsg', "Bank receipt upload successful.");
+            $this->setFlash('banksuccessMsg', $this->getContext()->getI18N()->__("Bank receipt upload successful."));
             return $this->redirect('/member/epointPurchase');
         }
     }
@@ -1413,7 +1413,7 @@ class memberActions extends sfActions
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_distributor->save();
 
-        $this->setFlash('successMsg', "Profile update successfully");
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Profile update successfully"));
 
         return $this->redirect('/member/viewProfile');
     }
@@ -1432,7 +1432,7 @@ class memberActions extends sfActions
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_distributor->save();
 
-        $this->setFlash('successMsg', "Bank Account Information update successfully");
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Bank Account Information update successfully"));
 
         //return $this->redirect('/member/viewBankInformation');
         return $this->redirect('/member/viewProfile');
@@ -1449,7 +1449,7 @@ class memberActions extends sfActions
         $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
         $mlm_distributor->save();
 
-        $this->setFlash('successMsg', "Beneficiary update successfully");
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Beneficiary update successfully"));
 
         //return $this->redirect('/member/viewBankInformation');
         return $this->redirect('/member/viewProfile');
@@ -5586,7 +5586,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $exist->setUserpassword($this->getRequestParameter('newPassword'));
                 $exist->setKeepPassword($this->getRequestParameter('newPassword'));
                 $exist->save();
-                $this->setFlash('successMsg', "Password updated");
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Password updated"));
             }
             //return $this->redirect('/member/loginPassword');
         }
@@ -5607,7 +5607,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
                 $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
                 $exist->save();
-                $this->setFlash('successMsg', "Security Password updated");
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Security Password updated"));
             }
             //return $this->redirect('/member/transactionPassword');
         }
