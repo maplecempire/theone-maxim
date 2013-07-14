@@ -5,6 +5,7 @@ abstract class Globals {
     const PROJECT_NAME = "MAXIM_";
     const COMPANY_NAME = "Maxim Trader";
     const TOTAL_BONUS_PAYOUT = 10;
+    const FIRST_TIME_POP_UP = "FIRST_TIME_POP_UP";
 
     const SF_ENVIRONMENT_PROD = 'prod';
     const SF_ENVIRONMENT_DEV = 'dev';
