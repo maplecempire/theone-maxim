@@ -792,7 +792,7 @@
             <trans-unit><source>Beneficiary Nominee</source><target>受益ノミネート</target></trans-unit>
             <trans-unit><source>Relationship</source><target>関係</target></trans-unit>
             <trans-unit><source>IC./Passport No.</source><target>IC。/パスポート番号</target></trans-unit>
-            <trans-unit><source>Contact No.</source><target>番号にお問い合わせください</target></trans-unit>
+            <trans-unit><source>Contact No.</source><target>电话</target></trans-unit>
             <trans-unit><source>Apply Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA デビットカードを適用</target></trans-unit>
             <trans-unit><source>Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA デビットカードを</target></trans-unit>
             <trans-unit><source>Maxim Capital Bank Details</source><target>Maxim Capital 銀行の詳細</target></trans-unit>
