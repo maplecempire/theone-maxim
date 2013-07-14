@@ -204,10 +204,10 @@
             <trans-unit><source>Status</source><target>承認状況</target></trans-unit>
             <trans-unit><source>Verified by</source><target>によるレビュー</target></trans-unit>
             <trans-unit><source>Date Verified</source><target>監査時間</target></trans-unit>
-            <trans-unit><source>Remarks</source><target>説明</target></trans-unit>
+            <trans-unit><source>Remarks</source><target>発言</target></trans-unit>
             <trans-unit><source>Download</source><target>ダウンロード</target></trans-unit>
             <trans-unit><source>Title</source><target>タイトル</target></trans-unit>
-            <trans-unit><source>Date</source><target>時間</target></trans-unit>
+            <trans-unit><source>Date</source><target>日付</target></trans-unit>
             <trans-unit><source>close</source><target>閉じる</target></trans-unit>
             <trans-unit><source>In</source><target>信用に立ち</target></trans-unit>
             <trans-unit><source>Out</source><target>アカウント</target></trans-unit>
@@ -355,7 +355,7 @@
             <trans-unit><source>Member activated successfully.</source><target>会員は、有効になりました。</target></trans-unit>
             <trans-unit><source>Do you want to proceed to member placement?</source><target>あなたは、家系図を整理するために継続すべき？</target></trans-unit>
             <trans-unit><source>Are you sure want to place this member into this position?</source><target>あなたが決定するこのメンバは、この位置に配置されます?</target></trans-unit>
-            <trans-unit><source>Transaction Type</source><target>取引金額</target></trans-unit>
+            <trans-unit><source>Transaction Type</source><target>トランザクションタイプ</target></trans-unit>
             <trans-unit><source>PROCESS CHARGES</source><target>手続料</target></trans-unit>
             <trans-unit><source>REGISTER</source><target>登録</target></trans-unit>
             <trans-unit><source>TRANSFER TO</source><target>に移管</target></trans-unit>
@@ -701,9 +701,9 @@
             <trans-unit><source>OFX Trader Academy Accounts Team</source><target>OFX 交易学院帐户小组</target></trans-unit>
             <trans-unit><source>Welcome to OFX Trader Academy</source><target>欢迎来到OFX 交易学院</target></trans-unit>
             <trans-unit><source>OFX Trader Academy Accounts Team Chinese</source><target>OFX 交易学院帐户小组 OFX Trader Academy Accounts Team</target></trans-unit>
-            <trans-unit><source>CP1 Statement</source><target>CP1声明</target></trans-unit>
-            <trans-unit><source>CP2 Statement</source><target>CP2声明</target></trans-unit>
-            <trans-unit><source>CP3 Statement</source><target>CP3声明</target></trans-unit>
+            <trans-unit><source>CP1 Statement</source><target>CP1ステートメント</target></trans-unit>
+            <trans-unit><source>CP2 Statement</source><target>CP2ステートメント</target></trans-unit>
+            <trans-unit><source>CP3 Statement</source><target>CP3ステートメント</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal</source><target>CP2取り下げる</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal</source><target>MT4取り下げる</target></trans-unit>
             <trans-unit><source>CP1 Amount</source><target>CP1の額</target></trans-unit>
@@ -729,8 +729,8 @@
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议以签订配套。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
             <trans-unit><source>Sign up</source><target>签订</target></trans-unit>
-            <trans-unit><source>OFX Accumulator statement</source><target>OFX累加器声明</target></trans-unit>
-            <trans-unit><source>Download OFX Accumulator statement</source><target>下载OFX累加器声明</target></trans-unit>
+            <trans-unit><source>OFX Accumulator statement</source><target>OFX累加器ステートメント</target></trans-unit>
+            <trans-unit><source>Download OFX Accumulator statement</source><target>下载OFX累加器ステートメント</target></trans-unit>
             <trans-unit><source>Referral and Placement Position</source><target>推荐人和按置的位置</target></trans-unit>
             <trans-unit><source>Placement Type</source><target>按置</target></trans-unit>
             <trans-unit><source>Auto</source><target>自动</target></trans-unit>
@@ -832,6 +832,8 @@
             <trans-unit><source>CP3 convert to CP1 successful.</source><target>CP3は成功CP1に変換。</target></trans-unit>
             <trans-unit><source>RP convert to CP1 successful.</source><target>RPは成功CP1に変換。</target></trans-unit>
             <trans-unit><source>Package upgraded successful.</source><target>パッケージには、成功したアップグレード。</target></trans-unit>
+            <trans-unit><source>Risk Warning</source><target>リスク警告</target></trans-unit>
+            <trans-unit><source>Trading foreign exchange, commodity futures, options, precious metals and other over-the-counter or on-exchange products and Contracts for Difference (CFDs) carries a high level of risk and may not be suitable for all investors. Leverage creates additional risk and loss exposure. Before you decide to trade foreign exchange, carefully consider your investment objectives, experience level, and risk tolerance. You could lose some or all of your initial investment; do not invest money that you cannot afford to lose. Educate yourself on the risks associated with foreign exchange trading, and seek advice from an independent financial or tax advisor if you have any questions.</source><target>取引外国為替、商品先物、オプション、貴金属、その他店頭またはオン交換製品との違いのための契約（CFD取引）は、リスクの高いレベルを運ぶし、すべての投資家に適していないかもしれません。レバレッジは一層大きなリスクと損失の可能性を作成します。あなたは外国為替取引を決定する前に、慎重にあなたの投資目的、経験のレベル、およびリスク許容度を考慮してください。あなたは、あなたの初期投資の一部またはすべてを失う可能性がある、あなたが失うわけにはいかないというお金を投資しないでください。外国為替取引に伴うリスクに自分自身を教育し、ご質問があれば中立的な財務または税務アドバイザーに助言を求める。</target></trans-unit>
         </body>
     </file>
 </xliff>
