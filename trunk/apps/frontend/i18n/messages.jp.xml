@@ -743,11 +743,12 @@
             <trans-unit><source>Payment Reference</source><target>付款参考号码</target></trans-unit>
             <trans-unit><source>Upload Bank Receipt</source><target>上传银行收据</target></trans-unit>
             <trans-unit><source>Deposit Amount</source><target>存款金额</target></trans-unit>
-            <trans-unit><source>Bank Swift Code</source><target>银行代码</target></trans-unit>
-            <trans-unit><source>Bank Account Holder</source><target>银行账户持有人</target></trans-unit>
-            <trans-unit><source>City of Bank</source><target>银行所在城市</target></trans-unit>
-            <trans-unit><source>Print</source><target>打印</target></trans-unit>
-            <trans-unit><source>Country of Bank</source><target>银行所在国家</target></trans-unit>
+            <trans-unit><source>Bank Swift Code</source><target>銀行SWIFTコード</target></trans-unit>
+            <trans-unit><source>IBAN</source><target>IBAN</target></trans-unit>
+            <trans-unit><source>Bank Account Holder</source><target>銀行口座名義</target></trans-unit>
+            <trans-unit><source>City of Bank</source><target>銀行の都市</target></trans-unit>
+            <trans-unit><source>Print</source><target>印刷</target></trans-unit>
+            <trans-unit><source>Country of Bank</source><target>銀行の国</target></trans-unit>
             <trans-unit><source>Trading Currency on MT4</source><target>MT4交易货币</target></trans-unit>
             <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
             <trans-unit><source>Invalid username or password.</source><target>会员ID和密码不正确</target></trans-unit>
@@ -784,7 +785,11 @@
             <trans-unit><source>IC./Passport No.</source><target>IC。/パスポート番号</target></trans-unit>
             <trans-unit><source>Contact No.</source><target>番号にお問い合わせください</target></trans-unit>
             <trans-unit><source>Apply Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA デビットカードを適用</target></trans-unit>
+            <trans-unit><source>Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA デビットカードを</target></trans-unit>
             <trans-unit><source>Maxim Capital Bank Details</source><target>Maxim Capital 銀行の詳細</target></trans-unit>
+            <trans-unit><source>Bank Account Information</source><target>銀行口座情報</target></trans-unit>
+            <trans-unit><source>Maxim Capital Limited USD Account</source><target>Maxim Capital Limited USD アカウント</target></trans-unit>
+            <trans-unit><source>NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</source><target>注：リファレンスに書いてください : Maxim Capital Limited - 9120028849</target></trans-unit>
         </body>
     </file>
 </xliff>
