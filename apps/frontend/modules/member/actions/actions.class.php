@@ -71,14 +71,14 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
-            }
+            }*/
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertCp3ToCp1');
@@ -4858,14 +4858,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/transferEpoint');
             }
 
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/transferEpoint');
-            }
+            }*/
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             $sponsorId = $this->getRequestParameter('sponsorId');
@@ -6993,14 +6993,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $epointAmount = $this->getRequestParameter('epointAmount');
 
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
-            }
+            }*/
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null, null, null, null)) {
                 $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
                 return $this->redirect('/member/convertEcashToEpoint');
