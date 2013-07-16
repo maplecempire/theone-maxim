@@ -947,7 +947,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         return sfView::HEADER_ONLY;
     }
     public function executeFindUnderLeader() {
-        $str = '126182,254865';
+        $str = '1992,1994,1984,1993';
 
         $memberArrs = explode(",", $str);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
