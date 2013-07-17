@@ -754,13 +754,13 @@ class memberActions extends sfActions
             return $this->redirect('home/maintenance');
         }*/
 
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->setFlash('errorMsg', "This function temporary out of service.");
-        }
+        }*/
 
         if ($this->getRequestParameter('bePlacementId', '') != "") {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
@@ -935,14 +935,14 @@ class memberActions extends sfActions
     }
     public function executePurchasePackageViaTree2()
     {
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->setFlash('errorMsg', "This function temporary out of service.");
             return $this->redirect('/member/placementTree');
-        }
+        }*/
         if ($this->getRequestParameter('uplineDistCode', '') == "" || $this->getRequestParameter('position', '') == "") {
             return $this->redirect('/member/placementTree');
         }
@@ -1341,14 +1341,14 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', "Invalid Security password");
                 return $this->redirect('/member/memberRegistration');
             }*/
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/memberRegistration');
-            }
+            }*/
 
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
@@ -1813,14 +1813,14 @@ class memberActions extends sfActions
             return $this->redirect('home/maintenance');
         }*/
 
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->setFlash('errorMsg', "This function temporary out of service.");
             return $this->redirect('/member/memberRegistration');
-        }
+        }*/
 
         $userName = $this->getRequestParameter('userName','');
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
@@ -4060,14 +4060,14 @@ We look forward to your custom in the near future. Should you have any queries, 
             return $this->redirect('home/maintenance');
         }*/
         if ($this->getRequestParameter('doAction') == "save") {
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
             } else {
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/summary');
-            }
+            }*/
 
             $uplineDistCode = $this->getRequestParameter('uplineDistCode');
             $uplinePosition = $this->getRequestParameter('uplinePosition');
