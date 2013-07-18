@@ -190,6 +190,35 @@ $culture = $sf_user->getCulture();
                 </div>
                 <div id="feedContent">
                     <a href="#">
+                        <?php if ($culture == "cn") {  ?>
+                        <div class="poptitle"><h3>马胜金融讲座</h3><br>
+                        <?php } else {  ?>
+                        <div class="poptitle"><h3>Maxim Financial Seminar</h3><br>
+                        <?php }   ?>
+                    </div>
+                    </a>
+                    <br>
+                    <?php if ($culture == "cn") {  ?>
+                    <br>由马胜特聘讲师兼亚洲著名金融分析师Mr. Daniel Ang为你讲解最新巿场走势与货币／贵金属交易的基本优势，幇肋你开拓新的投资视野。欢迎马胜伙伴帯新朋友来参与这知性之旅及探讨新商机。
+                    <br>日期：2013年7月23日
+                    <br>时间：下午2时30分
+                    <br>地点：中国义乌大酒店
+                    <br>语言：华语
+                    <?php } else {  ?>
+                    <br>Maxim Consultant and Famous Asia Financial Analyst, Mr. Daniel Ang will be sharing with you the latest market outlook, basic advantages about precious metal/currency trading and broaden your investment prospective. All Maxim partners are welcome to invite new guests to participate and learn about new business opportunity.
+                    <br><br>Date: 23 July 2013
+                    <br>Time: 2:30pm
+                    <br>Venue: china yiwu Hotel
+                    <br><br>Pls pledge your group seat with - chris 18559033787 by 20july.
+                    <br>Limited seat!!!
+                    <?php }   ?>
+                    <div class="news_date">
+                    18 July 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="#">
                         <div class="poptitle"><h3>金汇融资商讨会 Dual Currency Investment (DCI)</h3><br>
                     </div>
                     </a>
