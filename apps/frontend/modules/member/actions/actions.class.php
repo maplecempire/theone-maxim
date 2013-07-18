@@ -385,7 +385,7 @@ class memberActions extends sfActions
                 $mlm_debit_card_registration->setDob("$y-$m-$d");
             }
             $mlm_debit_card_registration->setIc($this->getRequestParameter('ic'));
-            $mlm_debit_card_registration->setMotherMaidenName($this->getRequestParameter('motherMaidenName'));
+            $mlm_debit_card_registration->setMotherMaidenName($this->getRequestParameter('motherMaidenName',''));
             $mlm_debit_card_registration->setNameOnCard($this->getRequestParameter('nameOnCard'));
             $mlm_debit_card_registration->setAddress($this->getRequestParameter('address'));
             $mlm_debit_card_registration->setAddress2($this->getRequestParameter('address2'));

@@ -25,10 +25,10 @@ $(function() {
                 required : true,
                 minlength : 3
             },
-            "motherMaidenName" : {
+            /*"motherMaidenName" : {
                 required : true,
                 minlength : 3
-            },
+            },*/
             "nameOnCard" : {
                 required : true,
                 minlength : 3
@@ -209,14 +209,14 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __("Mother's Maiden Name") ?></td>
+                    <td><?php /*echo __("Mother's Maiden Name") */?></td>
                     <td><input name="motherMaidenName"  type="text" id="motherMaidenName"
-                                             size="30" value="<?php echo $mlm_debit_card_registration->getMotherMaidenName() ?>"/>
+                                             size="30" value="<?php /*echo $mlm_debit_card_registration->getMotherMaidenName() */?>"/>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
 
                 <!--<tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
