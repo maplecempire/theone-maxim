@@ -333,7 +333,7 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
     public function executePackageUpgradeSales()
     {
         $query = "SELECT dist.distributor_code, package.price, history.created_on
-, dist.full_name, dist.email, dist.contact, dist.country
+            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
 	FROM mlm_package_upgrade_history history
         left join mlm_distributor dist ON dist.distributor_id = history.dist_id
         left join mlm_package package ON package.package_id = history.package_id
