@@ -330,6 +330,49 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
         }
         $this->resultArray = $resultArray;
     }
+    public function executePackageUpgradeSales()
+    {
+        $query = "SELECT dist.distributor_code, package.price, history.created_on
+, dist.full_name, dist.email, dist.contact, dist.country
+	FROM mlm_package_upgrade_history history
+        left join mlm_distributor dist ON dist.distributor_id = history.dist_id
+        left join mlm_package package ON package.package_id = history.package_id
+AND history.created_on >= '2013-03-17 00:00:00'
+and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by 2";
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        //var_dump($query);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|" . $leaderArrs[$i] . "|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $resultArray[$count] = $arr;
+            $resultArray[$count]['LEADER'] = $leader;
+            $count++;
+        }
+        $this->resultArray = $resultArray;
+    }
 
     public function executeCustomerService()
     {
