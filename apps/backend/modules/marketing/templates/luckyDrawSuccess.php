@@ -106,6 +106,7 @@ $(function() {
                                 <option value="300">300</option>
                                 <option value="400">400</option>
                                 <option value="500">500</option>
+                                <option value="600">600</option>
                                 <option value="1,000">1,000</option>
                                 <option value="2,000">2,000</option>
                                 <option value="3,000">3,000</option>
@@ -117,6 +118,7 @@ $(function() {
                                 <option value="300">300</option>
                                 <option value="400">400</option>
                                 <option value="500">500</option>
+                                <option value="600">600</option>
                                 <option value="1,000">1,000</option>
                                 <option value="3,000">3,000</option>
                                 <option value="5,000">5,000</option>
