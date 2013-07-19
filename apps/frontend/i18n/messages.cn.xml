@@ -777,6 +777,73 @@
             <trans-unit><source>Group Development Bonus</source><target>组织发展奖金</target></trans-unit>
             <trans-unit><source>Fund Management Performance</source><target>基金管理绩效</target></trans-unit>
             <trans-unit><source>Special Bonus</source><target>特别奖金</target></trans-unit>
+            <trans-unit><source>Referrer and Placement Position</source><target>推荐和放置位置</target></trans-unit>
+            <trans-unit><source>Referrer ID</source><target>推荐人ID</target></trans-unit>
+            <trans-unit><source>Referrer Name</source><target>推荐人姓名</target></trans-unit>
+            <trans-unit><source>Placement</source><target>放置位置</target></trans-unit>
+            <trans-unit><source>New to Maxim Trader</source><target>Maxim Trader新会员</target></trans-unit>
+            <trans-unit><source>Self Registration</source><target>自己注册</target></trans-unit>
+            <trans-unit><source>IT'S EASY!!</source><target>这很容易！</target></trans-unit>
+            <trans-unit><source>Click here</source><target>点击这里</target></trans-unit>
+            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>Maxim的交易会员注册</target></trans-unit>
+            <trans-unit><source>Referrer</source><target>推荐人</target></trans-unit>
+            <trans-unit><source>Beneficiary Nominee</source><target>受益人提名</target></trans-unit>
+            <trans-unit><source>Relationship</source><target>关系</target></trans-unit>
+            <trans-unit><source>IC./Passport No.</source><target>IC / 护照</target></trans-unit>
+            <trans-unit><source>Contact No.</source><target>电话</target></trans-unit>
+            <trans-unit><source>Apply Maxim Trader VISA Debit Card</source><target>申请Maxim Trader VISA转账卡</target></trans-unit>
+            <trans-unit><source>Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA转账卡</target></trans-unit>
+            <trans-unit><source>Maxim Capital Bank Details</source><target>Maxim Capital银行帐户</target></trans-unit>
+            <trans-unit><source>Bank Account Information</source><target>银行帐户资料</target></trans-unit>
+            <trans-unit><source>Maxim Capital Limited USD Account</source><target>Maxim Capital Limited美元帐户</target></trans-unit>
+            <trans-unit><source>NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</source><target>注：请写在参考 : Maxim Capital Limited - 9120028849</target></trans-unit>
+            <trans-unit><source>Events</source><target>事件</target></trans-unit>
+            <trans-unit><source>Activities</source><target>活动</target></trans-unit>
+            <trans-unit><source>Transfer To User Name</source><target>转移到用户名</target></trans-unit>
+            <trans-unit><source>Member Name</source><target>会员名称</target></trans-unit>
+            <trans-unit><source>CP1 Converted Amount</source><target>CP1转换金额</target></trans-unit>
+            <trans-unit><source>CP2 Converted Amount</source><target>CP2转换金额</target></trans-unit>
+            <trans-unit><source>CP3 Converted Amount</source><target>CP3转换金额</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful</source><target>CP3转换到CP1成功</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RP转换到CP1成功</target></trans-unit>
+            <trans-unit><source>Your Ezy Cash Card application has been submitted successfully.</source><target>您的Ezy Cash借记卡的申请已提交成功。</target></trans-unit>
+            <trans-unit><source>Your VISA debit Card application has been submitted successfully.</source><target>您的Visa借记卡的申请已提交成功。</target></trans-unit>
+            <trans-unit><source>Your inquiry has been submitted.</source><target>你的询问已提交。</target></trans-unit>
+            <trans-unit><source>Member placement Successfully.</source><target>会员安置成功。</target></trans-unit>
+            <trans-unit><source>Password already sent to your email account. Please check your inbox.</source><target>密码已经发送到您的电子邮件帐户。请检查您的收件箱。</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted.</source><target>您的请求已提交。</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:</source><target>您的请求已提交，完成资金，请继续汇出帐户支付，详情如下所示：</target></trans-unit>
+            <trans-unit><source>Upload successful.</source><target>上传成功。</target></trans-unit>
+            <trans-unit><source>Bank receipt upload successful.</source><target>银行收据上传成功。</target></trans-unit>
+            <trans-unit><source>Profile update successfully</source><target>已成功更新</target></trans-unit>
+            <trans-unit><source>Bank Account Information update successfully</source><target>银行帐户资料更新成功</target></trans-unit>
+            <trans-unit><source>Beneficiary update successfully</source><target>受益人更新成功</target></trans-unit>
+            <trans-unit><source>Your Username is</source><target>你的用户名是</target></trans-unit>
+            <trans-unit><source>(%1%) Package Purchase Successfully.</source><target>(%1%)配套购买成功</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully.</source><target>成功注册会员(%1%)。</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>成功注册会员(%1%)。请手动安置。</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>转让成功</target></trans-unit>
+            <trans-unit><source>Password updated</source><target>更新密码</target></trans-unit>
+            <trans-unit><source>Security Password updated</source><target>更新交易密码</target></trans-unit>
+            <trans-unit><source>Your CP3 withdrawal has been submitted.</source><target>您的CP3兑现申请已提交成功</target></trans-unit>
+            <trans-unit><source>Your CP2 withdrawal has been submitted.</source><target>您的CP2兑现申请已提交成功</target></trans-unit>
+            <trans-unit><source>Your MT4 Fund Reload has been submitted.</source><target>您的MT4基金充值已提交成功</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 successful.</source><target>CP2转换到CP1成功</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful.</source><target>CP3转换到CP1成功</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RP转换到CP1成功</target></trans-unit>
+            <trans-unit><source>Package upgraded successful.</source><target>配套升级成功</target></trans-unit>
+            <trans-unit><source>Risk Warning</source><target>风险警示</target></trans-unit>
+            <trans-unit><source>Trading foreign exchange, commodity futures, options, precious metals and other over-the-counter or on-exchange products and Contracts for Difference (CFDs) carries a high level of risk and may not be suitable for all investors. Leverage creates additional risk and loss exposure. Before you decide to trade foreign exchange, carefully consider your investment objectives, experience level, and risk tolerance. You could lose some or all of your initial investment; do not invest money that you cannot afford to lose. Educate yourself on the risks associated with foreign exchange trading, and seek advice from an independent financial or tax advisor if you have any questions.</source><target>外汇交易，商品期货，期权，贵金属和其他过度的柜台上或外汇及差价合约（差价合约）进行高水平的风险，可能不适合所有投资者。杠杆创造了额外的风险和损失风险。在您决定进行外汇保证金交易之前，请仔细考虑您的投资目标，经验水平和风险承受能力。您可能会失去部分或全部您的初始投资，不投资的钱，你不能输不起。教育自己与外汇交易相关联的风险，并寻求独立的财务或税务顾问的意见，如果您有任何疑问。</target></trans-unit>
+            <trans-unit><source>NOTE :</source><target>注：</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1只能用来购买配套，配套升级和充值MT4帐户。CP1是不能兑现的</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP2转换到CP1将获得额外的5%</target></trans-unit>
+            <trans-unit><source>Immediate Member Restructuring</source><target>立即加入重组</target></trans-unit>
+            <trans-unit><source>Restructure</source><target>再構築する</target></trans-unit>
+            <trans-unit><source>Member has been registered successfully.</source><target>会员已注册成功</target></trans-unit>
+            <trans-unit><source>Member Information</source><target>会员信息</target></trans-unit>
+            <trans-unit><source>Forget Password</source><target>忘记密码</target></trans-unit>
+            <trans-unit><source>Request Password</source><target>申请密码</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>点击下载基金管理报告2013年6月</target></trans-unit>
         </body>
     </file>
 </xliff>
