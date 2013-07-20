@@ -12,7 +12,10 @@ class memberActions extends sfActions
     public function executeTest() {
         //echo $this->getRollingPointData();
 
-        print_r("Start<br>");
+        $bonusService = new BonusService();
+        $bonusService->contraDebitAccount(68, "CONTRA BY EPOINT", 0);
+
+        /*print_r("Start<br>");
         $c = new Criteria();
         $c->add(MlmDailyBonusLogPeer::BONUS_TYPE, Globals::DAILY_BONUS_LOG_TYPE_DAILY);
         $c->addDescendingOrderByColumn(MlmDailyBonusLogPeer::BONUS_DATE);
@@ -37,7 +40,7 @@ class memberActions extends sfActions
 
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
             }
-        }
+        }*/
         print_r("Done");
     }
     public function executeTestSendReport()
