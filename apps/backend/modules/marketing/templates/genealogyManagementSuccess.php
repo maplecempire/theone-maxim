@@ -68,6 +68,26 @@ $(function() {
             }
         });
     });
+    $("#btnResetPassword").button().click(function(event){
+        event.preventDefault();
+
+        waiting();
+    	$.ajax({
+        	type : 'POST',
+            url : "<?php echo url_for("/marketing/doResetPassword"); ?>",
+            dataType : 'json',
+            cache: false,
+            data: {
+            	distId : $('#optMember').val()
+            },
+            success : function(data) {
+                alert("Update Successful");
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Your login attempt was not successful. Please try again.");
+            }
+        });
+    });
 });
 </script>
 
@@ -123,6 +143,7 @@ $(function() {
                         <td>&nbsp;</td>
                         <td>
                             <button id="btnSubmit"><?php echo __('Submit') ?></button>
+                            <button id="btnResetPassword"><?php echo __('Reset Password') ?></button>
                         </td>
                     </tr>
                 </table>

@@ -828,6 +828,18 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $dist->save();
         return sfView::HEADER_ONLY;
     }
+    public function executeDoResetPassword()
+    {
+        $dist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
+        if ($dist) {
+            $appUser = AppUserPeer::retrieveByPK($dist->getUserId());
+            if ($appUser) {
+                $appUser->setUserpassword($dist->getDistributorCode());
+                $appUser->save();
+            }
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoCheckGenealogy()
     {
         $dist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
