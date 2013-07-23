@@ -838,6 +838,8 @@
             <trans-unit><source>Forget Password</source><target>암호를 잊어 버린</target></trans-unit>
             <trans-unit><source>Request Password</source><target>암호 요청</target></trans-unit>
             <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>기금 관리 보고서를 다운로드하려면 클릭하십시오June 2013</target></trans-unit>
+            <trans-unit><source>FUND MANAGEMENT</source><target>기금 관리</target></trans-unit>
+            <trans-unit><source>Fund Management Contract</source><target>기금 관리 계약</target></trans-unit>
         </body>
     </file>
 </xliff>
