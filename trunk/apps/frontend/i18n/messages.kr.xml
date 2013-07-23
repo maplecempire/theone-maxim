@@ -771,6 +771,73 @@
             <trans-unit><source>Group Development Bonus</source><target>그룹 개발 보너스</target></trans-unit>
             <trans-unit><source>Fund Management Performance</source><target>기금 경영 성과</target></trans-unit>
             <trans-unit><source>Special Bonus</source><target>특별 보너스</target></trans-unit>
+            <trans-unit><source>Referrer and Placement Position</source><target>추천자와 배치 위치</target></trans-unit>
+            <trans-unit><source>Referrer ID</source><target>추천자 ID</target></trans-unit>
+            <trans-unit><source>Referrer Name</source><target>추천자 이름</target></trans-unit>
+            <trans-unit><source>Placement</source><target>위치</target></trans-unit>
+            <trans-unit><source>New to Maxim Trader</source><target>Maxim Trader신규 회원</target></trans-unit>
+            <trans-unit><source>Self Registration</source><target>자동 등록</target></trans-unit>
+            <trans-unit><source>IT'S EASY!!</source><target>그것은 간단!</target></trans-unit>
+            <trans-unit><source>Click here</source><target>여기를 클릭하십시오</target></trans-unit>
+            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>Maxim Trader가입하기</target></trans-unit>
+            <trans-unit><source>Referrer</source><target>추천자</target></trans-unit>
+            <trans-unit><source>Beneficiary Nominee</source><target>수익 후보</target></trans-unit>
+            <trans-unit><source>Relationship</source><target>관계</target></trans-unit>
+            <trans-unit><source>IC./Passport No.</source><target>IC. / 여권 번호</target></trans-unit>
+            <trans-unit><source>Contact No.</source><target>번호 문의</target></trans-unit>
+            <trans-unit><source>Apply Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA 직불 카드를 적용</target></trans-unit>
+            <trans-unit><source>Maxim Trader VISA Debit Card</source><target>Maxim Trader VISA직불 카드</target></trans-unit>
+            <trans-unit><source>Maxim Capital Bank Details</source><target>Maxim Capital은행 세부 사항</target></trans-unit>
+            <trans-unit><source>Bank Account Information</source><target>은행 계좌 정보</target></trans-unit>
+            <trans-unit><source>Maxim Capital Limited USD Account</source><target>Maxim Capital Limited USD 계정</target></trans-unit>
+            <trans-unit><source>NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849</source><target>참고 : 참고로 작성 해주세요 : Maxim Capital Limited - 9120028849</target></trans-unit>
+            <trans-unit><source>Events</source><target>이벤트</target></trans-unit>
+            <trans-unit><source>Activities</source><target>활동</target></trans-unit>
+            <trans-unit><source>Transfer To User Name</source><target>사용자 이름 전송</target></trans-unit>
+            <trans-unit><source>Member Name</source><target>멤버 이름</target></trans-unit>
+            <trans-unit><source>CP1 Converted Amount</source><target>CP1변환 금액</target></trans-unit>
+            <trans-unit><source>CP2 Converted Amount</source><target>CP2변환 금액</target></trans-unit>
+            <trans-unit><source>CP3 Converted Amount</source><target>CP3변환 금액</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful</source><target>CP3는 CP1 성공적인로 변환</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RP 성공 CP1을 변환합니다.</target></trans-unit>
+            <trans-unit><source>Your Ezy Cash Card application has been submitted successfully.</source><target>귀하의 Ezy Cash Card 응용 프로그램이 성공적으로 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>Your VISA debit Card application has been submitted successfully.</source><target>귀하의 VISA debit Card 응용 프로그램이 성공적으로 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>Your inquiry has been submitted.</source><target>당신 조회는 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>Member placement Successfully.</source><target>성공적 회원 위치.</target></trans-unit>
+            <trans-unit><source>Password already sent to your email account. Please check your inbox.</source><target>암호는 이미 이메일 계정으로 전송됩니다. 귀하의받은 편지함을 확인하시기 바랍니다.</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted.</source><target>귀하의 요청이 제출되었습니다</target></trans-unit>
+            <trans-unit><source>Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:</source><target>아래와 같이 귀하의 요청이 자금 조달을 완료하기 위해 제출되었습니다, ​​세부 사항, 송금 계정에 지불을 진행하시기 바랍니다：</target></trans-unit>
+            <trans-unit><source>Upload successful.</source><target>성공적으로 업로드합니다.</target></trans-unit>
+            <trans-unit><source>Bank receipt upload successful.</source><target>성공적으로 업로드 은행 영수증</target></trans-unit>
+            <trans-unit><source>Profile update successfully</source><target>성공적으로 업데이트 프로파일</target></trans-unit>
+            <trans-unit><source>Bank Account Information update successfully</source><target>은행 계좌 정보가 성공적으로 업데이트</target></trans-unit>
+            <trans-unit><source>Beneficiary update successfully</source><target>성공적으로 수혜자 업데이트</target></trans-unit>
+            <trans-unit><source>Your Username is</source><target>사용자 이름은</target></trans-unit>
+            <trans-unit><source>(%1%) Package Purchase Successfully.</source><target>(%1%)성공적으로 패키지 구매</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully.</source><target>회원(%1%)이 성공적으로 등록</target></trans-unit>
+            <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>회원(%1%)이 성공적으로 등록. 매뉴얼은 지금 배치 해주세요</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>성공을 전송</target></trans-unit>
+            <trans-unit><source>Password updated</source><target>암호 업데이트</target></trans-unit>
+            <trans-unit><source>Security Password updated</source><target>보안 암호 업데이트</target></trans-unit>
+            <trans-unit><source>Your CP3 withdrawal has been submitted.</source><target>귀하의 CP3 철수가 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>Your CP2 withdrawal has been submitted.</source><target>귀하의 CP2 철수가 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>Your MT4 Fund Reload has been submitted.</source><target>귀하의 MT4 기금 재 장전이 제출되었습니다.</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 successful.</source><target>CP2 성공 CP1을 변환합니다.</target></trans-unit>
+            <trans-unit><source>CP3 convert to CP1 successful.</source><target>CP3 성공 CP1을 변환합니다.</target></trans-unit>
+            <trans-unit><source>RP convert to CP1 successful.</source><target>RP 성공 CP1을 변환합니다.</target></trans-unit>
+            <trans-unit><source>Package upgraded successful.</source><target>패키지가 성공적으로 업그레이드했습니다.</target></trans-unit>
+            <trans-unit><source>Risk Warning</source><target>위험 경고</target></trans-unit>
+            <trans-unit><source>Trading foreign exchange, commodity futures, options, precious metals and other over-the-counter or on-exchange products and Contracts for Difference (CFDs) carries a high level of risk and may not be suitable for all investors. Leverage creates additional risk and loss exposure. Before you decide to trade foreign exchange, carefully consider your investment objectives, experience level, and risk tolerance. You could lose some or all of your initial investment; do not invest money that you cannot afford to lose. Educate yourself on the risks associated with foreign exchange trading, and seek advice from an independent financial or tax advisor if you have any questions.</source><target>무역 외환, 상품 선물, 옵션, 귀금속과 다른 이상 - 더 - 카운터 나에 교환 제품과 차이 계약 (CFD는) 위험 높은 수준을 실시하고 모든 투자자에게 적합하지 않을 수 있습니다. 활용하여 추가적인 위험과 손실 가능성을 만듭니다. 당신은 외환 거래를 결정하기 전에 신중하게 투자 목적, 경험의 정도, 위험 허용을 고려하십시오. 당신은 당신의 초기 투자의 일부 또는 전부를 잃을 수 있습니다, ​​당신이 잃을 여유가 없다 그 돈을 투자하지 않습니다. 외환 거래와 관련된 위험에 자신을 교육하고, 당신은 질문이있는 경우에는 독립적 인 금융 또는 세금 고문의 조언을 구해야한다.</target></trans-unit>
+            <trans-unit><source>NOTE :</source><target>참고：</target></trans-unit>
+            <trans-unit><source>CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1은 패키지 구매, 패키지 업그레이드, MT4 계정 재로드 전용입니다 비 인출됩니다.</target></trans-unit>
+            <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP1에 CP2 변환 여분의 5% 를 얻을 것이다</target></trans-unit>
+            <trans-unit><source>Immediate Member Restructuring</source><target>즉시 회원 구조 조정</target></trans-unit>
+            <trans-unit><source>Restructure</source><target>구조 조정</target></trans-unit>
+            <trans-unit><source>Member has been registered successfully.</source><target>회원이 성공적으로 등록되었습니다.</target></trans-unit>
+            <trans-unit><source>Member Information</source><target>회원 정보</target></trans-unit>
+            <trans-unit><source>Forget Password</source><target>암호를 잊어 버린</target></trans-unit>
+            <trans-unit><source>Request Password</source><target>암호 요청</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>기금 관리 보고서를 다운로드하려면 클릭하십시오June 2013</target></trans-unit>
         </body>
     </file>
 </xliff>

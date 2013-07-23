@@ -783,9 +783,9 @@
             <trans-unit><source>Placement</source><target>放置位置</target></trans-unit>
             <trans-unit><source>New to Maxim Trader</source><target>Maxim Trader新会员</target></trans-unit>
             <trans-unit><source>Self Registration</source><target>自己注册</target></trans-unit>
-            <trans-unit><source>IT'S EASY!!</source><target>这很容易！</target></trans-unit>
+            <trans-unit><source>IT'S EASY!!</source><target>这很容易!!</target></trans-unit>
             <trans-unit><source>Click here</source><target>点击这里</target></trans-unit>
-            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>Maxim的交易会员注册</target></trans-unit>
+            <trans-unit><source>to instantly register as Maxim Trader Member</source><target>Maxim Trader会员注册</target></trans-unit>
             <trans-unit><source>Referrer</source><target>推荐人</target></trans-unit>
             <trans-unit><source>Beneficiary Nominee</source><target>受益人提名</target></trans-unit>
             <trans-unit><source>Relationship</source><target>关系</target></trans-unit>
@@ -838,7 +838,7 @@
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.</source><target>CP1只能用来购买配套，配套升级和充值MT4帐户。CP1是不能兑现的</target></trans-unit>
             <trans-unit><source>CP2 convert to CP1 will get extra 5%</source><target>CP2转换到CP1将获得额外的5%</target></trans-unit>
             <trans-unit><source>Immediate Member Restructuring</source><target>立即加入重组</target></trans-unit>
-            <trans-unit><source>Restructure</source><target>再構築する</target></trans-unit>
+            <trans-unit><source>Restructure</source><target>重组</target></trans-unit>
             <trans-unit><source>Member has been registered successfully.</source><target>会员已注册成功</target></trans-unit>
             <trans-unit><source>Member Information</source><target>会员信息</target></trans-unit>
             <trans-unit><source>Forget Password</source><target>忘记密码</target></trans-unit>
