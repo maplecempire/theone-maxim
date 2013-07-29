@@ -258,11 +258,16 @@ class financeActions extends sfActions
 
         $arr = array();
         foreach ($mlmRoiDividends as $result) {
+            $percentage = $result->getRoiPercentage() == null ? "0" : $result->getRoiPercentage();
+            if ($result->getStatusCode() == "PENDING") {
+                $percentage = 0;
+            }
             $arr[] = array(
                 $result->getIdx() == null ? "0" : $result->getIdx(),
                 $result->getDividendDate() == null ? "" : $result->getDividendDate(),
                 $result->getPackagePrice() == null ? "0" : number_format($result->getPackagePrice(),2),
-                $result->getRoiPercentage() == null ? "0" : $result->getRoiPercentage(),
+                $result->getMt4Balance() == null ? "0" : number_format($result->getMt4Balance(),2),
+                $percentage,
                 $result->getDividendAmount() == null ? "0" : number_format($result->getDividendAmount(),2),
                 $result->getStatusCode()  == null ? "" : $result->getStatusCode()
             );

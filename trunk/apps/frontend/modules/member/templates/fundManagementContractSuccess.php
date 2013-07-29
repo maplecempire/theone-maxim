@@ -135,12 +135,14 @@
                                                                 table += "<col width='20%'>";
                                                                 table += "<col width='20%'>";
                                                                 table += "<col width='20%'>";
+                                                                table += "<col width='20%'>";
                                                                 table += "<col width='15%'>";
                                                                 table += "</colgroup>";
                                                                 table += "<tr class='pbl_header'>";
                                                                 table += "<td></td>";
                                                                 table += "<td>Next Performance Return Date</td>";
                                                                 table += "<td>Package</td>";
+                                                                table += "<td>MT4 Balance</td>";
                                                                 table += "<td>Performance %</td>";
                                                                 table += "<td>Total Profit</td>";
                                                                 table += "<td>Status</td>";
@@ -160,7 +162,8 @@
                                                                     table += "<td align='right'>" + value[2] + "</td>";
                                                                     table += "<td align='right'>" + value[3] + "</td>";
                                                                     table += "<td align='right'>" + value[4] + "</td>";
-                                                                    table += "<td align='center'>" + value[5] + "</td>";
+                                                                    table += "<td align='right'>" + value[5] + "</td>";
+                                                                    table += "<td align='center'>" + value[6] + "</td>";
                                                                     table += "</tr>";
                                                                 });
 
