@@ -249,7 +249,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <!--<font color="#dc143c"><?php /*echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days<br>Bank charges : Minimum USD '.$handlingChargeInUsd.' depends on your corresponding banks') */?></font>-->
-                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 3 working days<br>Please close your floating trading before you submit withdrawal') ?></font>
+                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 3 working days<br>Please close your floating trading before you submit withdrawal<br>MT4 Withdrawal will be credited into CP3 account') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
