@@ -844,6 +844,7 @@
             <trans-unit><source>Forget Password</source><target>忘记密码</target></trans-unit>
             <trans-unit><source>Request Password</source><target>申请密码</target></trans-unit>
             <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>点击下载基金管理报告2013年6月</target></trans-unit>
+            <trans-unit><source>Fund Management Contract</source><target>基金管理合同</target></trans-unit>
         </body>
     </file>
 </xliff>

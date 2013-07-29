@@ -960,16 +960,23 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         return sfView::HEADER_ONLY;
     }
     public function executeFindUnderLeader() {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $this->dists = MlmDistributorPeer::doSelect($c);
+    }
+    public function executeDoFindUnderLeader() {
         $str = '1992,1994,1984,1993';
 
         $memberArrs = explode(",", $str);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $leader = "";
-        for ($y = 0; $y < count($memberArrs); $y++) {
+        //for ($y = 0; $y < count($memberArrs); $y++) {
             //$c = new Criteria();
             //$c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberArrs[$y]);
             //$distDB = MlmDistributorPeer::doSelectOne($c);
-            $distDB = MlmDistributorPeer::retrieveByPK($memberArrs[$y]);
+            //$distDB = MlmDistributorPeer::retrieveByPK($memberArrs[$y]);
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
 
             for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
@@ -984,9 +991,12 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                 }
             }
 //            print_r($memberArrs[$y].":".$leader."<br>");
-            print_r($leader."<br>");
-        }
-
+            //print_r($leader."<br>");
+        $arr = array(
+            'result' => $leader
+        );
+        //}
+        echo json_encode($arr);
         return sfView::HEADER_ONLY;
     }
     public function executeUpdateAccountStatus()

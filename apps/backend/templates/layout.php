@@ -681,6 +681,11 @@ $(function() {
                              border="0">
                         &nbsp;<?php echo __('Genealogy Management'); ?></a><br/>
                     <?php } ?>
+
+                    <a href="<?php echo url_for('marketing/findUnderLeader') ?>" title="Find Under Leader">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Find Under Leader'); ?></a><br/>
                 </div>
                 <?php } ?>
 
