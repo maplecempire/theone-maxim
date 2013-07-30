@@ -5386,7 +5386,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
 
 
-                $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_ECASH);
+                $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
                 $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
                 $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
@@ -6397,7 +6397,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     }
 
                     $c = new Criteria();
-                    //$c->add(MlmDistPairingPeer::DIST_ID, 476);
+                    //$c->add(MlmDistPairingPeer::DIST_ID, 2310);
                     $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
                         $distId = $mlmDistPairingDB->getDistId();
@@ -6537,7 +6537,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistCommissionledger->save();
 
-                                    $pairingBonusAmount = $flushAmount;
+                                    $pairingBonusAmount = $pairingBonusAmount - $flushAmount;
                                 }
 
                                 $maintenanceBalance = $pairingBonusAmount * Globals::BONUS_MAINTENANCE_PERCENTAGE;
@@ -6557,9 +6557,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 }
 
                                 $bonusService = new BonusService();
+                                //print_r($bonusService->checkDebitAccount($distId)."<br>");
+                                //print_r($pairingBonusAmount."<br>");
+                                //print_r($flushAmount."<br>");
+                                //exit();
                                 if ($bonusService->checkDebitAccount($distId) == true) {
                                     $debitAccountRemark = "GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")";
-                                    $bonusService->contraDebitAccount($distId, $debitAccountRemark, $pairingBonusAmount - $flushAmount);
+                                    $bonusService->contraDebitAccount($distId, $debitAccountRemark, $pairingBonusAmount);
                                 }
                                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -6627,7 +6631,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $con->rollback();
             //throw $e;
         }
-
+        //exit();
         print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
         $this->retrieveGmailMailAttachment();
 
