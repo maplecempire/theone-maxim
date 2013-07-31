@@ -120,7 +120,7 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <th>withdrawal id [hidden]</th>
                             <th></th>
-                            <th>Shareholder</th>
+                            <th>Member ID</th>
                             <th>Name</th>
                             <th>Withdraw</th>
                             <th>Withdraw after Deduction</th>
@@ -187,6 +187,7 @@ function reassignDatagridEventAttr(){
                 <option value="PAID">PAID</option>
             </select>
             <button id="btnUpdate">Update</button>
+            <a href="<?php echo url_for("finance/cp3WithdrawalListInDetail")?>">Export</a>
         <?php } ?>
     </div>
 </div>

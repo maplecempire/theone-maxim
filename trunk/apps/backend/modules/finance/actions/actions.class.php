@@ -2118,4 +2118,136 @@ class financeActions extends sfActions
         }
         return 0;
     }
+    // #####################################
+    public function executeCp3WithdrawalListInDetail()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/xls');
+        $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/download', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->sendHttpHeaders();
+
+        $this->xlsBOF();
+        $columnIdx = 0;
+        $this->xlsWriteLabel(0, $columnIdx++, "ID");
+        $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
+        $this->xlsWriteLabel(0, $columnIdx++, "Name");
+        $this->xlsWriteLabel(0, $columnIdx++, "Withdraw");
+        $this->xlsWriteLabel(0, $columnIdx++, "Withdraw after Deduction");
+        $this->xlsWriteLabel(0, $columnIdx++, "CP3 in wallet");
+        $this->xlsWriteLabel(0, $columnIdx++, "Status");
+        $this->xlsWriteLabel(0, $columnIdx++, "Date");
+        $this->xlsWriteLabel(0, $columnIdx++, "IC");
+        $this->xlsWriteLabel(0, $columnIdx++, "Email");
+        $this->xlsWriteLabel(0, $columnIdx++, "Contact No");
+        $this->xlsWriteLabel(0, $columnIdx++, "Leader Code");
+        $this->xlsWriteLabel(0, $columnIdx++, "Bank Name");
+        $this->xlsWriteLabel(0, $columnIdx++, "Bank Branch Name");
+        $this->xlsWriteLabel(0, $columnIdx++, "Bank Account No");
+        $this->xlsWriteLabel(0, $columnIdx++, "Bank Holder Name");
+        $this->xlsWriteLabel(0, $columnIdx++, "Bank Swift Code");
+        $this->xlsWriteLabel(0, $columnIdx++, "Visa Debit Card");
+        $this->xlsWriteLabel(0, $columnIdx++, "Rank Code");
+        $this->xlsWriteLabel(0, $columnIdx++, "Remarks");
+
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,pack.package_name,withdraw.remarks  FROM mlm_cp3_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                LEFT JOIN
+            (
+            SELECT SUM(credit-debit) AS _ecash, dist_id
+                FROM mlm_account_ledger accountLedger WHERE account_type = 'MAINTENANCE' GROUP BY dist_id
+            ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
+                WHERE 1=1 ";
+
+        if ($this->getRequestParameter('statusCode') != "") {
+            $query = " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+        }
+
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $query .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
+
+        if ($this->getRequestParameter('filterLeader') != "") {
+            $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
+        }
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        $xlsRow = 1;
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        while ($rs->next()) {
+            $arr = $rs->getRow();
+            $arrs[] = $arr;
+            $columnIdx = 0;
+
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['_ecash']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['status_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['created_on']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['ic']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['email']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['contact']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['leader_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_branch_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_acc_no']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_holder_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_swift_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['visa_debit_card']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['package_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);
+            $xlsRow++;
+        }
+        $this->xlsEOF();
+        //exit();
+        //$this->arrs = $arrs;
+        return sfView::HEADER_ONLY;
+    }
+    /* ****************************
+     *  excel start ~
+     * *****************************/
+    function xlsBOF()
+    {
+        echo pack("ssssss", 0x809, 0x8, 0x0, 0x10, 0x0, 0x0);
+        return;
+    }
+
+    function xlsEOF()
+    {
+        echo pack("ss", 0x0A, 0x00);
+        return;
+    }
+
+    function xlsWriteNumber($Row, $Col, $Value)
+    {
+        echo pack("sssss", 0x203, 14, $Row, $Col, 0x0);
+        echo pack("d", $Value);
+        return;
+    }
+
+    function xlsWriteLabel($Row, $Col, $Value)
+    {
+        $L = strlen($Value);
+        echo pack("ssssss", 0x204, 8 + $L, $Row, $Col, 0x0, $L);
+        echo $Value;
+        return;
+    }
+
+    /* ****************************
+     *  excel end ~
+     * *****************************/
 }
