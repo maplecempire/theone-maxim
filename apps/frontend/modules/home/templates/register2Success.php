@@ -727,7 +727,7 @@ function error(data) {
         <p>Below are the contractural terms and agreements that you are bound by as a client
         of OFXGlobal. We recommend that you take the time to read each of them carefully.</p>
 
-        <p><strong>Please check the boxes below to acknowledge your acceptance, argeement and
+        <p><strong>Please check the boxes below to acknowledge your acceptance, agreement and
             understanding of these terms and agreements.</strong></p>
 
     </td>

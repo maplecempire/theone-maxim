@@ -637,7 +637,7 @@
             <trans-unit><source>Accept Terms</source><target>接受条款</target></trans-unit>
             <trans-unit><source>Agreements</source><target>协议</target></trans-unit>
             <trans-unit><source>Below are the contractural terms and agreements that you are bound by as a client of MaximTrader. We recommend that you take the time to read each of them carefully.</source><target>以下的的挛缩条款和协议，你一定会作为客户端的MaximTrader。我们建议您走的时候，他们每个人仔细阅读。</target></trans-unit>
-            <trans-unit><source>Please check the boxes below to acknowledge your acceptance, argeement and understanding of these terms and agreements.</source><target>请检查下面的框，以确认您的的验收，argeement和理解这些条款和协议。</target></trans-unit>
+            <trans-unit><source>Please check the boxes below to acknowledge your acceptance, agreement and understanding of these terms and agreements.</source><target>请检查下面的框，以确认您的的验收，argeement和理解这些条款和协议。</target></trans-unit>
             <trans-unit><source>MTL Risk Disclosure statement</source><target>MTL风险披露声明</target></trans-unit>
             <trans-unit><source>MCL Risk Disclosure statement</source><target>MCL风险披露声明</target></trans-unit>
             <trans-unit><source>I hereby attest and certify that the above information is complete and accurate and I agree to be bound by these terms and conditions.</source><target>我在此证明和证明，上述信息是完整的和准确的，我同意这些条款和条件的约束。</target></trans-unit>
@@ -845,6 +845,7 @@
             <trans-unit><source>Request Password</source><target>申请密码</target></trans-unit>
             <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>点击下载基金管理报告2013年6月</target></trans-unit>
             <trans-unit><source>Fund Management Contract</source><target>基金管理合同</target></trans-unit>
+            <trans-unit><source>Download PDF</source><target>下载PDF</target></trans-unit>
         </body>
     </file>
 </xliff>
