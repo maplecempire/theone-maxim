@@ -115,7 +115,7 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <th>withdrawal id [hidden]</th>
                             <th></th>
-                            <th>Shareholder</th>
+                            <th>Member ID</th>
                             <th>Name</th>
                             <th>Withdraw</th>
                             <th>Withdraw after Deduction</th>
