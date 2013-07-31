@@ -13,7 +13,7 @@ abstract class BaseAppUserPeer {
 	const CLASS_DEFAULT = 'lib.model.AppUser';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -62,23 +62,26 @@ abstract class BaseAppUserPeer {
 	const FROM_ABFX = 'app_user.FROM_ABFX';
 
 	
+	const REMARK = 'app_user.REMARK';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('UserId', 'Username', 'KeepPassword', 'Userpassword', 'KeepPassword2', 'Userpassword2', 'UserRole', 'StatusCode', 'LastLoginDatetime', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'FromAbfx', ),
-		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID, AppUserPeer::USERNAME, AppUserPeer::KEEP_PASSWORD, AppUserPeer::USERPASSWORD, AppUserPeer::KEEP_PASSWORD2, AppUserPeer::USERPASSWORD2, AppUserPeer::USER_ROLE, AppUserPeer::STATUS_CODE, AppUserPeer::LAST_LOGIN_DATETIME, AppUserPeer::CREATED_BY, AppUserPeer::CREATED_ON, AppUserPeer::UPDATED_BY, AppUserPeer::UPDATED_ON, AppUserPeer::FROM_ABFX, ),
-		BasePeer::TYPE_FIELDNAME => array ('user_id', 'username', 'keep_password', 'userpassword', 'keep_password2', 'userpassword2', 'user_role', 'status_code', 'last_login_datetime', 'created_by', 'created_on', 'updated_by', 'updated_on', 'from_abfx', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('UserId', 'Username', 'KeepPassword', 'Userpassword', 'KeepPassword2', 'Userpassword2', 'UserRole', 'StatusCode', 'LastLoginDatetime', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'FromAbfx', 'Remark', ),
+		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID, AppUserPeer::USERNAME, AppUserPeer::KEEP_PASSWORD, AppUserPeer::USERPASSWORD, AppUserPeer::KEEP_PASSWORD2, AppUserPeer::USERPASSWORD2, AppUserPeer::USER_ROLE, AppUserPeer::STATUS_CODE, AppUserPeer::LAST_LOGIN_DATETIME, AppUserPeer::CREATED_BY, AppUserPeer::CREATED_ON, AppUserPeer::UPDATED_BY, AppUserPeer::UPDATED_ON, AppUserPeer::FROM_ABFX, AppUserPeer::REMARK, ),
+		BasePeer::TYPE_FIELDNAME => array ('user_id', 'username', 'keep_password', 'userpassword', 'keep_password2', 'userpassword2', 'user_role', 'status_code', 'last_login_datetime', 'created_by', 'created_on', 'updated_by', 'updated_on', 'from_abfx', 'remark', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('UserId' => 0, 'Username' => 1, 'KeepPassword' => 2, 'Userpassword' => 3, 'KeepPassword2' => 4, 'Userpassword2' => 5, 'UserRole' => 6, 'StatusCode' => 7, 'LastLoginDatetime' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, 'FromAbfx' => 13, ),
-		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID => 0, AppUserPeer::USERNAME => 1, AppUserPeer::KEEP_PASSWORD => 2, AppUserPeer::USERPASSWORD => 3, AppUserPeer::KEEP_PASSWORD2 => 4, AppUserPeer::USERPASSWORD2 => 5, AppUserPeer::USER_ROLE => 6, AppUserPeer::STATUS_CODE => 7, AppUserPeer::LAST_LOGIN_DATETIME => 8, AppUserPeer::CREATED_BY => 9, AppUserPeer::CREATED_ON => 10, AppUserPeer::UPDATED_BY => 11, AppUserPeer::UPDATED_ON => 12, AppUserPeer::FROM_ABFX => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('user_id' => 0, 'username' => 1, 'keep_password' => 2, 'userpassword' => 3, 'keep_password2' => 4, 'userpassword2' => 5, 'user_role' => 6, 'status_code' => 7, 'last_login_datetime' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, 'from_abfx' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('UserId' => 0, 'Username' => 1, 'KeepPassword' => 2, 'Userpassword' => 3, 'KeepPassword2' => 4, 'Userpassword2' => 5, 'UserRole' => 6, 'StatusCode' => 7, 'LastLoginDatetime' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, 'FromAbfx' => 13, 'Remark' => 14, ),
+		BasePeer::TYPE_COLNAME => array (AppUserPeer::USER_ID => 0, AppUserPeer::USERNAME => 1, AppUserPeer::KEEP_PASSWORD => 2, AppUserPeer::USERPASSWORD => 3, AppUserPeer::KEEP_PASSWORD2 => 4, AppUserPeer::USERPASSWORD2 => 5, AppUserPeer::USER_ROLE => 6, AppUserPeer::STATUS_CODE => 7, AppUserPeer::LAST_LOGIN_DATETIME => 8, AppUserPeer::CREATED_BY => 9, AppUserPeer::CREATED_ON => 10, AppUserPeer::UPDATED_BY => 11, AppUserPeer::UPDATED_ON => 12, AppUserPeer::FROM_ABFX => 13, AppUserPeer::REMARK => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('user_id' => 0, 'username' => 1, 'keep_password' => 2, 'userpassword' => 3, 'keep_password2' => 4, 'userpassword2' => 5, 'user_role' => 6, 'status_code' => 7, 'last_login_datetime' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, 'from_abfx' => 13, 'remark' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -159,6 +162,8 @@ abstract class BaseAppUserPeer {
 		$criteria->addSelectColumn(AppUserPeer::UPDATED_ON);
 
 		$criteria->addSelectColumn(AppUserPeer::FROM_ABFX);
+
+		$criteria->addSelectColumn(AppUserPeer::REMARK);
 
 	}
 

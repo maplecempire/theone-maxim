@@ -19,6 +19,7 @@ $(function(){
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
             aoData.push({ "name": "filterUsername", "value": $("#search_username").val()  } );
+            aoData.push({ "name": "filterLeader", "value": $("#search_leader").val()  } );
             aoData.push({ "name": "statusCode", "value": $("#search_combo_statusCode").val()  });
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
@@ -55,10 +56,14 @@ $(function(){
             , { "sName" : "dist.ic",  "bSortable": true}
             , { "sName" : "dist.email",  "bSortable": true}
             , { "sName" : "dist.contact",  "bSortable": true}
+            , { "sName" : "leader_code",  "bSortable": true}
             , { "sName" : "dist.bank_name",  "bSortable": true}
+            , { "sName" : "dist.bank_branch_name",  "bSortable": true}
             , { "sName" : "dist.bank_acc_no",  "bSortable": true}
             , { "sName" : "dist.bank_holder_name",  "bSortable": true}
-            , { "sName" : "dist.rank_code",  "bSortable": true}
+            , { "sName" : "dist.bank_swift_code",  "bSortable": true}
+            , { "sName" : "dist.visa_debit_card",  "bSortable": true}
+            , { "sName" : "pack.package_name",  "bSortable": true}
             , { "sName" : "withdraw.remarks",  "bSortable": true}
         ]
     });
@@ -125,9 +130,13 @@ function reassignDatagridEventAttr(){
                             <th>IC</th>
                             <th>Email</th>
                             <th>Contact No</th>
-                            <th width="30%">Bank Name</th>
+                            <th>Leader Code</th>
+                            <th>Bank Name</th>
+                            <th>Bank Branch Name</th>
                             <th>Bank Account No</th>
                             <th>Bank Holder Name</th>
+                            <th>Bank Swift Code</th>
+                            <th>Visa Debit Card</th>
                             <th>Rank Code</th>
                             <th>Remarks</th>
                         </tr>
@@ -142,13 +151,17 @@ function reassignDatagridEventAttr(){
                             <td>
                                 <select id="search_combo_statusCode">
                                     <option value="">All</option>
-                                    <option value="PENDING">PENDING</option>
+                                    <option value="PENDING" selected="selected">PENDING</option>
                                     <option value="PROCESSING">PROCESSING</option>
                                     <option value="REJECTED">REJECTED</option>
                                     <option value="PAID">PAID</option>
                                 </select>
                             </td>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -165,6 +178,7 @@ function reassignDatagridEventAttr(){
 				</tr>
 			</table>
             <?php if ($sf_user->hasCredential(array(AP::AL_READONLY), false)) {
+
             } else {
             ?>
             <select name="withdrawStatus">
