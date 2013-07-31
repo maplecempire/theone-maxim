@@ -71,7 +71,15 @@ $(function(){
         icons: {
             primary: "ui-icon-circle-check"
         }
-    })
+    });
+    $("#btnExport").button({
+        icons: {
+            primary: "ui-icon-circle-check"
+        }
+    }).click(function(event){
+        event.preventDefault();
+        window.open("<?php echo url_for("finance/cp3WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#search_leader").val() + "&statusCode=" + $("#search_combo_statusCode").val());
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -187,7 +195,7 @@ function reassignDatagridEventAttr(){
                 <option value="PAID">PAID</option>
             </select>
             <button id="btnUpdate">Update</button>
-            <a href="<?php echo url_for("finance/cp3WithdrawalListInDetail")?>">Export</a>
+            <button id="btnExport">Export</button>
         <?php } ?>
     </div>
 </div>
