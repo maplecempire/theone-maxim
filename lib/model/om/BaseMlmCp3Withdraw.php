@@ -55,6 +55,10 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 	
 	protected $updated_on;
 
+
+	
+	protected $leader_dist_id;
+
 	
 	protected $alreadyInSave = false;
 
@@ -188,6 +192,13 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getLeaderDistId()
+	{
+
+		return $this->leader_dist_id;
 	}
 
 	
@@ -386,6 +397,23 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setLeaderDistId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->leader_dist_id !== $v) {
+			$this->leader_dist_id = $v;
+			$this->modifiedColumns[] = MlmCp3WithdrawPeer::LEADER_DIST_ID;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -414,11 +442,13 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 
 			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
 
+			$this->leader_dist_id = $rs->getInt($startcol + 12);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 13; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmCp3Withdraw object", $e);
 		}
@@ -599,6 +629,9 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 			case 11:
 				return $this->getUpdatedOn();
 				break;
+			case 12:
+				return $this->getLeaderDistId();
+				break;
 			default:
 				return null;
 				break;
@@ -621,6 +654,7 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 			$keys[9] => $this->getCreatedOn(),
 			$keys[10] => $this->getUpdatedBy(),
 			$keys[11] => $this->getUpdatedOn(),
+			$keys[12] => $this->getLeaderDistId(),
 		);
 		return $result;
 	}
@@ -672,6 +706,9 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 			case 11:
 				$this->setUpdatedOn($value);
 				break;
+			case 12:
+				$this->setLeaderDistId($value);
+				break;
 		} 	}
 
 	
@@ -691,6 +728,7 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setLeaderDistId($arr[$keys[12]]);
 	}
 
 	
@@ -710,6 +748,7 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmCp3WithdrawPeer::CREATED_ON)) $criteria->add(MlmCp3WithdrawPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmCp3WithdrawPeer::UPDATED_BY)) $criteria->add(MlmCp3WithdrawPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmCp3WithdrawPeer::UPDATED_ON)) $criteria->add(MlmCp3WithdrawPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmCp3WithdrawPeer::LEADER_DIST_ID)) $criteria->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, $this->leader_dist_id);
 
 		return $criteria;
 	}
@@ -761,6 +800,8 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setLeaderDistId($this->leader_dist_id);
 
 
 		$copyObj->setNew(true);

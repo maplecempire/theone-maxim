@@ -62,7 +62,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('ALTERNATE_EMAIL', 'AlternateEmail', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('CONTACT', 'Contact', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('CONTACT', 'Contact', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('GENDER', 'Gender', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -72,11 +72,11 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('BANK_BRANCH_NAME', 'BankBranchName', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('BANK_ACC_NO', 'BankAccNo', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('BANK_ACC_NO', 'BankAccNo', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('BANK_HOLDER_NAME', 'BankHolderName', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('BANK_HOLDER_NAME', 'BankHolderName', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('BANK_SWIFT_CODE', 'BankSwiftCode', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('BANK_SWIFT_CODE', 'BankSwiftCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('VISA_DEBIT_CARD', 'VisaDebitCard', 'string', CreoleTypes::VARCHAR, false, 18);
 

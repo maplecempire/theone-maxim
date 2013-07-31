@@ -63,6 +63,10 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 	
 	protected $from_abfx = '';
 
+
+	
+	protected $remark;
+
 	
 	protected $alreadyInSave = false;
 
@@ -210,6 +214,13 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 	{
 
 		return $this->from_abfx;
+	}
+
+	
+	public function getRemark()
+	{
+
+		return $this->remark;
 	}
 
 	
@@ -454,6 +465,23 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setRemark($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->remark !== $v) {
+			$this->remark = $v;
+			$this->modifiedColumns[] = AppUserPeer::REMARK;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -486,11 +514,13 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 
 			$this->from_abfx = $rs->getString($startcol + 13);
 
+			$this->remark = $rs->getString($startcol + 14);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 15; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating AppUser object", $e);
 		}
@@ -677,6 +707,9 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 			case 13:
 				return $this->getFromAbfx();
 				break;
+			case 14:
+				return $this->getRemark();
+				break;
 			default:
 				return null;
 				break;
@@ -701,6 +734,7 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 			$keys[11] => $this->getUpdatedBy(),
 			$keys[12] => $this->getUpdatedOn(),
 			$keys[13] => $this->getFromAbfx(),
+			$keys[14] => $this->getRemark(),
 		);
 		return $result;
 	}
@@ -758,6 +792,9 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 			case 13:
 				$this->setFromAbfx($value);
 				break;
+			case 14:
+				$this->setRemark($value);
+				break;
 		} 	}
 
 	
@@ -779,6 +816,7 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setFromAbfx($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setRemark($arr[$keys[14]]);
 	}
 
 	
@@ -800,6 +838,7 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AppUserPeer::UPDATED_BY)) $criteria->add(AppUserPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(AppUserPeer::UPDATED_ON)) $criteria->add(AppUserPeer::UPDATED_ON, $this->updated_on);
 		if ($this->isColumnModified(AppUserPeer::FROM_ABFX)) $criteria->add(AppUserPeer::FROM_ABFX, $this->from_abfx);
+		if ($this->isColumnModified(AppUserPeer::REMARK)) $criteria->add(AppUserPeer::REMARK, $this->remark);
 
 		return $criteria;
 	}
@@ -855,6 +894,8 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		$copyObj->setUpdatedOn($this->updated_on);
 
 		$copyObj->setFromAbfx($this->from_abfx);
+
+		$copyObj->setRemark($this->remark);
 
 
 		$copyObj->setNew(true);

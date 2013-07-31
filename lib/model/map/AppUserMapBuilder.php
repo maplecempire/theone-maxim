@@ -60,5 +60,7 @@ class AppUserMapBuilder {
 
 		$tMap->addColumn('FROM_ABFX', 'FromAbfx', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
+
 	} 
 } 
