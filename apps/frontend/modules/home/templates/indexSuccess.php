@@ -143,6 +143,11 @@
     font-weight: bold;
     text-align: left;
 }
+
+    .page_link {
+        font-size: 14px;
+    }
+
     </style>
     <script type='text/javascript' src='/js/popup.js'></script>
 	<script type="text/javascript">
@@ -324,19 +329,24 @@ annoucementArr.push({
 
 var popIndex = 1;
 	$(function() {
-        loadContent(popIndex);
+        //loadContent(popIndex);
 
         centerPopup();
         loadPopup();
 
+        $(".page_link").click(function(event){
+            event.preventDefault();
+            $(".page").hide();
+            $("#page_" + $(this).attr("ref")).show(500);
+        });
         $("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
             disablePopup();
-            if ($(annoucementArr).length > popIndex) {
+            /*if ($(annoucementArr).length > popIndex) {
                 popIndex++;
                 loadContent(popIndex);
                 centerPopup();
                 loadPopup();
-            }
+            }*/
         });
         <?php
         //if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
@@ -893,42 +903,43 @@ if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, t
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-        <!--<a href="<?php /*echo url_for("/member/announcement?id=".$announcement->getAnnouncementId())*/?>">-->
-            <div class="poptitle"><?php
-                /*if ($culture == "en")
-                    echo $announcement->getTitle();
-                else if ($culture == "jp")
-                    echo $announcement->getTitleJp();
-                else
-                    echo $announcement->getTitleCn();*/
-                ?>
-            Maxim Trader Incentive For February 2013 - Bangkok March Workshop (BMW) 马胜金融集团 2013年二月奖励计划 - 曼谷投资检讨会 2013年2月インセンティブ·プラン - バンコク投資レビュー
+        <table width="100%">
+            <tr>
+                <td align="center">
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a>
+                </td>
+            </tr>
+        </table>
+        <div id="page_1" class="page">
+            <div class="poptitle">
+                INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
-        <!--</a>-->
-
-        <div class="news_date">
-        <?php
-            $dateUtil = new DateUtil();
-            //$currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
-            //echo $currentDate;
-            echo "18 FEB 2013";
-            ?>
-        </div>
-        <div class="news_desc">
+            <div class="news_date">
             <?php
-            /*if ($culture == "en")
-                echo $announcement->getShortContent();
-            else if ($culture == "jp")
-                echo $announcement->getShortContentJp();
-            else
-                echo $announcement->getShortContentCn();*/
-
-            ?>
-
-            <br><br><a target="_blank" href="#"><img width="460" border="0" alt="Maxim Trader" src="http://partner.maximtrader.com/images/email/Bangkok_March_Workshop.jpg"></a><br>
+                $dateUtil = new DateUtil();
+                echo "8 JULY 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
+            </div>
         </div>
+        <div id="page_2" class="page" style="display: none">
+            <div class="poptitle">
+                INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "8 JULY 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br><img width="460"  src="http://partner.maximtrader.com/images/email/IME_Poster_<?php echo $culture;?>.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
+            </div>
     </div>
     <div class="popdivider"></div>
+    </div>
     <?php //} ?>
     <p></p>
     <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
