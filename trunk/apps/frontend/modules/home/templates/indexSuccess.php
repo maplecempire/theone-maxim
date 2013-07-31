@@ -618,9 +618,11 @@ ul, ol {
                 <ol class="slides" style="position: relative; overflow: hidden;">
                     <li class="slide-content hide"
                         style="position: absolute; top: 0px; z-index: 6; opacity: 1; display: none; width: 582px; height: 212px;">
+                        <a target="_self" href="<?php echo url_for("/member/applyDebitCard") ?>">
                         <div class="slide-content"
-                             style="background:#f6f7f6 url('/css/maxim/banner/bg8.png') left top no-repeat;width:582px;height:212px;">
+                             style="background:#f6f7f6 url('/css/maxim/banner/bg8.jpg') left top no-repeat;width:582px;height:212px;">
                         </div>
+                        </a>
                     </li>
 
                     <li class="slide-content hide"
