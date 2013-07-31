@@ -2168,7 +2168,7 @@ class financeActions extends sfActions
                 WHERE 1=1 ";
 
         if ($this->getRequestParameter('statusCode') != "") {
-            $query = " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
         }
 
         if ($this->getRequestParameter('filterUsername') != "") {
@@ -2178,7 +2178,6 @@ class financeActions extends sfActions
         if ($this->getRequestParameter('filterLeader') != "") {
             $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
         }
-
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $rs = $statement->executeQuery();
