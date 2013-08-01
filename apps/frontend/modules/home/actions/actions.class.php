@@ -574,9 +574,28 @@ class homeActions extends sfActions
                     "sLast":     "末页"
                 }
             }';
-        } else {
+        }  else {
             echo '{}';
         }
+        /*else if ($this->getUser()->getCulture() == "kr") {
+            echo '{
+                "sProcessing":   "処理...",
+                "sLengthMenu":   "ショー _MENU_ 結果",
+                "sZeroRecords":  "一致する結果がない",
+                "sInfo":         "ディスプレイ _START_ へ _END_ 結果，完全に _TOTAL_ アイテム",
+                "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix":  "",
+                "sSearch":       "搜索:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "首页",
+                    "sPrevious": "上页",
+                    "sNext":     "下页",
+                    "sLast":     "末页"
+                }
+            }';
+        }*/
         return sfView::HEADER_ONLY;
     }
 }
