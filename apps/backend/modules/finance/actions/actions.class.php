@@ -2121,7 +2121,7 @@ class financeActions extends sfActions
     // #####################################
     public function executeCp3WithdrawalListInDetail()
     {
-        $response = $this->getResponse();
+        /*$response = $this->getResponse();
         $response->clearHttpHeaders();
         $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
         $response->setContentType('application/xls');
@@ -2130,9 +2130,9 @@ class financeActions extends sfActions
         $response->setHttpHeader('Content-Type', 'application/download', TRUE);
         $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->sendHttpHeaders();
+        $response->sendHttpHeaders();*/
 
-        $this->xlsBOF();
+        /*$this->xlsBOF();
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
@@ -2153,7 +2153,7 @@ class financeActions extends sfActions
         $this->xlsWriteLabel(0, $columnIdx++, "Bank Swift Code");
         $this->xlsWriteLabel(0, $columnIdx++, "Visa Debit Card");
         $this->xlsWriteLabel(0, $columnIdx++, "Rank Code");
-        $this->xlsWriteLabel(0, $columnIdx++, "Remarks");
+        $this->xlsWriteLabel(0, $columnIdx++, "Remarks");*/
 
         $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,pack.package_name,withdraw.remarks  FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
@@ -2184,12 +2184,14 @@ class financeActions extends sfActions
 
         $xlsRow = 1;
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $text="column1\tcolumn2\tcolumn3\nfor new line";
+        $text="";
         while ($rs->next()) {
             $arr = $rs->getRow();
             $arrs[] = $arr;
             $columnIdx = 0;
 
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
+            /*$this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
@@ -2208,12 +2210,58 @@ class financeActions extends sfActions
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_swift_code']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['visa_debit_card']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['package_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);*/
+
+            $text .= "".$arr['withdraw_id'];
+            $text .= "\t".$arr['distributor_code'];
+            $text .= "\t".$arr['full_name'];
+            $text .= "\t".$arr['deduct'];
+            $text .= "\t".$arr['amount'];
+            $text .= "\t".$arr['_ecash'];
+            $text .= "\t".$arr['status_code'];
+            $text .= "\t".$arr['created_on'];
+            $text .= "\t".$arr['ic'];
+            $text .= "\t".$arr['email'];
+            $text .= "\t".$arr['contact'];
+            $text .= "\t".$arr['leader_code'];
+            $text .= "\t".$arr['bank_name'];
+            $text .= "\t".$arr['bank_branch_name'];
+            $text .= "\t".$arr['bank_acc_no'];
+            $text .= "\t".$arr['bank_holder_name'];
+            $text .= "\t".$arr['bank_swift_code'];
+            $text .= "\t".$arr['visa_debit_card'];
+            $text .= "\t".$arr['package_name'];
+            $text .= "\t".$arr['remarks'];
             $xlsRow++;
+
+            $text .= "\n";
         }
-        $this->xlsEOF();
+        //$this->xlsEOF();
         //exit();
         //$this->arrs = $arrs;
+
+
+
+        $myFile = "export.xls";
+        $fh = fopen($myFile, 'w') or die("can't open file");
+        fwrite($fh, $text);
+        fclose($myFile);
+        //$filename = sfConfig::get('sf_upload_dir').'/excel/export.xls';
+        $filename = $myFile;
+
+        $filename = realpath($filename); //server specific
+        $ctype="application/force-download";
+        header("Pragma: public"); // required
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=1, pre-check=1");
+        header("Cache-Control: private",false); // required for certain browsers
+        header("Content-Type: $ctype");
+        header("Content-Disposition: attachment; filename=".basename($filename).";" );
+        header("Content-Transfer-Encoding: binary");
+        header("Content-Length: ".@filesize($filename));
+        @readfile("$filename") or die("File not found.");
+        unlink($filename);
+        exit();
         return sfView::HEADER_ONLY;
     }
     /* ****************************
