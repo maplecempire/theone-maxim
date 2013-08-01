@@ -2283,112 +2283,6 @@ class financeActions extends sfActions
 
         $this->xlsBOF();
         //$this->xlsCodepage("UTF-8");
-//        $this->xlsCodepage("65001");
-        $columnIdx = 0;
-        $this->xlsWriteLabel(0, $columnIdx++, "ID");
-        $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
-        $this->xlsWriteLabel(0, $columnIdx++, "Name");
-        $this->xlsWriteLabel(0, $columnIdx++, "Withdraw");
-        $this->xlsWriteLabel(0, $columnIdx++, "Withdraw after Deduction");
-        $this->xlsWriteLabel(0, $columnIdx++, "CP3 in wallet");
-        $this->xlsWriteLabel(0, $columnIdx++, "Status");
-        $this->xlsWriteLabel(0, $columnIdx++, "Date");
-        $this->xlsWriteLabel(0, $columnIdx++, "IC");
-        $this->xlsWriteLabel(0, $columnIdx++, "Email");
-        $this->xlsWriteLabel(0, $columnIdx++, "Contact No");
-        $this->xlsWriteLabel(0, $columnIdx++, "Leader Code");
-        $this->xlsWriteLabel(0, $columnIdx++, "Bank Name");
-        $this->xlsWriteLabel(0, $columnIdx++, "Bank Branch Name");
-        $this->xlsWriteLabel(0, $columnIdx++, "Bank Account No");
-        $this->xlsWriteLabel(0, $columnIdx++, "Bank Holder Name");
-        $this->xlsWriteLabel(0, $columnIdx++, "Bank Swift Code");
-        $this->xlsWriteLabel(0, $columnIdx++, "Visa Debit Card");
-        $this->xlsWriteLabel(0, $columnIdx++, "Rank Code");
-        $this->xlsWriteLabel(0, $columnIdx++, "Remarks");
-
-        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,pack.package_name,withdraw.remarks  FROM mlm_cp3_withdraw withdraw
-                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
-                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
-
-                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
-                LEFT JOIN
-            (
-            SELECT SUM(credit-debit) AS _ecash, dist_id
-                FROM mlm_account_ledger accountLedger WHERE account_type = 'MAINTENANCE' GROUP BY dist_id
-            ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
-                WHERE 1=1 ";
-
-        if ($this->getRequestParameter('statusCode') != "") {
-            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
-        }
-
-        if ($this->getRequestParameter('filterUsername') != "") {
-            $query .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
-        }
-
-        if ($this->getRequestParameter('filterLeader') != "") {
-            $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
-        }
-
-        $connection = Propel::getConnection();
-        $statement = $connection->prepareStatement($query);
-        $rs = $statement->executeQuery();
-
-        $xlsRow = 1;
-        $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        while ($rs->next()) {
-            $arr = $rs->getRow();
-            $arrs[] = $arr;
-            $columnIdx = 0;
-
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, mb_convert_encoding($arr['full_name'],'utf-16','utf-8'));
-            //$this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['_ecash']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['status_code']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['created_on']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['ic']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['email']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['contact']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['leader_code']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_branch_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_acc_no']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_holder_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_swift_code']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['visa_debit_card']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['package_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);
-            $xlsRow++;
-        }
-        $this->xlsEOF();
-//        exit();
-        //$this->arrs = $arrs;
-        echo "\xEF\xBB\xBF"; // UTF-8 BOM
-        return sfView::HEADER_ONLY;
-    }
-
-    public function executeCp3WithdrawalListInDetail()
-    {
-        $response = $this->getResponse();
-        $response->clearHttpHeaders();
-        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
-        $response->setContentType('application/xls');
-        $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
-        $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
-        $response->setHttpHeader('Content-Type', 'application/download', TRUE);
-        $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
-        $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
-        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
-
-        $response->sendHttpHeaders();
-
-        $this->xlsBOF();
-        //$this->xlsCodepage("UTF-8");
         $this->xlsCodepage("65001");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
@@ -2473,6 +2367,125 @@ class financeActions extends sfActions
 //        exit();
         //$this->arrs = $arrs;
         echo "\xEF\xBB\xBF"; // UTF-8 BOM
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeCp3WithdrawalListInDetail()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/xls');
+        $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/download', TRUE);
+        $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
+
+        $response->sendHttpHeaders();
+
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,pack.package_name,withdraw.remarks  FROM mlm_cp3_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                LEFT JOIN
+            (
+            SELECT SUM(credit-debit) AS _ecash, dist_id
+                FROM mlm_account_ledger accountLedger WHERE account_type = 'MAINTENANCE' GROUP BY dist_id
+            ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
+                WHERE 1=1 ";
+
+        if ($this->getRequestParameter('statusCode') != "") {
+            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+        }
+
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $query .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
+
+        if ($this->getRequestParameter('filterLeader') != "") {
+            $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
+        }
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        $xlsRow = 1;
+
+        /*$export_data = preg_split("/\n/", $tsv_data);
+        foreach($export_data as &$row) {
+            $row = preg_split("/\t/", $row);
+        }
+
+        include("includes/PHPExcel.php");
+        include('includes/PHPExcel/Writer/Excel5.php');
+
+        $objPHPExcel = new PHPExcel();
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+        foreach($export_data as $row_cells) {
+            if(!is_array($row_cells)) { continue; }
+                foreach($row_cells as $cell) {
+                    $sheet->setCellValue($col.$row, $cell);
+                    $col++;
+                }
+            $row += 1;
+            $col = "A";
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');*/
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+        while ($rs->next()) {
+            $arr = $rs->getRow();
+            $arrs[] = $arr;
+            $columnIdx = 0;
+
+            $sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            $sheet->setCellValue("B".$xlsRow, $arr['distributor_code']);
+            $sheet->setCellValue("C".$xlsRow, $arr['full_name']);
+            $sheet->setCellValue("D".$xlsRow, $arr['deduct']);
+            $sheet->setCellValue("E".$xlsRow, $arr['amount']);
+            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
+            $sheet->setCellValue("G".$xlsRow, $arr['status_code']);
+            $sheet->setCellValue("H".$xlsRow, $arr['created_on']);
+            $sheet->setCellValue("I".$xlsRow, $arr['ic']);
+            $sheet->setCellValue("J".$xlsRow, $arr['email']);
+            $sheet->setCellValue("K".$xlsRow, $arr['contact']);
+            $sheet->setCellValue("L".$xlsRow, $arr['leader_code']);
+            $sheet->setCellValue("M".$xlsRow, $arr['bank_name']);
+            $sheet->setCellValue("N".$xlsRow, $arr['bank_branch_name']);
+            $sheet->setCellValue("O".$xlsRow, $arr['bank_acc_no']);
+            $sheet->setCellValue("P".$xlsRow, $arr['bank_holder_name']);
+            $sheet->setCellValue("Q".$xlsRow, $arr['bank_swift_code']);
+            $sheet->setCellValue("R".$xlsRow, $arr['visa_debit_card']);
+            $sheet->setCellValue("S".$xlsRow, $arr['package_name']);
+            $sheet->setCellValue("T".$xlsRow, $arr['remarks']);
+
+            //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            //$row += 1;
+            //$col = "A";
+
+            $xlsRow++;
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
         return sfView::HEADER_ONLY;
     }
     /* ****************************
