@@ -1535,8 +1535,11 @@ class financeListActions extends sfActions
 
     public function executeEcashWithdrawList()
     {
+        $this->updateLeaderForCp2Withdrawal();
+
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
+        $sColumns = str_replace("leader_code", "leader.distributor_code as leader_code", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 
@@ -1546,6 +1549,8 @@ class financeListActions extends sfActions
         $arr = array();
         $sql = " FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
                 LEFT JOIN
             (
             SELECT SUM(credit-debit) AS _ecash, dist_id
@@ -1561,6 +1566,9 @@ class financeListActions extends sfActions
 
         if ($this->getRequestParameter('filterUsername') != "") {
             $sWhere .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
+        if ($this->getRequestParameter('filterLeader') != "") {
+            $sWhere .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
         }
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
@@ -1588,7 +1596,7 @@ class financeListActions extends sfActions
         /******   pagination  *******/
         $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
-        $query = "SELECT tree_structure, accountLedger._ecash, " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $query = "SELECT dist.tree_structure, " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
@@ -1613,11 +1621,17 @@ class financeListActions extends sfActions
                 $resultArr['ic'] == null ? "" : $resultArr['ic'],
                 $resultArr['email'] == null ? "" : $resultArr['email'],
                 $resultArr['contact'] == null ? "" : $resultArr['contact'],
+                $resultArr['leader_code'] == null ? "" : $resultArr['leader_code'],
+                $resultArr['bank_in_to'] == null ? "" : $resultArr['bank_in_to'],
                 $resultArr['bank_name'] == null ? "" : $resultArr['bank_name'],
+                $resultArr['bank_branch_name'] == null ? "" : $resultArr['bank_branch_name'],
                 $resultArr['bank_acc_no'] == null ? "" : $resultArr['bank_acc_no'],
                 $resultArr['bank_holder_name'] == null ? "" : $resultArr['bank_holder_name'],
-                $resultArr['rank_code'] == null ? "" : $resultArr['rank_code'],
-                $resultArr['remarks'] == null ? "" : $resultArr['remarks']
+                $resultArr['bank_swift_code'] == null ? "" : $resultArr['bank_swift_code'],
+                $resultArr['visa_debit_card'] == null ? "" : $resultArr['visa_debit_card'],
+                $resultArr['package_name'] == null ? "" : $resultArr['package_name'],
+                $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
+                $resultArr['country'] == null ? "" : $resultArr['country']
             );
         }
         $output = array(
@@ -1942,6 +1956,34 @@ class financeListActions extends sfActions
                     if ($dist) {
                         $mlmCp3Withdraw->setLeaderDistId($dist->getDistributorId());
                         $mlmCp3Withdraw->save();
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    function updateLeaderForCp2Withdrawal()
+    {
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
+        $mlmCp2Withdraws = MlmEcashWithdrawPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        foreach ($mlmCp2Withdraws as $mlmCp2Withdraw) {
+
+            $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
+
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $mlmCp2Withdraw->setLeaderDistId($dist->getDistributorId());
+                        $mlmCp2Withdraw->save();
                     }
                     break;
                 }

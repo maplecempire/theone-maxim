@@ -2119,6 +2119,7 @@ class financeActions extends sfActions
         return 0;
     }
     // #####################################
+
     public function executeCp3WithdrawalListInDetail2()
     {
         /*$response = $this->getResponse();
@@ -2380,7 +2381,7 @@ class financeActions extends sfActions
         $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
         $response->setHttpHeader('Content-Type', 'application/download', TRUE);
         $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
-        $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=cp3_withdrawal_list.xls', TRUE);
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
         $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
 
@@ -2393,6 +2394,163 @@ class financeActions extends sfActions
 ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
 ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
 FROM mlm_cp3_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                LEFT JOIN
+            (
+            SELECT SUM(credit-debit) AS _ecash, dist_id
+                FROM mlm_account_ledger accountLedger WHERE account_type = 'MAINTENANCE' GROUP BY dist_id
+            ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
+                WHERE 1=1 ";
+
+        if ($this->getRequestParameter('statusCode') != "") {
+            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+        }
+
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $query .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
+
+        if ($this->getRequestParameter('filterLeader') != "") {
+            $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
+        }
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        $xlsRow = 1;
+
+        /*$export_data = preg_split("/\n/", $tsv_data);
+        foreach($export_data as &$row) {
+            $row = preg_split("/\t/", $row);
+        }
+
+        include("includes/PHPExcel.php");
+        include('includes/PHPExcel/Writer/Excel5.php');
+
+        $objPHPExcel = new PHPExcel();
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+        foreach($export_data as $row_cells) {
+            if(!is_array($row_cells)) { continue; }
+                foreach($row_cells as $cell) {
+                    $sheet->setCellValue($col.$row, $cell);
+                    $col++;
+                }
+            $row += 1;
+            $col = "A";
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');*/
+
+        include("PHPExcel.php");
+        include('PHPExcel/Writer/Excel5.php');
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+
+        $sheet->setCellValue("A".$xlsRow, "ID");
+        $sheet->setCellValue("B".$xlsRow, "Member ID");
+        $sheet->setCellValue("C".$xlsRow, "Name");
+        $sheet->setCellValue("D".$xlsRow, "Withdraw");
+        $sheet->setCellValue("E".$xlsRow, "Withdraw after Deduction");
+        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
+        $sheet->setCellValue("G".$xlsRow, "Status");
+        $sheet->setCellValue("H".$xlsRow, "Date");
+        $sheet->setCellValue("I".$xlsRow, "IC");
+        $sheet->setCellValue("J".$xlsRow, "Email");
+        $sheet->setCellValue("K".$xlsRow, "Contact No");
+        $sheet->setCellValue("L".$xlsRow, "Leader Code");
+        $sheet->setCellValue("M".$xlsRow, "Credit To");
+        $sheet->setCellValue("N".$xlsRow, "Bank Name");
+        $sheet->setCellValue("O".$xlsRow, "Bank Branch Name");
+        $sheet->setCellValue("P".$xlsRow, "Bank Account No");
+        $sheet->setCellValue("Q".$xlsRow, "Bank Holder Name");
+        $sheet->setCellValue("R".$xlsRow, "Bank Swift Code");
+        $sheet->setCellValue("S".$xlsRow, "Visa Debit Card");
+        $sheet->setCellValue("T".$xlsRow, "Rank Code");
+        $sheet->setCellValue("U".$xlsRow, "Remarks");
+        $sheet->setCellValue("V".$xlsRow, "Country");
+
+        $xlsRow = 2;
+        while ($rs->next()) {
+            $arr = $rs->getRow();
+            $arrs[] = $arr;
+            $columnIdx = 0;
+
+            $sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            $sheet->setCellValue("B".$xlsRow, $arr['distributor_code']);
+            $sheet->setCellValue("C".$xlsRow, $arr['full_name']);
+            $sheet->setCellValue("D".$xlsRow, $arr['deduct']);
+            $sheet->setCellValue("E".$xlsRow, $arr['amount']);
+            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
+            $sheet->setCellValue("G".$xlsRow, $arr['status_code']);
+            $sheet->setCellValue("H".$xlsRow, $arr['created_on']);
+            $sheet->setCellValue("I".$xlsRow, $arr['ic']);
+            $sheet->setCellValue("J".$xlsRow, $arr['email']);
+            $sheet->setCellValue("K".$xlsRow, $arr['contact']);
+            $sheet->setCellValue("L".$xlsRow, $arr['leader_code']);
+            $sheet->setCellValue("M".$xlsRow, $arr['bank_in_to']);
+            $sheet->setCellValue("N".$xlsRow, $arr['bank_name']);
+            $sheet->setCellValue("O".$xlsRow, $arr['bank_branch_name']);
+            //$sheet->setCellValue("O".$xlsRow, $arr['bank_acc_no']);
+            $sheet->setCellValueExplicit("P".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
+
+            $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
+            $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
+            $sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
+            $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("V".$xlsRow, $arr['country']);
+
+            //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            //$row += 1;
+            //$col = "A";
+
+            $xlsRow++;
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeCp2WithdrawalListInDetail()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/xls');
+        $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/download', TRUE);
+        $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=cp2_withdrawal_list.xls', TRUE);
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
+
+        $response->sendHttpHeaders();
+
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
+,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
+,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
 

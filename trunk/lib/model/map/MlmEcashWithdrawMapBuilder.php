@@ -56,5 +56,7 @@ class MlmEcashWithdrawMapBuilder {
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
+		$tMap->addColumn('LEADER_DIST_ID', 'LeaderDistId', 'int', CreoleTypes::INTEGER, false, null);
+
 	} 
 } 
