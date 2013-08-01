@@ -687,19 +687,16 @@
             <trans-unit><source>October</source><target>十月</target></trans-unit>
             <trans-unit><source>November</source><target>十一月</target></trans-unit>
             <trans-unit><source>December</source><target>十二月</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Chinese)</source><target>点击下载：每日外汇指南（中文）</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (English)</source><target>点击下载：每日外汇指南（英文）</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Japanese)</source><target>点击下载：每日外汇指南（日文）</target></trans-unit>
-            <trans-unit><source>Download MT4 (Standard)</source><target>下载MT4平台（普通版）</target></trans-unit>
-            <trans-unit><source>Download MT4 Pro</source><target>下载MT4平台（专业版）</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 (Standard)</source><target>下载MT4平台（普通版）</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro</source><target>下载MT4平台（专业版）</target></trans-unit>
-            <trans-unit><source>The popular platform MetaTrader 4 can now be used for professional trading.</source><target>广受欢迎的MetaTrader 4平台，现在可以使用专业版来做交易。</target></trans-unit>
-            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro User Guide</source><target>点击下载MT4专业版指南</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Chinese)</source><target>毎日Fxのガイド（中国語）をクリックしてダウンロードしてください</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (English)</source><target>毎日Fxのガイド（英語）をクリックしてダウンロードしてください</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Daily Fx Guide (Japanese)</source><target>毎日Fxのガイド（日本語版）のダウンロードがクリック</target></trans-unit>
+            <trans-unit><source>Download MT4 (Standard)</source><target>ダウンロードMT4（標準）</target></trans-unit>
+            <trans-unit><source>Download MT4 Pro</source><target>ダウンロードMT4プロ</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 (Standard)</source><target>メタトレーダー4（標準）をクリックしてダウンロードしてください</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro</source><target>メタトレーダー4のProをダウンロードするにはクリック</target></trans-unit>
+            <trans-unit><source>The popular platform MetaTrader 4 can now be used for professional trading.</source><target>人気のあるプラットフォームメタトレーダー4は、現在プロの貿易に使用することができます。</target></trans-unit>
+            <trans-unit><source>Click to DOWNLOAD Meta Trader 4 Pro User Guide</source><target>メタトレーダー4 Proユーザーガイドをダウンロードするにはクリック</target></trans-unit>
             <trans-unit><source>Meta Trader 4 (MT4) is one of the best Forex trading platforms in the world with its advanced charting package and user-friendly interface, MT4 is ideal for traders whatever your experience.</source><target>MT4是世界最好的外汇交易平台，凭借其先进的图表工具和友好的用户界面，让你体验快捷方便的外汇交易平台</target></trans-unit>
-            <trans-unit><source>OFX Trader Academy Accounts Team</source><target>OFX 交易学院帐户小组</target></trans-unit>
-            <trans-unit><source>Welcome to OFX Trader Academy</source><target>欢迎来到OFX 交易学院</target></trans-unit>
-            <trans-unit><source>OFX Trader Academy Accounts Team Chinese</source><target>OFX 交易学院帐户小组 OFX Trader Academy Accounts Team</target></trans-unit>
             <trans-unit><source>CP1 Statement</source><target>CP1ステートメント</target></trans-unit>
             <trans-unit><source>CP2 Statement</source><target>CP2ステートメント</target></trans-unit>
             <trans-unit><source>CP3 Statement</source><target>CP3ステートメント</target></trans-unit>

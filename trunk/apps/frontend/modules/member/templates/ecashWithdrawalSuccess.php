@@ -218,6 +218,7 @@
                         <br>4. <?php echo __('Processing time : 3-5 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
+
                 </tr>
 
                 <tr class="tbl_form_row_odd">

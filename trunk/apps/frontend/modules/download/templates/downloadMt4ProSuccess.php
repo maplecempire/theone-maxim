@@ -22,7 +22,7 @@
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Download MT4 (Standard)</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __("Download MT4 (Standard)")?></span></td>
 </tr>
 <tr>
     <td><br>
@@ -55,10 +55,11 @@
         <table class="pbt_table">
             <tbody>
             <tr>
-                <td rowspan="3"><img src="/images/mt4_ps.jpg"></td>
-                <td>Meta Trader 4 (MT4) is one of the best Forex trading platforms in the world with its
+                <td><img src="/images/mt4_ps.jpg"></td>
+                <td>
+                    <!--Meta Trader 4 (MT4) is one of the best Forex trading platforms in the world with its
                     advanced charting package and user-friendly interface, MT4 is ideal for traders whatever
-                    your experience.
+                    your experience.-->
                 </td>
             </tr>
             <tr>
@@ -66,7 +67,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe">Click to DOWNLOAD Meta Trader 4 (Standard)</a>
+                    <a href="http://files.metaquotes.net/maxim.capital.limited/mt4/maxim4setup.exe"><?php echo __("Click to DOWNLOAD Meta Trader 4 (Standard)") ?></a>
 <!--                    <a href="--><?php //echo url_for("/member/downloadMt4?q=" . rand()) ?><!--">Click to DOWNLOAD Meta Trader 4 (Standard)</a>-->
                     <br>
                 </td>
