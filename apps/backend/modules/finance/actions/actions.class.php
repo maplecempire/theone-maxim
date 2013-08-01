@@ -2454,6 +2454,29 @@ class financeActions extends sfActions
         $sheet = $objPHPExcel->getActiveSheet();
         $row = '1';
         $col = "A";
+
+        $sheet->setCellValue("A".$xlsRow, "ID");
+        $sheet->setCellValue("B".$xlsRow, "Member ID");
+        $sheet->setCellValue("C".$xlsRow, "Name");
+        $sheet->setCellValue("D".$xlsRow, "Withdraw");
+        $sheet->setCellValue("E".$xlsRow, "Withdraw after Deduction");
+        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
+        $sheet->setCellValue("G".$xlsRow, "Status");
+        $sheet->setCellValue("H".$xlsRow, "Date");
+        $sheet->setCellValue("I".$xlsRow, "IC");
+        $sheet->setCellValue("J".$xlsRow, "Email");
+        $sheet->setCellValue("K".$xlsRow, "Contact No");
+        $sheet->setCellValue("L".$xlsRow, "Leader Code");
+        $sheet->setCellValue("M".$xlsRow, "Bank Name");
+        $sheet->setCellValue("N".$xlsRow, "Bank Branch Name");
+        $sheet->setCellValue("O".$xlsRow, "Bank Account No");
+        $sheet->setCellValue("P".$xlsRow, "Bank Holder Name");
+        $sheet->setCellValue("Q".$xlsRow, "Bank Swift Code");
+        $sheet->setCellValue("R".$xlsRow, "Visa Debit Card");
+        $sheet->setCellValue("S".$xlsRow, "Rank Code");
+        $sheet->setCellValue("T".$xlsRow, "Remarks");
+
+        $xlsRow = 2;
         while ($rs->next()) {
             $arr = $rs->getRow();
             $arrs[] = $arr;
