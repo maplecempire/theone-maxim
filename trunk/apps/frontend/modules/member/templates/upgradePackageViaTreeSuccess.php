@@ -12,7 +12,7 @@ $(function() {
     $("#topupForm").validate({
         messages : {
             transactionPassword: {
-                remote: "Security Password is not valid."
+                remote: "<?php echo __("Security Password is not valid")?>"
             }
         },
         rules : {
@@ -169,7 +169,7 @@ $(function() {
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Ranking') ?></td>
-                    <td><input type="text" readonly="readonly" size="20px" value="<?php echo $distPackage->getPackageName(); ?>"/></td>
+                    <td><input type="text" readonly="readonly" size="20px" value="<?php echo __($distPackage->getPackageName()); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>
 
@@ -222,7 +222,7 @@ $(function() {
                                     echo "<td></td>";
                                 }
 
-                                echo "<td align='center'>" . $packageDB->getPackageName() . "</td>
+                                echo "<td align='center'>" . __($packageDB->getPackageName()) . "</td>
                                     <td align='center'>";
 
                                     if ($ableUpgrade) {

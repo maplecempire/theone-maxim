@@ -387,7 +387,7 @@ function reassignDatagridAnnouncementEventAttr() {
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Ranking') ?></td>
-        <td><input size="40" type="text" readonly="readonly" value="<?php echo $ranking; ?>"></td>
+        <td><input size="40" type="text" readonly="readonly" value="<?php echo __($ranking); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 

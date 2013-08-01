@@ -20,7 +20,7 @@
         $("#registerForm").validate({
             messages : {
                 transactionPassword: {
-                    remote: "Security Password is not valid."
+                    remote: "<?php echo __("Security Password is not valid")?>"
                 },
                 confirmPassword: {
                     equalTo: "<?php echo __('Please enter the same password as above') ?>"

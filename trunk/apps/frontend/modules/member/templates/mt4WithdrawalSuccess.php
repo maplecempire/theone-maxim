@@ -55,7 +55,7 @@ $(function() {
     $("#withdrawForm").validate({
                 messages : {
                     transactionPassword: {
-                        remote: "Security Password is not valid."
+                        remote: "<?php echo __("Security Password is not valid")?>"
                     }
                 },
                 rules : {
@@ -175,8 +175,8 @@ $(function() {
                     <td><?php echo __('Payment Type'); ?></td>
                     <td>
                         <select name="paymentType" id="paymentType">
-                            <option value='VISA'>VISA Cash Card</option>
-                            <option value='BANK'>Local Bank Transfer</option>
+                            <option value='VISA'><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
+                            <option value='BANK'><?php echo __('Local Bank Transfer'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
@@ -247,9 +247,19 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td colspan="2" align="center">
+                    <td align="right" valign="top">
+                        <font color="#dc143c">
+                            <?php echo __('NOTE :') ?> &nbsp;
+                        </font>
+                    </td>
+                    <td align="left">
                         <!--<font color="#dc143c"><?php /*echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 5-7 working days<br>Bank charges : Minimum USD '.$handlingChargeInUsd.' depends on your corresponding banks') */?></font>-->
-                        <font color="#dc143c"><?php echo __('NOTE : Minimum withdrawal amount : USD 100<br>Processing time : 3 working days<br>Please close your floating trading before you submit withdrawal<br>MT4 Withdrawal will be credited into CP3 account') ?></font>
+                        <font color="#dc143c">
+                            1. <?php echo __('Minimum withdrawal amount : USD 100') ?><br>
+                            2. <?php echo __('Processing time : 3 working days') ?><br>
+                            3. <?php echo __('Please close your floating trading before you submit withdrawal') ?><br>
+                            4. <?php echo __('MT4 Withdrawal will be credited into CP3 account') ?>
+                        </font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

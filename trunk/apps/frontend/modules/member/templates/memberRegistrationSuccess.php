@@ -5,7 +5,7 @@ $(function() {
     $("#topupForm").validate({
         messages : {
             transactionPassword: {
-                remote: "Security Password is not valid."
+                remote: "<?php echo __("Security Password is not valid")?>"
             }
         },
         rules : {
@@ -176,7 +176,7 @@ $(function() {
                                                                                                                                                                        'ref' => $packageDB->getPrice(),
                                                                                                                                                                        'pid' => $packageDB->getPackageId(),
                                                                                                                                                                   )) . "</td>
-                                                <td align='center'>" . $packageDB->getPackageName() . "</td>
+                                                <td align='center'>" . __($packageDB->getPackageName()) . "</td>
                                                 <td align='center'>" . $packagePrice . "</td>
                                             </tr>";
                                     }
