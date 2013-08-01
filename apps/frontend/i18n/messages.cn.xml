@@ -875,6 +875,13 @@
             <trans-unit><source>Credit To</source><target>存入</target></trans-unit>
             <trans-unit><source>After handling fee</source><target>扣除手续费后</target></trans-unit>
             <trans-unit><source>CP3 Withdrawal Amount</source><target>CP3兑现金额</target></trans-unit>
+            <trans-unit><source>Apply Maxim Trader VISA Debit Card History</source><target>申请Maxim Trader VISA转账卡记录表</target></trans-unit>
+            <trans-unit><source>NRIC / Passport</source><target>身份证 / 护照</target></trans-unit>
+            <trans-unit><source>Upload Proof of Residence and Passport/Photo ID</source><target>上传居住证明和护照/身份证照片</target></trans-unit>
+            <trans-unit><source>Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency</source><target>请上传（1份）身份证/护照副本（1份）居住证明的副本</target></trans-unit>
+            <trans-unit><source>Debit Card application : USD 35</source><target>转账卡申请：35美元</target></trans-unit>
+            <trans-unit><source>Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)</source><target>激活费用：50美元（50美元将被存入到转账卡）</target></trans-unit>
+            <trans-unit><source>The card will be delivered within 30 working days</source><target>该卡将在30个工作日内交付</target></trans-unit>
         </body>
     </file>
 </xliff>
