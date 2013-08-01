@@ -2446,6 +2446,9 @@ class financeActions extends sfActions
         header('Cache-Control: max-age=0');
         $objWriter->save('php://output');*/
 
+        include("PHPExcel.php");
+        include('PHPExcel/Writer/Excel5.php');
+
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $sheet = $objPHPExcel->getActiveSheet();
