@@ -2279,7 +2279,8 @@ class financeActions extends sfActions
         $response->sendHttpHeaders();
 
         $this->xlsBOF();
-        $this->xlsCodepage("UTF-8");
+        //$this->xlsCodepage("UTF-8");
+        $this->xlsCodepage("65001");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
