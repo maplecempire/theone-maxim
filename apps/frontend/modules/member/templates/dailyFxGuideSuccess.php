@@ -3,7 +3,7 @@
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Download Daily FX Guide</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __("Download Daily FX Guide") ?></span></td>
 </tr>
 <tr>
     <td><br>
@@ -39,22 +39,22 @@
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?a=CN&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Chinese)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=CN&q=" . rand()) ?>"><span><?php echo __("Click to DOWNLOAD Daily Fx Guide (Chinese)") ?></span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?a=EN&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (English)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=EN&q=" . rand()) ?>"><span><?php echo __("Click to DOWNLOAD Daily Fx Guide (English)") ?></span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?a=JP&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Japanese)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=JP&q=" . rand()) ?>"><span><?php echo __("Click to DOWNLOAD Daily Fx Guide (Japanese)") ?></span></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="<?php echo url_for("/download/downloadGuide?a=KR&q=" . rand()) ?>"><span>Click to DOWNLOAD Daily Fx Guide (Korean)</span></a>
+                    <a href="<?php echo url_for("/download/downloadGuide?a=KR&q=" . rand()) ?>"><span><?php echo __("Click to DOWNLOAD Daily Fx Guide (Korean)") ?></span></a>
                 </td>
             </tr>
             </tbody>

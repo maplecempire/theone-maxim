@@ -192,6 +192,9 @@ $(function() {
                                 for ($i = 100; $i <= 10000; $i = $i + 100) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
+                                for ($i = 10500; $i <= 19500; $i = $i + 500) {
+                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
+                                }
                                 for ($i = 20000; $i <= 50000; $i = $i + 10000) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
