@@ -140,12 +140,12 @@
                                                                 table += "</colgroup>";
                                                                 table += "<tr class='pbl_header'>";
                                                                 table += "<td></td>";
-                                                                table += "<td>Next Performance Return Date</td>";
-                                                                table += "<td>Package</td>";
-                                                                table += "<td>MT4 Balance</td>";
-                                                                table += "<td>Performance %</td>";
-                                                                table += "<td>Total Profit</td>";
-                                                                table += "<td>Status</td>";
+                                                                table += "<td><?php echo __('Next Performance Return Date')?></td>";
+                                                                table += "<td><?php echo __('Package')?></td>";
+                                                                table += "<td><?php echo __('MT4 Balance')?></td>";
+                                                                table += "<td><?php echo __('Performance')?> %</td>";
+                                                                table += "<td><?php echo __('Total Profit')?></td>";
+                                                                table += "<td><?php echo __('Status')?></td>";
                                                                 table += "</tr>";
 
                                                                 var trStyle = "1";
