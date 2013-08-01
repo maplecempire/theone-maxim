@@ -2279,7 +2279,7 @@ class financeActions extends sfActions
         $response->sendHttpHeaders();
 
         $this->xlsBOF();
-        //$this->xlsCodepage("UTF-8");
+        $this->xlsCodepage("UTF-8");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
@@ -2315,7 +2315,7 @@ class financeActions extends sfActions
                 WHERE 1=1 ";
 
         if ($this->getRequestParameter('statusCode') != "") {
-            $query = " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
         }
 
         if ($this->getRequestParameter('filterUsername') != "") {
@@ -2360,7 +2360,7 @@ class financeActions extends sfActions
             $xlsRow++;
         }
         $this->xlsEOF();
-        exit();
+//        exit();
         //$this->arrs = $arrs;
         return sfView::HEADER_ONLY;
     }
