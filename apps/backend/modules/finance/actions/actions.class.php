@@ -2497,7 +2497,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("M".$xlsRow, $arr['bank_name']);
             $sheet->setCellValue("N".$xlsRow, $arr['bank_branch_name']);
             //$sheet->setCellValue("O".$xlsRow, $arr['bank_acc_no']);
-            $sheet->getActiveSheet()->setCellValueExplicit("O".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit("O".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
 
             $sheet->setCellValue("P".$xlsRow, $arr['bank_holder_name']);
             $sheet->setCellValue("Q".$xlsRow, $arr['bank_swift_code']);
