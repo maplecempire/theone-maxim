@@ -5,7 +5,7 @@ $(function() {
     $("#csForm").validate({
         messages : {
             transactionPassword: {
-                remote: "<?php echo __("Security Password is not valid")?>"
+                remote: "Security Password is not valid."
             }
         },
         rules : {

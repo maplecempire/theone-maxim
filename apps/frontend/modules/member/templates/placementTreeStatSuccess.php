@@ -170,7 +170,7 @@ function reassignDatagridEventAttr(){
     <td><br></td>
 </tr>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Placement Genealogy</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Downline Stats'); ?></span></td>
 </tr>
 <tr>
     <td><br>

@@ -882,6 +882,11 @@
             <trans-unit><source>Debit Card application : USD 35</source><target>转账卡申请：35美元</target></trans-unit>
             <trans-unit><source>Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)</source><target>激活费用：50美元（50美元将被存入到转账卡）</target></trans-unit>
             <trans-unit><source>The card will be delivered within 30 working days</source><target>该卡将在30个工作日内交付</target></trans-unit>
+            <trans-unit><source>Rank</source><target>等级</target></trans-unit>
+            <trans-unit><source>FUND MANAGEMENT</source><target>基金管理</target></trans-unit>
+            <trans-unit><source>Enquiry History</source><target>留言记录表</target></trans-unit>
+            <trans-unit><source>Customer Enquiry</source><target>会员留言</target></trans-unit>
+            <trans-unit><source>Read / Unread</source><target>已读/未读</target></trans-unit>
         </body>
     </file>
 </xliff>
