@@ -212,9 +212,9 @@
                                 <thead>
                                 <tr>
                                     <th>id [hidden]</th>
-                                    <th>Month</th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
+                                    <th><?php echo __('Month') ?></th>
+                                    <th><?php echo __('Description') ?></th>
+                                    <th><?php echo __('Amount') ?></th>
                                 </tr>
                                 <tr>
                                     <td></td>

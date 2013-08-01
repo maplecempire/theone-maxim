@@ -5,7 +5,7 @@
         $("#ecreditForm").validate({
             messages : {
                 transactionPassword: {
-                    remote: "Security Password is not valid."
+                    remote: "<?php echo __("Security Password is not valid")?>"
                 }
             },
             rules : {

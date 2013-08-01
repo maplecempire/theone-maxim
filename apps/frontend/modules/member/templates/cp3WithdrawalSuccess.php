@@ -9,7 +9,7 @@
             $("#withdrawForm").validate({
                 messages : {
                     transactionPassword: {
-                        remote: "Security Password is not valid."
+                        remote: "<?php echo __("Security Password is not valid")?>"
                     }
                 },
                 rules : {
@@ -178,12 +178,12 @@
                     <td>
                         <select name="bankInTo" id="bankInTo">
                             <?php if (Globals::APPLY_DEBITCARD_ENABLE == true) { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>">Maxim Trader VISA DEBIT CARD</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>">Local Bank</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>"><?php echo __('Local Bank Transfer'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
@@ -206,10 +206,10 @@
                         <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
                     </td>
                     <td colspan="1" align="left">
-                        <font color="#dc143c"> <?php echo __('1. Minimum withdrawal amount : USD 100
-                        <br>2. Can only be withdrawn on the first working week of the month
-                        <br>3. Handling fee USD30
-                        <br>4. Processing time : 3-5 working days') ?></font>
+                        <font color="#dc143c">1. <?php echo __('Minimum withdrawal amount : USD 100') ?>
+                        <br>2. <?php echo __('Can only be withdrawn on the first working week of the month') ?>
+                        <br>3. <?php echo __('Handling fee USD30') ?>
+                        <br>4. <?php echo __('Processing time : 3-5 working days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

@@ -126,17 +126,17 @@ class memberActions extends sfActions
                 return $this->redirect('/member/convertCp3ToCp1');
             }*/
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, Globals::YES_Y, null, null, null, null, null, null)) {
-                $this->setFlash('errorMsg', "Convert CP3 To CP1 temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert CP3 To CP1 temporary out of service."));
                 return $this->redirect('/member/convertCp3ToCp1');
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP3");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
                 $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -192,7 +192,7 @@ class memberActions extends sfActions
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             //if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null, null, null, null)) {
-                $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert RP To CP1 temporary out of service."));
                 return $this->redirect('/member/convertRPToCp1');
             }
             /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
@@ -203,10 +203,10 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient RP");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient RP"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
                 $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -261,7 +261,7 @@ class memberActions extends sfActions
             return $this->redirect('/member/summary');
         }
         if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Ezy Cash Card temporary out of service."));
             return $this->redirect('/member/applyEzyCashCard');
         }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -335,7 +335,7 @@ class memberActions extends sfActions
             return $this->redirect('/member/summary');
         }
         if (Globals::APPLY_EZYCASHCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', "Apply Ezy Cash Card temporary out of service.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Ezy Cash Card temporary out of service."));
         }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->distDB = $distDB;
@@ -347,7 +347,7 @@ class memberActions extends sfActions
     public function executeApplyDebitCard()
     {
         if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', "Apply Maxim Trader VISA Debit Card temporary out of service.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of service."));
         }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
@@ -377,7 +377,7 @@ class memberActions extends sfActions
     public function executeDoApplyDebitCard()
     {
         if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', "Apply Maxim Trader VISA Debit Card temporary out of service.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of service."));
             return $this->redirect('/member/applyDebitCard');
         }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -1027,7 +1027,7 @@ class memberActions extends sfActions
 
             } else {
                 if ($amountNeeded > $ledgerEPointBalance) {
-                    $this->setFlash('errorMsg', "In-sufficient CP1 amount");
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                     return $this->redirect('/member/purchasePackageViaTree');
                 }
             }
@@ -1418,7 +1418,7 @@ class memberActions extends sfActions
             }*/
 
             if ($amountNeeded > $ledgerEPointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                 return $this->redirect('/member/memberRegistration');
             }
             $this->selectedPackage = $selectedPackage;
@@ -1528,7 +1528,7 @@ class memberActions extends sfActions
 
         if (strtoupper($this->getRequestParameter('captcha')) == $this->getUser()->getAttribute(Globals::SYSTEM_CAPTCHA_ID)){
     	} else{
-            $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("The CAPTCHA wasn't entered correctly. Go back and try it again."));
             return $this->redirect('/home/login');
     	}
         $userName = $this->getRequestParameter('userName');
@@ -1896,7 +1896,7 @@ class memberActions extends sfActions
         $exist = AppUserPeer::doSelectOne($c);
 
         if ($exist) {
-            $this->setFlash('errorMsg', "User Name already exist.");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("User Name already exist."));
             return $this->redirect('/member/memberRegistration');
         }
 
@@ -4787,7 +4787,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             if ($pos === false) { // note: three equal signs
 
             } else {
-                $this->setFlash('errorMsg', "This function temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("This function temporary out of service."));
                 return $this->redirect('/member/transferEcash');
             }
 
@@ -4911,7 +4911,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, Globals::YES_Y, null, null)) {
-                $this->setFlash('errorMsg', "CP1 Transfer temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP1 Transfer temporary out of service."));
                 return $this->redirect('/member/transferEpoint');
             }
 
@@ -5100,7 +5100,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, Globals::YES_Y, null)) {
-                $this->setFlash('errorMsg', "CP2 Transfer temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP2 Transfer temporary out of service."));
                 return $this->redirect('/member/transferCp2');
             }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -5108,7 +5108,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             if ($pos === false) { // note: three equal signs
 
             } else {
-                $this->setFlash('errorMsg', "This function temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("This function temporary out of service."));
                 return $this->redirect('/member/transferCp2');
             }
 
@@ -5289,7 +5289,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, null, Globals::YES_Y)) {
-                $this->setFlash('errorMsg', "CP3 Transfer temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Transfer temporary out of service."));
                 return $this->redirect('/member/transferCp3');
             }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -5297,7 +5297,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             if ($pos === false) { // note: three equal signs
 
             } else {
-                $this->setFlash('errorMsg', "This function temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("This function temporary out of service."));
                 return $this->redirect('/member/transferCp3');
             }
 
@@ -5473,7 +5473,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
-                $this->setFlash('errorMsg', "Convert RP To CP1 temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert RP To CP1 temporary out of service."));
                 return $this->redirect('/member/convertRPToCp1');
             }
             /*if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
@@ -5638,7 +5638,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
-                $this->setFlash('errorMsg', "Old password is not valid.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old password is not valid."));
             } else {
                 $exist->setUserpassword($this->getRequestParameter('newPassword'));
                 $exist->setKeepPassword($this->getRequestParameter('newPassword'));
@@ -5659,7 +5659,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
-                $this->setFlash('errorMsg', "Old Security password is not valid.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old Security password is not valid."));
             } else {
                 $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
                 $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
@@ -5705,7 +5705,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $distinfo = MlmDistributorPeer::doSelectOne($c);
 
             if (!$distinfo) {
-                $this->setFlash('errorMsg', "Username is not exist.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Username is not exist."));
                 return $this->redirect('/member/sponsorTree');
             }
 
@@ -5827,17 +5827,17 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
-                $this->setFlash('errorMsg', "CP3 Withdrawal temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Withdrawal temporary out of service."));
                 return $this->redirect('/member/cp3Withdrawal');
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP3");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($withdrawAmount > 0) {
                 $tbl_account_ledger = new MlmAccountLedger();
@@ -5902,17 +5902,17 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
-                $this->setFlash('errorMsg', "CP2 Withdrawal temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP2 Withdrawal temporary out of service."));
                 return $this->redirect('/member/ecashWithdrawal');
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP2");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($withdrawAmount > 0) {
                 $tbl_account_ledger = new MlmAccountLedger();
@@ -6006,10 +6006,10 @@ We look forward to your custom in the near future. Should you have any queries, 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } else if (!$this->getRequestParameter('mt4Id')) {
-                $this->setFlash('errorMsg', "Invalid MT4 ID.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID."));
 
             } else {
                 $paymentType = $this->getRequestParameter('paymentType');
@@ -6104,13 +6104,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($pointNeeded > $ledgerEpointBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP1");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($mt4UserName == "") {
-                $this->setFlash('errorMsg', "Invalid MT4 ID.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID."));
 
             } else {
                 $tbl_account_ledger = new MlmAccountLedger();
@@ -7063,17 +7063,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/convertEcashToEpoint');
             }*/
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null, null, null, null)) {
-                $this->setFlash('errorMsg', "Convert CP2 To CP1 temporary out of service.");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert CP2 To CP1 temporary out of service."));
                 return $this->redirect('/member/convertEcashToEpoint');
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', "In-sufficient CP2");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
                 $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -7179,13 +7179,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             }*/
 
             if ($amountNeeded > $ledgerECashBalance && $paymentType == "ecash") {
-                $this->setFlash('errorMsg', "In-sufficient MT4 Credit amount");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient MT4 Credit amount"));
                 return $this->redirect('/member/packageUpgrade');
             } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
-                $this->setFlash('errorMsg', "In-sufficient CP1 amount");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                 return $this->redirect('/member/packageUpgrade');
             } else if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', "Invalid Security password");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
                 return $this->redirect('/member/packageUpgrade');
             } else {
                 $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);

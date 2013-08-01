@@ -12,7 +12,7 @@
         $("#withdrawForm").validate({
                     messages : {
                         transactionPassword: {
-                            remote: "Security Password is not valid."
+                            remote: "<?php echo __("Security Password is not valid")?>"
                         }
                     },
                     rules : {
@@ -172,7 +172,7 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
-                        <font color="#dc143c"><?php echo __('Note : MT4 Fund Reload will take 2 business days. ') ?></font>
+                        <font color="#dc143c"><?php echo __('Note : MT4 Fund Reload will take 2 business days') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

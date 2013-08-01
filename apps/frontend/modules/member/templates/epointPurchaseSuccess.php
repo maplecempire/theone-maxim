@@ -17,7 +17,7 @@ $(function() {
     $("#transferForm").validate({
         messages : {
             transactionPassword: {
-                remote: "Security Password is not valid."
+                remote: "<?php echo __("Security Password is not valid")?>"
             }
         },
         rules : {
@@ -288,7 +288,7 @@ $(function() {
                                 , image_src : oObj.aData[6]
                                 , bank_id : oObj.aData[7]
                             });
-                            return "<img src='" + oObj.aData[6] + "' style='display:none'><a class='detailLink' ref='" + oObj.aData[0] + "' href='#'>Detail</a>";
+                            return "<img src='" + oObj.aData[6] + "' style='display:none'><a class='detailLink' ref='" + oObj.aData[0] + "' href='#'><?php echo __("Details"); ?></a>";
                         }},
                         { "sName" : "bank_id", "bVisible" : false,  "bSortable": true}
                     ]
@@ -311,7 +311,7 @@ $(function() {
                 $("#uploadForm").validate({
                     messages : {
                         transactionPassword: {
-                            remote: "Security Password is not valid."
+                            remote: "<?php echo __("Security Password is not valid")?>"
                         }
                     },
                     rules : {

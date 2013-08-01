@@ -672,7 +672,7 @@
             <trans-unit><source>Commission Details</source><target>奖金收益</target></trans-unit>
             <trans-unit><source>Commission Categories</source><target>奖金总结</target></trans-unit>
             <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4户口没有余额。</target></trans-unit>
-            <trans-unit><source>Direct Referral Bonus</source><target>直推奖金</target></trans-unit>
+            <trans-unit><source>Direct Referrer Bonus</source><target>直推奖金</target></trans-unit>
             <trans-unit><source>Pairing Bonus</source><target>配对奖金</target></trans-unit>
             <trans-unit><source>Generation Bonus</source><target>代数奖金</target></trans-unit>
             <trans-unit><source>Pips Rebate</source><target>点数回赠</target></trans-unit>
@@ -846,6 +846,35 @@
             <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>点击下载基金管理报告2013年6月</target></trans-unit>
             <trans-unit><source>Fund Management Contract</source><target>基金管理合同</target></trans-unit>
             <trans-unit><source>Download PDF</source><target>下载PDF</target></trans-unit>
+            <trans-unit><source>Convert CP3 To CP1</source><target>CP3转换为CP1</target></trans-unit>
+            <trans-unit><source>CP2 Transfer</source><target>CP2转让</target></trans-unit>
+            <trans-unit><source>CP3 Transfer</source><target>CP3转让</target></trans-unit>
+            <trans-unit><source>Transfer CP2 Amount</source><target>转让CP2金额</target></trans-unit>
+            <trans-unit><source>Transfer CP3 Amount</source><target>转让CP3金额</target></trans-unit>
+            <trans-unit><source>CP2 Balance</source><target>CP2金额</target></trans-unit>
+            <trans-unit><source>CP3 Balance</source><target>CP3金额</target></trans-unit>
+            <trans-unit><source>Security Password is not valid</source><target>交易密码不正确</target></trans-unit>
+            <trans-unit><source>Upgrade</source><target>升级</target></trans-unit>
+            <trans-unit><source>In-sufficient CP1 amount</source><target>CP1数量不足</target></trans-unit>
+            <trans-unit><source>Reload MT4 Fund Status</source><target>充值MT4基金状态</target></trans-unit>
+            <trans-unit><source>Note : MT4 Fund Reload will take 2 business days</source><target>注: 充值MT4基金处理需时2个工作日</target></trans-unit>
+            <trans-unit><source>Sub Total</source><target>总</target></trans-unit>
+            <trans-unit><source>Pips Rebate Detail</source><target>点数回赠明细</target></trans-unit>
+            <trans-unit><source>Month</source><target>月份</target></trans-unit>
+            <trans-unit><source>Description</source><target>描述</target></trans-unit>
+            <trans-unit><source>Minimum withdrawal amount : USD 100</source><target>兑现数额不能少过100美金</target></trans-unit>
+            <trans-unit><source>Processing time : 3 working days</source><target>处理时间：3个工作日</target></trans-unit>
+            <trans-unit><source>Processing time : 3-5 working days</source><target>处理时间：3-5个工作日</target></trans-unit>
+            <trans-unit><source>Please close your floating trading before you submit withdrawal</source><target>您提交兑现之前，请关闭您的浮动交易</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal will be credited into CP3 account</source><target>MT4提款将存入CP3帐户</target></trans-unit>
+            <trans-unit><source>Handling fee USD60 or 5% whichever is higher</source><target>手续费60美元或5%（以较高者为准）</target></trans-unit>
+            <trans-unit><source>Handling fee USD30</source><target>手续费30美元</target></trans-unit>
+            <trans-unit><source>Local Bank Transfer</source><target>银行转账</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal</source><target>CP3兑现</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal Status</source><target>CP3兑现状态</target></trans-unit>
+            <trans-unit><source>Credit To</source><target>存入</target></trans-unit>
+            <trans-unit><source>After handling fee</source><target>扣除手续费后</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal Amount</source><target>CP3兑现金额</target></trans-unit>
         </body>
     </file>
 </xliff>
