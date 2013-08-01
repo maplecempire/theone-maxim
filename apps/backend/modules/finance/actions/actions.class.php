@@ -2389,7 +2389,7 @@ class financeActions extends sfActions
 
         $this->xlsBOF();
         //$this->xlsCodepage("UTF-8");
-        //$this->xlsCodepage("65001");
+        $this->xlsCodepage("65001");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
@@ -2449,8 +2449,7 @@ class financeActions extends sfActions
 
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
-            //$this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, mb_convert_encoding($arr['full_name'],'utf-16','utf-8'));
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['_ecash']);
