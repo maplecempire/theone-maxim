@@ -391,7 +391,6 @@
             <trans-unit><source>The Consortium</source><target>アライアンス</target></trans-unit>
             <trans-unit><source>Fund Management</source><target>ファンドマネジメント</target></trans-unit>
             <trans-unit><source>FUND MANAGEMENT</source><target>ファンドマネジメント</target></trans-unit>
-            <trans-unit><source>Fund Management Contract</source><target>ファンドマネジメント契約</target></trans-unit>
             <trans-unit><source>MaximTrade Executor</source><target>马胜金融执行者</target></trans-unit>
             <trans-unit><source>MaximTrade™ Executor</source><target>Maximtrade™ Executor</target></trans-unit>
             <trans-unit><source>Executor</source><target>執行者</target></trans-unit>
@@ -846,6 +845,58 @@
             <trans-unit><source>Forget Password</source><target>パスワードを忘れる</target></trans-unit>
             <trans-unit><source>Request Password</source><target>リクエストパスワード</target></trans-unit>
             <trans-unit><source>Click to DOWNLOAD Fund Management Report June 2013</source><target>2013年6月ファンド管理レポートをダウンロードするにはクリック</target></trans-unit>
+            <trans-unit><source>Fund Management Contract</source><target>ファンドマネジメント契約</target></trans-unit>
+            <trans-unit><source>Download PDF</source><target>PDFをダウンロード</target></trans-unit>
+            <trans-unit><source>Convert CP3 To CP1</source><target>変換CP3へCP1</target></trans-unit>
+            <trans-unit><source>CP2 Transfer</source><target>CP2転送</target></trans-unit>
+            <trans-unit><source>CP3 Transfer</source><target>CP3転送</target></trans-unit>
+            <trans-unit><source>Transfer CP2 Amount</source><target>転送CP2額</target></trans-unit>
+            <trans-unit><source>Transfer CP3 Amount</source><target>転送CP3額</target></trans-unit>
+            <trans-unit><source>CP2 Balance</source><target>CP2量</target></trans-unit>
+            <trans-unit><source>CP3 Balance</source><target>CP3量</target></trans-unit>
+            <trans-unit><source>Security Password is not valid</source><target>セキュリティパスワードは有効ではありません</target></trans-unit>
+            <trans-unit><source>Upgrade</source><target>アップグレード</target></trans-unit>
+            <trans-unit><source>In-sufficient CP1 amount</source><target>イン十分CP1量</target></trans-unit>
+            <trans-unit><source>Reload MT4 Fund Status</source><target>MT4基金ステータスをリロード</target></trans-unit>
+            <trans-unit><source>Note : MT4 Fund Reload will take 2 business days</source><target>注：MT4ファンドリロードは、2営業日かかります</target></trans-unit>
+            <trans-unit><source>Sub Total</source><target>合計</target></trans-unit>
+            <trans-unit><source>Pips Rebate Detail</source><target>ピップリベートの詳細</target></trans-unit>
+            <trans-unit><source>Month</source><target>月</target></trans-unit>
+            <trans-unit><source>Description</source><target>説明</target></trans-unit>
+            <trans-unit><source>Minimum withdrawal amount : USD 100</source><target>最小引き出し額：100ドル（USD）</target></trans-unit>
+            <trans-unit><source>Processing time : 3 working days</source><target>最小引き出し額：100ドル（USD）</target></trans-unit>
+            <trans-unit><source>Processing time : 3-5 working days</source><target>処理時間:3-5営業日</target></trans-unit>
+            <trans-unit><source>Please close your floating trading before you submit withdrawal</source><target>あなたは撤退を提出する前に、浮動取引を閉じてください</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal will be credited into CP3 account</source><target>MT4の撤退はCP3口座に入金されます</target></trans-unit>
+            <trans-unit><source>Handling fee USD60 or 5% whichever is higher</source><target>手数料のいずれか高い方USD60または5％の取り扱い</target></trans-unit>
+            <trans-unit><source>Handling fee USD30</source><target>料金USD30の取り扱い</target></trans-unit>
+            <trans-unit><source>Local Bank Transfer</source><target>地元の銀行振込</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal</source><target>CP3撤退</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal Status</source><target>CP3撤退の状況</target></trans-unit>
+            <trans-unit><source>Credit To</source><target>への信用</target></trans-unit>
+            <trans-unit><source>After handling fee</source><target>手数料の取り扱い後</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal Amount</source><target>CP3引き出し額</target></trans-unit>
+            <trans-unit><source>Apply Maxim Trader VISA Debit Card History</source><target>マキシムトレーダーVISAデビットカード履歴を適用</target></trans-unit>
+            <trans-unit><source>NRIC / Passport</source><target>NRIC/パスポート</target></trans-unit>
+            <trans-unit><source>Upload Proof of Residence and Passport/Photo ID</source><target>レジデンスとパスポート/写真付きIDの証明をアップロード</target></trans-unit>
+            <trans-unit><source>Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency</source><target>親切にID /パスポート（1）コピーと居住の証明（1）コピーをアップロードする</target></trans-unit>
+            <trans-unit><source>Debit Card application : USD 35</source><target>デビットカードアプリケーション：USD35</target></trans-unit>
+            <trans-unit><source>Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)</source><target>料金をアクティブ：USD50（USD50がデビットカードにロードされます）</target></trans-unit>
+            <trans-unit><source>The card will be delivered within 30 working days</source><target>カードは、30営業日以内に配信されます</target></trans-unit>
+            <trans-unit><source>Rank</source><target>ランク</target></trans-unit>
+            <trans-unit><source>FUND MANAGEMENT</source><target>ファンドマネジメント</target></trans-unit>
+            <trans-unit><source>Enquiry History</source><target>お問い合わせ履歴</target></trans-unit>
+            <trans-unit><source>Customer Enquiry</source><target>お客様のお問い合わせ</target></trans-unit>
+            <trans-unit><source>Read / Unread</source><target>リード/未読</target></trans-unit>
+            <trans-unit><source>Unrealized Profit</source><target>未実現利益</target></trans-unit>
+            <trans-unit><source>Realized Profit</source><target>実現利益</target></trans-unit>
+            <trans-unit><source>Private Investment Agreement</source><target>民間投資協定</target></trans-unit>
+            <trans-unit><source>Next Performance Return Date</source><target>次にパフォーマンス返却年月日</target></trans-unit>
+            <trans-unit><source>MT4 Balance</source><target>MT4バランス</target></trans-unit>
+            <trans-unit><source>Performance</source><target>パフォーマンス</target></trans-unit>
+            <trans-unit><source>Total Profit</source><target>利益総額</target></trans-unit>
+            <trans-unit><source>Charges (USD)</source><target>料金（USD）</target></trans-unit>
+            <trans-unit><source>Pay By</source><target>で支払う</target></trans-unit>
         </body>
     </file>
 </xliff>
