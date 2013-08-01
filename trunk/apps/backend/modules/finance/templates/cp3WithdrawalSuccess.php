@@ -57,6 +57,7 @@ $(function(){
             , { "sName" : "dist.email",  "bSortable": true}
             , { "sName" : "dist.contact",  "bSortable": true}
             , { "sName" : "leader_code",  "bSortable": true}
+            , { "sName" : "withdraw.bank_in_to",  "bSortable": true}
             , { "sName" : "dist.bank_name",  "bSortable": true}
             , { "sName" : "dist.bank_branch_name",  "bSortable": true}
             , { "sName" : "dist.bank_acc_no",  "bSortable": true}
@@ -65,6 +66,7 @@ $(function(){
             , { "sName" : "dist.visa_debit_card",  "bSortable": true}
             , { "sName" : "pack.package_name",  "bSortable": true}
             , { "sName" : "withdraw.remarks",  "bSortable": true}
+            , { "sName" : "dist.country",  "bSortable": true}
         ]
     });
     $("#btnUpdate").button({
@@ -95,7 +97,6 @@ function reassignDatagridEventAttr(){
         $("#dgAddPanel").dialog("open");
 	});
 }
-
 </script>
 
 <?php echo form_tag('finance/cp3Withdrawal', 'id=loginForm') ?>
@@ -139,6 +140,7 @@ function reassignDatagridEventAttr(){
                             <th>Email</th>
                             <th>Contact No</th>
                             <th>Leader Code</th>
+                            <th>Credit To</th>
                             <th>Bank Name</th>
                             <th>Bank Branch Name</th>
                             <th>Bank Account No</th>
@@ -147,6 +149,7 @@ function reassignDatagridEventAttr(){
                             <th>Visa Debit Card</th>
                             <th>Rank Code</th>
                             <th>Remarks</th>
+                            <th>Country</th>
                         </tr>
                         <tr>
                             <td></td>
@@ -170,6 +173,8 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td></td>
                             <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

@@ -2386,7 +2386,13 @@ class financeActions extends sfActions
 
         $response->sendHttpHeaders();
 
-        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,pack.package_name,withdraw.remarks  FROM mlm_cp3_withdraw withdraw
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
+,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
+,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
 
@@ -2467,14 +2473,16 @@ class financeActions extends sfActions
         $sheet->setCellValue("J".$xlsRow, "Email");
         $sheet->setCellValue("K".$xlsRow, "Contact No");
         $sheet->setCellValue("L".$xlsRow, "Leader Code");
-        $sheet->setCellValue("M".$xlsRow, "Bank Name");
-        $sheet->setCellValue("N".$xlsRow, "Bank Branch Name");
-        $sheet->setCellValue("O".$xlsRow, "Bank Account No");
-        $sheet->setCellValue("P".$xlsRow, "Bank Holder Name");
-        $sheet->setCellValue("Q".$xlsRow, "Bank Swift Code");
-        $sheet->setCellValue("R".$xlsRow, "Visa Debit Card");
-        $sheet->setCellValue("S".$xlsRow, "Rank Code");
-        $sheet->setCellValue("T".$xlsRow, "Remarks");
+        $sheet->setCellValue("M".$xlsRow, "Credit To");
+        $sheet->setCellValue("N".$xlsRow, "Bank Name");
+        $sheet->setCellValue("O".$xlsRow, "Bank Branch Name");
+        $sheet->setCellValue("P".$xlsRow, "Bank Account No");
+        $sheet->setCellValue("Q".$xlsRow, "Bank Holder Name");
+        $sheet->setCellValue("R".$xlsRow, "Bank Swift Code");
+        $sheet->setCellValue("S".$xlsRow, "Visa Debit Card");
+        $sheet->setCellValue("T".$xlsRow, "Rank Code");
+        $sheet->setCellValue("U".$xlsRow, "Remarks");
+        $sheet->setCellValue("V".$xlsRow, "Country");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -2494,16 +2502,18 @@ class financeActions extends sfActions
             $sheet->setCellValue("J".$xlsRow, $arr['email']);
             $sheet->setCellValue("K".$xlsRow, $arr['contact']);
             $sheet->setCellValue("L".$xlsRow, $arr['leader_code']);
-            $sheet->setCellValue("M".$xlsRow, $arr['bank_name']);
-            $sheet->setCellValue("N".$xlsRow, $arr['bank_branch_name']);
+            $sheet->setCellValue("M".$xlsRow, $arr['bank_in_to']);
+            $sheet->setCellValue("N".$xlsRow, $arr['bank_name']);
+            $sheet->setCellValue("O".$xlsRow, $arr['bank_branch_name']);
             //$sheet->setCellValue("O".$xlsRow, $arr['bank_acc_no']);
-            $sheet->setCellValueExplicit("O".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit("P".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
 
-            $sheet->setCellValue("P".$xlsRow, $arr['bank_holder_name']);
-            $sheet->setCellValue("Q".$xlsRow, $arr['bank_swift_code']);
-            $sheet->setCellValue("R".$xlsRow, $arr['visa_debit_card']);
-            $sheet->setCellValue("S".$xlsRow, $arr['package_name']);
-            $sheet->setCellValue("T".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
+            $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
+            $sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
+            $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("V".$xlsRow, $arr['country']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
