@@ -2279,6 +2279,7 @@ class financeActions extends sfActions
         $response->sendHttpHeaders();
 
         $this->xlsBOF();
+        $this->xlsCodepage("UTF-8");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
@@ -2366,6 +2367,15 @@ class financeActions extends sfActions
     /* ****************************
      *  excel start ~
      * *****************************/
+    function xlsCodepage($codepage) {
+        $record    = 0x0042;    // Codepage Record identifier
+        $length    = 0x0002;    // Number of bytes to follow
+
+        $header    = pack('vv', $record, $length);
+        $data      = pack('v',  $codepage);
+
+        echo $header , $data;
+    }
     function xlsBOF()
     {
         echo pack("ssssss", 0x809, 0x8, 0x0, 0x10, 0x0, 0x0);
