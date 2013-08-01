@@ -1721,6 +1721,7 @@ class financeListActions extends sfActions
                 $resultArr['email'] == null ? "" : $resultArr['email'],
                 $resultArr['contact'] == null ? "" : $resultArr['contact'],
                 $resultArr['leader_code'] == null ? "" : $resultArr['leader_code'],
+                $resultArr['bank_in_to'] == null ? "" : $resultArr['bank_in_to'],
                 $resultArr['bank_name'] == null ? "" : $resultArr['bank_name'],
                 $resultArr['bank_branch_name'] == null ? "" : $resultArr['bank_branch_name'],
                 $resultArr['bank_acc_no'] == null ? "" : $resultArr['bank_acc_no'],
@@ -1728,7 +1729,8 @@ class financeListActions extends sfActions
                 $resultArr['bank_swift_code'] == null ? "" : $resultArr['bank_swift_code'],
                 $resultArr['visa_debit_card'] == null ? "" : $resultArr['visa_debit_card'],
                 $resultArr['package_name'] == null ? "" : $resultArr['package_name'],
-                $resultArr['remarks'] == null ? "" : $resultArr['remarks']
+                $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
+                $resultArr['country'] == null ? "" : $resultArr['country']
             );
         }
         $output = array(

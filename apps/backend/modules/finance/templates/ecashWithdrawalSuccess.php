@@ -60,6 +60,7 @@ $(function(){
             , { "sName" : "dist.bank_holder_name",  "bSortable": true}
             , { "sName" : "dist.rank_code",  "bSortable": true}
             , { "sName" : "withdraw.remarks",  "bSortable": true}
+            , { "sName" : "dist.country",  "bSortable": true}
         ]
     });
     $("#btnUpdate").button({
@@ -130,6 +131,7 @@ function reassignDatagridEventAttr(){
                             <th>Bank Holder Name</th>
                             <th>Rank Code</th>
                             <th>Remarks</th>
+                            <th>country</th>
                         </tr>
                         <tr>
                             <td></td>
@@ -148,6 +150,7 @@ function reassignDatagridEventAttr(){
                                     <option value="PAID">PAID</option>
                                 </select>
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
