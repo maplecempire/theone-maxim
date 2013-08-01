@@ -894,6 +894,8 @@
             <trans-unit><source>MT4 Balance</source><target>MT4余额</target></trans-unit>
             <trans-unit><source>Performance</source><target>表现</target></trans-unit>
             <trans-unit><source>Total Profit</source><target>利润总额</target></trans-unit>
+            <trans-unit><source>Charges (USD)</source><target>收费（美元）</target></trans-unit>
+            <trans-unit><source>Pay By</source><target>支付方式</target></trans-unit>
         </body>
     </file>
 </xliff>
