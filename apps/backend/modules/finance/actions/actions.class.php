@@ -2274,13 +2274,16 @@ class financeActions extends sfActions
         $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
         $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
         $response->setHttpHeader('Content-Type', 'application/download', TRUE);
+        $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
         $response->setHttpHeader('Content-Disposition', 'attachment; filename=withdrawal_list.xls', TRUE);
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
+
         $response->sendHttpHeaders();
 
         $this->xlsBOF();
         //$this->xlsCodepage("UTF-8");
-        $this->xlsCodepage("65001");
+        //$this->xlsCodepage("65001");
         $columnIdx = 0;
         $this->xlsWriteLabel(0, $columnIdx++, "ID");
         $this->xlsWriteLabel(0, $columnIdx++, "Member ID");
@@ -2338,26 +2341,26 @@ class financeActions extends sfActions
             $arrs[] = $arr;
             $columnIdx = 0;
 
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['_ecash']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['status_code']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['created_on']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['ic']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['email']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['contact']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['leader_code']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_name']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_branch_name']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_acc_no']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_holder_name']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_swift_code']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['visa_debit_card']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['package_name']);
-//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['_ecash']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['status_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['created_on']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['ic']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['email']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['contact']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['leader_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_branch_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_acc_no']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_holder_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['bank_swift_code']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['visa_debit_card']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['package_name']);
+            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['remarks']);
             $xlsRow++;
         }
         $this->xlsEOF();
