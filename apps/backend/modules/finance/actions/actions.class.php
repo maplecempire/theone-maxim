@@ -2341,8 +2341,8 @@ class financeActions extends sfActions
             $arrs[] = $arr;
             $columnIdx = 0;
 
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
-            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
+//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['withdraw_id']);
+//            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['distributor_code']);
             $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['full_name']);
 //            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['deduct']);
 //            $this->xlsWriteLabel($xlsRow, $columnIdx++, $arr['amount']);
@@ -2366,6 +2366,7 @@ class financeActions extends sfActions
         $this->xlsEOF();
 //        exit();
         //$this->arrs = $arrs;
+        echo "\xEF\xBB\xBF"; // UTF-8 BOM
         return sfView::HEADER_ONLY;
     }
     /* ****************************
