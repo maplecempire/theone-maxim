@@ -388,13 +388,15 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td colspan="2" align="center">
+                    <td colspan="1" align="right" valign="top">
+                        <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
+                    </td>
+                    <td colspan="1" align="left">
                         <font color="#dc143c">
-                            <?php echo __('Note: Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?><br>
-                            <?php echo __('Debit Card application : USD 35') ?><br>
-                            <?php echo __('Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)') ?><br>
-                            <?php echo __('The card will be delivered within 30 working days') ?>
-                        </font>
+                        1. <?php echo __('Kindly upload (1) copy of ID/Passport and (1) copy of proof of residency') ?><br>
+                        2. <?php echo __('Debit Card application : USD 35') ?><br>
+                        3. <?php echo __('Activate Charges : USD 50 (USD 50 will be loaded into the Debit Card)') ?><br>
+                        4. <?php echo __('The card will be delivered within 30 working days') ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
