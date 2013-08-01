@@ -2511,7 +2511,8 @@ FROM mlm_cp3_withdraw withdraw
 
             $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
             $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
-            $sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            //$sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            $sheet->setCellValueExplicit("S".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
             $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
             $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
             $sheet->setCellValue("V".$xlsRow, $arr['country']);
@@ -2668,7 +2669,8 @@ FROM mlm_ecash_withdraw withdraw
 
             $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
             $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
-            $sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            //$sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
+            $sheet->setCellValueExplicit("S".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
             $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
             $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
             $sheet->setCellValue("V".$xlsRow, $arr['country']);
