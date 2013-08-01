@@ -887,6 +887,13 @@
             <trans-unit><source>Enquiry History</source><target>留言记录表</target></trans-unit>
             <trans-unit><source>Customer Enquiry</source><target>会员留言</target></trans-unit>
             <trans-unit><source>Read / Unread</source><target>已读/未读</target></trans-unit>
+            <trans-unit><source>Unrealized Profit</source><target>未实现利润</target></trans-unit>
+            <trans-unit><source>Realized Profit</source><target>实现利润</target></trans-unit>
+            <trans-unit><source>Private Investment Agreement</source><target>私人投资协议</target></trans-unit>
+            <trans-unit><source>Next Performance Return Date</source><target>下一步表现回报日期</target></trans-unit>
+            <trans-unit><source>MT4 Balance</source><target>MT4余额</target></trans-unit>
+            <trans-unit><source>Performance</source><target>表现</target></trans-unit>
+            <trans-unit><source>Total Profit</source><target>利润总额</target></trans-unit>
         </body>
     </file>
 </xliff>
