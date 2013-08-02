@@ -20,10 +20,10 @@ if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) 
             href="<?php echo url_for("/home")?>"><?php echo __('Home') ?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
     </li>
-    <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
-        <a href="<?php echo url_for("/home/company")?>"><?php echo __('The Consortium') ?></a>
+    <!--<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
+        <a href="<?php /*echo url_for("/home/company")*/?>"><?php /*echo __('The Consortium') */?></a>
         <div class="hr2" style="margin-bottom: 0px; margin-top: 0px; margin:auto; width:150px; float: none;"></div>
-    </li>
+    </li>-->
     <!--<li id="menu-item-156"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a
             href="<?php /*echo url_for("/home/investment")*/?>"><?php /*echo __('Fund Management') */?></a>
