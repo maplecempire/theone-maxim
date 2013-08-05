@@ -24,6 +24,19 @@ class downloadActions extends sfActions
 
         return sfView::NONE;
     }
+    public function executeInvitation()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/jpg');
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=invitation.jpg', TRUE);
+        $response->sendHttpHeaders();
+        readfile(sfConfig::get('sf_upload_dir')."/activities/INVITATION.jpg");
+
+        return sfView::NONE;
+    }
     public function executePrivateInvestmentAgreementContract()
     {
         $mt4Id = $this->getRequestParameter('q');

@@ -181,6 +181,30 @@ $culture = $sf_user->getCulture();
     <div id="page">
         <div id="content">
 
+        <script type="text/javascript">
+        $(document).ready(function() {
+            /*
+             *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+             */
+            $('.fancybox-thumbs').fancybox({
+                prevEffect : 'none',
+                nextEffect : 'none',
+
+                closeBtn  : false,
+                arrows    : false,
+                nextClick : true,
+                "autoScale": false,
+                 // if fancybox 2.x
+                fitToView: false,
+                helpers : {
+                    thumbs : {
+                        width  : 50,
+                        height : 50
+                    }
+                }
+            });
+        });
+        </script>
 
             <div id="feedBody">
                 <div id="feedTitle">
@@ -189,6 +213,43 @@ $culture = $sf_user->getCulture();
                     </div>
                 </div>
                 <div id="feedContent">
+                    <a href="#">
+                        <?php if ($culture == "cn") {  ?>
+                        <div class="poptitle"><h3>国际金融交流会(IME)澳门 2013</h3><br>
+                        <?php } else if ($culture == "kr") {   ?>
+                        <div class="poptitle"><h3>첫번째 인터내셔날 멤버스 교환 (IME) 2013</h3><br>
+                        <?php } else if ($culture == "jp") {   ?>
+                        <div class="poptitle"><h3>国際金融交流会(IME) in マカオ 2013</h3><br>
+                        <?php } else {  ?>
+                        <div class="poptitle"><h3>INAUGURAL INTERNATIONAL MEMBERS EXCHANGE (IME) 2013</h3><br>
+                        <?php }   ?>
+                    </div>
+                    </a>
+                    <br>
+                    <?php if ($culture == "cn") {  ?>
+                    <br>马胜以无尚荣幸地欢迎各位亲爱的伙伴与尊贵的嘉宾们参加此次国际金融交流盛会！我们会为您奉上来自世界一流的金融大师、顶尖的行业专家以及著名的激励演讲名师带来各式讲座与思想交流！如果您想真正打造自己的国际视野并建立国际事业，这将是一个千载难逢的机会！您可以与800多位来自世界不同国家与地区的领导，并与您拥有一致目标的伙伴们增进互动、交流思想！非凡体验，不可错失！
+                    <br><br><font color="red" style="font-weight: bold; font-size: 16px">我们与您相约在澳门！</font>
+                    <?php } else if ($culture == "kr") {  ?>
+                    큰 기쁨으로 이 엄청남 컨퍼런스와 미팅을 찾아오신 맥심의 모든 멤버들과 손님들을 환영합니다.  오신 모든 분들을 위하여 최고의 금융전문가, 업계 전문가와 최고의 동기부여 강사들을 자랑스러움을 가지고 모셨습니다.  진심으로 글로벌 비즈니스의 성공을 원하신다면 IME로 오십시오.  오셔서 전세계에서 모인 800여명의 같은 생각을 갖고 계신 회원들, 친구들, 손님들과 아이디어를 교환하시고, 관계를 만드시고, 시너지를 개발하십시오.… 절대로 놓쳐서는 안 되는 놀라운 경험이 될 것입니다.
+                    <br><br><font color="red" style="font-weight: bold; font-size: 16px">마카오에서 뵙기를 바랍니다.</font>
+                    <?php } else if ($culture == "jp") {  ?>
+                    我々マッシムトレーダーはパートナーや御来賓が国際金融交流イベントに参加することを、心より歓迎しております。今回の交流会において、世界トップクラスの金融専門家や業界エリート、および有名なファシリテーター講師を招待し、多彩のセミナーを開いていただき、思考交流のチャンスを提供致します。あなたが本当に自分自身の国際的な視点を構築し、国際的なキャリアを確立したいなら、今回の交流会は絶好のチャンスになります。800人の世界各地から来た指導者や同じ目標を持つ仲間たちと、連携を促進し、意見を交換することができます！特別な体験なので、是非見逃すことなく。
+                    <br><br><font color="red" style="font-weight: bold; font-size: 16px">マカオでお会いしましょう！</font>
+                    <?php } else {  ?>
+                    <br>With the greatest of pleasure, we welcome members and guests of Maxim to this fabulous conference and meeting of minds. Proudly, we bring you the best Financial Gurus, Industry Experts and Motivation Speaker Extraordinaire. Come to IME if you want to build for yourself a truly successful global business. Come exchange ideas, foster relationships and develop synergy with over 800 like-minded members, friends and guests from around the world……
+                    <br><br><font color="red" style="font-weight: bold; font-size: 16px">An amazing experience NOT to be MISSED.</font>
+                    <?php }   ?>
+
+                    <p>
+                        <a class="fancybox-thumbs" data-fancybox-group="thumb" href="/uploads/activities/INVITATION.jpg"><img src="/uploads/activities/INVITATION.jpg" alt="" style="height: 100px;"/></a>
+                    </p>
+                    <a href="<?php echo url_for("/download/invitation")?>"><?php echo __("Download")?></a>
+                    <div class="news_date">
+                    Posted on 4 August 2013
+                    </div>
+
+                    <div class="hr"></div>
+
                     <a href="#">
                         <?php if ($culture == "cn") {  ?>
                         <div class="poptitle"><h3>马胜金融讲座</h3><br>
@@ -213,7 +274,7 @@ $culture = $sf_user->getCulture();
                     <br>Limited seat!!!
                     <?php }   ?>
                     <div class="news_date">
-                    18 July 2013
+                    Posted on 18 July 2013
                     </div>
 
                     <div class="hr"></div>
@@ -234,7 +295,7 @@ $culture = $sf_user->getCulture();
                     <br><br>
                     <br>Pledge ticket before 14July @ 5pm Ms. Vicky  01111112616
                     <div class="news_date">
-                    12 June 2013
+                    Posted on 12 June 2013
                     </div>
 
                     <div class="hr"></div>
@@ -259,7 +320,7 @@ $culture = $sf_user->getCulture();
                     <br>Pledge ticket before 15July @ 5pm Ms. Jennifer  +60163228282
                     <br>
                     <div class="news_date">
-                    10 July 2013
+                    Posted on 10 July 2013
                     </div>
 
                     <div class="hr"></div>
@@ -308,7 +369,7 @@ $culture = $sf_user->getCulture();
                     <?php } ?>
                     <br>
                     <div class="news_date">
-                    9 July 2013
+                    Posted on 9 July 2013
                     </div>
 
                     <div class="hr"></div>
@@ -339,7 +400,7 @@ $culture = $sf_user->getCulture();
                     <br><br>Pls pledge your group seat with Miss Fion 0174000830 by 10 July before 5pm. Limited seat!!!
                     <br>
                     <div class="news_date">
-                    9 July 2013
+                    Posted on 9 July 2013
                     </div>
 
                     <div class="hr"></div>
@@ -386,7 +447,7 @@ will elaborate how the world and economic environments have changed, and are in 
                     <?php } ?>
                     <br>
                     <div class="news_date">
-                    26 June 2013
+                    Posted on 26 June 2013
                     </div>
 
                     <div class="hr"></div>
@@ -445,7 +506,7 @@ will elaborate how the world and economic environments have changed, and are in 
 
                     <br>
                     <div class="news_date">
-                    1 June 2013
+                    Posted on 1 June 2013
                     </div>
 
 
@@ -477,7 +538,7 @@ will elaborate how the world and economic environments have changed, and are in 
 
                     <br>
                     <div class="news_date">
-                    2 June 2013
+                    Posted on 2 June 2013
                     </div>
 
 
