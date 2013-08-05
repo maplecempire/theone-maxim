@@ -895,6 +895,31 @@ $tempDisable = true;
 if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, true) == true) {
     $sf_user->setAttribute(Globals::FIRST_TIME_POP_UP, false)
 ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    /*
+     *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+     */
+    $('.fancybox-fittoview').fancybox({
+        prevEffect : 'none',
+        nextEffect : 'none',
+
+        closeBtn  : false,
+        arrows    : false,
+        nextClick : true,
+        "autoScale": false,
+         // if fancybox 2.x
+        fitToView: false,
+        helpers : {
+            thumbs : {
+                width  : 50,
+                height : 50
+            }
+        }
+    });
+});
+</script>
 <div style="position: absolute; display: none;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
@@ -912,11 +937,40 @@ if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, t
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a>
                 </td>
             </tr>
         </table>
         <div id="page_1" class="page">
+            <div class="poptitle">
+                Q3 Champions Challenge - BMW 5 Series
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "4 AUGUST 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br>
+                <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/q3_champions_challenge.jpg"><img width="460"  src="/uploads/activities/q3_champions_challenge.jpg" alt = "Q3 Champions Challenge - BMW 5 Series‏"></a><br>
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none">
+            <div class="poptitle">
+                WHEEL OF FORTUNE
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "4 AUGUST 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
+            </div>
+        </div>
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -930,7 +984,7 @@ if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, t
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -943,7 +997,7 @@ if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, t
             <div class="news_desc">
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/IME_Poster_<?php echo $culture;?>.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
-    </div>
+        </div>
     <div class="popdivider"></div>
     </div>
     <?php //} ?>
