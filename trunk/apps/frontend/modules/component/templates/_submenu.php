@@ -148,6 +148,17 @@ function blink(selector) {
         </li>
     </ul>
     <br class="clear"><br>
+
+    <ul>
+        <li class="menu_title"><?php echo __('MAX STORE'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/maxStore"><span><?php echo __('MAX Store Merchandising'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/maxStore/history"><span><?php echo __('MAX Store Merchandising History'); ?></span></a>
+        </li>
+    </ul>
+    <br class="clear"><br>
     <?php } ?>
     <!--<ul>
         <li class="menu_title"><?php /*echo __('EXCHANGE RATE'); */?></li>

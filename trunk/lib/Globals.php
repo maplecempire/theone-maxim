@@ -84,6 +84,7 @@ abstract class Globals {
     const ACCOUNT_TYPE_RANK = 'RANK';
     const ACCOUNT_TYPE_ECASH = 'ECASH';
     const ACCOUNT_TYPE_EPOINT = 'EPOINT';
+    const ACCOUNT_TYPE_MAXSTORE = 'MAX STORE';
     const ACCOUNT_TYPE_RP = 'RP';
     const ACCOUNT_TYPE_DEBIT = 'DEBIT';
     const ACCOUNT_TYPE_MAINTENANCE = 'MAINTENANCE';
