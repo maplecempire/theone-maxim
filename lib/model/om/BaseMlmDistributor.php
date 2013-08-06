@@ -363,6 +363,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $new_report_flag = '1';
 
+
+	
+	protected $q3_champions = '';
+
+
+	
+	protected $q3_datetime;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1080,6 +1088,35 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->new_report_flag;
+	}
+
+	
+	public function getQ3Champions()
+	{
+
+		return $this->q3_champions;
+	}
+
+	
+	public function getQ3Datetime($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->q3_datetime === null || $this->q3_datetime === '') {
+			return null;
+		} elseif (!is_int($this->q3_datetime)) {
+						$ts = strtotime($this->q3_datetime);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [q3_datetime] as date/time value: " . var_export($this->q3_datetime, true));
+			}
+		} else {
+			$ts = $this->q3_datetime;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
 	}
 
 	
@@ -2572,6 +2609,41 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setQ3Champions($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->q3_champions !== $v || $v === '') {
+			$this->q3_champions = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::Q3_CHAMPIONS;
+		}
+
+	} 
+
+	
+	public function setQ3Datetime($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [q3_datetime] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->q3_datetime !== $ts) {
+			$this->q3_datetime = $ts;
+			$this->modifiedColumns[] = MlmDistributorPeer::Q3_DATETIME;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2754,11 +2826,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->new_report_flag = $rs->getString($startcol + 88);
 
+			$this->q3_champions = $rs->getString($startcol + 89);
+
+			$this->q3_datetime = $rs->getTimestamp($startcol + 90, null);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 89; 
+						return $startcol + 91; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3170,6 +3246,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 88:
 				return $this->getNewReportFlag();
 				break;
+			case 89:
+				return $this->getQ3Champions();
+				break;
+			case 90:
+				return $this->getQ3Datetime();
+				break;
 			default:
 				return null;
 				break;
@@ -3269,6 +3351,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[86] => $this->getNomineeContactno(),
 			$keys[87] => $this->getNewActivityFlag(),
 			$keys[88] => $this->getNewReportFlag(),
+			$keys[89] => $this->getQ3Champions(),
+			$keys[90] => $this->getQ3Datetime(),
 		);
 		return $result;
 	}
@@ -3551,6 +3635,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 88:
 				$this->setNewReportFlag($value);
 				break;
+			case 89:
+				$this->setQ3Champions($value);
+				break;
+			case 90:
+				$this->setQ3Datetime($value);
+				break;
 		} 	}
 
 	
@@ -3647,6 +3737,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[86], $arr)) $this->setNomineeContactno($arr[$keys[86]]);
 		if (array_key_exists($keys[87], $arr)) $this->setNewActivityFlag($arr[$keys[87]]);
 		if (array_key_exists($keys[88], $arr)) $this->setNewReportFlag($arr[$keys[88]]);
+		if (array_key_exists($keys[89], $arr)) $this->setQ3Champions($arr[$keys[89]]);
+		if (array_key_exists($keys[90], $arr)) $this->setQ3Datetime($arr[$keys[90]]);
 	}
 
 	
@@ -3743,6 +3835,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::NOMINEE_CONTACTNO)) $criteria->add(MlmDistributorPeer::NOMINEE_CONTACTNO, $this->nominee_contactno);
 		if ($this->isColumnModified(MlmDistributorPeer::NEW_ACTIVITY_FLAG)) $criteria->add(MlmDistributorPeer::NEW_ACTIVITY_FLAG, $this->new_activity_flag);
 		if ($this->isColumnModified(MlmDistributorPeer::NEW_REPORT_FLAG)) $criteria->add(MlmDistributorPeer::NEW_REPORT_FLAG, $this->new_report_flag);
+		if ($this->isColumnModified(MlmDistributorPeer::Q3_CHAMPIONS)) $criteria->add(MlmDistributorPeer::Q3_CHAMPIONS, $this->q3_champions);
+		if ($this->isColumnModified(MlmDistributorPeer::Q3_DATETIME)) $criteria->add(MlmDistributorPeer::Q3_DATETIME, $this->q3_datetime);
 
 		return $criteria;
 	}
@@ -3948,6 +4042,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setNewActivityFlag($this->new_activity_flag);
 
 		$copyObj->setNewReportFlag($this->new_report_flag);
+
+		$copyObj->setQ3Champions($this->q3_champions);
+
+		$copyObj->setQ3Datetime($this->q3_datetime);
 
 
 		$copyObj->setNew(true);
