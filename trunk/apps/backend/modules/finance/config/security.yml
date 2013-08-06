@@ -122,5 +122,17 @@ updatePackageUpgrade:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PACKAGE_UPGRADE ]]
 
+productPurchase:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_MAX_STORE ]]
+
+productPurchaseEdit:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_MAX_STORE ]]
+
+updateProductPurchase:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_MAX_STORE ]]
+
 all:
   is_secure:  off        # off is the default value anyway
