@@ -10,6 +10,150 @@
  */
 class financeActions extends sfActions
 {
+    public function executeUpdateProductPurchase()
+    {
+        if ($this->getRequestParameter('status_code') && $this->getRequestParameter('history_id')) {
+            $historyId = $this->getRequestParameter('history_id');
+            $statusCode = $this->getRequestParameter('status_code');
+
+            $mlmProductPurchaseHistory = MlmProductPurchaseHistoryPeer::retrieveByPk($historyId);
+            $this->forward404Unless($mlmProductPurchaseHistory);
+
+            $mlmProductPurchaseHistory->setStatusCode($statusCode);
+            $mlmProductPurchaseHistory->setRemarks($this->getRequestParameter('remarks'));
+            $mlmProductPurchaseHistory->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode)
+                $mlmProductPurchaseHistory->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+            $mlmProductPurchaseHistory->save();
+
+            if (Globals::STATUS_REJECT == $statusCode) {
+                $refundEcash = $mlmProductPurchaseHistory->getTotalAmount();
+                $distId = $mlmProductPurchaseHistory->getDistId();
+                /******************************/
+                /*  Account
+                /******************************/
+                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlmProductPurchaseHistory->getHistoryId() . ")");
+                $mlm_account_ledger->setCredit($refundEcash);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+            }
+
+            $this->setFlash('successMsg', "Update successfully");
+            return $this->redirect('finance/productPurchaseEdit?purchaseId='.$historyId);
+        }
+    }
+    public function executeProductPurchaseEdit()
+    {
+        $mlmProductPurchaseHistory = MlmProductPurchaseHistoryPeer::retrieveByPk($this->getRequestParameter('purchaseId'));
+        $this->forward404Unless($mlmProductPurchaseHistory);
+
+        $c = new Criteria();
+        $c->add(MlmProductPurchaseHistoryDetailPeer::HISTORY_ID, $mlmProductPurchaseHistory->getHistoryId());
+        $mlmProductPurchaseHistoryDetails = MlmProductPurchaseHistoryDetailPeer::doSelect($c);
+
+        $this->mlmProductPurchaseHistory = $mlmProductPurchaseHistory;
+        $this->mlmProductPurchaseHistoryDetails = $mlmProductPurchaseHistoryDetails;
+    }
+    public function executeProductPurchase()
+    {
+        if ($this->getRequestParameter('purchaseStatus') && $this->getRequestParameter('purchaseId')) {
+            $error = false;
+            $arr = $this->getRequestParameter('purchaseId');
+            $statusCode = $this->getRequestParameter('purchaseStatus');
+
+            $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                for ($i = 0; $i < count($arr); $i++) {
+                    $mlm_dist_epoint_purchase = MlmDistEpointPurchasePeer::retrieveByPk($arr[$i]);
+                    $this->forward404Unless($mlm_dist_epoint_purchase);
+
+                    $totalEpoint = $mlm_dist_epoint_purchase->getAmount();
+
+                    $dist = MlmDistributorPeer::retrieveByPK($mlm_dist_epoint_purchase->getDistId());
+                    $this->forward404Unless($dist);
+                    /* ***********************************
+                     *   Company Account
+                     * ************************************/
+                    $companyEpoint = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+                    $distEpoint = $this->getAccountBalance($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+                    //var_dump($companyEpoint);
+                    //var_dump($totalEpoint);
+                    //exit();
+                    if ($companyEpoint >= $totalEpoint) {
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                        $mlm_account_ledger->setRemark("EPOINT PURCHASE (" . $dist->getDistributorCode() . ")");
+                        $mlm_account_ledger->setCredit(0);
+                        $mlm_account_ledger->setDebit($totalEpoint);
+                        $mlm_account_ledger->setBalance($companyEpoint - $totalEpoint);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        //$this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($dist->getDistributorId());
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                        $mlm_account_ledger->setRemark("");
+                        $mlm_account_ledger->setCredit($totalEpoint);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        //$this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+                        /* ***********************************
+                       *   e-Point
+                       * ************************************/
+                        $mlm_dist_epoint_purchase->setStatusCode($statusCode);
+                        //$mlm_ecash_withdraw->setRemarks($this->getRequestParameter('remarks'));
+                        $mlm_dist_epoint_purchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+                        if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
+                            $mlm_dist_epoint_purchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                            if (Globals::STATUS_COMPLETE == $statusCode) {
+                                $mlm_dist_epoint_purchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                            }
+                        }
+
+                        $mlm_dist_epoint_purchase->save();
+                    } else {
+                        $error = true;
+
+                        $this->setFlash('errorMsg', "Insufficient e-Point.");
+                    }
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+            if ($error == false)
+                $this->setFlash('successMsg', "Update successfully");
+            return $this->redirect('finance/epointPurchase');
+        }
+    }
     public function executeDebitAccountManagement()
     {
         $c = new Criteria();
