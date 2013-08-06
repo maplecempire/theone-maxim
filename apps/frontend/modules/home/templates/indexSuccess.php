@@ -341,12 +341,15 @@ var popIndex = 1;
         });
         $("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
             disablePopup();
-            /*if ($(annoucementArr).length > popIndex) {
+            //if ($(annoucementArr).length > popIndex) {
+            if (popIndex == 1) {
                 popIndex++;
-                loadContent(popIndex);
+                $(".page").hide();
+                $("#page_" + popIndex).show(500);
+                //loadContent(popIndex);
                 centerPopup();
                 loadPopup();
-            }*/
+            }
         });
         <?php
         //if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
