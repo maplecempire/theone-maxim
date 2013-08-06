@@ -51,15 +51,15 @@
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td valign="middle"></td>
-                                <td valign="middle"><?php echo __('Member ID') ?></td>
+                                <td valign="middle" width="10"></td>
+                                <td valign="left"><?php echo __('Member ID') ?></td>
                             </tr>
 
                             <?php
-                                if (count($members) > 0) {
+                                if (count($resultArray) > 0) {
                                     $trStyle = "1";
                                     $idx = 1;
-                                    foreach ($members as $member) {
+                                    foreach ($resultArray as $member) {
                                         if ($trStyle == "1") {
                                             $trStyle = "0";
                                         } else {
@@ -68,8 +68,7 @@
 
                                         echo "<tr class='row" . $trStyle . "'>
                                                 <td align='left'>" . $idx++ . ".</td>
-                                                <td align='left'>" . __($member->getDistributorCode()) . "</td>
-                                                <td align='center'>
+                                                <td align='left'>" . $member['distributor_code'] . "</td>
                                                 </tr>";
                                     }
                                 } else {

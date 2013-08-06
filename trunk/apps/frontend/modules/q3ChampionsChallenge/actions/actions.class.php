@@ -21,6 +21,29 @@ class q3ChampionsChallengeActions extends sfActions
         if ($distDB->getQ3Champions() == "Y") {
             $this->isChallenge = "Y";
         }
+
+        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
+                            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM mlm_distributor newDist
+                        LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                where newDist.loan_account = 'N'
+                    AND newDist.from_abfx = 'N'
+                    AND dist.q3_champions = 'Y'
+                    AND newDist.created_on >= '2013-07-06 00:00:00' group by upline_dist_id order by 3 desc limit 10";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $resultArray[$count] = $arr;
+            $count++;
+        }
+        $this->resultArray = $resultArray;
     }
 
     public function executeSubmit() {
