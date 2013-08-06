@@ -88,7 +88,7 @@
         background: url(images/popbg.jpg) repeat-y #fff;
         border: 2px solid #999999;
         color: #333;
-        z-index: 10000;
+        z-index: 1000;
         font-size: 13px;
         padding: 5px 5px;
     }
