@@ -67,6 +67,34 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	
 	protected $updated_on;
 
+
+	
+	protected $payment_method;
+
+
+	
+	protected $pg_success;
+
+
+	
+	protected $pg_msg;
+
+
+	
+	protected $pg_bill_no;
+
+
+	
+	protected $pg_ret_encode_type;
+
+
+	
+	protected $pg_currency_type;
+
+
+	
+	protected $pg_signature;
+
 	
 	protected $alreadyInSave = false;
 
@@ -221,6 +249,55 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getPaymentMethod()
+	{
+
+		return $this->payment_method;
+	}
+
+	
+	public function getPgSuccess()
+	{
+
+		return $this->pg_success;
+	}
+
+	
+	public function getPgMsg()
+	{
+
+		return $this->pg_msg;
+	}
+
+	
+	public function getPgBillNo()
+	{
+
+		return $this->pg_bill_no;
+	}
+
+	
+	public function getPgRetEncodeType()
+	{
+
+		return $this->pg_ret_encode_type;
+	}
+
+	
+	public function getPgCurrencyType()
+	{
+
+		return $this->pg_currency_type;
+	}
+
+	
+	public function getPgSignature()
+	{
+
+		return $this->pg_signature;
 	}
 
 	
@@ -476,6 +553,125 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	} 
 
 	
+	public function setPaymentMethod($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->payment_method !== $v) {
+			$this->payment_method = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PAYMENT_METHOD;
+		}
+
+	} 
+
+	
+	public function setPgSuccess($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_success !== $v) {
+			$this->pg_success = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_SUCCESS;
+		}
+
+	} 
+
+	
+	public function setPgMsg($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_msg !== $v) {
+			$this->pg_msg = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_MSG;
+		}
+
+	} 
+
+	
+	public function setPgBillNo($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_bill_no !== $v) {
+			$this->pg_bill_no = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_BILL_NO;
+		}
+
+	} 
+
+	
+	public function setPgRetEncodeType($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_ret_encode_type !== $v) {
+			$this->pg_ret_encode_type = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE;
+		}
+
+	} 
+
+	
+	public function setPgCurrencyType($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_currency_type !== $v) {
+			$this->pg_currency_type = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE;
+		}
+
+	} 
+
+	
+	public function setPgSignature($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->pg_signature !== $v) {
+			$this->pg_signature = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::PG_SIGNATURE;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -510,11 +706,25 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 			$this->updated_on = $rs->getTimestamp($startcol + 14, null);
 
+			$this->payment_method = $rs->getString($startcol + 15);
+
+			$this->pg_success = $rs->getString($startcol + 16);
+
+			$this->pg_msg = $rs->getString($startcol + 17);
+
+			$this->pg_bill_no = $rs->getString($startcol + 18);
+
+			$this->pg_ret_encode_type = $rs->getString($startcol + 19);
+
+			$this->pg_currency_type = $rs->getString($startcol + 20);
+
+			$this->pg_signature = $rs->getString($startcol + 21);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 15; 
+						return $startcol + 22; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistEpointPurchase object", $e);
 		}
@@ -704,6 +914,27 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 			case 14:
 				return $this->getUpdatedOn();
 				break;
+			case 15:
+				return $this->getPaymentMethod();
+				break;
+			case 16:
+				return $this->getPgSuccess();
+				break;
+			case 17:
+				return $this->getPgMsg();
+				break;
+			case 18:
+				return $this->getPgBillNo();
+				break;
+			case 19:
+				return $this->getPgRetEncodeType();
+				break;
+			case 20:
+				return $this->getPgCurrencyType();
+				break;
+			case 21:
+				return $this->getPgSignature();
+				break;
 			default:
 				return null;
 				break;
@@ -729,6 +960,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 			$keys[12] => $this->getCreatedOn(),
 			$keys[13] => $this->getUpdatedBy(),
 			$keys[14] => $this->getUpdatedOn(),
+			$keys[15] => $this->getPaymentMethod(),
+			$keys[16] => $this->getPgSuccess(),
+			$keys[17] => $this->getPgMsg(),
+			$keys[18] => $this->getPgBillNo(),
+			$keys[19] => $this->getPgRetEncodeType(),
+			$keys[20] => $this->getPgCurrencyType(),
+			$keys[21] => $this->getPgSignature(),
 		);
 		return $result;
 	}
@@ -789,6 +1027,27 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 			case 14:
 				$this->setUpdatedOn($value);
 				break;
+			case 15:
+				$this->setPaymentMethod($value);
+				break;
+			case 16:
+				$this->setPgSuccess($value);
+				break;
+			case 17:
+				$this->setPgMsg($value);
+				break;
+			case 18:
+				$this->setPgBillNo($value);
+				break;
+			case 19:
+				$this->setPgRetEncodeType($value);
+				break;
+			case 20:
+				$this->setPgCurrencyType($value);
+				break;
+			case 21:
+				$this->setPgSignature($value);
+				break;
 		} 	}
 
 	
@@ -811,6 +1070,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		if (array_key_exists($keys[12], $arr)) $this->setCreatedOn($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setUpdatedBy($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setUpdatedOn($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setPaymentMethod($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setPgSuccess($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setPgMsg($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setPgBillNo($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setPgRetEncodeType($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setPgCurrencyType($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setPgSignature($arr[$keys[21]]);
 	}
 
 	
@@ -833,6 +1099,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::CREATED_ON)) $criteria->add(MlmDistEpointPurchasePeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::UPDATED_BY)) $criteria->add(MlmDistEpointPurchasePeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::UPDATED_ON)) $criteria->add(MlmDistEpointPurchasePeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PAYMENT_METHOD)) $criteria->add(MlmDistEpointPurchasePeer::PAYMENT_METHOD, $this->payment_method);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_SUCCESS)) $criteria->add(MlmDistEpointPurchasePeer::PG_SUCCESS, $this->pg_success);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_MSG)) $criteria->add(MlmDistEpointPurchasePeer::PG_MSG, $this->pg_msg);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_BILL_NO)) $criteria->add(MlmDistEpointPurchasePeer::PG_BILL_NO, $this->pg_bill_no);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE)) $criteria->add(MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE, $this->pg_ret_encode_type);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE)) $criteria->add(MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE, $this->pg_currency_type);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PG_SIGNATURE)) $criteria->add(MlmDistEpointPurchasePeer::PG_SIGNATURE, $this->pg_signature);
 
 		return $criteria;
 	}
@@ -890,6 +1163,20 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setPaymentMethod($this->payment_method);
+
+		$copyObj->setPgSuccess($this->pg_success);
+
+		$copyObj->setPgMsg($this->pg_msg);
+
+		$copyObj->setPgBillNo($this->pg_bill_no);
+
+		$copyObj->setPgRetEncodeType($this->pg_ret_encode_type);
+
+		$copyObj->setPgCurrencyType($this->pg_currency_type);
+
+		$copyObj->setPgSignature($this->pg_signature);
 
 
 		$copyObj->setNew(true);

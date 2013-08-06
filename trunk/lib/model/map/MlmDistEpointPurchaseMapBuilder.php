@@ -62,5 +62,19 @@ class MlmDistEpointPurchaseMapBuilder {
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
+		$tMap->addColumn('PAYMENT_METHOD', 'PaymentMethod', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('PG_SUCCESS', 'PgSuccess', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('PG_MSG', 'PgMsg', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('PG_BILL_NO', 'PgBillNo', 'string', CreoleTypes::VARCHAR, false, 255);
+
+		$tMap->addColumn('PG_RET_ENCODE_TYPE', 'PgRetEncodeType', 'string', CreoleTypes::VARCHAR, false, 255);
+
+		$tMap->addColumn('PG_CURRENCY_TYPE', 'PgCurrencyType', 'string', CreoleTypes::VARCHAR, false, 255);
+
+		$tMap->addColumn('PG_SIGNATURE', 'PgSignature', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 	} 
 } 

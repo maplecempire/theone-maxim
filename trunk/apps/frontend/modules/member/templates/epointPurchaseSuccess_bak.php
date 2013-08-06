@@ -76,9 +76,9 @@ $(function() {
         }
     });
 
-    <?php if ($sf_flash->has('successMsg') && $pg == "N") { ?>
+    <?php if ($sf_flash->has('successMsg')): ?>
         $("#dgBankReceipt").dialog("open");
-    <?php } ?>
+    <?php endif; ?>
 });
 </script>
 
@@ -205,18 +205,6 @@ $(function() {
                 </tr>
 
                 <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Payment Method'); ?></td>
-                    <td>
-                        <select name="paymentMethod" id="paymentMethod">
-                            <option value="LB"><?php echo __("Bank Transfer");?></option>
-                            <option value="PG"><?php echo __("Union Pay");?></option>
-                        </select>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
