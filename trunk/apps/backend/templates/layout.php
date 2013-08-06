@@ -844,6 +844,16 @@ $(function() {
                         &nbsp;<?php echo __('zAdvanceEpoint'); ?></a><br/>
                 </div>
                 <?php } ?>
+
+                <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_MAX_STORE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                <h3><a href="#"><?php echo __('Max Store'); ?></a></h3>
+                <div>
+                    <a href="<?php echo url_for('finance/productPurchase') ?>" title="Max Store">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Max Store'); ?></a><br/>
+                </div>
+                <?php } ?>
             </div>
             <?php
             if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
