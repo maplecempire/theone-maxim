@@ -47,7 +47,18 @@ $(function() {
     $('#totalAmount').autoNumeric({
         mDec: 2
     });
-    $('.qty').autoNumeric({
+
+    $('.qty').change(function(event){
+        var totalAmount = 0;
+        jQuery.each($('.qty'), function(key, value) {
+            var productPrice = $(this).attr("ref");
+            var productQty = $(this).val();
+            totalAmount += parseFloat(productQty) * parseFloat(productPrice);
+        });
+        $("#epointNeeded").autoNumericSet(totalAmount);
+    }).trigger("change");
+
+    /*$('.qty').autoNumeric({
         mDec: 0
     }).focus(function(){
         $(this).select();
@@ -59,14 +70,29 @@ $(function() {
             totalAmount += parseFloat(productQty) * parseFloat(productPrice);
         });
         $("#epointNeeded").autoNumericSet(totalAmount);
-    }).trigger("keyup");
+    }).trigger("keyup");*/
 });
 </script>
+
+<div class="ewallet_li">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/maxStore")?>" style="color: rgb(134, 197, 51);">
+        <?php echo __('MAX Store'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+        <a target="_self" class="navcontainer" href="<?php echo url_for("/maxStore/history")?>" style="color: rgb(0, 93, 154);">
+        <?php echo __('Transaction History'); ?>
+    </a>
+</div>
 
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('MAX Store Merchandising') ?></span></td>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('MAX Store') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -133,10 +159,51 @@ $(function() {
 
                                         echo "<tr class='row" . $trStyle . "'>
                                                 <td align='left'>" . $idx++ . ".</td>
-                                                <td align='left'>" . $productDB->getProductName() . "</td>
+                                                <td align='left'>" . __($productDB->getProductName()) . "</td>
                                                 <td align='center'>" . $productPrice . "</td>
-                                                <td align='center'><input type='text' class='text qty' name='qty[]' value='0' size='5' ref='".$productDB->getPrice()."'>
-                                                                   <input type='hidden' name='productId[]' value='".$productDB->getStoreId()."'></td>
+                                                <td align='center'>";
+
+                                        if ($productDB->getStoreId() != 5) {
+                                            echo "<select class='text qty' name='qty[]' ref='".$productDB->getPrice()."'>
+                                                    <option value='0'>0</option>
+                                                    <option value='10'>10</option>
+                                                    <option value='20'>20</option>
+                                                    <option value='30'>30</option>
+                                                    <option value='40'>40</option>
+                                                    <option value='50'>50</option>
+                                                    <option value='60'>60</option>
+                                                    <option value='70'>70</option>
+                                                    <option value='80'>80</option>
+                                                    <option value='90'>90</option>
+                                                    <option value='100'>100</option>
+                                                </select>";
+                                        } else {
+                                            echo "<select class='text qty' name='qty[]' ref='".$productDB->getPrice()."'>
+                                                    <option value='0'>0</option>
+                                                    <option value='5'>5</option>
+                                                    <option value='10'>10</option>
+                                                    <option value='15'>15</option>
+                                                    <option value='20'>20</option>
+                                                    <option value='25'>25</option>
+                                                    <option value='30'>30</option>
+                                                    <option value='35'>35</option>
+                                                    <option value='40'>40</option>
+                                                    <option value='45'>45</option>
+                                                    <option value='50'>50</option>
+                                                    <option value='55'>55</option>
+                                                    <option value='60'>60</option>
+                                                    <option value='65'>65</option>
+                                                    <option value='70'>70</option>
+                                                    <option value='75'>75</option>
+                                                    <option value='80'>80</option>
+                                                    <option value='85'>85</option>
+                                                    <option value='90'>90</option>
+                                                    <option value='95'>95</option>
+                                                    <option value='100'>100</option>
+                                                </select>";
+                                        }
+
+                                        echo "        <input type='hidden' name='productId[]' value='".$productDB->getStoreId()."'></td>
                                             </tr>";
                                     }
                                 } else {
@@ -144,6 +211,7 @@ $(function() {
                                 }
                             ?>
                             </tbody>
+                            <!--<input type='text' class='text qty' name='qty[]' value='0' size='5' ref='".$productDB->getPrice()."'>-->
                         </table>
                     </td>
                 </tr>
@@ -156,9 +224,9 @@ $(function() {
                                 <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
                             </td>
                             <td colspan="1" align="left">
-                                <font color="#dc143c">1. <?php echo __('COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH & 6TH AUGUST 2013.') ?>
+                                <font color="#dc143c">1. <?php echo __('COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH'). "&". __('6TH AUGUST 2013.') ?>
                                 <br>2. <?php echo __('KINDLY VISIT OUR MAX STORE.') ?>
-                                <br>3. <?php echo __('**ITEMS SOLD ARE NOT EXCHANGABLE OR RETURNABLE.') ?>
+                                <br>3. <?php echo __('**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.') ?>
                                 </font>
                             </td>
                         </table>

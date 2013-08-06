@@ -77,12 +77,26 @@
     }
 </script>
 
+<div class="ewallet_li">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/maxStore")?>" style="color: rgb(0, 93, 154);">
+        <?php echo __('MAX Store'); ?>
+    </a>
+    &nbsp;&nbsp;
+    <img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+        <a target="_self" class="navcontainer" href="<?php echo url_for("/maxStore/history")?>" style="color: rgb(134, 197, 51);">
+        <?php echo __('Transaction History'); ?>
+    </a>
+</div>
 
 <input type="hidden" id="txtHistoryId" value="0">
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('MAX Store Merchandising History') ?></span></td>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Transaction History') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -123,7 +137,7 @@
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('MAX Store Merchandising History') ?></th>
+                    <th colspan="2"><?php echo __('Transaction History') ?></th>
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
                     </th>

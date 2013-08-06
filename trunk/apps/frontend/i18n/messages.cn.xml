@@ -897,6 +897,21 @@
             <trans-unit><source>Total Profit</source><target>利润总额</target></trans-unit>
             <trans-unit><source>Charges (USD)</source><target>收费（美元）</target></trans-unit>
             <trans-unit><source>Pay By</source><target>支付方式</target></trans-unit>
+            <trans-unit><source>MAX Store</source><target>MAX专卖店</target></trans-unit>
+            <trans-unit><source>Total Amount</source><target>所需金额</target></trans-unit>
+            <trans-unit><source>Product Name</source><target>产品名称</target></trans-unit>
+            <trans-unit><source>Maxim Trader Corporate Profile  (v.2.0)</source><target>Maxim Trader公司简介（2.0版）</target></trans-unit>
+            <trans-unit><source>Forex Express Magazine August 2013</source><target>外汇快递杂志2013年8月</target></trans-unit>
+            <trans-unit><source>Money Magazine August 2013</source><target>Money杂志2013年8月</target></trans-unit>
+            <trans-unit><source>IME Booklet August 2013</source><target>IME小册子2013年8月</target></trans-unit>
+            <trans-unit><source>MAXIM Trader Pen Drive (2GB)</source><target>MAXIM Trader随身碟（2GB）</target></trans-unit>
+            <trans-unit><source>ROGP Corporate Profile (v.1.0)</source><target>ROGP公司简介（V.1.0）</target></trans-unit>
+            <trans-unit><source>COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH</source><target>收集以上所有产品在澳门2013年8月5日</target></trans-unit>
+            <trans-unit><source>6TH AUGUST 2013.</source><target>2013年8月6日</target></trans-unit>
+            <trans-unit><source>KINDLY VISIT OUR MAX STORE.</source><target>请访问我们的MAX专卖店</target></trans-unit>
+            <trans-unit><source>**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.</source><target>**出售物品均不可更换或可退回</target></trans-unit>
+            <trans-unit><source>Transaction History</source><target>交易记录</target></trans-unit>
+            <trans-unit><source>Status Code</source><target>状态</target></trans-unit>
         </body>
     </file>
 </xliff>
