@@ -243,4 +243,14 @@ function blink(selector) {
         </li>-->
     </ul>
     <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Q3 Champions Challenge'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/q3ChampionsChallenge"><span><?php echo __('Q3 Champions Challenge'); ?></span></a>
+        </li>
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
+        </li>-->
+    </ul>
+    <br class="clear"><br>
 </div>

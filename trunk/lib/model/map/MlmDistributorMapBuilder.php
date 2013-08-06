@@ -210,5 +210,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('NEW_REPORT_FLAG', 'NewReportFlag', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('Q3_CHAMPIONS', 'Q3Champions', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('Q3_DATETIME', 'Q3Datetime', 'int', CreoleTypes::TIMESTAMP, false, null);
+
 	} 
 } 
