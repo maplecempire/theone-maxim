@@ -891,6 +891,21 @@
             <trans-unit><source>Total Profit</source><target>총 이익</target></trans-unit>
             <trans-unit><source>Charges (USD)</source><target>요금 (USD)</target></trans-unit>
             <trans-unit><source>Pay By</source><target>에 의하여 급여</target></trans-unit>
+            <trans-unit><source>MAX Store</source><target>MAX 저장</target></trans-unit>
+            <trans-unit><source>Total Amount</source><target>총액</target></trans-unit>
+            <trans-unit><source>Product Name</source><target>제품 이름</target></trans-unit>
+            <trans-unit><source>Maxim Trader Corporate Profile  (v.2.0)</source><target>Maxim Trader회사 소개 (V.2.0)</target></trans-unit>
+            <trans-unit><source>Forex Express Magazine August 2013</source><target>외환 익스프레스 매거진 2013년 8월</target></trans-unit>
+            <trans-unit><source>Money Magazine August 2013</source><target>머니 매거진 2013년 8월</target></trans-unit>
+            <trans-unit><source>IME Booklet August 2013</source><target>IME소책자 2013년 8월</target></trans-unit>
+            <trans-unit><source>MAXIM Trader Pen Drive (2GB)</source><target>MAXIM Trader펜 드라이브 (2GB)</target></trans-unit>
+            <trans-unit><source>ROGP Corporate Profile (v.1.0)</source><target>ROGP회사 소개 (V.1.0)</target></trans-unit>
+            <trans-unit><source>COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH</source><target>마카오, 마카오에있는 모든 위의 항목의 컬렉션5TH</target></trans-unit>
+            <trans-unit><source>6TH AUGUST 2013.</source><target>2013년 8월 6TH</target></trans-unit>
+            <trans-unit><source>KINDLY VISIT OUR MAX STORE.</source><target>친절하게 우리의 MAX 상점을 방문하십시오</target></trans-unit>
+            <trans-unit><source>**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.</source><target>**판매 된 제품은 교환 또는 반환 할 수 있지 않다</target></trans-unit>
+            <trans-unit><source>Transaction History</source><target>거래 내역</target></trans-unit>
+            <trans-unit><source>Status Code</source><target>지위</target></trans-unit>
         </body>
     </file>
 </xliff>
