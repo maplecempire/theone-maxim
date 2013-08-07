@@ -894,6 +894,21 @@
             <trans-unit><source>Total Profit</source><target>利益総額</target></trans-unit>
             <trans-unit><source>Charges (USD)</source><target>料金（USD）</target></trans-unit>
             <trans-unit><source>Pay By</source><target>で支払う</target></trans-unit>
+            <trans-unit><source>MAX Store</source><target>MAX店</target></trans-unit>
+            <trans-unit><source>Total Amount</source><target>合計</target></trans-unit>
+            <trans-unit><source>Product Name</source><target>製品名</target></trans-unit>
+            <trans-unit><source>Maxim Trader Corporate Profile  (v.2.0)</source><target>Maxim Trader会社概要(v.2.0)</target></trans-unit>
+            <trans-unit><source>Forex Express Magazine August 2013</source><target>外国エクスプレスマガジン2013年8月</target></trans-unit>
+            <trans-unit><source>Money Magazine August 2013</source><target>マネー誌2013年8月</target></trans-unit>
+            <trans-unit><source>IME Booklet August 2013</source><target>IMEブックレット2013年8月</target></trans-unit>
+            <trans-unit><source>MAXIM Trader Pen Drive (2GB)</source><target>MAXIM Traderペンドライブ（2GB）</target></trans-unit>
+            <trans-unit><source>ROGP Corporate Profile (v.1.0)</source><target>ROGP会社概要（V.1.0）</target></trans-unit>
+            <trans-unit><source>COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH</source><target>マカオ·上記のすべての項目のコレクション5TH</target></trans-unit>
+            <trans-unit><source>6TH AUGUST 2013.</source><target>2013年8月6TH</target></trans-unit>
+            <trans-unit><source>KINDLY VISIT OUR MAX STORE.</source><target>親切に私達のMAXの店を訪問。</target></trans-unit>
+            <trans-unit><source>**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.</source><target>**販売された商品は交換OR返却されていません</target></trans-unit>
+            <trans-unit><source>Transaction History</source><target>トランザクション履歴</target></trans-unit>
+            <trans-unit><source>Status Code</source><target>状態</target></trans-unit>
         </body>
     </file>
 </xliff>

@@ -10,7 +10,11 @@
                 <source>Dear %1%</source>
                 <target>%1%,您好!</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="3">
+                <source>Register</source>
+                <target>请即报名接受挑战</target>
+            </trans-unit>
+            <trans-unit id="4">
                 <source>Your registration request has been successfully sent to Vital Universe Group</source>
                 <target>Vital Universe Group 已收到您的注册申请</target>
             </trans-unit>

@@ -133,7 +133,7 @@ $(function() {
         </tr>
         <tr>
             <td align="center">
-                <?php echo __('Here is a challenge worthy of champions to be… <strong>Register</strong> your Challenge which kicks off on August 5th 2013 and ends on September 30th 2013(GMT+8)') ?>
+                <?php echo __('Here is a challenge worthy of champions to be…')?> <strong><?php echo __('Register', null, 'email')?></strong> <?php echo __('your Challenge which kicks off on August 5th 2013 and ends on September 30th 2013(GMT+8)') ?>
             </td>
         </tr>
         <tr>
@@ -150,7 +150,7 @@ $(function() {
         </tr>
         <tr>
             <td><span class="blue_text">
-                    <?php echo __('Stage 2 :')?>
+                    <?php echo __('Stage 2')?> :
                     <font color="#ff4500"><?php echo __('Top Performer')?></font> <?php echo __('during the Champions Challenge will win a Brand New BMW 5 Series 2013 model (regardless of country the winner is from)')?><br><br>
                     <font color="#ff4500"><?php echo __('1st Runner Up')?></font> : <?php echo __('Fully Furnished Resort Apartment by Royale Harmony (Southern Thailand) worth USD100,000.')?><br><br>
                     <font color="#ff4500"><?php echo __('2nd Runner Up')?></font> : <?php echo __('Resort Apartment by Royale Harmony (Southern Thailand) worth USD100,000')?><br><br>
