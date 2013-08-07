@@ -18,8 +18,10 @@ abstract class Globals {
     const PAYMENT_GATEWAY_ENVIRONMENT = "PROD";// PROD or DEV
     const PAYMENT_GATEWAY_MER_CODE = "023047";
     const PAYMENT_GATEWAY_MER_KEY = "6tBQ8hoHV3JxArUhVYEaH2jtf6gHuDAOzmRVtzY4udjXB6Ct9Wh7Pxu3AHk11WOGtvxOPzoWzAgdKBhZtn7NV3z1sOLbFX2NFRdG8oUAhB7DGFjzaA7EP0mpvvW1eCGS";
-    const PAYMENT_GATEWAY_MERCHANT_URL = "http://localhost:8087/member/pgRedirect?p=success";
-    const PAYMENT_GATEWAY_FAIL_URL = "http://localhost:8087/member/pgRedirect?p=fail";
+    const PAYMENT_GATEWAY_MERCHANT_URL = "http://partner.maximtrader.com/member/pgRedirect?p=success";
+    const PAYMENT_GATEWAY_FAIL_URL = "http://partner.maximtrader.com/member/pgRedirect?p=fail";
+//    const PAYMENT_GATEWAY_MERCHANT_URL = "http://localhost:8087/member/pgRedirect?p=success";
+//    const PAYMENT_GATEWAY_FAIL_URL = "http://localhost:8087/member/pgRedirect?p=fail";
 
     const COUNTRY_OTHER = "Others";
     const YES = 1;
