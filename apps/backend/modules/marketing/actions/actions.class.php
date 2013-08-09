@@ -10,6 +10,36 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeDoSendAbfxMT4()
+    {
+        $c = new Criteria();
+        $c->add(AbfxDistMt4Peer::STATUS_CODE, "COMPLETE");
+        $abfxDistMt4s = AbfxDistMt4Peer::doSelect($c);
+
+        foreach ($abfxDistMt4s as $abfxDistMt4) {
+            $c = new Criteria();
+            $c->add(MlmDistMt4Peer::DIST_ID, $abfxDistMt4->getDistId());
+            $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+            if (count($distMt4s) >= 1) {
+                foreach ($distMt4s as $distMt4) {
+                    $result = $this->sendEmailForMt4($distMt4->getMt4UserName(), $distMt4->getMt4Password(), $abfxDistMt4->getFullName(), $abfxDistMt4->getEmail());
+                    if ($result != "") {
+                        $abfxDistMt4->setStatusCode("ERROR");
+                        $abfxDistMt4->save();
+                    } else {
+                        $abfxDistMt4->setStatusCode("SENT");
+                        $abfxDistMt4->save();
+                    }
+                }
+            }
+
+        }
+
+        echo "Done.";
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeLuckyDraw()
     {
         $doAction = "EVENT";
