@@ -9,6 +9,31 @@
  */
 class ApService
 {
+    public function blockGenealogy($currentDistId, $placementTreeStructure)
+    {
+        $hideGroup = "";
+        if ($currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126) {
+            // alvinang1,alvinang2,alvinang4
+            $hideGroup = "128"; // law01
+        } else if ($currentDistId == 127 || $currentDistId == 128) {
+            // law01,law1
+            $hideGroup = "129";  // Law001
+        } else if ($currentDistId == 129) {
+            // law01,law1
+            $hideGroup = "402";  // Law001
+        } else if ($currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126 || $currentDistId == 127 || $currentDistId == 128 || $currentDistId == 129 || $currentDistId == 104 || $currentDistId == 105 || $currentDistId == 402) {
+            // law01,law1
+            $hideGroup = "175";  // Law001
+        }
+        $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            return true;
+        }
+
+        return false;
+    }
     public function constructAp()
     {
         $this->constructApAdmin(1000);

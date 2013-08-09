@@ -89,7 +89,7 @@ $(function() {
             },
             "<?php echo __('Submit') ?>": function() {
                 if ($("#dgActivateMember_pointNeeded").val() == 0 || $("#dgActivateMember_pointNeeded").val() == "") {
-                    error("In-sufficient fund to purchase package.");
+                    error("<?php echo __("In-sufficient fund to purchase package.");?>");
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeEPoint").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_pointAvail").val())){
                     alert("In-sufficient CP1. " + $("#dgActivateMember_pointAvail").val());

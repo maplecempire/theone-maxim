@@ -939,6 +939,10 @@
             <trans-unit><source>Organizer will endeavor to send prizes within 6 month of the competition end date but cannot guarantee this delivery time.</source><target>主催者は、チャレンジ終了日の6ヶ月以内に賞品をお送りするよう努めますが、この配達時間を保証することはできません。</target></trans-unit>
             <trans-unit><source>If you win a competition, we will notify you by e-mail. The judges’ decision will be final, and no correspondence will be entered into.</source><target>チャレンジに勝った場合、我々は電子メールでお知らせします。審査員の決定が最終となります。</target></trans-unit>
             <trans-unit><source>This competition is being run by Maxim Capital Limited.</source><target>このチャレンジは、マキシム•キャピタル•リミテッドによって運営されています。</target></trans-unit>
+            <trans-unit><source>In-Sufficient Fund</source><target>不十分基金</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to purchase product.</source><target>製品を購入するのに十分な資金。</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to upgrade package.</source><target>パッケージをアップグレードするのに十分な資金。</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to purchase package.</source><target>パッケージを購入するのに十分な資金。</target></trans-unit>
         </body>
     </file>
 </xliff>

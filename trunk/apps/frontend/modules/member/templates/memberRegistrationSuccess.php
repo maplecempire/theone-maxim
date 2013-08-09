@@ -28,7 +28,7 @@ $(function() {
             var epointPackageNeeded = $('#epointNeeded').autoNumericGet();
 
             if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
-                error("In-sufficient fund to purchase package.");
+                error("<?php echo __("In-sufficient fund to purchase package.");?>");
             } else {
                 waiting();
                 form.submit();

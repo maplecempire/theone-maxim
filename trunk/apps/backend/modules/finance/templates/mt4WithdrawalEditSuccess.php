@@ -21,7 +21,7 @@ $(function() {
     });
     $("#cboStatusCode").change(function(){
         if ($(this).val() == "REJECT") {
-            $("#txtRemarks").val("In-Sufficient Fund");
+            $("#txtRemarks").val("<?php echo __("In-Sufficient Fund");?>");
         } else if ($(this).val() == "COMPLETE") {
             $("#txtRemarks").val("");
         }
