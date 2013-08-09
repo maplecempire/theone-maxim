@@ -4410,13 +4410,17 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         // TO_HIDE_DIST_GROUP
         $hideDistGroup = false;
-        $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
+        $pos = strrpos(Globals::TO_HIDE_DIST_GROUP, "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+        //var_dump($pos."<br>");
         if ($pos === false) { // note: oee equal signs
 
         } else {
             $hideDistGroup = true;
         }
         $this->hideDistGroup = $hideDistGroup;
+        //var_dump(Globals::HIDE_DIST_GROUP."<br>");
+        //var_dump($this->getUser()->getAttribute(Globals::SESSION_DISTID)."<br>");
+        //var_dump($hideDistGroup);
         // TO_HIDE_DIST_GROUP end ~
 
         $c = new Criteria();
@@ -4427,21 +4431,18 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if (!$distDB) {
             $this->errorSearch = true;
-            $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
-            $distDB = MlmDistributorPeer::doSelectOne($c);
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         }
 
         // TO_HIDE_DIST_GROUP
+        $apService = new ApService();
         if ($hideDistGroup) {
-            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-            if ($pos === false) { // note: three equal signs
-
-            } else {
+            if ($apService->blockGenealogy($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                 $this->errorSearch = true;
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
-                $distDB = MlmDistributorPeer::doSelectOne($c);
+                //$c = new Criteria();
+                //$c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
+                //$distDB = MlmDistributorPeer::doSelectOne($c);
+                $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             }
         }
         // TO_HIDE_DIST_GROUP end ~

@@ -243,17 +243,17 @@ function reassignDatagridEventAttr(){
 
 <div style="width: 600px; padding-top:10px;"><div style="width: 140px; margin-left: 230px; float:left; overflow-x:hidden;" class="stats-node">
      <?php
+        $apService = new ApService();
+
         $distCode = $anode[0]['distCode'];
         $availableButton = $anode[0]['_available'];
         $textStr = "";
         $headColor = "";
         if ($distCode != "") {
             $distDB = $anode[0]['_self'];
-            if ($hideDistGroup == true) {
-                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-                if ($pos === false) { // note: three equal signs
 
-                } else {
+            if ($hideDistGroup == true) {
+                if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                 }
@@ -291,7 +291,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -367,10 +367,7 @@ function reassignDatagridEventAttr(){
     if ($distCode != "") {
         $distDB = $anode[1]['_self'];
         if ($hideDistGroup == true) {
-            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-            if ($pos === false) { // note: three equal signs
-
-            } else {
+            if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -403,7 +400,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -471,10 +468,7 @@ function reassignDatagridEventAttr(){
     if ($distCode != "") {
         $distDB = $anode[2]['_self'];
         if ($hideDistGroup == true) {
-            $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-            if ($pos === false) { // note: three equal signs
-
-            } else {
+            if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -507,7 +501,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -590,10 +584,7 @@ function reassignDatagridEventAttr(){
         if ($distCode != "") {
             $distDB = $anode[3]['_self'];
             if ($hideDistGroup == true) {
-                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-                if ($pos === false) { // note: three equal signs
-
-                } else {
+                if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                 }
@@ -625,7 +616,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -696,10 +687,7 @@ function reassignDatagridEventAttr(){
         if ($distCode != "") {
             $distDB = $anode[4]['_self'];
             if ($hideDistGroup == true) {
-                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-                if ($pos === false) { // note: three equal signs
-
-                } else {
+                if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                 }
@@ -730,7 +718,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -801,10 +789,7 @@ function reassignDatagridEventAttr(){
         if ($distCode != "") {
             $distDB = $anode[5]['_self'];
             if ($hideDistGroup == true) {
-                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-                if ($pos === false) { // note: three equal signs
-
-                } else {
+                if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                 }
@@ -835,7 +820,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {
@@ -906,10 +891,7 @@ function reassignDatagridEventAttr(){
         if ($distCode != "") {
             $distDB = $anode[6]['_self'];
             if ($hideDistGroup == true) {
-                $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::HIDE_DIST_GROUP);
-                if ($pos === false) { // note: three equal signs
-
-                } else {
+                if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                 }
@@ -940,7 +922,7 @@ function reassignDatagridEventAttr(){
                 <div>
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
-                        if ($distDB->getUserId() != null) {
+                        if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
                         } else {

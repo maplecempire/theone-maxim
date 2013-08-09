@@ -942,6 +942,10 @@
             <trans-unit><source>Organizer will endeavor to send prizes within 6 month of the competition end date but cannot guarantee this delivery time.</source><target>主办方会致力在挑战计划截止日后的6个月之内派送出奖品, 但不能保证奖品之送达时间。</target></trans-unit>
             <trans-unit><source>If you win a competition, we will notify you by e-mail. The judges’ decision will be final, and no correspondence will be entered into.</source><target>如果您在挑战计划中获得奖项,我们将会以邮件的方式通知您. 活动评审结果为最终裁定结果, 其他人士不得异议。</target></trans-unit>
             <trans-unit><source>This competition is being run by Maxim Capital Limited.</source><target>此次活动由马胜资本有限公司主办。</target></trans-unit>
+            <trans-unit><source>In-Sufficient Fund</source><target>资金数量不足</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to purchase product.</source><target>资金数量不足来购买产品。</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to upgrade package.</source><target>资金数量不足来升级配套。</target></trans-unit>
+            <trans-unit><source>In-sufficient fund to purchase package.</source><target>资金数量不足来购买配套。</target></trans-unit>
         </body>
     </file>
 </xliff>
