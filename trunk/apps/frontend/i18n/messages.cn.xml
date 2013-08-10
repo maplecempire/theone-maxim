@@ -946,6 +946,7 @@
             <trans-unit><source>In-sufficient fund to purchase product.</source><target>资金数量不足来购买产品。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to upgrade package.</source><target>资金数量不足来升级配套。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to purchase package.</source><target>资金数量不足来购买配套。</target></trans-unit>
+            <trans-unit><source>ITEM WILL BE DELIVER WITHIN 30 DAYS</source><target>物品将在30天内送递。</target></trans-unit>
         </body>
     </file>
 </xliff>

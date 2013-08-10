@@ -225,9 +225,10 @@ $(function() {
                                     <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
                                 </td>
                                 <td colspan="1" align="left">
-                                    <font color="#dc143c">1. <?php echo __('COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH'). "&". __('6TH AUGUST 2013.') ?>
-                                    <br>2. <?php echo __('KINDLY VISIT OUR MAX STORE.') ?>
-                                    <br>3. <?php echo __('**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.') ?>
+<!--                                    <font color="#dc143c">1. --><?php //echo __('COLLECTION OF ALL ABOVE ITEMS IN MACAU ON 5TH'). "&". __('6TH AUGUST 2013.') ?>
+<!--                                    <br>2. --><?php //echo __('KINDLY VISIT OUR MAX STORE.') ?>
+                                    <br>1. <?php echo __('ITEM WILL BE DELIVER WITHIN 30 DAYS.') ?>
+                                    <br>2. <?php echo __('**ITEMS SOLD ARE NOT EXCHANGEABLE OR RETURNABLE.') ?>
                                     </font>
                                 </td>
                             </tr>
