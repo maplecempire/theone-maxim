@@ -32,18 +32,18 @@ $(function() {
         }
     });
     $('#epointAmount').autoNumeric({
-        mDec: 0
+        mDec: 2
     }).keyup(function(){
         var convertedAmount = 0;
         var epointAmount = $('#epointAmount').autoNumericGet();
         //convertedAmount = parseFloat(epointAmount) * 1.05;
-        convertedAmount = parseFloat(epointAmount) * 1;
-        convertedAmount = Math.floor(convertedAmount);
+//        convertedAmount = parseFloat(epointAmount) * 1;
+//        convertedAmount = Math.floor(convertedAmount);
 
-        $("#epointConvertedAmount").val(convertedAmount);
+        $("#epointConvertedAmount").val(epointAmount);
     });
     $('#epointConvertedAmount').autoNumeric({
-        mDec: 0
+        mDec: 2
     });
 });
 </script>
