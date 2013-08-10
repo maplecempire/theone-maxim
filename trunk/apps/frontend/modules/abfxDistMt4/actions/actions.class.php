@@ -17,6 +17,7 @@ class abfxDistMt4Actions extends sfActions
     public function executeSendPrivateMessage()
     {
         $c = new Criteria();
+        $c->add(AbfxDistMt4Peer::FILE_NAME, "MAM2.xls");
         $c->add(AbfxDistMt4Peer::STATUS_CODE, "COMPLETE");
         $abfxDistMt4s = AbfxDistMt4Peer::doSelect($c);
 
@@ -90,10 +91,10 @@ class abfxDistMt4Actions extends sfActions
     {
 //        $fileName = "Summary_Report2.xls";
 //        $fileName = "MAM1.xls";
-//        $fileName = "MAM2.xls";
+        $fileName = "MAM2.xls";
 //        $fileName = "MAM3.xls";
 //        $fileName = "MAM5.xls";
-        $fileName = "Summary_Report.xls";
+//        $fileName = "Summary_Report.xls";
 
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "abfx" . DIRECTORY_SEPARATOR . $fileName;
 
