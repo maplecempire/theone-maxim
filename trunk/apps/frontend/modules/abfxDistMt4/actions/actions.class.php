@@ -14,6 +14,53 @@
  */
 class abfxDistMt4Actions extends sfActions
 {
+    public function executeSendPrivateMessage()
+    {
+        $c = new Criteria();
+        $c->add(AbfxDistMt4Peer::STATUS_CODE, "COMPLETE");
+        $abfxDistMt4s = AbfxDistMt4Peer::doSelect($c);
+
+        foreach ($abfxDistMt4s as $abfxDistMt4) {
+            $mlmCustomerEnquiry = new MlmCustomerEnquiry();
+            $distId = $abfxDistMt4->getDistId();
+            $title = "MT4 username and password";
+            $message = "Dear Sir/Madam,
+                        <br><br>
+                        Below is your MT4 login credential:
+                        <br><br>
+                        Mt4 ID: ".$abfxDistMt4->getMt4UserName()."
+                        <br>
+                        Password: ".$abfxDistMt4->getMt4Password()."
+                        <br><br>
+                        If you have any enquiries, please do not hesitate to contact us. Thank You!
+                        <br><br>
+                        Sincerely,
+                        <br>Customer Service";
+
+            $mlmCustomerEnquiry->setDistributorId($distId);
+            $mlmCustomerEnquiry->setContactNo("");
+            $mlmCustomerEnquiry->setTitle($title);
+            $mlmCustomerEnquiry->setAdminUpdated(Globals::TRUE);
+            $mlmCustomerEnquiry->setDistributorUpdated(Globals::FALSE);
+            $mlmCustomerEnquiry->setAdminRead(Globals::TRUE);
+            $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
+            $mlmCustomerEnquiry->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmCustomerEnquiry->save();
+
+            $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
+            $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlmCustomerEnquiry->getEnquiryId());
+            $mlm_customer_enquiry_detail->setMessage($message);
+            $mlm_customer_enquiry_detail->setReplyFrom(Globals::ROLE_ADMIN);
+            $mlm_customer_enquiry_detail->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_customer_enquiry_detail->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_customer_enquiry_detail->save();
+        }
+
+        echo "Done.";
+        return sfView::HEADER_ONLY;
+    }
     public function executeAttachMt4ToDist()
     {
         $c = new Criteria();
