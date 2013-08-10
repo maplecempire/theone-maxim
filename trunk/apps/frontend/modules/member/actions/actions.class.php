@@ -12,9 +12,9 @@ class memberActions extends sfActions
     public function executeTest() {
         //echo $this->getRollingPointData();
 
-        //$bonusService = new BonusService();
-        //$bonusService->contraDebitAccount(68, "CONTRA BY EPOINT", 0);
-        $dateUtil = new DateUtil();
+        $bonusService = new BonusService();
+        $bonusService->contraDebitAccount(2336, "CONTRA BY EPOINT", 0);
+        /*$dateUtil = new DateUtil();
 
         $c = new Criteria();
         $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::STATUS_SUCCESS);
@@ -55,7 +55,7 @@ class memberActions extends sfActions
             } else {
                 print_r($mlmRoiDividend->getDevidendId()."<br>");
             }
-        }
+        }*/
 
         /*print_r("Start<br>");
         $c = new Criteria();
