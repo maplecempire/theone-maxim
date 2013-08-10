@@ -612,9 +612,9 @@ class marketingListActions extends sfActions
         $totalRecords = MlmCustomerEnquiryPeer::doCount($c);
 
         /******   total filtered records  *******/
-        /*if ($this->getRequestParameter('filterAction') != "") {
-            $c->addAnd(MlmEcashWithdrawPeer::F_ACTION, "%" . $this->getRequestParameter('filterAction') . "%", Criteria::LIKE);
-        }*/
+        if ($this->getRequestParameter('filterSubject') != "") {
+            $c->add(MlmCustomerEnquiryPeer::TITLE, "%" . $this->getRequestParameter('filterSubject') . "%", Criteria::LIKE);
+        }
         $totalFilteredRecords = MlmCustomerEnquiryPeer::doCount($c);
 
         /******   sorting  *******/

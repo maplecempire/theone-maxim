@@ -20,6 +20,7 @@ $(function(){
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
+            aoData.push( { "name": "filterSubject", "value": $("#search_subject").val()  } );
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
             reassignDatagridEventAttr();
@@ -89,6 +90,13 @@ function reassignDatagridEventAttr(){
                             <th>Subject</th>
                             <th>Last Reply</th>
                             <th>Read / Unread</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><input title="" size="10" type="text" id="search_subject" value="" class="search_init"/></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         </thead>
                     </table>
