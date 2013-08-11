@@ -342,14 +342,14 @@ var popIndex = 1;
         $("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
             disablePopup();
             //if ($(annoucementArr).length > popIndex) {
-            if (popIndex == 1) {
+            /*if (popIndex == 1) {
                 popIndex++;
                 $(".page").hide();
                 $("#page_" + popIndex).show(500);
                 //loadContent(popIndex);
                 centerPopup();
                 loadPopup();
-            }
+            }*/
         });
         <?php
         //if ($sf_user->getAttribute(Globals::FIRST_LOGIN, 0) == 0) {
@@ -940,7 +940,7 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a><!-- - <a href='#' class="page_link" ref='4'>4</a>-->
                 </td>
             </tr>
         </table>
@@ -959,21 +959,21 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/q3_champions_challenge.jpg"><img width="460"  src="/uploads/activities/q3_champions_challenge.jpg" alt = "Q3 Champions Challenge - BMW 5 Series‏"></a><br>
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <!--<div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 WHEEL OF FORTUNE
             </div>
             <div class="news_date">
             <?php
-                $dateUtil = new DateUtil();
+/*                $dateUtil = new DateUtil();
                 echo "4 AUGUST 2013";
-                ?>
+                */?>
             </div>
             <div class="news_desc">
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
-        </div>
-        <div id="page_3" class="page" style="display: none">
+        </div>-->
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -987,7 +987,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
