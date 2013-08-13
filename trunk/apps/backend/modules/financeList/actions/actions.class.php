@@ -513,7 +513,7 @@ class financeListActions extends sfActions
         LEFT JOIN mlm_dist_mt4 mt4 ON dist.distributor_id = mt4.dist_id ";
 
         /******   total records  *******/
-        $sWhere = " WHERE 1=1 ";
+        $sWhere = " WHERE from_abfx = 'N' ";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
