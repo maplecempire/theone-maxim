@@ -7072,14 +7072,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $status = Globals::STATUS_PIPS_CSV_ACTIVE;
                                         $remarks = "";
 
-                                        $mlm_pip_csv = new MlmDailyPipsCsv();
-                                        $mlm_pip_csv->setFileId($mlmDailyPipsFile->getFileId());
-                                        $mlm_pip_csv->setPipsString($string);
+//                                        $mlm_pip_csv = new MlmDailyPipsCsv();
+//                                        $mlm_pip_csv->setFileId($mlmDailyPipsFile->getFileId());
+//                                        $mlm_pip_csv->setPipsString($string);
 
                                         if (count($arr) == 12) {
                                             if (is_numeric($arr[0])) {
                                                 $idx = 0;
-                                                $mlm_pip_csv->setTradedDatetime($tradedDate);
+//                                                $mlm_pip_csv->setTradedDatetime($tradedDate);
 //                                                $mlm_pip_csv->setLoginId($arr[0]);
 //                                                $mlm_pip_csv->setLoginName($arr[1]);
 //                                                $mlm_pip_csv->setBalance($arr[12]);
@@ -7092,28 +7092,28 @@ We look forward to your custom in the near future. Should you have any queries, 
                                                 //$mlm_pip_csv->setTax($arr[8]);
                                                 //$mlm_pip_csv->setUnrealizedpl($arr[$idx++]);
                                                 //$mlm_pip_csv->setEquity($arr[$idx++]);
-                                                $mlm_pip_csv->setLoginId($arr[$idx++]);
-                                                $mlm_pip_csv->setLoginName($arr[$idx++]);
-                                                $mlm_pip_csv->setBalance($arr[$idx++]);
-                                                $mlm_pip_csv->setCredit($arr[$idx++]);
-                                                $mlm_pip_csv->setCommissions($arr[$idx++]);
-                                                $mlm_pip_csv->setTaxes($arr[$idx++]);
-                                                $mlm_pip_csv->setStorage($arr[$idx++]);
-                                                $mlm_pip_csv->setProfit($arr[$idx++]);
-                                                $mlm_pip_csv->setInterest($arr[$idx++]);
-                                                $mlm_pip_csv->setTax($arr[$idx++]);
-                                                $mlm_pip_csv->setUnrealizedpl($arr[$idx++]);
-                                                $mlm_pip_csv->setEquity($arr[$idx++]);
-                                                $mlm_pip_csv->setStatusCode($status);
-                                                $mlm_pip_csv->setRemarks($remarks);
-                                                $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $mlm_pip_csv->save();
+//                                                $mlm_pip_csv->setLoginId($arr[$idx++]);
+//                                                $mlm_pip_csv->setLoginName($arr[$idx++]);
+//                                                $mlm_pip_csv->setBalance($arr[$idx++]);
+//                                                $mlm_pip_csv->setCredit($arr[$idx++]);
+//                                                $mlm_pip_csv->setCommissions($arr[$idx++]);
+//                                                $mlm_pip_csv->setTaxes($arr[$idx++]);
+//                                                $mlm_pip_csv->setStorage($arr[$idx++]);
+//                                                $mlm_pip_csv->setProfit($arr[$idx++]);
+//                                                $mlm_pip_csv->setInterest($arr[$idx++]);
+//                                                $mlm_pip_csv->setTax($arr[$idx++]);
+//                                                $mlm_pip_csv->setUnrealizedpl($arr[$idx++]);
+//                                                $mlm_pip_csv->setEquity($arr[$idx++]);
+//                                                $mlm_pip_csv->setStatusCode($status);
+//                                                $mlm_pip_csv->setRemarks($remarks);
+//                                                $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                                $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                                $mlm_pip_csv->save();
                                                 /* ++++++++++++++++++++++++++++++++++++++++++++++
                                                *      Calculate Pips
                                                * +++++++++++++++++++++++++++++++++++++++++++++++*/
                                                 //$totalVolume = $mlm_pip_csv->getVolume();
-                                                $mt4Id = $mlm_pip_csv->getLoginId();
+                                                $mt4Id = $arr[0];
 
                                                 $c = new Criteria();
                                                 $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
@@ -7123,15 +7123,15 @@ We look forward to your custom in the near future. Should you have any queries, 
                                                     $mlmDailyDistMt4Credit = new MlmDailyDistMt4Credit();
                                                     $mlmDailyDistMt4Credit->setDistId($mlm_dist_mt4->getDistId());
                                                     $mlmDailyDistMt4Credit->setMt4UserName($mlm_dist_mt4->getMt4UserName());
-                                                    $mlmDailyDistMt4Credit->setMt4Credit($mlm_pip_csv->getBalance());
+                                                    $mlmDailyDistMt4Credit->setMt4Credit($arr[2]);
                                                     $mlmDailyDistMt4Credit->setTradedDatetime($tradedDate);
                                                     $mlmDailyDistMt4Credit->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                     $mlmDailyDistMt4Credit->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                                     $mlmDailyDistMt4Credit->save();
                                                 } else {
-                                                    $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
-                                                    $mlm_pip_csv->setRemarks("Invalid MT4 ID");
-                                                    $mlm_pip_csv->save();
+//                                                    $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
+//                                                    $mlm_pip_csv->setRemarks("Invalid MT4 ID");
+//                                                    $mlm_pip_csv->save();
                                                 }
                                                 /* ++++++++++++++++++++++++++++++++++++++++++++++
                                                *      ~ END Calculate Pips ~
@@ -7140,21 +7140,21 @@ We look forward to your custom in the near future. Should you have any queries, 
                                                 $status = Globals::STATUS_PIPS_CSV_ERROR;
                                                 $remarks = "FIRST ELEMENT NOT NUMERIC";
 
-                                                $mlm_pip_csv->setStatusCode($status);
-                                                $mlm_pip_csv->setRemarks($remarks);
-                                                $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                                $mlm_pip_csv->save();
+//                                                $mlm_pip_csv->setStatusCode($status);
+//                                                $mlm_pip_csv->setRemarks($remarks);
+//                                                $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                                $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                                $mlm_pip_csv->save();
                                             }
                                         } else {
                                             $status = Globals::STATUS_PIPS_CSV_ERROR;
                                             $remarks = "ARRAY NOT EQUAL TO 12";
 
-                                            $mlm_pip_csv->setStatusCode($status);
-                                            $mlm_pip_csv->setRemarks($remarks);
-                                            $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                            $mlm_pip_csv->save();
+//                                            $mlm_pip_csv->setStatusCode($status);
+//                                            $mlm_pip_csv->setRemarks($remarks);
+//                                            $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                            $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//                                            $mlm_pip_csv->save();
                                         }
                                     }
                                     $con->commit();
