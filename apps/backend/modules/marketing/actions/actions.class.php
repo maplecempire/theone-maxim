@@ -2039,7 +2039,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                 if (!$mlmDistMt4DB) {
                     $mlm_dist_mt4 = new MlmDistMt4();
                     $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
-                    $mlm_dist_mt4->setRankId($tbl_distributor->getRankId());
+                    $mlm_dist_mt4->setRankId($tbl_distributor->getInitRankId());
                     $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
                     $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
                     $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
