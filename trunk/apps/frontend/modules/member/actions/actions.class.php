@@ -7160,7 +7160,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $con->commit();
                                 } catch (PropelException $e) {
                                     $con->rollback();
-                                    //throw $e;
+                                    throw $e;
                                 }
                             }
                         }
