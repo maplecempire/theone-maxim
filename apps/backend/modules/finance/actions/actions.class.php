@@ -154,6 +154,13 @@ class financeActions extends sfActions
             return $this->redirect('finance/epointPurchase');
         }
     }
+    public function executeCp3Transfer()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $this->dists = MlmDistributorPeer::doSelect($c);
+    }
     public function executeDebitAccountManagement()
     {
         $c = new Criteria();
@@ -223,7 +230,12 @@ class financeActions extends sfActions
             $mlm_account_ledger = new MlmAccountLedger();
             $mlm_account_ledger->setDistId($distId);
             $mlm_account_ledger->setAccountType($walletType);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ADVANCE);
+
+//            if ($walletType == "MAINTENANCE") {
+//                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM_COMPANY);
+//            } else {
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ADVANCE);
+//            }
             $mlm_account_ledger->setRemark($externalRemark);
             $mlm_account_ledger->setInternalRemark($internalRemark);
             $mlm_account_ledger->setCredit($amount);
