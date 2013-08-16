@@ -20,15 +20,15 @@ abstract class Mails {
 //    const EMAIL_SENDER = "support@maximtrader.com";
 //    const EMAIL_PASSWORD = "maximtemp";
 
-//    const EMAIL_FROM = "account@maximtrader.com";
-//    const EMAIL_FROM_NOREPLY = "account@maximtrader.com";
-//    const EMAIL_SENDER = "account@maximtrader.com";
-//    const EMAIL_PASSWORD = "Pass868@";
+    const EMAIL_FROM = "account@maximtrader.com";
+    const EMAIL_FROM_NOREPLY = "account@maximtrader.com";
+    const EMAIL_SENDER = "account@maximtrader.com";
+    const EMAIL_PASSWORD = "Pass868@";
 
-    const EMAIL_FROM = "noreply@maximtrader.com";
-    const EMAIL_FROM_NOREPLY = "noreply@maximtrader.com";
-    const EMAIL_SENDER = "noreply@maximtrader.com";
-    const EMAIL_PASSWORD = "pass!@#$";
+//    const EMAIL_FROM = "noreply@maximtrader.com";
+//    const EMAIL_FROM_NOREPLY = "noreply@maximtrader.com";
+//    const EMAIL_SENDER = "noreply@maximtrader.com";
+//    const EMAIL_PASSWORD = "pass!@#$";
 
 //    const EMAIL_FROM = "no_reply@maximtrader.com";
 //    const EMAIL_FROM_NOREPLY = "no_reply@maximtrader.com";
