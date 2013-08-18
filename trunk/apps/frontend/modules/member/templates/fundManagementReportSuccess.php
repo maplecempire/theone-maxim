@@ -57,59 +57,10 @@ $(function() {
             </tr>
             <tr>
                 <td>
-                    <a class='fundManagementLink' href="<?php echo url_for("/download/downloadFundManagementReport?p=June_2013") ?>"><span><?php echo __('Click to DOWNLOAD Fund Management Report June 2013') ?></span></a>
+                    <a class='fundManagementLink' href="<?php echo url_for("/download/downloadFundManagementReport?p=Jul_2013") ?>"><span><?php echo __('Click to DOWNLOAD Fund Management Report July 2013') ?></span></a>
                 </td>
             </tr>
-            <!--<tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=May_2013") */?>"><span>Click to DOWNLOAD Fund Management Report May 2013</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=April_2013") */?>"><span>Click to DOWNLOAD Fund Management Report April 2013</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Mar_2013") */?>"><span>Click to DOWNLOAD Fund Management Report Mar 2013</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Feb_2013") */?>"><span>Click to DOWNLOAD Fund Management Report Feb 2013</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Jan_2013") */?>"><span>Click to DOWNLOAD Fund Management Report Jan 2013</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Dec_2012") */?>"><span>Click to DOWNLOAD Fund Management Report Dec 2012</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Nov_2012") */?>"><span>Click to DOWNLOAD Fund Management Report Nov 2012</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Oct_2012") */?>"><span>Click to DOWNLOAD Fund Management Report Oct 2012</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Sep_2012") */?>"><span>Click to DOWNLOAD Fund Management Report Sep 2012</span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a class='fundManagementLink' href="<?php /*echo url_for("/download/downloadFundManagementReport?p=Aug_2012") */?>"><span>Click to DOWNLOAD Fund Management Report Aug 2012</span></a>
-                </td>
-            </tr>-->
+
             </tbody>
         </table>
     </td>
