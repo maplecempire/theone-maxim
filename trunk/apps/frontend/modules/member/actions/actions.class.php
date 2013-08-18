@@ -13,7 +13,7 @@ class memberActions extends sfActions
         //echo $this->getRollingPointData();
 
         $bonusService = new BonusService();
-        $bonusService->contraDebitAccount(2336, "CONTRA BY EPOINT", 0);
+        $bonusService->contraDebitAccount(255391, "CONTRA BY CP2", 0);
         /*$dateUtil = new DateUtil();
 
         $c = new Criteria();
@@ -6775,7 +6775,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         //exit();
         if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) {
             print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
-            //$this->retrieveGmailMailAttachment();
+            $this->retrieveGmailMailAttachment();
 
             print_r("+++++ ROI Dividend +++++<br>");
             $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
