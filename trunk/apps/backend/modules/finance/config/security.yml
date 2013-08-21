@@ -12,7 +12,7 @@ cp3Withdrawal:
 
 cp3Transfer:
   is_secure:   on
-  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_CP3_TRANSFER ]]
 
 dailyBonus:
   is_secure:   on
