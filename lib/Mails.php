@@ -30,10 +30,10 @@ abstract class Mails {
     const EMAIL_SENDER = "noreply@maximtrader.com";
     const EMAIL_PASSWORD = "pass!@#$";
 
-//    const EMAIL_FROM = "no_reply@maximtrader.com";
-//    const EMAIL_FROM_NOREPLY = "no_reply@maximtrader.com";
-//    const EMAIL_SENDER = "no_reply@maximtrader.com";
-//    const EMAIL_PASSWORD = "pass!@#$";
+    const CS_EMAIL_FROM = "no_reply@maximtrader.com";
+    const CS_EMAIL_FROM_NOREPLY = "no_reply@maximtrader.com";
+    const CS_EMAIL_SENDER = "no_reply@maximtrader.com";
+    const CS_EMAIL_PASSWORD = "pass!@#$";
 
     const EMAIL_FROM_NAME = "Maxim Trader";
     const EMAIL_FROM_NOREPLY_NAME = "Maxim Trader";
