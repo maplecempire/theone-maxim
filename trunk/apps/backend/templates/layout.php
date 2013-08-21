@@ -681,12 +681,12 @@ $(function() {
                              border="0">
                         &nbsp;<?php echo __('Debit Account'); ?></a><br/>
                     <?php } ?>
-                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+<!--                    --><?php //if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/genealogyManagement') ?>" title="Genealogy Management">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Genealogy Management'); ?></a><br/>
-                    <?php } ?>
+<!--                    --><?php //} ?>
 
                     <a href="<?php echo url_for('marketing/findUnderLeader') ?>" title="Find Under Leader">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
