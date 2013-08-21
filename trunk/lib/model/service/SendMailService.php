@@ -129,6 +129,47 @@ class SendMailService
         }
         return "";
     }
+    public function sendCsMail($receiverEmail, $receiverFullName, $subject, $body, $sendFrom=Mails::CS_EMAIL_SENDER, $bcc="")
+    {
+        error_reporting(E_STRICT);
+
+        date_default_timezone_set(date_default_timezone_get());
+
+        include_once('class.phpmailer.php');
+        $mail = new PHPMailer();
+
+        if (Mails::EMAIL_SMTP == true) {
+            $mail->IsSMTP();
+            $mail->Port = Mails::EMAIL_PORT;
+            $mail->SMTPDebug = 1; // telling the class to use SMTP
+            $mail->SMTPAuth = true; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
+            $mail->Username = $sendFrom;
+            $mail->Password = Mails::CS_EMAIL_PASSWORD;
+        } else {
+            $mail->IsMail();
+            $mail->Sender = $sendFrom;
+        }
+
+        $mail->Host = Mails::EMAIL_HOST; // SMTP server
+        $mail->From = Mails::CS_EMAIL_FROM_NOREPLY;
+        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
+        //$mail->Subject = $subject;
+        $mail->Subject = "=?UTF-8?B?".base64_encode($subject)."?=";
+        $mail->CharSet="utf-8";
+
+        $text_body = $body;
+
+        $mail->Body = $body;
+        $mail->AltBody = $text_body;
+        $mail->AddAddress($receiverEmail, $receiverFullName);
+
+        if (!$mail->Send()) {
+            return $mail->ErrorInfo;
+            //return false;
+        }
+        return "";
+    }
     public function sendForgetPassword($existDistributor, $subject, $body)
     {
         error_reporting(E_STRICT);
