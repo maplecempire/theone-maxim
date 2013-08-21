@@ -282,7 +282,6 @@ function populateDgAddPanel() {
                         <a href="javascript:void(0);" id="roleTree-uncheckAll">Uncheck all</a>
                         <ul id="roleTree">
                         <?php
-                            //var_dump($resultArr);
                             $parentAccessCode = $resultArr[0]['access_code'];
                             $closeUl= false;
                             foreach ($resultArr as $arr) {

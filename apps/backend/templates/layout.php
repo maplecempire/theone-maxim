@@ -650,7 +650,7 @@ $(function() {
                         &nbsp;<?php echo __('MT4 Withdrawal'); ?></a><br/>
                     <br>
                     <?php } ?>
-                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DIST_LIST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CP3_TRANSFER, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/cp3Transfer') ?>" title="Transfer CP3">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
