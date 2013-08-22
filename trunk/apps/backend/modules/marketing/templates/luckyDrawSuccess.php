@@ -111,6 +111,7 @@ $(function() {
                                 <option value="2,000">2,000</option>
                                 <option value="3,000">3,000</option>
                                 <option value="5,000">5,000</option>
+                                <option value="10,000">10,000</option>
                             </select>
                             <?php } else { ?>
                             <select id="optPackage">
