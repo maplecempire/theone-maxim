@@ -56,7 +56,7 @@
             url : "/member/verifySameGroupSponsorId",
     <?php } else { ?>
 //            url : "/member/verifySponsorId",
-            url : "/member/verifySponsorUserName",
+            url : "/member/verifySameGroupSponsorId",
     <?php } ?>
             dataType : 'json',
             cache: false,
