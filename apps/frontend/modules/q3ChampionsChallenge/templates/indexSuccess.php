@@ -52,7 +52,8 @@
                             <tbody>
                             <tr class="pbl_header">
                                 <td valign="middle" width="10"></td>
-                                <td valign="left"><?php echo __('Member ID') ?></td>
+                                <td valign="middle"><?php echo __('Member ID') ?></td>
+                                <td valign="middle"><?php echo __('Country') ?></td>
                             </tr>
 
                             <?php
@@ -68,7 +69,8 @@
 
                                         echo "<tr class='row" . $trStyle . "'>
                                                 <td align='left'>" . $idx++ . ".</td>
-                                                <td align='left'>" . $member['distributor_code'] . "</td>
+                                                <td align='middle'>" . $member['distributor_code'] . "</td>
+                                                <td align='middle'>" . $member['country'] . "</td>
                                                 </tr>";
                                     }
                                 } else {
