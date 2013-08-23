@@ -22,7 +22,7 @@ class q3ChampionsChallengeActions extends sfActions
             $this->isChallenge = "Y";
         }
 
-        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
+        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, dist.country, SUM(package.price) AS _SUM
                             , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
                     FROM mlm_distributor newDist
                         LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
