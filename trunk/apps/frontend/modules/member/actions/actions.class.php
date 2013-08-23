@@ -5744,7 +5744,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsorId = $this->getRequestParameter('sponsorId');
             //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
+                /*$query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -5785,7 +5785,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                     return $this->redirect('/member/transferRP');
-                }
+                }*/
             //}
             if (($this->getRequestParameter('epointAmount')) > $ledgerAccountBalance) {
 
