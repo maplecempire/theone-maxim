@@ -3701,7 +3701,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
         $sponsorId = $this->getRequestParameter('sponsorId');
 
-        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -3719,7 +3719,18 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
             if ($pos === false) { // note: three equal signs
+                $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                if ($pos === false) { // note: three equal signs
 
+                } else {
+                    $isFound = true;
+                    $arr = array(
+                        'userId' => $resultArr["distributor_id"],
+                        'userName' => $resultArr["distributor_code"],
+                        'fullname' => $resultArr["full_name"],
+                        'nickname' => $resultArr["nickname"]
+                    );
+                }
             } else {
                 $isFound = true;
                 $arr = array(
@@ -5095,7 +5106,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
             //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -5113,7 +5124,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $isFound = true;
+                        }
                     } else {
                         $isFound = true;
                     }
@@ -5306,7 +5322,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
             //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -5324,7 +5340,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $isFound = true;
+                        }
                     } else {
                         $isFound = true;
                     }
@@ -5517,7 +5538,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsorId = $this->getRequestParameter('sponsorId');
 
             //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -5535,7 +5556,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $isFound = true;
+                        }
                     } else {
                         $isFound = true;
                     }
@@ -5718,7 +5744,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsorId = $this->getRequestParameter('sponsorId');
             //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE
+                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
                     WHERE appUser.username = '".$sponsorId."'";
@@ -5736,7 +5762,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $isFound = true;
+                        }
                     } else {
                         $isFound = true;
                     }
