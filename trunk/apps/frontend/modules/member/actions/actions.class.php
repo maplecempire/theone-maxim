@@ -6693,12 +6693,11 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $level = 0;
                 while ($level < 10) {
-                    print_r("level start ".$level."<br><br>");
                     if ($bonusDate == $currentDate) {
                         print_r("break<br>");
                         break;
                     }
-
+                    print_r("level start ".$level."<br><br>");
                     //$c = new Criteria();
                     //$mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
