@@ -6672,6 +6672,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeDailyBonus()
     {
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+        $fromAbfx = "Y";
         try {
             $con->begin();
 
@@ -6701,7 +6702,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$c = new Criteria();
                     //$mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::FROM_ABFX, "Y");
+                    $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $dists = MlmDistributorPeer::doSelect($c);
 
                     foreach ($dists as $dist) {
@@ -6943,7 +6944,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             throw $e;
         }
         //exit();
-        if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) {
+        if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD && $fromAbfx == "N") {
             print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
             $this->retrieveGmailMailAttachment();
 
@@ -7114,15 +7115,16 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
                 }
             }
-        }
-        // roi dividend end~
+            // roi dividend end~
 
-        print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
-        //$this->executeSendRemindationEmailForUploadAgreement();
-        print_r("<br>sendDailyReport<br>");
-        if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) {
-            $this->sendDailyReport();
+            print_r("<br>executeSendRemindationEmailForUploadAgreement<br>");
+            //$this->executeSendRemindationEmailForUploadAgreement();
+            print_r("<br>sendDailyReport<br>");
+            if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) {
+                $this->sendDailyReport();
+            }
         }
+
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
