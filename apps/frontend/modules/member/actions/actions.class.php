@@ -6698,12 +6698,22 @@ We look forward to your custom in the near future. Should you have any queries, 
                         break;
                     }
 
+                    //$c = new Criteria();
+                    //$mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    //$c->add(MlmDistPairingPeer::DIST_ID, 2310);
-                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
-                    foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
+                    $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+                    $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+                    $dists = MlmDistributorPeer::doSelect($c);
+
+                    foreach ($dists as $dist) {
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
+                        $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        if (!$mlmDistPairingDB)
+                            continue;
+
                         $distId = $mlmDistPairingDB->getDistId();
-                        //$flushLimit = $mlmDistPairingDB->getFlushLimit() - $this->getDsbAmount($distId, $bonusDate);
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
                         print_r("DistId ".$distId."<br>");
                         $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, null);
