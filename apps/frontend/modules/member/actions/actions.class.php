@@ -6698,19 +6698,20 @@ We look forward to your custom in the near future. Should you have any queries, 
                         break;
                     }
                     print_r("level start :".$level."<br><br>");
-                    //$c = new Criteria();
-                    //$mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
-                    $dists = MlmDistributorPeer::doSelect($c);
-                    print_r("total Dist:".count($dists)."<br><br>");
-                    foreach ($dists as $dist) {
-                        $c = new Criteria();
-                        $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
-                        $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
+//                    $c = new Criteria();
+//                    $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
+//                    $dists = MlmDistributorPeer::doSelect($c);
+//                    print_r("total Dist:".count($dists)."<br><br>");
+//                    foreach ($dists as $dist) {
+                    foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
+//                        $c = new Criteria();
+//                        $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
+//                        $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
 
-                        if (!$mlmDistPairingDB)
-                            continue;
+//                        if (!$mlmDistPairingDB)
+//                            continue;
 
                         $distId = $mlmDistPairingDB->getDistId();
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
