@@ -6703,7 +6703,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $c = new Criteria();
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $dists = MlmDistributorPeer::doSelect($c);
-
+                    print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
                         $c = new Criteria();
                         $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
