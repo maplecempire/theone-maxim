@@ -6701,8 +6701,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$c = new Criteria();
                     //$mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::FROM_ABFX, "N");
-                    $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+                    $c->add(MlmDistributorPeer::FROM_ABFX, "Y");
                     $dists = MlmDistributorPeer::doSelect($c);
 
                     foreach ($dists as $dist) {
