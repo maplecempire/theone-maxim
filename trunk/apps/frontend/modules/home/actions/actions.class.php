@@ -145,7 +145,8 @@ class homeActions extends sfActions
 
             if ($existDistributor) {
                 $c = new Criteria();
-                $c->add(AppUserPeer::USERNAME, $username);
+//                $c->add(AppUserPeer::USERNAME, $username);
+                $c->add(AppUserPeer::USER_ID, $existDistributor->getUserId());
                 $c->add(AppUserPeer::USER_ROLE, Globals::ROLE_DISTRIBUTOR);
                 $c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
                 $existUser = AppUserPeer::doSelectOne($c);
