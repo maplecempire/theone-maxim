@@ -52,8 +52,10 @@ tinyMCE.init({
     <div class="portlet">
         <div class="portlet-header">Customer Enquiry</div>
         <div class="portlet-content" style="width: 98%">
+            <?php $distributorDB = MlmDistributorPeer::retrieveByPK($mlmCustomerEnquiry->getDistributorId());?>
             <h3>Title: <?php echo $mlmCustomerEnquiry->getTitle(); ?></h3>
             <h3>Contact No: <?php echo $mlmCustomerEnquiry->getContactNo(); ?></h3>
+            <h3>From ABFX: <?php echo $distributorDB->getFromAbfx(); ?></h3>
 
             <table class="sf_admin_list" cellpadding="3" width="100%">
                 <tr>
@@ -77,7 +79,6 @@ tinyMCE.init({
                     </td>
                 </tr>
                 <?php
-                $distributorDB = MlmDistributorPeer::retrieveByPK($mlmCustomerEnquiry->getDistributorId());
                 foreach ($mlmCustomerEnquiryDetails as $mlmCustomerEnquiryDetail) {
                     if ($mlmCustomerEnquiryDetail->getReplyFrom() == "ADMIN")
                         $class = "color: #0088CF";

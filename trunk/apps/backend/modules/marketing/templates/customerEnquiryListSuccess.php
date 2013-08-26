@@ -20,6 +20,7 @@ $(function(){
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
+            aoData.push( { "name": "filterDistCode", "value": $("#search_distCode").val()  } );
             aoData.push( { "name": "filterSubject", "value": $("#search_subject").val()  } );
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
@@ -38,14 +39,15 @@ $(function(){
             [1,'desc']
         ],
         "aoColumns": [
-            { "sName" : "enquiry_id", "bVisible" : false,  "bSortable": true},
-            { "sName" : "updated_on", "bVisible" : true,  "bSortable": true},
-            { "sName" : "title",  "bSortable": true},
-            { "sName" : "distributor_updated",  "bSortable": true},
-            { "sName" : "admin_read",  "bVisible": true, "fnRender": function ( oObj ) {
-                if (oObj.aData[4] == "Read") {
+            { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
+            { "sName" : "customer.updated_on", "bVisible" : true,  "bSortable": true},
+            { "sName" : "dist.distributor_code",  "bSortable": true},
+            { "sName" : "customer.title",  "bSortable": true},
+            { "sName" : "customer.distributor_updated",  "bSortable": true},
+            { "sName" : "customer.admin_read",  "bVisible": true, "fnRender": function ( oObj ) {
+                if (oObj.aData[5] == "Read") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "'>Read</a>";
-                } else if (oObj.aData[4] == "Unread") {
+                } else if (oObj.aData[5] == "Unread") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "' style='color:#0088CF'>Unread</a>";
                 }
             }}
@@ -87,6 +89,7 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <th></th>
                             <th>Date</th>
+                            <th>Member ID</th>
                             <th>Subject</th>
                             <th>Last Reply</th>
                             <th>Read / Unread</th>
@@ -94,7 +97,8 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <td></td>
                             <td></td>
-                            <td><input title="" size="10" type="text" id="search_subject" value="" class="search_init"/></td>
+                            <td><input title="" size="20" type="text" id="search_distCode" value="" class="search_init"/></td>
+                            <td><input title="" size="20" type="text" id="search_subject" value="" class="search_init"/></td>
                             <td></td>
                             <td></td>
                         </tr>
