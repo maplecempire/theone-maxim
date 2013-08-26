@@ -7127,12 +7127,27 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             print_r("Start<br>");
 
-            $c = new Criteria();
-            $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
+//            $c = new Criteria();
+//            $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
             $bonusDate = date("Y-m-d");
-            foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
-                $distId = $mlmDistPairingDB->getDistId();
-                $flushLimit = $mlmDistPairingDB->getFlushLimit();
+            $query = "SELECT pairing.pairing_id, pairing.dist_id, pairing.left_balance, pairing.right_balance
+                , pairing.flush_limit, pairing.created_by, pairing.created_on, pairing.updated_by, pairing.updated_on
+            FROM mlm_dist_pairing pairing
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+                    WHERE dist.from_abfx = 'Y'";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+            $resultArray = array();
+            $result = 0;
+            while ($resultset->next()) {
+                $resultArr = $resultset->getRow();
+//            foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
+//                $distId = $mlmDistPairingDB->getDistId();
+                $distId = $resultArr['dist_id'];
+//                $flushLimit = $mlmDistPairingDB->getFlushLimit();
+                $flushLimit = $resultArr['flush_limit'];
                 print_r("DistId " . $distId . "<br>");
                 $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, null);
                 $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, null);
@@ -7156,8 +7171,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $pairingPercentage = $packageDB->getPairingBonus();
                         $dailyMaxPairing = $packageDB->getDailyMaxPairing();
                         if ($flushLimit != $dailyMaxPairing) {
-                            $mlmDistPairingDB->setFlushLimit($dailyMaxPairing);
-                            $mlmDistPairingDB->save();
+                            //$mlmDistPairingDB->setFlushLimit($dailyMaxPairing);
+                            //$mlmDistPairingDB->save();
 
                             $flushLimit = $dailyMaxPairing;
                         }
