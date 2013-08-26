@@ -3724,21 +3724,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 } else {
                     $isFound = true;
-                    $arr = array(
-                        'userId' => $resultArr["distributor_id"],
-                        'userName' => $resultArr["distributor_code"],
-                        'fullname' => $resultArr["full_name"],
-                        'nickname' => $resultArr["nickname"]
-                    );
                 }
             } else {
                 $isFound = true;
-                $arr = array(
-                    'userId' => $resultArr["distributor_id"],
-                    'userName' => $resultArr["distributor_code"],
-                    'fullname' => $resultArr["full_name"],
-                    'nickname' => $resultArr["nickname"]
-                );
             }
 
             if ($isFound == false) {
@@ -3749,14 +3737,16 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     } else {
                         $isFound = true;
-                        $arr = array(
-                            'userId' => $existDist->getDistributorId(),
-                            'userName' => $existDist->getDistributorCode(),
-                            'fullname' => $existDist->getFullName(),
-                            'nickname' => $existDist->getNickname()
-                        );
                     }
                 }
+            }
+            if ($isFound) {
+                $arr = array(
+                    'userId' => $resultArr["distributor_id"],
+                    'userName' => $resultArr["distributor_code"],
+                    'fullname' => $resultArr["full_name"],
+                    'nickname' => $resultArr["nickname"]
+                );
             }
         }
 
