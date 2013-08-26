@@ -946,6 +946,31 @@ $(document).ready(function() {
         </table>
         <div id="page_1" class="page">
             <div class="poptitle">
+                Q3 Champions Challenge
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "25 AUGUST 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br>
+                SUPER ANNOUNCEMENT for those Registered for Q3 Challenge 2013. In addition to the many great prizes already up for grabs, it gives us tremendous pleasure to throw in a Rolex King for anyone and everyone that achieves a personal sales of USD200K. For those who have not registered but would like to participate, you have till August 31st to do so. Your  cumulative personal sales from August 5th to Sept 30th will be captured for the Q3 Challenge. Go For It !!! GOOD LUCK & GOOD HUNTING MAXIMers !!!!
+                <br>
+                <br>
+                <span style="font-family: 宋体">
+                超级好消息!!!
+                <br>
+                特告知所有报名参加第三Q3季度冠军挑战计划的伙伴们：在原有奖励计划基础上，马胜金融集团决定额外奖励每一位个人销售业绩达到二十万美金（USD200,000）的伙伴将获公司赠送名贵瑞士劳力士Rolex King系列手表一只！尚未报名参加第三Q3季度冠军挑战计划的伙伴们在2013.8.31日前依然可以报名参加。公司将根据您从2013.8.5日至9.30日的个人累积销售业绩做出评判。我们期待您的参与，加油吧！
+                <br>
+                祝您旗开得胜，盆满钵满！
+                </span>
+            </div>
+            <br>
+            <div class="popdivider"></div>
+            <br>
+            <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
             <div class="news_date">
