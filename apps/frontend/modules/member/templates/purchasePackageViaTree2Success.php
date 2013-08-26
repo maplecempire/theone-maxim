@@ -16,6 +16,10 @@ $(function() {
         return this.optional(element) || /^[a-z0-9\-\s\_]+$/i.test(value);
     }, "This field only accept latin word, numbers, or dashes.");
 
+    jQuery.validator.addMethod("latinRegex", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\-\s\_\/\.]+$/i.test(value);
+    }, "This field only accept latin word, numbers, or dashes.");
+
     $("#registerForm").validate({
         messages : {
             confirmPassword: {
@@ -63,7 +67,7 @@ $(function() {
             },
             "fullname" : {
                 required : true,
-                loginRegex: true,
+                latinRegex: true,
                 minlength : 2
 //                , remote: "/member/verifyFullName"
             },
@@ -106,7 +110,7 @@ $(function() {
             },
             <?php } ?>
             "sign_name" : {
-                loginRegex: true,
+                latinRegex: true,
                 required : true
             }
             /*"privateInvestmentAgreement" : {
