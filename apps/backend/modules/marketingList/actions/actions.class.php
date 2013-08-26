@@ -606,51 +606,64 @@ class marketingListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
 
+        $sql = " FROM mlm_customer_enquiry customer
+                    LEFT JOIN mlm_distributor dist ON customer.distributor_id = dist.distributor_id";
+
         /******   total records  *******/
-        $c = new Criteria();
-        //$c->addAnd(MlmEcashWithdrawPeer::F_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-        $totalRecords = MlmCustomerEnquiryPeer::doCount($c);
+        $sWhere = " WHERE 1=1";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
         if ($this->getRequestParameter('filterSubject') != "") {
-            $c->add(MlmCustomerEnquiryPeer::TITLE, "%" . $this->getRequestParameter('filterSubject') . "%", Criteria::LIKE);
+            $sWhere .= " AND customer.title like '%" . $this->getRequestParameter('filterSubject') ."%'";
         }
-        $totalFilteredRecords = MlmCustomerEnquiryPeer::doCount($c);
+        if ($this->getRequestParameter('filterDistCode') != "") {
+            $sWhere .= " AND dist.distributor_code like '%" . $this->getRequestParameter('filterDistCode') ."%'";
+        }
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
         for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
         {
             if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
-                if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
-                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
-                } else {
-                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
-                }
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
             }
         }
 
-        /******   pagination  *******/
-        $pager = new sfPropelPager('MlmCustomerEnquiry', $limit);
-        $pager->setCriteria($c);
-        $pager->setPage(($offset / $limit) + 1);
-        $pager->init();
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
 
-        foreach ($pager->getResults() as $result) {
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
             $lastReply = "";
             $read = "";
 
-            if ($result->getDistributorUpdated() == "T") {
+            if ($resultArr['distributor_updated'] == "T") {
                 $lastReply = "<font style='color:red'>Yes</font>";
             }
-            if ($result->getAdminRead() == "T") {
+            if ($resultArr['admin_read'] == "T") {
                 $read = "Read";
             } else {
                 $read = "Unread";
             }
             $arr[] = array(
-                $result->getEnquiryId() == null ? "" : $result->getEnquiryId(),
-                $result->getUpdatedOn()  == null ? "" : $result->getUpdatedOn(),
-                $result->getTitle() == null ? "" : $result->getTitle(),
+                $resultArr['enquiry_id'] == null ? "" : $resultArr['enquiry_id'],
+                $resultArr['updated_on'] == null ? "" : $resultArr['updated_on'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['title'] == null ? "" : $resultArr['title'],
                 $lastReply,
                 $read
             );
