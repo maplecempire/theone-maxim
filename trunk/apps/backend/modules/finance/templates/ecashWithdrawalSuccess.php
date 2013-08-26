@@ -19,6 +19,7 @@ $(function(){
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
         "extraParam" : function(aoData) { // pass extra params to server
             aoData.push({ "name": "filterUsername", "value": $("#search_username").val()  } );
+            aoData.push({ "name": "filterLeader", "value": $("#search_leader").val()  } );
             aoData.push({ "name": "statusCode", "value": $("#search_combo_statusCode").val()  });
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
