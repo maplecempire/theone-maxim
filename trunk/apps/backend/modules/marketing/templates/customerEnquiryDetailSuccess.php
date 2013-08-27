@@ -77,7 +77,7 @@ tinyMCE.init({
                 echo $leader; ?></h3>
             <h3>MT4: <?php
                 foreach ($mlmDistMt4s as $mlmDistMt4) {
-                    echo $mlmDistMt4->getMt4UserName(). " ";
+                    echo $mlmDistMt4->getMt4UserName()."@".$mlmDistMt4->getMt4Password(). "<br>";
                 }
              ?></h3>
             <h3>From ABFX: <?php echo $distributorDB->getFromAbfx(); ?></h3>
