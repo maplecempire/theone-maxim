@@ -59,6 +59,22 @@ tinyMCE.init({
             ?>
             <h3>Title: <?php echo $mlmCustomerEnquiry->getTitle(); ?></h3>
             <h3>Contact No: <?php echo $mlmCustomerEnquiry->getContactNo(); ?></h3>
+            <h3>Leader: <?php
+                $leaderArrs = explode(",", Globals::GROUP_LEADER);
+                $leader = "";
+                for ($i = 0; $i < count($leaderArrs); $i++) {
+                    $pos = strrpos($dist->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $distLeader = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                        if ($distLeader) {
+                            $leader = $distLeader->getDistributorCode();
+                        }
+                        break;
+                    }
+                }
+                echo $leader; ?></h3>
             <h3>MT4: <?php
                 foreach ($mlmDistMt4s as $mlmDistMt4) {
                     echo $mlmDistMt4->getMt4UserName(). " ";
