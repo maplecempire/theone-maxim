@@ -5161,116 +5161,125 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
                 $existDist = MlmDistributorPeer::doSelectOne($c);*/
 
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+
+                    $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '".$sponsorId."'";
+                            WHERE appUser.username = '" . $sponsorId . "'";
 
 
-                $connection = Propel::getConnection();
-                $statement = $connection->prepareStatement($query);
-                $resultset = $statement->executeQuery();
+                    $connection = Propel::getConnection();
+                    $statement = $connection->prepareStatement($query);
+                    $resultset = $statement->executeQuery();
 
-                $toId = "";
-                $toCode = "";
-                $toName = "";
+                    $toId = "";
+                    $toCode = "";
+                    $toName = "";
 
-                if ($resultset->next()) {
-                    $resultArr = $resultset->getRow();
+                    if ($resultset->next()) {
+                        $resultArr = $resultset->getRow();
 
-                    $toId = $resultArr["distributor_id"];
-                    $toCode = $resultArr["distributor_code"];
-                    $toName = $resultArr["nickname"];
-                } else {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
-                    return $this->redirect('/member/transferEpoint');
+                        $toId = $resultArr["distributor_id"];
+                        $toCode = $resultArr["distributor_code"];
+                        $toName = $resultArr["nickname"];
+                    } else {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
+                        return $this->redirect('/member/transferEpoint');
+                    }
+
+                    $c = new Criteria();
+                    $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
+                    $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
+                    $toAccount = MlmAccountPeer::doSelectOne($c);
+
+                    if (!$toAccount) {
+                        $toAccount = new MlmAccount();
+
+                        $toAccount->setDistId($toId);
+                        $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $toAccount->setBalance(0);
+                        $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->save();
+                    }
+
+
+                    $toBalance = $toAccount->getBalance();
+                    $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                    $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
+                    $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
+                    $fromBalance = $ledgerAccountBalance;
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setDistId($fromId);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($toId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                    // ******       processing fees      ****************
+                    /*$tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                   $tbl_account_ledger->setDistId($fromId);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
+                   $tbl_account_ledger->setCredit(0);
+                   $tbl_account_ledger->setDebit($processFee);
+                   $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
+
+                    // ******       company account      ****************
+                    /*$c = new Criteria();
+                   $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
+                   $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
+                   $companyAccount = MlmAccountPeer::doSelectOne($c);
+
+                   $tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                   $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
+                   $tbl_account_ledger->setCredit($processFee);
+                   $tbl_account_ledger->setDebit(0);
+                   $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
                 }
-
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
-                $toAccount = MlmAccountPeer::doSelectOne($c);
-
-                if (!$toAccount) {
-                    $toAccount = new MlmAccount();
-
-                    $toAccount->setDistId($toId);
-                    $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $toAccount->setBalance(0);
-                    $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->save();
-                }
-
-
-                $toBalance = $toAccount->getBalance();
-                $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
-                $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
-                $fromBalance = $ledgerAccountBalance;
-
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $mlm_account_ledger->setDistId($fromId);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_EPOINT);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($toId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
-                $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
-
-                // ******       processing fees      ****************
-                /*$tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($fromId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($processFee);
-                $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
-
-                // ******       company account      ****************
-                /*$c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                $companyAccount = MlmAccountPeer::doSelectOne($c);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
@@ -5376,121 +5385,129 @@ We look forward to your custom in the near future. Should you have any queries, 
                 /*$c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
                 $existDist = MlmDistributorPeer::doSelectOne($c);*/
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+                    $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '".$sponsorId."'";
+                            WHERE appUser.username = '" . $sponsorId . "'";
 
 
-                $connection = Propel::getConnection();
-                $statement = $connection->prepareStatement($query);
-                $resultset = $statement->executeQuery();
+                    $connection = Propel::getConnection();
+                    $statement = $connection->prepareStatement($query);
+                    $resultset = $statement->executeQuery();
 
-                $toId = "";
-                $toCode = "";
-                $toName = "";
+                    $toId = "";
+                    $toCode = "";
+                    $toName = "";
 
-                if ($resultset->next()) {
-                    $resultArr = $resultset->getRow();
+                    if ($resultset->next()) {
+                        $resultArr = $resultset->getRow();
 
-                    $toId = $resultArr["distributor_id"];
-                    $toCode = $resultArr["distributor_code"];
-                    $toName = $resultArr["nickname"];
-                } else {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
+                        $toId = $resultArr["distributor_id"];
+                        $toCode = $resultArr["distributor_code"];
+                        $toName = $resultArr["nickname"];
+                    } else {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
+                        return $this->redirect('/member/transferCp2');
+                    }
+
+                    $c = new Criteria();
+                    $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
+                    $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
+                    $toAccount = MlmAccountPeer::doSelectOne($c);
+
+                    if (!$toAccount) {
+                        $toAccount = new MlmAccount();
+
+                        $toAccount->setDistId($toId);
+                        $toAccount->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $toAccount->setBalance(0);
+                        $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->save();
+                    }
+
+
+                    $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_ECASH);
+                    $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                    $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
+                    $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
+                    $fromBalance = $ledgerAccountBalance;
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setDistId($fromId);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($toId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
+
+                    // ******       processing fees      ****************
+                    /*$tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                   $tbl_account_ledger->setDistId($fromId);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
+                   $tbl_account_ledger->setCredit(0);
+                   $tbl_account_ledger->setDebit($processFee);
+                   $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
+
+                    // ******       company account      ****************
+                    /*$c = new Criteria();
+                   $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
+                   $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
+                   $companyAccount = MlmAccountPeer::doSelectOne($c);
+
+                   $tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                   $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
+                   $tbl_account_ledger->setCredit($processFee);
+                   $tbl_account_ledger->setDebit(0);
+                   $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
+                    $con->commit();
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
+
                     return $this->redirect('/member/transferCp2');
+
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
                 }
-
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-                $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
-                $toAccount = MlmAccountPeer::doSelectOne($c);
-
-                if (!$toAccount) {
-                    $toAccount = new MlmAccount();
-
-                    $toAccount->setDistId($toId);
-                    $toAccount->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                    $toAccount->setBalance(0);
-                    $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->save();
-                }
-
-
-                $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_ECASH);
-                $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
-                $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
-                $fromBalance = $ledgerAccountBalance;
-
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $mlm_account_ledger->setDistId($fromId);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($toId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
-                $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
-
-                // ******       processing fees      ****************
-                /*$tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($fromId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($processFee);
-                $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
-
-                // ******       company account      ****************
-                /*$c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                $companyAccount = MlmAccountPeer::doSelectOne($c);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
-
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
-
-                return $this->redirect('/member/transferCp2');
             }
         }
     }
@@ -5592,118 +5609,124 @@ We look forward to your custom in the near future. Should you have any queries, 
                 /*$c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
                 $existDist = MlmDistributorPeer::doSelectOne($c);*/
-
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+                    $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '".$sponsorId."'";
+                            WHERE appUser.username = '" . $sponsorId . "'";
 
 
-                $connection = Propel::getConnection();
-                $statement = $connection->prepareStatement($query);
-                $resultset = $statement->executeQuery();
+                    $connection = Propel::getConnection();
+                    $statement = $connection->prepareStatement($query);
+                    $resultset = $statement->executeQuery();
 
-                $toId = "";
-                $toCode = "";
-                $toName = "";
+                    $toId = "";
+                    $toCode = "";
+                    $toName = "";
 
-                if ($resultset->next()) {
-                    $resultArr = $resultset->getRow();
+                    if ($resultset->next()) {
+                        $resultArr = $resultset->getRow();
 
-                    $toId = $resultArr["distributor_id"];
-                    $toCode = $resultArr["distributor_code"];
-                    $toName = $resultArr["nickname"];
-                } else {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
-                    return $this->redirect('/member/transferCp3');
+                        $toId = $resultArr["distributor_id"];
+                        $toCode = $resultArr["distributor_code"];
+                        $toName = $resultArr["nickname"];
+                    } else {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
+                        return $this->redirect('/member/transferCp3');
+                    }
+
+                    $c = new Criteria();
+                    $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
+                    $toAccount = MlmAccountPeer::doSelectOne($c);
+
+                    if (!$toAccount) {
+                        $toAccount = new MlmAccount();
+
+                        $toAccount->setDistId($toId);
+                        $toAccount->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $toAccount->setBalance(0);
+                        $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->save();
+                    }
+
+
+                    $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                    $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
+                    $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
+                    $fromBalance = $ledgerAccountBalance;
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setDistId($fromId);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId($toId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    // ******       processing fees      ****************
+                    /*$tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                   $tbl_account_ledger->setDistId($fromId);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
+                   $tbl_account_ledger->setCredit(0);
+                   $tbl_account_ledger->setDebit($processFee);
+                   $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
+
+                    // ******       company account      ****************
+                    /*$c = new Criteria();
+                   $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
+                   $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
+                   $companyAccount = MlmAccountPeer::doSelectOne($c);
+
+                   $tbl_account_ledger = new MlmAccountLedger();
+                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                   $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
+                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
+                   $tbl_account_ledger->setCredit($processFee);
+                   $tbl_account_ledger->setDebit(0);
+                   $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
+                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                   $tbl_account_ledger->save();
+
+                   $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
                 }
-
-                $c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $c->addAnd(MlmAccountPeer::DIST_ID, $toId);
-                $toAccount = MlmAccountPeer::doSelectOne($c);
-
-                if (!$toAccount) {
-                    $toAccount = new MlmAccount();
-
-                    $toAccount->setDistId($toId);
-                    $toAccount->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                    $toAccount->setBalance(0);
-                    $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->save();
-                }
-
-
-                $toBalance = $this->getAccountBalance($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
-                $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
-                $fromBalance = $ledgerAccountBalance;
-
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $mlm_account_ledger->setDistId($fromId);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $tbl_account_ledger->setDistId($toId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
-                $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-
-                // ******       processing fees      ****************
-                /*$tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($fromId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($processFee);
-                $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
-
-                // ******       company account      ****************
-                /*$c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                $companyAccount = MlmAccountPeer::doSelectOne($c);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
-
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
                 return $this->redirect('/member/transferCp3');
@@ -5802,54 +5825,62 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $c->addAnd(MlmAccountPeer::DIST_ID, $existDist->getDistributorId());
                 $toAccount = MlmAccountPeer::doSelectOne($c);
 
-                if (!$toAccount) {
-                    $toAccount = new MlmAccount();
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                    $toAccount->setDistId($existDist->getDistributorId());
-                    $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $toAccount->setBalance(0);
-                    $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $toAccount->save();
+                    if (!$toAccount) {
+                        $toAccount = new MlmAccount();
+
+                        $toAccount->setDistId($existDist->getDistributorId());
+                        $toAccount->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $toAccount->setBalance(0);
+                        $toAccount->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $toAccount->save();
+                    }
+
+                    $toId = $existDist->getDistributorId();
+                    $toCode = $existDist->getDistributorCode();
+                    $toName = $existDist->getNickname();
+                    $toBalance = $toAccount->getBalance();
+                    $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+                    $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
+                    $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
+                    $fromBalance = $ledgerAccountBalance;
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                    $mlm_account_ledger->setDistId($fromId);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_RP);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($toId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
                 }
-
-                $toId = $existDist->getDistributorId();
-                $toCode = $existDist->getDistributorCode();
-                $toName = $existDist->getNickname();
-                $toBalance = $toAccount->getBalance();
-                $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-                $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
-                $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
-                $fromBalance = $ledgerAccountBalance;
-
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
-                $mlm_account_ledger->setDistId($fromId);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
-
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_RP);
-
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($toId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
-                $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
-
-                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
-
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
                 return $this->redirect('/member/transferRP');
