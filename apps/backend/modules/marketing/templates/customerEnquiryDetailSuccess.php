@@ -63,7 +63,7 @@ tinyMCE.init({
                 $leaderArrs = explode(",", Globals::GROUP_LEADER);
                 $leader = "";
                 for ($i = 0; $i < count($leaderArrs); $i++) {
-                    $pos = strrpos($dist->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                    $pos = strrpos($distributorDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                     if ($pos === false) { // note: three equal signs
 
                     } else {
