@@ -55,8 +55,8 @@
             <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Cambodia" alt=""
                                                         src="/css/maxim/flag/22.gif"><br>Cambodia</p></td>
-                <td valign="middle"><p align="center">KHR4,400.00</p></td>
-                <td valign="middle"><p align="center">KHR4,000.00</p></td>
+                <td valign="middle"><p align="center">KHR4,500.00</p></td>
+                <td valign="middle"><p align="center">KHR4,100.00</p></td>
             </tr>
             <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="China Yuan" alt=""
@@ -84,14 +84,14 @@
                 <td valign="middle"><p align="center"><img width="90" height="45" title="India Rupees" alt=""
                                                         src="/css/maxim/flag/16.gif"><br>India Rupees
                 </p></td>
-                <td valign="middle"><p align="center">INR60.00</p></td>
-                <td valign="middle"><p align="center">INR55.00</p></td>
+                <td valign="middle"><p align="center">INR75.00</p></td>
+                <td valign="middle"><p align="center">INR68.00</p></td>
             </tr>
             <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Indonesia Rupiahs" alt=""
                                                         src="/css/maxim/flag/19.gif"><br>Indonesia Rupiahs</p></td>
+                <td valign="middle"><p align="center">R12,000.00</p></td>
                 <td valign="middle"><p align="center">R11,000.00</p></td>
-                <td valign="middle"><p align="center">R10,000.00</p></td>
             </tr>
             <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Japan Yen" alt=""
@@ -105,6 +105,14 @@
                 <td valign="middle"><p align="center">KRW1,250.00</p></td>
                 <td valign="middle"><p align="center">KRW1,150.00</p></td>
             </tr>
+            <tr class="row1">
+                <td valign="middle"><p align="center"><img width="90" height="45" title="Malaysia Ringgit" alt=""
+                                                        src="/css/maxim/flag/7.gif"><br>Malaysia Ringgit
+
+                </p></td>
+                <td valign="middle"><p align="center">RM3.60</p></td>
+                <td valign="middle"><p align="center">RM3.30</p></td>
+            </tr>
             <!--<tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Macau Patacas" alt=""
                                                         src="/css/maxim/flag/10.gif"><br>Macau Patacas
@@ -112,14 +120,7 @@
                 <td valign="middle"><p align="center">8.60</p></td>
                 <td valign="middle"><p align="center">7.40</p></td>
             </tr>
-            <tr class="row1">
-                <td valign="middle"><p align="center"><img width="90" height="45" title="Malaysia Ringgit" alt=""
-                                                        src="/css/maxim/flag/7.gif"><br>Malaysia Ringgit
 
-                </p></td>
-                <td valign="middle"><p align="center">3.40</p></td>
-                <td valign="middle"><p align="center">3.10</p></td>
-            </tr>
             <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="New Zealand Dollars" alt=""
                                                         src="/css/maxim/flag/6.gif"><br>New Zealand Dollars</p></td>
@@ -132,11 +133,11 @@
                 <td valign="middle"><p align="center">175.00</p></td>
                 <td valign="middle"><p align="center">150.00</p></td>
             </tr>-->
-            <tr class="row1">
+            <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Philippines Pesos" alt=""
                                                         src="/css/maxim/flag/15.gif"><br>Philippines Pesos</p></td>
+                <td valign="middle"><p align="center">PHP50.00</p></td>
                 <td valign="middle"><p align="center">PHP45.00</p></td>
-                <td valign="middle"><p align="center">PHP41.00</p></td>
             </tr>
             <!--<tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Russia Rubles" alt=""
@@ -144,11 +145,11 @@
                 <td valign="middle"><p align="center">34.80</p></td>
                 <td valign="middle"><p align="center">30.00</p></td>
             </tr>-->
-            <tr class="row0">
+            <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Singapore Dollars" alt=""
                                                         src="/css/maxim/flag/4.gif"><br>Singapore Dollars</p></td>
-                <td valign="middle"><p align="center">SGD1.37</p></td>
-                <td valign="middle"><p align="center">SGD1.25</p></td>
+                <td valign="middle"><p align="center">SGD1.40</p></td>
+                <td valign="middle"><p align="center">SGD1.28</p></td>
             </tr>
             <!--<tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="South Africa Rand" alt=""
@@ -162,17 +163,17 @@
                 <td valign="middle"><p align="center">1.00</p></td>
                 <td valign="middle"><p align="center">0.90</p></td>
             </tr>-->
-            <tr class="row1">
+            <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Taiwan New Dollars" alt=""
                                                         src="/css/maxim/flag/13.gif"><br>Taiwan New Dollars</p></td>
                 <td valign="middle"><p align="center">NTD34.00</p></td>
                 <td valign="middle"><p align="center">NTD31.00</p></td>
             </tr>
-            <tr class="row0">
+            <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Thailand Baht" alt=""
                                                         src="/css/maxim/flag/14.gif"><br>Thailand Baht</p></td>
-                <td valign="middle"><p align="center">B34</p></td>
-                <td valign="middle"><p align="center">B31</p></td>
+                <td valign="middle"><p align="center">B36</p></td>
+                <td valign="middle"><p align="center">B33</p></td>
             </tr>
             <!--<tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Turkey" alt=""
@@ -187,14 +188,14 @@
                 <td valign="middle" color="#28eb13"><p align="center">0.69</p></td>
                 <td valign="middle"><p align="center">0.59</p></td>
             </tr>-->
-            <tr class="row1">
+            <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="United State" alt=""
                                                         src="/css/maxim/flag/21.gif"><br>United State Dollar
                 </p></td>
                 <td valign="middle" color="#28eb13"><p align="center">USD1.05</p></td>
                 <td valign="middle"><p align="center">USD1.00</p></td>
             </tr>
-            <tr class="row0">
+            <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Vietnam Dong" alt=""
                                                         src="/css/maxim/flag/20.gif"><br>Vietnam Dong</p></td>
                 <td valign="middle"><p align="center">VND24,000.00</p></td>
