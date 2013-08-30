@@ -6740,7 +6740,6 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
-                    $c->setLimit(3000);
                     $dists = MlmDistributorPeer::doSelect($c);
 //                    print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
