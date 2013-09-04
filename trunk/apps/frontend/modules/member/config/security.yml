@@ -34,6 +34,10 @@ downloadMt4:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+downlineList:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 ecashWithdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

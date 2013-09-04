@@ -74,6 +74,8 @@ $(function(){
                                 , file_bank_pass_book : oObj.aData[idx++]
                                 , file_proof_of_residence : oObj.aData[idx++]
                                 , file_nric : oObj.aData[idx++]
+                                , leader : oObj.aData[idx++]
+                                , remark : oObj.aData[idx++]
                           });
 		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>"
 		  				  + "<br><a id='resendPasswordLink' href='#' title='Resend Password'>Resend_Password</a><br><a id='resendMt4Link' href='#' title='Resend MT4'>Resend_MT4</a>";
@@ -125,6 +127,8 @@ $(function(){
                                 return "";
                             }
                       }}
+                , { "sName" : "dist.created_on",  "bSortable": false}
+                , { "sName" : "dist.remark",  "bVisible": false}
 		]
 	});
 
@@ -264,6 +268,8 @@ function reassignDatagridEventAttr(){
 								<th>Bank Account Proof</th>
 								<th>Proof of Residence</th>
 								<th>NRIC</th>
+								<th>Leader</th>
+								<th>Remark</th>
 							</tr>
                             <tr>
                                 <td></td>
@@ -291,6 +297,8 @@ function reassignDatagridEventAttr(){
                                 <td></td>
                                 <td><input title="" size="10" type="text" id="search_parentCode" value="" class="search_init"/></td>
                                 <td><input title="" size="10" type="text" id="search_statusCode" value="" class="search_init"/></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -416,6 +424,8 @@ function populateDgAddPanel() {
         $("#dgAddPanelParent").val(data.parent_nickname);
         $("#dgAddPanelStatus").val(data.status_code);
         $("#dgAddPanelAddDate").val(data.created_on);
+        $("#dgAddPanelRemark").val(data.remark);
+        $("#dgAddPanelLeader").val(data.leader);
     }
 }
 </script>
@@ -532,6 +542,16 @@ function populateDgAddPanel() {
             <td>Add Date</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelAddDate" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+        </tr>
+        <tr>
+            <td>Leader</td>
+            <td>:</td>
+            <td><input type="text" id="dgAddPanelLeader" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+        </tr>
+        <tr>
+            <td>Remark</td>
+            <td>:</td>
+            <td colspan="4"><textarea id="dgAddPanelRemark" class="text ui-widget-content ui-corner-all" readonly="readonly" rows="2" cols="60"></textarea></td>
         </tr>
     </table>
     </fieldset>

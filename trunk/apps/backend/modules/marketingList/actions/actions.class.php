@@ -841,7 +841,7 @@ class marketingListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
 
-        $sql = "FROM mlm_distributor dist
+        $sql = " ,dist.tree_structure FROM mlm_distributor dist
             LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
             LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
 
@@ -909,6 +909,9 @@ class marketingListActions extends sfActions
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
         //var_dump($query);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
         while ($resultset->next())
         {
             $resultArr = $resultset->getRow();
@@ -927,6 +930,20 @@ class marketingListActions extends sfActions
                         $mt4Password .= ",";
                     $mt4Id .= $distMt4->getMt4UserName();
                     $mt4Password .= $distMt4->getMt4Password();
+                }
+            }
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
                 }
             }
 
@@ -962,6 +979,8 @@ class marketingListActions extends sfActions
                 , $resultArr['file_bank_pass_book'] == null ? "" : $resultArr['file_bank_pass_book']
                 , $resultArr['file_proof_of_residence'] == null ? "" : $resultArr['file_proof_of_residence']
                 , $resultArr['file_nric'] == null ? "" : $resultArr['file_nric']
+                , $leader
+                , $resultArr['remark'] == null ? "" : $resultArr['remark']
             );
         }
         $output = array(
