@@ -75,7 +75,7 @@
                         Zealand Address: </strong>
                         <br>Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland,
                         1010, New Zealand.<br>
-                        <strong>Tel: </strong>(+64) 9379 1159 / 09 379 1159 (if dialed within NZ)
+                        <strong>Tel: </strong>(+64) 9925 0379 / 09 925 0379 (if dialed within NZ)
                         </p>
                     </div>
                     <span class="seperator extralight-border"></span></div>
@@ -105,7 +105,7 @@
 
             <!--<p align="justify"><strong><?php /*echo __('New Zealand Address') */?></strong>: 13 Beechwood Road, Rothesay Bay, Auckland, 0630 , New Zealand
             <br> Support Hotline: +64 9 379 1159
-            <br>(09 379 1159 if dialed within NZ)
+            <br>(09 925 0379 if dialed within NZ)
 
             <p align="justify"><strong><?php /*echo __('Thailand Address') */?></strong>: No 1,2,3, 6th Floor, VOFFIC BUILDING, Soi 26, Ratchadaphisek Road, Huay Kwang, Bangkok 10310 Thailand
                 <br>Tel (+662) 207 2423</p>

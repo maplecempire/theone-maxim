@@ -35,7 +35,7 @@ abstract class Globals {
     const SYSTEM_COMPANY_DIST_ID = '0';
     const SYSTEM_CAPTCHA_ID = 'captcha_id';
     const LOAN_ACCOUNT_CREATOR_DIST_ID = 1;
-    const LOGIN_RETRY = 0;
+    const LOGIN_RETRY = "LOGIN_RETRY";
     const FIRST_LOGIN = 0;
     const DEBIT_CARD_CHARGES = 35;
     const DEBIT_CARD_ACTIVATION_CHARGES = 50;

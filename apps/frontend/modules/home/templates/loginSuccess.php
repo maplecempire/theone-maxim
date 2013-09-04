@@ -427,6 +427,7 @@
                                             <td class="txt_highlight"></td>
                                             <td colspan="2">
                                                 <?php
+                                                //var_dump($sf_user->getAttribute(Globals::LOGIN_RETRY));
                                                 if ($sf_user->getAttribute(Globals::LOGIN_RETRY, 0) >= 3) {
                                                     require_once('recaptchalib.php');
                                                     $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
