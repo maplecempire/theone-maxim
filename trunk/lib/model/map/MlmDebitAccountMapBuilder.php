@@ -60,5 +60,7 @@ class MlmDebitAccountMapBuilder {
 
 		$tMap->addColumn('TRANSFER_CP3', 'TransferCp3', 'string', CreoleTypes::VARCHAR, true, 1);
 
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 	} 
 } 

@@ -38,6 +38,13 @@ class adminActions extends sfActions
             $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
             $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
 
+            $appLoginLog = new AppLoginLog();
+            $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $appLoginLog->setUserId($existUser->getUserId());
+            $appLoginLog->setRemark("Master User Id:".$masterUserId);
+            $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->save();
             return $this->redirect('admin/redirectToFrontend');
         }
 
