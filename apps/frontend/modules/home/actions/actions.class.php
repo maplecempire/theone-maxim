@@ -479,6 +479,15 @@ class homeActions extends sfActions
 
                 $existUser->setLastLoginDatetime(date("Y/m/d h:i:s A"));
                 $existUser->save();
+
+                $appLoginLog = new AppLoginLog();
+                $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+                $appLoginLog->setUserId($existUser->getUserId());
+                $appLoginLog->setRemark("");
+                $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $appLoginLog->save();
+
                 return $this->redirect('home/index');
                 //return $this->redirect('member/summary');
                 //}

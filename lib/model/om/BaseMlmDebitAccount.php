@@ -63,6 +63,10 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	
 	protected $transfer_cp3 = '1';
 
+
+	
+	protected $remark;
+
 	
 	protected $alreadyInSave = false;
 
@@ -195,6 +199,13 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	{
 
 		return $this->transfer_cp3;
+	}
+
+	
+	public function getRemark()
+	{
+
+		return $this->remark;
 	}
 
 	
@@ -438,6 +449,23 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setRemark($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->remark !== $v) {
+			$this->remark = $v;
+			$this->modifiedColumns[] = MlmDebitAccountPeer::REMARK;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -470,11 +498,13 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 
 			$this->transfer_cp3 = $rs->getString($startcol + 13);
 
+			$this->remark = $rs->getString($startcol + 14);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 15; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDebitAccount object", $e);
 		}
@@ -661,6 +691,9 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			case 13:
 				return $this->getTransferCp3();
 				break;
+			case 14:
+				return $this->getRemark();
+				break;
 			default:
 				return null;
 				break;
@@ -685,6 +718,7 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			$keys[11] => $this->getTransferCp1(),
 			$keys[12] => $this->getTransferCp2(),
 			$keys[13] => $this->getTransferCp3(),
+			$keys[14] => $this->getRemark(),
 		);
 		return $result;
 	}
@@ -742,6 +776,9 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 			case 13:
 				$this->setTransferCp3($value);
 				break;
+			case 14:
+				$this->setRemark($value);
+				break;
 		} 	}
 
 	
@@ -763,6 +800,7 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setTransferCp1($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setTransferCp2($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setTransferCp3($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setRemark($arr[$keys[14]]);
 	}
 
 	
@@ -784,6 +822,7 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP1)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP1, $this->transfer_cp1);
 		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP2)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP2, $this->transfer_cp2);
 		if ($this->isColumnModified(MlmDebitAccountPeer::TRANSFER_CP3)) $criteria->add(MlmDebitAccountPeer::TRANSFER_CP3, $this->transfer_cp3);
+		if ($this->isColumnModified(MlmDebitAccountPeer::REMARK)) $criteria->add(MlmDebitAccountPeer::REMARK, $this->remark);
 
 		return $criteria;
 	}
@@ -839,6 +878,8 @@ abstract class BaseMlmDebitAccount extends BaseObject  implements Persistent {
 		$copyObj->setTransferCp2($this->transfer_cp2);
 
 		$copyObj->setTransferCp3($this->transfer_cp3);
+
+		$copyObj->setRemark($this->remark);
 
 
 		$copyObj->setNew(true);
