@@ -63,7 +63,8 @@ $(function() {
                         <td class="caption">Member ID</td>
                         <td class="value">
                             <select id="optMember">
-                                <option value="130872">bmw5-bmw5</option>
+                                <option value="130873">bmw6</option>
+                                <option value="252828">minaki1491</option>
                                 <?php
                                     foreach ($dists as $dist) {
                                 ?>
