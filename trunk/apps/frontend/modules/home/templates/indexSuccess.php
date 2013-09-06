@@ -940,11 +940,53 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a>
                 </td>
             </tr>
         </table>
         <div id="page_1" class="page">
+            <div class="poptitle">
+                IMPORTANT ANNOUNCEMENT!!!
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "6 SEPTEMBER 2013";
+                ?>
+            </div>
+            <div class="news_desc" style="text-align:left">
+                <br>
+                IMPORTANT ANNOUNCEMENT!!!
+                <br><br>To ensure security and to prevent unauthorized entry into your Maxim Account, please update, change and use a "stronger" password of between 8-32 characters: Use a combination of Capital letters, Small letters, 0-9 and underscore (_) only and must include at least one letter and one number.
+                <br><br>NB1. At least eight characters long
+                <br>NB2. Does not contain your user name, real name or company name.
+                <br>NB3. Does not contain a complete word
+                <br><br>PROTECT YOUR ACCOUNT, PROTECT YOUR MAXIM ASSET.
+                <br>
+                <br>
+                <span style="font-family: 宋体">
+                重要提醒!!!!
+                <br>
+                <br>为了确保您的账户安全，杜绝无授权登录行为，马胜金融集团友情提醒您尽快登录个人账户，升级您的账户密码安全级别，并将其更改至由8-32位符号组成的密码。请只组合使用大写英文字母、小写英文字母、0-9的数字，下划线等符号，且新密码必须含最少包含一个字母与一个数字。
+                <br>
+                <br>规则一：密码最少长度为8个符号
+                <br>规则二：请不要使用您的账户名、真实姓名或公司名称
+                <br>规则三：请不要包含一个完整的单词。
+                <br>
+                <br>保护您的账户, 保证您的资产安全!
+                </span>
+                <br>
+                <br>
+                <br>重要発表！
+                <br><br>セキュリティおよびあなたのマキシムアカウントに不正侵入を防ぐために、8-32文字の"より安全な"パスワードに変更するように更新してください：アルファベットの大文字、小文字、数字の0～9、そしてアンダースコア（_）を使用してください。更に、少なくともアルファベット文字一つと数字を1つ含める必要があります。
+                <br><br>1.少なくとも8文字
+                <br>2.ユーザー名、本名、または会社名が含まれない。
+                <br>3. 完全な単語を使用しない。
+                <br><br>アカウントを守りましょう！、あなたのMAXIM資産を守りましょう！！
+                <br>よろしくお願いいたします。
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -972,7 +1014,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1001,7 +1043,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1015,7 +1057,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
