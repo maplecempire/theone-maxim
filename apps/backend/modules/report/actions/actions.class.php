@@ -253,6 +253,16 @@ LEFT JOIN (
                     AND newDist.created_on >= '2013-03-17 00:00:00'
                     and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having SUM(package.price) >= 30000  order by 3";
 
+        $query = "SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price) AS _SUM
+                            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM mlm_distributor newDist
+                        LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                where newDist.loan_account = 'N'
+                    AND newDist.from_abfx = 'N'
+                    AND dist.placement_tree_structure like '%|1464|%'
+                    AND newDist.created_on >= '2013-08-05 00:00:00' group by upline_dist_id";
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
