@@ -291,6 +291,7 @@ LEFT JOIN (
 
             $resultArray[$count] = $arr;
             $resultArray[$count]['LEADER'] = $leader;
+            $resultArray[$count]['UPGRADE_AMOUNT'] = $this->getUpgradePackageSales($arr['upline_dist_id']);
             $count++;
         }
         $this->resultArray = $resultArray;
@@ -382,6 +383,30 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
             $count++;
         }
         $this->resultArray = $resultArray;
+    }
+
+    function getUpgradePackageSales($distId)
+    {
+        $query = "SELECT SUM(package.price) AS _SUM
+	FROM mlm_package_upgrade_history history
+        left join mlm_distributor dist ON dist.distributor_id = history.dist_id
+        left join mlm_package package ON package.package_id = history.package_id
+            WHERE history.created_on >= '2013-08-05 00:00:00'
+                    AND dist.upline_dist_id = ".$distId;
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            return $arr['_SUM'];
+        }
+        return 0;
     }
 
     public function executeCustomerService()
