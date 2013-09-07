@@ -4,6 +4,7 @@
         <td>Member Id</td>
         <td>Full Name</td>
         <td>Personal Sales Amount</td>
+        <td>upgrade Amount</td>
         <td>Email</td>
         <td>Contact Number</td>
         <td>Country</td>
@@ -19,6 +20,7 @@
         <td><?php echo $arr['distributor_code'] ?></td>
         <td><?php echo $arr['full_name'] ?></td>
         <td><?php echo number_format($arr['_SUM'],2) ?></td>
+        <td><?php echo number_format($arr['UPGRADE_AMOUNT'],2) ?></td>
         <td><?php echo $arr['email'] ?></td>
         <td><?php echo $arr['contact'] ?></td>
         <td><?php echo $arr['country'] ?></td>
