@@ -1,5 +1,69 @@
 <?php include('scripts.php'); ?>
 
+<script type='text/javascript' src='/js/jquery/cmxforms.js'></script>
+
+<script src="/js/jquery-countdown/js/jquery.countdown.js" type="text/javascript" charset="utf-8"></script>
+
+<?php
+
+$time1 = strtotime(date("Y-m-d H:i:s"));
+$time2 = strtotime("2013-10-01 00:00:00");
+
+$diff = $time2-$time1;
+
+$days    = floor($diff / 86400);
+$hours   = floor(($diff - ($days * 86400)) / 3600);
+$minutes = floor(($diff - ($days * 86400) - ($hours * 3600)) / 60);
+$seconds = floor(($diff - ($days * 86400) - ($hours * 3600) - ($minutes*60)));
+
+if ($days < 10) {
+    $days = "0".$days;
+}
+if ($hours < 10) {
+    $hours = "0".$hours;
+}
+if ($minutes < 10) {
+    $minutes = "0".$minutes;
+}
+if ($seconds < 10) {
+    $seconds = "0".$seconds;
+}
+?>
+
+<script type="text/javascript">
+$(function() {
+    $('#counter').countdown({
+        image: '/js/jquery-countdown/img/digits.png',
+        startTime: '<?php echo $days.":".$hours.":".$minutes.":".$seconds?>'
+    });
+});
+</script>
+<style type="text/css">
+    br {
+        clear: both;
+    }
+
+    .cntSeparator {
+        font-size: 54px;
+        margin: 10px 7px;
+        color: #000;
+    }
+
+    .desc {
+        margin: 7px 3px;
+    }
+
+    .desc div {
+        float: left;
+        font-family: Arial;
+        width: 70px;
+        margin-right: 65px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #000;
+    }
+</style>
+
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
@@ -45,7 +109,17 @@
                     <col width="1%">
                 </colgroup>
                 <tbody>
-
+                <tr>
+                    <td colspan="4">
+                        <div id="counter"></div>
+                        <div class="desc">
+                            <div>Days</div>
+                            <div>Hours</div>
+                            <div>Minutes</div>
+                            <div>Seconds</div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="4">
                         <table class="pbl_table" border="1" cellspacing="0">
