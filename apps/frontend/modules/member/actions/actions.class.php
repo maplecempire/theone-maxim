@@ -5761,6 +5761,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null, null, null, null)) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Transfer temporary out of service."));
+                return $this->redirect('/member/convertRPToCp1');
+            }
             if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert RP To CP1 temporary out of service."));
                 return $this->redirect('/member/convertRPToCp1');
