@@ -34,7 +34,7 @@ class businessActions extends sfActions
                 if ($arr["_TOTAL"] != null) {
                     $totalBonus = $arr["_TOTAL"];
                     $dist_id = $arr["dist_id"];
-
+                    print_r($dist_id.":".$totalBonus."<br>");
                     $ledgerAccountBalance = $this->getAccountBalance($dist_id, Globals::ACCOUNT_TYPE_ECASH);
 
                     $tbl_account_ledger = new MlmAccountLedger();
