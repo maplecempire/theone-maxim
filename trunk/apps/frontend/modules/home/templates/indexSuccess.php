@@ -940,11 +940,51 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a>
                 </td>
             </tr>
         </table>
         <div id="page_1" class="page">
+            <div class="poptitle">
+                IMPORTANT ANNOUNCEMENT!!!
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "9 SEPTEMBER 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br>
+                IMPORTANT ANNOUNCEMENT!!!
+                <br><br>Currency Whole Seller Rate as effective from
+                <br><strong>10th Sep 2013</strong>:
+                <br><br>
+                <table>
+                    <tr>
+                        <td align="center">
+                            <table style="text-align: left; width: 300px">
+                                <tr><td>1. </td><td>Malaysia RM - RM3.30 / RM3.60       </td></tr>
+                                <tr><td>2. </td><td>Thailand Baht - B33/ B36            </td></tr>
+                                <tr><td>3. </td><td>Indonesia Rupiah - R11,000 / R12,000</td></tr>
+                                <tr><td>4. </td><td>China RMB - RMB6.30 / RMB7.00       </td></tr>
+                                <tr><td>5. </td><td>Taiwan New Dollar - NTD31 / NTD34   </td></tr>
+                                <tr><td>6. </td><td>Hong Kong Dollar - HKD7.8/HKD8.5    </td></tr>
+                                <tr><td>7. </td><td>Japanese Yen - JPY103               </td></tr>
+                                <tr><td>8. </td><td>Korean Won - KRW1,150/KRW1,250      </td></tr>
+                                <tr><td>9. </td><td>Phillipine Peso - PHP45/PHP50       </td></tr>
+                                <tr><td>10.</td><td>Singapore Dollar - SGD1.28/SGD1.40 </td></tr>
+                                <tr><td>11.</td><td>Cambodia Riel - KHR4,100/KHR4,500  </td></tr>
+                                <tr><td>12.</td><td>Vietnam Dong - VND22,000/VND24,000 </td></tr>
+                                <tr><td>13.</td><td>India Rupee - INR68/INR75          </td></tr>
+                                <tr><td>14.</td><td>USD - USD1/USD1.05                 </td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -986,7 +1026,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1014,7 +1054,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1043,7 +1083,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1057,7 +1097,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
