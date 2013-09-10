@@ -10,6 +10,58 @@
  */
 class businessActions extends sfActions
 {
+    public function executeAdjustmentAugustPipsBonus()
+    {
+        $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $query = "SELECT SUM(credit-debit) as _TOTAL, dist_id
+                    FROM mlm_account_ledger
+                where transaction_type IN ('PIPS BONUS','PIPS REBATE')
+                    and account_type = 'ECASH'
+                    and created_on >= '2013-09-07 00:00:00'
+                group by dist_id having _TOTAL > 0";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+
+            $totalBonus = 0;
+            while ($resultset->next())
+            {
+                $arr = $resultset->getRow();
+                if ($arr["_TOTAL"] != null) {
+                    $totalBonus = $arr["_TOTAL"];
+                    $dist_id = $arr["dist_id"];
+
+                    $ledgerAccountBalance = $this->getAccountBalance($dist_id, Globals::ACCOUNT_TYPE_ECASH);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($dist_id);
+                    $tbl_account_ledger->setTransactionType("ADJUSTMENT");
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($totalBonus);
+                    $tbl_account_ledger->setRemark("ADJUSTMENT");
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $totalBonus);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+                } else {
+                    $totalBonus = 0;
+                }
+            }
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeIndex()
     {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "gao_group_90.xls";
