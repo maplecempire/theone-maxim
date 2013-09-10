@@ -20,7 +20,7 @@ class businessActions extends sfActions
                     FROM mlm_account_ledger
                 where transaction_type IN ('PIPS BONUS','PIPS REBATE')
                     and account_type = 'ECASH'
-                    and created_on >= '2013-07-07 00:00:00'
+                    and created_on >= '2013-09-07 00:00:00'
                 group by dist_id having _TOTAL > 0";
 
             $connection = Propel::getConnection();
