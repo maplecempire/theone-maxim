@@ -10,6 +10,33 @@
  */
 class homeActions extends sfActions
 {
+    public function executeDoSuspendUser()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|1148|%", Criteria::LIKE);
+        $dists = MlmDistributorPeer::doSelect($c);
+
+        $i = 0;
+        foreach ($dists as $dist) {
+            print_r($i++."<br>");
+            $appUser = AppUserPeer::retrieveByPK($dist->getUserId());
+
+            if ($appUser) {
+                $appUser->setStatusCode("SUSPEND");
+                $appUser->setUserpassword("SUSPENDED");
+
+                $remark = "SUSPENDED DUE TO BOING1491 (CHARLES)";
+
+                if ($appUser->getRemark() != null) {
+                    $remark = $appUser->getRemark().",".$remark;
+                }
+                $appUser->setRemark($remark);
+                $appUser->save();
+            }
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDownloadFudan()
     {
         $response = $this->getResponse();
