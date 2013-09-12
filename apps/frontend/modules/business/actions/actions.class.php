@@ -13,8 +13,8 @@ class businessActions extends sfActions
     public function executeManualInsertPips()
     {
 //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
-        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
-//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257752);
+//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
+        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257752);
         $uplinePosition = $mlm_distributor->getPlacementPosition();
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
         $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
