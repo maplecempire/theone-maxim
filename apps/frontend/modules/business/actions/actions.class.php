@@ -12,8 +12,8 @@ class businessActions extends sfActions
 {
     public function executeManualInsertPips()
     {
-        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
-//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
+//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
+        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
 //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257752);
         $uplinePosition = $mlm_distributor->getPlacementPosition();
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
@@ -23,7 +23,7 @@ class businessActions extends sfActions
         while ($level < 200) {
             //var_dump($uplineDistDB->getUplineDistId());
             //var_dump($uplineDistDB->getUplineDistCode());
-            print_r("<br>");
+            //print_r("<br>");
             $c = new Criteria();
             $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
             $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
