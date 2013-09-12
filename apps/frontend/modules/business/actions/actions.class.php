@@ -10,6 +10,87 @@
  */
 class businessActions extends sfActions
 {
+    public function executeManualInsertPips()
+    {
+        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
+//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
+//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257752);
+        $uplinePosition = $mlm_distributor->getPlacementPosition();
+        $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
+        $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
+        $pairingPoint = 1000;
+        $level =0;
+        while ($level < 200) {
+            //var_dump($uplineDistDB->getUplineDistId());
+            //var_dump($uplineDistDB->getUplineDistCode());
+            print_r("<br>");
+            $c = new Criteria();
+            $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+            $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+            $addToLeft = 0;
+            $addToRight = 0;
+            $leftBalance = 0;
+            $rightBalance = 0;
+            if (!$sponsorDistPairingDB) {
+                $sponsorDistPairingDB = new MlmDistPairing();
+                $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                if (!$packageDB) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+                    return $this->redirect('/member/memberRegistration');
+                }
+
+                $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                $sponsorDistPairingDB->setRightBalance($rightBalance);
+                $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            } else {
+                $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                $rightBalance = $sponsorDistPairingDB->getRightBalance();
+            }
+            $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+            $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+            $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sponsorDistPairingDB->save();
+
+            $c = new Criteria();
+            $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+            $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+            $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+            $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+            $legBalance = 0;
+            if ($sponsorDistPairingLedgerDB) {
+                $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+            }
+
+            $sponsorDistPairingledger = new MlmDistPairingLedger();
+            $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+            $sponsorDistPairingledger->setLeftRight($uplinePosition);
+            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+            $sponsorDistPairingledger->setCredit($pairingPoint);
+            $sponsorDistPairingledger->setDebit(0);
+            $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sponsorDistPairingledger->save();
+
+            $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+            if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                break;
+            }
+
+            $uplinePosition = $uplineDistDB->getPlacementPosition();
+            $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+            $level++;
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAdjustmentAugustPipsBonus()
     {
         $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
@@ -416,6 +497,48 @@ class businessActions extends sfActions
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
 
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function revalidatePairing($distributorId, $leftRight)
+    {
+        $balance = $this->getPairingBalance($distributorId, $leftRight);
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingPeer::DIST_ID, $distributorId);
+        $tbl_account = MlmDistPairingPeer::doSelectOne($c);
+
+        if (!$tbl_account) {
+            $tbl_account = new MlmDistPairing();
+            $tbl_account->setDistId($distributorId);
+            $tbl_account->setLeftBalance(0);
+            $tbl_account->setRightBalance(0);
+        }
+        if (Globals::PLACEMENT_LEFT == $leftRight) {
+            $tbl_account->setLeftBalance($balance);
+        } else if (Globals::PLACEMENT_RIGHT == $leftRight) {
+            $tbl_account->setRightBalance($balance);
+        }
+
+        $tbl_account->save();
+    }
+    function getPairingBalance($distributorId, $leftRight)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId . " AND left_right = '" . $leftRight . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr["SUB_TOTAL"] != null) {
