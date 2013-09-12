@@ -2434,7 +2434,7 @@ class memberActions extends sfActions
             }
             $distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
-            if ($doAction == "PENDING_MEMBER" && $distributor->getPlacementTreeStructure() != null) {
+            /*if ($doAction == "PENDING_MEMBER" && $distributor->getPlacementTreeStructure() != null) {
                 if ($distributor->getTreeUplineDistId() != 0 && $distributor->getTreeUplineDistCode() != null) {
                     $fcode = $distributor->getDistributorCode();
                     $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($distributor->getRankId());
@@ -2512,7 +2512,8 @@ class memberActions extends sfActions
                         $level++;
                     }
                 }
-            } else if ($doAction == "PENDING_MEMBER" || $distributor->getPlacementTreeStructure() == null) {
+            } else*/
+            if ($doAction == "PENDING_MEMBER" || $distributor->getPlacementTreeStructure() == null) {
 
             } else {
                 // **********************************************************************************************
