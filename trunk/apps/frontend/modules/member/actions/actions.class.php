@@ -13,24 +13,25 @@ class memberActions extends sfActions
         //echo $this->getRollingPointData();
 
         $bonusService = new BonusService();
-        $bonusService->contraDebitAccount(130872, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256464, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256463, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256462, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256461, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256460, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256459, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256458, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256457, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256456, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256455, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256454, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256453, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256452, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256451, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256450, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256449, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(256448, "CONTRA BY CP2", 0);
+        $bonusService->contraDebitAccount(130872, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccount(130872, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256464, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256463, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256462, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256461, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256460, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256459, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256458, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256457, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256456, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256455, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256454, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256453, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256452, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256451, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256450, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256449, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(256448, "CONTRA BY CP2", 0);
         /*$dateUtil = new DateUtil();
 
         $c = new Criteria();
@@ -2038,7 +2039,7 @@ class memberActions extends sfActions
 
         $userName = $this->getRequestParameter('userName','');
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
-        $fcode = $userName;
+        //$fcode = $userName;
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
         $packageId = $this->getRequestParameter('packageId');
