@@ -2039,7 +2039,7 @@ class memberActions extends sfActions
 
         $userName = $this->getRequestParameter('userName','');
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
-        //$fcode = $userName;
+        $fcode = $userName;
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
         $packageId = $this->getRequestParameter('packageId');
