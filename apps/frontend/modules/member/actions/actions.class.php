@@ -6245,6 +6245,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
+        $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $withdrawAmount = $this->getRequestParameter('cp3Amount');
         $processFee = 30;
@@ -6316,6 +6317,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
+        $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $withdrawAmount = $this->getRequestParameter('ecashAmount');
         //$processFee = 0;

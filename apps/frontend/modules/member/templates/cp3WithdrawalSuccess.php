@@ -158,7 +158,7 @@
                     </td>
                     <td>
                         <select name="bankInTo" id="bankInTo">
-                            <?php if (Globals::APPLY_DEBITCARD_ENABLE == true) { ?>
+                            <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
