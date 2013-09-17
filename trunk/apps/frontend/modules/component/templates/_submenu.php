@@ -257,5 +257,23 @@ function blink(selector) {
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+    <?php
+    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 ||
+            $distDB->getDistributorId() == 15) {
+    ?>
     <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Member List'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/downlineList"><span><?php echo __('Member List'); ?></span></a>
+        </li>
+    </ul>
+    <?php
+    }
+    ?>
+    <br class="clear"><br>
+
+    <div class="footer_frame" style="z-index: 20;">
+        <div class="footer_content">&copy; 2013 maximtrader.com <br> All rights reserved.</div>
+    </div>
 </div>

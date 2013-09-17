@@ -465,6 +465,81 @@ class businessActions extends sfActions
 
         return sfView::HEADER_ONLY;
     }
+
+    public function executeDownlineMemberList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = "FROM mlm_distributor ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE distributor_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sWhere .= " AND placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+
+        $totalRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('search_memberId') != "") {
+            $sWhere .= " AND distributor_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('search_memberId'))."%'";
+            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i=0 ; $i<intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_'.intval($this->getRequestParameter('iSortCol_'.$i))) == "true")
+            {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_'.$i))]."
+                    ".mysql_real_escape_string($this->getRequestParameter('sSortDir_'.$i)).", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY")
+        {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT ".mysql_real_escape_string($offset).", ".mysql_real_escape_string($limit);
+
+        $query  = "SELECT ".$sColumns." ".$sql." ".$sWhere." ".$sOrder." ".$sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+		$resultset = $statement->executeQuery();
+
+	    while ($resultset->next())
+	    {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name']
+            );
+	    }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
     /************************************/
     /********   FUNCTION        *********/
     /************************************/

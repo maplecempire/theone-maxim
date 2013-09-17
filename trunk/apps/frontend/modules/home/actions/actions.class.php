@@ -412,6 +412,42 @@ class homeActions extends sfActions
                 return $this->redirect('home/redirectToBackend');
                 //}
             }
+        } else if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == "D") {
+            $existUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN_ID));
+
+            $masterUserId = $this->getUser()->getAttribute(Globals::SESSION_USERID);
+            if ($existUser) {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::USER_ID, $existUser->getUserId());
+                $existDist = MlmDistributorPeer::doSelectOne($c);
+
+                if ($existDist) {
+                    $this->getUser()->clearCredentials();
+                    $this->getUser()->getAttributeHolder()->clear();
+
+                    $this->getUser()->setAuthenticated(true);
+                    $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+
+                    $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+                    $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
+                    $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
+                    $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
+                    $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+                    $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
+                    $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
+
+                    $appLoginLog = new AppLoginLog();
+                    $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+                    $appLoginLog->setUserId($existUser->getUserId());
+                    $appLoginLog->setRemark("Downline User Id logout:".$masterUserId);
+                    $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $appLoginLog->save();
+
+                    return $this->redirect('member/summary');
+                }
+                //}
+            }
         }
 
         $this->getUser()->clearCredentials();
@@ -588,6 +624,52 @@ class homeActions extends sfActions
     {
         $this->getUser()->setAttribute(Globals::SESSION_MENU_IDX, $this->getRequestParameter('menuIdx'));
         return sfView::HEADER_ONLY;
+    }
+
+    public function executeDownlineLogin()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $this->getRequestParameter("q"));
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+        $existDist = MlmDistributorPeer::doSelectOne($c);
+
+        if (!$existDist) {
+            return $this->redirect('member/summary');
+        }
+        $existUser = AppUserPeer::retrieveByPk($existDist->getUserId());
+
+        if ($existUser) {
+            $masterUserId = $this->getUser()->getAttribute(Globals::SESSION_USERID);
+
+            $this->getUser()->clearCredentials();
+            $this->getUser()->getAttributeHolder()->clear();
+
+            $this->getUser()->setAuthenticated(true);
+            $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+
+            $this->getUser()->setAttribute(Globals::SESSION_MASTER_LOGIN_ID, $masterUserId);
+            $this->getUser()->setAttribute(Globals::SESSION_MASTER_LOGIN, "D");
+
+            $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
+            $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
+            $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
+            $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
+            $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+            $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
+            $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
+
+            $appLoginLog = new AppLoginLog();
+            $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $appLoginLog->setUserId($existUser->getUserId());
+            $appLoginLog->setRemark("Upline User Id:".$masterUserId);
+            $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->save();
+            return $this->redirect('member/summary');
+        }
+
+        $this->setFlash('errorMsg', "Invalid action.");
+        return $this->redirect('member/summary');
     }
 
     public function executeLoadDatatableLanguagePack()
