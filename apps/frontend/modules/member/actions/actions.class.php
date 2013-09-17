@@ -6867,8 +6867,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $distId = $mlmDistPairingDB->getDistId();
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
                         print_r("DistId ".$distId."<br>");
-                        $leftBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_LEFT, $currentDate);
-                        $rightBalance = $this->findPairingLedgers($distId, Globals::PLACEMENT_RIGHT, $currentDate);
+                        $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $currentDate);
+                        $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $currentDate);
 
                         if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
@@ -8745,7 +8745,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function findPairingLedgers($distributorId, $position, $date)
     {
-        /*$query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -8763,9 +8763,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return 0;
             }
         }
-        return 0;*/
+        return 0;
+    }
 
+    function findPairingLedgersBonus($distributorId, $position, $date)
+    {
         $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($date)));
+        //var_dump($yesterday);
+        //exit();
         $totalCredit = $this->getPairingSumCredit($distributorId, $position, $yesterday);
         $totalDebit = $this->getPairingSumDebit($distributorId, $position, null);
 
