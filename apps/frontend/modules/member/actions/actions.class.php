@@ -112,6 +112,14 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDownlineList()
+    {
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+                $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
+        } else {
+            return $this->redirect('/member/summary');
+        }
+    }
     public function executeFundManagementContract()
     {
         $this->fundManagements = $this->findFundManagementList($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -1639,6 +1647,8 @@ class memberActions extends sfActions
         $this->forward404Unless($mlm_distributor);
 
         $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+        $mlm_distributor->setBankBranchName($this->getRequestParameter('bankBranchName'));
+        $mlm_distributor->setBankAddress($this->getRequestParameter('bankAddress'));
         $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccNo'));
         $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
         $mlm_distributor->setBankSwiftCode($this->getRequestParameter('bankSwiftCode'));

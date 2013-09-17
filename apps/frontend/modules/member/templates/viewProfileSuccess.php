@@ -81,6 +81,10 @@ $(function() {
         }
     });
 
+    jQuery.validator.addMethod("latinRegex", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\-\s\_\/\.]+$/i.test(value);
+    }, "This field only accept latin word, numbers, or dashes.");
+
     $("#bankForm").validate({
         messages : {
             transactionPassword: {
@@ -99,6 +103,26 @@ $(function() {
             "bankHolderName" : {
                 required : true,
                 minlength : 3
+            },
+            "bankAddress" : {
+                required : true
+                <?php
+                if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+
+                } else {
+                ?>
+                , latinRegex: true
+                <?php } ?>
+            },
+            "bankBranchName" : {
+                required : true
+                <?php
+                if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+
+                } else {
+                ?>
+                , latinRegex: true
+                <?php } ?>
             },
             "transactionPassword" : {
                 required : true,
@@ -634,6 +658,24 @@ $(function() {
                     <td><?php echo __('Bank Name') ?></td>
                     <td><input name="bankName" type="text" id="bankName"
                              size="30" value="<?php echo $distDB->getBankName() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Branch') ?></td>
+                    <td><input name="bankBranchName" type="text" id="bankBranchName" size="30"
+                                                         value="<?php echo $distDB->getBankBranchName() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Address') ?></td>
+                    <td><input name="bankAddress" type="text" id="bankAddress" size="30"
+                                                         value="<?php echo $distDB->getBankAddress() ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

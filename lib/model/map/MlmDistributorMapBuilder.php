@@ -72,6 +72,8 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('BANK_BRANCH_NAME', 'BankBranchName', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('BANK_ADDRESS', 'BankAddress', 'string', CreoleTypes::VARCHAR, false, 255);
+
 		$tMap->addColumn('BANK_ACC_NO', 'BankAccNo', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('BANK_HOLDER_NAME', 'BankHolderName', 'string', CreoleTypes::VARCHAR, false, 100);
