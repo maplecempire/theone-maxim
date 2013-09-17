@@ -1059,6 +1059,174 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDownlineCp3WithdrawalList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " FROM mlm_cp3_withdraw withdrawal
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = withdrawal.dist_id ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE withdrawal.dist_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sWhere .= " AND dist.tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+        /******   total filtered records  *******/
+
+        $totalRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterMemberId') != "") {
+            $sWhere .= " AND dist.distributor_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('filterMemberId'))."%'";
+            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
+        }
+        if ($this->getRequestParameter('filterStatusCode') != "") {
+            $sWhere .= " AND withdrawal.status_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('filterStatusCode'))."%'";
+            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i=0 ; $i<intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_'.intval($this->getRequestParameter('iSortCol_'.$i))) == "true")
+            {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_'.$i))]."
+                    ".mysql_real_escape_string($this->getRequestParameter('sSortDir_'.$i)).", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY")
+        {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT ".mysql_real_escape_string($offset).", ".mysql_real_escape_string($limit);
+
+        $query  = "SELECT ".$sColumns." ".$sql." ".$sWhere." ".$sOrder." ".$sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+		$resultset = $statement->executeQuery();
+
+	    while ($resultset->next())
+	    {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['dist_id'] == null ? "" : $resultArr['dist_id'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
+                $resultArr['amount'] == null ? "" : $resultArr['amount'],
+                $resultArr['bank_in_to'] == null ? "" : $resultArr['bank_in_to'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
+                $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on']
+            );
+	    }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeDownlineCp2WithdrawalList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " FROM mlm_ecash_withdraw withdrawal
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = withdrawal.dist_id ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE withdrawal.dist_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sWhere .= " AND dist.tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+        /******   total filtered records  *******/
+
+        $totalRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterMemberId') != "") {
+            $sWhere .= " AND dist.distributor_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('filterMemberId'))."%'";
+            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
+        }
+        if ($this->getRequestParameter('filterStatusCode') != "") {
+            $sWhere .= " AND withdrawal.status_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('filterStatusCode'))."%'";
+            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql.$sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i=0 ; $i<intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_'.intval($this->getRequestParameter('iSortCol_'.$i))) == "true")
+            {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_'.$i))]."
+                    ".mysql_real_escape_string($this->getRequestParameter('sSortDir_'.$i)).", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY")
+        {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT ".mysql_real_escape_string($offset).", ".mysql_real_escape_string($limit);
+
+        $query  = "SELECT ".$sColumns." ".$sql." ".$sWhere." ".$sOrder." ".$sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+		$resultset = $statement->executeQuery();
+
+	    while ($resultset->next())
+	    {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['dist_id'] == null ? "" : $resultArr['dist_id'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
+                $resultArr['amount'] == null ? "" : $resultArr['amount'],
+                $resultArr['bank_in_to'] == null ? "" : $resultArr['bank_in_to'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
+                $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on']
+            );
+	    }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeEcashWithdrawalList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

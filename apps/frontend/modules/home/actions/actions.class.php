@@ -630,7 +630,7 @@ class homeActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $this->getRequestParameter("q"));
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
         $existDist = MlmDistributorPeer::doSelectOne($c);
 
         if (!$existDist) {
