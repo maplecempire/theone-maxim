@@ -267,6 +267,12 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/downlineList"><span><?php echo __('Member List'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/downlineCp2WithdrawalList"><span><?php echo __('CP2 Withdrawal List'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/downlineCp3WithdrawalList"><span><?php echo __('CP3 Withdrawal List'); ?></span></a>
+        </li>
     </ul>
     <?php
     }

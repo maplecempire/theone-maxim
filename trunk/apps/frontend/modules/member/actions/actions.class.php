@@ -112,6 +112,22 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDownlineCp2WithdrawalList()
+    {
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+                $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
+        } else {
+            return $this->redirect('/member/summary');
+        }
+    }
+    public function executeDownlineCp3WithdrawalList()
+    {
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+                $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
+        } else {
+            return $this->redirect('/member/summary');
+        }
+    }
     public function executeDownlineList()
     {
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||

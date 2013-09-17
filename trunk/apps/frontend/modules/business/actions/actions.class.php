@@ -482,7 +482,7 @@ class businessActions extends sfActions
 
         /******   total records  *******/
         $sWhere = " WHERE distributor_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
-        $sWhere .= " AND placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+        $sWhere .= " AND tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
         $totalRecords = $this->getTotalRecords($sql.$sWhere);
 
