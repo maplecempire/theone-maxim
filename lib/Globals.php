@@ -298,7 +298,7 @@ abstract class Globals {
     /*******************************/
     /*const GROUP_LEADER = "thorsengwah,kaseong,maximthai1,MAXCAP,maxworld,MaximIndon,Dynasty,MaximChina,datoheng";*/
     //const GROUP_LEADER = "SUPERA,TWOSASA,Diana,Jchooi,CN777,Rudy001,AlexSim,kaseong,Dynasty,MaximTaiwan,thorsengwah,MaximIndon,maximthai1,ongeuzan,MaximChina,uncletong,MAXCAP,maxworld,BRA129,kinowaiming,alvinang1,datoheng,amz001,klm76,vision1,chris5,KL6,FYL188";
-    const GROUP_LEADER = "763,595,554,715,61,142,665,60,1763,1561,283,143,1984,240,57,1770,161,952,2286,71,262,43,15,256077,104,124,129,135,175,1458,557,203,1";
+    const GROUP_LEADER = "763,595,554,715,61,142,665,60,1763,1561,283,143,1984,240,57,1770,161,257749,952,2286,71,262,43,15,256077,104,124,129,135,175,1458,557,15,203,1";
 
 //    const HIDE_DIST_GROUP = "MAXCAP";
 //    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
