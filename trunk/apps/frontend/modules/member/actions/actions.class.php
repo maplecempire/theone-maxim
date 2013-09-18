@@ -271,7 +271,7 @@ class memberActions extends sfActions
                 $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
                 $tbl_account_ledger->setCredit($epointAmount);
                 $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
+                $tbl_account_ledger->setRemark("CONVERT RP TO CP1, RP:".$epointAmount);
                 $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
                 $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
