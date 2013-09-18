@@ -389,7 +389,7 @@ class memberActions extends sfActions
     public function executeApplyDebitCard()
     {
         if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of service."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of stock."));
         }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
@@ -419,7 +419,7 @@ class memberActions extends sfActions
     public function executeDoApplyDebitCard()
     {
         if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of service."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of stock."));
             return $this->redirect('/member/applyDebitCard');
         }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
