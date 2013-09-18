@@ -278,8 +278,4 @@ function blink(selector) {
     }
     ?>
     <br class="clear"><br>
-    <br class="clear"><br>
-    <br class="clear"><br>
-
-
 </div>
