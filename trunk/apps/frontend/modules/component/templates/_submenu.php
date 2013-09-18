@@ -278,8 +278,8 @@ function blink(selector) {
     }
     ?>
     <br class="clear"><br>
+    <br class="clear"><br>
+    <br class="clear"><br>
 
-    <div class="footer_frame" style="z-index: 20;">
-        <div class="footer_content">&copy; 2013 maximtrader.com <br> All rights reserved.</div>
-    </div>
+
 </div>

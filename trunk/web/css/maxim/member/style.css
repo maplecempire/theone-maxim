@@ -200,16 +200,16 @@ color:#333333;
 
 .footer_frame{
 float:left;
-/*position:absolute;*/
+position:absolute;
 bottom:20px;
 left:0px;
-/*margin-left:60px;*/
+margin-left:60px;
 }
 
 .footer_content{
 float:left;
 width:170px;
-/*line-height:20px;*/
+line-height:20px;
 text-align:center;
 color:#767877;
 font-weight: bold;

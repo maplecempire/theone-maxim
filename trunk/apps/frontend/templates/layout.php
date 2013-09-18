@@ -288,6 +288,9 @@
 
     <?php include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
 
+    <div class="footer_frame" style="z-index: 20;">
+        <div class="footer_content">&copy; 2013 maximtrader.com <br> All rights reserved.</div>
+    </div>
 </div>
 <br class="clear">
 
