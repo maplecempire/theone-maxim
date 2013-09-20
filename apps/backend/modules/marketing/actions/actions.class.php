@@ -104,7 +104,7 @@ class marketingActions extends sfActions
 
         $subject = "Maxim Trader Wheel of Fortune Million Dollar$ Lucky Draw Winnings 百万美金幸运财富大抽奖";
         if ($drawType == "EVENT") {
-            $subject = "Maxim Trader Lucky Draw Winnings 幸运大抽奖";
+            $subject = "Terms for Commit Sales Get Extra MT4 Credit Account 会议现场报单承诺奖励";
         }
 
         $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -478,13 +478,65 @@ a)	为了能够兑现您的交易利润，请您务必在一定的时间期限�
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 																Dear <strong>" . $fullName . "</strong>,<br><br>
-																Congratulations on your recent Lucky Draw Winnings.<br><br>
+																Congratulations on your Extra MT4 Credit Account.<br><br>
 																It gives us great pleasure to activate your MT4 account with: <br><br>
 																Live MT4 Trading Account ID : <strong>" . $mt4UserName . "</strong><br><br>
 																Live MT4 Trading Account password : <strong>" . $mt4Password . "</strong><br><br>
 
-                                                                <strong>Lucky Draw Winnings: USD " . $amount . "</strong><br><br>
+                                                                <strong>USD " . $amount . "</strong><br><br>
 
+																<strong>Extra MT4 Credit Account Term and Condition</strong><br><br>
+																1) Commit USD 1000 get USD 100 credit MT4 account Term and Condition apply
+<br>
+<br>2) Commit USD 5000 get USD 500 credit  MT4 account Term and Condition apply
+<br>
+<br>3)  Commit USD 10000 get USD 1000 credit  MT4 account Term and Condition apply
+<br>
+<br>4) Commit USD 20000 get USD 3000 credit  MT4 account Term and Condition apply
+<br>
+<br>5) Commit USD 30000 get USD 5000 credit  MT4 account Term and Condition apply
+<br>
+<br><strong>Terms & Conditions :</strong>
+<br>
+<br>In order to withdraw your trading profits, you are required to achieve a minimum volume of trading within certain period of time :
+<br>
+<br>Prize : USD 100
+<br>Minimum Volume Required : 5 lots
+<br>EXPIRED FROM THE STARTED  : 90 days
+<br>
+<br>Prize : USD 300
+<br>Minimum Volume Required : 15 lots
+<br>EXPIRED FROM THE STARTED  : 90 days
+<br>
+<br>Prize : USD 500
+<br>Minimum Volume Required : 25 lots
+<br>EXPIRED FROM THE STARTED  : 90 days
+<br>
+<br>Prize : USD 1000
+<br>Minimum Volume Required : 50 lots
+<br>EXPIRED FROM THE STARTED  : 180 days
+<br>
+<br>Prize : USD 3000
+<br>Minimum Volume Required : 150 lots
+<br>EXPIRED FROM THE STARTED  : 180 days
+<br>
+<br>Prize : USD 5000
+<br>Minimum Volume Required : 250 lots
+<br>EXPIRED FROM THE STARTED  : 180 days
+<br>
+<br>
+<br><strong>*** Terms of trading applies ***</strong>
+<br>
+<br>1) This Extra Credit is used for MT4 trading account.
+<br>
+<br>2) This Extra Credit is NOT TRANSFERABLE.
+<br>
+<br>3) This Extra Credit is valid for below USD 999.00 is 90days  and USD 1000.00 and above is 180 days from the account effective date started.
+<br>
+<br>4) Every ( 1.0 ) standard lot trading will have USD 30 commission charge.
+<br>
+<br>5) No hedging trade allowed in this platform.
+<br>
 																Terms & Conditions:<br>
 In order to withdraw your trading profits, you are required to achieve a minimum volume of trading within certain period of time:
 <br>
@@ -506,6 +558,9 @@ b.) Withdrawal requirement : within 30 days from date of signing,
     <td><strong>USD</strong></td><td><strong>Minimum volume Required</strong></td>
 </tr>
 <tr>
+    <td>100</td><td>5 lots</td>
+</tr>
+<tr>
     <td>300</td><td>15 lots</td>
 </tr>
 <tr>
@@ -513,9 +568,6 @@ b.) Withdrawal requirement : within 30 days from date of signing,
 </tr>
 <tr>
     <td>1,000</td><td>50 lots</td>
-</tr>
-<tr>
-    <td>2,000</td><td>100 lots</td>
 </tr>
 <tr>
     <td>3,000</td><td>150 lots</td>
@@ -631,14 +683,31 @@ We look forward to your custom in the near future. Should you have any queries, 
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
 												您好! <strong>" . $fullName . "</strong>,<br><br>
-																恭喜您在刚刚进行的马胜金融集团幸运大抽奖中赢得奖金!<br><br>
-																我们非常荣幸能够帮助激活您在马胜外汇交易平台MT4的帐号: <br><br>
+																恭喜您在马胜金融集团开户后得到额外MT4信用额帐户<br><br>
 																MT4交易户口登录ID  : <strong>" . $mt4UserName . "</strong><br><br>
 																MT4交易户口密码 : <strong>" . $mt4Password . "</strong><br><br>
 
-                                                                <strong>幸运大抽奖:美金" . $amount . "</strong><br><br>
+                                                                <strong>美金" . $amount . "</strong><br><br>
 
-																条款与条件:<br>
+																<strong>如何可以获得额外MT4信用额帐号：</strong><br>
+<br>1)开户1000美元获得100美元的mt4信用额帐户需符合条款和条件
+<br>2)开户5000美元获得500美元的mt4信用额帐户需符合条款和条件
+<br>3)开户10000美元获得1000美元的mt4信用额帐户必须符合条款和条件
+<br>4)开户20000美元获得3000美元的mt4信用额帐户必须符合条款和条件
+<br>5)开户30000美元获得5000美元的mt4信用额帐户必须符合户条款和条件
+<br>
+
+<strong>条款与条件:</strong><br>
+<br>为了能够兑现您的交易利润，请您务必在一定的时间期限内完成一定数量的交易次数。具体如下表：
+<br>
+<br>交易条款适用于
+<br>1)这额外MT4信用额奖励只用于在mt4交易帐户。
+<br>2）这额外信用额帐户是不得转让。
+<br>3）这个额外信用额奖励有效期为999.00美元以下是90天,usd 1000.00及以上是180天从账户生效日期开始。
+<br>4)每手(1.0)标准手数将有30美元手续费。
+<br>5)不允许在这个平台做任何对冲交易。
+<br>
+		条款与条件:<br>
 为了能够兑现您的交易利润，请您务必在一定的时间期限内完成一定数量的交易次数。具体如下表：<br><br>
 <br>
 1.) 只限会员
@@ -657,6 +726,9 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     <td><strong>美金（USD）</strong></td><td><strong>最少交易次数(手)</strong></td>
 </tr>
 <tr>
+    <td>100</td><td>5 手</td>
+</tr>
+<tr>
     <td>300</td><td>15 手</td>
 </tr>
 <tr>
@@ -664,9 +736,6 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 </tr>
 <tr>
     <td>1,000</td><td>50 手</td>
-</tr>
-<tr>
-    <td>2,000</td><td>100 手</td>
 </tr>
 <tr>
     <td>3,000</td><td>150 手</td>
