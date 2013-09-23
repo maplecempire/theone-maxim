@@ -943,6 +943,12 @@
             <trans-unit><source>In-sufficient fund to purchase product.</source><target>製品を購入するのに十分な資金。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to upgrade package.</source><target>パッケージをアップグレードするのに十分な資金。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to purchase package.</source><target>パッケージを購入するのに十分な資金。</target></trans-unit>
+            <trans-unit><source>Minimum withdrawal amount is USD100</source><target>最低限の出金額はUSD100となる</target></trans-unit>
+            <trans-unit><source>Withdrawal request must be done during the first 7 days of each month</source><target>出金申請は、毎月最初の7日の間に行われなければならない</target></trans-unit>
+            <trans-unit><source>Processing time will be at least 3 days</source><target>出金申請処理は、8日から始まり、最短3営業日かかる</target></trans-unit>
+            <trans-unit><source>Payout will be by the 15th of each month</source><target>ペイアウトは、毎月15日に行われる（地元の銀行の休日などによりに1日以上のずれが生じる場合があります）</target></trans-unit>
+            <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>手数料はUSD60あるいは5％となり、高い方で徴収する</target></trans-unit>
+            <trans-unit><source>Handling Fee is USD30</source><target>手数料はUSD30となる</target></trans-unit>
         </body>
     </file>
 </xliff>

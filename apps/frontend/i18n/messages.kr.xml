@@ -940,6 +940,12 @@
             <trans-unit><source>In-sufficient fund to purchase product.</source><target>제품을 구입하기에 충분 기금。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to upgrade package.</source><target>패키지를 업그레이드하기에 충분 기금。</target></trans-unit>
             <trans-unit><source>In-sufficient fund to purchase package.</source><target>패키지를 구입 부족 자금。</target></trans-unit>
+            <trans-unit><source>Minimum withdrawal amount is USD100</source><target>최소 인출 가능 금액은 100불입니다</target></trans-unit>
+            <trans-unit><source>Withdrawal request must be done during the first 7 days of each month</source><target>인출 요청은 매달 초 7일 이내에 행해져야 합니다</target></trans-unit>
+            <trans-unit><source>Processing time will be at least 3 days</source><target>매달 8일 이후부터 인출 시간은 휴일 제외한 3일이 걸립니다</target></trans-unit>
+            <trans-unit><source>Payout will be by the 15th of each month</source><target>지불은 매달 15일에 이루어집니다. (각 국가의 은행 휴일에 따라 1일 또는 그 이상이 걸릴수 있습니다.)</target></trans-unit>
+            <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>수수료는 60불 또는 전체 인출 금액의 5% 중 높은 금액으로 합니다</target></trans-unit>
+            <trans-unit><source>Handling Fee is USD30</source><target>수수료는 30입니다</target></trans-unit>
         </body>
     </file>
 </xliff>

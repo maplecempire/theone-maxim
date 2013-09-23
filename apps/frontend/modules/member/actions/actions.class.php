@@ -6277,6 +6277,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if (date("d") > 7) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
+                return $this->redirect('/member/cp3Withdrawal');
+            }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Withdrawal temporary out of service."));
@@ -6354,6 +6358,11 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if (date("d") > 7) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
+                return $this->redirect('/member/ecashWithdrawal');
+            }
+
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP2 Withdrawal temporary out of service."));
                 return $this->redirect('/member/ecashWithdrawal');
