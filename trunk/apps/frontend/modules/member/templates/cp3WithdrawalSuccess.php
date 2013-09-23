@@ -187,10 +187,11 @@
                         <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
                     </td>
                     <td colspan="1" align="left">
-                        <font color="#dc143c">1. <?php echo __('Minimum withdrawal amount : USD 100') ?>
-                        <br>2. <?php echo __('Can only be withdrawn on the first working week of the month') ?>
-                        <br>3. <?php echo __('Handling fee USD30') ?>
-                        <br>4. <?php echo __('Processing time : 3-5 working days') ?></font>
+                        <font color="#dc143c">1. <?php echo __('Minimum withdrawal amount is USD100') ?>
+                        <br>2. <?php echo __('Withdrawal request must be done during the first 7 days of each month') ?>
+                        <br>3. <?php echo __('Processing time will be at least 3 days') ?>
+                        <br>4. <?php echo __('Payout will be by the 15th of each month') ?>
+                        <br>5. <?php echo __('Handling Fee is USD30') ?></font>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
