@@ -272,6 +272,36 @@ $(function() {
             </div>
             </td>
         </tr>
+
+        <tr>
+            <td>
+            <div class="ui-widget">
+                <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                     class="ui-state-highlight ui-corner-all">
+                    <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                  class="ui-icon ui-icon-info"></span>
+                        <strong><?php echo __("Your current personal sales : ".number_format($totalPersonalSales,2)) ?></strong></p>
+                </div>
+            </div>
+            </td>
+        </tr>
+        <?php } ?>
+
+        <?php
+        if ($entitleRolex == "Y") {
+        ?>
+        <tr>
+            <td>
+            <div class="ui-widget">
+                <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                     class="ui-state-highlight ui-corner-all">
+                    <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                  class="ui-icon ui-icon-info"></span>
+                        <strong><?php echo __("Congratulation, You has been achieved a personal sales of USD200K and entitled for a Rolex Air King") ?></strong></p>
+                </div>
+            </div>
+            </td>
+        </tr>
         <?php } ?>
         <tr>
             <td><br></td>
