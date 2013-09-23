@@ -128,6 +128,7 @@ $(function() {
                                 <td valign="middle" width="10"></td>
                                 <td valign="middle"><?php echo __('Member ID') ?></td>
                                 <td valign="middle"><?php echo __('Country') ?></td>
+                                <td valign="middle"><?php echo __('Total Personal Sales') ?></td>
                             </tr>
 
                             <?php
@@ -141,10 +142,16 @@ $(function() {
                                             $trStyle = "1";
                                         }
 
+                                        $totalSales = number_format($member['SUB_TOTAL'],2);
+                                        if ($idx > 5) {
+                                            $totalSales = "******";
+                                        }
+
                                         echo "<tr class='row" . $trStyle . "'>
                                                 <td align='left'>" . $idx++ . ".</td>
                                                 <td align='middle'>" . $member['distributor_code'] . "</td>
                                                 <td align='middle'>" . $member['country'] . "</td>
+                                                <td align='middle'>" . $totalSales . "</td>
                                                 </tr>";
                                     }
                                 } else {
