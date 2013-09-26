@@ -1272,6 +1272,22 @@ class memberActions extends sfActions
         }
     }
 
+    public function executeGozSuccessRedirect() {
+        //var_dump(date("Ymd"));
+        //exit();
+        return sfView::HEADER_ONLY;
+    }
+    public function executeGozErrorRedirect() {
+        //var_dump(date("Ymd"));
+        //exit();
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeEpointPurchaseGoz() {
+        //var_dump(date("Ymd"));
+        //exit();
+        $this->setTemplate('epointPurchaseGoz');
+    }
     public function executeEpointPurchase() {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distDB);
