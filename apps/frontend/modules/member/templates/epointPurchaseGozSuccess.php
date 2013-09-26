@@ -2,11 +2,13 @@
 header("Content-type:text/html; charset=gb2312"); 
 
 //提交地址
+/*
 if(Globals::PAYMENT_GATEWAY_ENVIRONMENT == 'DEV') {
 	$form_url = 'http://www.goz-llq.com/do/Trade/iPay/goTrans.aspx'; //测试
 } else {
 	$form_url = 'http://www.goz-llq.com/do/Trade/iPay/goTrans.aspx'; //正式
 }
+
 $form_url = 'http://www.goz-llq.com/do/Trade/iPay/goTrans.aspx'; //正式
 
 //商户号
@@ -70,35 +72,36 @@ $orge = 'billno'.$Billno.'currencytype'.$Currency_Type.'amount'.$Amount.'date'.$
 $SignMD5 = md5($orge) ;
 //echo '密文:'.$SignMD5 ;
 //sleep(20);
+*/
 ?>
 <html>
   <head>
     <title>redirecting......</title>
-    <meta http-equiv="content-Type" content="text/html; charset=gb2312" />
+    <meta http-equiv="content-Type" content="text/html; charset=utf8" />
   </head>
   <body>
   <?php
   $test = "1.0";
   $Mer_key = "100009";
   $Billno = date("Ymdhis");
-  $Amount = "1000.00";
+  $Amount = "0.10";
   $Date = date("Ymd");
   $Currency_Type = "RMB";
   $Gateway_Type = "01";
   $Lang = "GB";
   $Merchanturl = "http://localhost:8087/member/gozSuccessRedirect";
   $ErrorUrl = "http://localhost:8087/member/gozErrorRedirect";
-  $remark = "test remark aa";
+  $remark = "testremarkaa";
   $enctype = "1";
-  $channelid = "ABC";
+  $channelid = "CMB";
 
   $md5Key = "88496625849445331821427993934397583101845496550535688096140279054296113998693043340961948795056633136331268949200793818235742794";
   //$orge = "ver=$test&merid=$Mer_key&orderid=$Billno&amount=$Amount&orderdate=$Date&curtype=$Currency_Type&paytype=$Gateway_Type&lang=$Lang&returnurl=$Merchanturl&errorurl=$ErrorUrl&remark1=$remark&enctype=$enctype&notifytype=2&channelid=$channelid";
-  $orge = 'ver=$test&merid=$Mer_key&orderid=$Billno&amount=$Amount&orderdate=$Date&curtype=$Currency_Type&paytype=$Gateway_Type&lang=$Lang&returnurl=$Merchanturl&errorurl=$ErrorUrl&remark1=$remark&enctype=$enctype&notifytype=2&urltype=1&s2surl=$ErrorUrl&goodsname=goods&channelid=$channelid';
-
+  $orge = 'ver='.$test.'&merid='.$Mer_key.'&orderid='.$Billno.'&amount='.$Amount.'&orderdate='.$Date.'&curtype='.$Currency_Type.'&paytype='.$Gateway_Type.'&lang='.$Lang.'&returnurl='.$Merchanturl.'&errorurl='.$ErrorUrl.'&remark1='.$remark.'&enctype='.$enctype.'&notifytype=2&urltype=1&s2surl='.$ErrorUrl.'&goodsname=goods&channelid='.$channelid;
+	echo  $orge;
   $SignMD5 = md5($orge.$md5Key) ;
   ?>
-    <form action="<?php echo $form_url ?>" method="post" id="frm1">
+    <form action="http://www.goz-llq.com/do/Trade/iPay/goTrans.aspx" method="post" id="frm1">
       <!--<input type="hidden" name="ver" value="<?php echo $test ?>">
       <input type="hidden" name="merid" value="<?php echo $Mer_key ?>">
       <input type="hidden" name="orderid" value="<?php echo $Billno ?>">
@@ -134,9 +137,10 @@ $SignMD5 = md5($orge) ;
 	<input type="hidden" name="goodsname" value=goods />
 	<input type="hidden" name="channelid" value=<?php echo $channelid ?> />
 	<input type="hidden" name="sign" value=<?php echo $SignMD5;?> />
+	<input type="submit" />
     </form>
     <script language="javascript">
-      document.getElementById("frm1").submit();
+//      document.getElementById("frm1").submit();
     </script>
   </body>
 </html>
