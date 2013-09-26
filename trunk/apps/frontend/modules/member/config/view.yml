@@ -25,3 +25,7 @@ registerInfoSuccess:
 epointPurchasePGSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+epointPurchaseGozSuccess:
+  has_layout:     off
+  stylesheets: 	  []
