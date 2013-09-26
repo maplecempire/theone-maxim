@@ -1275,11 +1275,97 @@ class memberActions extends sfActions
     public function executeGozSuccessRedirect() {
         //var_dump(date("Ymd"));
         //exit();
+        print_r("<br>ver:".$this->getRequestParameter('ver'));
+        print_r("<br>merid:".$this->getRequestParameter('merid'));
+        print_r("<br>orderid:".$this->getRequestParameter('orderid'));
+        print_r("<br>amount:".$this->getRequestParameter('amount'));
+        print_r("<br>orderdate:".$this->getRequestParameter('orderdate'));
+        print_r("<br>curtype:".$this->getRequestParameter('curtype'));
+        print_r("<br>paytype:".$this->getRequestParameter('paytype'));
+        print_r("<br>lang:".$this->getRequestParameter('lang'));
+        print_r("<br>returnurl:".$this->getRequestParameter('returnurl'));
+        print_r("<br>errorurl:".$this->getRequestParameter('errorurl'));
+        print_r("<br>remark1:".$this->getRequestParameter('remark1'));
+        print_r("<br>enctype:".$this->getRequestParameter('enctype'));
+        print_r("<br>notifytype:".$this->getRequestParameter('notifytype'));
+        print_r("<br>urltype:".$this->getRequestParameter('urltype'));
+        print_r("<br>s2surl:".$this->getRequestParameter('s2surl'));
+        print_r("<br>goodsname:".$this->getRequestParameter('goodsname'));
+        print_r("<br>channelid:".$this->getRequestParameter('channelid'));
+        print_r("<br>sign:".$this->getRequestParameter('sign'));
+
+        $sign = $this->getRequestParameter("sign");
+        $transtat = $this->getRequestParameter("transtat");
+        $amount = $this->getRequestParameter("amount");
+
+        $mlmDistEpointPurchase = new MlmDistEpointPurchase();
+        $mlmDistEpointPurchase->setDistId(1);
+        $mlmDistEpointPurchase->setPaymentMethod("GOZ");
+        $mlmDistEpointPurchase->setAmount($amount);
+        $mlmDistEpointPurchase->setPgBillNo("9988");
+        $mlmDistEpointPurchase->setPgRetEncodeType("");
+        $mlmDistEpointPurchase->setPgCurrencyType("");
+        $mlmDistEpointPurchase->setPgSignature($sign);
+        $mlmDistEpointPurchase->setPaymentReference("");
+        $mlmDistEpointPurchase->setTransactionType(Globals::PURCHASE_EPOINT_BANK_TRANSFER);
+        $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_SUCCESS);
+        $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmDistEpointPurchase->setPgSuccess("Y");
+        $mlmDistEpointPurchase->setPgMsg($transtat);
+        $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+        $mlmDistEpointPurchase->setApprovedByUserid(1);
+
+        $mlmDistEpointPurchase->save();
+        /*mysql_select_db('dfff_a', $con);
+        mysql_query("SET CHARACTER SET UTF8");
+        $sql = "SELECT *  FROM `cn` WHERE `amount` = '" . $amount . "' AND `sign` = '" . $sign . "' LIMIT 1";
+        $rs = mysql_query($sql);
+        $count = count($rs);
+        if ($coun != 1) {
+            die("Valid result!");
+        } else {
+            if ($transtat == '000') {
+                die("OK");
+            } else {
+                die("Valid result!");
+            }
+        }*/
+        if ($transtat == '000') {
+            $this->getRequestParameter("OK");
+        } else {
+            $this->getRequestParameter("Valid result!");
+        }
         return sfView::HEADER_ONLY;
     }
     public function executeGozErrorRedirect() {
         //var_dump(date("Ymd"));
         //exit();
+        $sign = $this->getRequestParameter("sign");
+        $transtat = $this->getRequestParameter("transtat");
+        $amount = $this->getRequestParameter("amount");
+
+        $mlmDistEpointPurchase = new MlmDistEpointPurchase();
+        $mlmDistEpointPurchase->setDistId(1);
+        $mlmDistEpointPurchase->setPaymentMethod("GOZ");
+        $mlmDistEpointPurchase->setAmount($amount);
+        $mlmDistEpointPurchase->setPgBillNo("9988");
+        $mlmDistEpointPurchase->setPgRetEncodeType("");
+        $mlmDistEpointPurchase->setPgCurrencyType("");
+        $mlmDistEpointPurchase->setPgSignature($sign);
+        $mlmDistEpointPurchase->setPaymentReference("");
+        $mlmDistEpointPurchase->setTransactionType(Globals::PURCHASE_EPOINT_BANK_TRANSFER);
+        $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+        $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlmDistEpointPurchase->setPgSuccess("N");
+        $mlmDistEpointPurchase->setPgMsg($transtat);
+        $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+        $mlmDistEpointPurchase->setApprovedByUserid(1);
+
+        $mlmDistEpointPurchase->save();
+
+        print_r("<br>executeGozErrorRedirect:".$this->getRequestParameter('sign'));
         return sfView::HEADER_ONLY;
     }
 
