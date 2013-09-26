@@ -65,7 +65,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.created_on >= '2013-07-06 00:00:00' group by upline_dist_id
+                            AND history.created_on >= '2013-07-06 00:00:00' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
                 ORDER BY 3 DESC LIMIT 10";
@@ -124,7 +124,7 @@ class q3ChampionsChallengeActions extends sfActions
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
                             AND newDist.upline_dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0)."
-                            AND newDist.created_on >= '2013-07-06 00:00:00' group by upline_dist_id
+                            AND history.created_on >= '2013-07-06 00:00:00' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
             WHERE dist.distributor_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0);
