@@ -44,6 +44,15 @@ $(function() {
         mDec: 2
     });
 
+    $('#paymentMethod').change(function(){
+        var paymentMethod = $(this).val();
+        if (paymentMethod == "GOZ") {
+            $("#tr_channelid").show();
+        } else {
+            $("#tr_channelid").hide();
+        }
+    });
+
     $("#dgBankReceipt").dialog("destroy");
     $("#dgBankReceipt").dialog({
         autoOpen : false,
@@ -208,9 +217,47 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('Payment Method'); ?></td>
                     <td>
+                        <?php
+                        $disabled = "";
+                        if ($distDB->getDistributorId() == 1) {
+
+                        } else {
+                            $disabled = "disabled='disabled'";
+                        }
+                        ?>
                         <select name="paymentMethod" id="paymentMethod">
                             <option value="LB"><?php echo __("Bank Transfer");?></option>
                             <option value="PG"><?php echo __("Union Pay");?></option>
+                            <option value="GOZ" <?php echo $disabled;?>><?php echo __("Online Payment Gateway");?></option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd" id="tr_channelid" style="display: none;">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank'); ?></td>
+                    <td>
+                        <select name="channelid" id="channelid">
+                            <option value="ABC">中国农业银行</option>
+                            <option value="CCB">中国建设银行</option>
+                            <option value="CIB">兴业银行</option>
+                            <option value="CMB">招商银行</option>
+                            <option value="CMBC">民生银行</option>
+                            <option value="HXB">华夏银行</option>
+                            <option value="ICBC">中国工商银行</option>
+                            <option value="BOCSH">中国银行</option>
+                            <option value="COMM">交通银行</option>
+                            <option value="SPDB">浦发银行</option>
+                            <option value="GDB">广发银行</option>
+                            <option value="SDB">深圳发展银行</option>
+                            <option value="POSTGC">中国邮政储蓄</option>
+                            <option value="SHRCB">上海农村商业银行</option>
+                            <option value="BOB">北京银行</option>
+                            <option value="GZCB">广州商业银行</option>
+                            <option value="CEB">光大银行</option>
+                            <option value="BOWZ">温州银行</option>
+                            <option value="CNCB">中信银行</option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
