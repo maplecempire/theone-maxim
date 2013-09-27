@@ -1275,48 +1275,33 @@ class memberActions extends sfActions
     public function executeGozSuccessRedirect() {
         //var_dump(date("Ymd"));
         //exit();
-        print_r("<br>ver:".$this->getRequestParameter('ver'));
-        print_r("<br>merid:".$this->getRequestParameter('merid'));
-        print_r("<br>orderid:".$this->getRequestParameter('orderid'));
-        print_r("<br>amount:".$this->getRequestParameter('amount'));
-        print_r("<br>orderdate:".$this->getRequestParameter('orderdate'));
-        print_r("<br>curtype:".$this->getRequestParameter('curtype'));
-        print_r("<br>paytype:".$this->getRequestParameter('paytype'));
-        print_r("<br>lang:".$this->getRequestParameter('lang'));
-        print_r("<br>returnurl:".$this->getRequestParameter('returnurl'));
-        print_r("<br>errorurl:".$this->getRequestParameter('errorurl'));
-        print_r("<br>remark1:".$this->getRequestParameter('remark1'));
-        print_r("<br>enctype:".$this->getRequestParameter('enctype'));
-        print_r("<br>notifytype:".$this->getRequestParameter('notifytype'));
-        print_r("<br>urltype:".$this->getRequestParameter('urltype'));
-        print_r("<br>s2surl:".$this->getRequestParameter('s2surl'));
-        print_r("<br>goodsname:".$this->getRequestParameter('goodsname'));
-        print_r("<br>channelid:".$this->getRequestParameter('channelid'));
-        print_r("<br>sign:".$this->getRequestParameter('sign'));
+//        print_r("<br>ver:".$this->getRequestParameter('ver'));
+//        print_r("<br>merid:".$this->getRequestParameter('merid'));
+//        print_r("<br>orderid:".$this->getRequestParameter('orderid'));
+//        print_r("<br>amount:".$this->getRequestParameter('amount'));
+//        print_r("<br>orderdate:".$this->getRequestParameter('orderdate'));
+//        print_r("<br>curtype:".$this->getRequestParameter('curtype'));
+//        print_r("<br>paytype:".$this->getRequestParameter('paytype'));
+//        print_r("<br>lang:".$this->getRequestParameter('lang'));
+//        print_r("<br>returnurl:".$this->getRequestParameter('returnurl'));
+//        print_r("<br>errorurl:".$this->getRequestParameter('errorurl'));
+//        print_r("<br>remark1:".$this->getRequestParameter('remark1'));
+//        print_r("<br>enctype:".$this->getRequestParameter('enctype'));
+//        print_r("<br>notifytype:".$this->getRequestParameter('notifytype'));
+//        print_r("<br>urltype:".$this->getRequestParameter('urltype'));
+//        print_r("<br>s2surl:".$this->getRequestParameter('s2surl'));
+//        print_r("<br>goodsname:".$this->getRequestParameter('goodsname'));
+//        print_r("<br>channelid:".$this->getRequestParameter('channelid'));
+//        print_r("<br>sign:".$this->getRequestParameter('sign'));
 
         $sign = $this->getRequestParameter("sign");
         $transtat = $this->getRequestParameter("transtat");
         $amount = $this->getRequestParameter("amount");
 
-        $mlmDistEpointPurchase = new MlmDistEpointPurchase();
-        $mlmDistEpointPurchase->setDistId(1);
-        $mlmDistEpointPurchase->setPaymentMethod("GOZ");
-        $mlmDistEpointPurchase->setAmount($amount);
-        $mlmDistEpointPurchase->setPgBillNo("9988");
-        $mlmDistEpointPurchase->setPgRetEncodeType("");
-        $mlmDistEpointPurchase->setPgCurrencyType("");
-        $mlmDistEpointPurchase->setPgSignature($sign);
-        $mlmDistEpointPurchase->setPaymentReference("");
-        $mlmDistEpointPurchase->setTransactionType(Globals::PURCHASE_EPOINT_BANK_TRANSFER);
-        $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_SUCCESS);
-        $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlmDistEpointPurchase->setPgSuccess("Y");
-        $mlmDistEpointPurchase->setPgMsg($transtat);
-        $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-        $mlmDistEpointPurchase->setApprovedByUserid(1);
+        $c = new Criteria();
+        $c->add(MlmDistEpointPurchasePeer::PG_SIGNATURE, $sign);
+        $mlmDistEpointPurchase = MlmDistEpointPurchasePeer::doSelectOne($c);
 
-        $mlmDistEpointPurchase->save();
         /*mysql_select_db('dfff_a', $con);
         mysql_query("SET CHARACTER SET UTF8");
         $sql = "SELECT *  FROM `cn` WHERE `amount` = '" . $amount . "' AND `sign` = '" . $sign . "' LIMIT 1";
@@ -1331,41 +1316,76 @@ class memberActions extends sfActions
                 die("Valid result!");
             }
         }*/
-        if ($transtat == '000') {
-            $this->getRequestParameter("OK");
+        if ($mlmDistEpointPurchase) {
+            if ($transtat == '000') {
+                $dist = MlmDistributorPeer::retrieveByPK($mlmDistEpointPurchase->getDistId());
+                $companyEpoint = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+                $distEpoint = $this->getAccountBalance($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $totalEpoint = $mlmDistEpointPurchase->getAmount();
+
+                $mlmDistEpointPurchase->setPgSuccess("Y");
+                $mlmDistEpointPurchase->setPgMsg("SUCCESS");
+                $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_COMPLETE);
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+                $mlmDistEpointPurchase->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                $mlm_account_ledger->setRemark("EPOINT PURCHASE (" . $dist->getDistributorCode() . ")");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($totalEpoint);
+                $mlm_account_ledger->setBalance($companyEpoint - $totalEpoint);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($dist->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setCredit($totalEpoint);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transaction Successful."));
+                return $this->redirect('/member/epointPurchase?pg=Y');
+            } else {
+                $mlmDistEpointPurchase->setPgSuccess("N");
+                $mlmDistEpointPurchase->setPgMsg("transtat not 000");
+                $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->save();
+
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                return $this->redirect('/member/epointPurchase');
+            }
         } else {
-            $this->getRequestParameter("Valid result!");
+            $mlmDistEpointPurchase->setPgSuccess("N");
+            $mlmDistEpointPurchase->setPgMsg("Invalid Signature");
+            $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->save();
+
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/epointPurchase');
         }
         return sfView::HEADER_ONLY;
     }
     public function executeGozErrorRedirect() {
-        //var_dump(date("Ymd"));
-        //exit();
-        $sign = $this->getRequestParameter("sign");
-        $transtat = $this->getRequestParameter("transtat");
-        $amount = $this->getRequestParameter("amount");
-
-        $mlmDistEpointPurchase = new MlmDistEpointPurchase();
-        $mlmDistEpointPurchase->setDistId(1);
-        $mlmDistEpointPurchase->setPaymentMethod("GOZ");
-        $mlmDistEpointPurchase->setAmount($amount);
-        $mlmDistEpointPurchase->setPgBillNo("9988");
-        $mlmDistEpointPurchase->setPgRetEncodeType("");
-        $mlmDistEpointPurchase->setPgCurrencyType("");
-        $mlmDistEpointPurchase->setPgSignature($sign);
-        $mlmDistEpointPurchase->setPaymentReference("");
-        $mlmDistEpointPurchase->setTransactionType(Globals::PURCHASE_EPOINT_BANK_TRANSFER);
-        $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
-        $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlmDistEpointPurchase->setPgSuccess("N");
-        $mlmDistEpointPurchase->setPgMsg($transtat);
-        $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-        $mlmDistEpointPurchase->setApprovedByUserid(1);
-
-        $mlmDistEpointPurchase->save();
-
-        print_r("<br>executeGozErrorRedirect:".$this->getRequestParameter('sign'));
         return sfView::HEADER_ONLY;
     }
 
@@ -1414,7 +1434,6 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_PENDING);
             $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-
             $mlmDistEpointPurchase->save();
 
             $mlmDistEpointPurchase->setPaymentReference($mlmDistEpointPurchase->getPurchaseId());
@@ -1444,6 +1463,48 @@ class memberActions extends sfActions
                     $this->merKey = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
                 }
                 $this->setTemplate('epointPurchasePG');
+            } else if ($paymentMethod == "GOZ") {
+                $ver = "1.0";
+                $merid = "100009";
+                $orderid = $paymentReference;
+                $amount = number_format($dispAmount,2);
+                $orderdate = date("Ymd");
+                $curtype = "RMB";
+                $paytype = "01";
+                $lang = "GB";
+                $returnurl = "http://partner.maximtrader.com/member/gozSuccessRedirect";
+                $errorurl = "http://partner.maximtrader.com/member/gozErrorRedirect";
+                $remark = $distDB->getDistributorCode();
+                $enctype = "1";
+                $channelid = $this->getRequestParameter('channelid', "CMB");
+
+                $this->ver = $ver;
+                $this->merid = $merid;
+                $this->orderid = $orderid;
+                $this->amount = $amount;
+                $this->orderdate = $orderdate;
+                $this->curtype = $curtype;
+                $this->paytype = $paytype;
+                $this->lang = $lang;
+                $this->returnurl = $returnurl;
+                $this->errorurl = $errorurl;
+                $this->remark = $remark;
+                $this->enctype = $enctype;
+                $this->channelid = $channelid;
+
+                $md5Key = "88496625849445331821427993934397583101845496550535688096140279054296113998693043340961948795056633136331268949200793818235742794";
+                $orge = 'ver='.$ver.'&merid='.$merid.'&orderid='.$orderid.'&amount='.$amount.'&orderdate='.$orderdate.'&curtype='.$curtype.'&paytype='.$paytype.'&lang='.$lang.'&returnurl='.$returnurl.'&errorurl='.$errorurl.'&remark1='.$remark.'&enctype='.$enctype.'&notifytype=2&urltype=1&s2surl='.$errorurl.'&goodsname=goods&channelid='.$channelid;
+                  //echo  $orge;
+                $this->SignMD5 = md5($orge.$md5Key) ;
+
+                $mlmDistEpointPurchase->setPgMsg($orge);
+                $mlmDistEpointPurchase->setPgBillNo($orderid);
+                $mlmDistEpointPurchase->setPgRetEncodeType($channelid);
+                $mlmDistEpointPurchase->setPgCurrencyType($curtype);
+                $mlmDistEpointPurchase->setPgSignature($this->SignMD5);
+                $mlmDistEpointPurchase->save();
+
+                $this->setTemplate('epointPurchaseGoz');
             } else {
                 $this->setFlash('purchaseId', $mlmDistEpointPurchase->getPurchaseId());
                 $this->setFlash('amount', $amount);
