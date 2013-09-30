@@ -1076,6 +1076,11 @@ class financeActions extends sfActions
         /******   total records  *******/
         $sWhere = " WHERE withdrawal.dist_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $sWhere .= " AND dist.placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458) {
+            // hide datoheng group
+            $sWhere .= " AND dist.placement_tree_structure not like '%|203|%'";
+        }
         /******   total filtered records  *******/
 
         $totalRecords = $this->getTotalRecords($sql.$sWhere);
@@ -1160,6 +1165,11 @@ class financeActions extends sfActions
         /******   total records  *******/
         $sWhere = " WHERE withdrawal.dist_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $sWhere .= " AND dist.placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458) {
+            // hide datoheng group
+            $sWhere .= " AND dist.placement_tree_structure not like '%|203|%'";
+        }
         /******   total filtered records  *******/
 
         $totalRecords = $this->getTotalRecords($sql.$sWhere);

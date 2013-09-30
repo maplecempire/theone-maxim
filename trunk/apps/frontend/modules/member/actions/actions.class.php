@@ -114,7 +114,7 @@ class memberActions extends sfActions
 
     public function executeDownlineCp2WithdrawalList()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458 ||
                 $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
         } else {
             return $this->redirect('/member/summary');
@@ -122,7 +122,7 @@ class memberActions extends sfActions
     }
     public function executeDownlineCp3WithdrawalList()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458 ||
                 $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
         } else {
             return $this->redirect('/member/summary');
@@ -130,7 +130,7 @@ class memberActions extends sfActions
     }
     public function executeDownlineList()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 ||
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 203 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458 ||
                 $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15) {
         } else {
             return $this->redirect('/member/summary');

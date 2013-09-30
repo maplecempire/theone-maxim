@@ -258,7 +258,7 @@ function blink(selector) {
         </li>-->
     </ul>
     <?php
-    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 ||
+    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 || $distDB->getDistributorId() == 1458 ||
             $distDB->getDistributorId() == 15) {
     ?>
     <br class="clear"><br>

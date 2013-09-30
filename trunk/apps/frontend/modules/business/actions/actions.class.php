@@ -484,6 +484,11 @@ class businessActions extends sfActions
         $sWhere = " WHERE distributor_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $sWhere .= " AND placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458) {
+            // hide datoheng group
+            $sWhere .= " AND placement_tree_structure not like '%|203|%'";
+        }
+
         $totalRecords = $this->getTotalRecords($sql.$sWhere);
 
         /******   total filtered records  *******/
