@@ -1613,9 +1613,27 @@ class financeActions extends sfActions
 		</tr>
 	</tbody>
 </table>";
+                    $leaderArrs = explode(",", Globals::GROUP_LEADER);
+                    $isAmz001 = false;
+                    for ($i = 0; $i < count($leaderArrs); $i++) {
+                        $pos = strrpos($tbl_distributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                        if ($pos === false) { // note: three equal signs
+
+                        } else {
+                            if ($leaderArrs[$i] == 1458) {
+                                $isAmz001 = true;
+                            }
+                        }
+                    }
 
                     $sendMailService = new SendMailService();
-                    $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+
+                    if ($isAmz001) {
+                        $dist = MlmDistributorPeer::retrieveByPK(1458);
+                        $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body, $sendFrom=Mails::EMAIL_SENDER, $dist->getEmail());
+                    } else {
+                        $sendMailService->sendMail($tbl_distributor->getEmail(), $tbl_distributor->getFullName(), $subject, $body);
+                    }
                 }
             }
             /*}

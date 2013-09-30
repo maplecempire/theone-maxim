@@ -2164,7 +2164,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageContract->save();
 
-                    $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
+                    $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
                 }
                 $con->commit();
             } catch (PropelException $e) {
@@ -2882,7 +2882,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
         if (count($distMt4s) >= 1) {
             foreach ($distMt4s as $distMt4) {
-                $this->sendEmailForMt4($distMt4->getMt4UserName(), $distMt4->getMt4Password(), $tbl_distributor->getFullName(), $tbl_distributor->getEmail());
+                $this->sendEmailForMt4($distMt4->getMt4UserName(), $distMt4->getMt4Password(), $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
             }
         }
 
@@ -2907,7 +2907,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         return sfView::HEADER_ONLY;
     }
 
-    function sendEmailForMt4($mt4UserName, $mt4Password, $fullName, $email)
+    function sendEmailForMt4($mt4UserName, $mt4Password, $fullName, $email, $tbl_distributor=null)
     {
         if ($mt4UserName != "" && $mt4Password != "") {
                     $subject = "Your live trading account with Maxim Trader has been activated 您的马胜交易户口已被激活";
@@ -3244,7 +3244,29 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 </table>";
 
             $sendMailService = new SendMailService();
-            return $sendMailService->sendMail($email, $fullName, $subject, $body);
+            $leaderArrs = explode(",", Globals::GROUP_LEADER);
+            $isAmz001 = false;
+
+            if ($tbl_distributor != null) {
+                for ($i = 0; $i < count($leaderArrs); $i++) {
+                    $pos = strrpos($tbl_distributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        if ($leaderArrs[$i] == 1458) {
+                            $isAmz001 = true;
+                        }
+                    }
+                }
+            }
+
+            if ($isAmz001) {
+                $dist = MlmDistributorPeer::retrieveByPK(1458);
+                return $sendMailService->sendMail($email, $fullName, $subject, $body, $sendFrom=Mails::EMAIL_SENDER, $dist->getEmail());
+            } else {
+                return $sendMailService->sendMail($email, $fullName, $subject, $body);
+            }
+            return "";
         }
     }
 
