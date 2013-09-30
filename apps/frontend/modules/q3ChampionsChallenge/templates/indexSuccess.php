@@ -280,7 +280,7 @@ $(function() {
             <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">&nbsp;<span style="font-weight: bold;"><label for="terms_risk"><?php echo __('I have read, have accepted and would like to Register my name to PARTICIPATE in the Q3 Champions Challenge.')?></label></span></td>
         </tr>
         <tr>
-            <td align="right"><button id="btnSubmit"><?php echo __('Submit') ?></button></td>
+<!--            <td align="right"><button id="btnSubmit">--><?php //echo __('Submit') ?><!--</button></td>-->
         </tr>
         <?php } else { ?>
         <tr>
