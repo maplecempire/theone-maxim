@@ -60,7 +60,7 @@ class q3ChampionsChallengeActions extends sfActions
             $count++;
         }
         $idx = 1;
-        foreach ($resultArray as $member) {
+        /*foreach ($resultArray as $member) {
             $totalSales = $member['SUB_TOTAL'];
 
             $cp1 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_EPOINT);
@@ -113,7 +113,7 @@ class q3ChampionsChallengeActions extends sfActions
             }
 
             echo $enough.$member['upline_dist_id']."-".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'] . "-CP1:" . $cp1. "-CP2:" . $cp2. "-CP3:" . $cp3 . "<br>";
-        }
+        }*/
 
         print_r("Done");
         return sfView::HEADER_ONLY;
