@@ -66,7 +66,35 @@ class q3ChampionsChallengeActions extends sfActions
             $cp1 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_EPOINT);
             $cp2 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_ECASH);
             $cp3 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_MAINTENANCE);
-            echo $idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'] . "-CP1:" . $cp1. "-CP2:" . $cp2. "-CP3:" . $cp3 . "<br>";
+            $fine = 1000;
+            $enough = "";
+            if ($fine >= $cp1) {
+
+            } else if ($fine >= $cp2) {
+
+            } else if ($fine >= $cp3) {
+
+            }
+
+            if ($fine > 0) {
+                if ($cp1 >= $fine) {
+                    $fine = $cp1 - $fine;
+                } else {
+                    $fine = $fine - $cp1;
+                }
+            }
+            if ($fine > 0) {
+                if ($cp2 >= $fine) {
+                    $fine = $cp2 - $fine;
+                } else {
+                    $fine = $fine - $cp2;
+                }
+            }
+            if ($fine > 0) {
+                $fine = $cp3 - $fine;
+            }
+            $enough = "*****";
+            echo $member['upline_dist_id']."-".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'] . "-CP1:" . $cp1. "-CP2:" . $cp2. "-CP3:" . $cp3 . "<br>";
         }
 
         print_r("Done");
