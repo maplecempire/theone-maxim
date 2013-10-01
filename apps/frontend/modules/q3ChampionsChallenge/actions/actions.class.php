@@ -68,7 +68,7 @@ class q3ChampionsChallengeActions extends sfActions
             $cp3 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_MAINTENANCE);
             $fine = 1000;
             $enough = "*****";
-            if ($fine >= $cp1) {
+            if ($cp1 >= $fine) {
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($member['upline_dist_id']);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
@@ -82,7 +82,7 @@ class q3ChampionsChallengeActions extends sfActions
                 $mlm_account_ledger->save();
 
                 $enough = "";
-            } else if ($fine >= $cp2) {
+            } else if ($cp2 >= $fine) {
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($member['upline_dist_id']);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
@@ -96,7 +96,7 @@ class q3ChampionsChallengeActions extends sfActions
                 $mlm_account_ledger->save();
 
                 $enough = "";
-            } else if ($fine >= $cp3) {
+            } else if ($cp3 >= $fine) {
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($member['upline_dist_id']);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
