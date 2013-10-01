@@ -67,34 +67,52 @@ class q3ChampionsChallengeActions extends sfActions
             $cp2 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_ECASH);
             $cp3 = $this->getAccountBalance($member['upline_dist_id'], Globals::ACCOUNT_TYPE_MAINTENANCE);
             $fine = 1000;
-            $enough = "";
-            if ($fine >= $cp1) {
-
-            } else if ($fine >= $cp2) {
-
-            } else if ($fine >= $cp3) {
-
-            }
-
-            if ($fine > 0) {
-                if ($cp1 >= $fine) {
-                    $fine = $cp1 - $fine;
-                } else {
-                    $fine = $fine - $cp1;
-                }
-            }
-            if ($fine > 0) {
-                if ($cp2 >= $fine) {
-                    $fine = $cp2 - $fine;
-                } else {
-                    $fine = $fine - $cp2;
-                }
-            }
-            if ($fine > 0) {
-                $fine = $cp3 - $fine;
-            }
             $enough = "*****";
-            echo $member['upline_dist_id']."-".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'] . "-CP1:" . $cp1. "-CP2:" . $cp2. "-CP3:" . $cp3 . "<br>";
+            if ($fine >= $cp1) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($member['upline_dist_id']);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType("Q3");
+                $mlm_account_ledger->setRemark("Commitment Fee of 1,000CP (deducted from CP1/CP2/CP3) in the event that the Registrant fails to achieve at least USD100,000 of Personal Sales during Challenge Period.");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($fine);
+                $mlm_account_ledger->setBalance($cp1 - $fine);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $enough = "";
+            } else if ($fine >= $cp2) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($member['upline_dist_id']);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType("Q3");
+                $mlm_account_ledger->setRemark("Commitment Fee of 1,000CP (deducted from CP1/CP2/CP3) in the event that the Registrant fails to achieve at least USD100,000 of Personal Sales during Challenge Period.");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($fine);
+                $mlm_account_ledger->setBalance($cp2 - $fine);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $enough = "";
+            } else if ($fine >= $cp3) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($member['upline_dist_id']);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $mlm_account_ledger->setTransactionType("Q3");
+                $mlm_account_ledger->setRemark("Commitment Fee of 1,000CP (deducted from CP1/CP2/CP3) in the event that the Registrant fails to achieve at least USD100,000 of Personal Sales during Challenge Period.");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($fine);
+                $mlm_account_ledger->setBalance($cp3 - $fine);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $enough = "";
+            }
+
+            echo $enough.$member['upline_dist_id']."-".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'] . "-CP1:" . $cp1. "-CP2:" . $cp2. "-CP3:" . $cp3 . "<br>";
         }
 
         print_r("Done");
