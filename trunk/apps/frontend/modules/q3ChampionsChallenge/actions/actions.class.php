@@ -68,7 +68,8 @@ class q3ChampionsChallengeActions extends sfActions
                             AND history.created_on >= '2013-07-06 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
-                ORDER BY 3 DESC LIMIT 10";
+                    HAVING SUB_TOTAL >= 100000
+                        ORDER BY 3 DESC ";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
