@@ -488,7 +488,6 @@ class homeActions extends sfActions
 
                     if (!$resp->is_valid) {
                         $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
-
                         $this->setFlash('errorMsg', "The CAPTCHA wasn't entered correctly. Go back and try it again.");
                         return $this->redirect('home/login');
                     }
@@ -499,12 +498,12 @@ class homeActions extends sfActions
 
                 if ($username == '' || $password == '') {
                     $this->getUser()->setAttribute(Globals::LOGIN_RETRY, $this->getUser()->getAttribute(Globals::LOGIN_RETRY) + 1);
-
                     $this->setFlash('errorMsg', "Invalid username or password.");
                     return $this->redirect('home/login');
                 }
+                //var_dump("==BBB=".$this->getUser()->getAttribute(Globals::LOGIN_RETRY));
 
-                $this->getUser()->getAttributeHolder()->clear();
+                //
 
                 /*	    user      	*/
                 $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
@@ -519,6 +518,8 @@ class homeActions extends sfActions
             }
 
             if ($existUser) {
+                $this->getUser()->getAttributeHolder()->clear();
+
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::USER_ID, $existUser->getUserId());
                 $existDist = MlmDistributorPeer::doSelectOne($c);
