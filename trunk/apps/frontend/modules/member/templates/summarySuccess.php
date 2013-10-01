@@ -480,13 +480,25 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 <?php } ?>
-<?php if ($distributor->getDebitAccount() == "Y") { ?>
+<?php
+    if ($distributor->getDebitAccount() == "Y") {
+        // hide from korea group
+        $hide = false;
+        $pos = strrpos($distributor->getTreeStructure(), "|255607|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $hide = true;
+        }
+        if ($hide == false) {
+    ?>
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('Debit Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($debitAccount,2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
+    <?php } ?>
 <?php } ?>
     <!--<tr class="tbl_listing_end">
         <td colspan="4">
