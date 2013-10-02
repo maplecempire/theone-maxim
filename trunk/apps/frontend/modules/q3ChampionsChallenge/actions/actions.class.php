@@ -62,7 +62,7 @@ class q3ChampionsChallengeActions extends sfActions
         $idx = 1;
         foreach ($resultArray as $member) {
             $totalSales = $member['SUB_TOTAL'];
-            echo $idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'];
+            echo "<br>".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'];
         }
         /*foreach ($resultArray as $member) {
             $totalSales = $member['SUB_TOTAL'];
