@@ -20,10 +20,10 @@ class ApService
             $hideGroup = "129";  // Law001
         } else if ($currentDistId == 129) {
             // law01,law1
-            $hideGroup = "402";  // Law001
-        } else if ($currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126 || $currentDistId == 127 || $currentDistId == 128 || $currentDistId == 129 || $currentDistId == 104 || $currentDistId == 105 || $currentDistId == 402) {
+            $hideGroup = "104";  // BRF129
+        } else if ($currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126 || $currentDistId == 127 || $currentDistId == 128 || $currentDistId == 104 || $currentDistId == 105 || $currentDistId == 402) {
             // law01,law1
-            $hideGroup = "175";  // Law001
+            $hideGroup = "175";  // maxworld
         }
         $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
         if ($pos === false) { // note: three equal signs
