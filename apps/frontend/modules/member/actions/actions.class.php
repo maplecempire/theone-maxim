@@ -101,6 +101,192 @@ class memberActions extends sfActions
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
             }
         }*/
+        $mlm_distributor = MlmDistributorPeer::retrieveByPK(255235);
+        $app_user = AppUserPeer::retrieveByPK($mlm_distributor->getUserId());
+            $receiverEmail = $this->getRequestParameter('email', $mlm_distributor->getEmail());
+            $receiverFullname = $this->getRequestParameter('fullname', $mlm_distributor->getFullName());
+            $subject = "Maxim Trader - Thank You for Your Registration";
+
+            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
+
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table border='0' cellspacing='0' cellpadding='0' style='width:440.0pt;border-collapse:collapse'>
+                                        <tbody>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Member ID<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$app_user->getUserName()."<u></u><u></u></span>
+                                            </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Password<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$app_user->getUserpassword()."<u></u><u></u></span>
+                                            </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Security Password<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$app_user->getUserpassword2()."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180' style='width:135.0pt;border:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Member ID<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border:solid black 1.0pt;border-left:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'><p
+                                                    class='MsoNormal'><span
+                                                    style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$mlm_distributor->getDistributorCode()."<u></u><u></u></span>
+                                            </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Full Name(As In IC)<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$receiverFullname."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Email<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'><a
+                                                        href='mailto:".$mlm_distributor->getEmail()."'
+                                                        target='_blank'>".$this->getRequestParameter('email', $mlm_distributor->getEmail())."</a><u></u><u></u></span></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Mobile Number<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('contactNumber', $mlm_distributor->getContact())."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Country<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>".$this->getRequestParameter('country', $mlm_distributor->getCountry())."<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width='180'
+                                                style='width:135.0pt;border:solid black 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Package<u></u><u></u></span>
+                                                </p></td>
+                                            <td style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt'>
+                                                <p class='MsoNormal'><span
+                                                        style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;'>Platinum (USD 1,000.00)<u></u><u></u></span>
+                                                </p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader Account Opening Team</strong><br>
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (International): (+64) 9925 0379 Tel (Dial within NZ): 09 925 0379, Email support@maximtrader.com
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+									<br><br>
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Group Holding Inc.旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+<br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
+
+            $sendMailService = new SendMailService();
+            $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
