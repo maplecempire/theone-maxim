@@ -189,15 +189,18 @@
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td colspan="1" align="right" valign="top">
-                        <font color="#dc143c"> <?php echo __('NOTE :') ?></font> &nbsp;
-                    </td>
-                    <td colspan="1" align="left">
-                        <font color="#dc143c">1. <?php echo __('Minimum withdrawal amount is USD100') ?>
-                        <br>2. <?php echo __('Withdrawal request must be done during the first 7 days of each month') ?>
-                        <br>3. <?php echo __('Processing time will be at least 3 days') ?>
-                        <br>4. <?php echo __('Payout will be by the 15th of each month') ?>
-                        <br>5. <?php echo __('Handling Fee USD60 or 5% whichever is higher') ?></font>
+                    <td colspan="2" valign="top">
+                         &nbsp;
+                        <font color="#dc143c"> <?php echo __('NOTE :') ?></font>
+                        <br>
+                        <ol style="color: #dc143c; padding-left: 20px;">
+                            <li><?php echo __('Minimum withdrawal amount is USD100') ?></li>
+                            <li><?php echo __('Withdrawal request must be done during the first 7 days of each month') ?></li>
+                            <li><?php echo __('Processing time will be at least 3 days') ?></li>
+                            <li><?php echo __('Payout will be by the 15th of each month') ?></li>
+                            <li><?php echo __('Handling Fee USD60 or 5% whichever is higher') ?></li>
+                            <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
+                        </ol>
                     </td>
                     <td>&nbsp;</td>
 
