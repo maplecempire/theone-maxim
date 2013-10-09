@@ -101,7 +101,7 @@ class memberActions extends sfActions
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
             }
         }*/
-        $mlm_distributor = MlmDistributorPeer::retrieveByPK(255235);
+        /*$mlm_distributor = MlmDistributorPeer::retrieveByPK(255235);
         $app_user = AppUserPeer::retrieveByPK($mlm_distributor->getUserId());
             $receiverEmail = $this->getRequestParameter('email', $mlm_distributor->getEmail());
             $receiverFullname = $this->getRequestParameter('fullname', $mlm_distributor->getFullName());
@@ -286,7 +286,7 @@ class memberActions extends sfActions
 </table>";
 
             $sendMailService = new SendMailService();
-            $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
+            $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);*/
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
