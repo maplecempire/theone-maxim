@@ -991,6 +991,20 @@ $(document).ready(function() {
             <div class="news_date">
             <?php
                 $dateUtil = new DateUtil();
+                echo "4 OCTOBER 2013";
+                ?>
+            </div>
+            <div class="news_desc" style="text-align:left">
+                <br>
+                IMPORTANT ANNOUNCEMENT!!!
+                <br><br>Please be informed that effective 1st October 2013, pending order placement will be disabled 1 hour earlier prior to the US NFP news release at 8:30 EDT and will be made available 2 hours after the news release.
+            </div>
+
+            <div class="popdivider"></div>
+
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
                 echo "6 SEPTEMBER 2013";
                 ?>
             </div>
