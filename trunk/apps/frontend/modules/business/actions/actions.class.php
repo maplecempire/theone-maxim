@@ -14,11 +14,11 @@ class businessActions extends sfActions
     {
 //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
 //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
-        $mlm_distributor = MlmDistributorPeer::retrieveByPk(258783);
+        $mlm_distributor = MlmDistributorPeer::retrieveByPk(255838);
         $uplinePosition = $mlm_distributor->getPlacementPosition();
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
 
-        /*$sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
+        $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
         $pairingPoint = 30000;
         $level =0;
         while ($level < 200) {
@@ -88,7 +88,7 @@ class businessActions extends sfActions
             $uplinePosition = $uplineDistDB->getPlacementPosition();
             $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
             $level++;
-        }*/
+        }
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
