@@ -949,6 +949,7 @@
             <trans-unit><source>Payout will be by the 15th of each month</source><target>ペイアウトは、毎月15日に行われる（地元の銀行の休日などによりに1日以上のずれが生じる場合があります）</target></trans-unit>
             <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>手数料はUSD60あるいは5％となり、高い方で徴収する</target></trans-unit>
             <trans-unit><source>Handling Fee is USD30</source><target>手数料はUSD30となる</target></trans-unit>
+            <trans-unit><source>All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges</source><target>全ての出金金額は 出金日の為替レートと 銀行手数料に基づいて支払います</target></trans-unit>
         </body>
     </file>
 </xliff>

@@ -946,6 +946,7 @@
             <trans-unit><source>Payout will be by the 15th of each month</source><target>지불은 매달 15일에 이루어집니다. (각 국가의 은행 휴일에 따라 1일 또는 그 이상이 걸릴수 있습니다.)</target></trans-unit>
             <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>수수료는 60불 또는 전체 인출 금액의 5% 중 높은 금액으로 합니다</target></trans-unit>
             <trans-unit><source>Handling Fee is USD30</source><target>수수료는 30입니다</target></trans-unit>
+            <trans-unit><source>All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges</source><target>모든 인출은 현재 ‘일반적인 환율과 현지 은행 수수료'대상에 따라 지급됩니다</target></trans-unit>
         </body>
     </file>
 </xliff>
