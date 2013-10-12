@@ -754,7 +754,8 @@ function reassignDatagridAnnouncementEventAttr() {
                 <tr class="row0"><td>11.</td><td>Cambodia Riel - KHR4,100/KHR4,500                </td></tr>
                 <tr class="row1"><td>12.</td><td>Vietnam Dong - VND22,000/VND24,000               </td></tr>
                 <tr class="row0"><td>13.</td><td>India Rupee - INR68/INR75                        </td></tr>
-                <tr class="row1"><td>14.</td><td>USD - USD1/USD1.1   15. AUD - AUD1.06/AUD1.16    </td></tr>
+                <tr class="row1"><td>14.</td><td>USD - USD1/USD1.1</td></tr>
+                <tr class="row1"><td>15.</td><td>AUD - AUD1.1/AUD1.2    </td></tr>
                 </tbody>
             </table>
         </td>
