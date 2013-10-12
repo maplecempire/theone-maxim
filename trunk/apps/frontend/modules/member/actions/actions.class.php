@@ -919,7 +919,7 @@ class memberActions extends sfActions
         $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Full Name: ".$distDB->getFullName()."<br>Contact No: ".$contactNoEmail."<br><br>Message: ".$message;
 
         $sendMailService = new SendMailService();
-        $sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
+        //$sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
         return $this->redirect('/member/customerEnquiry');
@@ -963,7 +963,7 @@ class memberActions extends sfActions
         $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Full Name: ".$distDB->getFullName()."<br><br>Message: ".$message;
 
         $sendMailService = new SendMailService();
-        $sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$mlmCustomerEnquiry->getTitle(), $message);
+        //$sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$mlmCustomerEnquiry->getTitle(), $message);
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
         return $this->redirect('/member/customerEnquiryDetail?enquiryId='.$enquiryId);
