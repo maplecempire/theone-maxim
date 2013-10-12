@@ -6371,6 +6371,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeEcashLog()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=W');
+        }
+
         $c = new Criteria();
         $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_RP);
@@ -6380,6 +6384,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeEpointLog()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=W');
+        }
+
         $c = new Criteria();
         $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_RP);
@@ -6401,6 +6409,9 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeMaintenanceLog()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=W');
+        }
         $c = new Criteria();
         $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_RP);
@@ -6479,6 +6490,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             } else if ($doAction == "C") {
                 $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, true);
                 return $this->redirect('/member/bonusDetails');
+            } else if ($doAction == "W") {
+                $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, true);
+                return $this->redirect('/member/epointLog');
             }
         }
     }
