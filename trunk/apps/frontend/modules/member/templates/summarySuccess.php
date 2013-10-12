@@ -723,6 +723,45 @@ function reassignDatagridAnnouncementEventAttr() {
     </tbody>
 </table>
 <?php } ?>
+
+<br>
+<br>
+<table cellspacing="0" cellpadding="0" class="tbl_form">
+    <colgroup>
+        <col width="1%">
+        <col width="30%">
+        <col width="69%">
+        <col width="1%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <td colspan="4">
+            <table class="pbl_table" cellpadding="3" cellspacing="3">
+                <tr class="pbl_header">
+                    <td colspan="2"><?php echo __('Maxim Trader Currency Whole Seller Market Currency Rate as effective from 10th Sep 2013:') ?></td>
+                </tr>
+                <tbody>
+                <tr class="row0"><td>1. </td><td>Malaysia RM - RM3.30 / RM3.60                    </td></tr>
+                <tr class="row1"><td>2. </td><td>Thailand Baht - B33/ B36                         </td></tr>
+                <tr class="row0"><td>3. </td><td>Indonesia Rupiah - R11,000 / R12,000             </td></tr>
+                <tr class="row1"><td>4. </td><td>China RMB - RMB6.30 / RMB7.00                    </td></tr>
+                <tr class="row0"><td>5. </td><td>Taiwan New Dollar - NTD31 / NTD34                </td></tr>
+                <tr class="row1"><td>6. </td><td>Hong Kong Dollar - HKD7.8/HKD8.5                 </td></tr>
+                <tr class="row0"><td>7. </td><td>Japanese Yen - JPY                               </td></tr>
+                <tr class="row1"><td>8. </td><td>Korean Won - KRW1,150/KRW1,250                   </td></tr>
+                <tr class="row0"><td>9. </td><td>Phillipine Peso - PHP45/PHP50                    </td></tr>
+                <tr class="row1"><td>10.</td><td>Singapore Dollar - SGD1.28/SGD1.40               </td></tr>
+                <tr class="row0"><td>11.</td><td>Cambodia Riel - KHR4,100/KHR4,500                </td></tr>
+                <tr class="row1"><td>12.</td><td>Vietnam Dong - VND22,000/VND24,000               </td></tr>
+                <tr class="row0"><td>13.</td><td>India Rupee - INR68/INR75                        </td></tr>
+                <tr class="row1"><td>14.</td><td>USD - USD1/USD1.1   15. AUD - AUD1.06/AUD1.16    </td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 <form action="/member/delete" id="frmDeleteMember" name="frmDeleteMember">
     <input type="hidden" id="distid" name="distid">
 </form>
