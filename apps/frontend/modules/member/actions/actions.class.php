@@ -4748,6 +4748,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executePlacementTree()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=G');
+        }
+
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($distDB->getHideGenealogy() == "Y") {
             return $this->redirect('/member/summary');
@@ -6450,6 +6454,34 @@ We look forward to your custom in the near future. Should you have any queries, 
         return $this->redirect('/member/viewProfile');
     }
 
+    public function executeSecurityPasswordRequired()
+    {
+        $doAction = $this->getRequestParameter('doAction', "VP");
+        $this->doAction = $doAction;
+
+        if ($this->getRequestParameter('transactionPassword')) {
+            $c = new Criteria();
+            $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('transactionPassword'));
+            $exist = AppUserPeer::doSelectOne($c);
+
+            if (!$exist) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Security password is not valid."));
+                return $this->redirect('/member/securityPasswordRequired?doAction='.$doAction);
+            }
+
+            if ($doAction == "VP") {
+                $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, true);
+                return $this->redirect('/member/viewProfile');
+            } else if ($doAction == "G") {
+                $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, true);
+                return $this->redirect('/member/sponsorTree');
+            } else if ($doAction == "C") {
+                $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, true);
+                return $this->redirect('/member/bonusDetails');
+            }
+        }
+    }
     public function executeTransactionPassword()
     {
         if ($this->getRequestParameter('oldSecurityPassword')) {
@@ -6481,6 +6513,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeSponsorTree()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=G');
+        }
+
         $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
 
@@ -6967,7 +7003,9 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
 
     public function executeBonusDetails() {
-
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=C');
+        }
     }
     public function executePipsRebate()
     {
@@ -7141,6 +7179,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeViewProfile()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, false) == false) {
+            return $this->redirect('/member/securityPasswordRequired?doAction=VP');
+        }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distDB);
 
