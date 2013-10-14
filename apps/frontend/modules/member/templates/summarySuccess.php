@@ -726,7 +726,7 @@ function reassignDatagridAnnouncementEventAttr() {
 
 <br>
 <br>
-<table cellspacing="0" cellpadding="0" class="tbl_form">
+<!--<table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
         <col width="30%">
@@ -738,7 +738,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <td colspan="4">
             <table class="pbl_table" cellpadding="3" cellspacing="3">
                 <tr class="pbl_header">
-                    <td colspan="2"><?php echo __('Maxim Trader Currency Whole Seller Market Currency Rate as effective from 10th Sep 2013:') ?></td>
+                    <td colspan="2"><?php /*echo __('Maxim Trader Currency Whole Seller Market Currency Rate as effective from 10th Sep 2013:') */?></td>
                 </tr>
                 <tbody>
                 <tr class="row0"><td>1. </td><td>Malaysia RM - RM3.30 / RM3.60                    </td></tr>
@@ -761,7 +761,7 @@ function reassignDatagridAnnouncementEventAttr() {
         </td>
     </tr>
     </tbody>
-</table>
+</table>-->
 
 <form action="/member/delete" id="frmDeleteMember" name="frmDeleteMember">
     <input type="hidden" id="distid" name="distid">
