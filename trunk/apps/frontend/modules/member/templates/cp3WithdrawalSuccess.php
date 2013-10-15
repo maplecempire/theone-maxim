@@ -121,16 +121,13 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Withdrawal Amount'); ?></td>
                     <td>
-                        <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2">
+                        <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2" style="text-align:right">
                             <?php
                                 //if ($distributorDB->getMt4UserName() != null) {
                                 for ($i = 100; $i <= 10000; $i = $i + 100) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
-                                for ($i = 10500; $i <= 19500; $i = $i + 500) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-                                for ($i = 20000; $i <= 100000; $i = $i + 10000) {
+                                for ($i = 10500; $i <= 100000; $i = $i + 500) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
                                 //}
