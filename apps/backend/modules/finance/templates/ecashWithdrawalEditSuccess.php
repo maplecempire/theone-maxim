@@ -11,7 +11,7 @@
             icons: {
                 primary: "ui-icon-circle-check"
             }
-        })
+        });
 
         $("#btnCancel").button({
             icons: {
