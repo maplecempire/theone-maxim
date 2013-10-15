@@ -7321,6 +7321,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
+//                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 100);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $dists = MlmDistributorPeer::doSelect($c);
 //                    print_r("total Dist:".count($dists)."<br><br>");
@@ -7335,6 +7336,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $distId = $mlmDistPairingDB->getDistId();
                         $flushLimit = $mlmDistPairingDB->getFlushLimit();
+                        $legFlushLimit = $mlmDistPairingDB->getFlushLimit() * 10;
                         print_r("DistId ".$distId."<br>");
                         $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $currentDate);
                         $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $currentDate);
@@ -7344,15 +7346,27 @@ We look forward to your custom in the near future. Should you have any queries, 
                             // requery for paring ledger
 
                             $minBalance = $leftBalance;
+                            $leftPairedPoint = $leftBalance;
+                            $rightPairedPoint = $rightBalance;
                             if ($rightBalance < $leftBalance) {
                                 $minBalance = $rightBalance;
+                            }
+                            if ($legFlushLimit < $minBalance) {
+                                if ($leftPairedPoint > $rightPairedPoint) {
+                                    $leftPairedPoint = $legFlushLimit;
+                                } else if ($leftPairedPoint < $rightPairedPoint) {
+                                    $rightPairedPoint = $legFlushLimit;
+                                }
+                            } else {
+                                $leftPairedPoint = $minBalance;
+                                $rightPairedPoint = $minBalance;
                             }
                             print_r("leftBalance ".$leftBalance."<br>");
                             print_r("rightBalance ".$rightBalance."<br>");
                             print_r("minBalance ".$minBalance."<br>");
                             if ($leftBalance > 0 && $rightBalance > 0) {
-                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $minBalance);
-                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $minBalance);
+                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $leftPairedPoint);
+                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $rightPairedPoint);
 
                                 // start paring bonus
                                 $distributorDB = MlmDistributorPeer::retrieveByPK($distId);
