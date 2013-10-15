@@ -730,8 +730,9 @@ class memberActions extends sfActions
                         $packagePrice = $arr["mt4_credit"];
                     }
 
-                    if ($packagePrice < 0)
+                    if ($packagePrice < 0) {
                         $packagePrice = 0;
+                    }
                 /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
                 $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
                 $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
@@ -824,6 +825,8 @@ class memberActions extends sfActions
                         }
                     }
                     // new implement end ~ ********************************************************************
+
+                    print_r($mlmRoiDividend->getMt4UserName() . ":" . $packagePrice . "<br>");
                     $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                     $mlmRoiDividend->setDividendAmount($dividendAmount);
                     $mlmRoiDividend->setMt4Balance($packagePrice);
