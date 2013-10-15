@@ -178,7 +178,7 @@ ul, ol {
             <div id="feedBody">
                 <div id="feedTitle">
                     <div id="feedTitleContainer">
-                        <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Announcement List') ?></h1>
+                        <h1 id="feedTitleText" style="margin-right: 135px;"><?php echo __('Announcement') ?></h1>
                     </div>
                 </div>
                 <div id="feedContent">
