@@ -2,6 +2,14 @@ index:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+announcement:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+announcementList:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 company:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

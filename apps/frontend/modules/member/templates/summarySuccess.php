@@ -768,3 +768,5 @@ function reassignDatagridAnnouncementEventAttr() {
 <div class="info_bottom_bg"></div>
 <div class="clear"></div>
 <br>
+
+
