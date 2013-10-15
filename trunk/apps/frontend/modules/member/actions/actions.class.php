@@ -12,6 +12,51 @@ class memberActions extends sfActions
     public function executeTest() {
         //echo $this->getRollingPointData();
 
+        $c = new Criteria();
+        $c->add(MlmRoiDividendPeer::DIVIDEND_AMOUNT, 0, Criteria::GREATER_THAN);
+        $c->add(MlmRoiDividendPeer::MT4_BALANCE, 0, Criteria::LESS_EQUAL);
+        $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
+
+        $dateUtil = new DateUtil();
+        foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+            $distId = $mlmRoiDividend->getDistId();
+            $mt4UserName = $mlmRoiDividend->getMt4UserName();
+            $packagePrice = $mlmRoiDividend->getPackagePrice();
+            $dividendDate = $mlmRoiDividend->getDividendDate();
+            print_r("DistId " . $distId . "<br>");
+
+            $dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
+            $dividendDateFrom = $dividendDateStr . " 00:00:00";
+            $dividendDateTo = $dividendDateStr . " 23:59:59";
+
+            $dividendDateFromTS = strtotime($dividendDateFrom);
+            $dividendDateToTS = strtotime($dividendDateTo);
+
+            $query = "SELECT mt4_credit, credit_id FROM mlm_daily_dist_mt4_credit WHERE 1=1 "
+                     . " AND dist_id = '" . $distId . "' AND mt4_user_name = '" . $mt4UserName . "'"
+                     . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS)
+                     . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
+
+            //var_dump($query);
+            //exit();
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+
+            if ($resultset->next()) {
+                $arr = $resultset->getRow();
+                if ($packagePrice > $arr["mt4_credit"]) {
+                    $packagePrice = $arr["mt4_credit"];
+                }
+                print_r($mlmRoiDividend->getMt4UserName() . ":" . $mlmRoiDividend->getMt4Balance() . ":" . ":" . $packagePrice . "<br>");
+                $mlmRoiDividend->setMt4Balance($packagePrice);
+                $mlmRoiDividend->save();
+            } else {
+                print_r($mlmRoiDividend->getMt4UserName() . "+++<br>");
+            }
+        }
+
+
         $bonusService = new BonusService();
 //        $bonusService->contraDebitAccount(256642, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccount(130872, "CONTRA BY CP2", 0);
