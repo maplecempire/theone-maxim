@@ -6521,7 +6521,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($this->getRequestParameter('transactionPassword')) {
             $c = new Criteria();
             $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('transactionPassword'));
+            if ($doAction == "VP") {
+                $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
+            } else if ($doAction == "G") {
+                $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
+            } else if ($doAction == "C") {
+                $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
+            } else if ($doAction == "W") {
+                $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('transactionPassword'));
+            }
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
