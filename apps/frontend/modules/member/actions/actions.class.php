@@ -6528,7 +6528,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             } else if ($doAction == "C") {
                 $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
             } else if ($doAction == "W") {
-                $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('transactionPassword'));
+                $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
             }
             $exist = AppUserPeer::doSelectOne($c);
 
