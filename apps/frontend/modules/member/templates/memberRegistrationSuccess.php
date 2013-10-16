@@ -49,17 +49,19 @@ $(function() {
         }
     }).click(function(event) {
         event.preventDefault();
+
         var epointNeeded = $(this).attr("ref");
         var pid = $(this).attr("pid");
-
         if (pid >= <?php echo Globals::MAX_PACKAGE_ID?>) {
             epointNeeded = $("#specialPackageId option:selected").attr("price");
             pid = $("#specialPackageId").val();
         }
-
-        $('#epointNeeded').val(epointNeeded);
-        $('#pid').val(pid);
-        $("#topupForm").submit();
+        var sure = confirm("<?php echo __('Are you sure want to purchase this package ')?>" + epointNeeded + "?");
+        if (sure) {
+            $('#epointNeeded').val(epointNeeded);
+            $('#pid').val(pid);
+            $("#topupForm").submit();
+        }
     });
 
     $("#rdoFxgold").click(function(event){
