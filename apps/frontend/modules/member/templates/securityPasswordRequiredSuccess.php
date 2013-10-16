@@ -24,7 +24,7 @@
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Password is required') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Login Password is required') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -66,7 +66,7 @@
                         <th class="tbl_header_left">
                             <div class="border_left_grey">&nbsp;</div>
                         </th>
-                        <th colspan="2"><?php echo __('Please key in your password') ?></th>
+                        <th colspan="2"><?php echo __('Please key in your login password') ?></th>
                         <th class="tbl_header_right">
                             <div class="border_right_grey">&nbsp;</div>
                         </th>
@@ -74,7 +74,7 @@
 
                     <tr class="tbl_form_row_odd">
                         <td>&nbsp;</td>
-                        <td><?php echo __('Password'); ?></td>
+                        <td><?php echo __('Login Password'); ?></td>
                         <td>
                             <input name="transactionPassword" type="password" id="transactionPassword"/>
                         </td>

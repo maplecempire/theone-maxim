@@ -6533,7 +6533,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $exist = AppUserPeer::doSelectOne($c);
 
             if (!$exist) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Security password is not valid."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Login password is not valid."));
                 return $this->redirect('/member/securityPasswordRequired?doAction='.$doAction);
             }
 
