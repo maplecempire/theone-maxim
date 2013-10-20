@@ -12,7 +12,7 @@ class businessActions extends sfActions
 {
     public function executeCreateEmptyAccount()
     {
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|1077|%", Criteria::LIKE);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
@@ -176,7 +176,7 @@ class businessActions extends sfActions
             $mlmDistPairingLedger->save();
 
             $count++;
-        }
+        }*/
 
         print_r("Done");
         return sfView::HEADER_ONLY;
