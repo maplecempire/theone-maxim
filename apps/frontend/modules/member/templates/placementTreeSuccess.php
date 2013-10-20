@@ -375,7 +375,7 @@ function reassignDatagridEventAttr(){
                     }
                 }
 
-                echo $distDB->getDistributorCode()." (".$userName.")";
+                echo $distCode." (".$userName.")";
             } else {
                 echo $distDB->getDistributorCode();
             }
