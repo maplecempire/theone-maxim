@@ -356,8 +356,26 @@ function reassignDatagridEventAttr(){
         <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
         <?php
             if ($distCode != "Restricted to view member information") {
+                $pos = strrpos($tbl_distributor->getPlacementTreeStructure(), "|259817|");
+                $isRemoveUS = false;
+                $distCode = $distDB->getDistributorCode();
                 $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                $userName = $userDB->getUsername();
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $lastChar = substr($distCode, -1);
+                    if ($lastChar == "_") {
+                        $distCode = substr($distCode, 0, -1);
+
+                        $lastChar = substr($userName, -1);
+                        if ($lastChar == "_") {
+                            $userName = substr($userName, 0, -1);
+                        }
+                    }
+                }
+
+                echo $distDB->getDistributorCode()." (".$userName.")";
             } else {
                 echo $distDB->getDistributorCode();
             }
