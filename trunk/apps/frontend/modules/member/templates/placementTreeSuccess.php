@@ -356,7 +356,7 @@ function reassignDatagridEventAttr(){
         <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" --><?php /*echo $classAndAttr;*/?>
         <?php
             if ($distCode != "Restricted to view member information") {
-                $pos = strrpos($tbl_distributor->getPlacementTreeStructure(), "|259817|");
+                $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                 $isRemoveUS = false;
                 $distCode = $distDB->getDistributorCode();
                 $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
