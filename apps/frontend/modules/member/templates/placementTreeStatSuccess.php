@@ -292,8 +292,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -401,8 +419,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -502,8 +538,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -617,8 +671,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -719,8 +791,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -821,8 +911,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
@@ -923,8 +1031,26 @@ function reassignDatagridEventAttr(){
                 <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
+                            $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
+                            $isRemoveUS = false;
+                            $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
-                            echo $distDB->getDistributorCode()." (".$userDB->getUsername().")";
+                            $userName = $userDB->getUsername();
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $lastChar = substr($distCode, -1);
+                                if ($lastChar == "_") {
+                                    $distCode = substr($distCode, 0, -1);
+
+                                    $lastChar = substr($userName, -1);
+                                    if ($lastChar == "_") {
+                                        $userName = substr($userName, 0, -1);
+                                    }
+                                }
+                            }
+
+                            echo $distCode." (".$userName.")";
                         } else {
                             echo $distDB->getDistributorCode();
                         }
