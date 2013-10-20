@@ -10,17 +10,189 @@
  */
 class businessActions extends sfActions
 {
+    public function executeCreateEmptyAccount()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|1077|%", Criteria::LIKE);
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+
+        $count = 0;
+        foreach ($mlmDistributors as $mlmDistributor) {
+            print_r($count . "<br>");
+            $appUserDB = AppUserPeer::retrieveByPK($mlmDistributor->getUserId());
+
+            $appUser = new AppUser();
+            $appUser->setUsername($appUserDB->getUsername()."_");
+            $appUser->setKeepPassword($appUserDB->getKeepPassword());
+            $appUser->setUserpassword($appUserDB->getUserpassword());
+            $appUser->setKeepPassword2($appUserDB->getKeepPassword2());
+            $appUser->setUserpassword2($appUserDB->getUserpassword2());
+            $appUser->setUserRole($appUserDB->getUserRole());
+            $appUser->setStatusCode("BLOCKED");
+            $appUser->setLastLoginDatetime($appUserDB->getLastLoginDatetime());
+            $appUser->setCreatedBy($appUserDB->getCreatedBy());
+            $appUser->setCreatedOn($appUserDB->getCreatedOn());
+            $appUser->setUpdatedBy($appUserDB->getUpdatedBy());
+            $appUser->setUpdatedOn($appUserDB->getUpdatedOn());
+            $appUser->setFromAbfx($appUserDB->getFromAbfx());
+            $appUser->setRemark($appUserDB->getRemark().", ORI MOVE UNDER Superming (NICHOLES)");
+            $appUser->save();
+
+            $placementUplineDistDB = null;
+            if ($count == 0) {
+                $placementUplineDistId = 1050;
+                $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($placementUplineDistId);
+            } else {
+                $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($mlmDistributor->getTreeUplineDistId());
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementUplineDistDB->getDistributorCode()."_");
+                $placementUplineDistDB = MlmDistributorPeer::doSelectOne($c);
+            }
+
+            $mlm_distributor = new MlmDistributor();
+            $mlm_distributor->setDistributorCode($mlmDistributor->getDistributorCode()."_");
+            $mlm_distributor->setUserId($appUser->getUserId());
+            $mlm_distributor->setStatusCode("BLOCKED");
+            $mlm_distributor->setFullName($mlmDistributor->getFullName());
+            $mlm_distributor->setNickname($mlmDistributor->getNickname());
+            $mlm_distributor->setIc($mlmDistributor->getIc());
+            $mlm_distributor->setCountry($mlmDistributor->getCountry());
+            $mlm_distributor->setAddress($mlmDistributor->getAddress());
+            $mlm_distributor->setAddress2($mlmDistributor->getAddress2());
+            $mlm_distributor->setCity($mlmDistributor->getCity());
+            $mlm_distributor->setState($mlmDistributor->getState());
+            $mlm_distributor->setPostcode($mlmDistributor->getPostcode());
+            $mlm_distributor->setEmail($mlmDistributor->getEmail());
+            $mlm_distributor->setAlternateEmail($mlmDistributor->getAlternateEmail());
+            $mlm_distributor->setContact($mlmDistributor->getContact());
+            $mlm_distributor->setGender($mlmDistributor->getGender());
+            $mlm_distributor->setDob($mlmDistributor->getDob());
+            $mlm_distributor->setBankName($mlmDistributor->getBankName());
+            $mlm_distributor->setBankBranchName($mlmDistributor->getBankBranchName());
+            $mlm_distributor->setBankAddress($mlmDistributor->getBankAddress());
+            $mlm_distributor->setBankAccNo($mlmDistributor->getBankAccNo());
+            $mlm_distributor->setBankHolderName($mlmDistributor->getBankHolderName());
+            $mlm_distributor->setBankSwiftCode($mlmDistributor->getBankSwiftCode());
+            $mlm_distributor->setVisaDebitCard($mlmDistributor->getVisaDebitCard());
+            $mlm_distributor->setEzyCashCard($mlmDistributor->getEzyCashCard());
+            $mlm_distributor->setTreeLevel($mlmDistributor->getTreeLevel());
+            $mlm_distributor->setTreeStructure($mlmDistributor->getTreeStructure());
+            $mlm_distributor->setInitRankId($mlmDistributor->getInitRankId());
+            $mlm_distributor->setInitRankCode($mlmDistributor->getInitRankCode());
+            $mlm_distributor->setUplineDistId($mlmDistributor->getUplineDistId());
+            $mlm_distributor->setUplineDistCode($mlmDistributor->getUplineDistCode());
+            $mlm_distributor->setTreeUplineDistId($placementUplineDistDB->getDistributorId());
+            $mlm_distributor->setTreeUplineDistCode($placementUplineDistDB->getDistributorCode());
+            $mlm_distributor->setTotalLeft($mlmDistributor->getTotalLeft());
+            $mlm_distributor->setTotalRight($mlmDistributor->getTotalRight());
+            $mlm_distributor->setPlacementPosition($mlmDistributor->getPlacementPosition());
+            $mlm_distributor->setPlacementDatetime($mlmDistributor->getPlacementDatetime());
+            $mlm_distributor->setRankId($mlmDistributor->getRankId());
+            $mlm_distributor->setRankCode($mlmDistributor->getRankCode());
+            $mlm_distributor->setActiveDatetime($mlmDistributor->getActiveDatetime());
+            $mlm_distributor->setActivatedBy($mlmDistributor->getActivatedBy());
+            $mlm_distributor->setLeverage($mlmDistributor->getLeverage());
+            $mlm_distributor->setSpread($mlmDistributor->getSpread());
+            $mlm_distributor->setDepositCurrency($mlmDistributor->getDepositCurrency());
+            $mlm_distributor->setDepositAmount($mlmDistributor->getDepositAmount());
+            $mlm_distributor->setSignName($mlmDistributor->getSignName());
+            $mlm_distributor->setSignDate($mlmDistributor->getSignDate());
+            $mlm_distributor->setTermCondition($mlmDistributor->getTermCondition());
+            $mlm_distributor->setIbCommission($mlmDistributor->getIbCommission());
+            $mlm_distributor->setIsIb($mlmDistributor->getIsIb());
+            $mlm_distributor->setCreatedBy($mlmDistributor->getCreatedBy());
+            $mlm_distributor->setCreatedOn($mlmDistributor->getCreatedOn());
+            $mlm_distributor->setUpdatedBy($mlmDistributor->getUpdatedBy());
+            $mlm_distributor->setUpdatedOn($mlmDistributor->getUpdatedOn());
+            $mlm_distributor->setPackagePurchaseFlag($mlmDistributor->getPackagePurchaseFlag());
+            $mlm_distributor->setFileBankPassBook($mlmDistributor->getFileBankPassBook());
+            $mlm_distributor->setFileProofOfResidence($mlmDistributor->getFileProofOfResidence());
+            $mlm_distributor->setFileNric($mlmDistributor->getFileNric());
+            $mlm_distributor->setExcludedStructure($mlmDistributor->getExcludedStructure());
+            $mlm_distributor->setProductMte($mlmDistributor->getProductMte());
+            $mlm_distributor->setProductFxgold($mlmDistributor->getProductFxgold());
+            $mlm_distributor->setRemark($mlmDistributor->getRemark());
+            $mlm_distributor->setLoanAccount($mlmDistributor->getLoanAccount());
+            $mlm_distributor->setSelfRegister($mlmDistributor->getSelfRegister());
+            $mlm_distributor->setDebitAccount($mlmDistributor->getDebitAccount());
+            $mlm_distributor->setDebitRankId($mlmDistributor->getDebitRankId());
+            $mlm_distributor->setDebitStatusCode($mlmDistributor->getDebitStatusCode());
+            $mlm_distributor->setHideGenealogy($mlmDistributor->getHideGenealogy());
+            $mlm_distributor->setFromAbfx($mlmDistributor->getFromAbfx());
+            $mlm_distributor->setAbfxUserId($mlmDistributor->getAbfxUserId());
+            $mlm_distributor->setAbfxRef($mlmDistributor->getAbfxRef());
+            $mlm_distributor->setAbfxUpline1($mlmDistributor->getAbfxUpline1());
+            $mlm_distributor->setAbfxPosition($mlmDistributor->getAbfxPosition());
+            $mlm_distributor->setAbfxRemark($mlmDistributor->getAbfxRemark());
+            $mlm_distributor->setAbfxEwallet($mlmDistributor->getAbfxEwallet());
+            $mlm_distributor->setAbfxEpoint($mlmDistributor->getAbfxEpoint());
+            $mlm_distributor->setAbfxPairingLeft($mlmDistributor->getAbfxPairingLeft());
+            $mlm_distributor->setAbfxPairingRight($mlmDistributor->getAbfxPairingRight());
+            $mlm_distributor->setMigratedStatus($mlmDistributor->getMigratedStatus());
+            $mlm_distributor->setMigratedPlacementStatus($mlmDistributor->getMigratedPlacementStatus());
+            $mlm_distributor->setMigrateRetry($mlmDistributor->getMigrateRetry());
+            $mlm_distributor->setNomineeName($mlmDistributor->getNomineeName());
+            $mlm_distributor->setNomineeIc($mlmDistributor->getNomineeIc());
+            $mlm_distributor->setNomineeRelationship($mlmDistributor->getNomineeRelationship());
+            $mlm_distributor->setNomineeContactno($mlmDistributor->getNomineeContactno());
+            $mlm_distributor->setNewActivityFlag($mlmDistributor->getNewActivityFlag());
+            $mlm_distributor->setNewReportFlag($mlmDistributor->getNewReportFlag());
+            $mlm_distributor->setQ3Champions($mlmDistributor->getQ3Champions());
+            $mlm_distributor->setQ3Datetime($mlmDistributor->getQ3Datetime());
+
+            $mlm_distributor->save();
+
+            $mlm_distributor->setPlacementTreeLevel($placementUplineDistDB->getPlacementTreeLevel() + 1);
+            $mlm_distributor->setPlacementTreeStructure($placementUplineDistDB->getPlacementTreeStructure()."|".$mlm_distributor->getDistributorId()."|");
+            $mlm_distributor->save();
+
+            $leftOnePlacement = $this->getPairingBalance($placementUplineDistDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $rightTwoPlacement = $this->getPairingBalance($placementUplineDistDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+
+            $mlmDistPairingLedger = new MlmDistPairingLedger();
+            $mlmDistPairingLedger->setDistId($mlm_distributor->getDistributorId());
+            $mlmDistPairingLedger->setLeftRight("LEFT");
+            $mlmDistPairingLedger->setTransactionType("REGISTER");
+            $mlmDistPairingLedger->setCredit($leftOnePlacement);
+            $mlmDistPairingLedger->setDebit(0);
+            $mlmDistPairingLedger->setBalance($leftOnePlacement);
+            $mlmDistPairingLedger->setRemark("");
+            $mlmDistPairingLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistPairingLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistPairingLedger->save();
+
+            $mlmDistPairingLedger = new MlmDistPairingLedger();
+            $mlmDistPairingLedger->setDistId($mlm_distributor->getDistributorId());
+            $mlmDistPairingLedger->setLeftRight("RIGHT");
+            $mlmDistPairingLedger->setTransactionType("REGISTER");
+            $mlmDistPairingLedger->setCredit($rightTwoPlacement);
+            $mlmDistPairingLedger->setDebit(0);
+            $mlmDistPairingLedger->setBalance($rightTwoPlacement);
+            $mlmDistPairingLedger->setRemark("");
+            $mlmDistPairingLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistPairingLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistPairingLedger->save();
+
+            $count++;
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeManualInsertPips()
     {
-//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
-//        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
+        //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257750);
+        //        $mlm_distributor = MlmDistributorPeer::retrieveByPk(257751);
         $mlm_distributor = MlmDistributorPeer::retrieveByPk(255838);
         $uplinePosition = $mlm_distributor->getPlacementPosition();
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
 
         $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
         $pairingPoint = 5000;
-        $level =0;
+        $level = 0;
         while ($level < 200) {
             //var_dump($uplineDistDB->getUplineDistId());
             //var_dump($uplineDistDB->getUplineDistCode());
@@ -92,6 +264,7 @@ class businessActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
     public function executeAdjustmentAugustPipsBonus()
     {
         $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
@@ -116,7 +289,7 @@ class businessActions extends sfActions
                 if ($arr["_TOTAL"] != null) {
                     $totalBonus = $arr["_TOTAL"];
                     $dist_id = $arr["dist_id"];
-                    print_r($dist_id.":".$totalBonus."<br>");
+                    print_r($dist_id . ":" . $totalBonus . "<br>");
                     $ledgerAccountBalance = $this->getAccountBalance($dist_id, Globals::ACCOUNT_TYPE_ECASH);
 
                     $tbl_account_ledger = new MlmAccountLedger();
@@ -144,6 +317,7 @@ class businessActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
     public function executeIndex()
     {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "gao_group_90.xls";
@@ -163,42 +337,43 @@ class businessActions extends sfActions
             if ($mt4Password == "" || $email == "")
                 continue;
 
-//            $c = new Criteria();
-//            $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Username);
-//            $mlmDistMt4 = MlmDistMt4Peer::doSelectOne($c);
+            //            $c = new Criteria();
+            //            $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Username);
+            //            $mlmDistMt4 = MlmDistMt4Peer::doSelectOne($c);
 
-//            if ($mlmDistMt4) {
-                $tmpMt4Account = new TmpMt4Account();
-                $tmpMt4Account->setMt4Username($mt4Username);
-                $tmpMt4Account->setMt4Password($mt4Password);
-                $tmpMt4Account->setFullname($fullname);
-                $tmpMt4Account->setEmail($email);
-                $tmpMt4Account->setStatusCode(Globals::STATUS_ACTIVE);
-                $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tmpMt4Account->save();
+            //            if ($mlmDistMt4) {
+            $tmpMt4Account = new TmpMt4Account();
+            $tmpMt4Account->setMt4Username($mt4Username);
+            $tmpMt4Account->setMt4Password($mt4Password);
+            $tmpMt4Account->setFullname($fullname);
+            $tmpMt4Account->setEmail($email);
+            $tmpMt4Account->setStatusCode(Globals::STATUS_ACTIVE);
+            $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tmpMt4Account->save();
 
-                $counter++;
-//            } else {
-//                $tmpMt4Account = new TmpMt4Account();
-//                $tmpMt4Account->setMt4Username($mt4Username);
-//                $tmpMt4Account->setMt4Password($mt4Password);
-//                $tmpMt4Account->setFullname($fullname);
-//                $tmpMt4Account->setEmail($email);
-//                $tmpMt4Account->setStatusCode(Globals::STATUS_CANCEL);
-//                $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-//                $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-//                $tmpMt4Account->save();
-//
-//                print_r($mt4Username);
-//                print_r("<br>");
-//            }
+            $counter++;
+            //            } else {
+            //                $tmpMt4Account = new TmpMt4Account();
+            //                $tmpMt4Account->setMt4Username($mt4Username);
+            //                $tmpMt4Account->setMt4Password($mt4Password);
+            //                $tmpMt4Account->setFullname($fullname);
+            //                $tmpMt4Account->setEmail($email);
+            //                $tmpMt4Account->setStatusCode(Globals::STATUS_CANCEL);
+            //                $tmpMt4Account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            //                $tmpMt4Account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            //                $tmpMt4Account->save();
+            //
+            //                print_r($mt4Username);
+            //                print_r("<br>");
+            //            }
         }
         print_r($totalRow);
 
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
     public function executeCustomerEnquiryList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
@@ -255,7 +430,7 @@ class businessActions extends sfActions
             }
             $arr[] = array(
                 $result->getEnquiryId() == null ? "" : $result->getEnquiryId(),
-                $result->getUpdatedOn()  == null ? "" : $result->getUpdatedOn(),
+                $result->getUpdatedOn() == null ? "" : $result->getUpdatedOn(),
                 $result->getTitle() == null ? "" : $result->getTitle(),
                 $lastReply,
                 $read
@@ -393,58 +568,56 @@ class businessActions extends sfActions
             LEFT JOIN tbl_distributor distributor ON placement.f_dist_id2 = distributor.f_id ";
 
         /******   total records  *******/
-        $sWhere = " WHERE placement.f_dist_id =".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
-        $totalRecords = $this->getTotalRecords($sql.$sWhere);
+        $sWhere = " WHERE placement.f_dist_id =" . $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
         if ($this->getRequestParameter('filterDistcode') != "") {
-            $sWhere .= " AND placement.f_dist_code2 LIKE %".mysql_real_escape_string($this->getRequestParameter('filterDistcode'))."%";
+            $sWhere .= " AND placement.f_dist_code2 LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%";
             //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
         }
         if ($this->getRequestParameter('filterPlacementcode') != "") {
-            $sWhere .= " AND placement.f_parentid_code2 LIKE %".mysql_real_escape_string($this->getRequestParameter('filterPlacementcode'))."%";
+            $sWhere .= " AND placement.f_parentid_code2 LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterPlacementcode')) . "%";
             //$c->addAnd(sfPropelPager::F_PARENTID_CODE2, "%" . $this->getRequestParameter('filterPlacementcode') . "%", Criteria::LIKE);
         }
         if ($this->getRequestParameter('filterPosition') != "") {
-            $sWhere .= " AND placement.f_position LIKE %".mysql_real_escape_string($this->getRequestParameter('filterPosition'))."%";
+            $sWhere .= " AND placement.f_position LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterPosition')) . "%";
             //$c->addAnd(TblPlacementPeer::F_POSITION, "%" . $this->getRequestParameter('filterPosition') . "%", Criteria::LIKE);
         }
-        $totalFilteredRecords = $this->getTotalRecords($sql.$sWhere);
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   sorting  *******/
         $sOrder = "ORDER BY  ";
-        for ($i=0 ; $i<intval($this->getRequestParameter('iSortingCols')); $i++)
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
         {
-            if ($this->getRequestParameter('bSortable_'.intval($this->getRequestParameter('iSortCol_'.$i))) == "true")
-            {
-                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_'.$i))]."
-                    ".mysql_real_escape_string($this->getRequestParameter('sSortDir_'.$i)).", ";
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
             }
         }
 
         $sOrder = substr_replace($sOrder, "", -2);
-        if ($sOrder == "ORDER BY")
-        {
+        if ($sOrder == "ORDER BY") {
             $sOrder = "";
         }
         //var_dump($sOrder);
         /******   pagination  *******/
-        $sLimit = " LIMIT ".mysql_real_escape_string($offset).", ".mysql_real_escape_string($limit);
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
-        $query  = "SELECT ".$sColumns." ".$sql." ".$sWhere." ".$sOrder." ".$sLimit;
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
-		$resultset = $statement->executeQuery();
+        $resultset = $statement->executeQuery();
 
-	    while ($resultset->next())
-	    {
+        while ($resultset->next())
+        {
             $resultArr = $resultset->getRow();
 
             $position = "";
             if ($resultArr['f_position'] <> null && $this->getUser()->getCulture() == "cn") {
-                if ("left" == $resultArr['f_position']){
+                if ("left" == $resultArr['f_position']) {
                     $position = $this->getContext()->getI18N()->__("left");
-                }else{
+                } else {
                     $position = $this->getContext()->getI18N()->__("right");
                 }
             }
@@ -455,7 +628,7 @@ class businessActions extends sfActions
                 $position,
                 $resultArr['f_created_datetime'] == null ? "" : $resultArr['f_created_datetime']
             );
-	    }
+        }
         $output = array(
             "sEcho" => intval($sEcho),
             "iTotalRecords" => $totalRecords,
@@ -482,51 +655,49 @@ class businessActions extends sfActions
         $sql = "FROM mlm_distributor ";
 
         /******   total records  *******/
-        $sWhere = " WHERE distributor_id <> ".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
-        $sWhere .= " AND placement_tree_structure like '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+        $sWhere = " WHERE distributor_id <> " . $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        $sWhere .= " AND placement_tree_structure like '%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%'";
 
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1458) {
             // hide datoheng group
             $sWhere .= " AND placement_tree_structure not like '%|203|%'";
         }
 
-        $totalRecords = $this->getTotalRecords($sql.$sWhere);
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
         if ($this->getRequestParameter('search_memberId') != "") {
-            $sWhere .= " AND distributor_code LIKE '%".mysql_real_escape_string($this->getRequestParameter('search_memberId'))."%'";
+            $sWhere .= " AND distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('search_memberId')) . "%'";
             //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
         }
 
-        $totalFilteredRecords = $this->getTotalRecords($sql.$sWhere);
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   sorting  *******/
         $sOrder = "ORDER BY  ";
-        for ($i=0 ; $i<intval($this->getRequestParameter('iSortingCols')); $i++)
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
         {
-            if ($this->getRequestParameter('bSortable_'.intval($this->getRequestParameter('iSortCol_'.$i))) == "true")
-            {
-                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_'.$i))]."
-                    ".mysql_real_escape_string($this->getRequestParameter('sSortDir_'.$i)).", ";
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
             }
         }
 
         $sOrder = substr_replace($sOrder, "", -2);
-        if ($sOrder == "ORDER BY")
-        {
+        if ($sOrder == "ORDER BY") {
             $sOrder = "";
         }
         //var_dump($sOrder);
         /******   pagination  *******/
-        $sLimit = " LIMIT ".mysql_real_escape_string($offset).", ".mysql_real_escape_string($limit);
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
-        $query  = "SELECT ".$sColumns." ".$sql." ".$sWhere." ".$sOrder." ".$sLimit;
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
-		$resultset = $statement->executeQuery();
+        $resultset = $statement->executeQuery();
 
-	    while ($resultset->next())
-	    {
+        while ($resultset->next())
+        {
             $resultArr = $resultset->getRow();
 
             $arr[] = array(
@@ -535,7 +706,7 @@ class businessActions extends sfActions
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name']
             );
-	    }
+        }
         $output = array(
             "sEcho" => intval($sEcho),
             "iTotalRecords" => $totalRecords,
@@ -546,29 +717,29 @@ class businessActions extends sfActions
 
         return sfView::HEADER_ONLY;
     }
+
     /************************************/
     /********   FUNCTION        *********/
     /************************************/
     function getTotalRecords($sql)
-	{
-		$query = "SELECT COUNT(*) AS _TOTAL ".$sql;
+    {
+        $query = "SELECT COUNT(*) AS _TOTAL " . $sql;
         //var_dump($query);
-		$connection = Propel::getConnection();
-	  	$statement = $connection->prepareStatement($query);
-		$resultset = $statement->executeQuery();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
 
-		$count = 0;
-	    if ($resultset->next())
-	    {
-	    	$arr = $resultset->getRow();
-	    	if ($arr["_TOTAL"] != null) {
-	    		$count = $arr["_TOTAL"];
-	    	} else {
-	    		$count = 0;
-	    	}
-	    }
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_TOTAL"] != null) {
+                $count = $arr["_TOTAL"];
+            } else {
+                $count = 0;
+            }
+        }
         return $count;
-	}
+    }
 
     function getAccountBalance($distributorId, $accountType)
     {
@@ -611,6 +782,7 @@ class businessActions extends sfActions
 
         $tbl_account->save();
     }
+
     function getPairingBalance($distributorId, $leftRight)
     {
         $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId . " AND left_right = '" . $leftRight . "'";
