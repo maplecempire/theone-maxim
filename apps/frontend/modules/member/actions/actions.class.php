@@ -4515,7 +4515,11 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeSummary()
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1) {
+
+        } else {
+            $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        }
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
         $this->pendingDistributors = MlmDistributorPeer::doSelect($c);
