@@ -74,7 +74,7 @@
                                             <td><?php echo __('Private Investment Agreement') ?></td>
                                         </tr>
                                         <?php
-                                                            if (count($fundManagements) > 0) {
+                                        if (count($fundManagements) > 0) {
                                             $trStyle = "1";
                                             $idx = 1;
                                             foreach ($fundManagements as $fundManagement) {
