@@ -940,51 +940,85 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a>
                 </td>
             </tr>
         </table>
-        <!--<div id="page_1" class="page">
+        <div id="page_1" class="page">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
             <div class="news_date">
             <?php
-/*                $dateUtil = new DateUtil();
-                echo "9 SEPTEMBER 2013";
-                */?>
+                $dateUtil = new DateUtil();
+                echo "23 OCTOBER 2013";
+                ?>
             </div>
-            <div class="news_desc">
+            <div class="news_desc" style="text-align:left">
                 <br>
                 IMPORTANT ANNOUNCEMENT!!!
-                <br><br>Currency Whole Seller Rate as effective from
-                <br><strong>10th Sep 2013</strong>:
                 <br><br>
-                <table>
-                    <tr>
-                        <td align="center">
-                            <table style="text-align: left; width: 300px">
-                                <tr><td>1. </td><td>Malaysia RM - RM3.30 / RM3.60       </td></tr>
-                                <tr><td>2. </td><td>Thailand Baht - B33/ B36            </td></tr>
-                                <tr><td>3. </td><td>Indonesia Rupiah - R11,000 / R12,000</td></tr>
-                                <tr><td>4. </td><td>China RMB - RMB6.30 / RMB7.00       </td></tr>
-                                <tr><td>5. </td><td>Taiwan New Dollar - NTD31 / NTD34   </td></tr>
-                                <tr><td>6. </td><td>Hong Kong Dollar - HKD7.8/HKD8.5    </td></tr>
-                                <tr><td>7. </td><td>Japanese Yen - JPY103               </td></tr>
-                                <tr><td>8. </td><td>Korean Won - KRW1,150/KRW1,250      </td></tr>
-                                <tr><td>9. </td><td>Phillipine Peso - PHP45/PHP50       </td></tr>
-                                <tr><td>10.</td><td>Singapore Dollar - SGD1.28/SGD1.40 </td></tr>
-                                <tr><td>11.</td><td>Cambodia Riel - KHR4,100/KHR4,500  </td></tr>
-                                <tr><td>12.</td><td>Vietnam Dong - VND22,000/VND24,000 </td></tr>
-                                <tr><td>13.</td><td>India Rupee - INR68/INR75          </td></tr>
-                                <tr><td>14.</td><td>USD - USD1/USD1.05                 </td></tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+
+                Maxim Trader D&D 2014:
+                <br>
+                <br>
+                Dear Partners, here is your change to qualify for our Annual Dinner & Dance which will he held in Bangkok, Thailand in February 2014.
+                <br>* Purchase 10k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel
+                <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
+                <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
+                <br>
+                <br>Qualifying period: October 22, 2013 to December 31, 2013
+                <br>Nb. Tickets are Non-Transferable
+                <br>
+                <br>HURRY, be amongst the elite to qualify for a limited number of seats for our Annual Dinner & Dance 2014.
+                <br>
+                <div class="popdivider"></div>
+                <br>
+                <br>亲爱的伙伴们：
+                <br>
+                <br>以下是有关参加马胜金融集团2014.2月份泰国曼谷年度庆祝晚宴的具体通知-
+                <br>
+                <br>*购买10k美金配套-可获得泰国曼谷5星级酒店4天/3夜豪华住宿安排（双人间）
+                <br>
+                <br>*购买20k美金配套-可获得泰国曼谷5星级酒店4天/3夜豪华住宿安排（双人间）
+                <br>
+                <br>                                    并额外享受往返机票福利
+                <br>
+                <br>**个人销售业绩达到40k美金- 可享受泰国曼谷5星级酒店4天/3夜豪华住宿安排（双 人间）
+                <br>
+                <br>                                    并额外享受往返机票福利
+                <br>
+                <br>结算（考核）日期：2013.10.22-2013.12.31日
+                <br>
+                <br>注：此次活动参加资格不给转让他人
+                <br>
+                <br>名额有限。快点行动，成为参加此次马胜年度庆祝晚宴精英中的一员吧！
+                <br>
+                <div class="popdivider"></div>
+                <br>
+                <br>공지사항입니다.
+                <br>
+                <br>맥심 트레이더 D&D 2014:
+                <br>
+                <br>파트너 여러분들, 2014년 2월 태국 방콕에서 열릴 디너와 댄스 축제 참석 자격 요건입니다.
+                <br>*만불 구매 - 5성급 호텔에서의 3박 4일 숙박권 (2인 1실)
+                <br>* 이만불 구매 - 5성급 호텔에서의 3박 4일 숙박권 (2인 1실)과 비행기 티켓
+                <br>** 개인 매출 사만불 (12월 31일까지) 달성시 5성급 호텔에서의 3박 4일 숙박권 (2인 1실)과 비행기 티켓
+                <br>
+                <br>자격 요건 달성 기간 : 2013년 10월 22일부터 2013년 12월 31일까지
+                <br>참고 : 비행기 티켓은 환불 불가합니다.
+                <br>
+                <br>2014 디너와 댄스 파티의 자리는 한정되어 있습니다.  서두르셔서 자리를 확보하시기 바랍니다.
+                <br>
+<!--                <div class="popdivider"></div>-->
+                <!--<br>
+                <br>注意事項:
+                <br>
+                <br>現時点でのCP2からCP1にトランスファーする時に5%増の特別優遇は、今年末の2013年12月31日に終了させていただきます。
+                <br>よろしくお願いいたします-->
             </div>
-        </div>-->
-        <div id="page_1" class="page">
+        </div>
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1040,7 +1074,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1068,7 +1102,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1097,7 +1131,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1111,7 +1145,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
