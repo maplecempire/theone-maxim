@@ -687,6 +687,29 @@ class financeActions extends sfActions
 
             if (Globals::STATUS_COMPLETE == $statusCode || Globals::STATUS_REJECT == $statusCode) {
                 $mt4ReloadFund->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                if (Globals::STATUS_REJECT == $statusCode) {
+                    $refundEpoint = $mt4ReloadFund->getAmount();
+                    $distId = $mt4ReloadFund->getDistId();
+                    /******************************/
+                    /*  Account
+                    /******************************/
+                    $distAccountEpointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                    $mlm_account_ledger->setRemark("MT4 REFUND (REFERENCE ID " . $mt4ReloadFund->getReloadId() . ")");
+                    $mlm_account_ledger->setCredit($refundEpoint);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEpointBalance + $refundEpoint);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                }
             }
 
             $mt4ReloadFund->save();
@@ -722,6 +745,29 @@ class financeActions extends sfActions
                     }
 
                     $mt4ReloadFund->save();
+
+                    if (Globals::STATUS_REJECT == $statusCode) {
+                        $refundEpoint = $mt4ReloadFund->getAmount();
+                        $distId = $mt4ReloadFund->getDistId();
+                        /******************************/
+                        /*  Account
+                        /******************************/
+                        $distAccountEpointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($distId);
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                        $mlm_account_ledger->setRemark("MT4 REFUND (REFERENCE ID " . $mt4ReloadFund->getReloadId() . ")");
+                        $mlm_account_ledger->setCredit($refundEpoint);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($distAccountEpointBalance + $refundEpoint);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                    }
                 }
                 $con->commit();
             } catch (PropelException $e) {
