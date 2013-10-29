@@ -22,7 +22,7 @@ $(function() {
         },
         rules : {
             "bankSlip" : {
-                required : true
+                required : true,
                 accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
             },
             "epointAmount" : {
@@ -376,7 +376,7 @@ $(function() {
                     rules : {
                         "bankSlip" : {
                             required : true
-                            , accept:true
+                            , accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
                         },
                         "transactionPassword" : {
                             required : true,
