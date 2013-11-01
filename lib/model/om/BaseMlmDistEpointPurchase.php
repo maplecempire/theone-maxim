@@ -17,6 +17,10 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 
 	
+	protected $currency_type = 'USD';
+
+
+	
 	protected $amount = 0;
 
 
@@ -113,6 +117,13 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	{
 
 		return $this->dist_id;
+	}
+
+	
+	public function getCurrencyType()
+	{
+
+		return $this->currency_type;
 	}
 
 	
@@ -330,6 +341,23 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		if ($this->dist_id !== $v) {
 			$this->dist_id = $v;
 			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::DIST_ID;
+		}
+
+	} 
+
+	
+	public function setCurrencyType($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->currency_type !== $v || $v === 'USD') {
+			$this->currency_type = $v;
+			$this->modifiedColumns[] = MlmDistEpointPurchasePeer::CURRENCY_TYPE;
 		}
 
 	} 
@@ -680,51 +708,53 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 			$this->dist_id = $rs->getInt($startcol + 1);
 
-			$this->amount = $rs->getFloat($startcol + 2);
+			$this->currency_type = $rs->getString($startcol + 2);
 
-			$this->transaction_type = $rs->getString($startcol + 3);
+			$this->amount = $rs->getFloat($startcol + 3);
 
-			$this->image_src = $rs->getString($startcol + 4);
+			$this->transaction_type = $rs->getString($startcol + 4);
 
-			$this->status_code = $rs->getString($startcol + 5);
+			$this->image_src = $rs->getString($startcol + 5);
 
-			$this->remarks = $rs->getString($startcol + 6);
+			$this->status_code = $rs->getString($startcol + 6);
 
-			$this->payment_reference = $rs->getString($startcol + 7);
+			$this->remarks = $rs->getString($startcol + 7);
 
-			$this->bank_id = $rs->getInt($startcol + 8);
+			$this->payment_reference = $rs->getString($startcol + 8);
 
-			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 9, null);
+			$this->bank_id = $rs->getInt($startcol + 9);
 
-			$this->approved_by_userid = $rs->getInt($startcol + 10);
+			$this->approve_reject_datetime = $rs->getTimestamp($startcol + 10, null);
 
-			$this->created_by = $rs->getInt($startcol + 11);
+			$this->approved_by_userid = $rs->getInt($startcol + 11);
 
-			$this->created_on = $rs->getTimestamp($startcol + 12, null);
+			$this->created_by = $rs->getInt($startcol + 12);
 
-			$this->updated_by = $rs->getInt($startcol + 13);
+			$this->created_on = $rs->getTimestamp($startcol + 13, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 14, null);
+			$this->updated_by = $rs->getInt($startcol + 14);
 
-			$this->payment_method = $rs->getString($startcol + 15);
+			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
 
-			$this->pg_success = $rs->getString($startcol + 16);
+			$this->payment_method = $rs->getString($startcol + 16);
 
-			$this->pg_msg = $rs->getString($startcol + 17);
+			$this->pg_success = $rs->getString($startcol + 17);
 
-			$this->pg_bill_no = $rs->getString($startcol + 18);
+			$this->pg_msg = $rs->getString($startcol + 18);
 
-			$this->pg_ret_encode_type = $rs->getString($startcol + 19);
+			$this->pg_bill_no = $rs->getString($startcol + 19);
 
-			$this->pg_currency_type = $rs->getString($startcol + 20);
+			$this->pg_ret_encode_type = $rs->getString($startcol + 20);
 
-			$this->pg_signature = $rs->getString($startcol + 21);
+			$this->pg_currency_type = $rs->getString($startcol + 21);
+
+			$this->pg_signature = $rs->getString($startcol + 22);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 22; 
+						return $startcol + 23; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistEpointPurchase object", $e);
 		}
@@ -876,63 +906,66 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 				return $this->getDistId();
 				break;
 			case 2:
-				return $this->getAmount();
+				return $this->getCurrencyType();
 				break;
 			case 3:
-				return $this->getTransactionType();
+				return $this->getAmount();
 				break;
 			case 4:
-				return $this->getImageSrc();
+				return $this->getTransactionType();
 				break;
 			case 5:
-				return $this->getStatusCode();
+				return $this->getImageSrc();
 				break;
 			case 6:
-				return $this->getRemarks();
+				return $this->getStatusCode();
 				break;
 			case 7:
-				return $this->getPaymentReference();
+				return $this->getRemarks();
 				break;
 			case 8:
-				return $this->getBankId();
+				return $this->getPaymentReference();
 				break;
 			case 9:
-				return $this->getApproveRejectDatetime();
+				return $this->getBankId();
 				break;
 			case 10:
-				return $this->getApprovedByUserid();
+				return $this->getApproveRejectDatetime();
 				break;
 			case 11:
-				return $this->getCreatedBy();
+				return $this->getApprovedByUserid();
 				break;
 			case 12:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 13:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 14:
-				return $this->getUpdatedOn();
+				return $this->getUpdatedBy();
 				break;
 			case 15:
-				return $this->getPaymentMethod();
+				return $this->getUpdatedOn();
 				break;
 			case 16:
-				return $this->getPgSuccess();
+				return $this->getPaymentMethod();
 				break;
 			case 17:
-				return $this->getPgMsg();
+				return $this->getPgSuccess();
 				break;
 			case 18:
-				return $this->getPgBillNo();
+				return $this->getPgMsg();
 				break;
 			case 19:
-				return $this->getPgRetEncodeType();
+				return $this->getPgBillNo();
 				break;
 			case 20:
-				return $this->getPgCurrencyType();
+				return $this->getPgRetEncodeType();
 				break;
 			case 21:
+				return $this->getPgCurrencyType();
+				break;
+			case 22:
 				return $this->getPgSignature();
 				break;
 			default:
@@ -947,26 +980,27 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		$result = array(
 			$keys[0] => $this->getPurchaseId(),
 			$keys[1] => $this->getDistId(),
-			$keys[2] => $this->getAmount(),
-			$keys[3] => $this->getTransactionType(),
-			$keys[4] => $this->getImageSrc(),
-			$keys[5] => $this->getStatusCode(),
-			$keys[6] => $this->getRemarks(),
-			$keys[7] => $this->getPaymentReference(),
-			$keys[8] => $this->getBankId(),
-			$keys[9] => $this->getApproveRejectDatetime(),
-			$keys[10] => $this->getApprovedByUserid(),
-			$keys[11] => $this->getCreatedBy(),
-			$keys[12] => $this->getCreatedOn(),
-			$keys[13] => $this->getUpdatedBy(),
-			$keys[14] => $this->getUpdatedOn(),
-			$keys[15] => $this->getPaymentMethod(),
-			$keys[16] => $this->getPgSuccess(),
-			$keys[17] => $this->getPgMsg(),
-			$keys[18] => $this->getPgBillNo(),
-			$keys[19] => $this->getPgRetEncodeType(),
-			$keys[20] => $this->getPgCurrencyType(),
-			$keys[21] => $this->getPgSignature(),
+			$keys[2] => $this->getCurrencyType(),
+			$keys[3] => $this->getAmount(),
+			$keys[4] => $this->getTransactionType(),
+			$keys[5] => $this->getImageSrc(),
+			$keys[6] => $this->getStatusCode(),
+			$keys[7] => $this->getRemarks(),
+			$keys[8] => $this->getPaymentReference(),
+			$keys[9] => $this->getBankId(),
+			$keys[10] => $this->getApproveRejectDatetime(),
+			$keys[11] => $this->getApprovedByUserid(),
+			$keys[12] => $this->getCreatedBy(),
+			$keys[13] => $this->getCreatedOn(),
+			$keys[14] => $this->getUpdatedBy(),
+			$keys[15] => $this->getUpdatedOn(),
+			$keys[16] => $this->getPaymentMethod(),
+			$keys[17] => $this->getPgSuccess(),
+			$keys[18] => $this->getPgMsg(),
+			$keys[19] => $this->getPgBillNo(),
+			$keys[20] => $this->getPgRetEncodeType(),
+			$keys[21] => $this->getPgCurrencyType(),
+			$keys[22] => $this->getPgSignature(),
 		);
 		return $result;
 	}
@@ -989,63 +1023,66 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 				$this->setDistId($value);
 				break;
 			case 2:
-				$this->setAmount($value);
+				$this->setCurrencyType($value);
 				break;
 			case 3:
-				$this->setTransactionType($value);
+				$this->setAmount($value);
 				break;
 			case 4:
-				$this->setImageSrc($value);
+				$this->setTransactionType($value);
 				break;
 			case 5:
-				$this->setStatusCode($value);
+				$this->setImageSrc($value);
 				break;
 			case 6:
-				$this->setRemarks($value);
+				$this->setStatusCode($value);
 				break;
 			case 7:
-				$this->setPaymentReference($value);
+				$this->setRemarks($value);
 				break;
 			case 8:
-				$this->setBankId($value);
+				$this->setPaymentReference($value);
 				break;
 			case 9:
-				$this->setApproveRejectDatetime($value);
+				$this->setBankId($value);
 				break;
 			case 10:
-				$this->setApprovedByUserid($value);
+				$this->setApproveRejectDatetime($value);
 				break;
 			case 11:
-				$this->setCreatedBy($value);
+				$this->setApprovedByUserid($value);
 				break;
 			case 12:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 13:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 14:
-				$this->setUpdatedOn($value);
+				$this->setUpdatedBy($value);
 				break;
 			case 15:
-				$this->setPaymentMethod($value);
+				$this->setUpdatedOn($value);
 				break;
 			case 16:
-				$this->setPgSuccess($value);
+				$this->setPaymentMethod($value);
 				break;
 			case 17:
-				$this->setPgMsg($value);
+				$this->setPgSuccess($value);
 				break;
 			case 18:
-				$this->setPgBillNo($value);
+				$this->setPgMsg($value);
 				break;
 			case 19:
-				$this->setPgRetEncodeType($value);
+				$this->setPgBillNo($value);
 				break;
 			case 20:
-				$this->setPgCurrencyType($value);
+				$this->setPgRetEncodeType($value);
 				break;
 			case 21:
+				$this->setPgCurrencyType($value);
+				break;
+			case 22:
 				$this->setPgSignature($value);
 				break;
 		} 	}
@@ -1057,26 +1094,27 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 		if (array_key_exists($keys[0], $arr)) $this->setPurchaseId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDistId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setAmount($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setTransactionType($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setImageSrc($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setStatusCode($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setRemarks($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setPaymentReference($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setBankId($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setApproveRejectDatetime($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setApprovedByUserid($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCreatedBy($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCreatedOn($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setUpdatedBy($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setUpdatedOn($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setPaymentMethod($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setPgSuccess($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setPgMsg($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setPgBillNo($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setPgRetEncodeType($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setPgCurrencyType($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setPgSignature($arr[$keys[21]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCurrencyType($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setAmount($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTransactionType($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setImageSrc($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setStatusCode($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setRemarks($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setPaymentReference($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setBankId($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setApproveRejectDatetime($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setApprovedByUserid($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setPaymentMethod($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setPgSuccess($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setPgMsg($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setPgBillNo($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setPgRetEncodeType($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setPgCurrencyType($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setPgSignature($arr[$keys[22]]);
 	}
 
 	
@@ -1086,6 +1124,7 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::PURCHASE_ID)) $criteria->add(MlmDistEpointPurchasePeer::PURCHASE_ID, $this->purchase_id);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::DIST_ID)) $criteria->add(MlmDistEpointPurchasePeer::DIST_ID, $this->dist_id);
+		if ($this->isColumnModified(MlmDistEpointPurchasePeer::CURRENCY_TYPE)) $criteria->add(MlmDistEpointPurchasePeer::CURRENCY_TYPE, $this->currency_type);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::AMOUNT)) $criteria->add(MlmDistEpointPurchasePeer::AMOUNT, $this->amount);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::TRANSACTION_TYPE)) $criteria->add(MlmDistEpointPurchasePeer::TRANSACTION_TYPE, $this->transaction_type);
 		if ($this->isColumnModified(MlmDistEpointPurchasePeer::IMAGE_SRC)) $criteria->add(MlmDistEpointPurchasePeer::IMAGE_SRC, $this->image_src);
@@ -1137,6 +1176,8 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	{
 
 		$copyObj->setDistId($this->dist_id);
+
+		$copyObj->setCurrencyType($this->currency_type);
 
 		$copyObj->setAmount($this->amount);
 

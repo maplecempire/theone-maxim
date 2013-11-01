@@ -36,6 +36,8 @@ class MlmDistEpointPurchaseMapBuilder {
 
 		$tMap->addColumn('DIST_ID', 'DistId', 'int', CreoleTypes::INTEGER, true, null);
 
+		$tMap->addColumn('CURRENCY_TYPE', 'CurrencyType', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addColumn('AMOUNT', 'Amount', 'double', CreoleTypes::DECIMAL, true, 12);
 
 		$tMap->addColumn('TRANSACTION_TYPE', 'TransactionType', 'string', CreoleTypes::VARCHAR, true, 20);

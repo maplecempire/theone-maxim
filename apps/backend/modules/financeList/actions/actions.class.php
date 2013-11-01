@@ -409,7 +409,7 @@ class financeListActions extends sfActions
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
-        $sql = " ,dist.tree_structure FROM mlm_dist_epoint_purchase purchase
+        $sql = " ,purchase.currency_type,dist.tree_structure FROM mlm_dist_epoint_purchase purchase
         LEFT JOIN mlm_distributor dist ON purchase.dist_id = dist.distributor_id ";
 
         /******   total records  *******/
@@ -476,7 +476,7 @@ class financeListActions extends sfActions
                 $resultArr['purchase_id'] == null ? "" : $resultArr['purchase_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
-                $resultArr['amount'] == null ? "" : $resultArr['amount'],
+                $resultArr['amount'] == null ? "" : $resultArr['currency_type']." ".number_format($resultArr['amount'], 2),
                 $resultArr['transaction_type'] == null ? "" : $resultArr['transaction_type'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $resultArr['image_src'] == null ? "" : $resultArr['image_src'],

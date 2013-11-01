@@ -50,5 +50,7 @@ class MlmDistPairingMapBuilder {
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
+		$tMap->addColumn('BONUS_CALCULATE_FLAG', 'BonusCalculateFlag', 'int', CreoleTypes::INTEGER, true, null);
+
 	} 
 } 

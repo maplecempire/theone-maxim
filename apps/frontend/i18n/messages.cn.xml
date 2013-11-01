@@ -577,6 +577,7 @@
             <trans-unit><source>Your Account Point</source><target>您的帐户点</target></trans-unit>
             <trans-unit><source>Inactive Traders</source><target>未激活的会员</target></trans-unit>
             <trans-unit><source>Currency</source><target>货币</target></trans-unit>
+            <trans-unit><source>Currency Code</source><target>货币</target></trans-unit>
             <trans-unit><source>No data available in table</source><target>无可用的数据</target></trans-unit>
             <trans-unit><source>records</source><target>记录</target></trans-unit>
             <trans-unit><source>Personal Information</source><target>个人资料</target></trans-unit>
