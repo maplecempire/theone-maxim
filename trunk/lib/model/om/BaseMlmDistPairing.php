@@ -43,6 +43,10 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 	
 	protected $updated_on;
 
+
+	
+	protected $bonus_calculate_flag = 0;
+
 	
 	protected $alreadyInSave = false;
 
@@ -140,6 +144,13 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getBonusCalculateFlag()
+	{
+
+		return $this->bonus_calculate_flag;
 	}
 
 	
@@ -298,6 +309,23 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setBonusCalculateFlag($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->bonus_calculate_flag !== $v || $v === 0) {
+			$this->bonus_calculate_flag = $v;
+			$this->modifiedColumns[] = MlmDistPairingPeer::BONUS_CALCULATE_FLAG;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -320,11 +348,13 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 
 			$this->updated_on = $rs->getTimestamp($startcol + 8, null);
 
+			$this->bonus_calculate_flag = $rs->getInt($startcol + 9);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 9; 
+						return $startcol + 10; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistPairing object", $e);
 		}
@@ -496,6 +526,9 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 			case 8:
 				return $this->getUpdatedOn();
 				break;
+			case 9:
+				return $this->getBonusCalculateFlag();
+				break;
 			default:
 				return null;
 				break;
@@ -515,6 +548,7 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCreatedOn(),
 			$keys[7] => $this->getUpdatedBy(),
 			$keys[8] => $this->getUpdatedOn(),
+			$keys[9] => $this->getBonusCalculateFlag(),
 		);
 		return $result;
 	}
@@ -557,6 +591,9 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 			case 8:
 				$this->setUpdatedOn($value);
 				break;
+			case 9:
+				$this->setBonusCalculateFlag($value);
+				break;
 		} 	}
 
 	
@@ -573,6 +610,7 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCreatedOn($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setUpdatedBy($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setUpdatedOn($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setBonusCalculateFlag($arr[$keys[9]]);
 	}
 
 	
@@ -589,6 +627,7 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistPairingPeer::CREATED_ON)) $criteria->add(MlmDistPairingPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmDistPairingPeer::UPDATED_BY)) $criteria->add(MlmDistPairingPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmDistPairingPeer::UPDATED_ON)) $criteria->add(MlmDistPairingPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmDistPairingPeer::BONUS_CALCULATE_FLAG)) $criteria->add(MlmDistPairingPeer::BONUS_CALCULATE_FLAG, $this->bonus_calculate_flag);
 
 		return $criteria;
 	}
@@ -634,6 +673,8 @@ abstract class BaseMlmDistPairing extends BaseObject  implements Persistent {
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setBonusCalculateFlag($this->bonus_calculate_flag);
 
 
 		$copyObj->setNew(true);

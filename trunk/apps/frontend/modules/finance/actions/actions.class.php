@@ -1435,7 +1435,7 @@ class financeActions extends sfActions
             $arr[] = array(
                 $result->getPurchaseId() == null ? "" : $result->getPurchaseId(),
                 $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
-                $result->getAmount() == null ? "" : $result->getAmount(),
+                $result->getAmount() == null ? "" : $result->getCurrencyType()." ".number_format($result->getAmount(),2),
                 $result->getPaymentReference() == null ? "" : $result->getPaymentReference(),
                 $statusCode,
                 $result->getRemarks() == null ? "" : $result->getRemarks(),

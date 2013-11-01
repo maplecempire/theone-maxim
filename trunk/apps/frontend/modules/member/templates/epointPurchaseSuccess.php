@@ -48,10 +48,15 @@ $(function() {
         var paymentMethod = $(this).val();
         if (paymentMethod == "GOZ") {
             $("#tr_channelid").show();
+            $("#currencyCode").val("RMB");
+        } else if (paymentMethod == "PG") {
+            $("#tr_channelid").hide();
+            $("#currencyCode").val("RMB");
         } else {
             $("#tr_channelid").hide();
+            $("#currencyCode").val("USD");
         }
-    });
+    }).trigger("change");
 
     $("#dgBankReceipt").dialog("destroy");
     $("#dgBankReceipt").dialog({
@@ -206,6 +211,15 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
+                    <td><?php echo __('Currency Code'); ?></td>
+                    <td>
+                        <input name="currencyCode" id="currencyCode" readonly="readonly"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
                     <td><?php echo __('Total Fund Deposited'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount"/>
@@ -213,7 +227,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Payment Method'); ?></td>
                     <td>
@@ -234,7 +248,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd" id="tr_channelid" style="display: none;">
+                <tr class="tbl_form_row_even" id="tr_channelid" style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('Bank'); ?></td>
                     <td>
@@ -466,7 +480,7 @@ $(function() {
                 <strong><?php echo __('Deposit Amount'); ?></strong>
             </td>
             <td class="value" style="color: red">
-                <?php echo $systemCurrency." "; ?>
+                <?php //echo $systemCurrency." "; ?>
                 <span id="depositAmountSpan">
                     <?php echo $sf_flash->get('amount'); ?>
                 </span>

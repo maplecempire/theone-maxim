@@ -1655,8 +1655,10 @@ class memberActions extends sfActions
 
         if ($this->getRequestParameter('epointAmount') != "") {
             $amount = $this->getRequestParameter('epointAmount');
+            //$currencyType = $this->getRequestParameter('currency_type');
             //$paymentReference = $this->generatePaymentReference();
-            $dispAmount = $amount * 7;
+            //$dispAmount = $amount * 7;
+            $dispAmount = $amount;
             $paymentMethod = $this->getRequestParameter('paymentMethod', 'LB');
 
             $mlmDistEpointPurchase = new MlmDistEpointPurchase();
@@ -1666,6 +1668,7 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setPaymentReference("");
             $mlmDistEpointPurchase->setTransactionType(Globals::PURCHASE_EPOINT_BANK_TRANSFER);
             $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_PENDING);
+            $mlmDistEpointPurchase->setCurrencyType("USD");
             $mlmDistEpointPurchase->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
@@ -1696,6 +1699,10 @@ class memberActions extends sfActions
                     $this->merCode = "000015";
                     $this->merKey = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
                 }
+
+                $mlmDistEpointPurchase->setCurrencyType($this->currencyType);
+                $mlmDistEpointPurchase->save();
+
                 $this->setTemplate('epointPurchasePG');
             } else if ($paymentMethod == "GOZ") {
                 $ver = "1.0";
@@ -1731,6 +1738,7 @@ class memberActions extends sfActions
                   //echo  $orge;
                 $this->SignMD5 = md5($orge.$md5Key) ;
 
+                $mlmDistEpointPurchase->setCurrencyType($curtype);
                 $mlmDistEpointPurchase->setPgMsg($orge);
                 $mlmDistEpointPurchase->setPgBillNo($orderid);
                 $mlmDistEpointPurchase->setPgRetEncodeType($channelid);
@@ -1741,7 +1749,7 @@ class memberActions extends sfActions
                 $this->setTemplate('epointPurchaseGoz');
             } else {
                 $this->setFlash('purchaseId', $mlmDistEpointPurchase->getPurchaseId());
-                $this->setFlash('amount', $amount);
+                $this->setFlash('amount', $mlmDistEpointPurchase->getCurrencyType() . " ". $amount);
                 $this->setFlash('paymentReference', $paymentReference);
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:"));
                 return $this->redirect('/member/epointPurchase');

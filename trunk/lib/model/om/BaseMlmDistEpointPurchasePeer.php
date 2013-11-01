@@ -13,7 +13,7 @@ abstract class BaseMlmDistEpointPurchasePeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDistEpointPurchase';
 
 	
-	const NUM_COLUMNS = 22;
+	const NUM_COLUMNS = 23;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseMlmDistEpointPurchasePeer {
 
 	
 	const DIST_ID = 'mlm_dist_epoint_purchase.DIST_ID';
+
+	
+	const CURRENCY_TYPE = 'mlm_dist_epoint_purchase.CURRENCY_TYPE';
 
 	
 	const AMOUNT = 'mlm_dist_epoint_purchase.AMOUNT';
@@ -91,18 +94,18 @@ abstract class BaseMlmDistEpointPurchasePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PurchaseId', 'DistId', 'Amount', 'TransactionType', 'ImageSrc', 'StatusCode', 'Remarks', 'PaymentReference', 'BankId', 'ApproveRejectDatetime', 'ApprovedByUserid', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'PaymentMethod', 'PgSuccess', 'PgMsg', 'PgBillNo', 'PgRetEncodeType', 'PgCurrencyType', 'PgSignature', ),
-		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID, MlmDistEpointPurchasePeer::DIST_ID, MlmDistEpointPurchasePeer::AMOUNT, MlmDistEpointPurchasePeer::TRANSACTION_TYPE, MlmDistEpointPurchasePeer::IMAGE_SRC, MlmDistEpointPurchasePeer::STATUS_CODE, MlmDistEpointPurchasePeer::REMARKS, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, MlmDistEpointPurchasePeer::BANK_ID, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME, MlmDistEpointPurchasePeer::APPROVED_BY_USERID, MlmDistEpointPurchasePeer::CREATED_BY, MlmDistEpointPurchasePeer::CREATED_ON, MlmDistEpointPurchasePeer::UPDATED_BY, MlmDistEpointPurchasePeer::UPDATED_ON, MlmDistEpointPurchasePeer::PAYMENT_METHOD, MlmDistEpointPurchasePeer::PG_SUCCESS, MlmDistEpointPurchasePeer::PG_MSG, MlmDistEpointPurchasePeer::PG_BILL_NO, MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE, MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE, MlmDistEpointPurchasePeer::PG_SIGNATURE, ),
-		BasePeer::TYPE_FIELDNAME => array ('purchase_id', 'dist_id', 'amount', 'transaction_type', 'image_src', 'status_code', 'remarks', 'payment_reference', 'bank_id', 'approve_reject_datetime', 'approved_by_userid', 'created_by', 'created_on', 'updated_by', 'updated_on', 'payment_method', 'pg_success', 'pg_msg', 'pg_bill_no', 'pg_ret_encode_type', 'pg_currency_type', 'pg_signature', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('PurchaseId', 'DistId', 'CurrencyType', 'Amount', 'TransactionType', 'ImageSrc', 'StatusCode', 'Remarks', 'PaymentReference', 'BankId', 'ApproveRejectDatetime', 'ApprovedByUserid', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'PaymentMethod', 'PgSuccess', 'PgMsg', 'PgBillNo', 'PgRetEncodeType', 'PgCurrencyType', 'PgSignature', ),
+		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID, MlmDistEpointPurchasePeer::DIST_ID, MlmDistEpointPurchasePeer::CURRENCY_TYPE, MlmDistEpointPurchasePeer::AMOUNT, MlmDistEpointPurchasePeer::TRANSACTION_TYPE, MlmDistEpointPurchasePeer::IMAGE_SRC, MlmDistEpointPurchasePeer::STATUS_CODE, MlmDistEpointPurchasePeer::REMARKS, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, MlmDistEpointPurchasePeer::BANK_ID, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME, MlmDistEpointPurchasePeer::APPROVED_BY_USERID, MlmDistEpointPurchasePeer::CREATED_BY, MlmDistEpointPurchasePeer::CREATED_ON, MlmDistEpointPurchasePeer::UPDATED_BY, MlmDistEpointPurchasePeer::UPDATED_ON, MlmDistEpointPurchasePeer::PAYMENT_METHOD, MlmDistEpointPurchasePeer::PG_SUCCESS, MlmDistEpointPurchasePeer::PG_MSG, MlmDistEpointPurchasePeer::PG_BILL_NO, MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE, MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE, MlmDistEpointPurchasePeer::PG_SIGNATURE, ),
+		BasePeer::TYPE_FIELDNAME => array ('purchase_id', 'dist_id', 'currency_type', 'amount', 'transaction_type', 'image_src', 'status_code', 'remarks', 'payment_reference', 'bank_id', 'approve_reject_datetime', 'approved_by_userid', 'created_by', 'created_on', 'updated_by', 'updated_on', 'payment_method', 'pg_success', 'pg_msg', 'pg_bill_no', 'pg_ret_encode_type', 'pg_currency_type', 'pg_signature', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PurchaseId' => 0, 'DistId' => 1, 'Amount' => 2, 'TransactionType' => 3, 'ImageSrc' => 4, 'StatusCode' => 5, 'Remarks' => 6, 'PaymentReference' => 7, 'BankId' => 8, 'ApproveRejectDatetime' => 9, 'ApprovedByUserid' => 10, 'CreatedBy' => 11, 'CreatedOn' => 12, 'UpdatedBy' => 13, 'UpdatedOn' => 14, 'PaymentMethod' => 15, 'PgSuccess' => 16, 'PgMsg' => 17, 'PgBillNo' => 18, 'PgRetEncodeType' => 19, 'PgCurrencyType' => 20, 'PgSignature' => 21, ),
-		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID => 0, MlmDistEpointPurchasePeer::DIST_ID => 1, MlmDistEpointPurchasePeer::AMOUNT => 2, MlmDistEpointPurchasePeer::TRANSACTION_TYPE => 3, MlmDistEpointPurchasePeer::IMAGE_SRC => 4, MlmDistEpointPurchasePeer::STATUS_CODE => 5, MlmDistEpointPurchasePeer::REMARKS => 6, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE => 7, MlmDistEpointPurchasePeer::BANK_ID => 8, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME => 9, MlmDistEpointPurchasePeer::APPROVED_BY_USERID => 10, MlmDistEpointPurchasePeer::CREATED_BY => 11, MlmDistEpointPurchasePeer::CREATED_ON => 12, MlmDistEpointPurchasePeer::UPDATED_BY => 13, MlmDistEpointPurchasePeer::UPDATED_ON => 14, MlmDistEpointPurchasePeer::PAYMENT_METHOD => 15, MlmDistEpointPurchasePeer::PG_SUCCESS => 16, MlmDistEpointPurchasePeer::PG_MSG => 17, MlmDistEpointPurchasePeer::PG_BILL_NO => 18, MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE => 19, MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE => 20, MlmDistEpointPurchasePeer::PG_SIGNATURE => 21, ),
-		BasePeer::TYPE_FIELDNAME => array ('purchase_id' => 0, 'dist_id' => 1, 'amount' => 2, 'transaction_type' => 3, 'image_src' => 4, 'status_code' => 5, 'remarks' => 6, 'payment_reference' => 7, 'bank_id' => 8, 'approve_reject_datetime' => 9, 'approved_by_userid' => 10, 'created_by' => 11, 'created_on' => 12, 'updated_by' => 13, 'updated_on' => 14, 'payment_method' => 15, 'pg_success' => 16, 'pg_msg' => 17, 'pg_bill_no' => 18, 'pg_ret_encode_type' => 19, 'pg_currency_type' => 20, 'pg_signature' => 21, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('PurchaseId' => 0, 'DistId' => 1, 'CurrencyType' => 2, 'Amount' => 3, 'TransactionType' => 4, 'ImageSrc' => 5, 'StatusCode' => 6, 'Remarks' => 7, 'PaymentReference' => 8, 'BankId' => 9, 'ApproveRejectDatetime' => 10, 'ApprovedByUserid' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, 'PaymentMethod' => 16, 'PgSuccess' => 17, 'PgMsg' => 18, 'PgBillNo' => 19, 'PgRetEncodeType' => 20, 'PgCurrencyType' => 21, 'PgSignature' => 22, ),
+		BasePeer::TYPE_COLNAME => array (MlmDistEpointPurchasePeer::PURCHASE_ID => 0, MlmDistEpointPurchasePeer::DIST_ID => 1, MlmDistEpointPurchasePeer::CURRENCY_TYPE => 2, MlmDistEpointPurchasePeer::AMOUNT => 3, MlmDistEpointPurchasePeer::TRANSACTION_TYPE => 4, MlmDistEpointPurchasePeer::IMAGE_SRC => 5, MlmDistEpointPurchasePeer::STATUS_CODE => 6, MlmDistEpointPurchasePeer::REMARKS => 7, MlmDistEpointPurchasePeer::PAYMENT_REFERENCE => 8, MlmDistEpointPurchasePeer::BANK_ID => 9, MlmDistEpointPurchasePeer::APPROVE_REJECT_DATETIME => 10, MlmDistEpointPurchasePeer::APPROVED_BY_USERID => 11, MlmDistEpointPurchasePeer::CREATED_BY => 12, MlmDistEpointPurchasePeer::CREATED_ON => 13, MlmDistEpointPurchasePeer::UPDATED_BY => 14, MlmDistEpointPurchasePeer::UPDATED_ON => 15, MlmDistEpointPurchasePeer::PAYMENT_METHOD => 16, MlmDistEpointPurchasePeer::PG_SUCCESS => 17, MlmDistEpointPurchasePeer::PG_MSG => 18, MlmDistEpointPurchasePeer::PG_BILL_NO => 19, MlmDistEpointPurchasePeer::PG_RET_ENCODE_TYPE => 20, MlmDistEpointPurchasePeer::PG_CURRENCY_TYPE => 21, MlmDistEpointPurchasePeer::PG_SIGNATURE => 22, ),
+		BasePeer::TYPE_FIELDNAME => array ('purchase_id' => 0, 'dist_id' => 1, 'currency_type' => 2, 'amount' => 3, 'transaction_type' => 4, 'image_src' => 5, 'status_code' => 6, 'remarks' => 7, 'payment_reference' => 8, 'bank_id' => 9, 'approve_reject_datetime' => 10, 'approved_by_userid' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, 'payment_method' => 16, 'pg_success' => 17, 'pg_msg' => 18, 'pg_bill_no' => 19, 'pg_ret_encode_type' => 20, 'pg_currency_type' => 21, 'pg_signature' => 22, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
@@ -159,6 +162,8 @@ abstract class BaseMlmDistEpointPurchasePeer {
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::PURCHASE_ID);
 
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::DIST_ID);
+
+		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::CURRENCY_TYPE);
 
 		$criteria->addSelectColumn(MlmDistEpointPurchasePeer::AMOUNT);
 
