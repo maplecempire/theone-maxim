@@ -4684,7 +4684,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executePlacementTree()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=G');
         }
 
@@ -6307,7 +6307,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeEcashLog()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
 
@@ -6320,7 +6320,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeEpointLog()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
 
@@ -6345,7 +6345,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeMaintenanceLog()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
         $c = new Criteria();
@@ -6471,7 +6471,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeSponsorTree()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=G');
         }
 
@@ -6961,7 +6961,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
 
     public function executeBonusDetails() {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=C');
         }
     }
@@ -7137,7 +7137,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeViewProfile()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, false) == false) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::TRUE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=VP');
         }
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
