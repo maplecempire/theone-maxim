@@ -2140,7 +2140,7 @@ class memberActions extends sfActions
             $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
             if (!$uplineDistDB) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referral ID."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
                 return $this->redirect('/home/login');
             }
 
@@ -2553,7 +2553,7 @@ class memberActions extends sfActions
                 $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
                 if (!$uplineDistDB) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referral ID."));
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
                     return $this->redirect('/member/memberRegistration');
                 }
 
@@ -2690,7 +2690,7 @@ class memberActions extends sfActions
 
             $sponsorId = $mlm_distributor->getDistributorId();
             /**************************************/
-            /*  Direct REFERRAL Bonus For Upline
+            /*  Direct REFERRER Bonus For Upline
             /**************************************/
             if ($uplineDistDB->getIsIb() == Globals::YES) {
                 $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
@@ -3742,7 +3742,7 @@ class memberActions extends sfActions
         //menu-dob-month	12
         //menu-dob-year	2000
         //phone-number	phone
-        //referid	referral
+        //referid	referrer
         //ssnumber	password
         //state	state
         //title	Mr.
@@ -4095,124 +4095,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         return sfView::HEADER_ONLY;
     }
-    public function executeOpenLiveAccount_old()
-    {
-        $error = false;
-        $errorMsg = "";
 
-        if (!$this->getRequestParameter('referralId')) {
-            $error = true;
-            $errorMsg = "Referral ID is required.";
-        } else {
-            $uplineDistDB = $this->getDistributorInformation($this->getRequestParameter('referralId'));
-            if (!$uplineDistDB) {
-                $error = true;
-                $errorMsg = "Invalid referral ID.";
-            } else {
-                //$fcode = $this->getRequestParameter('userName');
-                //$password = $this->getRequestParameter('userpassword');
-                $fcode = $this->generateFcode("");
-                $password = "";
-
-                //******************* upline distributor ID
-                //$treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
-                //$treeLevel = $uplineDistDB->getTreeLevel() + 1;
-                $treeStructure = "";
-                $treeLevel = 0;
-
-                // ****************************
-                $mlm_distributor = new MlmDistributor();
-                $mlm_distributor->setDistributorCode($fcode);
-                $mlm_distributor->setUserId(Globals::SYSTEM_BROKER_ID);
-                $mlm_distributor->setStatusCode(Globals::STATUS_PENDING);
-                $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-                $mlm_distributor->setNickname($fcode);
-                $mlm_distributor->setIc($this->getRequestParameter('ic'));
-                if ($this->getRequestParameter('country') == 'China') {
-                    $mlm_distributor->setCountry('China (PRC)');
-                } else {
-                    $mlm_distributor->setCountry($this->getRequestParameter('country'));
-                }
-                $mlm_distributor->setAddress($this->getRequestParameter('address'));
-                $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
-                $mlm_distributor->setCity($this->getRequestParameter('city'));
-                $mlm_distributor->setState($this->getRequestParameter('state'));
-                $mlm_distributor->setPostcode($this->getRequestParameter('zip'));
-                $mlm_distributor->setEmail($this->getRequestParameter('email'));
-                $mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
-                $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
-                $mlm_distributor->setGender($this->getRequestParameter('gender'));
-                if ($this->getRequestParameter('dob')) {
-                    list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
-                    $mlm_distributor->setDob("$y-$m-$d");
-                }
-                $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
-                $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
-                $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
-
-                $mlm_distributor->setTreeLevel($treeLevel);
-                $mlm_distributor->setTreeStructure($treeStructure);
-                $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
-                $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
-
-                $mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
-                $mlm_distributor->setSpread($this->getRequestParameter('spread'));
-                $mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
-                $mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
-                $mlm_distributor->setSignName($this->getRequestParameter('sign_name'));
-                $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
-                $mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
-                $mlm_distributor->setExcludedStructure("Y");
-
-                $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_BROKER_ID));
-                $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_BROKER_ID));
-                $mlm_distributor->save();
-            }
-        }
-        //print_r("error:".$error.",errorMsg:".$errorMsg);
-        $arr = array(
-            'error' => $error,
-            'errorMsg' => $errorMsg
-        );
-
-        echo json_encode($arr);
-        /****************************/
-        /*****  Send email **********/
-        /****************************/
-        /*error_reporting(E_STRICT);
-
-        date_default_timezone_set(date_default_timezone_get());
-
-        include_once('class.phpmailer.php');
-
-        $subject = $this->getContext()->getI18N()->__("Vital Universe Group Registration email notification", null, 'email');
-        $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
-
-        <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Vital Universe Group", null, 'email') . "</p>
-        <p><b>" . $this->getContext()->getI18N()->__("Member ID", null) . ": " . $fcode . "</b>
-        <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
-
-        $mail = new PHPMailer();
-        $mail->IsMail(); // telling the class to use SMTP
-        $mail->Host = Mails::EMAIL_HOST; // SMTP server
-        $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
-        $mail->From = Mails::EMAIL_FROM_NOREPLY;
-        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-        $mail->Subject = $subject;
-        $mail->CharSet="utf-8";
-
-        $text_body = $body;
-
-        $mail->Body = $body;
-        $mail->AltBody = $text_body;
-        $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
-        $mail->AddBCC("r9projecthost@gmail.com", "jason");
-
-        if (!$mail->Send()) {
-            echo $mail->ErrorInfo;
-        }*/
-        return sfView::HEADER_ONLY;
-    }
     // **********************************************************************************************
     // *******************   ~ end      For broker registeration       end ~   **********************
     // **********************************************************************************************
@@ -4229,6 +4112,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
         $arr = "";
+
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -7719,6 +7603,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     // new implement end ~ ********************************************************************
                     $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                     $mlmRoiDividend->setDividendAmount($dividendAmount);
+                    $mlmRoiDividend->setMt4Balance($packagePrice);
                     $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
                     //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
                     $mlmRoiDividend->save();
@@ -8445,7 +8330,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
 
                         /**************************************/
-                        /*  Direct REFERRAL Bonus For Upline
+                        /*  Direct REFERRER Bonus For Upline
                         /**************************************/
                         $uplineDistId = $distDB->getUplineDistId();
                         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
@@ -8926,7 +8811,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $userDB->save();
 
         /**************************************/
-        /*  Direct REFERRAL Bonus For Upline
+        /*  Direct REFERRER Bonus For Upline
         /**************************************/
         $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
         if ($uplineDistDB) {
