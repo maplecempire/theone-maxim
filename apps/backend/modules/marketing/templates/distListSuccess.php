@@ -461,10 +461,10 @@ function populateDgAddPanel() {
         <tr>
             <td>MT4 ID</td>
             <td>:</td>
-            <td><input type="text" id="dgAddPanelmt4_user_name" class="text ui-widget-content ui-corner-all" size="25"></td>
+            <td><input type="text" id="dgAddPanelmt4_user_name" readonly="readonly" class="text ui-widget-content ui-corner-all" size="25"></td>
             <td>MT4 Password</td>
             <td>:</td>
-            <td><input type="text" id="dgAddPanelmt4_password" class="text ui-widget-content ui-corner-all" size="25"></td>
+            <td><input type="text" id="dgAddPanelmt4_password" readonly="readonly" class="text ui-widget-content ui-corner-all" size="25"></td>
         </tr>
         <tr>
             <td>Name</td>
