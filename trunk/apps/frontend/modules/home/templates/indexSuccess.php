@@ -962,7 +962,7 @@ $(document).ready(function() {
                 Maxim Trader D&D 2014:
                 <br>
                 <br>
-                Dear Partners, here is your change to qualify for our Annual Dinner & Dance which will he held in Bangkok, Thailand in February 2014.
+                Dear Partners, here is your chance to qualify for our Annual Dinner & Dance which will he held in Bangkok, Thailand in February 2014.
                 <br>* Purchase 10k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel
                 <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
                 <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
