@@ -215,6 +215,33 @@ $culture = $sf_user->getCulture();
                 <div id="feedContent">
                     <a href="#">
                         <?php if ($culture == "cn") {  ?>
+                        <div class="poptitle"><h3>马胜集团11月份梹城商业金融分享会(100名额)</h3><br>
+                        <?php } else {  ?>
+                        <div class="poptitle"><h3>Maxim Trader November Penang business and finance preview (Limited to 100 participants)</h3><br>
+                        <?php }   ?>
+                    </div>
+                    </a>
+                    <br>
+                    <?php if ($culture == "cn") {  ?>
+                    <br>时间: 2013.11.12 晚上8:00
+                    <br>地点: Penang Vistana Hotel
+                    <br>语言: 中英双语
+                    <?php } else {  ?>
+                    <br>Date: 12. Nov 2013
+                    <br>Time: 8pm
+                    <br>Venue: Vistana Hotel. Penang
+                    <br>Medium: English/Mandarin.
+                    <br>Contact person. Ms Fion 0174000830 (pg)
+                    <?php }   ?>
+                    <div class="news_date">
+                    Posted on 10 November 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+
+                    <a href="#">
+                        <?php if ($culture == "cn") {  ?>
                         <div class="poptitle"><h3>国际金融交流会(IME)澳门 2013</h3><br>
                         <?php } else if ($culture == "kr") {   ?>
                         <div class="poptitle"><h3>첫번째 인터내셔날 멤버스 교환 (IME) 2013</h3><br>
