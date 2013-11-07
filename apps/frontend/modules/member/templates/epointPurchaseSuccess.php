@@ -21,10 +21,10 @@ $(function() {
             }
         },
         rules : {
-            "bankSlip" : {
+            /*"bankSlip" : {
                 required : true,
                 accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
-            },
+            },*/
             "epointAmount" : {
                 required : true
             },
@@ -66,7 +66,7 @@ $(function() {
         hide: 'clip',
         show: 'slide',
         width: 700,
-        height: 430,
+        height: 480,
         buttons: {
             "<?php echo __('Print') ?>": function() {
                 var params  = 'width=891';
@@ -373,7 +373,13 @@ $(function() {
                     $("#depositAmountSpan").html(data.amount);
                     $("#paymentReferenceSpan").html(data.payment_reference);
                     $("#purchaseId").val(data.purchase_id);
-                    $("#fancyImageLink").attr("href", data.image_src);
+                    if (data.image_src != "") {
+                        $(".fancyImageLink").show();
+<!--                        $("#fancyImageLink").attr("href", "--><?php //echo url_for("/download/bankslip?q=".rand()) ?><!--" + "/p/" + data.purchase_id);-->
+                        $("#fancyImageLink").attr("href", data.image_src);
+                    } else {
+                        $(".fancyImageLink").hide();
+                    }
                     $("#fancyImageImg").attr("src", data.image_src);
 
                     $("#bankId").val(data.bank_id).change();
@@ -557,10 +563,14 @@ $(function() {
                 <strong><?php echo __('Upload Bank Receipt'); ?></strong>
             </td>
             <td class="value">
-                <?php echo "<a id='fancyImageLink' rel='image_group' href=''>"; ?>
+                <?php /*echo "<a id='fancyImageLink' rel='image_group' href=''>"; */?><!--
                     <img id='fancyImageImg' onerror="this.src='/images/common/not_available.gif';"
                      src="empty"
                      height="50">
+                </a>-->
+
+                <a href="#" id="fancyImageLink" class="fancyImageLink" target="_blank">
+                    <img src="/images/common/fileopen.png" alt="view file" class="fancyImageLink">
                 </a>
                 <?php echo input_file_tag('fileNew', array("id" => "bankSlip", "name" => "bankSlip")); ?>
                 <button id="btnUpload">Upload Bank Receipt</button>
