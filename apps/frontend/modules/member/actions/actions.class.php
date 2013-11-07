@@ -4713,124 +4713,133 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', "This function temporary out of service.");
                 return $this->redirect('/member/summary');
             }*/
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
 
-            $uplineDistCode = $this->getRequestParameter('uplineDistCode');
-            $uplinePosition = $this->getRequestParameter('uplinePosition');
-            $sponsorDistId = $this->getRequestParameter('sponsorDistId');
+                $uplineDistCode = $this->getRequestParameter('uplineDistCode');
+                $uplinePosition = $this->getRequestParameter('uplinePosition');
+                $sponsorDistId = $this->getRequestParameter('sponsorDistId');
 
-            $uplineDistDB = $this->getDistributorInformation($uplineDistCode);
-            $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $sponsorDB = MlmDistributorPeer::retrieveByPk($sponsorDistId);
-            $this->forward404Unless($distDB);
-            $this->forward404Unless($sponsorDB);
+                $uplineDistDB = $this->getDistributorInformation($uplineDistCode);
+                $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $sponsorDB = MlmDistributorPeer::retrieveByPk($sponsorDistId);
+                $this->forward404Unless($distDB);
+                $this->forward404Unless($sponsorDB);
 
-            $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $sponsorDB->getDistributorCode() . "|";
-            $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
+                $treeStructure = $uplineDistDB->getPlacementTreeStructure() . "|" . $sponsorDB->getDistributorCode() . "|";
+                $treeLevel = $uplineDistDB->getPlacementTreeLevel() + 1;
 
-            $sponsorDB->setPlacementDatetime(date("Y/m/d h:i:s A"));
-            $sponsorDB->setPlacementPosition($uplinePosition);
-            //$sponsorDB->setUplineDistId($uplineDistDB->getDistributorId());
-            //$sponsorDB->setUplineDistCode($uplineDistDB->getDistributorCode());
-            $sponsorDB->setPlacementTreeStructure($treeStructure);
-            $sponsorDB->setPlacementTreeLevel($treeLevel);
-            $sponsorDB->setTreeUplineDistId($uplineDistDB->getDistributorId());
-            $sponsorDB->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
-            $sponsorDB->save();
+                $sponsorDB->setPlacementDatetime(date("Y/m/d h:i:s A"));
+                $sponsorDB->setPlacementPosition($uplinePosition);
+                //$sponsorDB->setUplineDistId($uplineDistDB->getDistributorId());
+                //$sponsorDB->setUplineDistCode($uplineDistDB->getDistributorCode());
+                $sponsorDB->setPlacementTreeStructure($treeStructure);
+                $sponsorDB->setPlacementTreeLevel($treeLevel);
+                $sponsorDB->setTreeUplineDistId($uplineDistDB->getDistributorId());
+                $sponsorDB->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
+                $sponsorDB->save();
 
-            $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
-            $this->forward404Unless($sponsoredPackageDB);
-            $pairingPoint = $sponsoredPackageDB->getPrice();
-            /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
-                $pairingPoint = $amountNeeded;
-            }*/
-            // recalculate Total left and total right for $uplineDistDB
-            /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
-            for ($x = count($arrs); $x > 0; $x--) {
-                if ($arrs[$x] == "") {
-                    continue;
+                $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
+                $this->forward404Unless($sponsoredPackageDB);
+                $pairingPoint = $sponsoredPackageDB->getPrice();
+                /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                    $pairingPoint = $amountNeeded;
+                }*/
+                // recalculate Total left and total right for $uplineDistDB
+                /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
+                for ($x = count($arrs); $x > 0; $x--) {
+                    if ($arrs[$x] == "") {
+                        continue;
+                    }
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
+                    $this->forward404Unless($uplineDistDB);
+                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
+                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
+                    $uplineDistDB->setTotalLeft($totalLeft);
+                    $uplineDistDB->setTotalRight($totalRight);
+                    $uplineDistDB->save();
+                }*/
+
+                /******************************/
+                /*  store Pairing points
+                /******************************/
+                if ($sponsorDB->getTreeUplineDistId() != 0 && $sponsorDB->getTreeUplineDistCode() != null) {
+                    $level = 0;
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($sponsorDB->getTreeUplineDistId());
+                    $sponsoredDistributorCode = $sponsorDB->getDistributorCode();
+                    while ($level < 100) {
+                        //var_dump($uplineDistDB->getUplineDistId());
+                        //var_dump($uplineDistDB->getUplineDistCode());
+                        //print_r("<br>");
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        $addToLeft = 0;
+                        $addToRight = 0;
+                        $leftBalance = 0;
+                        $rightBalance = 0;
+                        if (!$sponsorDistPairingDB) {
+                            $sponsorDistPairingDB = new MlmDistPairing();
+                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            $this->forward404Unless($packageDB);
+
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance);
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                        }
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingDB->save();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                        $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                        $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                        $legBalance = 0;
+                        if ($sponsorDistPairingLedgerDB) {
+                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                        }
+
+                        $sponsorDistPairingledger = new MlmDistPairingLedger();
+                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                        $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setDebit(0);
+                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->save();
+
+                        $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                        if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                            break;
+                        }
+
+                        $uplinePosition = $uplineDistDB->getPlacementPosition();
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                        $level++;
+                    }
                 }
-                $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
-                $this->forward404Unless($uplineDistDB);
-                $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
-                $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
-                $uplineDistDB->setTotalLeft($totalLeft);
-                $uplineDistDB->setTotalRight($totalRight);
-                $uplineDistDB->save();
-            }*/
-
-            /******************************/
-            /*  store Pairing points
-            /******************************/
-            if ($sponsorDB->getTreeUplineDistId() != 0 && $sponsorDB->getTreeUplineDistCode() != null) {
-                $level = 0;
-                $uplineDistDB = MlmDistributorPeer::retrieveByPk($sponsorDB->getTreeUplineDistId());
-                $sponsoredDistributorCode = $sponsorDB->getDistributorCode();
-                while ($level < 100) {
-                    //var_dump($uplineDistDB->getUplineDistId());
-                    //var_dump($uplineDistDB->getUplineDistCode());
-                    //print_r("<br>");
-                    $c = new Criteria();
-                    $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                    $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
-
-                    $addToLeft = 0;
-                    $addToRight = 0;
-                    $leftBalance = 0;
-                    $rightBalance = 0;
-                    if (!$sponsorDistPairingDB) {
-                        $sponsorDistPairingDB = new MlmDistPairing();
-                        $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
-
-                        $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                        $this->forward404Unless($packageDB);
-
-                        $sponsorDistPairingDB->setLeftBalance($leftBalance);
-                        $sponsorDistPairingDB->setRightBalance($rightBalance);
-                        $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
-                        $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    } else {
-                        $leftBalance = $sponsorDistPairingDB->getLeftBalance();
-                        $rightBalance = $sponsorDistPairingDB->getRightBalance();
-                    }
-                    $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
-                    $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
-                    $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingDB->save();
-
-                    $c = new Criteria();
-                    $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                    $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
-                    $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
-                    $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
-
-                    $legBalance = 0;
-                    if ($sponsorDistPairingLedgerDB) {
-                        $legBalance = $sponsorDistPairingLedgerDB->getBalance();
-                    }
-
-                    $sponsorDistPairingledger = new MlmDistPairingLedger();
-                    $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
-                    $sponsorDistPairingledger->setLeftRight($uplinePosition);
-                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
-                    $sponsorDistPairingledger->setCredit($pairingPoint);
-                    $sponsorDistPairingledger->setDebit(0);
-                    $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
-                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingledger->save();
-
-                    $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
-
-                    if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
-                        break;
-                    }
-
-                    $uplinePosition = $uplineDistDB->getPlacementPosition();
-                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
-                    $level++;
-                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
             }
+
             /******************************/
             /*  Pairing             ~ END ~
             /******************************/
