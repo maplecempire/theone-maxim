@@ -214,6 +214,33 @@ $culture = $sf_user->getCulture();
                 </div>
                 <div id="feedContent">
                     <a href="#">
+                        <div class="poptitle"><h3>Maxim Trader Forex Preview</h3><br>
+                    </div>
+                    </a>
+                    <br>
+
+                    <br>YOU ARE INVITED!
+                    <br>
+                    <br>8 November 2013, 7:30pm
+                    <br>
+                    <br>Suntec Singapore International
+                    <br>Convention & Exhibition Centre
+                    <br>Level 6 Hall 605 Room 606E
+                    <br>1 Raffles Boulevard. Suntec City, Singapore
+                    <br>039593
+                    <br>
+                    <br>BY INVITATION ONLY.
+                    <br>Register through your Introducing Broker.
+                    <br>
+                    <br>Guests from overseas will be given priority seating.
+                    <div class="news_date">
+                    Posted on 10 November 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+
+                    <a href="#">
                         <?php if ($culture == "cn") {  ?>
                         <div class="poptitle"><h3>马胜集团11月份梹城商业金融分享会(100名额)</h3><br>
                         <?php } else {  ?>
