@@ -8689,7 +8689,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function revalidatePairing($distributorId, $leftRight)
     {
-        $balance = $this->getPairingBalance($distributorId, $leftRight);
+        //$balance = $this->getPairingBalance($distributorId, $leftRight);
 
         $c = new Criteria();
         $c->add(MlmDistPairingPeer::DIST_ID, $distributorId);
@@ -8700,14 +8700,17 @@ We look forward to your custom in the near future. Should you have any queries, 
             $tbl_account->setDistId($distributorId);
             $tbl_account->setLeftBalance(0);
             $tbl_account->setRightBalance(0);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->save();
         }
-        if (Globals::PLACEMENT_LEFT == $leftRight) {
+        /*if (Globals::PLACEMENT_LEFT == $leftRight) {
             $tbl_account->setLeftBalance($balance);
         } else if (Globals::PLACEMENT_RIGHT == $leftRight) {
             $tbl_account->setRightBalance($balance);
-        }
+        }*/
 
-        $tbl_account->save();
+        //$tbl_account->save();
     }
 
     function getPairingBalance($distributorId, $leftRight)
