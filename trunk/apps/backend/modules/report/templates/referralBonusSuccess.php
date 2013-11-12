@@ -11,15 +11,32 @@
 </tr>
 <?php
 $idx = 1;
-foreach ($reports as $report) { ?>
+
+$totalSales = 0;
+$totalDrb = 0;
+$totalGdb = 0;
+foreach ($reports as $report) {
+    $totalSales += $report->getTotalSales();
+    $totalDrb += $report->getTotalDrb();
+    $totalGdb += $report->getTotalGdb();
+    ?>
 <tr class='sf_admin_row_1'>
     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo $idx;?></td>
     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo $report->getBonusDate();?></td>
     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalSales(),2);?></td>
     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalDrb(),2);?></td>
     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getTotalGdb(),2);?></td>
-    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getGdbPercentage(),2);?></td>
+    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><?php echo number_format($report->getGdbPercentage() * 100,2);?> %</td>
 </tr>
 <?php } ?>
+
+<tr>
+   <td></td>
+   <td></td>
+   <td><?php echo number_format($totalSales,2);?></td>
+   <td><?php echo number_format($totalDrb,2);?></td>
+   <td><?php echo number_format($totalGdb,2);?></td>
+   <td><?php echo number_format($totalGdb / $totalSales * 100,2);?>%</td>
+</tr>
 </thead>
 <tbody>
