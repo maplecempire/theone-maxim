@@ -178,6 +178,14 @@ $(function() {
             verifySponsorId();
         }
     });
+
+    <?php
+    if ($sponsorId != "") {
+    ?>
+    $("#sponsorId").trigger("change");
+    <?php
+    }
+    ?>
 });
 function verifySponsorId() {
     waiting();
@@ -365,7 +373,7 @@ function error(data) {
         <td>&nbsp;</td>
         <td><?php echo __('Referrer ID') ?></td>
         <td>
-            <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php //echo $sponsorId;?>">
+            <input type="text" class="inputbox" id="sponsorId" name="sponsorId" value="<?php echo $sponsorId;?>">
             &nbsp;
         </td>
         <td>&nbsp;</td>

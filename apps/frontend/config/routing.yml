@@ -39,5 +39,9 @@ epoint_purchase:
   url:   /member/cp1Purchase
   param: { module: member, action: epointPurchase }
 
+affiliateLink:
+  url:   /a/:id
+  param: { module: member, action: register }
+
 default:
   url:   /:module/:action/*
