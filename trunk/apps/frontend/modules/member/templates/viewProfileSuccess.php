@@ -510,6 +510,42 @@ $(function() {
             <div class="clear"></div>
             <br>
 
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+
+                <tbody>
+                <tr class="row_header">
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('Affiliate Setting') ?></th>
+                    <th></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Affiliate Link') ?></td>
+                    <td>
+                        <input type="text" class="inputbox" id="affiliateLink" size="40" name="affiliateLink" value="<?php echo "http://partner.maximtrader.com/a/".$distDB->getDistributorCode() ?>">
+                        &nbsp;
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
             <form action="/member/loginPassword" id="passwordForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>

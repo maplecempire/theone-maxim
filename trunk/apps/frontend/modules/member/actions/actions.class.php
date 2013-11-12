@@ -1963,6 +1963,7 @@ class memberActions extends sfActions
 
     public function executeRegister()
     {
+        $this->sponsorId = $this->getRequestParameter('id');
     }
 
     public function executeMemberRegistration()
