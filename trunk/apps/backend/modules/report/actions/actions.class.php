@@ -118,8 +118,8 @@ class reportActions extends sfActions
             print_r($bonusDate . "<br>");
 
             $totalDrb = $bonusService->doCalculateDrb($bonusDate);
-            $totalSales = $bonusService->doCalculateTotalSales($bonusDate);
-//            $totalSales = $totalDrb * 10;
+            //$totalSales = $bonusService->doCalculateTotalSales($bonusDate);
+            $totalSales = $totalDrb * 10;
             $totalGdb = $bonusService->doCalculateGrb($queryDateForGrb);
 
             $reportPayoutBonus = new ReportPayoutBonus();
