@@ -293,7 +293,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -421,7 +421,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -541,7 +541,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -675,7 +675,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -796,7 +796,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -917,7 +917,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
@@ -1038,7 +1038,7 @@ function reassignDatagridEventAttr(){
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
-                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|192|");
+                            $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
