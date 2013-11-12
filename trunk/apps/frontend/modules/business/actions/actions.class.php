@@ -12,8 +12,8 @@ class businessActions extends sfActions
 {
     public function executeCreateEmptyAccount()
     {
-        /*$c = new Criteria();
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|1077|%", Criteria::LIKE);
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|192|%", Criteria::LIKE);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
 
@@ -36,12 +36,12 @@ class businessActions extends sfActions
             $appUser->setUpdatedBy($appUserDB->getUpdatedBy());
             $appUser->setUpdatedOn($appUserDB->getUpdatedOn());
             $appUser->setFromAbfx($appUserDB->getFromAbfx());
-            $appUser->setRemark($appUserDB->getRemark().", ORI MOVE UNDER Superming (NICHOLES)");
+            $appUser->setRemark($appUserDB->getRemark().", ORI MOVE UNDER MaximChina2 (NICHOLES)");
             $appUser->save();
 
             $placementUplineDistDB = null;
             if ($count == 0) {
-                $placementUplineDistId = 1050;
+                $placementUplineDistId = 165;
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($placementUplineDistId);
             } else {
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($mlmDistributor->getTreeUplineDistId());
@@ -176,7 +176,7 @@ class businessActions extends sfActions
             $mlmDistPairingLedger->save();
 
             $count++;
-        }*/
+        }
 
         print_r("Done");
         return sfView::HEADER_ONLY;
