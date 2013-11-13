@@ -101,6 +101,7 @@ $(function() {
 <form action="/member/doMemberRegistration" id="topupForm" name="topupForm" method="post">
     <input type="hidden" id="packageId" name="packageId" value=""/>
     <input type="hidden" id="epointNeeded" value="0"/>
+    <input type="hidden" id="userName" name="userName" value="<?php echo $distDB->getDistributorCode(); ?>"/>
     <input type="hidden" id="doAction" name="doAction" value="PENDING_MEMBER"/>
     <input type="hidden" id="sponsorId" value="<?php echo $distDB->getUplineDistId(); ?>">
 
