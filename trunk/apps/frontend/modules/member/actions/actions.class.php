@@ -2483,6 +2483,7 @@ class memberActions extends sfActions
          * ***************************************************/
         $c = new Criteria();
         $c->add(AppUserPeer::USERNAME, $userName);
+        $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID), Criteria::NOT_EQUAL);
         $exist = AppUserPeer::doSelectOne($c);
 
         if ($exist) {
