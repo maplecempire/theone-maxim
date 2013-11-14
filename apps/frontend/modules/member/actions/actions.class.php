@@ -3043,6 +3043,20 @@ class memberActions extends sfActions
                     $mlm_distributor->setPlacementTreeLevel($treeLevel);
                     $mlm_distributor->setTreeUplineDistId($uplineDistDB->getDistributorId());
                     $mlm_distributor->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
+
+                    $pos = strrpos($mlm_distributor->getPlacementTreeStructure(), "|256175|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $mlm_distributor->setHideGenealogy("N");
+                    }
+                    $pos = strrpos($mlm_distributor->getPlacementTreeStructure(), "|256258|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $mlm_distributor->setHideGenealogy("N");
+                    }
+
                     $mlm_distributor->save();
 
                     $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
