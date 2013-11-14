@@ -9731,7 +9731,7 @@ Wish you all the best.
         $body .= $this->getAllBonusData();
         $body .= $this->getRollingPointData();
         $body .= $this->getPackageSaleData();
-        $body .= $this->getUpcomingPerformanceReturn();
+        //$body .= $this->getUpcomingPerformanceReturn();
 
         $sendMailService = new SendMailService();
         $dateUtil = new DateUtil();
