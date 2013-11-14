@@ -3044,6 +3044,7 @@ class memberActions extends sfActions
                     $mlm_distributor->setTreeUplineDistId($uplineDistDB->getDistributorId());
                     $mlm_distributor->setTreeUplineDistCode($uplineDistDB->getDistributorCode());
 
+                    // requested by andrew lim
                     $pos = strrpos($mlm_distributor->getPlacementTreeStructure(), "|256175|");
                     if ($pos === false) { // note: three equal signs
 
