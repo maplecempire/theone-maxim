@@ -375,6 +375,7 @@ class memberActions extends sfActions
     public function executePackagePurchase()
     {
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
@@ -1256,6 +1257,7 @@ class memberActions extends sfActions
         $uplineDistCode = $this->getRequestParameter('distcode');
         $position = $this->getRequestParameter('position');
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -1319,6 +1321,7 @@ class memberActions extends sfActions
     {
         $distCode = $this->getRequestParameter('distcode');
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -1464,6 +1467,7 @@ class memberActions extends sfActions
 
     public function executePackagePurchaseViaBankTransfer() {
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
         $packages = MlmPackagePeer::doSelect($c);
 
@@ -1969,6 +1973,7 @@ class memberActions extends sfActions
     public function executeMemberRegistration()
     {
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -4330,7 +4335,6 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
 
             $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
-
             $packages = MlmPackagePeer::doSelect($c);
 
             $packageArray = array();
@@ -8222,6 +8226,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->forward404Unless($pendingDistDB);
 
         $c = new Criteria();
+        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
@@ -8605,6 +8610,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         } else {
             $c = new Criteria();
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
             $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
             $packageDBs = MlmPackagePeer::doSelect($c);
 
