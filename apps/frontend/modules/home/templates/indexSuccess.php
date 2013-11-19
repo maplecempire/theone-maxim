@@ -940,74 +940,12 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a>
                 </td>
             </tr>
         </table>
-        <div id="page_1" class="page">
-            <div class="poptitle">
-                IMPORTANT ANNOUNCEMENT!!!
-            </div>
-            <div class="news_date">
-            <?php
-                $dateUtil = new DateUtil();
-                echo "11 NOVEMBER 2013";
-                ?>
-            </div>
-            <div class="news_desc" style="text-align:left">
-                <br>
-                IMPORTANT ANNOUNCEMENT!!!
-                <br><br>
 
-                Dear Member,
-                <br>
-                <br>Yesterday our hosting service provider experienced some technical problems that resulted our official website could not work properly. The nameserver is failure now due to outage happened. Fortunately, our partner website - <strong>partner.maximtrader.com</strong> is not affected.
-                <br>
-                <br>If you were affected, we are very sorry for the disruption in service and the distress and inconvenience this caused.
-                <br>
-                <br>Should you require a more detailed technical explanation of what happened, please email to our technical support (<strong>support@maximtrader.com</strong>). Please feel free to contact me or a member of my team directly on the e-mail above if you have any further concerns.
-                <br>
-                <br>Maxim Trader Support Team
-                <br>
-                <div class="popdivider"></div>
-                <br>
-                <br>亲爱的伙伴们：
-                <br>
-                <br>很抱歉昨天我们的服务器供应商出现了一些问题，以致于我们的官网不能正常访问。出现问题的原因是因为存储溢出，幸运的是我们的<strong>partner.maximtrader.com</strong>并没有受到影响。
-                <br>
-                <br>我们为对此造成的耽误与不便深感抱歉。
-                <br>
-                <br>如果您需要知道关于此问题的技术细节，请邮件<strong>support@maximtrader.com</strong>询问。也非常欢迎您直接联系我本人或邮件中提到的马胜的工作人员。
-                <br>
-                <br>马胜
-                <br>客户服务部
-                <br>
-                <div class="popdivider"></div>
-                <br>
-                <br>회원여러분,
-                <br>
-                <br>어제 당사의 인터넷 기술 제공회사가 기술적인 문제에 당착하여 당사의 홈페이지가 제대로 작동하지 못하였습니다.  네임서버가 정전으로 꺼졌습니다.  다행히도 당사의 파트너 웹사이트 – <strong>partner.maximtrader.com</strong>은 영향을 받지 않았습니다.
-                <br>
-                <br>영향을 받았다면, 서비스가 제공되지 못하여 불편함을 끼친 점을 사과드립니다.
-                <br>
-                <br>이러한 일이 일어나게 된 점에 대한 기술적인 설명을 듣기 원하신다면, 우리 기술부서 (<strong>support@maximtrader.com</strong>)으로 메일을 보내주시기 바랍니다.  저나 우리 팀 멤버들에게 직접 연락을 취하고 싶으신 부분이 있으시면 언제든지 위의 메일 주소로 연락주시기 바랍니다.
-                <br>
-                <br>맥심 트레이더 회원지원 부서
-                <br>
-                <div class="popdivider"></div>
-                <br>
-                <br>親愛なるパートナーへ、
-                <br>現在 マキシントレーダーのホームページはただ今 メンテナンス中です。
-                <br>直接接続 <strong>partner.maximtrader.com</strong> からご利用しててください。
-                <br>ご迷惑をかけまして、本当に申し訳ございません。
-                <br>
-                <br>ご不明なことろがあれば、遠慮なく<strong>support@maximtrader.com & japan@maximtrader.com</strong> に問い合わせください。
-                <br>今後とも よろしくお願いいたします。
-                <br>
-                <br>Maxim Trader Support Team
-            </div>
-        </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_1" class="page">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1090,7 +1028,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1146,7 +1084,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1174,7 +1112,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1203,7 +1141,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1217,7 +1155,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_7" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
