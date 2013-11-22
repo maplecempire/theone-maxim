@@ -612,6 +612,16 @@ ul, ol {
             });
             </script>
             <?php if ($culture == "cn") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/cn_shanghai_fair_banner.jpg"><img width="582" src="/images/cn_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else if ($culture == "kr") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/kr_shanghai_fair_banner.jpg"><img width="582" src="/images/kr_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else if ($culture == "jp") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/en_shanghai_fair_banner.jpg"><img width="582" src="/images/en_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/en_shanghai_fair_banner.jpg"><img width="582" src="/images/en_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } ?>
+            <div class="hr2"></div>
+            <?php if ($culture == "cn") {?>
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_C.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_C.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
             <?php } else if ($culture == "kr") {?>
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_K.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_K.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
