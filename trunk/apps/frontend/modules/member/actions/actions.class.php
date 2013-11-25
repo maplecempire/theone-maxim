@@ -3423,9 +3423,9 @@ class memberActions extends sfActions
             $mlm_mt4_demo_request->setRiskDisclosure($this->getRequestParameter('agreeofRiskDisclosure'));
             $mlm_mt4_demo_request->setCountryOfCitizen($this->getRequestParameter('coutrylist'));
             $mlm_mt4_demo_request->setCity($this->getRequestParameter('city'));
-            $mlm_mt4_demo_request->setDobDay($this->getRequestParameter('menu-dob-day'));
-            $mlm_mt4_demo_request->setDobMonth($this->getRequestParameter('menu-dob-month'));
-            $mlm_mt4_demo_request->setDobYear($this->getRequestParameter('menu-dob-year'));
+            $mlm_mt4_demo_request->setDobDay($this->getRequestParameter('dob_day'));
+            $mlm_mt4_demo_request->setDobMonth($this->getRequestParameter('dob_month'));
+            $mlm_mt4_demo_request->setDobYear($this->getRequestParameter('dob_year'));
             $mlm_mt4_demo_request->setRefId($this->getRequestParameter('referid'));
             $mlm_mt4_demo_request->setPassport($this->getRequestParameter('ssnumber'));
             $mlm_mt4_demo_request->setSubject($this->getRequestParameter('your-subject'));
