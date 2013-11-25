@@ -6,6 +6,10 @@ certificateSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+demoAccountSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 forgetPasswordSuccess:
   has_layout:     off
   stylesheets: 	  []
