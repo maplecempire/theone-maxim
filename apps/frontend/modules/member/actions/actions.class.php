@@ -3379,6 +3379,9 @@ class memberActions extends sfActions
         }
         return $fcode;
     }
+    public function executeDemoAccount()
+    {
+    }
     public function executeOpenDemoAccount()
     {
         $error = false;
