@@ -86,6 +86,7 @@ $(function() {
                     if (data.error == true) {
                         alert(data.errorMsg);
                     } else {
+                        $("#ajaxForm").reset();
                         alert("Your application has been submitted.");
                     }
                 },
