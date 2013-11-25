@@ -82,11 +82,10 @@ $(function() {
                 cache:false,
                 data: serializeForm,
                 success:function (data) {
-                    $.unblockUI;
+                    $.unblockUI();
                     if (data.error == true) {
                         alert(data.errorMsg);
                     } else {
-                        $("#ajaxForm").reset();
                         alert("Your application has been submitted.");
                     }
                 },
@@ -98,9 +97,36 @@ $(function() {
         success: function(label) {
         }
     });
-});
-</script>
 
+    $("#btnSubmit").click(function(event){
+        event.preventDefault();
+        $("#ajaxForm").submit();
+    });
+});
+function waiting() {
+    /*$("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");*/
+    $("#waitingLB h3").html("<h3 style='font-size: 16px; width: 100%; padding-left: 0px; background-color:inherit; color: black; line-height:0px; margin-top: 20px;'>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
+
+    $.blockUI({
+        message: $("#waitingLB")
+        , css: {
+            border: 'none',
+            padding: '5px',
+            'background-color': '#fff',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            'border-radius': '10px',
+            opacity: .8,
+            color: '#000'
+        }});
+    $(".blockOverlay").css("z-index", 1010);
+    $(".blockPage").css("z-index", 1011);
+}
+</script>
+<img src="/images/loading.gif" style="display: none;">
+<div id="waitingLB" style="display:none; cursor: default">
+    <h3 style="width: 100%; padding-left: 0px; background-color:inherit; color: black; line-height:0px; margin-top: 0px">We are processing your request. Please be patient.</h3>
+</div>
 <form action="http://partner.maximtrader.com/member/openDemoAccount" id="ajaxForm" method="post" class="ajax_form">
     <h3>Open Demo Account</h3>
 
