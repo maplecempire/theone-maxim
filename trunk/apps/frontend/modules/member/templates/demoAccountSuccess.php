@@ -73,6 +73,7 @@ $(function() {
             }
         },
         submitHandler: function(form) {
+            waiting();
             var serializeForm = $("#ajaxForm").serialize();
             $.ajax({
                 type:'POST',
@@ -81,6 +82,7 @@ $(function() {
                 cache:false,
                 data: serializeForm,
                 success:function (data) {
+                    $.unblockUI;
                     if (data.error == true) {
                         alert(data.errorMsg);
                     } else {
@@ -104,15 +106,15 @@ $(function() {
     <table cellpadding="3" cellspacing="3">
         <tr>
             <td><label for="f-name">First Name</label></td>
-            <td><input name="f-name" id="f-name" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="f-name" id="f-name" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Last Name</label></td>
-            <td><input name="l-name" id="l-name" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="l-name" id="l-name" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Title</label></td>
-            <td><input name="title" id="title" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="title" id="title" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Date of Birth</label></td>
@@ -125,35 +127,35 @@ $(function() {
         </tr>
         <tr>
             <td><label for="f-name">Passport</label></td>
-            <td><input name="ssnumber" id="ssnumber" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="ssnumber" id="ssnumber" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Email</label></td>
-            <td><input name="your-email" id="your-email" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="your-email" id="your-email" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Phone Number</label></td>
-            <td><input name="phone-number" id="phone-number" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="phone-number" id="phone-number" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Address</label></td>
-            <td><input name="address-1" id="address-1" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="address-1" id="address-1" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name"></label></td>
-            <td><input name="address-2" id="address-2" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="address-2" id="address-2" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">City</label></td>
-            <td><input name="city" id="city" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="city" id="city" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">State</label></td>
-            <td><input name="state" id="state" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="state" id="state" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td><label for="f-name">Country</label></td>
-            <td><input name="countrylist" id="countrylist" class="text_input is_empty" type="text" value=""></td>
+            <td><input name="countrylist" id="countrylist" class="text_input is_empty" type="text" value="" size="30"></td>
         </tr>
         <tr>
             <td colspan="2">
