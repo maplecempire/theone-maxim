@@ -22,6 +22,13 @@ h1, h2, h3, h4, h5, h6 {
 label {
     color: #919191;
 }
+
+.button {
+    background-color: #ABC023;
+    border-color: #ABC023;
+    color: #FFFFFF;
+    padding: 5px;
+}
 </style>
 <?php include('scripts.php'); ?>
 <script>
@@ -129,7 +136,7 @@ function waiting() {
 </div>
 <form action="http://partner.maximtrader.com/member/openDemoAccount" id="ajaxForm" method="post" class="ajax_form">
     <h3>Open Demo Account</h3>
-
+    <br>
     <table cellpadding="3" cellspacing="3">
         <tr>
             <td><label for="f-name">First Name</label></td>
@@ -191,7 +198,7 @@ function waiting() {
                     <input name="agreeofRiskDisclosure" class="input_checkbox is_empty" type="checkbox" id="avia_i_have_read_the_general_terms_and_conditions_and_i_agree" value="true">
                 </p>
                 <p class="" style="display: inline;">
-                    <label for="avia_i_have_read_the_general_terms_and_conditions_and_i_agree">I have read the <a href="http://partner.maximtrader.com/download/riskDisclosureStatement" target="_blank">general terms and conditions</a> and I agree!*</label>
+                    <label for="avia_i_have_read_the_general_terms_and_conditions_and_i_agree">I have read the <a href="http://partner.maximtrader.com/download/riskDisclosureStatement" target="_blank" style="color: #ABC023;">general terms and conditions</a> and I agree!*</label>
                 </p>
             </td>
         </tr>
