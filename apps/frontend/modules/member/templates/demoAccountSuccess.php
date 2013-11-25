@@ -10,6 +10,18 @@ h3 {
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
+
+.text_input {
+    border-color: #E1E1E1;
+    color: #919191;
+    max-width: 100%;
+    outline: medium none;
+    padding: 6px 4px;
+    font-size: 13px;
+}
+label {
+    color: #919191;
+}
 </style>
 <?php include('scripts.php'); ?>
 <script>
