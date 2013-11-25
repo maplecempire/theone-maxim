@@ -10,6 +10,10 @@ demoAccountSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+liveAccountSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 forgetPasswordSuccess:
   has_layout:     off
   stylesheets: 	  []
