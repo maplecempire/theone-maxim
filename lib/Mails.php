@@ -40,6 +40,11 @@ abstract class Mails {
     const CS_EMAIL_SENDER = "cs@maximtrader.com";
     const CS_EMAIL_PASSWORD = "maximcscs";
 
+    const LACD_EMAIL_FROM = "lacd@maximtrader.com";
+    const LACD_EMAIL_FROM_NOREPLY = "Maxim Trader LACD";
+    const LACD_EMAIL_SENDER = "lacd@maximtrader.com";
+    const LACD_EMAIL_PASSWORD = "maximlacd";
+
     const EMAIL_FROM_NAME = "Maxim Trader";
     const EMAIL_FROM_NOREPLY_NAME = "Maxim Trader";
     const EMAIL_SENDER_INFO = "noreply@maximtrader.com";

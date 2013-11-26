@@ -258,6 +258,19 @@ function blink(selector) {
         </li>-->
     </ul>
     <?php
+    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
+    ?>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Legal Watch'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/legalWatch"><span><?php echo __('Ask and be answered'); ?></span></a>
+        </li>
+    </ul>
+    <?php
+    }
+    ?>
+    <?php
     if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 || $distDB->getDistributorId() == 1458 ||
             $distDB->getDistributorId() == 15) {
     ?>

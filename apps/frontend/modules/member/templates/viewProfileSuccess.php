@@ -52,12 +52,12 @@ $(function() {
                 accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
             },
             "proofOfResidence" : {
-                required: "#bankPassBook.length > 0",
+                required: "#proofOfResidence.length > 0",
                 minlength : 3,
                 accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
             },
             "nric" : {
-                required: "#bankPassBook.length > 0",
+                required: "#nric.length > 0",
                 minlength : 3,
                 accept:'docx?|pdf|bmp|jpg|jpeg|gif|png|tif|tiff|xls|xlsx'
             }
