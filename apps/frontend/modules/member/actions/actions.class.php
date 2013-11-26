@@ -13,10 +13,11 @@ class memberActions extends sfActions
         //echo $this->getRollingPointData();
 
         $bonusService = new BonusService();
-        $bonusService->contraDebitAccountByEpoint(261626, "CONTRA BY CP1", 0);
-        $bonusService->contraDebitAccountByEpoint(261627, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(261626, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(261627, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(261357, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccount(256463, "CONTRA BY CP2", 0);
+        $bonusService->contraDebitAccount(254741, "CONTRA BY CP2", 0);
 //        $bonusService->contraDebitAccount(256462, "CONTRA BY CP2", 0);
 //        $bonusService->contraDebitAccount(256461, "CONTRA BY CP2", 0);
 //        $bonusService->contraDebitAccount(256460, "CONTRA BY CP2", 0);
