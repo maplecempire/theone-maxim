@@ -2,6 +2,10 @@ downloadGuide:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+DownloadDicta:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 downloadMt4Pro:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

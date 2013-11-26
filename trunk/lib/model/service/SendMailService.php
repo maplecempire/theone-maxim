@@ -208,6 +208,44 @@ class SendMailService
             echo $mail->ErrorInfo;
         }
     }
+    public function sendLegalWatch($email, $fullname, $subject, $body)
+    {
+        error_reporting(E_STRICT);
+
+        date_default_timezone_set(date_default_timezone_get());
+
+        include_once('class.phpmailer.php');
+        $mail = new PHPMailer();
+
+        if (Mails::EMAIL_SMTP == true) {
+            $mail->IsSMTP();
+            $mail->Port = Mails::EMAIL_PORT;
+            $mail->SMTPDebug = 1; // telling the class to use SMTP
+            $mail->SMTPAuth = true; // telling the class to use SMTP
+            $mail->SMTPSecure = Mails::EMAIL_SMTP_SECURE; // telling the class to use SMTP
+            $mail->Username = Mails::LACD_EMAIL_SENDER;
+            $mail->Password = Mails::LACD_EMAIL_PASSWORD;
+        } else {
+            $mail->IsMail();
+            $mail->Sender = Mails::LACD_EMAIL_SENDER;
+        }
+
+        $mail->Host = Mails::EMAIL_HOST; // SMTP server
+        $mail->From = Mails::LACD_EMAIL_FROM;
+        $mail->FromName = Mails::LACD_EMAIL_FROM_NOREPLY;
+        $mail->Subject = $subject;
+        $mail->CharSet="utf-8";
+
+        $text_body = $body;
+
+        $mail->Body = $body;
+        $mail->AltBody = $text_body;
+        $mail->AddAddress($email, $fullname);
+
+        if (!$mail->Send()) {
+            echo $mail->ErrorInfo;
+        }
+    }
 
     public function sendMt4UsernameAndPassword($existDistributor, $subject, $body)
     {
