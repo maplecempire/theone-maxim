@@ -114,7 +114,7 @@ $(function() {
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Passport/ID card full name (In English please)'); ?>:</td>
                                 <td>
-                                    <input name="fullName" id="fullName" tabindex="1"
+                                    <input name="fullName" id="fullName" 
                                                        value="<?php echo $distDB->getFullName(); ?>"/>
                                 </td>
                                 <td>&nbsp;</td>
@@ -124,7 +124,7 @@ $(function() {
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My MAXIM Member ID'); ?>:</td>
                                 <td>
-                                    <input name="memberId" id="memberId" tabindex="1" disabled="disabled"
+                                    <input name="memberId" id="memberId"  disabled="disabled"
                                                        value="<?php echo $distDB->getDistributorCode(); ?>"/>
                                 </td>
                                 <td>&nbsp;</td>
@@ -159,7 +159,7 @@ $(function() {
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Email Address'); ?>:</td>
                                 <td>
-                                    <input name="email" id="email" tabindex="1"
+                                    <input name="email" id="email" 
                                                        value="<?php echo $distDB->getEmail(); ?>"/>
                                 </td>
                                 <td>&nbsp;</td>
@@ -168,7 +168,7 @@ $(function() {
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Contact Number'); ?>:</td>
                                 <td>
-                                    <input name="contact" id="contact" tabindex="1"
+                                    <input name="contact" id="contact" 
                                                        value="<?php echo $distDB->getContact(); ?>"/>
                                 </td>
                                 <td>&nbsp;</td>
@@ -177,7 +177,7 @@ $(function() {
                                 <td>&nbsp;</td>
                                 <td><?php echo __('Title'); ?>:</td>
                                 <td>
-                                    <input name="title" id="title" tabindex="1" maxlength="200"
+                                    <input name="title" id="title"  maxlength="200"
                                                        value=""/>
                                 </td>
                                 <td>&nbsp;</td>
