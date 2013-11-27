@@ -358,6 +358,8 @@ class financeActions extends sfActions
                 print_r("<br>");
             }*/
         }
+
+        return sfView::HEADER_ONLY;
     }
     public function executeIndex()
     {
