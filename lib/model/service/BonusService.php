@@ -363,7 +363,7 @@ class BonusService
                 }
             }
 
-            if ($completeStatus) {
+            if ($completeStatus && $totalDebit > 0) {
                 $distDB->setPackagePurchaseFlag("Y");
                 $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
                 $distDB->save();
@@ -589,33 +589,35 @@ class BonusService
                     }
                 }
 
-                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
                 $distAccountDebitBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
             }
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT_ACCOUNT);
-            $mlm_account_ledger->setRemark("DEBITED TO DEBIT ACCOUNT");
-            $mlm_account_ledger->setCredit(0);
-            $mlm_account_ledger->setDebit($totalDebit);
-            $mlm_account_ledger->setBalance($distAccountEcashBalance - $totalDebit);
-            $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
-            $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
-            $mlm_account_ledger->save();
+            if ($totalDebit > 0) {
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT_ACCOUNT);
+                $mlm_account_ledger->setRemark("DEBITED TO DEBIT ACCOUNT");
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($totalDebit);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance - $totalDebit);
+                $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
+                $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
+                $mlm_account_ledger->save();
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ECASH_DEBIT);
-            $mlm_account_ledger->setRemark($debitAccountRemark);
-            $mlm_account_ledger->setCredit(0);
-            $mlm_account_ledger->setDebit($totalDebit);
-            $mlm_account_ledger->setBalance($distAccountDebitBalance - $totalDebit);
-            $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
-            $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
-            $mlm_account_ledger->save();
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_ECASH_DEBIT);
+                $mlm_account_ledger->setRemark($debitAccountRemark);
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($totalDebit);
+                $mlm_account_ledger->setBalance($distAccountDebitBalance - $totalDebit);
+                $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
+                $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
+                $mlm_account_ledger->save();
+            }
 
             $con->commit();
 
