@@ -44,9 +44,22 @@ class BonusService
 
             $distDB = MlmDistributorPeer::retrieveByPK($distId);
 
+            $isFound = false;
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|261469|");
+            if ($pos === false) { // note: three equal signs
+                $pos = strrpos($distDB->getTreeStructure(), "|261469|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $isFound = true;
+                }
+            } else {
+                $isFound = true;
+            }
+
             $totalDebit = 0;
             $completeStatus = false;
-            if ($distDB->getDebitRankId() >= 3) {
+            if ($distDB->getDebitRankId() >= 3 || $isFound) {
                 $totalDebit = $deductAmount / 2;
 
                 if ($distAccountDebitBalance > $totalDebit) {
