@@ -2096,16 +2096,20 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
         if ($tbl_distributor && $tbl_distributor->getPackagePurchaseFlag() == "Y") {
             $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
+            $error = false;
+            $errorMessage = "";
+
             try {
                 $con->begin();
-                $tbl_distributor->setPackagePurchaseFlag("N");
-                $tbl_distributor->save();
 
                 $c = new Criteria();
                 $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4_user_name'));
                 $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
 
                 if (!$mlmDistMt4DB) {
+                    $tbl_distributor->setPackagePurchaseFlag("N");
+                    $tbl_distributor->save();
+
                     $mlm_dist_mt4 = new MlmDistMt4();
                     $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
                     $mlm_dist_mt4->setRankId($tbl_distributor->getInitRankId());
@@ -2165,6 +2169,9 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $mlmPackageContract->save();
 
                     $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
+                } else {
+                    $error = true;
+                    $errorMessage = "MT4 already exist in database";
                 }
                 $con->commit();
             } catch (PropelException $e) {
@@ -2172,7 +2179,8 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                 throw $e;
             }
             $output = array(
-                "error" => false
+                "error" => $error
+                , "errorMsg" => $errorMessage
             );
             echo json_encode($output);
         }
