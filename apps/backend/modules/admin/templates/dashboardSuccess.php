@@ -570,7 +570,7 @@ $(function(){
         buttons: {
             Submit: function() {
                 if ($.trim($('#dgAddPanelmt4_user_name').val()) == "") {
-                    alert("MT4 ID is empty.");
+                    error("MT4 ID is empty.");
                     $('#dgAddPanelmt4_user_name').focus();
                 } else {
                     waiting();
@@ -586,16 +586,16 @@ $(function(){
                         },
                         success : function(data) {
                             if (data.error) {
-                                alert(data.errorMsg);
+                                error(data.errorMsg);
                             } else {
                                 $("#dgAddPanel").dialog('close');
                                 datagridPackagePurchase.fnDraw();
-                                alert("Record Save Successfully.");
+                                error("Record Save Successfully.");
                             }
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown) {
                             $('#waiting').hide(500);
-                            alert("Server connection error.");
+                            error("Server connection error.");
                         }
                     });
                 }
