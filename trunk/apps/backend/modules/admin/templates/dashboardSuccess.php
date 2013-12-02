@@ -590,7 +590,7 @@ $(function(){
                             } else {
                                 $("#dgAddPanel").dialog('close');
                                 datagridPackagePurchase.fnDraw();
-                                error("Record Save Successfully.");
+                                alert("Record Save Successfully.");
                             }
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown) {
