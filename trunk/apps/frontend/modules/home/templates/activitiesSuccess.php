@@ -214,6 +214,31 @@ $culture = $sf_user->getCulture();
                 </div>
                 <div id="feedContent">
                     <a href="#">
+                        <div class="poptitle"><h3>Perth event</h3><br>
+                    </div>
+                    </a>
+                    <br>
+
+
+
+                    <br>16/1/2014 Thursday :
+                    <br>Leader meeting with Dr Andrew lim , 7.30pm @ Antrium crown plaza .
+                    <br>PO Box 500 Victoria Park  Western Australia 6979
+                    <br>
+                    <br>18/1/2014 Saturday :
+                    <br>Financial Preview & Maxim Preview by Mr Daniel Ang & Dr Andrew Lim (for Public, estimate 100-150pax)
+                    <br>7pm to 11pm @ botanicals room, crown burswood. PO Box 500 Victoria Park  Western Australia 6979
+                    <br>
+                    <br>19/1/2014 Sunday :
+                    <br>Forex training by Mr Daniel Ang ( for in house trader estimate 40-60pax)
+                    <br>10am to 5pm @ community hall , city of bayswater . 28 Eighth Avenue Maylands. WA 6051
+                    <div class="news_date">
+                    Posted on 05 December 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="#">
                         <div class="poptitle"><h3>Maxim Trader Forex Preview</h3><br>
                     </div>
                     </a>
