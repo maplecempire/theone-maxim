@@ -9932,8 +9932,7 @@ Wish you all the best.
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
                     FROM mlm_account_ledger account
                         where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
-            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
-        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id";
+            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
