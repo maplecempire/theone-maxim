@@ -468,8 +468,12 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
         $this->dist = MlmDistributorPeer::retrieveByPK($id);
 
         $c = new Criteria();
+
+        $c1 = $c->getNewCriterion(MlmAccountLedgerPeer::ACCOUNT_TYPE, "RP");
+        $c2 = $c->getNewCriterion(MlmAccountLedgerPeer::ACCOUNT_TYPE, "DEBIT");
+        $c1->addOr($c2);
+        $c->add($c1);
         $c->add(MlmAccountLedgerPeer::DIST_ID, $id);
-        $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, "RP");
         $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
         $this->reportDetails = MlmAccountLedgerPeer::doSelect($c);
     }
