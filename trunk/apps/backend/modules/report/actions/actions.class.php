@@ -88,7 +88,11 @@ class reportActions extends sfActions
     {
         $dateFrom = $this->getRequestParameter('dateFrom','');
         $dateTo = $this->getRequestParameter('dateTo','');
+
         $this->rollingPointTable = $this->getRollingPointData($dateFrom, $dateTo);
+
+        $this->dateFrom = $dateFrom;
+        $this->dateTo = $dateTo;
     }
 
     public function executeConvertEcashToEpoint()
@@ -468,9 +472,9 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Full Name</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Available</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Used</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP Available</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Total RP Used - DEBIT = RP Used Balance</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Debit</th>
                     </tr>
                     </thead>
@@ -493,7 +497,7 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['contact'] . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPoint, 2) . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointAvailable, 2) . "</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointUsed, 2) . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($arr['TOTAL_RP_USED'], 2)."(".number_format($debitAccount, 2).")=".number_format($rollingPointUsed, 2) . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($debitAccount, 2) . "</td>
                     </tr>";
         }
@@ -507,9 +511,13 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
     function fetchRollingPoint($dateFrom, $dateTo)
     {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
-        , totalRollingPoint.TOTAL_ROLLING_POINT
-        , rpUsed.TOTAL_RP_USED
-    FROM mlm_account_ledger transferLedger
+        , totalRollingPoint.TOTAL_ROLLING_POINT, rpUsed.TOTAL_RP_USED
+            FROM mlm_distributor dist
+        INNER JOIN
+        (
+            SELECT dist_id FROM mlm_account_ledger where account_type = '" . Globals::ACCOUNT_TYPE_RP . "'
+                group by dist_id
+        ) transferLedger ON dist.distributor_id = transferLedger.dist_id
         LEFT JOIN
             (
                 SELECT sum(credit) AS TOTAL_ROLLING_POINT, dist_id
@@ -538,11 +546,9 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
             $query .= " AND created_on <= '".$dateTo." 23:59:59'";
         }
 
-                    $query .= "group by dist_id
-            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
-        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-    where transferLedger.account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by transferLedger.dist_id";
-        //var_dump($query);
+            $query .= "group by dist_id
+        ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id";
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
@@ -554,17 +560,25 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
             $arr = $resultset->getRow();
 
             $resultArray[$count] = $arr;
-            $resultArray[$count]['TOTAL_DEBIT'] = $this->fetchTotalDebit($arr['dist_id']);
+            $resultArray[$count]['TOTAL_DEBIT'] = $this->fetchTotalDebit($arr['dist_id'], $dateFrom, $dateTo);
             $count++;
         }
         return $resultArray;
     }
 
-    function fetchTotalDebit($distId)
+    function fetchTotalDebit($distId, $dateFrom, $dateTo)
     {
         $query = "SELECT sum(credit) AS TOTAL_DEBIT, dist_id
                     FROM mlm_account_ledger
-                where account_type = '" . Globals::ACCOUNT_TYPE_DEBIT . "' AND dist_id = " . $distId . " group by dist_id";
+                where account_type = '" . Globals::ACCOUNT_TYPE_DEBIT . "' AND dist_id = " . $distId;
+
+        if ($dateFrom != "") {
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != "") {
+            $query .= " AND created_on <= '".$dateTo." 23:59:59'";
+        }
+        $query .= " group by dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);

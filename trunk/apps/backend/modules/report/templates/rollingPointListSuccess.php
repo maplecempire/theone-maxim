@@ -13,17 +13,17 @@ $(function(){
     });
 });
 </script>
-<form action="/report/rollingPointList" method="post" id="enquiryForm" name="enquiryForm">
+<form action="<?php echo url_for("/report/rollingPointList"); ?>" method="post" id="enquiryForm" name="enquiryForm">
 <table width="100%">
     <tr>
         <td width="100">Date From</td>
         <td width="1">:</td>
-        <td><input id="dateFrom" name="dateFrom" size="20" readonly="readonly" value="<?php echo date('Y-m-d');?>"></td>
+        <td><input id="dateFrom" name="dateFrom" size="20" value="<?php echo $dateFrom;?>"></td>
     </tr>
     <tr>
         <td>Date To</td>
         <td>:</td>
-        <td><input id="dateTo" name="dateTo" size="20" readonly="readonly" value="<?php echo date('Y-m-d');?>"></td>
+        <td><input id="dateTo" name="dateTo" size="20" value="<?php echo $dateTo;?>"></td>
     </tr>
     <tr>
         <td></td>

@@ -9914,9 +9914,13 @@ Wish you all the best.
     }
     function fetchRollingPoint() {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
-        , totalRollingPoint.TOTAL_ROLLING_POINT
-        , rpUsed.TOTAL_RP_USED
-    FROM mlm_account_ledger transferLedger
+        , totalRollingPoint.TOTAL_ROLLING_POINT, rpUsed.TOTAL_RP_USED
+            FROM mlm_distributor dist
+        INNER JOIN
+        (
+            SELECT dist_id FROM mlm_account_ledger where account_type = '" . Globals::ACCOUNT_TYPE_RP . "'
+                group by dist_id
+        ) transferLedger ON dist.distributor_id = transferLedger.dist_id
         LEFT JOIN
             (
                 SELECT sum(credit) AS TOTAL_ROLLING_POINT, dist_id
@@ -9929,8 +9933,7 @@ Wish you all the best.
                     FROM mlm_account_ledger account
                         where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
             ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
-        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
-    where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_RP."' group by transferLedger.dist_id";
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
