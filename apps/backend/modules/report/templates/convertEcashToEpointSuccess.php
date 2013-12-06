@@ -48,8 +48,8 @@ $(function(){
         ]
     });
 
-    $("#txtDateFrom").datepicker()
-    $("#txtDateTo").datepicker()
+    $("#txtDateFrom").datepicker();
+    $("#txtDateTo").datepicker();
 
     $("#btnSearch").click(function(event){
         event.preventDefault();

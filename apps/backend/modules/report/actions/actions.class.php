@@ -86,7 +86,9 @@ class reportActions extends sfActions
 
     public function executeRollingPointList()
     {
-        $this->rollingPointTable = $this->getRollingPointData();
+        $dateFrom = $this->getRequestParameter('dateFrom','');
+        $dateTo = $this->getRequestParameter('dateTo','');
+        $this->rollingPointTable = $this->getRollingPointData($dateFrom, $dateTo);
     }
 
     public function executeConvertEcashToEpoint()
@@ -454,9 +456,9 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
     {
     }
 
-    function getRollingPointData()
+    function getRollingPointData($dateFrom, $dateTo)
     {
-        $arrs = $this->fetchRollingPoint();
+        $arrs = $this->fetchRollingPoint($dateFrom, $dateTo);
 
         $body = "<h3>Rolling Point Table</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
                     <thead>
@@ -502,7 +504,7 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
         return $body;
     }
 
-    function fetchRollingPoint()
+    function fetchRollingPoint($dateFrom, $dateTo)
     {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
         , totalRollingPoint.TOTAL_ROLLING_POINT
@@ -512,13 +514,31 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
             (
                 SELECT sum(credit) AS TOTAL_ROLLING_POINT, dist_id
                     FROM mlm_account_ledger account
-                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by dist_id
+                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "'";
+
+        if ($dateFrom != "") {
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != "") {
+            $query .= " AND created_on <= '".$dateTo." 23:59:59'";
+        }
+
+                    $query .= "group by dist_id
             ) totalRollingPoint ON totalRollingPoint.dist_id = transferLedger.dist_id
         LEFT JOIN
             (
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
                     FROM mlm_account_ledger account
-                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by dist_id
+                        where account_type = '" . Globals::ACCOUNT_TYPE_RP . "'";
+
+        if ($dateFrom != "") {
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != "") {
+            $query .= " AND created_on <= '".$dateTo." 23:59:59'";
+        }
+
+                    $query .= "group by dist_id
             ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
         LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
     where transferLedger.account_type = '" . Globals::ACCOUNT_TYPE_RP . "' group by transferLedger.dist_id";
