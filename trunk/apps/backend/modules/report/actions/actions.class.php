@@ -458,6 +458,20 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
 
     public function executeTotalVolumeTraded()
     {
+
+    }
+
+    public function executeRollingPointDetail()
+    {
+        $id = $this->getRequestParameter('id');
+
+        $this->dist = MlmDistributorPeer::retrieveByPK($id);
+
+        $c = new Criteria();
+        $c->add(MlmAccountLedgerPeer::DIST_ID, $id);
+        $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, "RP");
+        $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+        $this->reportDetails = MlmAccountLedgerPeer::doSelect($c);
     }
 
     function getRollingPointData($dateFrom, $dateTo)
@@ -491,7 +505,7 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
 
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $idx++ . "</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['distributor_code'] . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'><a href='/backend.php/report/rollingPointDetail?id=".$arr['dist_id']."'>" . $arr['distributor_code'] . "</a></td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['full_name'] . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['email'] . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['contact'] . "</td>
