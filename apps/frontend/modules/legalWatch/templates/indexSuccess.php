@@ -127,7 +127,7 @@ $(function() {
                                 <td>&nbsp;</td>
                             </tr>
 
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Passport/ID card full name (In English please)'); ?>:</td>
                                 <td>
@@ -137,7 +137,7 @@ $(function() {
                                 <td>&nbsp;</td>
                             </tr>
 
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('Member ID'); ?>:</td>
                                 <td>
@@ -146,7 +146,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My age'); ?>:</td>
                                 <td>
@@ -160,7 +160,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Education level'); ?>:</td>
                                 <td>
@@ -172,7 +172,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Email Address'); ?>:</td>
                                 <td>
@@ -181,7 +181,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Contact Number'); ?>:</td>
                                 <td>
@@ -190,7 +190,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('Your title or Job'); ?>:</td>
                                 <td>
@@ -199,7 +199,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('The Legal Issue I want to ask about is …(keep it very concise and brief)'); ?></td>
                                 <td>
@@ -207,7 +207,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('Attach any related picture, Legal dicta or article in support of your above question'); ?></td>
                                 <td>
