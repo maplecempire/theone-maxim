@@ -89,7 +89,7 @@ $(function() {
                         <strong>READ THIS CAREFULLY PLEASE:</strong>
                         <br>
                         <br>
-                        <span style="color:#ff4500">
+                        <span style="color:#ff4500; font-size: 14px;line-height: 20px">
                         This is a FREE service designed for YOU ONLY, as an existing MAXIM member. If you have prospects who want to make the wise decision to come into MAXIM but are not in yet, they must ask their legal questions through YOU, as we can only advise YOU as a MAXIM member. Furthermore, we are not Formal Legal Advisers and therefore are NOT qualified to opine what the law may happen to be in your particular jurisdiction or Country. Therefore, we disclaim any responsibility as to the accuracy of our responses, despite our careful diligence  applied. Please consult your own local practicing Solicitor, Attorney or Advocate for any formal legal advice, at your expense, if you so wish. Lastly, if you are a minor (person below 18), you must have a parent type in the question and give their email for the answer. Our system is designed to automatically check the MAXIM number you give, against the information held against that number, ie; Name, age etc.
                         </span>
                     </td>
@@ -119,7 +119,7 @@ $(function() {
 
                             <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('I have read  '); ?>:</td>
+                                <td><?php echo __('I have carefully read the above'); ?>:</td>
                                 <td>
                                     <input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">&nbsp;
                                     <label for="terms_risk"><?php echo __('YES') ?> </label>
@@ -192,7 +192,7 @@ $(function() {
                             </tr>
                             <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('Your title or Job'); ?>:</td>
+                                <td><?php echo __('My title or job is'); ?>:</td>
                                 <td>
                                     <input name="title" id="title"  maxlength="200"
                                                        value=""/>
