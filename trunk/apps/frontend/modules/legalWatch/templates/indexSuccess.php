@@ -17,6 +17,9 @@ $(function() {
                 required : true
                 , email: true
             },
+            "terms_risk" : {
+                required : true
+            },
             "contact" : {
                 required : true
             },
@@ -82,8 +85,12 @@ $(function() {
                 </tr>
                 <tr>
                     <td>
+                        <br>
+                        <strong>READ THIS CAREFULLY PLEASE:</strong>
+                        <br>
+                        <br>
                         <span style="color:#ff4500">
-                        This is a facility designed for YOU ONLY, as an existing MAXIM member. We are not Formal Legal Advisers and therefore are NOT qualified to opine what the law may be in your particular jurisdiction. Therefore, we disclaim any responsibility as to the accuracy of our responses, despite all our diligence being applied. Please consult your own formal practicing Solicitor, Attorney or Advocate for  an formal legal advice.
+                        This is a FREE service designed for YOU ONLY, as an existing MAXIM member. If you have prospects who want to make the wise decision to come into MAXIM but are not in yet, they must ask their legal questions through YOU, as we can only advise YOU as a MAXIM member. Furthermore, we are not Formal Legal Advisers and therefore are NOT qualified to opine what the law may happen to be in your particular jurisdiction or Country. Therefore, we disclaim any responsibility as to the accuracy of our responses, despite our careful diligence  applied. Please consult your own local practicing Solicitor, Attorney or Advocate for any formal legal advice, at your expense, if you so wish. Lastly, if you are a minor (person below 18), you must have a parent type in the question and give their email for the answer. Our system is designed to automatically check the MAXIM number you give, against the information held against that number, ie; Name, age etc.
                         </span>
                     </td>
                 </tr>
@@ -112,9 +119,19 @@ $(function() {
 
                             <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
+                                <td><?php echo __('I have read  '); ?>:</td>
+                                <td>
+                                    <input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">&nbsp;
+                                    <label for="terms_risk"><?php echo __('YES') ?> </label>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                            <tr class="tbl_form_row_odd">
+                                <td>&nbsp;</td>
                                 <td><?php echo __('My Passport/ID card full name (In English please)'); ?>:</td>
                                 <td>
-                                    <input name="fullName" id="fullName" 
+                                    <input name="fullName" id="fullName"
                                                        value="<?php echo $distDB->getFullName(); ?>"/>
                                 </td>
                                 <td>&nbsp;</td>
@@ -122,7 +139,7 @@ $(function() {
 
                             <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('My MAXIM Member ID'); ?>:</td>
+                                <td><?php echo __('Member ID'); ?>:</td>
                                 <td>
                                     <input name="memberId" id="memberId"  disabled="disabled"
                                                        value="<?php echo $distDB->getDistributorCode(); ?>"/>
@@ -175,7 +192,7 @@ $(function() {
                             </tr>
                             <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('Title'); ?>:</td>
+                                <td><?php echo __('Your title or Job'); ?>:</td>
                                 <td>
                                     <input name="title" id="title"  maxlength="200"
                                                        value=""/>
@@ -184,7 +201,7 @@ $(function() {
                             </tr>
                             <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('My preferred language is (if not English I can get your response translated)'); ?></td>
+                                <td><?php echo __('The Legal Issue I want to ask about is …(keep it very concise and brief)'); ?></td>
                                 <td>
                                     <textarea rows="3" cols="30" id="message" name="message"></textarea>
                                 </td>
@@ -192,7 +209,7 @@ $(function() {
                             </tr>
                             <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
-                                <td><?php echo __('LEGAL WATCH DICTA'); ?></td>
+                                <td><?php echo __('Attach any related picture, Legal dicta or article in support of your above question'); ?></td>
                                 <td>
                                     <?php echo input_file_tag('legalWatchDicta', array("id" => "legalWatchDicta", "name" => "legalWatchDicta")); ?>
                                 </td>

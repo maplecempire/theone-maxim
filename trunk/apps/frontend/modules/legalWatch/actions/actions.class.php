@@ -14,6 +14,9 @@ class legalWatchActions extends sfActions
      * Executes index action
      *
      */
+    public function executeSuccessful()
+    {
+    }
     public function executeIndex()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -61,7 +64,7 @@ class legalWatchActions extends sfActions
         $this->sendLegalWatchEmail($legal_watch);
 
         $this->setFlash('successMsg', "Your submission has been successfully received by LACD.<br><br>We thank you for taking the time to “ASK and be ANSWERED”. No matter what, we are there for you, and YES WE CAN! Please now expect a response from LACD within 48 hours.");
-        return $this->redirect('/legalWatch/index');
+        return $this->redirect('/legalWatch/successful');
     }
 
     function sendLegalWatchEmail($legal_watch)
