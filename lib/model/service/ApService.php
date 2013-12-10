@@ -14,7 +14,7 @@ class ApService
         $hideGroup = "";
         if ($currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126) {
             // alvinang1,alvinang2,alvinang4
-            $hideGroup = "128"; // law01
+            $hideGroup = "262726"; // law01
         } else if ($currentDistId == 127 || $currentDistId == 128) {
             // law01,law1
             $hideGroup = "129";  // Law001
