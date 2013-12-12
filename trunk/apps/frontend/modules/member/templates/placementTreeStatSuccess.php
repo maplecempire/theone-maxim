@@ -294,11 +294,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -422,11 +423,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -542,11 +544,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -676,11 +679,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -797,11 +801,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -918,11 +923,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
@@ -1039,11 +1045,12 @@ function reassignDatagridEventAttr(){
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
                             $pos2 = strrpos($distDB->getPlacementTreeStructure(), "|165|");
+                            $pos3 = strrpos($distDB->getPlacementTreeStructure(), "|132|");
                             $isRemoveUS = false;
                             $distCode = $distDB->getDistributorCode();
                             $userDB = AppUserPeer::retrieveByPk($distDB->getUserId());
                             $userName = $userDB->getUsername();
-                            if ($pos === false && $pos2 == false) { // note: three equal signs
+                            if ($pos === false && $pos2 == false && $pos3 == false) { // note: three equal signs
 
                             } else {
                                 $lastChar = substr($distCode, -1);
