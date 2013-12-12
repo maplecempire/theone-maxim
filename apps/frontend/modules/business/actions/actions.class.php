@@ -12,8 +12,8 @@ class businessActions extends sfActions
 {
     public function executeCreateEmptyAccount()
     {
-        /*$c = new Criteria();
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|192|%", Criteria::LIKE);
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|557|%", Criteria::LIKE);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
 
@@ -41,7 +41,7 @@ class businessActions extends sfActions
 
             $placementUplineDistDB = null;
             if ($count == 0) {
-                $placementUplineDistId = 165;
+                $placementUplineDistId = 132;
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($placementUplineDistId);
             } else {
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($mlmDistributor->getTreeUplineDistId());
@@ -148,8 +148,8 @@ class businessActions extends sfActions
             $mlm_distributor->setPlacementTreeStructure($placementUplineDistDB->getPlacementTreeStructure()."|".$mlm_distributor->getDistributorId()."|");
             $mlm_distributor->save();
 
-            $leftOnePlacement = $this->getPairingBalance($placementUplineDistDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $rightTwoPlacement = $this->getPairingBalance($placementUplineDistDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $leftOnePlacement = $this->getPairingBalance($mlmDistributor->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $rightTwoPlacement = $this->getPairingBalance($mlmDistributor->getDistributorId(), Globals::PLACEMENT_RIGHT);
 
             $mlmDistPairingLedger = new MlmDistPairingLedger();
             $mlmDistPairingLedger->setDistId($mlm_distributor->getDistributorId());
@@ -176,7 +176,7 @@ class businessActions extends sfActions
             $mlmDistPairingLedger->save();
 
             $count++;
-        }*/
+        }
 
         print_r("Done");
         return sfView::HEADER_ONLY;
