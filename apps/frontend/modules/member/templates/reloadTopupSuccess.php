@@ -7,38 +7,38 @@
             var result = parseFloat($(this).val());
             var epointBalance = $('#epointBalance').val();
             $("#convertedAmount").autoNumericSet(result);
-            $("#epointBalanceDisplay").autoNumericSet(epointBalance - result);
+            $("#epointBalanceDisplay").autoNumericSet(epointBalance);
         });
         $("#withdrawForm").validate({
-                    messages : {
-                        transactionPassword: {
-                            remote: "<?php echo __("Security Password is not valid")?>"
-                        }
-                    },
-                    rules : {
-                        "transactionPassword" : {
-                            required : true
-                            , remote: "/member/verifyTransactionPassword"
-                        }
-                    },
-                    submitHandler: function(form) {
-                        if ($("#mt4UserName").val() == "") {
-                            alert("MT4 status is pending.");
-                            return false;
-                        }
-                        var epointBalance = $('#epointBalance').val();
+            messages : {
+                transactionPassword: {
+                    remote: "<?php echo __("Security Password is not valid")?>"
+                }
+            },
+            rules : {
+                "transactionPassword" : {
+                    required : true
+                    , remote: "/member/verifyTransactionPassword"
+                }
+            },
+            submitHandler: function(form) {
+                if ($("#mt4UserName").val() == "") {
+                    alert("MT4 status is pending.");
+                    return false;
+                }
+                var epointBalance = $('#epointBalance').val();
 <!--                        var mt4Amount = $('#cbo_topupAmount').val() * --><?php //echo $usdToMyr;?><!--;-->
-                        var mt4Amount = $('#cbo_topupAmount').val();
+                var mt4Amount = $('#cbo_topupAmount').val();
 
-                        if (parseFloat(mt4Amount) > parseFloat(epointBalance)) {
-                            alert("In-sufficient CP1");
-                            return false;
-                        }
-                        waiting();
+                if (parseFloat(mt4Amount) > parseFloat(epointBalance)) {
+                    alert("In-sufficient CP1");
+                    return false;
+                }
+                waiting();
 
-                        form.submit();
-                    }
-                });
+                form.submit();
+            }
+        });
         $("#cbo_topupAmount").trigger("change");
     });
 </script>
