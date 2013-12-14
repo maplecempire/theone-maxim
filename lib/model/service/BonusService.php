@@ -353,7 +353,8 @@ class BonusService
             $distAccountDebitBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
 
             $distDB = MlmDistributorPeer::retrieveByPK($distId);
-
+            print_r("DistId " . $distId . "<br>");
+            print_r("epoint: " . $distAccountEcashBalance . "<br>");
             $totalDebit = 0;
             $completeStatus = false;
             if ($distDB->getDebitRankId() >= 3) {
