@@ -214,12 +214,35 @@ $culture = $sf_user->getCulture();
                 </div>
                 <div id="feedContent">
                     <a href="#">
+                        <div class="poptitle"><h3>马胜集团12月份新加坡商业金融分享会(200名额) Maxim Trader December Singapore business and finance seminar (Limited to 200 participants)</h3><br>
+                    </div>
+                    </a>
+                    <br>
+                    <br>时间: 2013.12.17
+                    <br>时间: 晚上7: 30
+                    <br>地点: Suntec Singapore International Convention & Exhibition Centre.
+                    <br>Level 6 Hall 605 Room 606E
+                    <br>1 Raffles Boulevard, Suntec city, Singapore 039593.
+                    <br>语言: 中英双语.
+                    <br>
+                    <br>Date: 17th Dec 2013
+                    <br>Time: 7.30pm
+                    <br>Venue: Suntec Singapore International Convention & Exhibition Centre.
+                    <br>Level 6 Hall 605 Room 606E
+                    <br>1 Raffles Boulevard, Suntec city, Singapore 039593.
+                    <br>Medium: English/Mandarin.
+                    <br>Contact person : +6591200067 (Rykel Lim)
+                    <div class="news_date">
+                    Posted on 16 December 2013
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="#">
                         <div class="poptitle"><h3>Perth event</h3><br>
                     </div>
                     </a>
                     <br>
-
-
 
                     <br>16/1/2014 Thursday :
                     <br>Leader meeting with Dr Andrew lim , 7.30pm @ Antrium crown plaza .
