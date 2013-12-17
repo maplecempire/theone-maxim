@@ -22,6 +22,10 @@ rollingPointList:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_ROLLING_POINT ]]
 
+rollingPointList2:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_ROLLING_POINT ]]
+
 referralBonus:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_REFERRAL_BONUS ]]
