@@ -791,6 +791,12 @@ $(function() {
                 <?php if ($sf_user->hasCredential(Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN)) { ?>
                 <h3><a href="#"><?php echo __('Super Admin'); ?></a></h3>
                 <div>
+                    <a href="<?php echo url_for('report/rollingPointList2') ?>"
+                       title="<?php echo __('Rolling Point List 2'); ?>">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Rolling Point List 2'); ?></a><br/>
+
                     <a href="<?php echo url_for('zAppSetting') ?>" title="<?php echo __('zAppSetting'); ?>">
                         &nbsp;<?php echo __('zAppSetting'); ?></a><br/>
                     <a href="<?php echo url_for('zAppUser') ?>" title="<?php echo __('zAppUser'); ?>">
