@@ -146,51 +146,36 @@ if(isset($_REQUEST["create"]))
 	$params['phone'] 				= @$_REQUEST['phone'];
 	$params['id'] 					= '';
 	$params['comment'] 				= @$_REQUEST['comment'];
-
-    $answer = $mt4request->MakeRequest("createaccount", $params);
-
+	
+	$answer = $mt4request->MakeRequest("createaccount", $params);
+	
 	if($answer['result']!=1)
 	{
 			print "<p style='background-color:#FFEEEE'>An error occured: <b>".$answer['reason']."</b>.</p>";
 	}
 	else
-	{
+	{	
 			print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> has just been created.</p>";
-
+			
 			$params = array();
 			$params['login'] 	= $answer['login'];
 			$params['value'] 	= @$_REQUEST['balance']; // above zero for deposits, below zero for withdraws
 			$params['comment'] 	= "test balance operation";
 			$answer = $mt4request->MakeRequest("changebalance", $params);
-
+			
 			if($answer['result']!=1)
 			{
 				print "<p style='background-color:#FFEEEE'>Balance change error: <b>".$answer['reason']."</b>.</p>";
 			}
 			else
-			{
+			{	
 				print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$_REQUEST['balance'].".</p>";
 			}
 	}
-	//$params['login'] = "2088511615";
-//    $params['value'] = 100; // above zero for deposits, below zero for withdraws
-//    $params['comment'] = "test balance operation";
-//    $answerData = $mt4request->MakeRequest("changebalance", $params);
-//    array(4) { ["result"]=> string(1) "1" ["login"]=> string(10) "2088511615" ["newbalance"]=> string(7) "1300.00" ["order"]=> string(6) "392461" }
-
-//    $answerData = $mt4request->MakeRequest("getaccountinfo", $params);
-    //array(20) { ["result"]=> string(1) "1" ["login"]=> string(10) "2088511615" ["name"]=> string(10) "jason wong" ["email"]=> string(17) "r9jason@gmail.com" ["group"]=> string(6) "KLTEST" ["leverage"]=> string(3) "500" ["regdate"]=> string(10) "1386932016" ["country"]=> string(0) "" ["state"]=> string(0) "" ["adress"]=> string(0) "" ["city"]=> string(0) "" ["zip"]=> string(0) "" ["enable"]=> string(1) "1" ["tradingblocked"]=> string(1) "0" ["balance"]=> string(7) "1200.00" ["comment"]=> string(0) "" ["enableChangePassword"]=> string(1) "1" ["free_margin"]=> string(7) "1200.00" ["opened_orders"]=> string(2) "no" ["agent"]=> string(1) "0" }
-
-//    $answerData = $mt4request->MakeRequest("getaccountbalance", $params);
-//    array(3) { ["result"]=> string(1) "1" ["login"]=> string(10) "2088511615" ["balance"]=> string(7) "1300.00" }
-
-    //$answerData = $mt4request->MakeRequest("getaccounts");
-    //array(2) { ["result"]=> string(1) "1" ["size"]=> string(148) "144 2088511614;test;;KLTEST;500;1386930969;;;;;;1;0;1000.00;;1;0 2088511615;jason wong;r9jason@gmail.com;KLTEST;500;1386932016;;;;;;1;0;1200.00;;1;0" }
-    //var_dump($answerData);
 }
 ?>
 
-<form method="POST" action="http://localhost:8087/mt4Api/getBalance<?php //echo htmlentities($_SERVER['PHP_SELF']);?>">
+<form method="POST" action="http://localhost:8087/mt4Api<?php //echo htmlentities($_SERVER['PHP_SELF']);?>">
 <table>
 <tr>
   <td><strong>login</strong> (only enter 0, do not enter other value)</td>

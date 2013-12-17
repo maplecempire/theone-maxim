@@ -146,7 +146,8 @@ if(isset($_REQUEST["create"]))
 	$params['phone'] 				= @$_REQUEST['phone'];
 	$params['id'] 					= '';
 	$params['comment'] 				= @$_REQUEST['comment'];
-	
+    //var_dump($params);
+    //exit();
 	$answer = $mt4request->MakeRequest("createaccount", $params);
 	
 	if($answer['result']!=1)
@@ -175,7 +176,7 @@ if(isset($_REQUEST["create"]))
 }
 ?>
 
-<form method="POST" action="http://localhost:8087/mt4Api<?php //echo htmlentities($_SERVER['PHP_SELF']);?>">
+<form method="POST" action="http://localhost:8087/mt4Api">
 <table>
 <tr>
   <td><strong>login</strong> (only enter 0, do not enter other value)</td>
