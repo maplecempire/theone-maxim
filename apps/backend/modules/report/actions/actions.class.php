@@ -89,7 +89,17 @@ class reportActions extends sfActions
         $dateFrom = $this->getRequestParameter('dateFrom','');
         $dateTo = $this->getRequestParameter('dateTo','');
 
-        $this->rollingPointTable = $this->getRollingPointData($dateFrom, $dateTo);
+        $this->rollingPointTable = $this->getRollingPointData($dateFrom, $dateTo, false);
+
+        $this->dateFrom = $dateFrom;
+        $this->dateTo = $dateTo;
+    }
+    public function executeRollingPointList2()
+    {
+        $dateFrom = $this->getRequestParameter('dateFrom','');
+        $dateTo = $this->getRequestParameter('dateTo','');
+
+        $this->rollingPointTable = $this->getRollingPointData($dateFrom, $dateTo, true);
 
         $this->dateFrom = $dateFrom;
         $this->dateTo = $dateTo;
@@ -478,7 +488,7 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
         $this->reportDetails = MlmAccountLedgerPeer::doSelect($c);
     }
 
-    function getRollingPointData($dateFrom, $dateTo)
+    function getRollingPointData($dateFrom, $dateTo, $moreDetail)
     {
         $arrs = $this->fetchRollingPoint($dateFrom, $dateTo);
 
@@ -491,9 +501,15 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP Available</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Total RP Used - DEBIT = RP Used Balance</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Debit</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP Available</th>";
+
+        if ($moreDetail == true) {
+            $body .= "<th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Total RP Used - DEBIT = RP Used Balance</th>";
+        } else if ($moreDetail == false) {
+            $body .= "<th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>RP Used Balance</th>";
+        }
+
+        $body .= "<th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Debit</th>
                     </tr>
                     </thead>
                     <tbody>";
@@ -514,9 +530,15 @@ and history.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['email'] . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . $arr['contact'] . "</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPoint, 2) . "</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointAvailable, 2) . "</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($arr['TOTAL_RP_USED'], 2)."(".number_format($debitAccount, 2).")=".number_format($rollingPointUsed, 2) . "</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($debitAccount, 2) . "</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointAvailable, 2) . "</td>";
+
+            if ($moreDetail == true) {
+                $body .= "<td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($arr['TOTAL_RP_USED'], 2)."(".number_format($debitAccount, 2).")=".number_format($rollingPointUsed, 2) . "</td>";
+            } else {
+                $body .= "<td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($rollingPointUsed, 2) . "</td>";
+            }
+
+            $body .= "<td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>" . number_format($debitAccount, 2) . "</td>
                     </tr>";
         }
 
