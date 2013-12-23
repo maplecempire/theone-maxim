@@ -36,7 +36,17 @@ $(function() {
     }).keyup(function(){
         var convertedAmount = 0;
         var epointAmount = $('#epointAmount').autoNumericGet();
+        <?php
+        if ($toHideCp2Cp3Transfer == false) {
+        ?>
         convertedAmount = parseFloat(epointAmount) * 1.05;
+        <?php
+        } else {
+        ?>
+        convertedAmount = parseFloat(epointAmount);
+        <?php
+        }
+        ?>
         convertedAmount = Math.floor(convertedAmount);
 
         $("#epointConvertedAmount").val(convertedAmount);
@@ -52,6 +62,9 @@ $(function() {
         <?php echo __('CP1 Transfer'); ?>
     </a>
     &nbsp;&nbsp;
+    <?php
+    if ($toHideCp2Cp3Transfer == false) {
+    ?>
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
 	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp2")?>" style="color: rgb(0, 93, 154);">
@@ -63,6 +76,7 @@ $(function() {
 	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp3")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP3 Transfer'); ?>
     </a>
+    <?php } ?>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
@@ -200,7 +214,13 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <font color="#dc143c"><?php echo __('NOTE :'); ?><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.'); ?>
+                        <?php
+                        if ($toHideCp2Cp3Transfer == false) {
+                        ?>
                         <br><?php echo __('CP2 convert to CP1 will get extra 5%'); ?>
+                        <?php
+                        }
+                        ?>
                         </font>
                     </td>
                     <td>&nbsp;</td>
