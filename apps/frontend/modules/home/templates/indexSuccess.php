@@ -137,17 +137,20 @@
     }
 
 
-.poptitle2 {
-    color: #BC9C48;
-    font-size: 13px;
-    font-weight: bold;
-    text-align: left;
-}
+    .poptitle2 {
+        color: #BC9C48;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: left;
+    }
 
     .page_link {
         font-size: 14px;
     }
 
+    .announcement_table p {
+        line-height: 12px;
+    }
     </style>
     <script type='text/javascript' src='/js/popup.js'></script>
 	<script type="text/javascript">
@@ -950,12 +953,330 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a>
                 </td>
             </tr>
         </table>
 
         <div id="page_1" class="page">
+            <div class="poptitle">
+                IMPORTANT ANNOUNCEMENT!!!
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "23 DECEMBER 2013";
+                ?>
+            </div>
+            <div class="news_desc" style="text-align:left">
+                <br>
+                Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象
+                <br><br>
+
+                <div dir="ltr"><p class="MsoNormal"><span lang="EN-US">Dear Member,<br>
+                    </span><span lang="ZH-CN" style="font-family:宋体">亲爱的会员：</span><span lang="EN-US"><br>
+                    <br>
+                    The team at Maxim Trader wish you a Happy Holiday Season and a Prosperous New
+                    Year.&nbsp;<br>
+                    </span><span lang="ZH-CN" style="font-family:宋体">马胜金融集团恭祝您节日快乐，新年新气象！</span><a name="1431d92baa15c48b__GoBack"></a></p>
+
+                    <p class="MsoNormal"><span lang="EN-US"><h2>Market and Customer Support Opening Times* 以下是公司市场及客户服务时间</h2></span></p>
+
+                    <p class="MsoNormal"><span lang="EN-US">*All times are listed in MT4 Server Time
+                    (GMT + 2 hours)</span></p>
+
+                    <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">所有时间均按照</span><span lang="EN-US">MT4</span><span lang="ZH-CN" style="font-family:宋体">服务器时间（</span><span lang="EN-US">GMT+2</span><span lang="ZH-CN" style="font-family:宋体">）</span></p>
+
+
+                    <table border="1" cellpadding="0" class="announcement_table" width="630" style="width:360pt;border:1pt solid rgb(204,204,204)">
+                     <tbody><tr>
+                      <td style="border:none;background-color:rgb(204,204,204);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Date</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">日期</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(204,204,204);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(204,204,204);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">FX Trading Hours</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">FX</span><span lang="ZH-CN" style="font-family:宋体">交易时间</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(204,204,204);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Metals Trading Hours</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">贵金属交易时间</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(204,204,204);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Customer Support Hours</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">客户服务时间</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">24th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.24</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Tuesday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期二</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">01:00 - 20:00</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">25th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.25</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Wednesday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期三</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">26th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.26</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Thursday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期四</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">01:05 - 23:59</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">07:00 - 23:59</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">27th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.27</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Friday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期五</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">28th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.28</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Saturday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期六</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">29th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.29</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Sunday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期日</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">30th December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.30</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Monday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期一</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">31st December</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">12.31</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Tuesday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期二</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">01:00 - 20:00</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">1st January</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">1.1</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Wednesday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期三</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">CLOSED</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">关闭</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">2nd January</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">1.2</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Thursday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期四</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">01:05 - 23:59</span></p>
+                      </td>
+                      <td style="border:none;background-color:rgb(235,235,235);padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">01:05 - 23:59</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                     <tr>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">3rd January</span></p>
+                      <p class="MsoNormal"><span lang="EN-US">1.3</span><span lang="ZH-CN" style="font-family:宋体">日</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Friday</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">星期五</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                      <td style="border:none;padding:7.5pt">
+                      <p class="MsoNormal"><span lang="EN-US">Open</span></p>
+                      <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">开放</span></p>
+                      </td>
+                     </tr>
+                    </tbody></table>
+
+                    <p class="MsoNormal"><span lang="EN-US">&nbsp;<br>
+                    <br>
+                    </span></p>
+
+                    <p class="MsoNormal"><span lang="EN-US"><h2>Low Liquidity / Widened Spreads 低流动性 / 被扩大的利差</h2></span></p>
+
+                    <p class="MsoNormal"><span lang="EN-US">Please note that spreads may be wider and
+                    there may be increased volatility in the market as fewer liquidity providers
+                    offer prices during this time.<br>
+                    </span><span lang="ZH-CN" style="font-family:宋体">友情提醒：由于更少的流动性报价，因此此段时间利差会被扩大，<wbr>从而可能导致市场波动幅度加大。</span><span lang="EN-US"><br>
+                    <br>
+                    <br>
+                    Clients should make sure their accounts are adequately capitalised as these
+                    conditions can impact even fully hedged positions.</span></p>
+
+                    <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">客户应该时刻注意并保证您的账户里资金充足，<wbr>因为这些因素甚至会影响完全对冲头寸。</span><span lang="EN-US"><br>
+                    <br>
+                    <br>
+                    Kind regards,</span></p>
+
+                    <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">敬上</span></p>
+
+                    <p class="MsoNormal"><span lang="EN-US"><br>
+                    The Maxim Trader Team</span></p>
+
+                    <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">马胜金融集团</span></p></div>
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none;">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1038,7 +1359,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1094,7 +1415,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1122,7 +1443,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1151,7 +1472,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1165,7 +1486,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_7" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
