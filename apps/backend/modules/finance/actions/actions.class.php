@@ -2749,6 +2749,177 @@ FROM mlm_cp3_withdraw withdraw
         return sfView::HEADER_ONLY;
     }
 
+    public function executeMt4WithdrawalListInDetail()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/xls');
+        $response->setHttpHeader('Content-Type', 'application/force-download', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/octet-stream', TRUE);
+        $response->setHttpHeader('Content-Type', 'application/download', TRUE);
+        $response->setHttpHeader('Content-Type', 'charset=UTF-8', TRUE);
+        $response->setHttpHeader('Content-Disposition', 'attachment; filename=mt4_withdrawal_list.xls', TRUE);
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Encoding', 'UTF-8', TRUE);
+
+        $response->sendHttpHeaders();
+
+        $query = "SELECT withdraw.withdraw_id,dist.distributor_code,withdraw.mt4_user_name
+            ,dist.full_name,withdraw.currency_code,withdraw.amount_requested,withdraw.handling_fee
+            ,withdraw.grand_amount,withdraw.payment_type,withdraw.status_code,dist.bank_name,dist.bank_branch_name,dist.bank_acc_no
+            ,dist.bank_holder_name,dist.bank_swift_code,dist.visa_debit_card,withdraw.remarks,withdraw.created_on
+            ,dist.tree_structure,dist.ic,dist.email,dist.contact
+                FROM mlm_mt4_withdraw withdraw
+        LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id   WHERE 1=1  ";
+
+        if ($this->getRequestParameter('statusCode') != "") {
+            $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
+        }
+
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $query .= " AND dist.distributor_code LIKE '%" . $this->getRequestParameter('filterUsername') . "%'";
+        }
+
+        if ($this->getRequestParameter('filterLeader') != "") {
+            $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
+        }
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        $xlsRow = 1;
+
+        /*$export_data = preg_split("/\n/", $tsv_data);
+        foreach($export_data as &$row) {
+            $row = preg_split("/\t/", $row);
+        }
+
+        include("includes/PHPExcel.php");
+        include('includes/PHPExcel/Writer/Excel5.php');
+
+        $objPHPExcel = new PHPExcel();
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+        foreach($export_data as $row_cells) {
+            if(!is_array($row_cells)) { continue; }
+                foreach($row_cells as $cell) {
+                    $sheet->setCellValue($col.$row, $cell);
+                    $col++;
+                }
+            $row += 1;
+            $col = "A";
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');*/
+
+        include("PHPExcel.php");
+        include('PHPExcel/Writer/Excel5.php');
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $row = '1';
+        $col = "A";
+
+        $sheet->setCellValue("A".$xlsRow, "ID");
+        $sheet->setCellValue("B".$xlsRow, "Member ID");
+        $sheet->setCellValue("C".$xlsRow, "MT4");
+        $sheet->setCellValue("D".$xlsRow, "Full Name");
+        $sheet->setCellValue("E".$xlsRow, "Amount Requested (USD)");
+        $sheet->setCellValue("F".$xlsRow, "Handling Fee (USD)");
+        $sheet->setCellValue("G".$xlsRow, "Grand Amount (USD)");
+        $sheet->setCellValue("H".$xlsRow, "Payment Type");
+        $sheet->setCellValue("I".$xlsRow, "Status");
+        $sheet->setCellValue("J".$xlsRow, "Bank Name");
+        $sheet->setCellValue("K".$xlsRow, "Bank Branch Name");
+        $sheet->setCellValue("L".$xlsRow, "Bank Account No");
+        $sheet->setCellValue("M".$xlsRow, "Bank Holder Name");
+        $sheet->setCellValue("N".$xlsRow, "Bank Swift Code");
+        $sheet->setCellValue("O".$xlsRow, "Visa Debit Card");
+        $sheet->setCellValue("P".$xlsRow, "Remarks");
+        $sheet->setCellValue("Q".$xlsRow, "Date");
+        $sheet->setCellValue("R".$xlsRow, "IC");
+        $sheet->setCellValue("S".$xlsRow, "Email");
+        $sheet->setCellValue("T".$xlsRow, "Contact No");
+        $sheet->setCellValue("U".$xlsRow, "Leader Code");
+
+        $xlsRow = 2;
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($rs->next()) {
+            $arr = $rs->getRow();
+            $arrs[] = $arr;
+            $columnIdx = 0;
+
+            $paymentType = $arr['payment_type'] == null ? "" : $arr['payment_type'];
+            if ($paymentType == "VISA") {
+                $paymentType = "VISA Cash Card";
+            } elseif ($paymentType == "BANK") {
+                $paymentType = "Local Bank Transfer";
+            }
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            $sheet->setCellValue("B".$xlsRow, $arr['distributor_code']);
+            $sheet->setCellValue("C".$xlsRow, $arr['mt4_user_name']);
+            $sheet->setCellValue("D".$xlsRow, $arr['full_name']);
+//            $sheet->setCellValue("E".$xlsRow, $arr['currency_code']);
+            $sheet->setCellValue("E".$xlsRow, $arr['amount_requested']);
+            $sheet->setCellValue("F".$xlsRow, $arr['handling_fee']);
+            $sheet->setCellValue("G".$xlsRow, $arr['grand_amount']);
+            $sheet->setCellValue("H".$xlsRow, $paymentType);
+            $sheet->setCellValue("I".$xlsRow, $arr['status_code']);
+            $sheet->setCellValue("J".$xlsRow, $arr['bank_name']);
+            $sheet->setCellValue("K".$xlsRow, $arr['bank_branch_name']);
+            $sheet->setCellValueExplicit("L".$xlsRow, $arr['bank_acc_no'], PHPExcel_Cell_DataType::TYPE_STRING);
+
+            $sheet->setCellValue("M".$xlsRow, $arr['bank_holder_name']);
+            $sheet->setCellValue("N".$xlsRow, $arr['bank_swift_code']);
+            $sheet->setCellValueExplicit("O".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
+
+            $sheet->setCellValue("P".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("Q".$xlsRow, $arr['created_on']);
+
+            $sheet->setCellValue("R".$xlsRow, $arr['ic']);
+            $sheet->setCellValue("S".$xlsRow, $arr['email']);
+
+            $sheet->setCellValueExplicit("T".$xlsRow, $arr['contact'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValue("U".$xlsRow, $leader);
+
+            //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
+            //$row += 1;
+            //$col = "A";
+
+            $xlsRow++;
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeCp2WithdrawalListInDetail()
     {
         $response = $this->getResponse();
