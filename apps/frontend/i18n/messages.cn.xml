@@ -355,6 +355,7 @@
             <trans-unit><source>E-Share Trading Center</source><target>原始股交易所</target></trans-unit>
             <trans-unit><source>Package Type</source><target>配套</target></trans-unit>
             <trans-unit><source>Payment Type</source><target>付款方式</target></trans-unit>
+            <trans-unit><source>Payment Method</source><target>付款方式</target></trans-unit>
             <trans-unit><source>Available</source><target>可用的</target></trans-unit>
             <trans-unit><source>Place Here</source><target>放置位置</target></trans-unit>
             <trans-unit><source>Member activated successfully.</source><target>会员成功被激活.</target></trans-unit>
@@ -482,6 +483,7 @@
             <trans-unit><source>Fund Structure</source><target>基金结构</target></trans-unit>
             <trans-unit><source>The future is Algo-trading : Conceptual Background</source><target>未来是算法交易的概念背景</target></trans-unit>
             <trans-unit><source>Research Journey</source><target>研究之旅</target></trans-unit>
+            <trans-unit><source>Online Payment Gateway</source><target>在线支付网关</target></trans-unit>
             <trans-unit><source>TECHNOLOGY REVOLUTION</source><target>技术革命</target></trans-unit>
             <trans-unit><source>Majority of the people are unaware of the on going Automated Trading revolution. Yet, they are well familiar with other revolutions that have radically changed the world within the past decade: The Internet, Online Trading, Email, Blogs, Google, YouTube, Facebook, Twitter, Skype and the list goes on.</source><target>大部分的人是不知道的，持续的自动交易革命。然而，与其他革命，从根本上改变了世界，在过去的十年中，他们是非常熟悉：互联网，网上交易，电子邮件，博客，谷歌，YouTube和Facebook，Twitter的，Skype和列表中的推移。</target></trans-unit>
             <trans-unit><source>The advent of these technological advances have completely changed how we lead our lives. Could you imagine going about your daily activities without having access to your email, having to do research without search engines or having to execute every trade manually over the phone?</source><target>的出现，这些技术的进步，已经完全改变了我们的领导我们的生活。你能想象去了解你的日常活动，而无需访问您的电子邮件，有没有搜索引擎做研究，或通过电话手动执行每一个行业？</target></trans-unit>
@@ -554,9 +556,9 @@
             <trans-unit><source>User Profile</source><target>用户个人资料</target></trans-unit>
             <trans-unit><source>Registration</source><target>注册</target></trans-unit>
             <trans-unit><source>Package Purchase</source><target>购买配套</target></trans-unit>
-            <trans-unit><source>Funds Deposit</source><target>基金存款</target></trans-unit>
+            <trans-unit><source>Funds Deposit</source><target>在线充值</target></trans-unit>
             <trans-unit><source>Package Upgrade</source><target>配套升级</target></trans-unit>
-            <trans-unit><source>Reload MT4 Fund</source><target>充值MT4基金</target></trans-unit>
+            <trans-unit><source>Reload MT4 Fund</source><target>充值MT4</target></trans-unit>
             <trans-unit><source>Commission</source><target>佣金</target></trans-unit>
             <trans-unit><source>Monetary Wallet</source><target>金融钱包</target></trans-unit>
             <trans-unit><source>ACCOUNT INFORMATION</source><target>帐户信息</target></trans-unit>
@@ -649,10 +651,10 @@
             <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>我明白与外汇交易相关联的风险，并会征询法律意见和外汇留学深造任何交易活动开始之前。</target></trans-unit>
             <trans-unit><source>Convert CP2 To CP1</source><target>CP2转换为CP1</target></trans-unit>
             <trans-unit><source>CP1 Transfer</source><target>CP1转让</target></trans-unit>
-            <trans-unit><source>Total Fund Deposited</source><target>缴存总额</target></trans-unit>
+            <trans-unit><source>Total Fund Deposited</source><target>充值总额</target></trans-unit>
             <trans-unit><source>Reference No</source><target>参考编号</target></trans-unit>
-            <trans-unit><source>Funds Deposit History</source><target>存款记录表</target></trans-unit>
-            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>存入资金，将被记入CP1的帐户。</target></trans-unit>
+            <trans-unit><source>Funds Deposit History</source><target>充值记录表</target></trans-unit>
+            <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>充值将被记入CP1的帐户。</target></trans-unit>
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>CP1只能用来收购配套，配套升级和充值MT4帐户，而不能兑现现金。</target></trans-unit>
             <trans-unit><source>1 equals to 1 value of CP1</source><target>1等于1的值的CP1</target></trans-unit>
             <trans-unit><source>CP1 Account</source><target>CP1 户口</target></trans-unit>
@@ -858,8 +860,8 @@
             <trans-unit><source>Security Password is not valid</source><target>交易密码不正确</target></trans-unit>
             <trans-unit><source>Upgrade</source><target>升级</target></trans-unit>
             <trans-unit><source>In-sufficient CP1 amount</source><target>CP1数量不足</target></trans-unit>
-            <trans-unit><source>Reload MT4 Fund Status</source><target>充值MT4基金状态</target></trans-unit>
-            <trans-unit><source>Note : MT4 Fund Reload will take 2 business days</source><target>注: 充值MT4基金处理需时2个工作日</target></trans-unit>
+            <trans-unit><source>Reload MT4 Fund Status</source><target>充值MT4状态</target></trans-unit>
+            <trans-unit><source>Note : MT4 Fund Reload will take 2 business days</source><target>注: 充值MT4处理需时2个工作日</target></trans-unit>
             <trans-unit><source>Sub Total</source><target>总</target></trans-unit>
             <trans-unit><source>Pips Rebate Detail</source><target>点数回赠明细</target></trans-unit>
             <trans-unit><source>Month</source><target>月份</target></trans-unit>
@@ -872,6 +874,7 @@
             <trans-unit><source>Handling fee USD60 or 5% whichever is higher</source><target>手续费60美元或5%（以较高者为准）</target></trans-unit>
             <trans-unit><source>Handling fee USD30</source><target>手续费30美元</target></trans-unit>
             <trans-unit><source>Local Bank Transfer</source><target>银行转账</target></trans-unit>
+            <trans-unit><source>Bank Transfer</source><target>银行转账</target></trans-unit>
             <trans-unit><source>CP3 Withdrawal</source><target>CP3兑现</target></trans-unit>
             <trans-unit><source>CP3 Withdrawal Status</source><target>CP3兑现状态</target></trans-unit>
             <trans-unit><source>Credit To</source><target>存入</target></trans-unit>
