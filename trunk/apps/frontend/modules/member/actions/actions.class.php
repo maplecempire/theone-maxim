@@ -354,6 +354,15 @@ class memberActions extends sfActions
 
         $epointAmount = $this->getRequestParameter('epointAmount');
 
+        $this->toHideCp2Cp3Transfer = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
@@ -1388,6 +1397,16 @@ class memberActions extends sfActions
 
     public function executePrintBankInformation()
     {
+        $this->toHideCp2Cp3Transfer = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
+
         $purchaseId = $this->getRequestParameter('p');
 
         $c = new Criteria();
@@ -1598,7 +1617,15 @@ class memberActions extends sfActions
     }
     public function executeEpointPurchase() {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $this->forward404Unless($distDB);
+
+        $this->toHideCp2Cp3Transfer = false;
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
         $this->distDB = $distDB;
 
         $this->tradingCurrencyOnMT4 = "USD";
@@ -5374,6 +5401,14 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferEcash()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            return $this->redirect('/member/summary');
+        }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -5387,7 +5422,6 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->processFee = $processFee;
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
 
@@ -5502,6 +5536,15 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferEpoint()
     {
+        $this->toHideCp2Cp3Transfer = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -5727,6 +5770,15 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferCp2()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            return $this->redirect('/member/summary');
+        }
+
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -5951,6 +6003,14 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferCp3()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            return $this->redirect('/member/summary');
+        }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -8139,6 +8199,15 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeConvertEcashToEpoint()
     {
+        $this->toHideCp2Cp3Transfer = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        // amz001 chales (20131223)
+        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -8182,6 +8251,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->save();
 
                 $epointConvertedAmount = floor($epointAmount * 1.05);
+                if ($this->toHideCp2Cp3Transfer == true) {
+                    $epointConvertedAmount = floor($epointAmount);
+                }
 
                 $tbl_account_ledger = new MlmAccountLedger();
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
