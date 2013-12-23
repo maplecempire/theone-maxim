@@ -69,6 +69,19 @@ $(function(){
             { "sName" : "withdraw.created_on",  "bSortable": false}
         ]
     });
+    $("#btnUpdate").button({
+        icons: {
+            primary: "ui-icon-circle-check"
+        }
+    });
+    $("#btnExport").button({
+        icons: {
+            primary: "ui-icon-circle-check"
+        }
+    }).click(function(event){
+        event.preventDefault();
+        window.open("<?php echo url_for("finance/mt4WithdrawalListInDetail")?>?filterUsername=" + $("#search_upgradeUsername").val() + "&statusCode=" + $("#search_combo_statusCode").val());
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -173,6 +186,7 @@ function reassignDatagridEventAttr(){
                     <option value="COMPLETE">COMPLETE</option>
                 </select>
                 <button id="btnUpdate">Update</button>
+                <button id="btnExport">Export</button>
 			</td>
 		</tr>
 	</table>
