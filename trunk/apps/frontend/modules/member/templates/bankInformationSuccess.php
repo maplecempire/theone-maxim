@@ -125,6 +125,44 @@
                 </tbody>
             </table>
 
+            <br>
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th colspan="2"><?php echo __('Global Transaction Services') ?></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Phone') ?></td>
+                    <td class="value">+44 (0)207 824 5210</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td valign="top"><?php echo __('Address') ?></td>
+                    <td class="value">Office 618,
+                    <br>52 Grosvenor Gardens
+                    <br>London
+                    <br>SW1W 0AU
+                    <br>United Kingdom</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
             <?php
             $toHide = true;
             if ($distDB->getCountry() != "Thailand" && $toHide == false) { ?>

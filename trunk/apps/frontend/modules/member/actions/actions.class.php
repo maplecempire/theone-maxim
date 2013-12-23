@@ -7192,6 +7192,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->cityOfBank2 = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK_2);
         $this->countryOfBank2 = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK_2);
 
+        /*$this->bankName3 = $this->getAppSetting(Globals::SETTING_BANK_NAME_3);
+        $this->bankSwiftCode3 = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE_3);
+        $this->iban3 = $this->getAppSetting(Globals::SETTING_IBAN_3);
+        $this->bankAccountHolder3 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_HOLDER_3);
+        $this->bankAccountNumber3 = $this->getAppSetting(Globals::SETTING_BANK_ACCOUNT_NUMBER_3);
+        $this->cityOfBank3 = $this->getAppSetting(Globals::SETTING_CITY_OF_BANK_3);
+        $this->countryOfBank3 = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK_3);*/
+
         $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
         $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
         $this->iban = $this->getAppSetting(Globals::SETTING_IBAN);
