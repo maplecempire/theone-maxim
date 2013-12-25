@@ -614,6 +614,8 @@ ul, ol {
                 });
             });
             </script>
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/christmas.jpg"><img width="582" src="/images/christmas.jpg" alt="" title="Merry Christmas & Happy New Year" class="aligncenter size-full wp-image-162"></a></p>
+            <div class="hr2"></div>
             <?php if ($culture == "cn") {?>
                 <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/cn_shanghai_fair_banner.jpg"><img width="582" src="/images/cn_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
             <?php } else if ($culture == "kr") {?>
