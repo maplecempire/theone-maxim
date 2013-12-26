@@ -30,7 +30,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -42,7 +42,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND history.created_on >= '2013-08-06 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '2013-08-05 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
                     HAVING SUB_TOTAL < 100000
@@ -145,7 +145,7 @@ class q3ChampionsChallengeActions extends sfActions
                 where newDist.loan_account = 'N'
                     AND newDist.from_abfx = 'N'
                     AND dist.q3_champions = 'Y'
-                    AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id order by 3 desc limit 10";
+                    AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id order by 3 desc limit 10";
 
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
@@ -162,7 +162,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -174,7 +174,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND history.created_on >= '2013-08-06 00:00:00' AND history.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '2013-08-05 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
                     HAVING SUB_TOTAL >= 100000
@@ -216,7 +216,7 @@ class q3ChampionsChallengeActions extends sfActions
                 where newDist.loan_account = 'N'
                     AND newDist.from_abfx = 'N'
                     AND dist.q3_champions = 'Y'
-                    AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id order by 3 desc limit 10";
+                    AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id order by 3 desc limit 10";
 
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
@@ -233,7 +233,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -245,7 +245,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND history.created_on >= '2013-08-06 00:00:00' AND history.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '2013-08-05 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
                     HAVING SUB_TOTAL >= 100000
@@ -292,7 +292,7 @@ class q3ChampionsChallengeActions extends sfActions
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
                             AND newDist.upline_dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0)."
-                            AND newDist.created_on >= '2013-08-06 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -305,7 +305,7 @@ class q3ChampionsChallengeActions extends sfActions
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
                             AND newDist.upline_dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0)."
-                            AND history.created_on >= '2013-08-06 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '2013-08-05 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
             WHERE dist.distributor_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0);
