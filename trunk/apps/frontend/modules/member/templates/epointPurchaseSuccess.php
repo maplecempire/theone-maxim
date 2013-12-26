@@ -555,13 +555,13 @@ $(function() {
         </tr>
         <tr>
             <td width="160px" class="caption">
-                <strong><?php echo __('Phone Number'); ?></strong>
+                <strong><?php echo __('Global Transaction Services') ?>&nbsp;<?php echo __('Phone Number'); ?></strong>
             </td>
             <td class="value">+44 (0)207 824 5210</td>
         </tr>
         <tr>
             <td width="160px" class="caption">
-                <strong><?php echo __('Beneficiary Address'); ?></strong>
+                <strong><?php echo __('Global Transaction Services') ?>&nbsp;<?php echo __('Beneficiary Address'); ?></strong>
             </td>
             <td class="value">Office 618,
                     <br>52 Grosvenor Gardens
