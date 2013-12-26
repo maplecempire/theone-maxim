@@ -66,7 +66,7 @@ $(function() {
         hide: 'clip',
         show: 'slide',
         width: 700,
-        height: 480,
+        height: 580,
         buttons: {
             "<?php echo __('Print') ?>": function() {
                 var params  = 'width=891';
@@ -552,6 +552,22 @@ $(function() {
                 <strong><?php echo __('Country of Bank'); ?></strong>
             </td>
             <td class="value" id="countryOfBankText"><?php echo $countryOfBank; ?></td>
+        </tr>
+        <tr>
+            <td width="160px" class="caption">
+                <strong><?php echo __('Phone Number'); ?></strong>
+            </td>
+            <td class="value">+44 (0)207 824 5210</td>
+        </tr>
+        <tr>
+            <td width="160px" class="caption">
+                <strong><?php echo __('Beneficiary Address'); ?></strong>
+            </td>
+            <td class="value">Office 618,
+                    <br>52 Grosvenor Gardens
+                    <br>London
+                    <br>SW1W 0AU
+                    <br>United Kingdom</td>
         </tr>
         <tr>
             <td width="160px" class="caption">
