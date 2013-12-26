@@ -247,6 +247,9 @@ function blink(selector) {
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+    <?php $hideQ3 = true;
+    if ($hideQ3 == true) {
+    ?>
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('Q3 Champions Challenge'); ?></li>
@@ -257,6 +260,9 @@ function blink(selector) {
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+    <?php
+    }
+    ?>
     <?php
     if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
     ?>
