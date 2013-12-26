@@ -15,6 +15,7 @@ class componentComponents extends sfComponents
         $distDB = MlmDistributorPeer::retrieveByPK($this->param);
 
         $this->distDB = $distDB;
+        $this->showLink = $this->showLink;
     }
     public function executeCountrySelectOption()
     {
