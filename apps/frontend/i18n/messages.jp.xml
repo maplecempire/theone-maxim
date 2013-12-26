@@ -950,6 +950,9 @@
             <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>手数料はUSD60あるいは5％となり、高い方で徴収する</target></trans-unit>
             <trans-unit><source>Handling Fee is USD30</source><target>手数料はUSD30となる</target></trans-unit>
             <trans-unit><source>All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges</source><target>全ての出金金額は 出金日の為替レートと 銀行手数料に基づいて支払います</target></trans-unit>
+            <trans-unit><source>Global Transaction Services</source><target>グローバル·トランザクション·サービス</target></trans-unit>
+            <trans-unit><source>Phone Number</source><target>電話番号</target></trans-unit>
+            <trans-unit><source>Beneficiary Address</source><target>受取人住所</target></trans-unit>
         </body>
     </file>
 </xliff>
