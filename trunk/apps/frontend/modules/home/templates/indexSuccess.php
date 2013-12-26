@@ -333,10 +333,14 @@ annoucementArr.push({
 var popIndex = 1;
 	$(function() {
         //loadContent(popIndex);
-
+        <?php
+        $tempDisable = true;
+        if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, true) == true) {
+            $sf_user->setAttribute(Globals::FIRST_TIME_POP_UP, false)
+        ?>
         centerPopup();
         loadPopup();
-
+        <?php } ?>
         $(".page_link").click(function(event){
             event.preventDefault();
             $(".page").hide();
@@ -372,6 +376,12 @@ var popIndex = 1;
         <?php
         //}
         ?>
+
+        $("#linkLatestNews").click(function(event){
+            event.preventDefault();
+            centerPopup();
+            loadPopup();
+        });
 	});
     function loadContent(popIndex) {
         var obj = annoucementArr[popIndex -1];
@@ -791,7 +801,7 @@ ul, ol {
 
             <div id="logo"><a href="<?php echo url_for("/home")?>"><img src="/images/logo.png"></a></div>
             <div id="menu">
-                <?php include_component('component', 'homeLeftMenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
+                <?php include_component('component', 'homeLeftMenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0), 'showLink' => 'Y')) ?>
             </div>
             <div id="primary" class="widget-area" role="complementary">
                 <ul class="xoxo">
@@ -908,11 +918,6 @@ ul, ol {
 <!--####################################################################################################-->
 <!--####################################################################################################-->
 <!--####################################################################################################-->
-<?php
-$tempDisable = true;
-if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, true) == true) {
-    $sf_user->setAttribute(Globals::FIRST_TIME_POP_UP, false)
-?>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -955,12 +960,228 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a>
                 </td>
             </tr>
         </table>
 
         <div id="page_1" class="page">
+            <div class="poptitle">
+                NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "25 DECEMBER 2013";
+                ?>
+            </div>
+            <div class="news_desc">
+                <?php
+                if ($culture == "kr") {
+                ?>
+                <table style="border-collapse:collapse;border:1px solid rgb(0,0,0)" border="0" cellspacing="0"
+                       width="99%">
+                    <tbody>
+                    <tr>
+                        <th colspan="2"
+                            style="color:rgb(0,0,0);font-weight:bold;background-color:rgb(221,221,221);text-align:left;padding:3px 7px;border:1px solid rgb(170,170,170);background-repeat:initial initial">
+                            Poland (USD)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="30%">
+                            은행:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="69%">MBank (Formerly known as BRE Bank)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" colspan="2">지점 은행</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">주소:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">00-95 Warsaw, ul. Krolewska 14,
+                            skr. Poczt. 728
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            계좌번호:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">계좌명:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Global Transaction Services (UK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PL39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">스위프트 코드 (SWIFT BIC):</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">BREXPLPWWA1</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <?php
+                } else if ($culture == "cn") {
+                ?>
+                <table style="border-collapse:collapse;border:1px solid rgb(0,0,0)" border="0" cellspacing="0"
+                       width="99%">
+                    <tbody>
+                    <tr>
+                        <th colspan="2"
+                            style="color:rgb(0,0,0);font-weight:bold;background-color:rgb(221,221,221);text-align:left;padding:3px 7px;border:1px solid rgb(170,170,170);background-repeat:initial initial">
+                            Poland (USD)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="30%">
+                            银行名称:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="69%">MBank (Formerly known as BRE Bank)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">银行所在城市:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">00-95 Warsaw, ul. Krolewska 14,
+                            skr. Poczt. 728
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            银行帐户号码:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">银行账户持有人:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Global Transaction Services (UK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PL39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">银行代码:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">BREXPLPWWA1</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <?php
+                } else if ($culture == "jp") {
+                ?>
+                <table style="border-collapse:collapse;border:1px solid rgb(0,0,0)" border="0" cellspacing="0"
+                       width="99%">
+                    <tbody>
+                    <tr>
+                        <th colspan="2"
+                            style="color:rgb(0,0,0);font-weight:bold;background-color:rgb(221,221,221);text-align:left;padding:3px 7px;border:1px solid rgb(170,170,170);background-repeat:initial initial">
+                            Poland (USD)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="30%">
+                            銀行名:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="69%">MBank (Formerly known as BRE Bank)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" colspan="2">銀行支店</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">住所:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">00-95 Warsaw, ul. Krolewska 14,
+                            skr. Poczt. 728
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            口座番号:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">受取人:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Global Transaction Services (UK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PL39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Swiftコード:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">BREXPLPWWA1</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <?php
+                } else {
+                ?>
+                <table style="border-collapse:collapse;border:1px solid rgb(0,0,0)" border="0" cellspacing="0"
+                       width="99%">
+                    <tbody>
+                    <tr>
+                        <th colspan="2"
+                            style="color:rgb(0,0,0);font-weight:bold;background-color:rgb(221,221,221);text-align:left;padding:3px 7px;border:1px solid rgb(170,170,170);background-repeat:initial initial">
+                            Poland (USD)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="30%">
+                            Bank:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" width="69%">MBank (Formerly known as BRE Bank)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)" colspan="2">Account Holding Branch:</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Address:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">00-95 Warsaw, ul. Krolewska 14,
+                            skr. Poczt. 728
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Account No:
+                        </td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Name:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Global Transaction Services (UK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PL39114010105240009120028849</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">SWIFT BIC:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">BREXPLPWWA1</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1278,7 +1499,7 @@ $(document).ready(function() {
                     <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">马胜金融集团</span></p></div>
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none;">
+        <div id="page_3" class="page" style="display: none;">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1361,7 +1582,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1417,7 +1638,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1445,7 +1666,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1474,7 +1695,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_7" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1488,7 +1709,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_7" class="page" style="display: none">
+        <div id="page_8" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1509,6 +1730,6 @@ $(document).ready(function() {
     <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
 </div>
 <div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
-<?php } ?>
+
 </body>
 </html>
