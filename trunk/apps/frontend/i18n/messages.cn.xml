@@ -958,6 +958,9 @@
             <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>单次兑现手续费为60美金，或兑现申请额度的5%(取大值)</target></trans-unit>
             <trans-unit><source>Handling Fee is USD30</source><target>单次兑现手续费为30美金</target></trans-unit>
             <trans-unit><source>All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges</source><target>所有的取现都将按照转款当日实时外汇利率进行支付，且会扣除（若含）当地银行规定的相关手续费</target></trans-unit>
+            <trans-unit><source>Global Transaction Services</source><target>环球交易服务</target></trans-unit>
+            <trans-unit><source>Phone Number</source><target>电话号码</target></trans-unit>
+            <trans-unit><source>Beneficiary Address</source><target>收款人地址</target></trans-unit>
         </body>
     </file>
 </xliff>

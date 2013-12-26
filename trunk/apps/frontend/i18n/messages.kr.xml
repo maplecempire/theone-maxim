@@ -589,8 +589,8 @@
             <trans-unit><source>Re-enter Security Password</source><target>다시 입력보안 암호</target></trans-unit>
             <trans-unit><source>Update</source><target>업데이트</target></trans-unit>
             <trans-unit><source>Bank Account Details</source><target>은행 계좌 정보</target></trans-unit>
-            <trans-unit><source>Bank Account Number</source><target>은행 계좌 번호</target></trans-unit>
-            <trans-unit><source>Bank Account Holder Name</source><target>은행 계좌 소유자 이름</target></trans-unit>
+            <trans-unit><source>Bank Account Number</source><target>계좌번호</target></trans-unit>
+            <trans-unit><source>Bank Account Holder Name</source><target>계좌명</target></trans-unit>
             <trans-unit><source>Bank Swift Code / ABA</source><target>은행 고유 (Swift) 코드 / ABA</target></trans-unit>
             <trans-unit><source>Security Password</source><target>보안 암호</target></trans-unit>
             <trans-unit><source>Upload Bank Account Proof, Proof of Residence and Passport/Photo ID</source><target>은행 계좌 증명, 레지던스, 여권 / 사진이 부착 된 신분증을 증명하는 서류를 업로드</target></trans-unit>
@@ -740,9 +740,9 @@
             <trans-unit><source>Payment Reference</source><target>결제 참조</target></trans-unit>
             <trans-unit><source>Upload Bank Receipt</source><target>은행 영수증을 업로드</target></trans-unit>
             <trans-unit><source>Deposit Amount</source><target>보증금 금액</target></trans-unit>
-            <trans-unit><source>Bank Swift Code</source><target>은행 고유 (Swift) 코드</target></trans-unit>
-            <trans-unit><source>Bank Account Holder</source><target>은행 예금주</target></trans-unit>
-            <trans-unit><source>City of Bank</source><target>은행 시티</target></trans-unit>
+            <trans-unit><source>Bank Swift Code</source><target>스위프트 코드 (SWIFT BIC)</target></trans-unit>
+            <trans-unit><source>Bank Account Holder</source><target>계좌명</target></trans-unit>
+            <trans-unit><source>City of Bank</source><target>주소</target></trans-unit>
             <trans-unit><source>Print</source><target>인쇄</target></trans-unit>
             <trans-unit><source>Country of Bank</source><target>은행의 국가</target></trans-unit>
             <trans-unit><source>Trading Currency on MT4</source><target>MT4에서 거래 통화</target></trans-unit>
@@ -947,6 +947,9 @@
             <trans-unit><source>Handling Fee USD60 or 5% whichever is higher</source><target>수수료는 60불 또는 전체 인출 금액의 5% 중 높은 금액으로 합니다</target></trans-unit>
             <trans-unit><source>Handling Fee is USD30</source><target>수수료는 30입니다</target></trans-unit>
             <trans-unit><source>All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges</source><target>모든 인출은 현재 ‘일반적인 환율과 현지 은행 수수료'대상에 따라 지급됩니다</target></trans-unit>
+            <trans-unit><source>Global Transaction Services</source><target>글로벌 트랜잭션 서비스</target></trans-unit>
+            <trans-unit><source>Phone Number</source><target>전화 번호</target></trans-unit>
+            <trans-unit><source>Beneficiary Address</source><target>수취인 주소</target></trans-unit>
         </body>
     </file>
 </xliff>
