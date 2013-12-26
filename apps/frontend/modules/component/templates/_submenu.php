@@ -248,7 +248,7 @@ function blink(selector) {
         </li>-->
     </ul>
     <?php $hideQ3 = true;
-    if ($hideQ3 == true) {
+    if ($hideQ3 == false) {
     ?>
     <br class="clear"><br>
     <ul>
