@@ -124,6 +124,8 @@ class q3ChampionsChallengeActions extends sfActions
     }
     public function executeIndex()
     {
+        return $this->redirect('member/summary');
+
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->isChallenge = "N";
         $this->totalPersonalSales = 0;
