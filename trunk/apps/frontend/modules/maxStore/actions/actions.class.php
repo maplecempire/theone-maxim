@@ -16,6 +16,8 @@ class maxStoreActions extends sfActions
      */
     public function executeIndex()
     {
+        return $this->redirect('member/summary');
+
         $c = new Criteria();
         $c->add(MlmMaxStorePeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $productDBs = MlmMaxStorePeer::doSelect($c);
