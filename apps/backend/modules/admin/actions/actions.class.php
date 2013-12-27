@@ -232,9 +232,7 @@ class adminActions extends sfActions
             $tbl_user = new AppUser();
 
             $tbl_admin->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $tbl_admin->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $tbl_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $tbl_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $tbl_admin->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
         }
         $tbl_user->setUsername($userName);
         $tbl_user->setKeepPassword($userPassword);
@@ -243,6 +241,8 @@ class adminActions extends sfActions
         $tbl_user->setUserpassword2($userPassword);
         $tbl_user->setUserRole(Globals::ROLE_ADMIN);
         $tbl_user->setStatusCode($status);
+        $tbl_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $tbl_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $tbl_user->save();
 
         $userId = $tbl_user->getUserId();
@@ -252,6 +252,8 @@ class adminActions extends sfActions
         $tbl_admin->setStatusCode($status);
         $tbl_admin->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
         $tbl_admin->setAdminRole($role);
+        $tbl_admin->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $tbl_admin->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $tbl_admin->save();
 
         $output = array(
