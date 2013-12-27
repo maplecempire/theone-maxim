@@ -237,6 +237,9 @@ function blink(selector) {
     </ul>
     <?php } ?>
 
+    <?php $hideMaxStore = true;
+    if ($hideMaxStore == false) {
+    ?>
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('MAX STORE'); ?></li>
@@ -247,6 +250,9 @@ function blink(selector) {
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+    <?php
+    }
+    ?>
     <?php $hideQ3 = true;
     if ($hideQ3 == false) {
     ?>
