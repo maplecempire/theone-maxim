@@ -34,7 +34,7 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
         </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
         <li>
             <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
         </li>
@@ -48,12 +48,12 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
         </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
             <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
         </li>
     <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/reloadTopup"><span><?php echo __('Reload MT4 Fund'); ?></span></a>
         </li>
@@ -65,6 +65,7 @@ function blink(selector) {
     <?php } ?>
 
     </ul>
+    <?php if ($distDB->getDistributorId() != 263640) { ?>
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('ACCOUNT INFORMATION'); ?></li>
@@ -115,6 +116,7 @@ function blink(selector) {
 
         </li>
     </ul>
+    <?php } ?>
     <!--<br class="clear"><br>
     <ul>
         <li class="menu_title"><?php /*echo __('EDUCATION / TRAINING COURSES'); */?></li>
@@ -192,7 +194,7 @@ function blink(selector) {
     </ul>-->
     <br class="clear"><br>
 
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
     <ul>
         <li class="menu_title"><?php echo __('FUND MANAGEMENT'); ?></li>
 
@@ -215,7 +217,7 @@ function blink(selector) {
     <br class="clear"><br>
     <?php } ?>
 
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
     <ul>
         <li class="menu_title"><?php echo __('DOWNLOAD'); ?></li>
 
