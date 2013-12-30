@@ -257,6 +257,7 @@ $(function(){
                             data: {
                                 distId : $('#dgAddPanelId').val()
                                 , epointAmount : $('#epointAmount').val()
+                                , internalRemark : $('#internalRemark').val()
                                 , doAction : doAction
                             },
                             success : function(data) {
@@ -338,6 +339,12 @@ function populateDgAddPanel() {
             <td>Total e-Point</td>
             <td>:</td>
             <td><input name="epointAmount" id="epointAmount" class="text ui-widget-content ui-corner-all" size="25"/></td>
+        </tr>
+
+        <tr>
+            <td>Internal Remark</td>
+            <td>:</td>
+            <td><input name="internalRemark" id="internalRemark" class="text ui-widget-content ui-corner-all" size="25"/></td>
         </tr>
 
         <tr>
