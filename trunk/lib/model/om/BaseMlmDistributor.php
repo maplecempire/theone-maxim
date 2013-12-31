@@ -375,6 +375,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $q3_datetime;
 
+
+	
+	protected $email_status = 'ACTIVE';
+
 	
 	protected $alreadyInSave = false;
 
@@ -1128,6 +1132,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getEmailStatus()
+	{
+
+		return $this->email_status;
 	}
 
 	
@@ -2672,6 +2683,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setEmailStatus($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->email_status !== $v || $v === 'ACTIVE') {
+			$this->email_status = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::EMAIL_STATUS;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2860,11 +2888,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->q3_datetime = $rs->getTimestamp($startcol + 91, null);
 
+			$this->email_status = $rs->getString($startcol + 92);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 92; 
+						return $startcol + 93; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3285,6 +3315,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 91:
 				return $this->getQ3Datetime();
 				break;
+			case 92:
+				return $this->getEmailStatus();
+				break;
 			default:
 				return null;
 				break;
@@ -3387,6 +3420,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[89] => $this->getNewReportFlag(),
 			$keys[90] => $this->getQ3Champions(),
 			$keys[91] => $this->getQ3Datetime(),
+			$keys[92] => $this->getEmailStatus(),
 		);
 		return $result;
 	}
@@ -3678,6 +3712,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 91:
 				$this->setQ3Datetime($value);
 				break;
+			case 92:
+				$this->setEmailStatus($value);
+				break;
 		} 	}
 
 	
@@ -3777,6 +3814,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[89], $arr)) $this->setNewReportFlag($arr[$keys[89]]);
 		if (array_key_exists($keys[90], $arr)) $this->setQ3Champions($arr[$keys[90]]);
 		if (array_key_exists($keys[91], $arr)) $this->setQ3Datetime($arr[$keys[91]]);
+		if (array_key_exists($keys[92], $arr)) $this->setEmailStatus($arr[$keys[92]]);
 	}
 
 	
@@ -3876,6 +3914,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::NEW_REPORT_FLAG)) $criteria->add(MlmDistributorPeer::NEW_REPORT_FLAG, $this->new_report_flag);
 		if ($this->isColumnModified(MlmDistributorPeer::Q3_CHAMPIONS)) $criteria->add(MlmDistributorPeer::Q3_CHAMPIONS, $this->q3_champions);
 		if ($this->isColumnModified(MlmDistributorPeer::Q3_DATETIME)) $criteria->add(MlmDistributorPeer::Q3_DATETIME, $this->q3_datetime);
+		if ($this->isColumnModified(MlmDistributorPeer::EMAIL_STATUS)) $criteria->add(MlmDistributorPeer::EMAIL_STATUS, $this->email_status);
 
 		return $criteria;
 	}
@@ -4087,6 +4126,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setQ3Champions($this->q3_champions);
 
 		$copyObj->setQ3Datetime($this->q3_datetime);
+
+		$copyObj->setEmailStatus($this->email_status);
 
 
 		$copyObj->setNew(true);
