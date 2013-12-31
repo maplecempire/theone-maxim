@@ -216,5 +216,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('Q3_DATETIME', 'Q3Datetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
+		$tMap->addColumn('EMAIL_STATUS', 'EmailStatus', 'string', CreoleTypes::VARCHAR, false, 10);
+
 	} 
 } 
