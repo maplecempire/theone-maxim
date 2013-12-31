@@ -1518,9 +1518,9 @@ $(document).ready(function() {
                 <br>
                 <br>
                 Dear Partners, here is your chance to qualify for our Annual Dinner & Dance which will he held in Bangkok, Thailand in February 2014.
-                <br>* Purchase 10k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel
-                <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket (up to $500)
-                <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket (up to $500)
+                <br>* Purchase 10k - receive 4 days/3 nights Accommodations (Twin Sharing Basis) in 5 Star Hotel
+                <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Sharing Basis) in 5 Star Hotel plus Air Ticket (up to $500)
+                <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Sharing Basis) in 5 Star Hotel plus Air Ticket (up to $500)
                 <br>
                 <br>Qualifying period: October 22, 2013 to December 31, 2013
                 <br>Nb. Tickets are Non-Transferable
