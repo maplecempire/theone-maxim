@@ -1519,8 +1519,8 @@ $(document).ready(function() {
                 <br>
                 Dear Partners, here is your chance to qualify for our Annual Dinner & Dance which will he held in Bangkok, Thailand in February 2014.
                 <br>* Purchase 10k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel
-                <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
-                <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket
+                <br>* Purchase 20k - receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket (up to $500)
+                <br>** Personal Sales of 40k (till December 31) will receive 4 days/3 nights Accommodations (Twin Share) in 5 Star Hotel plus Air Ticket (up to $500)
                 <br>
                 <br>Qualifying period: October 22, 2013 to December 31, 2013
                 <br>Nb. Tickets are Non-Transferable
@@ -1537,11 +1537,11 @@ $(document).ready(function() {
                 <br>
                 <br>*购买20k美金配套-可获得泰国曼谷5星级酒店4天/3夜豪华住宿安排（双人间）
                 <br>
-                <br>                                    并额外享受往返机票福利
+                <br>                                    并额外享受往返机票福利 (高达$500)
                 <br>
                 <br>**个人销售业绩达到40k美金- 可享受泰国曼谷5星级酒店4天/3夜豪华住宿安排（双 人间）
                 <br>
-                <br>                                    并额外享受往返机票福利
+                <br>                                    并额外享受往返机票福利 (高达$500)
                 <br>
                 <br>结算（考核）日期：2013.10.22-2013.12.31日
                 <br>
