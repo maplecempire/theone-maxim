@@ -961,6 +961,7 @@
             <trans-unit><source>Global Transaction Services</source><target>环球交易服务</target></trans-unit>
             <trans-unit><source>Phone Number</source><target>电话号码</target></trans-unit>
             <trans-unit><source>Beneficiary Address</source><target>收款人地址</target></trans-unit>
+            <trans-unit><source>Maxim Trader Newsletter</source><target>马胜金融集团月报</target></trans-unit>
         </body>
     </file>
 </xliff>
