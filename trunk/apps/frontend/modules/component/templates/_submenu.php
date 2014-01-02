@@ -284,6 +284,13 @@ function blink(selector) {
     <?php
     }
     ?>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Maxim Trader Newsletter'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/download/newsletter2013"><span><?php echo __('Download Newsletter Nov/Dec 2013'); ?></span></a>
+        </li>
+    </ul>
     <?php
     if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 || $distDB->getDistributorId() == 1458 ||
             $distDB->getDistributorId() == 15) {

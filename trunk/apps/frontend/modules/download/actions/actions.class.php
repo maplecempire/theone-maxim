@@ -11,6 +11,19 @@
 class downloadActions extends sfActions
 {
 
+    public function executeNewsletter2013()
+    {
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+        $response->setContentType('application/exe');
+        $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename=maximtrader_news_letter_nov_dec_2013.pdf', TRUE);
+        $response->sendHttpHeaders();
+        readfile(sfConfig::get('sf_upload_dir')."/news_letter/maximtrader_news_letter_nov_dec_2013.pdf");
+
+        return sfView::NONE;
+    }
     public function executeDownloadMaximTrader4SetupV3()
     {
         $response = $this->getResponse();
