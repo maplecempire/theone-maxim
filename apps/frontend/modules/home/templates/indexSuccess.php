@@ -962,12 +962,43 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a>
                 </td>
             </tr>
         </table>
 
         <div id="page_1" class="page">
+            <div class="poptitle">
+                IMPORTANT ANNOUNCEMENT!!!
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "04 JANUARY 2014";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br>End of Promo - CP2 to CP1 extra 5%
+                <br>
+                <br>Dear Partners and Leaders,
+                <br>To kick off 2014 on a positive note, we are pleased to announce on the promotion of extra 5% for transferring from CP2 to CP1 will be end on 2359hrs of January 14.
+                <br>say YES TO MAXIM TRADER... !!!
+                <br>
+                <br>优惠结束-CP2转CP1优惠5%
+                <br>
+                <br>亲爱的领导人与伙伴们：
+                <br>为了迎接2014新年，我们很高兴地通知大家-公司CP2转CP1享额外5%的优惠政策之截止日期为2014.1.14日23:59分。
+                <br>
+                <br>确认马胜说:YES!!!
+                <br>
+                <br>キャンペーン期限のお知らせ－CP2からCP1に変換する際に５％増しパートナーやリーダー達へ、
+                <br>２０１４年度を新年早々から明るく突っ走るために、CP2からCP1に変換する際に５％増しキャンペーンの期限を１月１４日から数えて２３５９時間までとすることを弊社の方でお知らせ致します。
+                <br>Maxim Trader（マキシム・トレーダー）にエールを。。。！！！
+                <br>
+                <br>마지막 프로모션 - CP2에서 CP1 추가 5% 친애하는 파트너와 리더분들,  밝아오는 새해를 맞이하여 CP2에서 CP1으로 전환시킬경우 추가 5% 프로모션 기간이 1월 14일 오후 11시 59분까지로 연장되었음을 기쁘게 알려드립니다. 맥심에게 예스라고 합시다!!!
+                <br>
+            </div>
+        </div><div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED
             </div>
@@ -1183,7 +1214,7 @@ $(document).ready(function() {
                 ?>
             </div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1501,7 +1532,7 @@ $(document).ready(function() {
                     <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">马胜金融集团</span></p></div>
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none;">
+        <div id="page_5" class="page" style="display: none;">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1584,7 +1615,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1640,7 +1671,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1668,7 +1699,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_7" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1697,7 +1728,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_7" class="page" style="display: none">
+        <div id="page_8" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1711,7 +1742,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_8" class="page" style="display: none">
+        <div id="page_9" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
