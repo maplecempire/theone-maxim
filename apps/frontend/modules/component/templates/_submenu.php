@@ -272,7 +272,7 @@ function blink(selector) {
     }
     ?>
     <?php
-    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
+    //if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
     ?>
     <br class="clear"><br>
     <ul>
@@ -282,7 +282,7 @@ function blink(selector) {
         </li>
     </ul>
     <?php
-    }
+    //}
     ?>
     <br class="clear"><br>
     <ul>
