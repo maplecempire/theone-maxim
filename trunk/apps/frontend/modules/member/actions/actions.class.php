@@ -5614,6 +5614,21 @@ We look forward to your custom in the near future. Should you have any queries, 
                             }
                         }
                     }
+
+                    // block worldpeace upline transfer worldpeace downline
+                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|557|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $worldPeaceDist = MlmDistributorPeer::retrieveByPK(557);
+
+                        $worldPeacePlacementTreeLevel = $worldPeaceDist->getPlacementTreeLevel();
+
+                        if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
+                            return $this->redirect('/member/transferEpoint');
+                        }
+                    }
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                     return $this->redirect('/member/transferEpoint');
@@ -5848,6 +5863,21 @@ We look forward to your custom in the near future. Should you have any queries, 
                             }
                         }
                     }
+
+                    // block worldpeace upline transfer worldpeace downline
+                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|557|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $worldPeaceDist = MlmDistributorPeer::retrieveByPK(557);
+
+                        $worldPeacePlacementTreeLevel = $worldPeaceDist->getPlacementTreeLevel();
+
+                        if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
+                            return $this->redirect('/member/transferCp2');
+                        }
+                    }
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                     return $this->redirect('/member/transferCp2');
@@ -6078,6 +6108,21 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                 return $this->redirect('/member/transferCp3');
                             }
+                        }
+                    }
+
+                    // block worldpeace upline transfer worldpeace downline
+                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|557|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $worldPeaceDist = MlmDistributorPeer::retrieveByPK(557);
+
+                        $worldPeacePlacementTreeLevel = $worldPeaceDist->getPlacementTreeLevel();
+
+                        if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
+                            return $this->redirect('/member/transferCp3');
                         }
                     }
                 } else {
