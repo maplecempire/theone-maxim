@@ -784,11 +784,11 @@ class financeActions extends sfActions
         foreach ($pager->getResults() as $result) {
             $arr[] = array(
                 $result->getAccountId == null ? "0" : $result->getAccountId(),
+                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
                 $result->getCredit() == null ? "0" : $result->getCredit(),
                 $result->getDebit() == null ? "0" : $result->getDebit(),
                 $result->getBalance() == null ? "0" : $result->getBalance(),
                 $result->getTransactionType() == null ? "" : $this->getContext()->getI18N()->__($result->getTransactionType()),
-                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
                 $result->getRemark()  == null ? "" : $result->getRemark()
             );
         }
@@ -849,11 +849,11 @@ class financeActions extends sfActions
         foreach ($pager->getResults() as $result) {
             $arr[] = array(
                 $result->getAccountId == null ? "0" : $result->getAccountId(),
+                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
                 $result->getCredit() == null ? "0" : $result->getCredit(),
                 $result->getDebit() == null ? "0" : $result->getDebit(),
                 $result->getBalance() == null ? "0" : $result->getBalance(),
                 $result->getTransactionType() == null ? "" : $this->getContext()->getI18N()->__($result->getTransactionType()),
-                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
                 $result->getRemark()  == null ? "" : $result->getRemark()
             );
         }
