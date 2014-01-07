@@ -22,15 +22,15 @@
                     "sAjaxSource": "/finance/maintenanceLogList",
                     "sPaginationType": "full_numbers",
                     "aaSorting": [
-                        [0,'desc']
+                        [1,'desc']
                     ],
                     "aoColumns": [
                         { "sName" : "account_id", "bVisible" : false,  "bSortable": true},
+                        { "sName" : "created_on",  "bSortable": true},
                         { "sName" : "credit", "bVisible" : true,  "bSortable": true},
                         { "sName" : "debit",  "bSortable": true},
                         { "sName" : "balance",  "bSortable": true},
                         { "sName" : "transaction_type",  "bSortable": true},
-                        { "sName" : "created_on",  "bSortable": true},
                         { "sName" : "remark",  "bSortable": true}
                     ]
                 });
@@ -128,11 +128,11 @@
                             <thead>
                             <tr>
                                 <th>id</th>
+                                <th><?php echo __('Date') ?></th>
                                 <th><?php echo __('In') ?></th>
                                 <th><?php echo __('Out') ?></th>
                                 <th><?php echo __('Balance') ?></th>
                                 <th><?php echo __('Transaction Type') ?></th>
-                                <th><?php echo __('Date') ?></th>
                                 <th><?php echo __('Remarks') ?></th>
                             </tr>
                             <tr>
@@ -140,8 +140,8 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><input size="15" type="text" id="search_action" value="" class="search_init"/></td>
                                 <td></td>
+                                <td><input size="15" type="text" id="search_action" value="" class="search_init"/></td>
                                 <td></td>
                             </tr>
                             </thead>
