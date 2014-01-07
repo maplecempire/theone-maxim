@@ -10,6 +10,11 @@
  */
 class financeActions extends sfActions
 {
+    public function executeTest() {
+
+        $bonusService = new BonusService();
+        $bonusService->contraDebitAccountByEpoint(263918, "CONTRA BY CP1", 0);
+    }
     public function executeBonusDetailLogList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
