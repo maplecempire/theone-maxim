@@ -14,6 +14,9 @@ class financeActions extends sfActions
 
         $bonusService = new BonusService();
         $bonusService->contraDebitAccountByEpoint(263918, "CONTRA BY CP1", 0);
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
     }
     public function executeBonusDetailLogList()
     {
