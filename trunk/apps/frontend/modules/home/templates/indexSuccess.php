@@ -962,12 +962,37 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a>
                 </td>
             </tr>
         </table>
 
         <div id="page_1" class="page">
+            <div class="poptitle">
+                10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "08 JANUARY 2014";
+                ?>
+            </div>
+            <div class="news_desc">
+                <br>Dear Leaders and Partners, Maxim Capital Limited is pleased to confirm that our 1st Annual Extravaganza Dinner & Dance will be held in the fun city of Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia during March 9th to 12th. Proudly, we will be booking the entire hotel and on the 10th, our Gala Dinner and Dance promises to be an historical event with celebrities and dignitaries from the world over.
+                <br>For more details and other arrangements, please contact our Corporate Events Executive Ms Catherine +60 10 465 3832
+                <br>
+                <br>亲爱的领导人或伙伴们：
+                <br>马胜金融集团非常荣幸地告诉大家马胜第一届庆祝年会将会于2014.3.9日-3.12日在马来西亚吉隆坡著名城市Sunway 之Pyramid会展中心举行!我们很自豪地将会包下整个场馆酒店,且10号晚上会隆重举行马胜大型庆祝晚宴会-届时将会各国要人代表云集,群星璀璨,大家共同见证这一历史时刻!
+                <br>如欲了解更多详情与安排,请联系公司活动组织官Catherine +60 10 465 3832
+                <br>
+                <br>パートナーやリーダ達へ、マキシム・キャピタル・リミテッドは３月９日から１２日までにマレイシア・クアラルンプール市のSunway Pyramid Convention Centre（サンウェイピラミッドコンベンションセンター）という賑やかな都会で1st Annual Extravaganza Dinner & Dance（第１回豪華ディナー＆ショー）を開催することになりました。我々は自慢なことにホテル全室を貸し切っており、そして１０日に世界各地からのセレブリティやお偉方が参加される弊社主催のガラディナー＆ダンスが歴史的なイベントに変身することをお約束致します。
+                <br>
+                <br>친애하는 리더와 파트너 여러분, 맥심 캐피탈이 우리의 첫 엑스트라베간자 디너 및 댄스가 말레. 이시아 쿠알라룸푸르의 선웨이 피라미드 컨벤션 센터의 펀 시티에서 9일에서 12일에 열리게 되었음을 기쁘게 알려드립니다 당사는 10일 호텔 전체를 예약하여 우리의 갈라 디너와 댄스가 전 세계적으로 역사적인 축제행사가 될 수 있게 할 것입니다.
+                <br>더 자세한 상항과 행사 예약에 관하여서는 당사의 행사 담당인 캐서린에게 +60 10 465 3832로 연락하시기 바랍니다.
+            </div>
+        </div>
+
+        <div id="page_2" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -998,7 +1023,8 @@ $(document).ready(function() {
                 <br>마지막 프로모션 - CP2에서 CP1 추가 5% 친애하는 파트너와 리더분들,  밝아오는 새해를 맞이하여 CP2에서 CP1으로 전환시킬경우 추가 5% 프로모션 기간이 1월 14일 오후 11시 59분까지로 연장되었음을 기쁘게 알려드립니다. 맥심에게 예스라고 합시다!!!
                 <br>
             </div>
-        </div><div id="page_2" class="page" style="display: none">
+        </div>
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED
             </div>
@@ -1214,7 +1240,7 @@ $(document).ready(function() {
                 ?>
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1615,7 +1641,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1671,7 +1697,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_7" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1699,7 +1725,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_7" class="page" style="display: none">
+        <div id="page_8" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1728,7 +1754,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_8" class="page" style="display: none">
+        <div id="page_9" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1742,7 +1768,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_9" class="page" style="display: none">
+        <div id="page_10" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
