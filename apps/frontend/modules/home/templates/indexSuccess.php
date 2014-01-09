@@ -962,12 +962,89 @@ $(document).ready(function() {
         <table width="100%">
             <tr>
                 <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a>
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
                 </td>
             </tr>
         </table>
 
         <div id="page_1" class="page">
+            <div class="poptitle">
+                Legal Watch - Ask And Be Answered
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "08 JANUARY 2014";
+                ?>
+            </div>
+            <div class="news_desc" style="text-align: left">
+                <br>GOOD NEWS from the Maxim Legal Department.
+                <br>
+                <br>LEGAL WATCH is now up and fully operation effective today.Maxim Members can now go to there back office and at the members area they. can click. on LEGAL WATCH and send there legal questions to us at Legal Affairs and Compliance Division (LACD) and answers will be given in no longer than 48 hours by a LACD Officer.
+                <br>
+                <br>More New Year gifts are coming.
+                <br>
+                <br>Thank you
+                <br>
+                <br>Mr.W.Royce (Rocky) Lane
+                <br>GROUP LEGAL COUNSEL
+                <br>Maxim Capital Group
+                <br>
+                <div class="popdivider"></div>
+                <br>马胜金融集团法律部门-
+                <br>好消息!
+                <br>
+                <br>今天马胜法务观察已经正式开始为大家服务。所有会员都可以登录会员专区直接点击”Legal Watch(法务观察)”, 把您的问题发送给法律事务与合规部(LACD). LACD部门会在48小时内回复您的问题。
+                <br>
+                <br>新年新期待, 我们会为大家带来更多的好消息!
+                <br>
+                <br>Rocky Lane 先生
+                <br>集团法务顾问
+                <br>马胜金融集团
+                <br>
+                <div class="popdivider"></div>
+                <br>マキシム法務部からの朗報です。
+                <br>Legal Watch（リーガル・ウォッチ）は今日から完全に有効になりました。マキシム会員はバックオフィスに入ることが出来、そしてメンバーエリアでリーガル・ウォッチをクリックすることで法律問題に関する問い合わせをLegal Affairs and Compliance Division（法務部・略「LACD」）に送付することが可能になり、更にLACD役員から４８時間以内に必ず返答致します。
+                <br>新年の贈り物はまだまだございます。
+                <br>
+                <br>今後も宜しくお願い致します。
+                <br>
+                <br>W.ロイス（ロッキー）レーン氏
+                <br>GROUP LEGAL COUNSEL（グループ法律顧問）
+                <br>マキシム・キャピタル・グループ
+                <br>
+                <div class="popdivider"></div>
+                <br>맥심 법무 부서로부터의 좋은 소식입니다.
+                <br>
+                <br>리갈 와치는 오늘로부터 모든 준비사항을 마치고 업무를 시작하였습니다.  맥심 멤버들은 직접 사무실에 찾아가실 수 있으며 사이트에 멤버스 구역에 가셔서 클릭을 하시면 리갈 와치로 들어가실 수 있습니다. 법적인 질문사항을 법무부서로 ( LACD)로 보내주시면 최대 48 시간 이내로 답변을 드릴 것입니다.
+                <br>
+                <br>새해 더 많은 선물을 기대하셔도 좋습니다.
+                <br>
+                <br>감사합니다.
+                <br>
+                <br>W. 로이스 (로키) 레인
+                <br>법무 상담 그룹
+            </div>
+        </div>
+        <div id="page_2" class="page" style="display: none">
+            <div class="poptitle">
+                Attention
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "08 JANUARY 2014";
+                ?>
+            </div>
+            <div class="news_desc" style="text-align: left">
+                <br>This is the OFFICIAL WEBSITE of Maxim Trader. Unauthorized use and replication of company information is not permitted unless with the written approval of LACD. Any infringement of this policy will result in immediate suspension followed by termination if necessary.
+                <br>
+                <div class="popdivider"></div>
+                <br>这是马胜金融集团唯一官方网站。除非获得马胜金融集团LACD法律部的书面批准，任何对公司信息的未经授权的使用和复制都是不被允许的。任意对该政策的侵犯在必要时将会立即导致使用终止。
+            </div>
+        </div>
+
+        <div id="page_3" class="page" style="display: none">
             <div class="poptitle">
                 10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia
             </div>
@@ -992,7 +1069,7 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <div id="page_2" class="page" style="display: none">
+        <div id="page_4" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1024,7 +1101,7 @@ $(document).ready(function() {
                 <br>
             </div>
         </div>
-        <div id="page_3" class="page" style="display: none">
+        <div id="page_5" class="page" style="display: none">
             <div class="poptitle">
                 NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED
             </div>
@@ -1240,7 +1317,7 @@ $(document).ready(function() {
                 ?>
             </div>
         </div>
-        <div id="page_4" class="page" style="display: none">
+        <div id="page_6" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1558,7 +1635,7 @@ $(document).ready(function() {
                     <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">马胜金融集团</span></p></div>
             </div>
         </div>
-        <div id="page_5" class="page" style="display: none;">
+        <div id="page_7" class="page" style="display: none;">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1641,7 +1718,7 @@ $(document).ready(function() {
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
         </div>
-        <div id="page_6" class="page" style="display: none">
+        <div id="page_8" class="page" style="display: none">
             <div class="poptitle">
                 IMPORTANT ANNOUNCEMENT!!!
             </div>
@@ -1697,7 +1774,7 @@ $(document).ready(function() {
                 <br>よろしくお願いいたします。
             </div>
         </div>
-        <div id="page_7" class="page" style="display: none">
+        <div id="page_9" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge
             </div>
@@ -1725,7 +1802,7 @@ $(document).ready(function() {
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
         </div>
-        <div id="page_8" class="page" style="display: none">
+        <div id="page_10" class="page" style="display: none">
             <div class="poptitle">
                 Q3 Champions Challenge - BMW 5 Series
             </div>
@@ -1754,7 +1831,7 @@ $(document).ready(function() {
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
             </div>
         </div>-->
-        <div id="page_9" class="page" style="display: none">
+        <div id="page_11" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
@@ -1768,7 +1845,7 @@ $(document).ready(function() {
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
         </div>
-        <div id="page_10" class="page" style="display: none">
+        <div id="page_12" class="page" style="display: none">
             <div class="poptitle">
                 INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
             </div>
