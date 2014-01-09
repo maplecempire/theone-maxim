@@ -10,10 +10,6 @@
  */
 class q3ChampionsChallengeActions extends sfActions
 {
-    /**
-     * Executes index action
-     *
-     */
     public function executeDisqualifiedMember()
     {
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
@@ -62,7 +58,7 @@ class q3ChampionsChallengeActions extends sfActions
         $idx = 1;
         foreach ($resultArray as $member) {
             $totalSales = $member['SUB_TOTAL'];
-            echo "<br>".$idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'];
+            echo "<br>" . $idx++ . "-" . $totalSales . "-" . $member['distributor_code'] . "-" . $member['country'];
         }
         /*foreach ($resultArray as $member) {
             $totalSales = $member['SUB_TOTAL'];
@@ -122,6 +118,7 @@ class q3ChampionsChallengeActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
     public function executeIndex()
     {
         return $this->redirect('member/summary');
@@ -195,6 +192,7 @@ class q3ChampionsChallengeActions extends sfActions
         }
         $this->resultArray = $resultArray;
     }
+
     public function executeIndex2()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -267,7 +265,8 @@ class q3ChampionsChallengeActions extends sfActions
         $this->resultArray = $resultArray;
     }
 
-    public function executeSubmit() {
+    public function executeSubmit()
+    {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($distDB->getQ3Champions() != "Y") {
             $distDB->setQ3Champions("Y");
@@ -278,7 +277,8 @@ class q3ChampionsChallengeActions extends sfActions
         return $this->redirect('q3ChampionsChallenge/index');
     }
 
-   function getTotalPersonalSales() {
+    function getTotalPersonalSales()
+    {
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
                         , Coalesce(reg._SUM, 0) AS register_sum
@@ -293,7 +293,7 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.upline_dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0)."
+                            AND newDist.upline_dist_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0) . "
                             AND newDist.created_on >= '2013-08-05 00:00:00' AND newDist.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) reg
                 LEFT JOIN
@@ -306,11 +306,11 @@ class q3ChampionsChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND dist.q3_champions = 'Y'
-                            AND newDist.upline_dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0)."
+                            AND newDist.upline_dist_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0) . "
                             AND history.created_on >= '2013-08-05 00:00:00' AND history.created_on <= '2013-09-30 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
-            WHERE dist.distributor_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID, 0);
+            WHERE dist.distributor_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0);
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -341,5 +341,154 @@ class q3ChampionsChallengeActions extends sfActions
             }
         }
         return 0;
+    }
+
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//    ^^^^^^^^^^^^^^^^^^^^      Bangkok      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    public function executeBkk2()
+    {
+        if ($this->validateActivateDate(690)) {
+            echo "Y";
+        } else {
+            echo "N";
+        }
+//        $this->executeBkk();
+//        $this->executeBkk();
+//        $this->executeBkk();
+//        $this->executeBkk();
+//        $this->executeBkk();
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeBkk()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        foreach ($distDBs as $distDB) {
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+
+            if ($distDB->getLoanAccount() != "Y") {
+                if ($distDB->getInitRankId() == 3 && $this->validateActivateDate($distDB->getDistributorId())) {
+                    $distDB->setBkkQualify1("Y");
+                }
+                if ($distDB->getInitRankId() >= 4 && $this->validateActivateDate($distDB->getDistributorId())) {
+                    $distDB->setBkkQualify2("Y");
+                }
+            }
+
+            $amount = $this->getUpgradedPackage($distDB->getDistributorId());
+            if ($amount == 10000) {
+                $distDB->setBkkQualify1("Y");
+            }
+            if ($amount >= 20000) {
+                $distDB->setBkkQualify2("Y");
+            }
+
+            $personalSales = $this->getBkkTotalPersonalSales($distDB->getDistributorId());
+            $distDB->setBkkPersonalSales($personalSales);
+
+            if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }
+
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
+    function validateActivateDate($distributorId)
+    {
+        $query = "SELECT distributor_id, active_datetime
+                    FROM mlm_distributor dist
+                WHERE dist.active_datetime >= '2013-10-22 00:00:00' AND dist.active_datetime <= '2013-12-31 23:59:59'
+                    AND distributor_id = '" . $distributorId . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            return true;
+        }
+        return false;
+    }
+
+    function getUpgradedPackage($distributorId)
+    {
+        $query = "SELECT upgrade_id, dist_id, package_id, mt4_user_name, mt4_password, transaction_code, amount
+                    FROM mlm_package_upgrade_history history
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = history.dist_id
+                    WHERE history.created_on >= '2013-10-22 00:00:00' AND history.created_on <= '2013-12-31 23:59:59'
+                            AND amount >= 10000
+                            AND dist_id = '" . $distributorId . "'
+                        ORDER BY amount DESC";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["amount"] != null) {
+                return $arr["amount"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getBkkTotalPersonalSales($distributorId)
+    {
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorId . "
+                            AND newDist.active_datetime >= '2013-10-22 00:00:00' AND newDist.active_datetime <= '2013-12-31 23:59:59' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorId . "
+                            AND history.created_on >= '2013-10-22 00:00:00' AND history.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["SUB_TOTAL"];
+        }
+        return $result;
     }
 }

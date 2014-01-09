@@ -977,7 +977,7 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc">
+            <div class="news_desc" style="text-align: left">
                 <br>Dear Leaders and Partners, Maxim Capital Limited is pleased to confirm that our 1st Annual Extravaganza Dinner & Dance will be held in the fun city of Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia during March 9th to 12th. Proudly, we will be booking the entire hotel and on the 10th, our Gala Dinner and Dance promises to be an historical event with celebrities and dignitaries from the world over.
                 <br>For more details and other arrangements, please contact our Corporate Events Executive Ms Catherine +60 10 465 3832
                 <br>
@@ -1002,7 +1002,7 @@ $(document).ready(function() {
                 echo "04 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc">
+            <div class="news_desc" style="text-align: left">
                 <br>End of Promo - CP2 to CP1 extra 5%
                 <br>
                 <br>Dear Partners and Leaders,

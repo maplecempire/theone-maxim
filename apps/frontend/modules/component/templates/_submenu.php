@@ -288,7 +288,7 @@ function blink(selector) {
     <ul>
         <li class="menu_title"><?php echo __('Maxim Trader Newsletter'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/download/newsletter2013"><span><?php echo __('Download Newsletter Nov/Dec 2013'); ?></span></a>
+            <a href="/download/newsletter2013"><span><?php echo __('Download Newsletter Nov/Dec 2013'); ?> (69MB)</span></a>
         </li>
     </ul>
     <?php
