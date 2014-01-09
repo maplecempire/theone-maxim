@@ -977,7 +977,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='1'>Legal Watch - Ask And Be Answered</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='1'>LACD LEGAL WARNING NOTICE TAKE NOTICE THAT: LACD法律部警示</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -987,52 +987,21 @@ $(document).ready(function() {
             </div>
 
             <div id="page_1" class="news_desc" style="text-align: left; display: none">
-                <br>GOOD NEWS from the Maxim Legal Department.
+                <br>It has come to the attention of the Company that some Maxim Members, and others, are allegedly in breach of COPYRIGHT LAW, by causing the unauthorized replication of the Company’s, Maxim Trader, Official Website and using the same to their own advantage to the complete detriment and financial loss of the lawful owner of the Copy Right, Maxim Capital Ltd, and its Registered Mark “Maxim Trader.”
+                <br>我们最近注意到部分马胜金融集团的会员涉嫌违法版权法，未经授权使用公司名称、公司商标以及公司官网作个人目的，并给马胜资本有限公司、“马胜金融集团”商标带来损害以及财务损失。
                 <br>
-                <br>LEGAL WATCH is now up and fully operation effective today.Maxim Members can now go to there back office and at the members area they. can click. on LEGAL WATCH and send there legal questions to us at Legal Affairs and Compliance Division (LACD) and answers will be given in no longer than 48 hours by a LACD Officer.
+                <br>LET IT CLEARLY BE MADE KNOWN TO ALL, that persons allegedly in breach (Including those who have done this, to aid their presentation of the Maxim Module), shall be tenaciously tracked down, found and brought before the Courts whereat, upon being found guilty, shall not only suffer the immediate Termination of their Maxim Membership, but the Company shall seek the most highest and maximum penalty metered out by law, to be imposed against Copy Right offenders. Rewards will be paid to anyone assisting to lead LACD towards the detection of Copy Right offenders.
+                <br>因此我们在此郑重声明: 任何涉嫌违反版权法的会员（包括已经违反版权用来帮助个人马胜发展的人士）都会被严肃追踪、追查、并起诉至法庭接受罪行审判。此外，其马胜会员资格会被立即取消，同时马胜公司还会确保其因违反版权法而受到法律允许范围内的最高、最大惩罚 。任何协助马胜公司LACD法律部追踪、追查该类事件的，公司将会大力嘉赏。
                 <br>
-                <br>More New Year gifts are coming.
+                <br>Maxim Members, who wish to seek the prior approval from LACD, to use such company Aids should use the new LEGAL WATCH facility at their back office Members area, to query their possibility of seeking LACD approval, for the use of the Company’s Copy Right.
+                <br>若您需要该类公司工具发展事业，并提前获得LACD的批准，请登录公司网站会员专区，点击“LEGAL WATCH 法务观察”，向法律部提出使用公司版权的申请。
                 <br>
-                <br>Thank you
+                <br>DATED this 10th day of January 2014
+                <br>生效日期: 2014.1.10日
                 <br>
-                <br>Mr.W.Royce (Rocky) Lane
-                <br>GROUP LEGAL COUNSEL
-                <br>Maxim Capital Group
-                <br>
-                <div class="popdivider"></div>
-                <br>马胜金融集团法律部门-
-                <br>好消息!
-                <br>
-                <br>今天马胜法务观察已经正式开始为大家服务。所有会员都可以登录会员专区直接点击”Legal Watch(法务观察)”, 把您的问题发送给法律事务与合规部(LACD). LACD部门会在48小时内回复您的问题。
-                <br>
-                <br>新年新期待, 我们会为大家带来更多的好消息!
-                <br>
-                <br>Rocky Lane 先生
-                <br>集团法务顾问
-                <br>马胜金融集团
-                <br>
-                <div class="popdivider"></div>
-                <br>マキシム法務部からの朗報です。
-                <br>Legal Watch（リーガル・ウォッチ）は今日から完全に有効になりました。マキシム会員はバックオフィスに入ることが出来、そしてメンバーエリアでリーガル・ウォッチをクリックすることで法律問題に関する問い合わせをLegal Affairs and Compliance Division（法務部・略「LACD」）に送付することが可能になり、更にLACD役員から４８時間以内に必ず返答致します。
-                <br>新年の贈り物はまだまだございます。
-                <br>
-                <br>今後も宜しくお願い致します。
-                <br>
-                <br>W.ロイス（ロッキー）レーン氏
-                <br>GROUP LEGAL COUNSEL（グループ法律顧問）
-                <br>マキシム・キャピタル・グループ
-                <br>
-                <div class="popdivider"></div>
-                <br>맥심 법무 부서로부터의 좋은 소식입니다.
-                <br>
-                <br>리갈 와치는 오늘로부터 모든 준비사항을 마치고 업무를 시작하였습니다.  맥심 멤버들은 직접 사무실에 찾아가실 수 있으며 사이트에 멤버스 구역에 가셔서 클릭을 하시면 리갈 와치로 들어가실 수 있습니다. 법적인 질문사항을 법무부서로 ( LACD)로 보내주시면 최대 48 시간 이내로 답변을 드릴 것입니다.
-                <br>
-                <br>새해 더 많은 선물을 기대하셔도 좋습니다.
-                <br>
-                <br>감사합니다.
-                <br>
-                <br>W. 로이스 (로키) 레인
-                <br>법무 상담 그룹
+                <br>BY ORDER OF:
+                <br>Legal Affairs and Compliance Division (LACD) Maxim Trader and Group of companies
+                <br>马胜金融集团级集团公司法律事务与合规部(LACD)
             </div>
 
             <div class="popdivider"></div>
