@@ -343,8 +343,8 @@ var popIndex = 1;
         <?php } ?>
         $(".page_link").click(function(event){
             event.preventDefault();
-            $(".page").hide();
-            $("#page_" + $(this).attr("ref")).show(500);
+            //$(".page").hide();
+            $("#page_" + $(this).attr("ref")).toggle(500);
         });
         $("#popupContactClose,#popupContactClose2,#backgroundPopup").click(function(){
             disablePopup();
@@ -949,6 +949,13 @@ $(document).ready(function() {
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
 
+    <table width="100%">
+            <tr>
+                <td align="center">
+                    <strong><?php echo __("Click on each title for more details")?></strong>
+                </td>
+            </tr>
+        </table>
     <p id="contactArea">
         <!--<img src='http://www.abfxtrader.com/ablive/nimages/site/eidalfitr-2012.jpg' />-->
     </p>
@@ -959,17 +966,18 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-        <table width="100%">
+
+        <!--<table width="100%">
             <tr>
                 <td align="center">
                     <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
                 </td>
             </tr>
-        </table>
+        </table>-->
 
-        <div id="page_1" class="page">
+        <div class="page">
             <div class="poptitle">
-                Legal Watch - Ask And Be Answered
+                <a href='#' class="page_link" ref='1'>Legal Watch - Ask And Be Answered</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -977,7 +985,8 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc" style="text-align: left">
+
+            <div id="page_1" class="news_desc" style="text-align: left; display: none">
                 <br>GOOD NEWS from the Maxim Legal Department.
                 <br>
                 <br>LEGAL WATCH is now up and fully operation effective today.Maxim Members can now go to there back office and at the members area they. can click. on LEGAL WATCH and send there legal questions to us at Legal Affairs and Compliance Division (LACD) and answers will be given in no longer than 48 hours by a LACD Officer.
@@ -1025,10 +1034,12 @@ $(document).ready(function() {
                 <br>W. 로이스 (로키) 레인
                 <br>법무 상담 그룹
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_2" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                Attention
+                <a href='#' class="page_link" ref='2'>Attention</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1036,17 +1047,18 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc" style="text-align: left">
+            <div id="page_2" class="news_desc" style="text-align: left; display: none">
                 <br>This is the OFFICIAL WEBSITE of Maxim Trader. Unauthorized use and replication of company information is not permitted unless with the written approval of LACD. Any infringement of this policy will result in immediate suspension followed by termination if necessary.
                 <br>
                 <div class="popdivider"></div>
                 <br>这是马胜金融集团唯一官方网站。除非获得马胜金融集团LACD法律部的书面批准，任何对公司信息的未经授权的使用和复制都是不被允许的。任意对该政策的侵犯在必要时将会立即导致使用终止。
             </div>
-        </div>
 
-        <div id="page_3" class="page" style="display: none">
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
             <div class="poptitle">
-                10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia
+                <a href='#' class="page_link" ref='3'>10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1054,7 +1066,7 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc" style="text-align: left">
+            <div id="page_3" class="news_desc" style="text-align: left; display: none">
                 <br>Dear Leaders and Partners, Maxim Capital Limited is pleased to confirm that our 1st Annual Extravaganza Dinner & Dance will be held in the fun city of Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia during March 9th to 12th. Proudly, we will be booking the entire hotel and on the 10th, our Gala Dinner and Dance promises to be an historical event with celebrities and dignitaries from the world over.
                 <br>For more details and other arrangements, please contact our Corporate Events Executive Ms Catherine +60 10 465 3832
                 <br>
@@ -1067,11 +1079,12 @@ $(document).ready(function() {
                 <br>친애하는 리더와 파트너 여러분, 맥심 캐피탈이 우리의 첫 엑스트라베간자 디너 및 댄스가 말레. 이시아 쿠알라룸푸르의 선웨이 피라미드 컨벤션 센터의 펀 시티에서 9일에서 12일에 열리게 되었음을 기쁘게 알려드립니다 당사는 10일 호텔 전체를 예약하여 우리의 갈라 디너와 댄스가 전 세계적으로 역사적인 축제행사가 될 수 있게 할 것입니다.
                 <br>더 자세한 상항과 행사 예약에 관하여서는 당사의 행사 담당인 캐서린에게 +60 10 465 3832로 연락하시기 바랍니다.
             </div>
-        </div>
 
-        <div id="page_4" class="page" style="display: none">
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
             <div class="poptitle">
-                IMPORTANT ANNOUNCEMENT!!!
+                <a href='#' class="page_link" ref='4'>IMPORTANT ANNOUNCEMENT!!! End of Promo - CP2 to CP1 extra 5%</a>
             </div>
             <div class="news_date">
             <?php
@@ -1079,7 +1092,7 @@ $(document).ready(function() {
                 echo "04 JANUARY 2014";
                 ?>
             </div>
-            <div class="news_desc" style="text-align: left">
+            <div id="page_4" class="news_desc" style="text-align: left; display: none">
                 <br>End of Promo - CP2 to CP1 extra 5%
                 <br>
                 <br>Dear Partners and Leaders,
@@ -1100,10 +1113,12 @@ $(document).ready(function() {
                 <br>마지막 프로모션 - CP2에서 CP1 추가 5% 친애하는 파트너와 리더분들,  밝아오는 새해를 맞이하여 CP2에서 CP1으로 전환시킬경우 추가 5% 프로모션 기간이 1월 14일 오후 11시 59분까지로 연장되었음을 기쁘게 알려드립니다. 맥심에게 예스라고 합시다!!!
                 <br>
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_5" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED
+                <a href='#' class="page_link" ref='5'>NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED</a>
             </div>
             <div class="news_date">
             <?php
@@ -1111,7 +1126,7 @@ $(document).ready(function() {
                 echo "25 DECEMBER 2013";
                 ?>
             </div>
-            <div class="news_desc">
+            <div id="page_5" class="news_desc" style="display: none">
                 <?php
                 if ($culture == "kr") {
                 ?>
@@ -1316,10 +1331,12 @@ $(document).ready(function() {
                 }
                 ?>
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_6" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                IMPORTANT ANNOUNCEMENT!!!
+                <a href='#' class="page_link" ref='6'>Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象</a>
             </div>
             <div class="news_date">
             <?php
@@ -1327,7 +1344,7 @@ $(document).ready(function() {
                 echo "23 DECEMBER 2013";
                 ?>
             </div>
-            <div class="news_desc" style="text-align:left">
+            <div id="page_6" class="news_desc" style="text-align:left; display: none">
                 <br>
                 Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象
                 <br><br>
@@ -1634,10 +1651,12 @@ $(document).ready(function() {
 
                     <p class="MsoNormal"><span lang="ZH-CN" style="font-family:宋体">马胜金融集团</span></p></div>
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_7" class="page" style="display: none;">
+        <div class="page">
             <div class="poptitle">
-                IMPORTANT ANNOUNCEMENT!!!
+                <a href='#' class="page_link" ref='7'>IMPORTANT ANNOUNCEMENT!!!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1645,7 +1664,7 @@ $(document).ready(function() {
                 echo "23 OCTOBER 2013";
                 ?>
             </div>
-            <div class="news_desc" style="text-align:left">
+            <div id="page_7" class="news_desc" style="display: none; text-align:left">
                 <br>
                 IMPORTANT ANNOUNCEMENT!!!
                 <br><br>
@@ -1717,10 +1736,12 @@ $(document).ready(function() {
                 <br>
                 <br>皆様、バンコクでまたお会いできること心から願っております。
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_8" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                IMPORTANT ANNOUNCEMENT!!!
+                <a href='#' class="page_link" ref='8'>IMPORTANT ANNOUNCEMENT!!!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1728,55 +1749,49 @@ $(document).ready(function() {
                 echo "4 OCTOBER 2013";
                 ?>
             </div>
-            <div class="news_desc" style="text-align:left">
+            <div id="page_8" class="news_desc" style="display: none; text-align:left">
                 <br>
                 IMPORTANT ANNOUNCEMENT!!!
-                <br><br>Please be informed that effective 1st October 2013, pending order placement will be disabled 1 hour earlier prior to the US NFP news release at 8:30 EDT and will be made available 2 hours after the news release.
+                <br><br>
+                <ol>
+                    <li>Please be informed that effective 1st October 2013, pending order placement will be disabled 1 hour earlier prior to the US NFP news release at 8:30 EDT and will be made available 2 hours after the news release.</li>
+                    <li>
+                        <br><br>To ensure security and to prevent unauthorized entry into your Maxim Account, please update, change and use a "stronger" password of between 8-32 characters: Use a combination of Capital letters, Small letters, 0-9 and underscore (_) only and must include at least one letter and one number.
+                        <br><br>NB1. At least eight characters long
+                        <br>NB2. Does not contain your user name, real name or company name.
+                        <br>NB3. Does not contain a complete word
+                        <br><br>PROTECT YOUR ACCOUNT, PROTECT YOUR MAXIM ASSET.
+                        <br>
+                        <br>
+                        <span style="font-family: 宋体">
+                        重要提醒!!!!
+                        <br>
+                        <br>为了确保您的账户安全，杜绝无授权登录行为，马胜金融集团友情提醒您尽快登录个人账户，升级您的账户密码安全级别，并将其更改至由8-32位符号组成的密码。请只组合使用大写英文字母、小写英文字母、0-9的数字，下划线等符号，且新密码必须含最少包含一个字母与一个数字。
+                        <br>
+                        <br>规则一：密码最少长度为8个符号
+                        <br>规则二：请不要使用您的账户名、真实姓名或公司名称
+                        <br>规则三：请不要包含一个完整的单词。
+                        <br>
+                        <br>保护您的账户, 保证您的资产安全!
+                        </span>
+                        <br>
+                        <br>
+                        <br>重要発表！
+                        <br><br>セキュリティおよびあなたのマキシムアカウントに不正侵入を防ぐために、8-32文字の"より安全な"パスワードに変更するように更新してください：アルファベットの大文字、小文字、数字の0～9、そしてアンダースコア（_）を使用してください。更に、少なくともアルファベット文字一つと数字を1つ含める必要があります。
+                        <br><br>1.少なくとも8文字
+                        <br>2.ユーザー名、本名、または会社名が含まれない。
+                        <br>3. 完全な単語を使用しない。
+                        <br><br>アカウントを守りましょう！、あなたのMAXIM資産を守りましょう！！
+                        <br>よろしくお願いいたします。
+                    </li>
+                </ol>
             </div>
 
             <div class="popdivider"></div>
-
-            <div class="news_date">
-            <?php
-                $dateUtil = new DateUtil();
-                echo "6 SEPTEMBER 2013";
-                ?>
-            </div>
-            <div class="news_desc" style="text-align:left">
-                <br>
-                IMPORTANT ANNOUNCEMENT!!!
-                <br><br>To ensure security and to prevent unauthorized entry into your Maxim Account, please update, change and use a "stronger" password of between 8-32 characters: Use a combination of Capital letters, Small letters, 0-9 and underscore (_) only and must include at least one letter and one number.
-                <br><br>NB1. At least eight characters long
-                <br>NB2. Does not contain your user name, real name or company name.
-                <br>NB3. Does not contain a complete word
-                <br><br>PROTECT YOUR ACCOUNT, PROTECT YOUR MAXIM ASSET.
-                <br>
-                <br>
-                <span style="font-family: 宋体">
-                重要提醒!!!!
-                <br>
-                <br>为了确保您的账户安全，杜绝无授权登录行为，马胜金融集团友情提醒您尽快登录个人账户，升级您的账户密码安全级别，并将其更改至由8-32位符号组成的密码。请只组合使用大写英文字母、小写英文字母、0-9的数字，下划线等符号，且新密码必须含最少包含一个字母与一个数字。
-                <br>
-                <br>规则一：密码最少长度为8个符号
-                <br>规则二：请不要使用您的账户名、真实姓名或公司名称
-                <br>规则三：请不要包含一个完整的单词。
-                <br>
-                <br>保护您的账户, 保证您的资产安全!
-                </span>
-                <br>
-                <br>
-                <br>重要発表！
-                <br><br>セキュリティおよびあなたのマキシムアカウントに不正侵入を防ぐために、8-32文字の"より安全な"パスワードに変更するように更新してください：アルファベットの大文字、小文字、数字の0～9、そしてアンダースコア（_）を使用してください。更に、少なくともアルファベット文字一つと数字を1つ含める必要があります。
-                <br><br>1.少なくとも8文字
-                <br>2.ユーザー名、本名、または会社名が含まれない。
-                <br>3. 完全な単語を使用しない。
-                <br><br>アカウントを守りましょう！、あなたのMAXIM資産を守りましょう！！
-                <br>よろしくお願いいたします。
-            </div>
         </div>
-        <div id="page_9" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                Q3 Champions Challenge
+                <a href='#' class="page_link" ref='9'>Q3 Champions Challenge</a>
             </div>
             <div class="news_date">
             <?php
@@ -1784,7 +1799,7 @@ $(document).ready(function() {
                 echo "25 AUGUST 2013";
                 ?>
             </div>
-            <div class="news_desc">
+            <div id="page_9" class="news_desc" style="display: none;">
                 <br>
                 SUPER ANNOUNCEMENT for those Registered for Q3 Challenge 2013. In addition to the many great prizes already up for grabs, it gives us tremendous pleasure to throw in a Rolex Air King for anyone and everyone that achieves a personal sales of USD200K. For those who have not registered but would like to participate, you have till August 31st to do so. Your  cumulative personal sales from August 5th to Sept 30th will be captured for the Q3 Challenge. Go For It !!! GOOD LUCK & GOOD HUNTING MAXIMers !!!!
                 <br>
@@ -1801,10 +1816,12 @@ $(document).ready(function() {
                 <br>
                 New. 2013년 삼분기 등록을 하신 분들을 위한 수퍼 발표입니다.  이미 발표된 많은 상에 추가로, 개인매출 200,000불을 달성한 모든 분들에게 로렉스 에어 킹을 드립니다.  아직 등록하지 않으신 분들은 8월 31일까지 기회가 있습니다.  8월 5일부터 9월 30일까지 누적된 개인매출이 삼분기 도전에 사용됩니다.  파이팅하십화이.  행운을 빌며, 맥심인으로 최선을 다하십시오
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_10" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                Q3 Champions Challenge - BMW 5 Series
+                <a href='#' class="page_link" ref='10'>Q3 Champions Challenge - BMW 5 Series</a>
             </div>
             <div class="news_date">
             <?php
@@ -1812,28 +1829,16 @@ $(document).ready(function() {
                 echo "4 AUGUST 2013";
                 ?>
             </div>
-            <div class="news_desc">
+            <div id="page_10" class="news_desc" style="display: none">
                 <br>
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/q3_champions_challenge.jpg"><img width="460"  src="/uploads/activities/q3_champions_challenge.jpg" alt = "Q3 Champions Challenge - BMW 5 Series‏"></a><br>
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <!--<div id="page_2" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                WHEEL OF FORTUNE
-            </div>
-            <div class="news_date">
-            <?php
-/*                $dateUtil = new DateUtil();
-                echo "4 AUGUST 2013";
-                */?>
-            </div>
-            <div class="news_desc">
-                <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/wheel_of_fortune.jpg"><img width="460"  src="/uploads/activities/wheel_of_fortune.jpg" alt = "WHEEL OF FORTUNE‏"></a><br>
-            </div>
-        </div>-->
-        <div id="page_11" class="page" style="display: none">
-            <div class="poptitle">
-                INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
+                <a href='#' class="page_link" ref='11'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
             </div>
             <div class="news_date">
             <?php
@@ -1841,13 +1846,15 @@ $(document).ready(function() {
                 echo "8 JULY 2013";
                 ?>
             </div>
-            <div class="news_desc">
+            <div id="page_11" class="news_desc" style="display: none">
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
+
+            <div class="popdivider"></div>
         </div>
-        <div id="page_12" class="page" style="display: none">
+        <div class="page">
             <div class="poptitle">
-                INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)
+                <a href='#' class="page_link" ref='11'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
             </div>
             <div class="news_date">
             <?php
@@ -1855,9 +1862,10 @@ $(document).ready(function() {
                 echo "8 JULY 2013";
                 ?>
             </div>
-            <div class="news_desc">
+            <div id="page_12" class="news_desc" style="display: none">
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/IME_Poster_<?php echo $culture;?>.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
+
         </div>
     <div class="popdivider"></div>
     </div>
