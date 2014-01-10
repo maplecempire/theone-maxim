@@ -67,7 +67,7 @@ $(function() {
 	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp3")?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP3 Transfer'); ?>
     </a>
-    <?php } ?>
+
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
@@ -80,6 +80,7 @@ $(function() {
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertCp3ToCp1")?>" style="color: rgb(134, 197, 51);">
         <?php echo __('Convert CP3 To CP1'); ?>
     </a>
+    <?php } ?>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;

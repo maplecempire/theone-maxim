@@ -363,6 +363,7 @@ class memberActions extends sfActions
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
+            return $this->redirect('/member/summary');
         }
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -6746,6 +6747,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
         $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
+        $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+            return $this->redirect('/member/summary');
+        }
+
         $withdrawAmount = $this->getRequestParameter('cp3Amount');
         $processFee = 30;
 
@@ -6821,6 +6830,13 @@ We look forward to your custom in the near future. Should you have any queries, 
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
         $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+            return $this->redirect('/member/summary');
+        }
 
         $withdrawAmount = $this->getRequestParameter('ecashAmount');
         //$processFee = 0;
@@ -6905,6 +6921,16 @@ We look forward to your custom in the near future. Should you have any queries, 
         $handlingCharge = 4;
         $handlingChargeInUsd = 40;
 
+        $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->distributorDB = $distributorDB;
+
+        // amz001 chales (20131223)
+        $pos = strrpos($distributorDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+        }
         /*$c = new Criteria();
         $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_USD_TO_MYR);
         $settingDB = AppSettingPeer::doSelectOne($c);
@@ -6928,9 +6954,6 @@ We look forward to your custom in the near future. Should you have any queries, 
             $handlingChargeInUsd = $settingDB->getSettingValue();
         }
         $this->handlingChargeInUsd = $handlingChargeInUsd;
-
-        $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $this->distributorDB = $distributorDB;
 
         $c = new Criteria();
         $c->add(MlmDistMt4Peer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -8253,6 +8276,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
+            return $this->redirect('/member/summary');
         }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;

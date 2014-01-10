@@ -76,7 +76,9 @@ $(function() {
             });
 });
 </script>
-
+<?php
+    if ($toHideCp2Cp3Transfer == false) {
+    ?>
 <div class="ewallet_li">
 	<a target="_self" class="navcontainer" href="/member/mt4Withdrawal" style="color: rgb(134, 197, 51);">
         <?php echo __('MT4 Withdrawal'); ?>
@@ -94,6 +96,7 @@ $(function() {
         <?php echo __('CP3 Withdrawal'); ?>
     </a>
 </div>
+<?php } ?>
 
 <table cellpadding="0" cellspacing="0">
     <tbody>
