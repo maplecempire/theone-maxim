@@ -213,6 +213,20 @@ $culture = $sf_user->getCulture();
                     </div>
                 </div>
                 <div id="feedContent">
+
+                    <a href="#">
+                        <div class="poptitle"><h3>2014 January Calendar</h3><br>
+                    </div>
+                    </a>
+                    <br>
+
+                    <br><a href="/download/calendar">Download 2014 January Calendar</a> (315KB PDF)
+                    <div class="news_date">
+                    Posted on 09 January 2014
+                    </div>
+
+                    <div class="hr"></div>
+
                     <a href="#">
                         <div class="poptitle"><h3>马胜集团12月份新加坡商业金融分享会(200名额) Maxim Trader December Singapore business and finance seminar (Limited to 200 participants)</h3><br>
                     </div>
