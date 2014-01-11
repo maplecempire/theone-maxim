@@ -357,7 +357,7 @@ class BonusService
             print_r("epoint: " . $distAccountEcashBalance . "<br>");
             $totalDebit = 0;
             $completeStatus = false;
-            if ($distDB->getDebitRankId() >= 3) {
+            /*if ($distDB->getDebitRankId() >= 3) {
                 $totalDebit = $deductAmount / 2;
 
                 if ($distAccountDebitBalance > $totalDebit) {
@@ -367,7 +367,7 @@ class BonusService
 
                     $completeStatus = true;
                 }
-            } else {
+            } else {*/
                 if ($distAccountDebitBalance > $distAccountEcashBalance) {
                     $totalDebit = $distAccountEcashBalance;
                 } else {
@@ -375,7 +375,7 @@ class BonusService
 
                     $completeStatus = true;
                 }
-            }
+            //}
 
             if ($completeStatus && $totalDebit > 0) {
                 $distDB->setPackagePurchaseFlag("Y");
