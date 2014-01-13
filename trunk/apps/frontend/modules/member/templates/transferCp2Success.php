@@ -97,6 +97,9 @@
         <?php echo __('CP3 Transfer'); ?>
     </a>
     &nbsp;&nbsp;
+    <?php
+    if ($toHideCp2Cp3Transfer == false) {
+    ?>
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">
@@ -109,6 +112,7 @@
         <?php echo __('Convert CP3 To CP1'); ?>
     </a>
     &nbsp;&nbsp;
+    <?php } ?>
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="/member/epointPurchase" style="color: rgb(0, 93, 154);">

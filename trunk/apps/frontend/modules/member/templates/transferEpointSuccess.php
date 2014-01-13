@@ -85,9 +85,7 @@
         <?php echo __('CP1 Transfer'); ?>
     </a>
     &nbsp;&nbsp;
-    <?php
-    if ($toHideCp2Cp3Transfer == false) {
-    ?>
+
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
 	<a target="_self" class="navcontainer" href="<?php echo url_for("/member/transferCp2")?>" style="color: rgb(0, 93, 154);">
@@ -101,6 +99,9 @@
     </a>
 
     &nbsp;&nbsp;
+    <?php
+    if ($toHideCp2Cp3Transfer == false) {
+    ?>
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/convertEcashToEpoint") ?>" style="color: rgb(0, 93, 154);">

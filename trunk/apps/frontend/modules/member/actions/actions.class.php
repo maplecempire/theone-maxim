@@ -1982,6 +1982,13 @@ class memberActions extends sfActions
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->packageDBs = $packageDBs;
+
+        // amz001 chales (20130113)
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+            $this->cp2Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+            $this->cp3Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+            $this->setTemplate('memberRegistrationEx');
+        }
     }
     public function executeMemberRegistration2()
     {
@@ -2003,19 +2010,62 @@ class memberActions extends sfActions
             }*/
 
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
-            $this->forward404Unless($selectedPackage);
+            if (!$selectedPackage) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                return $this->redirect('/member/summary');
+            }
 
             $amountNeeded = $selectedPackage->getPrice();
 
             /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
             }*/
+            if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+                $ledgerCp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                $ledgerCp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-            if ($amountNeeded > $ledgerEPointBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
-                return $this->redirect('/member/memberRegistration');
+                $this->cp2cp3PaymentMethod = $this->getRequestParameter('cp2cp3PaymentMethod');
+                $this->cp2cp3Paid = $this->getRequestParameter('cp2cp3Paid');
+                $this->cp1Paid = $this->getRequestParameter('cp1Paid');
+
+                $maxCp2Cp3 = $amountNeeded / 2;
+                if ($this->cp1Paid > $ledgerEPointBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                    return $this->redirect('/member/memberRegistration');
+                }
+                if ($this->cp2cp3PaymentMethod == "CP2") {
+                    if ($this->cp2cp3Paid > $ledgerCp2Balance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2 amount"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                    if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp2"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                } else if ($this->cp2cp3PaymentMethod == "CP3") {
+                    if ($this->cp2cp3Paid > $ledgerCp3Balance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3 amount"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                    if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp3"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                }
+                $total = $this->cp2cp3Paid + $this->cp1Paid;
+                if ($amountNeeded > $total) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Fund"));
+                    return $this->redirect('/member/memberRegistration');
+                }
+            } else {
+                if ($amountNeeded > $ledgerEPointBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                    return $this->redirect('/member/memberRegistration');
+                }
             }
+
             $this->selectedPackage = $selectedPackage;
             $this->amountNeeded = $amountNeeded;
             $this->productCode = $this->getRequestParameter('productCode');
@@ -2521,9 +2571,48 @@ class memberActions extends sfActions
         if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
         } else {
-            if ($packagePrice > $sponsorAccountBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient fund to purchase package."));
-                return $this->redirect('/member/memberRegistration');
+            if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+                $ledgerCp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                $ledgerCp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                $this->cp2cp3PaymentMethod = $this->getRequestParameter('cp2cp3PaymentMethod');
+                $this->cp2cp3Paid = $this->getRequestParameter('cp2cp3Paid');
+                $this->cp1Paid = $this->getRequestParameter('cp1Paid');
+
+                $maxCp2Cp3 = $amountNeeded / 2;
+                if ($this->cp1Paid > $sponsorAccountBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                    return $this->redirect('/member/memberRegistration');
+                }
+                if ($this->cp2cp3PaymentMethod == "CP2") {
+                    if ($this->cp2cp3Paid > $ledgerCp2Balance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2 amount"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                    if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp2"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                } else if ($this->cp2cp3PaymentMethod == "CP3") {
+                    if ($this->cp2cp3Paid > $ledgerCp3Balance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3 amount"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                    if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp3"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                }
+                $total = $this->cp2cp3Paid + $this->cp1Paid;
+                if ($amountNeeded > $total) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Fund"));
+                    return $this->redirect('/member/memberRegistration');
+                }
+            } else {
+                if ($packagePrice > $sponsorAccountBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient fund to purchase package."));
+                    return $this->redirect('/member/memberRegistration');
+                }
             }
         }
 
@@ -2734,23 +2823,74 @@ class memberActions extends sfActions
              * ***************************************************/
             $bonusService = new BonusService();
 
-            $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
             if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
             } else {
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($packagePrice);
-                $mlm_account_ledger->setBalance($sponsorAccountBalance);
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+                    $ledgerCp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $ledgerCp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    $this->cp2cp3PaymentMethod = $this->getRequestParameter('cp2cp3PaymentMethod');
+                    $this->cp2cp3Paid = $this->getRequestParameter('cp2cp3Paid');
+                    $this->cp1Paid = $this->getRequestParameter('cp1Paid');
+
+                    if ($this->cp2cp3Paid > 0) {
+                        $accountType = "";
+                        $accountTypeDesc = "";
+                        $accountTypeBalance = 0;
+                        if ($this->cp2cp3PaymentMethod == "CP2") {
+                            $accountType = Globals::ACCOUNT_TYPE_ECASH;
+                            $accountTypeBalance = $ledgerCp2Balance;
+                            $accountTypeDesc = "CP2";
+                        } else if ($this->cp2cp3PaymentMethod == "CP3") {
+                            $accountType = Globals::ACCOUNT_TYPE_MAINTENANCE;
+                            $accountTypeBalance = $ledgerCp3Balance;
+                            $accountTypeDesc = "CP3";
+                        }
+
+                        if ($accountType != "") {
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                            $mlm_account_ledger->setAccountType($accountType);
+                            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode().", ".$accountTypeDesc.":".$this->cp2cp3Paid.", CP1:".$this->cp1Paid);
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit($this->cp2cp3Paid);
+                            $mlm_account_ledger->setBalance($accountTypeBalance - $this->cp2cp3Paid);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+                        }
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                        $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode().", ".$accountType.":".$this->cp2cp3Paid.", CP1:".$this->cp1Paid);
+                        $mlm_account_ledger->setCredit(0);
+                        $mlm_account_ledger->setDebit($this->cp1Paid);
+                        $mlm_account_ledger->setBalance($sponsorAccountBalance - $this->cp1Paid);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+                    }
+
+                } else {
+                    $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                    $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($packagePrice);
+                    $mlm_account_ledger->setBalance($sponsorAccountBalance);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                }
 
                 /******************************/
                 /*  Direct Sponsor Bonus
@@ -5794,7 +5934,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($pos === false) { // note: three equal signs
 
         } else {
-            return $this->redirect('/member/summary');
+            $this->toHideCp2Cp3Transfer = true;
         }
 
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -6042,7 +6182,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($pos === false) { // note: three equal signs
 
         } else {
-            return $this->redirect('/member/summary');
+            $this->toHideCp2Cp3Transfer = true;
         }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
         $this->ledgerAccountBalance = $ledgerAccountBalance;

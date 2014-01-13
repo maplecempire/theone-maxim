@@ -218,5 +218,17 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('EMAIL_STATUS', 'EmailStatus', 'string', CreoleTypes::VARCHAR, false, 10);
 
+		$tMap->addColumn('BKK_PACKAGE_PURCHASE', 'BkkPackagePurchase', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('BKK_QUALIFY_1', 'BkkQualify1', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('BKK_QUALIFY_2', 'BkkQualify2', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('BKK_PERSONAL_SALES', 'BkkPersonalSales', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('BKK_QUALIFY_3', 'BkkQualify3', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('BKK_STATUS', 'BkkStatus', 'string', CreoleTypes::VARCHAR, false, 10);
+
 	} 
 } 
