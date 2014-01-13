@@ -71,6 +71,8 @@ abstract class Globals {
     /*************************/
     /*****    SESSION   ******/
     /*************************/
+	const SESSION_LEADER_ID = "MAXIM_LEADER_ID";
+	const SESSION_LEADER_CODE = "MAXIM_LEADER_CODE";
 	const SESSION_DISTID = "MAXIM_DISTID";
 	const SESSION_ADMINID = 'MAXIM_ADMINID';
 	const SESSION_USERNAME = 'MAXIM_USERNAME';

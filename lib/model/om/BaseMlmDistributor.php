@@ -379,6 +379,30 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $email_status = 'ACTIVE';
 
+
+	
+	protected $bkk_package_purchase = 0;
+
+
+	
+	protected $bkk_qualify_1 = '';
+
+
+	
+	protected $bkk_qualify_2 = '';
+
+
+	
+	protected $bkk_personal_sales = 0;
+
+
+	
+	protected $bkk_qualify_3 = '';
+
+
+	
+	protected $bkk_status = 'PENDING';
+
 	
 	protected $alreadyInSave = false;
 
@@ -1139,6 +1163,48 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->email_status;
+	}
+
+	
+	public function getBkkPackagePurchase()
+	{
+
+		return $this->bkk_package_purchase;
+	}
+
+	
+	public function getBkkQualify1()
+	{
+
+		return $this->bkk_qualify_1;
+	}
+
+	
+	public function getBkkQualify2()
+	{
+
+		return $this->bkk_qualify_2;
+	}
+
+	
+	public function getBkkPersonalSales()
+	{
+
+		return $this->bkk_personal_sales;
+	}
+
+	
+	public function getBkkQualify3()
+	{
+
+		return $this->bkk_qualify_3;
+	}
+
+	
+	public function getBkkStatus()
+	{
+
+		return $this->bkk_status;
 	}
 
 	
@@ -2700,6 +2766,96 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setBkkPackagePurchase($v)
+	{
+
+		if ($this->bkk_package_purchase !== $v || $v === 0) {
+			$this->bkk_package_purchase = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_PACKAGE_PURCHASE;
+		}
+
+	} 
+
+	
+	public function setBkkQualify1($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bkk_qualify_1 !== $v || $v === '') {
+			$this->bkk_qualify_1 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_QUALIFY_1;
+		}
+
+	} 
+
+	
+	public function setBkkQualify2($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bkk_qualify_2 !== $v || $v === '') {
+			$this->bkk_qualify_2 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_QUALIFY_2;
+		}
+
+	} 
+
+	
+	public function setBkkPersonalSales($v)
+	{
+
+		if ($this->bkk_personal_sales !== $v || $v === 0) {
+			$this->bkk_personal_sales = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_PERSONAL_SALES;
+		}
+
+	} 
+
+	
+	public function setBkkQualify3($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bkk_qualify_3 !== $v || $v === '') {
+			$this->bkk_qualify_3 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_QUALIFY_3;
+		}
+
+	} 
+
+	
+	public function setBkkStatus($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bkk_status !== $v || $v === 'PENDING') {
+			$this->bkk_status = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::BKK_STATUS;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2890,11 +3046,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->email_status = $rs->getString($startcol + 92);
 
+			$this->bkk_package_purchase = $rs->getFloat($startcol + 93);
+
+			$this->bkk_qualify_1 = $rs->getString($startcol + 94);
+
+			$this->bkk_qualify_2 = $rs->getString($startcol + 95);
+
+			$this->bkk_personal_sales = $rs->getFloat($startcol + 96);
+
+			$this->bkk_qualify_3 = $rs->getString($startcol + 97);
+
+			$this->bkk_status = $rs->getString($startcol + 98);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 93; 
+						return $startcol + 99; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3318,6 +3486,24 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 92:
 				return $this->getEmailStatus();
 				break;
+			case 93:
+				return $this->getBkkPackagePurchase();
+				break;
+			case 94:
+				return $this->getBkkQualify1();
+				break;
+			case 95:
+				return $this->getBkkQualify2();
+				break;
+			case 96:
+				return $this->getBkkPersonalSales();
+				break;
+			case 97:
+				return $this->getBkkQualify3();
+				break;
+			case 98:
+				return $this->getBkkStatus();
+				break;
 			default:
 				return null;
 				break;
@@ -3421,6 +3607,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[90] => $this->getQ3Champions(),
 			$keys[91] => $this->getQ3Datetime(),
 			$keys[92] => $this->getEmailStatus(),
+			$keys[93] => $this->getBkkPackagePurchase(),
+			$keys[94] => $this->getBkkQualify1(),
+			$keys[95] => $this->getBkkQualify2(),
+			$keys[96] => $this->getBkkPersonalSales(),
+			$keys[97] => $this->getBkkQualify3(),
+			$keys[98] => $this->getBkkStatus(),
 		);
 		return $result;
 	}
@@ -3715,6 +3907,24 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 92:
 				$this->setEmailStatus($value);
 				break;
+			case 93:
+				$this->setBkkPackagePurchase($value);
+				break;
+			case 94:
+				$this->setBkkQualify1($value);
+				break;
+			case 95:
+				$this->setBkkQualify2($value);
+				break;
+			case 96:
+				$this->setBkkPersonalSales($value);
+				break;
+			case 97:
+				$this->setBkkQualify3($value);
+				break;
+			case 98:
+				$this->setBkkStatus($value);
+				break;
 		} 	}
 
 	
@@ -3815,6 +4025,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[90], $arr)) $this->setQ3Champions($arr[$keys[90]]);
 		if (array_key_exists($keys[91], $arr)) $this->setQ3Datetime($arr[$keys[91]]);
 		if (array_key_exists($keys[92], $arr)) $this->setEmailStatus($arr[$keys[92]]);
+		if (array_key_exists($keys[93], $arr)) $this->setBkkPackagePurchase($arr[$keys[93]]);
+		if (array_key_exists($keys[94], $arr)) $this->setBkkQualify1($arr[$keys[94]]);
+		if (array_key_exists($keys[95], $arr)) $this->setBkkQualify2($arr[$keys[95]]);
+		if (array_key_exists($keys[96], $arr)) $this->setBkkPersonalSales($arr[$keys[96]]);
+		if (array_key_exists($keys[97], $arr)) $this->setBkkQualify3($arr[$keys[97]]);
+		if (array_key_exists($keys[98], $arr)) $this->setBkkStatus($arr[$keys[98]]);
 	}
 
 	
@@ -3915,6 +4131,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::Q3_CHAMPIONS)) $criteria->add(MlmDistributorPeer::Q3_CHAMPIONS, $this->q3_champions);
 		if ($this->isColumnModified(MlmDistributorPeer::Q3_DATETIME)) $criteria->add(MlmDistributorPeer::Q3_DATETIME, $this->q3_datetime);
 		if ($this->isColumnModified(MlmDistributorPeer::EMAIL_STATUS)) $criteria->add(MlmDistributorPeer::EMAIL_STATUS, $this->email_status);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_PACKAGE_PURCHASE)) $criteria->add(MlmDistributorPeer::BKK_PACKAGE_PURCHASE, $this->bkk_package_purchase);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_QUALIFY_1)) $criteria->add(MlmDistributorPeer::BKK_QUALIFY_1, $this->bkk_qualify_1);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_QUALIFY_2)) $criteria->add(MlmDistributorPeer::BKK_QUALIFY_2, $this->bkk_qualify_2);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_PERSONAL_SALES)) $criteria->add(MlmDistributorPeer::BKK_PERSONAL_SALES, $this->bkk_personal_sales);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_QUALIFY_3)) $criteria->add(MlmDistributorPeer::BKK_QUALIFY_3, $this->bkk_qualify_3);
+		if ($this->isColumnModified(MlmDistributorPeer::BKK_STATUS)) $criteria->add(MlmDistributorPeer::BKK_STATUS, $this->bkk_status);
 
 		return $criteria;
 	}
@@ -4128,6 +4350,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setQ3Datetime($this->q3_datetime);
 
 		$copyObj->setEmailStatus($this->email_status);
+
+		$copyObj->setBkkPackagePurchase($this->bkk_package_purchase);
+
+		$copyObj->setBkkQualify1($this->bkk_qualify_1);
+
+		$copyObj->setBkkQualify2($this->bkk_qualify_2);
+
+		$copyObj->setBkkPersonalSales($this->bkk_personal_sales);
+
+		$copyObj->setBkkQualify3($this->bkk_qualify_3);
+
+		$copyObj->setBkkStatus($this->bkk_status);
 
 
 		$copyObj->setNew(true);
