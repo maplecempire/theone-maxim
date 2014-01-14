@@ -8461,10 +8461,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
 
-                $epointConvertedAmount = floor($epointAmount * 1.05);
-                if ($this->toHideCp2Cp3Transfer == true) {
+                //$epointConvertedAmount = floor($epointAmount * 1.05);
+                //if ($this->toHideCp2Cp3Transfer == true) {
                     $epointConvertedAmount = floor($epointAmount);
-                }
+                //}
 
                 $tbl_account_ledger = new MlmAccountLedger();
                 $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);

@@ -36,17 +36,8 @@ $(function() {
     }).keyup(function(){
         var convertedAmount = 0;
         var epointAmount = $('#epointAmount').autoNumericGet();
-        <?php
-        if ($toHideCp2Cp3Transfer == false) {
-        ?>
-        convertedAmount = parseFloat(epointAmount) * 1.05;
-        <?php
-        } else {
-        ?>
+
         convertedAmount = parseFloat(epointAmount);
-        <?php
-        }
-        ?>
         convertedAmount = Math.floor(convertedAmount);
 
         $("#epointConvertedAmount").val(convertedAmount);
@@ -216,13 +207,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <font color="#dc143c"><?php echo __('NOTE :'); ?><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.'); ?>
-                        <?php
-                        if ($toHideCp2Cp3Transfer == false) {
-                        ?>
-                        <br><?php echo __('CP2 convert to CP1 will get extra 5%'); ?>
-                        <?php
-                        }
-                        ?>
+                        <br><?php //echo __('CP2 convert to CP1 will get extra 5%'); ?>
                         </font>
                     </td>
                     <td>&nbsp;</td>
