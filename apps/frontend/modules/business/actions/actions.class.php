@@ -13,7 +13,7 @@ class businessActions extends sfActions
     public function executeCreateEmptyAccount()
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|557|%", Criteria::LIKE);
+        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|256559|%", Criteria::LIKE);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
 
@@ -41,7 +41,7 @@ class businessActions extends sfActions
 
             $placementUplineDistDB = null;
             if ($count == 0) {
-                $placementUplineDistId = 132;
+                $placementUplineDistId = 264495;
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($placementUplineDistId);
             } else {
                 $placementUplineDistDB = MlmDistributorPeer::retrieveByPK($mlmDistributor->getTreeUplineDistId());
