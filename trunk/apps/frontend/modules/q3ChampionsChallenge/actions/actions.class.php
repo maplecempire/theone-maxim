@@ -348,19 +348,47 @@ class q3ChampionsChallengeActions extends sfActions
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     public function executeBkk2()
     {
-        if ($this->validateActivateDate(690)) {
-            echo "Y";
-        } else {
-            echo "N";
-        }
-//        $this->executeBkk();
-//        $this->executeBkk();
-//        $this->executeBkk();
-//        $this->executeBkk();
-//        $this->executeBkk();
+        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+        //$this->executeBkk();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeTop2013()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        foreach ($distDBs as $distDB) {
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+
+            $left = $this->getTotalGroupSales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            $right = $this->getTotalGroupSales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+
+            $lowest = $left;
+            if ($right < $left) {
+                $lowest = $right;
+            }
+
+            //$distDB->setBkkQualify1(number_format($left,0));
+            //$distDB->setBkkQualify2($right);
+            $distDB->setBkkPersonalSales($lowest);
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeBkk()
     {
         $c = new Criteria();
@@ -490,5 +518,26 @@ class q3ChampionsChallengeActions extends sfActions
             $result = $arr["SUB_TOTAL"];
         }
         return $result;
+    }
+
+    function getTotalGroupSales($distributorId, $leftRight)
+    {
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE
+            dist_id = " . $distributorId . " AND left_right = '" . $leftRight . "' AND created_on >= '2013-01-01 00:00:00' AND created_on <= '2013-12-31 23:59:59'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }
