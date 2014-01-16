@@ -402,8 +402,8 @@ function populateDgAddPanel() {
         var data = $("#dgAddPanel").data("data_" + $("#dgAddPanelId").val());
         $("#dgAddPanelDistCode").val(data.distributor_code);
         $("#dgAddPanelrank_code").val(data.rank_code);
-        $("#dgAddPanelPassword").val(data.userpassword).focus().select();
-        $("#dgAddPanelPassword2").val(data.userpassword2).focus().select();
+        $("#dgAddPanelPassword").val(data.userpassword);
+        $("#dgAddPanelPassword2").val(data.userpassword2);
         $("#dgAddPanelmt4_user_name").val(data.mt4_user_name);
         $("#dgAddPanelmt4_password").val(data.mt4_password);
         $("#dgAddPanelName").val(data.full_name);
