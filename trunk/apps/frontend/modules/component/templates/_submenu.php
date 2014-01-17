@@ -284,6 +284,7 @@ function blink(selector) {
     <?php
     //}
     ?>
+
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('Maxim Trader Newsletter'); ?></li>
@@ -291,6 +292,22 @@ function blink(selector) {
             <a href="/download/newsletter2013"><span><?php echo __('Download Newsletter Nov/Dec 2013'); ?> (69MB)</span></a>
         </li>
     </ul>
+    <?php
+    if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
+    ?>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Maxim Trader e-Book'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/ebook/read.htm" target="_blank"><span><?php echo __('Online Reading'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/ebook/pdf/myPDF.pdf" target="_blank"><span><?php echo __('Download e-Book'); ?> (75MB)</span></a>
+        </li>
+    </ul>
+    <?php
+    }
+    ?>
     <?php
     if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 203 || $distDB->getDistributorId() == 1458 ||
             $distDB->getDistributorId() == 15) {
