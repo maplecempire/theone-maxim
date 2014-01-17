@@ -1,0 +1,35 @@
+/* USED IN FLASH!!! */
+/* You can change these values, but you can't change their names without changing some AS in the FLA!! */
+
+
+/* pre loader text */
+
+prelTxt		{ font-family: Verdana; font-size: 11px; color: #333333;  display: inline; text-align: center; }
+
+
+/* pagination  */
+
+pageNumber 	{ font-family: Verdana; font-size: 11px; color: #333333;  display: inline; text-align: center; }
+
+
+/* zoom text */
+
+dragMessage	{ font-family: Verdana; font-size: 11px; color: #000000;  display: inline; text-align: center; font-weight: bold; }
+
+
+/* help text  */
+
+helpTxt		{ font-family: Verdana; font-size: 11px; color: #ffffff;  display: inline; text-align: center; font-weight: bold; }
+
+
+/* print box text */
+
+headPrint	{ font-family: Verdana; font-size: 11px; color: #858c1e;  display: inline; text-align: left; font-weight: bold; }
+closePrint	{ font-family: Verdana; font-size: 11px; color: #858c1e;  display: inline; text-align: center; font-weight: bold; }
+contPrint	{ font-family: Verdana; font-size: 11px; color: #ffffff;  display: inline; text-align: left; }
+butTxt		{ font-family: Verdana; font-size: 11px; color: #ffffff;  display: inline; text-align: center; font-weight: bold;} 
+numTxt		{ font-family: Verdana; font-size: 11px; color: #000000;  display: inline; text-align: right; }
+
+/* lightbox close text */
+lbTxt		{ font-family: Verdana; font-size: 11px; color: #333333;  display: inline; text-align: left; }
+lbPreTxt	{ font-family: Verdana; font-size: 11px; color: #ffffff;  display: inline; text-align: left; }
