@@ -319,7 +319,7 @@ abstract class Globals {
 //    const HIDE_DIST_GROUP = "MAXCAP,law01,Law001,BRF129,maxworld";
     const HIDE_DIST_GROUP = "|128|,|129|,|402|,|175|";
 //    const TO_HIDE_DIST_GROUP = "alvinang1,alvinang2,alvinang3,alvinang4,alvinang5,alvinang6,alvinang7,BRA129,BRB129,BRF129,law1,law01,chris3,Law001,chris5,chris6,chris7,roy1,roy2,roy3,roy4,roy5,roy6,roy7,ALVINANG1,ALVINANG2,ALVINANG3,ALVINANG4,ALVINANG5,ALVINANG6,ALVINANG7,LAW1,LAW01,CHRIS3,LAW001,CHRIS5,CHRIS6,CHRIS7,ROY1,ROY2,ROY3,ROY4,ROY5,ROY6,ROY7";
-    const TO_HIDE_DIST_GROUP = "|124|,|125|,|126|,|127|,|128|,|129|,|104|,|105|,|402|";
+    const TO_HIDE_DIST_GROUP = "|127|,|128|,|129|,|104|,|105|,|402|";
 
     const HIDE_DIST_GROUP_2 = "law01";
     const TO_HIDE_DIST_GROUP_2 = "alvinang1,alvinang2,alvinang4";
