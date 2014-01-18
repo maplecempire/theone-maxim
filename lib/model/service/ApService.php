@@ -16,6 +16,7 @@ class ApService
             // alvinang1,alvinang2,alvinang4
             //$hideGroup = "262726"; // law01
         //} else
+
         if ($currentDistId == 127 || $currentDistId == 128) {
             // law01,law1
             $hideGroup = "129";  // Law001
@@ -27,6 +28,7 @@ class ApService
             // law01,law1
             $hideGroup = "175";  // maxworld
         }
+
         $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
         if ($pos === false) { // note: three equal signs
 
