@@ -74,6 +74,34 @@ $(function() {
             primary: "ui-icon-circle-check"
         }
     });
+    $(".placementLeftLink").button({
+        icons: {
+            primary: "ui-icon-arrow-1-sw"
+        }
+    }).click(function(event){
+        event.preventDefault();
+        var answer = confirm("Are you sure you want to do auto placement (LEFT)?");
+        if (answer){
+            waiting()
+            $("#autoDistid").val($(this).attr("ref"));
+            $("#placement").val("LEFT");
+            $("#frmAutoPlacement").submit();
+        }
+    });
+    $(".placementRightLink").button({
+        icons: {
+            primary: "ui-icon-arrow-1-se"
+        }
+    }).click(function(event){
+        event.preventDefault();
+        var answer = confirm("Are you sure you want to do auto placement (RIGHT)?");
+        if (answer){
+            waiting()
+            $("#autoDistid").val($(this).attr("ref"));
+            $("#placement").val("RIGHT");
+            $("#frmAutoPlacement").submit();
+        }
+    });
 
     $("#dgActivateMember").dialog("destroy");
     $("#dgActivateMember").dialog({
@@ -695,12 +723,18 @@ function reassignDatagridAnnouncementEventAttr() {
                                 $trStyle = "1";
                             }
 
+                            $hideRestructureButton = "";
+                            if ($distributor->getHideGenealogy() == "Y") {
+                                $hideRestructureButton = "display:none";
+                            }
                     echo "<tr class='row" . $trStyle . "'>
                     <td align='center'>" . $dist->getCreatedOn() . "</td>
                     <td align='center' class='date'>" . $dist->getDistributorCode() . "</td>
                     <td align='center'>" . $dist->getFullName() . "</td>
-                    <td align='center'>" . link_to(__('Restructure'), 'member/placementTree?bePlacementId=' . $dist->getDistributorId(), array(
+                    <td align='center'>" .
+                         link_to(__('Restructure'), 'member/placementTree?bePlacementId=' . $dist->getDistributorId(), array(
                                    'class' => 'activeLink',
+                                   'style' => $hideRestructureButton,
                                    'ref' => $dist->getDistributorId(),
                                    'refCode' => $dist->getDistributorCode(),
                                    'refNickname' => $dist->getFullname(),
@@ -709,6 +743,15 @@ function reassignDatagridAnnouncementEventAttr() {
                                       'class' => 'deleteLink',
                                       'style' => 'display:none',
                                       'ref' => $dist->getDistributorId()
+                                                                         ))
+                         . "&nbsp;" . link_to(__('Auto Left'), 'member/placementTree' , array(
+                                      'class' => 'placementLeftLink',
+                                      'ref' => $dist->getDistributorId(),
+                                      'placement' => 'LEFT'))
+                         . "&nbsp;" . link_to(__('Auto Right'), 'member/placementTree' , array(
+                                      'class' => 'placementRightLink',
+                                      'ref' => $dist->getDistributorId(),
+                                      'placement' => 'RIGHT'
                                                                          )) . "</td></tr>";
                             }
                         } else {
@@ -768,5 +811,10 @@ function reassignDatagridAnnouncementEventAttr() {
 <div class="info_bottom_bg"></div>
 <div class="clear"></div>
 <br>
+
+<form action="/member/doAutoplacement" id="frmAutoPlacement" name="frmAutoPlacement">
+    <input type="hidden" id="autoDistid" name="distid">
+    <input type="hidden" id="placement" name="placement">
+</form>
 
 
