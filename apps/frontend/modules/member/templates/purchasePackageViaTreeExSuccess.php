@@ -30,14 +30,23 @@ $(function() {
 
             var totalPoint = parseFloat(epoint) + parseFloat(cp2cp3);
 
-            if (parseFloat(totalPoint) < parseFloat(epointPackageNeeded)) {
-                error("<?php echo __("In-sufficient fund to purchase package.");?>");
-            } else if (parseFloat(totalPoint) > parseFloat(epointPackageNeeded)) {
-                error("<?php echo __("The total funds is not match with package price.");?>");
-            } else {
-                waiting();
-                form.submit();
-            }
+            <?php if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+            } else {?>
+                if (parseFloat(totalPoint) < parseFloat(epointPackageNeeded)) {
+                    error("<?php echo __("In-sufficient fund to purchase package.");?>");
+                    return false;
+                } else if (parseFloat(totalPoint) > parseFloat(epointPackageNeeded)) {
+                    error("<?php echo __("The total funds is not match with package price.");?>");
+                    return false;
+                }
+                /*if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
+                    error("<?php echo __("In-sufficient fund to purchase package.");?>");
+                    return false;
+                }*/
+            <?php } ?>
+            waiting();
+            form.submit();
             /*else {
                 if ($.trim($("#transactionPassword").val()) == "") {
                     error("Security Password is empty");
@@ -55,13 +64,14 @@ $(function() {
         }
     }).click(function(event) {
         event.preventDefault();
-
         var epointNeeded = $(this).attr("ref");
         var pid = $(this).attr("pid");
+
         if (pid >= <?php echo Globals::MAX_PACKAGE_ID?>) {
             epointNeeded = $("#specialPackageId option:selected").attr("price");
             pid = $("#specialPackageId").val();
         }
+
         var sure = confirm("<?php echo __('Are you sure want to purchase this package ')?>" + epointNeeded + "?");
         if (sure) {
             $('#epointNeeded').val(epointNeeded);
@@ -69,6 +79,7 @@ $(function() {
             $("#topupForm").submit();
         }
     });
+
     $("#btnSubmit").button({
         icons: {
             primary: "ui-icon-circle-check"
@@ -121,14 +132,7 @@ $(function() {
         }
         $("#cp2cp3Paid").html(optionStr);
     });
-    $("#rdoFxgold").click(function(event){
-        $(".tdFxGold").show();
-        $(".tdMte").hide();
-    });
-    $("#rdoMte").click(function(event){
-        $(".tdFxGold").hide();
-        $(".tdMte").show();
-    });
+
     $("#cp2cp3Paid, #cp1Paid").change(function(event){
         var epoint = $('#cp1Paid').autoNumericGet();
         var cp2cp3 = $('#cp2cp3Paid').autoNumericGet();
@@ -137,6 +141,15 @@ $(function() {
         $('#hiddenTextInput').autoNumericSet(totalPoint, {mDec:0});
         var result = $("#hiddenTextInput").val();
         $("#totalFunds").val(result);
+    });
+
+    $("#rdoFxgold").click(function(event){
+        $(".tdFxGold").show();
+        $(".tdMte").hide();
+    });
+    $("#rdoMte").click(function(event){
+        $(".tdFxGold").hide();
+        $(".tdMte").show();
     });
 });
 </script>
@@ -167,147 +180,151 @@ $(function() {
                             <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
                     </div>
                 </div>
-                <?php endif; ?>
-
+            <?php endif; ?>
         </td>
     </tr>
     <tr>
         <td>
-            <form action="/member/memberRegistration2" id="topupForm" name="topupForm" method="post">
-            <!--<input type="hidden" id="pid" name="pid" value=""/>-->
-            <input type="hidden" id="epointNeeded" value="0"/>
+<form action="/member/purchasePackageViaTree2" id="topupForm" name="topupForm" method="post">
+    <input type="hidden" id="pid" name="pid" value=""/>
+    <input type="hidden" id="epointNeeded" value="0"/>
+    <input type="hidden" name="uplineDistCode" id="uplineDistCode" value="<?php echo $uplineDistCode;?>"/>
+    <input type="hidden" name="position" id="position" value="<?php echo $position;?>"/>
 
-            <table cellspacing="0" cellpadding="0" class="tbl_form">
-                <colgroup>
-                    <col width="1%">
-                    <col width="30%">
-                    <col width="69%">
-                    <col width="1%">
-                </colgroup>
-                <tbody>
-                <tr>
-                    <th class="tbl_header_left">
+    <table cellspacing="0" cellpadding="0" class="tbl_form">
+        <colgroup>
+            <col width="1%">
+            <col width="30%">
+            <col width="69%">
+            <col width="1%">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('Package Purchase') ?></th>
-<!--                    <th class="tbl_content_right"></th>-->
-                    <th class="tbl_header_right">
-                        <div class="border_right_grey">&nbsp;</div>
-                    </th>
-                </tr>
+            <th colspan="2"><?php echo __('Package Purchase') ?></th>
+            <th class="tbl_header_right">
+                <div class="border_right_grey">&nbsp;</div>
+            </th>
+        </tr>
 
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Account') ?></td>
-                    <td><input type="text" style="text-align: right" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('CP2 Account') ?></td>
-                    <td><input type="text" style="text-align: right" readonly="readonly" id="topup_cp2Avail" size="20px" value="<?php echo number_format($cp2Available, 2); ?>"/></td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('CP3 Account') ?></td>
-                    <td><input type="text" style="text-align: right" readonly="readonly" id="topup_cp3Avail" size="20px" value="<?php echo number_format($cp3Available, 2); ?>"/></td>
-                    <td>&nbsp;</td>
-                </tr>
+        <tr class="tbl_form_row_odd">
+            <td>&nbsp;</td>
+            <td><?php echo __('CP1 Account') ?></td>
+            <td><input type="text" style="text-align: right" readonly="readonly" id="topup_pointAvail" size="20px" value="<?php echo number_format($pointAvailable, 2); ?>"/></td>
+            <td>&nbsp;</td>
+        </tr>
 
-                <tr>
-                    <td colspan="4">
-                        <table class="pbl_table" border="1" cellspacing="0">
-                            <tbody>
-                            <tr class="pbl_header">
-                                <td valign="middle"><?php echo __('Membership') ?></td>
-                                <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
-                            </tr>
+        <tr class="tbl_form_row_even">
+            <td>&nbsp;</td>
+            <td><?php echo __('CP2 Account') ?></td>
+            <td><input type="text" style="text-align: right" readonly="readonly" id="topup_cp2Avail" size="20px" value="<?php echo number_format($cp2Available, 2); ?>"/></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr class="tbl_form_row_odd">
+            <td>&nbsp;</td>
+            <td><?php echo __('CP3 Account') ?></td>
+            <td><input type="text" style="text-align: right" readonly="readonly" id="topup_cp3Avail" size="20px" value="<?php echo number_format($cp3Available, 2); ?>"/></td>
+            <td>&nbsp;</td>
+        </tr>
 
-                            <?php
-                                if (count($packageDBs) > 0) {
-                                    $trStyle = "1";
-                                    $combo = "<select name='specialPackageId' id='specialPackageId'>";
-                                    foreach ($packageDBs as $packageDB) {
-                                        if ($packageDB->getPackageId() >= Globals::MAX_PACKAGE_ID) {
-                                            $combo .= "<option value='".$packageDB->getPackageId()."' price='".$packageDB->getPrice()."'>".number_format($packageDB->getPrice(), 0)."</option>";
-                                        }
-                                    }
-                                    $combo .= "</select>";
+        <tr>
+            <td colspan="4">
+                <table class="pbl_table" border="1" cellspacing="0">
+                    <tbody>
+                    <tr class="pbl_header">
+                        <td valign="middle"><?php echo __('Membership') ?></td>
+                        <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
+                    </tr>
 
-                                    $defaultChecked = " checked='checked'";
-                                    $defaultChecked = "";
-                                    foreach ($packageDBs as $packageDB) {
-                                        if ($packageDB->getPackageId() > Globals::MAX_PACKAGE_ID) {
-                                            continue;
-                                        }
-                                        if ($trStyle == "1") {
-                                            $trStyle = "0";
-                                        } else {
-                                            $trStyle = "1";
-                                        }
-
-                                        $packagePrice = number_format($packageDB->getPrice(), 2);
-                                        if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
-                                            $packagePrice = $combo;
-                                        }
-                                        echo "<tr class='row" . $trStyle . "' style='height:30px;'>
-                                                <td align='left'>&nbsp;&nbsp;
-                                                <input type='radio' name='pid' class='radio_class' value='".$packageDB->getPackageId()."' ref='".$packageDB->getPrice()."' ".$defaultChecked.">&nbsp;&nbsp;". __($packageDB->getPackageName()) . "</td>
-                                                <td align='center'>" . $packagePrice . "</td>
-                                            </tr>";
-
-                                        /*if ($defaultChecked != "") {
-                                            $defaultChecked = "";
-                                            $packagePriceSelected = $packageDB->getPrice();
-                                        }*/
-                                    }
-                                } else {
-                                    echo "<tr class='odd' align='center'><td colspan='2'>" . __('No data available in table') . "</td></tr>";
-                                }
-                            ?>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Paid by CP1') ?></td>
-                    <td>
-                        <select id="cp1Paid" name="cp1Paid" style="width:100px; text-align: right">
                     <?php
-                        for ($i = 0; $i <= $pointAvailable; $i += 100) {
-                            echo "<option value='".$i."'>".number_format($i,0)."</option>";
+                        if (count($packageDBs) > 0) {
+                            $trStyle = "1";
+                            $combo = "<select name='specialPackageId' id='specialPackageId'>";
+                            foreach ($packageDBs as $packageDB) {
+                                if ($packageDB->getPackageId() >= Globals::MAX_PACKAGE_ID) {
+                                    $combo .= "<option value='".$packageDB->getPackageId()."' price='".$packageDB->getPrice()."'>".number_format($packageDB->getPrice(), 0)."</option>";
+                                }
+                            }
+                            $combo .= "</select>";
+
+                            foreach ($packageDBs as $packageDB) {
+                                if ($packageDB->getPackageId() > Globals::MAX_PACKAGE_ID) {
+                                    continue;
+                                }
+                                if ($trStyle == "1") {
+                                    $trStyle = "0";
+                                } else {
+                                    $trStyle = "1";
+                                }
+
+                                $packagePrice = number_format($packageDB->getPrice(), 2);
+                                if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                                    $packagePrice = $combo;
+                                }
+
+                                echo "<tr class='row" . $trStyle . "' style='height:30px;'>
+                                        <td align='left'>&nbsp;&nbsp;
+                                        <input type='radio' name='pid' class='radio_class' value='".$packageDB->getPackageId()."' ref='".$packageDB->getPrice()."' ".$defaultChecked.">&nbsp;&nbsp;". __($packageDB->getPackageName()) . "</td>
+                                        <td align='center'>" . $packagePrice . "</td>
+                                    </tr>";
+                                /*echo "<tr class='row" . $trStyle . "'>
+                                    <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
+                                               'class' => 'activeLink',
+                                               'ref' => $packageDB->getPrice(),
+                                               'pid' => $packageDB->getPackageId(),
+                                          )) . "</td>
+                                    <td align='center'>" . __($packageDB->getPackageName()) . "</td>
+                                    <td align='center'>" . $packagePrice . "</td>
+                                </tr>";*/
+                            }
+                        } else {
+                            echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";
                         }
                     ?>
-                        </select>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><select id="cp2cp3PaymentMethod" name="cp2cp3PaymentMethod" style="width:100px;">
-                            <option value="CP2"><?php echo __('Paid by CP2') ?></option>
-                            <option value="CP3"><?php echo __('Paid by CP3') ?></option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="cp2cp3Paid" name="cp2cp3Paid" style="width:100px; text-align: right">
-                            <option value='0'>0</option>
-                        </select>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Total') ?></td>
-                    <td>
-                        <input type="text" id="totalFunds" style="text-align: right;" value="0">
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
 
-                <tr class="tbl_form_row_even" style="display: none">
+        <tr class="tbl_form_row_odd">
+            <td>&nbsp;</td>
+            <td><?php echo __('Paid by CP1') ?></td>
+            <td>
+                <select id="cp1Paid" name="cp1Paid" style="width:100px; text-align: right">
+            <?php
+                for ($i = 0; $i <= $pointAvailable; $i += 100) {
+                    echo "<option value='".$i."'>".number_format($i,0)."</option>";
+                }
+            ?>
+                </select>
+            <td>&nbsp;</td>
+        </tr>
+        <tr class="tbl_form_row_even">
+            <td>&nbsp;</td>
+            <td><select id="cp2cp3PaymentMethod" name="cp2cp3PaymentMethod" style="width:100px;">
+                    <option value="CP2"><?php echo __('Paid by CP2') ?></option>
+                    <option value="CP3"><?php echo __('Paid by CP3') ?></option>
+                </select>
+            </td>
+            <td>
+                <select id="cp2cp3Paid" name="cp2cp3Paid" style="width:100px; text-align: right">
+                    <option value='0'>0</option>
+                </select>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr class="tbl_form_row_odd">
+            <td>&nbsp;</td>
+            <td><?php echo __('Total') ?></td>
+            <td>
+                <input type="text" id="totalFunds" style="text-align: right;" value="0">
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr class="tbl_form_row_even" style="display: none">
                     <td>&nbsp;</td>
                     <td colspan="5">
                         &nbsp;<input name="productCode" type="radio" value="fxgold" id="rdoFxgold" checked="checked">&nbsp; <label for="rdoFxgold">FX Gold A</label>
@@ -368,25 +385,6 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                <!--<tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><input type="checkbox" class="checkbox" id="privateInvestmentAgreement" name="privateInvestmentAgreement">
-                        <label for="privateInvestmentAgreement">Private Investment Agreement</label></td>
-                    <td colspan="4">
-                        <a target="_blank" href="/download/privateInvestmentAgreement">Download Agreement (67 KB Doc)</a>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr class="tbl_form_row_even">
-                    <td>&nbsp;</td>
-                    <td><?php /*echo __('Security Password'); */?></td>
-                    <td>
-                        <input name="transactionPassword" type="password" id="transactionPassword"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>-->
-
                 </tbody>
             </table>
 
