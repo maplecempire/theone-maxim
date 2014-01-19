@@ -1396,6 +1396,13 @@ class memberActions extends sfActions
 
         $this->uplineDistCode = $uplineDistCode;
         $this->position = $position;
+
+        // amz001 chales (20130113)
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+            $this->cp2Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+            $this->cp3Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+            $this->setTemplate('purchasePackageViaTreeEx');
+        }
     }
     public function executePurchasePackageViaTree2()
     {
@@ -1417,7 +1424,10 @@ class memberActions extends sfActions
         if ($this->getRequestParameter('pid') <> "") {
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
-            $this->forward404Unless($selectedPackage);
+            if (!$selectedPackage) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                return $this->redirect('/member/purchasePackageViaTree');
+            }
 
             $amountNeeded = $selectedPackage->getPrice();
 
@@ -1426,16 +1436,58 @@ class memberActions extends sfActions
             }*/
 
             $existDist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTID)));
-            $this->forward404Unless($existDist);
+            if (!$existDist) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                return $this->redirect('/member/purchasePackageViaTree');
+            }
             $this->sponsorId = $existDist->getDistributorCode();
             $this->sponsorName = $existDist->getFullName();
 
             if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
             } else {
-                if ($amountNeeded > $ledgerEPointBalance) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
-                    return $this->redirect('/member/purchasePackageViaTree');
+                if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
+                    $ledgerCp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $ledgerCp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $this->cp2cp3PaymentMethod = $this->getRequestParameter('cp2cp3PaymentMethod');
+                    $this->cp2cp3Paid = $this->getRequestParameter('cp2cp3Paid');
+                    $this->cp1Paid = $this->getRequestParameter('cp1Paid');
+
+                    $maxCp2Cp3 = $amountNeeded / 2;
+                    if ($this->cp1Paid > $ledgerEPointBalance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                    if ($this->cp2cp3PaymentMethod == "CP2") {
+                        if ($this->cp2cp3Paid > $ledgerCp2Balance) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2 amount"));
+                            return $this->redirect('/member/memberRegistration');
+                        }
+                        if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp2"));
+                            return $this->redirect('/member/memberRegistration');
+                        }
+                    } else if ($this->cp2cp3PaymentMethod == "CP3") {
+                        if ($this->cp2cp3Paid > $ledgerCp3Balance) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3 amount"));
+                            return $this->redirect('/member/memberRegistration');
+                        }
+                        if ($this->cp2cp3Paid > $maxCp2Cp3) {
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Exceed the maximum amount of cp3"));
+                            return $this->redirect('/member/memberRegistration');
+                        }
+                    }
+                    $total = $this->cp2cp3Paid + $this->cp1Paid;
+                    if ($amountNeeded > $total) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Fund"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+                } else {
+                    if ($amountNeeded > $ledgerEPointBalance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                        return $this->redirect('/member/purchasePackageViaTree');
+                    }
                 }
             }
 
