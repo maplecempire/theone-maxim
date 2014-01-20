@@ -747,10 +747,12 @@ function reassignDatagridAnnouncementEventAttr() {
                          . "&nbsp;" . link_to(__('Auto Left'), 'member/placementTree' , array(
                                       'class' => 'placementLeftLink',
                                       'ref' => $dist->getDistributorId(),
+                                      'style' => 'display:none',
                                       'placement' => 'LEFT'))
                          . "&nbsp;" . link_to(__('Auto Right'), 'member/placementTree' , array(
                                       'class' => 'placementRightLink',
                                       'ref' => $dist->getDistributorId(),
+                                      'style' => 'display:none',
                                       'placement' => 'RIGHT'
                                                                          )) . "</td></tr>";
                             }
