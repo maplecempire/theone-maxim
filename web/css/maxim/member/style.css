@@ -62,7 +62,7 @@ float:left;
 background:url(images/sidebar_bg.png) repeat-y;
 width:324px;
 height:100%;
-min-height:1180px;
+min-height:1220px;
 position:absolute;
 margin-left:-315px;
 top:0;
@@ -73,7 +73,7 @@ left:0;
 float:left;
 width:666px;
 
-min-height:1180px;
+min-height:1220px;
 background:url(images/page-bg.png) repeat-y;
 position:absolute;
 top:0;
