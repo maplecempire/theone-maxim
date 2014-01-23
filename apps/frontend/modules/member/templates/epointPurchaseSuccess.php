@@ -298,11 +298,16 @@ $(function() {
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td valign="top"><font color="#dc143c"><?php echo __('NOTE :'); ?></font></td>
-                                <td>
-                                    <font color="#dc143c"><?php echo __('Funds Deposited will be credited into CP1 Account.'); ?>
-                                    <br><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.'); ?>
-                                    <br><?php echo $systemCurrency?> <?php echo __('1 equals to 1 value of CP1'); ?>.&nbsp;</font>
+                                <td colspan="2" valign="top">
+                                     &nbsp;
+                                    <font color="#dc143c"> <?php echo __('NOTE :') ?></font>
+                                    <br>
+                                    <ol style="color: #dc143c; padding-left: 20px;">
+                                        <li><?php echo __('Funds Deposited will be credited into CP1 Account.') ?></li>
+                                        <li><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.') ?></li>
+                                        <li><?php echo $systemCurrency?> <?php echo __('1 equals to 1 value of CP1'); ?>.&nbsp;</li>
+                                        <li><?php echo __('Payment via credit card is subject to an extra 5% charge') ?></li>
+                                    </ol>
                                 </td>
                             </tr>
                         </table>
