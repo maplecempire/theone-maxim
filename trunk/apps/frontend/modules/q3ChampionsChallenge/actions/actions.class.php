@@ -398,6 +398,8 @@ class q3ChampionsChallengeActions extends sfActions
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
         foreach ($distDBs as $distDB) {
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
 
@@ -426,6 +428,21 @@ class q3ChampionsChallengeActions extends sfActions
             }
 
             $distDB->setBkkStatus("COMPLETE");
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $distDB->setNomineeName($leader);
             $distDB->save();
         }
 

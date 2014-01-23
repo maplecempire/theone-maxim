@@ -977,7 +977,66 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='1'>LACD LEGAL WARNING NOTICE TAKE NOTICE THAT: LACD法律部警示</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='1'>2014 US Martin Luther King Jr. Holiday</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "19 JANUARY 2014";
+                ?>
+            </div>
+
+            <div id="page_1" class="news_desc" style="text-align: left; display: none">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse" valign="top">
+                            <p>Dear Trader,</p>
+
+                            <p>Maxim would like to inform you that on Monday 20th of January certain instruments will be closed for trading during the U.S. trading session due to Martin Luther King day.</p>
+
+                            <p>Please find below the list of the affected instruments (timing base on MT4 server, GMT+2):</p>
+
+                            <table border="1">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3" style="border-collapse:collapse">Monday 20th Jan, 2014:</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="164" style="border-collapse:collapse">&nbsp;</td>
+                                        <td width="144" style="border-collapse:collapse"><strong>Close (Today)</strong></td>
+                                        <td bgcolor="#F2F2F2" style="border-collapse:collapse"><strong>Re Open (21st of January)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-collapse:collapse">XAU/USD</td>
+                                        <td style="border-collapse:collapse"><span class="aBn" data-term="goog_1344016735" tabindex="0"><span class="aQJ">20:00</span></span></td>
+                                        <td bgcolor="#F2F2F2" style="border-collapse:collapse"><span class="aBn" data-term="goog_1344016736" tabindex="0"><span class="aQJ">01:00</span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-collapse:collapse">XAG/USD</td>
+                                        <td style="border-collapse:collapse"><span class="aBn" data-term="goog_1344016737" tabindex="0"><span class="aQJ">20:00</span></span></td>
+                                        <td bgcolor="#F2F2F2" style="border-collapse:collapse"><span class="aBn" data-term="goog_1344016738" tabindex="0"><span class="aQJ">01:00</span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-collapse:collapse">CFD</td>
+                                        <td style="border-collapse:collapse">Closed</td>
+                                        <td bgcolor="#F2F2F2" style="border-collapse:collapse">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>*Please be advised that on holidays a low trading volume and illiquidity; high spreads and volatility in markets are expected</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='2'>LACD LEGAL WARNING NOTICE TAKE NOTICE THAT: LACD法律部警示</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -986,7 +1045,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_1" class="news_desc" style="text-align: left; display: none">
+            <div id="page_2" class="news_desc" style="text-align: left; display: none">
                 <br>It has come to the attention of the Company that some Maxim Members, and others, are allegedly in breach of COPYRIGHT LAW, by causing the unauthorized replication of the Company’s, Maxim Trader, Official Website and using the same to their own advantage to the complete detriment and financial loss of the lawful owner of the Copy Right, Maxim Capital Ltd, and its Registered Mark “Maxim Trader.”
                 <br>我们最近注意到部分马胜金融集团的会员涉嫌违法版权法，未经授权使用公司名称、公司商标以及公司官网作个人目的，并给马胜资本有限公司、“马胜金融集团”商标带来损害以及财务损失。
                 <br>
@@ -1008,7 +1067,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='2'>Attention</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='3'>Attention</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1016,7 +1075,7 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div id="page_2" class="news_desc" style="text-align: left; display: none">
+            <div id="page_3" class="news_desc" style="text-align: left; display: none">
                 <br>This is the OFFICIAL WEBSITE of Maxim Trader. Unauthorized use and replication of company information is not permitted unless with the written approval of LACD. Any infringement of this policy will result in immediate suspension followed by termination if necessary.
                 <br>
                 <div class="popdivider"></div>
@@ -1027,7 +1086,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='3'>10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='4'>10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1035,7 +1094,7 @@ $(document).ready(function() {
                 echo "08 JANUARY 2014";
                 ?>
             </div>
-            <div id="page_3" class="news_desc" style="text-align: left; display: none">
+            <div id="page_4" class="news_desc" style="text-align: left; display: none">
                 <br>Dear Leaders and Partners, Maxim Capital Limited is pleased to confirm that our 1st Annual Extravaganza Dinner & Dance will be held in the fun city of Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia during March 9th to 12th. Proudly, we will be booking the entire hotel and on the 10th, our Gala Dinner and Dance promises to be an historical event with celebrities and dignitaries from the world over.
                 <br>For more details and other arrangements, please contact our Corporate Events Executive Ms Catherine +60 10 465 3832
                 <br>
@@ -1053,7 +1112,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='4'>IMPORTANT ANNOUNCEMENT!!! End of Promo - CP2 to CP1 extra 5%</a>
+                <a href='#' class="page_link" ref='5'>IMPORTANT ANNOUNCEMENT!!! End of Promo - CP2 to CP1 extra 5%</a>
             </div>
             <div class="news_date">
             <?php
@@ -1061,7 +1120,7 @@ $(document).ready(function() {
                 echo "04 JANUARY 2014";
                 ?>
             </div>
-            <div id="page_4" class="news_desc" style="text-align: left; display: none">
+            <div id="page_5" class="news_desc" style="text-align: left; display: none">
                 <br>End of Promo - CP2 to CP1 extra 5%
                 <br>
                 <br>Dear Partners and Leaders,
@@ -1087,7 +1146,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='5'>NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED</a>
+                <a href='#' class="page_link" ref='6'>NEW GTS FUNDING INSTRUCTION - MAXIM CAPITAL LIMITED</a>
             </div>
             <div class="news_date">
             <?php
@@ -1095,7 +1154,7 @@ $(document).ready(function() {
                 echo "25 DECEMBER 2013";
                 ?>
             </div>
-            <div id="page_5" class="news_desc" style="display: none">
+            <div id="page_6" class="news_desc" style="display: none">
                 <?php
                 if ($culture == "kr") {
                 ?>
@@ -1305,7 +1364,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='6'>Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象</a>
+                <a href='#' class="page_link" ref='7'>Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象</a>
             </div>
             <div class="news_date">
             <?php
@@ -1313,7 +1372,7 @@ $(document).ready(function() {
                 echo "23 DECEMBER 2013";
                 ?>
             </div>
-            <div id="page_6" class="news_desc" style="text-align:left; display: none">
+            <div id="page_7" class="news_desc" style="text-align:left; display: none">
                 <br>
                 Holiday Trading and Support Hours 马胜金融集团恭祝您节日快乐,新年新气象
                 <br><br>
@@ -1625,7 +1684,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='7'>IMPORTANT ANNOUNCEMENT!!!</a>
+                <a href='#' class="page_link" ref='8'>IMPORTANT ANNOUNCEMENT!!!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1633,7 +1692,7 @@ $(document).ready(function() {
                 echo "23 OCTOBER 2013";
                 ?>
             </div>
-            <div id="page_7" class="news_desc" style="display: none; text-align:left">
+            <div id="page_8" class="news_desc" style="display: none; text-align:left">
                 <br>
                 IMPORTANT ANNOUNCEMENT!!!
                 <br><br>
@@ -1710,7 +1769,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='8'>IMPORTANT ANNOUNCEMENT!!!</a>
+                <a href='#' class="page_link" ref='9'>IMPORTANT ANNOUNCEMENT!!!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1718,7 +1777,7 @@ $(document).ready(function() {
                 echo "4 OCTOBER 2013";
                 ?>
             </div>
-            <div id="page_8" class="news_desc" style="display: none; text-align:left">
+            <div id="page_9" class="news_desc" style="display: none; text-align:left">
                 <br>
                 IMPORTANT ANNOUNCEMENT!!!
                 <br><br>
@@ -1760,7 +1819,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='9'>Q3 Champions Challenge</a>
+                <a href='#' class="page_link" ref='10'>Q3 Champions Challenge</a>
             </div>
             <div class="news_date">
             <?php
@@ -1768,7 +1827,7 @@ $(document).ready(function() {
                 echo "25 AUGUST 2013";
                 ?>
             </div>
-            <div id="page_9" class="news_desc" style="display: none;">
+            <div id="page_10" class="news_desc" style="display: none;">
                 <br>
                 SUPER ANNOUNCEMENT for those Registered for Q3 Challenge 2013. In addition to the many great prizes already up for grabs, it gives us tremendous pleasure to throw in a Rolex Air King for anyone and everyone that achieves a personal sales of USD200K. For those who have not registered but would like to participate, you have till August 31st to do so. Your  cumulative personal sales from August 5th to Sept 30th will be captured for the Q3 Challenge. Go For It !!! GOOD LUCK & GOOD HUNTING MAXIMers !!!!
                 <br>
@@ -1790,7 +1849,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='10'>Q3 Champions Challenge - BMW 5 Series</a>
+                <a href='#' class="page_link" ref='11'>Q3 Champions Challenge - BMW 5 Series</a>
             </div>
             <div class="news_date">
             <?php
@@ -1798,7 +1857,7 @@ $(document).ready(function() {
                 echo "4 AUGUST 2013";
                 ?>
             </div>
-            <div id="page_10" class="news_desc" style="display: none">
+            <div id="page_11" class="news_desc" style="display: none">
                 <br>
                 <a class="fancybox-fittoview" data-fancybox-group="thumb" href="/uploads/activities/q3_champions_challenge.jpg"><img width="460"  src="/uploads/activities/q3_champions_challenge.jpg" alt = "Q3 Champions Challenge - BMW 5 Series‏"></a><br>
             </div>
@@ -1807,23 +1866,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='11'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
-            </div>
-            <div class="news_date">
-            <?php
-                $dateUtil = new DateUtil();
-                echo "8 JULY 2013";
-                ?>
-            </div>
-            <div id="page_11" class="news_desc" style="display: none">
-                <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
-            </div>
-
-            <div class="popdivider"></div>
-        </div>
-        <div class="page">
-            <div class="poptitle">
-                <a href='#' class="page_link" ref='11'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
+                <a href='#' class="page_link" ref='12'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
             </div>
             <div class="news_date">
             <?php
@@ -1832,6 +1875,22 @@ $(document).ready(function() {
                 ?>
             </div>
             <div id="page_12" class="news_desc" style="display: none">
+                <br><img width="460"  src="http://partner.maximtrader.com/images/email/Maxim_IME_Poster.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='13'>INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)</a>
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "8 JULY 2013";
+                ?>
+            </div>
+            <div id="page_13" class="news_desc" style="display: none">
                 <br><img width="460"  src="http://partner.maximtrader.com/images/email/IME_Poster_<?php echo $culture;?>.jpg" alt = "INAUGURAL INTERNATIONAL MEMBER EXCHANGE (IME)‏"></a><br>
             </div>
 
