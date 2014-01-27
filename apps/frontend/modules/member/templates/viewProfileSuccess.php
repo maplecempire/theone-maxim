@@ -82,7 +82,7 @@ $(function() {
     });
 
     jQuery.validator.addMethod("latinRegex", function(value, element) {
-        return this.optional(element) || /^[a-z0-9\-\s\_\/\.]+$/i.test(value);
+        return this.optional(element) || /[a-zA-Z\-\'\ ]/i.test(value);
     }, "This field only accept latin word, numbers, or dashes.");
 
     $("#bankForm").validate({
