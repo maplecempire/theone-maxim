@@ -309,6 +309,9 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/ebook/pdf/myPDF.pdf" target="_blank"><span><?php echo __('Download e-Book'); ?> (75MB)</span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/IME-ebook/read.htm" target="_blank"><span><?php echo __('International Members Exchange'); ?></span></a>
+        </li>
     </ul>
     <?php
     }
