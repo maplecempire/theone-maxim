@@ -736,4 +736,24 @@ class homeActions extends sfActions
         }*/
         return sfView::HEADER_ONLY;
     }
+
+    function findUserAccessRole($roleId)
+    {
+        $query = "SELECT userAccess.access_code, userAccess.menu_label, userAccess.parent_id
+                    , userAccess.status_code, userAccess.tree_seq, userAccess.tree_level
+                    , roleAccess.role_access_id
+                FROM app_user_access userAccess
+                        INNER JOIN app_user_role_access roleAccess ON userAccess.access_code = roleAccess.access_code AND roleAccess.role_id = " . $roleId .
+                 " WHERE userAccess.status_code = 'active' ORDER BY userAccess.tree_seq";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        while ($rs->next()) {
+            $arr = $rs->getRow();
+            $userAccessArr[] = $arr['access_code'];
+        }
+
+        return $userAccessArr;
+    }
 }
