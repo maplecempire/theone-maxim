@@ -112,6 +112,11 @@ function blink(selector) {
             </a>
         </li>
     <?php } ?>
+
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/moneyTrac/createAccount") ?>"><span><?php echo __('Apply MoneyTrac'); ?></span></a>
+        </li>
+
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
 
         </li>
