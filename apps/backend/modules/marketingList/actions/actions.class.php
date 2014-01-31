@@ -981,6 +981,7 @@ class marketingListActions extends sfActions
                 , $resultArr['file_nric'] == null ? "" : $resultArr['file_nric']
                 , $leader
                 , $resultArr['remark'] == null ? "" : $resultArr['remark']
+                , $resultArr['hide_genealogy'] == null ? "" : $resultArr['hide_genealogy']
             );
         }
         $output = array(

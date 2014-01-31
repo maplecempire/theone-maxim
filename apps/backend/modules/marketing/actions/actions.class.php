@@ -915,10 +915,10 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     }
     public function executeGenealogyManagement()
     {
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
-        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-        $this->dists = MlmDistributorPeer::doSelect($c);
+//        $c = new Criteria();
+//        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+//        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+//        $this->dists = MlmDistributorPeer::doSelect($c);
     }
     public function executeDoUpdateHideGenealogy()
     {

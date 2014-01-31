@@ -129,6 +129,7 @@ $(function(){
                       }}
                 , { "sName" : "dist.created_on",  "bSortable": false}
                 , { "sName" : "dist.remark",  "bVisible": false}
+                , { "sName" : "dist.hide_genealogy",  "bVisible": false}
 		]
 	});
 
@@ -270,6 +271,7 @@ function reassignDatagridEventAttr(){
 								<th>NRIC</th>
 								<th>Leader</th>
 								<th>Remark</th>
+								<th>Hide Genealogy</th>
 							</tr>
                             <tr>
                                 <td></td>
@@ -297,6 +299,7 @@ function reassignDatagridEventAttr(){
                                 <td></td>
                                 <td><input title="" size="10" type="text" id="search_parentCode" value="" class="search_init"/></td>
                                 <td><input title="" size="10" type="text" id="search_statusCode" value="" class="search_init"/></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
