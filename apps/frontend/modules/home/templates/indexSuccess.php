@@ -978,6 +978,44 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='14'>MoneyTrac - FOR NOW AND UNTIL FURTHER NOTICE, ONLY AVAILABLE FOR M'sians 直到有进一步通知，Money Trac服务目前只对马来西亚客户开放</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "31 JANUARY 2014";
+                ?>
+            </div>
+
+            <div id="page_14" class="news_desc" style="text-align: left; display: none">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse" valign="top">
+                            <p>Dear Partners and Leaders,</p>
+
+                            <p>亲爱的领导人与伙伴们：</p>
+
+                            <p>In an effort to serve you better in 2014, we have tied up with MoneyTrac (product of GlobalPayout.com) which is an international payment gateway that offers a variety of options to receive and disburse your Maxim earnings.</p>
+
+                            <p>为了在2014年更好地服务所有伙伴,我们已与一家国际支付渠道MoneyTrac(Global Payout. com旗下产品)达成合作协议，为您马胜的收入提供更丰富的出金渠道。</p>
+
+                            <p>We encourage you to Sign Up for your MoneyTrac e-wallet account. Once done, you can transfer your CP2 & CP3 into your MoneyTrac account and thereafter decide if you want to load into your local bank(s) accounts, credit/debit cards. It is user friendly and a very efficient way to manage and utilise your Maxim$$$.</p>
+
+                            <p>我们鼓励所有的客户注册MoneyTrac电子钱包账户。一旦注册成功，您可以选择将您的CP2和CP3转入您的MoneyTrac账户，之后您可再选择将金钱转至于您的本地借记卡或信用卡。该账户使用非常方便，处理高效。</p>
+
+                            <p>Say YES TO MAXIM TRADER...</p>
+
+                            <p>确认马胜说：YES!</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div><div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='1'>2014 US Martin Luther King Jr. Holiday</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
