@@ -626,7 +626,8 @@ ul, ol {
             </script>
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
-            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/christmas.jpg"><img width="582" src="/images/christmas.jpg" alt="" title="Merry Christmas & Happy New Year" class="aligncenter size-full wp-image-162"></a></p>
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/CNY.jpg"><img width="582" src="/images/CNY.jpg" alt="" title="Happy Chinese New Year" class="aligncenter size-full wp-image-162"></a></p>
+<!--            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/christmas.jpg"><img width="582" src="/images/christmas.jpg" alt="" title="Merry Christmas & Happy New Year" class="aligncenter size-full wp-image-162"></a></p>-->
             <div class="hr2"></div>
             <?php if ($culture == "cn") {?>
                 <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/cn_shanghai_fair_banner.jpg"><img width="582" src="/images/cn_shanghai_fair_banner.jpg" alt="" title="SHANGHAI FAIR" class="aligncenter size-full wp-image-162"></a></p>
