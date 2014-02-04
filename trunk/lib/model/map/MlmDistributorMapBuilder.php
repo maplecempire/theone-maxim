@@ -230,5 +230,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('BKK_STATUS', 'BkkStatus', 'string', CreoleTypes::VARCHAR, false, 10);
 
+		$tMap->addColumn('MONEYTRAC_CUSTOMER_ID', 'MoneytracCustomerId', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('MONEYTRAC_USERNAME', 'MoneytracUsername', 'string', CreoleTypes::VARCHAR, false, 50);
+
 	} 
 } 
