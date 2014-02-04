@@ -868,7 +868,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('MoneyTrac Username') ?></td>
+                    <td><?php echo __('MoneyTrac Full Name') ?></td>
                     <td>
                         <input name="moneyTracUsername" type="text" id="moneyTracUsername" size="30"
                                                          value="<?php echo $distDB->getMoneytracUsername() ?>"/>
@@ -878,7 +878,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('MoneyTrac Account Number') ?></td>
+                    <td><?php echo __('MoneyTrac Customer ID') ?></td>
                     <td>
                         <input name="moneyTracCustomerId" type="text" id="moneyTracCustomerId" size="30"
                                                          value="<?php echo $distDB->getMoneytracCustomerId() ?>"/>
