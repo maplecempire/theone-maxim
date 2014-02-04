@@ -2346,6 +2346,21 @@ class memberActions extends sfActions
         //return $this->redirect('/member/viewBankInformation');
         return $this->redirect('/member/viewProfile');
     }
+    public function executeUpdateMoneyTrac()
+    {
+        $mlm_distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->forward404Unless($mlm_distributor);
+
+        $mlm_distributor->setMoneytracUsername($this->getRequestParameter('moneyTracUsername'));
+        $mlm_distributor->setMoneytracCustomerId($this->getRequestParameter('moneyTracCustomerId'));
+        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_distributor->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Money Trac Information update successfully"));
+
+        //return $this->redirect('/member/viewBankInformation');
+        return $this->redirect('/member/viewProfile');
+    }
 
     public function executeUpdateBeneficiary()
     {
