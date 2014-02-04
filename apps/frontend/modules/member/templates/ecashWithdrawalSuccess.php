@@ -12,31 +12,32 @@
 
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
-            $("#withdrawForm").validate({
-                messages : {
-                    transactionPassword: {
-                        remote: "<?php echo __("Security Password is not valid")?>"
-                    }
-                },
-                rules : {
-                    "transactionPassword" : {
-                        required : true
-                        , remote: "/member/verifyTransactionPassword"
-                    }
-                },
-                submitHandler: function(form) {
-                    waiting();
-                    var ecashBalance = $('#ecashBalance').autoNumericGet();
-                    var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
 
-                    if (withdrawAmount > parseFloat(ecashBalance)) {
-                        alert("In-sufficient CP2");
-                        return false;
-                    }
-
-                    form.submit();
+        $("#withdrawForm").validate({
+            messages : {
+                transactionPassword: {
+                    remote: "<?php echo __("Security Password is not valid")?>"
                 }
-            });
+            },
+            rules : {
+                "transactionPassword" : {
+                    required : true
+                    , remote: "/member/verifyTransactionPassword"
+                }
+            },
+            submitHandler: function(form) {
+                waiting();
+                var ecashBalance = $('#ecashBalance').autoNumericGet();
+                var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
+
+                if (withdrawAmount > parseFloat(ecashBalance)) {
+                    alert("In-sufficient CP2");
+                    return false;
+                }
+
+                form.submit();
+            }
+        });
     });
 </script>
 
@@ -161,13 +162,20 @@
                     </td>
                     <td>
                         <select name="bankInTo" id="bankInTo">
-                            <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
+                            <?php
+                            $disable = "";
+
+                            if ($distributorDB->getCountry() == "Malaysia") {
+                                $disable = " disabled='disabled'";
+                            }
+                            if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>"><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC?>"><?php echo __('Money Trac'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>

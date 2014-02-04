@@ -162,6 +162,7 @@
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
                             <?php } ?>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>"><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC?>"><?php echo __('Money Trac'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
