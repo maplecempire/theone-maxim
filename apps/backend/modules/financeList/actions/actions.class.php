@@ -1711,6 +1711,8 @@ class financeListActions extends sfActions
                 $resultArr['bank_holder_name'] == null ? "" : $resultArr['bank_holder_name'],
                 $resultArr['bank_swift_code'] == null ? "" : $resultArr['bank_swift_code'],
                 $resultArr['visa_debit_card'] == null ? "" : $resultArr['visa_debit_card'],
+                $resultArr['moneytrac_customer_id'] == null ? "" : $resultArr['moneytrac_customer_id'],
+                $resultArr['moneytrac_username'] == null ? "" : $resultArr['moneytrac_username'],
                 $resultArr['package_name'] == null ? "" : $resultArr['package_name'],
                 $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
                 $resultArr['country'] == null ? "" : $resultArr['country']
@@ -1824,6 +1826,8 @@ class financeListActions extends sfActions
                 $resultArr['bank_holder_name'] == null ? "" : $resultArr['bank_holder_name'],
                 $resultArr['bank_swift_code'] == null ? "" : $resultArr['bank_swift_code'],
                 $resultArr['visa_debit_card'] == null ? "" : $resultArr['visa_debit_card'],
+                $resultArr['moneytrac_customer_id'] == null ? "" : $resultArr['moneytrac_customer_id'],
+                $resultArr['moneytrac_username'] == null ? "" : $resultArr['moneytrac_username'],
                 $resultArr['package_name'] == null ? "" : $resultArr['package_name'],
                 $resultArr['remarks'] == null ? "" : $resultArr['remarks'],
                 $resultArr['country'] == null ? "" : $resultArr['country']

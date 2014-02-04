@@ -64,6 +64,8 @@ $(function(){
             , { "sName" : "dist.bank_holder_name",  "bSortable": true}
             , { "sName" : "dist.bank_swift_code",  "bSortable": true}
             , { "sName" : "dist.visa_debit_card",  "bSortable": true}
+            , { "sName" : "dist.moneytrac_customer_id",  "bSortable": true}
+            , { "sName" : "dist.moneytrac_username",  "bSortable": true}
             , { "sName" : "pack.package_name",  "bSortable": true}
             , { "sName" : "withdraw.remarks",  "bSortable": true}
             , { "sName" : "dist.country",  "bSortable": true}
@@ -147,6 +149,8 @@ function reassignDatagridEventAttr(){
                             <th>Bank Holder Name</th>
                             <th>Bank Swift Code</th>
                             <th>Visa Debit Card</th>
+                            <th>Money Trac Customer ID</th>
+                            <th>Money Trac Username</th>
                             <th>Rank Code</th>
                             <th>Remarks</th>
                             <th>Country</th>
@@ -173,6 +177,8 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td></td>
                             <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

@@ -64,6 +64,8 @@ $(function(){
             , { "sName" : "dist.bank_holder_name",  "bSortable": true}
             , { "sName" : "dist.bank_swift_code",  "bSortable": true}
             , { "sName" : "dist.visa_debit_card",  "bSortable": true}
+            , { "sName" : "dist.moneytrac_customer_id",  "bSortable": true}
+            , { "sName" : "dist.moneytrac_username",  "bSortable": true}
             , { "sName" : "pack.package_name",  "bSortable": true}
             , { "sName" : "withdraw.remarks",  "bSortable": true}
             , { "sName" : "dist.country",  "bSortable": true}
@@ -103,7 +105,7 @@ function reassignDatagridEventAttr(){
 <?php echo form_tag('finance/ecashWithdrawal', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet" style="">
-    <div class="portlet-header">e-Cash Withdrawal Listing</div>
+    <div class="portlet-header">CP2 Withdrawal Listing</div>
     <div class="portlet-content">
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">
@@ -148,6 +150,8 @@ function reassignDatagridEventAttr(){
                             <th>Bank Holder Name</th>
                             <th>Bank Swift Code</th>
                             <th>Visa Debit Card</th>
+                            <th>Money Trac Customer ID</th>
+                            <th>Money Trac Username</th>
                             <th>Rank Code</th>
                             <th>Remarks</th>
                             <th>Country</th>
@@ -174,6 +178,8 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td></td>
                             <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

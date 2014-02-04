@@ -2613,6 +2613,7 @@ class financeActions extends sfActions
 ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
 ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
 ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+,dist.moneytrac_customer_id,dist.moneytrac_username
 FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -2701,9 +2702,11 @@ FROM mlm_cp3_withdraw withdraw
         $sheet->setCellValue("Q".$xlsRow, "Bank Holder Name");
         $sheet->setCellValue("R".$xlsRow, "Bank Swift Code");
         $sheet->setCellValue("S".$xlsRow, "Visa Debit Card");
-        $sheet->setCellValue("T".$xlsRow, "Rank Code");
-        $sheet->setCellValue("U".$xlsRow, "Remarks");
-        $sheet->setCellValue("V".$xlsRow, "Country");
+        $sheet->setCellValue("T".$xlsRow, "Money Trac Customer ID");
+        $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
+        $sheet->setCellValue("V".$xlsRow, "Rank Code");
+        $sheet->setCellValue("W".$xlsRow, "Remarks");
+        $sheet->setCellValue("X".$xlsRow, "Country");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -2733,9 +2736,11 @@ FROM mlm_cp3_withdraw withdraw
             $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
             //$sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
             $sheet->setCellValueExplicit("S".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
-            $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
-            $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
-            $sheet->setCellValue("V".$xlsRow, $arr['country']);
+            $sheet->setCellValueExplicit("T".$xlsRow, $arr['moneytrac_customer_id'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
+            $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("X".$xlsRow, $arr['country']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
@@ -2942,6 +2947,7 @@ FROM mlm_cp3_withdraw withdraw
 ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
 ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
 ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+,dist.moneytrac_customer_id,dist.moneytrac_username
 FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -3030,9 +3036,11 @@ FROM mlm_ecash_withdraw withdraw
         $sheet->setCellValue("Q".$xlsRow, "Bank Holder Name");
         $sheet->setCellValue("R".$xlsRow, "Bank Swift Code");
         $sheet->setCellValue("S".$xlsRow, "Visa Debit Card");
-        $sheet->setCellValue("T".$xlsRow, "Rank Code");
-        $sheet->setCellValue("U".$xlsRow, "Remarks");
-        $sheet->setCellValue("V".$xlsRow, "Country");
+        $sheet->setCellValueExplicit("T".$xlsRow, $arr['moneytrac_customer_id'], PHPExcel_Cell_DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
+        $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
+        $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
+        $sheet->setCellValue("X".$xlsRow, $arr['country']);
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3061,10 +3069,11 @@ FROM mlm_ecash_withdraw withdraw
             $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
             $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
             //$sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
-            $sheet->setCellValueExplicit("S".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
-            $sheet->setCellValue("T".$xlsRow, $arr['package_name']);
-            $sheet->setCellValue("U".$xlsRow, $arr['remarks']);
-            $sheet->setCellValue("V".$xlsRow, $arr['country']);
+            $sheet->setCellValue("T".$xlsRow, "Money Trac Customer ID");
+            $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
+            $sheet->setCellValue("V".$xlsRow, "Rank Code");
+            $sheet->setCellValue("W".$xlsRow, "Remarks");
+            $sheet->setCellValue("X".$xlsRow, "Country");
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;

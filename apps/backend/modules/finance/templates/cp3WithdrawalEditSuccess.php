@@ -143,6 +143,16 @@
                     <td class="value"><?php
                         echo $existDist->getEzyCashCard() ?></td>
                 </tr>
+                <tr>
+                    <th class="caption">Money Trac Customer ID :</th>
+                    <td class="value"><?php
+                        echo $existDist->getMoneytracCustomerId() ?></td>
+                </tr>
+                <tr>
+                    <th class="caption">Money Trac Username :</th>
+                    <td class="value"><?php
+                        echo $existDist->getMoneytracUsername() ?></td>
+                </tr>
                 </tbody>
             </table>
         </div>
