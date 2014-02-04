@@ -12,6 +12,7 @@ abstract class Globals {
     const SF_ENVIRONMENT_TEST = 'test';
 
     const WITHDRAWAL_LOCAL_BANK = 'LOCAL BANK';
+    const WITHDRAWAL_MONEYTRAC = 'MONEYTRAC';
     const WITHDRAWAL_EZY_CASH_CARD = 'EZY CASH CARD';
     const WITHDRAWAL_VISA_DEBIT_CARD = 'VISA DEBIT CARD';
 
