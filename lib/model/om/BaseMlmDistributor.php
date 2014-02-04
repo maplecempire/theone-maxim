@@ -403,6 +403,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $bkk_status = 'PENDING';
 
+
+	
+	protected $moneytrac_customer_id;
+
+
+	
+	protected $moneytrac_username;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1205,6 +1213,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->bkk_status;
+	}
+
+	
+	public function getMoneytracCustomerId()
+	{
+
+		return $this->moneytrac_customer_id;
+	}
+
+	
+	public function getMoneytracUsername()
+	{
+
+		return $this->moneytrac_username;
 	}
 
 	
@@ -2856,6 +2878,40 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	} 
 
 	
+	public function setMoneytracCustomerId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->moneytrac_customer_id !== $v) {
+			$this->moneytrac_customer_id = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID;
+		}
+
+	} 
+
+	
+	public function setMoneytracUsername($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->moneytrac_username !== $v) {
+			$this->moneytrac_username = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MONEYTRAC_USERNAME;
+		}
+
+	} 
+
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -3058,11 +3114,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->bkk_status = $rs->getString($startcol + 98);
 
+			$this->moneytrac_customer_id = $rs->getString($startcol + 99);
+
+			$this->moneytrac_username = $rs->getString($startcol + 100);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 99; 
+						return $startcol + 101; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3504,6 +3564,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 98:
 				return $this->getBkkStatus();
 				break;
+			case 99:
+				return $this->getMoneytracCustomerId();
+				break;
+			case 100:
+				return $this->getMoneytracUsername();
+				break;
 			default:
 				return null;
 				break;
@@ -3613,6 +3679,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[96] => $this->getBkkPersonalSales(),
 			$keys[97] => $this->getBkkQualify3(),
 			$keys[98] => $this->getBkkStatus(),
+			$keys[99] => $this->getMoneytracCustomerId(),
+			$keys[100] => $this->getMoneytracUsername(),
 		);
 		return $result;
 	}
@@ -3925,6 +3993,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 98:
 				$this->setBkkStatus($value);
 				break;
+			case 99:
+				$this->setMoneytracCustomerId($value);
+				break;
+			case 100:
+				$this->setMoneytracUsername($value);
+				break;
 		} 	}
 
 	
@@ -4031,6 +4105,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[96], $arr)) $this->setBkkPersonalSales($arr[$keys[96]]);
 		if (array_key_exists($keys[97], $arr)) $this->setBkkQualify3($arr[$keys[97]]);
 		if (array_key_exists($keys[98], $arr)) $this->setBkkStatus($arr[$keys[98]]);
+		if (array_key_exists($keys[99], $arr)) $this->setMoneytracCustomerId($arr[$keys[99]]);
+		if (array_key_exists($keys[100], $arr)) $this->setMoneytracUsername($arr[$keys[100]]);
 	}
 
 	
@@ -4137,6 +4213,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::BKK_PERSONAL_SALES)) $criteria->add(MlmDistributorPeer::BKK_PERSONAL_SALES, $this->bkk_personal_sales);
 		if ($this->isColumnModified(MlmDistributorPeer::BKK_QUALIFY_3)) $criteria->add(MlmDistributorPeer::BKK_QUALIFY_3, $this->bkk_qualify_3);
 		if ($this->isColumnModified(MlmDistributorPeer::BKK_STATUS)) $criteria->add(MlmDistributorPeer::BKK_STATUS, $this->bkk_status);
+		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID)) $criteria->add(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID, $this->moneytrac_customer_id);
+		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_USERNAME)) $criteria->add(MlmDistributorPeer::MONEYTRAC_USERNAME, $this->moneytrac_username);
 
 		return $criteria;
 	}
@@ -4362,6 +4440,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setBkkQualify3($this->bkk_qualify_3);
 
 		$copyObj->setBkkStatus($this->bkk_status);
+
+		$copyObj->setMoneytracCustomerId($this->moneytrac_customer_id);
+
+		$copyObj->setMoneytracUsername($this->moneytrac_username);
 
 
 		$copyObj->setNew(true);
