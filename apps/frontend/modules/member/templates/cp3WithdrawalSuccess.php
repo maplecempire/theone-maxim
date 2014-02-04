@@ -155,14 +155,22 @@
                     </td>
                     <td>
                         <select name="bankInTo" id="bankInTo">
-                            <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
+                            <?php
+                            $disable = "";
+                            $disableMoney = " disabled='disabled'";
+
+                            if ($distributorDB->getCountry() == "Malaysia") {
+                                $disable = " disabled='disabled'";
+                                $disableMoney = "";
+                            }
+                            if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>"><?php echo __('Local Bank Transfer'); ?></option>
-                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC?>"><?php echo __('Money Trac'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
