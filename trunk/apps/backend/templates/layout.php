@@ -586,26 +586,26 @@ $(function() {
                     <?php
                     if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ECASH_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('finance/ecashWithdrawal') ?>"
-                       title="<?php echo __('e-Cash Withdrawal'); ?>">
+                       title="<?php echo __('CP2 Withdrawal'); ?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('e-Cash Withdrawal'); ?></a><br/>
+                        &nbsp;<?php echo __('CP2 Withdrawal'); ?></a><br/>
                     <?php
                     }
                     ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
-                    <a href="<?php echo url_for('finance/epointPurchase') ?>" title="e-Point Purchase">
+                    <a href="<?php echo url_for('finance/epointPurchase') ?>" title="CP1 Purchase">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('e-Point Purchase'); ?></a><br/>
+                        &nbsp;<?php echo __('CP1 Purchase'); ?></a><br/>
                     <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_TRANSFER, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
-                    <a href="<?php echo url_for('finance/epointTransfer') ?>" title="e-Point Transfer">
+                    <a href="<?php echo url_for('finance/epointTransfer') ?>" title="CP1 Transfer">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('e-Point Transfer'); ?></a><br/>
+                        &nbsp;<?php echo __('CP1 Transfer'); ?></a><br/>
                     <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
@@ -616,7 +616,7 @@ $(function() {
                     <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_UPGRADE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
-                    <a href="<?php echo url_for('finance/packageUpgradeHistory') ?>" title="e-Point Purchase">
+                    <a href="<?php echo url_for('finance/packageUpgradeHistory') ?>" title="CP1 Purchase">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Package Upgrade History'); ?></a><br/>
@@ -707,18 +707,18 @@ $(function() {
                     <?php } ?>
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_EPOINT_TRANSFER, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('report/epointTransfer') ?>"
-                       title="<?php echo __('e-Point Transfer'); ?>">
+                       title="<?php echo __('CP1 Transfer'); ?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('e-Point Transfer'); ?></a><br/>
+                        &nbsp;<?php echo __('CP1 Transfer'); ?></a><br/>
                     <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_CONVERT_ECASH_TO_EPOINT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('report/convertEcashToEpoint') ?>"
-                       title="<?php echo __('Convert e-Cash To e-Point'); ?>">
+                       title="<?php echo __('Convert CP2 To CP1'); ?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Convert e-Cash To e-Point'); ?></a><br/>
+                        &nbsp;<?php echo __('Convert CP2 To CP1'); ?></a><br/>
                     <?php } ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_REPORT_GROUP_SALES, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
