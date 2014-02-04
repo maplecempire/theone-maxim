@@ -6,7 +6,7 @@ $(function() {
     $("#financeForm").validate({
         messages : {
             total_epoint: {
-                equalTo: "Please enter e-point"
+                equalTo: "Please enter CP1"
             }
         },
         rules : {
@@ -67,7 +67,7 @@ function reassignDatagridEventAttr() {
 <?php echo form_tag('finance/doAdvanceEpoint', 'id=financeForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 800px">
 <div class="portlet">
-    <div class="portlet-header">Advance e-Point</div>
+    <div class="portlet-header">Advance CP1</div>
     <div class="portlet-content">
         <table cellpadding="3" cellspacing="3" border="0" width="100%" class="tablelist">
             <tr>
@@ -95,7 +95,7 @@ function reassignDatagridEventAttr() {
                     <table cellspacing="0" cellpadding="0" width="650px" style="margin:0 auto">
                         <tr>
                             <td width="20%">
-                                <strong><?php echo __('e-Point Amount'); ?></strong>
+                                <strong><?php echo __('CP1 Amount'); ?></strong>
                             </td>
                             <td>
                                 <input name="total_epoint" id="total_epoint" tabindex="3"/>

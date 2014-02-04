@@ -75,7 +75,7 @@ function reassignDatagridEventAttr(){
 <?php echo form_tag('finance/epointPurchase', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1000px">
 <div class="portlet">
-    <div class="portlet-header">e-Point Transfer Report</div>
+    <div class="portlet-header">CP1 Transfer Report</div>
     <div class="portlet-content">
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">

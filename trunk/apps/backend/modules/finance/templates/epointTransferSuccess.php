@@ -72,7 +72,7 @@ $(function(){
                                 , status_code : oObj.aData[idx++]
                                 , created_on : oObj.aData[idx++]
                           });
-		  				  return "<a id='transferEpointLink' href='#' title='Transfer e-Point'>Transfer</a>";
+		  				  return "<a id='transferEpointLink' href='#' title='Transfer CP1'>Transfer</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
 		              { "sName" : "dist.rank_code",  "bSortable": true},
@@ -135,7 +135,7 @@ function reassignDatagridEventAttr(){
 <?php echo form_tag('admin/doLogin', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet">
-    <div class="portlet-header">e-Point Transfer</div>
+    <div class="portlet-header">CP1 Transfer</div>
     <div class="portlet-content">
 	<table width="100%" border="0">
 		<tr>
@@ -236,7 +236,7 @@ $(function(){
                 if (doAction == "debit") {
                     msg = "Are you sure want to Return Rolling Point?";
                 } else if (doAction == "epoint") {
-                    msg = "Are you sure want to Transfer e-Point?";
+                    msg = "Are you sure want to Transfer CP1?";
                 }
                 var answer = confirm(msg);
                 if (answer){
@@ -300,7 +300,7 @@ function populateDgAddPanel() {
     $("#epointAmount").val("0").focus().select();
 }
 </script>
-<div id="dgAddPanel" style="display:none; width: 850px" title="e-Point Transfer">
+<div id="dgAddPanel" style="display:none; width: 850px" title="CP1 Transfer">
     <input type="hidden" id="dgAddPanelId">
     <table width="100%">
         <tr>
@@ -336,7 +336,7 @@ function populateDgAddPanel() {
         </tr>
 
         <tr>
-            <td>Total e-Point</td>
+            <td>Total CP1</td>
             <td>:</td>
             <td><input name="epointAmount" id="epointAmount" class="text ui-widget-content ui-corner-all" size="25"/></td>
         </tr>
@@ -354,7 +354,7 @@ function populateDgAddPanel() {
                 <select id="doAction" name="doAction">
                     <option value="transfer">Transfer Rolling Point</option>
                     <option value="debit">Return Rolling Point</option>
-                    <option value="epoint">Transfer e-Point</option>
+                    <option value="epoint">Transfer CP1</option>
                 </select>
             </td>
         </tr>

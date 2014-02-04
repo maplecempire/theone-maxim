@@ -345,7 +345,7 @@ function populateDgAddPanel() {
         </tr>
 
         <tr>
-            <td>Total e-Point</td>
+            <td>Total CP1</td>
             <td>:</td>
             <td><input name="epointAmount" id="epointAmount" class="text ui-widget-content ui-corner-all" size="25"/></td>
         </tr>
@@ -364,7 +364,7 @@ function populateDgAddPanel() {
                 <select id="doAction" name="doAction">
 <!--                    <option value="transfer">Transfer Rolling Point</option>-->
                     <option value="RECALL">Recall Rolling Point</option>
-<!--                    <option value="epoint">Transfer e-Point</option>-->
+<!--                    <option value="epoint">Transfer CP1</option>-->
                 </select>
             </td>
         </tr>
