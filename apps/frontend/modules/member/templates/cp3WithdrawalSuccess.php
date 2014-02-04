@@ -1,6 +1,8 @@
 <?php include('scripts.php'); ?>
 
 <script type="text/javascript" language="javascript">
+    var moneytracUsername = "<?php echo $distributorDB->getMoneytracUsername()?>";
+    var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_cp3Amount").change(function(){
             var ecashFinal = $("#cbo_cp3Amount").val() - 30;
@@ -24,7 +26,11 @@
                     var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
 
                     if (withdrawAmount > parseFloat(ecashBalance)) {
-                        alert("In-sufficient CP3");
+                        error("In-sufficient CP3");
+                        return false;
+                    }
+                    if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" && moneytracCustomerId == "") {
+                        error("Please update Money Trac Information in User Profile.");
                         return false;
                     }
 
@@ -164,13 +170,13 @@
                                 $disableMoney = "";
                             }
                             if ($distributorDB->getVisaDebitCard() != "") { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD?>">EzyAccount</option>
+                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD; ?>">EzyAccount</option>
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
-                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC; ?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
