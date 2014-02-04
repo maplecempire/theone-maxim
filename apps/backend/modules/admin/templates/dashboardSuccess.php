@@ -264,7 +264,7 @@ function reassignDatagridEventAttr(){
                 <table cellpadding="3" cellspacing="3" width="100%">
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
-                        <td><strong>Company e-Point</strong></td>
+                        <td><strong>Company CP1</strong></td>
                         <td align="right"><?php echo number_format($companyEpoint, 2); ?></td>
                     </tr>
                     <?php } ?>
@@ -321,7 +321,7 @@ function reassignDatagridEventAttr(){
                     <?php } ?>
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ECASH_WITHDRAWAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <tr>
-                        <td><strong>e-Cash Withdrawal</strong></td>
+                        <td><strong>CP2 Withdrawal</strong></td>
                         <td align="right"><?php
                             if ($ecashWithdrawal > 0)
                                 echo "<a id='editLink' href='".url_for('finance/ecashWithdrawal')."'>".$ecashWithdrawal."</a>";
@@ -412,7 +412,7 @@ function reassignDatagridEventAttr(){
         </div>
         <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EPOINT_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
         <div class="portlet">
-            <div class="portlet-header">e-Point Purchase</div>
+            <div class="portlet-header">CP1 Purchase</div>
             <div class="portlet-content">
                 <table class="display" id="datagridEPointPurchase" border="0" width="100%" cellpadding="0" cellspacing="0">
                     <thead>

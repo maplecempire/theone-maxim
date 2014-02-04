@@ -141,7 +141,7 @@ class financeActions extends sfActions
                     } else {
                         $error = true;
 
-                        $this->setFlash('errorMsg', "Insufficient e-Point.");
+                        $this->setFlash('errorMsg', "Insufficient CP1.");
                     }
                 }
                 $con->commit();
@@ -350,7 +350,7 @@ class financeActions extends sfActions
         if ($companyEPointBalance < $epointAmount && ($doAction == "transfer" || $doAction == "epoint")) {
             $output = array(
                 "error" => true,
-                "errorMsg" => "Insufficient e-Point."
+                "errorMsg" => "Insufficient CP1."
             );
             echo json_encode($output);
             return sfView::HEADER_ONLY;
@@ -922,7 +922,7 @@ class financeActions extends sfActions
                     } else {
                         $error = true;
 
-                        $this->setFlash('errorMsg', "Insufficient e-Point.");
+                        $this->setFlash('errorMsg', "Insufficient CP1.");
                     }
                 }
                 $con->commit();
@@ -1013,7 +1013,7 @@ class financeActions extends sfActions
                     } else {
                         $error = true;
 
-                        $this->setFlash('errorMsg', "Insufficient e-Point.");
+                        $this->setFlash('errorMsg', "Insufficient CP1.");
                     }
                 }
                 $con->commit();
@@ -1108,7 +1108,7 @@ class financeActions extends sfActions
             } else {
                 $error = true;
 
-                $this->setFlash('errorMsg', "Insufficient e-Point.");
+                $this->setFlash('errorMsg', "Insufficient CP1.");
             }
             $con->commit();
         } catch (PropelException $e) {
@@ -1231,7 +1231,7 @@ class financeActions extends sfActions
                 } else {
                     $error = true;
 
-                    $this->setFlash('errorMsg', "Insufficient e-Point.");
+                    $this->setFlash('errorMsg', "Insufficient CP1.");
                 }
             }
             $con->commit();

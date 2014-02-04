@@ -18,7 +18,7 @@
                     <td><?php echo __('Name') ?>:</td>
                     <td><strong><?php echo $componentDistributor->getNickname(); ?></strong></td>
                     <td>&nbsp;</td>
-                    <td><?php echo __('e-Point Wallet') ?>:</td>
+                    <td><?php echo __('CP1 Wallet') ?>:</td>
                     <td><strong><?php echo number_format($epoint,2) ?></strong></td>
                 </tr>
                 <tr>

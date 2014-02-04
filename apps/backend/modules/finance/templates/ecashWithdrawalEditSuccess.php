@@ -29,7 +29,7 @@
 
 <div style="padding: 10px; top: 10px; width: 95%">
     <div class="portlet">
-        <div class="portlet-header">e-Cash Withdrawal Details</div>
+        <div class="portlet-header">CP2 Withdrawal Details</div>
         <div class="portlet-content">
             <table class="sf_admin_list" cellpadding="3" width="100%">
                 <tbody>

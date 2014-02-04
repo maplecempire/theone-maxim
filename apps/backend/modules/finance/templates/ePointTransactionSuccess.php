@@ -65,7 +65,7 @@ function reassignDatagridEventAttr(){
 
 <div style="padding: 10px; top: 30px; position: absolute; width: 900px">
 <div class="portlet">
-    <div class="portlet-header">e-Point Transaction Listing</div>
+    <div class="portlet-header">CP1 Transaction Listing</div>
     <div class="portlet-content">
 	<table width="100%" border="0">
 		<tr>
