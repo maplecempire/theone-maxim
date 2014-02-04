@@ -740,7 +740,7 @@ class memberActions extends sfActions
     }
     public function executeApplyDebitCard()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
 
         } else {
             if (Globals::APPLY_DEBITCARD_ENABLE == false) {
@@ -775,7 +775,7 @@ class memberActions extends sfActions
 
     public function executeDoApplyDebitCard()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142) {
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
 
         } else {
             if (Globals::APPLY_DEBITCARD_ENABLE == false) {
