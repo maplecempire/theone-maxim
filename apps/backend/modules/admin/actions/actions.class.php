@@ -21,6 +21,23 @@ class adminActions extends sfActions
         if ($existUser) {
             $masterUserId = $this->getUser()->getAttribute(Globals::SESSION_USERID);
 
+            $leaderId = "";
+            $leaderCode = "";
+            $leaderArrs = explode(",", Globals::GROUP_LEADER);
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($existDist->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leaderId = $dist->getDistributorId();
+                        $leaderCode = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
             $this->getUser()->clearCredentials();
             $this->getUser()->getAttributeHolder()->clear();
 
@@ -37,6 +54,8 @@ class adminActions extends sfActions
             $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
             $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
             $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
+            $this->getUser()->setAttribute(Globals::SESSION_LEADER_ID, $leaderId);
+            $this->getUser()->setAttribute(Globals::SESSION_LEADER_CODE, $leaderCode);
 
             $appLoginLog = new AppLoginLog();
             $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));

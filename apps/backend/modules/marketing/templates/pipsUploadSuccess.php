@@ -135,6 +135,7 @@ $(function(){
 
               <?php
                 $year = array();
+                $year["2014"] = "2014";
                 $year["2013"] = "2013";
                 $year["2012"] = "2012";
                 echo select_tag('tradingYear', options_for_select($year, date('y')), array(
