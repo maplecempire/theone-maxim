@@ -1016,7 +1016,7 @@ $(document).ready(function() {
             <div class="popdivider"></div>
         </div><div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='1'>2014 US Martin Luther King Jr. Holiday</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='1'>2014 US Martin Luther King Jr. Holiday</a>
             </div>
             <div class="news_date">
             <?php
@@ -1075,7 +1075,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='2'>LACD LEGAL WARNING NOTICE TAKE NOTICE THAT: LACD法律部警示</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='2'>LACD LEGAL WARNING NOTICE TAKE NOTICE THAT: LACD法律部警示</a>
             </div>
             <div class="news_date">
             <?php
@@ -1106,7 +1106,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='3'>Attention</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='3'>Attention</a>
             </div>
             <div class="news_date">
             <?php
@@ -1125,7 +1125,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='4'>10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='4'>10th March 2014 Annual Extravaganza Dinner & Dance @ Sunway Pyramid Convention Centre, Kuala Lumpur, Malaysia</a>
             </div>
             <div class="news_date">
             <?php
