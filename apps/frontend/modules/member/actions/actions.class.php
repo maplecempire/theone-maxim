@@ -6768,11 +6768,16 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                     $fromBalance = $ledgerAccountBalance;
 
+                    $remark = "";
+                    if ($this->getRequestParameter('remark')) {
+                        $remark = ", ".$this->getRequestParameter('remark');
+                    }
+
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
                     $mlm_account_ledger->setDistId($fromId);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")".$remark);
                     $mlm_account_ledger->setCredit(0);
                     $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
                     $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));

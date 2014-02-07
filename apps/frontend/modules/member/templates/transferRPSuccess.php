@@ -176,22 +176,29 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('Transfer RP Amount'); ?></td>
                     <td>
-                        <input name="epointAmount" id="epointAmount" tabindex="3"/>
+                        <input name="epointAmount" id="epointAmount"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Security Password'); ?></td>
+                    <td><?php echo __('Reference'); ?></td>
                     <td>
-                        <input name="transactionPassword" type="password" id="transactionPassword"
-                                           tabindex="3"/>
+                        <input name="remark" id="remark"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password'); ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="transactionPassword"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
 
