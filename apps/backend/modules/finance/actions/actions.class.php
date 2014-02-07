@@ -3069,11 +3069,12 @@ FROM mlm_ecash_withdraw withdraw
             $sheet->setCellValue("Q".$xlsRow, $arr['bank_holder_name']);
             $sheet->setCellValue("R".$xlsRow, $arr['bank_swift_code']);
             //$sheet->setCellValue("S".$xlsRow, $arr['visa_debit_card']);
-            $sheet->setCellValue("T".$xlsRow, "Money Trac Customer ID");
-            $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
-            $sheet->setCellValue("V".$xlsRow, "Rank Code");
-            $sheet->setCellValue("W".$xlsRow, "Remarks");
-            $sheet->setCellValue("X".$xlsRow, "Country");
+            $sheet->setCellValueExplicit("S".$xlsRow, $arr['visa_debit_card'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit("T".$xlsRow, $arr['moneytrac_customer_id'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
+            $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
+            $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
+            $sheet->setCellValue("X".$xlsRow, $arr['country']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
