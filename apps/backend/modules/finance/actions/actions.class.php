@@ -3036,11 +3036,11 @@ FROM mlm_ecash_withdraw withdraw
         $sheet->setCellValue("Q".$xlsRow, "Bank Holder Name");
         $sheet->setCellValue("R".$xlsRow, "Bank Swift Code");
         $sheet->setCellValue("S".$xlsRow, "Visa Debit Card");
-        $sheet->setCellValueExplicit("T".$xlsRow, $arr['moneytrac_customer_id'], PHPExcel_Cell_DataType::TYPE_STRING);
-        $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
-        $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
-        $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
-        $sheet->setCellValue("X".$xlsRow, $arr['country']);
+        $sheet->setCellValue("T".$xlsRow, "Money Trac Customer ID");
+        $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
+        $sheet->setCellValue("V".$xlsRow, "Rank Code");
+        $sheet->setCellValue("W".$xlsRow, "Remarks");
+        $sheet->setCellValue("X".$xlsRow, "Country");
 
         $xlsRow = 2;
         while ($rs->next()) {
