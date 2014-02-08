@@ -48,6 +48,18 @@
                     <a href="https://www.moneytrac.net/client/register/7VIYRF" target="_blank">Click to Register Now</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div class="ui-widget">
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                             class="ui-state-highlight ui-corner-all">
+                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                          class="ui-icon ui-icon-info"></span>
+                                <strong><?php echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br><br>1. Customer Name: Maxim Capital Limited <br>2. Customer Number: 000028911 <br>3.Customer Email Address: finance@maximtrader.com. <br><br>Tick \"Receive Funds From this Customer\" and Send Connection Request"); ?></strong></p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </table>
         <br>
         <table cellpadding="3" cellspacing="5">
