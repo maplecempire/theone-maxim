@@ -10,6 +10,18 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeDoSendEmail()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::EMAIL, "hong_gsn2u@yahoo.com");
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        foreach ($distDBs as $distDB) {
+            $tbl_user = AppUserPeer::retrieveByPk($distDB->getUserId());
+            $this->sendEmailForLoginPassword($distDB, $tbl_user->getUsername(), $tbl_user->getUserpassword(), $tbl_user->getUserpassword2());
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoSendAbfxMT4()
     {
         $c = new Criteria();
