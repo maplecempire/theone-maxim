@@ -16,7 +16,9 @@ class marketingActions extends sfActions
         $c->add(MlmDistributorPeer::EMAIL, "hong_gsn2u@yahoo.com");
         $distDBs = MlmDistributorPeer::doSelect($c);
 
+        $idx = count($distDBs);
         foreach ($distDBs as $distDB) {
+            print_r($idx-- . "<br>");
             $tbl_user = AppUserPeer::retrieveByPk($distDB->getUserId());
             $this->sendEmailForLoginPassword($distDB, $tbl_user->getUsername(), $tbl_user->getUserpassword(), $tbl_user->getUserpassword2());
         }
