@@ -3473,7 +3473,7 @@ class memberActions extends sfActions
                             $level = 0;
                             $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
                             $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
-                            while ($level < 200) {
+                            while ($level < 400) {
                                 //var_dump($uplineDistDB->getUplineDistId());
                                 //var_dump($uplineDistDB->getUplineDistCode());
                                 print_r("<br>");
