@@ -650,9 +650,11 @@
             <trans-unit><source>Terms and Conditions</source><target>条款和条件</target></trans-unit>
             <trans-unit><source>I am aware of the risks associated with foreign exchange trading and will seek advice and further my education on foreign exchange prior to starting any trading activity.</source><target>我明白与外汇交易相关联的风险，并会征询法律意见和外汇留学深造任何交易活动开始之前。</target></trans-unit>
             <trans-unit><source>Convert CP2 To CP1</source><target>CP2转换为CP1</target></trans-unit>
-            <trans-unit><source>CP1 Transfer</source><target>CP1转让</target></trans-unit>
+            <trans-unit><source>CP1 Transfer</source><target>CP1转账</target></trans-unit>
+            <trans-unit><source>RP Transfer</source><target>RP转账</target></trans-unit>
             <trans-unit><source>Total Fund Deposited</source><target>充值总额</target></trans-unit>
             <trans-unit><source>Reference No</source><target>参考编号</target></trans-unit>
+            <trans-unit><source>Reference Remark</source><target>参考备注</target></trans-unit>
             <trans-unit><source>Funds Deposit History</source><target>充值记录表</target></trans-unit>
             <trans-unit><source>Funds Deposited will be credited into CP1 Account.</source><target>充值将被记入CP1的帐户。</target></trans-unit>
             <trans-unit><source>CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>CP1只能用来收购配套，配套升级和充值MT4帐户，而不能兑现现金。</target></trans-unit>
@@ -711,9 +713,12 @@
             <trans-unit><source>CP2 Withdrawal</source><target>CP2兑现</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal</source><target>MT4兑现</target></trans-unit>
             <trans-unit><source>CP1 Amount</source><target>CP1金额</target></trans-unit>
+            <trans-unit><source>RP Amount</source><target>RP金额</target></trans-unit>
             <trans-unit><source>CP1 Balance</source><target>CP1金额</target></trans-unit>
-            <trans-unit><source>Transfer To Member ID</source><target>转让给会员ID</target></trans-unit>
-            <trans-unit><source>Transfer CP1 Amount</source><target>转让CP1金额</target></trans-unit>
+            <trans-unit><source>RP Balance</source><target>RP金额</target></trans-unit>
+            <trans-unit><source>Transfer To Member ID</source><target>转账给会员ID</target></trans-unit>
+            <trans-unit><source>Transfer CP1 Amount</source><target>CP1转账金额</target></trans-unit>
+            <trans-unit><source>Transfer RP Amount</source><target>RP转账金额</target></trans-unit>
             <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal Status</source><target>MT4兑现状态</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal Status</source><target>CP2兑现状态</target></trans-unit>
@@ -826,7 +831,7 @@
             <trans-unit><source>(%1%) Package Purchase Successfully.</source><target>(%1%)配套购买成功</target></trans-unit>
             <trans-unit><source>Member (%1%) Registered Successfully.</source><target>成功注册会员(%1%)。</target></trans-unit>
             <trans-unit><source>Member (%1%) Registered Successfully. Please manual do placement now.</source><target>成功注册会员(%1%)。请手动安置。</target></trans-unit>
-            <trans-unit><source>Transfer success</source><target>转让成功</target></trans-unit>
+            <trans-unit><source>Transfer success</source><target>转账成功</target></trans-unit>
             <trans-unit><source>Password updated</source><target>更新密码</target></trans-unit>
             <trans-unit><source>Security Password updated</source><target>更新交易密码</target></trans-unit>
             <trans-unit><source>Your CP3 withdrawal has been submitted.</source><target>您的CP3兑现申请已提交成功</target></trans-unit>
@@ -851,10 +856,11 @@
             <trans-unit><source>Fund Management Contract</source><target>基金管理合同</target></trans-unit>
             <trans-unit><source>Download PDF</source><target>下载PDF</target></trans-unit>
             <trans-unit><source>Convert CP3 To CP1</source><target>CP3转换为CP1</target></trans-unit>
-            <trans-unit><source>CP2 Transfer</source><target>CP2转让</target></trans-unit>
-            <trans-unit><source>CP3 Transfer</source><target>CP3转让</target></trans-unit>
-            <trans-unit><source>Transfer CP2 Amount</source><target>转让CP2金额</target></trans-unit>
-            <trans-unit><source>Transfer CP3 Amount</source><target>转让CP3金额</target></trans-unit>
+            <trans-unit><source>Convert RP To CP1</source><target>RP转换为CP1</target></trans-unit>
+            <trans-unit><source>CP2 Transfer</source><target>CP2转账</target></trans-unit>
+            <trans-unit><source>CP3 Transfer</source><target>CP3转账</target></trans-unit>
+            <trans-unit><source>Transfer CP2 Amount</source><target>CP2转账金额</target></trans-unit>
+            <trans-unit><source>Transfer CP3 Amount</source><target>CP3转账金额</target></trans-unit>
             <trans-unit><source>CP2 Balance</source><target>CP2金额</target></trans-unit>
             <trans-unit><source>CP3 Balance</source><target>CP3金额</target></trans-unit>
             <trans-unit><source>Security Password is not valid</source><target>交易密码不正确</target></trans-unit>

@@ -182,7 +182,7 @@
                 </tr>
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Reference'); ?></td>
+                    <td><?php echo __('Reference Remark'); ?></td>
                     <td>
                         <input name="remark" id="remark"/>
                     </td>
