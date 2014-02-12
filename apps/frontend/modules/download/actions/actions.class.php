@@ -18,9 +18,9 @@ class downloadActions extends sfActions
         $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
         $response->setContentType('application/exe');
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-        $response->setHttpHeader('Content-Disposition','attachment; filename=2014_JANUARY_EVENTS_CALENDAR.pdf', TRUE);
+        $response->setHttpHeader('Content-Disposition','attachment; filename='.$this->getRequestParameter('q').'_EVENTS_CALENDAR.pdf', TRUE);
         $response->sendHttpHeaders();
-        readfile(sfConfig::get('sf_upload_dir')."/calendar/2014_JANUARY_EVENTS_CALENDAR.pdf");
+        readfile(sfConfig::get('sf_upload_dir')."/calendar/".$this->getRequestParameter('q')."_EVENTS_CALENDAR.pdf");
 
         return sfView::NONE;
     }
