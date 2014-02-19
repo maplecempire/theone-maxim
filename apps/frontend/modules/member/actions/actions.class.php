@@ -2955,6 +2955,7 @@ class memberActions extends sfActions
                     $mlm_distributor->setPackagePurchaseFlag("N");
                     $mlm_distributor->setRemark("loan account");
                     $mlm_distributor->setLoanAccount("Y");
+                    $mlm_distributor->setHideGenealogy("N");
                 } else {
                     $mlm_distributor->setPackagePurchaseFlag("Y");
                 }
@@ -7219,7 +7220,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if (date("d") > 9) {
+            if (date("d") > 29) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
                 return $this->redirect('/member/cp3Withdrawal');
             }
@@ -7307,7 +7308,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if (date("d") > 9) {
+            if (date("d") > 29) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
                 return $this->redirect('/member/ecashWithdrawal');
             }
@@ -7574,6 +7575,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
 
     public function executeBonusDetails() {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($distDB->getHideGenealogy() == "Y") {
+            return $this->redirect('/member/summary');
+        }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=C');
         }

@@ -70,9 +70,11 @@ function blink(selector) {
     <ul>
         <li class="menu_title"><?php echo __('ACCOUNT INFORMATION'); ?></li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
+        <?php if ($distDB->getHideGenealogy() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
+        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/pipsRebate"><span><?php echo __('Pips Rebate'); ?></span></a>
         </li>
