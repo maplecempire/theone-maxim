@@ -29,6 +29,15 @@ class ApService
         } else if ($currentDistId == 557) {
             // worldpeace
             $hideGroup = "262891";  // kashventure_
+        } else if ($currentDistId == 124 || $currentDistId == 130 || $currentDistId == 265653 || $currentDistId == 265654 || $currentDistId == 265656 || $currentDistId == 132) {
+            $pos = strrpos($placementTreeStructure, "|262890|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                return true;
+            }
+
+            $hideGroup = "557";  // kashventure_
         }
 
         $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
