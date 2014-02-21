@@ -29,7 +29,6 @@ class ApService
             $hideGroup = "175";  // maxworld
         } else if ($currentDistId == 557) {
             // worldpeace
-            var_dump("557");
             $hideGroup = "262891";  // kashventure_
         }
 
