@@ -37,7 +37,12 @@ class ApService
                 return true;
             }
 
-            $hideGroup = "557";  // kashventure_
+            $hideGroup = "557";  // worldpeace
+        } else if ($currentDistId == 2001 || $currentDistId == 2314 || $currentDistId == 2121 || $currentDistId == 135
+                   || $currentDistId == 1998 || $currentDistId == 128 || $currentDistId == 127 || $currentDistId == 262726
+                   || $currentDistId == 126203 || $currentDistId == 124 || $currentDistId == 125 || $currentDistId == 126 || $currentDistId == 2122) {
+
+            $hideGroup = "557";  // worldpeace
         }
 
         $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
