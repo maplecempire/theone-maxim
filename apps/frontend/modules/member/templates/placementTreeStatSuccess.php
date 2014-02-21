@@ -249,6 +249,7 @@ function reassignDatagridEventAttr(){
         $availableButton = $anode[0]['_available'];
         $textStr = "";
         $headColor = "";
+        $restricted = false;
         if ($distCode != "") {
             $distDB = $anode[0]['_self'];
 
@@ -256,6 +257,7 @@ function reassignDatagridEventAttr(){
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
+                    $restricted = true;
                 }
             }
             $headColor = $colorArr[$distDB->getRankId()]."_";
@@ -385,12 +387,14 @@ function reassignDatagridEventAttr(){
     $availableButton = $anode[1]['_available'];
     $textStr = "";
     $headColor = "";
+    $restricted = false;
     if ($distCode != "") {
         $distDB = $anode[1]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
+                $restricted = true;
             }
         }
         $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
@@ -468,8 +472,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[1]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[1]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -477,8 +481,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[1]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[1]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -486,8 +490,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[1]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[1]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -495,8 +499,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[1]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[1]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
 
@@ -507,12 +511,14 @@ function reassignDatagridEventAttr(){
     $availableButton = $anode[2]['_available'];
     $textStr = "";
     $headColor = "";
+    $restricted = false;
     if ($distCode != "") {
         $distDB = $anode[2]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
+                $restricted = true;
             }
         }
         $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
@@ -590,8 +596,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[2]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[2]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -599,8 +605,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[2]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[2]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -608,8 +614,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[2]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[2]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -617,8 +623,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[2]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[2]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
 
@@ -644,12 +650,14 @@ function reassignDatagridEventAttr(){
         $availableButton = $anode[3]['_available'];
         $textStr = "";
         $headColor = "";
+        $restricted = false;
         if ($distCode != "") {
             $distDB = $anode[3]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
+                    $restricted = true;
                 }
             }
             $headColor = $colorArr[$distDB->getRankId()]."_";
@@ -726,8 +734,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[3]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[3]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -735,8 +743,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[3]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[3]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -744,8 +752,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[3]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[3]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -753,8 +761,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[3]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[3]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
@@ -768,12 +776,14 @@ function reassignDatagridEventAttr(){
         $availableButton = $anode[4]['_available'];
         $textStr = "";
         $headColor = "";
+        $restricted = false;
         if ($distCode != "") {
             $distDB = $anode[4]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
+                    $restricted = true;
                 }
             }
             $headColor = $colorArr[$distDB->getRankId()]."_";
@@ -849,8 +859,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[4]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[4]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -858,8 +868,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[4]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[4]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -867,8 +877,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[4]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[4]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -876,8 +886,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[4]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[4]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
@@ -891,12 +901,14 @@ function reassignDatagridEventAttr(){
         $availableButton = $anode[5]['_available'];
         $textStr = "";
         $headColor = "";
+        $restricted = false;
         if ($distCode != "") {
             $distDB = $anode[5]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
+                    $restricted = true;
                 }
             }
             $headColor = $colorArr[$distDB->getRankId()]."_";
@@ -972,8 +984,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[5]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[5]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -981,8 +993,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[5]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[5]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -990,8 +1002,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[5]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[5]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -999,8 +1011,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[5]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[5]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
@@ -1014,12 +1026,14 @@ function reassignDatagridEventAttr(){
         $availableButton = $anode[6]['_available'];
         $textStr = "";
         $headColor = "";
+        $restricted = false;
         if ($distCode != "") {
             $distDB = $anode[6]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
+                    $restricted = true;
                 }
             }
             $headColor = $colorArr[$distDB->getRankId()]."_";
@@ -1095,8 +1109,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[6]['_accumulate_left'],0) ?></td>
-            <td><?php echo number_format($anode[6]['_accumulate_right'],0)?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_accumulate_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_accumulate_right'],0); }?></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -1104,8 +1118,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[6]['_today_left'],0) ?></td>
-            <td><?php echo number_format($anode[6]['_today_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -1113,8 +1127,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[6]['_carry_left'],0) ?></td>
-            <td><?php echo number_format($anode[6]['_carry_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_carry_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_carry_right'],0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -1122,8 +1136,8 @@ function reassignDatagridEventAttr(){
             </td>
         </tr>
         <tr>
-            <td><?php echo number_format($anode[6]['_sales_left'],0) ?></td>
-            <td><?php echo number_format($anode[6]['_sales_right'],0) ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_sales_left'],0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_sales_right'],0); } ?></td>
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>

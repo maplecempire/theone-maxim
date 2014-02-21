@@ -15,7 +15,7 @@ class memberActions extends sfActions
         $bonusService = new BonusService();
 //        $bonusService->contraDebitAccountByEpoint(262636, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(263918, "CONTRA BY CP1", 0);
-        $bonusService->contraDebitAccountByEpoint(295, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(295, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(263051, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(262855, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(262108, "CONTRA BY CP1", 0);
