@@ -3430,6 +3430,12 @@ class memberActions extends sfActions
                     } else {
                         $mlm_distributor->setHideGenealogy("N");
                     }
+                    $pos = strrpos($mlm_distributor->getPlacementTreeStructure(), "|256170|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $mlm_distributor->setHideGenealogy("N");
+                    }
 
                     $mlm_distributor->save();
 
