@@ -27,6 +27,9 @@ class ApService
         } else if ($currentDistId == 127 || $currentDistId == 128 || $currentDistId == 104 || $currentDistId == 105 || $currentDistId == 402) {
             // law01,law1
             $hideGroup = "175";  // maxworld
+        } else if ($currentDistId == 557) {
+            // worldpeace
+            $hideGroup = "262891";  // kashventure_
         }
 
         $pos = strrpos($placementTreeStructure, "|".$hideGroup."|");
