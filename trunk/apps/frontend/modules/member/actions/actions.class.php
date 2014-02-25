@@ -7214,7 +7214,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if (date("d") > 7) {
+            if (date("d") > 27) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
                 return $this->redirect('/member/cp3Withdrawal');
             }
