@@ -2952,10 +2952,14 @@ class memberActions extends sfActions
                 $mlm_distributor->setInitRankCode($packageDB->getPackageName());
                 $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
                 if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
-                    $mlm_distributor->setPackagePurchaseFlag("N");
+                    //$mlm_distributor->setPackagePurchaseFlag("N");
                     $mlm_distributor->setRemark("loan account");
                     $mlm_distributor->setLoanAccount("Y");
                     $mlm_distributor->setHideGenealogy("N");
+
+                    $mlm_distributor->setDebitRankId(1);
+                    $mlm_distributor->setPackagePurchaseFlag("Y");
+                    $mlm_distributor->setDebitStatusCode(Globals::STATUS_COMPLETE);
                 } else {
                     $mlm_distributor->setPackagePurchaseFlag("Y");
                 }
