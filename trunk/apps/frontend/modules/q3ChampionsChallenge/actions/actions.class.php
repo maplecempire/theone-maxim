@@ -12,6 +12,8 @@ class q3ChampionsChallengeActions extends sfActions
 {
     public function executeIncentive()
     {
+        return $this->redirect('/member/summary');
+
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "prize.xls";
 
         error_reporting(E_ALL ^ E_NOTICE);
