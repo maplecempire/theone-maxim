@@ -320,6 +320,8 @@ class businessActions extends sfActions
 
     public function executeIndex()
     {
+        return $this->redirect('/member/summary');
+
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "gao_group_90.xls";
 
         error_reporting(E_ALL ^ E_NOTICE);
