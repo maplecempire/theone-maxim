@@ -8926,9 +8926,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlmPackageUpgradeHistory->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageUpgradeHistory->save();
 
-                    $distDB->setRankId($selectedPackage->getPackageId());
-                    $distDB->setRankCode($selectedPackage->getPackageName());
-                    $distDB->save();
+                    $distPackageDB = MlmPackagePeer::retrieveByPK($distDB->getRankId());
+                    if ($distPackageDB && $distPackageDB->getPrice() > $selectedPackage->getPrice()) {
+                        $distDB->setRankId($selectedPackage->getPackageId());
+                        $distDB->setRankCode($selectedPackage->getPackageName());
+                        $distDB->save();
+                    }
 
                     // create mlm_dist_pairing
                     $sponsorDistPairingDB = MlmDistPairingPeer::retrieveByPK($distId);
