@@ -10,6 +10,69 @@
  */
 class q3ChampionsChallengeActions extends sfActions
 {
+    public function executeIncentive()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "prize.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 1;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = $totalRow; $x > 0; $x--) {
+            $memberId = $data->val($x, "A");
+            $prize = $data->val($x, "E");
+            $deduct = $data->val($x, "F");
+
+            $prize = str_replace(",", "", $prize);
+            $prize = str_replace("*", "", $prize);
+            $deduct = str_replace("(", "", $deduct);
+            $deduct = str_replace(")", "", $deduct);
+            $deduct = str_replace("*", "", $deduct);
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberId);
+            $distributorDB = MlmDistributorPeer::doSelectOne($c);
+
+            if ($distributorDB) {
+                print_r($memberId.":".$prize.":".$deduct."<br>");
+
+                $cp2 = $this->getAccountBalance($distributorDB->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+                if ($prize > 0) {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distributorDB->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType("WOF");
+                    $mlm_account_ledger->setRemark("WOF PRIZE");
+                    $mlm_account_ledger->setCredit($prize);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($cp1 + $prize);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                } else {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distributorDB->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType("WOF");
+                    $mlm_account_ledger->setRemark("WOF");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($deduct);
+                    $mlm_account_ledger->setBalance($cp1 - $deduct);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+            } else {
+                print_r($memberId."not found========================================<br>");
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDisqualifiedMember()
     {
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
@@ -121,7 +184,7 @@ class q3ChampionsChallengeActions extends sfActions
 
     public function executeIndex()
     {
-        return $this->redirect('member/summary');
+        //return $this->redirect('member/summary');
 
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->isChallenge = "N";
@@ -348,13 +411,14 @@ class q3ChampionsChallengeActions extends sfActions
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     public function executeBkk2()
     {
-        $this->executeTop2013();
 //        $this->executeTop2013();
 //        $this->executeTop2013();
 //        $this->executeTop2013();
 //        $this->executeTop2013();
 //        $this->executeTop2013();
-        //$this->executeBkk();
+//        $this->executeTop2013();
+//        $this->executeBkk();
+        $this->executeCheckSales();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
@@ -391,16 +455,29 @@ class q3ChampionsChallengeActions extends sfActions
 
     public function executeBkk()
     {
+//        258906	aplim-01
+//        261490	LimLayHong
+//        262217	LimSiangLong
+//        260314	TanEngeHooi
+//        $accountTypeArr = array(258906,261490,262217,260314);
+        $accountTypeArr = array(260743);
+
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
         foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+            $distDB->setBkkPersonalSales(0);
+
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
 
             if ($distDB->getLoanAccount() != "Y") {
@@ -419,7 +496,7 @@ class q3ChampionsChallengeActions extends sfActions
             if ($amount >= 20000) {
                 $distDB->setBkkQualify2("Y");
             }
-
+            $distDB->setRemark($amount);
             $personalSales = $this->getBkkTotalPersonalSales($distDB->getDistributorId());
             $distDB->setBkkPersonalSales($personalSales);
 
@@ -444,6 +521,35 @@ class q3ChampionsChallengeActions extends sfActions
             }
             $distDB->setNomineeName($leader);
             $distDB->save();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeCheckSales()
+    {
+//        258906	aplim-01
+//        261490	LimLayHong
+//        262217	LimSiangLong
+//        260314	TanEngeHooi
+//        $accountTypeArr = array(258906,261490,262217,260314);
+        $distStr = "datoheng,success69,CHONGLONGHONG,helenpoh,FX5796,lee_chew_chun,chuashyangjwu,GDGRACE,yeesowsen,LKAng481,CHEAHSOKPING,chongszechung,lewtenshong,lor_Vincent,CKLeeJB2,ngiamhaiyi,chiayuhtzer,taysiaoleng,tansenghao,soosenjon,jeremyleechenhung,chuazongpu,phangkangsheng,davidtoo129,Yauchinjun,shenping,chuayeesoung,wongqianwei,Romzi_anwar,Angchunyee,chewhooicheng";
+        $distStr .= ",pingguatkhim,ngteckzhong,ongeuzan,cyliew,jawskit,mrleejb,TGKhoo,TLOng1,ShLim489,KEAVEN129,Eleenwong2,BRE129,david1470,joeey33,MINGDAWN,vision1,LAWCHUHOON,JULIEHA,AIFAA_ROSLAN,Rohasniza_mohamad_rosli,CHAI_YOKE_KHAM,KIMPLANETSA,wilson2,chinseng,gtkhoo62,wongyeowwah,ngyehming4,jackwongsk,William178,kenthugo";
+
+        $arrs = explode(',', $distStr);
+        for ($x = 0; $x <= count($arrs); $x++) {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $arrs[$x]);
+            $distDB = MlmDistributorPeer::doSelectOne($c);
+
+            if ($distDB) {
+                $personalSales = $this->getCommitmentTotalPersonalSales($distDB->getDistributorId());
+
+                print_r("<br>".$arrs[$x].":".$personalSales);
+            } else {
+                print_r("<br>".$arrs[$x].":not found");
+            }
         }
 
         print_r("Done");
@@ -522,6 +628,50 @@ class q3ChampionsChallengeActions extends sfActions
                             AND newDist.from_abfx = 'N'
                             AND newDist.upline_dist_id = " . $distributorId . "
                             AND history.created_on >= '2013-10-22 00:00:00' AND history.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["SUB_TOTAL"];
+        }
+        return $result;
+    }
+    function getCommitmentTotalPersonalSales($distributorId)
+    {
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorId . "
+                            AND newDist.active_datetime >= '2014-01-27 00:00:00' AND newDist.active_datetime <= '2014-02-15 23:59:59' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorId . "
+                            AND history.created_on >= '2014-01-27 00:00:00' AND history.created_on <= '2014-02-15 23:59:59' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id";
 
