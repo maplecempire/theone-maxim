@@ -8927,7 +8927,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlmPackageUpgradeHistory->save();
 
                     $distPackageDB = MlmPackagePeer::retrieveByPK($distDB->getRankId());
-                    if ($distPackageDB && $distPackageDB->getPrice() > $selectedPackage->getPrice()) {
+                    if ($distPackageDB && $selectedPackage->getPrice() > $distPackageDB->getPrice()) {
                         $distDB->setRankId($selectedPackage->getPackageId());
                         $distDB->setRankCode($selectedPackage->getPackageName());
                         $distDB->save();
