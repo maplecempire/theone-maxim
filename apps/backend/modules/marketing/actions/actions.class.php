@@ -1135,14 +1135,47 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     {
         $count = $this->getRequestParameter('count');
         $status = $this->getRequestParameter('status');
-        for ($i= 0; $i < $count; $i++) {
-            $requestId = $this->getRequestParameter('card_id'. $i);
 
-            $mlmDebitCardRegistration = MlmDebitCardRegistrationPeer::retrieveByPK($requestId);
-            if ($mlmDebitCardRegistration) {
-                $mlmDebitCardRegistration->setStatusCode($status);
-                $mlmDebitCardRegistration->save();
+        $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $debitCardCharges = Globals::DEBIT_CARD_CHARGES + Globals::DEBIT_CARD_ACTIVATION_CHARGES;
+
+            for ($i= 0; $i < $count; $i++) {
+                $requestId = $this->getRequestParameter('card_id'. $i);
+
+                $mlmDebitCardRegistration = MlmDebitCardRegistrationPeer::retrieveByPK($requestId);
+                if ($mlmDebitCardRegistration) {
+                    $mlmDebitCardRegistration->setStatusCode($status);
+                    $mlmDebitCardRegistration->save();
+
+                    if ($status == "REJECT") {
+                        $mlmAccountLedgerDB = MlmAccountLedgerPeer::retrieveByPK($mlmDebitCardRegistration->getAccountId());
+
+                        if ($mlmAccountLedgerDB) {
+                            $accountBalance = $this->getAccountBalance($mlmAccountLedgerDB->getDistId(), $mlmAccountLedgerDB->getAccountType());
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($mlmAccountLedgerDB->getDistId());
+                            $mlm_account_ledger->setAccountType($mlmAccountLedgerDB->getAccountType());
+                            $mlm_account_ledger->setTransactionType("REFUND");
+                            $mlm_account_ledger->setRemark("DEBIT CARD REFUNDS");
+                            $mlm_account_ledger->setCredit($debitCardCharges);
+                            $mlm_account_ledger->setDebit(0);
+                            $mlm_account_ledger->setBalance($accountBalance + $debitCardCharges);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+                        }
+                    }
+                }
             }
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
         }
         return sfView::HEADER_ONLY;
     }
