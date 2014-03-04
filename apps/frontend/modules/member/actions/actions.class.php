@@ -7836,6 +7836,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $c = new Criteria();
 //                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 100);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
+                    $c->setOffset($this->getRequestParameter('q'));
+                    $c->setLimit(($this->getRequestParameter('q') + 1) * 10000);
                     $dists = MlmDistributorPeer::doSelect($c);
                     print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
