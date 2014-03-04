@@ -7837,7 +7837,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 100);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $dists = MlmDistributorPeer::doSelect($c);
-//                    print_r("total Dist:".count($dists)."<br><br>");
+                    print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
 //                    foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
                         $c = new Criteria();
