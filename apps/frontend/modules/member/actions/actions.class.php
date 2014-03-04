@@ -5249,7 +5249,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $level = 0;
                     $uplineDistDB = MlmDistributorPeer::retrieveByPk($sponsorDB->getTreeUplineDistId());
                     $sponsoredDistributorCode = $sponsorDB->getDistributorCode();
-                    while ($level < 100) {
+                    while ($level < 400) {
                         //var_dump($uplineDistDB->getUplineDistId());
                         //var_dump($uplineDistDB->getUplineDistCode());
                         //print_r("<br>");
@@ -8997,7 +8997,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $level = 0;
                             $uplineDistDB = MlmDistributorPeer::retrieveByPk($distDB->getTreeUplineDistId());
                             $sponsoredDistributorCode = $distDB->getDistributorCode();
-                            while ($level < 100) {
+                            while ($level < 400) {
                                 //var_dump($uplineDistDB->getUplineDistId());
                                 //var_dump($uplineDistDB->getUplineDistCode());
                                 //print_r($uplineDistDB->getDistributorId()."<br>");
