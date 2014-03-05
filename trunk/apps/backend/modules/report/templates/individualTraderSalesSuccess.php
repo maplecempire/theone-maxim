@@ -82,21 +82,19 @@ $(function(){
 
     <?php
     $idx = 1;
-    if ($resultArray) {
-        foreach ($resultArray as $arr) { ?>
-        <tr style="background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;">
-            <td><?php echo $idx++; ?></td>
-            <td><?php echo $arr['distributor_code'] ?></td>
-            <td><?php echo $arr['full_name'] ?></td>
-            <td><?php echo number_format($arr['SUB_TOTAL'],2) ?></td>
-            <td><?php echo $arr['email'] ?></td>
-            <td><?php echo $arr['contact'] ?></td>
-            <td><?php echo $arr['country'] ?></td>
-            <td><?php echo $arr['LEADER'] ?></td>
-            <td><?php echo $arr['created_on'] ?></td>
-        </tr>
-        <?php
-        }
+    foreach ($resultArray as $arr) { ?>
+    <tr style="background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;">
+        <td><?php echo $idx++; ?></td>
+        <td><?php echo $arr['distributor_code'] ?></td>
+        <td><?php echo $arr['full_name'] ?></td>
+        <td><?php echo number_format($arr['SUB_TOTAL'],2) ?></td>
+        <td><?php echo $arr['email'] ?></td>
+        <td><?php echo $arr['contact'] ?></td>
+        <td><?php echo $arr['country'] ?></td>
+        <td><?php echo $arr['LEADER'] ?></td>
+        <td><?php echo $arr['created_on'] ?></td>
+    </tr>
+    <?php
     }
         ?>
 </table>
