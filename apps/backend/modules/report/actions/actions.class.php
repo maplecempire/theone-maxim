@@ -316,16 +316,84 @@ LEFT JOIN (
 
     public function executeIndividualTraderSales()
     {
-        $query = "SELECT dist.distributor_code, package.price
-            , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
-	FROM mlm_distributor dist
-        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
-where dist.loan_account = 'N'
-AND dist.from_abfx = 'N'
-AND dist.created_on >= '2013-03-17 00:00:00'
-and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by 2";
+        $this->dateFrom = $this->getRequestParameter('dateFrom','');
+        $this->dateTo = $this->getRequestParameter('dateTo','');
+        $this->memberId = $this->getRequestParameter('memberId','');
+    }
+    public function executeDoIndividualTraderSales()
+    {
+        $dateFrom = $this->getRequestParameter('dateFrom','');
+        $dateTo = $this->getRequestParameter('dateTo','');
+        $memberId = $this->getRequestParameter('memberId','');
+
+        $this->dateFrom = $dateFrom;
+        $this->dateTo = $dateTo;
+        $this->memberId = $memberId;
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberId);
+        $distributorDB = MlmDistributorPeer::doSelectOne($c);
+
+        if (!$distributorDB) {
+            $this->setFlash('errorMsg', "Member ID ".$memberId." not found.");
+            return $this->redirect('report/individualTraderSales?dateFrom='.$dateFrom.'&dateTo='.$dateTo.'&memberId='.$memberId);
+        }
+        /*$c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberId, Criteria::LIKE);
+        $distributorDBs = MlmDistributorPeer::doSelect($c);
+
+        $memberIdStr = "";
+        foreach ($distributorDBs as $distributorDB) {
+            $memberIdStr .= $distributorDB->getDistributorId().",";
+        }*/
+
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorDB->getDistributorId();
+
+        if ($dateFrom != "") {
+            $query .= " AND newDist.active_datetime >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != "") {
+            $query .= " AND newDist.active_datetime <= '".$dateTo." 23:59:59'";
+        }
+        $query .= " group by upline_dist_id ";
+
+        $query .= " ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $distributorDB->getDistributorId();
+        if ($dateFrom != "") {
+            $query .= " AND history.created_on >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != "") {
+            $query .= " AND history.created_on <= '".$dateTo." 23:59:59'";
+        }
+        $query .= "  group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id";
 
         //var_dump($query);
+        //exit();
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
@@ -335,7 +403,7 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
         //var_dump($query);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
-        while ($resultset->next()) {
+        if ($resultset->next()) {
             $arr = $resultset->getRow();
 
             $leader = "";
@@ -355,8 +423,14 @@ and dist.created_on <= '2013-07-10 23:59:59' AND package.price >= 10000 order by
             $resultArray[$count] = $arr;
             $resultArray[$count]['LEADER'] = $leader;
             $count++;
+
+
+
         }
+
         $this->resultArray = $resultArray;
+
+        $this->setTemplate('individualTraderSales');
     }
     public function executePackageUpgradeSales()
     {

@@ -8271,7 +8271,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             //$this->executeSendRemindationEmailForUploadAgreement();
             print_r("<br>sendDailyReport<br>");
             if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD) {
-                $this->sendDailyReport();
+                //$this->sendDailyReport();
             }
         }
 
