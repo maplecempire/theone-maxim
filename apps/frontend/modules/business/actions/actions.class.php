@@ -376,6 +376,63 @@ class businessActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeUpdateDebitCard()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "replacement_card.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 1;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = $totalRow; $x > 0; $x--) {
+            $memberId = $data->val($x, "A");
+            $visaCardNumber = $data->val($x, "D");
+
+            if ($memberId == "" || $visaCardNumber == "")
+                continue;
+
+            $visaCardNumber = str_replace(" ", "", $visaCardNumber);
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberId);
+            $distributorDB = MlmDistributorPeer::doSelectOne($c);
+
+            if ($distributorDB) {
+                $distributorDB->setVisaDebitCard($visaCardNumber);
+                $distributorDB->save();
+
+                $mlm_customer_enquiry = new MlmCustomerEnquiry();
+                $mlm_customer_enquiry->setDistributorId($distributorDB->getDistributorId());
+                $mlm_customer_enquiry->setContactNo($contactNoEmail);
+                $mlm_customer_enquiry->setTitle($title);
+                $mlm_customer_enquiry->setAdminUpdated(Globals::FALSE);
+                $mlm_customer_enquiry->setDistributorUpdated(Globals::TRUE);
+                $mlm_customer_enquiry->setAdminRead(Globals::FALSE);
+                $mlm_customer_enquiry->setDistributorRead(Globals::TRUE);
+                $mlm_customer_enquiry->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_customer_enquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                $mlm_customer_enquiry->save();
+
+                $mlm_customer_enquiry_detail = new MlmCustomerEnquiryDetail();
+                $mlm_customer_enquiry_detail->setCustomerEnquiryId($mlm_customer_enquiry->getEnquiryId());
+                $mlm_customer_enquiry_detail->setMessage($message);
+                $mlm_customer_enquiry_detail->setReplyFrom(Globals::ROLE_DISTRIBUTOR);
+                $mlm_customer_enquiry_detail->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlm_customer_enquiry_detail->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_customer_enquiry_detail->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_customer_enquiry_detail->save();
+            } else {
+                print_r($memberId."not found========================================<br>");
+            }
+        }
+        print_r($totalRow);
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCustomerEnquiryList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
