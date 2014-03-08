@@ -37,9 +37,9 @@ $(function() {
         },
         minLength: 2,
         select: function( event, ui ) {
-            if (ui.aaData) {
-                $('#distId').val(ui.aaData[0]);
-                $('#distCode').val(ui.aaData[1]);
+            if (ui.item) {
+                $('#distId').val(item.aaData[0]);
+                $('#distCode').val(item.aaData[1]);
             } else {
                 alert("Invalid ID");
                 $('#distId').val("");
