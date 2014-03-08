@@ -37,7 +37,10 @@ $(function() {
         },
         minLength: 2,
         select: function( event, ui ) {
-
+            if (ui.aaData) {
+                $('#distId').val(data.aaData[0]);
+                $('#distCode').val(data.aaData[1]);
+            }
             /*log( ui.item ?
                 "Selected: " + ui.item.label :
                 "Nothing selected, input was " + this.value);*/
