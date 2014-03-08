@@ -38,8 +38,8 @@ $(function() {
         minLength: 2,
         select: function( event, ui ) {
             if (ui.item) {
-                $('#distId').val(item.aaData[0]);
-                $('#distCode').val(item.aaData[1]);
+                $('#distId').val(item[0]);
+                $('#distCode').val(item[1]);
             } else {
                 alert("Invalid ID");
                 $('#distId').val("");
