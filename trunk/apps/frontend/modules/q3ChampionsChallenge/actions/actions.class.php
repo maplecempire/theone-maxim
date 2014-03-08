@@ -413,14 +413,14 @@ class q3ChampionsChallengeActions extends sfActions
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     public function executeBkk2()
     {
-//        $this->executeTop2013();
-//        $this->executeTop2013();
-//        $this->executeTop2013();
-//        $this->executeTop2013();
-//        $this->executeTop2013();
-//        $this->executeTop2013();
-//        $this->executeBkk();
-        $this->executeCheckSales();
+        $this->executeTop2013();
+        $this->executeTop2013();
+        $this->executeTop2013();
+        $this->executeTop2013();
+        $this->executeTop2013();
+        $this->executeTop2013();
+        $this->executeBkk();
+//        $this->executeCheckSales();
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
@@ -434,6 +434,8 @@ class q3ChampionsChallengeActions extends sfActions
 
         $idx = count($distDBs);
         foreach ($distDBs as $distDB) {
+            $distDB->setBkkPersonalSales(0);
+
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
 
             $left = $this->getTotalGroupSales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
@@ -448,6 +450,7 @@ class q3ChampionsChallengeActions extends sfActions
             //$distDB->setBkkQualify2($right);
             $distDB->setBkkPersonalSales($lowest);
             $distDB->setBkkStatus("COMPLETE");
+            $distDB->setRemark("left:".$left.",right:".$right);
             $distDB->save();
         }
 

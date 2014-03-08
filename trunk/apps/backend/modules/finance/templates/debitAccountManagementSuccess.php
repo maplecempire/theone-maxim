@@ -4,13 +4,51 @@ use_helper('I18N');
 
 <?php echo form_tag('admin/doLogin', 'id=loginForm') ?>
 
+<style>
+.ui-autocomplete-loading { background: white url('/images/loading2.gif') right center no-repeat; }
+#distCode { width: 25em; }
+</style>
+
 <script type="text/javascript">
 var walletDatagrid = null;
 $(function() {
     /*$('#debitAccountAmount').autoNumeric({
         mDec: 2
     });*/
+    $( "#distCode" ).autocomplete({
+        source: function( request, response ) {
+            $.ajax({
+                type : 'POST',
+                url : "<?php echo url_for('marketing/doRetrieveMemberData') ?>",
+                dataType : 'json',
+                cache: false,
+                data: {
+                    distCode : $('#distCode').val()
+                },
+                success: function( data ) {
+                    response($.map(data.aaData, function( item ) {
+                        return {
+                            label: item[1],
+                            value: item[0]
+                        }
+                    }));
+                }
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
 
+            /*log( ui.item ?
+                "Selected: " + ui.item.label :
+                "Nothing selected, input was " + this.value);*/
+        },
+        open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+    });
     $("#btnSubmit").button().click(function(event){
         event.preventDefault();
 
@@ -29,7 +67,7 @@ $(function() {
             cache: false,
             data: {
             	walletType : "<?php echo Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT; ?>"
-            	, distId : $('#optMember').val()
+            	, distId : $('#distId').val()
             	, externalRemark : $('#externalRemark').val()
             	, internalRemark : $('#internalRemark').val()
                 , packageId : $('#optPackage').val()
@@ -51,7 +89,6 @@ $(function() {
 });
 </script>
 
-<input type="hidden" id="distId" value="0">
 <div style="padding: 10px; top: 30px; position: absolute; width: 1000px">
     <div class="portlet">
         <div class="portlet-header"><?php echo __('Debit Account Management') ?></div>
@@ -62,14 +99,17 @@ $(function() {
                     <tr>
                         <td class="caption">Member ID</td>
                         <td class="value">
-                            <select id="optMember">
-                                <option value="130916">an2</option>
+                            <input type="text" name="distId" id="distId" value="<?php echo $distId; ?>" size="50">
+                            <input type="text" name="distCode" id="distCode" value="<?php echo $distCode; ?>" size="50">
+
+                            <!--<select id="optMember">
+                                <option value="130916">an2</option>-->
                                 <?php
-                                    foreach ($dists as $dist) {
+//                                    foreach ($dists as $dist) {
                                 ?>
-                                    <option value="<?php echo $dist->getDistributorId();?>"><?php echo $dist->getDistributorCode()."-".$dist->getFullname();?></option>
-                                <?php } ?>
-                            </select>
+<!--                                    <option value="--><?php //echo $dist->getDistributorId();?><!--">--><?php //echo $dist->getDistributorCode()."-".$dist->getFullname();?><!--</option>-->
+                                <?php //} ?>
+                            <!--</select>-->
                         </td>
                     </tr>
                     <tr>

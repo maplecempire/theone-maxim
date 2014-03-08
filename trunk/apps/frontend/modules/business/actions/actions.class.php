@@ -403,6 +403,28 @@ class businessActions extends sfActions
                 $distributorDB->setVisaDebitCard($visaCardNumber);
                 $distributorDB->save();
 
+                $content = "Dear Client,
+
+                Thanks for your time and please kindly know that we will be sending you the New Maxim Visa Debit card to replace the existing Maxim visa debit card you have. Please note that you can still use the balance you have on your existing card, yet you won't be able to credit more amount into it.
+
+                It will take you about 2 weeks to receive the new card, and once you get it, please keep your PIN number (we won't be keeping the PIN for you), and you are free to use this card. If you have any question regarding and only regarding the debit card, please write to melody@maximtrader.com （English/Chinese) for help.
+
+                Thank you very much!
+
+                Sincerely
+                Maxim Support
+
+                尊敬的客户您好！
+
+                请留意我们会寄送新的马胜借记卡，以取代您原有的马胜借记卡。
+                您依然可以使用您现有的卡上余额，但是请注意您已经不可以再继续往该卡上汇钱。
+
+                新卡大概需要2周寄到您的所在地。请妥善保管您的PIN号码（公司不会存档）。之后您可以正常使用该卡。
+                如果您有任何关于且只关于借记卡的疑虑，请中文或英文邮件至melody@maximtrader.com。
+
+                谢谢！
+                客户服务部";
+
                 $mlm_customer_enquiry = new MlmCustomerEnquiry();
                 $mlm_customer_enquiry->setDistributorId($distributorDB->getDistributorId());
                 $mlm_customer_enquiry->setContactNo($contactNoEmail);

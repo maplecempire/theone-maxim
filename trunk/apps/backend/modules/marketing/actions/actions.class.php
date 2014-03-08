@@ -969,10 +969,10 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     }
     public function executeCustomerEnquiryAdd()
     {
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-        $this->dists = MlmDistributorPeer::doSelect($c);
+        $this->dists = MlmDistributorPeer::doSelect($c);*/
     }
     public function executeSendLuckyDraw()
     {
@@ -2131,6 +2131,28 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
         $output = array(
             "error" => false
+        );
+        echo json_encode($output);
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoRetrieveMemberData()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, "%".$this->getRequestParameter('distCode')."%", Criteria::LIKE);
+        $c->setLimit(100);
+        $distributorDBs = MlmDistributorPeer::doSelect($c);
+
+        $output = array();
+        $arr = array();
+        foreach ($distributorDBs as $distributorDB) {
+            $arr[] = array(
+                $distributorDB->getDistributorId() == null ? "" : $distributorDB->getDistributorId(),
+                $distributorDB->getDistributorCode() == null ? "" : $distributorDB->getDistributorCode()
+            );
+        }
+
+        $output = array(
+            "aaData" => $arr
         );
         echo json_encode($output);
         return sfView::HEADER_ONLY;

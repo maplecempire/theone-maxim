@@ -16,6 +16,11 @@ $(function() {
 });
 </script>
 
+<style>
+.ui-autocomplete-loading { background: white url('/images/loading2.gif') right center no-repeat; }
+#distCode { width: 25em; }
+</style>
+
 <script type="text/javascript" language="javascript">
 $(function() {
     $("#csForm").validate({
@@ -25,14 +30,46 @@ $(function() {
             }
         },
         rules : {
-            "transactionPassword" : {
-                required : true
-                , remote: "/member/verifyTransactionPassword"
-            }
+
         },
         submitHandler: function(form) {
             waiting();
             form.submit();
+        }
+    });
+
+    $( "#distCode" ).autocomplete({
+        source: function( request, response ) {
+            $.ajax({
+                type : 'POST',
+                url : "<?php echo url_for('marketing/doRetrieveMemberData') ?>",
+                dataType : 'json',
+                cache: false,
+                data: {
+                    distCode : $('#distCode').val()
+                },
+                success: function( data ) {
+                    response($.map(data.aaData, function( item ) {
+                        return {
+                            label: item[1],
+                            value: item[0]
+                        }
+                    }));
+                }
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+
+            /*log( ui.item ?
+                "Selected: " + ui.item.label :
+                "Nothing selected, input was " + this.value);*/
+        },
+        open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
     });
 });
@@ -76,19 +113,21 @@ tinyMCE.init({
                 <tr>
                     <td class="caption">Title</td>
                     <td class="value">
-                        <input type="text" name="title" id="title" value="" size="50">
+                        <input type="text" name="title" id="title" value="<?php echo $title; ?>" size="50">
                     </td>
                 </tr>
                 <tr>
                     <td class="caption">Member ID</td>
                     <td class="value">
-                        <select id="optMember" name="distId">
+                        <input type="text" name="distId" id="distId" value="<?php echo $distId; ?>" size="50">
+                        <input type="text" name="distCode" id="distCode" value="<?php echo $distCode; ?>" size="50">
+                        <!--<select id="optMember" name="distId">
                             <?php
-                                foreach ($dists as $dist) {
-                            ?>
-                                <option value="<?php echo $dist->getDistributorId();?>"><?php echo $dist->getDistributorCode()."-".$dist->getFullname();?></option>
-                            <?php } ?>
-                        </select>
+/*                                foreach ($dists as $dist) {
+                            */?>
+                                <option value="<?php /*echo $dist->getDistributorId();*/?>"><?php /*echo $dist->getDistributorCode()."-".$dist->getFullname();*/?></option>
+                            <?php /*} */?>
+                        </select>-->
                     </td>
                 </tr>
                 <tr class="tbl_form_row_even">
