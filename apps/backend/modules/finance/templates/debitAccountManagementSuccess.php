@@ -102,8 +102,8 @@ $(function() {
                     <tr>
                         <td class="caption">Member ID</td>
                         <td class="value">
-                            <input type="text" name="distId" id="distId" value="<?php echo $distId; ?>" size="50">
                             <input type="text" name="distCode" id="distCode" value="<?php echo $distCode; ?>" size="50">
+                            <input type="text" name="distId" id="distId" value="<?php echo $distId; ?>" size="50">
 
                             <!--<select id="optMember">
                                 <option value="130916">an2</option>-->
