@@ -163,10 +163,10 @@ class financeActions extends sfActions
     }
     public function executeDebitAccountManagement()
     {
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-        $this->dists = MlmDistributorPeer::doSelect($c);
+        $this->dists = MlmDistributorPeer::doSelect($c);*/
 
         $c = new Criteria();
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
