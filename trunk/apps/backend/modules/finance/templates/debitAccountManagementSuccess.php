@@ -39,7 +39,7 @@ $(function() {
         select: function( event, ui ) {
             if (ui.item) {
                 $('#distId').val(ui.item.value);
-                $('#distCode').val(ui.item.label);
+                $('#distCode').val(this.value);
             } else {
                 alert("Invalid ID");
                 $('#distId').val("");
