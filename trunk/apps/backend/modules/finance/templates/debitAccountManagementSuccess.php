@@ -40,6 +40,9 @@ $(function() {
             if (ui.aaData) {
                 $('#distId').val(data.aaData[0]);
                 $('#distCode').val(data.aaData[1]);
+            } else {
+                alert("Invalid ID");
+                $('#distId').val("");
             }
             /*log( ui.item ?
                 "Selected: " + ui.item.label :
