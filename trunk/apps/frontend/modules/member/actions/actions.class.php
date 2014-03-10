@@ -7838,6 +7838,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->setOffset($this->getRequestParameter('q') * 10000);
                     $c->setLimit(10000);
+                    $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_ID);
                     $dists = MlmDistributorPeer::doSelect($c);
                     print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
