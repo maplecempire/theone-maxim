@@ -1053,6 +1053,65 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 March 2014";
+                ?>
+            </div>
+
+            <div id="page_16" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+
+                            <span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD30,000 to USD99,000 you are entitled for 1 FREE SYS Ticket</span>
+                            <ul style="list-style: circle">
+                                <li>4 days / 3 nights stay (twin share basis) in 5 Star Hotel</li>
+                                <li><span style="color: #ff0000; font-weight: bold;">Reimbursement of 500CP1 for your plane ticket</span></li>
+                                <li>2-way airport transfer</li>
+                                <li>VIP Pass to the 4-day Singapore Yacht Show</li>
+                                <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
+                            </ul>
+                            <br>
+                            <span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD100,000 to USD499,000 you are entitled for 1 FREE SYS Ticket</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4 days / 3 nights stay in <strong>5 Star Hotel - Premium Room</strong></li>
+                                <li>Reimbursement of 500CP1 for your plane ticket</li>
+                                <li>Limousine 2-way airport transfers</li>
+                                <li><strong>Silver VIP Pass</strong> to the 4-day Singapore Yacht Show</li>
+                                <li><strong>April 11th - Lunch with CEO and Maxim Management Team</strong></li>
+                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
+                            </ul>
+                            <br>
+                            <br><span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD500,000 you are entitled for 1 FREE SYS Ticket </span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4 days / 3 nights stay in <strong>5 Star Hotel - Suite Room</strong></li>
+                                <li><strong>Private jet</strong> to bring YOU to Singapore Seletar Airport</li>
+                                <li><strong>Exclusive use of Luxury Limousine plus Chauffeur for 4 days</strong></li>
+                                <li><strong>Diamond Black VVIP pass</strong> to the 4-day Singapore Yacht Show</li>
+                                <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
+                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
+                            </ul>
+                            <br>
+                            <a href="/images/201403/Singapore_Yacht_Show_Lifestyle_Challenge.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Singapore Yacht Show Lifestyle Challenge.pdf (1.4MB)</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='14'>MoneyTrac - FOR NOW AND UNTIL FURTHER NOTICE, ONLY AVAILABLE FOR M'sians 直到有进一步通知，Money Trac服务目前只对马来西亚客户开放</a>
             </div>
             <div class="news_date">
