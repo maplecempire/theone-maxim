@@ -240,7 +240,7 @@ $(function() {
                     <td>
                         <?php
                         $disabled = "";
-                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 161 || $distDB->getDistributorId() == 595) {
 
                         } else {
                             $disabled = "disabled='disabled'";
