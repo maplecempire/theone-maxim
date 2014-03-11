@@ -2007,7 +2007,7 @@ class memberActions extends sfActions
                 $companyEpoint = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
                 $distEpoint = $this->getAccountBalance($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $totalEpoint = $mlmDistEpointPurchase->getAmount();
+                $totalEpoint = $mlmDistEpointPurchase->getAmount() / 7;
 
                 $mlmDistEpointPurchase->setPgSuccess("Y");
                 $mlmDistEpointPurchase->setPgMsg($msg);
@@ -2036,7 +2036,7 @@ class memberActions extends sfActions
                 $mlm_account_ledger->setDistId($dist->getDistributorId());
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
-                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setRemark("FUND:".$mlmDistEpointPurchase->getAmount());
                 $mlm_account_ledger->setCredit($totalEpoint);
                 $mlm_account_ledger->setDebit(0);
                 $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
