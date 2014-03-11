@@ -1099,7 +1099,7 @@ $(document).ready(function() {
                                 <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
                             <br>
-                            <a href="/images/201403/Singapore_Yacht_Show_Lifestyle_Challenge.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Singapore Yacht Show Lifestyle Challenge.pdf (1.4MB)</a>
+                            <a href="/images/201403/Singapore_Yacht_Show_Lifestyle_Challenge.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Download Singapore Yacht Show Lifestyle Challenge.pdf (1.4MB)</a>
                             </td>
                         </tr>
                     </tbody>
@@ -1109,6 +1109,39 @@ $(document).ready(function() {
             <div class="popdivider"></div>
         </div>
 
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 March 2014";
+                ?>
+            </div>
+
+            <div id="page_17" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+
+                            <img style="width: 600px" src="/images/201403/bmw.jpg">
+
+                            <span style="color: #ff0000; font-weight: bold;">TOP PERSONAL SALES ACHIEVER ENTITLED FOR A BRAND NEW BMW X6 SERIES
+                            <br>** Minimum PERSONAL SALES of USD3mil required.
+                            </span>
+                            <br>
+                            <br>
+                            <a href="/images/201403/BMW_X6_CHALLENGE.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Download BMW X6 CHALLENGE.pdf (0.7MB)</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
 
         <div class="page">
             <div class="poptitle">
