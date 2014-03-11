@@ -2018,7 +2018,7 @@ class memberActions extends sfActions
 
                 $mlmDistEpointPurchase->save();
 
-                $mlm_account_ledger = new MlmAccountLedger();
+                /*$mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
@@ -2028,11 +2028,11 @@ class memberActions extends sfActions
                 $mlm_account_ledger->setBalance($companyEpoint - $totalEpoint);
                 $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                $mlm_account_ledger->save();*/
 
                 //$this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
-                $mlm_account_ledger = new MlmAccountLedger();
+                /*$mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($dist->getDistributorId());
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
@@ -2042,7 +2042,7 @@ class memberActions extends sfActions
                 $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
                 $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                $mlm_account_ledger->save();*/
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transaction Successful."));
                 return $this->redirect('/member/epointPurchase?pg=Y');
