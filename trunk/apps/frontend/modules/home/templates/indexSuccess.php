@@ -84,7 +84,7 @@
         display: none;
         margin-top: 150px;
         padding-bottom: 150px;
-        width: 500px;
+        width: 650px;
         background: url(images/popbg.jpg) repeat-y #fff;
         border: 2px solid #999999;
         color: #333;
@@ -978,7 +978,82 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='14'>MoneyTrac - FOR NOW AND UNTIL FURTHER NOTICE, ONLY AVAILABLE FOR M'sians 直到有进一步通知，Money Trac服务目前只对马来西亚客户开放</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "11 March 2014";
+                ?>
+            </div>
+
+            <div id="page_15" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <br>
+                            <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
+                            <br>     
+                            <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
+                            <br>     
+                            <br>To celebrate this milestone event, we have designed these very <span style="color: #ff0000;">exclusive Singapore Yacht Show Lifestyle Packages... <u>ONLY</u> for those that <u>COMMIT on March 10th 2014 with PAID SIGN UP by March 20th 2014</u>.</span>
+                            <br>
+                            <br><span style="color: #ff0000;">SIGN UP for USD30,000 to USD99,000 and you will <u>enjoy</u>  - for 1 pax :</span>
+                            <ul style="list-style: circle">
+                                <li>4 days / 3 nights stay (twin share basis) in 5 Star Hotel</li>
+                                <li>Reimbursement of 500CP1 for your plane ticket</li>
+                                <li>2-way airport transfer</li>
+                                <li>VIP Pass to the 4-day Singapore Yacht Show</li>
+                                <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
+                            </ul>
+                            <br>
+                            <br><span style="color: #ff0000;">SIGN UP for USD100,000 to USD499,000 and you will <u>enjoy</u> – for  1 pax :</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4 days / 3 nights stay (twin share basis) in <strong>5 Star Hotel - Premium Room</strong></li>
+                                <li>Reimbursement of 500CP1 for your plane ticket</li>
+                                <li>Limousine 2-way airport transfers</li>
+                                <li><strong>Silver VIP Pass</strong> to the 4-day Singapore Yacht Show</li>
+                                <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
+                                <li><strong>April 11th - Lunch with CEO and Maxim Management Team</strong></li>
+                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
+                            </ul>
+                            <br>
+                            <br><span style="color: #ff0000;">SIGN UP for USD500,000 and above to <u>enjoy</u> – for 1 pax:</span>
+                            <br><span style="color: #ff0000;">**Limited to 30 pax on a First Fully Paid Sign Up Basis (multiples of USD100,000 under 1 single UserID)</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4 days / 3 nights stay in <strong>5 Star Hotel - Suite Room</strong></li>
+                                <li><strong>Private jet</strong> to bring YOU to Singapore Seletar Airport</li>
+                                <li><strong>Exclusive use of Luxury Limousine plus Chauffeur for 4 days</strong></li>
+                                <li><strong>Diamond Black VVIP pass</strong> to the 4-day Singapore Yacht Show</li>
+                                <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
+                                <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
+                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
+                            </ul>
+                            <br>
+                            <img style="width: 600px" src="/images/201403/Singapore_Yacht_Show_Lifestyle_Incentive.jpg">
+                            <br>
+                            <br><span style="font-weight: bold;font-style: italic;">** If there are less than 8 persons in a particular country qualifying for the Private Jet, Maxim Capital will fly these qualifiers to another destination to join others to make up the maximum number of 12 passengers for each flight.</span>
+                            <br>
+                            <br><span style="color: #ff0000; font-weight: bold;">COME MAXIMers, SIGN UP NOW…… LET’S ROCK THE WORLD!!!</span>
+                            <br>
+                            <br>
+                            <a href="/images/201403/SYS_LIFESTYLE_INCENTIVE.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Download Sys Lifestyle Incentive.pdf (1.4MB)</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='14'>MoneyTrac - FOR NOW AND UNTIL FURTHER NOTICE, ONLY AVAILABLE FOR M'sians 直到有进一步通知，Money Trac服务目前只对马来西亚客户开放</a>
             </div>
             <div class="news_date">
             <?php
@@ -1014,7 +1089,9 @@ $(document).ready(function() {
             </div>
 
             <div class="popdivider"></div>
-        </div><div class="page">
+        </div>
+
+        <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='1'>2014 US Martin Luther King Jr. Holiday</a>
             </div>
@@ -1940,7 +2017,7 @@ $(document).ready(function() {
     <p></p>
     <a id="popupContactClose2"><?php echo __('CLOSE') ?></a><br>
 </div>
-<div style="height: 572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
+<div style="min-height: 1572px; opacity: 0.7; display: none;" id="backgroundPopup"></div>
 
 </body>
 </html>
