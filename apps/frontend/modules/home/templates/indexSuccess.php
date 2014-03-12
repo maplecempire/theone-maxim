@@ -1003,9 +1003,9 @@ $(document).ready(function() {
                             <?php if ($culture == "cn") {?>
                             <strong>2014.4.10-13日@新加坡圣淘沙One 15 Marina俱乐部</strong>
                             <?php } else if ($culture == "kr") {?>
-                            <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <strong>2014년 4월 10일@원15 마리나 클럽 센토사, 싱가포르</strong>
                             <?php } else if ($culture == "jp") {?>
-                            <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <strong>2014年４月10日〜13日@シンガポール・One15 マリーナクラブ・セントーサ </strong>
                             <?php } else {?>
                             <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
                             <?php } ?>
@@ -1205,16 +1205,6 @@ $(document).ready(function() {
                                 <li><strong>4월 11일 밤 로얄 알바트로스 호에서 열리는 맥심 VVIP 파티 초대</strong></li>
                             </ul>
                             <?php } else if ($culture == "jp") {?>
-                            <br><span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD500,000 you are entitled for 1 FREE SYS Ticket & 1 Carat Diamond Ring</span>
-                            <ul style="list-style: circle">
-                                <li>4 days / 3 nights stay in <strong>5 Star Hotel - Suite Room</strong></li>
-                                <li><strong>Private jet</strong> to bring YOU to Singapore Seletar Airport</li>
-                                <li><strong>Exclusive use of Luxury Limousine plus Chauffeur for 4 days</strong></li>
-                                <li><strong>Diamond Black VVIP pass</strong> to the 4-day Singapore Yacht Show</li>
-                                <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
-                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
-                            </ul>
-                            <?php } else {?>
                             <br><span style="color: #ff0000; font-weight: bold;">直接2×USD500,000をお申し込みいただくと、SYSチケットを1枚と1カラットのダイヤモンドリングを無料で差し上げます</span>
                             <ul style="list-style: circle">
                                 <li><strong>5つ星ホテルでの３泊４日の滞在（スイートルーム）</strong></li>
@@ -1223,6 +1213,16 @@ $(document).ready(function() {
                                 <li><strong>シンガポールヨットショーへの４日間のダイヤモンドブラックVIPパス</strong></li>
                                 <li><strong>4月12CEO とマネージメントチームとのシャンパンランチへご招待</strong></li>
                                 <li><strong>4月11日　夜ロイヤル・アルバトロス号マキシムVVIPパーティーへご招待</strong></li>
+                            </ul>
+                            <?php } else {?>
+                            <br><span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD500,000 you are entitled for 1 FREE SYS Ticket & 1 Carat Diamond Ring</span>
+                            <ul style="list-style: circle">
+                                <li>4 days / 3 nights stay in <strong>5 Star Hotel - Suite Room</strong></li>
+                                <li><strong>Private jet</strong> to bring YOU to Singapore Seletar Airport</li>
+                                <li><strong>Exclusive use of Luxury Limousine plus Chauffeur for 4 days</strong></li>
+                                <li><strong>Diamond Black VVIP pass</strong> to the 4-day Singapore Yacht Show</li>
+                                <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
+                                <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
                             <?php } ?>
                             <br>
