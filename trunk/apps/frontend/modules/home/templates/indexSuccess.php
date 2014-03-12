@@ -978,7 +978,15 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <?php if ($culture == "cn") {?>
+                <a href='#' class="page_link" ref='15'>新加坡国际游艇展-优惠计划</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "kr") {?>
+                <a href='#' class="page_link" ref='15'>싱가포르 요트 쇼 라이프스타일 인센티브</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "jp") {?>
+                <a href='#' class="page_link" ref='15'>ガポール・ヨットショー・ライフスタイル・インセンティブ</a><img src="/images/new_icon.gif">
+                <?php } else {?>
                 <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a><img src="/images/new_icon.gif">
+                <?php } ?>
             </div>
             <div class="news_date">
             <?php
@@ -992,11 +1000,29 @@ $(document).ready(function() {
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <?php if ($culture == "cn") {?>
+                            <strong>2014.4.10-13日@新加坡圣淘沙One 15 Marina俱乐部</strong>
+                            <?php } else if ($culture == "kr") {?>
                             <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <?php } else if ($culture == "jp") {?>
+                            <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <?php } else {?>
+                            <strong>April 10th to 13th 2014@One 15 Marina Club Sentosa, Singapore</strong>
+                            <?php } ?>
                             <br>
+                            <?php if ($culture == "cn") {?>
+                            <?php } else if ($culture == "kr") {?>
+                            <?php } else if ($culture == "jp") {?>
+                            <?php } else {?>
                             <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
+                            <?php } ?>
                             <br>     
+                            <?php if ($culture == "cn") {?>
+                            <?php } else if ($culture == "kr") {?>
+                            <?php } else if ($culture == "jp") {?>
+                            <?php } else {?>
                             <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
+                            <?php } ?>
                             <br>     
                             <br>To celebrate this milestone event, we have designed these very <span style="color: #ff0000;">exclusive Singapore Yacht Show Lifestyle Packages... <u>ONLY</u> for those that <u>COMMIT on March 10th 2014 with PAID SIGN UP by March 20th 2014</u>.</span>
                             <br>
@@ -1053,7 +1079,15 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <?php if ($culture == "cn") {?>
+                    <a href='#' class="page_link" ref='16'>新加坡国际游艇展挑战 <br>(期限：10th – 20th 3月 2014)</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "kr") {?>
+                    <a href='#' class="page_link" ref='16'>싱가폴 요트쇼 라이프 스타일 챌린지 <br>(기간 : 2014년 3월 10일 ~ 20일)</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "jp") {?>
+                <a href='#' class="page_link" ref='16'>シンガポールヨットショー・ライフスタイルチャレンジ <br>（期間　2014年3月10〜20日）</a><img src="/images/new_icon.gif">
+                <?php } else {?>
                 <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a><img src="/images/new_icon.gif">
+                <?php }?>
             </div>
             <div class="news_date">
             <?php
@@ -1068,6 +1102,34 @@ $(document).ready(function() {
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
 
+                            <?php if ($culture == "cn") {?>
+                            <span style="color: #ff0000; font-weight: bold;">直推奖励。2 个最少USD30,000 至 99,000配套，您将免费获得票券1张</span>
+                            <ul style="list-style: circle">
+                                <li>4天/3夜五星级酒店住宿（双人床）</li>
+                                <li><span style="color: #ff0000; font-weight: bold;">飞机票500 CP1的报销</span></li>
+                                <li>机场接送</li>
+                                <li>此次为期4天的新加坡国际游艇展的VIP套票</li>
+                                <li>受邀 <strong>4.10日晚登上The Royal Albatross享用马胜烧烤(BBQ)派对</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <span style="color: #ff0000; font-weight: bold;">2명 직접 추천 X   30,000 ~ 99,000 미국달러 – 무료 SYS 티켓 1장</span>
+                            <ul style="list-style: circle">
+                                <li>3박 4일 (2인 1일 실) 5성급 호텔 숙박</li>
+                                <li><span style="color: #ff0000; font-weight: bold;">비행기 값 500CP1 보상</span></li>
+                                <li>공항까지 교통편 제공</li>
+                                <li>싱가포르 요트 쇼 4일간의 VIP 패스</li>
+                                <li><strong>4월 10일 로얄 알바트로스 호에서 열리는 맥심 바비큐 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <span style="color: #ff0000; font-weight: bold;">直接2×USD30,000〜99,000をお申し込みいただくと、SYSチケットを1枚無料で差し上げます</span>
+                            <ul style="list-style: circle">
+                                <li>5つ星ホテルでの３泊４日の滞在（ツインルームのシェア基本）</li>
+                                <li><span style="color: #ff0000; font-weight: bold;">500CP1の飛行機チケットの償還</span></li>
+                                <li>エアポート往復送迎</li>
+                                <li>シンガポールヨットショーへの４日間のVIPパス</li>
+                                <li>strong>4月10日　夜ロイヤル・アルバトロス号へ招待</strong></li>
+                            </ul>
+                            <?php } else {?>
                             <span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD30,000 to USD99,000 you are entitled for 1 FREE SYS Ticket</span>
                             <ul style="list-style: circle">
                                 <li>4 days / 3 nights stay (twin share basis) in 5 Star Hotel</li>
@@ -1076,10 +1138,41 @@ $(document).ready(function() {
                                 <li>VIP Pass to the 4-day Singapore Yacht Show</li>
                                 <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
                             </ul>
+                            <?php } ?>
                             <br>
-                            <span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD100,000 to USD499,000 you are entitled for 1 FREE SYS Ticket</span>
+                            <?php if ($culture == "cn") {?>
+                            <span style="color: #ff0000; font-weight: bold;">直推奖励 2 个最少100,000-USD499,000配套，您将免费获得票券1张及1卡拉钻戒</span>
                             <ul style="list-style: circle">
-                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4天/3夜<strong>五星级酒店住宿（高级客房）</strong></li>
+                                <li>飞机票500 cp1的报销</li>
+                                <li>豪华轿车机场接送</li>
+                                <li><strong>此次为期4天的新加坡国际游艇展的VIP套票-银级别</strong></li>
+                                <li><strong>受邀4.11日中午与马胜金融CEO首席执行官以及</strong></li>
+                                <li><strong>受邀4.11日晚登上The Royal Albatross参加马胜VVIP派对公司高层共享午宴</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <span style="color: #ff0000; font-weight: bold;">2명 직접 추천 X 100,000 ~ 499,000 미국달러  - SYS 무료티켓 1장과 1캐롯 다이아몬드 반지</span>
+                            <ul style="list-style: circle">
+                                <li><strong>3박 4일 (2인 1일 실) 5성급 호텔 숙박 – 프리미엄 룸</strong></li>
+                                <li>비행기 값 500CP1  보상 </li>
+                                <li>공항까지 왕복 리무진 제공</li>
+                                <li><strong>싱가포르 요트 쇼 4일간의 실버 VIP 패스</strong></li>
+                                <li><strong>4월 11일 CEO와 맥심 임원진들과의 점심 식사</strong></li>
+                                <li><strong>4월 11일 밤 로얄 알바트로스 호에서 열리는 맥심 VVIP 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <span style="color: #ff0000; font-weight: bold;">直接2×USD100,000〜499,000をお申し込みいただくと、SYSチケットを1枚と1カラットのダイヤモンドリングを無料で差し上げます</span>
+                            <ul style="list-style: circle">
+                                <li><strong>5つ星ホテルでの３泊４日の滞在（プレミアムルーム）</strong></li>
+                                <li>500CP1の飛行機チケットの償還</li>
+                                <li>リムジンでのエアポート往復送迎</li>
+                                <li><strong>シンガポールヨットショーへの４日間のシルバーVIPパス</strong></li>
+                                <li><strong>4月11日 CEO とマネージメントチームとのシャンパンランチへご招待</strong></li>
+                                <li><strong>4月11日 夜ロイヤル・アルバトロス号VVIPパーティーへご招待</strong></li>
+                            </ul>
+                            <?php } else {?>
+                            <span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD100,000 to USD499,000 you are entitled for 1 FREE SYS Ticket & 1 Carat Diamond Ring</span>
+                            <ul style="list-style: circle">
                                 <li>4 days / 3 nights stay in <strong>5 Star Hotel - Premium Room</strong></li>
                                 <li>Reimbursement of 500CP1 for your plane ticket</li>
                                 <li>Limousine 2-way airport transfers</li>
@@ -1087,10 +1180,33 @@ $(document).ready(function() {
                                 <li><strong>April 11th - Lunch with CEO and Maxim Management Team</strong></li>
                                 <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
+                            <?php } ?>
                             <br>
-                            <br><span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD500,000 you are entitled for 1 FREE SYS Ticket </span>
+                            <?php if ($culture == "cn") {?>
+                            <br><span style="color: #ff0000; font-weight: bold;">直推奖励 2 个最少500,000配套，您将免费获得票券1张及1卡拉钻戒</span>
                             <ul style="list-style: circle">
-                                <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
+                                <li>4天/3夜<strong>五星级酒店住宿（套房）</strong></li>
+                                <li><strong>私人飞机</strong>送至新加坡Seletar机场</li>
+                                <li><strong>为期4天的豪华轿车自由使用，并配有私人司机</strong></li>
+                                <li><strong>此次为期4天的新加坡国际游艇展的VVIP套票-钻石黑级别</strong></li>
+                                <li><strong>受邀4.10日晚登上The Royal Albatross享用马胜烧烤(BBQ)派对</strong></li>
+                                <li><strong>受邀4.12日与马胜金融CEO首席执行官以及公司高层共享香槟午宴</strong></li>
+                                <li><strong>受邀4.11日晚登上The Royal Albatross参加马胜VVIP派对</strong></li>
+                                <li><strong>受邀4.12日晚在Exclusive W Hotel参加游艇展会后活动</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <br><span style="color: #ff0000; font-weight: bold;">2명 직접 추천  X 500,000  미국달러 - SYS 무료 티겟 1장과 1캐롯 다이아몬드 반지</span>
+                            <ul style="list-style: circle">
+                                <li><strong>3박 4일 (2인 1일 실) 5성급 호텔 숙박 – 스위트 룸</strong></li>
+                                <li><strong>싱가포르 셀레타 공항으로 개인 제트기 제공</strong></li>
+                                <li><strong>4일간 기사와 리무진 제공</strong></li>
+                                <li><strong>싱가포르 요트 쇼 4일간의 다이아몬드 블랙 VVIP 패스</strong></li>
+                                <li><strong>4월 12일 CEO와 맥심 임원진들과의 샴패인을 곁들인 점심 식사</strong></li>
+                                <li><strong>4월 11일 밤 로얄 알바트로스 호에서 열리는 맥심 VVIP 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <br><span style="color: #ff0000; font-weight: bold;">Direct refer 2 x USD500,000 you are entitled for 1 FREE SYS Ticket & 1 Carat Diamond Ring</span>
+                            <ul style="list-style: circle">
                                 <li>4 days / 3 nights stay in <strong>5 Star Hotel - Suite Room</strong></li>
                                 <li><strong>Private jet</strong> to bring YOU to Singapore Seletar Airport</li>
                                 <li><strong>Exclusive use of Luxury Limousine plus Chauffeur for 4 days</strong></li>
@@ -1098,6 +1214,17 @@ $(document).ready(function() {
                                 <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
                                 <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
+                            <?php } else {?>
+                            <br><span style="color: #ff0000; font-weight: bold;">直接2×USD500,000をお申し込みいただくと、SYSチケットを1枚と1カラットのダイヤモンドリングを無料で差し上げます</span>
+                            <ul style="list-style: circle">
+                                <li><strong>5つ星ホテルでの３泊４日の滞在（スイートルーム）</strong></li>
+                                <li><strong>シンガポール・セレター空港までプライベートジェットでお運びします</strong></li>
+                                <li><strong>4日間運転手付き専用リムジンをご用意</strong></li>
+                                <li><strong>シンガポールヨットショーへの４日間のダイヤモンドブラックVIPパス</strong></li>
+                                <li><strong>4月12CEO とマネージメントチームとのシャンパンランチへご招待</strong></li>
+                                <li><strong>4月11日　夜ロイヤル・アルバトロス号マキシムVVIPパーティーへご招待</strong></li>
+                            </ul>
+                            <?php } ?>
                             <br>
                             <a href="/images/201403/Singapore_Yacht_Show_Lifestyle_Challenge.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Download Singapore Yacht Show Lifestyle Challenge.pdf (1.4MB)</a>
                             </td>
@@ -1111,7 +1238,15 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <?php if ($culture == "cn") {?>
+                <a href='#' class="page_link" ref='17'>BMW X6挑战大奖 <br>(期限：3月10号 –  5月31号2014)</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "kr") {?>
+                    <a href='#' class="page_link" ref='17'>BMW X6 챌린지 <br>(기간 : 2014년 3월 10일 ~ 5월 31일)</a><img src="/images/new_icon.gif">
+                <?php } else if ($culture == "jp") {?>
+                    <a href='#' class="page_link" ref='17'>BMW X6　チャレンジ <br>（期間：２０１４年3月１０〜３１日）</a><img src="/images/new_icon.gif">
+                <?php } else {?>
                 <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a><img src="/images/new_icon.gif">
+                <?php } ?>
             </div>
             <div class="news_date">
             <?php
@@ -1128,8 +1263,19 @@ $(document).ready(function() {
 
                             <img style="width: 600px" src="/images/201403/bmw.jpg">
 
+                            <?php if ($culture == "cn") {?>
+                            <span style="color: #ff0000; font-weight: bold;">最高个人业绩者将获得一部崭新的BMW X6 系列
+                            <br>** 以最少3百万美金各人业绩为准.
+                            <?php } else if ($culture == "kr") {?>
+                            <span style="color: #ff0000; font-weight: bold;">최고의 개인 판매실적을 올린 분께 신형 BMW X6 시리즈를 드립니다
+                            <br>** 최소 개인 판매실적 미화 3백만 달러 이상 필요.
+                            <?php } else if ($culture == "jp") {?>
+                            <span style="color: #ff0000; font-weight: bold;">トップパーソナルセールスの達成者には新品のBMX X6 シリーズ獲得の権利があります
+                            <br>** ただし、個人セールスで、最低300万USDを達成する必要があります.
+                            <?php } else {?>
                             <span style="color: #ff0000; font-weight: bold;">TOP PERSONAL SALES ACHIEVER ENTITLED FOR A BRAND NEW BMW X6 SERIES
                             <br>** Minimum PERSONAL SALES of USD3mil required.
+                            <?php } ?>
                             </span>
                             <br>
                             <br>
