@@ -7820,6 +7820,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
             print_r("currentDate=".$currentDate."<br>");
 
+            $queryRecord = 5000;
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
                 print_r("bonusDate=".$bonusDate."<br>");
@@ -7836,8 +7837,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $c = new Criteria();
 //                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 100);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
-                    $c->setOffset($this->getRequestParameter('q') * 10000);
-                    $c->setLimit(10000);
+                    $c->setOffset($this->getRequestParameter('q') * $queryRecord);
+                    $c->setLimit($queryRecord);
                     $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_ID);
                     $dists = MlmDistributorPeer::doSelect($c);
                     print_r("total Dist:".count($dists)."<br><br>");
@@ -8077,7 +8078,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         }
                     }
 
-                    if (count($dists) != 10000) {
+                    if (count($dists) != $queryRecord) {
                         $bonusDate = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate($bonusDate, 1, 0, 0));
                         $mlm_daily_bonus_log = new MlmDailyBonusLog();
                         $mlm_daily_bonus_log->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
