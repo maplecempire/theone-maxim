@@ -244,7 +244,7 @@ class zMailActions extends sfActions
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
 									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel <a href='tel:%28%2B64%29%2093791159' value='+6493791159' target='_blank'>(+64) 93791159</a>, Email <a href='mailto:cs@maximtrader.com' target='_blank'>cs@maximtrader.com</a>
-									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Globe Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
@@ -367,7 +367,7 @@ class zMailActions extends sfActions
 								</font>
 								<br><br>
 								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
-								<span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团是Royale Group Holding Inc的下属企业</span>，
+								<span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团是Royale Globe Holding Inc的下属企业</span>，
 								是一家在美国上市的金融和投资信托基金公司，同时也受
 								<span style='font-size:16px; font-weight: bold; color:#ff0000'>新西兰金融服务提供商（FSP）</span>
 								的监管.拥有遍及欧洲和很多像中国，香港，韩国等和东南亚众多新型经济体的金融交易服务商和市场研究机构。马胜金融集团是由一群经验丰富，热情服务的交易员，金融分析师和精算师构成的，他们的目标就是为行业提供最佳的交易解决方案。
@@ -450,7 +450,7 @@ class zMailActions extends sfActions
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
 									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
-									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Globe Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
@@ -627,7 +627,7 @@ class zMailActions extends sfActions
 								</font>
 								<br><br>
 								<font face='Microsoft YaHei' size='3' color='#040404' style='font-size:14px;line-height:26px'>
-								<span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团是Royale Group Holding Inc的下属企业</span>，
+								<span style='font-size:16px; font-weight: bold; color:#ff0000'>马胜金融集团是Royale Globe Holding Inc的下属企业</span>，
 								是一家在美国上市的金融和投资信托基金公司，同时也受
 								<span style='font-size:16px; font-weight: bold; color:#ff0000'>新西兰金融服务提供商（FSP）</span>
 								的监管.拥有遍及欧洲和很多像中国，香港，韩国等和东南亚众多新型经济体的金融交易服务商和市场研究机构。马胜金融集团是由一群经验丰富，热情服务的交易员，金融分析师和精算师构成的，他们的目标就是为行业提供最佳的交易解决方案。
@@ -705,7 +705,7 @@ class zMailActions extends sfActions
 							<p align='justify'>
 								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
 									Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159, Email cs@maximtrader.com
-									<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Globe Holding Inc. a public listed company in USA.
 									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
@@ -890,7 +890,7 @@ class zMailActions extends sfActions
 								<p align='justify'>
 									<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
 											Maxim Trader is managed by Maxim Capital Limited which is authorised and regulated in the New Zealand by the Financial Services Provider. FSP Register number is 252705. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (+64) 93791159
-											<br><br>Maxim Capital Limited is a subsidiary of Royale Group Holding Inc. a public listed company in USA.
+											<br><br>Maxim Capital Limited is a subsidiary of Royale Globe Holding Inc. a public listed company in USA.
 <br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
 <br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 <br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
