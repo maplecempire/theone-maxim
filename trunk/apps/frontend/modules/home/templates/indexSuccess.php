@@ -1011,27 +1011,63 @@ $(document).ready(function() {
                             <?php } ?>
                             <br>
                             <?php if ($culture == "cn") {?>
-                            <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
+                            <br>非常荣幸<strong>马胜金融集团</strong>能够成为<strong>2014新加坡国际游艇展-这一亚太地区最顶级、最奢华生活方式代表活动的主要赞助商</strong>。新加坡和新加坡国际游艇展也担任着向亚洲地区最有影响力的财富新贵们展现这一世界顶级精英游艇界的奢华生活的重任。继摩纳哥帆船展及劳德代尔堡国际游艇展之后，世界的焦点再一次聚焦-新加坡国际游艇展。
                             <?php } else if ($culture == "kr") {?>
-                            <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
+                            <br><strong>맥심 캐피탈이 아시아 퍼시픽의 가장 훌륭하고 명망 높은 라이프스타일 이벤트인 싱가포르 요트 쇼 2014의 메인 스폰서</strong> 중 하나가 되어서 매우 영광스럽습니다.  싱가포르와 싱가포르 요트 쇼는 세계의 가장 비싼 보트와 상 받은 럭셔리 슈퍼 요트의 쇼케이스를 열어 아시아의 최고 부유층과 선두 사업자들을 초대합니다.  모나코 요트 쇼와 포트 로더데일 국제 보트 쇼 이후로, 세계는 지금 싱가포르 요트 쇼에 주목하고 있습니다.
                             <?php } else if ($culture == "jp") {?>
-                            <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
+                            <br>マキシム・キャピタル・リミテッドにとって、アジア太平洋地域でもっとも素晴らしく、権威のあるライフスタイル・イベントであるシンガポール・ヨットショー2014のメインスポンサーになったことは、大変光栄なことです。シンガポールとシンガポール・ヨットショーは世界でもっとも高級なボートや、秘蔵の豪華なスーパーヨットを、アジアでもっとも豊かなコミュニティーに先導して紹介します。モナコ・ヨットショーと、フォートフローダーテール国際ボートショーのあと、世界の注目はシンガポール・ヨットショーに集まっています。
                             <?php } else {?>
                             <br>It is indeed an honor for <strong>Maxim Capital Limited</strong> to be the <strong>main sponsor for one of the finest and most prestigious lifestyle events in the Asia Pacific, the Singapore Yacht Show 2014</strong>. Singapore and the Singapore Yacht Show is taking the lead to showcase some of the world’s most exclusive boats and prized luxury super yachts to Asia’s wealthiest community and leading business players. After Monaco Yacht Show and Ft Lauderdale International Boat Show, the world’s attention is focused on …. The Singapore Yacht Show.
                             <?php } ?>
                             <br>     
                             <?php if ($culture == "cn") {?>
-                            <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
+                            <br>在今年的活动中，<strong>最令人激动人心的是The Royal Albatross也会作为高位横帆船和超级游艇的代表</strong>首次跟大家见面。这艘游艇主体长度为47米，宽度为34米，拥有4跟铝造桅杆，可支撑22个帆蓬。作为高位横帆船和超级游艇的代表，The Royal Albatross也是唯一一艘拥有日间航行能力的游艇，并可容纳149位客人（最大容量为200位以上），且它还配有5个豪华船舱（夜间可容纳10位客人留宿），2个酒吧，270度全方位海景观赏，同时艺术灯光、音响以及导航系统配备齐全。很骄傲得告诉大家，<strong>The Royal Albatross将于4月10-11日对马胜开放</strong>。
                             <?php } else if ($culture == "kr") {?>
-                            <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
+                            <br>사상 처음으로, <strong>세계에서 가장 독특하고 고급스러운 톨 쉽과 로얄 알바트로스는</strong> 올해 쇼의 초고의 스타로 주목 받을 것입니다.  이 배는 41m 길이에 너비가 34m이며 22명의 돛이 44개의 알루미늄 돛대에 꽂혀있습니다. 149명이 항해할 수 있으며, 200+ 이상의 함께 모일 수 있는 장소와 10명이 5개의 스위트 객실에서 하룻밤 전세를 낼 수 있으며, 2개의 바, 270도 바다를 볼 수 있는 뷰를 가진 그랜드 살롱, 예술 수준의 조명, 오디오 장비와 네비게이션 시스템을 가진 이 클래스에서 유일한 배입니다.  <strong>로얄 알바트로스는 4월 10일과 11일에 우리의 개인 사용을 위해 사용할 수 있습니다.</strong>
                             <?php } else if ($culture == "jp") {?>
-                            <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
+                            <br>史上初めて、世界でもっともユニークで豪華な帆船であり、スーパーヨットクラスの「ザ・ロイヤル・アルバトロス号」は今年のショーのスター的アトラクションとなるでしょう。この船は長さ47メートル、幅34メートル。22の帆を付けられる4本のアルミニウムのマストを持っています。このクラスの船でははじめて、1日に149人のゲストを運ぶことができます。5つの大きなエンスイートキャビンをつけると、それぞれに10人が宿泊でき、200人以上を収容できます。２つのバー、270度を見渡せるグランドサロンと、アートライトニング、オーディオ機器、ナビゲーションシステムがあります。4月10日と11日、私たちはロイヤル・アルバトロス号をプライベートに使うことができます。
                             <?php } else {?>
                             <br>For the first time ever, <strong>the world’s most unique and luxurious Tall Ship and Super Yacht class The Royal Albatross</strong> will be the star attraction of this year’s show. She is 47m long, 34m wide and has 4 aluminum masts that carry 22 sails. It’s the only one in this class to have day sailing capacity of 149 guests, alongside capacity of 200+ and overnight charter of 10 guests in her 5 large en-suite cabins, 2 bars, 270view grand salon and state of the art lighting, audio equipment and navigation system. <strong>The Royal Albatross will be available for our private usage on April 10th & 11th</strong>.
                             <?php } ?>
                             <br>     
+                            <?php if ($culture == "cn") {?>
+                            <br>为了庆祝此次里程碑的活动，我们也为会员们准备了<span style="color: #ff0000;">专门的新加坡奢华游艇优惠计划。请注意，以下优惠只针对于<u>2014.3.10日报单且与2014.3.20日付完全款的客户</u></span>。
+                            <?php } else if ($culture == "kr") {?>
+                            <br>이 기념비 적인 이베트를 축하하기 위하여, 독점적으로 싱가포르 요트 쇼 라이프스타일 패키지를 마련하였습니다….. <span style="color: #ff0000;"><u>2014년 3월 20일까지 등록 및 입금완료한  분들 만을 위한</u></span>
+                            <?php } else if ($culture == "jp") {?>
+                            <br>この記念すべきイベントを祝い、私たちは特別な方だけに限定したシンガポールヨットショー・ライフスタイルパッケージを、<span style="color: #ff0000;"><u>2014年3月10日にコミットされた方だけにご用意します。支払いと登録は2014年3月20日までに済ませる必要があります</u></span>
+                            <?php } else {?>
                             <br>To celebrate this milestone event, we have designed these very <span style="color: #ff0000;">exclusive Singapore Yacht Show Lifestyle Packages... <u>ONLY</u> for those that <u>COMMIT on March 10th 2014 with PAID SIGN UP by March 20th 2014</u>.</span>
+                            <?php } ?>
                             <br>
+                            <?php if ($culture == "cn") {?>
+                            <br><span style="color: #ff0000;">购买配套额度为30,000-99,000美金，则可享受 --- 1人次 :</span>
+                            <ul style="list-style: circle">
+                                <li>4天/3夜五星级酒店住宿（双人床）</li>
+                                <li>飞机票500 CP1的报销</li>
+                                <li>机场接送</li>
+                                <li>此次为期4天的新加坡国际游艇展的VIP套票</li>
+                                <li><strong>受邀于4.10日晚登上The Royal Albatross享用马胜烧烤(BBQ)派对</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <br><span style="color: #ff0000;">미화 30,000 – 99,000가입하는 회원 - 1명이 즐길 수 있는 특권은 :</span>
+                            <ul style="list-style: circle">
+                                <li>3박 4일 (2인 1일 실) 5성급 호텔 숙박</li>
+                                <li>비행기 값 500CP1 보상</li>
+                                <li>공항까지 교통편 제공</li>
+                                <li>싱가포르 요트 쇼 4일간의 VIP 패스</li>
+                                <li><strong>4월 10일 로얄 알바트로스 호에서 열리는 맥심 바비큐 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <br><span style="color: #ff0000;">30,000USD〜99,000USDにサインアップされた方は以下をお楽しみいただけます（1名様）:</span>
+                            <ul style="list-style: circle">
+                                <li>5つ星ホテルへの3泊4日の滞在（原則ツインをシェア）</li>
+                                <li>飛行機チケット代の500CP1相当の返還</li>
+                                <li>エアポートへの往復送迎</li>
+                                <li>4日間のシンガポール・ヨット・ショーへのVIPパス</li>
+                                <li><strong>4月10日夜、ロイヤル・アルバトロス号でのマキシムBBQパーティーへのご招待</strong></li>
+                            </ul>
+                            <?php } else {?>
                             <br><span style="color: #ff0000;">SIGN UP for USD30,000 to USD99,000 and you will <u>enjoy</u>  - for 1 pax :</span>
                             <ul style="list-style: circle">
                                 <li>4 days / 3 nights stay (twin share basis) in 5 Star Hotel</li>
@@ -1040,7 +1076,45 @@ $(document).ready(function() {
                                 <li>VIP Pass to the 4-day Singapore Yacht Show</li>
                                 <li>Invite to <strong>Royal Albatross on night of April 10th for on-board Maxim BBQ party</strong></li>
                             </ul>
+                            <?php } ?>
                             <br>
+                            <?php if ($culture == "cn") {?>
+                            <br><span style="color: #ff0000;">购买配套额度为100,000-499,000美金，则可享受 --- 2人次 :</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1卡拉钻戒</span></li>
+                                <li><strong>4天/3夜五星级酒店住宿（高级客房)（双人床）</strong></li>
+                                <li>飞机票500 CP1的报销</li>
+                                <li>豪华轿车机场接送</li>
+                                <li><strong>此次为期4天的新加坡国际游艇展的VIP套票-银级别</strong></li>
+                                <li><strong>受邀4.10日晚登上The Royal Albatross享用马胜烧烤(BBQ)派对</strong></li>
+                                <li><strong>受邀4.11日中午与马胜金融CEO首席执行官以及公司高层共享午宴</strong></li>
+                                <li><strong>受邀4.11日晚登上The Royal Albatross参加马胜VVIP派对</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <br><span style="color: #ff0000;">미화 100,000 to 499,000 가입하는 회원 - 1명이 즐길 수 있는 특권은 :</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1캐롯 다이아몬드 반지</span></li>
+                                <li><strong>3박 4일 (2인 1일 실) 5성급 호텔 숙박 – 프리미엄 룸</strong></li>
+                                <li>비행기 값 500CP1 보상 </li>
+                                <li>공항까지 리무진 제공</li>
+                                <li><strong>싱가포르 요트 쇼 4일간의 실버 VIP 패스</strong></li>
+                                <li><strong>4월 11일 CEO와 맥심 임원진들과의 점심 식사</strong></li>
+                                <li><strong>4월 10일 로얄 알바트로스 호에서 열리는 맥심 바비큐 파티 초대</strong></li>
+                                <li><strong>4월 11일 밤 로얄 알바트로스 호에서 열리는 맥심 VVIP 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <br><span style="color: #ff0000;">100,000USD〜499,000USDにサインアップされた方は以下をお楽しみいただけます（1名様）:</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1カラットのダイヤモンドリングを無料で差し上げます</span></li>
+                                <li><strong>5つ星ホテルへの3泊4日の滞在- プレミアムルーム（原則ツインをシェア）</strong></li>
+                                <li>飛行機チケット代の500CP1相当の返還</li>
+                                <li>リムジンにてエアポートへの往復送迎</li>
+                                <li><strong>4日間のシンガポール・ヨット・ショーへのシルバーVIPパス</strong></li>
+                                <li><strong>4月11日、マキシムのCEOおよびマネージメントチームとの昼食会</strong></li>
+                                <li><strong>4月10日夜、ロイヤル・アルバトロス号でのマキシムBBQパーティーへのご招待</strong></li>
+                                <li><strong>4月11日夜、ロイヤル・アルバトロス号でのマキシムVVIPパーティーへご招待</strong></li>
+                            </ul>
+                            <?php } else {?>
                             <br><span style="color: #ff0000;">SIGN UP for USD100,000 to USD499,000 and you will <u>enjoy</u> – for  1 pax :</span>
                             <ul style="list-style: circle">
                                 <li><span style="color: #ff0000; font-weight: bold;">1 Carat Diamond Ring</span></li>
@@ -1052,7 +1126,48 @@ $(document).ready(function() {
                                 <li><strong>April 11th - Lunch with CEO and Maxim Management Team</strong></li>
                                 <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
+                            <?php } ?>
                             <br>
+                            <?php if ($culture == "cn") {?>
+                            <br><span style="color: #ff0000;">报单额度为500,000美金及以上，则可享受 --- 1人次:</span>
+                            <br><span style="color: #ff0000;">**名额只限30位。（客户可选择在且只在1个用户名下购买多个100,000美金的配套来达到该项优惠的金额要求。）</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1卡拉钻戒</span></li>
+                                <li><strong>4天/3夜五星级酒店住宿（套房）</strong></li>
+                                <li><strong>私人飞机送至新加坡Seletar机场</strong></li>
+                                <li><strong>为期4天的豪华轿车自由使用，并配有私人司机</strong></li>
+                                <li><strong>此次为期4天的新加坡国际游艇展的VVIP套票-钻石黑级别</strong></li>
+                                <li><strong>受邀4.10日晚登上The Royal Albatross享用马胜烧烤(BBQ)派对</strong></li>
+                                <li><strong>受邀4.12日与马胜金融CEO首席执行官以及公司高层共享香槟午宴</strong></li>
+                                <li><strong>受邀4.11日晚登上The Royal Albatross参加马胜VVIP派对</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "kr") {?>
+                            <br><span style="color: #ff0000;">미화 500,000 이상 가입하는 회원 – 1명이 즐길 수 있는 특권은 :</span>
+                            <br><span style="color: #ff0000;">**30명 한정으로 한 번에 완납 기준 (한 ID에 여러 개의 미화 100,000)</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1캐롯 다이아몬드 반지</span></li>
+                                <li><strong>3박 4일 (2인 1일 실) 5성급 호텔 숙박 – 스위트 룸</strong></li>
+                                <li><strong>싱가포르 셀레타 공항으로 개인 제트기 제공</strong></li>
+                                <li><strong>4일간 기사와 리무진 제공</strong></li>
+                                <li><strong>싱가포르 요트 쇼 4일간의 다이아몬드 블랙 VVIP 패스</strong></li>
+                                <li><strong>4월 10일 로얄 알바트로스 호에서 열리는 맥심 바비큐 파티 초대</strong></li>
+                                <li><strong>4월 12일 CEO와 맥심 임원진들과의 샴패인을 곁들인 점심 식사</strong></li>
+                                <li><strong>4월 11일 밤 로얄 알바트로스 호에서 열리는 맥심 VVIP 파티 초대</strong></li>
+                            </ul>
+                            <?php } else if ($culture == "jp") {?>
+                            <br><span style="color: #ff0000;">500,000USD以上をサインアップされた方は以下をお楽しみいただけます– 1名様 :</span>
+                            <br><span style="color: #ff0000;">**最大30名様まで。ただしサインアップ時に全額払い込むことが必須です.（お一人様のIDにつき、USD100,000の倍数であることが必要です）</span>
+                            <ul style="list-style: circle">
+                                <li><span style="color: #ff0000; font-weight: bold;">1カラットのダイヤモンドリングを無料で差し上げます</span></li>
+                                <li><strong>5つ星ホテルへの3泊4日の滞在- スイートルーム</strong></li>
+                                <li><strong>シンガポール・セレター空港までプライベートジェット*でご案内します</strong></li>
+                                <li><strong>4日間、豪華な運転手付き限定リムジンの特別ご提供</strong></li>
+                                <li><strong>4日間のシンガポール・ヨット・ショーへのダイヤモンドブラックVVIPパス</strong></li>
+                                <li><strong>4月10日夜、ロイヤル・アルバトロス号でのマキシムBBQパーティーへのご招待</strong></li>
+                                <li><strong>4月12日、マキシムのCEOおよびマネージメントチームとのシャンパンランチ</strong></li>
+                                <li><strong>4月11日夜、ロイヤル・アルバトロス号でのマキシムVVIPパーティーへご招待</strong></li>
+                            </ul>
+                            <?php } else {?>
                             <br><span style="color: #ff0000;">SIGN UP for USD500,000 and above to <u>enjoy</u> – for 1 pax:</span>
                             <br><span style="color: #ff0000;">**Limited to 30 pax on a First Fully Paid Sign Up Basis (multiples of USD100,000 under 1 single UserID)</span>
                             <ul style="list-style: circle">
@@ -1065,12 +1180,27 @@ $(document).ready(function() {
                                 <li><strong>Champagne Lunch with CEO and Maxim Management Team on April 12th</strong></li>
                                 <li>Invite to <strong>Royal Albatross on night of April 11th for Maxim VVIP party</strong></li>
                             </ul>
+                            <?php } ?>
                             <br>
                             <img style="width: 600px" src="/images/201403/Singapore_Yacht_Show_Lifestyle_Incentive.jpg">
                             <br>
+                            <?php if ($culture == "cn") {?>
+                            <br><span style="font-weight: bold;font-style: italic;">** 如果去往同一个国家的客人不足8人，私人飞机会飞到另外一个地方继续载客，以确保每次航行上的马胜伙伴人数均为12人.</span>
+                            <br>
+                            <br><span style="color: #ff0000; font-weight: bold;">现在就来报名吧! 让我们一起撼动整个世界!!!</span>
+                            <?php } else if ($culture == "kr") {?>
+                            <br><span style="font-weight: bold;font-style: italic;">** 한 특정 국가에서 개인 제트기에 대한 자격을 획득한 회원이 8명 미만일 경우, 맥심 캐피탈은 각 비행기의 최대 인원수인 12명을 맞추기 위하여 다른 지역의 회원과 함께 비행할 수 있게 조정할 것입니다.</span>
+                            <br>
+                            <br><span style="color: #ff0000; font-weight: bold;">심 회원 여러분들,어서 사인하시기 바랍니다……. 함께 세상을 뒤흔듭시다!!!</span>
+                            <?php } else if ($culture == "jp") {?>
+                            <br><span style="font-weight: bold;font-style: italic;">** もしある地域でのプライベート・ジェットの人数が8人に満たない場合、マキシム・キャピタルはそれぞれの機種を最大12 名までにするために、ほかの地域に飛ぶことがあります。</span>
+                            <br>
+                            <br><span style="color: #ff0000; font-weight: bold;">MAXIMersの皆さん、いますぐサインアップを.. 世界を揺さぶりましょう!!!</span>
+                            <?php } else {?>
                             <br><span style="font-weight: bold;font-style: italic;">** If there are less than 8 persons in a particular country qualifying for the Private Jet, Maxim Capital will fly these qualifiers to another destination to join others to make up the maximum number of 12 passengers for each flight.</span>
                             <br>
                             <br><span style="color: #ff0000; font-weight: bold;">COME MAXIMers, SIGN UP NOW…… LET’S ROCK THE WORLD!!!</span>
+                            <?php } ?>
                             <br>
                             <br>
                             <a href="/images/201403/SYS_LIFESTYLE_INCENTIVE.pdf" target="_blank" style="color: #3333ff; font-weight: bold;">Download Sys Lifestyle Incentive.pdf (1.4MB)</a>
