@@ -780,6 +780,30 @@ class BonusService
         }
         return 0;
     }
+    function doCountrySales($queryDate)
+    {
+        $query = "SELECT sum(credit - debit) AS SUB_TOTAL, dist.country FROM mlm_dist_commission_ledger ledger
+            LEFT JOIN mlm_distributor dist ON dist.distributor_id = ledger.dist_id";
+
+        $query .= " WHERE ledger.commission_type = '" . Globals::COMMISSION_TYPE_DRB . "'";
+        $query .= " AND ledger.created_on >= '" . $queryDate . " 00:00:00'";
+        $query .= " AND ledger.created_on <= '" . $queryDate . " 23:59:59' GROUP BY dist.country";
+        //var_dump($query);
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $countrySales = "";
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                $countrySales .= $arr["country"].":".number_format($arr["SUB_TOTAL"] * 10,0)."<br>";
+            } else {
+                $countrySales .= "";
+            }
+        }
+        return $countrySales;
+    }
     function doCalculatePackage($queryDate)
     {
         $c = new Criteria();
