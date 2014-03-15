@@ -11,7 +11,17 @@ class memberActions extends sfActions
 {
     public function executeTest() {
         //echo $this->getRollingPointData();
-
+        $q = 2;
+        $queryRecord = 10;
+        $c = new Criteria();
+        $c->setOffset($q * $queryRecord);
+        $c->setLimit($queryRecord);
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_ID);
+        $dists = MlmDistributorPeer::doSelect($c);
+        print_r("total Dist:".count($dists)."<br><br>");
+        foreach ($dists as $dist) {
+            print_r("Dist:".$dist->getDistributorId()."<br><br>");
+        }
         $bonusService = new BonusService();
 //        $bonusService->contraDebitAccountByEpoint(262636, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(263918, "CONTRA BY CP1", 0);
@@ -26,8 +36,8 @@ class memberActions extends sfActions
 //        $bonusService->contraDebitAccountByEpoint(261626, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(261627, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(261357, "CONTRA BY CP1", 0);
-        $bonusService->contraDebitAccountByEpoint(267514, "CONTRA BY CP1", 0);
-        $bonusService->contraDebitAccountByEpoint(259508, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(267514, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(259508, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccount(256463, "CONTRA BY CP2", 0);
 //        $bonusService->contraDebitAccount(1995, "CONTRA BY CP2", 0);
 //        $bonusService->contraDebitAccount(256462, "CONTRA BY CP2", 0);
@@ -7873,7 +7883,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             if ($legFlushLimit < $minBalance) {
                                 if ($leftPairedPoint > $rightPairedPoint) {
                                     $leftPairedPoint = $legFlushLimit;
-                                } else if ($leftPairedPoint < $rightPairedPoint) {
+                                } else {
                                     $rightPairedPoint = $legFlushLimit;
                                 }
                             } else {
