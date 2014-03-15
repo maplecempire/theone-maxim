@@ -11,7 +11,23 @@ class memberActions extends sfActions
 {
     public function executeTest() {
         //echo $this->getRollingPointData();
-        $q = 2;
+
+        $date_str = date('D');
+        var_dump($date_str);
+        var_dump(date("Y-m-d H:i:s"));
+
+        $dateUtil = new DateUtil();
+        $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
+
+        for ($i = 7; $i < 14; $i++) {
+            $dividendDate = strtotime("-".$i." day", strtotime($currentDate));
+
+            var_dump(date('D', $dividendDate));
+            var_dump(date("Y-m-d h:i:s", $dividendDate));
+        }
+
+
+        /*$q = 2;
         $queryRecord = 10;
         $c = new Criteria();
         $c->setOffset($q * $queryRecord);
@@ -22,7 +38,7 @@ class memberActions extends sfActions
         foreach ($dists as $dist) {
             print_r("Dist:".$dist->getDistributorId()."<br><br>");
         }
-        $bonusService = new BonusService();
+        $bonusService = new BonusService();*/
 //        $bonusService->contraDebitAccountByEpoint(262636, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(263918, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(295, "CONTRA BY CP1", 0);
@@ -10376,8 +10392,8 @@ Wish you all the best.
         $dateUtil = new DateUtil();
         $subject = "Maxim Trader Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
-//        $sendMailService->sendMail("r9jason@gmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
-        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "dcc@maximtrader.com,r9jason@gmail.com,lawrenceng1010@hotmail.com");
+        $sendMailService->sendMail("r9jason@gmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
+//        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "dcc@maximtrader.com,r9jason@gmail.com,lawrenceng1010@hotmail.com");
     }
 
     function getAllBonusData() {
@@ -10388,6 +10404,7 @@ Wish you all the best.
                     <thead>
                     <tr>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Date</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Country Sales</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>DRB</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>GRB</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Generation Bonus</th>
@@ -10405,6 +10422,7 @@ Wish you all the best.
             $queryDateForGrb = $dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), $i * -1, 0, 0));
 
             $totalDrb = $bonusService->doCalculateDrb($queryDate);
+            $countrySales = $bonusService->doCountrySales($queryDate);
             $totalGrb = $bonusService->doCalculateGrb($queryDateForGrb);
             $totalGenerationBonus = $bonusService->doCalculateGenerationBonus($queryDate);
             $pipsRebate = $bonusService->doCalculatePipsRebateBonus($queryDate);
@@ -10413,8 +10431,9 @@ Wish you all the best.
 
             $body .= "<tr class='sf_admin_row_1'>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$queryDate."</td>
-                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalDrb,2)."</td>
-                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGrb,2)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$countrySales."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalDrb,0)."</td>
+                    <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGrb,0)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($totalGenerationBonus,2)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($pipsRebate,2)."</td>
                     <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($fundManagementBonus,2)."</td>
@@ -10507,7 +10526,22 @@ Wish you all the best.
     }
 
     function getRollingPointData() {
-        $arrs = $this->fetchRollingPoint();
+        $dateUtil = new DateUtil();
+        $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
+
+        $lastWeekSun = null;
+        for ($i = 0; $i < 7; $i++) {
+            $dividendDate = strtotime("-".$i." day", strtotime($currentDate));
+
+            if (date('D', $dividendDate) == "Sun") {
+                $lastWeekSun = date("Y-m-d", $dividendDate);
+                break;
+            }
+        }
+
+        //var_dump($lastWeekSun);
+        //exit();
+        $arrs = $this->fetchRollingPoint($lastWeekSun);
 
         $body = "<h3>Rolling Point Table</h3><table width='100%' style='border-color: #DDDDDD -moz-use-text-color -moz-use-text-color #DDDDDD;border-image: none; border-style: solid none none solid;border-width: 1px 0 0 1px;'>
                     <thead>
@@ -10515,12 +10549,11 @@ Wish you all the best.
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'></th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Distributor Code</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Full Name</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Email</th>
-                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Contact</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Available</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Rolling Point Used</th>
                         <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>Debit</th>
+                        <th style='background-color: #CCCCFF; padding: 2px; text-align: left;'>".$currentDate." RP Bill</th>
                     </tr>
                     </thead>
                     <tbody>";
@@ -10533,17 +10566,20 @@ Wish you all the best.
             $rollingPoint = $arr['TOTAL_ROLLING_POINT'] - $debitAccount;
             $rollingPointUsed = $arr['TOTAL_RP_USED'] - $debitAccount;
             $rollingPointAvailable = $arr['TOTAL_ROLLING_POINT'] - $arr['TOTAL_RP_USED'];
+            $lastWeekRP = $arr['TOTAL_LAST_WEEK_RP_USED'] - $debitAccount;
+            if ($lastWeekRP < 0) {
+                $lastWeekRP = 0;
+            }
 
             $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$idx++."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['distributor_code']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['email']."</td>
-                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['contact']."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$arr['full_name']."<br>".$arr['email']."<br>".$arr['contact']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPoint,2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($rollingPointAvailable,2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;font-weight:bold; font-size:15px;'>".number_format($rollingPointUsed,2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($debitAccount,2)."</td>
+                        <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($lastWeekRP,2)."</td>
                     </tr>";
         }
 
@@ -10552,9 +10588,9 @@ Wish you all the best.
 
         return $body;
     }
-    function fetchRollingPoint() {
+    function fetchRollingPoint($lastWeekSun) {
         $query = "SELECT transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
-        , totalRollingPoint.TOTAL_ROLLING_POINT, rpUsed.TOTAL_RP_USED
+        , totalRollingPoint.TOTAL_ROLLING_POINT, rpUsed.TOTAL_RP_USED, lastWeekRpUsed.TOTAL_LAST_WEEK_RP_USED
             FROM mlm_distributor dist
         INNER JOIN
         (
@@ -10572,7 +10608,19 @@ Wish you all the best.
                 SELECT sum(debit) AS TOTAL_RP_USED, dist_id
                     FROM mlm_account_ledger account
                         where account_type = '".Globals::ACCOUNT_TYPE_RP."' group by dist_id
-            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id";
+            ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
+        LEFT JOIN
+            (
+                SELECT sum(debit) AS TOTAL_LAST_WEEK_RP_USED, dist_id
+                    FROM mlm_account_ledger account
+                        where account_type = '".Globals::ACCOUNT_TYPE_RP."'";
+
+        if ($lastWeekSun != null) {
+            $query .= " AND account.created_on <= '".$lastWeekSun." 23:59:59'";
+        }
+
+        $query .= " group by dist_id
+            ) lastWeekRpUsed ON lastWeekRpUsed.dist_id = transferLedger.dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
