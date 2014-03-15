@@ -10486,13 +10486,15 @@ Wish you all the best.
 
         $totalAmount = 0;
         foreach ($packageArrs as $packageArr) {
-            $totalAmount = $totalAmount + ($packageArr["qty"] * $packageArr["price"]);
-            $body .= "<tr class='sf_admin_row_1'>
+            if ($packageArr['qty'] > 0) {
+                $totalAmount = $totalAmount + ($packageArr["qty"] * $packageArr["price"]);
+                $body .= "<tr class='sf_admin_row_1'>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['name']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".$packageArr['qty']."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($packageArr['price'],2)."</td>
                         <td style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>".number_format($packageArr["qty"] * $packageArr["price"],2)."</td>
                     </tr>";
+            }
         }
         $body .= "<tr class='sf_admin_row_1'>
             <td colspan='3' align='right' style='background-color: #EEEEFF; border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; padding: 3px;'>Total Amount</td>
