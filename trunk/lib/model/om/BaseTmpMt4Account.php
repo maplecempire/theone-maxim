@@ -157,9 +157,7 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 	public function setMt4Id($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -169,14 +167,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFullname($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -186,14 +181,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -203,14 +195,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMt4Username($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -220,14 +209,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMt4Password($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -237,14 +223,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -254,14 +237,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -271,7 +251,6 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -289,14 +268,11 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -306,7 +282,6 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -324,7 +299,6 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -417,33 +391,25 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = TmpMt4AccountPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setMt4Id($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += TmpMt4AccountPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -680,14 +646,12 @@ abstract class BaseTmpMt4Account extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setMt4Id(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

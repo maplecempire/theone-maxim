@@ -234,5 +234,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('MONEYTRAC_USERNAME', 'MoneytracUsername', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('PREFER_LANGUAGE', 'PreferLanguage', 'string', CreoleTypes::VARCHAR, false, 10);
+
 	} 
 } 

@@ -124,9 +124,7 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 	public function setCountryId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -136,14 +134,11 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCountryName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -153,14 +148,11 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setPrefix($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -170,14 +162,11 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -187,7 +176,6 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -205,14 +193,11 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -222,7 +207,6 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -240,7 +224,6 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -327,33 +310,25 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmRegistrationCountryCodePeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setCountryId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmRegistrationCountryCodePeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -557,14 +532,12 @@ abstract class BaseMlmRegistrationCountryCode extends BaseObject  implements Per
 		$copyObj->setNew(true);
 
 		$copyObj->setCountryId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

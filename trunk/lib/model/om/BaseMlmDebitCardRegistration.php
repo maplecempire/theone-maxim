@@ -304,9 +304,7 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 	public function setCardId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -316,14 +314,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -333,14 +328,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setAccountId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -350,14 +342,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -367,14 +356,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setFullName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -384,7 +370,6 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setDob($v)
 	{
@@ -402,14 +387,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setIc($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -419,14 +401,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setMotherMaidenName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -436,14 +415,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setNameOnCard($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -453,14 +429,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setAddress($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -470,14 +443,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setAddress2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -487,14 +457,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCity($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -504,14 +471,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setState($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -521,14 +485,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setPostcode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -538,14 +499,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCountry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -555,14 +513,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -572,14 +527,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setContact($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -589,14 +541,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -606,7 +555,6 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -624,14 +572,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -641,7 +586,6 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -659,14 +603,11 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setRemark($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -676,7 +617,6 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -793,33 +733,25 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDebitCardRegistrationPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setCardId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDebitCardRegistrationPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1188,14 +1120,12 @@ abstract class BaseMlmDebitCardRegistration extends BaseObject  implements Persi
 		$copyObj->setNew(true);
 
 		$copyObj->setCardId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

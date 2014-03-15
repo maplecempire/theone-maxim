@@ -146,9 +146,7 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 	public function setDetailId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -158,14 +156,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCustomerEnquiryId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -175,14 +170,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setMessage($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -192,14 +184,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setReplyFrom($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -209,14 +198,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -226,14 +212,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -243,7 +226,6 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -261,14 +243,11 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -278,7 +257,6 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -296,7 +274,6 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -387,33 +364,25 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmCustomerEnquiryDetailPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setDetailId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmCustomerEnquiryDetailPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -639,14 +608,12 @@ abstract class BaseMlmCustomerEnquiryDetail extends BaseObject  implements Persi
 		$copyObj->setNew(true);
 
 		$copyObj->setDetailId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

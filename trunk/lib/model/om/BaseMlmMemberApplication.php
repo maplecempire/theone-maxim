@@ -205,9 +205,7 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 	public function setMemberId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -217,14 +215,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setFullName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -234,14 +229,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -251,14 +243,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setContact($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -268,14 +257,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setQq($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -285,14 +271,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setGender($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -302,14 +285,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setCountry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -319,7 +299,6 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setDob($v)
 	{
@@ -337,14 +316,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -354,14 +330,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -371,7 +344,6 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -389,14 +361,11 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -406,7 +375,6 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -424,7 +392,6 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -523,33 +490,25 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmMemberApplicationPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setMemberId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmMemberApplicationPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -819,14 +778,12 @@ abstract class BaseMlmMemberApplication extends BaseObject  implements Persisten
 		$copyObj->setNew(true);
 
 		$copyObj->setMemberId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

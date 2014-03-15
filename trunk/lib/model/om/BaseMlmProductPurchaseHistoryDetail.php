@@ -168,9 +168,7 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 	public function setHistoryDetailId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -180,14 +178,11 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setHistoryId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -197,14 +192,11 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setProductId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -214,14 +206,11 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setAccountId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -231,7 +220,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setPrice($v)
 	{
@@ -242,7 +230,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setQty($v)
 	{
@@ -253,7 +240,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setTotalAmount($v)
 	{
@@ -264,14 +250,11 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -281,7 +264,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -299,14 +281,11 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -316,7 +295,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -334,7 +312,6 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -429,33 +406,25 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmProductPurchaseHistoryDetailPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setHistoryDetailId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmProductPurchaseHistoryDetailPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -703,14 +672,12 @@ abstract class BaseMlmProductPurchaseHistoryDetail extends BaseObject  implement
 		$copyObj->setNew(true);
 
 		$copyObj->setHistoryDetailId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

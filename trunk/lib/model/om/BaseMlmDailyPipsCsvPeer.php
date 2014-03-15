@@ -208,19 +208,16 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
-		
-		$criteria = clone $criteria;
+				$criteria = clone $criteria;
 
-		
-		$criteria->clearSelectColumns()->clearOrderByColumns();
+				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(MlmDailyPipsCsvPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(MlmDailyPipsCsvPeer::COUNT);
 		}
 
-		
-		foreach($criteria->getGroupByColumns() as $column)
+				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
 		}
@@ -229,8 +226,7 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
-			
-			return 0;
+						return 0;
 		}
 	}
 	
@@ -261,23 +257,18 @@ abstract class BaseMlmDailyPipsCsvPeer {
 			MlmDailyPipsCsvPeer::addSelectColumns($criteria);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
-		
-		
-		return BasePeer::doSelect($criteria, $con);
+						return BasePeer::doSelect($criteria, $con);
 	}
 	
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
 	
-		
-		$cls = MlmDailyPipsCsvPeer::getOMClass();
+				$cls = MlmDailyPipsCsvPeer::getOMClass();
 		$cls = Propel::import($cls);
-		
-		while($rs->next()) {
+				while($rs->next()) {
 		
 			$obj = new $cls();
 			$obj->hydrate($rs);
@@ -306,21 +297,15 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} else {
-			$criteria = $values->buildCriteria(); 
-		}
+			$criteria = clone $values; 		} else {
+			$criteria = $values->buildCriteria(); 		}
 
 		$criteria->remove(MlmDailyPipsCsvPeer::PIP_ID); 
 
-
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			$pk = BasePeer::doInsert($criteria, $con);
 			$con->commit();
 		} catch(PropelException $e) {
@@ -342,17 +327,12 @@ abstract class BaseMlmDailyPipsCsvPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-
 			$comparison = $criteria->getComparison(MlmDailyPipsCsvPeer::PIP_ID);
 			$selectCriteria->add(MlmDailyPipsCsvPeer::PIP_ID, $criteria->remove(MlmDailyPipsCsvPeer::PIP_ID), $comparison);
 
-		} else { 
-			$criteria = $values->buildCriteria(); 
-			$selectCriteria = $values->buildPkeyCriteria(); 
-		}
+		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
@@ -363,11 +343,8 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$affectedRows = 0; 
-		try {
-			
-			
-			$con->begin();
+		$affectedRows = 0; 		try {
+									$con->begin();
 			$affectedRows += BasePeer::doDeleteAll(MlmDailyPipsCsvPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
@@ -385,25 +362,19 @@ abstract class BaseMlmDailyPipsCsvPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} elseif ($values instanceof MlmDailyPipsCsv) {
+			$criteria = clone $values; 		} elseif ($values instanceof MlmDailyPipsCsv) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
-			
-			$criteria = new Criteria(self::DATABASE_NAME);
+						$criteria = new Criteria(self::DATABASE_NAME);
 			$criteria->add(MlmDailyPipsCsvPeer::PIP_ID, (array) $values, Criteria::IN);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		$affectedRows = 0; 
-
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
@@ -476,19 +447,13 @@ abstract class BaseMlmDailyPipsCsvPeer {
 	}
 
 } 
-
-
 if (Propel::isInit()) {
-	
-	
-	try {
+			try {
 		BaseMlmDailyPipsCsvPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-	
-	
-	require_once 'lib/model/map/MlmDailyPipsCsvMapBuilder.php';
+			require_once 'lib/model/map/MlmDailyPipsCsvMapBuilder.php';
 	Propel::registerMapBuilder('lib.model.map.MlmDailyPipsCsvMapBuilder');
 }

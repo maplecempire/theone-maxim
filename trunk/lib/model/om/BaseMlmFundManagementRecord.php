@@ -113,9 +113,7 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 	public function setFundId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -125,7 +123,6 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPercentage($v)
 	{
@@ -136,14 +133,11 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -153,7 +147,6 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -171,14 +164,11 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -188,7 +178,6 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -206,7 +195,6 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -291,33 +279,25 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmFundManagementRecordPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setFundId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmFundManagementRecordPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -510,14 +490,12 @@ abstract class BaseMlmFundManagementRecord extends BaseObject  implements Persis
 		$copyObj->setNew(true);
 
 		$copyObj->setFundId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

@@ -201,9 +201,7 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 	public function setFortuneId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -213,14 +211,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setFullName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -230,14 +225,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCountry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -247,14 +239,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setMobileNo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -264,14 +253,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -281,14 +267,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setQq($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -298,14 +281,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setReferrer($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -315,14 +295,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setLuckyDraw($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -332,14 +309,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setSerialNo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -349,14 +323,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -366,14 +337,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -383,7 +351,6 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -401,14 +368,11 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -418,7 +382,6 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -436,7 +399,6 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -537,33 +499,25 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = WheelOfFortuneRegistrationPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setFortuneId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += WheelOfFortuneRegistrationPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -844,14 +798,12 @@ abstract class BaseWheelOfFortuneRegistration extends BaseObject  implements Per
 		$copyObj->setNew(true);
 
 		$copyObj->setFortuneId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

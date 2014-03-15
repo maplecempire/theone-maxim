@@ -212,9 +212,7 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	public function setAnnouncementId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -224,14 +222,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTitle($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -241,14 +236,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTitleCn($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -258,14 +250,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTitleJp($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -275,14 +264,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setContent($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -292,14 +278,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setContentCn($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -309,14 +292,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setContentJp($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -326,14 +306,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setShortContent($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -343,14 +320,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setShortContentCn($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -360,14 +334,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setShortContentJp($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -377,14 +348,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -394,14 +362,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -411,7 +376,6 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -429,14 +393,11 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -446,7 +407,6 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -464,7 +424,6 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -567,33 +526,25 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmAnnouncementPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setAnnouncementId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmAnnouncementPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -885,14 +836,12 @@ abstract class BaseMlmAnnouncement extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setAnnouncementId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

@@ -150,9 +150,7 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 	public function setLogId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -162,14 +160,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAccessIp($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -179,14 +174,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBonusType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -196,7 +188,6 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBonusDate($v)
 	{
@@ -214,14 +205,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -231,7 +219,6 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -249,14 +236,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -266,7 +250,6 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -284,7 +267,6 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -373,33 +355,25 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDailyBonusLogPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setLogId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDailyBonusLogPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -614,14 +588,12 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setLogId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

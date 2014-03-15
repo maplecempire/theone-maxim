@@ -245,9 +245,7 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 	public function setQuestionnaireId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -257,14 +255,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setMemberId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -274,14 +269,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ1($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -291,14 +283,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -308,14 +297,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ3($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -325,14 +311,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ4($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -342,14 +325,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ5($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -359,14 +339,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ6($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -376,14 +353,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ7($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -393,14 +367,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setQ8($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -410,14 +381,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setS1($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -427,14 +395,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setS2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -444,14 +409,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setS3($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -461,14 +423,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -478,14 +437,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -495,7 +451,6 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -513,14 +468,11 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -530,7 +482,6 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -548,7 +499,6 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -657,33 +607,25 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmMemberQuestionnairePeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setQuestionnaireId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmMemberQuestionnairePeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1008,14 +950,12 @@ abstract class BaseMlmMemberQuestionnaire extends BaseObject  implements Persist
 		$copyObj->setNew(true);
 
 		$copyObj->setQuestionnaireId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

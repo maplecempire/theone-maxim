@@ -102,9 +102,7 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 	public function setRoleAccessId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -114,14 +112,11 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAccessCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -131,14 +126,11 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRoleId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -148,7 +140,6 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -166,7 +157,6 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -184,7 +174,6 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -267,33 +256,25 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = AppUserRoleAccessPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setRoleAccessId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += AppUserRoleAccessPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -475,14 +456,12 @@ abstract class BaseAppUserRoleAccess extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setRoleAccessId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

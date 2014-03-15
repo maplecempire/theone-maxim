@@ -179,9 +179,7 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 	public function setAccessCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -191,14 +189,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setParentId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -208,14 +203,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMenuUrl($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -225,14 +217,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMenuLabel($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -242,14 +231,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setIsMenu($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -259,14 +245,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setIsAuthNeeded($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -276,14 +259,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeLevel($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -293,14 +273,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeSeq($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -310,14 +287,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeStructure($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -327,14 +301,11 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -344,7 +315,6 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -362,7 +332,6 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -380,7 +349,6 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -477,31 +445,24 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = AppUserAccessPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setNew(false);
 				} else {
 					$affectedRows += AppUserAccessPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -760,14 +721,12 @@ abstract class BaseAppUserAccess extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setAccessCode(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;
