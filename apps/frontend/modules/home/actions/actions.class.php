@@ -140,7 +140,7 @@ class homeActions extends sfActions
 
     public function executeMemberRegistration()
     {
-        $this->getUser()->setCulture("cn");
+        //$this->getUser()->setCulture("cn");
     }
 
     public function executeDoMemberRegistration()
@@ -589,6 +589,9 @@ class homeActions extends sfActions
                     }
                 }
 
+                //var_dump($existDist);
+                $this->getUser()->setCulture($existDist->getPreferLanguage());
+
                 $existUser->setLastLoginDatetime(date("Y/m/d h:i:s A"));
                 $existUser->save();
 
@@ -665,6 +668,14 @@ class homeActions extends sfActions
 
     public function executeLanguage()
     {
+        if($this->getUser()->getAttribute(Globals::SESSION_DISTID) != null) {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            if ($distDB) {
+                $distDB->setPreferLanguage($this->getRequestParameter('lang'));
+                $distDB->save();
+            }
+        }
+
         $this->getUser()->setCulture($this->getRequestParameter('lang'));
         $this->redirect($this->getRequest()->getReferer());
     }

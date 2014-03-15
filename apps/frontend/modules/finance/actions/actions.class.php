@@ -291,6 +291,44 @@ class financeActions extends sfActions
         echo json_encode($output);
         return sfView::HEADER_ONLY;
     }
+    public function executeUpdateDistPairing()
+    {
+        $distId = $this->getRequestParameter('distId');
+        $distDB = MlmDistributorPeer::retrieveByPK($distId);
+
+        print_r("======================================================");
+        print_r("dist code=".$distDB->getDistributorId());
+        print_r("<br>");
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distId);
+        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_LEFT);
+        $c->addAscendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+        $sponsorDistPairingLedgerDBs = MlmDistPairingLedgerPeer::doSelect($c);
+
+        $balance = 0;
+        foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
+            $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            $sponsorDistPairingLedgerDB->setBalance($balance);
+            $sponsorDistPairingLedgerDB->save();
+        }
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distId);
+        $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_RIGHT);
+        $c->addAscendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+        $sponsorDistPairingLedgerDBs = MlmDistPairingLedgerPeer::doSelect($c);
+
+        $balance = 0;
+        foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
+            $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            $sponsorDistPairingLedgerDB->setBalance($balance);
+            $sponsorDistPairingLedgerDB->save();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeUpdateDistCommission()
     {
         $distId = $this->getRequestParameter('distId');
