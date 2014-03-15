@@ -205,9 +205,7 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 	public function setWithdrawId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -217,14 +215,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -234,7 +229,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDeduct($v)
 	{
@@ -245,7 +239,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAmount($v)
 	{
@@ -256,14 +249,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankInTo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -273,14 +263,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -290,7 +277,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setApproveRejectDatetime($v)
 	{
@@ -308,14 +294,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRemarks($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -325,14 +308,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -342,7 +322,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -360,14 +339,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -377,7 +353,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -395,14 +370,11 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLeaderDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -412,7 +384,6 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -511,33 +482,25 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmCp3WithdrawPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setWithdrawId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmCp3WithdrawPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -807,14 +770,12 @@ abstract class BaseMlmCp3Withdraw extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setWithdrawId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

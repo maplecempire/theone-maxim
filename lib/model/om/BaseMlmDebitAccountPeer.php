@@ -173,19 +173,16 @@ abstract class BaseMlmDebitAccountPeer {
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
-		
-		$criteria = clone $criteria;
+				$criteria = clone $criteria;
 
-		
-		$criteria->clearSelectColumns()->clearOrderByColumns();
+				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(MlmDebitAccountPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(MlmDebitAccountPeer::COUNT);
 		}
 
-		
-		foreach($criteria->getGroupByColumns() as $column)
+				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
 		}
@@ -194,8 +191,7 @@ abstract class BaseMlmDebitAccountPeer {
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
-			
-			return 0;
+						return 0;
 		}
 	}
 	
@@ -226,23 +222,18 @@ abstract class BaseMlmDebitAccountPeer {
 			MlmDebitAccountPeer::addSelectColumns($criteria);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
-		
-		
-		return BasePeer::doSelect($criteria, $con);
+						return BasePeer::doSelect($criteria, $con);
 	}
 	
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
 	
-		
-		$cls = MlmDebitAccountPeer::getOMClass();
+				$cls = MlmDebitAccountPeer::getOMClass();
 		$cls = Propel::import($cls);
-		
-		while($rs->next()) {
+				while($rs->next()) {
 		
 			$obj = new $cls();
 			$obj->hydrate($rs);
@@ -271,21 +262,15 @@ abstract class BaseMlmDebitAccountPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} else {
-			$criteria = $values->buildCriteria(); 
-		}
+			$criteria = clone $values; 		} else {
+			$criteria = $values->buildCriteria(); 		}
 
 		$criteria->remove(MlmDebitAccountPeer::DEBIT_ID); 
 
-
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			$pk = BasePeer::doInsert($criteria, $con);
 			$con->commit();
 		} catch(PropelException $e) {
@@ -307,17 +292,12 @@ abstract class BaseMlmDebitAccountPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-
 			$comparison = $criteria->getComparison(MlmDebitAccountPeer::DEBIT_ID);
 			$selectCriteria->add(MlmDebitAccountPeer::DEBIT_ID, $criteria->remove(MlmDebitAccountPeer::DEBIT_ID), $comparison);
 
-		} else { 
-			$criteria = $values->buildCriteria(); 
-			$selectCriteria = $values->buildPkeyCriteria(); 
-		}
+		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
@@ -328,11 +308,8 @@ abstract class BaseMlmDebitAccountPeer {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$affectedRows = 0; 
-		try {
-			
-			
-			$con->begin();
+		$affectedRows = 0; 		try {
+									$con->begin();
 			$affectedRows += BasePeer::doDeleteAll(MlmDebitAccountPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
@@ -350,25 +327,19 @@ abstract class BaseMlmDebitAccountPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} elseif ($values instanceof MlmDebitAccount) {
+			$criteria = clone $values; 		} elseif ($values instanceof MlmDebitAccount) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
-			
-			$criteria = new Criteria(self::DATABASE_NAME);
+						$criteria = new Criteria(self::DATABASE_NAME);
 			$criteria->add(MlmDebitAccountPeer::DEBIT_ID, (array) $values, Criteria::IN);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		$affectedRows = 0; 
-
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
@@ -441,19 +412,13 @@ abstract class BaseMlmDebitAccountPeer {
 	}
 
 } 
-
-
 if (Propel::isInit()) {
-	
-	
-	try {
+			try {
 		BaseMlmDebitAccountPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-	
-	
-	require_once 'lib/model/map/MlmDebitAccountMapBuilder.php';
+			require_once 'lib/model/map/MlmDebitAccountMapBuilder.php';
 	Propel::registerMapBuilder('lib.model.map.MlmDebitAccountMapBuilder');
 }

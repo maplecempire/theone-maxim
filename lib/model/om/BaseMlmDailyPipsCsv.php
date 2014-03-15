@@ -304,9 +304,7 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	public function setPipId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -316,7 +314,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTradedDatetime($v)
 	{
@@ -334,14 +331,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFileId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -351,14 +345,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPipsString($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -368,14 +359,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLoginId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -385,14 +373,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLoginName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -402,7 +387,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBalance($v)
 	{
@@ -413,7 +397,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCredit($v)
 	{
@@ -424,7 +407,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCommissions($v)
 	{
@@ -435,7 +417,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTaxes($v)
 	{
@@ -446,7 +427,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStorage($v)
 	{
@@ -457,7 +437,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setProfit($v)
 	{
@@ -468,7 +447,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setInterest($v)
 	{
@@ -479,7 +457,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTax($v)
 	{
@@ -490,7 +467,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUnrealizedpl($v)
 	{
@@ -501,7 +477,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEquity($v)
 	{
@@ -512,14 +487,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -529,14 +501,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRemarks($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -546,14 +515,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -563,7 +529,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -581,14 +546,11 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -598,7 +560,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -616,7 +577,6 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -733,33 +693,25 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDailyPipsCsvPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setPipId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDailyPipsCsvPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1128,14 +1080,12 @@ abstract class BaseMlmDailyPipsCsv extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setPipId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

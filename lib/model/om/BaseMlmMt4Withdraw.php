@@ -227,9 +227,7 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 	public function setWithdrawId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -239,14 +237,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -256,14 +251,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMt4UserName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -273,7 +265,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAmountRequested($v)
 	{
@@ -284,7 +275,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setHandlingFee($v)
 	{
@@ -295,7 +285,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setGrandAmount($v)
 	{
@@ -306,14 +295,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCurrencyCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -323,14 +309,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPaymentType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -340,14 +323,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -357,7 +337,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setApproveRejectDatetime($v)
 	{
@@ -375,14 +354,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRemarks($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -392,14 +368,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -409,7 +382,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -427,14 +399,11 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -444,7 +413,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -462,7 +430,6 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -565,33 +532,25 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmMt4WithdrawPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setWithdrawId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmMt4WithdrawPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -883,14 +842,12 @@ abstract class BaseMlmMt4Withdraw extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setWithdrawId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

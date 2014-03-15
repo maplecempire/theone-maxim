@@ -278,9 +278,7 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 	public function setCommissionId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -290,14 +288,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -307,14 +302,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCommissionType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -324,14 +316,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setTransactionType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -341,14 +330,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setRefId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -358,14 +344,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setMonthTraded($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -375,14 +358,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setYearTraded($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -392,7 +372,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCredit($v)
 	{
@@ -403,7 +382,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setDebit($v)
 	{
@@ -414,7 +392,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setBalance($v)
 	{
@@ -425,14 +402,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setRemark($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -442,14 +416,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPipsDownlineUsername($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -459,14 +430,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPipsMt4Id($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -476,7 +444,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPipsRebate($v)
 	{
@@ -487,14 +454,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPipsLevel($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -504,7 +468,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setPipsLotsTraded($v)
 	{
@@ -515,14 +478,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -532,7 +492,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -550,14 +509,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -567,7 +523,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -585,14 +540,11 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -602,7 +554,6 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -717,33 +668,25 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDistCommissionLedgerPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setCommissionId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDistCommissionLedgerPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1101,14 +1044,12 @@ abstract class BaseMlmDistCommissionLedger extends BaseObject  implements Persis
 		$copyObj->setNew(true);
 
 		$copyObj->setCommissionId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

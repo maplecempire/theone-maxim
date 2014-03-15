@@ -333,9 +333,7 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 	public function setRequestId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -345,14 +343,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFirstName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -362,14 +357,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -379,14 +371,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -396,14 +385,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -413,7 +399,6 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -431,14 +416,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -448,7 +430,6 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -466,14 +447,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCountry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -483,14 +461,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPhoneNumber($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -500,14 +475,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLastName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -517,14 +489,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTitle($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -534,14 +503,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLiveDemo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -551,14 +517,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAddress1($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -568,14 +531,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAddress2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -585,14 +545,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAgreeOfBusiness($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -602,14 +559,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRiskDisclosure($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -619,14 +573,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCountryOfCitizen($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -636,14 +587,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDobDay($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -653,14 +601,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDobMonth($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -670,14 +615,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDobYear($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -687,14 +629,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRefId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -704,14 +643,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPassport($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -721,14 +657,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setSubject($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -738,14 +671,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCity($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -755,14 +685,11 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAddressState($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -772,7 +699,6 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -897,33 +823,25 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmMt4DemoRequestPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setRequestId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmMt4DemoRequestPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1336,14 +1254,12 @@ abstract class BaseMlmMt4DemoRequest extends BaseObject  implements Persistent {
 		$copyObj->setNew(true);
 
 		$copyObj->setRequestId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

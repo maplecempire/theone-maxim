@@ -411,6 +411,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $moneytrac_username;
 
+
+	
+	protected $prefer_language = 'EN';
+
 	
 	protected $alreadyInSave = false;
 
@@ -1230,12 +1234,17 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getPreferLanguage()
+	{
+
+		return $this->prefer_language;
+	}
+
+	
 	public function setDistributorId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1245,14 +1254,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDistributorCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1262,14 +1268,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUserId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1279,14 +1282,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1296,14 +1296,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFullName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1313,14 +1310,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNickname($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1330,14 +1324,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setIc($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1347,14 +1338,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCountry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1364,14 +1352,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAddress($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1381,14 +1366,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAddress2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1398,14 +1380,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCity($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1415,14 +1394,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setState($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1432,14 +1408,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPostcode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1449,14 +1422,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1466,14 +1436,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAlternateEmail($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1483,14 +1450,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setContact($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1500,14 +1464,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setGender($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1517,7 +1478,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDob($v)
 	{
@@ -1535,14 +1495,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1552,14 +1509,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankBranchName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1569,14 +1523,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankAddress($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1586,14 +1537,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankAccNo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1603,14 +1551,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankHolderName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1620,14 +1565,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBankSwiftCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1637,14 +1579,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setVisaDebitCard($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1654,14 +1593,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEzyCashCard($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1671,14 +1607,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeLevel($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1688,14 +1621,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeStructure($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1705,14 +1635,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPlacementTreeLevel($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1722,14 +1649,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPlacementTreeStructure($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1739,14 +1663,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setInitRankId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1756,14 +1677,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setInitRankCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1773,14 +1691,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUplineDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1790,14 +1705,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUplineDistCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1807,14 +1719,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeUplineDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1824,14 +1733,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTreeUplineDistCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1841,14 +1747,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTotalLeft($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1858,14 +1761,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTotalRight($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1875,14 +1775,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPlacementPosition($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1892,7 +1789,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPlacementDatetime($v)
 	{
@@ -1910,14 +1806,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRankId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1927,14 +1820,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRankCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1944,7 +1834,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setActiveDatetime($v)
 	{
@@ -1962,14 +1851,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setActivatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -1979,14 +1865,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLeverage($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -1996,14 +1879,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setSpread($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2013,14 +1893,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDepositCurrency($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2030,14 +1907,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDepositAmount($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2047,14 +1921,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setSignName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2064,7 +1935,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setSignDate($v)
 	{
@@ -2082,14 +1952,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setTermCondition($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2099,7 +1966,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setIbCommission($v)
 	{
@@ -2110,14 +1976,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setIsIb($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2127,14 +1990,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2144,7 +2004,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -2162,14 +2021,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2179,7 +2035,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -2197,14 +2052,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setPackagePurchaseFlag($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2214,14 +2066,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFileBankPassBook($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2231,14 +2080,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFileProofOfResidence($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2248,14 +2094,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFileNric($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2265,14 +2108,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setExcludedStructure($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2282,14 +2122,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setProductMte($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2299,14 +2136,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setProductFxgold($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2316,14 +2150,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setRemark($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2333,14 +2164,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setLoanAccount($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2350,14 +2178,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setSelfRegister($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2367,14 +2192,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDebitAccount($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2384,14 +2206,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDebitRankId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2401,14 +2220,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setDebitStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2418,14 +2234,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setHideGenealogy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2435,14 +2248,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setFromAbfx($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2452,14 +2262,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxUserId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2469,14 +2276,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxRef($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2486,14 +2290,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxUpline1($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2503,14 +2304,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxPosition($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2520,14 +2318,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxRemark($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2537,7 +2332,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxEwallet($v)
 	{
@@ -2548,7 +2342,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxEpoint($v)
 	{
@@ -2559,7 +2352,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxPairingLeft($v)
 	{
@@ -2570,7 +2362,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setAbfxPairingRight($v)
 	{
@@ -2581,14 +2372,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMigratedStatus($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2598,14 +2386,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMigratedPlacementStatus($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2615,14 +2400,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMigrateRetry($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -2632,14 +2414,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNomineeName($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2649,14 +2428,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNomineeIc($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2666,14 +2442,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNomineeRelationship($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2683,14 +2456,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNomineeContactno($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2700,14 +2470,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNewActivityFlag($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2717,14 +2484,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setNewReportFlag($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2734,14 +2498,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setQ3Champions($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2751,7 +2512,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setQ3Datetime($v)
 	{
@@ -2769,14 +2529,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setEmailStatus($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2786,7 +2543,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkPackagePurchase($v)
 	{
@@ -2797,14 +2553,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkQualify1($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2814,14 +2567,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkQualify2($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2831,7 +2581,6 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkPersonalSales($v)
 	{
@@ -2842,14 +2591,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkQualify3($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2859,14 +2605,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setBkkStatus($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2876,14 +2619,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMoneytracCustomerId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2893,14 +2633,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
-
 	
 	public function setMoneytracUsername($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -2910,7 +2647,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		}
 
 	} 
+	
+	public function setPreferLanguage($v)
+	{
 
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->prefer_language !== $v || $v === 'EN') {
+			$this->prefer_language = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PREFER_LANGUAGE;
+		}
+
+	} 
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -3118,11 +2868,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->moneytrac_username = $rs->getString($startcol + 100);
 
+			$this->prefer_language = $rs->getString($startcol + 101);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 101; 
+						return $startcol + 102; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3185,33 +2937,25 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDistributorPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setDistributorId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDistributorPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -3570,6 +3314,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 100:
 				return $this->getMoneytracUsername();
 				break;
+			case 101:
+				return $this->getPreferLanguage();
+				break;
 			default:
 				return null;
 				break;
@@ -3681,6 +3428,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[98] => $this->getBkkStatus(),
 			$keys[99] => $this->getMoneytracCustomerId(),
 			$keys[100] => $this->getMoneytracUsername(),
+			$keys[101] => $this->getPreferLanguage(),
 		);
 		return $result;
 	}
@@ -3999,6 +3747,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 100:
 				$this->setMoneytracUsername($value);
 				break;
+			case 101:
+				$this->setPreferLanguage($value);
+				break;
 		} 	}
 
 	
@@ -4107,6 +3858,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[98], $arr)) $this->setBkkStatus($arr[$keys[98]]);
 		if (array_key_exists($keys[99], $arr)) $this->setMoneytracCustomerId($arr[$keys[99]]);
 		if (array_key_exists($keys[100], $arr)) $this->setMoneytracUsername($arr[$keys[100]]);
+		if (array_key_exists($keys[101], $arr)) $this->setPreferLanguage($arr[$keys[101]]);
 	}
 
 	
@@ -4215,6 +3967,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::BKK_STATUS)) $criteria->add(MlmDistributorPeer::BKK_STATUS, $this->bkk_status);
 		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID)) $criteria->add(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID, $this->moneytrac_customer_id);
 		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_USERNAME)) $criteria->add(MlmDistributorPeer::MONEYTRAC_USERNAME, $this->moneytrac_username);
+		if ($this->isColumnModified(MlmDistributorPeer::PREFER_LANGUAGE)) $criteria->add(MlmDistributorPeer::PREFER_LANGUAGE, $this->prefer_language);
 
 		return $criteria;
 	}
@@ -4445,18 +4198,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 		$copyObj->setMoneytracUsername($this->moneytrac_username);
 
+		$copyObj->setPreferLanguage($this->prefer_language);
+
 
 		$copyObj->setNew(true);
 
 		$copyObj->setDistributorId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

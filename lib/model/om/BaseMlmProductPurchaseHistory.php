@@ -172,9 +172,7 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 	public function setHistoryId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -184,14 +182,11 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -201,7 +196,6 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setTotalAmount($v)
 	{
@@ -212,14 +206,11 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -229,7 +220,6 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setApproveRejectDatetime($v)
 	{
@@ -247,14 +237,11 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setRemarks($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -264,14 +251,11 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -281,7 +265,6 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -299,14 +282,11 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -316,7 +296,6 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -334,7 +313,6 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -427,33 +405,25 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmProductPurchaseHistoryPeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setHistoryId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmProductPurchaseHistoryPeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -690,14 +660,12 @@ abstract class BaseMlmProductPurchaseHistory extends BaseObject  implements Pers
 		$copyObj->setNew(true);
 
 		$copyObj->setHistoryId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;

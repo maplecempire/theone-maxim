@@ -138,19 +138,16 @@ abstract class BaseAppLoginLogPeer {
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
-		
-		$criteria = clone $criteria;
+				$criteria = clone $criteria;
 
-		
-		$criteria->clearSelectColumns()->clearOrderByColumns();
+				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(AppLoginLogPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(AppLoginLogPeer::COUNT);
 		}
 
-		
-		foreach($criteria->getGroupByColumns() as $column)
+				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
 		}
@@ -159,8 +156,7 @@ abstract class BaseAppLoginLogPeer {
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
-			
-			return 0;
+						return 0;
 		}
 	}
 	
@@ -191,23 +187,18 @@ abstract class BaseAppLoginLogPeer {
 			AppLoginLogPeer::addSelectColumns($criteria);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
-		
-		
-		return BasePeer::doSelect($criteria, $con);
+						return BasePeer::doSelect($criteria, $con);
 	}
 	
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
 	
-		
-		$cls = AppLoginLogPeer::getOMClass();
+				$cls = AppLoginLogPeer::getOMClass();
 		$cls = Propel::import($cls);
-		
-		while($rs->next()) {
+				while($rs->next()) {
 		
 			$obj = new $cls();
 			$obj->hydrate($rs);
@@ -236,21 +227,15 @@ abstract class BaseAppLoginLogPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} else {
-			$criteria = $values->buildCriteria(); 
-		}
+			$criteria = clone $values; 		} else {
+			$criteria = $values->buildCriteria(); 		}
 
 		$criteria->remove(AppLoginLogPeer::LOG_ID); 
 
-
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			$pk = BasePeer::doInsert($criteria, $con);
 			$con->commit();
 		} catch(PropelException $e) {
@@ -272,17 +257,12 @@ abstract class BaseAppLoginLogPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-
 			$comparison = $criteria->getComparison(AppLoginLogPeer::LOG_ID);
 			$selectCriteria->add(AppLoginLogPeer::LOG_ID, $criteria->remove(AppLoginLogPeer::LOG_ID), $comparison);
 
-		} else { 
-			$criteria = $values->buildCriteria(); 
-			$selectCriteria = $values->buildPkeyCriteria(); 
-		}
+		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
@@ -293,11 +273,8 @@ abstract class BaseAppLoginLogPeer {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$affectedRows = 0; 
-		try {
-			
-			
-			$con->begin();
+		$affectedRows = 0; 		try {
+									$con->begin();
 			$affectedRows += BasePeer::doDeleteAll(AppLoginLogPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
@@ -315,25 +292,19 @@ abstract class BaseAppLoginLogPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
-		} elseif ($values instanceof AppLoginLog) {
+			$criteria = clone $values; 		} elseif ($values instanceof AppLoginLog) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
-			
-			$criteria = new Criteria(self::DATABASE_NAME);
+						$criteria = new Criteria(self::DATABASE_NAME);
 			$criteria->add(AppLoginLogPeer::LOG_ID, (array) $values, Criteria::IN);
 		}
 
-		
-		$criteria->setDbName(self::DATABASE_NAME);
+				$criteria->setDbName(self::DATABASE_NAME);
 
 		$affectedRows = 0; 
-
 		try {
-			
-			
-			$con->begin();
+									$con->begin();
 			
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
@@ -406,19 +377,13 @@ abstract class BaseAppLoginLogPeer {
 	}
 
 } 
-
-
 if (Propel::isInit()) {
-	
-	
-	try {
+			try {
 		BaseAppLoginLogPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-	
-	
-	require_once 'lib/model/map/AppLoginLogMapBuilder.php';
+			require_once 'lib/model/map/AppLoginLogMapBuilder.php';
 	Propel::registerMapBuilder('lib.model.map.AppLoginLogMapBuilder');
 }

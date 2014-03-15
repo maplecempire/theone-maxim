@@ -315,9 +315,7 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	public function setPurchaseId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -327,14 +325,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setDistId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -344,14 +339,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setCurrencyType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -361,7 +353,6 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setAmount($v)
 	{
@@ -372,14 +363,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setTransactionType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -389,14 +377,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setImageSrc($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -406,14 +391,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setStatusCode($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -423,14 +405,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setRemarks($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -440,14 +419,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPaymentReference($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -457,14 +433,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setBankId($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -474,7 +447,6 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setApproveRejectDatetime($v)
 	{
@@ -492,14 +464,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setApprovedByUserid($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -509,14 +478,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setCreatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -526,7 +492,6 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setCreatedOn($v)
 	{
@@ -544,14 +509,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setUpdatedBy($v)
 	{
 
-		
-		
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
 			$v = (int) $v;
 		}
 
@@ -561,7 +523,6 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setUpdatedOn($v)
 	{
@@ -579,14 +540,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPaymentMethod($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -596,14 +554,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgSuccess($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -613,14 +568,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgMsg($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -630,14 +582,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgBillNo($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -647,14 +596,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgRetEncodeType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -664,14 +610,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgCurrencyType($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -681,14 +624,11 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function setPgSignature($v)
 	{
 
-		
-		
-		if ($v !== null && !is_string($v)) {
+						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
@@ -698,7 +638,6 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		}
 
 	} 
-
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
@@ -817,33 +756,25 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 	
 	protected function doSave($con)
 	{
-		$affectedRows = 0; 
-		if (!$this->alreadyInSave) {
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-			
-			if ($this->isModified()) {
+						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = MlmDistEpointPurchasePeer::doInsert($this, $con);
-					$affectedRows += 1; 
-										 
-										 
-
+					$affectedRows += 1; 										 										 
 					$this->setPurchaseId($pk);  
-
 					$this->setNew(false);
 				} else {
 					$affectedRows += MlmDistEpointPurchasePeer::doUpdate($this, $con);
 				}
-				$this->resetModified(); 
-			}
+				$this->resetModified(); 			}
 
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
 	} 
-
 	
 	protected $validationFailures = array();
 
@@ -1223,14 +1154,12 @@ abstract class BaseMlmDistEpointPurchase extends BaseObject  implements Persiste
 		$copyObj->setNew(true);
 
 		$copyObj->setPurchaseId(NULL); 
-
 	}
 
 	
 	public function copy($deepCopy = false)
 	{
-		
-		$clazz = get_class($this);
+				$clazz = get_class($this);
 		$copyObj = new $clazz();
 		$this->copyInto($copyObj, $deepCopy);
 		return $copyObj;
