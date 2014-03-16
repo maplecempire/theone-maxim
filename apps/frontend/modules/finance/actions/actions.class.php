@@ -17,7 +17,8 @@ class financeActions extends sfActions
 //        $bonusService->contraDebitAccountByEpoint(264193, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(264788, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(264787, "CONTRA BY CP1", 0);
-        $bonusService->contraDebitAccountByEpoint(261974, "CONTRA BY CP1", 0);
+//        $bonusService->contraDebitAccountByEpoint(261974, "CONTRA BY CP1", 0);
+        $bonusService->contraDebitAccountByEpoint(259509, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccount(263322, "CONTRA BY CP2", 0);
 
         print_r("Done");
