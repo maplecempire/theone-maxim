@@ -29,6 +29,9 @@
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
     <style type="text/css">
+    .chinese_font {
+        font-family : "Microsoft YaHei" !important;
+    }
     #popupContact {
         top: -100px !important;
     }
@@ -977,6 +980,47 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>-->
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='18'>IMPORTANT MESSAGE “FOREX LICENSING” 有关“外汇许可证”的重要通知</a>
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "17 March 2014";
+                ?>
+            </div>
+
+            <div id="page_18" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse" valign="top">
+                            <p>PLEASE NOTE THAT THE FLASH PRESENTATION SHOWN AT THE MAXIM CONVENTION IN KL, IS A MERE REPLICA  WHICH AS SPELT OUT CLEARLY ON THE NIGHT, IT IS NOT TO BE REPRESENTED TO ANY THIRD PARTY TIL THE  OFFICIALLY SEALED ORGINAL IS RECEIVED BY LACD.
+                            <br>
+                            <br><span class="chinese_font">诚如我们在此次马来西亚金融峰会上所说，我们展示的有关公司获得外汇许可证的介绍，请注意在我们尚未获得原件时，不要展示给任何第三方机构或个人。</span>
+                            <br>
+                            <br>THIS WAS ONLY SHOWN IN COPY FORM AND IS NOT TO BE REPRESENTED AS THE MAXIM LICENCE UNTIL THE LACD HAVE THE ORIGINAL, AND HAVE ANNOUNCED CLEARANCE FOR USE WHICH WILL TAKE AROUND 14 DAYS. MEMBERS FOUND WRONGFULLY REPRESENTING THIS TO OTHERS, BEFORE 14 DAYS,  MAY FACE TERMINATION PROCEEDINGS. HIGHER MEMBERS AND SUPREME MEMBERS ARE EXPECTED TO SUPERVISE AND ENFORCE THIS ANNOUNCEMENT PLEASE.
+                            <br>
+                            <br><span class="chinese_font">我们在会议中展示的是复印件，且在我们收到原件之前不要用作展示用。我们接到通知，大概14天左右会收到原件。任何伙伴和会员不得违反此规定，若擅自于我们收到原件之前展示此复印件，最严重可能会终止伙伴关系。若发现类似情况，也请公司高层及领导人严格按照此规定执行。</span>
+                            <br>
+                            <br>Mr. W. Royce (Rocky) Lane
+                            <br>CHIEF  LEGAL COUNSEL- Inhouse
+                            <br><span class="chinese_font">集团内部首席法律顾问</span>
+                            <br><span style="color: blue">In-house.legalcounsel@gmail.com</span>
+                            <br>Int’l Bar Association-Member  No. 108394
+                            <br>Legal Affairs & Compliance Division(LACD)
+                            <br>Multinational Group of Companies - <span style="color: blue">www.maximtrader.com</span>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
 
         <div class="page">
             <div class="poptitle">
