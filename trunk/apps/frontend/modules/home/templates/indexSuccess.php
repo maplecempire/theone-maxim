@@ -341,7 +341,7 @@ var popIndex = 1;
         if ($tempDisable == true && $sf_user->getAttribute(Globals::FIRST_TIME_POP_UP, true) == true) {
             $sf_user->setAttribute(Globals::FIRST_TIME_POP_UP, false)
         ?>
-        centerPopup();
+        //centerPopup();
         loadPopup();
         <?php } ?>
         $(".page_link").click(function(event){
@@ -382,7 +382,7 @@ var popIndex = 1;
 
         $("#linkLatestNews").click(function(event){
             event.preventDefault();
-            centerPopup();
+            //centerPopup();
             loadPopup();
         });
 	});
@@ -951,7 +951,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<div style="position: absolute; display: none;" id="popupContact">
+<div style="position: absolute; display: none; position: absolute; left: 30%; margin-left: -50px;" id="popupContact">
     <h1><?php echo __('Latest News') ?></h1>
     <a id="popupContactClose"><?php echo __('CLOSE') ?></a>
 
@@ -980,6 +980,53 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>-->
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='19'>Extend the SYS promo to 12 midnight of March 25th, 2014</a>
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "21 March 2014";
+                ?>
+            </div>
+
+            <div id="page_19" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse" valign="top">
+                            <br>Due to Request and Appeals by our IMs and Leadership, <strong>the company will extend the SYS promo to 12 midnight of March 25th, 2014.</strong>
+                            <br>Please NOTE that we have limited rooms left due to the overwhelming response received so far.
+                            <br>Sign up and make payment immediately to avoid disappointment.
+                            <br>Singapore Yacht Show, the most prestigious event of the year brought to you by Maxim Trader.... DON'T MISS OUT!!!
+                            <br>
+                            <br>鉴于多位领导人和伙伴们的要求, 我们决定将<strong>新加坡国际游艇展促销计划的截止日期延迟到2014.3.25日晚上12:00点</strong>。请注意因为目前接到的请求太多，所剩的房间数量并不多。请尽快报单并付清全款。这将是今年最值得期待的活动，机不可失 失不再来!
+                            <br>
+                            <br>국제 멤버들과 리더들의 요청에 의해서, <strong>당사는 SYS 프로모션을 2014년 3월 25일 자정까지 연장</strong>
+                            <br>하기로 하였습니다.
+                            <br>현재까지 열화와 같은 응답으로 남은 바 수가 제한되어 있음을 잊지 마십시오.
+                            <br>실망할 수 있으니 서둘러 신청하시고 결제하시기 바랍니다.
+                            <br>싱가폴 요트 쇼, 맥심 트레이더가 제공하는 올해 가장 특별한 이벤트입니다.
+                            <br>놓치지 마세요.
+                            <br>
+                            <br>IM、リーダーシップの皆さんの要請および希望により、<strong>社ではSYSプロモの会期を3月25日夜中12時まで延長します</strong>。
+                            <br>
+                            <br>これまでにも圧倒的な反響があったため、どうぞ残りの部屋がすでに限られていることにご注意ください。
+                            <br>
+                            <br>失望しないで済むために、サインアップし、すぐに支払いをしてください。
+                            <br>
+                            <br>シンガポールヨットショーは、マキシムトレーダーがあなたにお届けする今年もっとも権威あるイベントです。お見逃しなく。
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
 
         <div class="page">
             <div class="poptitle">
