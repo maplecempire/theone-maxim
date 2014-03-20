@@ -36,6 +36,11 @@ $(function() {
         submitHandler: function(form) {
             waiting();
             var amount = $('#epointAmount').autoNumericGet();
+            var paymentMethod = $('#paymentMethod').val();
+            if (paymentMethod == "PG" && amount > 50000) {
+                error("<?php echo __('Maximum Payment RMB 50,000 per transaction') ?>");
+                return false;
+            }
             $("#epointAmount").val(amount);
             form.submit();
         }
@@ -48,12 +53,15 @@ $(function() {
         var paymentMethod = $(this).val();
         if (paymentMethod == "GOZ") {
             $("#tr_channelid").show();
+            $("#li_note").hide();
             $("#currencyCode").val("RMB");
         } else if (paymentMethod == "PG") {
             $("#tr_channelid").hide();
+            $("#li_note").show();
             $("#currencyCode").val("RMB");
         } else {
             $("#tr_channelid").hide();
+            $("#li_note").hide();
             $("#currencyCode").val("USD");
         }
     }).trigger("change");
@@ -307,6 +315,7 @@ $(function() {
                                         <li><?php echo __('CP1 is ONLY for package purchase, package upgrade, MT4 account reload and is NON-WITHDRAWABLE.') ?></li>
                                         <li><?php echo $systemCurrency?> <?php echo __('1 equals to 1 value of CP1'); ?>.&nbsp;</li>
                                         <li><?php echo __('Payment via credit card is subject to an extra 5% charge') ?></li>
+                                        <li id="li_note"><?php echo __('Maximum Payment RMB 50,000 per transaction') ?></li>
                                     </ol>
                                 </td>
                             </tr>
