@@ -1931,6 +1931,11 @@ class memberActions extends sfActions
             $dispAmount = $amount;
             $paymentMethod = $this->getRequestParameter('paymentMethod', 'LB');
 
+            if ($paymentMethod == "PG" && $amount > 50000) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Maximum Payment RMB 50,000 per transaction"));
+                return $this->redirect('/member/epointPurchase');
+            }
+
             $mlmDistEpointPurchase = new MlmDistEpointPurchase();
             $mlmDistEpointPurchase->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $mlmDistEpointPurchase->setPaymentMethod($paymentMethod);
