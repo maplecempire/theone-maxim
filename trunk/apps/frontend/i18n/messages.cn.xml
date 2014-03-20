@@ -969,6 +969,7 @@
             <trans-unit><source>Beneficiary Address</source><target>收款人地址</target></trans-unit>
             <trans-unit><source>Maxim Trader Newsletter</source><target>马胜金融集团月报</target></trans-unit>
             <trans-unit><source>Payment via credit card is subject to an extra 5% charge</source><target>会员如果通过信用卡汇款，需额外支付5%费用</target></trans-unit>
+            <trans-unit><source>Maximum Payment RMB 50,000 per transaction</source><target>支付最高数额不可超过人民币50,000元</target></trans-unit>
         </body>
     </file>
 </xliff>
