@@ -130,7 +130,7 @@
                 <br>
                 <strong>•	<?php echo __('Our confidence') ?></strong>
                 <br>
-                <?php echo __('All client funds are insured in the form of a parental guarantee provided by our parent company Royale Globe Holding Inc. (Formally known as Royale Globe Holding Inc.) Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
+                <?php echo __('All client funds are insured in the form of a parental guarantee provided by our parent company Royale Globe Holding Inc. (Formally known as Royale Group Holding Inc.) Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
                 <br>
                 <br>
                 <strong><?php echo __('Sustained Profits') ?></strong>
