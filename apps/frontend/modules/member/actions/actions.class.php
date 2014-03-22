@@ -6237,11 +6237,16 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                     $fromBalance = $ledgerAccountBalance;
 
+                    $remark = "";
+                    if ($this->getRequestParameter('remark')) {
+                        $remark = ", ".$this->getRequestParameter('remark');
+                    }
+
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $mlm_account_ledger->setDistId($fromId);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")".$remark);
                     $mlm_account_ledger->setCredit(0);
                     $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
                     $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
@@ -6255,7 +6260,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $tbl_account_ledger->setDistId($toId);
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")".$remark);
                     $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
                     $tbl_account_ledger->setDebit(0);
                     $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
@@ -6947,7 +6952,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $tbl_account_ledger->setDistId($toId);
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")".$remark);
                     $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
                     $tbl_account_ledger->setDebit(0);
                     $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
@@ -7907,7 +7912,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-//                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 100);
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 254911);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->setOffset($this->getRequestParameter('q') * $queryRecord);
                     $c->setLimit($queryRecord);
