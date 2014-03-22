@@ -323,9 +323,9 @@
             <trans-unit><source>Withdrawal</source><target>兑现</target></trans-unit>
             <trans-unit><source>WITHDRAWAL</source><target>兑现</target></trans-unit>
             <trans-unit><source>Amount</source><target>总数</target></trans-unit>
-            <trans-unit><source>DSB</source><target>直推奖</target></trans-unit>
-            <trans-unit><source>DRB</source><target>直推奖金</target></trans-unit>
-            <trans-unit><source>GDB</source><target>对碰奖</target></trans-unit>
+            <trans-unit><source>DSB</source><target>经营奖</target></trans-unit>
+            <trans-unit><source>DRB</source><target>经营奖金</target></trans-unit>
+            <trans-unit><source>GDB</source><target>小组奖</target></trans-unit>
             <trans-unit><source>Total</source><target>总</target></trans-unit>
             <trans-unit><source>Bonus Date</source><target>日期从</target></trans-unit>
             <trans-unit><source>Bonus</source><target>奖金</target></trans-unit>
@@ -667,17 +667,17 @@
             <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
             <trans-unit><source>Downline Stats</source><target>下线统计简介</target></trans-unit>
             <trans-unit><source>Placement Genealogy</source><target>安置组织图</target></trans-unit>
-            <trans-unit><source>Sponsor Genealogy</source><target>直推组织图</target></trans-unit>
+            <trans-unit><source>Sponsor Genealogy</source><target>经营组织图</target></trans-unit>
             <trans-unit><source>Accumulate Group BV</source><target>小组累积业绩</target></trans-unit>
             <trans-unit><source>Today Group BV</source><target>今日小组业绩</target></trans-unit>
-            <trans-unit><source>Carry Forward</source><target>对碰余额</target></trans-unit>
+            <trans-unit><source>Carry Forward</source><target>小组余额</target></trans-unit>
             <trans-unit><source>Today Total Group BV</source><target>今日小组总业绩</target></trans-unit>
             <trans-unit><source>USD</source><target>美金</target></trans-unit>
             <trans-unit><source>NOTE: CP1 is ONLY for package purchase, package upgrade and for MT4 account reload and is NON-WITHDRAWAL.</source><target>注：CP1只能用来收购配套，配套升级和充值MT4帐户。CP1是不能兑现的。</target></trans-unit>
             <trans-unit><source>Commission Details</source><target>奖金收益</target></trans-unit>
             <trans-unit><source>Commission Categories</source><target>奖金总结</target></trans-unit>
             <trans-unit><source>Note: There will be no credit once mt4 credit amount finish.</source><target>注：奖金将不会存入当MT4户口没有余额。</target></trans-unit>
-            <trans-unit><source>Direct Referrer Bonus</source><target>直推奖金</target></trans-unit>
+            <trans-unit><source>Direct Referrer Bonus</source><target>经营奖金</target></trans-unit>
             <trans-unit><source>Pairing Bonus</source><target>配对奖金</target></trans-unit>
             <trans-unit><source>Generation Bonus</source><target>代数奖金</target></trans-unit>
             <trans-unit><source>Pips Rebate</source><target>点数回赠</target></trans-unit>

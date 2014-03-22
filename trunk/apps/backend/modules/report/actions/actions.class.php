@@ -10,6 +10,168 @@
  */
 class reportActions extends sfActions
 {
+    public function executeBmwX6Challenge()
+    {
+        $this->resultList = $this->findPersonalSalesList(null, "2014-03-10 00:00:00", "2014-05-31 00:00:00", null);
+    }
+    public function executeResetReport()
+    {
+        $query = "update mlm_distributor set bkk_status = 'PENDING', bkk_package_purchase= null, bkk_qualify_1 = null,
+                bkk_qualify_2 = null, bkk_qualify_3 = null, bkk_personal_sales = null";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+
+        print_r("<br>Reset Report Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeResetReport2()
+    {
+        $query = "update mlm_distributor set bkk_status = 'PENDING'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+
+        print_r("<br>Reset Report Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeTest()
+    {
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeSingaporeYachtShowLifestyleIncentive();
+        print_r("<br>Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeTest2()
+    {
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeSingaporeYachtShowLifestyleChallenge();
+        print_r("<br>Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeSingaporeYachtShowLifestyleChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-10 00:00:00";
+        $dateTo = "2014-03-25 00:00:00";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $directInformationRS = $this->getDirectInformation($distDB->getDistributorId());
+
+            $x30to99 = 0;
+            $x100to499 = 0;
+            $x500 = 0;
+            foreach ($directInformationRS as $directInformation) {
+                $totalSales = $directInformation['bkk_personal_sales'];
+                if ($totalSales >= 500000) {
+                    $x500 += 1;
+                } else if ($totalSales >= 100000 && $totalSales < 500000) {
+                    $x100to499 += 1;
+                } else if ($totalSales >= 30000 && $totalSales < 100000) {
+                    $x30to99 += 1;
+                }
+            }
+
+            if ($x500 >= 2) {
+                $distDB->setBkkQualify3("Y");
+            }
+            if ($x100to499 >= 2) {
+                $distDB->setBkkQualify2("Y");
+            }
+            if ($x30to99 >= 2) {
+                $distDB->setBkkQualify1("Y");
+            }
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeSingaporeYachtShowLifestyleChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeSingaporeYachtShowLifestyleIncentive()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-10 00:00:00";
+        $dateTo = "2014-03-25 00:00:00";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+            $distDB->setBkkPersonalSales(0);
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeSingaporeYachtShowLifestyleChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeRunImeReport()
     {
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -759,5 +921,144 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
             $result = $arr["_SUM"];
         }
         return $result;
+    }
+
+    function findPersonalSalesList($distId, $dateFrom, $dateTo, $minimum)
+    {
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'";
+
+        if ($distId != null) {
+            $query .= " AND newDist.upline_dist_id = " . $distId;
+        }
+
+        $query .= " AND newDist.created_on >= '".$dateFrom."' AND newDist.created_on <= '".$dateTo."' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'";
+
+        if ($distId != null) {
+            $query .= " AND newDist.upline_dist_id = " . $distId;
+        }
+
+        $query .= " AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id ";
+
+        $query .= " WHERE 1=1 ";
+
+        if ($distId != null) {
+            $query .= " AND dist.distributor_id = " . $distId;
+        }
+
+        if ($minimum != null) {
+            $query .= " HAVING SUB_TOTAL >= " . $minimum;
+        }
+        $query .= " ORDER BY 3 DESC ";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $resultArray[$count] = $arr;
+            $count++;
+        }
+        return $resultArray;
+    }
+
+    function getDirectInformation($distId)
+    {
+        $query = "SELECT upline_dist_id, bkk_personal_sales, distributor_id
+                    FROM mlm_distributor WHERE 1=1 ";
+
+        if ($distId != null) {
+            $query .= " AND upline_dist_id = " . $distId;
+        }
+        $query .= " ORDER BY bkk_personal_sales DESC ";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $resultArray[$count] = $arr;
+            $count++;
+        }
+        return $resultArray;
+    }
+
+    function getTotalUpgradedPackageAmount($distributorId, $dateFrom, $dateTo)
+    {
+        $query = "SELECT SUM(amount) as _SUM
+                    FROM mlm_package_upgrade_history
+                    WHERE created_on >= '".$dateFrom."' AND created_on <= '".$dateTo."'
+                            AND dist_id = '" . $distributorId . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_SUM"] != null) {
+                return $arr["_SUM"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getSignPackageAmount($distributorId, $dateFrom, $dateTo)
+    {
+        $query = "SELECT SUM(pack.price) as _SUM
+                    FROM mlm_distributor dist
+                        LEFT JOIN mlm_package pack ON pack.package_id = dist.init_rank_id
+                    WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
+                            AND dist.distributor_id = '" . $distributorId . "' AND dist.distributor_id = '" . $distributorId . "'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_SUM"] != null) {
+                return $arr["_SUM"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }

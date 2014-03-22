@@ -211,8 +211,16 @@
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-
                 <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Reference Remark'); ?></td>
+                    <td>
+                        <input name="remark" id="remark"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password'); ?></td>
                     <td>
@@ -222,7 +230,7 @@
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" align="center">
                         <font color="#dc143c"><?php
