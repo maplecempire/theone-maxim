@@ -574,8 +574,8 @@ class homeActions extends sfActions
                 $this->getUser()->setAttribute(Globals::SESSION_LEADER_CODE, $leaderCode);
 
                 if ($existUser->getLastLoginDatetime() == null) {
-                    $existDist->setHideGenealogy("Y");
-                    $existDist->save();
+                    //$existDist->setHideGenealogy("Y");
+                    //$existDist->save();
                 } else {
                     $dateUtil = new DateUtil();
                     $diff = abs(strtotime($dateUtil->formatDate("Y-m-d H:i:s", date("Y-m-d H:i:s"))) - strtotime($dateUtil->formatDate("Y-m-d H:i:s", $existUser->getLastLoginDatetime())));
