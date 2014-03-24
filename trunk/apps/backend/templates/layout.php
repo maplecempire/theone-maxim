@@ -785,23 +785,23 @@ $(function() {
                         &nbsp;<?php echo __('Total Volume Traded'); ?></a><br/>
                     <?php } ?>
                     <br>
-                    <a href="<?php echo url_for('report/bmwX6Challenge') ?>"
-                       title="<?php echo __('BMW X6 Challenge'); ?>">
+                    <!--<a href="<?php /*echo url_for('report/bmwX6Challenge') */?>"
+                       title="<?php /*echo __('BMW X6 Challenge'); */?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('BMW X6 Challenge'); ?></a><br/>
+                        &nbsp;<?php /*echo __('BMW X6 Challenge'); */?></a><br/>
 
-                    <a href="<?php echo url_for('report/singaporeYachtShowLifestyleChallenge') ?>"
-                       title="<?php echo __('Singapore Yacht Show Lifestyle Challenge'); ?>">
+                    <a href="<?php /*echo url_for('report/singaporeYachtShowLifestyleChallenge') */?>"
+                       title="<?php /*echo __('Singapore Yacht Show Lifestyle Challenge'); */?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Singapore Yacht Show Lifestyle Challenge'); ?></a><br/>
+                        &nbsp;<?php /*echo __('Singapore Yacht Show Lifestyle Challenge'); */?></a><br/>
 
-                    <a href="<?php echo url_for('report/singaporeYachtShowLifestyleIncentive') ?>"
-                       title="<?php echo __('Singapore Yacht Show Lifestyle Incentive'); ?>">
+                    <a href="<?php /*echo url_for('report/singaporeYachtShowLifestyleIncentive') */?>"
+                       title="<?php /*echo __('Singapore Yacht Show Lifestyle Incentive'); */?>">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
-                        &nbsp;<?php echo __('Singapore Yacht Show Lifestyle Incentive'); ?></a><br/>
+                        &nbsp;<?php /*echo __('Singapore Yacht Show Lifestyle Incentive'); */?></a><br/>-->
                 </div>
                 <?php } ?>
 
