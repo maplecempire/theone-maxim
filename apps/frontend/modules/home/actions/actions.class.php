@@ -445,7 +445,7 @@ class homeActions extends sfActions
                     $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
                     $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
                     $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
-                    $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+                    $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getFullName());
                     $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
                     $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
 
@@ -567,7 +567,7 @@ class homeActions extends sfActions
                 $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
                 $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
                 $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
-                $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+                $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getFullName());
                 $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
                 $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
                 $this->getUser()->setAttribute(Globals::SESSION_LEADER_ID, $leaderId);
@@ -714,7 +714,7 @@ class homeActions extends sfActions
             $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
             $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
             $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
-            $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getNickname());
+            $this->getUser()->setAttribute(Globals::SESSION_NICKNAME, $existDist->getFullName());
             $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existUser->getUserRole());
             $this->getUser()->setAttribute(Globals::SESSION_USERSTATUS, $existUser->getStatusCode());
 

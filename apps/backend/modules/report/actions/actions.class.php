@@ -80,6 +80,7 @@ class reportActions extends sfActions
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");
             $distDB->setBkkQualify3("N");
+            $distDB->setAbfxRemark("");
 
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
             $directInformationRS = $this->getDirectInformation($distDB->getDistributorId());
@@ -98,21 +99,24 @@ class reportActions extends sfActions
                 }
             }
 
-            if ($x500 >= 2) {
-                $distDB->setBkkQualify3("Y");
-            }
-            if ($x100to499 >= 2) {
-                $distDB->setBkkQualify2("Y");
-            }
-            if ($x30to99 >= 2) {
-                $distDB->setBkkQualify1("Y");
-            }
-            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+            if ($x500 > 0 || $x100to499  > 0 || $x30to99  > 0) {
+                //if ($x500 >= 2) {
+                $distDB->setBkkQualify3(round($x500 / 2, 0, PHP_ROUND_HALF_DOWN));
+                //}
+                //if ($x100to499 >= 2) {
+                $distDB->setBkkQualify2(round($x100to499 / 2, 0, PHP_ROUND_HALF_DOWN));
+                //}
+                //if ($x30to99 >= 2) {
+                $distDB->setBkkQualify1(round($x30to99 / 2, 0, PHP_ROUND_HALF_DOWN));
+                //}
+                //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
 
-            /*if ($personalSales >= 40000) {
-                $distDB->setBkkQualify3("Y");
-            }*/
+                /*if ($personalSales >= 40000) {
+                    $distDB->setBkkQualify3("Y");
+                }*/
 
+                $distDB->setAbfxRemark("x500=".$x500.",x100to499=".$x100to499.",x30to99=".$x30to99);
+            }
             $distDB->setBkkStatus("COMPLETE");
             $distDB->save();
         }
@@ -143,6 +147,7 @@ class reportActions extends sfActions
             $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
             $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
             $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+            $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
 
             //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
 
@@ -1045,7 +1050,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_package pack ON pack.package_id = dist.init_rank_id
                     WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
-                            AND dist.distributor_id = '" . $distributorId . "' AND dist.distributor_id = '" . $distributorId . "'";
+                            AND dist.distributor_id = '" . $distributorId . "'";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
