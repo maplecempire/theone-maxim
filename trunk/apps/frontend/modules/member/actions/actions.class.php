@@ -1644,7 +1644,7 @@ class memberActions extends sfActions
                     $password = $existUser->getUserpassword();
 
                     $subject = $this->getContext()->getI18N()->__("Password requested for maximtrader.com", null, 'email');
-                    $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getNickname()), 'email') . ",<p><p>
+                    $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $existDistributor->getFullName()), 'email') . ",<p><p>
                     <p>" . $this->getContext()->getI18N()->__("Your login password for maximtrader.com. ", null, 'email') . "</p>
                     <p><b>" . $this->getContext()->getI18N()->__("Login ID", null) . ": " . $username . "</b>
                     <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
@@ -4712,7 +4712,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     'userId' => $resultArr["distributor_id"],
                     'userName' => $resultArr["distributor_code"],
                     'fullname' => $resultArr["full_name"],
-                    'nickname' => $resultArr["nickname"]
+                    'nickname' => $resultArr["full_name"]
                 );
             }
         }
@@ -4743,7 +4743,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 'userId' => $resultArr["distributor_id"],
                 'userName' => $resultArr["distributor_code"],
                 'fullname' => $resultArr["full_name"],
-                'nickname' => $resultArr["nickname"]
+                'nickname' => $resultArr["full_name"]
             );
         }
 
@@ -4768,7 +4768,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 'userId' => $existUser->getDistributorId(),
                 'userName' => $existUser->getDistributorCode(),
                 'fullname' => $existUser->getFullName(),
-                'nickname' => $existUser->getNickname()
+                'nickname' => $existUser->getFullName()
             );
             //}
         }
@@ -4822,7 +4822,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 'userId' => $existUser->getDistributorId(),
                 'userName' => $existUser->getDistributorCode(),
                 'fullname' => $existUser->getFullName(),
-                'nickname' => $existUser->getNickname()
+                'nickname' => $existUser->getFullName()
             );
             //}
         }
@@ -5912,7 +5912,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $result->getCreatedOn() == null ? "" : $result->getActiveDatetime(),
                 $result->getDistributorCode() == null ? "" : $result->getDistributorCode(),
                 $result->getFullName() == null ? "" : $result->getFullName(),
-                $result->getNickname() == null ? "" : $result->getNickname(),
+                $result->getFullName() == null ? "" : $result->getFullName(),
                 $result->getIc() == null ? "" : $result->getIc(),
                 $result->getRankCode() == null ? "" : $result->getRankCode(),
             );
@@ -5986,7 +5986,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $toId = $existDist->getDistributorId();
                 $toCode = $existDist->getDistributorCode();
-                $toName = $existDist->getNickname();
+                $toName = $existDist->getFullName();
                 $toBalance = $toAccount->getBalance();
                 $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
                 $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
@@ -6208,7 +6208,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $toId = $resultArr["distributor_id"];
                         $toCode = $resultArr["distributor_code"];
-                        $toName = $resultArr["nickname"];
+                        $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
                         return $this->redirect('/member/transferEpoint');
@@ -6461,7 +6461,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $toId = $resultArr["distributor_id"];
                         $toCode = $resultArr["distributor_code"];
-                        $toName = $resultArr["nickname"];
+                        $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
                         return $this->redirect('/member/transferCp2');
@@ -6707,7 +6707,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $toId = $resultArr["distributor_id"];
                         $toCode = $resultArr["distributor_code"];
-                        $toName = $resultArr["nickname"];
+                        $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
                         return $this->redirect('/member/transferCp3');
@@ -6922,7 +6922,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $toId = $existDist->getDistributorId();
                     $toCode = $existDist->getDistributorCode();
-                    $toName = $existDist->getNickname();
+                    $toName = $existDist->getFullName();
                     $toBalance = $toAccount->getBalance();
                     $fromId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
                     $fromCode = $this->getUser()->getAttribute(Globals::SESSION_DISTCODE);
