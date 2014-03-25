@@ -320,7 +320,7 @@ class businessActions extends sfActions
 
     public function executeIndex()
     {
-        //return $this->redirect('/member/summary');
+        return $this->redirect('/member/summary');
 
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "leo_group_list.xls";
 
