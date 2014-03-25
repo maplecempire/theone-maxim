@@ -30,7 +30,8 @@ class reportActions extends sfActions
     }
     public function executeResetReport2()
     {
-        $query = "update mlm_distributor set bkk_status = 'PENDING'";
+        $query = "update mlm_distributor set bkk_status = 'PENDING', bkk_qualify_1 = null,
+                bkk_qualify_2 = null, bkk_qualify_3 = null";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -77,9 +78,9 @@ class reportActions extends sfActions
         $dateFrom = "2014-03-10 00:00:00";
         $dateTo = "2014-03-25 00:00:00";
         foreach ($distDBs as $distDB) {
-            $distDB->setBkkQualify1("N");
-            $distDB->setBkkQualify2("N");
-            $distDB->setBkkQualify3("N");
+            $distDB->setBkkQualify1("");
+            $distDB->setBkkQualify2("");
+            $distDB->setBkkQualify3("");
             $distDB->setAbfxRemark("");
 
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
@@ -101,21 +102,27 @@ class reportActions extends sfActions
 
             if ($x500 > 0 || $x100to499  > 0 || $x30to99  > 0) {
                 //if ($x500 >= 2) {
-                $distDB->setBkkQualify3(round($x500 / 2, 0, PHP_ROUND_HALF_DOWN));
-                //}
-                //if ($x100to499 >= 2) {
-                $distDB->setBkkQualify2(round($x100to499 / 2, 0, PHP_ROUND_HALF_DOWN));
-                //}
-                //if ($x30to99 >= 2) {
-                $distDB->setBkkQualify1(round($x30to99 / 2, 0, PHP_ROUND_HALF_DOWN));
-                //}
-                //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+                $q3 = round($x500 / 2, 0, PHP_ROUND_HALF_DOWN);
+                $q2 = round($x100to499 / 2, 0, PHP_ROUND_HALF_DOWN);
+                $q1 = round($x30to99 / 2, 0, PHP_ROUND_HALF_DOWN);
 
-                /*if ($personalSales >= 40000) {
-                    $distDB->setBkkQualify3("Y");
-                }*/
+                if ($q3 > 0 || $q2  > 0 || $q1  > 0) {
+                    $distDB->setBkkQualify3($q3);
+                    //}
+                    //if ($x100to499 >= 2) {
+                    $distDB->setBkkQualify2($q2);
+                    //}
+                    //if ($x30to99 >= 2) {
+                    $distDB->setBkkQualify1($q1);
+                    //}
+                    //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
 
-                $distDB->setAbfxRemark("x500=".$x500.",x100to499=".$x100to499.",x30to99=".$x30to99);
+                    /*if ($personalSales >= 40000) {
+                        $distDB->setBkkQualify3("Y");
+                    }*/
+
+                    $distDB->setAbfxRemark("x500=".$x500.",x100to499=".$x100to499.",x30to99=".$x30to99);
+                }
             }
             $distDB->setBkkStatus("COMPLETE");
             $distDB->save();
