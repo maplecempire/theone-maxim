@@ -629,6 +629,17 @@ ul, ol {
             </script>
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
+            <?php if ($culture == "cn") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/sys-cn.gif"><img width="582" src="/images/201403/sys-cn.gif" alt="" title="SINGAPORE YACHT SHOW 2014" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else if ($culture == "kr") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/sys-kr.gif"><img width="582" src="/images/201403/sys-kr.gif" alt="" title="SINGAPORE YACHT SHOW 2014" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else if ($culture == "jp") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/sys-en.gif"><img width="582" src="/images/201403/sys-en.gif" alt="" title="SINGAPORE YACHT SHOW 2014" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/sys-en.gif"><img width="582" src="/images/201403/sys-en.gif" alt="" title="SINGAPORE YACHT SHOW 2014" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } ?>
+            <div class="hr2"></div>
+
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/dubai_banner.jpg"><img width="582" src="/images/201403/dubai_banner.jpg" alt="" title="MENA 13TH FOREX SHOW MANAGED FUNDS & INVESTMENT OPPOTUNITIES" class="aligncenter size-full wp-image-162"></a></p>
             <div class="hr2"></div>
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/banner4.jpg"><img width="582" src="/images/banner4.jpg" alt="" title="Maxim Trader Annual Convention" class="aligncenter size-full wp-image-162"></a></p>
