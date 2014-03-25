@@ -320,6 +320,213 @@ class businessActions extends sfActions
 
     public function executeIndex()
     {
+        //return $this->redirect('/member/summary');
+
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "leo_group_list.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 0;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 1; $x <= $totalRow; $x++) {
+            $counter++;
+            print_r("===>user name:".$data->val($x, "A")."<br>");
+            $userName = trim($data->val($x, "A"));
+            //$password = rand(10000000, 99999999);
+            $password = "abcd1234";
+            $fullName = $data->val($x, "B");
+            $uplineDistCode = trim($data->val($x, "C"));
+            $placementDistCode = trim($data->val($x, "D"));
+            $email = $data->val($x, "E");
+            $status = $data->val($x, "F");
+
+            if ($status == "COMPLETE") {
+                continue;
+            }
+            print_r("===>placementDistCode:".$placementDistCode."<br>");
+            $arr = explode(' ', $placementDistCode);
+            $placementDistCode = trim($arr[0]);
+            $placementPositionStr = trim($arr[1]);
+            $placementPosition = "";
+            print_r("===>placementPosition:".$placementPositionStr."<br>");
+
+            if ($placementPositionStr == "(L)") {
+                $placementPosition = "LEFT";
+            } else if ($placementPositionStr == "(R)") {
+                $placementPosition = "RIGHT";
+            } else {
+                print_r("===>left right wrong:".$counter.":".$userName.":".$placementPositionStr."<br>");
+                break;
+            }
+
+            $treeUplineDistDB = null;
+            if ($placementDistCode == "") {
+                print_r("==placement code empty=>".$counter.":".$userName.":".$placementDistCode."<br>");
+                break;
+            } else {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|263774|%", Criteria::LIKE);
+                $treeUplineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                if (!$treeUplineDistDB) {
+                    print_r("==placement code not exist=>".$counter.":".$userName.":".$placementDistCode."<br>");
+                    break;
+                }
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_CODE, $placementDistCode);
+                $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $placementPosition);
+                $placementAvailable = MlmDistributorPeer::doSelectOne($c);
+
+                if ($placementAvailable) {
+                    print_r("==placement position not available=>".$counter.":".$userName.":".$placementDistCode.":".$placementPosition."<br>");
+                    break;
+                }
+            }
+
+            $c = new Criteria();
+            $c->add(AppUserPeer::USERNAME, $userName);
+            $exist = AppUserPeer::doSelectOne($c);
+
+            if ($exist) {
+                print_r("=username exist==>".$counter.":".$userName."<br>");
+                break;
+            }
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistCode);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|263774|%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+            if (!$uplineDistDB) {
+                print_r("===>invalid referrer:".$counter.":".$userName.":".$uplineDistCode."<br>");
+                break;
+            }
+
+            $uplineDistId = $uplineDistDB->getDistributorId();
+            $treeLevel = $uplineDistDB->getTreeLevel() + 1;
+            $packageDB = MlmPackagePeer::retrieveByPK(3);
+            $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                $app_user = new AppUser();
+                $app_user->setUsername($userName);
+                $app_user->setKeepPassword($password);
+                $app_user->setUserpassword($password);
+                $app_user->setKeepPassword2($password);
+                $app_user->setUserpassword2($password);
+                $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
+                $app_user->setStatusCode(Globals::STATUS_ACTIVE);
+                $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $app_user->save();
+
+                $mlm_distributor = new MlmDistributor();
+                $mlm_distributor->setDistributorCode($userName);
+                $mlm_distributor->setUserId($app_user->getUserId());
+                $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlm_distributor->setFullName($fullName);
+                $mlm_distributor->setNickname($userName);
+                //$mlm_distributor->setIc($this->getRequestParameter('ic'));
+                $mlm_distributor->setCountry('China (PRC)');
+                //$mlm_distributor->setAddress($this->getRequestParameter('address'));
+                //$mlm_distributor->setAddress2($this->getRequestParameter('address2'));
+                //$mlm_distributor->setCity($this->getRequestParameter('city'));
+                //$mlm_distributor->setState($this->getRequestParameter('state'));
+                //$mlm_distributor->setPostcode($this->getRequestParameter('zip'));
+                $mlm_distributor->setEmail($email);
+                //$mlm_distributor->setAlternateEmail($this->getRequestParameter('alt_email'));
+                //$mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
+                //$mlm_distributor->setGender($this->getRequestParameter('gender'));
+                /*if ($this->getRequestParameter('dob')) {
+                    list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
+                    $mlm_distributor->setDob("$y-$m-$d");
+                }*/
+                //$mlm_distributor->setBankName($this->getRequestParameter('bankName'));
+                //$mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
+                //$mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
+
+                $mlm_distributor->setTreeLevel($treeLevel);
+                $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+                $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+
+                //$mlm_distributor->setLeverage($this->getRequestParameter('leverage'));
+                //$mlm_distributor->setSpread($this->getRequestParameter('spread'));
+                //$mlm_distributor->setDepositCurrency($this->getRequestParameter('deposit_currency'));
+                //$mlm_distributor->setDepositAmount($this->getRequestParameter('deposit_amount'));
+                $mlm_distributor->setSignName($fullName);
+                $mlm_distributor->setSignDate(date("Y/m/d h:i:s A"));
+                //$mlm_distributor->setTermCondition($this->getRequestParameter('term_condition'));
+
+                $mlm_distributor->setRankId(3);
+                $mlm_distributor->setInitRankId(3);
+                $mlm_distributor->setRankCode("Platinum");
+                $mlm_distributor->setInitRankCode("Platinum");
+                $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
+                $mlm_distributor->setPackagePurchaseFlag("N");
+                $mlm_distributor->setRemark("loan account");
+                //$mlm_distributor->setRemark("loan account, Bandung Case (Steven)");
+                $mlm_distributor->setLoanAccount("Y");
+                $mlm_distributor->setHideGenealogy("N");
+
+                $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+//                $mlm_distributor->setNomineeName($this->getRequestParameter('nomineeName'));
+//                $mlm_distributor->setNomineeIc($this->getRequestParameter('nomineeIc'));
+//                $mlm_distributor->setNomineeRelationship($this->getRequestParameter('nomineeRelationship'));
+//                $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
+
+                $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_distributor->save();
+
+                $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
+                $mlm_distributor->setTreeStructure($treeStructure);
+                $mlm_distributor->save();
+
+                $sponsorDistPairingDB = MlmDistPairingPeer::retrieveByPK($mlm_distributor->getDistributorId());
+                if (!$sponsorDistPairingDB) {
+                    $sponsorDistPairingDB = new MlmDistPairing();
+                    $sponsorDistPairingDB->setDistId($mlm_distributor->getDistributorId());
+                    $sponsorDistPairingDB->setLeftBalance(0);
+                    $sponsorDistPairingDB->setRightBalance(0);
+                    $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                }
+                $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingDB->save();
+
+
+                $treeStructure = $treeUplineDistDB->getPlacementTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
+                $treeLevel = $treeUplineDistDB->getPlacementTreeLevel() + 1;
+                $mlm_distributor->setPlacementDatetime(date("Y/m/d h:i:s A"));
+                $mlm_distributor->setPlacementPosition($placementPosition);
+                //$mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
+                //$mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
+                $mlm_distributor->setPlacementTreeStructure($treeStructure);
+                $mlm_distributor->setPlacementTreeLevel($treeLevel);
+                $mlm_distributor->setTreeUplineDistId($treeUplineDistDB->getDistributorId());
+                $mlm_distributor->setTreeUplineDistCode($treeUplineDistDB->getDistributorCode());
+                $mlm_distributor->save();
+
+                $con->commit();
+
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeIndex2()
+    {
         return $this->redirect('/member/summary');
 
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "gao_group_90.xls";
