@@ -1183,7 +1183,7 @@ $(document).ready(function() {
                             <?php } ?>
                             <br>
                             <?php if ($culture == "cn") {?>
-                            <br><span style="color: #ff0000;">购买配套额度为100,000-499,000美金，则可享受 --- 2人次 :</span>
+                            <br><span style="color: #ff0000;">购买配套额度为100,000-499,000美金，则可享受 --- 1人次 :</span>
                             <ul style="list-style: circle">
                                 <li><span style="color: #ff0000; font-weight: bold;">1卡拉钻戒</span></li>
                                 <li><strong>4天/3夜五星级酒店住宿（高级客房)（双人床）</strong></li>
