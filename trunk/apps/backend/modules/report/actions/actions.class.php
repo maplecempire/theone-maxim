@@ -136,7 +136,7 @@ class reportActions extends sfActions
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
-        $c->setLimit(10000);
+        $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
