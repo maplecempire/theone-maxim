@@ -289,6 +289,14 @@ $(function(){
     $('#epointAmount').autoNumeric({
         mDec: 0
     });
+    $('#doAction').change(function(event){
+        event.preventDefault();
+        if ($(this).val() == "deduct_epoint") {
+            $("#tr_action").css("background-color", "red");
+        } else {
+            $("#tr_action").css("background-color", "");
+        }
+    });
 });
 
 function populateDgAddPanel() {
@@ -390,7 +398,7 @@ function populateDgAddPanel() {
             <td><input name="cp3" id="cp3" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
-        <tr>
+        <tr id="tr_action">
             <td>Action</td>
             <td>:</td>
             <td>
