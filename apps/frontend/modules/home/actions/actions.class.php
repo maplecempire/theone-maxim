@@ -341,7 +341,7 @@ class homeActions extends sfActions
 
     public function executeIndex()
     {
-        $$this->distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
     }
 
     public function executeIndex2()
