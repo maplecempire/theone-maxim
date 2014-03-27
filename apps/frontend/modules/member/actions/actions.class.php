@@ -1277,6 +1277,7 @@ class memberActions extends sfActions
         echo json_encode($arr);
         return sfView::HEADER_ONLY;
     }
+
     public function executePurchasePackageViaTree()
     {
         $dateUtil = new DateUtil();
