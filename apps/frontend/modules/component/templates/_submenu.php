@@ -34,7 +34,7 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
         </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
         <li>
             <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
         </li>
@@ -48,7 +48,7 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
         </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
             <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
         </li>
@@ -75,9 +75,11 @@ function blink(selector) {
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
         <?php } ?>
+        <?php if ($distDB->getNormalInvestor() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/pipsRebate"><span><?php echo __('Pips Rebate'); ?></span></a>
         </li>
+        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
@@ -192,6 +194,7 @@ function blink(selector) {
             ?></a>
         </li>
     </ul>
+    <br class="clear"><br>
     <!--<br class="clear"><br>
     <ul>
         <li class="menu_title"><?php /*echo __('ANNOUNCEMENT'); */?></li>
@@ -201,7 +204,7 @@ function blink(selector) {
     </ul>-->
     <!--<br class="clear"><br>-->
 
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
     <ul>
         <li class="menu_title"><?php echo __('FUND MANAGEMENT'); ?></li>
 
