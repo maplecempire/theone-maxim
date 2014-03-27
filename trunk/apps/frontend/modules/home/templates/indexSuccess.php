@@ -342,7 +342,9 @@ var popIndex = 1;
             $sf_user->setAttribute(Globals::FIRST_TIME_POP_UP, false)
         ?>
         //centerPopup();
+        <?php if ($distributor->getNormalInvestor() == "N") { ?>
         loadPopup();
+        <?php } ?>
         <?php } ?>
         $(".page_link").click(function(event){
             event.preventDefault();
