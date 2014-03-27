@@ -302,6 +302,30 @@ function populateDgAddPanel() {
     $("#dgAddPanelEmail").val(data.email);
     //$("#remark").val("TRANSFER FROM COMPANY");
     $("#epointAmount").val("0").focus().select();
+    $(".indicator").show();
+    $.ajax({
+        type : 'POST',
+        url : "<?php echo url_for('finance/enquiryCP') ?>",
+        dataType : 'json',
+        cache: false,
+        data: {
+            distId : $('#dgAddPanelId').val()
+        },
+        success : function(data) {
+            if (data.error) {
+                alert(data.errorMsg);
+            } else {
+                $(".indicator").hide();
+                $("#cp1").val(data.cp1);
+                $("#cp2").val(data.cp2);
+                $("#cp3").val(data.cp3);
+                $("#rp").val(data.rp);
+            }
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Server connection error.");
+        }
+    });
 }
 </script>
 <div id="dgAddPanel" style="display:none; width: 850px" title="CP1 Transfer">
@@ -343,18 +367,27 @@ function populateDgAddPanel() {
             <td>Total CP1</td>
             <td>:</td>
             <td><input name="epointAmount" id="epointAmount" class="text ui-widget-content ui-corner-all" size="25"/></td>
+            <td style="color: blue; font-weight: bold;">CP1<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td>:</td>
+            <td><input name="cp1" id="cp1" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>
             <td>Remark</td>
             <td>:</td>
             <td><input name="remark" id="remark" value="TRANSFER FROM COMPANY" class="text ui-widget-content ui-corner-all" size="25"/></td>
+            <td style="color: blue; font-weight: bold;">CP2<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td>:</td>
+            <td><input name="cp2" id="cp2" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>
             <td>Internal Remark</td>
             <td>:</td>
             <td><input name="internalRemark" id="internalRemark" class="text ui-widget-content ui-corner-all" size="25"/></td>
+            <td style="color: blue; font-weight: bold;">CP3<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td>:</td>
+            <td><input name="cp3" id="cp3" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>
@@ -368,6 +401,9 @@ function populateDgAddPanel() {
                     <option value="deduct_epoint">Deduct CP1</option>
                 </select>
             </td>
+            <td style="color: blue; font-weight: bold;">RP<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td>:</td>
+            <td><input name="rp" id="rp" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>

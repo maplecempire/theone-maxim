@@ -328,6 +328,26 @@ class financeActions extends sfActions
     {
     }
 
+    public function executeEnquiryCP()
+    {
+        $distId = $this->getRequestParameter('distId');
+
+        $cp1 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+        $cp2 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+        $cp3 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $rp = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
+
+        $arr = "";
+        $arr = array(
+            'cp1' => $cp1,
+            'cp2' => $cp2,
+            'cp3' => $cp3,
+            'rp' => $rp
+        );
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoEpointTransfer()
     {
         $distId = $this->getRequestParameter('distId');

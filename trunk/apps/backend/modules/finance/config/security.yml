@@ -42,6 +42,10 @@ epointTransfer:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_EPOINT_TRANSFER ]]
 
+enquiryCP:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_EPOINT_TRANSFER ]]
+
 epointPurchase:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_EPOINT_PURCHASE ]]
