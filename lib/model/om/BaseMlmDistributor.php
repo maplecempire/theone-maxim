@@ -413,7 +413,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 
 	
-	protected $prefer_language = 'EN';
+	protected $prefer_language = 'en';
+
+
+	
+	protected $normal_investor = '';
 
 	
 	protected $alreadyInSave = false;
@@ -1238,6 +1242,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->prefer_language;
+	}
+
+	
+	public function getNormalInvestor()
+	{
+
+		return $this->normal_investor;
 	}
 
 	
@@ -2655,9 +2666,23 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->prefer_language !== $v || $v === 'EN') {
+		if ($this->prefer_language !== $v || $v === 'en') {
 			$this->prefer_language = $v;
 			$this->modifiedColumns[] = MlmDistributorPeer::PREFER_LANGUAGE;
+		}
+
+	} 
+	
+	public function setNormalInvestor($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->normal_investor !== $v || $v === '') {
+			$this->normal_investor = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::NORMAL_INVESTOR;
 		}
 
 	} 
@@ -2870,11 +2895,13 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->prefer_language = $rs->getString($startcol + 101);
 
+			$this->normal_investor = $rs->getString($startcol + 102);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 102; 
+						return $startcol + 103; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3317,6 +3344,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 101:
 				return $this->getPreferLanguage();
 				break;
+			case 102:
+				return $this->getNormalInvestor();
+				break;
 			default:
 				return null;
 				break;
@@ -3429,6 +3459,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[99] => $this->getMoneytracCustomerId(),
 			$keys[100] => $this->getMoneytracUsername(),
 			$keys[101] => $this->getPreferLanguage(),
+			$keys[102] => $this->getNormalInvestor(),
 		);
 		return $result;
 	}
@@ -3750,6 +3781,9 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 101:
 				$this->setPreferLanguage($value);
 				break;
+			case 102:
+				$this->setNormalInvestor($value);
+				break;
 		} 	}
 
 	
@@ -3859,6 +3893,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[99], $arr)) $this->setMoneytracCustomerId($arr[$keys[99]]);
 		if (array_key_exists($keys[100], $arr)) $this->setMoneytracUsername($arr[$keys[100]]);
 		if (array_key_exists($keys[101], $arr)) $this->setPreferLanguage($arr[$keys[101]]);
+		if (array_key_exists($keys[102], $arr)) $this->setNormalInvestor($arr[$keys[102]]);
 	}
 
 	
@@ -3968,6 +4003,7 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID)) $criteria->add(MlmDistributorPeer::MONEYTRAC_CUSTOMER_ID, $this->moneytrac_customer_id);
 		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_USERNAME)) $criteria->add(MlmDistributorPeer::MONEYTRAC_USERNAME, $this->moneytrac_username);
 		if ($this->isColumnModified(MlmDistributorPeer::PREFER_LANGUAGE)) $criteria->add(MlmDistributorPeer::PREFER_LANGUAGE, $this->prefer_language);
+		if ($this->isColumnModified(MlmDistributorPeer::NORMAL_INVESTOR)) $criteria->add(MlmDistributorPeer::NORMAL_INVESTOR, $this->normal_investor);
 
 		return $criteria;
 	}
@@ -4199,6 +4235,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setMoneytracUsername($this->moneytrac_username);
 
 		$copyObj->setPreferLanguage($this->prefer_language);
+
+		$copyObj->setNormalInvestor($this->normal_investor);
 
 
 		$copyObj->setNew(true);
