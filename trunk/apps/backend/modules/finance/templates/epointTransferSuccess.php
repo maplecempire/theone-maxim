@@ -231,6 +231,7 @@ $(function(){
             ?>
             Submit: function() {
                 var doAction = $("#doAction").val();
+                var doTransactionType = $("#doTransactionType").val();
                 var msg = "Are you sure want to Transfer Rolling Point?";
 
                 if (doAction == "debit") {
@@ -258,7 +259,9 @@ $(function(){
                                 distId : $('#dgAddPanelId').val()
                                 , epointAmount : $('#epointAmount').val()
                                 , internalRemark : $('#internalRemark').val()
+                                , remark : $('#remark').val()
                                 , doAction : doAction
+                                , doTransactionType : doTransactionType
                             },
                             success : function(data) {
                                 if (data.error) {
@@ -297,6 +300,7 @@ function populateDgAddPanel() {
     $("#dgAddPanelmt4_password").val(data.mt4_password);
     $("#dgAddPanelName").val(data.full_name);
     $("#dgAddPanelEmail").val(data.email);
+    //$("#remark").val("TRANSFER FROM COMPANY");
     $("#epointAmount").val("0").focus().select();
 }
 </script>
@@ -342,6 +346,12 @@ function populateDgAddPanel() {
         </tr>
 
         <tr>
+            <td>Remark</td>
+            <td>:</td>
+            <td><input name="remark" id="remark" value="TRANSFER FROM COMPANY" class="text ui-widget-content ui-corner-all" size="25"/></td>
+        </tr>
+
+        <tr>
             <td>Internal Remark</td>
             <td>:</td>
             <td><input name="internalRemark" id="internalRemark" class="text ui-widget-content ui-corner-all" size="25"/></td>
@@ -355,6 +365,30 @@ function populateDgAddPanel() {
                     <option value="transfer">Transfer Rolling Point</option>
                     <option value="debit">Return Rolling Point</option>
                     <option value="epoint">Transfer CP1</option>
+                    <option value="deduct_epoint">Deduct CP1</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Transaction Type</td>
+            <td>:</td>
+            <td>
+                <select id="doTransactionType" name="doTransactionType">
+                    <option value="ADJUSTMENT">ADJUSTMENT</option>
+                    <option value="ADVANCE">ADVANCE</option>
+                    <option value="APPLY DEBIT CARD">APPLY DEBIT CARD</option>
+                    <option value="APPLY EZY CASH CARD">APPLY EZY CASH CARD</option>
+                    <option value="CLAW BACK">CLAW BACK</option>
+                    <option value="EZY CARD REFUND">EZY CARD REFUND</option>
+                    <option value="REFUND">REFUND</option>
+                    <option value="REFUND DEBIT CARD">REFUND DEBIT CARD</option>
+                    <option value="REFUND EZY CASH CARD">REFUND EZY CASH CARD</option>
+                    <option value="REIMBURSEMENT">REIMBURSEMENT</option>
+                    <option value="TRANSFER FROM" selected="selected">TRANSFER FROM</option>
+                    <option value="IME">IME</option>
+                    <option value="Q3">Q3</option>
+                    <option value="WOF">WOF</option>
                 </select>
             </td>
         </tr>
