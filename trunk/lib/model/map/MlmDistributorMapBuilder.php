@@ -236,5 +236,7 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('PREFER_LANGUAGE', 'PreferLanguage', 'string', CreoleTypes::VARCHAR, false, 10);
 
+		$tMap->addColumn('NORMAL_INVESTOR', 'NormalInvestor', 'string', CreoleTypes::VARCHAR, true, 1);
+
 	} 
 } 

@@ -199,7 +199,7 @@ function blink(selector) {
             <a href="/member/announcementList"><span><?php /*echo __('Announcement List'); */?></span></a>
         </li>
     </ul>-->
-    <br class="clear"><br>
+    <!--<br class="clear"><br>-->
 
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
     <ul>

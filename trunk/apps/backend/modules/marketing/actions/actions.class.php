@@ -2098,10 +2098,28 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     {
         $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
 
-        //todo update mt4
-        //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-        //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
-        $tbl_distributor->setFullName($this->getRequestParameter('fullname'));
+        $editFullname = $this->getRequestParameter('editFullName');
+
+        if ($editFullname == "Y") {
+            $remark = $tbl_distributor->getRemark();
+            if ($remark != "") {
+                $remark .= ", ";
+            }
+            $remark .= "renamed from ".$tbl_distributor->getFullName();
+            $tbl_distributor->setRemark($remark);
+            $tbl_distributor->setFullName($this->getRequestParameter('fullname'));
+
+            $c = new Criteria();
+            $c->add(MlmPackageContractPeer::DIST_ID, $tbl_distributor->getDistributorId());
+            $mlmPackageContracts = MlmPackageContractPeer::doSelect($c);
+
+            foreach ($mlmPackageContracts as $mlmPackageContract) {
+                $mlmPackageContract->setFullName($this->getRequestParameter('fullname'));
+                $mlmPackageContract->setInitialSignature($this->getRequestParameter('fullname'));
+                $mlmPackageContract->setStatusCode("ACTIVE");
+                $mlmPackageContract->save();
+            }
+        }
         $tbl_distributor->setNickname($this->getRequestParameter('nickname'));
         $tbl_distributor->setIc($this->getRequestParameter('ic'));
         $tbl_distributor->setCountry($this->getRequestParameter('country'));

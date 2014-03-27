@@ -144,6 +144,16 @@ $(function(){
         $("#dgAddPanelId").val("");
         $("#dgAddPanel").dialog("open");
     });
+
+    $("#checkboxFullName").click(function(){
+        if ($("#checkboxFullName").is(':checked')) {
+            $("#dgAddPanelName").attr("readonly", false);
+            $("#dgAddPanelName").css("color", "");
+        } else {
+            $("#dgAddPanelName").attr("readonly", true);
+            $("#dgAddPanelName").css("color", "#686868");
+        }
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -340,6 +350,12 @@ $(function(){
 
             Submit: function() {
                 waiting();
+
+                var editFullName = "N";
+                if ($("#checkboxFullName").is(':checked')) {
+                    editFullName = "Y";
+                }
+
                 $.ajax({
                     type : 'POST',
                     url : "<?php echo url_for('marketing/doSaveDist') ?>",
@@ -367,6 +383,7 @@ $(function(){
                         , bank_swift_code : $('#dgAddPanelbank_swift_code').val()
                         , visa_debit_card : $('#dgAddPanelvisa_debit_card').val()
                         , status : $('#dgAddPanelStatus').val()
+                        , editFullName : editFullName
                     },
                     success : function(data) {
                         if (data.error) {
@@ -393,6 +410,10 @@ $(function(){
 
 function populateDgAddPanel() {
     $("#dgMsg").hide();
+    $("#checkboxFullName").prop('checked', false);
+    $("#dgAddPanelName").attr("readonly", true);
+    $("#dgAddPanelName").css("color", "#686868");
+
     if ($("#dgAddPanelId").val() == "") {
         $("#dgAddPanelUserName").removeAttr("readonly");
         $("#dgAddPanelUserName").val("");
@@ -472,7 +493,7 @@ function populateDgAddPanel() {
         <tr>
             <td>Name</td>
             <td>:</td>
-            <td><input type="text" id="dgAddPanelName" class="text ui-widget-content ui-corner-all" size="25"></td>
+            <td><input type="text" id="dgAddPanelName" readonly="readonly" class="text ui-widget-content ui-corner-all" size="20"><input type="checkbox" id="checkboxFullName" value="1"></td>
             <td>Nick Name</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelNickName" class="text ui-widget-content ui-corner-all" size="25"></td>
