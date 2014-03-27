@@ -12,7 +12,53 @@ $(function() {
             icons: {
                 primary: "ui-icon-circle-check"
             }
-        })
+        });
+    $("#btnOpen").button({
+            icons: {
+                primary: "ui-icon-circle-check"
+            }
+        }).click(function(event){
+           event.preventDefault();
+           $.ajax({
+                    type : 'POST',
+                    url : "<?php echo url_for("/marketing/doUpdateHideGenealogy"); ?>",
+                    dataType : 'json',
+                    cache: false,
+                    data: {
+                        distId : "<?php echo $mlmCustomerEnquiry->getDistributorId(); ?>"
+                        , toHideGenealogy : "N"
+                    },
+                    success : function(data) {
+                        alert("Update Successful");
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Your login attempt was not successful. Please try again.");
+                    }
+                });
+        });
+    $("#btnClose").button({
+            icons: {
+                primary: "ui-icon-circle-check"
+            }
+        }).click(function(event){
+           event.preventDefault();
+           $.ajax({
+                    type : 'POST',
+                    url : "<?php echo url_for("/marketing/doUpdateHideGenealogy"); ?>",
+                    dataType : 'json',
+                    cache: false,
+                    data: {
+                        distId : "<?php echo $mlmCustomerEnquiry->getDistributorId(); ?>"
+                        , toHideGenealogy : "Y"
+                    },
+                    success : function(data) {
+                        alert("Update Successful");
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Your login attempt was not successful. Please try again.");
+                    }
+                });
+        });
 });
 </script>
 
@@ -135,6 +181,8 @@ tinyMCE.init({
             </table>
             <hr/>
             <button id="btnSave">Save</button>
+            <button id="btnOpen">Open Genealogy</button>
+            <button id="btnClose">Close Genealogy</button>
         </div>
     </div>
 </div>
