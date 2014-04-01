@@ -76,7 +76,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-03-10 00:00:00";
-        $dateTo = "2014-03-25 00:00:00";
+        $dateTo = "2014-03-25 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("");
             $distDB->setBkkQualify2("");
@@ -143,7 +143,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-03-10 00:00:00";
-        $dateTo = "2014-03-25 00:00:00";
+        $dateTo = "2014-03-25 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");

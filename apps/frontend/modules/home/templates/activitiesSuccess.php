@@ -215,22 +215,56 @@ $culture = $sf_user->getCulture();
                 <div id="feedContent">
 
                     <a href="#">
+                        <div class="poptitle"><h3>SYS 2014</h3><br>
+                    </div>
+                    </a>
+                    <br><span style="font-weight: bold; font-style: italic;">Thursday, 10th April 2014 (Show Time 2.00pm – 10.00pm)</span>
+                    <br>
+                    <br>- Arrival of International Members (Hotel Check-in from 2pm onwards)
+                    <br>- Official Opening of Singapore Yacht Show
+                    <br>- Maxim Trader Presentation at Maxim Hospitality Lounge
+                    <br>- Maxim Welcome Yacht Party for International Members
+                    <br>
+                    <br><span style="font-weight: bold; font-style: italic;">Friday, 11th April 2014 (Show Time 2.00pm – 10.00pm)</span>
+                    <br>
+                    <br>- Full Day Hippo & Duck Tours with Lunch on Cheng Ho Cruise & Singapore Flyer
+                    <br>- Maxim Trader Presentation at Maxim Hospitality Lounge
+                    <br>- Maxim Party for VIP members & SYS VIP guests + MOU signing ceremony on Royal Albatross (Members who qualify for USD 100k package and above)
+                    <br>
+                    <br><span style="font-weight: bold; font-style: italic;">Saturday, 12th April 2014 (Show Time 2.00pm – 10.00pm)</span>
+                    <br>
+                    <br>- Universal Studios / SEA Aquarium / Adventure Cove Water Park
+                    <br>- Maxim Asia Road Show briefing with Leaders
+                    <br>- Maxim Private Lunch for VIP International Members hosted by CEO – Crystal Jade Premium (Members who qualify for USD 100k package and above)
+                    <br>- Exclusive Yacht viewing and 30mins sea trials for Maxim International Members
+                    <br>- Maxim Trader Presentation at Maxim Hospitality Lounge
+                    <br>
+                    <br>
+                    <br><span style="font-weight: bold; font-style: italic;">Sunday, 13th April 2014 (Show Time 2.00pm – 10.00pm)</span>
+                    <br>
+                    <br>- Maxim Trader Presentation at Maxim Hospitality Lounge
+                    <br>- Departure of International Members
+
+                    <div class="news_date">
+                    Posted on 01 April 2014
+                    </div>
+
+                    <div class="hr"></div>
+
+                    <a href="#">
                         <div class="poptitle"><h3>2014 February Calendar</h3><br>
                     </div>
                     </a>
                     <br>
 
                     <br><a href="/download/calendar?q=2014_FEBRUARY">Download 2014 February Calendar</a> (242KB PDF)
+
                     <div class="news_date">
                     Posted on 09 January 2014
                     </div>
 
                     <div class="hr"></div>
-
-                    <a href="#">
-                        <div class="poptitle"><h3>2014 January Calendar</h3><br>
-                    </div>
-                    </a>
+                    <div class="poptitle"><h3>2014 January Calendar</h3><br></div>
                     <br>
 
                     <br><a href="/download/calendar?q=2014_JANUARY">Download 2014 January Calendar</a> (315KB PDF)
