@@ -10,6 +10,39 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeDoRoiNoReturn()
+    {
+        $accountTypeArr = array(265754,265733,265734,265750,265738,265755,265756,265714,265751,265752,265753,265737,265736,265735,265726,265727,265749,265741,265740,265739);
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr, Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+        $idx = 1;
+        foreach ($distDBs as $distDB) {
+            print_r($idx++ . ":" . $distDB->getDistributorId() . "<br>");
+
+            $distDB->setPrincipleReturn("N");
+            $distDB->save();
+
+            /*$mlm_roi_dividend = new MlmRoiDividend();
+            $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
+            $mlm_roi_dividend->setIdx(1);
+            $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+            $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+            $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
+            $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
+            $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+            $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+            $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_roi_dividend->save();*/
+        }
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoSendEmail()
     {
         $c = new Criteria();
@@ -1722,6 +1755,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $c = new Criteria();
                     $c->add(MlmPipCsvPeer::STATUS_CODE, Globals::STATUS_PIPS_CSV_ACTIVE);
                     $c->add(MlmPipCsvPeer::FILE_ID, $mlmFileDownloadDB->getFileId());
+                    $c->setLimit(500);
                     $mlmPipsCsvDBs = MlmPipCsvPeer::doSelect($c);
 
                     //$c = new Criteria();
@@ -2144,6 +2178,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
         $tbl_user->setUserpassword($this->getRequestParameter('password'));
         $tbl_user->setUserpassword2($this->getRequestParameter('password2'));
+        $tbl_user->setStatusCode($this->getRequestParameter('status'));
 
         $tbl_user->save();
 
