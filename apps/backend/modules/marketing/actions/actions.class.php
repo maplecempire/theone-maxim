@@ -1766,8 +1766,9 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     //if ($mlmFundManagementRecord) {
                     //    $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
                     //}
-
+                    //print_r($totalCount."success<br>");
                     foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
+                        print_r("1<br>");
                         $totalVolume = $mlm_pip_csv->getVolume();
                         $mt4Id = $mlm_pip_csv->getLoginId();
                         $tradingMonth =  $mlm_pip_csv->getMonthTraded();
@@ -1782,10 +1783,16 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                         $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
 
                         //if ($existDistributor) {
+                        //print_r($mt4Id."<==<br>");
+                        var_dump($mlm_dist_mt4);
                         if ($mlm_dist_mt4) {
                             $index = 0;
-                            if ($mlm_dist_mt4->getDistId() < 0)
+                            if ($mlm_dist_mt4->getDistId() < 0) {
+                                $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
+                                $mlm_pip_csv->setRemarks("Invalid MT4 ID");
+                                $mlm_pip_csv->save();
                                 continue;
+                            }
                             //var_dump($mlm_dist_mt4->getDistId());
                             //var_dump("<br>");
                             $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
@@ -1965,12 +1972,16 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
                             $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_SUCCESS);
                             $mlm_pip_csv->save();
+                            //print_r("success<br>");
                         } else {
                             $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
                             $mlm_pip_csv->setRemarks("Invalid MT4 ID");
                             $mlm_pip_csv->save();
+                            //print_r("error<br>");
                         }
+                        //print_r("success<br>");
                     }
+                    //print_r("done<br>");
                     if ($totalCount <= 0) {
                         $mlmFileDownloadDB->setStatusCode(Globals::STATUS_COMPLETE);
                         $mlmFileDownloadDB->save();
@@ -1981,6 +1992,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $con->rollback();
                     throw $e;
                 }
+                //return sfView::HEADER_ONLY;
                 return $this->redirect('/marketing/pipsUpload?doAction=calc_pips');
             }
         }
