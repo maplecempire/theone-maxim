@@ -1755,7 +1755,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $c = new Criteria();
                     $c->add(MlmPipCsvPeer::STATUS_CODE, Globals::STATUS_PIPS_CSV_ACTIVE);
                     $c->add(MlmPipCsvPeer::FILE_ID, $mlmFileDownloadDB->getFileId());
-                    $c->setLimit(500);
+                    $c->setLimit(2000);
                     $mlmPipsCsvDBs = MlmPipCsvPeer::doSelect($c);
                     $totalCount = count($mlmPipsCsvDBs);
                     //$c = new Criteria();
