@@ -719,8 +719,20 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            $mt4ReloadFund = MlmMt4ReloadFundPeer::retrieveByPk($this->getRequestParameter('reload_id'));
-            $this->forward404Unless($mt4ReloadFund);
+            //$mt4ReloadFund = MlmMt4ReloadFundPeer::retrieveByPk($this->getRequestParameter('reload_id'));
+            //$this->forward404Unless($mt4ReloadFund);
+
+            $statusCodeArr = array(Globals::WITHDRAWAL_PENDING, Globals::WITHDRAWAL_PROCESSING);
+
+            $c = new Criteria();
+            $c->add(MlmMt4ReloadFundPeer::RELOAD_ID, $this->getRequestParameter('reload_id'));
+            $c->add(MlmMt4ReloadFundPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+            $mt4ReloadFund = MlmMt4ReloadFundPeer::doSelectOne($c);
+
+            if (!$mt4ReloadFund) {
+                $this->setFlash('errorMsg', "Invalid Action");
+                return $this->redirect('finance/reloadMt4Fund');
+            }
 
             $mt4ReloadFund->setRemarks($remarks);
             $mt4ReloadFund->setStatusCode($statusCode);
@@ -1855,8 +1867,17 @@ class financeActions extends sfActions
 
     public function executeUpdateWithdrawal()
     {
-        $mlm_ecash_withdraw = MlmEcashWithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
-        $this->forward404Unless($mlm_ecash_withdraw);
+        $statusCodeArr = array(Globals::WITHDRAWAL_PENDING, Globals::WITHDRAWAL_PROCESSING);
+
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::WITHDRAW_ID, $this->getRequestParameter('withdraw_id'));
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+        $mlm_ecash_withdraw = MlmEcashWithdrawPeer::doSelectOne($c);
+
+        if (!$mlm_ecash_withdraw) {
+            $this->setFlash('errorMsg', "Invalid Action");
+            return $this->redirect('finance/ecashWithdrawal');
+        }
 
         $statusCode = $this->getRequestParameter('status_code');
 
@@ -1960,8 +1981,20 @@ class financeActions extends sfActions
 
     public function executeUpdateCp3Withdrawal()
     {
-        $mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
-        $this->forward404Unless($mlm_ecash_withdraw);
+        //$mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
+        //$this->forward404Unless($mlm_ecash_withdraw);
+
+        $statusCodeArr = array(Globals::WITHDRAWAL_PENDING, Globals::WITHDRAWAL_PROCESSING);
+
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::WITHDRAW_ID, $this->getRequestParameter('withdraw_id'));
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+        $mlm_ecash_withdraw = MlmCp3WithdrawPeer::doSelectOne($c);
+
+        if (!$mlm_ecash_withdraw) {
+            $this->setFlash('errorMsg', "Invalid Action");
+            return $this->redirect('finance/cp3Withdrawal');
+        }
 
         $statusCode = $this->getRequestParameter('status_code');
 
