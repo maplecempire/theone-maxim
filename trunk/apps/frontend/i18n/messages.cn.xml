@@ -665,7 +665,7 @@
             <trans-unit><source>Upgrade Package</source><target>升级配套</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>升级配套记录表</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
-            <trans-unit><source>Downline Stats</source><target>下线统计简介</target></trans-unit>
+            <trans-unit><source>Downline Stats</source><target>团队统计简介</target></trans-unit>
             <trans-unit><source>Placement Genealogy</source><target>安置组织图</target></trans-unit>
             <trans-unit><source>Sponsor Genealogy</source><target>经营组织图</target></trans-unit>
             <trans-unit><source>Accumulate Group BV</source><target>小组累积业绩</target></trans-unit>
