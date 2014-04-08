@@ -6147,8 +6147,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                         if ($existDist) {
                             $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
                             if ($pos === false) { // note: three equal signs
-                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                return $this->redirect('/member/transferEpoint');
+                                $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                                if ($pos === false) { // note: three equal signs
+                                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
+                                    return $this->redirect('/member/transferEpoint');
+                                }
                             }
                         }
                     }
@@ -6401,8 +6404,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                         if ($existDist) {
                             $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
                             if ($pos === false) { // note: three equal signs
-                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                return $this->redirect('/member/transferCp2');
+                                $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                                if ($pos === false) { // note: three equal signs
+                                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
+                                    return $this->redirect('/member/transferCp2');
+                                }
                             }
                         }
                     }
@@ -6648,8 +6654,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                         if ($existDist) {
                             $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
                             if ($pos === false) { // note: three equal signs
-                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                return $this->redirect('/member/transferCp3');
+                                $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                                if ($pos === false) { // note: three equal signs
+                                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
+                                    return $this->redirect('/member/transferCp3');
+                                }
+                                //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
+                                //return $this->redirect('/member/transferCp3');
                             }
                         }
                     }
