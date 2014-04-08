@@ -28,7 +28,7 @@
                 //console.log(amount);
                 //console.log(epointBalance);
                 if (parseFloat(epointBalance) < (parseFloat(amount))) {
-                    alert("<?php echo __("In-sufficient E-Point")?>");
+                    error("<?php echo __("In-sufficient CP2")?>");
                     return false;
                 }
 
@@ -65,7 +65,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    alert("Invalid User Name.");
+                    error("Invalid User Name.");
                     $('#sponsorId').focus();
                     $("#sponsorName").html("");
                 } else {
@@ -74,7 +74,7 @@
                 }
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Your login attempt was not successful. Please try again.");
+                error("Your login attempt was not successful. Please try again.");
             }
         });
     }

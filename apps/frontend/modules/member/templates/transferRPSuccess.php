@@ -28,7 +28,7 @@
                 //console.log(amount);
                 //console.log(epointBalance);
                 if (parseFloat(epointBalance) < (parseFloat(amount))) {
-                    alert("<?php echo __("In-sufficient RP")?>");
+                    error("<?php echo __("In-sufficient RP")?>");
                     return false;
                 }
 
@@ -64,7 +64,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    alert("Invalid Member ID.");
+                    error("Invalid Member ID.");
                     $('#sponsorId').focus();
                     $("#sponsorName").html("");
                 } else {
@@ -73,7 +73,7 @@
                 }
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Your login attempt was not successful. Please try again.");
+                error("Your login attempt was not successful. Please try again.");
             }
         });
     }

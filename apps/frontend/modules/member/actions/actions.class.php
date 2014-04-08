@@ -4705,7 +4705,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($existDist) {
                     $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $isFound = true;
+                        }
                     } else {
                         $isFound = true;
                     }
