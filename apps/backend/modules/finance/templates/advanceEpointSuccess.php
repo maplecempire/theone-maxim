@@ -53,7 +53,7 @@ $(function() {
     });
 
     $('#total_epoint').autoNumeric({
-        mDec: 0
+        mDec: 2
     });
 });
 

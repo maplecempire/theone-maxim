@@ -33,7 +33,7 @@
         });
 
         $('#total_ecash').autoNumeric({
-            mDec: 0
+            mDec: 2
         });
 	});
 	
