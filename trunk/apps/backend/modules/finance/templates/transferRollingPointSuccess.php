@@ -298,7 +298,7 @@ $(function(){
     });
 
     $('#epointAmount').autoNumeric({
-        mDec: 0
+        mDec: 2
     });
 });
 

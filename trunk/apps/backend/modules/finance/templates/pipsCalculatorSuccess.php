@@ -53,7 +53,7 @@ $(function() {
     });
 
     $('#total_amount').autoNumeric({
-        mDec: 0
+        mDec: 2
     });
 
     $("#btnCalculate").button({

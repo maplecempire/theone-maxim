@@ -64,6 +64,49 @@ class reportActions extends sfActions
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeUpdateLeader()
+    {
+        $query = "select  distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure
+                , init_rank_code, rank_code, remark, abfx_remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+                    from mlm_distributor
+                where
+                    bkk_qualify_1 != '' or
+                    bkk_qualify_2 != '' or bkk_qualify_3 != ''";
+
+        $query2 = "select distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+                     from mlm_distributor where bkk_personal_sales >= 30000 order by bkk_personal_sales desc";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr["tree_structure"], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $distDB = MlmDistributorPeer::retrieveByPK($arr["distributor_id"]);
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+
+        print_r("executeUpdateLeader Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeSingaporeYachtShowLifestyleChallenge()
     {
         $c = new Criteria();
