@@ -996,6 +996,41 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='20'>1 Carat Diamond Challenge 1克拉钻石挑战赛 <br>(Period: 26th March – 30th April 2014)</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "13 April 2014";
+                ?>
+            </div>
+
+            <div id="page_20" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+
+
+                            <span style="color: #ff0000; font-weight: bold;">Sign up 100k package - entitle for 1 carat diamond (qualify 1 time only per UserID) <br>投资單項十萬美金既可获取此奬勵。（同一賬号户口只可获得一次）.</span>
+                            <br>
+                            <br>
+                            <span style="color: #ff0000; font-weight: bold;">Sponsor 2 x 100k package - entitled to 1 carat diamond (qualify 1 time only per UserID) <br>直接推荐两位直線10萬美金，將合格一卡拉＂鑽石＂（同一賬号户口只习获得一次）.</span>
+                            <br>
+                            <br>
+                            <strong>HURRY, LAST Chance to win yourself a 1 Carat Diamond 最后的机会为自己赢得一颗1克拉的钻石</strong>
+                            <br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='19'>Extend the SYS promo to 12 midnight of March 25th, 2014</a>
             </div>
             <div class="news_date">
@@ -1005,7 +1040,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_19" class="news_desc" style="text-align: left;">
+            <div id="page_19" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1052,7 +1087,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_18" class="news_desc" style="text-align: left;">
+            <div id="page_18" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1085,13 +1120,13 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                <a href='#' class="page_link" ref='15'>新加坡国际游艇展-优惠计划</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='15'>新加坡国际游艇展-优惠计划</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "kr") {?>
-                <a href='#' class="page_link" ref='15'>싱가포르 요트 쇼 라이프스타일 인센티브</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='15'>싱가포르 요트 쇼 라이프스타일 인센티브</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "jp") {?>
-                <a href='#' class="page_link" ref='15'>ガポール・ヨットショー・ライフスタイル・インセンティブ</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='15'>ガポール・ヨットショー・ライフスタイル・インセンティブ</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else {?>
-                <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a><!--<img src="/images/new_icon.gif">-->
                 <?php } ?>
             </div>
             <div class="news_date">
@@ -1101,7 +1136,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_15" class="news_desc" style="text-align: left;">
+            <div id="page_15" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1322,13 +1357,13 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                    <a href='#' class="page_link" ref='16'>新加坡国际游艇展挑战 <br>(期限：10th – 20th 3月 2014)</a><img src="/images/new_icon.gif">
+                    <a href='#' class="page_link" ref='16'>新加坡国际游艇展挑战 <br>(期限：10th – 20th 3月 2014)</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "kr") {?>
-                    <a href='#' class="page_link" ref='16'>싱가폴 요트쇼 라이프 스타일 챌린지 <br>(기간 : 2014년 3월 10일 ~ 20일)</a><img src="/images/new_icon.gif">
+                    <a href='#' class="page_link" ref='16'>싱가폴 요트쇼 라이프 스타일 챌린지 <br>(기간 : 2014년 3월 10일 ~ 20일)</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "jp") {?>
-                <a href='#' class="page_link" ref='16'>シンガポールヨットショー・ライフスタイルチャレンジ <br>（期間　2014年3月10〜20日）</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='16'>シンガポールヨットショー・ライフスタイルチャレンジ <br>（期間　2014年3月10〜20日）</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else {?>
-                <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a><!--<img src="/images/new_icon.gif">-->
                 <?php }?>
             </div>
             <div class="news_date">
@@ -1338,7 +1373,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_16" class="news_desc" style="text-align: left;">
+            <div id="page_16" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1481,13 +1516,13 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                <a href='#' class="page_link" ref='17'>BMW X6挑战大奖 <br>(期限：3月10号 –  5月31号2014)</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='17'>BMW X6挑战大奖 <br>(期限：3月10号 –  5月31号2014)</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "kr") {?>
-                    <a href='#' class="page_link" ref='17'>BMW X6 챌린지 <br>(기간 : 2014년 3월 10일 ~ 5월 31일)</a><img src="/images/new_icon.gif">
+                    <a href='#' class="page_link" ref='17'>BMW X6 챌린지 <br>(기간 : 2014년 3월 10일 ~ 5월 31일)</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else if ($culture == "jp") {?>
-                    <a href='#' class="page_link" ref='17'>BMW X6　チャレンジ <br>（期間：２０１４年3月１０〜３１日）</a><img src="/images/new_icon.gif">
+                    <a href='#' class="page_link" ref='17'>BMW X6　チャレンジ <br>（期間：２０１４年3月１０〜３１日）</a><!--<img src="/images/new_icon.gif">-->
                 <?php } else {?>
-                <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a><!--<img src="/images/new_icon.gif">-->
                 <?php } ?>
             </div>
             <div class="news_date">
@@ -1497,7 +1532,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_17" class="news_desc" style="text-align: left;">
+            <div id="page_17" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
