@@ -667,6 +667,8 @@ ul, ol {
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/email/IME_5speakers_13.07.2013_E.jpg"><img width="582" src="/images/email/IME_5speakers_13.07.2013_E.jpg" alt="" title="IME MACAU @ 2013" class="aligncenter size-full wp-image-162"></a></p>
             <?php } ?>
             <div class="hr2"></div>
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/most_trusted_forex_company.jpg"><img width="582" src="/images/201403/most_trusted_forex_company.jpg" alt="" title="The most trusted Forex Company Award By JRJ .COM" class="aligncenter size-full wp-image-162"></a></p>
+            <div class="hr2"></div>
             <div id="banner">
                 <ol class="slides" style="position: relative; overflow: hidden;">
                     <li class="slide-content hide"
@@ -1012,10 +1014,10 @@ $(document).ready(function() {
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
 
 
-                            <span style="color: #ff0000; font-weight: bold;">Sign up 100k package - entitle for 1 carat diamond (qualify 1 time only per UserID) <br>投资單項十萬美金既可获取此奬勵。（同一賬号户口只可获得一次）.</span>
+                            <span style="color: #ff0000; font-weight: bold;">Sign up 100k package - entitle for 1 carat diamond <br>投资單項十萬美金既可获取此奬勵。</span>
                             <br>
                             <br>
-                            <span style="color: #ff0000; font-weight: bold;">Sponsor 2 x 100k package - entitled to 1 carat diamond (qualify 1 time only per UserID) <br>直接推荐两位直線10萬美金，將合格一卡拉＂鑽石＂（同一賬号户口只习获得一次）.</span>
+                            <span style="color: #ff0000; font-weight: bold;">Sponsor 2 x 100k package - entitled to 1 carat diamond <br>直接推荐两位直線10萬美金，將合格一卡拉＂鑽石＂</span>
                             <br>
                             <br>
                             <strong>HURRY, LAST Chance to win yourself a 1 Carat Diamond 最后的机会为自己赢得一颗1克拉的钻石</strong>
