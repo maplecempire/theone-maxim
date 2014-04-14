@@ -1,0 +1,100 @@
+http://localhost:8087/backend.php/report/resetReport
+http://localhost:8087/backend.php/report/test
+http://localhost:8087/backend.php/report/test
+http://localhost:8087/backend.php/report/resetReport2
+http://localhost:8087/backend.php/report/test2
+http://localhost:8087/backend.php/report/test2
+
+
+
+ SELECT dist.distributor_code, dist.email, dist.full_name, dist.contact, dist.country
+        ,dist.active_datetime , package.price
+        FROM maxim.mlm_distributor dist
+            LEFT JOIN maxim.mlm_package package ON package.package_id = dist.rank_id
+WHERE dist.loan_account = 'N'
+                            AND dist.from_abfx = 'N'
+AND package.price >= 10000 and package.price <= 10000
+AND dist.active_datetime >= '2013-10-22 00:00:00' AND dist.active_datetime <= '2013-12-31 23:59:59'
+order by dist.active_datetime
+
+
+
+
+ SELECT dist.distributor_code, dist.email, dist.full_name, dist.contact, dist.country
+        ,dist.active_datetime , package.price, remark
+        FROM maxim.mlm_distributor dist
+            LEFT JOIN maxim.mlm_package package ON package.package_id = dist.rank_id
+WHERE dist.loan_account = 'N'
+                            AND dist.from_abfx = 'N'
+AND package.price > 10000
+AND dist.active_datetime >= '2013-10-22 00:00:00' AND dist.active_datetime <= '2013-12-31 23:59:59'
+order by dist.active_datetime
+
+
+
+SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.active_datetime >= '2013-10-22 00:00:00' AND newDist.active_datetime <= '2013-12-31 23:59:59' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND history.created_on >= '2013-10-22 00:00:00' AND history.created_on <= '2013-12-31 23:59:59' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
+                    HAVING SUB_TOTAL >= 40000
+                        ORDER BY 3 DESC
+
+
+
+
+
+
+ALTER TABLE `mlm_distributor` ADD `bkk_package_purchase` DECIMAL( 12, 2 ) NULL DEFAULT '0',
+ADD `bkk_qualify_1` VARCHAR( 10 ) NULL DEFAULT 'N',
+ADD `bkk_qualify_2` VARCHAR( 10 ) NULL DEFAULT 'N',
+ADD `bkk_personal_sales` DECIMAL( 12, 2 ) NULL DEFAULT '0',
+ADD `bkk_qualify_3` VARCHAR( 10 ) NULL DEFAULT 'N'
+
+ALTER TABLE `mlm_distributor` ADD `bkk_status` VARCHAR( 10 ) NULL DEFAULT 'PENDING'
+
+
+
+
+select distributor_code, email, full_name, contact, country, active_datetime, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+ from mlm_distributor where bkk_qualify_1 = 'Y' or
+bkk_qualify_2 = 'Y' or bkk_qualify_3 = 'Y' or bkk_personal_sales >= 30000
+
+
+
+update mlm_distributor set bkk_status = 'PENDING', bkk_package_purchase= null, bkk_qualify_1 = null,
+bkk_qualify_2 = null, bkk_qualify_3 = null, bkk_personal_sales = null
+
+
+select  distributor_code, email, full_name, contact, country, active_datetime
+, init_rank_code, rank_code, remark, abfx_remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+ from mlm_distributor
+where
+bkk_qualify_1 != '' or
+bkk_qualify_2 != '' or bkk_qualify_3 != ''
+
+select distributor_code, email, full_name, contact, country, active_datetime, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+ from mlm_distributor where bkk_personal_sales >= 30000 order by bkk_personal_sales desc
