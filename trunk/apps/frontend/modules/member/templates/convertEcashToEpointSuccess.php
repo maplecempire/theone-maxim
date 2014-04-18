@@ -43,7 +43,7 @@ $(function() {
         $("#epointConvertedAmount").val(convertedAmount);
     });
     $('#epointConvertedAmount').autoNumeric({
-        mDec: 0
+        mDec: 2
     });
 });
 </script>
@@ -157,7 +157,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('CP1 Amount'); ?></td>
+                    <td><?php echo __('CP2 Amount'); ?></td>
                     <td>
                         <input name="epointAmount" id="epointAmount" tabindex="3"/>
                         <!--<select name="epointAmount" id="cbo_epointAmount" tabindex="2">
