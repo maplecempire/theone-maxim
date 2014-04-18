@@ -998,6 +998,92 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='21'>Easter schedule</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "17 April 2014";
+                ?>
+            </div>
+
+            <div id="page_21" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="width:630px;font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                        <tbody>
+                            <tr>
+                              <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse" valign="top" width="699">
+                                <p>Dear Traders,</p>
+
+                                <p>Maxim would like to inform you that on Friday 18th of April certain instruments will be closed for trading during the U.S. trading session due to Good <span class="aBn" data-term="goog_1601317888" tabindex="0"><span class="aQJ">Friday</span></span>.</p>
+
+                                <p>Please find below the list of the affected instruments.</p>
+                                <table cellpadding="5" cellspacing="5">
+                                  <tbody>
+                                    <tr bgcolor="#434343">
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse"><strong>Asset class</strong></td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse"><strong>Instrument</strong></td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse"><strong>Good Friday 18th of April</strong></td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse"><strong>Easter <span class="aBn" data-term="goog_1601317889" tabindex="0"><span class="aQJ">Monday 21st of April</span></span></strong></td>
+                                    </tr>
+                                    <tr bgcolor="#EEEEEE">
+                                      <td align="center" style="border-collapse:collapse">FOREX</td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse">All Currency Pairs</td>
+                                      <td align="center" style="border-collapse:collapse">Open </td>
+                                      <td align="center" style="border-collapse:collapse">Open</td>
+                                    </tr>
+                                    <tr bgcolor="#EEEEEE">
+                                      <td align="center" style="border-collapse:collapse">SHARE CFDs</td>
+                                      <td align="center" style="border-collapse:collapse"><table cellpadding="5" cellspacing="5">
+                                        <tbody>
+                                          <tr>
+                                            <td style="border-collapse:collapse" align="center">US Shares</td>
+                                            </tr>
+                                          <tr>
+                                            <td style="border-collapse:collapse" align="center">UK Shares</td>
+                                            </tr>
+                                          </tbody>
+                                        </table></td>
+                                      <td align="center" style="border-collapse:collapse">
+                                          <table cellpadding="5" cellspacing="5">
+                                        <tbody>
+                                          <tr>
+                                            <td style="border-collapse:collapse" align="center">Closed</td>
+                                            </tr>
+                                          <tr>
+                                            <td style="border-collapse:collapse" align="center">Closed</td>
+                                            </tr>
+                                          </tbody>
+                                        </table></td>
+                                      <td align="center" style="border-collapse:collapse"><table cellpadding="5" cellspacing="5">
+                                        <tbody>
+                                          <tr>
+                                            <td align="center" style="border-collapse:collapse">Open</td>
+                                            </tr>
+                                          <tr>
+                                            <td align="center" style="border-collapse:collapse">Open</td>
+                                            </tr>
+                                          </tbody>
+                                        </table></td>
+                                    </tr>
+                                    <tr bgcolor="#F9F9F9">
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse">METAL SPOT</td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse">XAU/USD &amp; XAG/USD </td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse">Closed</td>
+                                      <td align="center" bgcolor="#EEEEEE" style="border-collapse:collapse">Open </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              <p>*Please be advised that on holidays a low trading volume and illiquidity; high spreads and volatility in markets are expected</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='20'>1 Carat Diamond Challenge 1克拉钻石挑战赛 <br>(Period: 26th March – 30th April 2014)</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
