@@ -36,7 +36,7 @@ class financeActions extends sfActions
             $mlmRoiDividend = MlmRoiDividendPeer::doSelectOne($c);
 
             if ($mlmRoiDividend) {
-                $mlmRoiDividend->setDistributorId($mlmRoiDividend->getDistributorId() * -1);
+                $mlmRoiDividend->setDistId($mlmRoiDividend->getDistId() * -1);
                 $mlmRoiDividend->save();
             } else {
                 print_r("<br>====================".$resultArr['mt4_user_name'].":".$resultArr['idx']);
