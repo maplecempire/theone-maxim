@@ -14,6 +14,45 @@ class reportActions extends sfActions
     {
         $this->resultList = $this->findPersonalSalesList(null, "2014-03-10 00:00:00", "2014-05-31 00:00:00", null);
     }
+    public function executeUpdateLeaderId()
+    {
+        $query = "SELECT SUM(CREDIT-DEBIT) AS SUM, commission.dist_id
+                    , dist.distributor_code, dist.full_name, dist.tree_structure
+                FROM mlm_dist_commission_ledger commission
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = commission.dist_id
+                    where commission.commission_type IN ('CREDIT_REFUND','DRB','GDB','PIPS_BONUS')
+            group by commission.dist_id order by 1 desc LIMIT 300";
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr["tree_structure"], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+
+            $distDB = MlmDistributorPeer::retrieveByPK($arr["dist_id"]);
+            $distDB->setLeaderId($leader);
+            $distDB->save();
+        }
+
+        print_r("<br>UpdateLeaderId");
+        return sfView::HEADER_ONLY;
+    }
     public function executeResetReport()
     {
         $query = "update mlm_distributor set bkk_status = 'PENDING', bkk_package_purchase= null, bkk_qualify_1 = null,
