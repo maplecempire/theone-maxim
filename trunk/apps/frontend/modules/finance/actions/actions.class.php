@@ -24,8 +24,9 @@ class financeActions extends sfActions
 //        $bonusService->contraDebitAccountByEpoint(266510, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(266497, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccountByEpoint(266508, "CONTRA BY CP1", 0);
+        $bonusService->contraDebitAccountByEpoint(266498, "CONTRA BY CP1", 0);
 //        $bonusService->contraDebitAccount(255792, "CONTRA BY CP2", 0);
-        $bonusService->contraDebitAccount(260581, "CONTRA BY CP2", 0);
+//        $bonusService->contraDebitAccount(260581, "CONTRA BY CP2", 0);
 
         print_r("Done");
         return sfView::HEADER_ONLY;
@@ -399,7 +400,7 @@ class financeActions extends sfActions
                 print_r("<br>");
             }
 
-            /*$c = new Criteria();
+            $c = new Criteria();
             $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $distDB->getDistributorId());
             $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, "DRB");
             $c->addAscendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
@@ -414,7 +415,7 @@ class financeActions extends sfActions
                 $commissionLedger->save();
                 print_r("commission balance=".$balance);
                 print_r("<br>");
-            }*/
+            }
         }
 
         return sfView::HEADER_ONLY;
