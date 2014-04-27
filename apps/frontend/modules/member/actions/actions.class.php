@@ -7932,7 +7932,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 254911);
+                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1824);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->setOffset($this->getRequestParameter('q') * $queryRecord);
                     $c->setLimit($queryRecord);
@@ -7949,8 +7949,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                             continue;
 
                         $distId = $mlmDistPairingDB->getDistId();
-                        $flushLimit = $mlmDistPairingDB->getFlushLimit();
-                        $legFlushLimit = $mlmDistPairingDB->getFlushLimit() * 10;
+                        $packageDB = MlmPackagePeer::retrieveByPK($dist->getRankId());
+
+                        $flushLimit = $packageDB->getDailyMaxPairing();
+                        $legFlushLimit = $packageDB->getDailyMaxPairing() * 10;
                         print_r("DistId ".$distId."<br>");
                         $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $currentDate);
                         $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $currentDate);
@@ -7958,6 +7960,18 @@ We look forward to your custom in the near future. Should you have any queries, 
                         if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
                             // requery for paring ledger
+
+                            // start paring bonus
+                            //$distributorDB = MlmDistributorPeer::retrieveByPK($distId);
+                            $pairingPercentage = $packageDB->getPairingBonus();
+                            $dailyMaxPairing = $packageDB->getDailyMaxPairing();
+                            if ($flushLimit != $dailyMaxPairing) {
+                                $mlmDistPairingDB->setFlushLimit($dailyMaxPairing);
+                                $mlmDistPairingDB->save();
+
+                                $flushLimit = $dailyMaxPairing;
+                                $legFlushLimit = $flushLimit * 10;
+                            }
 
                             $minBalance = $leftBalance;
                             $leftPairedPoint = $leftBalance;
@@ -7981,19 +7995,6 @@ We look forward to your custom in the near future. Should you have any queries, 
                             if ($leftBalance > 0 && $rightBalance > 0) {
                                 $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $leftPairedPoint);
                                 $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $rightPairedPoint);
-
-                                // start paring bonus
-                                $distributorDB = MlmDistributorPeer::retrieveByPK($distId);
-                                $packageDB = MlmPackagePeer::retrieveByPK($distributorDB->getRankId());
-
-                                $pairingPercentage = $packageDB->getPairingBonus();
-                                $dailyMaxPairing = $packageDB->getDailyMaxPairing();
-                                if ($flushLimit != $dailyMaxPairing) {
-                                    $mlmDistPairingDB->setFlushLimit($dailyMaxPairing);
-                                    $mlmDistPairingDB->save();
-
-                                    $flushLimit = $dailyMaxPairing;
-                                }
 
                                 $pairingBonusAmount = $minBalance * $pairingPercentage / 100;
                                 print_r("pairingBonusAmount =".$pairingBonusAmount."<br>");
@@ -9119,14 +9120,15 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
                                     $this->forward404Unless($packageDB);
 
+                                    $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
                                     $sponsorDistPairingDB->setLeftBalance($leftBalance);
                                     $sponsorDistPairingDB->setRightBalance($rightBalance);
-                                    $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
                                     $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 } else {
                                     $leftBalance = $sponsorDistPairingDB->getLeftBalance();
                                     $rightBalance = $sponsorDistPairingDB->getRightBalance();
                                 }
+                                //$sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
                                 $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
                                 $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
                                 $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
