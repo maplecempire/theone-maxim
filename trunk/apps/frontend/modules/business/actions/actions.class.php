@@ -192,7 +192,7 @@ class businessActions extends sfActions
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
 
         $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
-        $pairingPoint = 1000;
+        $pairingPoint = 100000;
         $level = 0;
         while ($level < 200) {
             //var_dump($uplineDistDB->getUplineDistId());
