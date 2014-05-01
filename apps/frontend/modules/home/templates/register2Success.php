@@ -26,17 +26,12 @@
     <meta http-equiv="Content-Language" content="en-US">
     <style type="text/css" media="screen">
     html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-        /*background: none repeat scroll 0 0 transparent;*/
-        /*border: 0 none;*/
-        /*font-size: 100%;*/
-        /*margin: 0;*/
-        /*outline: 0 none;*/
-        /*padding: 0;*/
-    }
-
-    #content p {
-        clear: none;
-        margin-bottom: 0px !important ;
+        background: none repeat scroll 0 0 transparent;
+        border: 0 none;
+        font-size: 100%;
+        margin: 0;
+        outline: 0 none;
+        padding: 0;
     }
     .qtrans_flag span { display:none }
     .qtrans_flag { height:12px; width:18px; display:block }
@@ -44,296 +39,39 @@
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
-	<script>
-$(function() {
-    $("#lang").change(function() {
-        $("#langForm").submit();
-    });
-
-    $.populateDOB({
-                dobYear : $("#dob_year")
-                ,dobMonth : $("#dob_month")
-                ,dobDay : $("#dob_day")
-                ,dobFull : $("#dob")
-            });
-
-    $("#captchaimage").bind('click', function() {
-        $.post('/captcha/newSession');
-        $("#captchaimage").load('/captcha/imageRequest');
-        return false;
-    });
-
-    $("#sponsorId").change(function() {
-        if ($.trim($('#sponsorId').val()) != "") {
-            verifySponsorId();
-        }
-    });
-
-    jQuery.validator.addMethod("noSpace", function(value, element) {
-        return value.indexOf(" ") < 0 && value != "";
-    }, "No space please and don't leave it empty");
-
-    $("#registerForm").validate({
-                messages : {
-                    confirmPassword: {
-                        equalTo: "<?php echo __('Please enter the same password as above') ?>"
-                    },
-                    userName: {
-                        remote: "<?php echo __('User Name already in use') ?>."
-                    },
-                    fullname: {
-                        remote: "<?php echo __('Full Name already in use') ?>."
-                    }
-                },
-                rules : {
-                    "sponsorId" : {
-                        required: true
-                    },
-                    "userName" : {
-                        required : true,
-                        noSpace: true,
-                        minlength : 6,
-                        remote: "/member/verifyUserName"
-                    },
-                    "userpassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#userpassword"
-                    },
-                    "securityPassword" : {
-                        required : true,
-                        minlength : 6
-                    },
-                    "confirmSecurityPassword" : {
-                        required : true,
-                        minlength : 6,
-                        equalTo: "#securityPassword"
-                    },
-                    "leverage" : {
-                        required : true
-                    },
-                    "spread" : {
-                        required : true
-                    },
-                    "deposit_amount" : {
-                        required : true
-                    },
-                    "fullname" : {
-                        required : true,
-                        minlength : 2,
-                        remote: "/member/verifyFullName"
-                    },
-                    "dob" : {
-                        required : true
-                    },
-                    "address" : {
-                        required : true
-                    },
-                    "gender" : {
-                        required : true
-                    },
-                    "contactNumber" : {
-                        required : true
-                        , minlength : 10
-                    },
-                    "email" : {
-                        required : true
-                        , email: true
-                    },
-                    "email2" : {
-                        required : true,
-                        equalTo: "#email"
-                    },
-                    "terms_cust_agreement" : {
-                        required : true
-                    },
-                    "terms_bis" : {
-                        required : true
-                    },
-                    "terms_risk" : {
-                        required : true
-                    },
-                    "terms_aml" : {
-                        required : true
-                    },
-                    "term_condition" : {
-                        required : true
-                    },
-                    "sign_name" : {
-                        required : true
-                    }
-                },
-                submitHandler: function(form) {
-                    if ($.trim($('#sponsorId').val()) == "") {
-                        alert("<?php echo __('Referral ID cannot be blank') ?>.");
-                        $('#sponsorId').focus();
-                    } else {
-                        waiting();
-                        $.ajax({
-                                    type : 'POST',
-                                    url : "/member/verifySponsorId",
-                                    dataType : 'json',
-                                    cache: false,
-                                    data: {
-                                        sponsorId : $('#sponsorId').val()
-                                    },
-                                    success : function(data) {
-                                        waiting();
-                                        if (data == null || data == "") {
-                                            alert("<?php echo __('Invalid Referral ID') ?>");
-                                            $('#sponsorId').focus();
-                                            $("#sponsorName").val("");
-                                        } else {
-                                            form.submit();
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("Your login attempt was not successful. Please try again.");
-                                    }
-                                });
-                    }
-                },
-                success: function(label) {
-                }
-            });
-});
-
-function verifySponsorId() {
-    waiting();
-    $.ajax({
-                type : 'POST',
-                url : "/member/verifyActiveSponsorId",
-                dataType : 'json',
-                cache: false,
-                data: {
-                    sponsorId : $('#sponsorId').val()
-                },
-                success : function(data) {
-                    if (data == null || data == "") {
-                        error("<?php echo __('Invalid Referral ID') ?>");
-                        $('#sponsorId').focus();
-                        $("#sponsorName").val("");
-                    } else {
-                        $.unblockUI();
-                        $("#sponsorName").val(data.nickname);
-                    }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Your login attempt was not successful. Please try again.");
-                }
-            });
-}
-function waiting() {
-    $("#waitingLB h3").html("<h3>Loading...</h3><div id='loader' class='loader'><img id='img-loader' src='/images/loading.gif' alt='Loading'/></div>");
-
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    'background-color': '#fff',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .8,
-                    color: '#000'
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-}
-function alert(data) {
-    var msgs = "";
-    if ($.isArray(data)) {
-        jQuery.each(data, function(key, value) {
-            msgs = value + "<br>";
-        });
-    } else {
-        msgs = data + "<br>";
-    }
-
-    var alertPanel = "<div style='margin-bottom: 20px; padding: 1em;' class='ui-state-highlight ui-corner-all'><p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-info'></span>";
-    alertPanel += msgs + "</p></div>";
-    $("#waitingLB h3").html(alertPanel);
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .9
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
-}
-function error(data) {
-    var msgs = "";
-    if ($.isArray(data)) {
-        jQuery.each(data, function(key, value) {
-            msgs = value + "<br>";
-        });
-    } else {
-        msgs = data + "<br>";
-    }
-
-    var errorPanel = "<div style='padding: 1em' class='ui-state-error ui-corner-all'>";
-    errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
-    errorPanel += msgs + "</p></div>";
-    $("#waitingLB h3").html(errorPanel);
-    $.blockUI({
-                message: $("#waitingLB")
-                , css: {
-                    border: 'none',
-                    padding: '5px',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    'border-radius': '10px',
-                    opacity: .9,
-                    'min-width': '30%',
-                    'width': '60%',
-                    left: '25%',
-                    top: '25%'
-                }});
-    $(".blockOverlay").css("z-index", 1010);
-    $(".blockPage").css("z-index", 1011);
-    $('.blockOverlay').attr('title', 'Click to unblock').click($.unblockUI);
-}
-</script>
+	<script type="text/javascript">
+	$(function() {
+        /*$('BODY').bgStretcher({
+            images: ['/images/background/main-bg-031.jpg', '/images/background/main-bg-041.jpg','/images/background/main-bg-011.jpg', '/images/background/main-bg-022.jpg'],
+            imageWidth: 1024,
+            imageHeight: 768,
+            slideDirection: 'N',
+            nextSlideDelay: 5500,
+            transitionEffect: 'fade',
+            anchoring: 'left center',
+            anchoringImg: 'left center'
+        });*/
+	});
+	</script>
 </head>
 
 <body class="home blog">
-<div id="waitingLB" style="display:none; cursor: default">
-    <h3>We are processing your request. Please be patient.</h3>
-</div>
 <noscript>
 	<!-- display message if java is turned off -->
 	<div id="notification">Please turn on javascript in your browser for the maximum user experience!</div>
 </noscript>
-<form action="/member/doRegister" id="registerForm" method="post">
+
 <div id="wrapper">
     <div id="page">
         <div id="content">
-
-<table cellspacing="0" cellpadding="0">
-<colgroup>
-    <col width="1%">
-    <col width="99%">
-    <col width="1%">
-</colgroup>
+            <table cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
-    <td rowspan="3">&nbsp;</td>
-    <td class="tbl_sprt_bottom"><span class="txt_title">Member Registration</span></td>
-    <td rowspan="3">&nbsp;</td>
+    <td class="tbl_sprt_bottom"><span class="txt_title">welcome to Maxim Trader.</span></td>
 </tr>
 <tr>
     <td><br>
+
     </td>
 </tr>
 <tr>
@@ -354,92 +92,32 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Account Login Details</th>
-        <th class="tbl_content_right"><!--Step 1 of 3--></th>
+        <th>Account Information</th>
+        <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
     </tr>
+
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Referral ID</td>
-        <td>
-            <input type="text" class="inputbox" id="sponsorId" name="sponsorId">
-            &nbsp;
-        </td>
+        <td>MT4 ID</td>
+        <td><input type="text" value="mt4" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>
-
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Referral Name</td>
-        <td>
-            <input type="text" style="background-color: #d9d9d9;" class="inputbox" readonly="readonly" id="sponsorName" name="sponsorName">
-        </td>
+        <td>Ranking</td>
+        <td><input type="text" value="Diamond" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>
+
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>User Name</td>
-        <td>
-            <input type="text" class="inputbox" id="userName" name="userName">
-            &nbsp;
-            <br>Please choose a unique username for your account. Username accepts
-            3-32 characters, a-z, 0-9 and underscore (_) only.
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Set Password</td>
-        <td>
-            <input type="password" class="inputbox" id="userpassword" name="userpassword">
-            <br>enter your password. Password accepts 4-32 characters, A-Z,
-            a-z, 0-9 and underscore (_) only and must include at least one letter and one number. Password is also case
-            sensitive.
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Confirm Password:</td>
-        <td>
-            <input type="password" class="inputbox" id="confirmPassword" name="confirmPassword">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Security Password</td>
-        <td>
-            <input type="password" class="inputbox" id="securityPassword" name="securityPassword">
-            <br>Security Password is a separate password that is required when
-            you withdraw money from your account. This is for security purposes to further protect your funds.
-            <br>
-            Note: We strongly recommend that you choose a Security Password that is different from your login
-            password.
-            <br>
-            Security Password accepts 4-32 characters, A-Z, a-z, 0-9 and underscore (_) only and must include at least
-            one letter and one number. Security Password is also case sensitive.
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Confirm Security Password:</td>
-        <td>
-            <input type="password" class="inputbox" id="confirmSecurityPassword" name="confirmSecurityPassword">
-            &nbsp;
-        </td>
+        <td>Total Networks</td>
+        <td><input type="text" value="2" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>
 
@@ -458,81 +136,36 @@ function error(data) {
         <col width="69%">
         <col width="1%">
     </colgroup>
-
     <tbody>
-    <tr class="row_header">
+    <tr>
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Trading Account Details</th>
-        <th></th>
+        <th>Your Account Point</th>
+        <th class="tbl_content_right"></th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
     </tr>
 
-
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Leverage</td>
-        <td>
-            <select id="leverage" class="inputbox" name="leverage">
-                <option selected="selected" value="">Please Select</option>
-                <option value="50">1:50</option>
-                <option value="100">1:100</option>
-                <option value="200">1:200</option>
-                <option value="300">1:300</option>
-                <option value="400">1:400</option>
-                <option value="500">1:500</option>
-            </select>
-            &nbsp;
-        </td>
+        <td>Currency:</td>
+        <td><input type="text" value="MYR" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>
 
-
-    <tr class="tbl_form_row_even">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Spread</td>
-        <td>
-            <div class="td_desc">
-                <select id="spread" class="inputbox" name="spread">
-                    <option selected="selected" value="">Please Select</option>
-                    <option value="F">Fixed Spread</option>
-                    <option value="V">Variable Spread</option>
-                    <option value="E">ECN Premier Spread</option>
-                </select>
-                <a id="iagree" name="iagree"></a>
+        <td>CP2 Wallet</td>
+        <td><input type="text" value="0.00" readonly="readonly"></td>
+        <td>&nbsp;</td>
+    </tr>
 
-                <div class="none" style="padding-top:10px; text-align:justify;" id="ecn_agreement">Our ECN Premier Account
-                    requires a minimum deposit of USD500 (Fixed and Variable spread accounts require a minimum deposit of
-                    USD250).
-                    <br>
-                    By registering for our ECN Premier Account you agree to have a 1 pip commission deducted from your
-                    account in real-time for the equivalent of every standard lot traded. (approximately USD10 per standard
-                    lot, USD1 per mini lot and USD0.10 per micro lot).
-                    <br>
-                    We deduct this commission at the time you exit the trade. This commission is non-refundable.
-                    <br>
-                    Once you trade the equivalent of 250 standard lots or more in a calendar month, you will qualify for a
-                    lower commission rate of USD8 per standard lot round trip traded (or equivalent thereof.) Therefore we
-                    will credit your account USD2 for each lot traded.
-                    <br>
-                    For example, if you trade 300 standard lots during the month, we will credit your account with USD600 at
-                    the end of that month.
-                    <br>
-
-                    <p class="center">
-                        <input type="checkbox" class="checkbox" id="terms_ecn" checked="checked" name="terms_ecn">
-                        <label for="chk_terms_ecn"><span class="bold">I Agree</span></label>
-                    </p>
-                </div>
-            </div>
-
-            <div class="td_desc" id="fielddesc__spread">We offer Fixed, Variable and ECN Premier spreads on our MT4 trading
-                platform. Each option has its own distinct advantages. <a rel="750x680" class="popup_content" href="#">Click
-                    here for more information</a></div>
-        </td>
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td>Register Wallet</td>
+        <td><input type="text" value="0.00" readonly="readonly"></td>
         <td>&nbsp;</td>
     </tr>
 
@@ -544,11 +177,15 @@ function error(data) {
     </tbody>
 </table>
 
+<!--============================================================-->
 <table cellspacing="0" cellpadding="0" class="tbl_form">
     <colgroup>
         <col width="1%">
-        <col width="30%">
-        <col width="69%">
+        <col width="23%">
+        <col width="18%">
+        <col width="13%">
+        <col width="18%">
+        <col width="18%">
         <col width="1%">
     </colgroup>
 
@@ -557,8 +194,9 @@ function error(data) {
         <th class="tbl_header_left">
             <div class="border_left_grey">&nbsp;</div>
         </th>
-        <th>Deposit Information</th>
-        <th></th>
+        <th colspan="5">
+            Transaction Limit
+        </th>
         <th class="tbl_header_right">
             <div class="border_right_grey">&nbsp;</div>
         </th>
@@ -567,21 +205,47 @@ function error(data) {
 
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
-        <td>Deposit Currency</td>
+        <td colspan="5">
+            You can change your funds transfer and bill payment limit by entering your desired limit in the "New Limit"
+            column.
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><b>Transaction Type</b></td>
+        <td><b>Maximum Limit (MYR)</b></td>
+        <td>&nbsp;</td>
+        <td><b>Existing Limit (MYR)</b></td>
+        <td><b>New Limit (MYR)</b></td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
         <td>
-            <div>
-                <select id="deposit_currency" class="inputbox" name="deposit_currency">
-                    <option selected="selected" value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="AUD">AUD</option>
-                    <option value="SGD">SGD</option>
-                </select>
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_currency">If a Money Manager handles your account, the currency of
-                your account will match the currency that your Money Manager uses to make trades on your behalf. For
-                example, if your manager trades in USD, your account will be in USD regardless of which currency you choose.
-            </div>
+
+
+            3rd Party SCB Funds Transfer:
+
+
+        </td>
+        <td><input value="60,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+            <a target="_blank" href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC">
+                View limit detail
+            </a>
+        </td>
+        <td><input value="60,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+
+
+            <input type="text" id="customerTxnLimitList[0].newLimit" name="customerTxnLimitList[0].newLimit" value="60,000.00" size="10" maxlength="10">
+
+
             &nbsp;
         </td>
         <td>&nbsp;</td>
@@ -590,237 +254,95 @@ function error(data) {
 
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
-        <td>Deposit Amount</td>
         <td>
-            <div>
-                <input type="text" id="deposit_amount" value="" class="inputbox" name="deposit_amount">
-            </div>
-            <div class="td_desc" id="fielddesc__deposit_amount"></div>
+
+
+            Interbank Funds Transfer:
+
+
+        </td>
+        <td><input value="5,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+            <a target="_blank" href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC">
+                View limit detail
+            </a>
+        </td>
+        <td><input value="5,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+
+
+            <input type="text" id="customerTxnLimitList[1].newLimit" name="customerTxnLimitList[1].newLimit" value="5,000.00" size="10" maxlength="10">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td>
+
+
+            Bill Payment:
+
+
+        </td>
+        <td><input value="5,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+            <a target="_blank" href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC">
+                View limit detail
+            </a>
+        </td>
+        <td><input value="5,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+
+
+            <input type="text" id="customerTxnLimitList[2].newLimit" name="customerTxnLimitList[2].newLimit" value="5,000.00" size="10" maxlength="10">
+
+
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+
+
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td>
+
+
+            International Funds Transfer:
+
+
+        </td>
+        <td><input value="10,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+            <a target="_blank" href="https://ibank.standardchartered.com.my/nfs/ibank/preference_limit_detail_link.htm?a=doViewLimitDetail&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC&amp;r=011859FD-ADA8-623A-1202-39E4601E69DC">
+                View limit detail
+            </a>
+        </td>
+        <td><input value="10,000.00" readonly="readonly" size="10" maxlength="10"></td>
+        <td>
+
+
+            <input type="text" id="customerTxnLimitList[3].newLimit" name="customerTxnLimitList[3].newLimit" value="10,000.00" size="10" maxlength="10">
+
+
+            &nbsp;
         </td>
         <td>&nbsp;</td>
     </tr>
 
     <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
+        <td>&nbsp;</td>
+        <td colspan="5" class="tbl_content_right"></td>
+        <td>&nbsp;</td>
     </tr>
     </tbody>
 </table>
-
-<table cellspacing="0" cellpadding="0" class="tbl_form">
-    <colgroup>
-        <col width="1%">
-        <col width="30%">
-        <col width="69%">
-        <col width="1%">
-    </colgroup>
-
-    <tbody>
-    <tr class="row_header">
-        <th class="tbl_header_left">
-            <div class="border_left_grey">&nbsp;</div>
-        </th>
-        <th>Contact Details</th>
-        <th></th>
-        <th class="tbl_header_right">
-            <div class="border_right_grey">&nbsp;</div>
-        </th>
-    </tr>
-
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Telephone Number</td>
-        <td>
-            <input type="text" class="inputbox" id="contactNumber" name="contactNumber">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Primary Email</td>
-        <td>
-            <div>
-                <input type="text" class="inputbox" id="email" name="email">
-            </div>
-            <div class="td_desc" id="fielddesc__email">Please enter a valid Email address. Note: If you use a Yahoo! email
-                account, please also provide an Alternate Email below.
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Retype your email</td>
-        <td>
-            <input type="text" id="email2" value="" class="inputbox" name="email2">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-
-    <tr class="tbl_form_row_even">
-        <td>&nbsp;</td>
-        <td>Alternate Email</td>
-        <td>
-            <div>
-                <input type="text" id="alt_email" value="" class="inputbox" name="alt_email">
-            </div>
-            <div class="td_desc" id="fielddesc__alt_email">Alternate Email is required ONLY IF you use a Yahoo! email
-                account as your primary Email. Note: Your Alternate Email cannot be a Yahoo! account. We recommend <a target="_blank" href="http://mail.google.com">Gmail</a> or <a target="_blank" href="http://www.live.com">Hotmail</a>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td>Retype alternate email</td>
-        <td>
-            <input type="text" id="alt_email2" value="" class="inputbox" name="alt_email2">
-            &nbsp;
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr class="tbl_listing_end">
-        <td colspan="4">
-            &nbsp;
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<table cellspacing="0" cellpadding="0" class="tbl_form">
-<colgroup>
-    <col width="1%">
-    <col width="53%">
-    <col width="18%">
-    <col width="3%">
-    <col width="8%">
-    <col width="8%">
-    <col width="1%">
-</colgroup>
-
-<tbody>
-<tr class="row_header">
-    <th class="tbl_header_left">
-        <div class="border_left_grey">&nbsp;</div>
-    </th>
-    <th colspan="5">
-        Accept Terms &amp; Agreements    </th>
-    <th class="tbl_header_right">
-        <div class="border_right_grey">&nbsp;</div>
-    </th>
-</tr>
-
-
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td colspan="5">
-        <p>Below are the contractural terms and agreements that you are bound by as a client
-        of OFXGlobal. We recommend that you take the time to read each of them carefully.</p>
-
-        <p><strong>Please check the boxes below to acknowledge your acceptance, agreement and
-            understanding of these terms and agreements.</strong></p>
-
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_even">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_cust_agreement" name="terms_cust_agreement">
-        <label for="terms_cust_agreement">Customer Agreement</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/customerAgreement">Download Agreement (272 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_bis" name="terms_bis">
-        <label for="terms_bis">Terms Of Business, Trading Policies &amp; Procedures</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/termsOfBusiness">Download Agreement (343 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_even">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_risk" name="terms_risk">
-        <label for="terms_cust_agreement">Risk Disclosure Statement</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/riskDisclosureStatement">Download Agreement (175 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td><input type="checkbox" class="checkbox" id="terms_aml" name="terms_aml">
-        <label for="terms_bis">AML Policy</label></td>
-    <td colspan="4">
-        <a target="_blank" href="/download/amlPolicy">Download Agreement (228 KB PDF)</a>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_form_row_odd">
-    <td>&nbsp;</td>
-    <td colspan="5">
-
-        <p>I hereby attest and certify that the above information is complete and accurate and I agree to be bound by
-            these terms and conditions. I also authorise <strong>OFXGlobal</strong> to verify any or all of the
-            foregoing information. This electronic signature has the same validity and effect as a signature affixed by
-            hand.</p>
-
-        <table align="center" cellspacing="0" cellpadding="0" style="border-style:hidden">
-            <tbody><tr style="border-style:hidden">
-                <td align="right" style="border-style:hidden" class="td_1st">Name:</td>
-                <td style="border-style:hidden" class="td_2nd"><input type="text" class="inputbox" value="" name="sign_name"></td>
-            </tr>
-            <tr>
-                <td align="right" style="border-style:hidden" class="td_1st">Date:</td>
-                <td style="border-style:hidden" class="td_2nd"><input type="text" style="background-color: #d9d9d9;" readonly="readonly" class="inputbox" value="2012-08-24" name="date"></td>
-            </tr>
-            <tr>
-                <td align="left" valign="top" style="border-style:hidden" colspan="2">
-                    <input type="checkbox" style="float:left; margin-right:4px;" value="1" id="term_condition" name="term_condition">
-
-                    <label><p>I understand that as an OFXGlobal customer, it is my responsibility to review all necessary
-                        information about currency trading and the OFXGlobal <a target="_blank" href="/download/iBAgreement">Terms and Conditions</a>. I
-                        am aware of the risks associated with foreign exchange trading and will seek advice and further my education
-                        on foreign exchange prior to starting any trading activity.</p></label>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" style="border-style:hidden" class="td_1st" colspan="2">&nbsp;</td>
-            </tr>
-        </tbody></table>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr class="tbl_listing_end">
-    <td>&nbsp;</td>
-    <td colspan="5" class="tbl_content_right">
-        <span class="button">
-             <input type="submit" name="" value="Submit">
-        </span>
-    </td>
-    <td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
+<!--============================================================-->
 
 </td>
 </tr>
@@ -834,6 +356,7 @@ function error(data) {
 </tr>
 </tbody>
 </table>
+
 
 
 
@@ -866,6 +389,6 @@ function error(data) {
         </div>
     </div>
 </div>
-</form>
+
 </body>
 </html>
