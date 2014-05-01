@@ -5,39 +5,114 @@
     <meta http-equiv="CACHE-CONTROL" content="NO-STORE">
     <meta http-equiv="PRAGMA" content="NO-CACHE">
     <meta http-equiv="EXPIRES" content="-1">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=8" /><![endif]-->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
     <link rel="shortcut icon" href="/favicon.ico"/>
 
     <?php use_helper('I18N') ?>
     <?php include('scripts.php'); ?>
+<!--    <link rel="stylesheet" href="/css/style.css">-->
 
-    <link rel='stylesheet' id='nivocss-css'  href='/css/maxim/nivo-slider.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='styler-farbtastic-css'  href='/css/maxim/styler-farbtastic.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='wp-paginate-css'  href='/css/maxim/wp-paginate.css' type='text/css' media='screen' />
+<!--    <link rel='stylesheet' id='nivocss-css' href='/css/maxim/nivo-slider.css' type='text/css' media='all'/>-->
+<!--    <link rel='stylesheet' id='styler-farbtastic-css' href='/css/maxim/styler-farbtastic.css' type='text/css' media='all'/>-->
+<!--    <link rel='stylesheet' id='wp-paginate-css' href='/css/maxim/wp-paginate.css' type='text/css' media='screen'/>-->
+
+<!--    <script type='text/javascript' src='/css/maxim/comment-reply.js'></script>-->
+<!--    <script type='text/javascript' src='/css/maxim/preloader.js'></script>-->
+<!--    <script type='text/javascript' src='/css/maxim/jquery.nivo.slider.js'></script>-->
+<!--    <script type='text/javascript' src='/css/maxim/bottomfix.js'></script>-->
+<!--    <script type='text/javascript' src='/css/maxim/jquery.quicksand.js'></script>-->
+<!--    <script type='text/javascript' src='/css/maxim/farbtastic.js'></script>-->
+
+	<link type="text/css" href="/css/maxim/member/slider-styles.css" rel="stylesheet">
+    <script src="/css/maxim/member/popup.js" type="text/javascript"></script>
+
+	<link href="/css/maxim/member/style.css" rel="stylesheet">
+	<link media="screen" type="text/css" href="/css/maxim/member/member.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style.css">
+<!--    <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">-->
 
-    <script type='text/javascript' src='/css/maxim/comment-reply.js'></script>
-    <script type='text/javascript' src='/css/maxim/preloader.js'></script>
-    <script type='text/javascript' src='/css/maxim/jquery.nivo.slider.js'></script>
-    <script type='text/javascript' src='/css/maxim/bottomfix.js'></script>
-    <script type='text/javascript' src='/css/maxim/jquery.quicksand.js'></script>
-    <script type='text/javascript' src='/css/maxim/farbtastic.js'></script>
-
-    <meta http-equiv="Content-Language" content="en-US">
     <style type="text/css" media="screen">
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-        background: none repeat scroll 0 0 transparent;
-        border: 0 none;
-        font-size: 100%;
-        margin: 0;
-        outline: 0 none;
-        padding: 0;
-    }
-    .qtrans_flag span { display:none }
-    .qtrans_flag { height:12px; width:18px; display:block }
-    .qtrans_flag_and_text { padding-left:20px }
+        /*#content p {
+            clear: none;
+            margin-bottom: 0px !important ;
+        }
+        .ui-widget {
+            font-family: Segoe UI, Arial, sans-serif;
+            font-size: 0.9em;
+        }
+        .qtrans_flag span {
+            display: none
+        }
+
+        .qtrans_flag {
+            height: 12px;
+            width: 18px;
+            display: block
+        }
+
+        .qtrans_flag_and_text {
+            padding-left: 20px
+        }*/
+        #sidebar-border {
+            /*background-image: url("/css/maxim/sidebar-border.png");*/
+            background-repeat: repeat-y;
+            float: left;
+            height: 100%;
+            margin-left: 13px;
+            position: absolute;
+            width: 306px;
+            z-index: 13;
+        }
+
+        #sidebar-light {
+            background-image: url("/css/maxim/sidebar-light.png");
+            background-position: center top;
+            background-repeat: no-repeat;
+            float: left;
+            height: 100%;
+            margin-left: 13px;
+            position: absolute;
+            width: 306px;
+            z-index: 14;
+        }
+
+        /* digital clock */
+        /* If you want you can use font-face */
+        @font-face {
+            font-family: 'BebasNeueRegular';
+            src: url('BebasNeue-webfont.eot');
+            src: url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+                 url('BebasNeue-webfont.woff') format('woff'),
+                 url('BebasNeue-webfont.ttf') format('truetype'),
+                 url('BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .clock {width:100px; margin:0 auto; padding:5px; color:#fff; }
+        #Date { font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; font-size:10px; text-align:center; text-shadow:0 0 5px #00c6ff; }
+        .clock ul { width:100px; margin:0 auto; padding:0px; list-style:none; text-align:center; }
+        .clock ul li { display:inline; font-size:10px; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff; }
+        #point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padding-left:0px; padding-right:0px; }
+
+        /* Simple Animation */
+        @-webkit-keyframes mymove
+        {
+        0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+        50% {opacity:0; text-shadow:none; }
+        100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
+        }
+
+        @-moz-keyframes mymove
+        {
+        0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+        50% {opacity:0; text-shadow:none; }
+        100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
+        }
     </style>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/maxim/style.css">
 
 	<script type="text/javascript">
 	$(function() {
@@ -67,7 +142,7 @@
             <table cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title">OFX MSIA, welcome to Maxim Trader.</span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title">welcome to Maxim Trader.</span></td>
 </tr>
 <tr>
     <td><br>
