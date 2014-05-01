@@ -1257,7 +1257,7 @@ class memberActions extends sfActions
             //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$existUser->getDistributorId()."%|", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
             $existUser = MlmDistributorPeer::doSelectOne($c);
         }
