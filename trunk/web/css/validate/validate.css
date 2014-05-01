@@ -64,8 +64,10 @@ div.container {
     display: inline;
 }
 input.error,select.error,textarea.error {
-    background: #ff6;
-    border: 1px dotted red;
+    /*background: #ff6;*/
+    /*border: 1px dotted red;*/
+    color: #B94A48 !important;
+    border-color: #FF0000;
 }
 
 .ui-state-error-validate, .ui-widget-content-validate .ui-state-error-validate {
