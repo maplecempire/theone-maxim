@@ -2472,7 +2472,7 @@ class memberActions extends sfActions
         if (strtoupper($this->getRequestParameter('captcha')) == $this->getUser()->getAttribute(Globals::SYSTEM_CAPTCHA_ID)){
     	} else{
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("The CAPTCHA wasn't entered correctly. Go back and try it again."));
-            return $this->redirect('/home/login');
+            return $this->redirect('/member/register');
     	}
         $userName = $this->getRequestParameter('userName');
         $fcode = $userName;
@@ -2486,7 +2486,7 @@ class memberActions extends sfActions
 
         if ($exist) {
             $this->setFlash('errorMsg', "User Name already exist.");
-            return $this->redirect('/home/login');
+            return $this->redirect('/member/register');
         }
         //******************* upline distributor ID
         $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
@@ -2503,7 +2503,7 @@ class memberActions extends sfActions
 
             if (!$uplineDistDB) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Referrer ID."));
-                return $this->redirect('/home/login');
+                return $this->redirect('/member/register');
             }
 
             $uplineDistId = $uplineDistDB->getDistributorId();
