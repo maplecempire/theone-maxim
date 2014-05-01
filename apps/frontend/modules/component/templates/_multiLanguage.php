@@ -30,5 +30,5 @@ a, a:link, a:hover, a:visited {
     <li><a href="/home/language?lang=jp" class="qtrans_flag_jp qtrans_flag_and_text" style="font-weight: bold;"
            title="日文"><span>日本語</span></a></li>
     <li><a href="/home/language?lang=kr" class="qtrans_flag_kr qtrans_flag_and_text" style="font-weight: bold;"
-           title="한국의"><span>한국의</span></a></li>
+           title="한국어"><span>한국어</span></a></li>
 </ul>
