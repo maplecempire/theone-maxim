@@ -17,7 +17,7 @@ $(function () {
         }
     }).click(function(event){
         event.preventDefault();
-        var answer = confirm("Are you sure want to update the Reject Status.")
+        var answer = confirm("Are you sure want to update the Reject Status.");
         if (answer){
             updateStatus('REJECT');
         }
@@ -28,7 +28,7 @@ $(function () {
         }
     }).click(function(event){
         event.preventDefault();
-        var answer = confirm("Are you sure want to update the Success Status.")
+        var answer = confirm("Are you sure want to update the Success Status.");
         if (answer){
             updateStatus('SUCCESS');
         }
