@@ -40,7 +40,7 @@
         var monthOptions = "";
         var dayOptions = "";
 
-        for (var iyear=1930; iyear <= 2010; iyear++)
+        for (var iyear=1900; iyear <= 2010; iyear++)
             yearOptions = yearOptions + "<option value='" + iyear + "'>" + iyear + "</option>";
 
         for (var imonth = 1; imonth <= 12; imonth++) {
