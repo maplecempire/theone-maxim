@@ -1749,4 +1749,50 @@ class financeActions extends sfActions
         }
         return 0;
     }
+    
+    public function executeUpdatePairingRecord()
+    {
+        $arr = array();
+		
+		$dist_id = "258115,263571,263570,260951,255009,264687,257554,262039,262563,257548,261200,263569,262591,2267,255894,256992,1378,1945,263047,262696,255638,254837,255683,257879,257093,938,259945,1712,259977,259659,263288,262314,2117,254848,263369,255827,255499,255190,262530,661,262009,255787,262405,261117,261111,260926,1332,683,261517,262012,255337,255605,973,256712,259284,259729,126202,262012,2134,254903,261370,1649,258354,254861,254858,2360,257463,261516,258899,260182,260130,254911,260330,261628,260293,257704,260784,261323,261198,259948,256733,257908,255341,126179,256774,259088,261448,261997,261866,260741,257479,258031,258549,1594,257121,261814,1104,261816,256392,255180,255048,1426,260215,1822,258334,260199,260025,1971,255272,260753,2125,259608,256616,2231,255208,258741,210444,258106,256629,257157,258577,256197,260303,258597,690,259943,258720,255211,2097,259275,256123,257307,258810,259772,259497,254862,258742,254855,254850,257796,256506,258116,255179,259607,259918,259283,259460,258997,259176,260023,259401,255889,258690,258781,258954,258292,256652,1216,256916,255696,259080,256991,569,257462,256739,258195,258531,253015,255217,256437,257025,257500,257499,531,210444,255660,255126,255470,255650,256475,254832,258595,255443,257667,254844,257066,258345,2229,2104,255218,254910,254836,254827,254868,257600,257363,257152,255762,1152,256204,1438,257972,256713,256132,255188,255166,255049,257070,254975,257938,255805,257603,256939,256837,256684,256233,256917,254684,257021,2261,2096,1826,256690,255210,256262,255358,254683,256068,218,255536,256662,255820,254953,255534,256049,255967,255786,-256440,255863,-256140,255609,255776,255779,256290,1609,254820,255854,254830,1136,255430,255336,1114,254842,255624,255178,727,1516,255537,344,255625,254837,254843,255193,2054,1837,1610,252412,255335,255551,1378,277,255349,254859,254832,1167,254863,2078,1296,254719,254829,751,750,1844,2344,2098,1655,735,1169,1515,2195,1518,586,1532,1498,1250,88,618,1249,591,973,1668,617,101,570,1201,1167,298,274,257,258,390,365,342,90,121,120,98,3";
+		$arr = explode(",",$dist_id);
+		
+		for($i=0; $i<count($arr); $i++){
+			$sql = "SELECT c.debit, a.dist_id, a.left_right, a.debit as left_debit, b.left_right, b.debit as right_debit, date_format(a.created_on, '%Y-%m-%d') as create_on 
+					FROM maxim.mlm_dist_pairing_ledger a 
+					inner join maxim.mlm_dist_pairing_ledger b on a.dist_id=b.dist_id 
+					and date_format(a.created_on, '%Y-%m-%d')=date_format(b.created_on, '%Y-%m-%d')
+					and a.debit<>b.debit and a.transaction_type=b.transaction_type 
+					left join mlm_account_ledger c on c.dist_id=a.dist_id and c.remark like 'FLUSH%' 
+					and date_format(a.created_on, '%Y-%m-%d')=date_format(c.created_on, '%Y-%m-%d')
+					where a.dist_id = ".$arr[$i]." and a.transaction_type = 'PAIRED' and a.left_right='LEFT' order by a.created_on
+					";
+			
+			$connection = Propel::getConnection();
+			$statement = $connection->prepareStatement($sql);
+			$resultset = $statement->executeQuery();
+
+			while ($resultset->next())
+			{
+				$resultArr = $resultset->getRow();
+				
+				if($arr[$i]<>1822) continue;
+				
+				echo "ID=".$arr[$i];
+				
+				if($resultArr['debit']<=0){
+					if($resultArr['left_debit']>$resultArr['right_debit']){
+						$query = "UPDATE maxim.mlm_dist_pairing_ledger SET debit=".$resultArr['left_debit']." WHERE dist_id=".$resultArr['dist_id']." and date_format(created_on, '%Y-%m-%d')='".$resultArr['create_on']."' and transaction_type = 'PAIRED'";
+					}else{
+						$query = "UPDATE maxim.mlm_dist_pairing_ledger SET debit=".$resultArr['right_debit']." WHERE dist_id=".$resultArr['dist_id']." and date_format(created_on, '%Y-%m-%d')='".$resultArr['create_on']."' and transaction_type = 'PAIRED'";
+					}
+					
+					echo $query."<br>";
+					//$statement = $connection->prepareStatement($query);
+					//$statement->executeQuery();
+				}
+			}
+		}
+		return sfView::NONE;
+    }
 }
