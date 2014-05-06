@@ -1765,7 +1765,7 @@ class financeActions extends sfActions
 					and a.debit<>b.debit and a.transaction_type=b.transaction_type 
 					left join mlm_account_ledger c on c.dist_id=a.dist_id and c.remark like 'FLUSH%' 
 					and date_format(a.created_on, '%Y-%m-%d')=date_format(c.created_on, '%Y-%m-%d')
-					where a.dist_id = ".$arr[$i]." and a.transaction_type = 'PAIRED' and a.left_right='LEFT' order by a.created_on
+					where a.dist_id = ".$arr[$i]." and a.transaction_type = 'PAIRED' and a.left_right='LEFT' and date_format(a.created_on, '%Y-%m-%d')>='2013-10-01' order by a.created_on
 					";
 			
 			$connection = Propel::getConnection();
