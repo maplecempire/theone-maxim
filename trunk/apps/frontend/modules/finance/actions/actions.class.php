@@ -1776,10 +1776,6 @@ class financeActions extends sfActions
 			{
 				$resultArr = $resultset->getRow();
 				
-				if($arr[$i]<>1822) continue;
-				
-				echo "ID=".$arr[$i];
-				
 				if($resultArr['debit']<=0){
 					if($resultArr['left_debit']>$resultArr['right_debit']){
 						$query = "UPDATE maxim.mlm_dist_pairing_ledger SET debit=".$resultArr['left_debit']." WHERE dist_id=".$resultArr['dist_id']." and date_format(created_on, '%Y-%m-%d')='".$resultArr['create_on']."' and transaction_type = 'PAIRED'";
