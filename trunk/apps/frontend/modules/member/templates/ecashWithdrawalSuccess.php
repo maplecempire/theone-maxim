@@ -182,6 +182,14 @@
                             if ($distributorDB->getCountry() == "Malaysia") {
                                 $disable = " disabled='disabled'";
                                 $disableMoney = "";
+                            } else if ($distributorDB->getCountry() == "Hong Kong") {
+                                $disable = "";
+                                $disableMoney = "";
+                            }
+                            // bwhk (chales approved)
+                            if ($distributorDB->getDistributorId() == 257749) {
+                                $disable = "";
+                                $disableMoney = "";
                             }
                             if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
