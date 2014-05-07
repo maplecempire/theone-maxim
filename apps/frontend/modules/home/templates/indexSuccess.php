@@ -998,7 +998,41 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='21'>Easter schedule</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='22'>Monthly withdrawal period will be extended by an additional day to <strong>8 May 2014, 11.59PM</strong></a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "7 May 2014";
+                ?>
+            </div>
+
+            <div id="page_22" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear International Members,
+                            <br>
+                            <br>As you are aware, we had been experiencing some glitches in our website during the past two days.
+                            <br>This problem has now been fixed and to assist you, the monthly withdrawal period will be extended by an additional day to <strong>8 May 2014, 11.59PM</strong>.
+                            <br>The inconvenience caused is highly regretted and steps are under way to improve the services.
+                            <br>
+                            <br>Thank you,
+                            <br>CEO
+                            <br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='21'>Easter schedule</a>
             </div>
             <div class="news_date">
             <?php
@@ -1007,7 +1041,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_21" class="news_desc" style="text-align: left; ">
+            <div id="page_21" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="width:630px;font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                         <tbody>
                             <tr>
@@ -1084,7 +1118,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='20'>1 Carat Diamond Challenge 1克拉钻石挑战赛 <br>(Period: 26th March – 30th April 2014)</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='20'>1 Carat Diamond Challenge 1克拉钻石挑战赛 <br>(Period: 26th March – 30th April 2014)</a>
             </div>
             <div class="news_date">
             <?php
@@ -1093,7 +1127,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_20" class="news_desc" style="text-align: left; ">
+            <div id="page_20" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
