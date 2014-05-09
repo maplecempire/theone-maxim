@@ -91,10 +91,6 @@ class marketingActions extends sfActions
     {
         $doAction = "EVENT";
         $screenLebel = "Send Lucky Draw - Event";
-        if ($this->getRequestParameter('doAction','EVENT') != "EVENT") {
-            $doAction = "WOF";
-            $screenLebel = "Send Lucky Draw - Wheel of Fortune Million Dollar";
-        }
 
         $this->doAction = $doAction;
         $this->screenLebel = $screenLebel;
@@ -1784,7 +1780,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
                         //if ($existDistributor) {
                         //print_r($mt4Id."<==<br>");
-                        var_dump($mlm_dist_mt4);
+                        //var_dump($mlm_dist_mt4);
                         if ($mlm_dist_mt4) {
                             $index = 0;
                             if ($mlm_dist_mt4->getDistId() < 0) {
