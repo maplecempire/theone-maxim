@@ -283,16 +283,16 @@ $(function() {
             <td>
                 <span style="font-style: italic;"><?php echo __('Terms & Conditions')?></span><br><br>
                 <span style="font-style: italic;">
-                    <table>
-                        <tr><td>1.</td><td><?php echo __('Challenge period start from 10th March 2014 till 31th May 2014 (GMT+8).')?></td></tr>
-                        <tr><td>2.</td><td><?php echo __('The prize will not be transferable to another person.')?></td></tr>
-                        <tr><td>3.</td><td><?php echo __('No part of a prize is exchangeable for cash or any other prize.')?></td></tr>
-                        <tr><td>4.</td><td><?php echo __('If an advertised prize is not available, we reserve the right to offer an alternative prize of equal or greater value.')?></td></tr>
-                        <tr><td>5.</td><td><?php echo __('This challenge is to be run with the spirit of Trust & Integrity which is the culture by which MAXIMers’ have embraced and forms the foundation of our corporate Credo. We will not hesitate to disqualify any Registrant found manipulating fair-play and damaging company’s image and integrity during the challenge period.')?></td></tr>
-                        <tr><td>6.</td><td><?php echo __('Organizer will endeavor to send prizes within 6 month of the competition end date but cannot guarantee this delivery time.')?></td></tr>
-                        <tr><td>7.</td><td><?php echo __('If you win a competition, we will notify you by e-mail. The judges’ decision will be final, and no correspondence will be entered into.')?></td></tr>
-                        <tr><td>8.</td><td><?php echo __('This competition is being run by Maxim Capital Limited.')?></td></tr>
-                    </table>
+                    <ol>
+                        <li><?php echo __('Challenge period start from 10th March 2014 till 31th May 2014 (GMT+8).')?></li>
+                        <li><?php echo __('The prize will not be transferable to another person.')?></li>
+                        <li><?php echo __('No part of a prize is exchangeable for cash or any other prize.')?></li>
+                        <li><?php echo __('If an advertised prize is not available, we reserve the right to offer an alternative prize of equal or greater value.')?></li>
+                        <li><?php echo __('This challenge is to be run with the spirit of Trust & Integrity which is the culture by which MAXIMers’ have embraced and forms the foundation of our corporate Credo. We will not hesitate to disqualify any Registrant found manipulating fair-play and damaging company’s image and integrity during the challenge period.')?></li>
+                        <li><?php echo __('Organizer will endeavor to send prizes within 6 month of the competition end date but cannot guarantee this delivery time.')?></li>
+                        <li><?php echo __('If you win a competition, we will notify you by e-mail. The judges’ decision will be final, and no correspondence will be entered into.')?></li>
+                        <li><?php echo __('This competition is being run by Maxim Capital Limited.')?></li>
+                    </ol>
                 </span>
 
             </td>
