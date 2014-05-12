@@ -5491,13 +5491,6 @@ We look forward to your custom in the near future. Should you have any queries, 
         $anode[0]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
         $anode[0]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
 
-        // openman
-        if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
-            $anode[0]["_right_this_month_sales"] = 0;
-            $anode[0]["_accumulate_right"] = 0;
-            $anode[0]["_today_right"] = 0;
-        }
-
         $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[0]["_today_left"];
         if ($_carry_left < 0)
             $_carry_left = 0;
@@ -5509,6 +5502,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         $anode[0]["_carry_right"] = $_carry_right;
         $anode[0]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
         $anode[0]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+
+        // openman
+        if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+            $anode[0]["_right_this_month_sales"] = 0;
+            $anode[0]["_accumulate_right"] = 0;
+            $anode[0]["_today_right"] = 0;
+            $anode[0]["_carry_right"] = 0;
+            $anode[0]["_sales_right"] = 0;
+        }
 
         if ($leftOnePlacement == null) {
             $anode[1]["distCode"] = "";
@@ -5585,6 +5587,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[1]["_right_this_month_sales"] = 0;
                 $anode[1]["_accumulate_right"] = 0;
                 $anode[1]["_today_right"] = 0;
+                $anode[1]["_carry_right"] = 0;
+                $anode[1]["_sales_right"] = 0;
             }
 
             $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[1]["_today_left"];
@@ -5649,6 +5653,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[3]["_right_this_month_sales"] = 0;
                     $anode[3]["_accumulate_right"] = 0;
                     $anode[3]["_today_right"] = 0;
+                    $anode[3]["_carry_right"] = 0;
+                    $anode[3]["_sales_right"] = 0;
                 }
             }
             if ($rightFourPlacement == null) {
@@ -5701,6 +5707,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[4]["_right_this_month_sales"] = 0;
                     $anode[4]["_accumulate_right"] = 0;
                     $anode[4]["_today_right"] = 0;
+                    $anode[4]["_carry_right"] = 0;
+                    $anode[4]["_sales_right"] = 0;
                 }
             }
         }
@@ -5792,6 +5800,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[2]["_right_this_month_sales"] = 0;
                 $anode[2]["_accumulate_right"] = 0;
                 $anode[2]["_today_right"] = 0;
+                $anode[2]["_carry_right"] = 0;
+                $anode[2]["_sales_right"] = 0;
             }
             if ($leftFivePlacement == null) {
                 $anode[5]["distCode"] = "";
@@ -5843,6 +5853,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[5]["_right_this_month_sales"] = 0;
                     $anode[5]["_accumulate_right"] = 0;
                     $anode[5]["_today_right"] = 0;
+                    $anode[5]["_carry_right"] = 0;
+                    $anode[5]["_sales_right"] = 0;
                 }
             }
             if ($rightSixPlacement == null) {
@@ -5894,6 +5906,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[6]["_right_this_month_sales"] = 0;
                     $anode[6]["_accumulate_right"] = 0;
                     $anode[6]["_today_right"] = 0;
+                    $anode[6]["_carry_right"] = 0;
+                    $anode[6]["_sales_right"] = 0;
                 }
             }
         }
