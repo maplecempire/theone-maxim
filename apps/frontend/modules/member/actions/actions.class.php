@@ -8349,7 +8349,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             if ($rightBalance < $leftBalance) {
                                 $minBalance = $rightBalance;
                             }
-                            if ($legFlushLimit < $minBalance) {
+                            /*if ($legFlushLimit < $minBalance) {
                                 if ($leftPairedPoint > $rightPairedPoint) {
                                     $leftPairedPoint = $legFlushLimit;
                                 } else {
@@ -8358,13 +8358,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                             } else {
                                 $leftPairedPoint = $minBalance;
                                 $rightPairedPoint = $minBalance;
-                            }
+                            }*/
                             print_r("leftBalance ".$leftBalance."<br>");
                             print_r("rightBalance ".$rightBalance."<br>");
                             print_r("minBalance ".$minBalance."<br>");
                             if ($leftBalance > 0 && $rightBalance > 0) {
-                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $leftPairedPoint);
-                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $rightPairedPoint);
+                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_LEFT, $minBalance);
+                                $this->updateDistPairingLeader($distId, Globals::PLACEMENT_RIGHT, $minBalance);
 
                                 $pairingBonusAmount = $minBalance * $pairingPercentage / 100;
                                 print_r("pairingBonusAmount =".$pairingBonusAmount."<br>");
