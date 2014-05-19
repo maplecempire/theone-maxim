@@ -83,37 +83,72 @@ class reportActions extends sfActions
     }
     public function executeTest()
     {
-        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeSingaporeYachtShowLifestyleIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeSingaporeYachtShowLifestyleIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+
+//        $q3 = 11 / 3;
+//        var_dump($q3);
+//        $q3 = floor(11 / 3);
+//        var_dump($q3);
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
     public function executeTest2()
     {
-        $this->executeSingaporeYachtShowLifestyleChallenge();
-        $this->executeSingaporeYachtShowLifestyleChallenge();
-        $this->executeSingaporeYachtShowLifestyleChallenge();
-        $this->executeSingaporeYachtShowLifestyleChallenge();
-        $this->executeSingaporeYachtShowLifestyleChallenge();
-        $this->executeSingaporeYachtShowLifestyleChallenge();
+        $this->executeJapanChallenge();
+        $this->executeJapanChallenge();
+        $this->executeJapanChallenge();
+        $this->executeJapanChallenge();
+        $this->executeJapanChallenge();
+
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+//        $this->executeSingaporeYachtShowLifestyleChallenge();
+
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
     public function executeUpdateLeader()
     {
-        $query = "select  distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure
+        $query2 = "select  distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure
                 , init_rank_code, rank_code, remark, abfx_remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
                     from mlm_distributor
                 where
                     bkk_qualify_1 != '' or
                     bkk_qualify_2 != '' or bkk_qualify_3 != ''";
 
-        $query2 = "select distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
-                     from mlm_distributor where bkk_personal_sales >= 30000 order by bkk_personal_sales desc";
+        $query = "select distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
+                     from mlm_distributor where bkk_personal_sales >= 10000 order by bkk_personal_sales desc";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -146,6 +181,108 @@ class reportActions extends sfActions
         print_r("executeUpdateLeader Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeCaratDiamondChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-26 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("");
+            $distDB->setBkkQualify2("");
+            $distDB->setBkkQualify3("");
+            $distDB->setAbfxRemark("");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $directInformationRS = $this->getDirectInformation($distDB->getDistributorId());
+
+            $x30to99 = 0;
+            $x100to499 = 0;
+            $x500 = 0;
+            foreach ($directInformationRS as $directInformation) {
+                $totalSales = $directInformation['bkk_personal_sales'];
+                if ($totalSales >= 500000) {
+                    $x500 += 1;
+                } else if ($totalSales >= 100000 && $totalSales < 500000) {
+                    $x100to499 += 1;
+                }
+            }
+
+            if ($x500 > 0 || $x100to499  > 0 || $x30to99  > 0) {
+                //if ($x500 >= 2) {
+                $q3 = round($x500 / 2, 0, PHP_ROUND_HALF_DOWN);
+                $q2 = round($x100to499 / 2, 0, PHP_ROUND_HALF_DOWN);
+                $q1 = round($x30to99 / 2, 0, PHP_ROUND_HALF_DOWN);
+
+                if ($q3 > 0 || $q2  > 0 || $q1  > 0) {
+                    $distDB->setBkkQualify3($q3);
+                    //}
+                    //if ($x100to499 >= 2) {
+                    $distDB->setBkkQualify2($q2);
+                    //}
+                    //if ($x30to99 >= 2) {
+                    $distDB->setBkkQualify1($q1);
+                    //}
+                    //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+                    /*if ($personalSales >= 40000) {
+                        $distDB->setBkkQualify3("Y");
+                    }*/
+
+                    $distDB->setAbfxRemark("x500=".$x500.",x100to499=".$x100to499.",x30to99=".$x30to99);
+                }
+            }
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeCaratDiamondChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeLangkawiChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-02-20 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("");
+            $distDB->setBkkQualify2("");
+            $distDB->setBkkQualify3("");
+            $distDB->setAbfxRemark("");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $totalSponsorAmount = $this->getSponsorAmount($distDB->getDistributorId());
+
+            $x30to99 = 0;
+            $x100to499 = 0;
+            $x500 = 0;
+            if ($totalSponsorAmount >= 30000) {
+                $q3 = floor($totalSponsorAmount / 30000);
+                $distDB->setBkkQualify1($q3);
+                $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
+            }
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeLangkawiChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeSingaporeYachtShowLifestyleChallenge()
     {
         $c = new Criteria();
@@ -157,8 +294,8 @@ class reportActions extends sfActions
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        $dateFrom = "2014-03-10 00:00:00";
-        $dateTo = "2014-03-25 23:59:59";
+        $dateFrom = "2014-03-26 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("");
             $distDB->setBkkQualify2("");
@@ -213,7 +350,44 @@ class reportActions extends sfActions
         print_r("executeSingaporeYachtShowLifestyleChallenge Done");
         return sfView::HEADER_ONLY;
     }
-    public function executeSingaporeYachtShowLifestyleIncentive()
+    public function executeJapanChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-01 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("");
+            $distDB->setBkkQualify2("");
+            $distDB->setBkkQualify3("");
+            $distDB->setAbfxRemark("");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $totalSponsorAmount = $this->getSponsorAmount($distDB->getDistributorId());
+
+            $x30to99 = 0;
+            $x100to499 = 0;
+            $x500 = 0;
+            if ($totalSponsorAmount >= 50000) {
+                $q3 = floor($totalSponsorAmount / 50000);
+                $distDB->setBkkQualify1($q3);
+                $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
+            }
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeJapanChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeLangkawiIncentive()
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
@@ -224,8 +398,8 @@ class reportActions extends sfActions
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        $dateFrom = "2014-03-10 00:00:00";
-        $dateTo = "2014-03-25 23:59:59";
+        $dateFrom = "2014-02-20 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");
@@ -264,6 +438,112 @@ class reportActions extends sfActions
         }
 
         print_r("executeSingaporeYachtShowLifestyleChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeSingaporeYachtShowLifestyleIncentive()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(5000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-26 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+            $distDB->setBkkPersonalSales(0);
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+            $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
+
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeSingaporeYachtShowLifestyleChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeJapanIncentive()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(5000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-01 00:00:00";
+        $dateTo = "2014-04-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+            $distDB->setBkkPersonalSales(0);
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+            $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
+
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeJapanIncentive Done");
         return sfView::HEADER_ONLY;
     }
     public function executeRunImeReport()
@@ -1109,6 +1389,31 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
             $count++;
         }
         return $resultArray;
+    }
+
+    function getSponsorAmount($distId)
+    {
+        $query = "SELECT SUM(bkk_personal_sales) AS _SUM
+                    FROM mlm_distributor WHERE 1=1 ";
+
+        if ($distId != null) {
+            $query .= " AND upline_dist_id = " . $distId;
+        }
+        $query .= " GROUP BY upline_dist_id ";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        //var_dump($query);
+        //exit();
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $count = $arr['_SUM'];
+        }
+        return $count;
     }
 
     function getTotalUpgradedPackageAmount($distributorId, $dateFrom, $dateTo)
