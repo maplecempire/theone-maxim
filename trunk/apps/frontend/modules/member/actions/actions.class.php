@@ -5503,6 +5503,12 @@ We look forward to your custom in the near future. Should you have any queries, 
         $anode[0]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
         $anode[0]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
 
+        if ($anode[0]["_sales_left"] < 0) {
+            $anode[0]["_sales_left"] = 0;
+        }
+        if ($anode[0]["_sales_right"] < 0) {
+            $anode[0]["_sales_right"] = 0;
+        }
         // openman
         if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
             $anode[0]["_right_this_month_sales"] = 0;
@@ -5594,7 +5600,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $anode[1]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
             $anode[1]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+            if ($anode[1]["_sales_left"] < 0) {
+                $anode[1]["_sales_left"] = 0;
+            }
+            if ($anode[1]["_sales_right"] < 0) {
+                $anode[1]["_sales_right"] = 0;
+            }
             // openman
             if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                 $anode[1]["_right_this_month_sales"] = 0;
@@ -5647,7 +5658,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $anode[3]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
                 $anode[3]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+                if ($anode[3]["_sales_left"] < 0) {
+                    $anode[3]["_sales_left"] = 0;
+                }
+                if ($anode[3]["_sales_right"] < 0) {
+                    $anode[3]["_sales_right"] = 0;
+                }
                 // openman
                 if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[3]["_right_this_month_sales"] = 0;
@@ -5701,7 +5717,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $anode[4]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
                 $anode[4]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+                if ($anode[4]["_sales_left"] < 0) {
+                    $anode[4]["_sales_left"] = 0;
+                }
+                if ($anode[4]["_sales_right"] < 0) {
+                    $anode[4]["_sales_right"] = 0;
+                }
                 // openman
                 if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[4]["_right_this_month_sales"] = 0;
@@ -5794,7 +5815,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $anode[2]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
             $anode[2]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+            if ($anode[2]["_sales_left"] < 0) {
+                $anode[2]["_sales_left"] = 0;
+            }
+            if ($anode[2]["_sales_right"] < 0) {
+                $anode[2]["_sales_right"] = 0;
+            }
             // openman
             if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                 $anode[2]["_right_this_month_sales"] = 0;
@@ -5847,7 +5873,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $anode[5]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
                 $anode[5]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+                if ($anode[5]["_sales_left"] < 0) {
+                    $anode[5]["_sales_left"] = 0;
+                }
+                if ($anode[5]["_sales_right"] < 0) {
+                    $anode[5]["_sales_right"] = 0;
+                }
                 // openman
                 if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[5]["_right_this_month_sales"] = 0;
@@ -5900,7 +5931,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[6]["_carry_right"] = $_carry_right;
                 $anode[6]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
                 $anode[6]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-
+                if ($anode[6]["_sales_left"] < 0) {
+                    $anode[6]["_sales_left"] = 0;
+                }
+                if ($anode[6]["_sales_right"] < 0) {
+                    $anode[6]["_sales_right"] = 0;
+                }
                 // openman
                 if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[6]["_right_this_month_sales"] = 0;
