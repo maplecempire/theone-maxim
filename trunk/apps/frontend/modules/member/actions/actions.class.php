@@ -807,13 +807,13 @@ class memberActions extends sfActions
     }
     public function executeApplyDebitCard()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
+//        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
 
-        } else {
-            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
+//        } else {
+//            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of stock."));
-            }
-        }
+//            }
+//        }
 
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
@@ -842,14 +842,14 @@ class memberActions extends sfActions
 
     public function executeDoApplyDebitCard()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
+//        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
 
-        } else {
-            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
+//        } else {
+//            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of stock."));
                 return $this->redirect('/member/applyDebitCard');
-            }
-        }
+//            }
+//        }
         $this->ecashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->epointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
