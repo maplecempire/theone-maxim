@@ -426,7 +426,7 @@ function populateDgAddPanel() {
                     <option value="APPLY DEBIT CARD">APPLY DEBIT CARD</option>
                     <option value="APPLY EZY CASH CARD">APPLY EZY CASH CARD</option>
                     <option value="CLAW BACK">CLAW BACK</option>
-                    <option value="EZY CARD REFUND">EZY CARD REFUND</option>
+                    <option value="DEBIT">DEBIT</option>
                     <option value="REFUND">REFUND</option>
                     <option value="REFUND DEBIT CARD">REFUND DEBIT CARD</option>
                     <option value="REFUND EZY CASH CARD">REFUND EZY CASH CARD</option>
