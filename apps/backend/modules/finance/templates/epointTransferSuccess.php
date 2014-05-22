@@ -407,6 +407,8 @@ function populateDgAddPanel() {
                     <option value="debit">Return Rolling Point</option>
                     <option value="epoint">Transfer CP1</option>
                     <option value="deduct_epoint">Deduct CP1</option>
+                    <option value="deduct_cp2">Deduct CP2</option>
+                    <option value="deduct_cp3">Deduct CP3</option>
                 </select>
             </td>
             <td style="color: blue; font-weight: bold;">RP<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
@@ -433,6 +435,7 @@ function populateDgAddPanel() {
                     <option value="IME">IME</option>
                     <option value="Q3">Q3</option>
                     <option value="WOF">WOF</option>
+                    <option value="SYS">SYS</option>
                 </select>
             </td>
         </tr>

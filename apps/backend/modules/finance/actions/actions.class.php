@@ -485,6 +485,44 @@ class financeActions extends sfActions
 
             $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
+        } else if ($doAction == "deduct_cp2") {
+            $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+            $mlm_account_ledger->setTransactionType($transactionType);
+            $mlm_account_ledger->setRollingPoint("N");
+            $mlm_account_ledger->setRemark($remark);
+            $mlm_account_ledger->setInternalRemark($internalRemark);
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($epointAmount);
+            $mlm_account_ledger->setBalance($distEPointBalance - $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+        } else if ($doAction == "deduct_cp3") {
+            $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+            $mlm_account_ledger->setTransactionType($transactionType);
+            $mlm_account_ledger->setRollingPoint("N");
+            $mlm_account_ledger->setRemark($remark);
+            $mlm_account_ledger->setInternalRemark($internalRemark);
+            $mlm_account_ledger->setCredit(0);
+            $mlm_account_ledger->setDebit($epointAmount);
+            $mlm_account_ledger->setBalance($distEPointBalance - $epointAmount);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
         } else if ($doAction == "transfer") {
             $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
 
