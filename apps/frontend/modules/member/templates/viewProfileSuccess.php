@@ -93,16 +93,14 @@ $(function() {
         },
         rules : {
             "bankName" : {
-                required : true,
-                minlength : 3
+                required : true
             },
             "bankAccNo" : {
                 required : true,
                 minlength : 3
             },
             "bankHolderName" : {
-                required : true,
-                minlength : 3
+                required : true
             },
             "bankAddress" : {
                 required : true
