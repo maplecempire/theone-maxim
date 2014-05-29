@@ -166,8 +166,8 @@ $(function() {
                                         }
 
                                         $totalSales = number_format($member['SUB_TOTAL'],2);
-//                                        if ($idx > 0) {
-                                        if ($idx > 10) {
+                                        if ($idx > 0) {
+//                                        if ($idx > 10) {
                                             $totalSales = "******";
                                         }
 
