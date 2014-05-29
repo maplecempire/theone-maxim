@@ -8,6 +8,7 @@
 
 $time1 = strtotime(date("Y-m-d H:i:s"));
 $time2 = strtotime("2014-06-01 00:00:00");
+//$time2 = strtotime("2014-05-30 01:34:00");
 
 $diff = $time2-$time1;
 
@@ -15,9 +16,14 @@ $days    = floor($diff / 86400);
 $hours   = floor(($diff - ($days * 86400)) / 3600);
 $minutes = floor(($diff - ($days * 86400) - ($hours * 3600)) / 60);
 $seconds = floor(($diff - ($days * 86400) - ($hours * 3600) - ($minutes*60)));
+$stop = false;
 
-if ($days < 10) {
-    $days = "0".$days;
+if ($days < 0) {
+    $stop = true;
+} else {
+    if ($days < 10) {
+        $days = "0".$days;
+    }
 }
 if ($hours < 10) {
     $hours = "0".$hours;
@@ -32,10 +38,12 @@ if ($seconds < 10) {
 
 <script type="text/javascript">
 $(function() {
+    <?php if ($stop == false) { ?>
     $('#counter').countdown({
         image: '/js/jquery-countdown/img/digits.png',
         startTime: '<?php echo $days.":".$hours.":".$minutes.":".$seconds?>'
     });
+    <?php } ?>
 });
 </script>
 <style type="text/css">
@@ -111,6 +119,32 @@ $(function() {
                 <tbody>
                 <tr>
                     <td colspan="4">
+                        <?php if ($stop == true) { ?>
+                        <div id="counter" style="height: 77px; overflow: hidden;">
+                            <div class="cntDigit" id="cnt_0"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntDigit" id="cnt_2"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntSeparator" style="float: left;">:</div>
+                            <div class="cntDigit" id="cnt_4"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntDigit" id="cnt_5"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntSeparator" style="float: left;">:</div>
+                            <div class="cntDigit" id="cnt_7"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntDigit" id="cnt_8"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntSeparator" style="float: left;">:</div>
+                            <div class="cntDigit" id="cnt_10"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                            <div class="cntDigit" id="cnt_11"
+                                 style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
+                        </div>
+                        <?php } else { ?>
+                            <div id="counter"></div>
+                        <?php }  ?>
+
                         <!--<div id="counter" style="height: 77px; overflow: hidden;">
                             <div class="cntDigit" id="cnt_0"
                                  style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
@@ -132,7 +166,7 @@ $(function() {
                             <div class="cntDigit" id="cnt_11"
                                  style="height: 4620px; float: left; background: url(&quot;/js/jquery-countdown/img/digits.png&quot;) repeat scroll 0% 0% transparent; width: 53px; margin-top: 0px;"></div>
                         </div>-->
-                        <div id="counter"></div>
+
 
 
                         <div class="desc">
