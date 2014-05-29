@@ -7,7 +7,7 @@
 <?php
 
 $time1 = strtotime(date("Y-m-d H:i:s"));
-$time2 = strtotime("2014-05-31 00:00:00");
+$time2 = strtotime("2014-06-01 00:00:00");
 
 $diff = $time2-$time1;
 
@@ -166,8 +166,8 @@ $(function() {
                                         }
 
                                         $totalSales = number_format($member['SUB_TOTAL'],2);
-                                        if ($idx > 0) {
-                                        //if ($idx > 5) {
+//                                        if ($idx > 0) {
+                                        if ($idx > 10) {
                                             $totalSales = "******";
                                         }
 
