@@ -998,6 +998,47 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='23'>Investors and IMs can place funds in tranches of USD5million 投资者与代理IB们即可以实现500万美金的汇款</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "30 May 2014";
+                ?>
+            </div>
+
+            <div id="page_23" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Leaders and Partners
+                            <br>
+                            <br>The company takes pleasure to announce that effective immediately and from May 30th 2014, Investors and IMs can place funds in tranches of USD5million.
+                            <br>
+                            <br>Applicants will be required to comply with Due Diligence procedure conducted by our LACD and once approved, can proceed to make arrangements for transfer of funds from a recognized A+ New York Bank to our Bankers.
+                            <br>
+                            <br>By Order
+                            <br>Management of MCL
+                            <br>
+                            <br>亲爱的领导人与伙伴们:
+                            <br>
+                            <br>我们很荣幸地告诉所有伙伴-从2014.5.30日起，投资者与代理IB们即可以实现500万美金的汇款。
+                            <br>
+                            <br>需要汇款500万美金的申请者需要配合公司法律部LACD完成一份尽职调查。一旦审核完毕，公司即将安排申请者通过一家纽约A+级别银行完成汇款。
+                            <br>
+                            <br>马胜资本有限公司管理层公告
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='22'>Monthly withdrawal period will be extended by an additional day to <strong>8 May 2014, 11.59PM</strong></a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
