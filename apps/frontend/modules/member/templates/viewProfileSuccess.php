@@ -939,6 +939,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileBankPassBook() != "") {
                         ?>
+                            <img src="/images/common/fileopen.png" alt="view file">
                             <!--<a href="<?php /*echo url_for("/download/bankPassBook?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
                             </a>-->
@@ -959,6 +960,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileProofOfResidence() != "") {
                         ?>
+                            <img src="/images/common/fileopen.png" alt="view file">
                             <!--<a href="<?php /*echo url_for("/download/proofOfResidence?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
                             </a>-->
@@ -979,6 +981,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileNric() != "") {
                         ?>
+                            <img src="/images/common/fileopen.png" alt="view file">
                             <!--<a href="<?php /*echo url_for("/download/nric?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
                             </a>-->
