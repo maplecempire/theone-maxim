@@ -1824,9 +1824,9 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setPgSuccess("Y");
                 $mlmDistEpointPurchase->setPgMsg("SUCCESS");
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_COMPLETE);
-                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
                 $mlmDistEpointPurchase->save();
 
@@ -1860,9 +1860,9 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setPgSuccess("N");
                 $mlmDistEpointPurchase->setPgMsg("transtat not 000");
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
-                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->save();
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
@@ -1872,9 +1872,9 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setPgSuccess("N");
             $mlmDistEpointPurchase->setPgMsg("Invalid Signature");
             $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
-            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
@@ -2088,7 +2088,7 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setPgSuccess("Y");
                 $mlmDistEpointPurchase->setPgMsg($msg);
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_COMPLETE);
-                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
                 $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
@@ -2126,9 +2126,9 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setPgSuccess("N");
                 $mlmDistEpointPurchase->setPgMsg($msg);
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
-                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->save();
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
@@ -2138,9 +2138,9 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setPgSuccess("N");
             $mlmDistEpointPurchase->setPgMsg("Invalid Signature");
             $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
-            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
@@ -3619,6 +3619,22 @@ class memberActions extends sfActions
                                 $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sponsorDistPairingledger->save();
 
+                                if ($uplineDistDB->getDistributorId() == 595) {
+                                    // OPRNMAN
+                                    $legBalance = $this->getPairingBalance(273056, Globals::PLACEMENT_RIGHT);
+
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(273056);
+                                    $sponsorDistPairingledger->setLeftRight(Globals::PLACEMENT_RIGHT);
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+                                }
                                 //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
                                 if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
