@@ -3619,7 +3619,7 @@ class memberActions extends sfActions
                                 $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sponsorDistPairingledger->save();
 
-                                if ($uplineDistDB->getDistributorId() == 595) {
+                                /*if ($uplineDistDB->getDistributorId() == 595) {
                                     // OPRNMAN
                                     $legBalance = $this->getPairingBalance(273056, Globals::PLACEMENT_RIGHT);
 
@@ -3634,7 +3634,7 @@ class memberActions extends sfActions
                                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->save();
-                                }
+                                }*/
                                 //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
                                 if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
