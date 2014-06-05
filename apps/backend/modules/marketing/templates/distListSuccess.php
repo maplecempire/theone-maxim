@@ -154,6 +154,16 @@ $(function(){
             $("#dgAddPanelName").css("color", "#686868");
         }
     });
+
+    $("#checkboxMemberId").click(function(){
+        if ($("#checkboxMemberId").is(':checked')) {
+            $("#dgAddPanelDistCode").attr("readonly", false);
+            $("#dgAddPanelDistCode").css("color", "");
+        } else {
+            $("#dgAddPanelDistCode").attr("readonly", true);
+            $("#dgAddPanelDistCode").css("color", "#686868");
+        }
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -356,6 +366,11 @@ $(function(){
                     editFullName = "Y";
                 }
 
+                var editMemberId = "N";
+                if ($("#checkboxMemberId").is(':checked')) {
+                    editMemberId = "Y";
+                }
+
                 $.ajax({
                     type : 'POST',
                     url : "<?php echo url_for('marketing/doSaveDist') ?>",
@@ -367,6 +382,7 @@ $(function(){
                         , password2 : $('#dgAddPanelPassword2').val()
                         , mt4_user_name : $('#dgAddPanelmt4_user_name').val()
                         , mt4_password : $('#dgAddPanelmt4_password').val()
+                        , distributorCode : $('#dgAddPanelDistCode').val()
                         , fullname : $('#dgAddPanelName').val()
                         , nickname : $('#dgAddPanelNickName').val()
                         , ic : $('#dgAddPanelIc').val()
@@ -384,10 +400,11 @@ $(function(){
                         , visa_debit_card : $('#dgAddPanelvisa_debit_card').val()
                         , status : $('#dgAddPanelStatus').val()
                         , editFullName : editFullName
+                        , editMemberId : editMemberId
                     },
                     success : function(data) {
                         if (data.error) {
-                            alert(data.errorMsg);
+                            error(data.errorMsg);
                         } else {
                             $("#dgAddPanel").dialog('close');
                             datagrid.fnDraw();
@@ -411,6 +428,7 @@ $(function(){
 function populateDgAddPanel() {
     $("#dgMsg").hide();
     $("#checkboxFullName").prop('checked', false);
+    $("#editMemberId").prop('checked', false);
     $("#dgAddPanelName").attr("readonly", true);
     $("#dgAddPanelName").css("color", "#686868");
 
@@ -469,7 +487,7 @@ function populateDgAddPanel() {
         <tr>
             <td width="30%">Distributor Code</td>
             <td>:</td>
-            <td><input type="text" id="dgAddPanelDistCode" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+            <td><input type="text" id="dgAddPanelDistCode" class="text ui-widget-content ui-corner-all" readonly="readonly" size="20"><input type="checkbox" id="checkboxMemberId" value="1"></td>
             <td width="30%">Rank Code</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelrank_code" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
