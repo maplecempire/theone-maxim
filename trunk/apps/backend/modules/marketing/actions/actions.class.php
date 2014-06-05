@@ -2143,7 +2143,44 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
 
         $editFullname = $this->getRequestParameter('editFullName');
+        $editMemberId = $this->getRequestParameter('editMemberId');
 
+        if ($editMemberId == "Y") {
+            $c = new Criteria();
+            $c->add(AppUserPeer::USERNAME, $this->getRequestParameter('distributorCode'));
+            $exist = AppUserPeer::doSelectOne($c);
+
+            if ($exist) {
+                $output = array(
+                    "error" => true
+                    , "errorMsg" => "Username ".$this->getRequestParameter('distributorCode')." already exist"
+                );
+                echo json_encode($output);
+                return sfView::HEADER_ONLY;
+            }
+
+            $remark = $tbl_distributor->getRemark();
+            if ($remark != "") {
+                $remark .= ", ";
+            }
+            $remark .= "renamed member ID from ".$tbl_distributor->getDistributorCode();
+            $tbl_distributor->setRemark($remark);
+            $tbl_distributor->setDistributorCode($this->getRequestParameter('distributorCode'));
+
+            $tbl_user = AppUserPeer::retrieveByPk($tbl_distributor->getUserId());
+            $tbl_user->setUsername($this->getRequestParameter('distributorCode'));
+            $tbl_user->save();
+
+            $c = new Criteria();
+            $c->add(MlmPackageContractPeer::DIST_ID, $tbl_distributor->getDistributorId());
+            $mlmPackageContracts = MlmPackageContractPeer::doSelect($c);
+
+            foreach ($mlmPackageContracts as $mlmPackageContract) {
+                $mlmPackageContract->setUsername($this->getRequestParameter('distributorCode'));
+                $mlmPackageContract->setStatusCode("ACTIVE");
+                $mlmPackageContract->save();
+            }
+        }
         if ($editFullname == "Y") {
             $remark = $tbl_distributor->getRemark();
             if ($remark != "") {
