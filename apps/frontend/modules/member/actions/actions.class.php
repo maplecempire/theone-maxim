@@ -5526,13 +5526,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             $anode[0]["_sales_right"] = 0;
         }
         // openman
-        if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+        /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
             $anode[0]["_right_this_month_sales"] = 0;
             $anode[0]["_accumulate_right"] = 0;
             $anode[0]["_today_right"] = 0;
             $anode[0]["_carry_right"] = 0;
             $anode[0]["_sales_right"] = 0;
-        }
+        }*/
 
         if ($leftOnePlacement == null) {
             $anode[1]["distCode"] = "";
@@ -5623,13 +5623,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[1]["_sales_right"] = 0;
             }
             // openman
-            if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+            /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                 $anode[1]["_right_this_month_sales"] = 0;
                 $anode[1]["_accumulate_right"] = 0;
                 $anode[1]["_today_right"] = 0;
                 $anode[1]["_carry_right"] = 0;
                 $anode[1]["_sales_right"] = 0;
-            }
+            }*/
 
             if ($leftThreePlacement == null) {
                 $anode[3]["distCode"] = "";
@@ -5681,13 +5681,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[3]["_sales_right"] = 0;
                 }
                 // openman
-                if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+                /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[3]["_right_this_month_sales"] = 0;
                     $anode[3]["_accumulate_right"] = 0;
                     $anode[3]["_today_right"] = 0;
                     $anode[3]["_carry_right"] = 0;
                     $anode[3]["_sales_right"] = 0;
-                }
+                }*/
             }
             if ($rightFourPlacement == null) {
                 $anode[4]["distCode"] = "";
@@ -5740,13 +5740,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[4]["_sales_right"] = 0;
                 }
                 // openman
-                if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+                /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[4]["_right_this_month_sales"] = 0;
                     $anode[4]["_accumulate_right"] = 0;
                     $anode[4]["_today_right"] = 0;
                     $anode[4]["_carry_right"] = 0;
                     $anode[4]["_sales_right"] = 0;
-                }
+                }*/
             }
         }
 
@@ -5838,13 +5838,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[2]["_sales_right"] = 0;
             }
             // openman
-            if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+            /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                 $anode[2]["_right_this_month_sales"] = 0;
                 $anode[2]["_accumulate_right"] = 0;
                 $anode[2]["_today_right"] = 0;
                 $anode[2]["_carry_right"] = 0;
                 $anode[2]["_sales_right"] = 0;
-            }
+            }*/
             if ($leftFivePlacement == null) {
                 $anode[5]["distCode"] = "";
                 $anode[5]["_self"] = new MlmDistributor();
@@ -5896,13 +5896,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[5]["_sales_right"] = 0;
                 }
                 // openman
-                if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+                /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[5]["_right_this_month_sales"] = 0;
                     $anode[5]["_accumulate_right"] = 0;
                     $anode[5]["_today_right"] = 0;
                     $anode[5]["_carry_right"] = 0;
                     $anode[5]["_sales_right"] = 0;
-                }
+                }*/
             }
             if ($rightSixPlacement == null) {
                 $anode[6]["distCode"] = "";
@@ -5954,13 +5954,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $anode[6]["_sales_right"] = 0;
                 }
                 // openman
-                if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
+                /*if ($distDB->getDistributorId() == 273056 && $this->getUser()->getAttribute(Globals::SESSION_DISTID) != 273056) {
                     $anode[6]["_right_this_month_sales"] = 0;
                     $anode[6]["_accumulate_right"] = 0;
                     $anode[6]["_today_right"] = 0;
                     $anode[6]["_carry_right"] = 0;
                     $anode[6]["_sales_right"] = 0;
-                }
+                }*/
             }
         }
 
@@ -7438,7 +7438,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if (date("d") > 8) {
+            if (date("d") > 7) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
                 return $this->redirect('/member/cp3Withdrawal');
             }
@@ -7526,7 +7526,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if (date("d") > 8) {
+            if (date("d") > 7) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
                 return $this->redirect('/member/ecashWithdrawal');
             }
