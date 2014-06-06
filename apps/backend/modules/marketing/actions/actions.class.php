@@ -1764,7 +1764,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     //}
                     //print_r($totalCount."success<br>");
                     foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
-                        print_r("1<br>");
+                        print_r($mlm_pip_csv->getLoginId()."<br>");
                         $totalVolume = $mlm_pip_csv->getVolume();
                         $mt4Id = $mlm_pip_csv->getLoginId();
                         $tradingMonth =  $mlm_pip_csv->getMonthTraded();
