@@ -2781,13 +2781,14 @@ class financeActions extends sfActions
         $response->sendHttpHeaders();
 
         $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
-,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
-,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
-,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
-,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
-,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
-,dist.moneytrac_customer_id,dist.moneytrac_username
-FROM mlm_cp3_withdraw withdraw
+                    ,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+                    ,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
+                    ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+                    ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+                    ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+                    ,dist.moneytrac_customer_id,dist.moneytrac_username
+                    ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
+            FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
 
@@ -2879,7 +2880,12 @@ FROM mlm_cp3_withdraw withdraw
         $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
         $sheet->setCellValue("V".$xlsRow, "Rank Code");
         $sheet->setCellValue("W".$xlsRow, "Remarks");
-        $sheet->setCellValue("X".$xlsRow, "Country");
+        $sheet->setCellValue("X".$xlsRow, "Address");
+        $sheet->setCellValue("Y".$xlsRow, "Address 2");
+        $sheet->setCellValue("Z".$xlsRow, "City");
+        $sheet->setCellValue("AA".$xlsRow, "State");
+        $sheet->setCellValue("AB".$xlsRow, "Postcode");
+        $sheet->setCellValue("AC".$xlsRow, "Country");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -2913,7 +2919,12 @@ FROM mlm_cp3_withdraw withdraw
             $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
             $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
             $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
-            $sheet->setCellValue("X".$xlsRow, $arr['country']);
+            $sheet->setCellValue("X".$xlsRow, $arr['address']);
+            $sheet->setCellValue("Y".$xlsRow, $arr['address2']);
+            $sheet->setCellValue("Z".$xlsRow, $arr['city']);
+            $sheet->setCellValue("AA".$xlsRow, $arr['state']);
+            $sheet->setCellValue("AB".$xlsRow, $arr['postcode']);
+            $sheet->setCellValue("AC".$xlsRow, $arr['country']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
@@ -3115,13 +3126,14 @@ FROM mlm_cp3_withdraw withdraw
         $response->sendHttpHeaders();
 
         $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
-,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
-,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
-,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
-,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
-,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
-,dist.moneytrac_customer_id,dist.moneytrac_username
-FROM mlm_ecash_withdraw withdraw
+                ,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+                ,accountLedger._ecash,withdraw.status_code,withdraw.created_on,dist.ic
+                ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+                ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+                ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+                ,dist.moneytrac_customer_id,dist.moneytrac_username
+                , dist.address, dist.address2, dist.city, dist.state, dist.postcode
+            FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
 
@@ -3213,7 +3225,12 @@ FROM mlm_ecash_withdraw withdraw
         $sheet->setCellValue("U".$xlsRow, "Money Trac Username");
         $sheet->setCellValue("V".$xlsRow, "Rank Code");
         $sheet->setCellValue("W".$xlsRow, "Remarks");
-        $sheet->setCellValue("X".$xlsRow, "Country");
+        $sheet->setCellValue("X".$xlsRow, "Address");
+        $sheet->setCellValue("Y".$xlsRow, "Address 2");
+        $sheet->setCellValue("Z".$xlsRow, "City");
+        $sheet->setCellValue("AA".$xlsRow, "State");
+        $sheet->setCellValue("AB".$xlsRow, "Postcode");
+        $sheet->setCellValue("AC".$xlsRow, "Country");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3247,7 +3264,12 @@ FROM mlm_ecash_withdraw withdraw
             $sheet->setCellValueExplicit("U".$xlsRow, $arr['moneytrac_username'], PHPExcel_Cell_DataType::TYPE_STRING);
             $sheet->setCellValue("V".$xlsRow, $arr['package_name']);
             $sheet->setCellValue("W".$xlsRow, $arr['remarks']);
-            $sheet->setCellValue("X".$xlsRow, $arr['country']);
+            $sheet->setCellValue("X".$xlsRow, $arr['address']);
+            $sheet->setCellValue("Y".$xlsRow, $arr['address2']);
+            $sheet->setCellValue("Z".$xlsRow, $arr['city']);
+            $sheet->setCellValue("AA".$xlsRow, $arr['state']);
+            $sheet->setCellValue("AB".$xlsRow, $arr['postcode']);
+            $sheet->setCellValue("AC".$xlsRow, $arr['country']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
