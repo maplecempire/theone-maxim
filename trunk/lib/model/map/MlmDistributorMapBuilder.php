@@ -238,5 +238,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('NORMAL_INVESTOR', 'NormalInvestor', 'string', CreoleTypes::VARCHAR, true, 1);
 
+		$tMap->addColumn('PRINCIPLE_RETURN', 'PrincipleReturn', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('LEADER_ID', 'LeaderId', 'int', CreoleTypes::INTEGER, false, null);
+
 	} 
 } 
