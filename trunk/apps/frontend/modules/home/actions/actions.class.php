@@ -298,7 +298,7 @@ class homeActions extends sfActions
 	</tbody>
 </table>";
                     $sendMailService = new SendMailService();
-                    $sendMailService->sendForgetPassword($existDistributor, $subject, $body);
+                     $sendMailService->sendForgetPassword($existDistributor, $subject, $body);
 
                     $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Password already sent to your email account. Please check your inbox."));
                 } else {
