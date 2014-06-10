@@ -83,23 +83,23 @@ class reportActions extends sfActions
     }
     public function executeTest()
     {
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
-//        $this->executeLangkawiIncentive();
-//        $this->executeLangkawiIncentive();
-//        $this->executeLangkawiIncentive();
-//        $this->executeLangkawiIncentive();
-//        $this->executeLangkawiIncentive();
+        $this->executeLangkawiIncentive();
+        $this->executeLangkawiIncentive();
+        $this->executeLangkawiIncentive();
+        $this->executeLangkawiIncentive();
+        $this->executeLangkawiIncentive();
 
 //        $q3 = 11 / 3;
 //        var_dump($q3);
@@ -110,11 +110,11 @@ class reportActions extends sfActions
     }
     public function executeTest2()
     {
-        $this->executeJapanChallenge();
-        $this->executeJapanChallenge();
-        $this->executeJapanChallenge();
-        $this->executeJapanChallenge();
-        $this->executeJapanChallenge();
+//        $this->executeJapanChallenge();
+//        $this->executeJapanChallenge();
+//        $this->executeJapanChallenge();
+//        $this->executeJapanChallenge();
+//        $this->executeJapanChallenge();
 
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
@@ -130,11 +130,11 @@ class reportActions extends sfActions
 //        $this->executeCaratDiamondChallenge();
 //        $this->executeCaratDiamondChallenge();
 
-//        $this->executeLangkawiChallenge();
-//        $this->executeLangkawiChallenge();
-//        $this->executeLangkawiChallenge();
-//        $this->executeLangkawiChallenge();
-//        $this->executeLangkawiChallenge();
+        $this->executeLangkawiChallenge();
+        $this->executeLangkawiChallenge();
+        $this->executeLangkawiChallenge();
+        $this->executeLangkawiChallenge();
+        $this->executeLangkawiChallenge();
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
@@ -258,7 +258,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-02-20 00:00:00";
-        $dateTo = "2014-04-30 23:59:59";
+        $dateTo = "2014-05-09 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("");
             $distDB->setBkkQualify2("");
@@ -271,7 +271,7 @@ class reportActions extends sfActions
             $x30to99 = 0;
             $x100to499 = 0;
             $x500 = 0;
-            if ($totalSponsorAmount >= 30000) {
+            if ($totalSponsorAmount >= 5000) {
                 $q3 = floor($totalSponsorAmount / 30000);
                 $distDB->setBkkQualify1($q3);
                 $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
@@ -399,7 +399,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-02-20 00:00:00";
-        $dateTo = "2014-04-30 23:59:59";
+        $dateTo = "2014-05-09 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");

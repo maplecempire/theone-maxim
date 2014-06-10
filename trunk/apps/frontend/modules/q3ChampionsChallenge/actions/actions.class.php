@@ -413,12 +413,13 @@ class q3ChampionsChallengeActions extends sfActions
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     public function executeBkk2()
     {
-        $this->executeTop2013();
-        $this->executeTop2013();
-        $this->executeTop2013();
-        $this->executeTop2013();
-        $this->executeTop2013();
-        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+//        $this->executeTop2013();
+        $this->executeBkk();
         $this->executeBkk();
 //        $this->executeCheckSales();
         print_r("Done");
