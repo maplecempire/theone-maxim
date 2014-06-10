@@ -2475,7 +2475,9 @@ class memberActions extends sfActions
             return $this->redirect('/member/register');
     	}
         $userName = $this->getRequestParameter('userName');
+        $userName = trim($userName);
         $fcode = $userName;
+
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         $password = $this->getRequestParameter('userpassword');
         $password2 = $this->getRequestParameter('securityPassword');
@@ -2823,6 +2825,7 @@ class memberActions extends sfActions
         }*/
 
         $userName = $this->getRequestParameter('userName','');
+        $userName = trim($userName);
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         if ($userName == '') {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
