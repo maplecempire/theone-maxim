@@ -419,6 +419,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $normal_investor = '';
 
+
+	
+	protected $principle_return = '1';
+
+
+	
+	protected $leader_id;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1249,6 +1257,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->normal_investor;
+	}
+
+	
+	public function getPrincipleReturn()
+	{
+
+		return $this->principle_return;
+	}
+
+	
+	public function getLeaderId()
+	{
+
+		return $this->leader_id;
 	}
 
 	
@@ -2687,6 +2709,34 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setPrincipleReturn($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->principle_return !== $v || $v === '1') {
+			$this->principle_return = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PRINCIPLE_RETURN;
+		}
+
+	} 
+	
+	public function setLeaderId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->leader_id !== $v) {
+			$this->leader_id = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::LEADER_ID;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2897,11 +2947,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->normal_investor = $rs->getString($startcol + 102);
 
+			$this->principle_return = $rs->getString($startcol + 103);
+
+			$this->leader_id = $rs->getInt($startcol + 104);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 103; 
+						return $startcol + 105; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3347,6 +3401,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 102:
 				return $this->getNormalInvestor();
 				break;
+			case 103:
+				return $this->getPrincipleReturn();
+				break;
+			case 104:
+				return $this->getLeaderId();
+				break;
 			default:
 				return null;
 				break;
@@ -3460,6 +3520,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[100] => $this->getMoneytracUsername(),
 			$keys[101] => $this->getPreferLanguage(),
 			$keys[102] => $this->getNormalInvestor(),
+			$keys[103] => $this->getPrincipleReturn(),
+			$keys[104] => $this->getLeaderId(),
 		);
 		return $result;
 	}
@@ -3784,6 +3846,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 102:
 				$this->setNormalInvestor($value);
 				break;
+			case 103:
+				$this->setPrincipleReturn($value);
+				break;
+			case 104:
+				$this->setLeaderId($value);
+				break;
 		} 	}
 
 	
@@ -3894,6 +3962,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[100], $arr)) $this->setMoneytracUsername($arr[$keys[100]]);
 		if (array_key_exists($keys[101], $arr)) $this->setPreferLanguage($arr[$keys[101]]);
 		if (array_key_exists($keys[102], $arr)) $this->setNormalInvestor($arr[$keys[102]]);
+		if (array_key_exists($keys[103], $arr)) $this->setPrincipleReturn($arr[$keys[103]]);
+		if (array_key_exists($keys[104], $arr)) $this->setLeaderId($arr[$keys[104]]);
 	}
 
 	
@@ -4004,6 +4074,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::MONEYTRAC_USERNAME)) $criteria->add(MlmDistributorPeer::MONEYTRAC_USERNAME, $this->moneytrac_username);
 		if ($this->isColumnModified(MlmDistributorPeer::PREFER_LANGUAGE)) $criteria->add(MlmDistributorPeer::PREFER_LANGUAGE, $this->prefer_language);
 		if ($this->isColumnModified(MlmDistributorPeer::NORMAL_INVESTOR)) $criteria->add(MlmDistributorPeer::NORMAL_INVESTOR, $this->normal_investor);
+		if ($this->isColumnModified(MlmDistributorPeer::PRINCIPLE_RETURN)) $criteria->add(MlmDistributorPeer::PRINCIPLE_RETURN, $this->principle_return);
+		if ($this->isColumnModified(MlmDistributorPeer::LEADER_ID)) $criteria->add(MlmDistributorPeer::LEADER_ID, $this->leader_id);
 
 		return $criteria;
 	}
@@ -4237,6 +4309,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setPreferLanguage($this->prefer_language);
 
 		$copyObj->setNormalInvestor($this->normal_investor);
+
+		$copyObj->setPrincipleReturn($this->principle_return);
+
+		$copyObj->setLeaderId($this->leader_id);
 
 
 		$copyObj->setNew(true);

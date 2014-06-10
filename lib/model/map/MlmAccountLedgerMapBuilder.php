@@ -48,7 +48,7 @@ class MlmAccountLedgerMapBuilder {
 
 		$tMap->addColumn('BALANCE', 'Balance', 'double', CreoleTypes::DECIMAL, true, 12);
 
-		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('INTERNAL_REMARK', 'InternalRemark', 'string', CreoleTypes::VARCHAR, false, 255);
 
