@@ -188,9 +188,9 @@ $(function() {
                                 <td valign="middle"><?php echo __('Total Personal Sales') ?></td>
                                 <?php
                                 if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
-
-                                } else {
                                     echo "<td align='middle'>Full Name</td>";
+                                } else {
+
                                 }
                                 ?>
                             </tr>
@@ -223,9 +223,9 @@ $(function() {
                                                 <td align='middle'>" . $totalSales . "</td>";
 
                                         if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
-
-                                        } else {
                                             echo "<td align='middle'>" . $member['full_name'] . "</td>";
+                                        } else {
+
                                         }
                                         echo "</tr>";
 
