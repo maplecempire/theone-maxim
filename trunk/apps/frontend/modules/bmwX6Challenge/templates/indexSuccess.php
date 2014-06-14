@@ -186,6 +186,13 @@ $(function() {
                                 <td valign="middle"><?php echo __('Member ID') ?></td>
                                 <td valign="middle"><?php echo __('Country') ?></td>
                                 <td valign="middle"><?php echo __('Total Personal Sales') ?></td>
+                                <?php
+                                if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+                                } else {
+                                    echo "<td align='middle'>Full Name</td>";
+                                }
+                                ?>
                             </tr>
 
                             <?php
@@ -213,8 +220,14 @@ $(function() {
                                                 <td align='left'>" . $idx++ . ".</td>
                                                 <td align='middle'>" . $member['distributor_code'] . "</td>
                                                 <td align='middle'>" . $member['country'] . "</td>
-                                                <td align='middle'>" . $totalSales . "</td>
-                                                </tr>";
+                                                <td align='middle'>" . $totalSales . "</td>";
+
+                                        if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+                                        } else {
+                                            echo "<td align='middle'>" . $member['full_name'] . "</td>";
+                                        }
+                                        echo "</tr>";
 
                                         if ($idx > 10)
                                             break;
