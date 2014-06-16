@@ -998,7 +998,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='24'>HongKong Diamond Quest: 香港钻石优惠</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='24'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1012,14 +1012,13 @@ $(document).ready(function() {
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
-                            <br>HongKong Diamond Quest:
-                            <br>香港钻石优惠
-                            <br>
                             <br>Dear Partners and Leaders,
                             <br>亲爱的领导人于伙伴们：
+                            <br>친애하는 파트너 및 리더 여러분들,
                             <br>
                             <br>Due to overwhelming request by our IMs for the company to offer our 1 Carat Diamond Promo, the management is pleased to offer a Not To Be Repeated "HONGKONG DIAMOND QUEST".
                             <br>鉴于众多会员强烈要求公司继续1克拉钻石促销计划，公司很高兴地通知大家我们新的、且只此一次计划的“香港钻石优惠”。
+                            <br>1 캐럿 다이아몬드 프로모션에 대한 우리 국제 멤버들의 열화와 같은 요청에 의해, 회사 매니지먼트 팀은 반복되지 않는 “홍콩 다이아몬드 퀘스트” 프로모션을 진행하게 됨을 기쁘게 알려드립니다.
                             <br>
                             <br>Qualifying Period: June 14th to June 23rd, 2014
                             <br>Amount to Qualify: USD100K
@@ -1027,9 +1026,13 @@ $(document).ready(function() {
                             <br>优惠期限：2014.6.14-6.23
                             <br>额度要求：10万美金
                             <br>优惠奖励：一颗1克拉钻石，外加两张马胜2014巴厘岛国际金融交流会门票2张（会议具体时间再定）
+                            <br>자격 충족 기간 : 2014년 6월 14일부터 6월 23일 까지
+                            <br>자격 금액 : 미화 100,000달러
+                            <br>수상 : 2014년 9월에 열릴 아름답고 로맨틱한 발리 섬에서의 컨벤션 참석 2 도어 티켓과 1 캐럿 다이아몬드 (정확한 날짜는 추후 통보)
                             <br>
                             <br>Go for it, DON'T MISS OUT ON GETTING YOUR OWN DIAMOND !!!
                             <br>加油吧，抓住这最后机会赢取属于您自己的钻石！
+                            <br>힘내십시오, 당신의 자신의 다이아몬드를 얻기 놓치지 마세요!
                             </td>
                         </tr>
                     </tbody>
