@@ -998,7 +998,50 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='23'>Investors and IMs can place funds in tranches of USD5million 投资者与代理IB们即可以实现500万美金的汇款</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='24'>HongKong Diamond Quest: 香港钻石优惠</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "15 June 2014";
+                ?>
+            </div>
+
+            <div id="page_24" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>HongKong Diamond Quest:
+                            <br>香港钻石优惠
+                            <br>
+                            <br>Dear Partners and Leaders,
+                            <br>亲爱的领导人于伙伴们：
+                            <br>
+                            <br>Due to overwhelming request by our IMs for the company to offer our 1 Carat Diamond Promo, the management is pleased to offer a Not To Be Repeated "HONGKONG DIAMOND QUEST".
+                            <br>鉴于众多会员强烈要求公司继续1克拉钻石促销计划，公司很高兴地通知大家我们新的、且只此一次计划的“香港钻石优惠”。
+                            <br>
+                            <br>Qualifying Period: June 14th to June 23rd, 2014
+                            <br>Amount to Qualify: USD100K
+                            <br>Receive: 1 Carat Diamond plus 2 door tickets to attend our Convention in the beautiful romantic island of Bali in September 2014 (actual dates TBA).
+                            <br>优惠期限：2014.6.14-6.23
+                            <br>额度要求：10万美金
+                            <br>优惠奖励：一颗1克拉钻石，外加两张马胜2014巴厘岛国际金融交流会门票2张（会议具体时间再定）
+                            <br>
+                            <br>Go for it, DON'T MISS OUT ON GETTING YOUR OWN DIAMOND !!!
+                            <br>加油吧，抓住这最后机会赢取属于您自己的钻石！
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='23'>Investors and IMs can place funds in tranches of USD5million 投资者与代理IB们即可以实现500万美金的汇款</a>
             </div>
             <div class="news_date">
             <?php
@@ -1007,7 +1050,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_23" class="news_desc" style="text-align: left; ">
+            <div id="page_23" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1039,7 +1082,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='22'>Monthly withdrawal period will be extended by an additional day to <strong>8 May 2014, 11.59PM</strong></a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='22'>Monthly withdrawal period will be extended by an additional day to <strong>8 May 2014, 11.59PM</strong></a>
             </div>
             <div class="news_date">
             <?php
@@ -1048,7 +1091,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_22" class="news_desc" style="text-align: left; ">
+            <div id="page_22" class="news_desc" style="text-align: left;  display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
