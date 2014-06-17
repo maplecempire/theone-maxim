@@ -939,7 +939,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileBankPassBook() != "") {
                         ?>
-                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span>
+                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span> <span style="color: #468847">Uploaded Successfully</span>
 <!--                            <img src="/images/common/fileopen.png" alt="view file">-->
                             <!--<a href="<?php /*echo url_for("/download/bankPassBook?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
@@ -961,7 +961,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileProofOfResidence() != "") {
                         ?>
-                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span>
+                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span> <span style="color: #468847">Uploaded Successfully</span>
 <!--                            <img src="/images/common/fileopen.png" alt="view file">-->
                             <!--<a href="<?php /*echo url_for("/download/proofOfResidence?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
@@ -983,7 +983,7 @@ $(function() {
                         <?php
                         if ($distDB->getFileNric() != "") {
                         ?>
-                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span>
+                            <span class="ui-icon ui-icon-circle-check" style="display:inline-block;"></span> <span style="color: #468847">Uploaded Successfully</span>
 <!--                            <img src="/images/common/fileopen.png" alt="view file">-->
                             <!--<a href="<?php /*echo url_for("/download/nric?q=".rand()) */?>">
                                 <img src="/images/common/fileopen.png" alt="view file">
