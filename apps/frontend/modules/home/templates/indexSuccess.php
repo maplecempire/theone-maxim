@@ -983,6 +983,14 @@ $(document).ready(function() {
 
     <div class="popdivider"></div>
 
+
+        <!--<table width="100%">
+            <tr>
+                <td align="center">
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
+                </td>
+            </tr>
+        </table>-->
     <?php
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
@@ -1049,18 +1057,6 @@ $(document).ready(function() {
             <div class="popdivider"></div>
         </div>
         <?php } ?>
-    <?php
-    $culture = $sf_user->getCulture();
-    //foreach ($announcements as $announcement) { ?>
-    <div class="popinfo1">
-
-        <!--<table width="100%">
-            <tr>
-                <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
-                </td>
-            </tr>
-        </table>-->
         <?php if ($culture == "jp") {?>
         <div class="page">
             <div class="poptitle">
