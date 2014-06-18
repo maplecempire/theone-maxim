@@ -995,6 +995,72 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>-->
+        <?php if ($culture == "kr") {?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='26'>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션 Exclusive International Member Exchange (IME) Bali Promo for Korea</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "18 June 2014";
+                ?>
+            </div>
+
+            <div id="page_26" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션:
+                            <br>
+                            <br>프로모션 기간 2014년 6월 15일에서 7월 31일
+                            <br>
+                            <br>자격요견 : 3만달러 신청
+                            <br>권리 : 1인 호텔 숙박권 (3박 – 2인1실 기준)과 맥심 트레이더 발리 IME 갈라 디너 참석권과 비행기 티켓 (500CP1 상당)
+                            <br>
+                            <br>또는
+                            <br>
+                            <br>개인 매출 자격 요견 : 개인 매출 100만 불
+                            <br>권리 : 1인 호텔 숙박권 (3박 – 2인1실 기준)과 맥심 트레이더 발리 IME 갈라 디너 참석권과 비행기 티켓 (500CP1 상당)
+                            <br>
+                            <br>참조 1: 한국국적 또는 거주자에 한함. (증빙 주소 요구)
+                            <br>참조 2: 국제 회원 또는 리더들은 1 인센티브만 자격 가능.
+                            <br>
+                            <br>Exclusive International Member Exchange (IME) Bali Promo for Korea:
+                            <br>
+                            <br>Promo June 15th to July 31st, 2014
+                            <br>
+                            <br>To Qualify: Sign Up for USD30k
+                            <br>Entitle: Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
+                            <br>
+                            <br>or
+                            <br>Personal Sales Qualifying: Personal Sales of USD100k
+                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
+                            <br>
+                            <br>Nb1: Only Citizens and Residents of Korea are eligible for this promo. (Proof of Address required)
+                            <br>Nb2: IM or Leaders can only qualify for 1 incentive
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
+    <?php
+    $culture = $sf_user->getCulture();
+    //foreach ($announcements as $announcement) { ?>
+    <div class="popinfo1">
+
+        <!--<table width="100%">
+            <tr>
+                <td align="center">
+                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
+                </td>
+            </tr>
+        </table>-->
         <?php if ($culture == "jp") {?>
         <div class="page">
             <div class="poptitle">
