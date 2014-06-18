@@ -995,7 +995,71 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>-->
+        <?php if ($culture == "jp") {?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='25'>Exclusive International Member Exchange (IME) Bali Promo for Japan 日本のためのバリ特別プロモーション</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "18 June 2014";
+                ?>
+            </div>
 
+            <div id="page_25" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Exclusive International Member Exchange (IME) Bali Promo for Japan:
+                            <br>
+                            <br>Promo June 15th to July 31, 2014
+                            <br>
+                            <br>To Qualify:
+                            <br>Sign Up for USD30k package
+                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner
+                            <br>
+                            <br>Sign Up for USD50k Package
+                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
+                            <br>
+                            <br>or
+                            <br>
+                            <br>Personal Sales Qualifying:  Personal Sales of USD150k
+                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
+                            <br>
+                            <br>
+                            <br>Nb1: Only Citizens and Residents of Japan are eligible for this promo. (Proof of Address required)
+                            <br>Nb2: IM or Leaders can only qualify for 1 incentive claim.
+                            <br>
+                            <br>
+                            <br>日本のためのバリ特別プロモーション
+                            <br>プロモーション期間　2014年6月15日〜7月31日
+                            <br>
+                            <br>資格を得るには:
+                            <br>USD30kパッケージへのサインアップ
+                            <br>権利:お一人さまにつきホテル宿泊（３泊　ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケット。
+                            <br>USD50kパッケージへのサインアップ
+                            <br>権利: お一人さまにつきホテル宿泊（３泊
+                            <br>ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケット＋航空券（500CP1）
+                            <br>または
+                            <br>パーソナルセールス資格:USD150kのパーソナルセールス
+                            <br>権利:  お一人さまにつきホテル宿泊（３泊
+                            <br>ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケットおよび航空券 (500CP1)
+                            <br>
+                            <br>
+                            <br>注意1:日本の居住者および日本国民のみがこのプロモーションの対象となります。（住所を証明するものが必要です）
+                            <br>
+                            <br>注意2: IMまたはリーダーは1インセンティブクレームのみの権利となります。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='24'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트 香港ダイヤモンドクエスト</a><img src="/images/new_icon.gif">
