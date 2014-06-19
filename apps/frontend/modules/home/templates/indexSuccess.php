@@ -631,6 +631,9 @@ ul, ol {
             </script>
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201406/chengdu_money_fair.jpg"><img width="582" src="/images/201406/chengdu_money_fair.jpg" alt="" title="CHENGDU MONEY FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <div class="hr2"></div>
+
             <?php if ($culture == "cn") {?>
                 <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201403/sys-cn.gif"><img width="582" src="/images/201403/sys-cn.gif" alt="" title="SINGAPORE YACHT SHOW 2014" class="aligncenter size-full wp-image-162"></a></p>
             <?php } else if ($culture == "kr") {?>
@@ -1003,10 +1006,61 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>-->
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='27'>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "19 June 2014";
+                ?>
+            </div>
+
+            <div id="page_27" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+                            <br>
+                            <br>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000.
+                            <br>
+                            <br>This decision has been a long time coming and very much in line with our objective to become an Icon in the Forex and Fund Management industry which is the aspiration of all our IMs and Partners.
+                            <br>
+                            <br>Say YES to MAXIM TRADER !!!!
+                            <br>
+                            <br>尊敬的领导人与伙伴们：
+                            <br>
+                            <br>从2014.7.15日起生效-马胜金融集团最低投资配套额度将变为黄金配套5000美金.
+                            <br>
+                            <br>公司有此决定由来已久，这也与希望将公司打造成外汇与基金管理界领军企业的远景不谋而合。
+                            <br>
+                            <br>确认马胜说：YES!
+                            <br>
+                            <br>친애하는 국제회원 및 파트너 여러분,
+                            <br>
+                            <br>2014년 7월 15일부터 맥심 트레이더에 사인하는 최소 패키지는 미화 5천불의 골드 패키지입니다.
+                            <br>
+                            <br>이 결정은 오래전에 정해진 결정이며 외환과 펀드 매니지먼트 산업의 아이콘이 되고자 하는 모든 국제 회원과 파트너의 염원을 목표로 하는 것과 같은 선상에 있습니다.
+                            <br>
+                            <br>맥심 트레이더에게 “예스”라고 합시다.
+                            <br>
+                            <br>IM(インターナショナルメンバー)およびパトナーの皆様
+                            <br>2014年7月15日より、マキシマムトレーダーの最小投資金額は5,000ドルのゴールドパッケージとなります。この変更は、マキシマムトレーダーを、為替・ファンドマネジメント業界のリーダーにする経営目標、そして、IM(インターナショナルメンバー)およびパトナーたちの期待を考慮した上で、長時間にわたって決定したことである。
+                            <br>マキシマムトレーダーの更なる成長に、「イエス」と言いましょう！！
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
         <?php if ($culture == "kr") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='26'>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션 Exclusive International Member Exchange (IME) Bali Promo for Korea</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='26'>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1034,20 +1088,6 @@ $(document).ready(function() {
                             <br>
                             <br>참조 1: 한국국적 또는 거주자에 한함. (증빙 주소 요구)
                             <br>참조 2: 국제 회원 또는 리더들은 1 인센티브만 자격 가능.
-                            <br>
-                            <br>Exclusive International Member Exchange (IME) Bali Promo for Korea:
-                            <br>
-                            <br>Promo June 15th to July 31st, 2014
-                            <br>
-                            <br>To Qualify: Sign Up for USD30k
-                            <br>Entitle: Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
-                            <br>
-                            <br>or
-                            <br>Personal Sales Qualifying: Personal Sales of USD100k
-                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
-                            <br>
-                            <br>Nb1: Only Citizens and Residents of Korea are eligible for this promo. (Proof of Address required)
-                            <br>Nb2: IM or Leaders can only qualify for 1 incentive
                             </td>
                         </tr>
                     </tbody>
@@ -1060,7 +1100,7 @@ $(document).ready(function() {
         <?php if ($culture == "jp") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='25'>Exclusive International Member Exchange (IME) Bali Promo for Japan 日本のためのバリ特別プロモーション</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='25'>日本のためのバリ特別プロモーション</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1074,45 +1114,25 @@ $(document).ready(function() {
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
-                            <br>Exclusive International Member Exchange (IME) Bali Promo for Japan:
-                            <br>
-                            <br>Promo June 15th to July 31, 2014
-                            <br>
-                            <br>To Qualify:
-                            <br>Sign Up for USD30k package
-                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner
-                            <br>
-                            <br>Sign Up for USD50k Package
-                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
-                            <br>
-                            <br>or
-                            <br>
-                            <br>Personal Sales Qualifying:  Personal Sales of USD150k
-                            <br>Entitle:  Hotel Accommodation (3 nights - twin sharing basis) for 1 pax plus 1 door ticket to Maxim Trader Bali IME @ Gala Dinner plus Air ticket (500CP1)
-                            <br>
-                            <br>
-                            <br>Nb1: Only Citizens and Residents of Japan are eligible for this promo. (Proof of Address required)
-                            <br>Nb2: IM or Leaders can only qualify for 1 incentive claim.
-                            <br>
-                            <br>
                             <br>日本のためのバリ特別プロモーション
                             <br>プロモーション期間　2014年6月15日〜7月31日
                             <br>
                             <br>資格を得るには:
-                            <br>USD30kパッケージへのサインアップ
+                            <br>USD30kパッケージへの自己投資
                             <br>権利:お一人さまにつきホテル宿泊（３泊　ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケット。
-                            <br>USD50kパッケージへのサインアップ
+                            <br>USD50kパッケージへの自己投資
                             <br>権利: お一人さまにつきホテル宿泊（３泊
                             <br>ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケット＋航空券（500CP1）
+                            <br>
                             <br>または
-                            <br>パーソナルセールス資格:USD150kのパーソナルセールス
+                            <br>直接紹介業績:USD150kのパーソナルセールス
                             <br>権利:  お一人さまにつきホテル宿泊（３泊
                             <br>ツインルームのシェアベース）。さらにマキシムトレーダーバリIME@ガラディナーへの1ドアチケットおよび航空券 (500CP1)
                             <br>
                             <br>
                             <br>注意1:日本の居住者および日本国民のみがこのプロモーションの対象となります。（住所を証明するものが必要です）
                             <br>
-                            <br>注意2: IMまたはリーダーは1インセンティブクレームのみの権利となります。
+                            <br>注意2: IMまたはリーダーは1インセンティブのみの権利となります。
                             </td>
                         </tr>
                     </tbody>
