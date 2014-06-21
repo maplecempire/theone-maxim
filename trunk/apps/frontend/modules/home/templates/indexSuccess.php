@@ -1008,6 +1008,77 @@ $(document).ready(function() {
         </table>-->
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='28'>Promo: 2nd BMW X6 Challenge: BMW X6挑战计划第二期</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "21 June 2014";
+                ?>
+            </div>
+
+            <div id="page_28" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Qualifying period June 1st to August 31st 2014 @ 23:59hours (GMT+8)
+                            <br>挑战日期：2014.6.1-8.31日晚23:59(GMT+8)
+                            <br>
+                            <br>Grand Prize BMW X6 Challenge
+                            <br>- The qualifier with the MOST Personal Sales will RECEIVE a Brand New BMW X6 in their country of domicile.
+                            <br>Note: ONLY 1 (one) WINNER
+                            <br>宝马BMW X6 特级挑战
+                            <br>挑战时期内个人销售业绩第一名的伙伴将会获得一辆崭新的BMW X6轿车(于会员注册国提取新车)
+                            <br>注：名额只限1位
+                            <br>
+                            <br>Consolation Prize
+                            <br>- Achieve a Personal Sales of USD3Million and you will receive a Brand New BMW 3 Series in your country.
+                            <br>Note: Multiple Winners Apply
+                            <br>宝马轿车挑战
+                            <br>于挑战时期间个人业绩达成300万美金的会员将会获得一辆崭新宝马BMW 3系列轿车(于会员注册国提取新车)
+                            <br>注：多位名额
+                            <br>
+                            <br>Go for it, Grab your BMW today....!!!
+                            <br>加油吧，赢取只属于您的宝马荣耀！
+                            <br>
+                            <br>プロモーション　第二次 BMW X6チャレンジ
+                            <br>資格期間　2014年6月1日〜8月31日 23:59 (GMT+8)
+                            <br>大賞　BMX X6　チャレンジ
+                            <br>- もっとも大きな個人売り上げをあげた資格者は新品のBMW X6を居住地にてお受け取りいただけます。
+                            <br>注意；勝者はお一人様のみとなります
+                            <br>
+                            <br>残念賞
+                            <br>- USD300万以上の個人セールスをあげた方は、新品のBMW3シリーズをあなたの国で受け取ります。
+                            <br>注意；複数名様
+                            <br>
+                            <br>頑張ってください。あなたのBMWを今日掴んでください....!!!
+                            <br>
+                            <br>프로모션 : 두번째 BMW X6 챌린지
+                            <br>
+                            <br>자격 충족 기간 2014년 6월 1일부터 8월 31일 밤 11:59시 까지
+                            <br>
+                            <br>최고 상 BMW X6 챌린지
+                            <br>-   최고 개인 판매를 올릴 경우 자국에서 신형 BMW X6를 받을 것입니다.
+                            <br>참조 : 단 1명의 승자
+                            <br>
+                            <br>감투상
+                            <br>
+                            <br>-   개인 매출 미화 3백만 달러를 달성할 경우 자국에서 신형 BMW 3시리즈를 받을 것입니다.
+                            <br>
+                            <br>참조 : 다수의 수상자 가능
+                            <br>
+                            <br>파이팅하십시오, 오늘 당신의 BMW를 쟁취하십시오…!!!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='27'>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
