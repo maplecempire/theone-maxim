@@ -1272,6 +1272,50 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='30'>Auto Placement into Genealogy 自动安置通知 자동 배치</a>
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "06 June 2014";
+                ?>
+            </div>
+
+            <div id="page_30" class="news_desc" style="text-align: left; display: none">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Partners and Leaders, effective immediately, please be informed that those Registered Members that have bought packages and not Restructured their Placement will be Automatically Placed by the company onto the Weaker Group of their Referrer's genealogy after 7 days to ensure that there are no orphan account in the system.
+                            <br>
+                            <br>By Order
+                            <br>Management of MCL
+                            <br>
+                            <br>
+                            <br>
+                            <br>亲爱的领导人和伙伴们：
+                            <br>
+                            <br>即时生效-为了系统内不产生遗留无推荐人账户，所有已经注册且已购买配套的会员账户若7天之内未完成安置，公司系统将会自动为您安置在业绩小的一条线上。敬请留意。
+                            <br>
+                            <br>马胜金融集团高层
+                            <br>
+                            <br>
+                            <br>
+                            <br>친애하는 파트너와 리더 여러분, 오늘부터 패키지를 구매한 등록 회원 중 위치를 재조정 하지 않은 분들은7일 이후에 시스템 확인 후 회사에 의해서 추천인의 소그룹으로 자동 배치될 것입니다.
+                            <br>
+                            <br>주문부서회사
+                            <br>맥심 캐피탈 주식
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='23'>Investors and IMs can place funds in tranches of USD5million 投资者与代理IB们即可以实现500万美金的汇款</a>
             </div>
             <div class="news_date">
