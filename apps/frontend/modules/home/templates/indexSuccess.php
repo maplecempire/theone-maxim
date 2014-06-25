@@ -1008,6 +1008,51 @@ $(document).ready(function() {
         </table>-->
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='31'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "25 June 2014";
+                ?>
+            </div>
+
+            <div id="page_31" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Partners and Leaders,
+                            <br>亲爱的领导人与伙伴们：
+                            <br>친애하는  파트너 및 리더 여러분,
+                            <br>
+                            <br>Due to overwhelming request by our IMs for the company to extend our 1 Carat Diamond Promo, the management is pleased:
+                            <br>鉴于众多会员们强烈要求公司延长1克拉钻石促销计划，我们很高兴地宣布：
+                            <br>1 캐럿 다이아몬드 프로모션을 연장해 달라는 우리 IMs의 열화와 같은 요구에, 우리 경영진은 기뻐하고 있습니다.
+                            <br>
+                            <br>Qualifying Period Extended to : June 30th, 2014
+                            <br>Amount to Qualify: USD100K
+                            <br>Receive: 1 Carat Diamond plus 2 door tickets to attend our Convention in the beautiful romantic island of Bali in September 2014 (actual dates TBA).
+                            <br>优惠期限延长至：2014.6.30
+                            <br>额度要求：10万美金
+                            <br>优惠奖励：一颗1克拉钻石，外加马胜2014巴厘岛国际金融交流会门票2张（会议具体时间再定）
+                            <br>연장 기간  :  2014년 6월 30일
+                            <br>유효 금액  : USD 100K
+                            <br>상품 :   1 캐럿 다이아몬드  + 2014년 9월 아름다운 낭만의 섬 발리에서 개최되는 컨벤션 티켓 2장 (상세일정 추후 공지)
+                            <br>
+                            <br>Go for it, DON'T MISS OUT ON GETTING YOUR OWN DIAMOND !!!
+                            <br>加油吧，抓住这最后机会赢取属于您自己的钻石！
+                            <br>꼭 참가하셔서. 다이아몬드 상품 기회를 놓치지 마세요!!!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='28'>Promo: 2nd BMW X6 Challenge: BMW X6挑战计划第二期</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1272,7 +1317,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='30'>Auto Placement into Genealogy 自动安置通知 자동 배치</a>
+                <a href='#' class="page_link" ref='30'>Auto Placement into Genealogy 自动安置通知 자동 배치 系図への自動配置について</a>
             </div>
             <div class="news_date">
             <?php
@@ -1305,6 +1350,12 @@ $(document).ready(function() {
                             <br>
                             <br>주문부서회사
                             <br>맥심 캐피탈 주식
+                            <br>
+                            <br>
+                            <br>
+                            <br>系図への自動配置について
+                            <br>
+                            <br>パートナーとリーダーの皆さま、登録されたメンバーで、パッケージを購入し、まだプレイスメントを再構築していない方は、システム内の孤立アカウントがないことを確実にするために、７日後に会社によって彼らの紹介者の系図のウィーカーグループに自動的に配置されてしまいますことをご承知ください。これは即時有効となります。
                             </td>
                         </tr>
                     </tbody>
