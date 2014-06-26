@@ -566,7 +566,7 @@ class memberActions extends sfActions
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
-
+        $epointAmount = str_replace(",", "", $epointAmount);
         $this->toHideCp2Cp3Transfer = false;
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         // amz001 chales (20131223)
@@ -1830,7 +1830,7 @@ class memberActions extends sfActions
 
                 $mlmDistEpointPurchase->save();
 
-                $mlm_account_ledger = new MlmAccountLedger();
+                /*$mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
@@ -1852,7 +1852,7 @@ class memberActions extends sfActions
                 $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
                 $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                $mlm_account_ledger->save();*/
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transaction Successful."));
                 return $this->redirect('/member/epointPurchase?pg=Y');
@@ -1880,6 +1880,119 @@ class memberActions extends sfActions
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
             return $this->redirect('/member/epointPurchase');
         }
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executePapSuccessRedirect() {
+        $orderRef = $this->getRequestParameter("orderRef");
+        $successcode = $this->getRequestParameter("successcode");
+        $amount = $this->getRequestParameter("amount");
+        $token = $this->getRequestParameter("token");
+        $security_code = "sayyestomaximtrader";
+
+        $arr = explode("_", $this->getRequestParameter('orderRef'));
+        $paymentId = $arr[1];
+        $mlmDistEpointPurchase = MlmDistEpointPurchasePeer::retrieveByPK($paymentId);
+
+        if ($mlmDistEpointPurchase) {
+            /*print_r($paymentId);
+            print_r("<br>");
+            print_r($orderRef);
+            print_r("<br>");
+            print_r($successcode);
+            print_r("<br>");
+            print_r($amount);
+            print_r("<br>");
+            print_r($security_code);
+            print_r("<br>");
+            print_r(":".$token);*/
+            //exit();
+            if (md5($orderRef . $successcode . $amount . $security_code) == $token) {
+                if ($successcode == '0') {
+                    $dist = MlmDistributorPeer::retrieveByPK($mlmDistEpointPurchase->getDistId());
+                    //$companyEpoint = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+                    //$distEpoint = $this->getAccountBalance($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $totalEpoint = $mlmDistEpointPurchase->getAmount();
+
+                    $mlmDistEpointPurchase->setPgSuccess("Y");
+                    $mlmDistEpointPurchase->setPgMsg("SUCCESS");
+                    $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_COMPLETE);
+                    $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                    $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                    $mlmDistEpointPurchase->save();
+
+                    /*$mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                    $mlm_account_ledger->setRemark("EPOINT PURCHASE (" . $dist->getDistributorCode() . ")");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($totalEpoint);
+                    $mlm_account_ledger->setBalance($companyEpoint - $totalEpoint);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($dist->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_POINT_PURCHASE);
+                    $mlm_account_ledger->setRemark("");
+                    $mlm_account_ledger->setCredit($totalEpoint);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distEpoint + $totalEpoint);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();*/
+
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transaction Successful."));
+                    return $this->redirect('/member/epointPurchase?pg=Y');
+                } else {
+                    $mlmDistEpointPurchase->setPgSuccess("N");
+                    $mlmDistEpointPurchase->setPgMsg("successcode not 0:".$successcode);
+                    $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+                    $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                    $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmDistEpointPurchase->save();
+
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                    return $this->redirect('/member/epointPurchase');
+                }
+            } else {
+                //var_dump("hehere");
+                //exit();
+                $mlmDistEpointPurchase->setPgSuccess("N");
+                $mlmDistEpointPurchase->setPgMsg("Invalid Token ".$token);
+                $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+                $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmDistEpointPurchase->save();
+
+                /*var_dump($mlmDistEpointPurchase);
+                exit();*/
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                return $this->redirect('/member/epointPurchase');
+            }
+        } else {
+            $mlmDistEpointPurchase->setPgSuccess("N");
+            $mlmDistEpointPurchase->setPgMsg("Invalid orderRef ".$orderRef);
+            $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
+            $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+            $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistEpointPurchase->save();
+
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/epointPurchase');
+        }
+        return sfView::HEADER_ONLY;
+    }
+    public function executePapErrorRedirect() {
         return sfView::HEADER_ONLY;
     }
     public function executeGozErrorRedirect() {
@@ -2026,6 +2139,53 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->save();
 
                 $this->setTemplate('epointPurchaseGoz');
+            } else if ($paymentMethod == "PaP") {
+                //$ver = "1.0";
+                $merid = "10000204";
+                $returnurl = "http://localhost:8087/paymentGateway?successcode=0";
+                $errorurl = "http://localhost:8087/paymentGateway?successcode=1";
+//                $returnurl = "http://partner.maximtrader.com/member/papSuccessRedirect";
+//                $errorurl = "http://partner.maximtrader.com/member/papErrorRedirect";
+                $orderid = "maxim_".$paymentReference;
+                $amount = $dispAmount;
+                $curtype = "156";
+                $lang = "En";
+                $paytype = "23";
+                $orderdate = date("Ymd");
+                $remark = $distDB->getDistributorCode();
+                $email = $distDB->getEmail();
+                $fullName = $distDB->getFullName();
+                $contactNo = $distDB->getContact();
+                $enctype = "1";
+
+                //$this->ver = $ver;
+                $this->merid = $merid;
+                $this->orderid = $orderid;
+                $this->amount = $amount;
+                $this->orderdate = $orderdate;
+                $this->curtype = $curtype;
+                $this->paytype = $paytype;
+                $this->lang = $lang;
+                $this->returnurl = $returnurl;
+                $this->errorurl = $errorurl;
+                $this->remark = $remark;
+                $this->enctype = $enctype;
+                $this->email = $email;
+                $this->fullName = $fullName;
+                $this->contactNo = $contactNo;
+
+                $md5Key = "88496625849445331821427993934397583101845496550535688096140279054296113998693043340961948795056633136331268949200793818235742794";
+                $orge = 'merid='.$merid.'&orderid='.$orderid.'&amount='.$amount.'&orderdate='.$orderdate.'&curtype='.$curtype.'&paytype='.$paytype.'&lang='.$lang.'&returnurl='.$returnurl.'&errorurl='.$errorurl.'&remark1='.$remark.'&enctype='.$enctype.'&notifytype=2&urltype=1&s2surl='.$errorurl.'&goodsname=goods';
+
+                $mlmDistEpointPurchase->setCurrencyType($curtype);
+                $mlmDistEpointPurchase->setPgMsg($orge);
+                $mlmDistEpointPurchase->setPgBillNo($orderid);
+                $mlmDistEpointPurchase->setPgRetEncodeType("");
+                $mlmDistEpointPurchase->setPgCurrencyType($curtype);
+                $mlmDistEpointPurchase->setPgSignature("");
+                $mlmDistEpointPurchase->save();
+
+                $this->setTemplate('epointPurchasePaP');
             } else {
                 $this->setFlash('purchaseId', $mlmDistEpointPurchase->getPurchaseId());
                 $this->setFlash('amount', $mlmDistEpointPurchase->getCurrencyType() . " ". $amount);
@@ -8324,6 +8484,32 @@ We look forward to your custom in the near future. Should you have any queries, 
         return sfView::HEADER_ONLY;
     }
 
+    public function executeAutoPlacement() {
+        $bodytag = str_replace(",", "", "2,000.00");
+        var_dump($bodytag);
+        $bodytag = str_replace(",", "", "200.00");
+        var_dump($bodytag);
+        $bodytag = str_replace(",", "", "2,200,000.00");
+        var_dump($bodytag);
+
+        $dateUtil = new DateUtil();
+        $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d")) . " 00:00:00";
+        $currentDate_timestamp = strtotime($currentDate);
+        //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+        $dividendDate = strtotime("-7 days", $currentDate_timestamp);
+        var_dump($dividendDate);
+        var_dump(date("Y-m-d",$dividendDate));
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+        $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
+        $c->add(MlmDistributorPeer::ACTIVE_DATETIME, $dividendDate, Criteria::LESS_THAN);
+
+        $pendingDistributors = MlmDistributorPeer::doSelect($c);
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDailyBonus()
     {
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
@@ -9275,7 +9461,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
-
+        $epointAmount = str_replace(",", "", $epointAmount);
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
