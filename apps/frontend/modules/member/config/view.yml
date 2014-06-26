@@ -37,3 +37,7 @@ epointPurchasePGSuccess:
 epointPurchaseGozSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+epointPurchasePaPSuccess:
+  has_layout:     off
+  stylesheets: 	  []
