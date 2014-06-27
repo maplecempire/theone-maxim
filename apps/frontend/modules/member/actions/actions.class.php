@@ -2160,7 +2160,8 @@ class memberActions extends sfActions
                 $amount = $dispAmount;
                 $curtype = "156";
                 $lang = "En";
-                $paytype = "23";
+                //$paytype = "23"; // testing
+                $paytype = "40"; // production
                 $orderdate = date("Ymd");
                 $remark = $distDB->getDistributorCode();
                 $email = $distDB->getEmail();
