@@ -62,6 +62,14 @@ abstract class Globals {
 	const STATUS_COMPLETE = 'COMPLETE';
     const STATUS_SUCCESS = 'SUCCESS';
 
+    /************************************/
+    /*****    Maturity Status      ******/
+    /************************************/
+    const STATUS_MATURITY_PENDING = 'PENDING';
+    const STATUS_MATURITY_RENEW = 'RENEW';
+    const STATUS_MATURITY_WITHDRAW = 'WITHDRAW';
+    const STATUS_MATURITY_SUCCESS = 'SUCCESS';
+
     /*************************/
     /*****    ROLE      ******/
     /*************************/
