@@ -26,24 +26,25 @@ class componentComponents extends sfComponents
     public function executeSubmenu()
     {
         $distDB = MlmDistributorPeer::retrieveByPK($this->param);
+        if ($distDB) {
+            $openTermCondition = true;
+            if ($distDB->getTermCondition() != null && $distDB->getTermCondition() == Globals::YES)
+                $openTermCondition = false;
 
-        $openTermCondition = true;
-        if ($distDB->getTermCondition() != null && $distDB->getTermCondition() == Globals::YES)
-            $openTermCondition = false;
+            $c = new Criteria();
+            $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, $this->param);
+            $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, Globals::FALSE);
+            $totalUnreadCsMessage = MlmCustomerEnquiryPeer::doCount($c);
 
-        $c = new Criteria();
-        $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, $this->param);
-        $c->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, Globals::FALSE);
-        $totalUnreadCsMessage = MlmCustomerEnquiryPeer::doCount($c);
+            $rp = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
+            //$debitAccount = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT);
+            //$this->rp = $rp - $debitAccount;
+            $this->rp = $rp;
 
-        $rp = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP);
-        //$debitAccount = $this->getAccountBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT);
-        //$this->rp = $rp - $debitAccount;
-        $this->rp = $rp;
-
-        $this->distDB = $distDB;
-        $this->openTermCondition = $openTermCondition;
-        $this->totalUnreadCsMessage = $totalUnreadCsMessage;
+            $this->distDB = $distDB;
+            $this->openTermCondition = $openTermCondition;
+            $this->totalUnreadCsMessage = $totalUnreadCsMessage;
+        }
     }
     public function executeHeaderInformation()
     {
