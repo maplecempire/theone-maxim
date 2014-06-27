@@ -61,7 +61,7 @@ $(function() {
             $("#currencyCode").val("RMB");
         }  else if (paymentMethod == "PaP") {
             $("#tr_channelid").hide();
-            $("#li_note").show();
+            $("#li_note").hide();
             $("#currencyCode").val("RMB");
         } else {
             $("#tr_channelid").hide();
