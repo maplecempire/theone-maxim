@@ -2,6 +2,10 @@ bdetailsSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+papSuccessDatafeedSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 certificateSuccess:
   has_layout:     off
   stylesheets: 	  []
