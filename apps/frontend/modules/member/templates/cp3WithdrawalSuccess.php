@@ -236,7 +236,32 @@
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-
+                <?php
+                if ($distributorDB->getBankAccNo() == "" || $distributorDB->getBankAccNo() == null
+                    || $distributorDB->getBankName() == "" || $distributorDB->getBankName() == null
+                    || $distributorDB->getBankBranchName() == "" || $distributorDB->getBankBranchName() == null
+                    || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
+                    || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
+                    || $distributorDB->getBankSwiftCode() == "" || $distributorDB->getBankSwiftCode() == null
+                    || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
+                    || $distributorDB->getFileProofOfResidence() == "" || $distributorDB->getFileProofOfResidence() == null
+                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
+                ?>
+                <tr class="tbl_form_row_odd">
+                    <td colspan="3">
+                    <div class="ui-widget">
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                             class="ui-state-error ui-corner-all">
+                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                          class="ui-icon ui-icon-alert"></span>
+                                <strong><?php echo __('Upon to submit withdrawal requests, please update your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+                <?php
+                } else {
+                ?>
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
@@ -245,6 +270,9 @@
                     </td>
                     <td>&nbsp;</td>
                 </tr>
+                <?php
+                }
+                ?>
                 </tbody>
             </table>
 
