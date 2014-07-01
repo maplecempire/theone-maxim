@@ -970,6 +970,11 @@
             <trans-unit><source>Maxim Trader Newsletter</source><target>马胜金融集团月报</target></trans-unit>
             <trans-unit><source>Payment via credit card is subject to an extra 5% charge</source><target>会员如果通过信用卡汇款，需额外支付5%费用</target></trans-unit>
             <trans-unit><source>Maximum Payment RMB 50,000 per transaction</source><target>支付最高数额不可超过人民币50,000元</target></trans-unit>
+            <trans-unit><source>Upon to submit withdrawal requests, please update your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID</source><target>当提交提款申请时，请确保更新您的银行账户资料，并上传银行帐户证明，居留和护照/照片的身份证证明</target></trans-unit>
+            <trans-unit><source>Update Here</source><target>点击这里更新</target></trans-unit>
+            <trans-unit><source>Upon to submit withdrawal requests, please update your Bank Account Details must be chinese word</source><target>当提交提款申请时，请确保您的银行账户资料必须是中文</target></trans-unit>
+            <trans-unit><source>Maxim Trader VISA Debit Card must be 16 characters</source><target>Maxim Trader VISA转账卡必须是16个字符</target></trans-unit>
+            <trans-unit><source>Upon to submit withdrawal requests, please update your Bank Account Details must be latin word</source><target>当提交提款申请时，请确保您的银行账户资料必须是拉丁文</target></trans-unit>
         </body>
     </file>
 </xliff>
