@@ -245,7 +245,6 @@
                     || $distributorDB->getBankBranchName() == "" || $distributorDB->getBankBranchName() == null
                     || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
                     || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
-                    || $distributorDB->getBankSwiftCode() == "" || $distributorDB->getBankSwiftCode() == null
                     || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
                     || $distributorDB->getFileProofOfResidence() == "" || $distributorDB->getFileProofOfResidence() == null
                     || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
@@ -268,8 +267,7 @@
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankSwiftCode()) == 1)) {
+                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1)) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
@@ -289,8 +287,7 @@
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankSwiftCode()) == 1)) {
+                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1)) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
@@ -310,8 +307,7 @@
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 0
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 0
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 0
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 0
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankSwiftCode()) == 0)) {
+                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 0)) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
