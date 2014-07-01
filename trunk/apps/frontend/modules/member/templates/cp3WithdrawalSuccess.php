@@ -257,7 +257,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('Upon to submit withdrawal requests, please update your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
@@ -278,7 +278,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('Upon to submit withdrawal requests, please update your Bank Account Details must be latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('You need to update all your Bank Account Details must be latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
@@ -299,7 +299,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('Upon to submit withdrawal requests, please update your Bank Account Details must be latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Please ensure all your Bank Account Details is latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
@@ -320,7 +320,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('Upon to submit withdrawal requests, please update your Bank Account Details must be chinese word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Please ensure all your Bank Account Details is chinese word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
@@ -335,7 +335,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('Maxim Trader VISA Debit Card must be 16 characters') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Maxim Trader VISA Debit Card must be 16 characters') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
