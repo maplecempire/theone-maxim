@@ -282,7 +282,6 @@
                     || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
                     || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
                     || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
-                    || $distributorDB->getFileProofOfResidence() == "" || $distributorDB->getFileProofOfResidence() == null
                     || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
                 ?>
                 <tr class="tbl_form_row_odd">
