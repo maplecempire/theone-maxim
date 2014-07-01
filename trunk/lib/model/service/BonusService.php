@@ -797,7 +797,11 @@ class BonusService
         while ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr["SUB_TOTAL"] != null) {
-                $countrySales .= $arr["country"].":".number_format($arr["SUB_TOTAL"] * 10,0)."<br>";
+                $country = $arr["country"];
+                if ($arr["country"] == "Korea South") {
+                    $country = "Korea";
+                }
+                $countrySales .= $country.":".number_format($arr["SUB_TOTAL"] * 10,0)."<br>";
             } else {
                 $countrySales .= "";
             }
