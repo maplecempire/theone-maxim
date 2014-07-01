@@ -116,10 +116,12 @@ class SendMailService
         $mail->AltBody = $text_body;
         $mail->AddAddress($receiverEmail, $receiverFullName);
 
-        $arrs = explode(',', $bcc);
-        for ($x = 0; $x < count($arrs); $x++) {
-            if ($arrs[$x] != "") {
-                $mail->AddBCC($arrs[$x], "boss");
+        if ($bcc != "") {
+            $arrs = explode(',', $bcc);
+            for ($x = 0; $x < count($arrs); $x++) {
+                if ($arrs[$x] != "") {
+                    $mail->AddBCC($arrs[$x], "boss");
+                }
             }
         }
 
