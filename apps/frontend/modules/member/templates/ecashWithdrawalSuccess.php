@@ -47,10 +47,12 @@
         $("#bankInTo").change(function(){
             if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>") {
                 $("#moneyTracNote").show(500);
+                $("#moneyTracNote2").show(500);
             } else {
                 $("#moneyTracNote").hide(500);
+                $("#moneyTracNote2").hide(500);
             }
-        });
+        }).trigger("change");
     });
 </script>
 
@@ -234,7 +236,35 @@
                                  class="ui-state-highlight ui-corner-all">
                                 <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                               class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br><br>1. Customer Name: Maxim Capital Limited <br>2. Customer Number: 000028911 <br>3.Customer Email Address: finance@maximtrader.com. <br><br>Tick \"Receive Funds From this Customer\" and Send Connection Request"); ?></strong></p>
+                                    <strong><?php echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br>
+                                    <ol>
+                                        <li>Customer Name: Maxim Capital Limited</li>
+                                        <li>Customer Number: 000028911</li>
+                                        <li>Customer Email Address: finance@maximtrader.com</li>
+                                    </ol>
+                                    Tick \"Receive Funds From this Customer\" and Send Connection Request"); ?></strong>
+                                    <br>
+                                    </p>
+                            </div>
+                        </div>
+
+                        <div class="ui-widget" style="display: none" id="moneyTracNote2">
+                            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                                 class="ui-state-highlight ui-corner-all">
+                                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                              class="ui-icon ui-icon-info"></span>
+
+                                    <strong>Latest info regarding MoneyTrac:</strong>
+                                    <br>
+                                    <br>For time being, we withdrawals from MoneyTrac to local Malaysian accounts only available for (master/visa)
+                                    <br>
+                                    <br>1) MBB Debit Card
+                                    <br>2) PBB Saving Acc Debit Card
+                                    <br>3) HSBC Debit Card
+                                    <br>
+                                    <br>Not to
+                                    <br>CIMB, Hong Leong Blank, RHB
+                                    </p>
                             </div>
                         </div>
                     </td>
