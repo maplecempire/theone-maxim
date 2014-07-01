@@ -105,7 +105,8 @@ $(function() {
             "bankAddress" : {
                 required : true
                 <?php
-                if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+                //if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+                if ($distDB->getCountry() == "China (PRC)") {
 
                 } else {
                 ?>
@@ -115,7 +116,8 @@ $(function() {
             "bankBranchName" : {
                 required : true
                 <?php
-                if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+                //if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
+                if ($distDB->getCountry() == "China (PRC)") {
 
                 } else {
                 ?>
