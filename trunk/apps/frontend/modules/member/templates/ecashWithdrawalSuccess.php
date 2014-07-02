@@ -263,7 +263,7 @@
                                     <br>3) HSBC Debit Card
                                     <br>
                                     <br>Not to
-                                    <br>CIMB, Hong Leong Blank, RHB
+                                    <br>CIMB, Hong Leong Bank, RHB
                                     </p>
                             </div>
                         </div>
