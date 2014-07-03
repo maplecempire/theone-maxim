@@ -1,4 +1,61 @@
+http://partner.maximtrader.com/finance/updateDistCommission?distId=259739
+http://partner.maximtrader.com/finance/updateDistPairing?distId=259739
+http://partner.maximtrader.com/business/manualInsertPips?q=273682&point=10000
+
+http://localhost:8087/maturityAccount/save?maturityType=June&longString=1837,1641,1214,2392,2407,2666,2681,2696,2711,2726,119072,2575,3441,3456,4162,1823,4498,3794,4780,4795,4810,5132,5147,4977,5102,5117,5162,5177,5700,5992,5715,6023,6038,6053,6068,6083,6302,6317,2032,6410,6425,6380,6395,9244,6440,6455,6470,4014,3519
+http://localhost:8087/maturityAccount/save?maturityType=July&longString=6753,6503,6768,6518,6533,6548,6563,2017,3809,7102,7117,7396,7411,1657,1673,1689,1500,2132,2313,2329,2345,2361,2377,2281,2297,2829,2845,2861,2910,2926,3330,3346,3362,3378,3394,3410,3426,3234,3250,3266,3282,3298,3314,2048,3588,3604,3620,3636,3652,3668,3684,3700,3716,3732,3572,3841,3857,1935,3825,3939,3955,3971,4099,4115,4131,4147,4035,4051,4067,4083,4359,4375,4391,4407,4423,4263,4279,4295,4311,4327,4343,4451,4467,4483,3873,3151,4562,4578,4594,4749,4765,4962,2776,4993,5009,5025,5041,5057,5073,5637,5653,5669,5685,5945,5961,5977,6008,6131,2813,2002,6099,6115,6255,6271,6287
+
+
+http://localhost:8087/finance/updateDistPairing?distId=2001
+
+1. view genealogy, commission, monetary wallet need password
+2. pips bonus need total
+3. save last language selection in user profile.
+
+
+
+
+
+
+1. self register
+2. generate agreement in pdf
+3. korean language for member area
+4.
+
+
 1. fxm2you currency RM
 2. withdraw mt4 currency US = USD convert to MYR 3.4
 3. 4% or USD 40 whichever is higher
 4. mt4 withdraw show rmy
+
+Cpanel and FTP login detail
+http://www.maximtrader.com/cpanel
+Username: maximtra
+Password : mMZ8NnER%[%i
+
+http://www.maximtrader.com/wp-admin.php
+Wordpress login detail
+user: mtadmin
+Password: mt2012
+
+
+
+Username : admin@maximtrader.com
+Password : @dm1n!@#21
+
+
+
+Thanks for your patience, we had just sent you the backend user login details,
+the login URL as below:
+
+Admin Login: www.maximtrader.com/?vipmaxim
+
+The contact form currently using plugin, the module script in following location:
+
+www.maximtrader.com/wp-content/plugins/contact-form-7
+
+
+
+Username: Jason
+Password: jason123
+http://www.maximtrader.com/wp-login.php

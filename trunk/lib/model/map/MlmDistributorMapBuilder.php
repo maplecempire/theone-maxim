@@ -242,5 +242,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('LEADER_ID', 'LeaderId', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('CLOSE_ACCOUNT', 'CloseAccount', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('SECONDTIME_RENEWAL', 'SecondtimeRenewal', 'string', CreoleTypes::VARCHAR, false, 1);
+
 	} 
 } 
