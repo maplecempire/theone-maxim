@@ -62,7 +62,11 @@ $(function(){
                         , created_on : oObj.aData[idx++]
                         , email_status : oObj.aData[idx++]
                   });
-                  return "<a id='actionLink' href='#' title='Action'>Action</a>";
+                  var data = $("#dgAddPanel").data("data_" + oObj.aData[0]);
+                  if (data.status_code == "PENDING") {
+                      return "<a id='actionLink' href='#' title='Action'>Action</a>";
+                  }
+                  return "";
                 }},
               { "sName" : "maturity.dividend_date",  "bSortable": true},
               { "sName" : "dist.distributor_code",  "bSortable": true},
@@ -214,7 +218,7 @@ $(function(){
                                 alert(data.errorMsg);
                             } else {
                                 $("#dgAddPanel").dialog('close');
-                                //datagrid.fnDraw();
+                                datagrid.fnDraw();
                                 alert("Account Renew Successfully.");
                             }
                         },
@@ -246,7 +250,7 @@ $(function(){
                                 alert(data.errorMsg);
                             } else {
                                 $("#dgAddPanel").dialog('close');
-                                //datagrid.fnDraw();
+                                datagrid.fnDraw();
                                 alert("Account Close Successfully.");
                             }
                         },
