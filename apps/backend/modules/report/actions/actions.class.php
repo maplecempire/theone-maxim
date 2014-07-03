@@ -89,17 +89,25 @@ class reportActions extends sfActions
 //        $this->executeJapanIncentive();
 //        $this->executeJapanIncentive();
 //        $this->executeJapanIncentive();
+
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
-        $this->executeLangkawiIncentive();
-        $this->executeLangkawiIncentive();
-        $this->executeLangkawiIncentive();
-        $this->executeLangkawiIncentive();
-        $this->executeLangkawiIncentive();
+
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+//        $this->executeLangkawiIncentive();
+
+        $this->executeShanghaiConventionTrip();
+        $this->executeShanghaiConventionTrip();
+        $this->executeShanghaiConventionTrip();
+        $this->executeShanghaiConventionTrip();
+        $this->executeShanghaiConventionTrip();
 
 //        $q3 = 11 / 3;
 //        var_dump($q3);
@@ -130,11 +138,18 @@ class reportActions extends sfActions
 //        $this->executeCaratDiamondChallenge();
 //        $this->executeCaratDiamondChallenge();
 
-        $this->executeLangkawiChallenge();
-        $this->executeLangkawiChallenge();
-        $this->executeLangkawiChallenge();
-        $this->executeLangkawiChallenge();
-        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+//        $this->executeLangkawiChallenge();
+
+        $this->executeShanghaiChallenge();
+        $this->executeShanghaiChallenge();
+        $this->executeShanghaiChallenge();
+        $this->executeShanghaiChallenge();
+        $this->executeShanghaiChallenge();
+
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
@@ -283,6 +298,43 @@ class reportActions extends sfActions
         print_r("executeLangkawiChallenge Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeShanghaiChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-12 00:00:00";
+        $dateTo = "2014-06-15 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("");
+            $distDB->setBkkQualify2("");
+            $distDB->setBkkQualify3("");
+            $distDB->setAbfxRemark("");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $totalSponsorAmount = $this->getSponsorAmount($distDB->getDistributorId());
+
+            $x30to99 = 0;
+            $x100to499 = 0;
+            $x500 = 0;
+            if ($totalSponsorAmount >= 50000) {
+                $q3 = floor($totalSponsorAmount / 50000);
+                $distDB->setBkkQualify1($q3);
+                $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
+            }
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeShanghaiChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeSingaporeYachtShowLifestyleChallenge()
     {
         $c = new Criteria();
@@ -400,6 +452,59 @@ class reportActions extends sfActions
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-02-20 00:00:00";
         $dateTo = "2014-05-09 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkQualify1("N");
+            $distDB->setBkkQualify2("N");
+            $distDB->setBkkQualify3("N");
+            $distDB->setBkkPersonalSales(0);
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+            $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
+
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeSingaporeYachtShowLifestyleChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeShanghaiConventionTrip()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(5000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-03-12 00:00:00";
+        $dateTo = "2014-06-15 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");
