@@ -1019,6 +1019,49 @@ $(document).ready(function() {
 
             <div class="popdivider"></div>
         </div>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='33'>04 July 2014 - US Independence Day Holiday</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "03 July 2014";
+                ?>
+            </div>
+
+            <div id="page_33" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            亲爱的领导人与伙伴们：
+                            <br>
+                            <br>以下是即将来临的市场假期 。
+                            <br>04 July 2014 - US Independence Day
+                            <br>
+                            <br>当日潜在市场流通性不足的情况，可能导致点差扩大，请相应地计划您的交易。
+                            <br>
+                            <br>黄金和白银市场将在19:59:59关闭。
+                            <br>
+                            <br>*******************************************************************************
+                            <br>
+                            <br>Dear Partners and Leaders,
+                            <br>
+                            <br>Please take note of the upcoming market holiday(s) below.
+                            <br>04 July 2014 - US Independence Day
+                            <br>
+                            <br>A lack of liquidity on these dates may lead to wider spreads; please plan your trades accordingly.
+                            <br>
+                            <br>The Spot Gold & Spot Silver market will be closed at 19:59:59.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
 
         <div class="page">
             <div class="poptitle">
