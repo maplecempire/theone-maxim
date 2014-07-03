@@ -69,6 +69,7 @@ abstract class Globals {
     const STATUS_MATURITY_RENEW = 'RENEW';
     const STATUS_MATURITY_WITHDRAW = 'WITHDRAW';
     const STATUS_MATURITY_SUCCESS = 'SUCCESS';
+    const STATUS_MATURITY_ON_HOLD = 'ON HOLD';
 
     /*************************/
     /*****    ROLE      ******/
