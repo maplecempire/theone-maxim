@@ -635,7 +635,7 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
-    public function executeDoRenewAccount()
+    public function executeDoOnHoldAccount()
     {
         $noticeId = $this->getRequestParameter('noticeId');
         $loanAccount = $this->getRequestParameter('loanAccount');
@@ -666,130 +666,17 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            $existDist->setCloseAccount("N");
-            $existDist->setSecondtimeRenewal("Y");
-            $existDist->save();
+            //$existDist->setCloseAccount("N");
+            //$existDist->setSecondtimeRenewal("Y");
+            //$existDist->save();
 
             //$existNotificationOfMaturity->setMt4Balance($cp3Amount);
             $existNotificationOfMaturity->setRemark($remark);
             $existNotificationOfMaturity->setInternalRemark($internalRemark);
-            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_SUCCESS);
-            $existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_ON_HOLD);
+            //$existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
             $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $existNotificationOfMaturity->save();
-
-            if ($loanAccount == "N") {
-                $c = new Criteria();
-                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $existNotificationOfMaturity->getMt4UserName());
-                $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
-                $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
-
-                $pairingPoint = 0;
-                if ($mlmRoiDividendDB) {
-                    $idx = $mlmRoiDividendDB->getIdx() + 1;
-                    for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT_36; $i++) {
-                        $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
-
-                        $monthAdded = $idx - 1;
-                        $dividendDate = strtotime("+".$monthAdded." months", $firstDividendTime);
-
-                        $mlm_roi_dividend = new MlmRoiDividend();
-                        $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
-                        $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
-                        $mlm_roi_dividend->setIdx($idx);
-                        //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-                        $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
-                        $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
-                        $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
-                        $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
-                        $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
-                        //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
-                        //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                        $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
-                        $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $mlm_roi_dividend->save();
-
-                        $idx = $idx + 1;
-                    }
-                    $pairingPoint = $mlmRoiDividendDB->getPackagePrice();
-                }
-
-                $uplinePosition = $existDist->getPlacementPosition();
-                $uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
-
-                $sponsoredDistributorCode = $existDist->getDistributorCode();
-
-                $level = 0;
-                while ($level < 200) {
-                    //var_dump($uplineDistDB->getUplineDistId());
-                    //var_dump($uplineDistDB->getUplineDistCode());
-                    //print_r("<br>");
-                    $c = new Criteria();
-                    $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                    $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
-
-                    $addToLeft = 0;
-                    $addToRight = 0;
-                    $leftBalance = 0;
-                    $rightBalance = 0;
-                    if (!$sponsorDistPairingDB) {
-                        $sponsorDistPairingDB = new MlmDistPairing();
-                        $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
-
-                        $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                        if (!$packageDB) {
-                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
-                            return $this->redirect('/member/memberRegistration');
-                        }
-
-                        $sponsorDistPairingDB->setLeftBalance($leftBalance);
-                        $sponsorDistPairingDB->setRightBalance($rightBalance);
-                        $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
-                        $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    } else {
-                        $leftBalance = $sponsorDistPairingDB->getLeftBalance();
-                        $rightBalance = $sponsorDistPairingDB->getRightBalance();
-                    }
-                    $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
-                    $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
-                    $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingDB->save();
-
-                    $c = new Criteria();
-                    $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
-                    $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
-                    $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
-                    $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
-
-                    $legBalance = 0;
-                    if ($sponsorDistPairingLedgerDB) {
-                        $legBalance = $sponsorDistPairingLedgerDB->getBalance();
-                    }
-
-                    $sponsorDistPairingledger = new MlmDistPairingLedger();
-                    $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
-                    $sponsorDistPairingledger->setLeftRight($uplinePosition);
-                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
-                    $sponsorDistPairingledger->setCredit($pairingPoint);
-                    $sponsorDistPairingledger->setDebit(0);
-                    $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . "), RENEW 18 MONTHS MATURITY");
-                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistPairingledger->save();
-
-                    $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
-
-                    if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
-                        break;
-                    }
-
-                    $uplinePosition = $uplineDistDB->getPlacementPosition();
-                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
-                    $level++;
-                }
-            }
 
             $con->commit();
         } catch (PropelException $e) {
