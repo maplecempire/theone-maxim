@@ -986,29 +986,43 @@ $(document).ready(function() {
 
     <div class="popdivider"></div>
 
-
-        <!--<table width="100%">
-            <tr>
-                <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
-                </td>
-            </tr>
-        </table>-->
     <?php
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-
-        <!--<table width="100%">
-            <tr>
-                <td align="center">
-                    <a href='#' class="page_link" ref='1'>1</a> - <a href='#' class="page_link" ref='2'>2</a> - <a href='#' class="page_link" ref='3'>3</a> - <a href='#' class="page_link" ref='4'>4</a> - <a href='#' class="page_link" ref='5'>5</a> - <a href='#' class="page_link" ref='6'>6</a> - <a href='#' class="page_link" ref='7'>7</a> - <a href='#' class="page_link" ref='8'>8</a> - <a href='#' class="page_link" ref='9'>9</a> - <a href='#' class="page_link" ref='10'>10</a> - <a href='#' class="page_link" ref='11'>11</a> - <a href='#' class="page_link" ref='12'>12</a>
-                </td>
-            </tr>
-        </table>-->
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='31'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='32'>Development bonus reduction announcement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "04 July 2014";
+                ?>
+            </div>
+
+            <div id="page_32" class="news_desc" style="text-align: left; ">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            Dear Partners and Leaders,
+                            <br>
+                            <br>Please note that with effect from 1 August 2014, Development Bonus will be calculated based on BV. Development Bonus of USD 1 will have a value of 0.5 BV. All other bonuses and Return on Investment will remain unchanged.
+                            <br>
+                            <br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='31'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트</a>
             </div>
             <div class="news_date">
             <?php
@@ -1017,7 +1031,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_31" class="news_desc" style="text-align: left; ">
+            <div id="page_31" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1053,7 +1067,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='28'>Promo: 2nd BMW X6 Challenge: BMW X6挑战计划第二期</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='28'>Promo: 2nd BMW X6 Challenge: BMW X6挑战计划第二期</a>
             </div>
             <div class="news_date">
             <?php
@@ -1062,7 +1076,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_28" class="news_desc" style="text-align: left; ">
+            <div id="page_28" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1124,7 +1138,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='27'>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='27'>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a>
             </div>
             <div class="news_date">
             <?php
@@ -1133,7 +1147,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_27" class="news_desc" style="text-align: left; ">
+            <div id="page_27" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1176,7 +1190,7 @@ $(document).ready(function() {
         <?php if ($culture == "kr") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='26'>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='26'>국제 회원 교류 (IME) 한국 회원만을 위한 발리 프로모션</a>
             </div>
             <div class="news_date">
             <?php
@@ -1185,7 +1199,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_26" class="news_desc" style="text-align: left; ">
+            <div id="page_26" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1216,7 +1230,7 @@ $(document).ready(function() {
         <?php if ($culture == "jp") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='25'>日本のためのバリ特別プロモーション</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='25'>日本のためのバリ特別プロモーション</a>
             </div>
             <div class="news_date">
             <?php
@@ -1225,7 +1239,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_25" class="news_desc" style="text-align: left; ">
+            <div id="page_25" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1260,7 +1274,7 @@ $(document).ready(function() {
         <?php } ?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='24'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트 香港ダイヤモンドクエスト</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='24'>HongKong Diamond Quest 香港钻石优惠 홍콩 다이아몬드 퀘스트 香港ダイヤモンドクエスト</a>
             </div>
             <div class="news_date">
             <?php
@@ -1269,7 +1283,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_24" class="news_desc" style="text-align: left; ">
+            <div id="page_24" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
