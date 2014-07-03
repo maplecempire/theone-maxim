@@ -87,6 +87,10 @@ class marketingActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeMaturityManagement()
+    {
+    }
+
     public function executeLuckyDraw()
     {
         $doAction = "EVENT";
