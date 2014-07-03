@@ -18,6 +18,10 @@ distList:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
 
+maturityManagement:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
+
 genealogyManagement:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
