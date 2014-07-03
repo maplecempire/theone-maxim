@@ -46,9 +46,17 @@ class NotificationOfMaturityMapBuilder {
 
 		$tMap->addColumn('RETRY', 'Retry', 'int', CreoleTypes::INTEGER, false, null);
 
-		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, true, null);
 
-		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addColumn('INTERNAL_REMARK', 'InternalRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('EMAIL_STATUS', 'EmailStatus', 'string', CreoleTypes::VARCHAR, true, 20);
+
+		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('APPROVE_REJECT_DATETIME', 'ApproveRejectDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('MT4_BALANCE', 'Mt4Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 

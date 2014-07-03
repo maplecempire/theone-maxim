@@ -304,6 +304,7 @@ abstract class Globals {
 	const DIVIDEND_STATUS_PENDING = 'PENDING';
 	const DIVIDEND_STATUS_SUCCESS = 'SUCCESS';
 	const DIVIDEND_TIMES_ENTITLEMENT = 18;
+	const DIVIDEND_TIMES_ENTITLEMENT_36 = 36;
 
     /***********************************************/
     /****    DEBIT CARD & EZY CASH CARD       ******/

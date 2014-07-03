@@ -427,6 +427,14 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $leader_id;
 
+
+	
+	protected $close_account = '';
+
+
+	
+	protected $secondtime_renewal = '';
+
 	
 	protected $alreadyInSave = false;
 
@@ -1271,6 +1279,20 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->leader_id;
+	}
+
+	
+	public function getCloseAccount()
+	{
+
+		return $this->close_account;
+	}
+
+	
+	public function getSecondtimeRenewal()
+	{
+
+		return $this->secondtime_renewal;
 	}
 
 	
@@ -2737,6 +2759,34 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCloseAccount($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->close_account !== $v || $v === '') {
+			$this->close_account = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::CLOSE_ACCOUNT;
+		}
+
+	} 
+	
+	public function setSecondtimeRenewal($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->secondtime_renewal !== $v || $v === '') {
+			$this->secondtime_renewal = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::SECONDTIME_RENEWAL;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -2951,11 +3001,15 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->leader_id = $rs->getInt($startcol + 104);
 
+			$this->close_account = $rs->getString($startcol + 105);
+
+			$this->secondtime_renewal = $rs->getString($startcol + 106);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 105; 
+						return $startcol + 107; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3407,6 +3461,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 104:
 				return $this->getLeaderId();
 				break;
+			case 105:
+				return $this->getCloseAccount();
+				break;
+			case 106:
+				return $this->getSecondtimeRenewal();
+				break;
 			default:
 				return null;
 				break;
@@ -3522,6 +3582,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[102] => $this->getNormalInvestor(),
 			$keys[103] => $this->getPrincipleReturn(),
 			$keys[104] => $this->getLeaderId(),
+			$keys[105] => $this->getCloseAccount(),
+			$keys[106] => $this->getSecondtimeRenewal(),
 		);
 		return $result;
 	}
@@ -3852,6 +3914,12 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 104:
 				$this->setLeaderId($value);
 				break;
+			case 105:
+				$this->setCloseAccount($value);
+				break;
+			case 106:
+				$this->setSecondtimeRenewal($value);
+				break;
 		} 	}
 
 	
@@ -3964,6 +4032,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[102], $arr)) $this->setNormalInvestor($arr[$keys[102]]);
 		if (array_key_exists($keys[103], $arr)) $this->setPrincipleReturn($arr[$keys[103]]);
 		if (array_key_exists($keys[104], $arr)) $this->setLeaderId($arr[$keys[104]]);
+		if (array_key_exists($keys[105], $arr)) $this->setCloseAccount($arr[$keys[105]]);
+		if (array_key_exists($keys[106], $arr)) $this->setSecondtimeRenewal($arr[$keys[106]]);
 	}
 
 	
@@ -4076,6 +4146,8 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::NORMAL_INVESTOR)) $criteria->add(MlmDistributorPeer::NORMAL_INVESTOR, $this->normal_investor);
 		if ($this->isColumnModified(MlmDistributorPeer::PRINCIPLE_RETURN)) $criteria->add(MlmDistributorPeer::PRINCIPLE_RETURN, $this->principle_return);
 		if ($this->isColumnModified(MlmDistributorPeer::LEADER_ID)) $criteria->add(MlmDistributorPeer::LEADER_ID, $this->leader_id);
+		if ($this->isColumnModified(MlmDistributorPeer::CLOSE_ACCOUNT)) $criteria->add(MlmDistributorPeer::CLOSE_ACCOUNT, $this->close_account);
+		if ($this->isColumnModified(MlmDistributorPeer::SECONDTIME_RENEWAL)) $criteria->add(MlmDistributorPeer::SECONDTIME_RENEWAL, $this->secondtime_renewal);
 
 		return $criteria;
 	}
@@ -4313,6 +4385,10 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setPrincipleReturn($this->principle_return);
 
 		$copyObj->setLeaderId($this->leader_id);
+
+		$copyObj->setCloseAccount($this->close_account);
+
+		$copyObj->setSecondtimeRenewal($this->secondtime_renewal);
 
 
 		$copyObj->setNew(true);
