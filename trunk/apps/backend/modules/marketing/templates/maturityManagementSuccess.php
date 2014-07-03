@@ -297,7 +297,36 @@ $(function(){
             },
             <?php } ?>
             "ON HOLD": function() {
+                var msg = "Are you sure want to ON HOLD this Account?";
+                var answer = confirm(msg);
+                if (answer){
+                    waiting();
 
+                    $.ajax({
+                        type : 'POST',
+                        url : "<?php echo url_for('finance/doOnHoldAccount') ?>",
+                        dataType : 'json',
+                        cache: false,
+                        data: {
+                            noticeId : $('#dgAddPanelId').val()
+                            , cp3Amount : $('#cp3Amount').val()
+                            , internalRemark : $('#internalRemark').val()
+                            , remark : $('#remark').val()
+                        },
+                        success : function(data) {
+                            if (data.error) {
+                                alert(data.errorMsg);
+                            } else {
+                                $("#dgAddPanel").dialog('close');
+                                datagrid.fnDraw();
+                                alert("Account On Hold Successfully.");
+                            }
+                        },
+                        error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Server connection error.");
+                        }
+                    });
+                }
             },
             Close: function() {
                 $(this).dialog('close');
