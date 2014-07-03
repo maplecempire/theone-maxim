@@ -10,6 +10,114 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeMaturityAccountList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+        //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = " FROM notification_of_maturity maturity
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = maturity.dist_id";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        //var_dump($sql);
+        /******   total filtered records  *******/
+
+        if ($this->getRequestParameter('filterDistcode') != "") {
+            $sWhere .= " AND dist.distributor_code like '%" . $this->getRequestParameter('filterDistcode') ."%'";
+        }
+        if ($this->getRequestParameter('filterMt4Userame') != "") {
+            $sWhere .= " AND maturity.mt4_user_name like '%" . $this->getRequestParameter('filterMt4Userame') ."%'";
+        }
+        if ($this->getRequestParameter('filterEmail') != "") {
+            $sWhere .= " AND maturity.email like '%" . $this->getRequestParameter('filterEmail') ."%'";
+        }
+        if ($this->getRequestParameter('filterStatusCode') != "") {
+            $sWhere .= " AND maturity.status_code = '" . $this->getRequestParameter('filterStatusCode') ."'";
+        }
+
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
+            $arr[] = array(
+                $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
+                , $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
+                , $resultArr['dividend_date'] == null ? "" : $resultArr['dividend_date']
+                , $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code']
+                , $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name']
+                , $resultArr['mt4_balance'] == null ? "" : $resultArr['mt4_balance']
+                , $resultArr['status_code'] == null ? "" : $resultArr['status_code']
+                , $resultArr['approve_reject_datetime'] == null ? "" : $resultArr['approve_reject_datetime']
+                , $resultArr['remark'] == null ? "" : $resultArr['remark']
+                , $resultArr['internal_remark'] == null ? "" : $resultArr['internal_remark']
+                , $resultArr['email'] == null ? "" : $resultArr['email']
+                , $resultArr['maturity_type'] == null ? "" : $resultArr['maturity_type']
+                , $leader
+                , $resultArr['created_on'] == null ? "" : $resultArr['created_on']
+                , $resultArr['email_status'] == null ? "" : $resultArr['email_status']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeLuckydrawList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
