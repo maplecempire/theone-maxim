@@ -63,7 +63,7 @@ $(function(){
                         , email_status : oObj.aData[idx++]
                   });
                   var data = $("#dgAddPanel").data("data_" + oObj.aData[0]);
-                  if (data.status_code == "PENDING") {
+                  if (data.status_code == "PENDING" || data.status_code == "ON HOLD") {
                       return "<a id='actionLink' href='#' title='Action'>Action</a>";
                   }
                   return "";
@@ -154,10 +154,11 @@ function reassignDatagridEventAttr(){
                                 <td>
                                     <select id="search_statusCode" name="search_statusCode">
                                         <option value="">(Empty)</option>
-                                        <option value="<?php echo Globals::STATUS_MATURITY_PENDING; ?>"><?php echo Globals::STATUS_MATURITY_PENDING; ?></option>
+                                        <option value="<?php echo Globals::STATUS_MATURITY_PENDING; ?>" selected="selected"><?php echo Globals::STATUS_MATURITY_PENDING; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_RENEW; ?>"><?php echo Globals::STATUS_MATURITY_RENEW; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_WITHDRAW; ?>"><?php echo Globals::STATUS_MATURITY_WITHDRAW; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_SUCCESS; ?>"><?php echo Globals::STATUS_MATURITY_SUCCESS; ?></option>
+                                        <option value="<?php echo Globals::STATUS_MATURITY_ON_HOLD; ?>"><?php echo Globals::STATUS_MATURITY_ON_HOLD; ?></option>
                                     </select>
                                 </td>
                                 <td></td>
@@ -212,6 +213,40 @@ $(function(){
                             , cp3Amount : $('#cp3Amount').val()
                             , internalRemark : $('#internalRemark').val()
                             , remark : $('#remark').val()
+                            , loanAccount : "N"
+                        },
+                        success : function(data) {
+                            if (data.error) {
+                                alert(data.errorMsg);
+                            } else {
+                                $("#dgAddPanel").dialog('close');
+                                datagrid.fnDraw();
+                                alert("Account Renew Successfully.");
+                            }
+                        },
+                        error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Server connection error.");
+                        }
+                    });
+                }
+            },
+            "Renew for loan account": function() {
+                var msg = "Are you sure want to Renew for loan account?";
+                var answer = confirm(msg);
+                if (answer){
+                    waiting();
+
+                    $.ajax({
+                        type : 'POST',
+                        url : "<?php echo url_for('finance/doRenewAccount') ?>",
+                        dataType : 'json',
+                        cache: false,
+                        data: {
+                            noticeId : $('#dgAddPanelId').val()
+                            , cp3Amount : $('#cp3Amount').val()
+                            , internalRemark : $('#internalRemark').val()
+                            , remark : $('#remark').val()
+                            , loanAccount : "Y"
                         },
                         success : function(data) {
                             if (data.error) {
@@ -261,6 +296,9 @@ $(function(){
                 }
             },
             <?php } ?>
+            "ON HOLD": function() {
+
+            },
             Close: function() {
                 $(this).dialog('close');
             }
@@ -286,19 +324,21 @@ function populateDgAddPanel() {
     var data = $("#dgAddPanel").data("data_" + $("#dgAddPanelId").val());
     $("#dgAddPanelDistCode").val(data.distributor_code);
     $("#dgAddPanelmt4_user_name").val(data.mt4_user_name);
-    $("#dgAddPanelmt4_password").val(data.mt4_password);
-    $("#dgAddPanelName").val(data.full_name);
+    $("#dgAddPanelDividendDate").val(data.dividend_date);
+    $("#dgAddPanelMt4Balance").val(data.mt4_balance);
+    $("#dgAddPanelMaturityType").val(data.maturity_type);
+    $("#dgAddPanelLeader").val(data.leader);
     $("#dgAddPanelEmail").val(data.email);
     //$("#remark").val("TRANSFER FROM COMPANY");
-    $("#epointAmount").val("0").focus().select();
+    $("#cp3Amount").val("0").focus().select();
     $(".indicator").show();
     $.ajax({
         type : 'POST',
-        url : "<?php echo url_for('finance/enquiryCP') ?>",
+        url : "<?php echo url_for('finance/enquiryMt4BalanceAndCP') ?>",
         dataType : 'json',
         cache: false,
         data: {
-            distId : $('#dgAddPanelId').val()
+            noticeId : $('#dgAddPanelId').val()
         },
         success : function(data) {
             if (data.error) {
@@ -308,7 +348,7 @@ function populateDgAddPanel() {
                 $("#cp1").val(data.cp1);
                 $("#cp2").val(data.cp2);
                 $("#cp3").val(data.cp3);
-                $("#rp").val(data.rp);
+                $("#dgAddPanelMt4Balance").val(data.mt4Balance);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -345,6 +385,14 @@ function populateDgAddPanel() {
             <td>Mt4 Balance</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelMt4Balance" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+        </tr>
+        <tr>
+            <td>Maturity Type</td>
+            <td>:</td>
+            <td><input type="text" id="dgAddPanelMaturityType" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+            <td>Leader</td>
+            <td>:</td>
+            <td><input type="text" id="dgAddPanelLeader" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
         </tr>
         <tr>
             <td>Name</td>
