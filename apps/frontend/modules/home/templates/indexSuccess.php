@@ -992,6 +992,58 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='27'>Effective Sep 30th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "19 June 2014";
+                ?>
+            </div>
+
+            <div id="page_27" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+                            <br>
+                            <br>Effective Sep 30th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000.
+                            <br>
+                            <br>This decision has been a long time coming and very much in line with our objective to become an Icon in the Forex and Fund Management industry which is the aspiration of all our IMs and Partners.
+                            <br>
+                            <br>Say YES to MAXIM TRADER !!!!
+                            <br>
+                            <br>尊敬的领导人与伙伴们：
+                            <br>
+                            <br>从2014.9.30日起生效-马胜金融集团最低投资配套额度将变为黄金配套5000美金.
+                            <br>
+                            <br>公司有此决定由来已久，这也与希望将公司打造成外汇与基金管理界领军企业的远景不谋而合。
+                            <br>
+                            <br>确认马胜说：YES!
+                            <br>
+                            <br>친애하는 국제회원 및 파트너 여러분,
+                            <br>
+                            <br>2014년 9월 30일부터 맥심 트레이더에 사인하는 최소 패키지는 미화 5천불의 골드 패키지입니다.
+                            <br>
+                            <br>이 결정은 오래전에 정해진 결정이며 외환과 펀드 매니지먼트 산업의 아이콘이 되고자 하는 모든 국제 회원과 파트너의 염원을 목표로 하는 것과 같은 선상에 있습니다.
+                            <br>
+                            <br>맥심 트레이더에게 “예스”라고 합시다.
+                            <br>
+                            <br>IM(インターナショナルメンバー)およびパトナーの皆様
+                            <br>2014年9月30日より、マキシマムトレーダーの最小投資金額は5,000ドルのゴールドパッケージとなります。この変更は、マキシマムトレーダーを、為替・ファンドマネジメント業界のリーダーにする経営目標、そして、IM(インターナショナルメンバー)およびパトナーたちの期待を考慮した上で、長時間にわたって決定したことである。
+                            <br>マキシマムトレーダーの更なる成長に、「イエス」と言いましょう！！
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='32'>Development bonus reduction announcement</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1179,57 +1231,7 @@ $(document).ready(function() {
 
             <div class="popdivider"></div>
         </div>
-        <div class="page">
-            <div class="poptitle">
-                <a href='#' class="page_link" ref='27'>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a>
-            </div>
-            <div class="news_date">
-            <?php
-                $dateUtil = new DateUtil();
-                echo "19 June 2014";
-                ?>
-            </div>
 
-            <div id="page_27" class="news_desc" style="text-align: left; display: none;">
-                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
-                    <tbody>
-                        <tr>
-                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
-                            <br>Dear IMs and Partners,
-                            <br>
-                            <br>Effective July 15th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000.
-                            <br>
-                            <br>This decision has been a long time coming and very much in line with our objective to become an Icon in the Forex and Fund Management industry which is the aspiration of all our IMs and Partners.
-                            <br>
-                            <br>Say YES to MAXIM TRADER !!!!
-                            <br>
-                            <br>尊敬的领导人与伙伴们：
-                            <br>
-                            <br>从2014.7.15日起生效-马胜金融集团最低投资配套额度将变为黄金配套5000美金.
-                            <br>
-                            <br>公司有此决定由来已久，这也与希望将公司打造成外汇与基金管理界领军企业的远景不谋而合。
-                            <br>
-                            <br>确认马胜说：YES!
-                            <br>
-                            <br>친애하는 국제회원 및 파트너 여러분,
-                            <br>
-                            <br>2014년 7월 15일부터 맥심 트레이더에 사인하는 최소 패키지는 미화 5천불의 골드 패키지입니다.
-                            <br>
-                            <br>이 결정은 오래전에 정해진 결정이며 외환과 펀드 매니지먼트 산업의 아이콘이 되고자 하는 모든 국제 회원과 파트너의 염원을 목표로 하는 것과 같은 선상에 있습니다.
-                            <br>
-                            <br>맥심 트레이더에게 “예스”라고 합시다.
-                            <br>
-                            <br>IM(インターナショナルメンバー)およびパトナーの皆様
-                            <br>2014年7月15日より、マキシマムトレーダーの最小投資金額は5,000ドルのゴールドパッケージとなります。この変更は、マキシマムトレーダーを、為替・ファンドマネジメント業界のリーダーにする経営目標、そして、IM(インターナショナルメンバー)およびパトナーたちの期待を考慮した上で、長時間にわたって決定したことである。
-                            <br>マキシマムトレーダーの更なる成長に、「イエス」と言いましょう！！
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="popdivider"></div>
-        </div>
         <?php if ($culture == "kr") {?>
         <div class="page">
             <div class="poptitle">
