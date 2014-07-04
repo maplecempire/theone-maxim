@@ -184,7 +184,7 @@
                                 $disableMoney = "";
                             }
                             // bwhk (chales approved)
-                            if ($distributorDB->getDistributorId() == 257749 || $distributorDB->getDistributorId() == 273758) {
+                            if ($distributorDB->getDistributorId() == 257749 || $distributorDB->getDistributorId() == 273758 || $distributorDB->getDistributorId() == 257792) {
                                 $disable = "";
                                 $disableMoney = "";
                             }
