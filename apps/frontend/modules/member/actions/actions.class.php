@@ -3166,8 +3166,10 @@ class memberActions extends sfActions
                 $mlm_distributor->setIc($this->getRequestParameter('ic'));
                 if ($this->getRequestParameter('country') == 'China') {
                     $mlm_distributor->setCountry('China (PRC)');
+                    $mlm_distributor->setBankCountry('China (PRC)');
                 } else {
                     $mlm_distributor->setCountry($this->getRequestParameter('country'));
+                    $mlm_distributor->setBankCountry($this->getRequestParameter('country'));
                 }
                 $mlm_distributor->setAddress($this->getRequestParameter('address'));
                 $mlm_distributor->setAddress2($this->getRequestParameter('address2'));
