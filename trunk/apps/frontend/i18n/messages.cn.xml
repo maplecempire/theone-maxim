@@ -972,9 +972,9 @@
             <trans-unit><source>Maximum Payment RMB 50,000 per transaction</source><target>支付最高数额不可超过人民币50,000元</target></trans-unit>
             <trans-unit><source>You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID</source><target>您必须更新你的的银行账户资料，并上传银行帐户证明，居留和护照/照片的身份证证明</target></trans-unit>
             <trans-unit><source>Update Here</source><target>点击这里更新</target></trans-unit>
-            <trans-unit><source>Please ensure all your Bank Account Details is chinese word</source><target>当提交提款申请时，请确保您的银行账户资料是中文</target></trans-unit>
+            <trans-unit><source>You need to update all your Bank Account Details must be chinese word</source><target>当提交提款申请时，请确保您的银行账户资料是中文</target></trans-unit>
             <trans-unit><source>Maxim Trader VISA Debit Card must be 16 characters</source><target>Maxim Trader VISA转账卡必须是16个字符</target></trans-unit>
-            <trans-unit><source>Please ensure all your Bank Account Details is latin word</source><target>当提交提款申请时，请确保您的银行账户资料是拉丁文</target></trans-unit>
+            <trans-unit><source>You need to update all your Bank Account Details must be latin word</source><target>当提交提款申请时，请确保您的银行账户资料是拉丁文</target></trans-unit>
             <trans-unit><source>You are not allowed to submit withdrawal, due to</source><target>你不能提交兑现，原因是</target></trans-unit>
         </body>
     </file>
