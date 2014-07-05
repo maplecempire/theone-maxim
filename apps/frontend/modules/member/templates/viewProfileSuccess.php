@@ -102,6 +102,12 @@ $(function() {
             "bankHolderName" : {
                 required : true
             },
+            "bankCountry" : {
+                required : true
+            },
+            "bankAccountCurrency" : {
+                required : true
+            },
             "bankAddress" : {
                 required : true
                 <?php
@@ -743,6 +749,25 @@ $(function() {
                     <td><?php echo __('Bank Address') ?></td>
                     <td><input name="bankAddress" type="text" id="bankAddress" size="30"
                                                          value="<?php echo $distDB->getBankAddress() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Country') ?></td>
+                    <td><?php include_component('component', 'countrySelectOption', array('countrySelected' => $distDB->getBankCountry(), 'countryName' => 'bankCountry', 'countryId' => 'bankCountry')) ?></td>
+                    <!--<td><input name="bankCountry" type="text" id="bankCountry" size="30"
+                                                         value="<?php /*echo $distDB->getBankCountry() */?>"/>
+                    </td>-->
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Currency') ?></td>
+                    <td><input name="bankAccountCurrency" type="text" id="bankAccountCurrency" size="30"
+                                                         value="<?php echo $distDB->getBankAccountCurrency() ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
