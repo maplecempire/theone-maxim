@@ -110,25 +110,9 @@ $(function() {
             },
             "bankAddress" : {
                 required : true
-                <?php
-                //if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
-                if ($distDB->getCountry() == "China (PRC)") {
-
-                } else {
-                ?>
-                , latinRegex: true
-                <?php } ?>
             },
             "bankBranchName" : {
                 required : true
-                <?php
-                //if ($distDB->getCountry() == "China (PRC)" || $distDB->getCountry() == "Taiwan") {
-                if ($distDB->getCountry() == "China (PRC)") {
-
-                } else {
-                ?>
-                , latinRegex: true
-                <?php } ?>
             },
             "transactionPassword" : {
                 required : true,
