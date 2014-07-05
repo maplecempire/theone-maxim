@@ -175,11 +175,11 @@
                             $disable = "";
                             $disableMoney = " disabled='disabled'";
 
-                            if ($distributorDB->getCountry() == "Malaysia") {
+                            if ($distributorDB->getBankCountry() == "Malaysia") {
                                 $disable = " disabled='disabled'";
                                 $disableMoney = "";
                             }
-                            else if ($distributorDB->getCountry() == "Hong Kong") {
+                            else if ($distributorDB->getBankCountry() == "Hong Kong") {
                                 $disable = "";
                                 $disableMoney = "";
                             }
@@ -291,7 +291,7 @@
                     </td>
                 </tr>
                 <?php
-                } else if ($distributorDB->getCountry() == "Taiwan"
+                } else if ($distributorDB->getBankCountry() == "Taiwan"
                            &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
@@ -311,7 +311,7 @@
                     </td>
                 </tr>
                 <?php
-                } else if (($distributorDB->getCountry() == "Korea North" || $distributorDB->getCountry() == "Korea South")
+                } else if (($distributorDB->getBankCountry() == "Korea North" || $distributorDB->getBankCountry() == "Korea South")
                         &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
@@ -331,7 +331,7 @@
                     </td>
                 </tr>
                 <?php
-                } else if ($distributorDB->getCountry() == "China (PRC)"
+                } else if ($distributorDB->getBankCountry() == "China (PRC)"
                            &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 0
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 0
