@@ -285,7 +285,7 @@ function blink(selector) {
     <ul>
         <li class="menu_title"><?php echo __('BMW X6 Champions Challenge'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/bmwX6Challenge"><span><?php echo __('BMW X6 Champions Challenge'); ?><img src="/images/new_icon.gif"></a>
+            <a href="/bmwX6Challenge"><span><?php echo __('2nd BMW X6 Champions Challenge'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
