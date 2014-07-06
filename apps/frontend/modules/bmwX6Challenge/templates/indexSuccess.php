@@ -7,7 +7,7 @@
 <?php
 
 $time1 = strtotime(date("Y-m-d H:i:s"));
-$time2 = strtotime("2014-06-01 00:00:00");
+$time2 = strtotime("2014-09-01 00:00:00");
 //$time2 = strtotime("2014-05-30 01:34:00");
 
 $diff = $time2-$time1;
@@ -78,7 +78,7 @@ $(function() {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('BMW X6 Challenge Ranking') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('2nd BMW X6 Challenge Ranking') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -207,7 +207,7 @@ $(function() {
                                         }
 
                                         $totalSales = number_format($member['SUB_TOTAL'],2);
-                                        if ($idx > 0) {
+                                        if ($idx > 10) {
                                             if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
                                             } else {
@@ -285,10 +285,10 @@ $(function() {
             <td><br></td>
         </tr>
         <tr>
-            <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('BMW X6 Challenge') ?></span></td>
+            <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('2nd BMW X6 Challenge') ?></span></td>
         </tr>
         <tr>
-            <td class=""><span style="font-weight: bold;"><?php echo __('Qualifying period March 10th to May 31th 2014 (GMT+8)') ?></span></td>
+            <td class=""><span style="font-weight: bold;"><?php echo __('Qualifying period June 01st to August 31st 2014 (GMT+8)') ?></span></td>
         </tr>
         <tr>
             <td><br></td>
@@ -334,7 +334,7 @@ $(function() {
                 <span style="font-style: italic;"><?php echo __('Terms & Conditions')?></span><br><br>
                 <span style="font-style: italic;">
                     <ol>
-                        <li><?php echo __('Challenge period start from 10th March 2014 till 31th May 2014 (GMT+8).')?></li>
+                        <li><?php echo __('Challenge period start from 01st June 2014 till 31st August 2014 (GMT+8).')?></li>
                         <li><?php echo __('The prize will not be transferable to another person.')?></li>
                         <li><?php echo __('No part of a prize is exchangeable for cash or any other prize.')?></li>
                         <li><?php echo __('If an advertised prize is not available, we reserve the right to offer an alternative prize of equal or greater value.')?></li>
