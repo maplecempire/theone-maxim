@@ -17,7 +17,9 @@ class bmwX6ChallengeActions extends sfActions
     public function executeIndex()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $this->totalPersonalSales = $this->getTotalPersonalSales();
+        $dateFrom = '2014-06-01 00:00:00';
+        $dateTo = '2014-08-31 23:59:59';
+        $this->totalPersonalSales = $this->getTotalPersonalSales($dateFrom, $dateTo);
 
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
@@ -33,7 +35,7 @@ class bmwX6ChallengeActions extends sfActions
                             LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
-                            AND newDist.created_on >= '2014-03-10 00:00:00' AND newDist.created_on <= '2014-05-31 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '".$dateFrom."' AND newDist.created_on <= '".$dateTo."' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -44,7 +46,7 @@ class bmwX6ChallengeActions extends sfActions
                             LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
-                            AND history.created_on >= '2014-03-10 00:00:00' AND history.created_on <= '2014-05-31 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
                     HAVING SUB_TOTAL >= 100000
@@ -64,7 +66,7 @@ class bmwX6ChallengeActions extends sfActions
         $this->resultArray = $resultArray;
     }
 
-    function getTotalPersonalSales()
+    function getTotalPersonalSales($dateFrom, $dateTo)
     {
         $query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
@@ -80,7 +82,7 @@ class bmwX6ChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND newDist.upline_dist_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0) . "
-                            AND newDist.created_on >= '2014-03-10 00:00:00' AND newDist.created_on <= '2014-05-31 23:59:59' group by upline_dist_id
+                            AND newDist.created_on >= '".$dateFrom."' AND newDist.created_on <= '".$dateTo."' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
@@ -92,7 +94,7 @@ class bmwX6ChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND newDist.upline_dist_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0) . "
-                            AND history.created_on >= '2014-03-10 00:00:00' AND history.created_on <= '2014-05-31 23:59:59' group by upline_dist_id
+                            AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
             WHERE dist.distributor_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0);
