@@ -58,6 +58,10 @@ class NotificationOfMaturityMapBuilder {
 
 		$tMap->addColumn('MT4_BALANCE', 'Mt4Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 
+		$tMap->addColumn('PACKAGE_PRICE', 'PackagePrice', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('LEADER_DIST_ID', 'LeaderDistId', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);

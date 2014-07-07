@@ -238,6 +238,9 @@ class maturityAccountActions extends sfActions
             return sfView::HEADER_ONLY;
         }
 
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+
         foreach ($arr as $dividendId) {
             $mlmRoiDividendDB = MlmRoiDividendPeer::retrieveByPK($dividendId);
 
@@ -248,6 +251,20 @@ class maturityAccountActions extends sfActions
                     continue;
                 }
 
+                $leader = "";
+                $distDB = MlmDistributorPeer::retrieveByPK($mlmRoiDividendDB->getDistId());
+                for ($i = 0; $i < count($leaderArrs); $i++) {
+                    $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                        if ($dist) {
+                            $leader = $dist->getDistributorId();
+                        }
+                        break;
+                    }
+                }
                 $notificationOfMaturity = new NotificationOfMaturity();
                 $notificationOfMaturity->setDistId($mlmRoiDividendDB->getDistId());
                 $notificationOfMaturity->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
@@ -257,6 +274,8 @@ class maturityAccountActions extends sfActions
                 $notificationOfMaturity->setRetry(0);
                 $notificationOfMaturity->setRemark("");
                 $notificationOfMaturity->setInternalRemark("");
+                $notificationOfMaturity->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
+                $notificationOfMaturity->setLeaderDistId($leader);
                 $notificationOfMaturity->setEmailStatus(Globals::STATUS_ACTIVE);
                 $notificationOfMaturity->setStatusCode(Globals::STATUS_PENDING);
                 $notificationOfMaturity->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
