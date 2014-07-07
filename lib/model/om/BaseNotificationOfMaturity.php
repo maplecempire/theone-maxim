@@ -61,6 +61,14 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 
 	
+	protected $package_price;
+
+
+	
+	protected $leader_dist_id;
+
+
+	
 	protected $created_by;
 
 
@@ -200,6 +208,20 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 	{
 
 		return $this->mt4_balance;
+	}
+
+	
+	public function getPackagePrice()
+	{
+
+		return $this->package_price;
+	}
+
+	
+	public function getLeaderDistId()
+	{
+
+		return $this->leader_dist_id;
 	}
 
 	
@@ -445,6 +467,30 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 	} 
 	
+	public function setPackagePrice($v)
+	{
+
+		if ($this->package_price !== $v) {
+			$this->package_price = $v;
+			$this->modifiedColumns[] = NotificationOfMaturityPeer::PACKAGE_PRICE;
+		}
+
+	} 
+	
+	public function setLeaderDistId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->leader_dist_id !== $v) {
+			$this->leader_dist_id = $v;
+			$this->modifiedColumns[] = NotificationOfMaturityPeer::LEADER_DIST_ID;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -537,19 +583,23 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 			$this->mt4_balance = $rs->getFloat($startcol + 12);
 
-			$this->created_by = $rs->getInt($startcol + 13);
+			$this->package_price = $rs->getFloat($startcol + 13);
 
-			$this->created_on = $rs->getTimestamp($startcol + 14, null);
+			$this->leader_dist_id = $rs->getInt($startcol + 14);
 
-			$this->updated_by = $rs->getInt($startcol + 15);
+			$this->created_by = $rs->getInt($startcol + 15);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 16, null);
+			$this->created_on = $rs->getTimestamp($startcol + 16, null);
+
+			$this->updated_by = $rs->getInt($startcol + 17);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 18, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 17; 
+						return $startcol + 19; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating NotificationOfMaturity object", $e);
 		}
@@ -726,15 +776,21 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 				return $this->getMt4Balance();
 				break;
 			case 13:
-				return $this->getCreatedBy();
+				return $this->getPackagePrice();
 				break;
 			case 14:
-				return $this->getCreatedOn();
+				return $this->getLeaderDistId();
 				break;
 			case 15:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 16:
+				return $this->getCreatedOn();
+				break;
+			case 17:
+				return $this->getUpdatedBy();
+				break;
+			case 18:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -760,10 +816,12 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 			$keys[10] => $this->getStatusCode(),
 			$keys[11] => $this->getApproveRejectDatetime(),
 			$keys[12] => $this->getMt4Balance(),
-			$keys[13] => $this->getCreatedBy(),
-			$keys[14] => $this->getCreatedOn(),
-			$keys[15] => $this->getUpdatedBy(),
-			$keys[16] => $this->getUpdatedOn(),
+			$keys[13] => $this->getPackagePrice(),
+			$keys[14] => $this->getLeaderDistId(),
+			$keys[15] => $this->getCreatedBy(),
+			$keys[16] => $this->getCreatedOn(),
+			$keys[17] => $this->getUpdatedBy(),
+			$keys[18] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -819,15 +877,21 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 				$this->setMt4Balance($value);
 				break;
 			case 13:
-				$this->setCreatedBy($value);
+				$this->setPackagePrice($value);
 				break;
 			case 14:
-				$this->setCreatedOn($value);
+				$this->setLeaderDistId($value);
 				break;
 			case 15:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 16:
+				$this->setCreatedOn($value);
+				break;
+			case 17:
+				$this->setUpdatedBy($value);
+				break;
+			case 18:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -850,10 +914,12 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		if (array_key_exists($keys[10], $arr)) $this->setStatusCode($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setApproveRejectDatetime($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setMt4Balance($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCreatedBy($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setCreatedOn($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUpdatedBy($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setUpdatedOn($arr[$keys[16]]);
+		if (array_key_exists($keys[13], $arr)) $this->setPackagePrice($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setLeaderDistId($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCreatedBy($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCreatedOn($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedBy($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUpdatedOn($arr[$keys[18]]);
 	}
 
 	
@@ -874,6 +940,8 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		if ($this->isColumnModified(NotificationOfMaturityPeer::STATUS_CODE)) $criteria->add(NotificationOfMaturityPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME)) $criteria->add(NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME, $this->approve_reject_datetime);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::MT4_BALANCE)) $criteria->add(NotificationOfMaturityPeer::MT4_BALANCE, $this->mt4_balance);
+		if ($this->isColumnModified(NotificationOfMaturityPeer::PACKAGE_PRICE)) $criteria->add(NotificationOfMaturityPeer::PACKAGE_PRICE, $this->package_price);
+		if ($this->isColumnModified(NotificationOfMaturityPeer::LEADER_DIST_ID)) $criteria->add(NotificationOfMaturityPeer::LEADER_DIST_ID, $this->leader_dist_id);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::CREATED_BY)) $criteria->add(NotificationOfMaturityPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::CREATED_ON)) $criteria->add(NotificationOfMaturityPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::UPDATED_BY)) $criteria->add(NotificationOfMaturityPeer::UPDATED_BY, $this->updated_by);
@@ -931,6 +999,10 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		$copyObj->setApproveRejectDatetime($this->approve_reject_datetime);
 
 		$copyObj->setMt4Balance($this->mt4_balance);
+
+		$copyObj->setPackagePrice($this->package_price);
+
+		$copyObj->setLeaderDistId($this->leader_dist_id);
 
 		$copyObj->setCreatedBy($this->created_by);
 
