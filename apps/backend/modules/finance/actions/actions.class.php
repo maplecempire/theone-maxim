@@ -732,23 +732,25 @@ class financeActions extends sfActions
             $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $existNotificationOfMaturity->save();
 
-            $distAccountCp3Balance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+            if ($cp3Amount > 0) {
+                $distAccountCp3Balance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MATURITY);
-            $mlm_account_ledger->setRollingPoint("N");
-            $mlm_account_ledger->setRemark($remark);
-            $mlm_account_ledger->setInternalRemark($internalRemark);
-            $mlm_account_ledger->setCredit($cp3Amount);
-            $mlm_account_ledger->setDebit(0);
-            $mlm_account_ledger->setBalance($distAccountCp3Balance + $cp3Amount);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MATURITY);
+                $mlm_account_ledger->setRollingPoint("N");
+                $mlm_account_ledger->setRemark($remark);
+                $mlm_account_ledger->setInternalRemark($internalRemark);
+                $mlm_account_ledger->setCredit($cp3Amount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountCp3Balance + $cp3Amount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
 
-            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+            }
 
             $con->commit();
         } catch (PropelException $e) {
