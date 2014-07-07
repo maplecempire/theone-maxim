@@ -695,7 +695,7 @@ class financeActions extends sfActions
         $noticeId = $this->getRequestParameter('noticeId');
         $cp3Amount = $this->getRequestParameter('cp3Amount');
         $internalRemark = $this->getRequestParameter('internalRemark', '');
-        $remark = $this->getRequestParameter('remark', Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
+        $remark = $this->getRequestParameter('remark', "CLOSE MT4");
 
         $existNotificationOfMaturity = NotificationOfMaturityPeer::retrieveByPK($noticeId);
         if (!$existNotificationOfMaturity) {
@@ -720,30 +720,30 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            $existDist->setCloseAccount("N");
-            $existDist->setSecondtimeRenewal("Y");
+            $existDist->setCloseAccount("Y");
+            $existDist->setSecondtimeRenewal("N");
             $existDist->save();
 
             $existNotificationOfMaturity->setMt4Balance($cp3Amount);
             $existNotificationOfMaturity->setRemark($remark);
             $existNotificationOfMaturity->setInternalRemark($internalRemark);
-            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_SUCCESS);
+            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_WITHDRAW);
             $existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
             $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $existNotificationOfMaturity->save();
 
-            $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+            $distAccountCp3Balance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             $mlm_account_ledger = new MlmAccountLedger();
             $mlm_account_ledger->setDistId($distId);
             $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-            $mlm_account_ledger->setTransactionType($transactionType);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MATURITY);
             $mlm_account_ledger->setRollingPoint("N");
             $mlm_account_ledger->setRemark($remark);
             $mlm_account_ledger->setInternalRemark($internalRemark);
-            $mlm_account_ledger->setCredit($epointAmount);
+            $mlm_account_ledger->setCredit($cp3Amount);
             $mlm_account_ledger->setDebit(0);
-            $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
+            $mlm_account_ledger->setBalance($distAccountCp3Balance + $cp3Amount);
             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
