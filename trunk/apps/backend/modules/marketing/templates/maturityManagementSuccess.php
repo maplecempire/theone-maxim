@@ -48,9 +48,9 @@ $(function(){
                   var idx = 2;
                   $("#dgAddPanel").data("data_" + oObj.aData[0], {
                         notice_id : oObj.aData[0]
+                        , dividend_date : oObj.aData[idx++]
                         , distributor_code : oObj.aData[idx++]
                         , mt4_user_name : oObj.aData[idx++]
-                        , dividend_date : oObj.aData[idx++]
                         , mt4_balance : oObj.aData[idx++]
                         , status_code : oObj.aData[idx++]
                         , approve_reject_datetime : oObj.aData[idx++]
@@ -78,7 +78,7 @@ $(function(){
               { "sName" : "maturity.internal_remark",  "bSortable": true},
               { "sName" : "maturity.email",  "bSortable": true},
               { "sName" : "maturity.maturity_type",  "bSortable": true},
-              { "sName" : "maturity.maturity_type",  "bSortable": true},
+              { "sName" : "leader.distributor_code",  "bSortable": true},
               { "sName" : "maturity.created_on",  "bSortable": true},
               { "sName" : "maturity.email_status",  "bSortable": true}
 		]
@@ -424,9 +424,9 @@ function populateDgAddPanel() {
             <td><input type="text" id="dgAddPanelLeader" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
         </tr>
         <tr>
-            <td>Name</td>
+            <td>Package value</td>
             <td>:</td>
-            <td><input type="text" id="dgAddPanelName" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+            <td><input type="text" id="dgAddPanelPackagePrice" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
             <td>Email</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelEmail" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>

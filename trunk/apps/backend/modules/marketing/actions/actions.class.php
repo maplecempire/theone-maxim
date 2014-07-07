@@ -89,6 +89,7 @@ class marketingActions extends sfActions
 
     public function executeMaturityManagement()
     {
+        $this->updateLeaderForNotificationOfMaturity();
     }
 
     public function executeLuckyDraw()
@@ -3555,6 +3556,61 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             </table>";
                 $sendMailService = new SendMailService();
                 $sendMailService->sendForgetPassword($existDistributor, $subject, $body);
+        }
+    }
+
+    function updateLeaderForNotificationOfMaturity()
+    {
+        $c = new Criteria();
+        $c->add(NotificationOfMaturityPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
+        $notificationOfMaturitys = NotificationOfMaturityPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        //var_dump($notificationOfMaturitys);
+        foreach ($notificationOfMaturitys as $notificationOfMaturity) {
+
+            $distDB = MlmDistributorPeer::retrieveByPK($notificationOfMaturity->getDistId());
+
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $notificationOfMaturity->setLeaderDistId($dist->getDistributorId());
+                        $notificationOfMaturity->save();
+                    }
+                    break;
+                }
+            }
+        }
+
+        $c = new Criteria();
+        $c->add(NotificationOfMaturityPeer::PACKAGE_PRICE, null, Criteria::ISNULL);
+        $notificationOfMaturitys = NotificationOfMaturityPeer::doSelect($c);
+
+        foreach ($notificationOfMaturitys as $notificationOfMaturity) {
+            $c = new Criteria();
+            $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $notificationOfMaturity->getMt4UserName());
+            $roiDBs = MlmRoiDividendPeer::doSelectOne($c);
+
+            $distDB = MlmDistributorPeer::retrieveByPK($notificationOfMaturity->getDistId());
+
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $notificationOfMaturity->setLeaderDistId($dist->getDistributorId());
+                        $notificationOfMaturity->save();
+                    }
+                    break;
+                }
+            }
         }
     }
 }
