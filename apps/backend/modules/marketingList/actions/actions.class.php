@@ -14,7 +14,7 @@ class marketingListActions extends sfActions
     {
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
-        //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
+        $sColumns = str_replace("leader.distributor_code", "leader.distributor_code as leader_dist_code", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 
@@ -24,7 +24,8 @@ class marketingListActions extends sfActions
         $arr = array();
 
         $sql = " FROM notification_of_maturity maturity
-        LEFT JOIN mlm_distributor dist ON dist.distributor_id = maturity.dist_id";
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = maturity.dist_id
+        LEFT JOIN mlm_distributor leader ON leader.distributor_id = maturity.leader_dist_id";
 
         /******   total records  *******/
         $sWhere = " WHERE 1=1";
@@ -66,30 +67,14 @@ class marketingListActions extends sfActions
         $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
         $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
         //var_dump($query);
-        $leaderArrs = explode(",", Globals::GROUP_LEADER);
-
         while ($resultset->next())
         {
             $resultArr = $resultset->getRow();
-
-            $leader = "";
-            for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
-                if ($pos === false) { // note: three equal signs
-
-                } else {
-                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
-                    if ($dist) {
-                        $leader = $dist->getDistributorCode();
-                    }
-                    break;
-                }
-            }
-
             $arr[] = array(
                 $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
                 , $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
@@ -103,7 +88,7 @@ class marketingListActions extends sfActions
                 , $resultArr['internal_remark'] == null ? "" : $resultArr['internal_remark']
                 , $resultArr['email'] == null ? "" : $resultArr['email']
                 , $resultArr['maturity_type'] == null ? "" : $resultArr['maturity_type']
-                , $leader
+                , $resultArr['leader_dist_code'] == null ? "" : $resultArr['leader_dist_code']
                 , $resultArr['created_on'] == null ? "" : $resultArr['created_on']
                 , $resultArr['email_status'] == null ? "" : $resultArr['email_status']
             );
