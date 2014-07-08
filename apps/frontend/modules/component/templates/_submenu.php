@@ -300,6 +300,9 @@ function blink(selector) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/legalWatch"><span><?php echo __('Ask and be answered'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/uploads/Maxim-Code-of-Ethic.pdf" target="_blank"><span><?php echo __('Maxim Code of Ethic'); ?> (9.5MB)</span><img src="/images/new_icon.gif"></a>
+        </li>
     </ul>
     <?php
     //}

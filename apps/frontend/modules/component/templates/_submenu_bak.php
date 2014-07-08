@@ -315,7 +315,7 @@ $(function() {
                                 a client
                                 of Maxim Trader. We recommend that you take the time to read each of them carefully.</p>
 
-                                <p><strong>Please check the boxes below to acknowledge your acceptance, argeement and
+                                <p><strong>Please check the boxes below to acknowledge your acceptance, agreement and
                                     understanding of these terms and agreements.</strong></p></td>
                         </tr>
                         <tr class='checkbox_bg row0 first'>
