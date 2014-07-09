@@ -990,6 +990,50 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+    <?php if ($culture == "cn" || $culture == "en") {?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='34'>Bali IME Convention Promo 马胜巴厘岛国际金融交流会优惠计划</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "9 July 2014";
+                ?>
+            </div>
+
+            <div id="page_34" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+                            <br>
+                            <br>Promo Period: June15th to August 15th, 2014
+                            <br>优惠时期：2014.6.15-8.15日
+                            <br>
+                            <br>To Qualify: Sign Up for USD30k & above package
+                            <br>Entitle: 1 door ticket to Maxim Trader Bali IME Convention & Gala Dinner
+                            <br>优惠项目：购买3万美金及以上配套
+                            <br>优惠获得：马胜巴厘岛国际金融交流会议及晚宴门票一张
+                            <br>
+                            <br>Nb. Maximum 1 ticket per UserID
+                            <br>注：一个账户ID只能享受一张票
+                            <br>
+                            <br>(Above Promo applies for all countries except Japan, Korea and Australia)
+                            <br>(以上优惠针对所有会员国家，除开日本、韩国以及澳大利亚)
+                            <br>
+                            <br>The beautiful and romantic island of Bali is calling you..... Hurry, we have limited seats left for the Maxim Trader Bali IME Gala Dinner  ..... !!!!
+                            <br>神秘浪漫的巴厘岛正在等待着您的到来！名额有限，机不可失，加油吧!!!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+    <?php } ?>
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='27'>Effective Sep 30th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
