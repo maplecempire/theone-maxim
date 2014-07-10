@@ -42,6 +42,7 @@ abstract class Globals {
     const DEBIT_CARD_ACTIVATION_CHARGES = 50;
     const EZY_CASH_CARD_CHARGES = 35;
     const IME_CHARGES = 800;
+    const WITHDRAWAL_DAY = 10;
 
     const FULL_DATETIME_FORMAT = 'l j F, Y g:i a';
     const BONUS_MAINTENANCE_PERCENTAGE = 0;
