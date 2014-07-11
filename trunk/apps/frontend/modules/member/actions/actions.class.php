@@ -11354,7 +11354,7 @@ Wish you all the best.
         $subject = "Daily Report ".$dateUtil->formatDate("Y-m-d", $dateUtil->addDate(date("Y-m-d"), -1, 0, 0));
 
 //        $sendMailService->sendMail("r9jason@gmail.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "r9jason@gmail.com");
-        $sendMailService->sendMail("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "dcc@maximtrader.com,r9jason@gmail.com,lawrenceng1010@hotmail.com");
+        $sendMailService->sendMailReport("kclim23@yahoo.com", "Boss", $subject, $body, Mails::EMAIL_SENDER, "dcc@maximtrader.com,r9jason@gmail.com,lawrenceng1010@hotmail.com");
     }
 
     function getAllBonusData() {
