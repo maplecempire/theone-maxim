@@ -8505,26 +8505,30 @@ We look forward to your custom in the near future. Should you have any queries, 
         $currentDate_timestamp = strtotime($currentDate);
         //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
         $dividendDate = strtotime("-7 days", $currentDate_timestamp);
-        var_dump($dividendDate);
-        var_dump(date("Y-m-d",$dividendDate));
+        //var_dump($dividendDate);
+        //var_dump(date("Y-m-d",$dividendDate));
 
         $queryRecord = 20;
         $c = new Criteria();
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
         $c->add(MlmDistributorPeer::ACTIVE_DATETIME, $dividendDate, Criteria::LESS_THAN);
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1, Criteria::NOT_EQUAL);
+        $c->add(MlmDistributorPeer::RANK_ID, null, Criteria::ISNOTNULL);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::ACTIVE_DATETIME);
         $c->setOffset($this->getRequestParameter('q') * $queryRecord);
         $c->setLimit($queryRecord);
 
         $pendingDistributors = MlmDistributorPeer::doSelect($c);
-        $idx = 1;
-        foreach ($pendingDistributors as $pendingDistributor) {
-            print_r($idx++.":".$pendingDistributor->getActiveDatetime());
+        //var_dump($pendingDistributors);
+        //exit();
+        //$idx = 1;
+        foreach ($pendingDistributors as $mlm_distributor) {
+            print_r($idx++.":".$mlm_distributor->getActiveDatetime());
             print_r("<br>");
             $placementSuccessful = false;
 
-            $uplineDistId = $pendingDistributor->getUplineDistId();
+            $uplineDistId = $mlm_distributor->getUplineDistId();
 
             $uplinePosition = Globals::PLACEMENT_LEFT;
 
@@ -8593,34 +8597,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
             if (!$sponsoredPackageDB) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Package selected."));
-                return $this->redirect('/member/memberRegistration');
+                continue;
             }
 
             $pairingPoint = $sponsoredPackageDB->getPrice();
-            //$sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
-            /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
-                $pairingPoint = $amountNeeded;
-            }*/
-
-            // recalculate Total left and total right for $uplineDistDB
-            //var_dump("===========");
-            /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
-            for ($x = count($arrs); $x > 0; $x--) {
-                if ($arrs[$x] == "") {
-                    continue;
-                }
-                //var_dump("+++".$arrs[$x]);
-                $uplineDistDB = MlmDistributorPeer::retrieveByPK($arrs[$x]);
-                if ($uplineDistDB) {
-                    $totalLeft = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_LEFT);
-                    $totalRight = $this->getTotalPosition($arrs[$x], Globals::PLACEMENT_RIGHT);
-                    $uplineDistDB->setTotalLeft($totalLeft);
-                    $uplineDistDB->setTotalRight($totalRight);
-                    $uplineDistDB->save();
-                }
-            }*/
-
             /******************************/
             /*  store Pairing points
             /******************************/
@@ -8646,8 +8626,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
                         if (!$packageDB) {
-                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
-                            return $this->redirect('/member/memberRegistration');
+                            continue;
                         }
 
                         $sponsorDistPairingDB->setLeftBalance($leftBalance);
@@ -8685,24 +8664,6 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->save();
-
-                    /*if ($uplineDistDB->getDistributorId() == 595) {
-                        // OPRNMAN
-                        $legBalance = $this->getPairingBalance(273056, Globals::PLACEMENT_RIGHT);
-
-                        $sponsorDistPairingledger = new MlmDistPairingLedger();
-                        $sponsorDistPairingledger->setDistId(273056);
-                        $sponsorDistPairingledger->setLeftRight(Globals::PLACEMENT_RIGHT);
-                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
-                        $sponsorDistPairingledger->setCredit($pairingPoint);
-                        $sponsorDistPairingledger->setDebit(0);
-                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
-                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistPairingledger->save();
-                    }*/
-                    //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
                     if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                         break;
