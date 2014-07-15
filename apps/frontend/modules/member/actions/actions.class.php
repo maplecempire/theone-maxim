@@ -5171,6 +5171,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::ACTIVE_DATETIME);
         $this->pendingDistributors = MlmDistributorPeer::doSelect($c);
 
         $c = new Criteria();
@@ -8521,11 +8522,11 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c->setLimit($queryRecord);
 
         $pendingDistributors = MlmDistributorPeer::doSelect($c);
-        //var_dump($pendingDistributors);
-        //exit();
+//        var_dump($pendingDistributors);
+//        exit();
         $idx = 1;
         foreach ($pendingDistributors as $mlm_distributor) {
-            print_r($idx++.":".$mlm_distributor->getActiveDatetime());
+            print_r($idx++.":".$mlm_distributor->getDistributorCode().":".$mlm_distributor->getActiveDatetime());
             print_r("<br>");
             $placementSuccessful = false;
 
@@ -8661,7 +8662,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingledger->setCredit($pairingPoint);
                     $sponsorDistPairingledger->setDebit(0);
                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [auto]");
                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->save();
@@ -8740,7 +8741,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingledger->setCredit($pairingPoint);
                     $sponsorDistPairingledger->setDebit(0);
                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [kashventure]");
+                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [kashventure] [auto]");
                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistPairingledger->save();

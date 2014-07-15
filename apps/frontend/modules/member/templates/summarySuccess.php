@@ -728,7 +728,7 @@ function reassignDatagridAnnouncementEventAttr() {
                                 $hideRestructureButton = "display:none";
                             }
                     echo "<tr class='row" . $trStyle . "'>
-                    <td align='center'>" . $dist->getCreatedOn() . "</td>
+                    <td align='center'>" . $dist->getActiveDatetime() . "</td>
                     <td align='center' class='date'>" . $dist->getDistributorCode() . "</td>
                     <td align='center'>" . $dist->getFullName() . "</td>
                     <td align='center'>" .
