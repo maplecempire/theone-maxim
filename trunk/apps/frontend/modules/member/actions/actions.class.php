@@ -5164,7 +5164,8 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $c = new Criteria();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1) {
-
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1, Criteria::NOT_EQUAL);
+            $c->add(MlmDistributorPeer::RANK_ID, null, Criteria::ISNOTNULL);
         } else {
             $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         }
@@ -8508,7 +8509,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         //var_dump($dividendDate);
         //var_dump(date("Y-m-d",$dividendDate));
 
-        $queryRecord = 20;
+        $queryRecord = 10;
         $c = new Criteria();
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
@@ -8522,7 +8523,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $pendingDistributors = MlmDistributorPeer::doSelect($c);
         //var_dump($pendingDistributors);
         //exit();
-        //$idx = 1;
+        $idx = 1;
         foreach ($pendingDistributors as $mlm_distributor) {
             print_r($idx++.":".$mlm_distributor->getActiveDatetime());
             print_r("<br>");
