@@ -83,13 +83,13 @@ class reportActions extends sfActions
     }
     public function executeTest()
     {
-//        $this->executeJapanIncentive();
-//        $this->executeJapanIncentive();
-//        $this->executeJapanIncentive();
-//        $this->executeJapanIncentive();
-//        $this->executeJapanIncentive();
-//        $this->executeJapanIncentive();
-
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+        $this->executeJapanIncentive();
+//
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
@@ -103,11 +103,18 @@ class reportActions extends sfActions
 //        $this->executeLangkawiIncentive();
 //        $this->executeLangkawiIncentive();
 
-        $this->executeShanghaiConventionTrip();
-        $this->executeShanghaiConventionTrip();
-        $this->executeShanghaiConventionTrip();
-        $this->executeShanghaiConventionTrip();
-        $this->executeShanghaiConventionTrip();
+//        $this->executeShanghaiConventionTrip();
+//        $this->executeShanghaiConventionTrip();
+//        $this->executeShanghaiConventionTrip();
+//        $this->executeShanghaiConventionTrip();
+//        $this->executeShanghaiConventionTrip();
+
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
 
 //        $q3 = 11 / 3;
 //        var_dump($q3);
@@ -131,12 +138,12 @@ class reportActions extends sfActions
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
 
-//        $this->executeCaratDiamondChallenge();
-//        $this->executeCaratDiamondChallenge();
-//        $this->executeCaratDiamondChallenge();
-//        $this->executeCaratDiamondChallenge();
-//        $this->executeCaratDiamondChallenge();
-//        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
+        $this->executeCaratDiamondChallenge();
 
 //        $this->executeLangkawiChallenge();
 //        $this->executeLangkawiChallenge();
@@ -144,38 +151,32 @@ class reportActions extends sfActions
 //        $this->executeLangkawiChallenge();
 //        $this->executeLangkawiChallenge();
 
-        $this->executeShanghaiChallenge();
-        $this->executeShanghaiChallenge();
-        $this->executeShanghaiChallenge();
-        $this->executeShanghaiChallenge();
-        $this->executeShanghaiChallenge();
+//        $this->executeShanghaiChallenge();
+//        $this->executeShanghaiChallenge();
+//        $this->executeShanghaiChallenge();
+//        $this->executeShanghaiChallenge();
+//        $this->executeShanghaiChallenge();
 
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
     public function executeUpdateLeader()
     {
-        $query2 = "select  distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure
-                , init_rank_code, rank_code, remark, abfx_remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
-                    from mlm_distributor
-                where
-                    bkk_qualify_1 != '' or
-                    bkk_qualify_2 != '' or bkk_qualify_3 != ''";
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->setLimit(5000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
 
-        $query = "select distributor_id, distributor_code, email, full_name, contact, country, active_datetime, tree_structure, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
-                     from mlm_distributor where bkk_personal_sales >= 10000 order by bkk_personal_sales desc";
-
-        $connection = Propel::getConnection();
-        $statement = $connection->prepareStatement($query);
-        $resultset = $statement->executeQuery();
-
+        $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkStatus("COMPLETE");
 
-        while ($resultset->next()) {
-            $arr = $resultset->getRow();
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($arr["tree_structure"], "|".$leaderArrs[$i]."|");
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -186,12 +187,9 @@ class reportActions extends sfActions
                     break;
                 }
             }
-
-            $distDB = MlmDistributorPeer::retrieveByPK($arr["distributor_id"]);
             $distDB->setNomineeName($leader);
             $distDB->save();
         }
-
 
         print_r("executeUpdateLeader Done");
         return sfView::HEADER_ONLY;
@@ -207,8 +205,8 @@ class reportActions extends sfActions
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        $dateFrom = "2014-03-26 00:00:00";
-        $dateTo = "2014-04-30 23:59:59";
+        $dateFrom = "2014-06-14 00:00:00";
+        $dateTo = "2014-06-30 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("");
             $distDB->setBkkQualify2("");
@@ -609,8 +607,8 @@ class reportActions extends sfActions
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        $dateFrom = "2014-03-01 00:00:00";
-        $dateTo = "2014-04-30 23:59:59";
+        $dateFrom = "2014-06-01 00:00:00";
+        $dateTo = "2014-06-30 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");

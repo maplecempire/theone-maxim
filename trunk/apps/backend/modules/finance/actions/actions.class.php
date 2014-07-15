@@ -720,7 +720,16 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            $existDist->setCloseAccount("Y");
+            $c = new Criteria();
+            $c->add(MlmRoiDividendPeer::DIST_ID, $distId);
+            $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
+            $mlm_roi_dividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+            if ($mlm_roi_dividendDB) {
+                $existDist->setCloseAccount("N");
+            } else {
+                $existDist->setCloseAccount("Y");
+            }
             $existDist->setSecondtimeRenewal("N");
             $existDist->save();
 
