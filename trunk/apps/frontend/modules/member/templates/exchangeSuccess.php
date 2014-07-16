@@ -102,7 +102,7 @@
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Korea(South) Won" alt=""
                                                         src="/css/maxim/flag/18.gif"><br>Korea(South) Won<br>
                 </p></td>
-                <td valign="middle"><p align="center">KRW1,250.00</p></td>
+                <td valign="middle"><p align="center">KRW1,050.00</p></td>
                 <td valign="middle"><p align="center">KRW1,150.00</p></td>
             </tr>
             <tr class="row1">
