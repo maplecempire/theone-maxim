@@ -690,6 +690,194 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDoRenewAccount()
+    {
+        $noticeId = $this->getRequestParameter('noticeId');
+        $loanAccount = $this->getRequestParameter('loanAccount');
+        $cp3Amount = $this->getRequestParameter('cp3Amount');
+        $internalRemark = $this->getRequestParameter('internalRemark', '');
+        $remark = $this->getRequestParameter('remark', Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " COMPANY");
+
+        $existNotificationOfMaturity = NotificationOfMaturityPeer::retrieveByPK($noticeId);
+        if (!$existNotificationOfMaturity) {
+            $output = array(
+                "error" => true,
+                "errorMsg" => "Invalid Action."
+            );
+            echo json_encode($output);
+            return sfView::HEADER_ONLY;
+        }
+        $existDist = MlmDistributorPeer::retrieveByPK($existNotificationOfMaturity->getDistId());
+        if (!$existDist) {
+            $output = array(
+                "error" => true,
+                "errorMsg" => "Invalid Member Id."
+            );
+            echo json_encode($output);
+            return sfView::HEADER_ONLY;
+        }
+        $distId = $existNotificationOfMaturity->getDistId();
+        $con = Propel::getConnection(MlmMt4WithdrawPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            if ($loanAccount == "Y") {
+                $internalRemark .= " (LOAN ACCOUNT)";
+            } else {
+                // ROI ++++++++++++++++++++++++++++++
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::DIST_ID, $existNotificationOfMaturity->getDistId());
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $existNotificationOfMaturity->getMt4UserName());
+                $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_SUCCESS);
+                $totalRecords = MlmRoiDividendPeer::doCount($c);
+
+                if ($totalRecords != 18) {
+                    $output = array(
+                        "error" => true,
+                        "errorMsg" => "Total ROI Records is not 18."
+                    );
+                    echo json_encode($output);
+                    return sfView::HEADER_ONLY;
+                }
+
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $existNotificationOfMaturity->getMt4UserName());
+                $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
+                $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+                if ($mlmRoiDividendDB && $totalRecords < Globals::DIVIDEND_TIMES_ENTITLEMENT_36) {
+                    $idx = $mlmRoiDividendDB->getIdx() + 1;
+                    for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT_36; $i++) {
+                        $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
+
+                        $monthAdded = $idx - 1;
+                        $dividendDate = strtotime("+".$monthAdded." months", $firstDividendTime);
+
+                        $mlm_roi_dividend = new MlmRoiDividend();
+                        $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
+                        $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
+                        $mlm_roi_dividend->setIdx($idx);
+                        //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                        $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                        $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
+                        $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
+                        $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
+                        $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                        //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                        //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                        $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
+                        $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_roi_dividend->save();
+
+                        $idx = $idx + 1;
+                    }
+                }
+
+                // store pairing point ++++++++++++++++++++++++++++++
+                $uplinePosition = $existDist->getPlacementPosition();
+                $uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
+
+                $sponsoredDistributorCode = $existDist->getDistributorCode();
+                $pairingPoint = $mlmRoiDividendDB->getPackagePrice();
+                $level = 0;
+                while ($level < 200) {
+                    //var_dump($uplineDistDB->getUplineDistId());
+                    //var_dump($uplineDistDB->getUplineDistCode());
+                    //print_r("<br>");
+                    $c = new Criteria();
+                    $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                    $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                    $addToLeft = 0;
+                    $addToRight = 0;
+                    $leftBalance = 0;
+                    $rightBalance = 0;
+                    if (!$sponsorDistPairingDB) {
+                        $sponsorDistPairingDB = new MlmDistPairing();
+                        $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                        $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                        if (!$packageDB) {
+                            $output = array(
+                                "error" => true,
+                                "errorMsg" => "Invalid Rank Id."
+                            );
+                            echo json_encode($output);
+                            return sfView::HEADER_ONLY;
+                        }
+
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance);
+                        $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                        $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    } else {
+                        $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                        $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                    }
+                    $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                    $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                    $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistPairingDB->save();
+
+                    $c = new Criteria();
+                    $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                    $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                    $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                    $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                    $legBalance = 0;
+                    if ($sponsorDistPairingLedgerDB) {
+                        $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                    }
+
+                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                    $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                    $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                    $sponsorDistPairingledger->setDebit(0);
+                    $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [MATURITY]");
+                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistPairingledger->save();
+
+                    $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                    if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                        break;
+                    }
+
+                    $uplinePosition = $uplineDistDB->getPlacementPosition();
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                    $level++;
+                }
+            }
+            //$existDist->setCloseAccount("N");
+            //$existDist->setSecondtimeRenewal("Y");
+            //$existDist->save();
+
+            //$existNotificationOfMaturity->setMt4Balance($cp3Amount);
+            $existNotificationOfMaturity->setRemark($remark);
+            $existNotificationOfMaturity->setInternalRemark($internalRemark);
+            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_SUCCESS);
+            //$existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+            $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $existNotificationOfMaturity->save();
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+        $output = array(
+            "error" => false
+        );
+        echo json_encode($output);
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeDoCloseAccount()
     {
         $noticeId = $this->getRequestParameter('noticeId');

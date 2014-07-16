@@ -8801,7 +8801,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 80);
+                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 80);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->setOffset($this->getRequestParameter('q') * $queryRecord);
                     $c->setLimit($queryRecord);
