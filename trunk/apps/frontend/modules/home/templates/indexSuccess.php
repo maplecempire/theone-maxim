@@ -990,6 +990,70 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+        <?php if ($culture == "cn" || $culture == "en") {?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='35'>Latest update on Bali IME: 巴厘岛IME国际金融交流会最新公告</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "21 July 2014";
+                ?>
+            </div>
+
+            <div id="page_35" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs & Partners,
+                            <br>亲爱的领导人与伙伴们：
+                            <br>
+                            <br>We are pleased to announce that the dates for our Bali IME are confirmed for September 19th to 22nd with our Gala IME Dinner in the luxurious and spectacular Bali Convention Centre on September 20th.
+                            <br>我们很荣幸地告知大家我们的2014巴厘岛IME国际金融交流会将会于9.19-22日在巴厘岛会议中心隆重举行,庆祝晚宴时间为9.20日晚上！
+                            <br>
+                            <br>By the way, we have only a maximum 2,500 pax available for this event and as of TODAY (July 19), there is only 750 pax left....
+                            <br>另外，此次活动场地只能接纳2500人，到今天(2014.7.19日)截止，仅剩下750个名额......
+                            <br>
+                            <br>Hurry, sign up for your package, get yourself qualified, pack your bags and let the romantic island of Bali seduce you with her culture, charms and beauty.
+                            <br>加油吧！注册配套，打包行李，神秘浪漫的巴厘岛正在等着您！
+                            <br>
+                            <br>Say YES to Maxim Trader......
+                            <br>确认马胜说: YES!
+                            <br>
+                            <br>IMおよびパートナーの皆様
+                            <br>
+                            <br>バリIMEの最新のアップデート
+                            <br>
+                            <br>親愛なるIMおよびパートナーの皆様
+                            <br>
+                            <br>私たちはバリIMEの日程が9月19日〜22日に確定しましたことを喜んでお伝えします。9月20日には豪華で壮大なバリコンベンションセンターでのガラディナーも行われます。
+                            <br>
+                            <br>ところで、私たちはこのイベントに対して、2500席しかご用意しておらず、現在のところ(7月19日)、750席しか残っておりません。
+                            <br>
+                            <br>どうぞ急いで、パッケージのサインアップをしてください。資格を得ていただき、バッグを支度し、バリのロマンティックな島にその文化と魅力、美しさで貴方を誘惑させてください。
+                            <br>
+                            <br>マキシムトレーダーにYESを言ってください。
+                            <br>
+                            <br>국제회원 및 파트너 여러분,
+                            <br>
+                            <br>발리 IME 일자가 9월 19알에서 22일로 확정되었음을 기쁘게 알려드립니다. 갈라 IME 디너는 화려하고 웅장한 발리 컨벤션 세터에서 9월 20일 열리게 될 것입니다.
+                            <br>
+                            <br>참조. 이 이벤트에 2,500 좌석만 입장이 가능하며 오늘부로 (7월 19일), 750좌석만이 남았습니다.
+                            <br>
+                            <br>서두르십시요. 패키지에 서명하셔서 자격을 충족하세요. 가방을 싸서 로맨티한 섬 발리가 자신의 매력적인 문화와 아름다움으로 당신을 유혹하게 하세요.
+                            <br>
+                            <br>맥심 트레이더에 예스라고 하세요.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
     <?php if ($culture == "cn" || $culture == "en") {?>
         <div class="page">
             <div class="poptitle">
