@@ -90,7 +90,7 @@
             <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Indonesia Rupiahs" alt=""
                                                         src="/css/maxim/flag/19.gif"><br>Indonesia Rupiahs</p></td>
-                <td valign="middle"><p align="center">R12,000.00</p></td>
+                <td valign="middle"><p align="center">R13,500.00</p></td>
                 <td valign="middle"><p align="center">R11,000.00</p></td>
             </tr>
             <tr class="row1">
@@ -111,7 +111,7 @@
 
                 </p></td>
                 <td valign="middle"><p align="center">RM3.60</p></td>
-                <td valign="middle"><p align="center">RM3.30</p></td>
+                <td valign="middle"><p align="center">N/A</p></td>
             </tr>
             <!--<tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Macau Patacas" alt=""
@@ -203,7 +203,7 @@
             </tr>
             </tbody>
         </table>
-        <br><strong>(Modified on 20th August 2013)</strong>
+        <br><strong>(Modified on 21st July 2014)</strong>
     </td>
 </tr>
 </tbody>
