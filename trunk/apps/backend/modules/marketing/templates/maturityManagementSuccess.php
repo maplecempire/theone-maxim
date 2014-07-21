@@ -141,7 +141,7 @@ function reassignDatagridEventAttr(){
 								<th>Email</th>
 								<th>Maturity Type</th>
 								<th>Leader</th>
-								<th>Created On</th>
+								<th>Dividend Date</th>
 								<th>Email Status</th>
 							</tr>
                             <tr>
