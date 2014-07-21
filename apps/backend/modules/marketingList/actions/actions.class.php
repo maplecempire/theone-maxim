@@ -89,7 +89,7 @@ class marketingListActions extends sfActions
                 , $resultArr['email'] == null ? "" : $resultArr['email']
                 , $resultArr['maturity_type'] == null ? "" : $resultArr['maturity_type']
                 , $resultArr['leader_dist_code'] == null ? "" : $resultArr['leader_dist_code']
-                , $resultArr['created_on'] == null ? "" : $resultArr['created_on']
+                , $resultArr['dividend_date'] == null ? "" : $resultArr['dividend_date']
                 , $resultArr['email_status'] == null ? "" : $resultArr['email_status']
             );
         }

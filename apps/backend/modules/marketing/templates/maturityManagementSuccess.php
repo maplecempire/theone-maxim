@@ -79,7 +79,7 @@ $(function(){
               { "sName" : "maturity.email",  "bSortable": true},
               { "sName" : "maturity.maturity_type",  "bSortable": true},
               { "sName" : "leader.distributor_code",  "bSortable": true},
-              { "sName" : "maturity.created_on",  "bSortable": true},
+              { "sName" : "maturity.dividend_date",  "bSortable": true},
               { "sName" : "maturity.email_status",  "bSortable": true}
 		]
 	});
