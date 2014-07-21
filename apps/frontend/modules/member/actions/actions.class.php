@@ -943,6 +943,7 @@ class memberActions extends sfActions
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                $idx = $mlmRoiDividend->getIdx();
                 $distId = $mlmRoiDividend->getDistId();
                 $mt4UserName = $mlmRoiDividend->getMt4UserName();
                 $packagePrice = $mlmRoiDividend->getPackagePrice();
@@ -997,7 +998,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
-                    $mlm_account_ledger->setRemark("");
+                    $mlm_account_ledger->setRemark("#".$idx);
                     $mlm_account_ledger->setCredit($dividendAmount);
                     $mlm_account_ledger->setDebit(0);
                     $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
@@ -1018,7 +1019,7 @@ class memberActions extends sfActions
                     $sponsorDistCommissionledger->setDebit(0);
                     $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                     $sponsorDistCommissionledger->setBalance($fundManagementBalance + $dividendAmount);
-                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice);
+                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", #".$idx);
                     $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistCommissionledger->save();
@@ -9091,6 +9092,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                $idx = $mlmRoiDividend->getIdx();
                 $distId = $mlmRoiDividend->getDistId();
                 $mt4UserName = $mlmRoiDividend->getMt4UserName();
                 $packagePrice = $mlmRoiDividend->getPackagePrice();
@@ -9144,7 +9146,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
-                    $mlm_account_ledger->setRemark("");
+                    $mlm_account_ledger->setRemark("#".$idx);
                     $mlm_account_ledger->setCredit($dividendAmount);
                     $mlm_account_ledger->setDebit(0);
                     $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
@@ -9165,7 +9167,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistCommissionledger->setDebit(0);
                     $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
                     $sponsorDistCommissionledger->setBalance($fundManagementBalance + $dividendAmount);
-                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice);
+                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", #".$idx);
                     $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $sponsorDistCommissionledger->save();
