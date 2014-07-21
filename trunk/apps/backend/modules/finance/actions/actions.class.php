@@ -666,9 +666,9 @@ class financeActions extends sfActions
         try {
             $con->begin();
 
-            //$existDist->setCloseAccount("N");
+            $existDist->setCloseAccount("Y");
             //$existDist->setSecondtimeRenewal("Y");
-            //$existDist->save();
+            $existDist->save();
 
             //$existNotificationOfMaturity->setMt4Balance($cp3Amount);
             $existNotificationOfMaturity->setRemark($remark);
@@ -948,6 +948,56 @@ class financeActions extends sfActions
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
+
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+        $output = array(
+            "error" => false
+        );
+        echo json_encode($output);
+        return sfView::HEADER_ONLY;
+    }
+
+    public function executeDoCloseAccountForLoanAccount()
+    {
+        $noticeId = $this->getRequestParameter('noticeId');
+        $cp3Amount = $this->getRequestParameter('cp3Amount');
+        $internalRemark = $this->getRequestParameter('internalRemark', '');
+        $remark = $this->getRequestParameter('remark', "CLOSE MT4");
+
+        $existNotificationOfMaturity = NotificationOfMaturityPeer::retrieveByPK($noticeId);
+        if (!$existNotificationOfMaturity) {
+            $output = array(
+                "error" => true,
+                "errorMsg" => "Invalid Action."
+            );
+            echo json_encode($output);
+            return sfView::HEADER_ONLY;
+        }
+        $existDist = MlmDistributorPeer::retrieveByPK($existNotificationOfMaturity->getDistId());
+        if (!$existDist) {
+            $output = array(
+                "error" => true,
+                "errorMsg" => "Invalid Member Id."
+            );
+            echo json_encode($output);
+            return sfView::HEADER_ONLY;
+        }
+        $distId = $existNotificationOfMaturity->getDistId();
+        $con = Propel::getConnection(MlmMt4WithdrawPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $existNotificationOfMaturity->setMt4Balance($cp3Amount);
+            $existNotificationOfMaturity->setRemark($remark);
+            $existNotificationOfMaturity->setInternalRemark($internalRemark.", CLOSE ACCOUNT FOR LOAN ACCOUNT");
+            $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_WITHDRAW);
+            $existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+            $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $existNotificationOfMaturity->save();
 
             $con->commit();
         } catch (PropelException $e) {
