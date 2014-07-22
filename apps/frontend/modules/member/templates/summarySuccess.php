@@ -1,4 +1,8 @@
 <?php include('scripts.php'); ?>
+<?php
+$culture = $sf_user->getCulture();
+
+?>
 
 <script type="text/javascript">
 var packageStrings = "<option value=''></option>";
@@ -158,6 +162,54 @@ $(function() {
                         }
                     });
                 }
+            }
+        },
+        open: function() {
+
+        },
+        close: function() {
+
+        }
+    });
+    <?php
+    $modalFormAppear = "false";
+    if ($notificationOfMaturity) {
+        $modalFormAppear = "true";
+    }
+    ?>
+    $("#dgMaturity").dialog("destroy");
+    $("#dgMaturity").dialog({
+        autoOpen : <?php echo $modalFormAppear;?>,
+        modal : true,
+        resizable : false,
+        hide: 'clip',
+        show: 'slide',
+        width: 600,
+        buttons: {
+            "<?php echo __('Renew Contract') ?>": function() {
+                if ($("#needToUp").val() == "Y") {
+                    var answer = confirm("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract. \nDo you want to navigate to MT4 Reload page?");
+                    if (answer){
+                        window.location = "<?php echo url_for("/member/reloadTopup")?>";
+                    }
+                }
+                var answer = confirm("Are you sure want to renew your contract?");
+                if (answer){
+                    waiting();
+                    $("#maturityAction").val("RENEW");
+                    $("#maturityForm").submit();
+                }
+            },
+            "<?php echo __('Terminate Contract') ?>": function() {
+                var answer = confirm("Are you sure want to terminate your contract?");
+                if (answer){
+                    waiting();
+                    $("#maturityAction").val("WITHDRAW");
+                    $("#maturityForm").submit();
+                }
+            },
+            "<?php echo __('Close') ?>": function() {
+                $(this).dialog('close');
             }
         },
         open: function() {
@@ -819,5 +871,113 @@ function reassignDatagridAnnouncementEventAttr() {
     <input type="hidden" id="placement" name="placement">
 </form>
 
-
-
+<?php if ($notificationOfMaturity) { ?>
+<form action="/maturityAccount/doMaturityAction" id="maturityForm" name="maturityForm">
+    <input type="hidden" id="maturityNotificationId" name="maturityNotificationId" value="<?php echo $notificationOfMaturity->getNoticeId(); ?>">
+    <input type="hidden" id="maturityAction" name="maturityAction" value="RENEW">
+    <input type="hidden" id="maturityMt4Balance" name="maturityMt4Balance" value="<?php echo $mt4Balance; ?>">
+    <input type="hidden" id="needToUp" name="needToUp" value="<?php echo $needTopup; ?>">
+</form>
+<div id="dgMaturity" style="display:none; width: 850px" title="<?php echo __("RENEWAL NOTICE")?>">
+    <table width="100%">
+        <tr>
+            <td colspan="3">
+                <p><?php echo __("Dear International Member")?>,</p>
+                <br><strong>MT4: <?php echo $notificationOfMaturity->getMt4UserName(); ?></strong>
+                <br><strong>Balance: <?php echo $mt4Balance. " (". $mt4BalanceDate .")"; ?></strong>
+                <br>
+                <br>
+                <?php if ($culture == "cn") { ?>
+                <p>请注意一旦您的合同期满，您将不再继续享受推荐和投资回报；为了继获得高额回报，我们将自动为您续期合同18个月。一旦续期，您将继续享受来自公司市场推荐制度所带来的奖金以及每月投资分红。</p>
+                <br>
+                <br><strong>1.	MT4余额低于初始本金</strong>
+                <br>
+                <br>注: 如果您的MT4余额低于您的初始入金，我们建议您充值至初始本金额度以继续享受由公司市场推荐制度产生的推荐奖金及投资分红。如果您未在合同到期日之前充值，您的账户将在合同到期日之后被暂时搁置，直到您充值至初始本金额度。一旦账户额度达到初始本金额度，您将重新开始享受推荐奖金及每月投资分红
+                <br>
+                <br><strong>2.	不继续合同</strong>
+                <br>
+                <br>如果您个人决定不再继续合同，请于公司网站会员专区选择“不再续期”选项。请按照要求填写“合同不再续期”表格并邮件至maturity@maximtrader.com. 您MT4账号中最后的余额（合同到期届时，投资本金等同于MT4交易账户中的最后余额），将会在合同到期日后14天之内转入您的CP3账户。公司会将您CP2与CP3款项全部支付给您，之后您的个人账户将会从系统中注销，因此您将不再享受马胜市场推荐制度所带来的任何获利。
+                <br>
+                <br><strong>3.	6个月不得重新加入</strong>
+                <br>
+                <br>如果您选择终止合同，公司严格规定6个月之内您将不得再次投资马胜，敬请遵守。
+                <br>
+                <br><strong>4.	欲知更多详情，欢迎邮件至maturity@maximtrader.com.</strong>
+                <br>
+                <br>谢谢！
+                <br>
+                <br>Andrew Lim 博士
+                <br>首席执行官
+                <br>马胜金融集团
+                <?php } else if ($culture == "kr") { ?>
+                <p>귀하의 계좌가 만기에 도달하면 더 이상 추천비와 투자 수익을 받으실 수 없음을 인지하시기 바랍니다. 높은 수익률을 계속 즐기시기 위해서 당사는 자동으로 18개월의 계약을 할 것입니다.  다른 방법으로는 홈페이지에 가셔서 “갱신” 옵션을 선택하실 수도 있습니다.  갱신하신 이후에는 당사의 추천 프로그램에 의해 제공되는 보너스와 월별 실적 수익을 받으실 수 있습니다.</p>
+                <br>
+                <br><strong>1.	MT4 구좌의 부족분</strong>
+                <br>
+                <br>MT4의 발란스가 초기 투자금에 미치지 못 할 경우에는 원금의 금액만큼 더 입금하셔야 당사의 추천 프로그램에 의한 보너스와 월별 실적 수익을 받으실 수 있습니다.  만기일까지 원금의 금액만큼 입금하시지 않을 경우, 원금의 금액만큼 입금하실때까지 계좌가 동결됩니다.  부족분을 입금하신 후에는, 입금일부터 추천 프로그램에 의한 보너스와 월별 실적 수익을 받으실 수 있습니다.
+                <br>
+                <br><strong>2.	계약을 갱신하지 않을 경우</strong>
+                <br>
+                <br>어떠한 이유에서든 귀하가 계약을 갱신하기를 원하지 않을 경우, 홈페이지에 가셔서 “비갱신” 옵션을 선택하십시오.  “비갱신” 양식을 작성하셔서 maturity@maximtrader.com으로 이메일을 보내주시기 바랍니다.  귀하의 최종 MT4 잔고 (만기일에 MT4 계좌에 표시되어 있는 원금에 대한 잔고)가 귀하의 CP3 계좌로 만기일로부터 14일 이내에 입금될 것입니다.  CP2와 CP3의 잔고를 평상시와 같은 방법으로 다음의 인출 사이클에 따라 인출하실 수 있습니다.  지급이 이루어지면 귀하의 계좌는 폐쇄됩니다.
+                <br>
+                <br><strong>3.	6개월 제외 조치</strong>
+                <br>
+                <br>계약을 갱신하지 않기로 결정하셨다면 만기일로부터 6개월 동안은 맥심 트레이더에 재 가입이 불가능합니다
+                <br>
+                <br><strong>4.	자세한 사항을 알고 싶으시면 maturity@maximtrader.com으로 이 메일 보내주시기 바랍니다.</strong>
+                <br>
+                <br>감사합니다.
+                <br>
+                <br>Dr. Andrew Lim
+                <br>최고경영자
+                <br>맥심 캐피탈 주식회사
+                <?php } else if ($culture == "jp") { ?>
+                <p>あなたのアカウントが満期を迎えると、今後紹介プログラムや投資プログラムからの権利を獲得することができなくなることにどうぞご注意ください。高いリターンを続けてお楽しみいただくために、私たちはあなたのアカウントの契約を自動的に18ヵ月延長します。またはあなたはウエブサイトに行き、「renew」を選択していただくこともできます。一度更新すると、紹介プログラムからのボーナスや、月間パフォーマンスに対するリターンをお受け取りいただけます。 </p>
+                <br>
+                <br><strong>1.	MT口座の不足</strong>
+                <br>
+                <br>もしあなたのMT4口座残高が初期の投資額を下回ると、私たちはあなたが引き続き紹介プログラムや月間のパフォーマンスリターンを楽しめるように、初期投資の金額にトップアップするようにお勧めしています。もしあなたが満期日までにトップアップしない場合、あなたのアカウントは完全にトップアップするまで保留となります。一度トップアップすれば、あなたは紹介プログラムや月間パフォーマンスリターンを受け取る権利を、トップアップした日から使うことができます。
+                <br>
+                <br><strong>2.	契約を更新しない場合</strong>
+                <br>
+                <br>どのような理由にしろ、もしあなたが契約を更新したくない場合は、どうぞ弊社のウエブサイトに行き、「non renewal」を選択してください。そしてさらに「non-renewal of contract」フォームを完成し、maturity@maximtrader.com.までeメールを送っていただく必要があります。あなたの最終的なMT4口座の残高（満期日におけるMT4口座の残高に示される初期投資金額）は満期日の14日以内に、CP3口座に入金されます。あなたはその後、あなたのCP2およびCP3の残高を通常の次の引き出しサイクルにて、引き出すことができます。一度引き出しが行われると口座は閉鎖されます。
+                <br>
+                <br><strong>3.	6ヵ月の除外措置</strong>
+                <br>
+                <br>一度あなたが契約の更新をしないことを決定すると、あなたはマキシムトレ   ーダーに満期日より6ヵ月は再登録することができなくなることにどうぞご注意ください。
+                <br>
+                <br><strong>4.	さらに説明が必要な場合は、どうぞmaturity@maximtrader.comにメールしてください。</strong>
+                <br>
+                <br>ありがとうございました。
+                <br>
+                <br>Andrew Lim 博士
+                <br>最高経営責任者
+                <br>マキシム・キャピタル・リミテッド
+                <?php } else { ?>
+                <p>Please note that once your account reaches maturity, you will not be entitled to earn from our referral and investment programs. In order to continue enjoying high returns, we will automatically renew your contract for another 18 months. Alternatively, you may also go into the website and select the ‘renew’ option. Once you renew, you will be entitled to earn the bonuses offered by our referral programs and earn monthly performance returns. </p>
+                <br>
+                <br><strong>1.	Shortfall in the MT4 account</strong>
+                <br>
+                <br>If your balance in the MT4 has fallen below your initial capital investment amount, we invite you to top-up to its original sum so that you can continue to be entitled to bonuses offered by our referral programs and enjoy monthly performance returns. If you do not top-up by the maturity date, your account will be put on hold until you fully top-up to its original sum. Once topped up, you will be entitled to our referral program and earn monthly performance returns from the date of top up.
+                <br>
+                <br><strong>2.	Non-renewal of contract</strong>
+                <br>
+                <br>For any reason, if you do not wish to renew your contract, please go to the website and select the ‘non-renewal’ option. You are also required to complete the ‘non-renewal of contract’ form and email to maturity@maximtrader.com. Your FINAL MT4 BALANCE (Initial Capital Investment which is represented by the balance in the MT4 account as of the maturity date) will then be credited into your CP3 account within 14 days after maturity date. You may then withdraw your CP2 and CP3 balances in the usual manner at the next withdrawal cycle. Once the payment is made, your account will be closed.
+                <br>
+                <br><strong>3.	Six months exclusion</strong>
+                <br>
+                <br>Please note if you decide not to renew your contract, you are not allowed to re-join Maximtrader for a period of 6 months after the maturity date.
+                <br>
+                <br><strong>4.	Please email to maturity@maximtrader.com if you need further clarifications.</strong>
+                <br>
+                <br>Thank you,
+                <br>
+                <br>Dr. Andrew Lim
+                <br>Chief Executive Officer
+                <br>Maxim Capital Limited
+                <?php }  ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php } ?>

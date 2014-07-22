@@ -950,6 +950,8 @@
             <trans-unit><source>Global Transaction Services</source><target>글로벌 트랜잭션 서비스</target></trans-unit>
             <trans-unit><source>Phone Number</source><target>전화 번호</target></trans-unit>
             <trans-unit><source>Beneficiary Address</source><target>수취인 주소</target></trans-unit>
+            <trans-unit><source>RENEWAL NOTICE</source><target>갱신 공지</target></trans-unit>
+            <trans-unit><source>Dear International Member</source><target>친애하는 국제 회원 여러분들께</target></trans-unit>
         </body>
     </file>
 </xliff>
