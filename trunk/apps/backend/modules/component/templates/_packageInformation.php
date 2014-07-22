@@ -6,7 +6,7 @@
             $package = $arr['package'];
             ?>
             <tr>
-                <td><strong><?php echo $package->getPackageName() ?></strong></td>
+                <td><strong><?php echo $package->getPackageName()." ".$package->getPrice() ?></strong></td>
                 <td align="right"><?php echo $arr['total']; ?></td>
             </tr>
             <?php
