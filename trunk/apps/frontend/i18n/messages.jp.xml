@@ -953,6 +953,8 @@
             <trans-unit><source>Global Transaction Services</source><target>グローバル·トランザクション·サービス</target></trans-unit>
             <trans-unit><source>Phone Number</source><target>電話番号</target></trans-unit>
             <trans-unit><source>Beneficiary Address</source><target>受取人住所</target></trans-unit>
+            <trans-unit><source>RENEWAL NOTICE</source><target>リニューアルのお知らせ</target></trans-unit>
+            <trans-unit><source>Dear International Member</source><target>国際メンバーの皆さま</target></trans-unit>
         </body>
     </file>
 </xliff>

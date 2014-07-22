@@ -46,6 +46,10 @@ downlineList:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+doMaturityAction:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 ecashWithdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

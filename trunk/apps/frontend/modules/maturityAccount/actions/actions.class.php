@@ -99,7 +99,6 @@ class maturityAccountActions extends sfActions
     }
 
     public function executeSendEmail_May()
-
     {
         $attachment_MAY_IA = "";
         $attachment_name_MAY_IA = "";
@@ -285,5 +284,84 @@ class maturityAccountActions extends sfActions
         }
         print_r("Done");
         return sfView::HEADER_ONLY;
+    }
+
+    public function executeDoMaturityAction()
+    {
+        $noticeId= $this->getRequestParameter('maturityNotificationId');
+        $maturityAction = $this->getRequestParameter('maturityAction');
+
+        if ($noticeId == "") {
+            $this->setFlash('errorMsg', "Invalid Action [error:901]");
+            return $this->redirect('member/summary');
+        }
+        if ($maturityAction == "") {
+            $this->setFlash('errorMsg', "Invalid Action [error:902]");
+            return $this->redirect('member/summary');
+        }
+        $array = explode(',', Globals::STATUS_MATURITY_ON_HOLD.",".Globals::STATUS_MATURITY_PENDING);
+
+        $c = new Criteria();
+        $c->add(NotificationOfMaturityPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
+        $existNotificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
+        if (!$existNotificationOfMaturity) {
+            $this->setFlash('errorMsg', "Invalid Action [error:903]");
+            return $this->redirect('member/summary');
+        }
+        if ($existNotificationOfMaturity) {
+
+            if ($maturityAction == "RENEW") {
+                $maturityArr = $this->getMt4Balance($this->getUser()->getAttribute(Globals::SESSION_DISTID), $existNotificationOfMaturity->getMt4UserName());
+
+                if ($maturityArr != null) {
+                    $mt4Balance = $maturityArr['mt4_credit'];
+                    $mt4BalanceDate = $maturityArr['traded_datetime'];
+
+                    $c = new Criteria();
+                    $c->add(MlmRoiDividendPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $existNotificationOfMaturity->getMt4UserName());
+                    $c->add(MlmRoiDividendPeer::IDX, 18);
+                    $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+                    if ($mt4Balance < $mlmRoiDividendDB->getPackagePrice()) {
+                        $this->setFlash('errorMsg', "Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.");
+                        return $this->redirect('member/summary');
+                    }
+                }
+
+                $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_CLIENT_RENEW);
+            } else if ($maturityAction == "WITHDRAW") {
+                $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_CLIENT_WITHDRAW);
+            } else {
+                $this->setFlash('errorMsg', "Invalid Action [error:904]");
+                return $this->redirect('member/summary');
+            }
+        } else {
+            $this->setFlash('errorMsg', "Invalid Action [error:905]");
+            return $this->redirect('member/summary');
+        }
+
+        $existNotificationOfMaturity->setClientResponseDatatime(date("Y/m/d h:i:s A"));
+        $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $existNotificationOfMaturity->save();
+        $this->setFlash('successMsg', "Your request has been submitted for review by our admin. Thank you.");
+        return $this->redirect('member/summary');
+    }
+
+    function getMt4Balance($distributorId, $mt4Username)
+    {
+        $query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
+          	FROM mlm_daily_dist_mt4_credit WHERE dist_id = ".$distributorId. " AND mt4_user_name = '".$mt4Username ."' ORDER BY traded_datetime DESC LIMIT 1";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            return $arr;
+        }
+        return null;
     }
 }

@@ -5264,6 +5264,48 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->maintenancePoint = $maintenancePoint;
         $this->rp = $rp;
         $this->debitAccount = $debitAccount;
+
+        // Maturity
+        $array = explode(',', Globals::STATUS_MATURITY_ON_HOLD.",".Globals::STATUS_MATURITY_PENDING);
+
+        $c = new Criteria();
+        $c->add(NotificationOfMaturityPeer::DIST_ID, $distributor->getDistributorId());
+        $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
+        $this->notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
+
+        $mt4Balance = 0;
+        $mt4BalanceDate = "";
+        $needTopup = "Y";
+        $dateUtil = new DateUtil();
+        if ($this->notificationOfMaturity) {
+            $maturityArr = $this->getMt4Balance($distributor->getDistributorId(), $this->notificationOfMaturity->getMt4UserName());
+
+            if ($maturityArr != null) {
+                $mt4Balance = $maturityArr['mt4_credit'];
+                $mt4BalanceDate = $dateUtil->formatDate("d M Y", $maturityArr['traded_datetime']);
+
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::DIST_ID, $distributor->getDistributorId());
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $this->notificationOfMaturity->getMt4UserName());
+                $c->add(MlmRoiDividendPeer::IDX, 18);
+                $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+                if ($mt4Balance >= $mlmRoiDividendDB->getPackagePrice()) {
+                    $needTopup = "N";
+                }
+            }
+        }
+        $this->mt4Balance = $mt4Balance;
+        $this->mt4BalanceDate = $mt4BalanceDate;
+        $this->needTopup = $needTopup;
+        /*$this->maturityDateStr = "";
+        $dateUtil = new DateUtil();
+        if (count($this->notificationOfMaturitys) > 0) {
+            foreach ($this->notificationOfMaturitys as $notificationOfMaturity) {
+                $this->maturityDateStr = $dateUtil->formatDate("d M Y", $notificationOfMaturity->getDividendDate());
+                break;
+            }
+        }*/
     }
 
     public function executeAnnouncementList()
@@ -11759,5 +11801,21 @@ Wish you all the best.
             return $dateUtil->formatDate("Y-M-d", $mlmRoiDividendDB->getDividendDate());
         }
         return "";
+    }
+
+    function getMt4Balance($distributorId, $mt4Username)
+    {
+        $query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
+          	FROM mlm_daily_dist_mt4_credit WHERE dist_id = ".$distributorId. " AND mt4_user_name = '".$mt4Username ."' ORDER BY traded_datetime DESC LIMIT 1";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            return $arr;
+        }
+        return null;
     }
 }

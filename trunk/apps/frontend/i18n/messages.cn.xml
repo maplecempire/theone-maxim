@@ -977,6 +977,8 @@
             <trans-unit><source>You need to update all your Bank Account Details must be latin word</source><target>当提交提款申请时，请确保您的银行账户资料是拉丁文</target></trans-unit>
             <trans-unit><source>You are not allowed to submit withdrawal, due to</source><target>你不能提交兑现，原因是</target></trans-unit>
             <trans-unit><source>Remaining</source><target>剩余</target></trans-unit>
+            <trans-unit><source>RENEWAL NOTICE</source><target>合同续签通知</target></trans-unit>
+            <trans-unit><source>Dear International Member</source><target>亲爱的马胜会员</target></trans-unit>
         </body>
     </file>
 </xliff>
