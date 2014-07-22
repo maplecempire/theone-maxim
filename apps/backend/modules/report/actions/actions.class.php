@@ -83,12 +83,12 @@ class reportActions extends sfActions
     }
     public function executeTest()
     {
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
-        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
+//        $this->executeJapanIncentive();
 //
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
 //        $this->executeSingaporeYachtShowLifestyleIncentive();
@@ -109,12 +109,12 @@ class reportActions extends sfActions
 //        $this->executeShanghaiConventionTrip();
 //        $this->executeShanghaiConventionTrip();
 
-//        $this->executeUpdateLeader();
-//        $this->executeUpdateLeader();
-//        $this->executeUpdateLeader();
-//        $this->executeUpdateLeader();
-//        $this->executeUpdateLeader();
-//        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
+        $this->executeUpdateLeader();
 
 //        $q3 = 11 / 3;
 //        var_dump($q3);
@@ -163,7 +163,7 @@ class reportActions extends sfActions
     public function executeUpdateLeader()
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::LEADER_ID, null, Criteria::ISNULL);
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
@@ -172,7 +172,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         foreach ($distDBs as $distDB) {
-            $distDB->setBkkStatus("COMPLETE");
+            //$distDB->setBkkStatus("COMPLETE");
 
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
@@ -182,12 +182,13 @@ class reportActions extends sfActions
                 } else {
                     $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
                     if ($dist) {
-                        $leader = $dist->getDistributorCode();
+//                        $leader = $dist->getDistributorCode();
+                        $leader = $dist->getDistributorId();
                     }
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            $distDB->setLeaderId($leader);
             $distDB->save();
         }
 
