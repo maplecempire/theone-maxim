@@ -67,7 +67,8 @@ abstract class Globals {
     /*****    Maturity Status      ******/
     /************************************/
     const STATUS_MATURITY_PENDING = 'PENDING';
-    const STATUS_MATURITY_RENEW = 'RENEW';
+    const STATUS_MATURITY_CLIENT_RENEW = 'CLIENT RENEW';
+    const STATUS_MATURITY_CLIENT_WITHDRAW = 'CLIENT WITHDRAW';
     const STATUS_MATURITY_WITHDRAW = 'WITHDRAW';
     const STATUS_MATURITY_SUCCESS = 'SUCCESS';
     const STATUS_MATURITY_ON_HOLD = 'ON HOLD';
