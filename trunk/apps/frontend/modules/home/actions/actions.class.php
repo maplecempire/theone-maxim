@@ -342,6 +342,14 @@ class homeActions extends sfActions
     public function executeIndex()
     {
         $this->distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+        $totalCount = $this->getTotalMemberEntitle();
+        $balance = 2500 - $totalCount;
+
+        if ($balance < 0) {
+            $balance = 0;
+        }
+        $this->totalMemberEntitle = $balance;
     }
 
     public function executeIndex2()
@@ -796,5 +804,24 @@ class homeActions extends sfActions
         }
 
         return $userAccessArr;
+    }
+
+    function getTotalMemberEntitle()
+    {
+        $query = "SELECT count(*) as _SUM FROM maxim.mlm_distributor where
+                active_datetime >= '2014-06-15 00:00:00'
+                AND active_datetime <= '2014-08-15 23:59:59'
+                AND init_rank_id >= 5 and country not in ('Korea South', 'japan','Australia')
+                AND loan_account = 'N'";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $rs = $statement->executeQuery();
+
+        if ($rs->next()) {
+            $arr = $rs->getRow();
+            return $arr['_SUM'];
+        }
+
+        return 0;
     }
 }
