@@ -1006,6 +1006,11 @@ $(document).ready(function() {
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
+                            <td align="center">
+                                <span style="font-size: 20px; color: red"><?php echo __("Remaining");?> : <?php echo $totalMemberEntitle;?></span>
+                            </td>
+                        </tr>
+                        <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
                             <br>Dear IMs & Partners,
                             <br>亲爱的领导人与伙伴们：

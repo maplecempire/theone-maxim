@@ -976,6 +976,7 @@
             <trans-unit><source>Maxim Trader VISA Debit Card must be 16 characters</source><target>Maxim Trader VISA转账卡必须是16个字符</target></trans-unit>
             <trans-unit><source>You need to update all your Bank Account Details must be latin word</source><target>当提交提款申请时，请确保您的银行账户资料是拉丁文</target></trans-unit>
             <trans-unit><source>You are not allowed to submit withdrawal, due to</source><target>你不能提交兑现，原因是</target></trans-unit>
+            <trans-unit><source>Remaining</source><target>剩余</target></trans-unit>
         </body>
     </file>
 </xliff>
