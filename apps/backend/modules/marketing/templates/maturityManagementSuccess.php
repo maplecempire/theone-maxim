@@ -155,7 +155,8 @@ function reassignDatagridEventAttr(){
                                     <select id="search_statusCode" name="search_statusCode">
                                         <option value="">(Empty)</option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_PENDING; ?>" selected="selected"><?php echo Globals::STATUS_MATURITY_PENDING; ?></option>
-                                        <option value="<?php echo Globals::STATUS_MATURITY_RENEW; ?>"><?php echo Globals::STATUS_MATURITY_RENEW; ?></option>
+                                        <option value="<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>"><?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?></option>
+                                        <option value="<?php echo Globals::STATUS_MATURITY_CLIENT_WITHDRAW; ?>"><?php echo Globals::STATUS_MATURITY_CLIENT_WITHDRAW; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_WITHDRAW; ?>"><?php echo Globals::STATUS_MATURITY_WITHDRAW; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_SUCCESS; ?>"><?php echo Globals::STATUS_MATURITY_SUCCESS; ?></option>
                                         <option value="<?php echo Globals::STATUS_MATURITY_ON_HOLD; ?>"><?php echo Globals::STATUS_MATURITY_ON_HOLD; ?></option>

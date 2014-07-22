@@ -854,9 +854,9 @@ class financeActions extends sfActions
                     $level++;
                 }
             }
-            //$existDist->setCloseAccount("N");
-            //$existDist->setSecondtimeRenewal("Y");
-            //$existDist->save();
+            $existDist->setCloseAccount("N");
+            $existDist->setSecondtimeRenewal("Y");
+            $existDist->save();
 
             //$existNotificationOfMaturity->setMt4Balance($cp3Amount);
             $existNotificationOfMaturity->setRemark($remark);
