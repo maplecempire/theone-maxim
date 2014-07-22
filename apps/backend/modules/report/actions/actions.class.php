@@ -164,8 +164,7 @@ class reportActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::LEADER_ID, null, Criteria::ISNULL);
-        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, null, Criteria::ISNOTNULL);
-        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        //$c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
         $distDBs = MlmDistributorPeer::doSelect($c);
