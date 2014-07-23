@@ -63,7 +63,7 @@ $(function(){
                         , email_status : oObj.aData[idx++]
                   });
                   var data = $("#dgAddPanel").data("data_" + oObj.aData[0]);
-                  if (data.status_code == "PENDING" || data.status_code == "ON HOLD") {
+                  if (data.status_code == "<?php echo Globals::STATUS_MATURITY_PENDING; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_ON_HOLD; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_WITHDRAW; ?>") {
                       return "<a id='actionLink' href='#' title='Action'>Action</a>";
                   }
                   return "";
