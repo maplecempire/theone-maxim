@@ -1,24 +1,134 @@
-delete from mlm_dist_commission
-go
-delete from mlm_dist_commission_ledger
-go
-UPDATE `app_user`
-SET `status_code`='ACTIVE'
-WHERE `user_id`=33
-go
-UPDATE `app_user`
-SET `status_code`='ACTIVE'
-WHERE `user_id`=34
-go
-UPDATE `mlm_distributor`
-SET `status_code`='PENDING', `active_datetime`=NULL, `rank_id`=NULL, `rank_code`=NULL, `tree_level`=NULL, `tree_structure`=NULL, `upline_dist_code`=NULL, `upline_dist_id`=NULL, `placement_position`=NULL, `placement_datetime`=NULL
-WHERE `distributor_id`=31
-go
-delete from mlm_account where dist_id > 30
-go
-delete from mlm_account_ledger where dist_id > 30
-go
-delete from mlm_dist_pairing
-go
-delete from mlm_dist_pairing_ledger
-go
+SELECT DATE_FORMAT(dividend_date, "%m-%Y") AS Month, SUM(package_price)
+FROM mlm_roi_dividend
+WHERE idx = 18
+GROUP BY DATE_FORMAT(dividend_date, "%m-%Y")
+
+
+
+
+
+
+
+
+select dist.distributor_id, dist.distributor_code
+        --, roi.package_id, roi.package_price, roi.dividend_amount
+        , pair.flush_limit
+        , pack.daily_max_pairing
+    FROM mlm_distributor dist
+        LEFT JOIN mlm_dist_pairing pair ON dist.distributor_id = pair.dist_id
+        left join mlm_package pack ON pack.package_id = rank_id
+WHERE pair.flush_limit <> pack.daily_max_pairing
+        LEFT JOIN mlm_roi_dividend roi ON roi.dist_id = dist.distributor_id
+
+
+
+// withdrawal ===================================
+
+SELECT dist.distributor_code, dist.full_name, cp3.deduct, cp3.amount, cp3.bank_in_to
+        , cp3.status_code, cp3.approve_reject_datetime, cp3.remarks
+        , cp3.created_on
+	FROM mlm_cp3_withdraw cp3
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = cp3.dist_id
+where cp3.leader_dist_id = 15 and cp3.created_on >= '2014-05-01 00:00:00'
+GO
+
+SELECT dist.distributor_code, dist.full_name, cp3.deduct, cp3.amount, cp3.bank_in_to
+        , cp3.status_code, cp3.approve_reject_datetime, cp3.remarks
+        , cp3.created_on
+	FROM mlm_ecash_withdraw cp3
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = cp3.dist_id
+where cp3.leader_dist_id = 15 and cp3.created_on >= '2014-05-01 00:00:00'
+GO
+
+
+
+
+
+
+
+
+put title on top.
+
+SELECT
+transferLedger.dist_id, dist.distributor_code, dist.full_name, dist.email, dist.contact
+, SUM(transferLedger.credit) AS ROLLING_POINT
+        , account.EPOINT, (SUM(transferLedger.credit) - account.EPOINT) AS BALANCE
+    FROM mlm_account_ledger transferLedger
+        LEFT JOIN
+            (
+                SELECT sum(credit - debit) AS EPOINT, account.dist_id
+                    FROM mlm_account_ledger account
+                        where account.account_type = 'EPOINT' group by account.dist_id
+            ) account ON account.dist_id = transferLedger.dist_id
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = transferLedger.dist_id
+    where account_type = 'EPOINT' AND transferLedger.remark = 'TRANSFER FROM COMPANY' group by transferLedger.dist_id
+
+
+
+
+
+
+
+
+========================================================
+// personal sales
+SELECT newDist.upline_dist_id, dist.distributor_code, SUM(package.price), dist.tree_structure, dist.full_name, dist.email, dist.contact
+	FROM mlm_distributor newDist
+        LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+where newDist.loan_account = 'N'
+AND newDist.created_on >= '2013-01-01 00:00:00'
+and newDist.created_on <= '2013-01-31 23:59:59' group by upline_dist_id Having SUM(package.price) >= 10000  order by 3
+
+
+// personal join package
+SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.rank_id, dist.init_rank_id, dist.remark, package.price
+	FROM mlm_distributor dist
+        left join mlm_package package ON package.package_id = init_rank_id
+where dist.created_on >= '2013-02-01 00:00:00'
+and dist.created_on <= '2013-02-28 23:59:59' and dist.rank_id >= 3 and dist.loan_account = 'N' and dist.remark is null
+GO
+
+// small leg group sales
+SELECT sum(pairing.credit), pairing.dist_id, dist.distributor_code, pairing.left_right, dist.full_name, dist.email, dist.contact
+	FROM mlm_dist_pairing_ledger pairing
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = pairing.dist_id
+where pairing.dist_id > 0 AND
+pairing.created_on >= '2013-01-01 00:00:00'
+and pairing.created_on <= '2013-01-31 23:59:59' group by pairing.dist_id, pairing.left_right Having SUM(pairing.credit) >= 20000 order by pairing.dist_id
+GO
+
+
+
+============================= member list registered from maximthai1
+SELECT dist.distributor_code, package.price, dist.full_name, dist.created_on
+	FROM mlm_distributor dist
+        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+where dist.created_by = 73
+
+
+
+
+
+
+
+
+
+=============================== check pairing flush mistake
+select lp.pairing_id, lp.dist_id, lp.debit, lp.created_on
+        from mlm_dist_pairing_ledger lp
+    left join mlm_dist_pairing_ledger rp ON rp.dist_id = lp.dist_id and rp.created_on = lp.created_on
+            and rp.transaction_type = 'PAIRED' and rp.left_right = 'RIGHT'
+    where lp.transaction_type = 'PAIRED' and lp.left_right = 'LEFT' and lp.debit <> rp.debit
+
+
+
+
+
+======================================  transfer from company
+SELECT dist.distributor_code, account.dist_id, account.account_type, account.transaction_type
+        , account.rolling_point, account.credit, account.debit, account.balance
+        , account.remark, account.internal_remark, account.created_by, account.created_on
+	FROM mlm_account_ledger account
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = account.dist_id
+            WHERE dist.tree_structure like '%|142|%' and account.account_type = 'EPOINT' and account.created_by = 1

@@ -1,3 +1,5 @@
+payment gateway technical guy andy@avoda.hk
+
 create new proj
 
 1, u create a folder at htdocs first
@@ -28,8 +30,8 @@ create new proj
 
 4,  to create a module without database is
 
-    symfony init-module frontend sky
-  
+    symfony init-module frontend legalWatch
+     symfony init-module frontend bmwChallenge
     sky is the module name u want to create
 
 ---------------------------------------------------------------

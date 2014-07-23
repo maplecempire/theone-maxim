@@ -6,6 +6,27 @@ http://localhost:8087/backend.php/report/test2
 http://localhost:8087/backend.php/report/test2
 
 
+================    Langkawi     ==================================
+http://localhost:8087/backend.php/report/resetReport
+
+update mlm_distributor set bkk_status = 'COMPLETE1' where tree_structure like '%|43|%'
+update mlm_distributor set bkk_status = 'COMPLETE' where bkk_status = 'PENDING'
+update mlm_distributor set bkk_status = 'PENDING' where bkk_status = 'COMPLETE1'
+
+http://localhost:8087/backend.php/report/test
+http://localhost:8087/backend.php/report/test
+
+update mlm_distributor set bkk_status = 'COMPLETE1' where tree_structure like '%|43|%'
+update mlm_distributor set bkk_status = 'COMPLETE' where bkk_status = 'PENDING'
+update mlm_distributor set bkk_status = 'PENDING' where bkk_status = 'COMPLETE1'
+
+http://localhost:8087/backend.php/report/test2
+http://localhost:8087/backend.php/report/test2
+
+
+
+
+
 
  SELECT dist.distributor_code, dist.email, dist.full_name, dist.contact, dist.country
         ,dist.active_datetime , package.price
@@ -98,3 +119,46 @@ bkk_qualify_2 != '' or bkk_qualify_3 != ''
 
 select distributor_code, email, full_name, contact, country, active_datetime, init_rank_code, rank_code, remark, bkk_qualify_1, bkk_qualify_2, bkk_qualify_3, bkk_personal_sales, nominee_name
  from mlm_distributor where bkk_personal_sales >= 30000 order by bkk_personal_sales desc
+
+
+
+
+select dist.distributor_code, dist.email, dist.full_name, dist.contact, dist.country
+        , dist.active_datetime, dist.remark, upline.distributor_code as upline
+        , dist.bkk_personal_sales, dist.nominee_name
+ from mlm_distributor dist
+    LEFT JOIN mlm_distributor upline ON upline.distributor_id = dist.upline_dist_id
+where dist.bkk_personal_sales >= 10000 and dist.nominee_name IN ('jpfx1','peter1')
+
+
+          ROI 18 months =============================================
+SELECT roi.devidend_id, roi.dist_id, roi.mt4_user_name, roi.idx, roi.dividend_date
+        , roi.package_id, roi.package_price, roi.roi_percentage, roi.mt4_balance
+        , credit.mt4_credit
+        , roi.dividend_amount, roi.remarks, roi.status_code, roi.created_by, roi.created_on, roi.first_dividend_date
+        , dist.distributor_code, dist.full_name, dist.full_name, dist.status_code, dist.created_on, dist.remark
+        , dist.loan_account
+	FROM mlm_roi_dividend roi
+        LEFT JOIN mlm_distributor dist ON roi.dist_id = dist.distributor_id
+        LEFT JOIN
+        (
+            SELECT mt4_credit, mt4_user_name FROM mlm_daily_dist_mt4_credit group by dist_id order by traded_datetime desc
+        ) credit ON credit.mt4_user_name = roi.mt4_user_name
+WHERE idx = 18
+and roi.dividend_date >= '2014-06-01 00:00:00'
+and roi.dividend_date <= '2014-07-31 23:59:59'
+order by dividend_date
+limit 1000
+
+
+
+
+
+         Hongkong Diamond quest 14 june to 30 june =============================================
+SELECT distributor_code, email, full_name, contact, country, active_datetime
+, init_rank_code, rank_code, remark, abfx_remark, nominee_name
+        from mlm_distributor dist
+    LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+        WHERE loan_account = 'N' AND active_datetime >= '2014-06-14 00:00:00'
+             AND active_datetime <= '2014-06-30 23:59:59'
+             AND package.price >= 100000
