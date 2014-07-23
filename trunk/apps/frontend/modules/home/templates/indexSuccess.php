@@ -1010,7 +1010,12 @@ $(document).ready(function() {
                                 <span style="font-size: 20px; color: red"><?php echo __("Remaining");?> : <?php echo $totalMemberEntitle;?></span>
                                 <br>
                                 <br>
-                                <span style="font-size: 20px; color: red">Our free ticket promotion to Bali IME for those who invested Usd 30k has been finish on 21/7 as the 2500 tickets already full house</span>
+                                <span style="font-size: 20px; color: red">
+We are pleased to announce that the Door Tickets for our Maxim BALI IME Convention & Gala Dinner (Sept 20th, 2014) is hereby declared CLOSED and that the 2,500 tickets have been completely SOLD OUT.
+<br>
+<br>Thank you all for your continuing  support of Maxim's Events.
+<br>
+<br>Say YES to Maxim Trader....... !!!!</span>
                             </td>
                         </tr>
                         <tr>
