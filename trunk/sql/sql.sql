@@ -1,36 +1,47 @@
-
-INSERT INTO `app_user` (`user_id`, `username`, `keep_password`, `userpassword`, `keep_password2`, `userpassword2`, `user_role`, `status_code`, `last_login_datetime`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(31, 'fantian1', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(32, 'fantian2', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(33, 'fantian3', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(34, 'fantian4', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(35, 'fantian5', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(36, 'fantian6', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(37, 'fantian7', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(38, 'xiaozhu1', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(39, 'xiaozhu2', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(40, 'xiaozhu3', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(41, 'xiaozhu4', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(42, 'xiaozhu5', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(43, 'xiaozhu6', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42'),
-(44, 'xiaozhu7', '123456', '123456', '123456', '123456', 'DISTRIBUTOR', 'ACTIVE', NULL, 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42');
+select cp2.withdraw_id, cp2.dist_id, cp2.deduct, cp2.amount, cp2.bank_in_to
+        , cp2.status_code, cp2.approve_reject_datetime, cp2.remarks
+        , cp2.created_on
+    FROM mlm_ecash_withdraw cp2
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = cp2.dist_id
+where dist.tree_structure like '%|15|%' and cp2.created_on >= '2014-03-01 00:00:00'
+ and cp2.created_on <= '2014-03-31 23:59:59'
 
 
-
-INSERT INTO `mlm_distributor` (`distributor_id`, `distributor_code`, `user_id`, `status_code`, `full_name`, `nickname`, `ic`, `country`, `address`, `address2`, `city`, `state`, `postcode`, `email`, `alternate_email`, `contact`, `gender`, `dob`, `bank_name`, `bank_acc_no`, `bank_holder_name`, `bank_swift_code`, `visa_debit_card`, `tree_level`, `tree_structure`, `placement_tree_level`, `placement_tree_structure`, `init_rank_id`, `init_rank_code`, `upline_dist_id`, `upline_dist_code`, `tree_upline_dist_id`, `tree_upline_dist_code`, `total_left`, `total_right`, `placement_position`, `placement_datetime`, `rank_id`, `rank_code`, `active_datetime`, `activated_by`, `leverage`, `spread`, `deposit_currency`, `deposit_amount`, `sign_name`, `sign_date`, `term_condition`, `ib_commission`, `is_ib`, `created_by`, `created_on`, `updated_by`, `updated_on`, `package_purchase_flag`, `file_bank_pass_book`, `file_proof_of_residence`, `file_nric`, `excluded_structure`, `product_mte`, `product_fxgold`) VALUES
-(29, 'fantian1', 31, 'ACTIVE', 'fantian1', 'fantian1', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian2', 32, 'ACTIVE', 'fantian2', 'fantian2', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian3', 33, 'ACTIVE', 'fantian3', 'fantian3', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian4', 34, 'ACTIVE', 'fantian4', 'fantian4', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian5', 35, 'ACTIVE', 'fantian5', 'fantian5', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian6', 36, 'ACTIVE', 'fantian6', 'fantian6', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'fantian7', 37, 'ACTIVE', 'fantian7', 'fantian7', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu1', 38, 'ACTIVE', 'xiaozhu1', 'xiaozhu1', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu2', 39, 'ACTIVE', 'xiaozhu2', 'xiaozhu2', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu3', 40, 'ACTIVE', 'xiaozhu3', 'xiaozhu3', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu4', 41, 'ACTIVE', 'xiaozhu4', 'xiaozhu4', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu5', 42, 'ACTIVE', 'xiaozhu5', 'xiaozhu5', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu6', 43, 'ACTIVE', 'xiaozhu6', 'xiaozhu6', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N'),
-(29, 'xiaozhu7', 44, 'ACTIVE', 'xiaozhu7', 'xiaozhu7', NULL, 'Malaysia', 'address', 'address 2', 'kl', 'state', 'zip', '123456789@gmail.com', '123456789@gmail.com', '1023456789', 'M', '1990-01-01', NULL, NULL, NULL, NULL, NULL, 2, '|fxm1||asdasdasda|', NULL, NULL, 1, 'Package A', 1, 'fxm1', NULL, NULL, 0, 0, NULL, NULL, 1, 'Package A', '2012-09-30 06:11:42', 1, NULL, NULL, NULL, NULL, NULL, '2012-09-30 06:11:42', 1, 0.00, '0', 3, '2012-09-30 06:11:42', 3, '2012-09-30 06:11:42', 'Y', NULL, NULL, NULL, 'N', 'Y', 'N');
+select cp3.withdraw_id, cp3.dist_id, cp3.deduct, cp3.amount, cp3.bank_in_to
+        , cp3.status_code, cp3.approve_reject_datetime, cp3.remarks
+        , cp3.created_on
+    FROM mlm_cp3_withdraw cp3
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = cp3.dist_id
+where dist.tree_structure like '%|15|%' and cp3.created_on >= '2014-03-01 00:00:00'
+ and cp3.created_on <= '2014-03-31 23:59:59'
 
 
+ SELECT roi.dist_id, roi.mt4_user_name, dist.distributor_code
+, roi.dividend_date, roi.roi_percentage, roi.dividend_amount, roi.status_code
+, roi.created_on
+	FROM mlm_roi_dividend roi
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
+WHERE roi.status_code = 'SUCCESS' and dist.tree_structure like '%|1807|%'
+
+
+
+
+
+SELECT roi.dist_id, roi.mt4_user_name, roi.idx, roi.dividend_date
+        , roi.package_id, roi.package_price, roi.roi_percentage, roi.mt4_balance
+        , credit.mt4_credit
+        , roi.dividend_amount, roi.remarks, roi.status_code, roi.created_by, roi.created_on, roi.first_dividend_date
+        , dist.distributor_code, dist.full_name, dist.full_name, dist.status_code, dist.created_on, dist.remark
+        , dist.loan_account
+	FROM mlm_roi_dividend roi
+        LEFT JOIN mlm_distributor dist ON roi.dist_id = dist.distributor_id
+        LEFT JOIN
+        (
+            SELECT mt4_credit, mt4_user_name FROM mlm_daily_dist_mt4_credit group by dist_id order by traded_datetime desc
+        ) credit ON credit.mt4_user_name = roi.mt4_user_name
+WHERE idx = 18
+and roi.dividend_date >= '2014-05-01 00:00:00'
+and roi.dividend_date <= '2014-05-31 23:59:59'
+order by dividend_date
+limit 1000
+GO
