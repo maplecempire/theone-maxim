@@ -344,7 +344,7 @@ class homeActions extends sfActions
         $this->distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $totalCount = $this->getTotalMemberEntitle();
-        $balance = 2500 - $totalCount;
+        $balance = 2200 - $totalCount;
 
         if ($balance < 0) {
             $balance = 0;
@@ -808,7 +808,7 @@ class homeActions extends sfActions
 
     function getTotalMemberEntitle()
     {
-        $query = "SELECT count(*) as _SUM FROM maxim.mlm_distributor where
+        $query = "SELECT count(*) as _SUM FROM mlm_distributor where
                 active_datetime >= '2014-06-15 00:00:00'
                 AND active_datetime <= '2014-08-15 23:59:59'
                 AND init_rank_id >= 5 and country not in ('Korea South', 'japan','Australia')
