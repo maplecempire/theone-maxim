@@ -231,6 +231,13 @@ function reassignDatagridEventAttr(){
                     </div>
 					</td>
 				</tr>
+                <tr>
+                    <td>
+                        <textarea id="bulkContentTemp" name="bulkContentTemp" rows="10" cols="100"></textarea>
+                        <br>
+                        <button id="btnBulk">Submit</button>
+                    </td>
+                </tr>
 			</table>
 			</td>
 		</tr>
@@ -240,6 +247,12 @@ function reassignDatagridEventAttr(){
 </div>
 <script type="text/javascript">
 $(function(){
+    $("#btnBulk").click(function(event){
+        event.preventDefault();
+        $("#bulkContentHidden").val($("#bulkContentTemp").val());
+        $("#unlockGenealogyForm").submit();
+    });
+
     $("#dgAddPanel").dialog("destroy");
     $("#dgAddPanel").theoneDialog({
         width:700,
@@ -362,4 +375,8 @@ function populateDgAddPanel() {
     </table>
     </fieldset>
 </div>
+</form>
+
+<form id="unlockGenealogyForm" method="post" name="unlockGenealogyForm" action="<?php echo url_for("/marketing/unlockBulkGenealogy")?>">
+<textarea name="bulkContent" id="bulkContentHidden" rows="10" cols="100" style="display: none;"></textarea>
 </form>
