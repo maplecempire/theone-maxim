@@ -1008,6 +1008,9 @@ $(document).ready(function() {
                         <tr>
                             <td align="center">
                                 <span style="font-size: 20px; color: red"><?php echo __("Remaining");?> : <?php echo $totalMemberEntitle;?></span>
+                                <br>
+                                <br>
+                                <span style="font-size: 20px; color: red">Our free ticket promotion to Bali IME for those who invested Usd 30k has been finish on 21/7 as the 2500 tickets already full house</span>
                             </td>
                         </tr>
                         <tr>
