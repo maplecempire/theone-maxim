@@ -10,6 +10,42 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeUnlockBulkGenealogy()
+    {
+        $bulkContent = $this->getRequestParameter('bulkContent');
+
+        $lineArr = explode("\n", $bulkContent); // break line
+//        $arr = explode("Username:", $bulkContent);
+
+        $idx = 1;
+        foreach ($lineArr as $line) {
+            $strArr = explode("Username:", $line);
+
+            if (count($strArr) < 2) {
+                var_dump("=================>");
+                var_dump($strArr);
+                print_r("<br>");
+            } else {
+                print_r($idx."<br><br>");
+                $memberId = trim($strArr[1]);
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $memberId);
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+
+                if ($distDB) {
+                    $distDB->setHideGenealogy("N");
+                    $distDB->save();
+                } else {
+                    print_r("<br><br>++++++++++++++++++++ No exist ++++++++++".$memberId);
+                }
+                $idx++;
+            }
+        }
+
+        exit();
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoRoiNoReturn()
     {
         $accountTypeArr = array(265754,265733,265734,265750,265738,265755,265756,265714,265751,265752,265753,265737,265736,265735,265726,265727,265749,265741,265740,265739);
