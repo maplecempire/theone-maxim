@@ -9818,7 +9818,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 //$epointConvertedAmount = floor($epointAmount * 1.05);
                 //if ($this->toHideCp2Cp3Transfer == true) {
-                    $epointConvertedAmount = floor($epointAmount);
+                    //$epointConvertedAmount = floor($epointAmount);
+                    $epointConvertedAmount = $epointAmount;
                 //}
 
                 $tbl_account_ledger = new MlmAccountLedger();
