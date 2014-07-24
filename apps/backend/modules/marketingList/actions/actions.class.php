@@ -75,6 +75,20 @@ class marketingListActions extends sfActions
         while ($resultset->next())
         {
             $resultArr = $resultset->getRow();
+
+            $pacakgePrice = $resultArr['package_price'];
+            $mt4Username = $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'];
+            if ($pacakgePrice == null) {
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+                $c->add(MlmRoiDividendPeer::IDX, 18);
+                $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+                $packagePrice = $mlmRoiDividendDB->getPackagePrice();
+
+                $existNotificationOfMaturity = NotificationOfMaturityPeer::retrieveByPK($resultArr['notice_id']);
+                $existNotificationOfMaturity->setPackagePrice($packagePrice);
+                $existNotificationOfMaturity->save();
+            }
             $arr[] = array(
                 $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
                 , $resultArr['notice_id'] == null ? "" : $resultArr['notice_id']
@@ -91,6 +105,7 @@ class marketingListActions extends sfActions
                 , $resultArr['leader_dist_code'] == null ? "" : $resultArr['leader_dist_code']
                 , $resultArr['dividend_date'] == null ? "" : $resultArr['dividend_date']
                 , $resultArr['email_status'] == null ? "" : $resultArr['email_status']
+                , $packagePrice
             );
         }
         $output = array(

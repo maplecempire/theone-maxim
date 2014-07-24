@@ -61,6 +61,7 @@ $(function(){
                         , leader : oObj.aData[idx++]
                         , created_on : oObj.aData[idx++]
                         , email_status : oObj.aData[idx++]
+                        , package_price : oObj.aData[idx++]
                   });
                   var data = $("#dgAddPanel").data("data_" + oObj.aData[0]);
                   if (data.status_code == "<?php echo Globals::STATUS_MATURITY_PENDING; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_ON_HOLD; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>" || data.status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_WITHDRAW; ?>") {
@@ -80,7 +81,8 @@ $(function(){
               { "sName" : "maturity.maturity_type",  "bSortable": true},
               { "sName" : "leader.distributor_code",  "bSortable": true},
               { "sName" : "maturity.dividend_date",  "bSortable": true},
-              { "sName" : "maturity.email_status",  "bSortable": true}
+              { "sName" : "maturity.email_status",  "bSortable": true},
+              { "sName" : "maturity.package_price",  "bSortable": true}
 		]
 	});
 
@@ -143,6 +145,7 @@ function reassignDatagridEventAttr(){
 								<th>Leader</th>
 								<th>Dividend Date</th>
 								<th>Email Status</th>
+								<th>Package Price</th>
 							</tr>
                             <tr>
                                 <td></td>
@@ -166,6 +169,7 @@ function reassignDatagridEventAttr(){
                                 <td></td>
                                 <td></td>
                                 <td><input title="" size="10" type="text" id="search_email" value="" class="search_init"/></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -391,6 +395,7 @@ function populateDgAddPanel() {
     $("#dgAddPanelMaturityType").val(data.maturity_type);
     $("#dgAddPanelLeader").val(data.leader);
     $("#dgAddPanelEmail").val(data.email);
+    $("#dgAddPanelPackagePrice").val(data.package_price);
     //$("#remark").val("TRANSFER FROM COMPANY");
     $("#cp3Amount").val("0").focus().select();
     $(".indicator").show();
@@ -447,6 +452,11 @@ function populateDgAddPanel() {
             <td>Mt4 Balance</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelMt4Balance" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
+        </tr>
+        <tr>
+            <td>Package Price</td>
+            <td>:</td>
+            <td><input type="text" id="dgAddPanelPackagePrice" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
         </tr>
         <tr>
             <td>Maturity Type</td>
