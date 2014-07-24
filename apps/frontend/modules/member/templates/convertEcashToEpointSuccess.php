@@ -37,10 +37,10 @@ $(function() {
         var convertedAmount = 0;
         var epointAmount = $('#epointAmount').autoNumericGet();
 
-        convertedAmount = parseFloat(epointAmount);
-        convertedAmount = Math.floor(convertedAmount);
+        //convertedAmount = parseFloat(epointAmount);
+        //convertedAmount = Math.floor(convertedAmount);
 
-        $("#epointConvertedAmount").val(convertedAmount);
+        $("#epointConvertedAmount").val(epointAmount);
     });
     $('#epointConvertedAmount').autoNumeric({
         mDec: 2
