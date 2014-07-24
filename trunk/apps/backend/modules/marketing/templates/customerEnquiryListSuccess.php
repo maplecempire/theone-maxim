@@ -40,7 +40,7 @@ $(function(){
         ],
         "aoColumns": [
             { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
-            { "sName" : "customer.updated_on", "bVisible" : true,  "bSortable": true},
+            { "sName" : "customer.created_on", "bVisible" : true,  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
             { "sName" : "customer.title",  "bSortable": true},
             { "sName" : "customer.distributor_updated",  "bSortable": true},
