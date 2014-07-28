@@ -943,6 +943,11 @@ class memberActions extends sfActions
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                $mlmRoiDividendValidator = MlmRoiDividendPeer::retrieveByPK($mlmRoiDividend->getDevidendId());
+                if ($mlmRoiDividendValidator->getStatusCode() != Globals::DIVIDEND_STATUS_PENDING) {
+                    break;
+                }
+
                 $idx = $mlmRoiDividend->getIdx();
                 $distId = $mlmRoiDividend->getDistId();
                 $mt4UserName = $mlmRoiDividend->getMt4UserName();
@@ -9134,6 +9139,11 @@ We look forward to your custom in the near future. Should you have any queries, 
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                $mlmRoiDividendValidator = MlmRoiDividendPeer::retrieveByPK($mlmRoiDividend->getDevidendId());
+                if ($mlmRoiDividendValidator->getStatusCode() != Globals::DIVIDEND_STATUS_PENDING) {
+                    break;
+                }
+
                 $idx = $mlmRoiDividend->getIdx();
                 $distId = $mlmRoiDividend->getDistId();
                 $mt4UserName = $mlmRoiDividend->getMt4UserName();
