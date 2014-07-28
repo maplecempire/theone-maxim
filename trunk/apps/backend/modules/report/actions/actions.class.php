@@ -104,17 +104,22 @@ class reportActions extends sfActions
 //        $this->executeLangkawiIncentive();
 
 //        $this->executeShanghaiConventionTrip();
+        $this->executeBaliJapanKoreaPersonalSignup();
+        $this->executeBaliJapanKoreaPersonalSignup();
+        $this->executeBaliJapanKoreaPersonalSignup();
+        $this->executeBaliJapanKoreaPersonalSignup();
+        $this->executeBaliJapanKoreaPersonalSignup();
 //        $this->executeShanghaiConventionTrip();
 //        $this->executeShanghaiConventionTrip();
 //        $this->executeShanghaiConventionTrip();
 //        $this->executeShanghaiConventionTrip();
 
-        $this->executeUpdateLeader();
-        $this->executeUpdateLeader();
-        $this->executeUpdateLeader();
-        $this->executeUpdateLeader();
-        $this->executeUpdateLeader();
-        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
+//        $this->executeUpdateLeader();
 
 //        $q3 = 11 / 3;
 //        var_dump($q3);
@@ -138,12 +143,12 @@ class reportActions extends sfActions
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
 //        $this->executeSingaporeYachtShowLifestyleChallenge();
 
-        $this->executeCaratDiamondChallenge();
-        $this->executeCaratDiamondChallenge();
-        $this->executeCaratDiamondChallenge();
-        $this->executeCaratDiamondChallenge();
-        $this->executeCaratDiamondChallenge();
-        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
+//        $this->executeCaratDiamondChallenge();
 
 //        $this->executeLangkawiChallenge();
 //        $this->executeLangkawiChallenge();
@@ -156,6 +161,10 @@ class reportActions extends sfActions
 //        $this->executeShanghaiChallenge();
 //        $this->executeShanghaiChallenge();
 //        $this->executeShanghaiChallenge();
+
+        $this->executeBaliJapanKoreaChallenge();
+        $this->executeBaliJapanKoreaChallenge();
+        $this->executeBaliJapanKoreaChallenge();
 
         print_r("<br>Done");
         return sfView::HEADER_ONLY;
@@ -164,6 +173,7 @@ class reportActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::LEADER_ID, null, Criteria::ISNULL);
+        $c->add(MlmDistributorPeer::BKK_QUALIFY_1, "Y");
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
@@ -325,6 +335,42 @@ class reportActions extends sfActions
             if ($totalSponsorAmount >= 50000) {
                 $q3 = floor($totalSponsorAmount / 50000);
                 $distDB->setBkkQualify1($q3);
+                $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
+            }
+            $distDB->setBkkStatus("COMPLETE");
+            $distDB->save();
+        }
+
+        print_r("executeShanghaiChallenge Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeBaliJapanKoreaChallenge()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->setLimit(10000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        foreach ($distDBs as $distDB) {
+            $distDB->setAbfxRemark("");
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $totalSponsorAmount = $this->getSponsorAmount($distDB->getDistributorId());
+
+            if ($totalSponsorAmount >= 100000 && ($distDB->getLeaderId() == 255607
+                    || $distDB->getLeaderId() == 264838
+                    || $distDB->getLeaderId() == 264839
+                    || $distDB->getLeaderId() == 257700
+                    || $distDB->getLeaderId() == 255709
+                    || $distDB->getLeaderId() == 264845
+                    || $distDB->getLeaderId() == 273056)) {
+                $distDB->setBkkQualify1("Y");
+                $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
+            } else if ($totalSponsorAmount >= 150000 && ($distDB->getLeaderId() == 142
+                    || $distDB->getLeaderId() == 15)) {
+                $distDB->setBkkQualify1("Y");
                 $distDB->setAbfxRemark("Total Sales=".$totalSponsorAmount);
             }
             $distDB->setBkkStatus("COMPLETE");
@@ -644,6 +690,42 @@ class reportActions extends sfActions
                 }
             }
             $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeJapanIncentive Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeBaliJapanKoreaPersonalSignup()
+    {
+        $leaderArr = explode(',', "255607,264838,264839,142,257700,255709,264845,273056,15");
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::LEADER_ID, $leaderArr , Criteria::IN);
+        $c->setLimit(5000);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-06-15 00:00:00";
+        $dateTo = "2014-07-30 23:59:59";
+        foreach ($distDBs as $distDB) {
+            $distDB->setBkkPersonalSales(0);
+
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
+            $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
+            $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
+
+            //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
+
+            /*if ($personalSales >= 40000) {
+                $distDB->setBkkQualify3("Y");
+            }*/
+
+            $distDB->setBkkStatus("COMPLETE");
             $distDB->save();
         }
 

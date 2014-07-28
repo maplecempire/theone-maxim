@@ -291,6 +291,7 @@ class financeActions extends sfActions
         }
         $c = new Criteria();
         $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+        $c->addAscendingOrderByColumn(MlmRoiDividendPeer::IDX);
         $mlmRoiDividends = MlmRoiDividendPeer::doSelect($c);
 
         $arr = array();
@@ -843,9 +844,19 @@ class financeActions extends sfActions
         {
             if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
                 if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
-                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                    if ($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] == "created_on") {
+                        $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                        $c->addAscendingOrderByColumn("account_id");
+                    } else {
+                        $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                    }
                 } else {
-                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                    if ($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] == "created_on") {
+                        $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                        $c->addDescendingOrderByColumn("account_id");
+                    } else {
+                        $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                    }
                 }
             }
         }
