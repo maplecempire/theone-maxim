@@ -32,6 +32,30 @@
 </tr>
 <tr>
     <td>
+        <h3>FMC Announcement</h3>
+        <br>Following consultations with our International Members and all those concerned and having listened carefully to  all the viewpoints offered for and against.
+        <br>
+        <br>The Board herein now complies with its legal obligation to give 14 days clear notice of the long overdue introduction of the Fund Management Costs (FMC)10% scheme. Recognising that this our FMC fee is one of the lowest in the market place and that at this stage of our infancy we have managed to survive without it, to date, yet still honoured our commitments to you to date, plus our Monthly returns being higher than most, we therefore look forward to your support and understanding please.
+        <br>
+        <br>Therefore, 14 days from the date of this Posting of this Notice at the back office, the following  Policy must be observed and adhered to please.
+        <br>
+        <br>Example;
+        <br>
+        <br>Pay in: US$5500.00
+        <br>CP credit: US$5000.00
+        <br>
+        <br>This shall also apply to existing Members whom open fresh accounts, as our system will be flagged to ensure the correct amount is paid in, inclusive of FMC.
+        <br>
+        <br>A full Explanation Sheet is being prepared and is available upon your request at Legal Watch, found at the members area at the back office. Please do allow yourself to be fully updated as you deserve to be and we truly thank you for you patronage through our time of infancy and look forward to your support.
+        <br>
+        <br>DATE POSTED:
+        <br>29 July 2014.
+        <br>
+        <br>..............................
+        <br>For and on behalf of
+        <br>The BOARD OF DIRECTORS, Maxim Capital Ltd.
+        <br>
+        <br>
         <table class="pbl_table" cellpadding="3" cellspacing="3">
             <tbody>
             <tr class="pbl_header">
