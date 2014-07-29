@@ -173,7 +173,7 @@ class reportActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::LEADER_ID, null, Criteria::ISNULL);
-        $c->add(MlmDistributorPeer::BKK_QUALIFY_1, "Y");
+        //$c->add(MlmDistributorPeer::BKK_QUALIFY_1, "Y");
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
