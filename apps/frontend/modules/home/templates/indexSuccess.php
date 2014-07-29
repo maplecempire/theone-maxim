@@ -990,10 +990,56 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='27'>FMC Announcement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "29 July 2014";
+                ?>
+            </div>
+
+            <div id="page_36" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Following consultations with our International Members and all those concerned and having listened carefully to  all the viewpoints offered for and against.
+                            <br>
+                            <br>The Board herein now complies with its legal obligation to give 14 days clear notice of the long overdue introduction of the Fund Management Costs (FMC)10% scheme. Recognising that this our FMC fee is one of the lowest in the market place and that at this stage of our infancy we have managed to survive without it, to date, yet still honoured our commitments to you to date, plus our Monthly returns being higher than most, we therefore look forward to your support and understanding please.
+                            <br>
+                            <br>Therefore, 14 days from the date of this Posting of this Notice at the back office, the following  Policy must be observed and adhered to please.
+                            <br>
+                            <br>Example;
+                            <br>
+                            <br>Pay in: US$5500.00
+                            <br>CP credit: US$5000.00
+                            <br>
+                            <br>This shall also apply to existing Members whom open fresh accounts, as our system will be flagged to ensure the correct amount is paid in, inclusive of FMC.
+                            <br>
+                            <br>A full Explanation Sheet is being prepared and is available upon your request at Legal Watch, found at the members area at the back office. Please do allow yourself to be fully updated as you deserve to be and we truly thank you for you patronage through our time of infancy and look forward to your support.
+                            <br>
+                            <br>DATE POSTED:
+                            <br>29 July 2014.
+                            <br>
+                            <br>..............................
+                            <br>For and on behalf of
+                            <br>The BOARD OF DIRECTORS, Maxim Capital Ltd.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
         <?php if ($culture == "cn" || $culture == "en") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='35'>Latest update on Bali IME: 巴厘岛IME国际金融交流会最新公告</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='35'>Latest update on Bali IME: 巴厘岛IME国际金融交流会最新公告</a>
             </div>
             <div class="news_date">
             <?php
@@ -1002,7 +1048,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_35" class="news_desc" style="text-align: left;">
+            <div id="page_35" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1070,7 +1116,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
     <?php if ($culture == "cn" || $culture == "en") {?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='34'>Bali IME Convention Promo 马胜巴厘岛国际金融交流会优惠计划</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='34'>Bali IME Convention Promo 马胜巴厘岛国际金融交流会优惠计划</a>>
             </div>
             <div class="news_date">
             <?php
@@ -1079,7 +1125,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
                 ?>
             </div>
 
-            <div id="page_34" class="news_desc" style="text-align: left;">
+            <div id="page_34" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1113,7 +1159,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
     <?php } ?>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='27'>Effective Sep 30th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='27'>Effective Sep 30th, 2014 the minimum package to sign up with Maxim Trader is our Gold Package of USD5,000</a>
             </div>
             <div class="news_date">
             <?php
@@ -1122,7 +1168,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
                 ?>
             </div>
 
-            <div id="page_27" class="news_desc" style="text-align: left;">
+            <div id="page_27" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1165,7 +1211,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='32'>Development bonus reduction announcement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='32'>Development bonus reduction announcement</a>
             </div>
             <div class="news_date">
             <?php
@@ -1174,7 +1220,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
                 ?>
             </div>
 
-            <div id="page_32" class="news_desc" style="text-align: left; ">
+            <div id="page_32" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1194,7 +1240,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='33'>04 July 2014 - US Independence Day Holiday</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='33'>04 July 2014 - US Independence Day Holiday</a>
             </div>
             <div class="news_date">
             <?php
@@ -1203,7 +1249,7 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
                 ?>
             </div>
 
-            <div id="page_33" class="news_desc" style="text-align: left; ">
+            <div id="page_33" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
