@@ -615,6 +615,30 @@ class homeActions extends sfActions
                 return $this->redirect('home/index');
                 //return $this->redirect('member/summary');
                 //}
+            } else if ($username == "amz001") {
+                $this->getUser()->setAttribute(Globals::LOGIN_RETRY, intval($this->getUser()->getAttribute(Globals::LOGIN_RETRY)) + 1);
+
+                $this->setFlash('errorMsg', "Dear Int'l Member
+                <br>Mr. Mingoss,
+                <br>
+                <br>Written Complaints have been lodged against you to the LACD alleging breaches of the company's Code Of Ethics (COE).The COE  is there at the back office for all members to observe and abide by.These complaints have been furnished you (or given to you) at your last known email,(as you know it is the Members Duty to update new emails, if any).Your actions have cause many below you to suffer wherein an ongoing investigation is still in motion to aid the innocent members you are now found to have cause them unjust and wrongful harm..This investigation has been in motion since January 2014 to date and is still continuing.
+                <br>
+                <br>When these complaints were submitted to you to be answered, you failed to submit any Answer to the Complaints made against you, therefore you have waived your right to be heard and to plea your defence.
+                <br>
+                <br>Also, at the Sunway Plaza Convention which you attended, you were called to a meeting where a board of enquiry consisting of the companys CCO.CFO and CLC patiently awaited your attendance.But again you failed to respond to this kind  act of fairness and Due Process duly extended to you.
+                <br>
+                <br>JUDGMENT:
+                <br>Accordingly, you have been found guilty of misconduct under the COE by the LACD, and you are herein ordered  terminated as a member and your CP accounts have been suspended for now, where the LACD herein invites  you to submit any written representations you may want to make to us, regarding the disbursement of  funds thereat. It is suspended until we receive your written representations.
+                <br>
+                <br>Be sure to understand clearly  that no matter who else you go to in the company and whatever is said or done with others, shall mean absolutely nothing at all as your only point if recall is now to the LACD who conducts itself fairly and just in accordance with Rules of Due Process.Thus the LACD can not and wont be fettered.
+                <br>
+                <br>As can be seen in the COE,decisions given down by the LACD following a fair and just investigation, remains FINAL  unless a convincing case of new evidence can be shown.The only course of appeal against the LACD judgment is to the Singapore Court as seen in the COE.For any service of process can nade at the companys Legal Office (LACD) at GPO.Box 260, Macau Central, Macau SARL.
+                <br>
+                <br>By Order;
+                <br>Mr.W.R.Lane
+                <br>CHIEF LEGAL COUNSEL ~ LACD.
+                <br>(Inhouse.legalcounsel@gmail.com)");
+                return $this->redirect('home/login');
             }
             $this->getUser()->setAttribute(Globals::LOGIN_RETRY, intval($this->getUser()->getAttribute(Globals::LOGIN_RETRY)) + 1);
 
