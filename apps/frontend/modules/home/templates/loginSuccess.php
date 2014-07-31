@@ -299,7 +299,7 @@
     </script>
 </head>
 
-<img src="/images/loading.gif" style="display: none;">
+<!--<img src="/images/loading.gif" style="display: none;">-->
 <body class="home blog">
 <div id="waitingLB" style="display:none; cursor: default">
     <h3 style="width: 100%; padding-left: 0px; background-color:inherit; color: black; line-height:0px; margin-top: 0px">We are processing your request. Please be patient.</h3>
