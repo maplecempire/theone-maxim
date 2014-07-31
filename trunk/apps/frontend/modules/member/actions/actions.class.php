@@ -8690,6 +8690,17 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
 
             $pairingPoint = $sponsoredPackageDB->getPrice();
+            $exp_date = "2014-08-01";
+            $todays_date = date("Y-m-d");
+            $today = strtotime($todays_date);
+            $expiration_date = strtotime($exp_date);
+            //if ()
+            if ($expiration_date > $today) {
+
+            } else {
+                $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
+            }
+            $pairingPointActual = $sponsoredPackageDB->getPrice();
             /******************************/
             /*  store Pairing points
             /******************************/
@@ -8747,6 +8758,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
                     $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                     $sponsorDistPairingledger->setCredit($pairingPoint);
+                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                     $sponsorDistPairingledger->setDebit(0);
                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                     $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [auto]");
@@ -8826,6 +8838,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
                     $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                     $sponsorDistPairingledger->setCredit($pairingPoint);
+                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                     $sponsorDistPairingledger->setDebit(0);
                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                     $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [kashventure] [auto]");
