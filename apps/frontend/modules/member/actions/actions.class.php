@@ -3833,6 +3833,7 @@ class memberActions extends sfActions
                                 $sponsorDistPairingledger->setLeftRight($uplinePosition);
                                 $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                                 $sponsorDistPairingledger->setCredit($pairingPoint);
+                                $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                                 $sponsorDistPairingledger->setDebit(0);
                                 $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                                 $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
@@ -3930,6 +3931,7 @@ class memberActions extends sfActions
                                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
                                     $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                                     $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                                     $sponsorDistPairingledger->setDebit(0);
                                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                                     $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [kashventure]");

@@ -13,7 +13,7 @@ abstract class BaseMlmDistPairingLedgerPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDistPairingLedger';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,6 +33,9 @@ abstract class BaseMlmDistPairingLedgerPeer {
 
 	
 	const CREDIT = 'mlm_dist_pairing_ledger.CREDIT';
+
+	
+	const CREDIT_ACTUAL = 'mlm_dist_pairing_ledger.CREDIT_ACTUAL';
 
 	
 	const DEBIT = 'mlm_dist_pairing_ledger.DEBIT';
@@ -61,18 +64,18 @@ abstract class BaseMlmDistPairingLedgerPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('PairingId', 'DistId', 'LeftRight', 'TransactionType', 'Credit', 'Debit', 'Balance', 'Remark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmDistPairingLedgerPeer::PAIRING_ID, MlmDistPairingLedgerPeer::DIST_ID, MlmDistPairingLedgerPeer::LEFT_RIGHT, MlmDistPairingLedgerPeer::TRANSACTION_TYPE, MlmDistPairingLedgerPeer::CREDIT, MlmDistPairingLedgerPeer::DEBIT, MlmDistPairingLedgerPeer::BALANCE, MlmDistPairingLedgerPeer::REMARK, MlmDistPairingLedgerPeer::CREATED_BY, MlmDistPairingLedgerPeer::CREATED_ON, MlmDistPairingLedgerPeer::UPDATED_BY, MlmDistPairingLedgerPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('pairing_id', 'dist_id', 'left_right', 'transaction_type', 'credit', 'debit', 'balance', 'remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PairingId', 'DistId', 'LeftRight', 'TransactionType', 'Credit', 'CreditActual', 'Debit', 'Balance', 'Remark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmDistPairingLedgerPeer::PAIRING_ID, MlmDistPairingLedgerPeer::DIST_ID, MlmDistPairingLedgerPeer::LEFT_RIGHT, MlmDistPairingLedgerPeer::TRANSACTION_TYPE, MlmDistPairingLedgerPeer::CREDIT, MlmDistPairingLedgerPeer::CREDIT_ACTUAL, MlmDistPairingLedgerPeer::DEBIT, MlmDistPairingLedgerPeer::BALANCE, MlmDistPairingLedgerPeer::REMARK, MlmDistPairingLedgerPeer::CREATED_BY, MlmDistPairingLedgerPeer::CREATED_ON, MlmDistPairingLedgerPeer::UPDATED_BY, MlmDistPairingLedgerPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('pairing_id', 'dist_id', 'left_right', 'transaction_type', 'credit', 'credit_actual', 'debit', 'balance', 'remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('PairingId' => 0, 'DistId' => 1, 'LeftRight' => 2, 'TransactionType' => 3, 'Credit' => 4, 'Debit' => 5, 'Balance' => 6, 'Remark' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmDistPairingLedgerPeer::PAIRING_ID => 0, MlmDistPairingLedgerPeer::DIST_ID => 1, MlmDistPairingLedgerPeer::LEFT_RIGHT => 2, MlmDistPairingLedgerPeer::TRANSACTION_TYPE => 3, MlmDistPairingLedgerPeer::CREDIT => 4, MlmDistPairingLedgerPeer::DEBIT => 5, MlmDistPairingLedgerPeer::BALANCE => 6, MlmDistPairingLedgerPeer::REMARK => 7, MlmDistPairingLedgerPeer::CREATED_BY => 8, MlmDistPairingLedgerPeer::CREATED_ON => 9, MlmDistPairingLedgerPeer::UPDATED_BY => 10, MlmDistPairingLedgerPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('pairing_id' => 0, 'dist_id' => 1, 'left_right' => 2, 'transaction_type' => 3, 'credit' => 4, 'debit' => 5, 'balance' => 6, 'remark' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('PairingId' => 0, 'DistId' => 1, 'LeftRight' => 2, 'TransactionType' => 3, 'Credit' => 4, 'CreditActual' => 5, 'Debit' => 6, 'Balance' => 7, 'Remark' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, ),
+		BasePeer::TYPE_COLNAME => array (MlmDistPairingLedgerPeer::PAIRING_ID => 0, MlmDistPairingLedgerPeer::DIST_ID => 1, MlmDistPairingLedgerPeer::LEFT_RIGHT => 2, MlmDistPairingLedgerPeer::TRANSACTION_TYPE => 3, MlmDistPairingLedgerPeer::CREDIT => 4, MlmDistPairingLedgerPeer::CREDIT_ACTUAL => 5, MlmDistPairingLedgerPeer::DEBIT => 6, MlmDistPairingLedgerPeer::BALANCE => 7, MlmDistPairingLedgerPeer::REMARK => 8, MlmDistPairingLedgerPeer::CREATED_BY => 9, MlmDistPairingLedgerPeer::CREATED_ON => 10, MlmDistPairingLedgerPeer::UPDATED_BY => 11, MlmDistPairingLedgerPeer::UPDATED_ON => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('pairing_id' => 0, 'dist_id' => 1, 'left_right' => 2, 'transaction_type' => 3, 'credit' => 4, 'credit_actual' => 5, 'debit' => 6, 'balance' => 7, 'remark' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -135,6 +138,8 @@ abstract class BaseMlmDistPairingLedgerPeer {
 		$criteria->addSelectColumn(MlmDistPairingLedgerPeer::TRANSACTION_TYPE);
 
 		$criteria->addSelectColumn(MlmDistPairingLedgerPeer::CREDIT);
+
+		$criteria->addSelectColumn(MlmDistPairingLedgerPeer::CREDIT_ACTUAL);
 
 		$criteria->addSelectColumn(MlmDistPairingLedgerPeer::DEBIT);
 

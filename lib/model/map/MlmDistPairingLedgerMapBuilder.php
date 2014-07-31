@@ -42,6 +42,8 @@ class MlmDistPairingLedgerMapBuilder {
 
 		$tMap->addColumn('CREDIT', 'Credit', 'double', CreoleTypes::DECIMAL, true, 12);
 
+		$tMap->addColumn('CREDIT_ACTUAL', 'CreditActual', 'double', CreoleTypes::DECIMAL, false, 12);
+
 		$tMap->addColumn('DEBIT', 'Debit', 'double', CreoleTypes::DECIMAL, true, 12);
 
 		$tMap->addColumn('BALANCE', 'Balance', 'double', CreoleTypes::DECIMAL, true, 12);

@@ -29,6 +29,10 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 
 
 	
+	protected $credit_actual = 0;
+
+
+	
 	protected $debit = 0;
 
 
@@ -94,6 +98,13 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 	{
 
 		return $this->credit;
+	}
+
+	
+	public function getCreditActual()
+	{
+
+		return $this->credit_actual;
 	}
 
 	
@@ -242,6 +253,16 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 
 	} 
 	
+	public function setCreditActual($v)
+	{
+
+		if ($this->credit_actual !== $v || $v === 0) {
+			$this->credit_actual = $v;
+			$this->modifiedColumns[] = MlmDistPairingLedgerPeer::CREDIT_ACTUAL;
+		}
+
+	} 
+	
 	public function setDebit($v)
 	{
 
@@ -352,25 +373,27 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 
 			$this->credit = $rs->getFloat($startcol + 4);
 
-			$this->debit = $rs->getFloat($startcol + 5);
+			$this->credit_actual = $rs->getFloat($startcol + 5);
 
-			$this->balance = $rs->getFloat($startcol + 6);
+			$this->debit = $rs->getFloat($startcol + 6);
 
-			$this->remark = $rs->getString($startcol + 7);
+			$this->balance = $rs->getFloat($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->remark = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->created_by = $rs->getInt($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->created_on = $rs->getTimestamp($startcol + 10, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->updated_by = $rs->getInt($startcol + 11);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 12, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 13; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistPairingLedger object", $e);
 		}
@@ -523,24 +546,27 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 				return $this->getCredit();
 				break;
 			case 5:
-				return $this->getDebit();
+				return $this->getCreditActual();
 				break;
 			case 6:
-				return $this->getBalance();
+				return $this->getDebit();
 				break;
 			case 7:
-				return $this->getRemark();
+				return $this->getBalance();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getRemark();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 11:
+				return $this->getUpdatedBy();
+				break;
+			case 12:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -558,13 +584,14 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 			$keys[2] => $this->getLeftRight(),
 			$keys[3] => $this->getTransactionType(),
 			$keys[4] => $this->getCredit(),
-			$keys[5] => $this->getDebit(),
-			$keys[6] => $this->getBalance(),
-			$keys[7] => $this->getRemark(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[5] => $this->getCreditActual(),
+			$keys[6] => $this->getDebit(),
+			$keys[7] => $this->getBalance(),
+			$keys[8] => $this->getRemark(),
+			$keys[9] => $this->getCreatedBy(),
+			$keys[10] => $this->getCreatedOn(),
+			$keys[11] => $this->getUpdatedBy(),
+			$keys[12] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -596,24 +623,27 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 				$this->setCredit($value);
 				break;
 			case 5:
-				$this->setDebit($value);
+				$this->setCreditActual($value);
 				break;
 			case 6:
-				$this->setBalance($value);
+				$this->setDebit($value);
 				break;
 			case 7:
-				$this->setRemark($value);
+				$this->setBalance($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setRemark($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 11:
+				$this->setUpdatedBy($value);
+				break;
+			case 12:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -628,13 +658,14 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 		if (array_key_exists($keys[2], $arr)) $this->setLeftRight($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTransactionType($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCredit($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setDebit($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setBalance($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setRemark($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCreditActual($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDebit($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setBalance($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRemark($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCreatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
 	}
 
 	
@@ -647,6 +678,7 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::LEFT_RIGHT)) $criteria->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $this->left_right);
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::TRANSACTION_TYPE)) $criteria->add(MlmDistPairingLedgerPeer::TRANSACTION_TYPE, $this->transaction_type);
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::CREDIT)) $criteria->add(MlmDistPairingLedgerPeer::CREDIT, $this->credit);
+		if ($this->isColumnModified(MlmDistPairingLedgerPeer::CREDIT_ACTUAL)) $criteria->add(MlmDistPairingLedgerPeer::CREDIT_ACTUAL, $this->credit_actual);
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::DEBIT)) $criteria->add(MlmDistPairingLedgerPeer::DEBIT, $this->debit);
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::BALANCE)) $criteria->add(MlmDistPairingLedgerPeer::BALANCE, $this->balance);
 		if ($this->isColumnModified(MlmDistPairingLedgerPeer::REMARK)) $criteria->add(MlmDistPairingLedgerPeer::REMARK, $this->remark);
@@ -691,6 +723,8 @@ abstract class BaseMlmDistPairingLedger extends BaseObject  implements Persisten
 		$copyObj->setTransactionType($this->transaction_type);
 
 		$copyObj->setCredit($this->credit);
+
+		$copyObj->setCreditActual($this->credit_actual);
 
 		$copyObj->setDebit($this->debit);
 
