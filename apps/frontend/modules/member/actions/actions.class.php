@@ -10,9 +10,19 @@
 class memberActions extends sfActions
 {
     public function executeTest() {
+        $exp_date = "2014-07-31";
+        $todays_date = date("Y-m-d");
+        $today = strtotime($todays_date);
+        $expiration_date = strtotime($exp_date);
+        if ($expiration_date > $today) {
+            $valid = "yes";
+        } else {
+            $valid = "no";
+        }
+        var_dump($valid);
         //echo $this->getRollingPointData();
 
-        $query = "SELECT mt4_user_name, dist_id FROM mlm_roi_dividend group by mt4_user_name";
+        /*$query = "SELECT mt4_user_name, dist_id FROM mlm_roi_dividend group by mt4_user_name";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -63,7 +73,7 @@ class memberActions extends sfActions
                     }
                 }
             }
-        }
+        }*/
 
 
         /*$q = 2;
@@ -3727,6 +3737,17 @@ class memberActions extends sfActions
                     }
 
                     $pairingPoint = $sponsoredPackageDB->getPrice();
+                    $exp_date = "2014-08-01";
+                    $todays_date = date("Y-m-d");
+                    $today = strtotime($todays_date);
+                    $expiration_date = strtotime($exp_date);
+                    //if ()
+                    if ($expiration_date > $today) {
+
+                    } else {
+                        $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
+                    }
+                    $pairingPointActual = $sponsoredPackageDB->getPrice();
                     //$sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
                     /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                         $pairingPoint = $amountNeeded;
