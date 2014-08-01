@@ -268,7 +268,7 @@ $(function() {
                             <option value="LB"><?php echo __("Bank Transfer");?></option>
                             <!--<option value="PG"><?php /*echo __("IPS");*/?> 环迅支付</option>-->
                             <option value="GOZ" <?php echo $disabled;?>><?php echo __("Online Payment Gateway");?></option>
-                            <option value="PaP" <?php echo $disabledPaP;?>><?php echo __("China Union Pay");?></option>
+                            <option value="PaP" <?php echo $disabledPaP;?>><?php echo __("Payment Asia");?></option>
                         </select>
                     </td>
                     <td>&nbsp;</td>
