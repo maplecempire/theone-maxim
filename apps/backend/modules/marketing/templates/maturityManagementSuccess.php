@@ -414,6 +414,9 @@ function populateDgAddPanel() {
     $("#dgMsg").hide();
     $("#dgAddPanelUserName").attr("readonly", "readonly");
     var data = $("#dgAddPanel").data("data_" + $("#dgAddPanelId").val());
+
+    var status_code = data.status_code;
+
     $("#dgAddPanelDistCode").val(data.distributor_code);
     $("#dgAddPanelmt4_user_name").val(data.mt4_user_name);
     $("#dgAddPanelDividendDate").val(data.dividend_date);
@@ -426,6 +429,12 @@ function populateDgAddPanel() {
     $("#cp3Amount").val("0").focus().select();
     $("#dgAddPanelRemark").val("");
     $("#text_principle_return").val("");
+
+    if (status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>") {
+
+    } else if (status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>") {
+
+    }
 
     $("#search_remark").val(data.distributor_code);
     datagridCommission.fnDraw();

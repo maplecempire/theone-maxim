@@ -26,7 +26,7 @@ class marketingListActions extends sfActions
         $sql = " FROM mlm_dist_commission_ledger";
 
         /******   total records  *******/
-        $sWhere = " WHERE 1=1";
+        $sWhere = " WHERE commission_type = 'DRB'";
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
         //var_dump($sql);
         /******   total filtered records  *******/

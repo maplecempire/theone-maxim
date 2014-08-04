@@ -192,7 +192,8 @@ class businessActions extends sfActions
         $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
 
         $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
-        $pairingPoint = $this->getRequestParameter('point');
+        $pairingPoint = $this->getRequestParameter('point') * Globals::PAIRING_POINT_BV;
+        $pairingPointActual = $this->getRequestParameter('point');
         $level = 0;
         while ($level < 200) {
             //var_dump($uplineDistDB->getUplineDistId());
@@ -245,6 +246,7 @@ class businessActions extends sfActions
             $sponsorDistPairingledger->setLeftRight($uplinePosition);
             $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
             $sponsorDistPairingledger->setCredit($pairingPoint);
+            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
             $sponsorDistPairingledger->setDebit(0);
             $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
             $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");

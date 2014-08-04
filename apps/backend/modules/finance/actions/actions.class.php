@@ -779,8 +779,21 @@ class financeActions extends sfActions
                 $uplinePosition = $existDist->getPlacementPosition();
                 $uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
 
+                $dateUtil = new DateUtil();
+
                 $sponsoredDistributorCode = $existDist->getDistributorCode();
                 $pairingPoint = $mlmRoiDividendDB->getPackagePrice();
+                $pairingPointActual = $mlmRoiDividendDB->getPackagePrice();
+                $exp_date = "2014-08-01 ";
+                $todays_date = $dateUtil->formatDate("Y-m-d", $mlmRoiDividendDB->getDividendDate());
+                $today = strtotime($todays_date);
+                $expiration_date = strtotime($exp_date);
+                //if ()
+                if ($expiration_date > $today) {
+
+                } else {
+                    $pairingPoint = $mlmRoiDividendDB->getPackagePrice() * Globals::PAIRING_POINT_BV;
+                }
                 $level = 0;
                 while ($level < 200) {
                     //var_dump($uplineDistDB->getUplineDistId());
@@ -837,6 +850,7 @@ class financeActions extends sfActions
                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
                     $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                     $sponsorDistPairingledger->setCredit($pairingPoint);
+                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                     $sponsorDistPairingledger->setDebit(0);
                     $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                     $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [MATURITY]");

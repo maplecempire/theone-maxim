@@ -436,7 +436,8 @@ class memberActions extends sfActions
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
                     return $this->redirect('/member/summary');
                 }
-                $pairingPoint = $sponsoredPackageDB->getPrice();
+                $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $sponsoredPackageDB->getPrice();
 
                 if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
                     $level = 0;
@@ -493,6 +494,7 @@ class memberActions extends sfActions
                         $sponsorDistPairingledger->setLeftRight($treePosition);
                         $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                         $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                         $sponsorDistPairingledger->setDebit(0);
                         $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                         $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
@@ -1339,7 +1341,8 @@ class memberActions extends sfActions
                 $mlm_distributor->save();
 
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
-                $pairingPoint = $sponsoredPackageDB->getPrice();
+                $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $sponsoredPackageDB->getPrice();
                 // recalculate Total left and total right for $uplineDistDB
                 /*$arrs = explode("|", $uplineDistDB->getPlacementTreeStructure());
                 for ($x = count($arrs); $x > 0; $x--) {
@@ -1417,6 +1420,7 @@ class memberActions extends sfActions
                         $sponsorDistPairingledger->setLeftRight($treePositione);
                         $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                         $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                         $sponsorDistPairingledger->setDebit(0);
                         $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                         $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
@@ -5587,7 +5591,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($sponsorDB->getRankId());
                 $this->forward404Unless($sponsoredPackageDB);
-                $pairingPoint = $sponsoredPackageDB->getPrice();
+                $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $sponsoredPackageDB->getPrice();
                 /*if ($sponsoredPackageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
                     $pairingPoint = $amountNeeded;
                 }*/
@@ -5661,6 +5666,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $sponsorDistPairingledger->setLeftRight($uplinePosition);
                         $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                         $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                         $sponsorDistPairingledger->setDebit(0);
                         $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                         $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
@@ -10070,7 +10076,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         /******************************/
                         /*  store Pairing points
                         /******************************/
-                        $pairingPoint = $amountNeeded;
+                        $pairingPoint = $amountNeeded  * Globals::PAIRING_POINT_BV;
+                        $pairingPointActual = $amountNeeded;
                         $uplinePosition = $distDB->getPlacementPosition();
                         if ($distDB->getTreeUplineDistId() != 0 && $distDB->getTreeUplineDistCode() != null) {
                             $level = 0;
@@ -10125,6 +10132,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $sponsorDistPairingledger->setLeftRight($uplinePosition);
                                 $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                                 $sponsorDistPairingledger->setCredit($pairingPoint);
+                                $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                                 $sponsorDistPairingledger->setDebit(0);
                                 $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                                 $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
