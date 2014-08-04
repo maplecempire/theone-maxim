@@ -173,7 +173,7 @@ class reportActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::LEADER_ID, null, Criteria::ISNULL);
-        //$c->add(MlmDistributorPeer::BKK_QUALIFY_1, "Y");
+        $c->add(MlmDistributorPeer::BKK_QUALIFY_1, "Y");
         $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->setLimit(5000);
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
@@ -181,6 +181,7 @@ class reportActions extends sfActions
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        print_r($idx);
         foreach ($distDBs as $distDB) {
             //$distDB->setBkkStatus("COMPLETE");
 
@@ -709,7 +710,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-06-15 00:00:00";
-        $dateTo = "2014-07-31 23:59:59";
+        $dateTo = "2014-08-15 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkPersonalSales(0);
 
