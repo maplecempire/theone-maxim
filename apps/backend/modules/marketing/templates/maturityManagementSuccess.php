@@ -2,6 +2,7 @@
 var isSubmitAjax = true;
 var jform = null;
 var datagrid = null;
+var datagridCommission = null;
 
 $(function(){
 	jform = $("#enquiryForm").validate({
@@ -83,6 +84,31 @@ $(function(){
               { "sName" : "maturity.dividend_date",  "bSortable": true},
               { "sName" : "maturity.email_status",  "bSortable": true},
               { "sName" : "maturity.package_price",  "bSortable": true}
+		]
+	});
+
+	datagridCommission = $("#datagridCommission").r9jasonDataTable({
+		// online1DataTable extra params
+		"idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
+		"extraParam" : function(aoData){ // pass extra params to server
+			aoData.push( { "name": "filterRemark", "value": $("#search_remark").val()  } );
+		},
+		"reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
+			reassignDatagridEventAttr();
+		},
+
+		// datatables params
+		"bLengthChange": true,
+		"bFilter": false,
+		"bProcessing": true,
+		"bServerSide": true,
+        "bAutoWidth": false,
+		"sAjaxSource": "<?php echo url_for('marketingList/commissionList') ?>",
+		"sPaginationType": "full_numbers",
+		"aoColumns": [
+              { "sName" : "created_on", "bSortable" : true},
+              { "sName" : "credit",  "bSortable": true},
+              { "sName" : "remark",  "bSortable": true}
 		]
 	});
 
@@ -398,6 +424,11 @@ function populateDgAddPanel() {
     $("#dgAddPanelPackagePrice").val(data.package_price);
     //$("#remark").val("TRANSFER FROM COMPANY");
     $("#cp3Amount").val("0").focus().select();
+    $("#dgAddPanelRemark").val("");
+    $("#text_principle_return").val("");
+
+    $("#search_remark").val(data.distributor_code);
+    datagridCommission.fnDraw();
     $(".indicator").show();
     $.ajax({
         type : 'POST',
@@ -416,6 +447,8 @@ function populateDgAddPanel() {
                 $("#cp2").val(data.cp2);
                 $("#cp3").val(data.cp3);
                 $("#dgAddPanelMt4Balance").val(data.mt4Balance);
+                $("#dgAddPanelRemark").val(data.remark);
+                $("#text_principle_return").val(data.principle_return);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -452,11 +485,6 @@ function populateDgAddPanel() {
             <td>Mt4 Balance</td>
             <td>:</td>
             <td><input type="text" id="dgAddPanelMt4Balance" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
-        </tr>
-        <tr>
-            <td>Package Price</td>
-            <td>:</td>
-            <td><input type="text" id="dgAddPanelPackagePrice" class="text ui-widget-content ui-corner-all" readonly="readonly" size="25"></td>
         </tr>
         <tr>
             <td>Maturity Type</td>
@@ -502,19 +530,36 @@ function populateDgAddPanel() {
             <td><input name="cp3" id="cp3" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
-        <!--<tr>
-            <td>Status</td>
+        <tr>
+            <td>Principle Return</td>
             <td>:</td>
-            <td>
-                <select id="statusCode" name="statusCode">
-                    <option value="">(Empty)</option>
-                    <option value="<?php /*echo Globals::STATUS_MATURITY_PENDING; */?>"><?php /*echo Globals::STATUS_MATURITY_PENDING; */?></option>
-                    <option value="<?php /*echo Globals::STATUS_MATURITY_RENEW; */?>"><?php /*echo Globals::STATUS_MATURITY_RENEW; */?></option>
-                    <option value="<?php /*echo Globals::STATUS_MATURITY_WITHDRAW; */?>"><?php /*echo Globals::STATUS_MATURITY_WITHDRAW; */?></option>
-                    <option value="<?php /*echo Globals::STATUS_MATURITY_SUCCESS; */?>"><?php /*echo Globals::STATUS_MATURITY_SUCCESS; */?></option>
-                </select>
+            <td><input name="text_principle_return" id="text_principle_return" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
+        </tr>
+
+        <tr>
+            <td>Member Remark</td>
+            <td>:</td>
+            <td colspan="4"><textarea id="dgAddPanelRemark" class="text ui-widget-content ui-corner-all" readonly="readonly" rows="2" cols="60"></textarea></td>
+        </tr>
+
+        <tr>
+            <td colspan="6">
+                <table class="display" id="datagridCommission" border="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Credit</th>
+                            <th>Remark</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><input title="" size="10" type="text" id="search_remark" value="" class="search_init"/></td>
+                        </tr>
+                    </thead>
+                </table>
             </td>
-        </tr>-->
+        </tr>
     </table>
     </fieldset>
 </div>

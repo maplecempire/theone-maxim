@@ -401,12 +401,13 @@ class financeActions extends sfActions
                 $cp3 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
                 $mt4Balance = $this->getMt4Balance($distId, $existNotificationOfMaturity->getMt4UserName());
 
-
                 $arr = array(
                     'cp1' => $cp1,
                     'cp2' => $cp2,
                     'cp3' => $cp3,
-                    'mt4Balance' => $mt4Balance
+                    'mt4Balance' => $mt4Balance,
+                    'remark' => $existDist->getRemark(),
+                    'principle_return' => $existDist->getPrincipleReturn()
                 );
             }
         }
