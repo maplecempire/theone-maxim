@@ -709,7 +709,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
         $dateFrom = "2014-06-15 00:00:00";
-        $dateTo = "2014-07-30 23:59:59";
+        $dateTo = "2014-07-31 23:59:59";
         foreach ($distDBs as $distDB) {
             $distDB->setBkkPersonalSales(0);
 
