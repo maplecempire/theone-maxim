@@ -339,6 +339,8 @@
                 <?php
                 } else if ($distributorDB->getBankCountry() == "China (PRC)"
                            &&
+                           $distributorDB->getDistributorId() != 255828
+                           &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 0
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 0
                            || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 0

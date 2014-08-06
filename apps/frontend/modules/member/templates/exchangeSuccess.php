@@ -120,14 +120,16 @@
             <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Japan Yen" alt=""
                                                         src="/css/maxim/flag/17.gif"><br>Japan Yen</p></td>
-                <td valign="middle" colspan="2"><p align="center">JPY (FOLLOW BANK RATE based on weekly)</p></td>
+<!--                <td valign="middle" colspan="2"><p align="center">JPY (FOLLOW BANK RATE based on weekly)</p></td>-->
+                <td valign="middle"><p align="center">JPY150.00</p></td>
+                <td valign="middle"><p align="center">N/A</p></td>
             </tr>
             <tr class="row0">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Korea(South) Won" alt=""
                                                         src="/css/maxim/flag/18.gif"><br>Korea(South) Won<br>
                 </p></td>
-                <td valign="middle"><p align="center">KRW1,050.00</p></td>
                 <td valign="middle"><p align="center">KRW1,150.00</p></td>
+                <td valign="middle"><p align="center">KRW1,050.00</p></td>
             </tr>
             <tr class="row1">
                 <td valign="middle"><p align="center"><img width="90" height="45" title="Malaysia Ringgit" alt=""
@@ -216,7 +218,7 @@
                 <td valign="middle"><p align="center"><img width="90" height="45" title="United State" alt=""
                                                         src="/css/maxim/flag/21.gif"><br>United State Dollar
                 </p></td>
-                <td valign="middle" color="#28eb13"><p align="center">USD1.05</p></td>
+                <td valign="middle" color="#28eb13"><p align="center">USD1.10</p></td>
                 <td valign="middle"><p align="center">USD1.00</p></td>
             </tr>
             <tr class="row1">
