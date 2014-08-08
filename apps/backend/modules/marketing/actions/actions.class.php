@@ -1740,7 +1740,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
-        $c->setLimit(5000);
+        $c->setLimit(2000);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = count($distDBs);
