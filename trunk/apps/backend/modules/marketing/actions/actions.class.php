@@ -1933,7 +1933,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
                                                         $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_CREDIT_REFUND);
 
-                                                        $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+                                                        /*$distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
 
                                                         $mlm_account_ledger = new MlmAccountLedger();
                                                         $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
@@ -1952,7 +1952,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                                                             $debitAccountRemark = "USD ".$creditRefundByPackage.", Volume:".$totalVolume;
                                                             $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $creditRefund);
                                                         }
-                                                        $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+                                                        $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);*/
                                                     } else if ($gap > 0) {
                                                         $pipsBalance = $this->getCommissionBalance($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
@@ -1979,7 +1979,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
                                                         $this->revalidateCommission($affectedDistributor->getDistributorId(), Globals::COMMISSION_TYPE_PIPS_BONUS);
 
-                                                        $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+                                                        /*$distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
 
                                                         $mlm_account_ledger = new MlmAccountLedger();
                                                         $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
@@ -1998,7 +1998,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                                                             $debitAccountRemark = "e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied;
                                                             $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $pipsAmountEntitied);
                                                         }
-                                                        $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+                                                        $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);*/
                                                     }
                                                 }
                                             }
