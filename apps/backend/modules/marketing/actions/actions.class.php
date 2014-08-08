@@ -1760,33 +1760,44 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $creditRefund = $resultArr['_CREDIT_REFUND'];
                     $pipsAmountEntitied = $resultArr['_PIPS_BONUS'];
 
-                    $distAccountEcashBalance = $distAccountEcashBalance + $creditRefund;
+                    if ($creditRefund <= 0 && $pipsAmountEntitied <= 0) {
+                        $affectedDistributor->setBkkStatus("COMPLETE");
+                        $affectedDistributor->save();
 
-                    $mlm_account_ledger = new MlmAccountLedger();
-                    $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
-                    $mlm_account_ledger->setRemark("");
-                    $mlm_account_ledger->setCredit($creditRefund);
-                    $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($distAccountEcashBalance);
-                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
+                        continue;
+                    }
 
-                    $distAccountEcashBalance = $distAccountEcashBalance + $pipsAmountEntitied;
+                    if ($creditRefund > 0) {
+                        $distAccountEcashBalance = $distAccountEcashBalance + $creditRefund;
 
-                    $mlm_account_ledger = new MlmAccountLedger();
-                    $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PIPS_BONUS);
-                    $mlm_account_ledger->setRemark("");
-                    $mlm_account_ledger->setCredit($pipsAmountEntitied);
-                    $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($distAccountEcashBalance);
-                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
+                        $mlm_account_ledger->setRemark("");
+                        $mlm_account_ledger->setCredit($creditRefund);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($distAccountEcashBalance);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+                    }
+
+                    if ($pipsAmountEntitied > 0) {
+                        $distAccountEcashBalance = $distAccountEcashBalance + $pipsAmountEntitied;
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PIPS_BONUS);
+                        $mlm_account_ledger->setRemark("");
+                        $mlm_account_ledger->setCredit($pipsAmountEntitied);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($distAccountEcashBalance);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+                    }
 
                     $bonusService = new BonusService();
                     if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
