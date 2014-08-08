@@ -1743,56 +1743,56 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $c->setLimit(5000);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
-        /*$idx = count($distDBs);
-        foreach ($distDBs as $distDB) {
-            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+        $idx = count($distDBs);
+        foreach ($distDBs as $affectedDistributor) {
+            print_r($idx-- . ":" . $affectedDistributor->getDistributorCode()."<br>");
 
-            $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+            $resultArr = $this->getPipsBonus($affectedDistributor->getDistributorId());
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
-            $mlm_account_ledger->setRemark("USD ".$creditRefundByPackage.", Volume:".$totalVolume);
-            $mlm_account_ledger->setCredit($creditRefund);
-            $mlm_account_ledger->setDebit(0);
-            $mlm_account_ledger->setBalance($distAccountEcashBalance + $creditRefund);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
+            if ($resultArr != null) {
+                $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
 
-            $bonusService = new BonusService();
-            if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
-                $debitAccountRemark = "USD ".$creditRefundByPackage.", Volume:".$totalVolume;
-                $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $creditRefund);
+                $creditRefund = $resultArr['_CREDIT_REFUND'];
+                $pipsAmountEntitied = $resultArr['_PIPS_BONUS'];
+
+                $distAccountEcashBalance = $distAccountEcashBalance + $creditRefund;
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CREDIT_REFUND);
+                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setCredit($creditRefund);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $distAccountEcashBalance = $distAccountEcashBalance + $pipsAmountEntitied;
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PIPS_BONUS);
+                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setCredit($pipsAmountEntitied);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $bonusService = new BonusService();
+                if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
+                    $debitAccountRemark = "PIPS BONUS AND CREDIT REFUND";
+                    $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $pipsAmountEntitied);
+                }
+                $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             }
-            $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
-
-
-
-
-            $distAccountEcashBalance = $this->getAccountBalance($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
-
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($affectedDistributor->getDistributorId());
-            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PIPS_BONUS);
-            $mlm_account_ledger->setRemark("e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied);
-            $mlm_account_ledger->setCredit($pipsAmountEntitied);
-            $mlm_account_ledger->setDebit(0);
-            $mlm_account_ledger->setBalance($distAccountEcashBalance + $pipsAmountEntitied);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
-
-            $bonusService = new BonusService();
-            if ($bonusService->checkDebitAccount($affectedDistributor->getDistributorId()) == true) {
-                $debitAccountRemark = "e-Trader:".$existDistributor->getDistributorCode().", tier:".$gap.", volume:".$totalVolume.", pips:".$pipsEntitied;
-                $bonusService->contraDebitAccount($affectedDistributor->getDistributorId(), $debitAccountRemark, $pipsAmountEntitied);
-            }
-            $this->revalidateAccount($affectedDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
-
-        }*/
+            $affectedDistributor->setBkkStatus("COMPLETE");
+            $affectedDistributor->save();
+        }
 
         print_r("<br><br><br>Done");
         return sfView::HEADER_ONLY;
@@ -3715,12 +3715,22 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     function getPipsBonus($distId)
     {
         $arr = array();
-        $query = "SELECT commission.created_on
-        , Coalesce(sales._PIPS_BONUS, 0) AS _PIPS_BONUS
-        FROM (
-            SELECT SUM(credit-debit) AS _PIPS_BONUS, DATE(created_on) as sales_created_on
-                FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$distId." GROUP BY DATE(created_on)
-        ) sales ON commission.created_on = sales.sales_created_on";
+        $query = "
+            SELECT dist.distributor_id
+                    , Coalesce(sales._PIPS_BONUS, 0) AS _PIPS_BONUS
+                    , Coalesce(cf._CREDIT_REFUND, 0) AS _CREDIT_REFUND
+                    FROM mlm_distributor dist
+                    LEFT JOIN (
+                        SELECT SUM(credit-debit) AS _PIPS_BONUS, dist_id
+                            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$distId."
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-10 23:59:59'
+                    ) sales ON dist.distributor_id = sales.dist_id
+                    LEFT JOIN (
+                        SELECT SUM(credit-debit) AS _CREDIT_REFUND, dist_id
+                            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_CREDIT_REFUND."' AND dist_id = ".$distId."
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-10 23:59:59'
+                    ) cf ON dist.distributor_id = cf.dist_id
+            WHERE dist.distributor_id = ".$distId;
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
