@@ -65,6 +65,33 @@ function blink(selector) {
     <?php } ?>
 
     </ul>
+
+    <?php
+    $rookieChallenge = false;
+
+    if ($distDB->getActiveDatetime() != null) {
+        $exp_date = "2014-03-01";
+        $todays_date = $distDB->getActiveDatetime();
+        $today = strtotime($todays_date);
+        $expiration_date = strtotime($exp_date);
+        if ($expiration_date > $today) {
+
+        } else {
+            $rookieChallenge = true;
+        }
+    }
+
+    if ($rookieChallenge == true) {
+    ?>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Rookie Challenge'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/rookieChallenge"><span><?php echo __('Rookie Challenge'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+    </ul>
+    <?php } ?>
+
     <?php if ($distDB->getDistributorId() != 263640) { ?>
     <br class="clear"><br>
     <ul>
