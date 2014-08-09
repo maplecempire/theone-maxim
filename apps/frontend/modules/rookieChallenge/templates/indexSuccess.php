@@ -183,11 +183,11 @@ $(function() {
         </tr>
         <tr>
             <td><span class="blue_text" style="font-weight: bold;">
-                    <?php echo __('Challenge Period: August 10th to September 10th, 2014
+                    <?php echo __('Challenge Period: August 8th to September 8th, 2014
                     <br><br>Direct Sponsor/Personal Sales:
-                    <br><br>USD50 to USD99k will receive an Extra 5%
-                    <br><br>USD100k to USD199k will receive an Extra 6%
-                    <br><br>USD200k to USD300k will receive an Extra 7%')?>
+                    <br>USD50 to USD99k will receive an Extra 5%
+                    <br>USD100k to USD199k will receive an Extra 6%
+                    <br>USD200k to USD300k will receive an Extra 7%')?>
                 </span>
             </td>
         </tr>
