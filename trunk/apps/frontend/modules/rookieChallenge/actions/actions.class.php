@@ -35,7 +35,7 @@ class rookieChallengeActions extends sfActions
             $dateTo = '2014-09-08 23:59:59';
             $this->totalPersonalSales = $this->getTotalPersonalSales($dateFrom, $dateTo);
         } else {
-            //return $this->redirect('/member/summary');
+            return $this->redirect('/member/summary');
         }
     }
 
