@@ -147,9 +147,9 @@ class marketingListActions extends sfActions
         {
             $resultArr = $resultset->getRow();
 
-            $pacakgePrice = $resultArr['package_price'];
+            $packagePrice = $resultArr['package_price'];
             $mt4Username = $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'];
-            if ($pacakgePrice == null) {
+            if ($packagePrice == null) {
                 $c = new Criteria();
                 $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
                 $c->add(MlmRoiDividendPeer::IDX, 18);

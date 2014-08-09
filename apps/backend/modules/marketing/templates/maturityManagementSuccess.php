@@ -431,9 +431,11 @@ function populateDgAddPanel() {
     $("#text_principle_return").val("");
 
     if (status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>") {
-
-    } else if (status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_RENEW; ?>") {
-
+        $("#dgAddPanelRemark").val("RENEW 18 MONTHS MATURITY");
+        $("#internalRemark").val("RENEW 18 MONTHS MATURITY");
+    } else if (status_code == "<?php echo Globals::STATUS_MATURITY_CLIENT_WITHDRAW; ?>") {
+        $("#dgAddPanelRemark").val("CLOSE MT4");
+        $("#internalRemark").val("CLOSE MT4");
     }
 
     $("#search_remark").val(data.distributor_code);
