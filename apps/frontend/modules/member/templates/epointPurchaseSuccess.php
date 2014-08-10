@@ -253,6 +253,7 @@ $(function() {
                         <?php
                         $disabled = "";
                         $disabledPaP = "";
+                        $disabledIps = "";
                         if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 161 || $distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 682) {
 
                         } else {
@@ -263,10 +264,15 @@ $(function() {
                         } else {
                             $disabledPaP = "disabled='disabled'";
                         }
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 286347) {
+
+                        } else {
+                            $disabledIps = "disabled='disabled'";
+                        }
                         ?>
                         <select name="paymentMethod" id="paymentMethod">
                             <option value="LB"><?php echo __("Bank Transfer");?></option>
-                            <!--<option value="PG"><?php /*echo __("IPS");*/?> 环迅支付</option>-->
+                            <option value="PG" <?php echo $disabledIps;?>><?php echo __("IPS"); ?> 环迅支付</option>
                             <option value="GOZ" <?php echo $disabled;?>><?php echo __("Online Payment Gateway");?></option>
                             <option value="PaP" <?php echo $disabledPaP;?>><?php echo __("Payment Asia");?></option>
                         </select>
