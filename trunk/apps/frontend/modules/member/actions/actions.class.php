@@ -379,6 +379,10 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeFmc()
+    {
+
+    }
     public function executeDoAutoplacement()
     {
         if ($this->getRequestParameter('distid', '') == "" || $this->getRequestParameter('placement', '') == "") {

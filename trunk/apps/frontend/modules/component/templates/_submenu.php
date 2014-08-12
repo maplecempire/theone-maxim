@@ -63,7 +63,13 @@ function blink(selector) {
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
     <?php } ?>
-
+    <?php
+        // maximcapital
+        if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/fmc"><span><?php echo __('FMC'); ?></span></a><img src="/images/new_icon.gif">
+        </li>
+    <?php } ?>
     </ul>
 
     <?php
@@ -148,6 +154,19 @@ function blink(selector) {
             <a href="<?php echo url_for("/moneyTrac/createAccount") ?>"><span><?php echo __('Apply MoneyTrac'); ?><img src="/images/new_icon.gif"></span></a>
         </li>
 
+        <?php
+        // gj1092, ko4390, korean001, Nextbill1, Openman   - leader group
+        // alexsim
+        if ($distDB->getDistributorId() == 142
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255607
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 257700
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255709
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 264845
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 273056) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?><img src="/images/new_icon.gif"></span></a>
+        </li>
+        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
 
         </li>
