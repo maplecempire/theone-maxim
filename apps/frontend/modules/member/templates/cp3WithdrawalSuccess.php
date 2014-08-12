@@ -15,6 +15,9 @@
                     }
                 },
                 rules : {
+                    "bankInTo" : {
+                        required : true
+                    },
                     "transactionPassword" : {
                         required : true
                         , remote: "/member/verifyTransactionPassword"

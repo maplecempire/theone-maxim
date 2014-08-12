@@ -25,6 +25,11 @@ abstract class Globals {
 //    const PAYMENT_GATEWAY_MERCHANT_URL = "http://localhost:8087/member/pgRedirect?p=success";
 //    const PAYMENT_GATEWAY_FAIL_URL = "http://localhost:8087/member/pgRedirect?p=fail";
 
+    const MT4_ENCRYPTIONKEY = "asfas1";
+    const MT4_SECRETHASH = "fsdvgfygfsddsag";
+    const MT4_SERVER = "173.201.253.129";
+    const MT4_SERVER_PORT = "702";
+
     const COUNTRY_OTHER = "Others";
     const YES = 1;
     const NO = 0;
