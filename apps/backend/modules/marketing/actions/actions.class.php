@@ -10,6 +10,105 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeDoUpdatePackagePurchaseViaAuto()
+    {
+        $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
+        //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+        //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
+        if ($tbl_distributor && $tbl_distributor->getPackagePurchaseFlag() == "Y") {
+            $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
+            $error = false;
+            $errorMessage = "";
+
+            try {
+                $con->begin();
+
+                $c = new Criteria();
+                $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4_user_name'));
+                $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
+
+                if (!$mlmDistMt4DB) {
+                    $tbl_distributor->setPackagePurchaseFlag("N");
+                    $tbl_distributor->save();
+
+                    $mlm_dist_mt4 = new MlmDistMt4();
+                    $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+                    $mlm_dist_mt4->setRankId($tbl_distributor->getInitRankId());
+                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
+                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
+
+                    $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getInitRankId());
+                    if ($tbl_distributor->getDebitAccount() == "Y") {
+                        $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getDebitRankId());
+                    }
+
+                    /* ****************************************************
+                   * ROI Divident
+                   * ***************************************************/
+                    $dateUtil = new DateUtil();
+                    $currentDate = $dateUtil->formatDate("Y-m-d", $tbl_distributor->getActiveDatetime()) . " 00:00:00";
+                    $currentDate_timestamp = strtotime($currentDate);
+                    //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
+                    $dividendDate = strtotime("+1 months", $currentDate_timestamp);
+
+                    $mlm_roi_dividend = new MlmRoiDividend();
+                    $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
+                    $mlm_roi_dividend->setIdx(1);
+                    $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+                    //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                    $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                    $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
+                    $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
+                    $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                    //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                    //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                    $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                    $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_roi_dividend->save();
+
+                    $userDB = AppUserPeer::retrieveByPK($tbl_distributor->getUserId());
+
+                    $mlmPackageContract = new MlmPackageContract();
+                    $mlmPackageContract->setDistId($tbl_distributor->getDistributorId());
+                    $mlmPackageContract->setFullName($tbl_distributor->getFullName());
+                    $mlmPackageContract->setUsername($userDB->getUsername());
+                    $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
+                    $mlmPackageContract->setPackagePrice($packageDB->getPrice());
+                    $mlmPackageContract->setSignDateDay(date("d"));
+                    $mlmPackageContract->setSignDateMonth(date("F"));
+                    $mlmPackageContract->setSignDateYear(date("Y"));
+                    $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
+                    $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
+                    $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                    $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->save();
+
+                    $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
+                } else {
+                    $error = true;
+                    $errorMessage = "MT4 already exist in database";
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+            $output = array(
+                "error" => $error
+                , "errorMsg" => $errorMessage
+            );
+            echo json_encode($output);
+        }
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeUnlockBulkGenealogy()
     {
         $bulkContent = $this->getRequestParameter('bulkContent');
