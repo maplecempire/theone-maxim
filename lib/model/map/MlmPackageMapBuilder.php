@@ -36,6 +36,8 @@ class MlmPackageMapBuilder {
 
 		$tMap->addColumn('PACKAGE_NAME', 'PackageName', 'string', CreoleTypes::VARCHAR, true, 50);
 
+		$tMap->addColumn('MT4_GROUP_NAME', 'Mt4GroupName', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addColumn('COLOR', 'Color', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('PRICE', 'Price', 'double', CreoleTypes::DECIMAL, false, 12);

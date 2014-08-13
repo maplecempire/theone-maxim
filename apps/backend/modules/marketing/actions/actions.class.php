@@ -12,10 +12,14 @@ class marketingActions extends sfActions
 {
     public function executeDoUpdatePackagePurchaseViaAuto()
     {
-        $tbl_distributor = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('distId'));
-        //$tbl_distributor->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-        //$tbl_distributor->setMt4Password($this->getRequestParameter('mt4_password'));
-        if ($tbl_distributor && $tbl_distributor->getPackagePurchaseFlag() == "Y") {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+        $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
+        $c->setLimit(10);
+        $distributorDBs = MlmDistributorPeer::doSelect($c);
+
+        foreach ($distributorDBs as $tbl_distributor) {
             $con = Propel::getConnection(MlmPipCsvPeer::DATABASE_NAME);
             $error = false;
             $errorMessage = "";
@@ -23,27 +27,104 @@ class marketingActions extends sfActions
             try {
                 $con->begin();
 
+                $encryptionKey = Globals::MT4_ENCRYPTIONKEY;
+                $secretHash = Globals::MT4_SECRETHASH;
+
                 $c = new Criteria();
-                $c->add(MlmDistMt4Peer::MT4_USER_NAME, $this->getRequestParameter('mt4_user_name'));
+                $c->add(AppSettingPeer::SETTING_PARAMETER, "MT4_ID");
+                $appSettingDB = AppSettingPeer::doSelectOne($c);
+
+                if (!$appSettingDB) {
+                    print_r("Error, MT4 ID not exits");
+                    return sfView::HEADER_ONLY;
+                }
+
+                $mt4Id = $appSettingDB->getSettingValue();
+                $mt4Password = $this->generateMt4Password();
+
+                $c = new Criteria();
+                $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
                 $mlmDistMt4DB = MlmDistMt4Peer::doSelectOne($c);
 
                 if (!$mlmDistMt4DB) {
+                    print_r("<br>Distributor ID:".$tbl_distributor->getDistributorId().", Distributor Code:".$tbl_distributor->getDistributorCode().", MT4:".$mt4Id);
                     $tbl_distributor->setPackagePurchaseFlag("N");
                     $tbl_distributor->save();
-
-                    $mlm_dist_mt4 = new MlmDistMt4();
-                    $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
-                    $mlm_dist_mt4->setRankId($tbl_distributor->getInitRankId());
-                    $mlm_dist_mt4->setMt4UserName($this->getRequestParameter('mt4_user_name'));
-                    $mlm_dist_mt4->setMt4Password($this->getRequestParameter('mt4_password'));
-                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_dist_mt4->save();
 
                     $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getInitRankId());
                     if ($tbl_distributor->getDebitAccount() == "Y") {
                         $packageDB = MlmPackagePeer::retrieveByPK($tbl_distributor->getDebitRankId());
                     }
+
+                    $leader = "";
+                    $leaderArrs = explode(",", Globals::GROUP_LEADER);
+                    for ($i = 0; $i < count($leaderArrs); $i++) {
+                        $pos = strrpos($tbl_distributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                        if ($pos === false) { // note: three equal signs
+
+                        } else {
+                            $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                            if ($dist) {
+                                $leader = $dist->getDistributorCode();
+                            }
+                            break;
+                        }
+                    }
+                    $groupName = $packageDB->getMt4GroupName();
+                    $packagePrice = $packageDB->getPrice();
+
+                    $mt4request = new CMT4DataReciver;
+                    $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+                    $params['array'] = array();
+                    $params['group'] = $groupName;
+//                    $params['group'] = "MX10000";
+            //        $params['group'] = "KLTEST";
+                    $params['agent'] = null;
+                    $params['login'] = $mt4Id;
+            //        $params['country'] = $mlm_distributor->getCountry();
+                    $params['country'] = "";
+                    $params['state'] = "";
+                    $params['city'] = $leader;
+            //        $params['city'] = "";
+                    $params['address'] = $tbl_distributor->getDistributorCode();
+                    $params['name'] = $tbl_distributor->getFullName();
+                    $params['email'] = $tbl_distributor->getEmail();
+                    $params['password'] = $mt4Password;
+            //        $params['password'] = "qwer1234";
+                    $params['password_investor'] = "123abc";
+                    $params['password_phone'] = null;
+                    $params['leverage'] = "100";
+                    //$params['leverage'] = $this->getRequestParameter('leverage');      2
+                    $params['zipcode'] = "";
+                    $params['phone'] = $packagePrice; // package price
+                    $params['id'] = '';
+                    $params['comment'] = "";
+                    var_dump($params);
+                    $answer = $mt4request->MakeRequest("createaccount", $params);
+
+                    if ($answer['result'] != 1) {
+                        var_dump($answer["reason"]);
+                    }
+                    else
+                    {
+                        $params = array();
+                        $params['login'] 	= $answer['login'];
+                        $params['value'] 	= $packagePrice; // above zero for deposits, below zero for withdraws
+                        $params['comment'] 	= "test balance operation";
+                        $answer = $mt4request->MakeRequest("changebalance", $params);
+                        print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+                    }
+                    $mt4request->CloseConnection();
+
+                    $mlm_dist_mt4 = new MlmDistMt4();
+                    $mlm_dist_mt4->setDistId($tbl_distributor->getDistributorId());
+                    $mlm_dist_mt4->setRankId($tbl_distributor->getInitRankId());
+                    $mlm_dist_mt4->setMt4UserName($mt4Id);
+                    $mlm_dist_mt4->setMt4Password($mt4Password);
+                    $mlm_dist_mt4->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_dist_mt4->save();
 
                     /* ****************************************************
                    * ROI Divident
@@ -57,7 +138,7 @@ class marketingActions extends sfActions
                     $mlm_roi_dividend = new MlmRoiDividend();
                     $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
                     $mlm_roi_dividend->setIdx(1);
-                    $mlm_roi_dividend->setMt4UserName($this->getRequestParameter('mt4_user_name'));
+                    $mlm_roi_dividend->setMt4UserName($mt4Id);
                     //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
                     $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
                     $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
@@ -89,23 +170,23 @@ class marketingActions extends sfActions
                     $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageContract->save();
 
-                    $this->sendEmailForMt4($this->getRequestParameter('mt4_user_name'), $this->getRequestParameter('mt4_password'), $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
+                    $appSettingDB->setSettingValue($mt4Id + 1);
+                    $appSettingDB->save();
+
+                    $this->sendEmailForMt4($mt4Id, $mt4Password, $tbl_distributor->getFullName(), $tbl_distributor->getEmail(), $tbl_distributor);
                 } else {
-                    $error = true;
-                    $errorMessage = "MT4 already exist in database";
+                    print_r($errorMessage);
+                    return sfView::HEADER_ONLY;
+
+                    break;
                 }
                 $con->commit();
             } catch (PropelException $e) {
                 $con->rollback();
                 throw $e;
             }
-            $output = array(
-                "error" => $error
-                , "errorMsg" => $errorMessage
-            );
-            echo json_encode($output);
         }
-
+        print_r("Done");
         return sfView::HEADER_ONLY;
     }
 
@@ -3863,5 +3944,18 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             return $arr;
         }
         return null;
+    }
+
+    function generateMt4Password()
+    {
+        $max_digit = 999999;
+        $digit = 6;
+
+        $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 4));
+
+        $fcode = rand(0, $max_digit) . "";
+        $fcode = str_pad($fcode, $digit, "0", STR_PAD_LEFT);
+
+        return $char.$fcode;
     }
 }
