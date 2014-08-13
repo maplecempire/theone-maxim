@@ -234,22 +234,22 @@
                             <li><?php echo __('Handling Fee USD60 or 5% whichever is higher') ?></li>
                             <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
                         </ol>
-                        <div class="ui-widget" style="display: none" id="moneyTracNote">
+                        <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
                             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
                                  class="ui-state-highlight ui-corner-all">
                                 <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                               class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br>
+                                    <strong><?php /*echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br>
                                     <ol>
                                         <li>Customer Name: Maxim Capital Limited</li>
                                         <li>Customer Number: 000028911</li>
                                         <li>Customer Email Address: finance@maximtrader.com</li>
                                     </ol>
-                                    Tick \"Receive Funds From this Customer\" and Send Connection Request"); ?></strong>
+                                    Tick \"Receive Funds From this Customer\" and Send Connection Request"); */?></strong>
                                     <br>
                                     </p>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="ui-widget" style="display: none" id="moneyTracNote2">
                             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"

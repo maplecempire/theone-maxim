@@ -6568,7 +6568,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
             //}
 
-            if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
+            $epointAmount = $this->getRequestParameter('epointAmount');
+            $epointAmount = str_replace(",", "", $epointAmount);
+            if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
                 return $this->redirect('/member/transferEpoint');
@@ -6583,7 +6585,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferEpoint');
 
-            } elseif ($sponsorId <> "" && $this->getRequestParameter('epointAmount') > 0) {
+            } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
                 /*$c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
@@ -6653,8 +6655,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")".$remark);
                     $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " ".$remark);
                     $mlm_account_ledger->setCredit(0);
-                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setDebit($epointAmount);
+                    $mlm_account_ledger->setBalance($fromBalance - $epointAmount);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
@@ -6667,9 +6669,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
                     //$tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")".$remark);
                     $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " ".$remark);
-                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCredit($epointAmount);
                     $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
@@ -6827,7 +6829,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
             //}
 
-            if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
+            $epointAmount = $this->getRequestParameter('epointAmount');
+            $epointAmount = str_replace(",", "", $epointAmount);
+            if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
                 return $this->redirect('/member/transferCp2');
@@ -6842,7 +6846,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferCp2');
 
-            } elseif ($sponsorId <> "" && $this->getRequestParameter('epointAmount') > 0) {
+            } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
                 /*$c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
@@ -6906,8 +6910,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
                     $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode);
                     $mlm_account_ledger->setCredit(0);
-                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setDebit($epointAmount);
+                    $mlm_account_ledger->setBalance($fromBalance - $epointAmount);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
@@ -6920,9 +6924,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
                     //$tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
                     $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode);
-                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCredit($epointAmount);
                     $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
@@ -7081,7 +7085,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
             //}
 
-            if (($this->getRequestParameter('epointAmount') + $processFee) > $ledgerAccountBalance) {
+            $epointAmount = $this->getRequestParameter('epointAmount');
+            $epointAmount = str_replace(",", "", $epointAmount);
+            if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
                 return $this->redirect('/member/transferCp3');
@@ -7096,7 +7102,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferCp3');
 
-            } elseif ($sponsorId <> "" && $this->getRequestParameter('epointAmount') > 0) {
+            } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
                 /*$c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
@@ -7159,8 +7165,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
                     $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode);
                     $mlm_account_ledger->setCredit(0);
-                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setDebit($epointAmount);
+                    $mlm_account_ledger->setBalance($fromBalance - $epointAmount);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
@@ -7173,9 +7179,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
                     //$tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
                     $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode);
-                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCredit($epointAmount);
                     $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
@@ -7298,7 +7304,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     return $this->redirect('/member/transferRP');
                 }*/
             //}
-            if (($this->getRequestParameter('epointAmount')) > $ledgerAccountBalance) {
+            $epointAmount = $this->getRequestParameter('epointAmount');
+            $epointAmount = str_replace(",", "", $epointAmount);
+            if ($epointAmount > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient RP"));
                 return $this->redirect('/member/transferRP');
@@ -7313,7 +7321,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
                 return $this->redirect('/member/transferRP');
 
-            } elseif ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0) {
+            } elseif ($this->getRequestParameter('sponsorId') <> "" && $epointAmount > 0) {
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
                 $existDist = MlmDistributorPeer::doSelectOne($c);
@@ -7359,8 +7367,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")".$remark);
                     $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " ".$remark);
                     $mlm_account_ledger->setCredit(0);
-                    $mlm_account_ledger->setDebit($this->getRequestParameter('epointAmount'));
-                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('epointAmount'));
+                    $mlm_account_ledger->setDebit($epointAmount);
+                    $mlm_account_ledger->setBalance($fromBalance - $epointAmount);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
@@ -7372,9 +7380,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setDistId($toId);
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
                     $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")".$remark);
-                    $tbl_account_ledger->setCredit($this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setCredit($epointAmount);
                     $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('epointAmount'));
+                    $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
