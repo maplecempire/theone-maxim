@@ -105,6 +105,7 @@ class marketingActions extends sfActions
 
                     if ($answer['result'] != 1) {
                         var_dump($answer["reason"]);
+                        return sfView::HEADER_ONLY;
                     }
                     else
                     {
