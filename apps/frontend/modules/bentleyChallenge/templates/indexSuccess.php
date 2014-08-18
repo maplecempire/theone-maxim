@@ -7,7 +7,7 @@
 <?php
 
 $time1 = strtotime(date("Y-m-d H:i:s"));
-$time2 = strtotime("2014-09-01 00:00:00");
+$time2 = strtotime("2015-01-01 00:00:00");
 //$time2 = strtotime("2014-05-30 01:34:00");
 
 $diff = $time2-$time1;
