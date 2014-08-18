@@ -196,7 +196,7 @@
             <trans-unit><source>Enquiry</source><target>留言</target></trans-unit>
             <trans-unit><source>Announcement</source><target>公告</target></trans-unit>
             <trans-unit><source>Announcements</source><target>公告</target></trans-unit>
-            <trans-unit><source>Genealogy</source><target>团队架购图</target></trans-unit>
+            <trans-unit><source>Genealogy</source><target>组织架构图</target></trans-unit>
             <trans-unit><source>Sponsor</source><target>团队发展谱图</target></trans-unit>
             <trans-unit><source>Placement</source><target>组织系谱图</target></trans-unit>
             <trans-unit><source>Global Auto Placement</source><target>国际公排谱图</target></trans-unit>
