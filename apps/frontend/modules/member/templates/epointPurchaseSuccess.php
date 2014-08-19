@@ -264,7 +264,7 @@ $(function() {
                         } else {
                             $disabledPaP = "disabled='disabled'";
                         }
-                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 286347) {
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 286347 || $distDB->getDistributorId() == 273302) {
 
                         } else {
                             $disabledIps = "disabled='disabled'";
