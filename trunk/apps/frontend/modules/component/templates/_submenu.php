@@ -158,7 +158,7 @@ function blink(selector) {
         // gj1092, ko4390, korean001, Nextbill1, Openman   - leader group
         // alexsim
         if ($distDB->getDistributorId() == 142
-            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 454
+            || $distDB->getDistributorId() == 454
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255607
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 257700
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255709
