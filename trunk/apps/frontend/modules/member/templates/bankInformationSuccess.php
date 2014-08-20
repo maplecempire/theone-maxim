@@ -147,18 +147,16 @@
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Phone Number') ?></td>
-                    <td class="value">+44 (0)207 824 5210</td>
+                    <td class="value">+1 678-264-2350</td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td valign="top"><?php echo __('Beneficiary Address') ?></td>
-                    <td class="value">Office 618,
-                    <br>52 Grosvenor Gardens
-                    <br>London
-                    <br>SW1W 0AU
-                    <br>United Kingdom</td>
+                    <td class="value">820 Marshview Close
+                        <br>Roswell, GA 30076-3285
+                        <br>USA</td>
                     <td>&nbsp;</td>
                 </tr>
                 </tbody>
