@@ -259,12 +259,12 @@ $(function() {
                         } else {
                             $disabled = "disabled='disabled'";
                         }
-                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 135 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 135) {
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 135 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 135 || $distDB->getDistributorId() == 273302 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 256205) {
 
                         } else {
                             $disabledPaP = "disabled='disabled'";
                         }
-                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 286347 || $distDB->getDistributorId() == 273302 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 256205) {
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 286347) {
 
                         } else {
                             $disabledIps = "disabled='disabled'";
