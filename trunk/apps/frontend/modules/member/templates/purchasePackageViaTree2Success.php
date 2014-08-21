@@ -125,11 +125,12 @@ $(function() {
                 waiting();
                 $.ajax({
                     type : 'POST',
-                    url : "/member/verifySponsorId",
+                    url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
                     dataType : 'json',
                     cache: false,
                     data: {
                         sponsorId : $('#sponsorId').val()
+                        , placementDistCode : $('#uplineDistCode').val()
                     },
                     success : function(data) {
                         waiting();
@@ -175,12 +176,12 @@ function verifySponsorId() {
     waiting();
     $.ajax({
         type : 'POST',
-        url : "/member/verifyActiveSponsorId",
+        url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
         dataType : 'json',
         cache: false,
         data: {
             sponsorId : $('#sponsorId').val()
-            , verifySameGroup : "Y"
+            , placementDistCode : $('#uplineDistCode').val()
         },
         success : function(data) {
             if (data == null || data == "") {

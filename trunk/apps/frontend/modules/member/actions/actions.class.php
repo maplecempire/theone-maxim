@@ -2184,6 +2184,10 @@ class memberActions extends sfActions
                 $amount = $dispAmount;
                 $curtype = "156";
                 $lang = "En";
+
+                if ($this->getUser()->getCulture() == 'cn') {
+                    $lang= "Sc";
+                }
                 //$paytype = "23"; // testing
                 $paytype = "40"; // production
                 $orderdate = date("Ymd");
@@ -3702,6 +3706,16 @@ class memberActions extends sfActions
                             }
                         }
                     }
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistDB->getDistributorCode());
+                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$mlm_distributor->getUplineDistId()."|%", Criteria::LIKE);
+                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                    $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
+                    if (!$existPlacementUser) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allowed to do placement on different referrer group"));
+                        return $this->redirect('/member/memberRegistration');
+                    }
+
                     //var_dump("result:::".$uplineDistId);
                     //var_dump($uplineDistDB);
                     //exit();
@@ -5055,6 +5069,43 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         }
         return $fcode;
+    }
+
+    public function executeVerifyPlacementUnderSameSponsorGroupBySponsorId()
+    {
+        $sponsorId = $this->getRequestParameter('sponsorId');
+        $placementDistCode = $this->getRequestParameter('placementDistCode');
+
+        $arr = "";
+        if ($sponsorId != "" && $placementDistCode != "") {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $existUser = MlmDistributorPeer::doSelectOne($c);
+            //var_dump($sponsorId);
+            //var_dump($placementDistCode);
+            if ($existUser) {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
+                //var_dump($existUser->getDistributorId());
+                //var_dump($existPlacementUser);
+                if ($existPlacementUser) {
+                    $arr = array(
+                        'userId' => $existUser->getDistributorId(),
+                        'userName' => $existUser->getDistributorCode(),
+                        'fullname' => $existUser->getFullName(),
+                        'nickname' => $existUser->getFullName()
+                    );
+                }
+            }
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
     }
 
     public function executeVerifyActiveSponsorId()

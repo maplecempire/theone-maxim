@@ -742,7 +742,7 @@
             <trans-unit><source>Auto Placement</source><target>自动按置</target></trans-unit>
             <trans-unit><source>Account Login Details</source><target>户口登录配置</target></trans-unit>
             <trans-unit><source>Search By Username</source><target>搜索用户名</target></trans-unit>
-            <trans-unit><source>Genealogy for your Member ID</source><target>您的团队架购图户口</target></trans-unit>
+            <trans-unit><source>Genealogy for your Member ID</source><target>您的团队架构图户口</target></trans-unit>
             <trans-unit><source>I understand that as an OfxTrader customer, it is my responsibility to review all necessary information about currency trading and the OfxTrader</source><target>我同意作为OfxTrader客户的责任是检讨有关外汇交易的所有必要的信息和OfxTrader的</target></trans-unit>
             <trans-unit><source>Existing Users Login</source><target>会员登入</target></trans-unit>
             <trans-unit><source>Great day, Trader!</source><target>您好！</target></trans-unit>
@@ -980,6 +980,7 @@
             <trans-unit><source>RENEWAL NOTICE</source><target>合同续签通知</target></trans-unit>
             <trans-unit><source>Dear International Member</source><target>亲爱的马胜会员</target></trans-unit>
             <trans-unit><source>Payment Asia</source><target>中國網銀支付系統</target></trans-unit>
+            <trans-unit><source>You are not allowed to do placement on different referrer group</source><target>你是不允许做放置在不同的经营组织图</target></trans-unit>
         </body>
     </file>
 </xliff>

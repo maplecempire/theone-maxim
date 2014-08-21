@@ -126,12 +126,12 @@ $(function() {
                             waiting();
                             $.ajax({
                                 type : 'POST',
-                                url : "/member/verifyActivePlacementDistId",
+                                url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
                                 dataType : 'json',
                                 cache: false,
                                 data: {
                                     sponsorId : $('#sponsorId').val()
-                                    , placementDistId : $('#placementDistId').val()
+                                    , placementDistCode : $('#placementDistId').val()
                                 },
                                 success : function(data) {
                                     if (data == null || data == "") {
@@ -218,12 +218,12 @@ function verifyPlacementDistId() {
     waiting();
     $.ajax({
         type : 'POST',
-        url : "/member/verifyActivePlacementDistId",
+        url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
         dataType : 'json',
         cache: false,
         data: {
             sponsorId : $('#sponsorId').val()
-            , placementDistId : $('#placementDistId').val()
+            , placementDistCode : $('#placementDistId').val()
         },
         success : function(data) {
             if (data == null || data == "") {
