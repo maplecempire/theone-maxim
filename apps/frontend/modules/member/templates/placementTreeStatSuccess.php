@@ -353,6 +353,15 @@ function reassignDatagridEventAttr(){
             <td><?php echo number_format($anode[0]['_today_right'],0) ?></td>
         </tr>
         <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo number_format($anode[0]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0) ?></td>
+            <td><?php echo number_format($anode[0]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0) ?></td>
+        </tr>
+        <tr>
             <td class="cf" colspan="2">
                 <?php echo __('Carry Forward'); ?>
             </td>
@@ -485,6 +494,15 @@ function reassignDatagridEventAttr(){
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_today_right'],0); } ?></td>
         </tr>
         <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[1]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+        </tr>
+        <tr>
             <td class="cf" colspan="2">
                 <?php echo __('Carry Forward'); ?>
             </td>
@@ -607,6 +625,15 @@ function reassignDatagridEventAttr(){
         <tr>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_left'],0); } ?></td>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_right'],0); } ?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[2]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -747,6 +774,15 @@ function reassignDatagridEventAttr(){
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_today_right'],0); } ?></td>
         </tr>
         <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[3]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+        </tr>
+        <tr>
             <td class="cf" colspan="2">
                 <?php echo __('Carry Forward'); ?>
             </td>
@@ -870,6 +906,15 @@ function reassignDatagridEventAttr(){
         <tr>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_left'],0); } ?></td>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_right'],0); } ?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[4]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
@@ -997,6 +1042,15 @@ function reassignDatagridEventAttr(){
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_today_right'],0); } ?></td>
         </tr>
         <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[5]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+        </tr>
+        <tr>
             <td class="cf" colspan="2">
                 <?php echo __('Carry Forward'); ?>
             </td>
@@ -1120,6 +1174,15 @@ function reassignDatagridEventAttr(){
         <tr>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_left'],0); } ?></td>
             <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_right'],0); } ?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo __('Today Group BV (USD)'); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_left'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
+            <td><?php if ($restricted == true) { echo "***"; } else { echo number_format($anode[6]['_today_right'] / Globals::PAIRING_POINT_BV * 1,0); } ?></td>
         </tr>
         <tr>
             <td class="cf" colspan="2">
