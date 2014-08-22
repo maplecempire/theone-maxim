@@ -126,12 +126,12 @@ $(function() {
                             waiting();
                             $.ajax({
                                 type : 'POST',
-                                url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
+                                url : "/member/verifyActivePlacementDistId",
                                 dataType : 'json',
                                 cache: false,
                                 data: {
                                     sponsorId : $('#sponsorId').val()
-                                    , placementDistCode : $('#placementDistId').val()
+                                    , placementDistId : $('#placementDistId').val()
                                 },
                                 success : function(data) {
                                     if (data == null || data == "") {
@@ -214,7 +214,7 @@ function verifySponsorId() {
         }
     });
 }
-function verifyPlacementDistId() {
+function verifyPlacementDistId____bak() {
     waiting();
     $.ajax({
         type : 'POST',
@@ -224,6 +224,33 @@ function verifyPlacementDistId() {
         data: {
             sponsorId : $('#sponsorId').val()
             , placementDistCode : $('#placementDistId').val()
+        },
+        success : function(data) {
+            if (data == null || data == "") {
+                error("<?php echo __('Invalid Placement ID') ?>");
+                $('#placementDistId').focus();
+                $("#placementDistName").val("");
+            } else {
+                $.unblockUI();
+                $("#placementDistName").val(data.userName);
+            }
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Your login attempt was not successful. Please try again.");
+        }
+    });
+}
+
+function verifyPlacementDistId() {
+    waiting();
+    $.ajax({
+        type : 'POST',
+        url : "/member/verifyActivePlacementDistId",
+        dataType : 'json',
+        cache: false,
+        data: {
+            sponsorId : $('#sponsorId').val()
+            , placementDistId : $('#placementDistId').val()
         },
         success : function(data) {
             if (data == null || data == "") {
