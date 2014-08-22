@@ -354,7 +354,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -495,7 +495,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -628,7 +628,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -775,7 +775,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -909,7 +909,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -1043,7 +1043,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
@@ -1177,7 +1177,7 @@ function reassignDatagridEventAttr(){
         </tr>
         <tr>
             <td colspan="2">
-                <?php echo __('Today Group BV (USD)'); ?>
+                <?php echo __('Today Group Sales (USD)'); ?>
             </td>
         </tr>
         <tr>
