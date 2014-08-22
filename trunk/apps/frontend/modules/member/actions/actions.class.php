@@ -3684,36 +3684,67 @@ class memberActions extends sfActions
                             }
                         }
 
-                        while ($placementSuccessful == false) {
-                            if ($placementSuccessful == true)
-                                break;
-                            //var_dump("uplineDistId=".$uplineDistId);
+                        $c = new Criteria();
+                        $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
+                        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                        $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
+                        $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
+
+                        if ($downlineDistDB) {
+                            $uplineDistId = $downlineDistDB->getDistributorId();
+                        } else {
+                            //var_dump("====NO===".$uplineDistId);
+                            $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+
+                            //var_dump($uplineDistDB);
+                            $placementSuccessful = true;
+                        }
+
+                        if ($placementSuccessful == true) {
+
+                        } else {
                             $c = new Criteria();
-                            $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
+                            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$mlm_distributor->getUplineDistId()."|%", Criteria::LIKE);
+                            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$uplineDistId."|%", Criteria::LIKE);
+                            $c->add(MlmDistributorPeer::PLACEMENT_POSITION, null, Criteria::ISNULL);
                             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-                            $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
-                            $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
+                            $c->addAscendingOrderByColumn(MlmDistributorPeer::TREE_LEVEL);
+                            $uplineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                            if ($downlineDistDB) {
-                                $uplineDistId = $downlineDistDB->getDistributorId();
+                            if ($uplineDistDB) {
+                                /*$c = new Criteria();
+                                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistDB->getDistributorCode());
+                                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$mlm_distributor->getUplineDistId()."|%", Criteria::LIKE);
+                                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                                $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
+                                if (!$existPlacementUser) {
+                                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allowed to do placement on different referrer group"));
+                                    return $this->redirect('/member/memberRegistration');
+                                }*/
                             } else {
-                                //var_dump("====NO===".$uplineDistId);
-                                $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+                                while ($placementSuccessful == false) {
+                                    if ($placementSuccessful == true)
+                                        break;
+                                    //var_dump("uplineDistId=".$uplineDistId);
+                                    $c = new Criteria();
+                                    $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, $uplineDistId);
+                                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                                    $c->add(MlmDistributorPeer::PLACEMENT_POSITION, $uplinePosition);
+                                    $downlineDistDB = MlmDistributorPeer::doSelectOne($c);
 
-                                //var_dump($uplineDistDB);
-                                $placementSuccessful = true;
-                                break;
+                                    if ($downlineDistDB) {
+                                        $uplineDistId = $downlineDistDB->getDistributorId();
+                                    } else {
+                                        //var_dump("====NO===".$uplineDistId);
+                                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+
+                                        //var_dump($uplineDistDB);
+                                        $placementSuccessful = true;
+                                        break;
+                                    }
+                                }
                             }
                         }
-                    }
-                    $c = new Criteria();
-                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $uplineDistDB->getDistributorCode());
-                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$mlm_distributor->getUplineDistId()."|%", Criteria::LIKE);
-                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-                    $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
-                    if (!$existPlacementUser) {
-                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allowed to do placement on different referrer group"));
-                        return $this->redirect('/member/memberRegistration');
                     }
 
                     //var_dump("result:::".$uplineDistId);
