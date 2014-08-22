@@ -125,12 +125,12 @@ $(function() {
                 waiting();
                 $.ajax({
                     type : 'POST',
-                    url : "/member/verifyPlacementUnderSameSponsorGroupBySponsorId",
+                    url : "/member/verifyActiveSponsorId",
                     dataType : 'json',
                     cache: false,
                     data: {
                         sponsorId : $('#sponsorId').val()
-                        , placementDistCode : $('#uplineDistCode').val()
+                        , verifySameGroup : "Y"
                     },
                     success : function(data) {
                         waiting();
@@ -173,6 +173,33 @@ $(function() {
 });
 
 function verifySponsorId() {
+    waiting();
+    $.ajax({
+        type : 'POST',
+        url : "/member/verifyActiveSponsorId",
+        dataType : 'json',
+        cache: false,
+        data: {
+            sponsorId : $('#sponsorId').val()
+            , verifySameGroup : "Y"
+        },
+        success : function(data) {
+            if (data == null || data == "") {
+                error("<?php echo __('Invalid Referrer ID') ?>");
+                $('#sponsorId').focus();
+                $("#sponsorName").val("");
+            } else {
+                $.unblockUI();
+                $("#sponsorName").val(data.userName);
+            }
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Your login attempt was not successful. Please try again.");
+        }
+    });
+}
+
+function verifySponsorId____BAK() {
     waiting();
     $.ajax({
         type : 'POST',
