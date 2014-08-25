@@ -65,7 +65,7 @@ function blink(selector) {
     <?php } ?>
     <?php
         // maximcapital
-        if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) { ?>
+        if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 1797) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/fmc"><span><?php echo __('FMC'); ?></span></a><img src="/images/new_icon.gif">
         </li>
