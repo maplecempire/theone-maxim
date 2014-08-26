@@ -438,6 +438,7 @@ function populateDgAddPanel() {
                     <option value="WOF">WOF</option>
                     <option value="SYS">SYS</option>
                     <option value="MATURITY">MATURITY</option>
+                    <option value="BANK CHARGES">BANK CHARGES</option>
                 </select>
             </td>
         </tr>
