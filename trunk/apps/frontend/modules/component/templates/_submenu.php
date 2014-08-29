@@ -157,17 +157,18 @@ function blink(selector) {
         <?php
         // gj1092, ko4390, korean001, Nextbill1, Openman   - leader group
         // alexsim
-        if ($distDB->getDistributorId() == 142
+        /*if ($distDB->getDistributorId() == 142
             || $distDB->getDistributorId() == 454
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255607
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 257700
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 255709
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 264845
-            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 273056) { ?>
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 273056) { */
+            ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?><img src="/images/new_icon.gif"></span></a>
         </li>
-        <?php } ?>
+        <?php //} ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
 
         </li>
