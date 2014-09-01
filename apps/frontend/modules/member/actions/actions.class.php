@@ -2083,6 +2083,9 @@ class memberActions extends sfActions
             } else if ($paymentMethod == "GOZ" && $amount > 200000) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Maximum Payment RMB 200,000 per transaction"));
                 return $this->redirect('/member/epointPurchase');
+            } else if ($paymentMethod == "PaP" && $amount > 200000) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Maximum Payment RMB 200,000 per transaction"));
+                return $this->redirect('/member/epointPurchase');
             }
 
             $mlmDistEpointPurchase = new MlmDistEpointPurchase();
