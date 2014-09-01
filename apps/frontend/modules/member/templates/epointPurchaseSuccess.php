@@ -40,6 +40,9 @@ $(function() {
             if (paymentMethod == "PG" && amount > 50000) {
                 error("<?php echo __('Maximum Payment RMB 50,000 per transaction') ?>");
                 return false;
+            } else if (paymentMethod == "PaP" && amount > 200000) {
+                error("<?php echo __('Maximum Payment RMB 200,000 per transaction') ?>");
+                return false;
             }
             $("#epointAmount").val(amount);
             form.submit();
@@ -269,12 +272,13 @@ $(function() {
                         } else {
                             $disabledIps = "disabled='disabled'";
                         }
+                        $disabledIps = "";
                         ?>
                         <select name="paymentMethod" id="paymentMethod">
                             <option value="LB"><?php echo __("Bank Transfer");?></option>
                             <option value="PG" <?php echo $disabledIps;?>><?php echo __("IPS"); ?> 环迅支付</option>
                             <option value="GOZ" <?php echo $disabled;?>><?php echo __("Online Payment Gateway");?></option>
-                            <option value="PaP" <?php echo $disabledPaP;?>><?php echo __("Payment Asia");?></option>
+<!--                            <option value="PaP" --><?php //echo $disabledPaP;?><!-->--><?php //echo __("Payment Asia");?><!--</option>-->
                         </select>
                     </td>
                     <td>&nbsp;</td>
