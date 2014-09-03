@@ -196,6 +196,10 @@
                                 $disable = "";
                                 $disableMoney = "";
                             }
+                            // special case (anna)
+                            if ($distributorDB->getDistributorId() ==  168) {
+                                $disable = "";
+                            }
                             if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>"><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
