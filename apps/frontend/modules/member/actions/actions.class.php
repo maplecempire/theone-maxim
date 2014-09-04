@@ -2616,6 +2616,7 @@ class memberActions extends sfActions
         $mlm_distributor->setBankSwiftCode($this->getRequestParameter('bankSwiftCode'));
         $mlm_distributor->setVisaDebitCard($this->getRequestParameter('visaDebitCard'));
         $mlm_distributor->setEzyCashCard($this->getRequestParameter('ezyCashCard'));
+        $mlm_distributor->setIaccount($this->getRequestParameter('iaccount'));
         $mlm_distributor->setBankCountry($this->getRequestParameter('bankCountry'));
         $mlm_distributor->setBankAccountCurrency($this->getRequestParameter('bankAccountCurrency'));
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));

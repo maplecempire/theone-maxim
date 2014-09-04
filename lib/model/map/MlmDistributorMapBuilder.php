@@ -88,6 +88,8 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('EZY_CASH_CARD', 'EzyCashCard', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('IACCOUNT', 'Iaccount', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addColumn('TREE_LEVEL', 'TreeLevel', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('TREE_STRUCTURE', 'TreeStructure', 'string', CreoleTypes::LONGVARCHAR, false, null);
