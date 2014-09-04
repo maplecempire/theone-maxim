@@ -49,7 +49,7 @@ class bmwX6ChallengeActions extends sfActions
                             AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."' group by upline_dist_id
                 ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
-                    HAVING SUB_TOTAL >= 100000
+                    HAVING SUB_TOTAL >= 3000000
                         ORDER BY 3 DESC ";
 
         $connection = Propel::getConnection();

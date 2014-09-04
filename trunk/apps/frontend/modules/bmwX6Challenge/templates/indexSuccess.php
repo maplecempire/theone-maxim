@@ -228,8 +228,8 @@ $(function() {
                                         }
                                         echo "</tr>";
 
-                                        if ($idx > 10)
-                                            break;
+                                        //if ($idx > 10)
+                                        //    break;
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='2'>" . __('No data available in table') . "</td></tr>";
