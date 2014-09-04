@@ -192,7 +192,7 @@
                                 $disableMoney = "";
                             }
                             // special case (anna)
-                            if ($distributorDB->getDistributorId() ==  168) {
+                            if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219) {
                                 $disable = "";
                             }
                             if ($distributorDB->getVisaDebitCard() != "") { ?>
