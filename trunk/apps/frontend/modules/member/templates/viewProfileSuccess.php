@@ -800,6 +800,16 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('i-Account') ?></td>
+                    <td>
+                        <input name="iaccount" type="text" id="iaccount" size="30" maxlength="16"
+                                                         value="<?php echo $distDB->getIaccount() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php /*echo __('EZY Account ID') */?></td>

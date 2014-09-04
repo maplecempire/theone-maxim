@@ -203,6 +203,10 @@
                             <?php } ?>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
                             <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC; ?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
+
+                            <?php if ($distributorDB->getIaccount() != "") { ?>
+                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
+                            <?php } ?>
                         </select>
                     </td>
                     <td>&nbsp;</td>
