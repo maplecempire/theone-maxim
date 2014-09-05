@@ -291,9 +291,10 @@ class marketingListActions extends sfActions
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
         //var_dump($sql);
         /******   total filtered records  *******/
-
+        $toQuery = false;
         if ($this->getRequestParameter('filterDistId') != "") {
             $sWhere .= " AND account.dist_id = " . $this->getRequestParameter('filterDistId');
+            $toQuery = true;
         }
         if ($this->getRequestParameter('filterAccountType') != "") {
             $sWhere .= " AND account.account_type like '%" . mysql_real_escape_string($this->getRequestParameter('filterAccountType')). "%'";
@@ -323,32 +324,42 @@ class marketingListActions extends sfActions
         $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
 
         $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
-        $connection = Propel::getConnection();
-        $statement = $connection->prepareStatement($query);
-        $resultset = $statement->executeQuery();
-        //var_dump($query);
-        while ($resultset->next())
-        {
-            $resultArr = $resultset->getRow();
 
-            $arr[] = array(
-                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
-                $resultArr['account_type'] == null ? "" : $resultArr['account_type'],
-                $resultArr['transaction_type'] == null ? "" : $resultArr['transaction_type'],
-                $resultArr['credit'] == null ? "" : $resultArr['credit'],
-                $resultArr['debit'] == null ? "" : $resultArr['debit'],
-                $resultArr['balance'] == null ? "" : $resultArr['balance'],
-                $resultArr['username'] == null ? "" : $resultArr['username']
+        if ($toQuery) {
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+            //var_dump($query);
+            while ($resultset->next())
+            {
+                $resultArr = $resultset->getRow();
+
+                $arr[] = array(
+                    $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                    $resultArr['account_type'] == null ? "" : $resultArr['account_type'],
+                    $resultArr['transaction_type'] == null ? "" : $resultArr['transaction_type'],
+                    $resultArr['credit'] == null ? "" : $resultArr['credit'],
+                    $resultArr['debit'] == null ? "" : $resultArr['debit'],
+                    $resultArr['balance'] == null ? "" : $resultArr['balance'],
+                    $resultArr['username'] == null ? "" : $resultArr['username']
                 , $resultArr['remark'] == null ? "" : $resultArr['remark']
                 , $resultArr['internal_remark'] == null ? "" : $resultArr['internal_remark']
+                );
+            }
+            $output = array(
+                "sEcho" => intval($sEcho),
+                "iTotalRecords" => $totalRecords,
+                "iTotalDisplayRecords" => $totalFilteredRecords,
+                "aaData" => $arr
+            );
+        } else {
+            $output = array(
+                "sEcho" => intval($sEcho),
+                "iTotalRecords" => $totalRecords,
+                "iTotalDisplayRecords" => $totalFilteredRecords,
+                "aaData" => array()
             );
         }
-        $output = array(
-            "sEcho" => intval($sEcho),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalFilteredRecords,
-            "aaData" => $arr
-        );
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;
@@ -427,7 +438,8 @@ class marketingListActions extends sfActions
     }
     public function executeRpList()
     {
-        $sColumns = $this->getRequestParameter('sColumns'). ", rp.TOTAL_DEBIT ";
+        //$sColumns = $this->getRequestParameter('sColumns'). ", rp.TOTAL_DEBIT ";
+        $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
         //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
 
@@ -468,6 +480,11 @@ class marketingListActions extends sfActions
                             ) rpUsed ON rpUsed.dist_id = transferLedger.dist_id
                     where transferLedger.account_type = '".Globals::ACCOUNT_TYPE_RP."' group by transferLedger.dist_id
             ) rp ON rp.dist_id = dist.distributor_id
+        ";
+
+        $sql = " FROM mlm_distributor dist
+            LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
+            LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
         ";
 
         if ($this->getRequestParameter('filterMt4Userame') != "") {
@@ -559,14 +576,15 @@ class marketingListActions extends sfActions
                 }
             }
 
-            $debitAccount = $resultArr['TOTAL_DEBIT'] == null ? 0 : $resultArr['TOTAL_DEBIT'];
-            $rollingPoint = $resultArr['TOTAL_ROLLING_POINT'] - $debitAccount;
+//            $debitAccount = $resultArr['TOTAL_DEBIT'] == null ? 0 : $resultArr['TOTAL_DEBIT'];
+//            $rollingPoint = $resultArr['TOTAL_ROLLING_POINT'] - $debitAccount;
 
             $arr[] = array(
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                number_format($rollingPoint, 2),
+//                number_format($rollingPoint, 2),
+                $resultArr['rank_code'] == null ? "" : $resultArr['rank_code'],
                 $resultArr['rank_code'] == null ? "" : $resultArr['rank_code'],
                 $resultArr['userpassword'] == null ? "" : $resultArr['userpassword'],
                 $resultArr['userpassword2'] == null ? "" : $resultArr['userpassword2'],
