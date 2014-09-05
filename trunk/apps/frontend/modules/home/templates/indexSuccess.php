@@ -990,6 +990,44 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+            <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='36'>Server Maintenance</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "5 September 2014";
+                ?>
+            </div>
+
+            <div id="page_36" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+                            <br>亲爱的领导人与会员们:
+                            <br>
+                            <br>Please be informed that we will doing maintenance on our server between the hours of 0000hrs to 0600hrs GMT ON Saturday September 6th 2014.
+                            <br>公司将于2014.9.6日周六凌晨12:00至早上6:00进行系统及服务器的维护，敬请留意。
+                            <br>
+                            <br>We apologize for any inconvenience cause and assure you that we are constantly looking into improving our support services to achieve service excellence for you.
+                            <br>为此给大家带来的不便，我们深表抱歉。公司一直竭尽全力为大家提供更好的服务。
+                            <br>
+                            <br>Thank you.
+                            <br>谢谢
+                            <br>
+                            <br>IT & Support
+                            <br>技术支持部
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
         <?php if ($culture == "cn" || $culture == "en") {?>
         <div class="page">
             <div class="poptitle">
