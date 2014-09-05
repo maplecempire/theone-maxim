@@ -261,6 +261,7 @@ abstract class Globals {
     const PAIRING_LEDGER_REGISTER = 'REGISTER';
     const PAIRING_LEDGER_FLUSH = 'FLUSH';
     const PAIRING_LEDGER_PAIRED = 'PAIRED';
+    const PAIRING_LEDGER_CLOSING = 'CLOSING';
 
     /*******************************/
     /*****    Placement  ******/
