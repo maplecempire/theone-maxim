@@ -17,6 +17,9 @@ class businessActions extends sfActions
         $this->executeDoArchivePairing();
         $this->executeDoArchivePairing();
         $this->executeDoArchivePairing();
+        $this->executeDoArchivePairing();
+        $this->executeDoArchivePairing();
+        $this->executeDoArchivePairing();
 
         return sfView::HEADER_ONLY;
     }
