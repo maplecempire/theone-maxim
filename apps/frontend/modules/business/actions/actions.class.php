@@ -25,7 +25,7 @@ class businessActions extends sfActions
     {
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
-        $c->setLimit(5000);
+        $c->setLimit(1000);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = 0;
