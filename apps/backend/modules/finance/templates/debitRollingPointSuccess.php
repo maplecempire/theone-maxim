@@ -74,10 +74,13 @@ $(function(){
 		  				  return "<a id='transferEpointLink' href='#' title='Debit Rolling Point'>Debit RP</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
-		              { "sName" : "rp.TOTAL_ROLLING_POINT",  "bSortable": false, "fnRender": function ( oObj ) {
+		              /*{ "sName" : "rp.TOTAL_ROLLING_POINT",  "bSortable": false, "fnRender": function ( oObj ) {
                             return "<a id='historyListLink' href='#' title='History List'>" + oObj.aData[3] + "</a>";
+                      }},*/
+		              { "sName" : "dist.rank_code",  "bVisible": false},
+		              { "sName" : "dist.rank_code",  "bSortable": false, "fnRender": function ( oObj ) {
+                            return "<a id='historyListLink' href='#' title='History List'>" + oObj.aData[4] + "</a>";
                       }},
-		              { "sName" : "dist.rank_code",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
