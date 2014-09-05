@@ -32,11 +32,16 @@ class businessActions extends sfActions
         foreach ($distDBs as $distDB) {
             $idx++;
 
-            if ($idx > 10) {
+            /*if ($distDB->getDistributorId() == 1) {
+                continue;
+            }*/
+            /*if ($idx > 10) {
                 break;
-            }
+            }*/
             $totalLeft = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
             $totalRight = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+            $totalLeftActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
+            $totalRightActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             $totalLeftPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
             $totalRightPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
 
@@ -44,15 +49,15 @@ class businessActions extends sfActions
             try {
                 $con->begin();
 
-                print_r("<br>".$distDB->getDistributorId());
+                print_r("<br>".$distDB->getDistributorId().":".$totalLeft.":".$totalRight.":".$totalLeftPaired.":".$totalRightPaired);
                 $this->removePairing($distDB->getDistributorId());
 
                 $sponsorDistPairingledger = new MlmDistPairingLedger();
                 $sponsorDistPairingledger->setDistId($distDB->getDistributorId());
                 $sponsorDistPairingledger->setLeftRight(Globals::PLACEMENT_LEFT);
-                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_CLOSING);
+                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                 $sponsorDistPairingledger->setCredit($totalLeft);
-                $sponsorDistPairingledger->setCreditActual($totalLeft);
+                $sponsorDistPairingledger->setCreditActual($totalLeftActual);
                 $sponsorDistPairingledger->setDebit(0);
                 $sponsorDistPairingledger->setBalance($totalLeft);
                 $sponsorDistPairingledger->setRemark("CLOSING 2014-09-06");
@@ -63,9 +68,9 @@ class businessActions extends sfActions
                 $sponsorDistPairingledger = new MlmDistPairingLedger();
                 $sponsorDistPairingledger->setDistId($distDB->getDistributorId());
                 $sponsorDistPairingledger->setLeftRight(Globals::PLACEMENT_RIGHT);
-                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_CLOSING);
+                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                 $sponsorDistPairingledger->setCredit($totalRight);
-                $sponsorDistPairingledger->setCreditActual($totalRight);
+                $sponsorDistPairingledger->setCreditActual($totalRightActual);
                 $sponsorDistPairingledger->setDebit(0);
                 $sponsorDistPairingledger->setBalance($totalRight);
                 $sponsorDistPairingledger->setRemark("CLOSING 2014-09-06");
@@ -1266,6 +1271,29 @@ class businessActions extends sfActions
     function getPairingSumCredit($distributorId, $position, $date)
     {
         $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+                 . " AND left_right = '" . $position . "'";
+
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getPairingSumCreditActual($distributorId, $position, $date)
+    {
+        $query = "SELECT SUM(credit_actual) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
