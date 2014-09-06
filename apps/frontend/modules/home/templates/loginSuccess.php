@@ -359,20 +359,188 @@
     <!--<div class="content_line"></div>-->
     <br class="clear">
 
-    <br>Dear IMs and Partners,
-    <br>亲爱的领导人与会员们:
-    <br>
-    <br>Please be informed that we will doing maintenance on our server between the hours of 0000hrs to 0600hrs GMT ON Sunday September 7th 2014.
-    <br>公司将于2014.9.7日周日凌晨12:00至早上6:00进行系统及服务器的维护，敬请留意。
-    <br>
-    <br>We apologize for any inconvenience cause and assure you that we are constantly looking into improving our support services to achieve service excellence for you.
-    <br>为此给大家带来的不便，我们深表抱歉。公司一直竭尽全力为大家提供更好的服务。
-    <br>
-    <br>Thank you.
-    <br>谢谢
-    <br>
-    <br>IT & Support
-    <br>技术支持部
+    <table cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="1%">
+                    <col width="99%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="3">&nbsp;</td>
+                    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Member Login') ?></span></td>
+                    <td rowspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                <td>
+                <table cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td class="tbl_content_top" colspan="3">
+                        <table cellspacing="0" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl_content_top">
+                                    <form action="/home/doLogin" id="loginForm" method="post">
+                                    <table border="0" width="256" cellspacing="0" cellpadding="0" class="tbl_login_grey_bg">
+                                        <colgroup>
+                                            <col width="1%">
+                                            <col width="30%">
+                                            <col width="61%">
+                                            <col width="2%">
+                                            <col width="1%">
+                                        </colgroup>
+                                        <tbody>
+                                        <tr>
+                                            <th class="tbl_header_left"><img border="0" src="/images/maxim/hdr-gry-left.gif"></th>
+                                            <th class="tbl_content_left" colspan="3"><?php echo __('Secure login') ?> &nbsp;<img src="/images/maxim/ico_secure_sml.gif"></th>
+                                            <th class="tbl_header_right"><img border="0" src="/images/maxim/hdr-gry-right.gif"></th>
+                                        </tr>
+
+                                        <tr height="20">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr height="24">
+                                            <td></td>
+                                            <td class="txt_highlight"><?php echo __('Username') ?></td>
+                                            <td colspan="2"><input type="text" autocomplete="off" size="38" id="username" name="username"></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr height="24">
+                                            <td></td>
+                                            <td class="txt_highlight"><?php echo __('Password') ?></td>
+                                            <td colspan="2"><input type="password" autocomplete="off" size="38" id="userpassword" name="userpassword"></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr height="24">
+                                            <td></td>
+                                            <td class="txt_highlight"></td>
+                                            <td colspan="2">
+                                                <?php
+                                                if ($sf_user->getAttribute(Globals::LOGIN_RETRY, 0) >= 3) {
+                                                    require_once('recaptchalib.php');
+                                                    $publickey = "6LfhJtYSAAAAAAMifW42AIEE0qnNgOEFIDB0sqwt"; // you got this from the signup page
+                                                    echo recaptcha_get_html($publickey);
+                                                }
+                                                ?>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr height="30">
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="2"><img class="arwList" src="/images/maxim/arrow_blue_single_tab.gif">
+                                                <a href="<?php echo url_for("/home/forgetPassword") ?>"><?php echo __('Forgot username') ?> / <?php echo __('password') ?></a></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr height="36">
+                                            <td align="center" colspan="5">
+                                                <span class="loginbutton">
+                                                    <input type="submit" value="<?php echo __('Login') ?>" name="Login" id="submitLink" style="width: 80px; background-color: #e5eef5">
+                                                </span>
+                                                &nbsp;&nbsp;
+                                                <!--<a href="<?php /*echo url_for("/member/register") */?>"><?php /*echo __('Register Now') */?></a>-->
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+                </table>
+
+<!--                    ####################################################            -->
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+
+            <tr>
+                <td class="tbl_content_top">
+                    <table class="tbl_info_grey_bg" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
+                            <th colspan="2"><?php echo __('New to Maxim Trader') ?>?</th>
+                            <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tbl_info_grey_bg_overall" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="1%">
+                            <col width="4%">
+                            <col width="94%">
+                            <col width="1%">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="tbl_content_top"><br>
+                                <img src="/images/maxim/arrow_blue_single_tab.gif">
+                            </td>
+                            <td><br>
+                                <a href="<?php echo url_for("/member/register")?>"><b><?php echo __('Self Registration') ?></b></a> <span class="txt_new"><?php echo __("IT'S EASY!!") ?></span>
+                                <p>
+                                    <a href="<?php echo url_for("/member/register")?>">
+                                        <?php echo __('Click here') ?></a> <?php echo __('to instantly register as Maxim Trader Member') ?>. </p>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td><br></td>
+                            <td><br></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="tbl_notice_end">
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+<!--                    ####################################################            -->
+                </td>
+                </tr>
+                </tbody>
+                </table>
+
     <div class="info_bottom_bg"></div>
 
     <!-- announcement popup   -->
