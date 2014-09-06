@@ -273,6 +273,7 @@ $(function() {
                             $disabledIps = "disabled='disabled'";
                         }
                         $disabledIps = "";
+                        $disabledPaP = "";
                         ?>
                         <select name="paymentMethod" id="paymentMethod">
                             <option value="LB"><?php echo __("Bank Transfer");?></option>
