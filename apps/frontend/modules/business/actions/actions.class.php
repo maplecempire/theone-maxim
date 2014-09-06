@@ -27,6 +27,7 @@ class businessActions extends sfActions
     public function executeDoArchivePairing()
     {
         $c = new Criteria();
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 161);
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
         if ($this->getRequestParameter('q')) {
             $c->add(MlmDistributorPeer::FROM_ABFX, $this->getRequestParameter('q'));
@@ -44,19 +45,20 @@ class businessActions extends sfActions
             /*if ($idx > 10) {
                 break;
             }*/
-            $totalLeft = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-            $totalRight = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-            $totalLeftActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-            $totalRightActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-            $totalLeftPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
-            $totalRightPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+            $queryDate = "2014-09-05";
+            $totalLeft = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRight = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
+            $totalLeftActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRightActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
+            $totalLeftPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRightPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
 
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
             try {
                 $con->begin();
 
                 print_r("<br>".$distDB->getDistributorId().":".$totalLeft.":".$totalRight.":".$totalLeftPaired.":".$totalRightPaired);
-                $this->removePairing($distDB->getDistributorId());
+                $this->removePairing($distDB->getDistributorId(), $queryDate);
 
                 $sponsorDistPairingledger = new MlmDistPairingLedger();
                 $sponsorDistPairingledger->setDistId($distDB->getDistributorId());
@@ -1276,7 +1278,7 @@ class businessActions extends sfActions
 
     function getPairingSumCredit($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -1299,7 +1301,7 @@ class businessActions extends sfActions
 
     function getPairingSumCreditActual($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit_actual) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit_actual) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -1322,7 +1324,7 @@ class businessActions extends sfActions
 
     function getPairingSumDebit($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -1342,9 +1344,9 @@ class businessActions extends sfActions
         }
         return 0;
     }
-    function removePairing($distributorId)
+    function removePairing($distributorId, $queryDate)
     {
-        $query = "delete from mlm_dist_pairing_ledger where dist_id = ".$distributorId;
+        $query = "delete from mlm_dist_pairing_ledger where dist_id = ".$distributorId . " and created_on <= '".$queryDate . "23:59:59'";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
