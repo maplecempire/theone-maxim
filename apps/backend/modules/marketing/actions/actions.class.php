@@ -13,9 +13,9 @@ class marketingActions extends sfActions
     public function executeDoUpdatePackagePurchaseViaAuto()
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
-        $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
-//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
+//        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+//        $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
         $c->setLimit(30);
         $distributorDBs = MlmDistributorPeer::doSelect($c);
 
@@ -2305,97 +2305,112 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
     public function executeManipulatePips()
     {
-        $targetFolder = '/uploads/pips'; // Relative to the root
+        //if ($this->getRequestParameter('file_upload') != "") {
+            $uploadedFilename = "maxim-pip-bonus-aug14.csv";
+            $tradingMonth = "8";
+            $tradingYear = "2014";
+            //$ext = explode(".", $this->getRequest()->getFileName('file_upload'));
+            //$extensionName = $ext[count($ext) - 1];
 
-        if (!empty($_FILES)) {
-            $tempFile = $_FILES['Filedata']['tmp_name'];
-            $targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;
-            $targetFile = rtrim($targetPath, '/') . '/' . $_FILES['Filedata']['name'];
+            //$this->getRequest()->moveFile('file_upload', sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename);
 
-            // Validate the file type
-            //$fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // File extensions
-            $fileTypes = array('csv'); // File extensions
-            $fileParts = pathinfo($_FILES['Filedata']['name']);
+            $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename;
 
-            if (in_array($fileParts['extension'], $fileTypes)) {
-                move_uploaded_file($tempFile, $targetFile);
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("PIPS");
+            $mlm_file_download->setFileSrc($physicalDirectory);
+            $mlm_file_download->setFileName($uploadedFilename);
+            $mlm_file_download->setContentType("application/csv");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+            /* **********************************************
+             *      Manipulate PIPS
+             * ***********************************************/
+            $file_handle = fopen($physicalDirectory, "rb");
 
-                $mlm_file_download = new MlmFileDownload();
-                $mlm_file_download->setFileType("PIPS");
-                $mlm_file_download->setFileSrc($targetFile);
-                $mlm_file_download->setFileName($_FILES['Filedata']['name']);
-                $mlm_file_download->setContentType("application/csv");
-                $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
-                $mlm_file_download->setRemarks("");
-                $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_file_download->save();
+            while (!feof($file_handle)) {
+                $line_of_text = fgets($file_handle);
+                $parts = explode('=', $line_of_text);
 
-                /*$mlm_pip_csv = new MlmPipCsv();
+                $string = $parts[0] . $parts[1];
+                $arr = explode(';', $string);
+
+                $status = Globals::STATUS_PIPS_CSV_ACTIVE;
+                $remarks = "";
+                $mlm_pip_csv = new MlmPipCsv();
                 $mlm_pip_csv->setFileId($mlm_file_download->getFileId());
-                $mlm_pip_csv->setPipsString("test");
-                $mlm_pip_csv->setStatusCode("active");
-                $mlm_pip_csv->setRemarks("test");
-                $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_pip_csv->save();*/
+                $mlm_pip_csv->setPipsString($string);
 
-                /* **********************************************
-                 *      Manipulate PIPS
-                 * ***********************************************/
-                $file_handle = fopen($targetFile, "rb");
+                if (count($arr) == 13) {
+                    if (is_numeric($arr[0])) {
+                        $idx = 0;
+                        $mlm_pip_csv->setMonthTraded($tradingMonth);
+                        $mlm_pip_csv->setYearTraded($tradingYear);
+                        $mlm_pip_csv->setLoginId($arr[$idx++]);
+                        $mlm_pip_csv->setLoginName($arr[$idx++]);
+                        $mlm_pip_csv->setDeposit($arr[$idx++]);
+                        $mlm_pip_csv->setWithdraw($arr[$idx++]);
+                        $mlm_pip_csv->setInOut($arr[$idx++]);
+                        $mlm_pip_csv->setCredit($arr[$idx++]);
+                        $mlm_pip_csv->setVolume($arr[$idx++]);
+                        $mlm_pip_csv->setCommission($arr[$idx++]);
+                        $mlm_pip_csv->setTaxes($arr[$idx++]);
+                        $mlm_pip_csv->setAgent($arr[$idx++]);
+                        $mlm_pip_csv->setStorage($arr[$idx++]);
+                        $mlm_pip_csv->setProfit($arr[$idx++]);
+                        $mlm_pip_csv->setLastBalance($arr[$idx++]);
+                        $mlm_pip_csv->setStatusCode($status);
+                        $mlm_pip_csv->setRemarks($remarks);
+                        $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->save();
+                        /* ++++++++++++++++++++++++++++++++++++++++++++++
+                       *      Calculate Pips
+                       * +++++++++++++++++++++++++++++++++++++++++++++++*/
+                        $totalVolume = $mlm_pip_csv->getVolume();
+                        $mt4Id = $mlm_pip_csv->getLoginId();
 
-                while (!feof($file_handle)) {
-                    $line_of_text = fgets($file_handle);
-                    $parts = explode('=', $line_of_text);
+                        $c = new Criteria();
+                        $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
+                        $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
 
-                    $string = $parts[0] . $parts[1];
-                    $arr = explode(';', $string);
+                        if ($mlm_dist_mt4) {
 
-                    $status = "ACTIVE";
-                    $remarks = "";
-                    $mlm_pip_csv = new MlmPipCsv();
-                    $mlm_pip_csv->setFileId($mlm_file_download->getFileId());
-                    $mlm_pip_csv->setPipsString($string);
-
-                    if (count($arr) == 13) {
-                        if (is_numeric($arr[0])) {
-                            $idx = 0;
-                            $mlm_pip_csv->setLoginId($arr[$idx++]);
-                            $mlm_pip_csv->setLoginName($arr[$idx++]);
-                            $mlm_pip_csv->setDeposit($arr[$idx++]);
-                            $mlm_pip_csv->setWithdraw($arr[$idx++]);
-                            $mlm_pip_csv->setInOut($arr[$idx++]);
-                            $mlm_pip_csv->setCredit($arr[$idx++]);
-                            $mlm_pip_csv->setVolume($arr[$idx++]);
-                            $mlm_pip_csv->setCommission($arr[$idx++]);
-                            $mlm_pip_csv->setTaxes($arr[$idx++]);
-                            $mlm_pip_csv->setAgent($arr[$idx++]);
-                            $mlm_pip_csv->setStorage($arr[$idx++]);
-                            $mlm_pip_csv->setProfit($arr[$idx++]);
-                            $mlm_pip_csv->setLastBalance($arr[$idx++]);
                         } else {
-                            $status = "ERROR";
-                            $remarks = "FIRST ELEMENT NOT NUMERIC";
+                            $mlm_pip_csv->setStatusCode(Globals::STATUS_PIPS_CSV_ERROR);
+                            $mlm_pip_csv->setRemarks("Invalid MT4 ID");
+                            $mlm_pip_csv->save();
                         }
+                        /* ++++++++++++++++++++++++++++++++++++++++++++++
+                       *      ~ END Calculate Pips ~
+                       * +++++++++++++++++++++++++++++++++++++++++++++++*/
                     } else {
-                        $status = "ERROR";
-                        $remarks = "ARRAY NOT EQUAL TO 13";
+                        $status = Globals::STATUS_PIPS_CSV_ERROR;
+                        $remarks = "FIRST ELEMENT NOT NUMERIC";
+
+                        $mlm_pip_csv->setStatusCode($status);
+                        $mlm_pip_csv->setRemarks($remarks);
+                        $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_pip_csv->save();
                     }
+                } else {
+                    $status = Globals::STATUS_PIPS_CSV_ERROR;
+                    $remarks = "ARRAY NOT EQUAL TO 13";
+
                     $mlm_pip_csv->setStatusCode($status);
                     $mlm_pip_csv->setRemarks($remarks);
                     $mlm_pip_csv->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_pip_csv->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_pip_csv->save();
-                    //print $parts[0] . $parts[1] . "<BR>";
                 }
-
-                fclose($file_handle);
-                echo 'Files was successfully uploaded.';
-            } else {
-                echo 'Invalid file type.';
             }
-        }
+            print_r("Files was successfully uploaded.");
+        //}
+        print_r("<br>Done");
         return sfView::HEADER_ONLY;
     }
 
