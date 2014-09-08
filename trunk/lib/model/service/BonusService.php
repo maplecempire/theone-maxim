@@ -96,7 +96,8 @@ class BonusService
 
                 $packageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getDebitRankId());
                 $packagePrice = $packageDB->getPrice();
-                $pairingPoint = $packagePrice;
+                $pairingPoint = $packagePrice * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $packagePrice;
                 /**************************************/
                 /*  Direct REFERRAL Bonus For Upline
                 /**************************************/
@@ -286,6 +287,7 @@ class BonusService
                         $sponsorDistPairingledger->setLeftRight($uplinePosition);
                         $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                         $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                         $sponsorDistPairingledger->setDebit(0);
                         $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                         $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
@@ -394,7 +396,8 @@ class BonusService
 
                 $packageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getDebitRankId());
                 $packagePrice = $packageDB->getPrice();
-                $pairingPoint = $packagePrice;
+                $pairingPoint = $packagePrice * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $packagePrice;
                 /**************************************/
                 /*  Direct REFERRAL Bonus For Upline
                 /**************************************/
@@ -584,6 +587,7 @@ class BonusService
                         $sponsorDistPairingledger->setLeftRight($uplinePosition);
                         $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
                         $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
                         $sponsorDistPairingledger->setDebit(0);
                         $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
                         $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
