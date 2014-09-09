@@ -2343,7 +2343,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                 $mlm_pip_csv = new MlmPipCsv();
                 $mlm_pip_csv->setFileId($mlm_file_download->getFileId());
                 try {
-                    $mlm_pip_csv->setPipsString($string);
+                    //$mlm_pip_csv->setPipsString($string);
                     $mlm_pip_csv->setPipsString("");
                 } catch (PropelException $e) {
                     //throw $e;
@@ -2357,6 +2357,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                         $mlm_pip_csv->setYearTraded($tradingYear);
                         $mlm_pip_csv->setLoginId($arr[$idx++]);
                         $mlm_pip_csv->setLoginName($arr[$idx++]);
+                        $mlm_pip_csv->setLoginName("");
                         $mlm_pip_csv->setDeposit($arr[$idx++]);
                         $mlm_pip_csv->setWithdraw($arr[$idx++]);
                         $mlm_pip_csv->setInOut($arr[$idx++]);
