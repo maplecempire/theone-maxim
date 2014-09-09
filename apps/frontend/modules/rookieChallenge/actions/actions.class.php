@@ -30,7 +30,7 @@ class rookieChallengeActions extends sfActions
             }
         }
 
-        if ($rookieChallenge == false) {
+        if ($rookieChallenge == true) {
             $dateFrom = '2014-08-08 00:00:00';
             $dateTo = '2014-09-19 23:59:59';
             $this->totalPersonalSales = $this->getTotalPersonalSales($dateFrom, $dateTo);
