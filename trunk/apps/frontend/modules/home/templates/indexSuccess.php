@@ -990,7 +990,97 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-            <div class="page">
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='37'>Rookie Challenge EXTENDED TO SEPTEMBER 19th, 2014 !!!!</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "9 September 2014";
+                ?>
+            </div>
+
+            <div id="page_37" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear All....
+                            <br>所有的伙伴们：
+                            <br>
+                            <br>ROOKIE CHALLENGE !!!
+                            <br>最新针对新伙伴挑战计划!!!
+                            <br>
+                            <br>Proudly and for the first-time ever, we are having a promo for Rookie IMs and Partners who as long as from date joined till now, are not over 6 calendar months .....
+                            <br>有史以来第一次公司针对新会员及伙伴们开放此政策，只要您加入马胜不超过6个(自然)月，您就可以享受该优惠！
+                            <br>
+                            <br>Challenge Period: August 8th to September 19th, 2014
+                            <br>优惠时间: 2014.8.8-9.19日
+                            <br>
+                            <br>Direct Sponsor:
+                            <br>直接推荐:
+                            <br>
+                            <br>USD50k to USD99k will receive an Extra 5%
+                            <br>5万-9.9万美金可额外享受5%奖金
+                            <br>
+                            <br>USD100k to USD199k will receive an Extra 6%
+                            <br>10万-19.9万美金可额外享受6%奖金
+                            <br>
+                            <br>USD200k to USD300k will receive an Extra 7%
+                            <br>20万-30万美金可额外享受7%奖金
+                            <br>
+                            <br>Nb1: Rookie Challenge Bonus will be credited into CP1
+                            <br>注1：该项奖金将会进入CP1账户
+                            <br>
+                            <br>Nb2. Rookie member who joined on 2014 March, April, May, June, July, August & September entitled only.
+                            <br>注2: 该项奖金只对于2014年3月、4月、5月、6月、7月、8月、9月加入马胜的会员。
+                            <br>
+                            <br>Come On Rookies ...... This is your chance to shine and reap your reward$$$
+                            <br>加油吧，所有新伙伴们！这是专属您闪亮炫耀的机会！
+                            <br>
+                            <br>
+                            <br>회원 여러분..
+                            <br>
+                            <br>새회원 챌린지!!!!
+                            <br>
+                            <br>처음으로 자랑스럽게 새로운 국제 회원 여러분과 파트너들을 위한 프로모션을 발표합니다. 새 회워 자격은 최초로 회사에 합류한 일자가 지금부터 6개월 이내의 회원을 의미합니다.
+                            <br>
+                            <br>도전 기간 : 2014년 8월 8일에서 9월 19일까지
+                            <br>직 스폰서/개인 매출 : USD5 0부터 USD99,000 은 추가 5%를 받습니다.
+                            <br>USD100,000부터 USD199,000은 추가 6%를
+                            <br>USD200,000부터 USD300,000은 추가 7%를 받게 됩니다.
+                            <br>
+                            <br>참고 1: 새 회원 도전 보너스는 CP1 계좌로 들어갑니다.
+                            <br>참고 2: 2014 3월, 5월, 6월, 7월, 8월, 9월에 등록한 새 회원들만 도전이 가능합니다,
+                            <br>
+                            <br>도전하세요, 새 회원 여러분... 여러분의 보상을 거둬들이고 밝혀줄 기회입니다.
+                            <br>
+                            <br>
+                            <br>親愛なるみなさま……
+                            <br>
+                            <br>ルーキー・チャレンジ
+                            <br>
+                            <br>今回初めて、そして大変誇らしいことに、私たちは6ヵ月以内に参加してくれた新人のIMとパートナーの皆様に向けてプロモーションを開始しました。
+                            <br>チャレンジ期間　2014年8月8日〜9月19日
+                            <br>ダイレクトスポンサー／パーソナルセールス
+                            <br>USD50〜99k　の方はさらに5％
+                            <br>USD100から199kの方はさらに6％
+                            <br>USD300k〜300kの方はさらに7％
+                            <br>
+                            <br>1　ルーキーチャレンジボーナスはCP1にクレジットされます。
+                            <br>2　2014年3月、4月、5月、6月、7月、8月、9月に参加したメンバーのみがルーキーとなります。
+                            <br>
+                            <br>来れルーキーたちよ ...... あなたの報酬を輝かせて刈り取るチャンスです！
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='36'>Server Maintenance</a><img src="/images/new_icon.gif">
             </div>
