@@ -14,8 +14,8 @@ class marketingActions extends sfActions
     {
         $c = new Criteria();
 //        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
-//        $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
+        $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
         $c->setLimit(30);
         $distributorDBs = MlmDistributorPeer::doSelect($c);
 
