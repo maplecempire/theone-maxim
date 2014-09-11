@@ -7403,6 +7403,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     return $this->redirect('/member/transferRP');
                 }*/
             //}
+
             $epointAmount = $this->getRequestParameter('epointAmount');
             $epointAmount = str_replace(",", "", $epointAmount);
             if ($epointAmount > $ledgerAccountBalance) {
@@ -7424,6 +7425,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $c = new Criteria();
                 $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('sponsorId'));
                 $existDist = MlmDistributorPeer::doSelectOne($c);
+
+                if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 296707 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 296708 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 296709) {
+                    $pos = strrpos($existDist->getTreeStructure(), "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+
+                    if ($pos === false) { // note: three equal signs
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to this account ".$this->getRequestParameter('sponsorId')."."));
+                        return $this->redirect('/member/transferRP');
+                    } else {
+
+                    }
+                }
 
                 $c = new Criteria();
                 $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
