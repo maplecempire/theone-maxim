@@ -210,19 +210,19 @@ $(function() {
                 <?php } else if ($culture == "jp") { ?>
                     チャレンジ期間　2014年8月8日〜9月8日
                     <br><br>ダイレクトスポンサー／パーソナルセールス:
-                    <br>USD50〜99k　の方はさらに5％
-                    <br>USD100から199kの方はさらに6％
+                    <br>USD50k〜99k　の方はさらに5％
+                    <br>USD100k〜199kの方はさらに6％
                     <br>USD300k〜300kの方はさらに7％
                 <?php } else if ($culture == "kr") { ?>
                     도전 기간 : 2014년 8월 8일에서 9월 8일까지
                     <br><br>직 스폰서/개인 매출 :
-                    <br>USD5 0부터 USD99,000 은 추가 5%를 받습니다
+                    <br>USD50,000부터 USD99,000 은 추가 5%를 받습니다
                     <br>USD100,000부터 USD199,000은 추가 6%를
                     <br>USD200,000부터 USD300,000은 추가 7%를 받게 됩니다.
                 <?php } else { ?>
                     Challenge Period: August 8th to September 8th, 2014
                     <br><br>Direct Sponsor/Personal Sales:
-                    <br>USD50 to USD99k will receive an Extra 5%
+                    <br>USD50k to USD99k will receive an Extra 5%
                     <br>USD100k to USD199k will receive an Extra 6%
                     <br>USD200k to USD300k will receive an Extra 7%
                 <?php } ?>
