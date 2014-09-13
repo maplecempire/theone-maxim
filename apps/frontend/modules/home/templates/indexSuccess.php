@@ -1021,14 +1021,14 @@ $(document).ready(function() {
                             <br>Direct Sponsor:
                             <br>直接推荐:
                             <br>
-                            <br>USD50k to USD99k will receive an Extra 5%
-                            <br>5万-9.9万美金可额外享受5%奖金
+                            <br>USD50,000 to USD99,000 will receive an Extra 5%
+                            <br>50,000-99,000美金可额外享受5%奖金
                             <br>
-                            <br>USD100k to USD199k will receive an Extra 6%
-                            <br>10万-19.9万美金可额外享受6%奖金
+                            <br>USD100,000 to USD199,000 will receive an Extra 6%
+                            <br>100,000-199,000美金可额外享受6%奖金
                             <br>
-                            <br>USD200k to USD300k will receive an Extra 7%
-                            <br>20万-30万美金可额外享受7%奖金
+                            <br>USD200,000 to USD300,000 will receive an Extra 7%
+                            <br>200,000-300,000美金可额外享受7%奖金
                             <br>
                             <br>Nb1: Rookie Challenge Bonus will be credited into CP1
                             <br>注1：该项奖金将会进入CP1账户
@@ -1047,7 +1047,7 @@ $(document).ready(function() {
                             <br>처음으로 자랑스럽게 새로운 국제 회원 여러분과 파트너들을 위한 프로모션을 발표합니다. 새 회워 자격은 최초로 회사에 합류한 일자가 지금부터 6개월 이내의 회원을 의미합니다.
                             <br>
                             <br>도전 기간 : 2014년 8월 8일에서 9월 19일까지
-                            <br>직 스폰서/개인 매출 : USD50k부터 USD99,000 은 추가 5%를 받습니다.
+                            <br>직 스폰서/개인 매출 : USD50,000부터 USD99,000 은 추가 5%를 받습니다.
                             <br>USD100,000부터 USD199,000은 추가 6%를
                             <br>USD200,000부터 USD300,000은 추가 7%를 받게 됩니다.
                             <br>
@@ -1064,9 +1064,9 @@ $(document).ready(function() {
                             <br>今回初めて、そして大変誇らしいことに、私たちは6ヵ月以内に参加してくれた新人のIMとパートナーの皆様に向けてプロモーションを開始しました。
                             <br>チャレンジ期間　2014年8月8日〜9月19日
                             <br>ダイレクトスポンサー／パーソナルセールス
-                            <br>USD50k〜99k　の方はさらに5％
-                            <br>USD100から199kの方はさらに6％
-                            <br>USD300k〜300kの方はさらに7％
+                            <br>USD50,000〜99,000　の方はさらに5％
+                            <br>USD100,000から199,000の方はさらに6％
+                            <br>USD300,000〜300,000の方はさらに7％
                             <br>
                             <br>1　ルーキーチャレンジボーナスはCP1にクレジットされます。
                             <br>2　2014年3月、4月、5月、6月、7月、8月、9月に参加したメンバーのみがルーキーとなります。
