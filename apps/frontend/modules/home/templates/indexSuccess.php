@@ -1001,12 +1001,18 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_37" class="news_desc" style="text-align: left;">
+            <div id="page_38" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear All,
+                            <br>
                             <br>Due to technical deficiency, the connection to bank encountered power outrage, causing the price feed to stop. All prices resumed at 0900 Singapore time. We sincerely apologies for the unancipated error and strived to serve you better in the near future.
+                            <br>
+                            <br>Thank you.
+                            <br>
+                            <br>IT & Support
                             </td>
                         </tr>
                     </tbody>
@@ -1116,7 +1122,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_36" class="news_desc" style="text-align: left;">
+            <div id="page_36" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
