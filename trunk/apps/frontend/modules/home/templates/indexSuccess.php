@@ -992,6 +992,31 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='37'>Important Announcement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "15 September 2014";
+                ?>
+            </div>
+
+            <div id="page_37" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Due to technical deficiency, the connection to bank encountered power outrage, causing the price feed to stop. All prices resumed at 0900 Singapore time. We sincerely apologies for the unancipated error and strived to serve you better in the near future.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='37'>Rookie Challenge EXTENDED TO SEPTEMBER 19th, 2014 !!!!</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1001,7 +1026,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_37" class="news_desc" style="text-align: left;">
+            <div id="page_37" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
