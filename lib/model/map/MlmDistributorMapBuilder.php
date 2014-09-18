@@ -90,6 +90,8 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('IACCOUNT', 'Iaccount', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('IACCOUNT_USERNAME', 'IaccountUsername', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addColumn('TREE_LEVEL', 'TreeLevel', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('TREE_STRUCTURE', 'TreeStructure', 'string', CreoleTypes::LONGVARCHAR, false, null);

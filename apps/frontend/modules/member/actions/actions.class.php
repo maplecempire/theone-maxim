@@ -2616,7 +2616,7 @@ class memberActions extends sfActions
         $mlm_distributor->setBankSwiftCode($this->getRequestParameter('bankSwiftCode'));
         $mlm_distributor->setVisaDebitCard($this->getRequestParameter('visaDebitCard'));
         $mlm_distributor->setEzyCashCard($this->getRequestParameter('ezyCashCard'));
-        $mlm_distributor->setIaccount($this->getRequestParameter('iaccount'));
+        //$mlm_distributor->setIaccount($this->getRequestParameter('iaccount'));
         $mlm_distributor->setBankCountry($this->getRequestParameter('bankCountry'));
         $mlm_distributor->setBankAccountCurrency($this->getRequestParameter('bankAccountCurrency'));
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -2638,6 +2638,21 @@ class memberActions extends sfActions
         $mlm_distributor->save();
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Money Trac Information update successfully"));
+
+        //return $this->redirect('/member/viewBankInformation');
+        return $this->redirect('/member/viewProfile');
+    }
+    public function executeUpdateIAccount()
+    {
+        $mlm_distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->forward404Unless($mlm_distributor);
+
+        $mlm_distributor->setIaccountUsername($this->getRequestParameter('iaccountUsername'));
+        $mlm_distributor->setIaccount($this->getRequestParameter('iaccount'));
+        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+        $mlm_distributor->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("i-Account Information update successfully"));
 
         //return $this->redirect('/member/viewBankInformation');
         return $this->redirect('/member/viewProfile');

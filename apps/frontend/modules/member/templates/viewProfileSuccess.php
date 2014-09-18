@@ -153,6 +153,32 @@ $(function() {
             //label.addClass("valid").text("Valid captcha!")
         }
     });
+    $("#iaccountForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "<?php echo __("Security Password is not valid")?>"
+            }
+        },
+        rules : {
+            "iaccount" : {
+                required : true
+            },
+            "iaccountUsername" : {
+                required : true
+            },
+            "transactionPassword" : {
+                required : true,
+                remote: "/member/verifyTransactionPassword"
+            }
+        },
+        submitHandler: function(form) {
+            waiting();
+            form.submit();
+        },
+        success: function(label) {
+            //label.addClass("valid").text("Valid captcha!")
+        }
+    });
 
     $("#btnBankUpdate").button({
         icons: {
@@ -160,6 +186,11 @@ $(function() {
         }
     });
     $("#btnMoneyTrac").button({
+        icons: {
+            primary: "ui-icon-circle-check"
+        }
+    });
+    $("#btnIAccount").button({
         icons: {
             primary: "ui-icon-circle-check"
         }
@@ -799,17 +830,6 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-
-                <tr class="tbl_form_row_odd">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('i-Account') ?></td>
-                    <td>
-                        <input name="iaccount" type="text" id="iaccount" size="30" maxlength="16"
-                                                         value="<?php echo $distDB->getIaccount() ?>"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
                 <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php /*echo __('EZY Account ID') */?></td>
@@ -854,6 +874,71 @@ $(function() {
                     <td></td>
                     <td align="right">
                         <button id="btnBankUpdate"><?php echo __('Update') ?></button>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+
+            <div class="info_bottom_bg"></div>
+            <div class="clear"></div>
+            <br>
+
+            <form id="iaccountForm" method="post" action="/member/updateIAccount">
+            <table cellspacing="0" cellpadding="0" class="tbl_form">
+                <colgroup>
+                    <col width="1%">
+                    <col width="30%">
+                    <col width="69%">
+                    <col width="1%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="tbl_header_left">
+                        <div class="border_left_grey">&nbsp;</div>
+                    </th>
+                    <th><?php echo __('i-Account Details') ?></th>
+                    <th class="tbl_content_right"></th>
+                    <th class="tbl_header_right">
+                        <div class="border_right_grey">&nbsp;</div>
+                    </th>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('i-Account Full Name') ?></td>
+                    <td>
+                        <input name="iaccountUsername" type="text" id="iaccountUsername" size="30"
+                                                         value="<?php echo $distDB->getIaccountUsername() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('i-Account ID') ?></td>
+                    <td>
+                        <input name="iaccount" type="text" id="iaccount" size="30" maxlength="16"
+                                                         value="<?php echo $distDB->getIaccount() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Security Password') ?></td>
+                    <td>
+                        <input name="transactionPassword" type="password" id="iaccountSecurityPassword" size="30"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td align="right">
+                        <button id="btnIAccount"><?php echo __('Update') ?></button>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
