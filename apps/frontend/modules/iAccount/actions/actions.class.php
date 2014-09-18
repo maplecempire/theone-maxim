@@ -17,4 +17,7 @@ class iAccountActions extends sfActions
     public function executeIndex()
     {
     }
+    public function executeInternationalTransfer()
+    {
+    }
 }
