@@ -3248,7 +3248,7 @@ class financeActions extends sfActions
                     ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
                     ,dist.moneytrac_customer_id,dist.moneytrac_username
                     ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
-                    ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book
+                    ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount
             FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -3350,6 +3350,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("AD".$xlsRow, "Proof of Residence Uploaded");
         $sheet->setCellValue("AE".$xlsRow, "Nric Uploaded");
         $sheet->setCellValue("AF".$xlsRow, "Bank Pass Book");
+        $sheet->setCellValue("AG".$xlsRow, "i-Account");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3392,6 +3393,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("AD".$xlsRow, $arr['file_proof_of_residence'] == "" ? "N" : "Y");
             $sheet->setCellValue("AE".$xlsRow, $arr['file_nric'] == "" ? "N" : "Y");
             $sheet->setCellValue("AF".$xlsRow, $arr['file_bank_pass_book'] == "" ? "N" : "Y");
+            $sheet->setCellValue("AG".$xlsRow, $arr['iaccount']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
@@ -3600,7 +3602,7 @@ class financeActions extends sfActions
                 ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
                 ,dist.moneytrac_customer_id,dist.moneytrac_username
                 ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
-                ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book
+                ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount
             FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -3702,6 +3704,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("AD".$xlsRow, "Proof of Residence Uploaded");
         $sheet->setCellValue("AE".$xlsRow, "Nric Uploaded");
         $sheet->setCellValue("AF".$xlsRow, "Bank Pass Book");
+        $sheet->setCellValue("AG".$xlsRow, "i-Account");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3744,6 +3747,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("AD".$xlsRow, $arr['file_proof_of_residence'] == "" ? "N" : "Y");
             $sheet->setCellValue("AE".$xlsRow, $arr['file_nric'] == "" ? "N" : "Y");
             $sheet->setCellValue("AF".$xlsRow, $arr['file_bank_pass_book'] == "" ? "N" : "Y");
+            $sheet->setCellValue("AG".$xlsRow, $arr['iaccount']);
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
             //$col = "A";
