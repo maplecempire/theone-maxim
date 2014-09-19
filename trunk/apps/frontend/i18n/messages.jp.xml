@@ -955,6 +955,8 @@
             <trans-unit><source>Beneficiary Address</source><target>受取人住所</target></trans-unit>
             <trans-unit><source>RENEWAL NOTICE</source><target>リニューアルのお知らせ</target></trans-unit>
             <trans-unit><source>Dear International Member</source><target>国際メンバーの皆さま</target></trans-unit>
+            <trans-unit><source>International Transfer Information</source><target>詳細については、下記をご参照ください</target></trans-unit>
+            <trans-unit><source>[Important Notice]</source><target>[重要]</target></trans-unit>
         </body>
     </file>
 </xliff>
