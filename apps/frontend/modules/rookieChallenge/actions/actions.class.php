@@ -55,7 +55,7 @@ class rookieChallengeActions extends sfActions
                         WHERE newDist.loan_account = 'N'
                             AND newDist.from_abfx = 'N'
                             AND newDist.upline_dist_id = " . $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0) . "
-                            AND newDist.created_on >= '".$dateFrom."' AND newDist.created_on <= '".$dateTo."' group by upline_dist_id
+                            AND newDist.active_datetime >= '".$dateFrom."' AND newDist.active_datetime <= '".$dateTo."' group by upline_dist_id
                 ) reg
                 LEFT JOIN
                 (
