@@ -131,6 +131,7 @@ $(function() {
                     data: {
                         sponsorId : $('#sponsorId').val()
                         , verifySameGroup : "Y"
+                        , placementDistCode : $('#uplineDistCode').val()
                     },
                     success : function(data) {
                         waiting();
@@ -182,6 +183,7 @@ function verifySponsorId() {
         data: {
             sponsorId : $('#sponsorId').val()
             , verifySameGroup : "Y"
+            , placementDistCode : $('#uplineDistCode').val()
         },
         success : function(data) {
             if (data == null || data == "") {
