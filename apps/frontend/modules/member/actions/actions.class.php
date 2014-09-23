@@ -5263,7 +5263,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $existUser = MlmDistributorPeer::doSelectOne($c);
                 //var_dump($sponsorId);
                 //var_dump($placementDistCode);
-                var_dump($existUser);
+                //var_dump($existUser);
                 if ($existUser) {
                     $c = new Criteria();
                     $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
