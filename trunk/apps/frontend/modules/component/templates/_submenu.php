@@ -99,10 +99,10 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
         }
     }
 
+    if ($onlyTransferRP == false) {
     if ($rookieChallenge == true) {
     ?>
     <br class="clear"><br>
-    <?php if ($onlyTransferRP == false) { ?>
     <ul>
         <li class="menu_title"><?php echo __('Rookie Challenge'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
