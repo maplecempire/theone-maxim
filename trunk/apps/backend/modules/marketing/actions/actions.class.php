@@ -137,6 +137,15 @@ class marketingActions extends sfActions
                         //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
                         $dividendDate = strtotime("+1 months", $currentDate_timestamp);
 
+                        // MV168 all referrer exceeded 3% will transfer to his account
+                        $exceedRoiSpecialCase = false;
+                        $pos = strrpos($tbl_distributor->getTreeStructure(), "|295032|");
+                        if ($pos === false) { // note: three equal signs
+
+                        } else {
+                            $exceedRoiSpecialCase = true;
+                        }
+
                         $mlm_roi_dividend = new MlmRoiDividend();
                         $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
                         $mlm_roi_dividend->setIdx(1);
@@ -146,10 +155,25 @@ class marketingActions extends sfActions
                         $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
                         $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
                         $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
-                        $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+
+                        if ($exceedRoiSpecialCase == false) {
+                            $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                        } else {
+                            $roi = $packageDB->getMonthlyPerformance();
+                            $exceedRoi = 0;
+                            if ($roi > 3) {
+                                $exceedRoi = $roi - 3;
+                                $roi = $roi - 3;
+                            }
+                            $mlm_roi_dividend->setRoiPercentage($roi);
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                            $mlm_roi_dividend->setExceedDistId(295032);
+                            $mlm_roi_dividend->setExceedRoiPercentage($exceedRoi);
+                        }
+
                         //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                         //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                        $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
                         $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_roi_dividend->save();
@@ -167,7 +191,11 @@ class marketingActions extends sfActions
                         $mlmPackageContract->setSignDateYear(date("Y"));
                         $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
                         $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
-                        $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                        if ($exceedRoiSpecialCase == false) {
+                            $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                        } else {
+                            $mlmPackageContract->setStatusCode(Globals::STATUS_COMPLETE);
+                        }
                         $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlmPackageContract->save();
@@ -2633,6 +2661,15 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     //$dividendDate = $dateUtil->addDate($currentDate, 30, 0, 0);
                     $dividendDate = strtotime("+1 months", $currentDate_timestamp);
 
+                    // MV168 all referrer exceeded 3% will transfer to his account
+                    $exceedRoiSpecialCase = false;
+                    $pos = strrpos($tbl_distributor->getTreeStructure(), "|295032|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $exceedRoiSpecialCase = true;
+                    }
+
                     $mlm_roi_dividend = new MlmRoiDividend();
                     $mlm_roi_dividend->setDistId($tbl_distributor->getDistributorId());
                     $mlm_roi_dividend->setIdx(1);
@@ -2642,10 +2679,24 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
                     $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
                     $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
-                    $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
                     //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                     //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                    $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+
+                    if ($exceedRoiSpecialCase == false) {
+                        $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                        $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                    } else {
+                        $roi = $packageDB->getMonthlyPerformance();
+                        $exceedRoi = 0;
+                        if ($roi > 3) {
+                            $exceedRoi = $roi - 3;
+                            $roi = $roi - 3;
+                        }
+                        $mlm_roi_dividend->setRoiPercentage($roi);
+                        $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                        $mlm_roi_dividend->setExceedDistId(295032);
+                        $mlm_roi_dividend->setExceedRoiPercentage($exceedRoi);
+                    }
                     $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_roi_dividend->save();
@@ -2663,7 +2714,13 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     $mlmPackageContract->setSignDateYear(date("Y"));
                     $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
                     $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
-                    $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+
+                    if ($exceedRoiSpecialCase == false) {
+                        $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                    } else {
+                        $mlmPackageContract->setStatusCode(Globals::STATUS_COMPLETE);
+                    }
+
                     $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageContract->save();
