@@ -1271,33 +1271,68 @@ class memberActions extends sfActions
         $sponsorId = $this->getRequestParameter('sponsorId');
         $placementDistId = $this->getRequestParameter('placementDistId');
 
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-        $existUser = MlmDistributorPeer::doSelectOne($c);
+        // family group
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 256205) {
+            $arr = "";
+            $placementDistCode = $placementDistId;
+            if ($sponsorId != "" && $placementDistCode != "") {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $existUser = MlmDistributorPeer::doSelectOne($c);
+                //var_dump($sponsorId);
+                //var_dump($placementDistCode);
+                if ($existUser) {
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
+                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
+                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                    $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
+                    //var_dump($existUser->getDistributorId());
+                    //var_dump($existPlacementUser);
+                    if ($existPlacementUser) {
+                        $arr = array(
+                            'userId' => $existUser->getDistributorId(),
+                            'userName' => $existUser->getDistributorCode(),
+                            'fullname' => $existUser->getFullName(),
+                            'nickname' => $existUser->getFullName()
+                        );
+                    }
+                }
+            }
 
-        if ($existUser) {
-            //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+            echo json_encode($arr);
+            return sfView::HEADER_ONLY;
+        } else {
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
-            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
             $existUser = MlmDistributorPeer::doSelectOne($c);
-        }
 
-        $arr = "";
-        if ($existUser) {
-            //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
-            $arr = array(
-                'userId' => $existUser->getDistributorId(),
-                'userName' => $existUser->getDistributorCode(),
-                'fullname' => $existUser->getFullName(),
-                'nickname' => $existUser->getNickname()
-            );
-            //}
-        }
+            if ($existUser) {
+                //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistId);
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $existUser = MlmDistributorPeer::doSelectOne($c);
+            }
 
-        echo json_encode($arr);
-        return sfView::HEADER_ONLY;
+            $arr = "";
+            if ($existUser) {
+                //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+                $arr = array(
+                    'userId' => $existUser->getDistributorId(),
+                    'userName' => $existUser->getDistributorCode(),
+                    'fullname' => $existUser->getFullName(),
+                    'nickname' => $existUser->getNickname()
+                );
+                //}
+            }
+
+            echo json_encode($arr);
+            return sfView::HEADER_ONLY;
+        }
     }
 
     public function executePurchasePackageViaTree()
@@ -5175,30 +5210,67 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
         $verifySameGroup = $this->getRequestParameter('verifySameGroup', "N");
+        $placementDistCode = $this->getRequestParameter('placementDistCode');
 
-        //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-        if ($verifySameGroup == "Y") {
-            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+        // family group
+        //var_dump($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID));
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 256205 && $placementDistCode != "") {
+            $arr = "";
+            if ($sponsorId != "" && $placementDistCode != "") {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+                $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $existUser = MlmDistributorPeer::doSelectOne($c);
+                //var_dump($sponsorId);
+                //var_dump($placementDistCode);
+                var_dump($existUser);
+                if ($existUser) {
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $placementDistCode);
+                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$existUser->getDistributorId()."|%", Criteria::LIKE);
+                    $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                    $existPlacementUser = MlmDistributorPeer::doSelectOne($c);
+                    //var_dump($existUser->getDistributorId());
+                    //var_dump($existPlacementUser);
+                    if ($existPlacementUser) {
+                        $arr = array(
+                            'userId' => $existUser->getDistributorId(),
+                            'userName' => $existUser->getDistributorCode(),
+                            'fullname' => $existUser->getFullName(),
+                            'nickname' => $existUser->getFullName()
+                        );
+                    }
+                }
+            }
+
+            echo json_encode($arr);
+            return sfView::HEADER_ONLY;
+        } else {
+            //$array = explode(',', Globals::STATUS_ACTIVE.",".Globals::STATUS_PENDING);
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+            if ($verifySameGroup == "Y") {
+                $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+            }
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $existUser = MlmDistributorPeer::doSelectOne($c);
+
+            $arr = "";
+            if ($existUser) {
+                //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
+                $arr = array(
+                    'userId' => $existUser->getDistributorId(),
+                    'userName' => $existUser->getDistributorCode(),
+                    'fullname' => $existUser->getFullName(),
+                    'nickname' => $existUser->getFullName()
+                );
+                //}
+            }
+
+            echo json_encode($arr);
+            return sfView::HEADER_ONLY;
         }
-        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $existUser = MlmDistributorPeer::doSelectOne($c);
-
-        $arr = "";
-        if ($existUser) {
-            //if ($existUser->getDistributorId() <> $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
-            $arr = array(
-                'userId' => $existUser->getDistributorId(),
-                'userName' => $existUser->getDistributorCode(),
-                'fullname' => $existUser->getFullName(),
-                'nickname' => $existUser->getFullName()
-            );
-            //}
-        }
-
-        echo json_encode($arr);
-        return sfView::HEADER_ONLY;
     }
 
     public function executeFetchPackage()
