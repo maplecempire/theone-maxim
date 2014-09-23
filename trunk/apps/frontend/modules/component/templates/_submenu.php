@@ -25,50 +25,62 @@ function blink(selector) {
 }
 </script>
 
+<?php
+$onlyTransferRP = false;
+
+if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 296708 || $distDB->getDistributorId() == 296709) {
+    $onlyTransferRP = true;
+}
+?>
+
 <div class="menu" style="z-index: 20;">
     <ul>
         <li class="menu_title"><?php echo __('MAIN MENU'); ?></li>
-        <li>
-            <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
-        </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
-        </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
-        <li>
-            <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
-        </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/packagePurchase")?>" id="linkPackagePurchase"><span><?php echo __('Package Purchase'); ?></span></a>
-        </li>
-    <?php } ?>
+        <?php if ($onlyTransferRP == false) { ?>
+            <li>
+                <a href="/member/summary"><span><?php echo __('Summary'); ?></span></a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/viewProfile"><span><?php echo __('User Profile'); ?></span></a>
+            </li>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
+            <li>
+                <a href="/member/memberRegistration"><span><?php echo __('Registration'); ?></span></a>
+            </li>
+        <?php } ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_PENDING) { ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="<?php echo url_for("/member/packagePurchase")?>" id="linkPackagePurchase"><span><?php echo __('Package Purchase'); ?></span></a>
+            </li>
+        <?php } ?>
 
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
-        </li>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
-            <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
-        </li>
-    <?php } ?>
-    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/member/reloadTopup"><span><?php echo __('Reload MT4 Fund'); ?></span></a>
-        </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
+            </li>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
+                <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
+            </li>
+        <?php } ?>
+        <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640) { ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/reloadTopup"><span><?php echo __('Reload MT4 Fund'); ?></span></a>
+            </li>
+        <?php } ?>
     <?php } ?>
     <?php if ($rp > 0) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
     <?php } ?>
+    <?php if ($onlyTransferRP == false) { ?>
     <?php
         // maximcapital
         if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 1797) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/fmc"><span><?php echo __('FMC'); ?></span></a><img src="/images/new_icon.gif">
         </li>
+    <?php } ?>
     <?php } ?>
     </ul>
 
@@ -90,6 +102,7 @@ function blink(selector) {
     if ($rookieChallenge == true) {
     ?>
     <br class="clear"><br>
+    <?php if ($onlyTransferRP == false) { ?>
     <ul>
         <li class="menu_title"><?php echo __('Rookie Challenge'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -412,6 +425,9 @@ function blink(selector) {
             <a href="/member/downlineCp3WithdrawalList"><span><?php echo __('CP3 Withdrawal List'); ?></span></a>
         </li>
     </ul>
+    <?php
+    }
+    ?>
     <?php
     }
     ?>
