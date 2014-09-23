@@ -56,6 +56,12 @@ class MlmRoiDividendMapBuilder {
 
 		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('EXCEED_DIST_ID', 'ExceedDistId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('EXCEED_ROI_PERCENTAGE', 'ExceedRoiPercentage', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('EXCEED_DIVIDEND_AMOUNT', 'ExceedDividendAmount', 'double', CreoleTypes::DECIMAL, false, 12);
+
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);

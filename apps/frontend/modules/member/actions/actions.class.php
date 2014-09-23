@@ -1047,6 +1047,43 @@ class memberActions extends sfActions
 
                     $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
+                    if ($mlmRoiDividend->getExceedDistId() != null) {
+                        $exceedDividendAmount = $packagePrice * $mlmRoiDividend->getExceedRoiPercentage() / 100;
+
+                        $accountBalance = $this->getAccountBalance($mlmRoiDividend->getExceedDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $fundManagementBalance = $this->getCommissionBalance($mlmRoiDividend->getExceedDistId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($mlmRoiDividend->getExceedDistId());
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
+                        $mlm_account_ledger->setRemark($mt4UserName." #".$idx." (EXCEEDING)");
+                        $mlm_account_ledger->setCredit($exceedDividendAmount);
+                        $mlm_account_ledger->setDebit(0);
+                        $mlm_account_ledger->setBalance($accountBalance + $exceedDividendAmount);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                        $sponsorDistCommissionledger->setMonthTraded(date('m'));
+                        $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                        $sponsorDistCommissionledger->setDistId($mlmRoiDividend->getExceedDistId());
+                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                        //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                        $sponsorDistCommissionledger->setCredit($exceedDividendAmount);
+                        $sponsorDistCommissionledger->setDebit(0);
+                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                        $sponsorDistCommissionledger->setBalance($fundManagementBalance + $exceedDividendAmount);
+                        $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getExceedRoiPercentage()."%, Fund:".$packagePrice.", #".$idx." (EXCEEDING)");
+                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionledger->save();
+
+                        $mlmRoiDividend->setExceedDividendAmount($exceedDividendAmount);
+                    }
+
                     $mt4Username = $mlmRoiDividend->getMt4UserName();
                     // new implement ********************************************************************
                     $c = new Criteria();
@@ -1077,6 +1114,8 @@ class memberActions extends sfActions
                                 $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
                                 $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
                                 $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                                $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
+                                $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
                                 //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                                 //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                                 $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
