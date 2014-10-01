@@ -13,6 +13,25 @@
             }
         });
 
+        $("#btnReject").button({
+            icons: {
+                primary: "ui-icon-circle-check"
+            }
+        }).click(function(){
+            if ($("#remarks").val() == "") {
+                alert("Remark is required.");
+                return false;
+            }
+
+            var answer = confirm("Are you sure want to reject this withdrawal?");
+            if (answer){
+                waiting();
+                $("#status_code").val("REJECTED");
+                $("#withdrawForm").attr("action", "<?php echo url_for("/finance/rejectCp2Withdrawal")?>");
+                $("#withdrawForm").submit();
+            }
+        });
+
         $("#btnCancel").button({
             icons: {
                 primary: "ui-icon-circle-arrow-w"
@@ -103,7 +122,14 @@
                 if ($mlm_ecash_withdraw->getStatusCode() == 'PENDING' || $mlm_ecash_withdraw->getStatusCode() == 'PROCESSING') {
             ?>
             <button id="btnSave">Save</button>
-            <?php } ?>
+            <?php } else if ($mlm_ecash_withdraw->getStatusCode() == 'PAID') {
+                if ($sf_user->hasCredential(Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN)) {
+            ?>
+                    <button id="btnReject" style="color: red">Reject</button>
+            <?php
+                }
+            }
+            ?>
             <?php } ?>
             <button id="btnCancel">Cancel</button>
             &nbsp;<?php //echo link_to('cancel', 'finance/ecashWithdrawal', array("id" => "btnCancel")) ?>

@@ -2436,6 +2436,63 @@ class financeActions extends sfActions
         return $this->redirect('finance/ecashWithdrawal');
     }
 
+    public function executeRejectCp2Withdrawal()
+    {
+        $statusCodeArr = array(Globals::WITHDRAWAL_PAID);
+
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::WITHDRAW_ID, $this->getRequestParameter('withdraw_id'));
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+        $mlm_ecash_withdraw = MlmEcashWithdrawPeer::doSelectOne($c);
+
+        if (!$mlm_ecash_withdraw) {
+            $this->setFlash('errorMsg', "Invalid Action");
+            return $this->redirect('finance/ecashWithdrawal');
+        }
+
+        $statusCode = $this->getRequestParameter('status_code');
+
+        $mlm_ecash_withdraw->setStatusCode($statusCode);
+        $mlm_ecash_withdraw->setRemarks($this->getRequestParameter('remarks'));
+        $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+        if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+            $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+        $mlm_ecash_withdraw->save();
+
+        if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+            $refundEcash = $mlm_ecash_withdraw->getDeduct();
+            $distId = $mlm_ecash_withdraw->getDistId();
+            /******************************/
+            /*  Account
+            /******************************/
+            $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+            $mlm_account_ledger = new MlmAccountLedger();
+            $mlm_account_ledger->setDistId($distId);
+            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+            $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+            $mlm_account_ledger->setCredit($refundEcash);
+            $mlm_account_ledger->setDebit(0);
+            $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_account_ledger->save();
+
+            $bonusService = new BonusService();
+            if ($bonusService->checkDebitAccount($distId) == true) {
+                $debitAccountRemark = "REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")";
+                $bonusService->contraDebitAccount($distId, $debitAccountRemark, $refundEcash);
+            }
+            $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+        }
+
+        $this->setFlash('successMsg', "Update successfully");
+        return $this->redirect('finance/ecashWithdrawal');
+    }
+
     /* ****************************************
      *     CP3 Withdrawal
      * *****************************************/
@@ -2516,6 +2573,68 @@ class financeActions extends sfActions
         //$this->forward404Unless($mlm_ecash_withdraw);
 
         $statusCodeArr = array(Globals::WITHDRAWAL_PENDING, Globals::WITHDRAWAL_PROCESSING);
+
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::WITHDRAW_ID, $this->getRequestParameter('withdraw_id'));
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+        $mlm_ecash_withdraw = MlmCp3WithdrawPeer::doSelectOne($c);
+
+        if (!$mlm_ecash_withdraw) {
+            $this->setFlash('errorMsg', "Invalid Action");
+            return $this->redirect('finance/cp3Withdrawal');
+        }
+
+        $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $statusCode = $this->getRequestParameter('status_code');
+
+            $mlm_ecash_withdraw->setStatusCode($statusCode);
+            $mlm_ecash_withdraw->setRemarks($this->getRequestParameter('remarks'));
+            $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+                $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+            $mlm_ecash_withdraw->save();
+
+            if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                $distId = $mlm_ecash_withdraw->getDistId();
+                /******************************/
+                /*  Account
+                /******************************/
+                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                $mlm_account_ledger->setCredit($refundEcash);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+            }
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+        $this->setFlash('successMsg', "Update successfully");
+        return $this->redirect('finance/cp3Withdrawal');
+    }
+    public function executeRejectCp3Withdrawal()
+    {
+        //$mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPk($this->getRequestParameter('withdraw_id'));
+        //$this->forward404Unless($mlm_ecash_withdraw);
+
+        $statusCodeArr = array(Globals::WITHDRAWAL_PAID);
 
         $c = new Criteria();
         $c->add(MlmCp3WithdrawPeer::WITHDRAW_ID, $this->getRequestParameter('withdraw_id'));
