@@ -1552,7 +1552,11 @@ class memberActions extends sfActions
         $uplineDistCode = $this->getRequestParameter('distcode');
         $position = $this->getRequestParameter('position');
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
+
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
