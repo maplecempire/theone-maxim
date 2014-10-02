@@ -210,18 +210,6 @@ function reassignDatagridEventAttr(){
                 <option value="PAID">PAID</option>
             </select>
             <button id="btnUpdate">Update</button>
-            <table>
-            	<tr>
-                    <td width="100">Date From</td>
-                    <td width="1">:</td>
-                    <td><input id="txtDateFrom" size="20" readonly="readonly" value="<?php echo date('Y-m-d');?>"></td>
-                </tr>
-                <tr>
-                    <td>Date To</td>
-                    <td>:</td>
-                    <td><input id="txtDateTo" size="20" readonly="readonly" value="<?php echo date('Y-m-d');?>"></td>
-                </tr>
-            </table>
             <button id="btnExport">Export</button>
         <?php } ?>
     </div>
