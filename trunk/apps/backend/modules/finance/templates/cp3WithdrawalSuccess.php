@@ -72,9 +72,6 @@ $(function(){
         ]
     });
     
-    $("#txtDateFrom").datepicker()
-    $("#txtDateTo").datepicker()
-    
     $("#btnUpdate").button({
         icons: {
             primary: "ui-icon-circle-check"
@@ -86,7 +83,7 @@ $(function(){
         }
     }).click(function(event){
         event.preventDefault();
-        window.open("<?php echo url_for("finance/cp3WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#search_leader").val() + "&statusCode=" + $("#search_combo_statusCode").val()) + "&dateFrom=" + $("#txtDateFrom").val()) + "&dateTo=" + $("#txtDateTo").val());
+        window.open("<?php echo url_for("finance/cp3WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#search_leader").val() + "&statusCode=" + $("#search_combo_statusCode").val());
     });
 }); // end $(function())
 
