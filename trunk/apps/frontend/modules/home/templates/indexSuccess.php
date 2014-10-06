@@ -992,7 +992,43 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='37'>Important Announcement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='39'>Important Announcement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "06 October 2014";
+                ?>
+            </div>
+
+            <div id="page_39" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+							<br>尊敬的会员及伙伴们:
+							<br>
+							<br>We are sorry to inform you due to a technical error with MBank, the there has been inaccessibility to Visa Card from the last couple of days. So far we don't have an ETA as to when the problem will be gone,  but we are actively seeking solution from MBank and once there is a feedback, we will update you all right away. We sincerely apologize for all the inconvenience caused.
+							<br>很抱歉通知大家-因为MBank出现技术问题，最近几天马胜VISA借记卡都不可正常使用。截止目前公司尚不得知MBank何时可解决该问题，但是我们会一直积极跟踪该问题；稍后若有回复，我们会第一时间发布公告。为此给您带来的不便，我们深表歉意。
+							<br>
+							<br>Your understanding and cooperation is very much appreciated, and we wish you all the success!
+							<br>敬请谅解；我们祝您的马胜事业蒸蒸日上！
+							<br>
+							<br>Mgmt of MCL
+							<br>马胜金融集团管理层
+							<br>发自我的 iPhone
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='38'>Important Announcement</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
