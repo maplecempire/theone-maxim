@@ -992,7 +992,7 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='39'>Important Announcement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='39'>News on Visa Debit Card Service Interruption<br>马胜借记卡服务暂停通告</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
             <?php
@@ -1007,17 +1007,40 @@ $(document).ready(function() {
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
                             <br>Dear IMs and Partners,
-							<br>尊敬的会员及伙伴们:
-							<br>
-							<br>We are sorry to inform you due to a technical error with MBank, the there has been inaccessibility to Visa Card from the last couple of days. So far we don't have an ETA as to when the problem will be gone,  but we are actively seeking solution from MBank and once there is a feedback, we will update you all right away. We sincerely apologize for all the inconvenience caused.
-							<br>很抱歉通知大家-因为MBank出现技术问题，最近几天马胜VISA借记卡都不可正常使用。截止目前公司尚不得知MBank何时可解决该问题，但是我们会一直积极跟踪该问题；稍后若有回复，我们会第一时间发布公告。为此给您带来的不便，我们深表歉意。
-							<br>
-							<br>Your understanding and cooperation is very much appreciated, and we wish you all the success!
-							<br>敬请谅解；我们祝您的马胜事业蒸蒸日上！
-							<br>
-							<br>Mgmt of MCL
-							<br>马胜金融集团管理层
-							<br>发自我的 iPhone
+                            <br>亲爱的会员及领导们:
+                            <br>
+                            <br>We are sorry to inform you that due to technical difficulties with Mbank, our Visa Debit Card service was affected during the past few days.  We hope that Mbank could solve current problems soonest.  We shall liaise with Mbank continuously and give you update on this matter as soon as we receive news from them.
+                            <br>很抱歉地通知大家-因为MBank出现技术问题，我们的Visa Debit借记卡服务在过去几天受到了影响。我们希望MBank可以尽快解决该问题。公司会积极跟进，稍后若有回复，我们会第一时间告知。
+                            <br>
+                            <br>Your understanding and attention to this matter is much appreciated. We sincerely apologize for all inconvenience caused.
+                            <br>敬请谅解与配合。为此给您带来的不便，我们深表歉意。
+                            <br>
+                            <br>Mgmt of MCL
+                            <br>马胜金融集团管理层
+                            <br>
+                            <br>
+                            <br>
+                            <br>ビザ・デビットカードサービス中断のお知らせ
+                            <br>
+                            <br>親愛なるIMおよびパートナーの皆様、
+                            <br>
+                            <br>Mbankの技術的問題のため、私たちのビザ・でビットカードサービスがここ数日影響を受けていることをお詫びします。我々はMbankがこの問題を早急に解決することを望んでいます。Mbankはこの問題に関してMbankからの継続的な情報を得るとともに、新たな情報があり次第お客様にお知らせします。
+                            <br>
+                            <br>この問題に関してご理解とご注意いただき感謝します。ご不便をおかけしておりますことを心よりお詫びいたします。
+                            <br>
+                            <br>MCLマネージメント
+                            <br>
+                            <br>
+                            <br>
+                            <br>비자 데빗카드 서비스 중단
+                            <br>
+                            <br>친애하는 국제회원 및 파트너 여러분
+                            <br>
+                            <br>Mbank의 기술적인 문제에 의해 데빗 카드 서비스가 지난 몇일동안 영향을 받았왔음에 유감을 표명합니다.  Mbank가 현재 문제를 빠른 시일내에 해결 할 수 있기를 바랍니다.  당사는 Mbank와 지속적인 협조를 할 것이며, 새로운 소식을 받는 즉시 알려드리겠습니다.
+                            <br>
+                            <br>귀하의 이해와 이 사항에 대한 관심에 감사드립니다.  불편을 끼쳐드려서 죄송합니다.
+                            <br>
+                            <br>맥심 매니지먼트
                             </td>
                         </tr>
                     </tbody>
