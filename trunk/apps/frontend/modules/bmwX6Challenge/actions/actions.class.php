@@ -14,6 +14,86 @@ class bmwX6ChallengeActions extends sfActions
      * Executes index action
      *
      */
+    public function executeDiamondChallenge()
+    {
+        $dateFrom = '2014-06-25 00:00:00';
+        $dateTo = '2014-06-30 23:59:59';
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $query = "SELECT distributor_id, distributor_code, full_name, package.price, tree_structure, active_datetime
+                FROM mlm_distributor dist
+                    LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+                        WHERE dist.loan_account = 'N'
+                            AND dist.from_abfx = 'N'
+                                        AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
+                            AND package.price >= 100000";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $resultArray[$count] = $arr;
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $resultArray[$count]['LEADER'] = $leader;
+            $count++;
+        }
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, package.price, history.created_on
+        FROM mlm_package_upgrade_history history
+        LEFT JOIN mlm_distributor dist ON history.dist_id = dist.distributor_id
+        LEFT JOIN mlm_package package ON package.package_id = history.package_id
+            WHERE dist.loan_account = 'N'
+                AND dist.from_abfx = 'N'
+                            AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."'
+                AND package.price >= 100000";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $upgradeResultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $upgradeResultArray[$count] = $arr;
+
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $upgradeResultArray[$count]['LEADER'] = $leader;
+
+            $count++;
+        }
+        $this->resultArray = $resultArray;
+        $this->upgradeResultArray = $upgradeResultArray;
+    }
     public function executeIndex()
     {
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -25,7 +105,7 @@ class bmwX6ChallengeActions extends sfActions
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
                         , Coalesce(reg._SUM, 0) AS register_sum
                         , Coalesce(upgrade._SUM, 0) AS upgrade_sum
-                        , dist.email, dist.full_name, dist.contact, dist.country
+                        , dist.email, dist.full_name, dist.contact, dist.country, dist.tree_structure
                 , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
                     FROM
                 (
