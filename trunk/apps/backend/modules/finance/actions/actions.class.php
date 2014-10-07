@@ -3367,7 +3367,7 @@ class financeActions extends sfActions
                     ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
                     ,dist.moneytrac_customer_id,dist.moneytrac_username
                     ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
-                    ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount
+                    ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount, dist.bank_account_currency
             FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -3392,13 +3392,15 @@ class financeActions extends sfActions
             $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
         }
 
-        /*if ($this->getRequestParameter('dateFrom') != "") {
+        if ($this->getRequestParameter('dateFrom') != "") {
             $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') >= '" . $this->getRequestParameter('dateFrom') . "'";
         }
 
         if ($this->getRequestParameter('dateTo') != "") {
             $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') <= '" . $this->getRequestParameter('dateTo') . "'";
-        }*/
+        }
+        
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $rs = $statement->executeQuery();
@@ -3477,6 +3479,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("AE".$xlsRow, "Nric Uploaded");
         $sheet->setCellValue("AF".$xlsRow, "Bank Pass Book");
         $sheet->setCellValue("AG".$xlsRow, "i-Account");
+        $sheet->setCellValue("AH".$xlsRow, "Bank Account Currency");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3520,6 +3523,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("AE".$xlsRow, $arr['file_nric'] == "" ? "N" : "Y");
             $sheet->setCellValue("AF".$xlsRow, $arr['file_bank_pass_book'] == "" ? "N" : "Y");
             $sheet->setCellValue("AG".$xlsRow, $arr['iaccount']);
+            $sheet->setCellValue("AH".$xlsRow, $arr['bank_account_currency']);
 
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
@@ -3728,7 +3732,7 @@ class financeActions extends sfActions
                 ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
                 ,dist.moneytrac_customer_id,dist.moneytrac_username
                 ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
-                ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount
+                ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount, dist.bank_account_currency
             FROM mlm_ecash_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
@@ -3751,6 +3755,14 @@ class financeActions extends sfActions
 
         if ($this->getRequestParameter('filterLeader') != "") {
             $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
+        }
+
+        if ($this->getRequestParameter('dateFrom') != "") {
+            $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') >= '" . $this->getRequestParameter('dateFrom') . "'";
+        }
+
+        if ($this->getRequestParameter('dateTo') != "") {
+            $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') <= '" . $this->getRequestParameter('dateTo') . "'";
         }
 
         $connection = Propel::getConnection();
@@ -3831,6 +3843,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("AE".$xlsRow, "Nric Uploaded");
         $sheet->setCellValue("AF".$xlsRow, "Bank Pass Book");
         $sheet->setCellValue("AG".$xlsRow, "i-Account");
+        $sheet->setCellValue("AH".$xlsRow, "Bank Account Currency");
 
         $xlsRow = 2;
         while ($rs->next()) {
@@ -3874,6 +3887,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("AE".$xlsRow, $arr['file_nric'] == "" ? "N" : "Y");
             $sheet->setCellValue("AF".$xlsRow, $arr['file_bank_pass_book'] == "" ? "N" : "Y");
             $sheet->setCellValue("AG".$xlsRow, $arr['iaccount']);
+            $sheet->setCellValue("AH".$xlsRow, $arr['bank_account_currency']);
             //$sheet->setCellValue("A".$xlsRow, $arr['withdraw_id']);
             //$row += 1;
             //$col = "A";
