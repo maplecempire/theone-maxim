@@ -71,6 +71,10 @@ $(function(){
             , { "sName" : "dist.country",  "bSortable": true}
         ]
     });
+    
+    $("#txtDateFrom").datepicker()
+    $("#txtDateTo").datepicker()
+    
     $("#btnUpdate").button({
         icons: {
             primary: "ui-icon-circle-check"
@@ -82,7 +86,7 @@ $(function(){
         }
     }).click(function(event){
         event.preventDefault();
-        window.open("<?php echo url_for("finance/cp2WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#search_leader").val() + "&statusCode=" + $("#search_combo_statusCode").val());
+        window.open("<?php echo url_for("finance/cp2WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#search_leader").val() + "&statusCode=" + $("#search_combo_statusCode").val() + "&dateFrom=" + $("#txtDateFrom").val() + "&dateTo=" + $("#txtDateTo").val());
     });
 }); // end $(function())
 
@@ -200,13 +204,26 @@ function reassignDatagridEventAttr(){
             <?php if ($sf_user->hasCredential(array(AP::AL_READONLY), false)) {
             } else {
             ?>
-            <select name="withdrawStatus">
-                <option value="PROCESSING">PROCESSING</option>
-                <!--<option value="REJECTED">REJECTED</option>-->
-                <option value="PAID">PAID</option>
-            </select>
-            <button id="btnUpdate">Update</button>
-            <button id="btnExport">Export</button>
+            <table>
+            	<tr>
+            		<td>
+			            <select name="withdrawStatus">
+			                <option value="PROCESSING">PROCESSING</option>
+			                <!--<option value="REJECTED">REJECTED</option>-->
+			                <option value="PAID">PAID</option>
+			            </select>
+			        </td>
+			        <td>
+            			<button id="btnUpdate">Update</button>
+            		</td>
+            		<td>
+            			<input id="txtDateFrom" size="20" readonly="readonly" value=""> to <input id="txtDateTo" size="20" readonly="readonly" value="">
+            		</td>
+            		<td>
+            			<button id="btnExport">Export</button>
+            		</td>
+            	</tr>
+            </table>
         <?php } ?>
     </div>
 </div>
