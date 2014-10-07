@@ -3392,15 +3392,13 @@ class financeActions extends sfActions
             $query .= " AND leader.distributor_code LIKE '%" . $this->getRequestParameter('filterLeader') . "%'";
         }
 
-        if ($this->getRequestParameter('dateFrom') != "") {
+        /*if ($this->getRequestParameter('dateFrom') != "") {
             $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') >= '" . $this->getRequestParameter('dateFrom') . "'";
         }
 
         if ($this->getRequestParameter('dateTo') != "") {
             $query .= " AND date_format(withdraw.created_on, '%Y-%m-%d') <= '" . $this->getRequestParameter('dateTo') . "'";
-        }
-        
-
+        }*/
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $rs = $statement->executeQuery();
