@@ -236,6 +236,7 @@
                             <li><?php echo __('Payout will be by the 15th of each month') ?></li>
                             <li><?php echo __('Handling Fee is USD30') ?></li>
                             <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
+                            <li><?php echo __('Leal time for monthly withdrawals to be credited to your bank accounts are as follow:<br>Local bank accounts - 20th<br>Visa debit card - 11th<br>i-Account - 11th<br>Money Trac - 15th') ?></li>
                         </ol>
 
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
