@@ -16,7 +16,7 @@ class bmwX6ChallengeActions extends sfActions
      */
     public function executeDiamondChallenge()
     {
-        $dateFrom = '2014-06-25 00:00:00';
+        $dateFrom = '2014-06-14 00:00:00';
         $dateTo = '2014-06-30 23:59:59';
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
