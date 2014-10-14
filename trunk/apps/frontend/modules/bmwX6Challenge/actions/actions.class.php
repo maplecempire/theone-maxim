@@ -55,7 +55,7 @@ class bmwX6ChallengeActions extends sfActions
             $count++;
         }
 
-        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, package.price, history.created_on
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, package.price, history.created_on, dist.tree_structure
         FROM mlm_package_upgrade_history history
         LEFT JOIN mlm_distributor dist ON history.dist_id = dist.distributor_id
         LEFT JOIN mlm_package package ON package.package_id = history.package_id
