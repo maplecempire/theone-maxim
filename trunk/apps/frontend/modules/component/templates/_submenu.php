@@ -102,13 +102,13 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
     if ($onlyTransferRP == false) {
     if ($rookieChallenge == true) {
     ?>
-    <br class="clear"><br>
+    <!--<br class="clear"><br>
     <ul>
-        <li class="menu_title"><?php echo __('Rookie Challenge'); ?></li>
+        <li class="menu_title"><?php /*echo __('Rookie Challenge'); */?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/rookieChallenge"><span><?php echo __('Rookie Challenge'); ?><img src="/images/new_icon.gif"></a>
+            <a href="/rookieChallenge"><span><?php /*echo __('Rookie Challenge'); */?><img src="/images/new_icon.gif"></a>
         </li>
-    </ul>
+    </ul>-->
     <?php } ?>
 
     <?php if ($distDB->getDistributorId() != 263640) { ?>
