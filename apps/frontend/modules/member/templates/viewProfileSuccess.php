@@ -942,6 +942,12 @@ $(function() {
                     </td>
                     <td>&nbsp;</td>
                 </tr>
+
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td colspan="2"><br><span style="color: #0080c8;"><?php echo __('Sample') ?></span>:<br><img src="/images/iAccount.jpg"></td>
+                    <td>&nbsp;</td>
+                </tr>
                 </tbody>
             </table>
             </form>
