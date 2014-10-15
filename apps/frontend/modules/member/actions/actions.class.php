@@ -7965,8 +7965,14 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if (date("d") > Globals::WITHDRAWAL_DAY) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
-                return $this->redirect('/member/cp3Withdrawal');
+                $userids = array(5650,5986,5227,5233,5234,5248,5255,5262,5267,5270,5272,5273,5277,5291,5300,5308,5318,5323,5324,5325,5326,5348,5372,5378,5404,5405,5416,5438,5444,5446,5447,5453,5454,5473,5477,5480,5484,5492,5500,5504,5507,5508,5511,5519,5520,5521,5527,5534,5544,5546,5553,5570,5576,5577,5579,5588,5590,5607,5614,5631,5649,5651,5652,5654,5657,5674,5675,5676,5677,5678,5684,5700,5701,5704,5716,5720,5730,5748,5750,5751,5757,5758,5764,5765,5767,5780,5788,5793,5800,5816,5844,5858,5872,5876,5915,5918,5921,5940,5957,5969,5973,6007,6015,6021,6040,6041,6061,6093,6097,6102,6130,6148,6152,6161,6162,6171,6181,6209,6265,6323,6330,6353,6382);
+                if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $userids)){
+                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("you can withdraw"));
+	                return $this->redirect('/member/cp3Withdrawal');
+                }else{
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
+	                return $this->redirect('/member/cp3Withdrawal');
+                }
             }
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
@@ -8511,9 +8517,11 @@ We look forward to your custom in the near future. Should you have any queries, 
         if (!$sponsor) {
             $sponsor = new MlmDistributor();
         }
-
+		
         $this->sponsor = $sponsor;
         $this->distDB = $distDB;
+        
+        $iaccount = str_replace('-','',$distDB->getIaccount());
     }
     public function executeBankInformation()
     {
