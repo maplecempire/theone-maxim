@@ -7965,10 +7965,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if (date("d") > Globals::WITHDRAWAL_DAY) {
-                $userids = array(5650,5986,5227,5233,5234,5248,5255,5262,5267,5270,5272,5273,5277,5291,5300,5308,5318,5323,5324,5325,5326,5348,5372,5378,5404,5405,5416,5438,5444,5446,5447,5453,5454,5473,5477,5480,5484,5492,5500,5504,5507,5508,5511,5519,5520,5521,5527,5534,5544,5546,5553,5570,5576,5577,5579,5588,5590,5607,5614,5631,5649,5651,5652,5654,5657,5674,5675,5676,5677,5678,5684,5700,5701,5704,5716,5720,5730,5748,5750,5751,5757,5758,5764,5765,5767,5780,5788,5793,5800,5816,5844,5858,5872,5876,5915,5918,5921,5940,5957,5969,5973,6007,6015,6021,6040,6041,6061,6093,6097,6102,6130,6148,6152,6161,6162,6171,6181,6209,6265,6323,6330,6353,6382);
-                if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $userids)){
-                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("you can withdraw"));
-	                return $this->redirect('/member/cp3Withdrawal');
+                $distributorcodes = array('LAY_YEE','money168','micken7','barabara','u212alc','hideko1','cho7510','Jieilove','tanpopo1','kakko1','ichigo1','sakura1959','aki900','pinmomie','MIYARYU23','shima101','MIEKOIKE','tomitomi','Hebori','hirokatsu1','firemoon','hy1805','megumi1110','KINGDAM','sekiken','dandy_oge','aiko-1','shinnsei','sueko1','toshimi26','KEIKO3','kikotan','mikuni456','Mayumi','skisa01','jamacyan','yuki3319','maximaichi','janneenciel','kimura34','kyoko7','Tomoya','Toku335','susan1','chiechan1','aura0928','teruyo1','OOTSU510','Nemoma','sethu1629','sin-yukito','shima101','Kimikimi3','kaka33','kaka138','saku1006','yukiko1','terutoyo','nakayoshi','atsuko1','eikotan','S351215yu','shita369','S2019yu','hfj281129','Masato0821','gorogoro','mayutan1','mirai2','mirai-12','Takayan','sab15595','suzuff01','katsu6000','kazuhisa1','rensi3333','YASUHIRO0516','kyoko7','rumiko1','fujisan1','ritsuko1','ritsuko1','ritsuko1','masaya1','hisayo28','kyoko7','u212alc','Kazucyan1','kaorin','princess7','mitsuru1','Kent1668','yukikohim','Takahiro','level0','yama517','runrun55','otiasi','mmika1','rikapii','kan2014','toshizo','TAKA2976','nobu3ocha','heart614sa','heart614','sunhigh1','chihiromama','naochan1','Crown48','shin0126','Toku335','Sachiko0139','seiwa1997tk','kokyuu43','Niwa3110','hypernomado1','ctl11240','fivestar1','Setuko0604','Jun19601212','MKJ5921','hypernomado1');
+                if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
+                	//can withdraw
                 }else{
 	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
 	                return $this->redirect('/member/cp3Withdrawal');
@@ -8059,8 +8058,13 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if (date("d") > Globals::WITHDRAWAL_DAY) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
-                return $this->redirect('/member/ecashWithdrawal');
+                $distributorcodes = array('celeb1208','utopian','Ari_luvs_087','white888','firemoon','hy1805','Uoochin','kimura34','kenf72','saku1006','terutoyo','terutoyo','atsuko1','Takayan','hisae1','kuma48','princess7','maru1122','george888','touch3939','sekiken','gregorioyoon','yes007','timothyhii','MaximIndon','MaximChina1','MaximIndon','edison7821401','rich8899','black6699','sally8888','jun12168');
+                if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
+                	//can withdraw
+                }else{
+                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
+                	return $this->redirect('/member/ecashWithdrawal');
+                }
             }
 
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
