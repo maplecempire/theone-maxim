@@ -110,10 +110,23 @@ tinyMCE.init({
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
-                        <?php echo __('Subject') ?>
+                        <?php echo __('Category') ?>
                     </td>
                     <td>
-                        <input name="title" id="title" size="50" value="<?php echo $title; ?>"/>
+                        <select name='title' id='title'>
+                        	<option value='Genealogy'><?php echo __('Genealogy') ?></option>
+                        	<option value='User Profile/Credentials'><?php echo __('User Profile/Credentials') ?></option>
+                        	<option value='Deposit/CP Points'><?php echo __('Deposit/CP Points') ?></option>
+                        	<option value='Investment Returns & Bonuses'><?php echo __('Investment Returns & Bonuses') ?></option>
+                        	<option value='MT4 Withdrawal/Reload/Trading'><?php echo __('MT4 Withdrawal/Reload/Trading') ?></option>
+                        	<option value='Withdrawal Issues'><?php echo __('Withdrawal Issues') ?></option>
+                        	<option value='Contract Maturity'><?php echo __('Contract Maturity') ?></option>
+                        	<option value='Maxim Visa Card'><?php echo __('Maxim Visa Card') ?></option>
+                        	<option value='Events/Promotions'><?php echo __('Events/Promotions') ?></option>
+                        	<option value='Others'><?php echo __('Others') ?></option>
+                        </select>
+                        <br>
+                        <?php echo __('For legal enquiries, please reach Legal Watch in Member Area.') ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
