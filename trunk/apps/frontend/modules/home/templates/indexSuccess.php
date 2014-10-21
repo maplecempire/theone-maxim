@@ -1004,12 +1004,12 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_39" class="news_desc" style="text-align: left;">
+            <div id="page_40" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
-                            <br><img src="/images/201410/maxim_gold.png">
+                            <br><img width="578" src="/images/201410/maxim_gold.png">
                             <br>Period: 1/10/2014 to 31/10/2014 2359hrs (GMT+8)
 							<br>挑战时间: 2014.10.1-10.31日23:59分(GMT+8)
 							<br>
