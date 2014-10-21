@@ -981,18 +981,6 @@
             <trans-unit><source>Dear International Member</source><target>亲爱的马胜会员</target></trans-unit>
             <trans-unit><source>Payment Asia</source><target>中國網銀支付系統</target></trans-unit>
             <trans-unit><source>You are not allowed to do placement on different referrer group</source><target>你是不允许做放置在不同的经营组织图</target></trans-unit>
-            <trans-unit><source>Category</source><target>类别</target></trans-unit>
-            <trans-unit><source>Genealogy</source><target>组织架构图</target></trans-unit>
-            <trans-unit><source>User Profile/Credentials</source><target>账户资料</target></trans-unit>
-            <trans-unit><source>Deposit/CP Points</source><target>入金与分数</target></trans-unit>
-            <trans-unit><source>Investment Returns & Bonuses</source><target>奖金与分红</target></trans-unit>
-            <trans-unit><source>MT4 Withdrawal/Reload/Trading</source><target>MT4取现/充值/交易</target></trans-unit>
-            <trans-unit><source>Withdrawal Issues</source><target>兑现问题</target></trans-unit>
-            <trans-unit><source>Contract Maturity</source><target>合同续约/终止</target></trans-unit>
-            <trans-unit><source>Maxim Visa Card</source><target>马胜借记卡</target></trans-unit>
-            <trans-unit><source>Events/Promotions</source><target>会议与促销</target></trans-unit>
-            <trans-unit><source>Others</source><target>其它</target></trans-unit>
-            <trans-unit><source>For legal enquiries, please reach Legal Watch in Member Area.</source><target>如有法律问题，请于会员专区页面左侧联系Legal Watch.</target></trans-unit>
         </body>
     </file>
 </xliff>
