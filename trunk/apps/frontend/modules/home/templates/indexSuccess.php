@@ -631,6 +631,9 @@ ul, ol {
             </script>
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
+            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201410/shanghai_money_fair.jpg"><img width="582" src="/images/201410/shanghai_money_fair.jpg" alt="" title="SHANHAI MONEY FAIR" class="aligncenter size-full wp-image-162"></a></p>
+            <div class="hr2"></div>
+            
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201406/chengdu_money_fair.jpg"><img width="582" src="/images/201406/chengdu_money_fair.jpg" alt="" title="CHENGDU MONEY FAIR" class="aligncenter size-full wp-image-162"></a></p>
             <div class="hr2"></div>
 
