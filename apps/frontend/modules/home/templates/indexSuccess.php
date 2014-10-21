@@ -1022,8 +1022,8 @@ $(document).ready(function() {
 							<br>plus
 							<br>及
 							<br>
-							<br>1 Entry Ticket to Maxim Trader Annual Convention & Gala Dinner 2015 in Phuket, Thailand. 
-							<br>马胜金融集团2015泰国普吉岛年会及晚宴门票1张
+							<br>1 Entry Ticket to Maxim Trader Annual Convention & Gala Dinner 2015 in Phuket, Thailand (TBC). 
+							<br>马胜金融集团2015泰国普吉岛(代确认)年会及晚宴门票1张
 							<br>
 							<br>Say YES to Maxim Trader..... Yes!!!!
 							<br>确认马胜说: YES!!!!
