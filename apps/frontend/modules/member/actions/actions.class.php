@@ -1225,7 +1225,59 @@ class memberActions extends sfActions
         $message = "Member ID: ".$this->getUser()->getAttribute(Globals::SESSION_DISTCODE)."<br>Full Name: ".$distDB->getFullName()."<br>Contact No: ".$contactNoEmail."<br><br>Message: ".$message;
 
         $sendMailService = new SendMailService();
-        //$sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
+        if (filter_var($distDB->getEmail(), FILTER_VALIDATE_EMAIL)) {
+        	if($distDB->getPreferLanguage()=='cn'){
+        		$subject = '此为系统自动回复';
+        		$body = '尊敬的客户您好!<br><br>
+					       谢谢您的来信；我们的客户服务人员会尽快回复您。<br><br>
+					       请注意我们的工作时间是周一至周五10:00-18:00 (GMT+8)；我们会在3个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答案)列表，以帮助所有的会员。<br><br>
+					   	注:来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们。<br><br>
+					       谢谢!<br><br>
+					       商祺，<br>
+					       客户服务部<br>
+					    www.maximtrader.com<br>
+						此为系统自动回复；请勿直接回复该邮件。';
+        	}elseif($distDB->getPreferLanguage()=='jp'){
+        		$subject = 'このメールは自動応答メールとなっております';
+        		$body = 'お客様各位、<br><br>
+						このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします。<br><br>
+						弊社の営業時間は月曜日から金曜日の10:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です。<br><br>
+						注：日本／韓国のメンバーの皆様は、それぞれ japan@maximtrader.com または korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます。<br><br>
+						ありがとうございました。<br><br>
+						敬具<br>
+						カスタマーサービス<br>
+						www.maximtrader.com<br>
+						このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください。';
+        	}elseif($distDB->getPreferLanguage()=='kr'){
+        		$subject = '본 메일은 자동응답 메일로 답장은 받을 수 없습니다';
+        		$body = '고객님께! <br><br>
+						연락주셔서 감사합니다.  고객님 메일은 잘 받았습니다. 곧 고객서비스팀에서 답장드릴 것입니다. <br><br>
+						당사의  근무시간은 월요일부터 금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무일 이내에 보내드리고 있습니다.  근무일이 아닌 경우 답변이 지연되는 점 양해바랍니다.  또한 이미 개설되어 있는 FAQ 는 즉시 이용가능하십니다.  <br><br>
+						참고) 한국 회원은 한국어 지원을 위해 korea@maximtrader.com 을 이용해 주시기 바랍니다..  <br><br>
+						감사합니다. <br><br>
+						고객지원팀<br>
+						www.maximtrader.com<br>
+						본 메일은 자동응답 메일로 답장은 받을 수 없습니다. ';
+        	}else{
+        		$subject = 'This is an automated response';
+        		$body = 'Dear Customer,
+						<br><br>
+						Thanks for contacting us. We have received your email and our Customer Service Team will be responding to you soon.
+						<br><br>
+						Please note our working hours is 10:00-18:00(GMT+8) from Monday to Friday and our standard responding time is within 3 working days.  We regret the delay in reply over the non-working hours. We are also currently working on a FAQ list which will be available very soon. 
+						<br><br>
+						Nb. Members from Japan/Korea can reach japan@maximtrader.com or korea@maximtrader.com for support in Japanese/Korean language.  
+						<br><br>
+						Thank you!
+						<br><br>
+						Best Regards,<br>
+						Customer Service<br>
+						www.maximtrader.com<br>
+						This is an automated response. Please do not directly reply to this email.';
+        	}
+        	$sendMailService->sendMail($distDB->getEmail(), $distDB->getFullName(), $subject, $body);
+        	//$sendMailService->sendCsMail("support@maximtrader.com", "support", "[Customer Enquiry]".$title, $message);
+        }       
 
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your inquiry has been submitted."));
         return $this->redirect('/member/customerEnquiry');
