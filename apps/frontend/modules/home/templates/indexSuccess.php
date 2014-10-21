@@ -995,6 +995,77 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='40'>October PROMO - Maxim GOLD CHALLENGE !!!<br>10月促销 - 马胜金融金钞挑战计划!</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "21 October 2014";
+                ?>
+            </div>
+
+            <div id="page_39" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br><img src="/images/201410/maxim_gold.png">
+                            <br>Period: 1/10/2014 to 31/10/2014 2359hrs (GMT+8)
+							<br>挑战时间: 2014.10.1-10.31日23:59分(GMT+8)
+							<br>
+							<br>To Qualify: Directly Sponsor 2 x USD100k VVIP AccountS
+							<br>挑战条件: 直接推荐2个VVIP10万美金的账户
+							<br>
+							<br>Entitle: 1 Set of Limited Edition Commemorative Medallion (1 Gold Note & 2 Gold Coins 999.9 pure certified by Government Labs with a total combined weight of 37grams ) 
+							<br>优惠获得：限量纪念版金钞1套(含经官方验证999.9纯金-金钞1张、金币2枚, 共重达37克)
+							<br>
+							<br>plus
+							<br>及
+							<br>
+							<br>1 Entry Ticket to Maxim Trader Annual Convention & Gala Dinner 2015 in Phuket, Thailand. 
+							<br>马胜金融集团2015泰国普吉岛年会及晚宴门票1张
+							<br>
+							<br>Say YES to Maxim Trader..... Yes!!!!
+							<br>确认马胜说: YES!!!!
+							<br>
+							<br>10월 프로모 – 맥심 골드 챌린지!!!!
+							<br>
+							<br>기간 : 1/10/2014 에서 31/10/2014 23시 59분
+							<br>
+							<br>자격요건 : 직접 추천 2 X USD10만불 VVIP 구좌들
+							<br>
+							<br>상품 : 기념 메달 리미티드 에디션 1 세트 (금권 1개와 금화 2개 총 무게 37그램, 정부 허가 기관에서 인증한 순도 999.9)
+							<br>
+							<br>와 함께
+							<br>
+							<br>태국 푸켓에서 열리는 맥심 트레이더 컨벤션 및 갈라 디너 2015 참석권 1개
+							<br>
+							<br>맥심에게 예스라고 하세요… 예스!!!!
+							<br>
+							<br>10月プロモーション-マキシム・ゴールド・チャレンジ!!!
+							<br>
+							<br>期間:2014年10月1日〜10月31日　23時59分（GMT＋8）
+							<br>
+							<br>資格:ダイレクトなスポンサー2　×　USD100k VVIPアカウントS
+							<br>
+							<br>権利:限定バージョンの記念メダル1セット（金券1枚と政府の研究所で認定された37グラムの2枚の純粋な24金コイン）
+							<br>
+							<br>プラス
+							<br>
+							<br>2015年タイ・プーケット島におけるマキシムトレーダー年次コンベンション＆ガラディナーへの招待チケット1枚
+							<br>
+							<br>マキシムトレーダーにYESと言ってください……YES!!!!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='39'>News on Visa Debit Card Service Interruption<br>马胜借记卡服务暂停通告</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
