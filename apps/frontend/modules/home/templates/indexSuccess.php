@@ -1009,7 +1009,7 @@ $(document).ready(function() {
                     <tbody>
                         <tr>
                             <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
-                            <br><img width="578" src="/images/201410/maxim_gold.png">
+                            <br><img width="580" src="/images/201410/maxim_gold.jpg">
                             <br>Period: 1/10/2014 to 31/10/2014 2359hrs (GMT+8)
 							<br>挑战时间: 2014.10.1-10.31日23:59分(GMT+8)
 							<br>
