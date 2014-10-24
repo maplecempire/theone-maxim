@@ -19,6 +19,9 @@ $(function() {
             , "title" : {
                 required : true
             }
+            , "category" : {
+                required : true
+            }
         },
         submitHandler: function(form) {
             waiting();
@@ -113,7 +116,8 @@ tinyMCE.init({
                         <?php echo __('Category') ?>
                     </td>
                     <td>
-                        <select name='title' id='title'>
+                        <select name='category' id='category'>
+                        	<option value=''><?php echo __('Please Select Category') ?></option>
                         	<option value='Genealogy'><?php echo __('Genealogy') ?></option>
                         	<option value='User Profile/Credentials'><?php echo __('User Profile/Credentials') ?></option>
                         	<option value='Deposit/CP Points'><?php echo __('Deposit/CP Points') ?></option>
@@ -127,6 +131,16 @@ tinyMCE.init({
                         </select>
                         <br>
                         <?php echo __('For legal enquiries, please reach Legal Watch in Member Area.') ?>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="tbl_form_row_odd">
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php echo __('Subject') ?>
+                    </td>
+                    <td>
+                        <input name="title" id="title" size="50" value="<?php echo $title; ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

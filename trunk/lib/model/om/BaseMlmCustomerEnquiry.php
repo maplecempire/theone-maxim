@@ -21,6 +21,10 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 
 
 	
+	protected $category;
+
+
+	
 	protected $title;
 
 
@@ -55,6 +59,10 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 	
 	protected $updated_on;
 
+
+	
+	protected $status_code = 'PENDING';
+
 	
 	protected $alreadyInSave = false;
 
@@ -80,6 +88,13 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 	{
 
 		return $this->contact_no;
+	}
+
+	
+	public function getCategory()
+	{
+
+		return $this->category;
 	}
 
 	
@@ -176,6 +191,13 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 	}
 
 	
+	public function getStatusCode()
+	{
+
+		return $this->status_code;
+	}
+
+	
 	public function setEnquiryId($v)
 	{
 
@@ -214,6 +236,20 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 		if ($this->contact_no !== $v) {
 			$this->contact_no = $v;
 			$this->modifiedColumns[] = MlmCustomerEnquiryPeer::CONTACT_NO;
+		}
+
+	} 
+	
+	public function setCategory($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->category !== $v) {
+			$this->category = $v;
+			$this->modifiedColumns[] = MlmCustomerEnquiryPeer::CATEGORY;
 		}
 
 	} 
@@ -350,6 +386,20 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 
 	} 
 	
+	public function setStatusCode($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->status_code !== $v || $v === 'PENDING') {
+			$this->status_code = $v;
+			$this->modifiedColumns[] = MlmCustomerEnquiryPeer::STATUS_CODE;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -360,29 +410,33 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 
 			$this->contact_no = $rs->getString($startcol + 2);
 
-			$this->title = $rs->getString($startcol + 3);
+			$this->category = $rs->getString($startcol + 3);
 
-			$this->admin_read = $rs->getString($startcol + 4);
+			$this->title = $rs->getString($startcol + 4);
 
-			$this->admin_updated = $rs->getString($startcol + 5);
+			$this->admin_read = $rs->getString($startcol + 5);
 
-			$this->distributor_read = $rs->getString($startcol + 6);
+			$this->admin_updated = $rs->getString($startcol + 6);
 
-			$this->distributor_updated = $rs->getString($startcol + 7);
+			$this->distributor_read = $rs->getString($startcol + 7);
 
-			$this->created_by = $rs->getInt($startcol + 8);
+			$this->distributor_updated = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->created_by = $rs->getInt($startcol + 9);
 
-			$this->updated_by = $rs->getInt($startcol + 10);
+			$this->created_on = $rs->getTimestamp($startcol + 10, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->updated_by = $rs->getInt($startcol + 11);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 12, null);
+
+			$this->status_code = $rs->getString($startcol + 13);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 14; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmCustomerEnquiry object", $e);
 		}
@@ -529,31 +583,37 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 				return $this->getContactNo();
 				break;
 			case 3:
-				return $this->getTitle();
+				return $this->getCategory();
 				break;
 			case 4:
-				return $this->getAdminRead();
+				return $this->getTitle();
 				break;
 			case 5:
-				return $this->getAdminUpdated();
+				return $this->getAdminRead();
 				break;
 			case 6:
-				return $this->getDistributorRead();
+				return $this->getAdminUpdated();
 				break;
 			case 7:
-				return $this->getDistributorUpdated();
+				return $this->getDistributorRead();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getDistributorUpdated();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 11:
+				return $this->getUpdatedBy();
+				break;
+			case 12:
 				return $this->getUpdatedOn();
+				break;
+			case 13:
+				return $this->getStatusCode();
 				break;
 			default:
 				return null;
@@ -568,15 +628,17 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 			$keys[0] => $this->getEnquiryId(),
 			$keys[1] => $this->getDistributorId(),
 			$keys[2] => $this->getContactNo(),
-			$keys[3] => $this->getTitle(),
-			$keys[4] => $this->getAdminRead(),
-			$keys[5] => $this->getAdminUpdated(),
-			$keys[6] => $this->getDistributorRead(),
-			$keys[7] => $this->getDistributorUpdated(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[3] => $this->getCategory(),
+			$keys[4] => $this->getTitle(),
+			$keys[5] => $this->getAdminRead(),
+			$keys[6] => $this->getAdminUpdated(),
+			$keys[7] => $this->getDistributorRead(),
+			$keys[8] => $this->getDistributorUpdated(),
+			$keys[9] => $this->getCreatedBy(),
+			$keys[10] => $this->getCreatedOn(),
+			$keys[11] => $this->getUpdatedBy(),
+			$keys[12] => $this->getUpdatedOn(),
+			$keys[13] => $this->getStatusCode(),
 		);
 		return $result;
 	}
@@ -602,31 +664,37 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 				$this->setContactNo($value);
 				break;
 			case 3:
-				$this->setTitle($value);
+				$this->setCategory($value);
 				break;
 			case 4:
-				$this->setAdminRead($value);
+				$this->setTitle($value);
 				break;
 			case 5:
-				$this->setAdminUpdated($value);
+				$this->setAdminRead($value);
 				break;
 			case 6:
-				$this->setDistributorRead($value);
+				$this->setAdminUpdated($value);
 				break;
 			case 7:
-				$this->setDistributorUpdated($value);
+				$this->setDistributorRead($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setDistributorUpdated($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 11:
+				$this->setUpdatedBy($value);
+				break;
+			case 12:
 				$this->setUpdatedOn($value);
+				break;
+			case 13:
+				$this->setStatusCode($value);
 				break;
 		} 	}
 
@@ -638,15 +706,17 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 		if (array_key_exists($keys[0], $arr)) $this->setEnquiryId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDistributorId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setContactNo($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setTitle($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setAdminRead($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAdminUpdated($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setDistributorRead($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setDistributorUpdated($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCategory($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTitle($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAdminRead($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAdminUpdated($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDistributorRead($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDistributorUpdated($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCreatedOn($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setStatusCode($arr[$keys[13]]);
 	}
 
 	
@@ -657,6 +727,7 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::ENQUIRY_ID)) $criteria->add(MlmCustomerEnquiryPeer::ENQUIRY_ID, $this->enquiry_id);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::DISTRIBUTOR_ID)) $criteria->add(MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, $this->distributor_id);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::CONTACT_NO)) $criteria->add(MlmCustomerEnquiryPeer::CONTACT_NO, $this->contact_no);
+		if ($this->isColumnModified(MlmCustomerEnquiryPeer::CATEGORY)) $criteria->add(MlmCustomerEnquiryPeer::CATEGORY, $this->category);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::TITLE)) $criteria->add(MlmCustomerEnquiryPeer::TITLE, $this->title);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::ADMIN_READ)) $criteria->add(MlmCustomerEnquiryPeer::ADMIN_READ, $this->admin_read);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::ADMIN_UPDATED)) $criteria->add(MlmCustomerEnquiryPeer::ADMIN_UPDATED, $this->admin_updated);
@@ -666,6 +737,7 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::CREATED_ON)) $criteria->add(MlmCustomerEnquiryPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::UPDATED_BY)) $criteria->add(MlmCustomerEnquiryPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmCustomerEnquiryPeer::UPDATED_ON)) $criteria->add(MlmCustomerEnquiryPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmCustomerEnquiryPeer::STATUS_CODE)) $criteria->add(MlmCustomerEnquiryPeer::STATUS_CODE, $this->status_code);
 
 		return $criteria;
 	}
@@ -700,6 +772,8 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 
 		$copyObj->setContactNo($this->contact_no);
 
+		$copyObj->setCategory($this->category);
+
 		$copyObj->setTitle($this->title);
 
 		$copyObj->setAdminRead($this->admin_read);
@@ -717,6 +791,8 @@ abstract class BaseMlmCustomerEnquiry extends BaseObject  implements Persistent 
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setStatusCode($this->status_code);
 
 
 		$copyObj->setNew(true);
