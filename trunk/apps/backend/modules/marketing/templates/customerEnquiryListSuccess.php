@@ -22,6 +22,7 @@ $(function(){
         "extraParam" : function(aoData) { // pass extra params to server
             aoData.push( { "name": "filterDistCode", "value": $("#search_distCode").val()  } );
             aoData.push( { "name": "filterSubject", "value": $("#search_subject").val()  } );
+            aoData.push( { "name": "filterStatusCode", "value": $("#search_statusCode").val()  } );
         },
         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
             reassignDatagridEventAttr();
@@ -50,7 +51,8 @@ $(function(){
                 } else if (oObj.aData[5] == "Unread") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "' style='color:#0088CF'>Unread</a>";
                 }
-            }}
+            }},
+            { "sName" : "customer.status_code",  "bSortable": true}
         ]
     });
 
@@ -93,6 +95,7 @@ function reassignDatagridEventAttr(){
                             <th>Subject</th>
                             <th>Last Reply</th>
                             <th>Read / Unread</th>
+                            <th>Status</th>
                         </tr>
                         <tr>
                             <td></td>
@@ -101,6 +104,7 @@ function reassignDatagridEventAttr(){
                             <td><input title="" size="20" type="text" id="search_subject" value="" class="search_init"/></td>
                             <td></td>
                             <td></td>
+                            <td><input title="" size="20" type="text" id="search_statusCode" value="" class="search_init"/></td>
                         </tr>
                         </thead>
                     </table>
