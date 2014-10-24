@@ -817,6 +817,9 @@ class marketingListActions extends sfActions
         if ($this->getRequestParameter('filterDistCode') != "") {
             $sWhere .= " AND dist.distributor_code like '%" . $this->getRequestParameter('filterDistCode') ."%'";
         }
+        if ($this->getRequestParameter('filterCategory') != "") {
+            $sWhere .= " AND customer.category like '%" . $this->getRequestParameter('filterCategory') ."%'";
+        }
         $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   sorting  *******/
@@ -858,9 +861,11 @@ class marketingListActions extends sfActions
             }
             $arr[] = array(
                 $resultArr['enquiry_id'] == null ? "" : $resultArr['enquiry_id'],
+                $resultArr['category'] == null ? "" : $resultArr['category'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
                 $resultArr['title'] == null ? "" : $resultArr['title'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $lastReply,
                 $read
             );
