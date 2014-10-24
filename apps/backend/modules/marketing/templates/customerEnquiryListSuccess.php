@@ -123,13 +123,12 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td></td>
                             <td>
-                            <?php
-		                        $arr = array();
-		                        $arr['PENDING'] = 'PENDING';
-		                        $arr['PROCESSING'] = 'PROCESSING';
-		                        $arr['SOLVED'] = 'SOLVED';
-		                        echo select_tag('search_statusCode', options_for_select($arr, $mlmCustomerEnquiry->getStatusCode()));
-		                     ?>
+                            <select id="search_statusCode">
+                                <option value="">All</option>
+                                <option value="PENDING" selected="selected">PENDING</option>
+                                <option value="PROCESSING">PROCESSING</option>
+                                <option value="SOLVED">SOLVED</option>
+                            </select>
                             </td>
                         </tr>
                         </thead>
