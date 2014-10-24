@@ -38,7 +38,7 @@ $(function(){
         "sAjaxSource": "<?php echo url_for("/marketingList/customerEnquiryList");?>",
         "sPaginationType": "full_numbers",
         "aaSorting": [
-            [1,'desc']
+            [2,'desc']
         ],
         "aoColumns": [
             { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
