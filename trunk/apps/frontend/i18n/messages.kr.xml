@@ -954,6 +954,17 @@
             <trans-unit><source>Dear International Member</source><target>친애하는 국제 회원 여러분들께</target></trans-unit>
             <trans-unit><source>International Transfer Information</source><target>자세한 사항은 하기내용을 참조하시기 바랍니다</target></trans-unit>
             <trans-unit><source>[Important Notice]</source><target>[중요]</target></trans-unit>
+            <trans-unit><source>Category</source><target>범주</target></trans-unit>
+            <trans-unit><source>User Profile/Credentials</source><target>사용자 프로필/자격정보</target></trans-unit>
+            <trans-unit><source>Deposit/CP Points</source><target>예금/CP 포인트</target></trans-unit>
+            <trans-unit><source>Investment Returns/Bonuses</source><target>투자 배당금 및 보너스</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal/Reload/Trading</source><target>MT4 인출/입금/거래</target></trans-unit>
+            <trans-unit><source>Withdrawal Issues</source><target>인출문제</target></trans-unit>
+            <trans-unit><source>Contract Maturity</source><target>계약만기</target></trans-unit>
+            <trans-unit><source>Maxim Visa Card</source><target>맥심 비자 카드</target></trans-unit>
+            <trans-unit><source>Events/Promotions</source><target>이벤트 및 프로모션</target></trans-unit>
+            <trans-unit><source>Others</source><target>기타</target></trans-unit>
+            <trans-unit><source>For legal enquiries, please reach Legal Watch in Member Area.</source><target>법률 관련 사항은 멤버 부분의 리걸 와치에 연락하시기 바랍니다.</target></trans-unit>
         </body>
     </file>
 </xliff>
