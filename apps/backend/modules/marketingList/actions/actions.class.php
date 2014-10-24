@@ -811,6 +811,9 @@ class marketingListActions extends sfActions
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterCategory') != "") {
+            $sWhere .= " AND customer.category like '%" . $this->getRequestParameter('filterCategory') ."%'";
+        }
         if ($this->getRequestParameter('filterSubject') != "") {
             $sWhere .= " AND customer.title like '%" . $this->getRequestParameter('filterSubject') ."%'";
         }
@@ -861,6 +864,7 @@ class marketingListActions extends sfActions
             }
             $arr[] = array(
                 $resultArr['enquiry_id'] == null ? "" : $resultArr['enquiry_id'],
+                $resultArr['category'] == null ? "" : $resultArr['category'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
                 $resultArr['title'] == null ? "" : $resultArr['title'],
