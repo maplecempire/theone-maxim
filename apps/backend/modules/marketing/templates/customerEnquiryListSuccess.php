@@ -42,11 +42,11 @@ $(function(){
         "aoColumns": [
             { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
             { "sName" : "customer.category",  "bSortable": true},
+            { "sName" : "customer.status_code",  "bSortable": true},
             { "sName" : "customer.created_on", "bVisible" : true,  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
             { "sName" : "customer.title",  "bSortable": true},
             { "sName" : "customer.distributor_updated",  "bSortable": true},
-            { "sName" : "customer.status_code",  "bSortable": true},
             { "sName" : "customer.admin_read",  "bVisible": true, "fnRender": function ( oObj ) {
                 if (oObj.aData[5] == "Read") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "'>Read</a>";
@@ -92,20 +92,20 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <th></th>
                             <th>Category</th>
+                            <th>Status</th>
                             <th>Date</th>
                             <th>Member ID</th>
                             <th>Subject</th>
                             <th>Last Reply</th>
-                            <th>Status</th>
                             <th>Read / Unread</th>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input title="" size="20" type="text" id="search_category" value="" class="search_init"/></td>
                             <td></td>
+                            <td></td>
                             <td><input title="" size="20" type="text" id="search_distCode" value="" class="search_init"/></td>
                             <td><input title="" size="20" type="text" id="search_subject" value="" class="search_init"/></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
