@@ -38,6 +38,8 @@ class MlmCustomerEnquiryMapBuilder {
 
 		$tMap->addColumn('CONTACT_NO', 'ContactNo', 'string', CreoleTypes::VARCHAR, false, 255);
 
+		$tMap->addColumn('CATEGORY', 'Category', 'string', CreoleTypes::VARCHAR, true, 255);
+
 		$tMap->addColumn('TITLE', 'Title', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('ADMIN_READ', 'AdminRead', 'string', CreoleTypes::VARCHAR, false, 1);
@@ -55,6 +57,8 @@ class MlmCustomerEnquiryMapBuilder {
 		$tMap->addColumn('UPDATED_BY', 'UpdatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
+
+		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 10);
 
 	} 
 } 
