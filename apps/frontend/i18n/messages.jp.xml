@@ -957,6 +957,17 @@
             <trans-unit><source>Dear International Member</source><target>国際メンバーの皆さま</target></trans-unit>
             <trans-unit><source>International Transfer Information</source><target>詳細については、下記をご参照ください</target></trans-unit>
             <trans-unit><source>[Important Notice]</source><target>[重要]</target></trans-unit>
+            <trans-unit><source>Category</source><target>カテゴリ</target></trans-unit>
+            <trans-unit><source>User Profile/Credentials</source><target>ユーザープロファイル／資格</target></trans-unit>
+            <trans-unit><source>Deposit/CP Points</source><target>預金／CPポイント</target></trans-unit>
+            <trans-unit><source>Investment Returns/Bonuses</source><target>投資リターン＆ボーナス</target></trans-unit>
+            <trans-unit><source>MT4 Withdrawal/Reload/Trading</source><target>MT4引き出し／リロード／トレード</target></trans-unit>
+            <trans-unit><source>Withdrawal Issues</source><target>引き出しに関する問題</target></trans-unit>
+            <trans-unit><source>Contract Maturity</source><target>契約の満期</target></trans-unit>
+            <trans-unit><source>Maxim Visa Card</source><target>マキシムビザカード</target></trans-unit>
+            <trans-unit><source>Events/Promotions</source><target>イベント／プロモーション</target></trans-unit>
+            <trans-unit><source>Others</source><target>その他</target></trans-unit>
+            <trans-unit><source>For legal enquiries, please reach Legal Watch in Member Area.</source><target>法律上の問題に関してはメンバーエリアのLegal Watchをご参照ください。</target></trans-unit>
         </body>
     </file>
 </xliff>

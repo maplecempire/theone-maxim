@@ -982,7 +982,6 @@
             <trans-unit><source>Payment Asia</source><target>中國網銀支付系統</target></trans-unit>
             <trans-unit><source>You are not allowed to do placement on different referrer group</source><target>你是不允许做放置在不同的经营组织图</target></trans-unit>
             <trans-unit><source>Category</source><target>类别</target></trans-unit>
-            <trans-unit><source>Genealogy</source><target>组织架构图</target></trans-unit>
             <trans-unit><source>User Profile/Credentials</source><target>账户资料</target></trans-unit>
             <trans-unit><source>Deposit/CP Points</source><target>入金与分数</target></trans-unit>
             <trans-unit><source>Investment Returns/Bonuses</source><target>奖金与分红</target></trans-unit>
