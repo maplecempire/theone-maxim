@@ -13,7 +13,7 @@ abstract class BaseMlmCustomerEnquiryPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmCustomerEnquiry';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,6 +27,9 @@ abstract class BaseMlmCustomerEnquiryPeer {
 
 	
 	const CONTACT_NO = 'mlm_customer_enquiry.CONTACT_NO';
+
+	
+	const CATEGORY = 'mlm_customer_enquiry.CATEGORY';
 
 	
 	const TITLE = 'mlm_customer_enquiry.TITLE';
@@ -56,23 +59,26 @@ abstract class BaseMlmCustomerEnquiryPeer {
 	const UPDATED_ON = 'mlm_customer_enquiry.UPDATED_ON';
 
 	
+	const STATUS_CODE = 'mlm_customer_enquiry.STATUS_CODE';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('EnquiryId', 'DistributorId', 'ContactNo', 'Title', 'AdminRead', 'AdminUpdated', 'DistributorRead', 'DistributorUpdated', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmCustomerEnquiryPeer::ENQUIRY_ID, MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, MlmCustomerEnquiryPeer::CONTACT_NO, MlmCustomerEnquiryPeer::TITLE, MlmCustomerEnquiryPeer::ADMIN_READ, MlmCustomerEnquiryPeer::ADMIN_UPDATED, MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, MlmCustomerEnquiryPeer::DISTRIBUTOR_UPDATED, MlmCustomerEnquiryPeer::CREATED_BY, MlmCustomerEnquiryPeer::CREATED_ON, MlmCustomerEnquiryPeer::UPDATED_BY, MlmCustomerEnquiryPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('enquiry_id', 'distributor_id', 'contact_no', 'title', 'admin_read', 'admin_updated', 'distributor_read', 'distributor_updated', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('EnquiryId', 'DistributorId', 'ContactNo', 'Category', 'Title', 'AdminRead', 'AdminUpdated', 'DistributorRead', 'DistributorUpdated', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'StatusCode', ),
+		BasePeer::TYPE_COLNAME => array (MlmCustomerEnquiryPeer::ENQUIRY_ID, MlmCustomerEnquiryPeer::DISTRIBUTOR_ID, MlmCustomerEnquiryPeer::CONTACT_NO, MlmCustomerEnquiryPeer::CATEGORY, MlmCustomerEnquiryPeer::TITLE, MlmCustomerEnquiryPeer::ADMIN_READ, MlmCustomerEnquiryPeer::ADMIN_UPDATED, MlmCustomerEnquiryPeer::DISTRIBUTOR_READ, MlmCustomerEnquiryPeer::DISTRIBUTOR_UPDATED, MlmCustomerEnquiryPeer::CREATED_BY, MlmCustomerEnquiryPeer::CREATED_ON, MlmCustomerEnquiryPeer::UPDATED_BY, MlmCustomerEnquiryPeer::UPDATED_ON, MlmCustomerEnquiryPeer::STATUS_CODE, ),
+		BasePeer::TYPE_FIELDNAME => array ('enquiry_id', 'distributor_id', 'contact_no', 'category', 'title', 'admin_read', 'admin_updated', 'distributor_read', 'distributor_updated', 'created_by', 'created_on', 'updated_by', 'updated_on', 'status_code', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('EnquiryId' => 0, 'DistributorId' => 1, 'ContactNo' => 2, 'Title' => 3, 'AdminRead' => 4, 'AdminUpdated' => 5, 'DistributorRead' => 6, 'DistributorUpdated' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (MlmCustomerEnquiryPeer::ENQUIRY_ID => 0, MlmCustomerEnquiryPeer::DISTRIBUTOR_ID => 1, MlmCustomerEnquiryPeer::CONTACT_NO => 2, MlmCustomerEnquiryPeer::TITLE => 3, MlmCustomerEnquiryPeer::ADMIN_READ => 4, MlmCustomerEnquiryPeer::ADMIN_UPDATED => 5, MlmCustomerEnquiryPeer::DISTRIBUTOR_READ => 6, MlmCustomerEnquiryPeer::DISTRIBUTOR_UPDATED => 7, MlmCustomerEnquiryPeer::CREATED_BY => 8, MlmCustomerEnquiryPeer::CREATED_ON => 9, MlmCustomerEnquiryPeer::UPDATED_BY => 10, MlmCustomerEnquiryPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('enquiry_id' => 0, 'distributor_id' => 1, 'contact_no' => 2, 'title' => 3, 'admin_read' => 4, 'admin_updated' => 5, 'distributor_read' => 6, 'distributor_updated' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('EnquiryId' => 0, 'DistributorId' => 1, 'ContactNo' => 2, 'Category' => 3, 'Title' => 4, 'AdminRead' => 5, 'AdminUpdated' => 6, 'DistributorRead' => 7, 'DistributorUpdated' => 8, 'CreatedBy' => 9, 'CreatedOn' => 10, 'UpdatedBy' => 11, 'UpdatedOn' => 12, 'StatusCode' => 13, ),
+		BasePeer::TYPE_COLNAME => array (MlmCustomerEnquiryPeer::ENQUIRY_ID => 0, MlmCustomerEnquiryPeer::DISTRIBUTOR_ID => 1, MlmCustomerEnquiryPeer::CONTACT_NO => 2, MlmCustomerEnquiryPeer::CATEGORY => 3, MlmCustomerEnquiryPeer::TITLE => 4, MlmCustomerEnquiryPeer::ADMIN_READ => 5, MlmCustomerEnquiryPeer::ADMIN_UPDATED => 6, MlmCustomerEnquiryPeer::DISTRIBUTOR_READ => 7, MlmCustomerEnquiryPeer::DISTRIBUTOR_UPDATED => 8, MlmCustomerEnquiryPeer::CREATED_BY => 9, MlmCustomerEnquiryPeer::CREATED_ON => 10, MlmCustomerEnquiryPeer::UPDATED_BY => 11, MlmCustomerEnquiryPeer::UPDATED_ON => 12, MlmCustomerEnquiryPeer::STATUS_CODE => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('enquiry_id' => 0, 'distributor_id' => 1, 'contact_no' => 2, 'category' => 3, 'title' => 4, 'admin_read' => 5, 'admin_updated' => 6, 'distributor_read' => 7, 'distributor_updated' => 8, 'created_by' => 9, 'created_on' => 10, 'updated_by' => 11, 'updated_on' => 12, 'status_code' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -132,6 +138,8 @@ abstract class BaseMlmCustomerEnquiryPeer {
 
 		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::CONTACT_NO);
 
+		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::CATEGORY);
+
 		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::TITLE);
 
 		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::ADMIN_READ);
@@ -149,6 +157,8 @@ abstract class BaseMlmCustomerEnquiryPeer {
 		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::UPDATED_BY);
 
 		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::UPDATED_ON);
+
+		$criteria->addSelectColumn(MlmCustomerEnquiryPeer::STATUS_CODE);
 
 	}
 
