@@ -104,17 +104,17 @@ function reassignDatagridEventAttr(){
                             <td></td>
                             <td>
                             <select name='search_category' id='search_category'>
-	                        	<option value=''><?php echo __('All Category') ?></option>
-	                        	<option value='Genealogy'><?php echo __('Genealogy') ?></option>
-	                        	<option value='User Profile/Credentials'><?php echo __('User Profile/Credentials') ?></option>
-	                        	<option value='Deposit/CP Points'><?php echo __('Deposit/CP Points') ?></option>
-	                        	<option value='Investment Returns/Bonuses'><?php echo __('Investment Returns/Bonuses') ?></option>
-	                        	<option value='MT4 Withdrawal/Reload/Trading'><?php echo __('MT4 Withdrawal/Reload/Trading') ?></option>
-	                        	<option value='Withdrawal Issues'><?php echo __('Withdrawal Issues') ?></option>
-	                        	<option value='Contract Maturity'><?php echo __('Contract Maturity') ?></option>
-	                        	<option value='Maxim Visa Card'><?php echo __('Maxim Visa Card') ?></option>
-	                        	<option value='Events/Promotions'><?php echo __('Events/Promotions') ?></option>
-	                        	<option value='Others'><?php echo __('Others') ?></option>
+	                        	<option value=''>All Category</option>
+	                        	<option value='Genealogy'>Genealogy</option>
+	                        	<option value='User Profile/Credentials'>User Profile/Credentials</option>
+	                        	<option value='Deposit/CP Points'>Deposit/CP Points</option>
+	                        	<option value='Investment Returns/Bonuses'>Investment Returns/Bonuses</option>
+	                        	<option value='MT4 Withdrawal/Reload/Trading'>MT4 Withdrawal/Reload/Trading</option>
+	                        	<option value='Withdrawal Issues'>Withdrawal Issues</option>
+	                        	<option value='Contract Maturity'>Contract Maturity</option>
+	                        	<option value='Maxim Visa Card'>Maxim Visa Card</option>
+	                        	<option value='Events/Promotions'>Events/Promotions</option>
+	                        	<option value='Others'>Others</option>
 	                        </select>
                             </td>
                             <td></td>
