@@ -102,13 +102,35 @@ function reassignDatagridEventAttr(){
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input title="" size="20" type="text" id="search_category" value="" class="search_init"/></td>
+                            <td>
+                            <select name='search_category' id='search_category'>
+	                        	<option value=''><?php echo __('All Category') ?></option>
+	                        	<option value='Genealogy'><?php echo __('Genealogy') ?></option>
+	                        	<option value='User Profile/Credentials'><?php echo __('User Profile/Credentials') ?></option>
+	                        	<option value='Deposit/CP Points'><?php echo __('Deposit/CP Points') ?></option>
+	                        	<option value='Investment Returns/Bonuses'><?php echo __('Investment Returns/Bonuses') ?></option>
+	                        	<option value='MT4 Withdrawal/Reload/Trading'><?php echo __('MT4 Withdrawal/Reload/Trading') ?></option>
+	                        	<option value='Withdrawal Issues'><?php echo __('Withdrawal Issues') ?></option>
+	                        	<option value='Contract Maturity'><?php echo __('Contract Maturity') ?></option>
+	                        	<option value='Maxim Visa Card'><?php echo __('Maxim Visa Card') ?></option>
+	                        	<option value='Events/Promotions'><?php echo __('Events/Promotions') ?></option>
+	                        	<option value='Others'><?php echo __('Others') ?></option>
+	                        </select>
+                            </td>
                             <td></td>
                             <td><input title="" size="20" type="text" id="search_distCode" value="" class="search_init"/></td>
                             <td><input title="" size="20" type="text" id="search_subject" value="" class="search_init"/></td>
                             <td></td>
                             <td></td>
-                            <td><input title="" size="20" type="text" id="search_statusCode" value="" class="search_init"/></td>
+                            <td>
+                            <?php
+		                        $arr = array();
+		                        $arr['PENDING'] = 'PENDING';
+		                        $arr['PROCESSING'] = 'PROCESSING';
+		                        $arr['SOLVED'] = 'SOLVED';
+		                        echo select_tag('search_statusCode', options_for_select($arr, $mlmCustomerEnquiry->getStatusCode()));
+		                     ?>
+                            </td>
                         </tr>
                         </thead>
                     </table>

@@ -178,6 +178,20 @@ tinyMCE.init({
                         <textarea rows="3" cols="3" id="message" name="message"><?php echo $message; ?></textarea>
                     </td>
                 </tr>
+                <tr class="tbl_form_row_even">
+                    <td>
+                        <?php echo __('Status') ?>
+                    </td>
+                    <td>
+                        <?php
+	                        $arr = array();
+	                        $arr['PENDING'] = 'PENDING';
+	                        $arr['PROCESSING'] = 'PROCESSING';
+	                        $arr['SOLVED'] = 'SOLVED';
+	                        echo select_tag('status_code', options_for_select($arr, $mlmCustomerEnquiry->getStatusCode()));
+	                     ?>
+                    </td>
+                </tr>
             </table>
             <hr/>
             <button id="btnSave">Save</button>
