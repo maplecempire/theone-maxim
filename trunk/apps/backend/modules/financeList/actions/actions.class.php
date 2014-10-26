@@ -548,6 +548,7 @@ class financeListActions extends sfActions
 
         $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
         $connection = Propel::getConnection();
+		//var_dump($query);
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
 
