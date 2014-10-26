@@ -125,7 +125,7 @@ function reassignDatagridEventAttr(){
                             <td>
                             <select id="search_statusCode">
                                 <option value="">All</option>
-                                <option value="PENDING" selected="selected">PENDING</option>
+                                <option value="PENDING">PENDING</option>
                                 <option value="PROCESSING">PROCESSING</option>
                                 <option value="SOLVED">SOLVED</option>
                             </select>
