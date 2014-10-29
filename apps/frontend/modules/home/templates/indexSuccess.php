@@ -993,6 +993,68 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+        
+        
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='41'>MBank Visa Card Service Termination Notice<br>马胜MBank Visa借记卡服务暂停公告</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "29 October 2014";
+                ?>
+            </div>
+
+            <div id="page_41" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear IMs and Partners,
+                            <br>亲爱的会员及领导们:
+                            <br>
+                            <br>Please kindly note that due to the past problems with MBank Visa Cards, the company has decided to terminate their service.  All the balance in accounts will be returned to our members CP3 accounts by 31 Oct 2014, after which you are welcome to apply for i-Accounts in Member Area.
+                            <br>请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额在2014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account。
+                            <br>
+                            <br>We apologize again for the inconvenience, yet please understand the company is doing so because we believe all our members deserve the best service. We very much appreciate your understanding and cooperation!
+                            <br>为此给您带来的不便我们深表歉意；但公司这样做正是因为我们一直将客户的利益谨记于心。谢谢大家的理解与配合！
+                            <br>
+                            <br>Mgmt of MCL
+                            <br>马胜金融集团管理层
+                            <br>
+                            <br>
+                            <br>
+                            <br>MBankビザカードサービス終了のお知らせ
+                            <br>
+                            <br>IMおよびパートナーの皆様
+                            <br>
+                            <br>過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに、2014年10月31日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します。
+                            <br>
+                            <br>さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します！
+                            <br>
+                            <br>MCLマネジメント
+                            <br>
+                            <br>
+                            <br>
+                            <br>MBank 비자카드 서비스 만료 공지
+                            <br>
+                            <br>국제회원 및 파트너님께,
+                            <br>
+                            <br>지난 MBank 비자카드의  문제 발생 이후로, 회사는  본 서비스를 종료하기로 결정하였음을 알려드립니다. 계좌에 있는 모든 잔액은 2014년 10월31일까지 우리의 회원 CP3 계좌로 다시 예치될 것입니다. 이후 홈페이지 멤버 에리어에서 i-account를 신청 하시기 바랍니다.
+                            <br>
+                            <br>다시 한번 불편을 끼쳐드린 점 죄송하게 생각하며, 회사는 회원들이 최상의 서비스를 드리기 위해서 이런 결정을 내리게 되었음을 이해해 주시기 바랍니다. 여러분의 이해와 협력에 깊은 감사를 드립니다.
+                            <br>
+                            <br>MCL 관리팀
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='40'>October PROMO - Maxim GOLD CHALLENGE !!!<br>10月促销 - 马胜金融金钞挑战计划!</a><img src="/images/new_icon.gif">
@@ -1123,6 +1185,7 @@ $(document).ready(function() {
 
             <div class="popdivider"></div>
         </div>
+        
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='38'>Important Announcement</a><img src="/images/new_icon.gif">
