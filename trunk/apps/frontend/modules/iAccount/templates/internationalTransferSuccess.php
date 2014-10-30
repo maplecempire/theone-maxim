@@ -52,7 +52,7 @@ $culture = $sf_user->getCulture();
             <tr>
                 <td class="">
                 <?php if ($culture == "cn") { ?>
-                    Maxim Capital Limited Seychelles (Company name)
+                    Maxim Capital Limited Seychelles (公司名称)
                     <br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.
                     <br><br>
                     <ul class="page_ul">
@@ -120,23 +120,20 @@ $culture = $sf_user->getCulture();
                 <td class="">
                 <ul class="page_ul">
                     <?php if ($culture == "cn") { ?>
-                        <li>Once you have completed your i-Account registration and received your i-Account number, please go to
-                    your Maxim Trader “member area” and update the exact information of your i-Account into your “user
-                    profile”. Once this is done, you may use your i-Account as an option for your monthly withdrawal.</li>
-                    <li>After you have remitted funds to Maxim Corporate i-Account, please scan and email the TT receipt to
-                    finance@maximtrader.com.</li>
-                <?php } else if ($culture == "kr") { ?>
-                    <li>i-Account등록 완료 후, i-Account계좌번호를 확인 하시면Maxim Trader사의「member area 」의 「user profile (개인설정)」에서,i-Account의 정확한 정보를(계좌번호 등) 갱신하여 주십시오.갱신 완료 후, i-Account를 매달 출금시 이용하실수 있습니다. </li>
-                    <li>Maxim사의i-Account로 자금 송금 후, finance@maximtrader.com로TTreceipt를 첨부해 주십시오.</li>
-                <?php } else if ($culture == "jp") { ?>
-                    <li>i-Accountの登録が完了し、i-Accountの口座番号を受け取りましたら、Maxim Trader社の「member area (メンバーエリア)」から「user profile (個人設定)」にアクセスし、i-Accountに関する正確な情報を更新してください。更新が完了した後、i-Account を月々の引き出しにご利用いただけます。</li>
-                    <li>Maxim社のi-Accountに資金を送金した後、finance@maximtrader.comまでTTレシートをスキャンしたものをメールにて送付してください。</li>
-                <?php } else { ?>
-                    <li>Once you have completed your i-Account registration and received your i-Account number, please go to
-                        your Maxim Trader “member area” and update the exact information of your i-Account into your “user
-                        profile”. Once this is done, you may use your i-Account as an option for your monthly withdrawal.</li>
-                    <li>After you have remitted funds to Maxim Corporate i-Account, please scan and email the TT receipt to
-                        finance@maximtrader.com.</li>
+                        <li>当您完成i-Account注册并获取i-Account账号之后，请到Maxim Trader的 “member area” 将您i-Account详细信息更新到 “user profile” 中。完成之后，您便可每月使用i-Account进行出金。</li>
+                    	<li>在您完成向Maxim i-Account 账户汇款后，请扫描电汇收据并发送至finance@maximtrader.com。</li>
+	                <?php } else if ($culture == "kr") { ?>
+	                    <li>i-Account등록 완료 후, i-Account계좌번호를 확인 하시면Maxim Trader사의「member area 」의 「user profile (개인설정)」에서,i-Account의 정확한 정보를(계좌번호 등) 갱신하여 주십시오.갱신 완료 후, i-Account를 매달 출금시 이용하실수 있습니다. </li>
+	                    <li>Maxim사의i-Account로 자금 송금 후, finance@maximtrader.com로TTreceipt를 첨부해 주십시오.</li>
+	                <?php } else if ($culture == "jp") { ?>
+	                    <li>i-Accountの登録が完了し、i-Accountの口座番号を受け取りましたら、Maxim Trader社の「member area (メンバーエリア)」から「user profile (個人設定)」にアクセスし、i-Accountに関する正確な情報を更新してください。更新が完了した後、i-Account を月々の引き出しにご利用いただけます。</li>
+	                    <li>Maxim社のi-Accountに資金を送金した後、finance@maximtrader.comまでTTレシートをスキャンしたものをメールにて送付してください。</li>
+	                <?php } else { ?>
+	                    <li>Once you have completed your i-Account registration and received your i-Account number, please go to
+	                        your Maxim Trader “member area” and update the exact information of your i-Account into your “user
+	                        profile”. Once this is done, you may use your i-Account as an option for your monthly withdrawal.</li>
+	                    <li>After you have remitted funds to Maxim Corporate i-Account, please scan and email the TT receipt to
+	                        finance@maximtrader.com.</li>
                     <?php } ?>
                 </ul>
                 </td>
@@ -150,21 +147,26 @@ $culture = $sf_user->getCulture();
             <tr>
                 <td class="">
                     <?php if ($culture == "cn") { ?>
-                        Beneficiary Account Information (International Transfer)
-                <br>
-                <br>
-                <ul class="page_ul">
-                    <li>Name of Beneficiary Bank: SHANGHAI PUDONG DEVELOPMENT BANK</li>
-                    <li>Address of Beneficiary Bank: 12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
-                    <li>Country of Beneficiary Bank: CHINA</li>
-                    <li>SWIFT: SPDBCNSHOSA</li>
-                    <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
-                    <li>Beneficiary Address: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
-                    <li>Beneficiary Account (each currency has respective account number)</li>
-                    <li>Beneficiary Country: HONG KONG</li>
-                    <li>Postcode: 999077</li>
-                    <li>USD:OSA11443632571742</li>
-                </ul>
+                        	您可在银行柜台或网上银行，通过国际汇款从您自己的银行账户向以下账户汇款。账户信息如下。
+			                <br>
+			                <br>
+			                <ul class="page_ul">
+			                    <li>您可以通过任何银行柜台或网上银行，用国际汇款方式汇款到您的个人i-Account账户或Maxim企业i-Account账户。我们会在确认到汇款后立即进行处理。</li>
+			                    <li>银行账户信息如下 （请注意底部需要注意事项）</li>
+			                </ul>
+			                <br><br>
+			                <ul class="page_ul">
+			                    <li>收款方银行名称：SHANGHAI PUDONG DEVELOPMENT BANK</li>
+			                    <li>收款方银行地址：12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
+			                    <li>收款方银行国家：中国</li>
+			                    <li>SWIFT: SPDBCNSHOSA</li>
+			                    <li>收款方账户名称：IACCOUNT SERVICES (HK) LIMITED</li>
+			                    <li>收款方地址: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
+			                    <li>收款方账号（各币种账号不同）</li>
+			                    <li>收款方地区：香港</li>
+			                    <li>邮编： 999077</li>
+			                    <li>USD: OSA1144632571742</li>
+			                </ul>
                 <?php } else if ($culture == "kr") { ?>
                     은행 창구 또는 인터넷뱅킹을 이용하여 하기의 계좌로 국제송금 하여주십시오.
                     <ul class="page_ul">
@@ -240,14 +242,12 @@ $culture = $sf_user->getCulture();
             <tr>
                 <td class="">
                     <?php if ($culture == "cn") { ?>
-                        Beneficiary Account Information (International Transfer)
                     <br>
                     <br>
                     <ul class="page_ul">
-                        <li>Please include your i-Account No. in the "Message" box if you want to send to your own i-Account.
-                            <br>eg. 111-123456-888</li>
-                        <li>Please add the word "MAX" before your i-Account No. if you want to send to Maxim.
-                            <br>eg. "MAX 111-123456-888".</li>
+                        <li>如果您往自己的i-Account账户汇款，请在“Message”栏中填入您的i-Account账号 （例：111-123456-888）</li>
+                        <li>如果您往Maxim企业i-Account账户汇款, 请在您的i-Account账号前面加上“MAX”(例：MAX 111-123456-888)</li>
+                        <li>请注意，如果“Message”栏中没有填写任何信息，我们将无法进行处理汇款</li>
                     </ul>
 
                     <br>
