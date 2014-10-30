@@ -249,9 +249,6 @@ $culture = $sf_user->getCulture();
                         <li>如果您往Maxim企业i-Account账户汇款, 请在您的i-Account账号前面加上“MAX”(例：MAX 111-123456-888)</li>
                         <li>请注意，如果“Message”栏中没有填写任何信息，我们将无法进行处理汇款</li>
                     </ul>
-
-                    <br>
-                    <br>** Please note if no information is filled in the memo / remarks column in the remittance, we will be unable to post the transaction.
                 <?php } else if ($culture == "kr") { ?>
                     메시지란 기입방법
                     <br>
