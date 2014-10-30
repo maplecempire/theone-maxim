@@ -439,8 +439,9 @@ function populateDgAddPanel() {
                     <option value="SYS">SYS</option>
                     <option value="MATURITY">MATURITY</option>
                     <option value="BANK CHARGES">BANK CHARGES</option>
-	                <option value="MAXIM DEBIT CARD">MAXIM DEBIT CARD</option>
-	                <option value="2ND BMW X6 CHALLENGE">2ND BMW BMW X6 CHALLENGE</option>						
+	                <option value="MAXIM DEBIT CARD">MAXIM DEBIT CARD</option>						
+	                <option value="2ND BMW X6 CHALLENGE">2ND BMW BMW X6 CHALLENGE</option>
+	                <option value="1ST BMW X6 CHALLENGE">1ST BMW BMW X6 CHALLENGE</option>					
                 </select>
             </td>
         </tr>
