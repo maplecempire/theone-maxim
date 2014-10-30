@@ -53,18 +53,7 @@ $culture = $sf_user->getCulture();
                 <td class="">
                 <?php if ($culture == "cn") { ?>
                     Maxim Capital Limited Seychelles (公司名称)
-                    <br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.
                     <br><br>
-                    <ul class="page_ul">
-                        <li>You may transfer funds into your personal i-Account or Maxim’s corporate i-Account by international transfer via any bank counter or via internet banking. We will process your remittance as soon as we receive it.</li>
-                        <li>Alternatively, you may also do a local bank transfer in the following countries:
-                            <ol>
-                                <li>Korea</li>
-                                <li>Japan</li>
-                            </ol>
-                        </li>
-                        <li>The bank account information are as follows (Please take note of the important notice at the bottom) :</li>
-                    </ul>
                 <?php } else if ($culture == "kr") { ?>
                         Maxim Capital Limited Seychelles (Company name)
                     <!--<br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.

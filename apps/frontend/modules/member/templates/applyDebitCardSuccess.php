@@ -170,7 +170,10 @@ $(function() {
         </td>
     </tr>
     <tr>
-        <td>
+    	<td><a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?></span></a></td>
+    </tr>
+    <tr>
+        <td style="display:none">
             <form id="registerForm" method="post" action="/member/doApplyDebitCard">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>

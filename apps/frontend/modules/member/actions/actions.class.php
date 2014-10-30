@@ -827,7 +827,7 @@ class memberActions extends sfActions
 
 //        } else {
 //            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Apply Maxim Trader VISA Debit Card temporary out of stock."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("MBank Visa Card Service Termination Notice<br><br>马胜MBank Visa借记卡服务暂停公告"));
 //            }
 //        }
 
