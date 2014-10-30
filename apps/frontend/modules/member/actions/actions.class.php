@@ -823,11 +823,37 @@ class memberActions extends sfActions
     }
     public function executeApplyDebitCard()
     {
+		if ($this->getUser()->getCulture() == 'cn') {
+			$message = "
+				请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额在2014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account。
+				<br><br>
+				为此给您带来的不便我们深表歉意；但公司这样做正是因为我们一直将客户的利益谨记于心。谢谢大家的理解与配合！ 
+			";
+		} else if ($this->getUser()->getCulture() == "kr") {
+			$message = "
+				지난 MBank 비자카드의 문제 발생 이후로, 회사는 본 서비스를 종료하기로 결정하였음을 알려드립니다. 계좌에 있는 모든 잔액은 2014년 10월31일까지 우리의 회원 CP3 계좌로 다시 예치될 것입니다. 이후 홈페이지 멤버 에리어에서 i-account를 신청 하시기 바랍니다. 
+				<br><br>
+				다시 한번 불편을 끼쳐드린 점 죄송하게 생각하며, 회사는 회원들이 최상의 서비스를 드리기 위해서 이런 결정을 내리게 되었음을 이해해 주시기 바랍니다. 여러분의 이해와 협력에 깊은 감사를 드립니다. 
+			";
+		} else if ($this->getUser()->getCulture() == "jp") {
+			$message = "
+				過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに、2014年10月31日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します。 
+				<br><br>
+				さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します！ 
+			";
+		} else {
+			$message = "
+				Please kindly note that due to the past problems with MBank Visa Cards, the company has decided to terminate their service. All the balance in accounts will be returned to our members CP3 accounts by 31 Oct 2014, after which you are welcome to apply for i-Accounts in Member Area.<br><br>
+				<br><br>
+				We apologize again for the inconvenience, yet please understand the company is doing so because we believe all our members deserve the best service. We very much appreciate your understanding and cooperation!
+			";
+		}
+
 //        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607) {
 
 //        } else {
 //            if (Globals::APPLY_DEBITCARD_ENABLE == false) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("MBank Visa Card Service Termination Notice<br><br>马胜MBank Visa借记卡服务暂停公告"));
+                $this->setFlash('errorMsg', $message);
 //            }
 //        }
 
