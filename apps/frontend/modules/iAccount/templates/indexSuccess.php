@@ -41,13 +41,13 @@ $culture = $sf_user->getCulture();
         <table>
             <tr>
                 <td align="left">
-                    <a href="http://www.liri-bd.com/apply/apply-personal.php?a_aid=53cf8e44ce6ed&amp;a_bid=7f6fb8e1" target="_blank"><img src="http://partner.lidyarich.com/af300/accounts/default1/banners/7f6fb8e1.png" alt="" title="" width="270" height="112" /></a><img style="border:0" src="http://partner.lidyarich.com/af300/scripts/imp.php?a_aid=53cf8e44ce6ed&amp;a_bid=7f6fb8e1" width="1" height="1" alt="" />
+                    <a href="http://www.liri-bd.com/apply/MAXIM/apply-personal.php?a_aid=53cf8e44ce6ed&a_bid=b8a3819a" target="_blank"><img src="http://partner.lidyarich.com/af300/accounts/default1/banners/7f6fb8e1.png" alt="" title="" width="270" height="112" /></a><img style="border:0" src="http://partner.lidyarich.com/af300/scripts/imp.php?a_aid=53cf8e44ce6ed&amp;a_bid=7f6fb8e1" width="1" height="1" alt="" />
                     <br>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="http://www.liri-bd.com/apply/apply-personal.php?a_aid=53cf8e44ce6ed&amp;a_bid=7f6fb8e1" target="_blank">
+                    <a href="http://www.liri-bd.com/apply/MAXIM/apply-personal.php?a_aid=53cf8e44ce6ed&a_bid=b8a3819a" target="_blank">
                         <?php if ($culture == "cn") { ?>
                         <?php echo __('Please click to apply for an i-Account') ?>
                         <?php } else if ($culture == "kr") { ?>
@@ -370,7 +370,7 @@ $culture = $sf_user->getCulture();
                         <?php } ?></strong>
                     <br>
                     <br>
-                    <a href="http://www.liri-bd.com/apply/apply-personal.php?a_aid=53cf8e44ce6ed&amp;a_bid=7f6fb8e1" target="_blank"><?php if ($culture == "cn") { ?>
+                    <a href="http://www.liri-bd.com/apply/MAXIM/apply-personal.php?a_aid=53cf8e44ce6ed&a_bid=b8a3819a" target="_blank"><?php if ($culture == "cn") { ?>
                         Please click to apply for an i-Account
                         <?php } else if ($culture == "kr") { ?>
                         i-Account와 카드를 동시에 신청하실 경우 이곳을 클릭하여 주십시오.
