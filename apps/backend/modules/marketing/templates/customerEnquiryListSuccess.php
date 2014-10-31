@@ -42,6 +42,9 @@ $(function(){
         ],
         "aoColumns": [
             { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
+            { "sName" : "customer.enquiry_id",  "bSortable": false, "bVisible" : true, "fnRender": function ( oObj ) {
+                return "<input type='checkbox' name='enquiryId[]' value='" + oObj.aData[0] + "' class='enquiryCheckbox'/>";                
+            }},
             { "sName" : "customer.category",  "bSortable": true},
             { "sName" : "customer.created_on", "bVisible" : true,  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
@@ -108,6 +111,7 @@ function reassignDatagridEventAttr(){
                         <thead>
                         <tr>
                             <th></th>
+                            <th></th>
                             <th>Category</th>
                             <th>Date</th>
                             <th>Member ID</th>
@@ -118,6 +122,7 @@ function reassignDatagridEventAttr(){
                         </tr>
                         <tr>
                             <td></td>
+                            <td><input type="checkbox" id="checkAll" value=""/></td>
                             <td>
                             <select name='search_category' id='search_category'>
 	                        	<option value=''>All Category</option>
