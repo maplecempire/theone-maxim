@@ -864,6 +864,7 @@ class marketingListActions extends sfActions
             }
             $arr[] = array(
                 $resultArr['enquiry_id'] == null ? "" : $resultArr['enquiry_id'],
+                $resultArr['enquiry_id'] == null ? "" : $resultArr['enquiry_id'],
                 $resultArr['category'] == null ? "" : $resultArr['category'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
