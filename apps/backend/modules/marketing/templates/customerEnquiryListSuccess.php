@@ -51,9 +51,9 @@ $(function(){
             { "sName" : "customer.title",  "bSortable": true},
             { "sName" : "customer.distributor_updated",  "bSortable": true},
             { "sName" : "customer.admin_read",  "bVisible": true, "fnRender": function ( oObj ) {
-                if (oObj.aData[7] == "Read") {
+                if (oObj.aData[6] == "Read") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "'>Read</a>";
-                } else if (oObj.aData[7] == "Unread") {
+                } else if (oObj.aData[6] == "Unread") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "' style='color:#0088CF'>Unread</a>";
                 }
             }},
