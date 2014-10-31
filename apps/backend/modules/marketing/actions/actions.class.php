@@ -1489,6 +1489,32 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     }
     public function executeCustomerEnquiryList()
     {
+    	if ($this->getRequestParameter('enquiryStatus') && $this->getRequestParameter('enquiryId')) {
+            $error = false;
+            $arr = $this->getRequestParameter('enquiryId');
+            $statusCode = $this->getRequestParameter('enquiryStatus');
+
+            $con = Propel::getConnection(MlmCustomerEnquiryPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                for ($i = 0; $i < count($arr); $i++) {
+                    $mlm_customer_enquiry = MlmCustomerEnquiryPeer::retrieveByPk($arr[$i]);
+                    $this->forward404Unless($mlm_customer_enquiry);
+					
+                    $mlm_customer_enquiry->setStatusCode($statusCode);
+                    $mlm_customer_enquiry->save();
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+            if ($error == false)
+                $this->setFlash('successMsg', "Update successfully");
+                
+            return $this->redirect('marketing/customerEnquiryList');
+        }
     }
 
     public function executeCustomerEnquiryDetail()
