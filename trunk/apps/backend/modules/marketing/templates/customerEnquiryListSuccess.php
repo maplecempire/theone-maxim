@@ -42,15 +42,18 @@ $(function(){
         ],
         "aoColumns": [
             { "sName" : "customer.enquiry_id", "bVisible" : false,  "bSortable": true},
+            { "sName" : "customer.enquiry_id",  "bSortable": false, "bVisible" : true, "fnRender": function ( oObj ) {
+                return "<input type='checkbox' name='enquiryId[]' value='" + oObj.aData[0] + "' class='enquiryCheckbox'/>";                
+            }},
             { "sName" : "customer.category",  "bSortable": true},
             { "sName" : "customer.created_on", "bVisible" : true,  "bSortable": true},
             { "sName" : "dist.distributor_code",  "bSortable": true},
             { "sName" : "customer.title",  "bSortable": true},
             { "sName" : "customer.distributor_updated",  "bSortable": true},
             { "sName" : "customer.admin_read",  "bVisible": true, "fnRender": function ( oObj ) {
-                if (oObj.aData[6] == "Read") {
+                if (oObj.aData[7] == "Read") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "'>Read</a>";
-                } else if (oObj.aData[6] == "Unread") {
+                } else if (oObj.aData[7] == "Unread") {
                     return "<a href='<?php echo url_for("/marketing/customerEnquiryDetail");?>?enquiryId=" + oObj.aData[0] + "' style='color:#0088CF'>Unread</a>";
                 }
             }},
@@ -77,11 +80,27 @@ function reassignDatagridEventAttr(){
 
 </script>
 
-<?php echo form_tag('marketing/doCustomerEnquiry', 'id=loginForm') ?>
+<?php echo form_tag('marketing/customerEnquiryList', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet">
     <div class="portlet-header">Customer Enquiry Listing</div>
     <div class="portlet-content">
+    	<?php if ($sf_flash->has('successMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-highlight ui-corner-all">
+                <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
+                    <strong><?php echo $sf_flash->get('successMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if ($sf_flash->has('errorMsg')): ?>
+        <div class="ui-widget">
+            <div style="margin-top: 20px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+                <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
+                    <strong><?php echo $sf_flash->get('errorMsg') ?></strong></p>
+            </div>
+        </div>
+        <?php endif; ?>
 	<table width="100%" border="0">
 		<tr>
 			<td>
@@ -91,6 +110,7 @@ function reassignDatagridEventAttr(){
 					<table class="display" id="datagrid" border="0" width="100%">
                         <thead>
                         <tr>
+                            <th></th>
                             <th></th>
                             <th>Category</th>
                             <th>Date</th>
@@ -102,6 +122,7 @@ function reassignDatagridEventAttr(){
                         </tr>
                         <tr>
                             <td></td>
+                            <td><input type="checkbox" id="checkAll" value=""/></td>
                             <td>
                             <select name='search_category' id='search_category'>
 	                        	<option value=''>All Category</option>
@@ -138,6 +159,16 @@ function reassignDatagridEventAttr(){
                 <tr>
                     <td>
                         <a href="<?php echo url_for("/marketing/customerEnquiryAdd");?>" id="btnNewMessage">New Message</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="enquiryStatus">
+                            <option value="PENDING">PENDING</option>
+                            <option value="PROCESSING">PROCESSING</option>
+                            <option value="SOLVED">SOLVED</option>
+		                </select>
+		                <button id="btnUpdate">Update</button>
                     </td>
                 </tr>
 			</table>
