@@ -138,9 +138,9 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
         </li>
 
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/member/applyDebitCard") ?>"><span><?php echo __('Apply Maxim Trader VISA Debit Card'); ?></span></a>
-        </li>
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php /*echo url_for("/member/applyDebitCard") */?>"><span><?php /*echo __('Apply Maxim Trader VISA Debit Card'); */?></span></a>
+        </li>-->
     <?php } ?>
 
     <?php if (Globals::APPLY_IME_VISIBLE == true) { ?>
