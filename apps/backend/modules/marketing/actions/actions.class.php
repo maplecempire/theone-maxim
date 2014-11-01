@@ -1544,6 +1544,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $enquiryId = $this->getRequestParameter('enquiryId');
         $message = $this->getRequestParameter('message');
         $status_code = $this->getRequestParameter('status_code');
+        $category = $this->getRequestParameter('category');
 
         $mlmCustomerEnquiry = new MlmCustomerEnquiry();
         if ($enquiryId == "") {
@@ -1559,6 +1560,8 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
             $mlmCustomerEnquiry->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+			$mlmCustomerEnquiry->setStatusCode($status_code);
+			$mlmCustomerEnquiry->setCategory($category);
 
             $mlmCustomerEnquiry->save();
 
@@ -1570,6 +1573,7 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             $mlmCustomerEnquiry->setDistributorRead(Globals::FALSE);
             $mlmCustomerEnquiry->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 			$mlmCustomerEnquiry->setStatusCode($status_code);
+			$mlmCustomerEnquiry->setCategory($category);
             
             $mlmCustomerEnquiry->save();
         }

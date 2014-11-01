@@ -4,7 +4,10 @@ var jform = null;
 var datagrid = null;
 
 $(function(){
-	jform = $("#enquiryForm").validate({
+	 $("#checkAll").click(function(){
+        $('.enquiryCheckbox').attr('checked', this.checked);
+    });
+    jform = $("#enquiryForm").validate({
 		submitHandler: function(form) {
 			if(isSubmitAjax){
 				//alert("submit ajax");

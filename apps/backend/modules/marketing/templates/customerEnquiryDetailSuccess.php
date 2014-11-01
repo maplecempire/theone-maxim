@@ -180,6 +180,27 @@ tinyMCE.init({
                 </tr>
                 <tr class="tbl_form_row_even">
                     <td>
+                        <?php echo __('Category') ?>
+                    </td>
+                    <td>
+                        <?php
+	                        $arr = array();
+	                        $arr['Genealogy'] = 'Genealogy';
+	                        $arr['User Profile/Credentials'] = 'User Profile/Credentials';
+	                        $arr['Deposit/CP Points'] = 'Deposit/CP Points';
+	                        $arr['Investment Returns/Bonuses'] = 'Investment Returns/Bonuses';
+	                        $arr['MT4 Withdrawal/Reload/Trading'] = 'MT4 Withdrawal/Reload/Trading';
+	                        $arr['Withdrawal Issues'] = 'Withdrawal Issues';
+	                        $arr['Contract Maturity'] = 'Contract Maturity';
+	                        $arr['Maxim Visa Card'] = 'Maxim Visa Card';
+	                        $arr['Events/Promotions'] = 'Events/Promotions';	                        
+	                        $arr['Others'] = 'Others';
+	                        echo select_tag('category', options_for_select($arr, $mlmTransaction->getCategory()));
+	                     ?>
+                    </td>
+                </tr>
+                <tr class="tbl_form_row_even">
+                    <td>
                         <?php echo __('Status') ?>
                     </td>
                     <td>
