@@ -195,7 +195,7 @@ tinyMCE.init({
 	                        $arr['Maxim Visa Card'] = 'Maxim Visa Card';
 	                        $arr['Events/Promotions'] = 'Events/Promotions';	                        
 	                        $arr['Others'] = 'Others';
-	                        echo select_tag('category', options_for_select($arr, $mlmTransaction->getCategory()));
+	                        echo select_tag('category', options_for_select($arr, $mlmCustomerEnquiry->getCategory()));
 	                     ?>
                     </td>
                 </tr>
