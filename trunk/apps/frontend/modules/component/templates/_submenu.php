@@ -179,7 +179,7 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 273056) { */
             ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?><img src="/images/new_icon.gif"></span></a>
+            <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account and Base Debit Card'); ?><img src="/images/new_icon.gif"></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/iAccount/internationalTransfer") ?>"><span><?php echo __('i-Account International Transfer'); ?><img src="/images/new_icon.gif"></span></a>
