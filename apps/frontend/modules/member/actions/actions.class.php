@@ -3281,6 +3281,9 @@ class memberActions extends sfActions
 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $userName);
+        if ($doAction == "PENDING_MEMBER") {
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID), Criteria::NOT_EQUAL);
+        }
         $exist = MlmDistributorPeer::doSelectOne($c);
 
         //var_dump($userName);
