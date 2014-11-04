@@ -3269,12 +3269,11 @@ class memberActions extends sfActions
          * ***************************************************/
         $c = new Criteria();
         $c->add(AppUserPeer::USERNAME, $userName);
-        //$c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID), Criteria::NOT_EQUAL);
+        if ($doAction == "PENDING_MEMBER") {
+            $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID), Criteria::NOT_EQUAL);
+        }
         $exist = AppUserPeer::doSelectOne($c);
 
-        //var_dump($userName);
-        //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERID));
-        //exit();
         if ($exist) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("User Name already exist."));
             return $this->redirect('/member/memberRegistration');
