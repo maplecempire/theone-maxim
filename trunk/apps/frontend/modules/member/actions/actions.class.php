@@ -616,40 +616,49 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
-                $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($epointAmount);
-                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1");
-                $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                //$epointConvertedAmount = floor($epointAmount * 1.05);
-                $epointConvertedAmount = $epointAmount;
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($epointAmount);
+                    $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1");
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                $tbl_account_ledger->setCredit($epointConvertedAmount);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
-                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    //$epointConvertedAmount = floor($epointAmount * 1.05);
+                    $epointConvertedAmount = $epointAmount;
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to CP1 successful."));
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to CP1 successful."));
+
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 return $this->redirect('/member/convertCp3ToCp1');
             }
         }
@@ -686,37 +695,45 @@ class memberActions extends sfActions
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
-                $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($epointAmount);
-                $tbl_account_ledger->setRemark("CONVERT RP TO CP1");
-                $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                $tbl_account_ledger->setCredit($epointAmount);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CONVERT RP TO CP1, RP:".$epointAmount);
-                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($epointAmount);
+                    $tbl_account_ledger->setRemark("CONVERT RP TO CP1");
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger->setCredit($epointAmount);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setRemark("CONVERT RP TO CP1, RP:".$epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("RP convert to CP1 successful."));
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("RP convert to CP1 successful."));
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 return $this->redirect('/member/convertRPToCp1');
             }
         }
@@ -10260,43 +10277,51 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($epointAmount > 0) {
-                $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($epointAmount);
-                $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
-                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1");
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                //$epointConvertedAmount = floor($epointAmount * 1.05);
-                //if ($this->toHideCp2Cp3Transfer == true) {
-                    //$epointConvertedAmount = floor($epointAmount);
-                    $epointConvertedAmount = $epointAmount;
-                //}
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_EPOINT);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                    $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1");
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                $tbl_account_ledger->setCredit($epointConvertedAmount);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1, CP2:".$epointAmount);
-                $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    //$epointConvertedAmount = floor($epointAmount * 1.05);
+                    //if ($this->toHideCp2Cp3Transfer == true) {
+                        //$epointConvertedAmount = floor($epointAmount);
+                        $epointConvertedAmount = $epointAmount;
+                    //}
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1, CP2:".$epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to CP1 successful."));
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to CP1 successful."));
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 return $this->redirect('/member/convertEcashToEpoint');
             }
         }
