@@ -41,7 +41,7 @@ class legalWatchActions extends sfActions
         $legal_watch->setAge($this->getRequestParameter('age'));
         $legal_watch->setEducationlevel($this->getRequestParameter('educationLevel'));
         $legal_watch->setEmail($this->getRequestParameter('email'));
-        $legal_watch->setContact($this->getRequestParameter('country'));		
+        $legal_watch->setCountry($this->getRequestParameter('country'));		
         $legal_watch->setContact($this->getRequestParameter('contact'));
         $legal_watch->setTitle($this->getRequestParameter('title'));
         $legal_watch->setMessage($this->getRequestParameter('message'));
