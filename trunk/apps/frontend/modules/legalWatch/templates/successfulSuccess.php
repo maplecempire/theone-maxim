@@ -9,7 +9,7 @@
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __("Your important message has been sent to LACD.") ?></span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __("Your important message has been sent to LEGAL WATCH (LW).") ?></span></td>
 </tr>
 <tr>
     <td>
@@ -18,8 +18,16 @@
                 <tr>
                     <td>
                         <br>
-                        <span class="blue_text">
-                            <?php echo __('We thank you for taking the time to “ASK and be ANSWERED”. No matter what, we are there for you, and YES WE CAN!')?>
+                        <span class="">
+                            <?php echo __('We thank you for having the wisdom to participate on LW like hundreds of others are doing.  The fact that you are asking, means you care enough to want things to be proper and legitimate, and we congratulate you for that. Do remember, that no matter who tells you what, the truth comes from us at Legal Watch.')?>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <span class="">
+                            <?php echo __('Please now expect a response from LACD  as soon as possible.. If nothing at all comes to your given email within  10 days, this means, LACD did not receive your message. Otherwise, everyone are getting responses in proper order.')?>
                         </span>
                     </td>
                 </tr>
@@ -27,29 +35,21 @@
                     <td>
                         <br>
                         <span class="blue_text">
-                            <?php echo __('Please now expect a response from LACD within 48 hours. Even if LACD cannot give a conclusive response, you SHALL receive an interim response within the 48 hours and be informed when the conclusive response is to come to you. If nothing at all comes to your given email within 48 hours, this means, LACD did not receive your message, and to please resend your message, which is why we have your message is automatically copied to your email. Please check your email to make sure you have a copy of your message sent to LACD. DO NOT resend your message to LACD within 48 hours.')?>
+                            <?php // echo __('Congratulations ! on your wisdom, to Ask and be Answered.')?>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <br>
-                        <span class="blue_text">
-                            <?php echo __('Congratulations ! on your wisdom, to Ask and be Answered.')?>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <span class="blue_text">
+                        <span class="">
                             <?php echo __('With warm regards,')?>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span class="blue_text">
+                        <span class="">
                             <?php echo __('LACD Officer.')?>
                         </span>
                     </td>
