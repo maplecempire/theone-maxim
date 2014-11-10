@@ -23,6 +23,9 @@ $(function() {
             "contact" : {
                 required : true
             },
+			"country" : {
+                required : true
+            },
             "title" : {
                 required : true
             },
@@ -40,6 +43,7 @@ $(function() {
             //label.addClass("valid").text("Valid captcha!")
         }
     });
+	$("#country").attr("value","");
 });
 </script>
 <table cellpadding="0" cellspacing="0">
@@ -78,25 +82,25 @@ $(function() {
             <tbody>
                 <tr>
                     <td>
-                        <span class="blue_text" style="font-style: italic;">
-                            <?php echo __('This is a free service to maxim members only. For  Non English communicators, please have someone read the two paragraphs below to you, in your language, and  type questions in English, as answers will be given in English.')?>
+                        <span class="" style="font-style: italic;">
+                            <?php echo __('This is a free service to maxim members only. Non English communicators, should try to have someone write their quest in English please and to explain these red passage below to them. Due to the large volume of wise people using Legal Watch, we don’t yet have the resources to handle translation at LACD, which is likely to change by the end of 2014.')?>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <br>
-                        <strong>READ THIS CAREFULLY PLEASE:</strong>
+                        <strong>FIRST, PLEASE READ THIS CAREFULLY :</strong>
                         <br>
                         <br>
                         <span style="color:#ff4500; font-size: 14px;line-height: 20px">
-                        This is a FREE service designed for YOU ONLY, as an existing MAXIM member. If you have prospects who want to make the wise decision to come into MAXIM but are not in yet, they must ask their legal questions through YOU, as we can only advise YOU as a MAXIM member. Furthermore, we are not Formal Legal Advisers and therefore are NOT qualified to opine what the law may happen to be in your particular jurisdiction or Country. Therefore, we disclaim any responsibility as to the accuracy of our responses, despite our careful diligence  applied. Please consult your own local practicing Solicitor, Attorney or Advocate for any formal legal advice, at your expense, if you so wish. Lastly, if you are a minor (person below 18), you must have a parent type in the question and give their email for the answer. Our system is designed to automatically check the MAXIM number you give, against the information held against that number, ie; Name, age etc.
+                        This is a FREE service designed for YOU ONLY, as an existing MAXIM member. If you have prospects who want to make the wise decision to join MAXIM but are not in yet, they must ask their legal questions through YOU, as we can only advise YOU as a MAXIM member. Furthermore, we are not Formal Legal Advisers and therefore are NOT qualified to opine what the law may happen to be in your particular jurisdiction or Country. Therefore, we disclaim any responsibility as to the accuracy of our responses, despite our careful diligence applied. Please consult your own local practicing Solicitor, Attorney or Advocate for any formal legal advice, at your expense, if you so wish to. Lastly, if you are a minor (person below 18), you must have a parent type in the question and give their email for the answer. Our system is designed to automatically check the MAXIM number you give, against the information held against that number, ie; Name, age etc.
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <br><br>Having said that, now let us say this. <strong>YES WE CAN !</strong> Your question will go direct to our Legal Affairs and Compliance Department (LACD) and a response shall be given to you within NO LONGER than 48 hours, whether it is an interim or conclusive response. If interim, you will there be informed on when you will have a conclusive answer. Our program will also, devise a FAQ system as time goes on. This way, any regular question will first be assessed by our system and if the answer is already in our system, an immediate answer will be given to YOU. Please now accurately complete the following information, so we can help you;
+                        <br><br>Having said that, now let us say this. <strong>YES WE CAN !</strong> Your question will go direct to our Legal Affairs and Compliance Department (LACD) and a response shall be given to you as soon as possible. Members are asked to understand that we now have quite a volume of members using Legal Watch and therefore we ask for your patience and understanding please. Our program will also, devise a FAQ system as time goes on. This way, any regular question will first be assessed by our system and if the answer is already in our system, an immediate answer will be given to YOU. But this is coming later. Please now accurately complete the following information, so we can help you;
                         <br><br>
                         <form action="/legalWatch/doSubmit" id="legalForm" name="legalForm" method="post" enctype="multipart/form-data">
                         <table cellspacing="0" cellpadding="0" class="tbl_form">
@@ -181,7 +185,16 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+							<tr class="tbl_form_row_odd">
+								<td>&nbsp;</td>
+								<td><?php echo __('Country') ?></td>
+								<td>
+									<?php include_component('component', 'countrySelectOption', array('countrySelected' => "", 'countryName' => 'country', 'countryId' => 'country')) ?>
+									&nbsp;
+								</td>
+								<td>&nbsp;</td>
+							</tr>							
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My Contact Number'); ?>:</td>
                                 <td>
@@ -190,7 +203,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('My title or job is'); ?>:</td>
                                 <td>
@@ -199,7 +212,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_odd">
+                            <tr class="tbl_form_row_even">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('The Legal Issue I want to ask about is …(keep it very concise and brief)'); ?></td>
                                 <td>
@@ -207,7 +220,7 @@ $(function() {
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
-                            <tr class="tbl_form_row_even">
+                            <tr class="tbl_form_row_odd">
                                 <td>&nbsp;</td>
                                 <td><?php echo __('Attach any related picture, Legal dicta or article in support of your above question'); ?></td>
                                 <td>
