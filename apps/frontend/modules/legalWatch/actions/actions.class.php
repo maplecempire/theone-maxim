@@ -92,16 +92,20 @@ class legalWatchActions extends sfActions
     {
         $subject = "LEGAL WATCH - Ask and be answered";
 
-        $body = "Thank you for caring to communicate with The Maxim Legal Affairs and Compliance Division (LACD).
+        $body = "We thank you for having the wisdom to participate on LW like hundreds of others are doing.
                 <br>
-                <br>Your important message will now be assigned to a LACD Legal Officer who knows to respond to you within 48 hours.
+                <br>The fact that you are asking, means you care enough to want things to be proper and legitimate, and we congratulate you for that. Do remember, that no matter who tells you what, the truth comes from us at Legal Watch.
                 <br>
-                <br>If we dont respond within 48 hours it can only mean that we never received your message and to please resend.
+                <br><b>Please now expect a response from LACD as soon as possible. 
                 <br>
-                <br>48 hours, the clock is ticking. You problem is ours, and our efficiency is yours, to enjoy.
+                <br>If nothing at all comes to your given email within 10 days, this means, LACD did not receive your message. Otherwise, everyone are getting responses in proper order.</b>
                 <br>
                 <br>Thank you
-                <br>LACD - We who advise and serve.";
+				<br>
+				<br>
+				<br>With warm regards, 
+                <br>LACD Officer. 				
+				<br>LACD - We who advise and serve.";
         $sendMailService = new SendMailService();
         $sendMailService->sendLegalWatch($legal_watch->getEmail(), $legal_watch->getFullName(), $subject, $body);
     }
