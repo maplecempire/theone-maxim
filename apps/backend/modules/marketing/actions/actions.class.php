@@ -2128,14 +2128,13 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     //$c = new Criteria();
                     //$c->addDescendingOrderByColumn(MlmFundManagementRecordPeer::CREATED_ON);
                     //$mlmFundManagementRecord = MlmFundManagementRecordPeer::doSelectOne($c);
-
                     $fundManagementPercentage = 0;
                     //if ($mlmFundManagementRecord) {
                     //    $fundManagementPercentage = $mlmFundManagementRecord->getPercentage();
                     //}
                     //print_r($totalCount."success<br>");
                     foreach ($mlmPipsCsvDBs as $mlm_pip_csv) {
-                        print_r($mlm_pip_csv->getLoginId()."<br>");
+
                         $totalVolume = $mlm_pip_csv->getVolume();
                         $mt4Id = $mlm_pip_csv->getLoginId();
                         $tradingMonth =  $mlm_pip_csv->getMonthTraded();
@@ -2148,7 +2147,6 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                         $c = new Criteria();
                         $c->add(MlmDistMt4Peer::MT4_USER_NAME, $mt4Id);
                         $mlm_dist_mt4 = MlmDistMt4Peer::doSelectOne($c);
-
                         //if ($existDistributor) {
                         //print_r($mt4Id."<==<br>");
                         //var_dump($mlm_dist_mt4);
@@ -2160,8 +2158,6 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                                 $mlm_pip_csv->save();
                                 continue;
                             }
-                            //var_dump($mlm_dist_mt4->getDistId());
-                            //var_dump("<br>");
                             $existDistributor = MlmDistributorPeer::retrieveByPK($mlm_dist_mt4->getDistId());
                             //$this->forward404Unless($existDistributor);
                             if ($existDistributor) {
@@ -4042,12 +4038,12 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     LEFT JOIN (
                         SELECT SUM(credit-debit) AS _PIPS_BONUS, dist_id
                             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$distId."
-                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-10 23:59:59'
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-15 23:59:59'
                     ) sales ON dist.distributor_id = sales.dist_id
                     LEFT JOIN (
                         SELECT SUM(credit-debit) AS _CREDIT_REFUND, dist_id
                             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_CREDIT_REFUND."' AND dist_id = ".$distId."
-                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-10 23:59:59'
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-15 23:59:59'
                     ) cf ON dist.distributor_id = cf.dist_id
             WHERE dist.distributor_id = ".$distId;
 
