@@ -552,8 +552,15 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 
-<?php if ($rp > 0) { ?>
     <tr class="tbl_form_row_odd">
+        <td>&nbsp;</td>
+        <td><?php echo __('CP4 Account') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($cp4,2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+
+<?php if ($rp > 0) { ?>
+    <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
         <td><?php echo __('RP Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($rp,2); ?>"></td>
@@ -561,8 +568,8 @@ function reassignDatagridAnnouncementEventAttr() {
     </tr>
 <?php } ?>
 
-<?php if ($rt > 0) { ?>
-    <tr class="tbl_form_row_even">
+<?php if ($isRpUser > 0) { ?>
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('RT Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($rt,2); ?>"></td>
@@ -570,14 +577,7 @@ function reassignDatagridAnnouncementEventAttr() {
     </tr>
 <?php } ?>
 
-<?php if ($cp4 > 0) { ?>
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td><?php echo __('CP4 Account') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo number_format($cp4,2); ?>"></td>
-        <td>&nbsp;</td>
-    </tr>
-<?php } ?>
+
 <?php
     if ($distributor->getDebitAccount() == "Y") {
         // hide from korea group
