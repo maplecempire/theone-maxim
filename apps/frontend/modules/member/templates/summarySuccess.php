@@ -552,7 +552,7 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd">
+    <tr class="tbl_form_row_odd" style="display: none;">
         <td>&nbsp;</td>
         <td><?php echo __('CP4 Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($cp4,2); ?>"></td>
