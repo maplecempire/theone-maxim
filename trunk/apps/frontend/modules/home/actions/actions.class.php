@@ -528,7 +528,7 @@ class homeActions extends sfActions
                 //
 
                 /*	    user      	*/
-                $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING);
+                $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING . "," . Globals::STATUS_SUSPEND);
                 //                $array = explode(',', Globals::STATUS_ACTIVE);
                 $c = new Criteria();
                 $c->add(AppUserPeer::USERNAME, $username);
@@ -540,6 +540,11 @@ class homeActions extends sfActions
             }
 
             if ($existUser) {
+                if ($existUser->getStatusCode() == Globals::STATUS_SUSPEND) {
+                    $this->setFlash('errorMsg', "You account has been suspended.");
+                    return $this->redirect('home/login');
+                }
+
                 $this->getUser()->getAttributeHolder()->clear();
 
                 $c = new Criteria();
