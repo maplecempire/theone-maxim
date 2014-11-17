@@ -72,6 +72,12 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/convertCp2ToRt"><span><?php echo __('Convert CP2 to RT'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/convertCp3ToRt"><span><?php echo __('Convert CP3 to RT'); ?></span></a>
+        </li>
     <?php } ?>
     <?php if ($onlyTransferRP == false) { ?>
     <?php

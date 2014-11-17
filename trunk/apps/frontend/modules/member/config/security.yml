@@ -186,6 +186,14 @@ transferRP:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+convertCp2ToRt:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+convertCp3ToRt:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 upgradePackageViaTree:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
