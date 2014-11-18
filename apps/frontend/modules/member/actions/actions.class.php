@@ -12332,7 +12332,7 @@ Wish you all the best.
             $c = new Criteria();
             $c->add(MlmPackageContractPeer::MT4_ID, $arr["mt4_user_name"]);
             $c->add(MlmPackageContractPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID, 0));
-            $c->add(MlmPackageContractPeer::STATUS_CODE, Globals::STATUS_COMPLETE);
+            //$c->add(MlmPackageContractPeer::STATUS_CODE, Globals::STATUS_COMPLETE);
             $mlmPackageContract = MlmPackageContractPeer::doSelectOne($c);
 
             //var_dump($mlmPackageContract);
