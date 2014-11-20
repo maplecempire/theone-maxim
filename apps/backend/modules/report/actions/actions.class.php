@@ -700,6 +700,8 @@ class reportActions extends sfActions
     public function executeBaliJapanKoreaPersonalSignup()
     {
         $leaderArr = explode(',', "255607,264838,264839,142,257700,255709,264845,273056,15");
+//        $leaderArr = explode(',', "273056");
+        $accountTypeArr = explode(',', "276932,290399,281128,273135,278236,276016");
         $c = new Criteria();
         $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
         $c->add(MlmDistributorPeer::LEADER_ID, $leaderArr , Criteria::IN);
@@ -714,12 +716,11 @@ class reportActions extends sfActions
         foreach ($distDBs as $distDB) {
             $distDB->setBkkPersonalSales(0);
 
-            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
             $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
             $upgradedAmount = $this->getTotalUpgradedPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
             $distDB->setBkkPersonalSales($signPackageAmount + $upgradedAmount);
             $distDB->setRemark("Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount);
-
+            print_r($idx-- . ":" . $distDB->getDistributorCode().":Package Amount:".$signPackageAmount.", Upgrade Amount:".$upgradedAmount."<br>");
             //$personalSales = $this->findPersonalSalesList($distDB->getDistributorId(), $dateFrom, $dateTo, null);
 
             /*if ($personalSales >= 40000) {

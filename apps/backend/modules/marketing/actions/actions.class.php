@@ -1448,6 +1448,8 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger);
                         }
                     }
                 }
@@ -2027,6 +2029,8 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger);
                     }
 
                     if ($pipsAmountEntitied > 0) {
@@ -2043,6 +2047,8 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger);
                     }
 
                     $bonusService = new BonusService();
@@ -2948,232 +2954,6 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         return sfView::HEADER_ONLY;
     }
 
-    public function executeDoRegister()
-    {
-        $sponsorDistId = Globals::SYSTEM_COMPANY_DIST_ID;
-
-        $fcode = $this->generateFcode($this->getRequestParameter('country'));
-        $password = $this->getRequestParameter('userpassword');
-        $parentId = $this->getRequestParameter('sponsorId');
-        $masterIbCode = $this->getRequestParameter('masterIbCode');
-        //******************* upline distributor ID
-        $uplineDistDB = $this->getDistributorInformation($parentId);
-        $this->forward404Unless($uplineDistDB);
-
-        $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $fcode . "|";
-        $treeLevel = $uplineDistDB->getTreeLevel() + 1;
-
-        //******************** master IB
-        $c = new Criteria();
-        $c->add(MlmMasterIbPeer::MASTER_IB_CODE, $masterIbCode);
-        $c->add(MlmMasterIbPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        $masterIB = MlmMasterIbPeer::doSelectOne($c);
-        $this->forward404Unless($masterIB);
-        //******************** package
-        $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($this->getRequestParameter('rankId'));
-        $this->forward404Unless($sponsoredPackageDB);
-
-        //******************** company account
-        $c = new Criteria();
-        $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-        $c->add(MlmAccountPeer::DIST_ID, $sponsorDistId);
-        $CompanyAccount = MlmAccountPeer::doSelectOne($c);
-        $this->forward404Unless($CompanyAccount);
-
-        $app_user = new AppUser();
-        $app_user->setUsername($fcode);
-        $app_user->setKeepPassword($password);
-        $app_user->setUserpassword($password);
-        $app_user->setKeepPassword2($password);
-        $app_user->setUserpassword2($password);
-        $app_user->setUserRole(Globals::ROLE_DISTRIBUTOR);
-        $app_user->setStatusCode(Globals::STATUS_ACTIVE);
-        $app_user->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $app_user->save();
-
-        // ****************************
-        $mlm_distributor = new MlmDistributor();
-        $mlm_distributor->setDistributorCode($fcode);
-        $mlm_distributor->setUserId($app_user->getUserId());
-        $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
-        $mlm_distributor->setFullName($this->getRequestParameter('fullname'));
-        $mlm_distributor->setNickname($this->getRequestParameter('nickName'));
-        $mlm_distributor->setIc($this->getRequestParameter('ic'));
-        if ($this->getRequestParameter('country') == 'China') {
-            $mlm_distributor->setCountry('China (PRC)');
-        } else {
-            $mlm_distributor->setCountry($this->getRequestParameter('country'));
-        }
-        $mlm_distributor->setAddress($this->getRequestParameter('address'));
-        $mlm_distributor->setPostcode($this->getRequestParameter('postcode'));
-        $mlm_distributor->setEmail($this->getRequestParameter('email'));
-        $mlm_distributor->setContact($this->getRequestParameter('contactNumber'));
-        $mlm_distributor->setGender($this->getRequestParameter('gender'));
-        if ($this->getRequestParameter('dob')) {
-            list($d, $m, $y) = sfI18N::getDateForCulture($this->getRequestParameter('dob'), $this->getUser()->getCulture());
-            $mlm_distributor->setDob("$y-$m-$d");
-        }
-        $mlm_distributor->setTreeLevel($treeLevel);
-        $mlm_distributor->setTreeStructure($treeStructure);
-        $mlm_distributor->setMasterIbId($masterIB->getMasterIbId());
-        $mlm_distributor->setMasterIbCode($masterIB->getMasterIbCode());
-        $mlm_distributor->setUplineDistId($uplineDistDB->getDistributorId());
-        $mlm_distributor->setUplineDistCode($uplineDistDB->getDistributorCode());
-        $mlm_distributor->setRankId($sponsoredPackageDB->getPackageId());
-        $mlm_distributor->setRankCode($sponsoredPackageDB->getPackageName());
-
-        $mlm_distributor->setBankName($this->getRequestParameter('bankName'));
-        $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccountNo'));
-        $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
-        $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_distributor->save();
-
-        $this->doSaveAccount($mlm_distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
-
-        /* ****************************************************
-         * get company last account ledger epoint balance
-         * ***************************************************/
-        $c = new Criteria();
-        $c->add(MlmAccountLedgerPeer::DIST_ID, $sponsorDistId);
-        $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-        $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
-        $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
-        $this->forward404Unless($accountLedgerDB);
-
-        $sponsorAccountBalance = $accountLedgerDB->getBalance();
-
-        /* ****************************************************
-         * Update distributor account
-         * ***************************************************/
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId($sponsorDistId);
-        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-        $mlm_account_ledger->setRemark("DIRECT SPONSOR TO " . $mlm_distributor->getDistributorCode());
-        $mlm_account_ledger->setCredit(0);
-        $mlm_account_ledger->setDebit($sponsoredPackageDB->getPrice());
-        $mlm_account_ledger->setBalance($sponsorAccountBalance - $sponsoredPackageDB->getPrice());
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
-
-        $this->revalidateAccount($sponsorDistId, Globals::ACCOUNT_TYPE_ECASH);
-
-        /**************************************/
-        /*  Direct Sponsor Bonus For Upline
-        /**************************************/
-        $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-
-        $directSponsorPercentage = $uplineDistPackage->getCommission();
-        $directSponsorBonusAmount = $directSponsorPercentage * $sponsoredPackageDB->getPrice() / 100;
-
-        $c = new Criteria();
-        $c->add(MlmAccountLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
-        $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-        $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
-        $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
-        $this->forward404Unless($accountLedgerDB);
-        $distAccountEcashBalance = $accountLedgerDB->getBalance();
-        var_dump("here3");
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId($uplineDistDB->getDistributorId());
-        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-        $mlm_account_ledger->setRemark("DIRECT SPONSOR BONUS AMOUNT (" . $mlm_distributor->getDistributorCode() . ")");
-        $mlm_account_ledger->setCredit($directSponsorBonusAmount);
-        $mlm_account_ledger->setDebit(0);
-        $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
-        var_dump("here4");
-        $this->revalidateAccount($uplineDistDB->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
-        var_dump("here5");
-        /******************************/
-        /*  Commission
-        /******************************/
-        $c = new Criteria();
-        $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistDB->getDistributorId());
-        $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-        $uplineDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
-        var_dump("here6");
-        $commissionBalance = 0;
-        if (!$uplineDistCommissionDB) {
-            $uplineDistCommissionDB = new MlmDistCommission();
-            $uplineDistCommissionDB->setDistId($uplineDistDB->getDistributorId());
-            $uplineDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-            $uplineDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $uplineDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        } else {
-            $commissionBalance = $uplineDistCommissionDB->getBalance();
-        }
-        $uplineDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
-        $uplineDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $uplineDistCommissionDB->save();
-
-        $c = new Criteria();
-        $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
-        $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-        $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
-        $uplineDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
-
-        $dsbBalance = 0;
-        if ($uplineDistCommissionLedgerDB)
-            $dsbBalance = $uplineDistCommissionLedgerDB->getBalance();
-
-        $uplineDistCommissionledger = new MlmDistCommissionLedger();
-        $uplineDistCommissionledger->setDistId($uplineDistDB->getDistributorId());
-        $uplineDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-        $uplineDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
-        $uplineDistCommissionledger->setCredit($directSponsorBonusAmount);
-        $uplineDistCommissionledger->setDebit(0);
-        $uplineDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
-        $uplineDistCommissionledger->setRemark("DIRECT SPONSOR BONUS AMOUNT (" . $mlm_distributor->getDistributorCode() . ")");
-        $uplineDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $uplineDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $uplineDistCommissionledger->save();
-
-        $this->revalidateCommission($uplineDistDB->getDistributorId(), Globals::COMMISSION_TYPE_DRB);
-        /****************************/
-        /*****  Send email **********/
-        /****************************/
-        error_reporting(E_STRICT);
-
-        date_default_timezone_set(date_default_timezone_get());
-
-        include_once('class.phpmailer.php');
-
-        $subject = $this->getContext()->getI18N()->__("Forex International Group Registration email notification", null, 'email');
-        $body = $this->getContext()->getI18N()->__("Dear %1%", array('%1%' => $mlm_distributor->getNickname()), 'email') . ",<p><p>
-
-        <p>" . $this->getContext()->getI18N()->__("Your registration request has been successfully sent to Forex International Group", null, 'email') . "</p>
-        <p><b>" . $this->getContext()->getI18N()->__("Trader ID", null) . ": " . $fcode . "</b>
-        <p><b>" . $this->getContext()->getI18N()->__("Password", null) . ": " . $password . "</b>";
-
-        $mail = new PHPMailer();
-        $mail->IsMail(); // telling the class to use SMTP
-        $mail->Host = Mails::EMAIL_HOST; // SMTP server
-        $mail->Sender = Mails::EMAIL_FROM_NOREPLY;
-        $mail->From = Mails::EMAIL_FROM_NOREPLY;
-        $mail->FromName = Mails::EMAIL_FROM_NOREPLY_NAME;
-        $mail->Subject = $subject;
-        $mail->CharSet = "utf-8";
-
-        $text_body = $body;
-
-        $mail->Body = $body;
-        $mail->AltBody = $text_body;
-        $mail->AddAddress($mlm_distributor->getEmail(), $mlm_distributor->getNickname());
-
-        if (!$mail->Send()) {
-            echo $mail->ErrorInfo;
-        }
-        $this->setFlash("successMsg", "Trader has been registered successfully.<br><br>Your Trader ID : <span id='LabelMemberName'>" . $fcode . "</span>");
-        return $this->redirect('/marketing/distAdd');
-    }
-
     public function executeManipulateSponsorTree()
     {
         $parentId = $this->getRequestParameter('root');
@@ -3281,29 +3061,6 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $this->forward404Unless($distDB);
 
         return $distDB;
-    }
-
-    function doSaveAccount($distId, $accountType, $credit, $debit, $transactionType, $remarks)
-    {
-        $mlm_account = new MlmAccount();
-        $mlm_account->setDistId($distId);
-        $mlm_account->setAccountType($accountType);
-        $mlm_account->setBalance($credit - $debit);
-        $mlm_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account->save();
-
-        $mlm_account_ledger = new MlmAccountLedger();
-        $mlm_account_ledger->setDistId($distId);
-        $mlm_account_ledger->setAccountType($accountType);
-        $mlm_account_ledger->setTransactionType($transactionType);
-        $mlm_account_ledger->setRemark($remarks);
-        $mlm_account_ledger->setCredit($credit);
-        $mlm_account_ledger->setDebit($debit);
-        $mlm_account_ledger->setBalance($credit - $debit);
-        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-        $mlm_account_ledger->save();
     }
 
     function revalidateAccount($distributorId, $accountType)
@@ -4069,5 +3826,23 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $fcode = str_pad($fcode, $digit, "0", STR_PAD_LEFT);
 
         return $char.$fcode;
+    }
+
+    function mirroringAccountLedger($mlmAccountLedger)
+    {
+        $log_account_ledger = new LogAccountLedger();
+        $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
+        $log_account_ledger->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+        $log_account_ledger->setDistId($mlmAccountLedger->getDistId());
+        $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
+        $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
+        $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
+        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
+        $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
+        $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
+        $log_account_ledger->setCreatedBy($mlmAccountLedger->getCreatedBy());
+        $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
+        $log_account_ledger->save();
     }
 }

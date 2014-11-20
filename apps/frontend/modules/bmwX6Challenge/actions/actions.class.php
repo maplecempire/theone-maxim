@@ -145,6 +145,57 @@ class bmwX6ChallengeActions extends sfActions
         }
         $this->resultArray = $resultArray;
     }
+    public function executeFirstChallenge()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $dateFrom = '2014-03-10 00:00:00';
+        $dateTo = '2014-05-31 23:59:59';
+        $this->totalPersonalSales = $this->getTotalPersonalSales($dateFrom, $dateTo);
+
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country, dist.tree_structure
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.created_on >= '".$dateFrom."' AND newDist.created_on <= '".$dateTo."' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND history.created_on >= '".$dateFrom."' AND history.created_on <= '".$dateTo."' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
+                    HAVING SUB_TOTAL >= 3000000
+                        ORDER BY 3 DESC ";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $resultArray[$count] = $arr;
+            $count++;
+        }
+        $this->resultArray = $resultArray;
+    }
 
     function getTotalPersonalSales($dateFrom, $dateTo)
     {
