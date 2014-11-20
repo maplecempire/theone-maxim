@@ -189,6 +189,7 @@ $(function() {
                                 <?php
                                 if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
                                     echo "<td align='middle'>Full Name</td>";
+                                    echo "<td align='middle'>Leader</td>";
                                 } else {
 
                                 }
@@ -223,6 +224,22 @@ $(function() {
 
                                         if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
                                             echo "<td align='middle'>" . $member['full_name'] . "</td>";
+
+                                            $leaderArrs = explode(",", Globals::GROUP_LEADER);
+                                            $leader = "";
+                                            for ($i = 0; $i < count($leaderArrs); $i++) {
+                                                $pos = strrpos($member['tree_structure'], "|".$leaderArrs[$i]."|");
+                                                if ($pos === false) { // note: three equal signs
+
+                                                } else {
+                                                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                                                    if ($dist) {
+                                                        $leader = $dist->getDistributorCode();
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                            echo "<td align='middle'>" . $leader . "</td>";
                                         } else {
 
                                         }

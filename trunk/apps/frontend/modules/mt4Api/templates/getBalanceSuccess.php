@@ -147,7 +147,7 @@ if(isset($_REQUEST["create"]))
 	$params['id'] 					= '';
 	$params['comment'] 				= @$_REQUEST['comment'];
 
-    $answer = $mt4request->MakeRequest("createaccount", $params);
+    /*$answer = $mt4request->MakeRequest("createaccount", $params);
 
 	if($answer['result']!=1)
 	{
@@ -171,14 +171,14 @@ if(isset($_REQUEST["create"]))
 			{
 				print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$_REQUEST['balance'].".</p>";
 			}
-	}
+	}*/
 	//$params['login'] = "2088511615";
 //    $params['value'] = 100; // above zero for deposits, below zero for withdraws
 //    $params['comment'] = "test balance operation";
 //    $answerData = $mt4request->MakeRequest("changebalance", $params);
 //    array(4) { ["result"]=> string(1) "1" ["login"]=> string(10) "2088511615" ["newbalance"]=> string(7) "1300.00" ["order"]=> string(6) "392461" }
 
-//    $answerData = $mt4request->MakeRequest("getaccountinfo", $params);
+    $answerData = $mt4request->MakeRequest("getaccountinfo", $params);
     //array(20) { ["result"]=> string(1) "1" ["login"]=> string(10) "2088511615" ["name"]=> string(10) "jason wong" ["email"]=> string(17) "r9jason@gmail.com" ["group"]=> string(6) "KLTEST" ["leverage"]=> string(3) "500" ["regdate"]=> string(10) "1386932016" ["country"]=> string(0) "" ["state"]=> string(0) "" ["adress"]=> string(0) "" ["city"]=> string(0) "" ["zip"]=> string(0) "" ["enable"]=> string(1) "1" ["tradingblocked"]=> string(1) "0" ["balance"]=> string(7) "1200.00" ["comment"]=> string(0) "" ["enableChangePassword"]=> string(1) "1" ["free_margin"]=> string(7) "1200.00" ["opened_orders"]=> string(2) "no" ["agent"]=> string(1) "0" }
 
 //    $answerData = $mt4request->MakeRequest("getaccountbalance", $params);
@@ -186,7 +186,7 @@ if(isset($_REQUEST["create"]))
 
     //$answerData = $mt4request->MakeRequest("getaccounts");
     //array(2) { ["result"]=> string(1) "1" ["size"]=> string(148) "144 2088511614;test;;KLTEST;500;1386930969;;;;;;1;0;1000.00;;1;0 2088511615;jason wong;r9jason@gmail.com;KLTEST;500;1386932016;;;;;;1;0;1200.00;;1;0" }
-    //var_dump($answerData);
+    var_dump($answerData);
 }
 ?>
 

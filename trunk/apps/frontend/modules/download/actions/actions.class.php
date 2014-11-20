@@ -453,11 +453,11 @@ p.s { font-size: 12px; }
         $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
         $response->setHttpHeader('Content-Disposition', 'attachment; filename=Private_Investment_Agreement.pdf', TRUE);
         $response->sendHttpHeaders();
-        if ($this->getUser()->getCulture() == 'cn') {
-            readfile(sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement_Cn.pdf");
-        } else {
+        //if ($this->getUser()->getCulture() == 'cn') {
+        //    readfile(sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement_Cn.pdf");
+        //} else {
             readfile(sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement.pdf");
-        }
+        //}
         return sfView::NONE;
     }
     public function executeMteAgreement()

@@ -634,6 +634,8 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
                     //$epointConvertedAmount = floor($epointAmount * 1.05);
                     $epointConvertedAmount = $epointAmount;
 
@@ -648,6 +650,8 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -713,6 +717,8 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
                     $tbl_account_ledger = new MlmAccountLedger();
                     $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -724,6 +730,8 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -798,6 +806,8 @@ class memberActions extends sfActions
             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
+
+            $this->mirroringAccountLedger($mlm_account_ledger);
 
             $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
 
@@ -948,6 +958,8 @@ class memberActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
+            $this->mirroringAccountLedger($mlm_account_ledger);
+
             $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
 
             $mlm_debit_card_registration = new MlmDebitCardRegistration();
@@ -1070,6 +1082,8 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
                     $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -1107,6 +1121,8 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger);
 
                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                         $sponsorDistCommissionledger->setMonthTraded(date('m'));
@@ -3623,6 +3639,8 @@ class memberActions extends sfActions
                             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger);
                         }
                         $mlm_account_ledger = new MlmAccountLedger();
                         $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -3635,6 +3653,8 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger);
                     }
 
                 } else {
@@ -3651,6 +3671,8 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
+
+                    $this->mirroringAccountLedger($mlm_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 }
@@ -3674,6 +3696,8 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
                     if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
                         $mlm_account_ledger = new MlmAccountLedger();
@@ -3687,6 +3711,8 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger);
                     } else {
                         if ($bonusService->checkDebitAccount($uplineDistId) == true) {
                             $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
@@ -6786,71 +6812,84 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $fromName = $this->getUser()->getAttribute(Globals::SESSION_NICKNAME);
                 $fromBalance = $ledgerAccountBalance;
 
-                $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $mlm_account_ledger->setDistId($fromId);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
-                //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
-                $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode);
-                $mlm_account_ledger->setCredit(0);
-                $mlm_account_ledger->setDebit($this->getRequestParameter('ecashAmount'));
-                $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('ecashAmount'));
-                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setDistId($fromId);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                    $mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode);
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($this->getRequestParameter('ecashAmount'));
+                    $mlm_account_ledger->setBalance($fromBalance - $this->getRequestParameter('ecashAmount'));
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($toId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                //$tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode);
-                $tbl_account_ledger->setCredit($this->getRequestParameter('ecashAmount'));
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('ecashAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $this->mirroringAccountLedger($mlm_account_ledger);
 
-                $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
 
-                // ******       processing fees      ****************
-                /*$tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($fromId);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($processFee);
-                $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($toId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    //$tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")");
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode);
+                    $tbl_account_ledger->setCredit($this->getRequestParameter('ecashAmount'));
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($toBalance + $this->getRequestParameter('ecashAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
-                // ******       company account      ****************
-                /*$c = new Criteria();
-                $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-                $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                $companyAccount = MlmAccountPeer::doSelectOne($c);
+                    $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    // ******       processing fees      ****************
+                    /*$tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($fromId);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($processFee);
+                    $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);*/
+                    $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
 
+                    // ******       company account      ****************
+                    /*$c = new Criteria();
+                    $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
+                    $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
+                    $companyAccount = MlmAccountPeer::doSelectOne($c);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
+                    $tbl_account_ledger->setCredit($processFee);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);*/
+
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
                 return $this->redirect('/member/transferEcash');
@@ -7055,6 +7094,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_EPOINT);
 
                     $tbl_account_ledger = new MlmAccountLedger();
@@ -7069,6 +7110,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -7310,6 +7353,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
 
                     $tbl_account_ledger = new MlmAccountLedger();
@@ -7324,6 +7369,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -7565,6 +7612,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
                     $tbl_account_ledger = new MlmAccountLedger();
@@ -7579,6 +7628,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -7668,6 +7719,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $epointConvertedAmount = $epointAmount;
 
@@ -7682,6 +7734,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -7736,6 +7790,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $epointConvertedAmount = $epointAmount;
 
@@ -7750,6 +7805,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -7915,6 +7972,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_RP);
 
                     $tbl_account_ledger = new MlmAccountLedger();
@@ -7928,6 +7987,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
                     $con->commit();
@@ -8289,46 +8350,59 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($withdrawAmount > 0) {
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($withdrawAmount);
-                $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($withdrawAmount);
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                // ******       company account      ****************
-                $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    // ******       company account      ****************
+                    $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                $tbl_cp3_withdraw = new MlmCp3Withdraw();
-                $tbl_cp3_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_cp3_withdraw->setDeduct($withdrawAmount);
-                $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
-                $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
-                $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
-                $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_cp3_withdraw->save();
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
+                    $tbl_account_ledger->setCredit($processFee);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
+                    $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $tbl_cp3_withdraw = new MlmCp3Withdraw();
+                    $tbl_cp3_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_cp3_withdraw->setDeduct($withdrawAmount);
+                    $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                    $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
+                    $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
+                    $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_cp3_withdraw->save();
+
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted."));
 
                 return $this->redirect('/member/cp3Withdrawal');
@@ -8382,47 +8456,59 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($withdrawAmount > 0) {
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($this->getRequestParameter('ecashAmount'));
-                $tbl_account_ledger->setBalance($ledgerAccountBalance - $this->getRequestParameter('ecashAmount'));
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($this->getRequestParameter('ecashAmount'));
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $this->getRequestParameter('ecashAmount'));
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                // ******       company account      ****************
-                $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
 
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
-                $tbl_account_ledger->setCredit($processFee);
-                $tbl_account_ledger->setDebit(0);
-                $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
+                    // ******       company account      ****************
+                    $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
 
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
+                    $tbl_account_ledger->setCredit($processFee);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $tbl_ecash_withdraw = new MlmEcashWithdraw();
-                $tbl_ecash_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_ecash_withdraw->setDeduct($withdrawAmount);
-                $tbl_ecash_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
-                $tbl_ecash_withdraw->setAmount($withdrawAmount - $processFee);
-                $tbl_ecash_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
-                $tbl_ecash_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_ecash_withdraw->save();
+                    $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
+                    $tbl_ecash_withdraw = new MlmEcashWithdraw();
+                    $tbl_ecash_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_ecash_withdraw->setDeduct($withdrawAmount);
+                    $tbl_ecash_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                    $tbl_ecash_withdraw->setAmount($withdrawAmount - $processFee);
+                    $tbl_ecash_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
+                    $tbl_ecash_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_ecash_withdraw->save();
+
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP2 withdrawal has been submitted."));
 
                 return $this->redirect('/member/ecashWithdrawal');
@@ -8587,30 +8673,41 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID."));
 
             } else {
-                $tbl_account_ledger = new MlmAccountLedger();
-                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TOPUP_MT4);
-                $tbl_account_ledger->setCredit(0);
-                $tbl_account_ledger->setDebit($pointNeeded);
-                $tbl_account_ledger->setBalance($ledgerEpointBalance - $pointNeeded);
-                $tbl_account_ledger->setRemark("MT4 Fund :".$mt4Amount);
-                //$tbl_account_ledger->setRemark("MT4 Fund :".$mt4Amount.", CONVERSION RATE :".$usdToMyr);
-                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $tbl_account_ledger->save();
+                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TOPUP_MT4);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($pointNeeded);
+                    $tbl_account_ledger->setBalance($ledgerEpointBalance - $pointNeeded);
+                    $tbl_account_ledger->setRemark("MT4 Fund :".$mt4Amount);
+                    //$tbl_account_ledger->setRemark("MT4 Fund :".$mt4Amount.", CONVERSION RATE :".$usdToMyr);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
 
-                $mlmMt4ReloadFund = new MlmMt4ReloadFund();
-                $mlmMt4ReloadFund->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $mlmMt4ReloadFund->setMt4UserName($mt4UserName);
-                $mlmMt4ReloadFund->setAmount($this->getRequestParameter('mt4Amount'));
-                $mlmMt4ReloadFund->setStatusCode(Globals::STATUS_PENDING);
-                $mlmMt4ReloadFund->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlmMt4ReloadFund->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlmMt4ReloadFund->save();
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
+                    $mlmMt4ReloadFund = new MlmMt4ReloadFund();
+                    $mlmMt4ReloadFund->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $mlmMt4ReloadFund->setMt4UserName($mt4UserName);
+                    $mlmMt4ReloadFund->setAmount($this->getRequestParameter('mt4Amount'));
+                    $mlmMt4ReloadFund->setStatusCode(Globals::STATUS_PENDING);
+                    $mlmMt4ReloadFund->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmMt4ReloadFund->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmMt4ReloadFund->save();
+
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your MT4 Fund Reload has been submitted."));
 
                 return $this->redirect('/member/reloadTopup');
@@ -9579,6 +9676,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $mlm_account_ledger->save();
 
+                                $this->mirroringAccountLedger($mlm_account_ledger);
+
                                 $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
                                 if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
                                     $mlm_account_ledger = new MlmAccountLedger();
@@ -9592,6 +9691,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->save();
+
+                                    $this->mirroringAccountLedger($mlm_account_ledger);
                                 } else {
                                     //commission
                                     $commissionBalance = $gdbBalance + $pairingBonusAmount;
@@ -9622,6 +9723,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $mlm_account_ledger->save();
+
+                                        $this->mirroringAccountLedger($mlm_account_ledger);
 
                                         $commissionBalance = $commissionBalance - $flushAmount;
                                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -9654,6 +9757,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $maintenanceEcashAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $maintenanceEcashAccountLedger->save();
+
+                                        $this->mirroringAccountLedger($maintenanceEcashAccountLedger);
                                     }
 
                                     $bonusService = new BonusService();
@@ -9710,6 +9815,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $maintenanceAccountLedger->save();
 
                                         $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                                        $this->mirroringAccountLedger($maintenanceAccountLedger);
                                     }
                                 }
                             }
@@ -9813,6 +9920,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
+
+                    $this->mirroringAccountLedger($mlm_account_ledger);
 
                     $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
@@ -10043,6 +10152,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
+                        $this->mirroringAccountLedger($mlm_account_ledger);
+
                         //commission
                         $commissionBalance = $gdbBalance + $pairingBonusAmount;
                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -10072,6 +10183,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger);
 
                             $commissionBalance = $commissionBalance - $flushAmount;
                             $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -10104,6 +10217,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $maintenanceEcashAccountLedger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $maintenanceEcashAccountLedger->save();
+
+                            $this->mirroringAccountLedger($maintenanceEcashAccountLedger);
                         }
 
                         $bonusService = new BonusService();
@@ -10438,6 +10553,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
+                    $this->mirroringAccountLedger($tbl_account_ledger);
+
                     //$epointConvertedAmount = floor($epointAmount * 1.05);
                     //if ($this->toHideCp2Cp3Transfer == true) {
                         //$epointConvertedAmount = floor($epointAmount);
@@ -10455,6 +10572,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -10566,6 +10685,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger);
 
                     if ($paymentType == "ecash") {
                         $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -10746,6 +10867,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger);
 
                             $bonusService = new BonusService();
                             if ($bonusService->checkDebitAccount($uplineDistId) == true) {
@@ -11062,233 +11185,246 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->forward404Unless($packageDB);
         $packageAmount = $packageDB->getPrice();
 
-        /* ****************************************************
-         * get distributor last account ledger epoint balance
-         * ***************************************************/
-        $c = new Criteria();
-        $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ("epoint" == $paymentType) {
-            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-        } else if ("ecash" == $paymentType) {
-            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
-        }
-        $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
-        $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
-        if (!$accountLedgerDB) {
-            $accountLedgerDB = new MlmAccountLedger();
-            $accountLedgerDB->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $accountLedgerDB->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-            $accountLedgerDB->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-            $accountLedgerDB->setRemark("");
-            $accountLedgerDB->setCredit(0);
-            $accountLedgerDB->setDebit(0);
-            $accountLedgerDB->setBalance(0);
-            $accountLedgerDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $accountLedgerDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $accountLedgerDB->save();
-        }
-
-        $sponsorAccountBalance = $accountLedgerDB->getBalance();
-
-        /* ****************************************************
-         * get sponsored distributor and user
-         * ***************************************************/
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $sponsorId);
-        $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_PENDING);
-        $sponsoredDistDB = MlmDistributorPeer::doSelectOne($c);
-        $this->forward404Unless($sponsoredDistDB);
-
-        $userDB = AppUserPeer::retrieveByPK($sponsoredDistDB->getUserId());
-        $this->forward404Unless($userDB);
-
-        /* ****************************************************
-         * update sponsored distributor and user
-         * ***************************************************/
-        $sponsoredDistDB->setRankId($packageDB->getPackageId());
-        $sponsoredDistDB->setRankCode($packageDB->getPackageName());
-        $sponsoredDistDB->setInitRankId($packageDB->getPackageId());
-        $sponsoredDistDB->setInitRankCode($packageDB->getPackageName());
-        $sponsoredDistDB->setStatusCode(Globals::STATUS_ACTIVE);
-        $sponsoredDistDB->setPackagePurchaseFlag("Y");
-        $sponsoredDistDB->setActiveDatetime(date("Y/m/d h:i:s A"));
-        $sponsoredDistDB->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $sponsoredDistDB->save();
-
-        $userDB->setStatusCode(Globals::STATUS_ACTIVE);
-        $userDB->save();
-
-        /**************************************/
-        /*  Direct REFERRER Bonus For Upline
-        /**************************************/
-        $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
-        if ($uplineDistDB) {
-            //if ($uplineDistDB->getIbRankId() != null) {
-            if ($uplineDistDB->getIsIb() == Globals::YES) {
-                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-            } else {
-                $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                $directSponsorPercentage = $uplineDistPackage->getCommission();
-                $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-            }
-            $totalBonusPayOut = $directSponsorPercentage;
-
-            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
-            $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+        $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+        try {
+            $con->begin();
             /* ****************************************************
-           * Update upline distributor account
-           * ***************************************************/
-            $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
-
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+             * get distributor last account ledger epoint balance
+             * ***************************************************/
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
             if ("epoint" == $paymentType) {
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
             } else if ("ecash" == $paymentType) {
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_ECASH);
             }
-            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-            $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$sponsoredDistDB->getDistributorCode());
-            $mlm_account_ledger->setCredit(0);
-            $mlm_account_ledger->setDebit($packageDB->getPrice());
-            $mlm_account_ledger->setBalance($sponsorAccountBalance);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
+            $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+            $accountLedgerDB = MlmAccountLedgerPeer::doSelectOne($c);
+            if (!$accountLedgerDB) {
+                $accountLedgerDB = new MlmAccountLedger();
+                $accountLedgerDB->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $accountLedgerDB->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $accountLedgerDB->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                $accountLedgerDB->setRemark("");
+                $accountLedgerDB->setCredit(0);
+                $accountLedgerDB->setDebit(0);
+                $accountLedgerDB->setBalance(0);
+                $accountLedgerDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $accountLedgerDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $accountLedgerDB->save();
 
-            if ("epoint" == $paymentType) {
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
-            } else if ("ecash" == $paymentType) {
-                $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                $this->mirroringAccountLedger($accountLedgerDB);
             }
 
-            /******************************/
-            /*  Direct Sponsor Bonus
-            /******************************/
-            $firstForDRB = true;
-            while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
-                $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+            $sponsorAccountBalance = $accountLedgerDB->getBalance();
+
+            /* ****************************************************
+             * get sponsored distributor and user
+             * ***************************************************/
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $sponsorId);
+            $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_PENDING);
+            $sponsoredDistDB = MlmDistributorPeer::doSelectOne($c);
+            $this->forward404Unless($sponsoredDistDB);
+
+            $userDB = AppUserPeer::retrieveByPK($sponsoredDistDB->getUserId());
+            $this->forward404Unless($userDB);
+
+            /* ****************************************************
+             * update sponsored distributor and user
+             * ***************************************************/
+            $sponsoredDistDB->setRankId($packageDB->getPackageId());
+            $sponsoredDistDB->setRankCode($packageDB->getPackageName());
+            $sponsoredDistDB->setInitRankId($packageDB->getPackageId());
+            $sponsoredDistDB->setInitRankCode($packageDB->getPackageName());
+            $sponsoredDistDB->setStatusCode(Globals::STATUS_ACTIVE);
+            $sponsoredDistDB->setPackagePurchaseFlag("Y");
+            $sponsoredDistDB->setActiveDatetime(date("Y/m/d h:i:s A"));
+            $sponsoredDistDB->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $sponsoredDistDB->save();
+
+            $userDB->setStatusCode(Globals::STATUS_ACTIVE);
+            $userDB->save();
+
+            /**************************************/
+            /*  Direct REFERRER Bonus For Upline
+            /**************************************/
+            $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+            if ($uplineDistDB) {
+                //if ($uplineDistDB->getIbRankId() != null) {
+                if ($uplineDistDB->getIsIb() == Globals::YES) {
+                    $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
+                    $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                } else {
+                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                    $directSponsorPercentage = $uplineDistPackage->getCommission();
+                    $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                }
+                $totalBonusPayOut = $directSponsorPercentage;
+
+                $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_ECASH, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+                $this->doSaveAccount($sponsorId, Globals::ACCOUNT_TYPE_EPOINT, 0, 0, Globals::ACCOUNT_LEDGER_ACTION_REGISTER, "");
+                /* ****************************************************
+               * Update upline distributor account
+               * ***************************************************/
+                $sponsorAccountBalance = $sponsorAccountBalance - $packageDB->getPrice();
 
                 $mlm_account_ledger = new MlmAccountLedger();
-                $mlm_account_ledger->setDistId($uplineDistId);
-                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
-                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")");
-                $mlm_account_ledger->setCredit($directSponsorBonusAmount);
-                $mlm_account_ledger->setDebit(0);
-                $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                if ("epoint" == $paymentType) {
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                } else if ("ecash" == $paymentType) {
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                }
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$sponsoredDistDB->getDistributorCode());
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($packageDB->getPrice());
+                $mlm_account_ledger->setBalance($sponsorAccountBalance);
                 $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $bonusService = new BonusService();
-                if ($bonusService->checkDebitAccount($uplineDistId) == true) {
-                    $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")";
-                    $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
+                $this->mirroringAccountLedger($mlm_account_ledger);
+
+                if ("epoint" == $paymentType) {
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                } else if ("ecash" == $paymentType) {
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 }
-                $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
                 /******************************/
-                /*  Commission
+                /*  Direct Sponsor Bonus
                 /******************************/
-                $c = new Criteria();
-                $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
-                $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-                $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+                $firstForDRB = true;
+                while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
+                    $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
-                $commissionBalance = 0;
-                if (!$sponsorDistCommissionDB) {
-                    $sponsorDistCommissionDB = new MlmDistCommission();
-                    $sponsorDistCommissionDB->setDistId($uplineDistId);
-                    $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-                    $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($uplineDistId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
+                    $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")");
+                    $mlm_account_ledger->setCredit($directSponsorBonusAmount);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
+                    $bonusService = new BonusService();
+                    if ($bonusService->checkDebitAccount($uplineDistId) == true) {
+                        $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $sponsoredDistDB->getDistributorCode() . ")";
+                        $bonusService->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
+                    }
+                    $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+
+                    /******************************/
+                    /*  Commission
+                    /******************************/
+                    $c = new Criteria();
+                    $c->add(MlmDistCommissionPeer::DIST_ID, $uplineDistId);
+                    $c->add(MlmDistCommissionPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                    $sponsorDistCommissionDB = MlmDistCommissionPeer::doSelectOne($c);
+
+                    $commissionBalance = 0;
+                    if (!$sponsorDistCommissionDB) {
+                        $sponsorDistCommissionDB = new MlmDistCommission();
+                        $sponsorDistCommissionDB->setDistId($uplineDistId);
+                        $sponsorDistCommissionDB->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                        $sponsorDistCommissionDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    } else {
+                        $commissionBalance = $sponsorDistCommissionDB->getBalance();
+                    }
+                    $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
                     $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                } else {
-                    $commissionBalance = $sponsorDistCommissionDB->getBalance();
-                }
-                $sponsorDistCommissionDB->setBalance($commissionBalance + $directSponsorBonusAmount);
-                $sponsorDistCommissionDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $sponsorDistCommissionDB->save();
+                    $sponsorDistCommissionDB->save();
 
-                $c = new Criteria();
-                $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
-                $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
-                $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
-                $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
+                    $c = new Criteria();
+                    $c->add(MlmDistCommissionLedgerPeer::DIST_ID, $uplineDistId);
+                    $c->add(MlmDistCommissionLedgerPeer::COMMISSION_TYPE, Globals::COMMISSION_TYPE_DRB);
+                    $c->addDescendingOrderByColumn(MlmDistCommissionLedgerPeer::CREATED_ON);
+                    $sponsorDistCommissionLedgerDB = MlmDistCommissionLedgerPeer::doSelectOne($c);
 
-                $dsbBalance = 0;
-                if ($sponsorDistCommissionLedgerDB)
-                    $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
+                    $dsbBalance = 0;
+                    if ($sponsorDistCommissionLedgerDB)
+                        $dsbBalance = $sponsorDistCommissionLedgerDB->getBalance();
 
-                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                $sponsorDistCommissionledger->setDistId($uplineDistId);
-                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
-                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
-                $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
-                $sponsorDistCommissionledger->setDebit(0);
-                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
-                if ($firstForDRB == true) {
-                    $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
-                    $firstForDRB = false;
-                } else {
-                    $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
-                }
-                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $sponsorDistCommissionledger->save();
+                    $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                    $sponsorDistCommissionledger->setDistId($uplineDistId);
+                    $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_DRB);
+                    $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_REGISTER);
+                    $sponsorDistCommissionledger->setCredit($directSponsorBonusAmount);
+                    $sponsorDistCommissionledger->setDebit(0);
+                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                    $sponsorDistCommissionledger->setBalance($dsbBalance + $directSponsorBonusAmount);
+                    if ($firstForDRB == true) {
+                        $sponsorDistCommissionledger->setRemark("DRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
+                        $firstForDRB = false;
+                    } else {
+                        $sponsorDistCommissionledger->setRemark("GRB FOR PACKAGE PURCHASE ".$directSponsorPercentage."% (".$packageDB->getPackageName().") for ".$sponsoredDistDB->getDistributorCode());
+                    }
+                    $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistCommissionledger->save();
 
-                $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
-                //var_dump("==>1");
-                if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
-                    //var_dump("==>2");
-                    $checkCommission = true;
-                    $uplineDistId = $uplineDistDB->getUplineDistId();
-                    while ($checkCommission == true) {
-                        //var_dump("==>3**".$uplineDistId);
-                        $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
+                    $this->revalidateCommission($uplineDistId, Globals::COMMISSION_TYPE_DRB);
+                    //var_dump("==>1");
+                    if ($totalBonusPayOut < Globals::TOTAL_BONUS_PAYOUT) {
+                        //var_dump("==>2");
+                        $checkCommission = true;
+                        $uplineDistId = $uplineDistDB->getUplineDistId();
+                        while ($checkCommission == true) {
+                            //var_dump("==>3**".$uplineDistId);
+                            $uplineDistDB = MlmDistributorPeer::retrieveByPK($uplineDistId);
 
-                        //var_dump("==>3$$".$uplineDistId);
-                        $this->forward404Unless($uplineDistDB);
+                            //var_dump("==>3$$".$uplineDistId);
+                            $this->forward404Unless($uplineDistDB);
 
-                        if ($uplineDistDB->getIsIb() == Globals::YES) {
-                            /*if ($uplineDistDB->getIbRankId() != null) {
-                                $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                            if ($uplineDistDB->getIsIb() == Globals::YES) {
+                                /*if ($uplineDistDB->getIbRankId() != null) {
+                                    $uplineDistPackage = MlmIbPackagePeer::retrieveByPK($uplineDistDB->getIbRankId());
+                                } else {
+                                    $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                                }*/
+                                $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
                             } else {
                                 $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                            }*/
-                            $directSponsorPercentage = $uplineDistDB->getIbCommission() * 100;
-                        } else {
-                            $uplineDistPackage = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
-                            $directSponsorPercentage = $uplineDistPackage->getCommission();
-                        }
-                        if ($directSponsorPercentage > $totalBonusPayOut) {
-                            //var_dump("==>6");
-                            $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
-                            $totalBonusPayOut += $directSponsorPercentage;
-                            if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
-                                //var_dump("==>7");
-                                $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                $directSponsorPercentage = $uplineDistPackage->getCommission();
                             }
-                        } else {
-                            //var_dump("==>8");
-                            $uplineDistId = $uplineDistDB->getUplineDistId();
-                            continue;
-                        }
+                            if ($directSponsorPercentage > $totalBonusPayOut) {
+                                //var_dump("==>6");
+                                $directSponsorPercentage = $directSponsorPercentage - $totalBonusPayOut;
+                                $totalBonusPayOut += $directSponsorPercentage;
+                                if ($totalBonusPayOut > Globals::TOTAL_BONUS_PAYOUT) {
+                                    //var_dump("==>7");
+                                    $directSponsorPercentage = $directSponsorPercentage - ($totalBonusPayOut - Globals::TOTAL_BONUS_PAYOUT);
+                                }
+                            } else {
+                                //var_dump("==>8");
+                                $uplineDistId = $uplineDistDB->getUplineDistId();
+                                continue;
+                            }
 
-                        $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
-                        $checkCommission == false;
+                            $directSponsorBonusAmount = $directSponsorPercentage * $packageDB->getPrice() / 100;
+                            $checkCommission == false;
+                            break;
+                            //var_dump("==>9");
+                        }
+                    } else {
                         break;
-                        //var_dump("==>9");
+                        //var_dump("==>^^");
                     }
-                } else {
-                    break;
-                    //var_dump("==>^^");
                 }
             }
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
         }
-
     }
 
     function getAppSetting($parameter)
@@ -11311,26 +11447,38 @@ We look forward to your custom in the near future. Should you have any queries, 
         $mlm_account = MlmAccountPeer::doSelectOne($c);
 
         if (!$mlm_account) {
-            $mlm_account = new MlmAccount();
+            $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+            try {
+                $con->begin();
 
-            $mlm_account->setDistId($distId);
-            $mlm_account->setAccountType($accountType);
-            $mlm_account->setBalance($credit - $debit);
-            $mlm_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account->save();
+                $mlm_account = new MlmAccount();
 
-            $mlm_account_ledger = new MlmAccountLedger();
-            $mlm_account_ledger->setDistId($distId);
-            $mlm_account_ledger->setAccountType($accountType);
-            $mlm_account_ledger->setTransactionType($transactionType);
-            $mlm_account_ledger->setRemark($remarks);
-            $mlm_account_ledger->setCredit($credit);
-            $mlm_account_ledger->setDebit($debit);
-            $mlm_account_ledger->setBalance($credit - $debit);
-            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $mlm_account_ledger->save();
+                $mlm_account->setDistId($distId);
+                $mlm_account->setAccountType($accountType);
+                $mlm_account->setBalance($credit - $debit);
+                $mlm_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType($accountType);
+                $mlm_account_ledger->setTransactionType($transactionType);
+                $mlm_account_ledger->setRemark($remarks);
+                $mlm_account_ledger->setCredit($credit);
+                $mlm_account_ledger->setDebit($debit);
+                $mlm_account_ledger->setBalance($credit - $debit);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->mirroringAccountLedger($mlm_account_ledger);
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
         }
     }
 
@@ -12465,5 +12613,23 @@ Wish you all the best.
             return false;
         }
         return false;
+    }
+
+    function mirroringAccountLedger($mlmAccountLedger)
+    {
+        $log_account_ledger = new LogAccountLedger();
+        $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
+        $log_account_ledger->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+        $log_account_ledger->setDistId($mlmAccountLedger->getDistId());
+        $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
+        $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
+        $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
+        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
+        $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
+        $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
+        $log_account_ledger->setCreatedBy($mlmAccountLedger->getCreatedBy());
+        $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
+        $log_account_ledger->save();
     }
 }
