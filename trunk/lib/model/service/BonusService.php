@@ -122,6 +122,8 @@ class BonusService
                     $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                     $mlm_account_ledger->save();
 
+                    $this->mirroringAccountLedger($mlm_account_ledger);
+
                     if ($this->checkDebitAccount($uplineDistId) == true) {
                         $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
                         $this->contraDebitAccount($uplineDistId, $debitAccountRemark, $directSponsorBonusAmount);
@@ -324,6 +326,8 @@ class BonusService
                 $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->save();
 
+                $this->mirroringAccountLedger($mlm_account_ledger);
+
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
@@ -335,6 +339,8 @@ class BonusService
                 $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->save();
+
+                $this->mirroringAccountLedger($mlm_account_ledger);
             }
 
             $con->commit();
@@ -421,6 +427,8 @@ class BonusService
                     $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
                     $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                     $mlm_account_ledger->save();
+
+                    $this->mirroringAccountLedger($mlm_account_ledger);
 
                     if ($this->checkDebitAccount($uplineDistId) == true) {
                         $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
@@ -624,6 +632,8 @@ class BonusService
                 $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->save();
 
+                $this->mirroringAccountLedger($mlm_account_ledger);
+
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
                 $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
@@ -635,6 +645,8 @@ class BonusService
                 $mlm_account_ledger->setCreatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->setUpdatedBy(Globals::SYSTEM_USER_ID);
                 $mlm_account_ledger->save();
+
+                $this->mirroringAccountLedger($mlm_account_ledger);
             }
 
             $con->commit();
@@ -1028,5 +1040,23 @@ class BonusService
             }
         }
         return 0;
+    }
+
+    function mirroringAccountLedger($mlmAccountLedger)
+    {
+        $log_account_ledger = new LogAccountLedger();
+        $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
+        $log_account_ledger->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+        $log_account_ledger->setDistId($mlmAccountLedger->getDistId());
+        $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
+        $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
+        $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
+        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
+        $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
+        $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
+        $log_account_ledger->setCreatedBy($mlmAccountLedger->getCreatedBy());
+        $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
+        $log_account_ledger->save();
     }
 }
