@@ -13,7 +13,7 @@ abstract class BaseLogAccountLedgerPeer {
 	const CLASS_DEFAULT = 'lib.model.LogAccountLedger';
 
 	
-	const NUM_COLUMNS = 15;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,6 +53,9 @@ abstract class BaseLogAccountLedgerPeer {
 	const INTERNAL_REMARK = 'log_account_ledger.INTERNAL_REMARK';
 
 	
+	const ACCESS_IP = 'log_account_ledger.ACCESS_IP';
+
+	
 	const CREATED_BY = 'log_account_ledger.CREATED_BY';
 
 	
@@ -70,18 +73,18 @@ abstract class BaseLogAccountLedgerPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LogId', 'AccountId', 'DistId', 'AccountType', 'TransactionType', 'RollingPoint', 'Credit', 'Debit', 'Balance', 'Remark', 'InternalRemark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (LogAccountLedgerPeer::LOG_ID, LogAccountLedgerPeer::ACCOUNT_ID, LogAccountLedgerPeer::DIST_ID, LogAccountLedgerPeer::ACCOUNT_TYPE, LogAccountLedgerPeer::TRANSACTION_TYPE, LogAccountLedgerPeer::ROLLING_POINT, LogAccountLedgerPeer::CREDIT, LogAccountLedgerPeer::DEBIT, LogAccountLedgerPeer::BALANCE, LogAccountLedgerPeer::REMARK, LogAccountLedgerPeer::INTERNAL_REMARK, LogAccountLedgerPeer::CREATED_BY, LogAccountLedgerPeer::CREATED_ON, LogAccountLedgerPeer::UPDATED_BY, LogAccountLedgerPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('log_id', 'account_id', 'dist_id', 'account_type', 'transaction_type', 'rolling_point', 'credit', 'debit', 'balance', 'remark', 'internal_remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('LogId', 'AccountId', 'DistId', 'AccountType', 'TransactionType', 'RollingPoint', 'Credit', 'Debit', 'Balance', 'Remark', 'InternalRemark', 'AccessIp', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (LogAccountLedgerPeer::LOG_ID, LogAccountLedgerPeer::ACCOUNT_ID, LogAccountLedgerPeer::DIST_ID, LogAccountLedgerPeer::ACCOUNT_TYPE, LogAccountLedgerPeer::TRANSACTION_TYPE, LogAccountLedgerPeer::ROLLING_POINT, LogAccountLedgerPeer::CREDIT, LogAccountLedgerPeer::DEBIT, LogAccountLedgerPeer::BALANCE, LogAccountLedgerPeer::REMARK, LogAccountLedgerPeer::INTERNAL_REMARK, LogAccountLedgerPeer::ACCESS_IP, LogAccountLedgerPeer::CREATED_BY, LogAccountLedgerPeer::CREATED_ON, LogAccountLedgerPeer::UPDATED_BY, LogAccountLedgerPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('log_id', 'account_id', 'dist_id', 'account_type', 'transaction_type', 'rolling_point', 'credit', 'debit', 'balance', 'remark', 'internal_remark', 'access_ip', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LogId' => 0, 'AccountId' => 1, 'DistId' => 2, 'AccountType' => 3, 'TransactionType' => 4, 'RollingPoint' => 5, 'Credit' => 6, 'Debit' => 7, 'Balance' => 8, 'Remark' => 9, 'InternalRemark' => 10, 'CreatedBy' => 11, 'CreatedOn' => 12, 'UpdatedBy' => 13, 'UpdatedOn' => 14, ),
-		BasePeer::TYPE_COLNAME => array (LogAccountLedgerPeer::LOG_ID => 0, LogAccountLedgerPeer::ACCOUNT_ID => 1, LogAccountLedgerPeer::DIST_ID => 2, LogAccountLedgerPeer::ACCOUNT_TYPE => 3, LogAccountLedgerPeer::TRANSACTION_TYPE => 4, LogAccountLedgerPeer::ROLLING_POINT => 5, LogAccountLedgerPeer::CREDIT => 6, LogAccountLedgerPeer::DEBIT => 7, LogAccountLedgerPeer::BALANCE => 8, LogAccountLedgerPeer::REMARK => 9, LogAccountLedgerPeer::INTERNAL_REMARK => 10, LogAccountLedgerPeer::CREATED_BY => 11, LogAccountLedgerPeer::CREATED_ON => 12, LogAccountLedgerPeer::UPDATED_BY => 13, LogAccountLedgerPeer::UPDATED_ON => 14, ),
-		BasePeer::TYPE_FIELDNAME => array ('log_id' => 0, 'account_id' => 1, 'dist_id' => 2, 'account_type' => 3, 'transaction_type' => 4, 'rolling_point' => 5, 'credit' => 6, 'debit' => 7, 'balance' => 8, 'remark' => 9, 'internal_remark' => 10, 'created_by' => 11, 'created_on' => 12, 'updated_by' => 13, 'updated_on' => 14, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('LogId' => 0, 'AccountId' => 1, 'DistId' => 2, 'AccountType' => 3, 'TransactionType' => 4, 'RollingPoint' => 5, 'Credit' => 6, 'Debit' => 7, 'Balance' => 8, 'Remark' => 9, 'InternalRemark' => 10, 'AccessIp' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, ),
+		BasePeer::TYPE_COLNAME => array (LogAccountLedgerPeer::LOG_ID => 0, LogAccountLedgerPeer::ACCOUNT_ID => 1, LogAccountLedgerPeer::DIST_ID => 2, LogAccountLedgerPeer::ACCOUNT_TYPE => 3, LogAccountLedgerPeer::TRANSACTION_TYPE => 4, LogAccountLedgerPeer::ROLLING_POINT => 5, LogAccountLedgerPeer::CREDIT => 6, LogAccountLedgerPeer::DEBIT => 7, LogAccountLedgerPeer::BALANCE => 8, LogAccountLedgerPeer::REMARK => 9, LogAccountLedgerPeer::INTERNAL_REMARK => 10, LogAccountLedgerPeer::ACCESS_IP => 11, LogAccountLedgerPeer::CREATED_BY => 12, LogAccountLedgerPeer::CREATED_ON => 13, LogAccountLedgerPeer::UPDATED_BY => 14, LogAccountLedgerPeer::UPDATED_ON => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('log_id' => 0, 'account_id' => 1, 'dist_id' => 2, 'account_type' => 3, 'transaction_type' => 4, 'rolling_point' => 5, 'credit' => 6, 'debit' => 7, 'balance' => 8, 'remark' => 9, 'internal_remark' => 10, 'access_ip' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -156,6 +159,8 @@ abstract class BaseLogAccountLedgerPeer {
 		$criteria->addSelectColumn(LogAccountLedgerPeer::REMARK);
 
 		$criteria->addSelectColumn(LogAccountLedgerPeer::INTERNAL_REMARK);
+
+		$criteria->addSelectColumn(LogAccountLedgerPeer::ACCESS_IP);
 
 		$criteria->addSelectColumn(LogAccountLedgerPeer::CREATED_BY);
 
