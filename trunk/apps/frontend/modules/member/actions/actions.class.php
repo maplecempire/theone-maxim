@@ -1074,7 +1074,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
-                    $mlm_account_ledger->setRemark($mt4UserName." #".$idx);
+                    $mlm_account_ledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", #".$idx);
                     $mlm_account_ledger->setCredit($dividendAmount);
                     $mlm_account_ledger->setDebit(0);
                     $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
