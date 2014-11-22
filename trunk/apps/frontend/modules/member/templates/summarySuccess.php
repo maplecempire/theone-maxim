@@ -568,7 +568,7 @@ function reassignDatagridAnnouncementEventAttr() {
     </tr>
 <?php } ?>
 
-<?php if ($isRpUser > 0) { ?>
+<?php if ($distributor->getFromAbfx() == "N") { ?>
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('RT Account') ?></td>
