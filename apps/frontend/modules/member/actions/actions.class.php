@@ -5660,7 +5660,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $ranking = "";
         $mt4Id = "";
         $currencyCode = "";
-        $this->isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        //$this->isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
         $c = new Criteria();
         $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SYSTEM_CURRENCY);
@@ -7681,8 +7681,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeConvertCp2ToRt()
     {
-        $isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($isRpUser == false) {
+        $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($mlmDistributor->getFromAbfx() == "Y") {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
             return $this->redirect('/member/summary');
         }
@@ -7752,8 +7753,9 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeConvertCp3ToRt()
     {
-        $isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($isRpUser == false) {
+        $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($mlmDistributor->getFromAbfx() == "Y") {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
             return $this->redirect('/member/summary');
         }
