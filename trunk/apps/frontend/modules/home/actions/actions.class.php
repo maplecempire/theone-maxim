@@ -844,6 +844,7 @@ class homeActions extends sfActions
                 AND loan_account = 'N'";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        //$statement->()
         $rs = $statement->executeQuery();
 
         if ($rs->next()) {

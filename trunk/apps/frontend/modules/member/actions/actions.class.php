@@ -634,7 +634,7 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "43");
 
                     //$epointConvertedAmount = floor($epointAmount * 1.05);
                     $epointConvertedAmount = $epointAmount;
@@ -651,7 +651,7 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "44");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -717,7 +717,7 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "45");
 
                     $tbl_account_ledger = new MlmAccountLedger();
                     $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
@@ -731,7 +731,7 @@ class memberActions extends sfActions
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "46");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -807,7 +807,7 @@ class memberActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->mirroringAccountLedger($mlm_account_ledger);
+            $this->mirroringAccountLedger($mlm_account_ledger, "47");
 
             $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
 
@@ -958,7 +958,7 @@ class memberActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->mirroringAccountLedger($mlm_account_ledger);
+            $this->mirroringAccountLedger($mlm_account_ledger, "48");
 
             $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), $accountType);
 
@@ -1082,7 +1082,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "49");
 
                     $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
@@ -1122,7 +1122,7 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "50");
 
                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                         $sponsorDistCommissionledger->setMonthTraded(date('m'));
@@ -3640,7 +3640,7 @@ class memberActions extends sfActions
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
 
-                            $this->mirroringAccountLedger($mlm_account_ledger);
+                            $this->mirroringAccountLedger($mlm_account_ledger, "51");
                         }
                         $mlm_account_ledger = new MlmAccountLedger();
                         $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -3654,7 +3654,7 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "52");
                     }
 
                 } else {
@@ -3672,7 +3672,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "53");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 }
@@ -3696,7 +3696,7 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "54");
 
                     $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
                     if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
@@ -3712,7 +3712,7 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "55");
                     } else {
                         if ($bonusService->checkDebitAccount($uplineDistId) == true) {
                             $debitAccountRemark = "PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")";
@@ -6829,7 +6829,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "56");
 
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -6846,7 +6846,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "57");
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -7094,7 +7094,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "58");
 
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -7111,7 +7111,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "59");
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -7353,7 +7353,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "60");
 
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -7370,7 +7370,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "61");
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -7612,7 +7612,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "62");
 
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -7629,7 +7629,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "63");
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -7720,7 +7720,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "64");
 
                     $epointConvertedAmount = $epointAmount;
 
@@ -7736,7 +7736,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "65");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -7792,7 +7792,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "66");
 
                     $epointConvertedAmount = $epointAmount;
 
@@ -7808,7 +7808,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "67");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -7974,7 +7974,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "68");
 
                     $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_RP);
 
@@ -7990,7 +7990,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "69");
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
                     $con->commit();
@@ -8369,7 +8369,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "70");
 
                     // ******       company account      ****************
                     $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -8386,7 +8386,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "71");
 
                     $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -8475,7 +8475,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "72");
 
                     // ******       company account      ****************
                     $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
@@ -8494,7 +8494,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "73");
 
                     $tbl_ecash_withdraw = new MlmEcashWithdraw();
                     $tbl_ecash_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -8694,7 +8694,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "74");
 
                     $mlmMt4ReloadFund = new MlmMt4ReloadFund();
                     $mlmMt4ReloadFund->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -9678,7 +9678,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $mlm_account_ledger->save();
 
-                                $this->mirroringAccountLedger($mlm_account_ledger);
+                                $this->mirroringAccountLedger($mlm_account_ledger, "75");
 
                                 $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
                                 if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
@@ -9694,7 +9694,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->save();
 
-                                    $this->mirroringAccountLedger($mlm_account_ledger);
+                                    $this->mirroringAccountLedger($mlm_account_ledger, "76");
                                 } else {
                                     //commission
                                     $commissionBalance = $gdbBalance + $pairingBonusAmount;
@@ -9726,7 +9726,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $mlm_account_ledger->save();
 
-                                        $this->mirroringAccountLedger($mlm_account_ledger);
+                                        $this->mirroringAccountLedger($mlm_account_ledger, "77");
 
                                         $commissionBalance = $commissionBalance - $flushAmount;
                                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -9760,7 +9760,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $maintenanceEcashAccountLedger->save();
 
-                                        $this->mirroringAccountLedger($maintenanceEcashAccountLedger);
+                                        $this->mirroringAccountLedger($maintenanceEcashAccountLedger, "78");
                                     }
 
                                     $bonusService = new BonusService();
@@ -9818,7 +9818,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                                         $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
-                                        $this->mirroringAccountLedger($maintenanceAccountLedger);
+                                        $this->mirroringAccountLedger($maintenanceAccountLedger, "79");
                                     }
                                 }
                             }
@@ -9923,7 +9923,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "80");
 
                     $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
 
@@ -10154,7 +10154,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "81");
 
                         //commission
                         $commissionBalance = $gdbBalance + $pairingBonusAmount;
@@ -10186,7 +10186,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
 
-                            $this->mirroringAccountLedger($mlm_account_ledger);
+                            $this->mirroringAccountLedger($mlm_account_ledger, "82");
 
                             $commissionBalance = $commissionBalance - $flushAmount;
                             $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -10220,7 +10220,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $maintenanceEcashAccountLedger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $maintenanceEcashAccountLedger->save();
 
-                            $this->mirroringAccountLedger($maintenanceEcashAccountLedger);
+                            $this->mirroringAccountLedger($maintenanceEcashAccountLedger, "83");
                         }
 
                         $bonusService = new BonusService();
@@ -10555,7 +10555,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "84");
 
                     //$epointConvertedAmount = floor($epointAmount * 1.05);
                     //if ($this->toHideCp2Cp3Transfer == true) {
@@ -10575,7 +10575,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "85");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -10688,7 +10688,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger);
+                    $this->mirroringAccountLedger($tbl_account_ledger, "86");
 
                     if ($paymentType == "ecash") {
                         $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -10870,7 +10870,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
 
-                            $this->mirroringAccountLedger($mlm_account_ledger);
+                            $this->mirroringAccountLedger($mlm_account_ledger, "87");
 
                             $bonusService = new BonusService();
                             if ($bonusService->checkDebitAccount($uplineDistId) == true) {
@@ -11215,7 +11215,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $accountLedgerDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $accountLedgerDB->save();
 
-                $this->mirroringAccountLedger($accountLedgerDB);
+                $this->mirroringAccountLedger($accountLedgerDB, "88");
             }
 
             $sponsorAccountBalance = $accountLedgerDB->getBalance();
@@ -11287,7 +11287,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "89");
 
                 if ("epoint" == $paymentType) {
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -11314,7 +11314,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "90");
 
                     $bonusService = new BonusService();
                     if ($bonusService->checkDebitAccount($uplineDistId) == true) {
@@ -11474,7 +11474,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "91");
 
                 $con->commit();
             } catch (PropelException $e) {
@@ -12617,7 +12617,7 @@ Wish you all the best.
         return false;
     }
 
-    function mirroringAccountLedger($mlmAccountLedger)
+    function mirroringAccountLedger($mlmAccountLedger, $internalRemark)
     {
         $log_account_ledger = new LogAccountLedger();
         $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
@@ -12626,7 +12626,7 @@ Wish you all the best.
         $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
         $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
         $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
-        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setInternalRemark($internalRemark);
         $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
         $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
         $log_account_ledger->setBalance($mlmAccountLedger->getBalance());

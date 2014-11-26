@@ -96,7 +96,7 @@ class rookieChallengeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "92");
                 }
 
                 $affectedDistributor->setBkkStatus("COMPLETE");
@@ -176,7 +176,7 @@ class rookieChallengeActions extends sfActions
         return 0;
     }
 
-    function mirroringAccountLedger($mlmAccountLedger)
+    function mirroringAccountLedger($mlmAccountLedger, $internalRemark)
     {
         $log_account_ledger = new LogAccountLedger();
         $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
@@ -185,7 +185,7 @@ class rookieChallengeActions extends sfActions
         $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
         $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
         $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
-        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setInternalRemark($internalRemark);
         $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
         $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
         $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
