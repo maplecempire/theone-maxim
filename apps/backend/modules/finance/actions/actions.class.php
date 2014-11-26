@@ -88,7 +88,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "1");
                     //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
                 }
                 $con->commit();
@@ -152,7 +152,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "2");
                         //$this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
                         $mlm_account_ledger = new MlmAccountLedger();
@@ -167,7 +167,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "3");
 
                         //$this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
                         /* ***********************************
@@ -254,7 +254,7 @@ class financeActions extends sfActions
             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_account_ledger->save();
 
-            $this->mirroringAccountLedger($mlm_account_ledger);
+            $this->mirroringAccountLedger($mlm_account_ledger, "4");
 
             if ("Y" == $debitUpgraded) {
 
@@ -307,7 +307,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "5");
             } else {
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
@@ -322,7 +322,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "6");
             }
             $con->commit();
         } catch (PropelException $e) {
@@ -458,7 +458,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "7");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_DEBIT);
             } else if ($doAction == "epoint") {
@@ -477,7 +477,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "8");
 
                 $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -495,7 +495,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "9");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -516,7 +516,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "10");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -537,7 +537,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "11");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -558,7 +558,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "12");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -579,7 +579,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "13");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -598,7 +598,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "14");
 
                 $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -616,7 +616,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "15");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
             } else if ($doAction == "RECALL") {
@@ -639,7 +639,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "16");
 
                     $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
                 }
@@ -981,7 +981,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "17");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
@@ -1211,7 +1211,7 @@ class financeActions extends sfActions
                             $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $tbl_account_ledger->save();
 
-                            $this->mirroringAccountLedger($tbl_account_ledger);
+                            $this->mirroringAccountLedger($tbl_account_ledger, "18");
 
                             $this->revalidateAccount($mt4Withdrawal->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
 
@@ -1299,7 +1299,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "19");
 
                     $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
                 }
@@ -1359,7 +1359,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "20");
 
                         $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
                     }
@@ -1483,7 +1483,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "21");
 
                         $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -1499,7 +1499,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "22");
 
                         $this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
                         /* ***********************************
@@ -1578,7 +1578,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "23");
 
                         $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -1594,7 +1594,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "24");
 
                         $this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
                         /* ***********************************
@@ -1676,7 +1676,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "25");
 
                     $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -1692,7 +1692,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger);
+                    $this->mirroringAccountLedger($mlm_account_ledger, "26");
 
                     $this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
                 }
@@ -1803,7 +1803,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "27");
 
                         $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -1819,7 +1819,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "28");
 
                         $this->revalidateAccount($dist->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
                     }
@@ -2407,7 +2407,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "29");
 
                         $bonusService = new BonusService();
                         if ($bonusService->checkDebitAccount($distId) == true) {
@@ -2483,7 +2483,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "30");
 
                 $bonusService = new BonusService();
                 if ($bonusService->checkDebitAccount($distId) == true) {
@@ -2550,7 +2550,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "31");
 
                 $bonusService = new BonusService();
                 if ($bonusService->checkDebitAccount($distId) == true) {
@@ -2623,7 +2623,7 @@ class financeActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger);
+                        $this->mirroringAccountLedger($mlm_account_ledger, "32");
 
                         $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
                     }
@@ -2696,7 +2696,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "33");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
@@ -2760,7 +2760,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "34");
 
                 $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
             }
@@ -2891,7 +2891,7 @@ class financeActions extends sfActions
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
 
-                $this->mirroringAccountLedger($tbl_account_ledger);
+                $this->mirroringAccountLedger($tbl_account_ledger, "35");
 
                 $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -2954,7 +2954,7 @@ class financeActions extends sfActions
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->save();
 
-                $this->mirroringAccountLedger($mlm_account_ledger);
+                $this->mirroringAccountLedger($mlm_account_ledger, "36");
 
                 $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -2971,7 +2971,7 @@ class financeActions extends sfActions
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->save();
 
-                $this->mirroringAccountLedger($tbl_account_ledger);
+                $this->mirroringAccountLedger($tbl_account_ledger, "37");
 
                 $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_ECASH);
 
@@ -4063,7 +4063,7 @@ class financeActions extends sfActions
         }
     }
 
-    function mirroringAccountLedger($mlmAccountLedger)
+    function mirroringAccountLedger($mlmAccountLedger, $internalRemark)
     {
         $log_account_ledger = new LogAccountLedger();
         $log_account_ledger->setAccountId($mlmAccountLedger->getAccountId());
@@ -4072,7 +4072,7 @@ class financeActions extends sfActions
         $log_account_ledger->setAccountType($mlmAccountLedger->getAccountType());
         $log_account_ledger->setTransactionType($mlmAccountLedger->getTransactionType());
         $log_account_ledger->setRemark($mlmAccountLedger->getRemark());
-        $log_account_ledger->setInternalRemark($mlmAccountLedger->getInternalRemark());
+        $log_account_ledger->setInternalRemark($internalRemark);
         $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
         $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
         $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
