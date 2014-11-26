@@ -1074,6 +1074,40 @@ $(document).ready(function() {
             <div class="popdivider"></div>
         </div>
 
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='43'>This coming US Thanksgiving holiday on 27th November 2014, the business will be as usual.</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "26 November 2014";
+                ?>
+            </div>
+
+            <div id="page_43" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear Client,
+<br>
+<br>This coming US Thanksgiving holiday on 27th November 2014, the business will be as usual.
+<br>Please note that liquidity is expected to be thin with many banks not participating, especially for XAUUSD & XAGUSD when Gold futures on CME/Comex is CLOSED during the following periods. This may result in unusually WIDE spreads:
+<br>
+<br>- 28 Nov 2014 0200hrs - 0700hrs (SG/HK Time)
+<br>- 29 Nov 2014 0245hrs - 0600hrs (SG/HK Time)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='41'>MBank Visa Card Service Termination Notice<br>马胜MBank Visa借记卡服务暂停公告</a><img src="/images/new_icon.gif">
