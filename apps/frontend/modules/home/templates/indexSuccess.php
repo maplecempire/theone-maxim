@@ -996,6 +996,86 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='44'>Change in CURRENCY EXCHANGE RATE (27/11Change in CURRENCY EXCHANGE RATE (27/11/2014):
+                    <br>2014.11.27日 货币兑换比例调整通知</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "28 November 2014";
+                ?>
+            </div>
+
+            <div id="page_44" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear IMs and Partners
+<br>亲爱的会员及伙伴们:
+<br>
+<br>In an effort to serve you better and with IMMEDIATE EFECT, please NOTE that we have revised our currency exchange rates.
+<br>为了更好的服务大家，敬请留意以下货币兑换比例调整通知。该调整即时生效。
+<br>
+<br>The currency exchange rate revision is in line with the rising value of the US Dollar over the months. The management has revised some currency exchange rates as the company can not provide rates which are lower than the market.
+<br>此次货币兑换比例的变更是因为美元在过去几个月的走势发生了很大的变化。因为公司无法提供比市场更低的利率，因此公司已经调整了个别币种的兑换比例。
+<br>
+<br>One of the currency exchange rate that has been revised is the JAPANESE YEN. Effective from 1st Dec 2014, the revised rate will be 130 YEN to 1 USD.
+<br>其中之一被调整的币种为日元；从2014.12.1日起，日元入金比例将调整为130日元兑1美金。
+<br>
+<br>Any bank transfer to Corporate Bank Account in US dollars is subject to 10% Fund Management Cost and hereby the 1:1.1 ratio (For a USD10,000 package, members should transfer USD11,000) .
+<br>所有以美金为货币汇款至公司账户款项都需支付10%的外汇FMC管理费用；因此请按照1:1.1的比例汇款(即客户购买1万美金配套,需转款1万1千美金)。
+<br>
+<br>The latest currency exchange rates can be found in the ANNOUNCEMENT page inside the PARTNER AREA.
+<br>有关最新货币兑换比例信息，请参照会员网站公告区。
+<br>
+<br>The Management
+<br>Maxim Capital Limited
+<br>马胜金融集团管理层
+<br>November 27th 2014
+<br>
+<br>通貨交換レートの変換について（27/11/2014）
+<br>
+<br>IMおよびパートナーの皆様
+<br>
+<br>迅速な効果を伴ったよりよいサービス提供のために、私たちは為替レートの改訂を行います。
+<br>
+<br>為替レートの変更は、ここ数ヶ月のUSドルの価値上昇によるものです。マネジメントは、マーケットよりも低いレートを提供するわけにはいかないために、いくつかの為替レートを変更します。
+<br>
+<br>すでに変更された為替レートには日本円があります。改訂レートは130円=1USDです。これは2014年12月1日から実施になります。
+<br>銀行からコーポレートバンク・アカウントへのUSドルでの支払いは、10％の資金管理コストがかかります。そのため、比率は1:1.1となります（USD10,000パッケージに対して、メンバーはUSD11,000を送金しなくてはなりません）。
+<br>
+<br>最新の通貨交換レートにつきましてはパートナーエリアの「ANNOUNCEMENT」ページをご覧ください。
+<br>
+<br>マネージメント
+<br>マキシム・キャピタル・リミテッド
+<br>2014年11月27日
+<br>
+<br>환율 변경 (27/11/2014):
+<br>
+<br>친애하는 회원 및 파트너 여러분
+<br>
+<br>여러분들께 더 나은 서비스를 드리고자 환율을 변경하게 되었음을 알려드립니다. (바로 실행됩니다.)
+<br>환율 변경은 지난 몇달 동안 지속되어온 미국 달러 가치의 변화의 일환입니다. 당사는 시장의 환율보다 아래의 환율로 제공할 수 없기 때문에 변경을 결정합니다.
+<br>
+<br>변경되는 환율 중 하나가 일본 엔입니다. 2014년 12월 1일부로 변경될 환율은 1달러 당 130원입니다.
+<br>
+<br>본사 구좌로 미국 달러를 송금할 경우, 펀드 매니지먼트 비용 10%이 차감되며 이로 인하여 1:1.1 비율이 적용됩니다. (예를 들어 미화 10,000불 패키지의 경우 회원은 미화 11,000불을 송금하여야 합니다.)
+<br>
+<br>맥심 캐피탈 임직원
+<br>2014년 11월 27일
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='43'>This coming US Thanksgiving holiday on 27th November 2014, the business will be as usual.</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1108,7 +1188,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='41'>MBank Visa Card Service Termination Notice<br>马胜MBank Visa借记卡服务暂停公告</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='41'>MBank Visa Card Service Termination Notice<br>马胜MBank Visa借记卡服务暂停公告</a>
             </div>
             <div class="news_date">
             <?php
@@ -1168,7 +1248,7 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='40'>October PROMO - Maxim GOLD CHALLENGE !!!<br>10月促销 - 马胜金融金钞挑战计划!</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='40'>October PROMO - Maxim GOLD CHALLENGE !!!<br>10月促销 - 马胜金融金钞挑战计划!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1239,7 +1319,7 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='39'>News on Visa Debit Card Service Interruption<br>马胜借记卡服务暂停通告</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='39'>News on Visa Debit Card Service Interruption<br>马胜借记卡服务暂停通告</a>
             </div>
             <div class="news_date">
             <?php
@@ -1299,7 +1379,7 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='38'>Important Announcement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='38'>Important Announcement</a>
             </div>
             <div class="news_date">
             <?php
@@ -1330,7 +1410,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='37'>Rookie Challenge EXTENDED TO SEPTEMBER 19th, 2014 !!!!</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='37'>Rookie Challenge EXTENDED TO SEPTEMBER 19th, 2014 !!!!</a>
             </div>
             <div class="news_date">
             <?php
@@ -1420,7 +1500,7 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='36'>Server Maintenance</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='36'>Server Maintenance</a>
             </div>
             <div class="news_date">
             <?php
