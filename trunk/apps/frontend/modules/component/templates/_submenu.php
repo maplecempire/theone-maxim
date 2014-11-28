@@ -27,9 +27,13 @@ function blink(selector) {
 
 <?php
 $onlyTransferRP = false;
-
 if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 296708 || $distDB->getDistributorId() == 296709) {
     $onlyTransferRP = true;
+}
+
+$allowChangeSponsor = false;
+if ($distDB->getDistributorId() == 135 || $distDB->getDistributorId() == 595) {
+    $allowChangeSponsor = true;
 }
 ?>
 
@@ -229,6 +233,11 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a>
         </li>
+        <?php if ($allowChangeSponsor == true) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/changeSponsor"><span><?php echo __('Change Referrer ID'); ?></span></a>
+        </li>
+        <?php } ?>
     </ul>
     <br class="clear"><br>
 
