@@ -5315,6 +5315,69 @@ We look forward to your custom in the near future. Should you have any queries, 
         echo json_encode($arr);
         return sfView::HEADER_ONLY;
     }
+    
+    public function executeVerifySameStructure()
+    {
+        $sponsorId = $this->getRequestParameter('sponsorId');
+        $distId = $this->getRequestParameter('distId');
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
+            FROM mlm_distributor dist
+                LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                    WHERE appUser.username = '".$sponsorId."'";
+
+        $arr = "";
+
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $isFound = false;
+
+        if ($resultset->next()) {
+            $resultArr = $resultset->getRow();
+
+            $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$distId."|");
+            if ($pos === false) { // note: three equal signs
+                $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$distId."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $isFound = true;
+                }
+            } else {
+                $isFound = true;
+            }
+
+            if ($isFound == false) {
+                $existDist = MlmDistributorPeer::retrieveByPK($distId);
+                if ($existDist) {
+                    $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                    if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                        if ($pos === false) { // note: three equal signs
+
+                        } else {
+                            $isFound = true;
+                        }
+                    } else {
+                        $isFound = true;
+                    }
+                }
+            }
+            if ($isFound) {
+                $arr = array(
+                    'userId' => $resultArr["distributor_id"],
+                    'userName' => $resultArr["distributor_code"],
+                    'fullname' => $resultArr["full_name"],
+                    'nickname' => $resultArr["full_name"]
+                );
+            }
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
 
     public function executeVerifySponsorUserName()
     {
@@ -12633,5 +12696,64 @@ Wish you all the best.
         $log_account_ledger->setCreatedBy($mlmAccountLedger->getCreatedBy());
         $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
         $log_account_ledger->save();
+    }
+    
+    public function executeChangeSponsor(){
+    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 595){
+	        $sponsorId = $this->getRequestParameter('sponsorId');
+	        $distId = $this->getRequestParameter('distId');
+	        if($sponsorId<>"" && $distId<>""){
+	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+	            try {
+	                $con->begin();
+	
+	                $c = new Criteria();
+	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
+	                $c->addAnd(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+	                $downline = MlmDistributorPeer::doSelectOne($c);
+	
+	                if ($downline) {
+	                    $c = new Criteria();
+		                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+		                $upline = MlmDistributorPeer::doSelectOne($c);
+	                    
+	                    if($upline){
+	                    	$downline->setUplineDistId($upline->getDistributorID());
+		                    $downline->setTreeLevel($upline->getTreeLevel()+1);
+		                    $downline->setTreeStructure($upline->getTreeStructure()."|".$downline->getDistributorID()."|");
+		                    $downline->save();
+			                
+			                $con->commit();
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
+	                    }else{
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                    }
+	                }else{
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                }
+	
+	            } catch (PropelException $e) {
+	                $con->rollback();
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                throw $e;
+	            }
+	        }
+	        
+	        $c = new Criteria();
+	        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+	        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+	        $distDDs = MlmDistributorPeer::doSelect($c);
+	        $this->distDDs = $distDDs;
+	        
+	        /*
+	        $c = new Criteria();
+        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $distDs = MlmDistributorPeer::doSelect($c);
+        $this->distDs = $distDs;
+        */
+    	}else{
+    		return $this->redirect('/member/summary');
+    	}
     }
 }
