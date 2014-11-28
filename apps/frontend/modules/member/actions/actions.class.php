@@ -12718,11 +12718,19 @@ Wish you all the best.
 		                $upline = MlmDistributorPeer::doSelectOne($c);
 	                    
 	                    if($upline){
-	                    	$downline->setUplineDistId($upline->getDistributorID());
+	                    	$oldTreeStructure = $downline->getTreeStructure();
+                            $newTreeStructure = $upline->getTreeStructure()."|".$downline->getDistributorID()."|";
+
+                            $downline->setUplineDistId($upline->getDistributorID());
 		                    $downline->setTreeLevel($upline->getTreeLevel()+1);
-		                    $downline->setTreeStructure($upline->getTreeStructure()."|".$downline->getDistributorID()."|");
+		                    $downline->setTreeStructure($newTreeDtructure);
 		                    $downline->save();
-			                
+
+                            $query = "UPDATE mlm_distributor SET tree_structure=REPLACE(tree_structure, ".$oldTreeStructure.", ".$newTreeStructure.") WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
+                            $connection = Propel::getConnection();
+                            $statement = $connection->prepareStatement($query);
+                            $statement->executeQuery();
+
 			                $con->commit();
 			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
 	                    }else{
