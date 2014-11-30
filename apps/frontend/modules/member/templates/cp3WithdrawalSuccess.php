@@ -236,7 +236,14 @@
                             <li><?php echo __('Payout will be by the 15th of each month') ?></li>
                             <li><?php echo __('Handling Fee is USD30') ?></li>
                             <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
-                            <li><?php echo __('Leal time for monthly withdrawals to be credited to your bank accounts are as follow:<br>Local bank accounts - 20th<br>Visa debit card - 11th<br>i-Account - 11th<br>Money Trac - 15th') ?></li>
+                            <li><?php echo __('Payout time for monthly CP2 withdrawals to be credited to your account:') ?>
+                                <ul>
+                                    <li style="padding-left: 15px;"><?php echo __('Local bank accounts - by 20th') ?></li>
+                                    <li style="padding-left: 15px;"><?php echo __('Visa debit card - by 11th') ?></li>
+                                    <li style="padding-left: 15px;"><?php echo __('i-Account - by 11th') ?></li>
+                                    <li style="padding-left: 15px;"><?php echo __('Money Trac - by 13th') ?></li>
+                                </ul>
+                            </li>
                         </ol>
 
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
@@ -298,6 +305,21 @@
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
                                 <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+                <?php
+                } else if ($distributorDB->getBankHolderName() <> $distributorDB->getFullName()) {
+                ?>
+                <tr class="tbl_form_row_odd">
+                    <td colspan="3">
+                    <div class="ui-widget">
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                             class="ui-state-error ui-corner-all">
+                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                          class="ui-icon ui-icon-alert"></span>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Holder Name is not same as your full name.') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>

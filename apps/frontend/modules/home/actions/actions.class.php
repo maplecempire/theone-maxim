@@ -498,7 +498,8 @@ class homeActions extends sfActions
             $existUser = null;
             if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_DEV && $this->getRequestParameter('username') == "" && $this->getRequestParameter('userpassword') == "") {
                 // ******************* uncomment for testing purpose ****************
-                $existUser = AppUserPeer::retrieveByPk(3);
+                //$existUser = AppUserPeer::retrieveByPk(3);
+                $existUser = AppUserPeer::retrieveByPk(611);
             } else {
                 if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
                     require_once('recaptchalib.php');
