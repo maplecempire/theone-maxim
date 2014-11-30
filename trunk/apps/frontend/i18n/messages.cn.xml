@@ -992,6 +992,12 @@
             <trans-unit><source>Events/Promotions</source><target>会议与促销</target></trans-unit>
             <trans-unit><source>Others</source><target>其它</target></trans-unit>
             <trans-unit><source>For legal enquiries, please reach Legal Watch in Member Area.</source><target>如有法律问题，请于会员专区页面左侧联系Legal Watch.</target></trans-unit>
+            <trans-unit><source>Payout time for monthly CP2 withdrawals to be credited to your account:</source><target>每月CP2取现到账时间分别为: </target></trans-unit>
+            <trans-unit><source>Payout time for monthly CP3 withdrawals to be credited to your account:</source><target>每月CP3取现到账时间分别为: </target></trans-unit>
+            <trans-unit><source>Local bank accounts - by 20th</source><target>本地银行卡取现 --- 最晚每月20号</target></trans-unit>
+            <trans-unit><source>Visa debit card - by 11th</source><target>马胜VISA借记卡取现 --- 最晚每月11号</target></trans-unit>
+            <trans-unit><source>i-Account - by 11th</source><target>i-Account取现 --- 最晚每月11号</target></trans-unit>
+            <trans-unit><source>Money Trac - by 13th</source><target>MoneyTrac取现 --- 最晚每月13号</target></trans-unit>
         </body>
     </file>
 </xliff>
