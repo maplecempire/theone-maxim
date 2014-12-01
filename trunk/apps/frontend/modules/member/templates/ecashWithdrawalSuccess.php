@@ -317,7 +317,8 @@
                     </td>
                 </tr>
                 <?php
-                } else if ((strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName())) && $distributorDB->getBankCountry() <> "Australia") {
+                } else if ($distributorDB->getBankCountry() <> "China (PRC)" && $distributorDB->getBankCountry() <> "Australia") {
+                    if ((strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName())) && $distributorDB->getBankCountry() <> "Australia") {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
@@ -331,7 +332,8 @@
                     </div>
                     </td>
                 </tr>
-                <?php
+                    <?php
+                    }
                 } else if ($distributorDB->getBankCountry() == "Taiwan"
                            &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
