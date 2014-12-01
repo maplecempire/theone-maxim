@@ -64,6 +64,16 @@ class adminActions extends sfActions
             $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $appLoginLog->save();
+
+            $logLoginLog = new LogLoginLog();
+            $logLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $logLoginLog->setLogLoginId($appLoginLog->getLogId());
+            $logLoginLog->setUserId($existUser->getUserId());
+            $logLoginLog->setRemark("Master User Id:".$masterUserId);
+            $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->save();
+
             return $this->redirect('admin/redirectToFrontend');
         }
 
@@ -501,6 +511,23 @@ class adminActions extends sfActions
             $this->getUser()->setAttribute(Globals::SESSION_USERID, $existUser->getUserId());
             $this->getUser()->setAttribute(Globals::SESSION_USERNAME, $existUser->getUsername());
             $this->getUser()->setAttribute(Globals::SESSION_USERTYPE, $existAdmin->getAdminRole());
+
+            $appLoginLog = new AppLoginLog();
+            $appLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $appLoginLog->setUserId($existUser->getUserId());
+            $appLoginLog->setRemark("");
+            $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $appLoginLog->save();
+
+            $logLoginLog = new LogLoginLog();
+            $logLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $logLoginLog->setLogLoginId($appLoginLog->getLogId());
+            $logLoginLog->setUserId($existUser->getUserId());
+            $logLoginLog->setRemark("");
+            $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->save();
 
             return $this->redirect('admin/dashboard');
         }
