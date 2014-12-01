@@ -47,7 +47,7 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    error("Invalid User Name or Invalid Tree Sturcture");
+                    error("<?php echo __('Invalid User Name or Invalid Tree Structure')?>");
                     $('#sponsorId').val("");
                     $('#sponsorId').focus();
                 } else {
