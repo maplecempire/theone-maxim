@@ -310,7 +310,7 @@
                     </td>
                 </tr>
                 <?php
-                } else if ($distributorDB->getBankHolderName() <> $distributorDB->getFullName()) {
+                } else if ((strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName())) && $distributorDB->getBankCountry() <> "Australia") {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">

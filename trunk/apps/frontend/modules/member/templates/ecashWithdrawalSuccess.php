@@ -293,6 +293,8 @@
                 <?php
                 //var_dump(preg_match('/[^\\p{Common}\\p{Latin}]/u', '你好吗'));
                 //var_dump(preg_match('/[^\\p{Common}\\p{Latin}]/u', 'sadasdasdasdaas'));
+                //var_dump($distributorDB->getBankHolderName());
+                //var_dump($distributorDB->getFullName());
                 //exit();
                 if ($distributorDB->getBankAccNo() == "" || $distributorDB->getBankAccNo() == null
                     || $distributorDB->getBankName() == "" || $distributorDB->getBankName() == null
@@ -315,7 +317,7 @@
                     </td>
                 </tr>
                 <?php
-                } else if ($distributorDB->getBankHolderName() <> $distributorDB->getFullName()) {
+                } else if ((strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName())) && $distributorDB->getBankCountry() <> "Australia") {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
