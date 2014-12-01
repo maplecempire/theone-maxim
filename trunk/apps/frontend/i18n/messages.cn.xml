@@ -148,7 +148,7 @@
             </trans-unit>
 			<trans-unit id="30">
                 <source>Bank Holder Name</source>
-                <target>银行账户姓名</target>
+                <target>银行账户持有人姓名</target>
             </trans-unit>
 			<trans-unit id="31">
                 <source>Bank Account No</source>
@@ -998,6 +998,7 @@
             <trans-unit><source>Visa debit card - by 11th</source><target>马胜VISA借记卡取现 --- 最晚每月11号</target></trans-unit>
             <trans-unit><source>i-Account - by 11th</source><target>i-Account取现 --- 最晚每月11号</target></trans-unit>
             <trans-unit><source>Money Trac - by 13th</source><target>MoneyTrac取现 --- 最晚每月13号</target></trans-unit>
+            <trans-unit><source>Bank Holder Name is not same as your full name</source><target>银行账户持有人姓名必须与你的姓名相同</target></trans-unit>
         </body>
     </file>
 </xliff>

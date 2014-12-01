@@ -326,7 +326,7 @@
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Holder Name is not same as your full name.') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Holder Name is not same as your full name') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>
