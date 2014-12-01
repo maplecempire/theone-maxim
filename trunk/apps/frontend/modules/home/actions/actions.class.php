@@ -466,6 +466,15 @@ class homeActions extends sfActions
                     $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $appLoginLog->save();
 
+                    $logLoginLog = new LogLoginLog();
+                    $logLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+                    $logLoginLog->setLogLoginId($appLoginLog->getLogId());
+                    $logLoginLog->setUserId($existUser->getUserId());
+                    $logLoginLog->setRemark("Downline User Id logout:".$masterUserId);
+                    $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $logLoginLog->save();
+
                     return $this->redirect('member/summary');
                 }
                 //}
@@ -618,6 +627,15 @@ class homeActions extends sfActions
                 $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $appLoginLog->save();
 
+                $logLoginLog = new LogLoginLog();
+                $logLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+                $logLoginLog->setLogLoginId($appLoginLog->getLogId());
+                $logLoginLog->setUserId($existUser->getUserId());
+                $logLoginLog->setRemark("");
+                $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $logLoginLog->save();
+
                 return $this->redirect('home/index');
                 //return $this->redirect('member/summary');
                 //}
@@ -764,6 +782,16 @@ class homeActions extends sfActions
             $appLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $appLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $appLoginLog->save();
+
+            $logLoginLog = new LogLoginLog();
+            $logLoginLog->setAccessIp($this->getRequest()->getHttpHeader('addr','remote'));
+            $logLoginLog->setLogLoginId($appLoginLog->getLogId());
+            $logLoginLog->setUserId($existUser->getUserId());
+            $logLoginLog->setRemark("Upline User Id:".$masterUserId);
+            $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $logLoginLog->save();
+
             return $this->redirect('member/summary');
         }
 
