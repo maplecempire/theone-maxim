@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit>
                 <source>Member ID</source>
-                <target>会员ID</target>
+                <target>会员号</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>Password</source>
@@ -290,7 +290,7 @@
             <trans-unit><source>Position</source><target>安置</target></trans-unit>
             <trans-unit><source>Place Shareholder History</source><target>安置股东记录表</target></trans-unit>
             <trans-unit><source>Place Trader History</source><target>安置会员记录表</target></trans-unit>
-            <trans-unit><source>Placement ID</source><target>组织ID</target></trans-unit>
+            <trans-unit><source>Placement ID</source><target>组织帐号</target></trans-unit>
             <trans-unit><source>Placement Date</source><target>安置时间</target></trans-unit>
             <trans-unit><source>No. of PIN required</source><target>追加PIN</target></trans-unit>
             <trans-unit><source>Quantity</source><target>购买数量</target></trans-unit>
@@ -584,7 +584,7 @@
             <trans-unit><source>records</source><target>记录</target></trans-unit>
             <trans-unit><source>Personal Information</source><target>个人资料</target></trans-unit>
             <trans-unit><source>Personal Detail</source><target>个人详细资料</target></trans-unit>
-            <trans-unit><source>Referral ID</source><target>推荐人ID</target></trans-unit>
+            <trans-unit><source>Referral ID</source><target>推荐人帐号</target></trans-unit>
             <trans-unit><source>Referral Name</source><target>推荐人名称</target></trans-unit>
             <trans-unit><source>City / Town</source><target>市/镇</target></trans-unit>
             <trans-unit><source>State / Province</source><target>州/省</target></trans-unit>
@@ -662,6 +662,7 @@
             <trans-unit><source>CP1 Account</source><target>CP1 户口</target></trans-unit>
             <trans-unit><source>CP2 Account</source><target>CP2 户口</target></trans-unit>
             <trans-unit><source>CP3 Account</source><target>CP3 户口</target></trans-unit>
+            <trans-unit><source>RT Account</source><target>RT 户口</target></trans-unit>
             <trans-unit><source>Upgrade Package</source><target>升级配套</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>升级配套记录表</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
@@ -716,7 +717,7 @@
             <trans-unit><source>RP Amount</source><target>RP金额</target></trans-unit>
             <trans-unit><source>CP1 Balance</source><target>CP1金额</target></trans-unit>
             <trans-unit><source>RP Balance</source><target>RP金额</target></trans-unit>
-            <trans-unit><source>Transfer To Member ID</source><target>转账给会员ID</target></trans-unit>
+            <trans-unit><source>Transfer To Member ID</source><target>转账给会员帐号</target></trans-unit>
             <trans-unit><source>Transfer CP1 Amount</source><target>CP1转账金额</target></trans-unit>
             <trans-unit><source>Transfer RP Amount</source><target>RP转账金额</target></trans-unit>
             <trans-unit><source>MT4 Fund Withdrawal Amount In USD</source><target>MT4兑现是以美金来计算的</target></trans-unit>
@@ -762,7 +763,7 @@
             <trans-unit><source>Country of Bank</source><target>银行所在国家</target></trans-unit>
             <trans-unit><source>Trading Currency on MT4</source><target>MT4交易货币</target></trans-unit>
             <trans-unit><source>Note: you must present this Payment Reference when making payment to the bank. This PAYMENT REFERENCE NUMBER must be placed in the section where it says CAR NO. whenever it is applicable.</source><target>注意：当你付款时必须出示的银行付款参考号码。此付款参考号码必须放在一节中说 NO. KERETA/ CAR NO.</target></trans-unit>
-            <trans-unit><source>Invalid username or password.</source><target>会员ID和密码不正确</target></trans-unit>
+            <trans-unit><source>Invalid username or password.</source><target>会员帐号和密码不正确</target></trans-unit>
             <trans-unit><source>The CAPTCHA wasn't entered correctly. Go back and try it again.</source><target>验证码输入不正确。回去再试一次。</target></trans-unit>
             <trans-unit><source>This content is restricted to site members. If you are an existing user, please login. New users may register below.</source><target>此内容仅限于网站成员。如果您已是我们的会员，请登录。新用户可以注册。</target></trans-unit>
             <trans-unit><source>Your requests has been submitted, to complete the funding, please proceed to remit the payment to the account, with details as indicated below:</source><target>您的存款请求已提交成功，请继续进行汇款支付的帐户，详情如下表所示：</target></trans-unit>
@@ -787,7 +788,7 @@
             <trans-unit><source>Fund Management Performance</source><target>基金管理绩效</target></trans-unit>
             <trans-unit><source>Special Bonus</source><target>特别奖金</target></trans-unit>
             <trans-unit><source>Referrer and Placement Position</source><target>推荐和放置位置</target></trans-unit>
-            <trans-unit><source>Referrer ID</source><target>推荐人ID</target></trans-unit>
+            <trans-unit><source>Referrer ID</source><target>推荐人帐号</target></trans-unit>
             <trans-unit><source>Referrer Name</source><target>推荐人姓名</target></trans-unit>
             <trans-unit><source>Placement</source><target>放置位置</target></trans-unit>
             <trans-unit><source>New to Maxim Trader</source><target>Maxim Trader新会员</target></trans-unit>
@@ -999,6 +1000,15 @@
             <trans-unit><source>i-Account - by 11th</source><target>i-Account取现 --- 最晚每月11号</target></trans-unit>
             <trans-unit><source>Money Trac - by 13th</source><target>MoneyTrac取现 --- 最晚每月13号</target></trans-unit>
             <trans-unit><source>Bank Holder Name is not same as your full name</source><target>银行账户持有人姓名必须与你的姓名相同</target></trans-unit>
+            <trans-unit><source>Convert CP2 to RT</source><target>CP2转换为RT</target></trans-unit>
+            <trans-unit><source>Convert CP3 to RT</source><target>CP3转换为RT</target></trans-unit>
+            <trans-unit><source>Apply MoneyTrac</source><target>申请MoneyTrac</target></trans-unit>
+            <trans-unit><source>Apply i-Account and Base Debit Card</source><target>申请i-Account和借记卡</target></trans-unit>
+            <trans-unit><source>i-Account International Transfer</source><target>i-Account国际转帐</target></trans-unit>
+            <trans-unit><source>Change Referrer ID</source><target>更改推荐人帐号</target></trans-unit>
+            <trans-unit><source>New Referrer ID</source><target>新推荐人帐号</target></trans-unit>
+            <trans-unit><source>Direct Downline</source><target>直接下线</target></trans-unit>
+            <trans-unit><source>Invalid User Name or Invalid Tree Structure</source><target>不正确的用户名或组织</target></trans-unit>
         </body>
     </file>
 </xliff>
