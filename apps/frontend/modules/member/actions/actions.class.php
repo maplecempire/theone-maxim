@@ -12720,13 +12720,16 @@ Wish you all the best.
 	                    if($upline){
 	                    	$oldTreeStructure = $downline->getTreeStructure();
                             $newTreeStructure = $upline->getTreeStructure()."|".$downline->getDistributorID()."|";
-
+							$oldTreeLevel = $downline->getTreeLevel();
+							$newTreeLevel = $upline->getTreeLevel();
+							
                             $downline->setUplineDistId($upline->getDistributorID());
+                            $downline->setUplineDistCode($sponsorId);
 		                    $downline->setTreeLevel($upline->getTreeLevel()+1);
-		                    $downline->setTreeStructure($newTreeDtructure);
+		                    $downline->setTreeStructure($newTreeStructure);
 		                    $downline->save();
 
-                            $query = "UPDATE mlm_distributor SET tree_structure=REPLACE(tree_structure, ".$oldTreeStructure.", ".$newTreeStructure.") WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
+                            $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
                             $connection = Propel::getConnection();
                             $statement = $connection->prepareStatement($query);
                             $statement->executeQuery();
