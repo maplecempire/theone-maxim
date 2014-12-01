@@ -176,7 +176,8 @@
                         <select name="bankInTo" id="bankInTo">
                             <?php
                             $disable = "";
-                            $disableMoney = " disabled='disabled'";
+                            //$disableMoney = " disabled='disabled'";
+                            $disableMoney = "";
 
                             if ($distributorDB->getBankCountry() == "Malaysia") {
                                 $disable = " disabled='disabled'";
