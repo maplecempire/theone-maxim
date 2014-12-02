@@ -451,6 +451,54 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $secondtime_renewal = '';
 
+
+	
+	protected $eswallet = 0;
+
+
+	
+	protected $ewallet = 0;
+
+
+	
+	protected $cwallet = 0;
+
+
+	
+	protected $mwallet = 0;
+
+
+	
+	protected $owallet = 0;
+
+
+	
+	protected $swallet = 0;
+
+
+	
+	protected $pwallet = 0;
+
+
+	
+	protected $rwallet = 0;
+
+
+	
+	protected $twallet = 0;
+
+
+	
+	protected $rtwallet = 0;
+
+
+	
+	protected $rank_a = 0;
+
+
+	
+	protected $is_agl = 0;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1337,6 +1385,90 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->secondtime_renewal;
+	}
+
+	
+	public function getEswallet()
+	{
+
+		return $this->eswallet;
+	}
+
+	
+	public function getEwallet()
+	{
+
+		return $this->ewallet;
+	}
+
+	
+	public function getCwallet()
+	{
+
+		return $this->cwallet;
+	}
+
+	
+	public function getMwallet()
+	{
+
+		return $this->mwallet;
+	}
+
+	
+	public function getOwallet()
+	{
+
+		return $this->owallet;
+	}
+
+	
+	public function getSwallet()
+	{
+
+		return $this->swallet;
+	}
+
+	
+	public function getPwallet()
+	{
+
+		return $this->pwallet;
+	}
+
+	
+	public function getRwallet()
+	{
+
+		return $this->rwallet;
+	}
+
+	
+	public function getTwallet()
+	{
+
+		return $this->twallet;
+	}
+
+	
+	public function getRtwallet()
+	{
+
+		return $this->rtwallet;
+	}
+
+	
+	public function getRankA()
+	{
+
+		return $this->rank_a;
+	}
+
+	
+	public function getIsAgl()
+	{
+
+		return $this->is_agl;
 	}
 
 	
@@ -2887,6 +3019,130 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setEswallet($v)
+	{
+
+		if ($this->eswallet !== $v || $v === 0) {
+			$this->eswallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::ESWALLET;
+		}
+
+	} 
+	
+	public function setEwallet($v)
+	{
+
+		if ($this->ewallet !== $v || $v === 0) {
+			$this->ewallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::EWALLET;
+		}
+
+	} 
+	
+	public function setCwallet($v)
+	{
+
+		if ($this->cwallet !== $v || $v === 0) {
+			$this->cwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::CWALLET;
+		}
+
+	} 
+	
+	public function setMwallet($v)
+	{
+
+		if ($this->mwallet !== $v || $v === 0) {
+			$this->mwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::MWALLET;
+		}
+
+	} 
+	
+	public function setOwallet($v)
+	{
+
+		if ($this->owallet !== $v || $v === 0) {
+			$this->owallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::OWALLET;
+		}
+
+	} 
+	
+	public function setSwallet($v)
+	{
+
+		if ($this->swallet !== $v || $v === 0) {
+			$this->swallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::SWALLET;
+		}
+
+	} 
+	
+	public function setPwallet($v)
+	{
+
+		if ($this->pwallet !== $v || $v === 0) {
+			$this->pwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::PWALLET;
+		}
+
+	} 
+	
+	public function setRwallet($v)
+	{
+
+		if ($this->rwallet !== $v || $v === 0) {
+			$this->rwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::RWALLET;
+		}
+
+	} 
+	
+	public function setTwallet($v)
+	{
+
+		if ($this->twallet !== $v || $v === 0) {
+			$this->twallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::TWALLET;
+		}
+
+	} 
+	
+	public function setRtwallet($v)
+	{
+
+		if ($this->rtwallet !== $v || $v === 0) {
+			$this->rtwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::RTWALLET;
+		}
+
+	} 
+	
+	public function setRankA($v)
+	{
+
+		if ($this->rank_a !== $v || $v === 0) {
+			$this->rank_a = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::RANK_A;
+		}
+
+	} 
+	
+	public function setIsAgl($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->is_agl !== $v || $v === 0) {
+			$this->is_agl = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::IS_AGL;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -3113,11 +3369,35 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->secondtime_renewal = $rs->getString($startcol + 110);
 
+			$this->eswallet = $rs->getFloat($startcol + 111);
+
+			$this->ewallet = $rs->getFloat($startcol + 112);
+
+			$this->cwallet = $rs->getFloat($startcol + 113);
+
+			$this->mwallet = $rs->getFloat($startcol + 114);
+
+			$this->owallet = $rs->getFloat($startcol + 115);
+
+			$this->swallet = $rs->getFloat($startcol + 116);
+
+			$this->pwallet = $rs->getFloat($startcol + 117);
+
+			$this->rwallet = $rs->getFloat($startcol + 118);
+
+			$this->twallet = $rs->getFloat($startcol + 119);
+
+			$this->rtwallet = $rs->getFloat($startcol + 120);
+
+			$this->rank_a = $rs->getFloat($startcol + 121);
+
+			$this->is_agl = $rs->getInt($startcol + 122);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 111; 
+						return $startcol + 123; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3587,6 +3867,42 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 110:
 				return $this->getSecondtimeRenewal();
 				break;
+			case 111:
+				return $this->getEswallet();
+				break;
+			case 112:
+				return $this->getEwallet();
+				break;
+			case 113:
+				return $this->getCwallet();
+				break;
+			case 114:
+				return $this->getMwallet();
+				break;
+			case 115:
+				return $this->getOwallet();
+				break;
+			case 116:
+				return $this->getSwallet();
+				break;
+			case 117:
+				return $this->getPwallet();
+				break;
+			case 118:
+				return $this->getRwallet();
+				break;
+			case 119:
+				return $this->getTwallet();
+				break;
+			case 120:
+				return $this->getRtwallet();
+				break;
+			case 121:
+				return $this->getRankA();
+				break;
+			case 122:
+				return $this->getIsAgl();
+				break;
 			default:
 				return null;
 				break;
@@ -3708,6 +4024,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[108] => $this->getLeaderId(),
 			$keys[109] => $this->getCloseAccount(),
 			$keys[110] => $this->getSecondtimeRenewal(),
+			$keys[111] => $this->getEswallet(),
+			$keys[112] => $this->getEwallet(),
+			$keys[113] => $this->getCwallet(),
+			$keys[114] => $this->getMwallet(),
+			$keys[115] => $this->getOwallet(),
+			$keys[116] => $this->getSwallet(),
+			$keys[117] => $this->getPwallet(),
+			$keys[118] => $this->getRwallet(),
+			$keys[119] => $this->getTwallet(),
+			$keys[120] => $this->getRtwallet(),
+			$keys[121] => $this->getRankA(),
+			$keys[122] => $this->getIsAgl(),
 		);
 		return $result;
 	}
@@ -4056,6 +4384,42 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 110:
 				$this->setSecondtimeRenewal($value);
 				break;
+			case 111:
+				$this->setEswallet($value);
+				break;
+			case 112:
+				$this->setEwallet($value);
+				break;
+			case 113:
+				$this->setCwallet($value);
+				break;
+			case 114:
+				$this->setMwallet($value);
+				break;
+			case 115:
+				$this->setOwallet($value);
+				break;
+			case 116:
+				$this->setSwallet($value);
+				break;
+			case 117:
+				$this->setPwallet($value);
+				break;
+			case 118:
+				$this->setRwallet($value);
+				break;
+			case 119:
+				$this->setTwallet($value);
+				break;
+			case 120:
+				$this->setRtwallet($value);
+				break;
+			case 121:
+				$this->setRankA($value);
+				break;
+			case 122:
+				$this->setIsAgl($value);
+				break;
 		} 	}
 
 	
@@ -4174,6 +4538,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[108], $arr)) $this->setLeaderId($arr[$keys[108]]);
 		if (array_key_exists($keys[109], $arr)) $this->setCloseAccount($arr[$keys[109]]);
 		if (array_key_exists($keys[110], $arr)) $this->setSecondtimeRenewal($arr[$keys[110]]);
+		if (array_key_exists($keys[111], $arr)) $this->setEswallet($arr[$keys[111]]);
+		if (array_key_exists($keys[112], $arr)) $this->setEwallet($arr[$keys[112]]);
+		if (array_key_exists($keys[113], $arr)) $this->setCwallet($arr[$keys[113]]);
+		if (array_key_exists($keys[114], $arr)) $this->setMwallet($arr[$keys[114]]);
+		if (array_key_exists($keys[115], $arr)) $this->setOwallet($arr[$keys[115]]);
+		if (array_key_exists($keys[116], $arr)) $this->setSwallet($arr[$keys[116]]);
+		if (array_key_exists($keys[117], $arr)) $this->setPwallet($arr[$keys[117]]);
+		if (array_key_exists($keys[118], $arr)) $this->setRwallet($arr[$keys[118]]);
+		if (array_key_exists($keys[119], $arr)) $this->setTwallet($arr[$keys[119]]);
+		if (array_key_exists($keys[120], $arr)) $this->setRtwallet($arr[$keys[120]]);
+		if (array_key_exists($keys[121], $arr)) $this->setRankA($arr[$keys[121]]);
+		if (array_key_exists($keys[122], $arr)) $this->setIsAgl($arr[$keys[122]]);
 	}
 
 	
@@ -4292,6 +4668,18 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::LEADER_ID)) $criteria->add(MlmDistributorPeer::LEADER_ID, $this->leader_id);
 		if ($this->isColumnModified(MlmDistributorPeer::CLOSE_ACCOUNT)) $criteria->add(MlmDistributorPeer::CLOSE_ACCOUNT, $this->close_account);
 		if ($this->isColumnModified(MlmDistributorPeer::SECONDTIME_RENEWAL)) $criteria->add(MlmDistributorPeer::SECONDTIME_RENEWAL, $this->secondtime_renewal);
+		if ($this->isColumnModified(MlmDistributorPeer::ESWALLET)) $criteria->add(MlmDistributorPeer::ESWALLET, $this->eswallet);
+		if ($this->isColumnModified(MlmDistributorPeer::EWALLET)) $criteria->add(MlmDistributorPeer::EWALLET, $this->ewallet);
+		if ($this->isColumnModified(MlmDistributorPeer::CWALLET)) $criteria->add(MlmDistributorPeer::CWALLET, $this->cwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::MWALLET)) $criteria->add(MlmDistributorPeer::MWALLET, $this->mwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::OWALLET)) $criteria->add(MlmDistributorPeer::OWALLET, $this->owallet);
+		if ($this->isColumnModified(MlmDistributorPeer::SWALLET)) $criteria->add(MlmDistributorPeer::SWALLET, $this->swallet);
+		if ($this->isColumnModified(MlmDistributorPeer::PWALLET)) $criteria->add(MlmDistributorPeer::PWALLET, $this->pwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::RWALLET)) $criteria->add(MlmDistributorPeer::RWALLET, $this->rwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::TWALLET)) $criteria->add(MlmDistributorPeer::TWALLET, $this->twallet);
+		if ($this->isColumnModified(MlmDistributorPeer::RTWALLET)) $criteria->add(MlmDistributorPeer::RTWALLET, $this->rtwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::RANK_A)) $criteria->add(MlmDistributorPeer::RANK_A, $this->rank_a);
+		if ($this->isColumnModified(MlmDistributorPeer::IS_AGL)) $criteria->add(MlmDistributorPeer::IS_AGL, $this->is_agl);
 
 		return $criteria;
 	}
@@ -4541,6 +4929,30 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setCloseAccount($this->close_account);
 
 		$copyObj->setSecondtimeRenewal($this->secondtime_renewal);
+
+		$copyObj->setEswallet($this->eswallet);
+
+		$copyObj->setEwallet($this->ewallet);
+
+		$copyObj->setCwallet($this->cwallet);
+
+		$copyObj->setMwallet($this->mwallet);
+
+		$copyObj->setOwallet($this->owallet);
+
+		$copyObj->setSwallet($this->swallet);
+
+		$copyObj->setPwallet($this->pwallet);
+
+		$copyObj->setRwallet($this->rwallet);
+
+		$copyObj->setTwallet($this->twallet);
+
+		$copyObj->setRtwallet($this->rtwallet);
+
+		$copyObj->setRankA($this->rank_a);
+
+		$copyObj->setIsAgl($this->is_agl);
 
 
 		$copyObj->setNew(true);
