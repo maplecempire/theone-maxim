@@ -7798,6 +7798,19 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+                    
+                    $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $bal = $mlm_distributor->getRtwallet() + $epointConvertedAmount;
+                    $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                    $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_rtwallet_record->setType('c');
+                    $gg_member_rtwallet_record->setAmount($epointConvertedAmount);
+                    $gg_member_rtwallet_record->setBal($bal);
+                    $gg_member_rtwallet_record->setDescr("CONVERT CP2 TO RT, CP2:".$epointAmount);
+                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                    $gg_member_rtwallet_record->save();
+                    $mlm_distributor->setRtwallet($bal);
+                    $mlm_distributor->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "65");
 
@@ -7870,6 +7883,19 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
+                    
+                    $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $bal = $mlm_distributor->getRtwallet() + $epointConvertedAmount;
+                    $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                    $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_rtwallet_record->setType('c');
+                    $gg_member_rtwallet_record->setAmount($epointConvertedAmount);
+                    $gg_member_rtwallet_record->setBal($bal);
+                    $gg_member_rtwallet_record->setDescr("CONVERT CP3 TO RT, CP3:".$epointAmount);
+                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                    $gg_member_rtwallet_record->save();
+                    $mlm_distributor->setRtwallet($bal);
+                    $mlm_distributor->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "67");
 
