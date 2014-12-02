@@ -7178,40 +7178,6 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_EPOINT);
 
-                    // ******       processing fees      ****************
-                    /*$tbl_account_ledger = new MlmAccountLedger();
-                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                   $tbl_account_ledger->setDistId($fromId);
-                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                   $tbl_account_ledger->setCredit(0);
-                   $tbl_account_ledger->setDebit($processFee);
-                   $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->save();
-
-                   $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
-
-                    // ******       company account      ****************
-                    /*$c = new Criteria();
-                   $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                   $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                   $companyAccount = MlmAccountPeer::doSelectOne($c);
-
-                   $tbl_account_ledger = new MlmAccountLedger();
-                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                   $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                   $tbl_account_ledger->setCredit($processFee);
-                   $tbl_account_ledger->setDebit(0);
-                   $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->save();
-
-                   $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
                     $con->commit();
                 } catch (PropelException $e) {
                     $con->rollback();
@@ -8071,7 +8037,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                     $tbl_account_ledger->setDistId($toId);
                     $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
-                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " (" . $fromName . ")".$remark);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM . " " . $fromCode . " ".$remark);
                     $tbl_account_ledger->setCredit($epointAmount);
                     $tbl_account_ledger->setDebit(0);
                     $tbl_account_ledger->setBalance($toBalance + $epointAmount);
