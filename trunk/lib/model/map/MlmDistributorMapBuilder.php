@@ -254,5 +254,29 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('SECONDTIME_RENEWAL', 'SecondtimeRenewal', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('ESWALLET', 'Eswallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('EWALLET', 'Ewallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('CWALLET', 'Cwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('MWALLET', 'Mwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('OWALLET', 'Owallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('SWALLET', 'Swallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('PWALLET', 'Pwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RWALLET', 'Rwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('TWALLET', 'Twallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RTWALLET', 'Rtwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RANK_A', 'RankA', 'double', CreoleTypes::DECIMAL, true, 5);
+
+		$tMap->addColumn('IS_AGL', 'IsAgl', 'int', CreoleTypes::TINYINT, true, null);
+
 	} 
 } 
