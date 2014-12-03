@@ -996,6 +996,134 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='45'>FRAUDULENT Act
+                <br>欺诈性行为通告
+                <br>不正行為について
+                <br>사기행위</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "1 December 2014";
+                ?>
+            </div>
+
+            <div id="page_45" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear Partners & IMs
+<br>亲爱的伙伴及代理们:
+<br>
+<br>Most recently, several IMs have reported to the company that they have been offered "stolen/unauthorized" CP1, CP2 & CP3 points from individuals claiming that they are from the company.
+<br>最近有个别代理向公司反应有人向他们兜售自称来自公司但实际上却是"盗取或未经认证的"CP1,CP2及CP3分数.
+<br>
+<br>NB1: THE COMPANY HAS NOT AUTHORIZED ANY INDIVIDUAL/CORPORATE TO SELL IN BULK CP POINTS AT DISCOUNTED RATES.
+<br>注1: 公司未认证任何个人或者集体以折扣的价格批量销售任何CP分数.
+<br>
+<br>NB2: THE COMPANY WOULD LIKE TO ADVISE ALL IMs NOT TO BUY CP POINTS FROM UNAUTHORIZED IMs AND STRANGERS.
+<br>注2: 公司建议所有的代理不要从未认证的代理或者陌生人那里购买CP分数.
+<br>
+<br>NB3: THE COMPANY HAS THE RIGHT TO VOID THE ACCOUNT/PLACEMENT IF PROVEN THAT IT WAS ACTIVATED WITH STOLEN/UNAUTHORIZED  CPs. FURTHER MORE, THE COMPANY WILL CLAW BACK ALL COMMISSIONS PAID-OUT AS A RESULT OF PLACEMENTS MADE WITH STOLEN/UNAUTHORIZED CP points
+<br>注3: 如果调查结果证明有涉嫌盗取或者未经认证的CP分数, 公司有权取消所有相关账户及账户的安置; 另外, 公司将收回所有相关涉嫌盗取或未经认证的CP分数账户及安置所产生的佣金及奖金分数.
+<br>
+<br>NB4: THE COMPANY WILL NOT HESITATE TO SUSPEND/ TERMINATE ANYONE WHO PARTICIPATES IN THIS FRAUDULENT ACT OF BUYING AND SELLING OF STOLEN/UNAUTHORIZED CP POINTS
+<br>注4: 公司将坚决吊销/终止所有参与盗取或未经认证CP分数买卖的代理之代理资格.
+<br>
+<br>NB5: THE COMPANY WILL NOT HESITATE TO PROSECUTE THOSE INVOLVED IN THESE FRAUDULENT
+<br>DEEDS AND BLATANT ACT OF THEFT.
+<br>注5: 公司将采取严厉措施,控告所有参与这一嚣张的欺诈性行为的人员.
+<br>
+<br>Dr Andrew Lim 博士
+<br>CEO 首席执行官
+<br>Maxim Capital Limited
+<br>马胜资本有限公司
+<br>
+<br>
+<br>親愛なるパートナーおよびIMのみなさん
+<br>
+<br>最近、何人かのIMからの報告によれば、社から提供されたと主張する「盗まれた・非公式の」CP1、CP2、CP3ポイントを提供する個人がいるそうです。
+<br>
+<br>注意1：弊社はいかなる個人／会社に対しても、CPポイントをディスカウントレートでバルク販売することはしません。
+<br>
+<br>注意2：弊社はすべてのIMに非公式のIMおよび見知らぬ人からのCPポイントを購入しないように忠告します。
+<br>
+<br>注意３：弊社は、盗難による／非公式のCPによってアクティベートされたと証明された場合に、そのアカウント／プレイスメントを取り消す権利を有しています。さらに、弊社は盗難による／非公式のCPポイントによって得られたプレイスメントによって生じたすべての支払い済みのコミッションを取り戻す権利を持っています。
+<br>
+<br>注意４：弊社は盗難による／非公認のCPポイントを買ったり売ったりした不正行為に参加した人のアカウントをを停止／終了させることを厭いません。
+<br>
+<br>注意５：弊社はこれらの不正行為や露骨な盗難行為をした人を告訴することを厭いません。
+<br>
+<br>アンドリュー・リム博士
+<br>CEO
+<br>マキシム・キャピタル・リミテッド
+<br>
+<br>
+<br>친애하는 파트너 및 국제회원 여러분
+<br>최근 몇몇 회원들로부터 회사 직원을 사칭하는 개인이 “도난/무단” CP1, CP2와 CP3포인트를 제안한다는 사실이 확인되었습니다.
+<br>
+<br>주의 1 : 회사는 절대 어떠한 개인 또는 회자 직원이 할인 가격으로 대량의 CP 포인트를 팔도록 승인하지 않습니다.
+<br>
+<br>주의2: 회사는 국제회원 여러분들이 승인받지 않은 다른 국제회원 또는 낯선 이로부터 CP 포인트를 사지 말 것을 당부합니다.
+<br>
+<br>주의 3: 회사는 도난/무단 CP로 활성화된 계좌 또는 위치를 무효화 할 권리가 있습니다. 더 나아가서, 회사는 도난/무단 CP 포인트로 결정된 배치에 의한 커미션을 모두 상환시킬 것입니다.
+<br>
+<br>주의4: 회사는 이러한 사기 행각에 가담하여 도난/무단 포인트의 판매 또는 구매한 회원 자격의 유예/박탈하는 것을 주저하지 않을 것입니다.
+<br>
+<br>주의5 : 회사는 이러한 사기 행위와 노골적인 절도행위에 가담한 사람들을 고소할 것을 주저하지 않을 것입니다.
+<br>
+<br>앤드류 림 박사
+<br>CEO
+<br>맥심 캐피탈 주식회사
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='43a'>Notification to all members to open iAccount by 31 December 2014 in order to improve monthly withdrawal process</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "1 December 2014";
+                ?>
+            </div>
+
+            <div id="page_43a" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear Client,
+<br>
+<br>We wish to achieve greater efficiency, speed and economies of scale in the monthly withdrawal process. As such, we would like to introduce uniformity in the withdrawal mode and credit the withdrawal amounts into your e-wallet by the 11th of every month.
+<br>
+<br>In order to achieve this, we urge you to open an iAccount latest by 31 December 2014 so that all withdrawals could be credited into your personal iAccount from January 2015 onwards. Once credited into your iAccount, you may withdraw the amount anytime, at your convenience.
+<br>
+<br>Kindly log-on to www.maximtrader.com and click the iAcccount hyperlink to apply an iAccount and base debit card at the same time. Please ensure you upload your Passport or National ID and Proof of Mailing (POM) in colour, as part of the iAccount application requirements.
+<br>
+<br>Your kind co-operation and prompt action shall be highly appreciated.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='44'>Change in CURRENCY EXCHANGE RATE (27/11Change in CURRENCY EXCHANGE RATE (27/11/2014):
                     <br>2014.11.27日 货币兑换比例调整通知</a><img src="/images/new_icon.gif">
             </div>
