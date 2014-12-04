@@ -292,11 +292,11 @@ class maturityAccountActions extends sfActions
         $maturityAction = $this->getRequestParameter('maturityAction');
 
         if ($noticeId == "") {
-            $this->setFlash('errorMsg', "Invalid Action [error:901]");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:901]");
             return $this->redirect('member/summary');
         }
         if ($maturityAction == "") {
-            $this->setFlash('errorMsg', "Invalid Action [error:902]");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:902]");
             return $this->redirect('member/summary');
         }
         $array = explode(',', Globals::STATUS_MATURITY_ON_HOLD.",".Globals::STATUS_MATURITY_PENDING);
@@ -306,7 +306,7 @@ class maturityAccountActions extends sfActions
         $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
         $existNotificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
         if (!$existNotificationOfMaturity) {
-            $this->setFlash('errorMsg', "Invalid Action [error:903]");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:903]");
             return $this->redirect('member/summary');
         }
         if ($existNotificationOfMaturity) {
@@ -325,7 +325,7 @@ class maturityAccountActions extends sfActions
                     $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
 
                     if ($mt4Balance < $mlmRoiDividendDB->getPackagePrice()) {
-                        $this->setFlash('errorMsg', "Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.");
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract."));
                         return $this->redirect('member/summary');
                     }
                 }
@@ -334,18 +334,18 @@ class maturityAccountActions extends sfActions
             } else if ($maturityAction == "WITHDRAW") {
                 $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_CLIENT_WITHDRAW);
             } else {
-                $this->setFlash('errorMsg', "Invalid Action [error:904]");
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:904]");
                 return $this->redirect('member/summary');
             }
         } else {
-            $this->setFlash('errorMsg', "Invalid Action [error:905]");
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:905]");
             return $this->redirect('member/summary');
         }
 
         $existNotificationOfMaturity->setClientResponseDatatime(date("Y/m/d h:i:s A"));
         $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $existNotificationOfMaturity->save();
-        $this->setFlash('successMsg', "Your request has been submitted for review by our admin. Thank you.");
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your request has been submitted for review by our admin. Thank you."));
         return $this->redirect('member/summary');
     }
 

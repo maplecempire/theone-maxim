@@ -230,6 +230,8 @@
             <trans-unit><source>redeem amount must be 100g</source><target>提取实物黄金规定100克</target></trans-unit>
             <trans-unit><source>Gold Dividend Balance</source><target>现有黄金数量</target></trans-unit>
             <trans-unit><source>Redeem gold success</source><target>提取实物黄金成功</target></trans-unit>
+            <trans-unit><source>In-sufficient CP1</source><target>CP1数量不足</target></trans-unit>
+            <trans-unit><source>In-sufficient CP2</source><target>CP2数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient E-Cash</source><target>金额数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit 数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient E-Point</source><target>点数数量不足</target></trans-unit>
@@ -239,6 +241,7 @@
             <trans-unit><source>Gold Amount</source><target>黄金数量</target></trans-unit>
             <trans-unit><source>Invalid trx password</source><target>请输入正确交易密码</target></trans-unit>
             <trans-unit><source>Invalid Security password</source><target>请输入正确交易密码</target></trans-unit>
+            <trans-unit><source>Invalid MT4 ID</source><target>请输入正确MT4 ID</target></trans-unit>
             <trans-unit><source>System cannot get gold price, please try again</source><target>系统黄金价有误请再试一次</target></trans-unit>
             <trans-unit><source>Withdraw gold success</source><target>黄金售卖成功</target></trans-unit>
             <trans-unit><source>Message</source><target>内容</target></trans-unit>
@@ -310,8 +313,10 @@
             <trans-unit><source>Please enter the same password as above</source><target>密码设置输入不一致,请检查</target></trans-unit>
             <trans-unit><source>left</source><target>左</target></trans-unit>
             <trans-unit><source>Left</source><target>左边</target></trans-unit>
+            <trans-unit><source>LEFT</source><target>左边</target></trans-unit>
             <trans-unit><source>right</source><target>右</target></trans-unit>
             <trans-unit><source>Right</source><target>右边</target></trans-unit>
+            <trans-unit><source>RIGHT</source><target>右边</target></trans-unit>
             <trans-unit><source>Search</source><target>查寻</target></trans-unit>
             <trans-unit><source>charge 5% handling fees when withdrawal requested</source><target>提现手续费用5%</target></trans-unit>
             <trans-unit><source>every transfer action need to pay USD%1%.00 processing fees</source><target>现金转账需付%1%元美金手续费</target></trans-unit>
@@ -1008,6 +1013,22 @@
             <trans-unit><source>New Referrer ID</source><target>新推荐人帐号</target></trans-unit>
             <trans-unit><source>Direct Downline</source><target>直接下线</target></trans-unit>
             <trans-unit><source>Invalid User Name or Invalid Tree Structure</source><target>不正确的用户名或组织</target></trans-unit>
+            <trans-unit><source>Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.</source><target>您在MT4余额已低于您最初的投资金额，请充值以继续你的合同续约。</target></trans-unit>
+            <trans-unit><source>Do you want to navigate to MT4 Reload page?</source><target>导航到MT4充值页面？</target></trans-unit>
+            <trans-unit><source>Are you sure want to renew your contract?</source><target>确定要续约您的合同？</target></trans-unit>
+            <trans-unit><source>RENEW</source><target>续约</target></trans-unit>
+            <trans-unit><source>Terminate Contract</source><target>终止合同</target></trans-unit>
+            <trans-unit><source>Are you sure want to terminate your contract?</source><target>您确定要终止合同？</target></trans-unit>
+            <trans-unit><source>WITHDRAW</source><target>兑现</target></trans-unit>
+            <trans-unit><source>Server connection error.</source><target>服务器连接错误。</target></trans-unit>
+            <trans-unit><source>Security Password is empty</source><target>安全密码不能为空</target></trans-unit>
+            <trans-unit><source>Are you sure you want to do auto placement (RIGHT)?</source><target>您确定要自动布局（右）？</target></trans-unit>
+            <trans-unit><source>Are you sure you want to do auto placement (LEFT)?</source><target>您确定要自动布局（左）？</target></trans-unit>
+            <trans-unit><source>Are you sure you want to remove this member?</source><target>您确定要删除此会员？</target></trans-unit>
+            <trans-unit><source>Your login attempt was not successful. Please try again.</source><target>您的登录尝试没有成功。请重试。</target></trans-unit>
+            <trans-unit><source>Invalid action.</source><target>操作无效。</target></trans-unit>
+            <trans-unit><source>Member deleted successfully.</source><target>会员成功删除。</target></trans-unit>
+            <trans-unit><source>Your request has been submitted for review by our admin. Thank you.</source><target>您的申请已经提交给我们的管理员审查。谢谢。</target></trans-unit>
         </body>
     </file>
 </xliff>

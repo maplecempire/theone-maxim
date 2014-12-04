@@ -386,7 +386,7 @@ class memberActions extends sfActions
     public function executeDoAutoplacement()
     {
         if ($this->getRequestParameter('distid', '') == "" || $this->getRequestParameter('placement', '') == "") {
-            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Invalid action."));
         } else {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
 
@@ -398,7 +398,7 @@ class memberActions extends sfActions
                 $uplineDistId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
                 $mlm_distributor = MlmDistributorPeer::retrieveByPK($distId);
                 if (!$mlm_distributor) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                     return $this->redirect('/member/summary');
                 }
                 $placementSuccessful = false;
@@ -437,7 +437,7 @@ class memberActions extends sfActions
 
                 $sponsoredPackageDB = MlmPackagePeer::retrieveByPK($mlm_distributor->getRankId());
                 if (!$sponsoredPackageDB) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                     return $this->redirect('/member/summary');
                 }
                 $pairingPoint = $sponsoredPackageDB->getPrice() * Globals::PAIRING_POINT_BV;
@@ -1446,7 +1446,7 @@ class memberActions extends sfActions
         $mlmCustomerEnquiry = MlmCustomerEnquiryPeer::retrieveByPK($enquiryId);
 
         if (!$mlmCustomerEnquiry) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/customerEnquiry');
         }
         $mlmCustomerEnquiry->setDistributorRead(Globals::TRUE);
@@ -1454,7 +1454,7 @@ class memberActions extends sfActions
         $mlmCustomerEnquiry->save();
 
         if ($mlmCustomerEnquiry->getDistributorId() != $this->getUser()->getAttribute(Globals::SESSION_DISTID)) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/customerEnquiry');
         }
 
@@ -1755,7 +1755,7 @@ class memberActions extends sfActions
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
             if (!$selectedPackage) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/purchasePackageViaTree');
             }
 
@@ -1767,7 +1767,7 @@ class memberActions extends sfActions
 
             $existDist = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('sponsorId', $this->getUser()->getAttribute(Globals::SESSION_DISTID)));
             if (!$existDist) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/purchasePackageViaTree');
             }
             $this->sponsorId = $existDist->getDistributorCode();
@@ -2127,7 +2127,7 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->save();
 
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/epointPurchase');
             }
         } else {
@@ -2139,7 +2139,7 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
 
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/epointPurchase');
         }
         return sfView::HEADER_ONLY;
@@ -2226,7 +2226,7 @@ class memberActions extends sfActions
                     $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmDistEpointPurchase->save();
 
-                    //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                    //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                     //return $this->redirect('/member/epointPurchase');
                 }
             } else {
@@ -2242,7 +2242,7 @@ class memberActions extends sfActions
 
                 /*var_dump($mlmDistEpointPurchase);
                 exit();*/
-                //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 //return $this->redirect('/member/epointPurchase');
             }
         } else {
@@ -2254,7 +2254,7 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
 
-            //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             //return $this->redirect('/member/epointPurchase');
         }
         // Print out ‘OK’ to notify us you have received the payment result
@@ -2262,7 +2262,7 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
     public function executePapErrorRedirect() {
-        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
         return $this->redirect('/member/epointPurchase?pg=Y');
     }
     public function executeGozErrorRedirect() {
@@ -2503,7 +2503,7 @@ class memberActions extends sfActions
         //var_dump($billno);
         //exit();
         if (!$mlmDistEpointPurchase) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/epointPurchase');
         }
         $mlmDistEpointPurchase->setPgBillNo($ipsbillno);
@@ -2571,7 +2571,7 @@ class memberActions extends sfActions
                 $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->save();
 
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/epointPurchase');
             }
         } else {
@@ -2583,7 +2583,7 @@ class memberActions extends sfActions
             $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlmDistEpointPurchase->save();
 
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/epointPurchase');
         }
     }
@@ -2734,7 +2734,7 @@ class memberActions extends sfActions
 
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
             if (!$selectedPackage) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/summary');
             }
 
@@ -3286,7 +3286,7 @@ class memberActions extends sfActions
         $userName = trim($userName);
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
         if ($userName == '') {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/memberRegistration');
         }
 
@@ -3330,7 +3330,7 @@ class memberActions extends sfActions
         $packageDB = MlmPackagePeer::retrieveByPK($packageId);
 
         if (!$packageDB) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/memberRegistration');
         }
 
@@ -5982,7 +5982,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $existUser = AppUserPeer::doSelectOne($c);
         if (!$existUser) {
             $error = true;
-            $errorMsg = "Invalid Security Password.";
+            $errorMsg = "Invalid Security password";
         }
 
         $packageDB = null;
@@ -5991,7 +5991,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->forward404Unless($packageDB);
             if (!$packageDB) {
                 $error = true;
-                $errorMsg = "Invalid Package.";
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Package.");
             }
         }
 
@@ -6000,17 +6000,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient CP1.";
+                    $errorMsg = $this->getContext()->getI18N()->__("In-sufficient CP1");
                 }
             } else if ("ecash" == $paymentType) {
                 $balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 if ($balance < $packageDB->getPrice()) {
                     $error = true;
-                    $errorMsg = "Insufficient CP2.";
+                    $errorMsg = $this->getContext()->getI18N()->__("In-sufficient CP2");
                 }
             } else {
                 $error = true;
-                $errorMsg = "Invalid Action.";
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid action.");
             }
         }
 
@@ -7713,7 +7713,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($mlmDistributor->getFromAbfx() == "Y") {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -7798,7 +7798,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($mlmDistributor->getFromAbfx() == "Y") {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -8727,7 +8727,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
             } elseif ($mt4UserName == "") {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID"));
 
             } else {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
