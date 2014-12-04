@@ -195,7 +195,10 @@
                             if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219) {
                                 $disable = "";
                             }
-                            if ($distributorDB->getVisaDebitCard() != "") { ?>
+                            if ($distributorDB->getIaccount() != "") { ?>
+                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
+                            <?php } ?>
+                            <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>" disabled='disabled'><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
@@ -203,10 +206,6 @@
                             <?php } ?>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
                             <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC; ?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
-
-                            <?php if ($distributorDB->getIaccount() != "") { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
-                            <?php } ?>
                         </select>
                     </td>
                     <td>&nbsp;</td>
