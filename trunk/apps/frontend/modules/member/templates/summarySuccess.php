@@ -66,7 +66,7 @@ $(function() {
         }
     }).click(function(event){
         event.preventDefault();
-        var answer = confirm("Are you sure you want to remove this member?");
+        var answer = confirm("<?php echo __("Are you sure you want to remove this member?") ?>");
         if (answer){
             waiting()
             $("#distid").val($(this).attr("ref"));
@@ -84,11 +84,11 @@ $(function() {
         }
     }).click(function(event){
         event.preventDefault();
-        var answer = confirm("Are you sure you want to do auto placement (LEFT)?");
+        var answer = confirm("<?php echo __("Are you sure you want to do auto placement (LEFT)?") ?>");
         if (answer){
             waiting()
             $("#autoDistid").val($(this).attr("ref"));
-            $("#placement").val("LEFT");
+            $("#placement").val("<?php echo __("LEFT") ?>");
             $("#frmAutoPlacement").submit();
         }
     });
@@ -98,11 +98,11 @@ $(function() {
         }
     }).click(function(event){
         event.preventDefault();
-        var answer = confirm("Are you sure you want to do auto placement (RIGHT)?");
+        var answer = confirm("<?php echo __("Are you sure you want to do auto placement (RIGHT)?") ?>");
         if (answer){
             waiting()
             $("#autoDistid").val($(this).attr("ref"));
-            $("#placement").val("RIGHT");
+            $("#placement").val("<?php echo __("RIGHT") ?>");
             $("#frmAutoPlacement").submit();
         }
     });
@@ -124,14 +124,14 @@ $(function() {
                     error("<?php echo __("In-sufficient fund to purchase package.");?>");
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeEPoint").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_pointAvail").val())){
-                    alert("In-sufficient CP1. " + $("#dgActivateMember_pointAvail").val());
+                    alert("<?php echo __("In-sufficient CP1 amount") ?>: " + $("#dgActivateMember_pointAvail").val());
                     $("#dgActivateMember_point").focus().select();
                 } else if ($("#paymentTypeECash").is(':checked') == true && parseFloat($("#dgActivateMember_point").val()) > parseFloat($("#dgActivateMember_ecash").val())){
-                    alert("In-sufficient MT4 Credit. " + $("#dgActivateMember_ecash").val());
+                    alert("<?php echo __("In-sufficient MT4 Credit") ?>: " + $("#dgActivateMember_ecash").val());
                     $("#dgActivateMember_point").focus().select();
                 } else {
                     if ($.trim($("#dgActivateMember_transactionPassword").val()) == "") {
-                        error("Security Password is empty");
+                        error("<?php echo __("Security Password is empty") ?>");
                         $("#dgActivateMember_transactionPassword").focus();
                         return false;
                     }
@@ -158,7 +158,7 @@ $(function() {
                             }
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown) {
-                            error("Server connection error.");
+                            error("<?php echo __("Server connection error.") ?>");
                         }
                     });
                 }
@@ -188,23 +188,23 @@ $(function() {
         buttons: {
             "<?php echo __('Renew Contract') ?>": function() {
                 if ($("#needToUp").val() == "Y") {
-                    var answer = confirm("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract. \nDo you want to navigate to MT4 Reload page?");
+                    var answer = confirm("<?php echo __("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.") + " \n" + __("Do you want to navigate to MT4 Reload page?") ?>");
                     if (answer){
                         window.location = "<?php echo url_for("/member/reloadTopup")?>";
                     }
                 }
-                var answer = confirm("Are you sure want to renew your contract?");
+                var answer = confirm("<?php echo __("Are you sure want to renew your contract?") ?>");
                 if (answer){
                     waiting();
-                    $("#maturityAction").val("RENEW");
+                    $("#maturityAction").val("<?php echo __("RENEW") ?>");
                     $("#maturityForm").submit();
                 }
             },
             "<?php echo __('Terminate Contract') ?>": function() {
-                var answer = confirm("Are you sure want to terminate your contract?");
+                var answer = confirm("<?php echo __("Are you sure want to terminate your contract?") ?>");
                 if (answer){
                     waiting();
-                    $("#maturityAction").val("WITHDRAW");
+                    $("#maturityAction").val("<?php echo __("WITHDRAW") ?>");
                     $("#maturityForm").submit();
                 }
             },
@@ -270,7 +270,7 @@ $(function() {
                 $("#dgAnnouncement").dialog("option", "title", data.title);
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
-                error("Your login attempt was not successful. Please try again.");
+                error("<?php echo __("Your login attempt was not successful. Please try again.") ?>");
             }
         });
     });
