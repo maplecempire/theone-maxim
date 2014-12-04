@@ -188,7 +188,7 @@ $(function() {
         buttons: {
             "<?php echo __('Renew Contract') ?>": function() {
                 if ($("#needToUp").val() == "Y") {
-                    var answer = confirm("<?php echo __("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.") + " \n" + __("Do you want to navigate to MT4 Reload page?") ?>");
+                    var answer = confirm("<?php echo __("Your balance in the MT4 has fallen below your initial capital investment amount, Please top-up if you want to continue to renew your contract.") ?> \n<?php echo __("Do you want to navigate to MT4 Reload page?") ?>");
                     if (answer){
                         window.location = "<?php echo url_for("/member/reloadTopup")?>";
                     }
