@@ -6039,7 +6039,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $dateUtil = new DateUtil();
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
-        }*/
+        }*/ 
         if ($this->getRequestParameter('doAction') == "save") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
@@ -11583,8 +11583,11 @@ We look forward to your custom in the near future. Should you have any queries, 
             $distDB = MlmDistributorPeer::retrieveByPK($distributorId);
             $distPairingDB = new MlmDistPairing();
             $distPairingDB->setDistId($distributorId);
-
-            $packageDB = MlmPackagePeer::retrieveByPK($distDB->getRankId());
+			
+			if($distDB->getRankId()>0)
+				$packageDB = MlmPackagePeer::retrieveByPK($distDB->getRankId());
+			else
+				$packageDB = MlmPackagePeer::retrieveByPK('1');
             $this->forward404Unless($packageDB);
 
             $distPairingDB->setLeftBalance(0);
