@@ -1492,10 +1492,10 @@ class memberActions extends sfActions
                     //var_dump($existPlacementUser);
                     if ($existPlacementUser) {
                         $arr = array(
-                            'userId' => $existUser->getDistributorId(),
-                            'userName' => $existUser->getDistributorCode(),
-                            'fullname' => $existUser->getFullName(),
-                            'nickname' => $existUser->getFullName()
+                            'userId' => $existPlacementUser->getDistributorId(),
+                            'userName' => $existPlacementUser->getDistributorCode(),
+                            'fullname' => $existPlacementUser->getFullName(),
+                            'nickname' => $existPlacementUser->getFullName()
                         );
                     }
                 }
