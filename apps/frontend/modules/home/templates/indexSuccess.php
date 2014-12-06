@@ -996,6 +996,75 @@ $(document).ready(function() {
         
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='45'>STRICTLY NO CROSS LINE OF MEMBERS IN MAXIM & AGL
+                <br>马胜及AGL业务之间严格不可跨线
+                <br>マキシム＆AGLにおいてのメンバークロスライン行為禁止について
+                <br>맥심과  AGL 사이의 크로스 라인을 엄격히 금지합니다.</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "1 December 2014";
+                ?>
+            </div>
+
+            <div id="page_45" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear IMs and Partners
+<br>亲爱的会员及伙伴们:
+<br>
+<br>(1) PLEASE BE REMINDED THAT CROSS LINING AND POACHING UNDER ANY CIRCUMSTANCES IS STRICTLY  PROHIBITED  IN BOTH  MAXIM & AGL NETWORK
+<br>请注意在马胜及AGL业务中, 任何形式的跨线或抢线都是被严格禁止的.
+<br>
+<br>(2) SEVERE ACTION (LEADING TO SUSPENSION AND TERMINATION) WILL METED OUT AGAINST THOSE WHO BLATANTLY IGNORE OUR CODE OF ETHICS
+<br>对于任何无视公司道德标准指南的会员, 公司将采取严厉打击措施(如注销会员代理资格等).
+<br>
+<br>3) THOSE AFFECTED BY CROSS LINING AND POACHING NEED ONLY SUBMIT A FORMAL WRITTEN COMPLAINT TO LACD TO INITIATE AN INVESTIGATION AND THEREAFTER RECTIFY LINEAGE
+<br>所有受非法越线或抢险影响的会员, 请向公司LACD法律部提交正式的书面投诉, 公司将根据投诉案件启动调查,并作出公正裁决;
+<br>
+<br>By a Order 命令
+<br>CEO 首席执行官
+<br>Maxim Capital Limited
+<br>马胜资本有限公司
+<br>
+<br>IMおよびパートナーのみなさま
+<br>
+<br>
+<br>(1) マキシムおよびAGLの両ネットワークにおいてクロスライン（越境）行為と侵入行為は堅く禁止されていますことをご承知ください。
+<br>
+<br>(2) この倫理規定に背いた場合、厳しい措置（停止や終了を導くもの）をとることになります。
+<br>
+<br>(3) クロスライン行為や侵入行為に関わったものに対しては、捜査を開始し、さらに系統を改正するために、LACDに正式な訴状を提出します。
+<br>
+<br>命令により
+<br>CEO
+<br>マキシム・キャピタル・リミテッド
+<br>
+<br>
+<br>(1) 맥심과  AGL의 네트웍의 크로스 라인을 하거나 불법으로 들어가는 것은 어떠한 경우에도 엄격히 금지되고 있습니다.
+<br>
+<br>(2) 노골적으로 윤리를 무시하는 회원들게게는 엄격한 처벌 (자격정지 또는 박탈에 해당되는)이 내려질 것입니다.
+<br>
+<br>(3) 크로스 라인 행위를 하거나 불법 침입의 폐해를 받은 회원들은 LACD에게 서면으로 불편사항을 보내시면 조사가 행해지고 정정이 이루어질 것입니다.
+<br>
+<br>명령에 의한 메시지입니다.
+<br>CEO
+<br>맥심 캐피탈 주식회사
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='45'>FRAUDULENT Act
                 <br>欺诈性行为通告
                 <br>不正行為について
