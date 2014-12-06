@@ -5,7 +5,7 @@
     var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_cp3Amount").change(function(){
-            var ecashFinal = $("#cbo_cp3Amount").val() - 30;
+            var ecashFinal = $("#cbo_cp3Amount").autoNumericGet() - 30;
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
             $("#withdrawForm").validate({
@@ -26,14 +26,18 @@
                 submitHandler: function(form) {
                     waiting();
                     var ecashBalance = $('#ecashBalance').autoNumericGet();
-                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
+                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
 
+                    if (withdrawAmount <= 30) {
+                        error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
+                        return false;
+                    }
                     if (withdrawAmount > parseFloat(ecashBalance)) {
-                        error("In-sufficient CP3");
+                        error("<?php echo __("In-sufficient CP3") ?>");
                         return false;
                     }
                     if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" && moneytracCustomerId == "") {
-                        error("Please update Money Trac Information in User Profile.");
+                        error("<?php echo __("Please update Money Trac Information in User Profile.") ?>");
                         return false;
                     }
 
@@ -50,6 +54,10 @@
                 $("#moneyTracNote2").hide(500);
             }
         }).trigger("change");
+
+        $('#cbo_cp3Amount').autoNumeric({
+            mDec: 2
+        });
     });
 </script>
 
@@ -126,6 +134,16 @@
                     </th>
                 </tr>
 
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Code'); ?></td>
+                    <td>
+                        <input name="bankCode" id="bankCode" tabindex="1" disabled="disabled"
+                                           value="<?php echo $distributorDB->getBankCode(); ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Balance'); ?></td>
@@ -140,6 +158,9 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Withdrawal Amount'); ?></td>
                     <td>
+                        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                        <input name="cp3Amount" id="cbo_cp3Amount" tabindex="2"/>
+                        <?php } else { ?>
                         <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2" style="text-align:right">
                             <?php
                                 //if ($distributorDB->getMt4UserName() != null) {
@@ -152,6 +173,7 @@
                                 //}
                             ?>
                         </select>
+                        <?php } ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -293,7 +315,8 @@
                     || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
                     || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
                     || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
-                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
+                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null
+                    || $distributorDB->getBankCode() == "") {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">

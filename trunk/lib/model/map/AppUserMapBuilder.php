@@ -50,6 +50,8 @@ class AppUserMapBuilder {
 
 		$tMap->addColumn('LAST_LOGIN_DATETIME', 'LastLoginDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
+		$tMap->addColumn('PASSWORD_EXPIRE_DATE', 'PasswordExpireDate', 'int', CreoleTypes::TIMESTAMP, false, null);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);

@@ -2852,6 +2852,7 @@ class memberActions extends sfActions
         $mlm_distributor->setBankAccNo($this->getRequestParameter('bankAccNo'));
         $mlm_distributor->setBankHolderName($this->getRequestParameter('bankHolderName'));
         $mlm_distributor->setBankSwiftCode($this->getRequestParameter('bankSwiftCode'));
+        $mlm_distributor->setBankCode($this->getRequestParameter('bankCode'));
         $mlm_distributor->setVisaDebitCard($this->getRequestParameter('visaDebitCard'));
         $mlm_distributor->setEzyCashCard($this->getRequestParameter('ezyCashCard'));
         //$mlm_distributor->setIaccount($this->getRequestParameter('iaccount'));
@@ -8135,8 +8136,50 @@ We look forward to your custom in the near future. Should you have any queries, 
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDoUpdatePassword()
+    {
+        $result = false;
+        $success = false;
+
+        $this->getRequest()->setParameter("update_pw_expire", "y");
+        $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+
+        try {
+            $con->begin();
+            $result = $this->executeLoginPassword();
+
+            if (!is_array($result) || $result["result"] !== true) {
+                throw new PropelException("Invalid login password.");
+            }
+
+            $result = $this->executeTransactionPassword();
+
+            if (!is_array($result) || $result["result"] !== true) {
+                throw new PropelException("Invalid transaction password.");
+            }
+
+            $success = true;
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            $this->setFlash('successMsg', null);
+        }
+
+        if ($success) {
+            // Update user credential.
+            $this->getUser()->removeCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED);
+            $this->getUser()->addCredential(Globals::PROJECT_NAME . $result["role"]);
+            return $this->redirect('home/index');
+        } else {
+            return $this->redirect('home/updatePassword');
+        }
+    }
+
     public function executeLoginPassword()
     {
+        $no_redirect = $this->hasRequestParameter("update_pw_expire"); // Use to collaborate with executeDoUpdatePassword()
+        $result = false;
+
         if ($this->getRequestParameter('oldPassword')) {
             $c = new Criteria();
             $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
@@ -8148,12 +8191,62 @@ We look forward to your custom in the near future. Should you have any queries, 
             } else {
                 $exist->setUserpassword($this->getRequestParameter('newPassword'));
                 $exist->setKeepPassword($this->getRequestParameter('newPassword'));
+                $exist->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $exist->setPasswordExpireDate(date("Y-m-d H:i:s", strtotime('+1 years'))); // Extend expire date to 1 year from now.
                 $exist->save();
+
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Password updated"));
+                $result = true;
             }
             //return $this->redirect('/member/loginPassword');
         }
-        return $this->redirect('/member/viewProfile');
+
+        if ($no_redirect) {
+            if ($result) {
+                return array("result" => true, "role" => $exist->getUserRole());
+            } else {
+                return false;
+            }
+        } else {
+            return $this->redirect('/member/viewProfile');
+        }
+    }
+
+    public function executeTransactionPassword()
+    {
+        $update_pw_expire = $this->hasRequestParameter("update_pw_expire"); // Use to collaborate with executeDoUpdatePassword()
+        $result = false;
+
+        if ($this->getRequestParameter('oldSecurityPassword')) {
+            $c = new Criteria();
+            $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('oldSecurityPassword'));
+            $exist = AppUserPeer::doSelectOne($c);
+
+            if (!$exist) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old Security password is not valid."));
+            } else {
+                $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
+                $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
+                $exist->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $exist->setPasswordExpireDate(date("Y-m-d H:i:s", strtotime('+1 years'))); // Extend expire date to 1 year from now.
+                $exist->save();
+                
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Security Password updated"));
+                $result = true;
+            }
+            //return $this->redirect('/member/transactionPassword');
+        }
+
+        if ($update_pw_expire) {
+            if ($result) {
+                return array("result" => true, "role" => $exist->getUserRole());
+            } else {
+                return false;
+            }
+        } else {
+            return $this->redirect('/member/viewProfile');
+        }
     }
 
     public function executeSecurityPasswordRequired()
@@ -8194,26 +8287,6 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/epointLog');
             }
         }
-    }
-    public function executeTransactionPassword()
-    {
-        if ($this->getRequestParameter('oldSecurityPassword')) {
-            $c = new Criteria();
-            $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
-            $c->add(AppUserPeer::USERPASSWORD2, $this->getRequestParameter('oldSecurityPassword'));
-            $exist = AppUserPeer::doSelectOne($c);
-
-            if (!$exist) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old Security password is not valid."));
-            } else {
-                $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
-                $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
-                $exist->save();
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Security Password updated"));
-            }
-            //return $this->redirect('/member/transactionPassword');
-        }
-        return $this->redirect('/member/viewProfile');
     }
 
     public function executeAnnouncement()
@@ -8383,6 +8456,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $processFee = 30;
 
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->distributorDB->getCloseAccount() == "Y") {
+                // Allow free text for closed account.
+                if ($withdrawAmount <= $processFee) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP3 Withdrawal Amount"), "%2%" => $processFee.".00")));
+                	return $this->redirect('/member/cp3Withdrawal');
+                }
+            }
+            
             if (date("d") > Globals::WITHDRAWAL_DAY) {
                 $distributorcodes = array('LAY_YEE','money168','micken7','barabara','u212alc','hideko1','cho7510','Jieilove','tanpopo1','kakko1','ichigo1','sakura1959','aki900','pinmomie','MIYARYU23','shima101','MIEKOIKE','tomitomi','Hebori','hirokatsu1','firemoon','hy1805','megumi1110','KINGDAM','sekiken','dandy_oge','aiko-1','shinnsei','sueko1','toshimi26','KEIKO3','kikotan','mikuni456','Mayumi','skisa01','jamacyan','yuki3319','maximaichi','janneenciel','kimura34','kyoko7','Tomoya','Toku335','susan1','chiechan1','aura0928','teruyo1','OOTSU510','Nemoma','sethu1629','sin-yukito','shima101','Kimikimi3','kaka33','kaka138','saku1006','yukiko1','terutoyo','nakayoshi','atsuko1','eikotan','S351215yu','shita369','S2019yu','hfj281129','Masato0821','gorogoro','mayutan1','mirai2','mirai-12','Takayan','sab15595','suzuff01','katsu6000','kazuhisa1','rensi3333','YASUHIRO0516','kyoko7','rumiko1','fujisan1','ritsuko1','ritsuko1','ritsuko1','masaya1','hisayo28','kyoko7','u212alc','Kazucyan1','kaorin','princess7','mitsuru1','Kent1668','yukikohim','Takahiro','level0','yama517','runrun55','otiasi','mmika1','rikapii','kan2014','toshizo','TAKA2976','nobu3ocha','heart614sa','heart614','sunhigh1','chihiromama','naochan1','Crown48','shin0126','Toku335','Sachiko0139','seiwa1997tk','kokyuu43','Niwa3110','hypernomado1','ctl11240','fivestar1','Setuko0604','Jun19601212','MKJ5921','hypernomado1');
                 if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
@@ -8489,6 +8570,14 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->distributorDB->getCloseAccount() == "Y") {
+                // Allow free text for closed account.
+                if ($withdrawAmount <= $processFee) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP2 Withdrawal Amount"), "%2%" => $processFee.".00")));
+                	return $this->redirect('/member/ecashWithdrawal');
+                }
+            }
+
             if (date("d") > Globals::WITHDRAWAL_DAY) {
                 $distributorcodes = array('celeb1208','utopian','Ari_luvs_087','white888','firemoon','hy1805','Uoochin','kimura34','kenf72','saku1006','terutoyo','terutoyo','atsuko1','Takayan','hisae1','kuma48','princess7','maru1122','george888','touch3939','sekiken','gregorioyoon','yes007','timothyhii','MaximIndon','MaximChina1','MaximIndon','edison7821401','rich8899','black6699','sally8888','jun12168');
                 if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){

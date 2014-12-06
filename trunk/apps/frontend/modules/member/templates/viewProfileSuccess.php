@@ -114,6 +114,9 @@ $(function() {
             "bankBranchName" : {
                 required : true
             },
+            "bankCode" : {
+                required : true
+            },
             "transactionPassword" : {
                 required : true,
                 remote: "/member/verifyTransactionPassword"
@@ -823,6 +826,15 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
+                    <td><?php echo __('Bank Code') ?></td>
+                    <td><input name="bankCode" type="text" id="bankCode" size="30"
+                                                         value="<?php echo $distDB->getBankCode() ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
                     <td><?php echo __('Maxim Trader VISA Debit Card') ?></td>
                     <td>
                         <input name="visaDebitCard" type="text" id="visaDebitCard" size="30" maxlength="16"
@@ -860,7 +872,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>-->
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('Security Password') ?></td>
                     <td>
