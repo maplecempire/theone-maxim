@@ -154,6 +154,9 @@
                 <source>Bank Account No</source>
                 <target>银行账号</target>
             </trans-unit>
+            <trans-unit><source>Bank Code</source><target>银行代码</target></trans-unit>
+            <trans-unit><source>Bank Branch</source><target>银行分行</target></trans-unit>
+            <trans-unit><source>Bank Address</source><target>银行地址</target></trans-unit>
             <trans-unit><source>Language</source><target>语言</target></trans-unit>
             <trans-unit><source>Server Time</source><target>服务器时间</target></trans-unit>
             <trans-unit><source>Current CPS price</source><target>当前股价</target></trans-unit>
@@ -232,6 +235,7 @@
             <trans-unit><source>Redeem gold success</source><target>提取实物黄金成功</target></trans-unit>
             <trans-unit><source>In-sufficient CP1</source><target>CP1数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient CP2</source><target>CP2数量不足</target></trans-unit>
+            <trans-unit><source>In-sufficient CP3</source><target>CP3数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient E-Cash</source><target>金额数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient MT4 Credit</source><target>MT4 Credit 数量不足</target></trans-unit>
             <trans-unit><source>In-sufficient E-Point</source><target>点数数量不足</target></trans-unit>
@@ -604,7 +608,7 @@
             <trans-unit><source>Bank Account Details</source><target>银行帐户资料</target></trans-unit>
             <trans-unit><source>Bank Account Number</source><target>银行帐户号码</target></trans-unit>
             <trans-unit><source>Bank Account Holder Name</source><target>银行账户持有人姓名</target></trans-unit>
-            <trans-unit><source>Bank Swift Code / ABA</source><target>银行代码/ ABA</target></trans-unit>
+            <trans-unit><source>Bank Swift Code / ABA</source><target>银行Swift代码/ ABA</target></trans-unit>
             <trans-unit><source>Security Password</source><target>安全密码</target></trans-unit>
             <trans-unit><source>Upload Bank Account Proof, Proof of Residence and Passport/Photo ID</source><target>上传银行帐户证明，居住证明和护照/ ID照片</target></trans-unit>
             <trans-unit><source>Bank Account Proof</source><target>银行帐户证明</target></trans-unit>
@@ -1029,6 +1033,11 @@
             <trans-unit><source>Invalid action.</source><target>操作无效。</target></trans-unit>
             <trans-unit><source>Member deleted successfully.</source><target>会员成功删除。</target></trans-unit>
             <trans-unit><source>Your request has been submitted for review by our admin. Thank you.</source><target>您的申请已经提交给我们的管理员审查。谢谢。</target></trans-unit>
+            <trans-unit><source>Please update Money Trac Information in User Profile.</source><target>请到用户个人资料页面更新您的Money Trac信息。</target></trans-unit>
+            <trans-unit><source>%1% must greater than %2%.</source><target>%1%必须大于%2%。</target></trans-unit>
+            <trans-unit><source>Update Password</source><target>更新密码</target></trans-unit>
+            <trans-unit><source>Update Password Details</source><target>更新密码信息</target></trans-unit>
+            <trans-unit><source>Your password has expired. Please update your password to continue using our Site and Service.</source><target>您的密码已过期。请更新您的密码以继续使用我们的网站和服务。</target></trans-unit>
         </body>
     </file>
 </xliff>

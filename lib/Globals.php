@@ -85,6 +85,7 @@ abstract class Globals {
     /*****    ROLE      ******/
     /*************************/
 	const ROLE_DISTRIBUTOR = 'DISTRIBUTOR';
+	const ROLE_DISTRIBUTOR_PW_EXPIRED = 'DISTRIBUTOR_PW_EXPIRED';
 	const ROLE_ADMIN = 'ADMIN';
 	const ROLE_SUPERADMIN = 'SUPERADMIN';
 

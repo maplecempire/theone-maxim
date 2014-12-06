@@ -10,6 +10,20 @@
  */
 class homeActions extends sfActions
 {
+    public function executeUpdatePassword()
+    {
+//        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR), false)) {
+//            return $this->redirect('home/index');
+//        }
+//
+//        $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2));
+//        $str = rand(1, 7) . rand(1, 7) . $char;
+//        $this->getUser()->setAttribute(Globals::SYSTEM_CAPTCHA_ID, $str);
+//
+//        $c = new Criteria();
+//        $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_SERVER_MAINTAIN);
+//        $this->appSetting = AppSettingPeer::doSelectOne($c);
+    }
     public function executeDoSuspendUser()
     {
         /*$c = new Criteria();
@@ -374,6 +388,9 @@ class homeActions extends sfActions
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
             return $this->redirect('home/maintenance');
         }*/
+        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED), false)) {
+            return $this->redirect('home/updatePassword');
+        }
         if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR), false)) {
             return $this->redirect('home/index');
         }
@@ -585,7 +602,19 @@ class homeActions extends sfActions
 
                 if (count($distributors) > 0) {*/
                 $this->getUser()->setAuthenticated(true);
-                $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+
+                if ($existUser->getPasswordExpireDate() != "") {
+                    $passwordExpire = DateTime::createFromFormat("Y-m-d H:i:s", $existUser->getPasswordExpireDate());
+                    $now = new DateTime();
+
+                    if ($now >= $passwordExpire) {
+                        $this->getUser()->addCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED);
+                    } else {
+                        $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+                    }
+                } else {
+                    $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+                }
 
                 $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
                 $this->getUser()->setAttribute(Globals::SESSION_DISTCODE, $existDist->getDistributorCode());
@@ -635,6 +664,10 @@ class homeActions extends sfActions
                 $logLoginLog->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $logLoginLog->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $logLoginLog->save();
+
+                if ($this->getUser()->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED)) {
+                    return $this->redirect('home/updatePassword');
+                }
 
                 return $this->redirect('home/index');
                 //return $this->redirect('member/summary');

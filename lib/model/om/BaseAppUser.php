@@ -45,6 +45,10 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 
 
 	
+	protected $password_expire_date;
+
+
+	
 	protected $created_by;
 
 
@@ -141,6 +145,28 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 			}
 		} else {
 			$ts = $this->last_login_datetime;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getPasswordExpireDate($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->password_expire_date === null || $this->password_expire_date === '') {
+			return null;
+		} elseif (!is_int($this->password_expire_date)) {
+						$ts = strtotime($this->password_expire_date);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [password_expire_date] as date/time value: " . var_export($this->password_expire_date, true));
+			}
+		} else {
+			$ts = $this->password_expire_date;
 		}
 		if ($format === null) {
 			return $ts;
@@ -353,6 +379,23 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setPasswordExpireDate($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [password_expire_date] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->password_expire_date !== $ts) {
+			$this->password_expire_date = $ts;
+			$this->modifiedColumns[] = AppUserPeer::PASSWORD_EXPIRE_DATE;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -465,23 +508,25 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 
 			$this->last_login_datetime = $rs->getTimestamp($startcol + 8, null);
 
-			$this->created_by = $rs->getInt($startcol + 9);
+			$this->password_expire_date = $rs->getTimestamp($startcol + 9, null);
 
-			$this->created_on = $rs->getTimestamp($startcol + 10, null);
+			$this->created_by = $rs->getInt($startcol + 10);
 
-			$this->updated_by = $rs->getInt($startcol + 11);
+			$this->created_on = $rs->getTimestamp($startcol + 11, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 12, null);
+			$this->updated_by = $rs->getInt($startcol + 12);
 
-			$this->from_abfx = $rs->getString($startcol + 13);
+			$this->updated_on = $rs->getTimestamp($startcol + 13, null);
 
-			$this->remark = $rs->getString($startcol + 14);
+			$this->from_abfx = $rs->getString($startcol + 14);
+
+			$this->remark = $rs->getString($startcol + 15);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 15; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating AppUser object", $e);
 		}
@@ -646,21 +691,24 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 				return $this->getLastLoginDatetime();
 				break;
 			case 9:
-				return $this->getCreatedBy();
+				return $this->getPasswordExpireDate();
 				break;
 			case 10:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 11:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 12:
-				return $this->getUpdatedOn();
+				return $this->getUpdatedBy();
 				break;
 			case 13:
-				return $this->getFromAbfx();
+				return $this->getUpdatedOn();
 				break;
 			case 14:
+				return $this->getFromAbfx();
+				break;
+			case 15:
 				return $this->getRemark();
 				break;
 			default:
@@ -682,12 +730,13 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 			$keys[6] => $this->getUserRole(),
 			$keys[7] => $this->getStatusCode(),
 			$keys[8] => $this->getLastLoginDatetime(),
-			$keys[9] => $this->getCreatedBy(),
-			$keys[10] => $this->getCreatedOn(),
-			$keys[11] => $this->getUpdatedBy(),
-			$keys[12] => $this->getUpdatedOn(),
-			$keys[13] => $this->getFromAbfx(),
-			$keys[14] => $this->getRemark(),
+			$keys[9] => $this->getPasswordExpireDate(),
+			$keys[10] => $this->getCreatedBy(),
+			$keys[11] => $this->getCreatedOn(),
+			$keys[12] => $this->getUpdatedBy(),
+			$keys[13] => $this->getUpdatedOn(),
+			$keys[14] => $this->getFromAbfx(),
+			$keys[15] => $this->getRemark(),
 		);
 		return $result;
 	}
@@ -731,21 +780,24 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 				$this->setLastLoginDatetime($value);
 				break;
 			case 9:
-				$this->setCreatedBy($value);
+				$this->setPasswordExpireDate($value);
 				break;
 			case 10:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 11:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 12:
-				$this->setUpdatedOn($value);
+				$this->setUpdatedBy($value);
 				break;
 			case 13:
-				$this->setFromAbfx($value);
+				$this->setUpdatedOn($value);
 				break;
 			case 14:
+				$this->setFromAbfx($value);
+				break;
+			case 15:
 				$this->setRemark($value);
 				break;
 		} 	}
@@ -764,12 +816,13 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setUserRole($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setStatusCode($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setLastLoginDatetime($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedBy($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCreatedOn($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedBy($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setUpdatedOn($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setFromAbfx($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setRemark($arr[$keys[14]]);
+		if (array_key_exists($keys[9], $arr)) $this->setPasswordExpireDate($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCreatedBy($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCreatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setUpdatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setFromAbfx($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setRemark($arr[$keys[15]]);
 	}
 
 	
@@ -786,6 +839,7 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AppUserPeer::USER_ROLE)) $criteria->add(AppUserPeer::USER_ROLE, $this->user_role);
 		if ($this->isColumnModified(AppUserPeer::STATUS_CODE)) $criteria->add(AppUserPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(AppUserPeer::LAST_LOGIN_DATETIME)) $criteria->add(AppUserPeer::LAST_LOGIN_DATETIME, $this->last_login_datetime);
+		if ($this->isColumnModified(AppUserPeer::PASSWORD_EXPIRE_DATE)) $criteria->add(AppUserPeer::PASSWORD_EXPIRE_DATE, $this->password_expire_date);
 		if ($this->isColumnModified(AppUserPeer::CREATED_BY)) $criteria->add(AppUserPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(AppUserPeer::CREATED_ON)) $criteria->add(AppUserPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(AppUserPeer::UPDATED_BY)) $criteria->add(AppUserPeer::UPDATED_BY, $this->updated_by);
@@ -837,6 +891,8 @@ abstract class BaseAppUser extends BaseObject  implements Persistent {
 		$copyObj->setStatusCode($this->status_code);
 
 		$copyObj->setLastLoginDatetime($this->last_login_datetime);
+
+		$copyObj->setPasswordExpireDate($this->password_expire_date);
 
 		$copyObj->setCreatedBy($this->created_by);
 

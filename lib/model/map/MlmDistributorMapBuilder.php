@@ -80,6 +80,8 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('BANK_SWIFT_CODE', 'BankSwiftCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('BANK_CODE', 'BankCode', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addColumn('BANK_COUNTRY', 'BankCountry', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('BANK_ACCOUNT_CURRENCY', 'BankAccountCurrency', 'string', CreoleTypes::VARCHAR, false, 100);

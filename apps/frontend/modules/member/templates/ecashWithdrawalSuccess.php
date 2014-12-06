@@ -5,8 +5,8 @@
     var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_ecashAmount").change(function(){
-            var ecashFinal = $("#cbo_ecashAmount").val() - 60;
-            var handlingCharge = $("#cbo_ecashAmount").val() * 0.95;
+            var ecashFinal = $("#cbo_ecashAmount").autoNumericGet() - 60;
+            var handlingCharge = $("#cbo_ecashAmount").autoNumericGet() * 0.95;
 
             if (parseFloat(handlingCharge) < ecashFinal)
                 ecashFinal = handlingCharge;
@@ -22,6 +22,11 @@
                 }
             },
             rules : {
+                <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                "ecashAmount" : {
+                    required : true
+                },
+                <?php } ?>
                 "bankInTo" : {
                     required : true
                 },
@@ -33,14 +38,18 @@
             submitHandler: function(form) {
                 waiting();
                 var ecashBalance = $('#ecashBalance').autoNumericGet();
-                var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
+                var withdrawAmount = parseFloat($("#cbo_ecashAmount").autoNumericGet());
 
+                if (withdrawAmount <= 60) {
+                    error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP2 Withdrawal Amount"), "%2%" => "60.00")) ?>");
+                    return false;
+                }
                 if (withdrawAmount > parseFloat(ecashBalance)) {
-                    error("In-sufficient CP2");
+                    error("<?php echo __("In-sufficient CP2") ?>");
                     return false;
                 }
                 if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" && moneytracCustomerId == "") {
-                    error("Please update Money Trac Information in User Profile.");
+                    error("<?php echo __("Please update Money Trac Information in User Profile.") ?>");
                     return false;
                 }
                 form.submit();
@@ -56,6 +65,10 @@
                 $("#moneyTracNote2").hide(500);
             }
         }).trigger("change");
+
+        $('#cbo_ecashAmount').autoNumeric({
+            mDec: 2
+        });
     });
 </script>
 
@@ -132,6 +145,16 @@
                     </th>
                 </tr>
 
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Bank Code'); ?></td>
+                    <td>
+                        <input name="bankCode" id="bankCode" tabindex="1" disabled="disabled"
+                                           value="<?php echo $distributorDB->getBankCode(); ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('CP2 Balance'); ?></td>
@@ -146,6 +169,9 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('CP2 Withdrawal Amount'); ?></td>
                     <td>
+                        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                        <input name="ecashAmount" id="cbo_ecashAmount" tabindex="2"/>
+                        <?php } else { ?>
                         <select name="ecashAmount" id="cbo_ecashAmount" tabindex="2" style="text-align:right">
                             <?php
                                 //if ($distributorDB->getMt4UserName() != null) {
@@ -158,6 +184,7 @@
                                 //}
                             ?>
                         </select>
+                        <?php } ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -301,7 +328,8 @@
                     || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
                     || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
                     || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
-                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
+                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null
+                    || $distributorDB->getBankCode() == "") {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">

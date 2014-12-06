@@ -13,8 +13,12 @@ html, body, form, a, acronym, code, div, hr, img, label, p, pre, span, strong, t
 
 <div class="menu" style="z-index: 20;">
 <ul>
-<?php
-if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) { ?>
+<?php if ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED)) { ?>
+    <li id="menu-item-142"
+        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a
+            href="<?php echo url_for("/home/logout")?>"><?php echo __('Logout') ?></a>
+    </li>
+<?php } elseif ($sf_user->hasCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR)) { ?>
     <li id="menu-item-209"
         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209"><a
             href="<?php echo url_for("/home")?>"><?php echo __('Home') ?></a>
