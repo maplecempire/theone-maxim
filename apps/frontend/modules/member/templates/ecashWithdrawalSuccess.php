@@ -13,7 +13,6 @@
             var handlingCharge = $("#cbo_ecashAmount").val() * 0.95;
             <?php } ?>
 
-
             if (parseFloat(handlingCharge) < ecashFinal)
                 ecashFinal = handlingCharge;
 //            var ecashFinal = $("#cbo_ecashAmount").val();
@@ -46,8 +45,8 @@
                 var ecashBalance = $('#ecashBalance').autoNumericGet();
                 <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                 var withdrawAmount = parseFloat($("#cbo_ecashAmount").autoNumericGet());
-                <?php } else { ?>,
-                var withdrawAmount = parseFloat($("#cbo_ecashAmount").val())
+                <?php } else { ?>
+                var withdrawAmount = parseFloat($("#cbo_ecashAmount").val());
                 <?php } ?>
                 if (withdrawAmount <= 60) {
                     error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP2 Withdrawal Amount"), "%2%" => "60.00")) ?>");
