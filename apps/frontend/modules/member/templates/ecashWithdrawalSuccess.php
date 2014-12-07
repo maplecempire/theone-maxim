@@ -5,8 +5,14 @@
     var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_ecashAmount").change(function(){
+            <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
             var ecashFinal = $("#cbo_ecashAmount").autoNumericGet() - 60;
             var handlingCharge = $("#cbo_ecashAmount").autoNumericGet() * 0.95;
+            <?php } else { ?>
+            var ecashFinal = $("#cbo_ecashAmount").val() - 60;
+            var handlingCharge = $("#cbo_ecashAmount").val() * 0.95;
+            <?php } ?>
+
 
             if (parseFloat(handlingCharge) < ecashFinal)
                 ecashFinal = handlingCharge;
@@ -38,8 +44,11 @@
             submitHandler: function(form) {
                 waiting();
                 var ecashBalance = $('#ecashBalance').autoNumericGet();
+                <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                 var withdrawAmount = parseFloat($("#cbo_ecashAmount").autoNumericGet());
-
+                <?php } else { ?>,
+                var withdrawAmount = parseFloat($("#cbo_ecashAmount").val())
+                <?php } ?>
                 if (withdrawAmount <= 60) {
                     error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP2 Withdrawal Amount"), "%2%" => "60.00")) ?>");
                     return false;
@@ -66,9 +75,11 @@
             }
         }).trigger("change");
 
+        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
         $('#cbo_ecashAmount').autoNumeric({
             mDec: 2
         });
+        <?php } ?>
     });
 </script>
 
