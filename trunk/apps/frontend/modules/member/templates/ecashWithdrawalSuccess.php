@@ -367,7 +367,22 @@
                     </div>
                     </td>
                 </tr>
-                    <?php
+                <?php
+                } else if ($distributorDB->getBankCountry() == "Singapore" && $distributorDB->getBankCode() == "") {
+                ?>
+                <tr class="tbl_form_row_odd">
+                    <td colspan="3">
+                    <div class="ui-widget">
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                             class="ui-state-error ui-corner-all">
+                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                          class="ui-icon ui-icon-alert"></span>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Code is required') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+                <?php
                 } else if ($distributorDB->getBankCountry() == "Taiwan"
                            &&
                            (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
