@@ -5,7 +5,11 @@
     var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_cp3Amount").change(function(){
+            <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
             var ecashFinal = $("#cbo_cp3Amount").autoNumericGet() - 30;
+            <?php } else { ?>
+            var ecashFinal = $("#cbo_cp3Amount").val() - 30;
+            <?php } ?>
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
             $("#withdrawForm").validate({
@@ -26,7 +30,11 @@
                 submitHandler: function(form) {
                     waiting();
                     var ecashBalance = $('#ecashBalance').autoNumericGet();
+                    <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                     var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
+                    <?php } else { ?>
+                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
+                    <?php } ?>
 
                     if (withdrawAmount <= 30) {
                         error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
@@ -55,9 +63,11 @@
             }
         }).trigger("change");
 
+        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
         $('#cbo_cp3Amount').autoNumeric({
             mDec: 2
         });
+        <?php } ?>
     });
 </script>
 
