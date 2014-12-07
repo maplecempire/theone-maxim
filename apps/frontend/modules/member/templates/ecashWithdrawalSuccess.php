@@ -60,6 +60,9 @@
                     error("<?php echo __("Please update Money Trac Information in User Profile.") ?>");
                     return false;
                 }
+                <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                $("#cbo_ecashAmount").val(withdrawAmount);
+                <?php } ?>
                 form.submit();
             }
         });
