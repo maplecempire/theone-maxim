@@ -35,7 +35,6 @@
                     <?php } else { ?>
                     var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
                     <?php } ?>
-
                     if (withdrawAmount <= 30) {
                         error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
                         return false;
@@ -50,7 +49,7 @@
                     }
 
                     <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
-                    $("#cbo_ecashAmount").val(withdrawAmount);
+                    $("#cbo_cp3Amount").val(withdrawAmount);
                     <?php } ?>
                     form.submit();
                 }
