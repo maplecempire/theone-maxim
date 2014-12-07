@@ -155,7 +155,7 @@
                     </th>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even"  style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('Bank Code'); ?></td>
                     <td>
@@ -338,8 +338,7 @@
                     || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
                     || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
                     || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
-                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null
-                    || $distributorDB->getBankCode() == "") {
+                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
