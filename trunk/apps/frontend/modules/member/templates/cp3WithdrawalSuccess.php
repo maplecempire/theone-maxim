@@ -49,6 +49,9 @@
                         return false;
                     }
 
+                    <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                    $("#cbo_ecashAmount").val(withdrawAmount);
+                    <?php } ?>
                     form.submit();
                 }
             });
