@@ -114,9 +114,9 @@ $(function() {
             "bankBranchName" : {
                 required : true
             },
-            "bankCode" : {
+            /*"bankCode" : {
                 required : true
-            },
+            },*/
             "transactionPassword" : {
                 required : true,
                 remote: "/member/verifyTransactionPassword"
@@ -124,6 +124,11 @@ $(function() {
         },
         submitHandler: function(form) {
             waiting();
+
+            if ($("#bankCountry").val() == "Singapore" && $("#bankCode").val() == "") {
+                error("<?php echo __("Bank Code is required")?>.");
+                return false;
+            }
             form.submit();
         },
         success: function(label) {

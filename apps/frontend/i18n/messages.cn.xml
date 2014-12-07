@@ -155,6 +155,7 @@
                 <target>银行账号</target>
             </trans-unit>
             <trans-unit><source>Bank Code</source><target>银行代码</target></trans-unit>
+            <trans-unit><source>Bank Code is required</source><target>请输入正确的银行代码</target></trans-unit>
             <trans-unit><source>Bank Branch</source><target>银行分行</target></trans-unit>
             <trans-unit><source>Bank Address</source><target>银行地址</target></trans-unit>
             <trans-unit><source>Language</source><target>语言</target></trans-unit>
