@@ -613,7 +613,8 @@ class homeActions extends sfActions
                         $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
                     }
                 } else {
-                    $this->getUser()->addCredential(Globals::PROJECT_NAME . $existUser->getUserRole());
+                    // Password expire date not set yet, force user to update password page.
+                    $this->getUser()->addCredential(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR_PW_EXPIRED);
                 }
 
                 $this->getUser()->setAttribute(Globals::SESSION_DISTID, $existDist->getDistributorId());
