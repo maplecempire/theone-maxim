@@ -54,6 +54,10 @@ class LogAccountLedgerMapBuilder {
 
 		$tMap->addColumn('INTERNAL_REMARK', 'InternalRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
+		$tMap->addColumn('REFERER_ID', 'RefererId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('REFERER_TYPE', 'RefererType', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addColumn('ACCESS_IP', 'AccessIp', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);

@@ -1733,6 +1733,9 @@ class memberActions extends sfActions
             $this->cp3Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
             $this->setTemplate('purchasePackageViaTreeEx');
         }
+
+        // FMC charges
+        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
     }
     public function executePurchasePackageViaTree2()
     {
@@ -1747,6 +1750,9 @@ class memberActions extends sfActions
         if ($this->getRequestParameter('uplineDistCode', '') == "" || $this->getRequestParameter('position', '') == "") {
             return $this->redirect('/member/placementTree');
         }
+
+        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
         $this->position = $this->getRequestParameter('position');
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
@@ -1760,6 +1766,7 @@ class memberActions extends sfActions
             }
 
             $amountNeeded = $selectedPackage->getPrice();
+            $packagePriceCharges = ($hasFmcCharges ? $amountNeeded * 10 / 100 : 0); // 10% FMC charges.
 
             /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
@@ -1809,12 +1816,12 @@ class memberActions extends sfActions
                         }
                     }
                     $total = $this->cp2cp3Paid + $this->cp1Paid;
-                    if ($amountNeeded > $total) {
+                    if (($amountNeeded + $packagePriceCharges) > $total) {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Fund"));
                         return $this->redirect('/member/memberRegistration');
                     }
                 } else {
-                    if ($amountNeeded > $ledgerEPointBalance) {
+                    if (($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance) {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                         return $this->redirect('/member/purchasePackageViaTree');
                     }
@@ -1854,6 +1861,9 @@ class memberActions extends sfActions
         $this->distDB = $distDB;
         //$this->highestPackageDB = $highestPackageDB;
         $this->distCode = $distCode;
+
+        // FMC charges
+        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
     }
     public function executeUnderMaintenance()
     {
@@ -2710,6 +2720,9 @@ class memberActions extends sfActions
             $this->cp3Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
             $this->setTemplate('memberRegistrationEx');
         }
+
+        // FMC charges
+        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
     }
     public function executeMemberRegistration2()
     {
@@ -3283,6 +3296,8 @@ class memberActions extends sfActions
             return $this->redirect('/member/memberRegistration');
         }*/
 
+        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+
         $userName = $this->getRequestParameter('userName','');
         $userName = trim($userName);
         //$fcode = $this->generateFcode($this->getRequestParameter('country'));
@@ -3337,6 +3352,7 @@ class memberActions extends sfActions
 
         $applicationPackageName = $packageDB->getPackageName();
         $packagePrice = $packageDB->getPrice();
+        $packagePriceCharges = ($hasFmcCharges ? $packagePrice * 10 / 100 : 0); // 10% FMC charges.
 
         $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -3381,7 +3397,7 @@ class memberActions extends sfActions
                     return $this->redirect('/member/memberRegistration');
                 }
             } else {
-                if ($packagePrice > $sponsorAccountBalance) {
+                if (($packagePrice + $packagePriceCharges) > $sponsorAccountBalance) {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient fund to purchase package."));
                     return $this->redirect('/member/memberRegistration');
                 }
@@ -3669,11 +3685,34 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setCredit(0);
                     $mlm_account_ledger->setDebit($packagePrice);
                     $mlm_account_ledger->setBalance($sponsorAccountBalance);
+                    $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
+                    $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($mlm_account_ledger, "53");
+
+                    if ($hasFmcCharges) {
+                        // FMC charges
+                        $sponsorAccountBalance = $sponsorAccountBalance - $packagePriceCharges;
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FMC);
+                        $mlm_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                        $mlm_account_ledger->setCredit(0);
+                        $mlm_account_ledger->setDebit($packagePriceCharges);
+                        $mlm_account_ledger->setBalance($sponsorAccountBalance);
+                        $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
+                        $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+
+                        $this->mirroringAccountLedger($mlm_account_ledger, "53a");
+                    }
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
                 }
@@ -10754,6 +10793,9 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->pendingDistDB = $pendingDistDB;
         $this->packageDBs = $packageDBs;
+
+        // FMC charges
+        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
     }
 
     public function executePackageUpgrade()
@@ -10766,6 +10808,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+            $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
 
             $distDB = null;
             $distId = null;
@@ -10800,10 +10844,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
             }*/
 
-            if ($amountNeeded > $ledgerECashBalance && $paymentType == "ecash") {
+            $packagePriceCharges = ($hasFmcCharges ? $amountNeeded * 10 / 100 : 0); // 10% FMC charges.
+
+            if (($amountNeeded + $packagePriceCharges) > $ledgerECashBalance && $paymentType == "ecash") {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient MT4 Credit amount"));
                 return $this->redirect('/member/packageUpgrade');
-            } else if ($amountNeeded > $ledgerEPointBalance && $paymentType == "epoint") {
+            } else if (($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance && $paymentType == "epoint") {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                 return $this->redirect('/member/packageUpgrade');
             } else if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
@@ -10824,15 +10870,42 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded);
                     } elseif ($paymentType == "epoint") {
                         $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                        $tbl_account_ledger->setBalance($ledgerEPointBalance - $amountNeeded);
+                        $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded);
                     }
                     $tbl_account_ledger->setDebit($amountNeeded);
                     $tbl_account_ledger->setRemark("PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
+                    $tbl_account_ledger->setRefererId($distId);
+                    $tbl_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "86");
+
+                    if ($hasFmcCharges) {
+                        // FMC charges
+                        $tbl_account_ledger = new MlmAccountLedger();
+                        $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                        $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FMC);
+                        $tbl_account_ledger->setCredit(0);
+
+                        if ($paymentType == "ecash") {
+                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                            $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded - $packagePriceCharges);
+                        } elseif ($paymentType == "epoint") {
+                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                            $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded - $packagePriceCharges);
+                        }
+                        $tbl_account_ledger->setDebit($packagePriceCharges);
+                        $tbl_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
+                        $tbl_account_ledger->setRefererId($distId);
+                        $tbl_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
+                        $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->save();
+
+                        $this->mirroringAccountLedger($tbl_account_ledger, "86a");
+                    }
 
                     if ($paymentType == "ecash") {
                         $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
@@ -11001,6 +11074,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $firstForDRB = true;
                         while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
                             $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+                            $accountBalance = $distAccountEcashBalance + $directSponsorBonusAmount;
 
                             $mlm_account_ledger = new MlmAccountLedger();
                             $mlm_account_ledger->setDistId($uplineDistId);
@@ -11009,7 +11083,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $mlm_account_ledger->setRemark("PACKAGE UPGRADE ".$directSponsorPercentage."% for " . $distDB->getDistributorCode() . " (" .$distPackage->getPackageName()." => ".$selectedPackage->getPackageName().")");
                             $mlm_account_ledger->setCredit($directSponsorBonusAmount);
                             $mlm_account_ledger->setDebit(0);
-                            $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                            $mlm_account_ledger->setBalance($accountBalance);
                             $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $mlm_account_ledger->save();
@@ -11161,6 +11235,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->distDB = $distDB;
             //$this->highestPackageDB = $highestPackageDB;
         }
+        
+        // FMC charges
+        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
     }
 
     /************************************************************************************************************************
@@ -12777,6 +12854,8 @@ Wish you all the best.
         $log_account_ledger->setCredit($mlmAccountLedger->getCredit());
         $log_account_ledger->setDebit($mlmAccountLedger->getDebit());
         $log_account_ledger->setBalance($mlmAccountLedger->getBalance());
+        $log_account_ledger->setRefererId($mlmAccountLedger->getRefererId());
+        $log_account_ledger->setRefererType($mlmAccountLedger->getRefererType());
         $log_account_ledger->setCreatedBy($mlmAccountLedger->getCreatedBy());
         $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
         $log_account_ledger->save();

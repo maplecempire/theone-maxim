@@ -53,6 +53,14 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 
 
 	
+	protected $referer_id;
+
+
+	
+	protected $referer_type;
+
+
+	
 	protected $access_ip;
 
 
@@ -152,6 +160,20 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 	{
 
 		return $this->internal_remark;
+	}
+
+	
+	public function getRefererId()
+	{
+
+		return $this->referer_id;
+	}
+
+	
+	public function getRefererType()
+	{
+
+		return $this->referer_type;
 	}
 
 	
@@ -362,6 +384,34 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRefererId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->referer_id !== $v) {
+			$this->referer_id = $v;
+			$this->modifiedColumns[] = LogAccountLedgerPeer::REFERER_ID;
+		}
+
+	} 
+	
+	public function setRefererType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->referer_type !== $v) {
+			$this->referer_type = $v;
+			$this->modifiedColumns[] = LogAccountLedgerPeer::REFERER_TYPE;
+		}
+
+	} 
+	
 	public function setAccessIp($v)
 	{
 
@@ -464,21 +514,25 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 
 			$this->internal_remark = $rs->getString($startcol + 10);
 
-			$this->access_ip = $rs->getString($startcol + 11);
+			$this->referer_id = $rs->getInt($startcol + 11);
 
-			$this->created_by = $rs->getInt($startcol + 12);
+			$this->referer_type = $rs->getString($startcol + 12);
 
-			$this->created_on = $rs->getTimestamp($startcol + 13, null);
+			$this->access_ip = $rs->getString($startcol + 13);
 
-			$this->updated_by = $rs->getInt($startcol + 14);
+			$this->created_by = $rs->getInt($startcol + 14);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
+			$this->created_on = $rs->getTimestamp($startcol + 15, null);
+
+			$this->updated_by = $rs->getInt($startcol + 16);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 17, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 16; 
+						return $startcol + 18; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating LogAccountLedger object", $e);
 		}
@@ -649,18 +703,24 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 				return $this->getInternalRemark();
 				break;
 			case 11:
-				return $this->getAccessIp();
+				return $this->getRefererId();
 				break;
 			case 12:
-				return $this->getCreatedBy();
+				return $this->getRefererType();
 				break;
 			case 13:
-				return $this->getCreatedOn();
+				return $this->getAccessIp();
 				break;
 			case 14:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 15:
+				return $this->getCreatedOn();
+				break;
+			case 16:
+				return $this->getUpdatedBy();
+				break;
+			case 17:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -684,11 +744,13 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 			$keys[8] => $this->getBalance(),
 			$keys[9] => $this->getRemark(),
 			$keys[10] => $this->getInternalRemark(),
-			$keys[11] => $this->getAccessIp(),
-			$keys[12] => $this->getCreatedBy(),
-			$keys[13] => $this->getCreatedOn(),
-			$keys[14] => $this->getUpdatedBy(),
-			$keys[15] => $this->getUpdatedOn(),
+			$keys[11] => $this->getRefererId(),
+			$keys[12] => $this->getRefererType(),
+			$keys[13] => $this->getAccessIp(),
+			$keys[14] => $this->getCreatedBy(),
+			$keys[15] => $this->getCreatedOn(),
+			$keys[16] => $this->getUpdatedBy(),
+			$keys[17] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -738,18 +800,24 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 				$this->setInternalRemark($value);
 				break;
 			case 11:
-				$this->setAccessIp($value);
+				$this->setRefererId($value);
 				break;
 			case 12:
-				$this->setCreatedBy($value);
+				$this->setRefererType($value);
 				break;
 			case 13:
-				$this->setCreatedOn($value);
+				$this->setAccessIp($value);
 				break;
 			case 14:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 15:
+				$this->setCreatedOn($value);
+				break;
+			case 16:
+				$this->setUpdatedBy($value);
+				break;
+			case 17:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -770,11 +838,13 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setBalance($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setRemark($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setInternalRemark($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setAccessIp($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[11], $arr)) $this->setRefererId($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setRefererType($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setAccessIp($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCreatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCreatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setUpdatedBy($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedOn($arr[$keys[17]]);
 	}
 
 	
@@ -793,6 +863,8 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LogAccountLedgerPeer::BALANCE)) $criteria->add(LogAccountLedgerPeer::BALANCE, $this->balance);
 		if ($this->isColumnModified(LogAccountLedgerPeer::REMARK)) $criteria->add(LogAccountLedgerPeer::REMARK, $this->remark);
 		if ($this->isColumnModified(LogAccountLedgerPeer::INTERNAL_REMARK)) $criteria->add(LogAccountLedgerPeer::INTERNAL_REMARK, $this->internal_remark);
+		if ($this->isColumnModified(LogAccountLedgerPeer::REFERER_ID)) $criteria->add(LogAccountLedgerPeer::REFERER_ID, $this->referer_id);
+		if ($this->isColumnModified(LogAccountLedgerPeer::REFERER_TYPE)) $criteria->add(LogAccountLedgerPeer::REFERER_TYPE, $this->referer_type);
 		if ($this->isColumnModified(LogAccountLedgerPeer::ACCESS_IP)) $criteria->add(LogAccountLedgerPeer::ACCESS_IP, $this->access_ip);
 		if ($this->isColumnModified(LogAccountLedgerPeer::CREATED_BY)) $criteria->add(LogAccountLedgerPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(LogAccountLedgerPeer::CREATED_ON)) $criteria->add(LogAccountLedgerPeer::CREATED_ON, $this->created_on);
@@ -847,6 +919,10 @@ abstract class BaseLogAccountLedger extends BaseObject  implements Persistent {
 		$copyObj->setRemark($this->remark);
 
 		$copyObj->setInternalRemark($this->internal_remark);
+
+		$copyObj->setRefererId($this->referer_id);
+
+		$copyObj->setRefererType($this->referer_type);
 
 		$copyObj->setAccessIp($this->access_ip);
 

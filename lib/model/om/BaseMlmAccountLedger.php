@@ -49,6 +49,14 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 
 
 	
+	protected $referer_id;
+
+
+	
+	protected $referer_type;
+
+
+	
 	protected $created_by;
 
 
@@ -137,6 +145,20 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 	{
 
 		return $this->internal_remark;
+	}
+
+	
+	public function getRefererId()
+	{
+
+		return $this->referer_id;
+	}
+
+	
+	public function getRefererType()
+	{
+
+		return $this->referer_type;
 	}
 
 	
@@ -326,6 +348,34 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRefererId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->referer_id !== $v) {
+			$this->referer_id = $v;
+			$this->modifiedColumns[] = MlmAccountLedgerPeer::REFERER_ID;
+		}
+
+	} 
+	
+	public function setRefererType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->referer_type !== $v) {
+			$this->referer_type = $v;
+			$this->modifiedColumns[] = MlmAccountLedgerPeer::REFERER_TYPE;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -412,19 +462,23 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 
 			$this->internal_remark = $rs->getString($startcol + 9);
 
-			$this->created_by = $rs->getInt($startcol + 10);
+			$this->referer_id = $rs->getInt($startcol + 10);
 
-			$this->created_on = $rs->getTimestamp($startcol + 11, null);
+			$this->referer_type = $rs->getString($startcol + 11);
 
-			$this->updated_by = $rs->getInt($startcol + 12);
+			$this->created_by = $rs->getInt($startcol + 12);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 13, null);
+			$this->created_on = $rs->getTimestamp($startcol + 13, null);
+
+			$this->updated_by = $rs->getInt($startcol + 14);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmAccountLedger object", $e);
 		}
@@ -592,15 +646,21 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 				return $this->getInternalRemark();
 				break;
 			case 10:
-				return $this->getCreatedBy();
+				return $this->getRefererId();
 				break;
 			case 11:
-				return $this->getCreatedOn();
+				return $this->getRefererType();
 				break;
 			case 12:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 13:
+				return $this->getCreatedOn();
+				break;
+			case 14:
+				return $this->getUpdatedBy();
+				break;
+			case 15:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -623,10 +683,12 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 			$keys[7] => $this->getBalance(),
 			$keys[8] => $this->getRemark(),
 			$keys[9] => $this->getInternalRemark(),
-			$keys[10] => $this->getCreatedBy(),
-			$keys[11] => $this->getCreatedOn(),
-			$keys[12] => $this->getUpdatedBy(),
-			$keys[13] => $this->getUpdatedOn(),
+			$keys[10] => $this->getRefererId(),
+			$keys[11] => $this->getRefererType(),
+			$keys[12] => $this->getCreatedBy(),
+			$keys[13] => $this->getCreatedOn(),
+			$keys[14] => $this->getUpdatedBy(),
+			$keys[15] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -673,15 +735,21 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 				$this->setInternalRemark($value);
 				break;
 			case 10:
-				$this->setCreatedBy($value);
+				$this->setRefererId($value);
 				break;
 			case 11:
-				$this->setCreatedOn($value);
+				$this->setRefererType($value);
 				break;
 			case 12:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 13:
+				$this->setCreatedOn($value);
+				break;
+			case 14:
+				$this->setUpdatedBy($value);
+				break;
+			case 15:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -701,10 +769,12 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setBalance($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setRemark($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setInternalRemark($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCreatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCreatedOn($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setUpdatedBy($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setUpdatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[10], $arr)) $this->setRefererId($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setRefererType($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
 	}
 
 	
@@ -722,6 +792,8 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmAccountLedgerPeer::BALANCE)) $criteria->add(MlmAccountLedgerPeer::BALANCE, $this->balance);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::REMARK)) $criteria->add(MlmAccountLedgerPeer::REMARK, $this->remark);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::INTERNAL_REMARK)) $criteria->add(MlmAccountLedgerPeer::INTERNAL_REMARK, $this->internal_remark);
+		if ($this->isColumnModified(MlmAccountLedgerPeer::REFERER_ID)) $criteria->add(MlmAccountLedgerPeer::REFERER_ID, $this->referer_id);
+		if ($this->isColumnModified(MlmAccountLedgerPeer::REFERER_TYPE)) $criteria->add(MlmAccountLedgerPeer::REFERER_TYPE, $this->referer_type);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::CREATED_BY)) $criteria->add(MlmAccountLedgerPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::CREATED_ON)) $criteria->add(MlmAccountLedgerPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmAccountLedgerPeer::UPDATED_BY)) $criteria->add(MlmAccountLedgerPeer::UPDATED_BY, $this->updated_by);
@@ -773,6 +845,10 @@ abstract class BaseMlmAccountLedger extends BaseObject  implements Persistent {
 		$copyObj->setRemark($this->remark);
 
 		$copyObj->setInternalRemark($this->internal_remark);
+
+		$copyObj->setRefererId($this->referer_id);
+
+		$copyObj->setRefererType($this->referer_type);
 
 		$copyObj->setCreatedBy($this->created_by);
 

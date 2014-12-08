@@ -175,6 +175,7 @@ abstract class Globals {
     const ACCOUNT_LEDGER_ACTION_APPLY_EZY_CASH_CARD = 'APPLY EZY CASH CARD';
     const ACCOUNT_LEDGER_ACTION_IME_REGISTRATION = 'IME REGISTRATION';
     const ACCOUNT_LEDGER_ACTION_MATURITY = 'MATURITY';
+    const ACCOUNT_LEDGER_ACTION_FMC = 'FMC';
 
     /*******************************/
     /*****    RELOAD TOPUP  ******/
