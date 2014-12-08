@@ -56,6 +56,10 @@ $(function() {
             epointNeeded = $("#specialPackageId option:selected").attr("price");
             pid = $("#specialPackageId").val();
         }
+        if (<?php echo ($hasFmcCharges ? "true" : "false") ?>) {
+            epointNeeded = parseInt(epointNeeded, 10);
+            epointNeeded += (epointNeeded * 10 / 100);
+        }
         var sure = confirm("<?php echo __('Are you sure want to purchase this package ')?>" + epointNeeded + "?");
         if (sure) {
             $('#epointNeeded').val(epointNeeded);
@@ -139,6 +143,15 @@ $(function() {
 
                 <tr>
                     <td colspan="4">
+                        <?php if ($hasFmcCharges) { ?>
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+                                <p style="margin: 10px">
+                                    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
+                                    <strong><?php echo __('Total price includes 10% FMC charges.') ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">

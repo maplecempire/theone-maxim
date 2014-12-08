@@ -55,10 +55,16 @@ $(function() {
             epointNeeded = $("#specialPackageId option:selected").attr("price");
             pid = $("#specialPackageId").val();
         }
-
-        $('#epointNeeded').val(epointNeeded);
-        $('#pid').val(pid);
-        $("#topupForm").submit();
+        if (<?php echo ($hasFmcCharges ? "true" : "false") ?>) {
+            epointNeeded = parseInt(epointNeeded, 10);
+            epointNeeded += (epointNeeded * 10 / 100);
+        }
+        var sure = confirm("<?php echo __('Are you sure want to purchase this package ')?>" + epointNeeded + "?");
+        if (sure) {
+            $('#epointNeeded').val(epointNeeded);
+            $('#pid').val(pid);
+            $("#topupForm").submit();
+        }
     });
     /*$.ajax({
         type : 'POST',
@@ -168,7 +174,17 @@ $(function() {
                 </tr>
 
                 <tr class="tbl_form_row_odd">
-                    <td colspan="4">
+                    <td colspan="4"><div class="ui-widget">
+                        <?php if ($hasFmcCharges) { ?>
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
+                                <p style="margin: 10px">
+                                    <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
+                                    <strong><?php echo __('Total price includes 10% FMC charges.') ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
@@ -209,7 +225,7 @@ $(function() {
                                             $ableUpgrade = true;
                                             echo "<td align='center'>" . link_to(__('Upgrade'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                          'class' => 'activeLink',
-                                                                                                                                                         'ref' => $pointNeeded,
+                                                                                                                                                         'ref' => $packageDB->getPrice(),
                                                                                                                                                  'pid' => $packageDB->getPackageId(),
                                                                                                                                             )) . "</td>";
                                         } else {
