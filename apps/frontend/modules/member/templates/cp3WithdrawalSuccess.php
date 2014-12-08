@@ -146,16 +146,6 @@
                     </th>
                 </tr>
 
-                <tr class="tbl_form_row_even" style="display: none;">
-                    <td>&nbsp;</td>
-                    <td><?php echo __('Bank Code'); ?></td>
-                    <td>
-                        <input name="bankCode" id="bankCode" tabindex="1" disabled="disabled"
-                                           value="<?php echo $distributorDB->getBankCode(); ?>"/>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Balance'); ?></td>
