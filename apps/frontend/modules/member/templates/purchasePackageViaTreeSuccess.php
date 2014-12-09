@@ -2,6 +2,19 @@
 
 <script type="text/javascript" language="javascript">
 $(function() {
+    <?php if ($hasFmcCharges) { ?>
+    $("#specialPackageId").change(function() {
+        var price = parseInt($("option:selected", this).attr("price"));
+        $("#formattedValue").autoNumericSet(price * 10 / 100, {mDec: 0});
+
+        var unformmattedPrice = parseFloat($("#formattedValue").autoNumericGet());
+        $(this).parent().prev(".priceCharges").html($("#formattedValue").val());
+
+        var totalPrice = price + parseFloat(unformmattedPrice);
+        $("#formattedValue").autoNumericSet(totalPrice);
+        $(this).parent().next(".priceTotal").html($("#formattedValue").val());
+    });
+    <?php } ?>
     $("#topupForm").validate({
         messages : {
             transactionPassword: {
@@ -115,6 +128,7 @@ $(function() {
     <tr>
         <td>
 <form action="/member/purchasePackageViaTree2" id="topupForm" name="topupForm" method="post">
+    <input type="hidden" id="formattedValue" value=""/>
     <input type="hidden" id="pid" name="pid" value=""/>
     <input type="hidden" id="epointNeeded" value="0"/>
     <input type="hidden" name="uplineDistCode" id="uplineDistCode" value="<?php echo $uplineDistCode;?>"/>
@@ -151,7 +165,7 @@ $(function() {
                 <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
                         <p style="margin: 10px">
                             <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                            <strong><?php echo __('Total price includes 10% FMC charges.') ?></strong>
+                            <strong><?php echo __('Total includes 10% of 18 months fund management fees.') ?></strong>
                         </p>
                     </div>
                 </div>
@@ -162,7 +176,13 @@ $(function() {
                     <tr class="pbl_header">
                         <td valign="middle"><?php echo __('Join Package') ?></td>
                         <td valign="middle"><?php echo __('Membership') ?></td>
+                        <?php if ($hasFmcCharges) { ?>
+                        <td valign="middle"><?php echo __('Fund Management Fees') ?></td>
+                        <?php } ?>
                         <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
+                        <?php if ($hasFmcCharges) { ?>
+                        <td valign="middle"><?php echo __('Total') ?></td>
+                        <?php } ?>
                     </tr>
 
                     <?php
@@ -197,9 +217,15 @@ $(function() {
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
                                           )) . "</td>
-                                    <td align='center'>" . __($packageDB->getPackageName()) . "</td>
-                                    <td align='center'>" . $packagePrice . "</td>
-                                </tr>";
+                                    <td align='center'>" . __($packageDB->getPackageName()) . "</td>";
+                                    if ($hasFmcCharges) {
+                                        echo "<td align='center' class='priceCharges'>".number_format($packageDB->getPrice() * 10 / 100)."</td>";
+                                    }
+                                    echo "<td align='center'>" . $packagePrice . "</td>";
+                                    if ($hasFmcCharges) {
+                                        echo "<td align='center' class='priceCharges'>".number_format($packageDB->getPrice() + ($packageDB->getPrice() * 10 / 100), 2)."</td>";
+                                    }
+                                    echo "</tr>";
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";

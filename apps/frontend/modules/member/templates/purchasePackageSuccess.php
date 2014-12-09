@@ -170,7 +170,7 @@ $(function() {
                         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
                                 <p style="margin: 10px">
                                     <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __('Total price includes 10% FMC charges.') ?></strong>
+                                    <strong><?php echo __('Total includes 10% of 18 months fund management fees.') ?></strong>
                                 </p>
                             </div>
                         </div>
@@ -179,9 +179,15 @@ $(function() {
                         <table class="pbl_table" border="1" cellspacing="0">
                             <tbody>
                             <tr class="pbl_header">
-                                <td valign="middle">Join Package</td>
-                                <td valign="middle">Membership</td>
-                                <td valign="middle">Price(<?php echo $systemCurrency; ?>)</td>
+                                <td valign="middle"><?php echo __('Join Package') ?></td>
+                                <td valign="middle"><?php echo __('Membership') ?></td>
+                                <?php if ($hasFmcCharges) { ?>
+                                <td valign="middle"><?php echo __('Fund Management Fees') ?></td>
+                                <?php } ?>
+                                <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
+                                <?php if ($hasFmcCharges) { ?>
+                                <td valign="middle"><?php echo __('Total') ?></td>
+                                <?php } ?>
                             </tr>
 
                             <?php
@@ -200,9 +206,15 @@ $(function() {
                                                'ref' => $packageDB->getPrice(),
                                                'pid' => $packageDB->getPackageId(),
                                           )) . "</td>
-                                    <td align='center'>" . $packageDB->getPackageName() . "</td>
-                                    <td align='center'>" . $packageDB->getPrice() . "</td>
-                                </tr>";
+                                    <td align='center'>" . $packageDB->getPackageName() . "</td>";
+                                    if ($hasFmcCharges) {
+                                        echo "<td align='center' class='priceCharges'>".number_format($packageDB->getPrice() * 10 / 100)."</td>";
+                                    }
+                                    echo "<td align='center'>" . number_format($packageDB->getPrice(), 2) . "</td>";
+                                    if ($hasFmcCharges) {
+                                        echo "<td align='center' class='priceTotal'>".number_format($packageDB->getPrice() + ($packageDB->getPrice() * 10 / 100), 2)."</td>";
+                                    }
+                                echo "</tr>";
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";
