@@ -5,6 +5,19 @@ $(function() {
     $("#topupPackageTypePaymentTypeEPoint").attr('checked', true);
     $("#topupPackageTypeSpanPaymentType").buttonset();
 
+    <?php if ($hasFmcCharges) { ?>
+    $("#specialPackageId").change(function() {
+        var price = parseInt($("option:selected", this).attr("price"));
+        $("#formattedValue").autoNumericSet(price * 10 / 100, {mDec: 0});
+
+        var unformmattedPrice = parseFloat($("#formattedValue").autoNumericGet());
+        $(this).parent().prev(".priceCharges").html($("#formattedValue").val());
+
+        var totalPrice = price + parseFloat(unformmattedPrice);
+        $("#formattedValue").autoNumericSet(totalPrice);
+        $(this).parent().next(".priceTotal").html($("#formattedValue").val());
+    });
+    <?php } ?>
     $("#topup_packageType").change(function() {
         $("#topup_packageType_pointNeeded").val($("#topup_packageType").val());
         $("#packageTypeSelected").val($('#topup_packageType option:selected').attr("ref"));
@@ -125,6 +138,7 @@ $(function() {
     <tr>
         <td>
             <form action="/member/packageUpgrade" id="topupForm" name="topupForm" method="post">
+            <input type="hidden" id="formattedValue">
             <input type="hidden" id="topup_ecash">
             <input type="hidden" id="pid" name="pid" value=""/>
             <input type="hidden" id="epointNeeded" value="0"/>
@@ -185,7 +199,7 @@ $(function() {
                         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
                                 <p style="margin: 10px">
                                     <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __('Total price includes 10% FMC charges.') ?></strong>
+                                    <strong><?php echo __('Total includes 10% of 18 months fund management fees.') ?></strong>
                                 </p>
                             </div>
                         </div>
@@ -196,7 +210,13 @@ $(function() {
                             <tr class="pbl_header">
                                 <td valign="middle"><?php echo __('Upgrade Package') ?></td>
                                 <td valign="middle"><?php echo __('Membership') ?></td>
+                                <?php if ($hasFmcCharges) { ?>
+                                <td valign="middle"><?php echo __('Fund Management Fees') ?></td>
+                                <?php } ?>
                                 <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
+                                <?php if ($hasFmcCharges) { ?>
+                                <td valign="middle"><?php echo __('Total') ?></td>
+                                <?php } ?>
                             </tr>
                             <?php
                                 if (count($packageDBs) > 0) {
@@ -238,16 +258,36 @@ $(function() {
                                     echo "<td></td>";
                                 }
 
-                                echo "<td align='center'>" . __($packageDB->getPackageName()) . "</td>
-                                    <td align='center'>";
+                                echo "<td align='center'>" . __($packageDB->getPackageName()) . "</td>";
+                                if ($hasFmcCharges) {
+                                    echo "<td align='center' class='priceCharges'>";
+
+                                    if ($ableUpgrade) {
+                                        echo number_format($packageDB->getPrice() * 10 / 100);
+                                    } else {
+                                        echo "--";
+                                    }
+                                    echo "</td>";
+                                }
+                                echo "<td align='center'>";
 
                                     if ($ableUpgrade) {
                                         echo $packagePrice;
                                     } else {
                                         echo "--";
                                     }
-                                echo "</td>
-                                </tr>";
+                                echo "</td>";
+                                if ($hasFmcCharges) {
+                                    echo "<td align='center' class='priceTotal'>";
+
+                                    if ($ableUpgrade) {
+                                        echo number_format($packageDB->getPrice() + ($packageDB->getPrice() * 10 / 100), 2);
+                                    } else {
+                                        echo "--";
+                                    }
+                                    echo "</td>";
+                                }
+                                echo "</tr>";
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='7'>" . __('No data available in table') . "</td></tr>";
