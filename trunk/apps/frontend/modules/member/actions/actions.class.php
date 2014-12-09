@@ -1735,7 +1735,8 @@ class memberActions extends sfActions
         }
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executePurchasePackageViaTree2()
     {
@@ -1751,7 +1752,8 @@ class memberActions extends sfActions
             return $this->redirect('/member/placementTree');
         }
 
-        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
 
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
         $this->position = $this->getRequestParameter('position');
@@ -1863,7 +1865,8 @@ class memberActions extends sfActions
         $this->distCode = $distCode;
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executeUnderMaintenance()
     {
@@ -2722,7 +2725,8 @@ class memberActions extends sfActions
         }
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executeMemberRegistration2()
     {
@@ -3296,7 +3300,8 @@ class memberActions extends sfActions
             return $this->redirect('/member/memberRegistration');
         }*/
 
-        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
 
         $userName = $this->getRequestParameter('userName','');
         $userName = trim($userName);
@@ -10795,7 +10800,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->packageDBs = $packageDBs;
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
 
     public function executePackageUpgrade()
@@ -11237,7 +11243,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
         
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
 
     /************************************************************************************************************************
