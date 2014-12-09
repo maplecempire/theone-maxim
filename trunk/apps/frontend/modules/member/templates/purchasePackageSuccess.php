@@ -170,7 +170,7 @@ $(function() {
                         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
                                 <p style="margin: 10px">
                                     <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __('Total includes 10% of 18 months fund management fees.') ?></strong>
+                                    <strong><?php echo __('Total includes 10% of 18 months fund management costs.') ?></strong>
                                 </p>
                             </div>
                         </div>
