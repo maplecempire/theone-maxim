@@ -2618,9 +2618,10 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
 
         $tbl_user = AppUserPeer::retrieveByPk($tbl_distributor->getUserId());
 
-        $tbl_user->setUserpassword($this->getRequestParameter('password'));
-        $tbl_user->setUserpassword2($this->getRequestParameter('password2'));
-        $tbl_user->setStatusCode($this->getRequestParameter('status'));
+        // todo temp
+        //$tbl_user->setUserpassword($this->getRequestParameter('password'));
+        //$tbl_user->setUserpassword2($this->getRequestParameter('password2'));
+        //$tbl_user->setStatusCode($this->getRequestParameter('status'));
 
         $tbl_user->save();
 
