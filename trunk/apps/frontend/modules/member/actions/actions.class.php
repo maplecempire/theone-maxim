@@ -12981,15 +12981,15 @@ Wish you all the best.
 			                $con->commit();
 			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
 	                    }else{
-	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail3"));
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
 	                    }
 	                }else{
-	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail2"));
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
 	                }
 
 	            } catch (PropelException $e) {
 	                $con->rollback();
-	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail1"));
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
 	                throw $e;
 	            }
 	        }
@@ -13000,14 +13000,6 @@ Wish you all the best.
 	        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
 	        $distDDs = MlmDistributorPeer::doSelect($c);
 	        $this->distDDs = $distDDs;
-
-	        /*
-	        $c = new Criteria();
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
-        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-        $distDs = MlmDistributorPeer::doSelect($c);
-        $this->distDs = $distDs;
-        */
     	}else{
     		return $this->redirect('/member/summary');
     	}
