@@ -12937,4 +12937,79 @@ Wish you all the best.
     		return $this->redirect('/member/summary');
     	}
     }
+
+    public function executeChangeSponsorB(){
+    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==135){
+	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
+	        $distId = $this->getRequestParameter('distId'); // downline
+	        if($sponsorId<>"" && $distId<>""){
+	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+	            try {
+	                $con->begin();
+
+	                $c = new Criteria();
+	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
+	                //$c->addAnd(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+	                $downline = MlmDistributorPeer::doSelect($c);
+
+	                if ($downline) {
+	                    $c = new Criteria();
+		                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+		                $upline = MlmDistributorPeer::doSelectOne($c);
+
+	                    if($upline){
+
+                            foreach ($downline as $dl) {
+                                $oldTreeStructure = $dl->getTreeStructure();
+                                $newTreeStructure = $upline->getTreeStructure()."|".$dl->getDistributorID()."|";
+                                $newTreeLevel = $upline->getTreeLevel();
+                                $oldTreeLevel = $dl->getTreeLevel();
+
+                                $dl->setUplineDistId($upline->getDistributorID());
+                                $dl->setUplineDistCode($sponsorId);
+                                $dl->setTreeLevel($upline->getTreeLevel()+1);
+                                $dl->setTreeStructure($newTreeStructure);
+                                $dl->save();
+
+                                $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
+                                $connection = Propel::getConnection();
+                                $statement = $connection->prepareStatement($query);
+                                $statement->executeQuery();
+                            }
+
+			                $con->commit();
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
+	                    }else{
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail3"));
+	                    }
+	                }else{
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail2"));
+	                }
+
+	            } catch (PropelException $e) {
+	                $con->rollback();
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail1"));
+	                throw $e;
+	            }
+	        }
+
+	        $c = new Criteria();
+//	        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+	        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+	        $distDDs = MlmDistributorPeer::doSelect($c);
+	        $this->distDDs = $distDDs;
+
+	        /*
+	        $c = new Criteria();
+        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+        $distDs = MlmDistributorPeer::doSelect($c);
+        $this->distDs = $distDs;
+        */
+    	}else{
+    		return $this->redirect('/member/summary');
+    	}
+    }
 }
