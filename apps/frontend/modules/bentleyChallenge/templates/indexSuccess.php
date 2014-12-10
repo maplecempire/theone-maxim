@@ -207,13 +207,13 @@ $(function() {
                                         }
 
                                         $totalSales = number_format($member['SUB_TOTAL'],2);
-                                        if ($idx > 0) {
+                                        /*if ($idx > 0) {
                                             if ($sf_user->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $sf_user->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
                                             } else {
                                                 $totalSales = "******";
                                             }
-                                        }
+                                        }*/
 
                                         echo "<tr class='row" . $trStyle . "'>
                                                 <td align='left'>" . $idx++ . ".</td>
@@ -228,7 +228,7 @@ $(function() {
                                         }
                                         echo "</tr>";
 
-                                        if ($idx > 10)
+                                        if ($idx > 5)
                                             break;
                                     }
                                 } else {
