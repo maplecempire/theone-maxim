@@ -199,7 +199,7 @@ $(function() {
                         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
                                 <p style="margin: 10px">
                                     <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                                    <strong><?php echo __('Total includes 10% of 18 months fund management costs.') ?></strong>
+                                    <strong><?php echo __('Total includes 10% of 18 months fund management cost (FMC).') ?></strong>
                                 </p>
                             </div>
                         </div>
@@ -211,7 +211,7 @@ $(function() {
                                 <td valign="middle"><?php echo __('Upgrade Package') ?></td>
                                 <td valign="middle"><?php echo __('Membership') ?></td>
                                 <?php if ($hasFmcCharges) { ?>
-                                <td valign="middle"><?php echo __('Fund Management Fees') ?></td>
+                                <td valign="middle"><?php echo __('Fund Management Cost (FMC)') ?></td>
                                 <?php } ?>
                                 <td valign="middle"><?php echo __('Price') ?>(<?php echo $systemCurrency; ?>)</td>
                                 <?php if ($hasFmcCharges) { ?>
