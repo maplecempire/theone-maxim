@@ -210,5 +210,13 @@ viewBankInformation:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+changeSponsor:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+changeSponsorB:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 all:
   is_secure:  off        # off is the default value anyway
