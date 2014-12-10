@@ -993,10 +993,76 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='47'>Updating Back Office Passwords
+                <br>升级会员专区密码
+                <br>Officeのパスワードのバック更新
+                <br>오피스 암호를 돌아 업데이트</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 December 2014";
+                ?>
+            </div>
+
+            <div id="page_47" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear IMs &amp; Partners
+<br>
+<br>For system integrity and security reasons, we politely request that you UPDATE and CHANGE your Login Password and Security Password.
+<br>
+<br>By Order
+<br>CEO
+<br>Maxim Capital Limited
+<br>
+<br>
+<br>亲爱的会员及伙伴们,
+<br>
+<br>为了系统的稳定性及安全原因，请一定及时更改及更新您的登录密码和安全密码.
+<br>
+<br>命令
+<br>
+<br>首席执行官
+<br>马胜资本有限公司
+<br>
+<br>
+<br>バックオフィスのパスワード変更
+<br>
+<br>IMおよびパートナーのみなさま
+<br>
+<br>システムの健全性および安全上の理由により、私たちは皆さまにログインパスワードおよびセキュリティパスワードをアップデートし、変更していただくようお願いいたします。
+<br>
+<br>CEOの命により
+<br>マキシム・キャピタル・リミテッド
+<br>
+<br>
+<br>백 오피스 패스워드 업데이트
+<br>
+<br>친애하는 국제 회원 및 파트너 여러분
+<br>안정적 시스템 구축과 시스템의 보안을 위하여 로그인 패스워드와 보안 패스워드를 업데이트와 변경해  주시기를 바랍니다.
+<br>
+<br>명령에 의해
+<br>CEO
+<br>맥심 캐피탈 주식회
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
         
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='45'>STRICTLY NO CROSS LINE OF MEMBERS IN MAXIM & AGL
+                <a href='#' class="page_link" ref='46'>STRICTLY NO CROSS LINE OF MEMBERS IN MAXIM & AGL
                 <br>马胜及AGL业务之间严格不可跨线
                 <br>マキシム＆AGLにおいてのメンバークロスライン行為禁止について
                 <br>맥심과  AGL 사이의 크로스 라인을 엄격히 금지합니다.</a><img src="/images/new_icon.gif">
@@ -1008,7 +1074,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_45" class="news_desc" style="text-align: left;">
+            <div id="page_46" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
