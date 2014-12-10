@@ -631,6 +631,16 @@ ul, ol {
             </script>
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
+
+            <?php if ($culture == "kr") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_1_kr.jpg"><img src="/images/201412/news_1_kr.jpg" alt="" title="SINGAPORE CONVENTION 2015" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else if ($culture == "jp") {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_1_jp.jpg"><img src="/images/201412/news_1_jp.jpg" alt="" title="SINGAPORE CONVENTION 2015" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } else {?>
+                <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_1.jpg"><img src="/images/201412/news_1.jpg" alt="" title="SINGAPORE CONVENTION 2015" class="aligncenter size-full wp-image-162"></a></p>
+            <?php } ?>
+            <div class="hr2"></div>
+
             <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201410/shanghai_money_fair.jpg"><img width="582" src="/images/201410/shanghai_money_fair.jpg" alt="" title="SHANHAI MONEY FAIR" class="aligncenter size-full wp-image-162"></a></p>
             <div class="hr2"></div>
             
@@ -996,7 +1006,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='47'>Updating Back Office Passwords
+                <a href='#' class="page_link" ref='48'>Updating Back Office Passwords
                 <br>升级会员专区密码
                 <br>Officeのパスワードのバック更新
                 <br>오피스 암호를 돌아 업데이트</a><img src="/images/new_icon.gif">
@@ -1008,7 +1018,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_47" class="news_desc" style="text-align: left;">
+            <div id="page_48" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1051,6 +1061,87 @@ $(document).ready(function() {
 <br>명령에 의해
 <br>CEO
 <br>맥심 캐피탈 주식회
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='47'>UNAUTHORIZED SITE
+                <br>未经授权认证的网站公告
+                <br>無許可の認定に関するお知らせ
+                <br>무단 인증 공지 사항</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 December 2014";
+                ?>
+            </div>
+
+            <div id="page_47" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear IMs and Partners,
+<br>亲爱的会员及伙伴们:
+<br>
+<br>Please NOTE that http://www.maximchina.com.cn/ is AN UNAUTHORIZED Website which our LACD HAVE BEEN GIVEN SPECIFIC INSTRUCTIONS TO DEMAND THAT THE OPERATORS OF THIS WEBSITE CEASE AND SHUT IT DOWN OR FACE LEGAL PROCEEDINGS.
+<br>请注意网站http://www.maximchina.com.cn/未经公司授权认证; 目前公司LACD法律部已经下发公告要求该网站运行人员关闭该网站,若然我们将采取法律措施.
+<br>
+<br>In event that the website is operated by an IM, we will not hesitate to Suspend and/or Terminate if there is Non-Compliance.
+<br>如果一经查实该网站为我们的会员所有, 且相关人员不配合公司政策, 我们将坚决注销会员资格.
+<br>
+<br>CEO 首席执行官
+<br>Maxim Capital Limited
+<br>马胜资本有限公司
+<br>
+<br>
+<br>不正行為について
+<br>
+<br>親愛なるパートナーおよびIMのみなさん
+<br>
+<br>最近、何人かのIMからの報告によれば、社から提供されたと主張する「盗まれた・非公式の」CP1、CP2、CP3ポイントを提供する個人がいるそうです。
+<br>
+<br>注意1：弊社はいかなる個人／会社に対しても、CPポイントをディスカウントレートでバルク販売することはしません。
+<br>
+<br>注意2：弊社はすべてのIMに非公式のIMおよび見知らぬ人からのCPポイントを購入しないように忠告します。
+<br>
+<br>注意３：弊社は、盗難による／非公式のCPによってアクティベートされたと証明された場合に、そのアカウント／プレイスメントを取り消す権利を有しています。さらに、弊社は盗難による／非公式のCPポイントによって得られたプレイスメントによって生じたすべての支払い済みのコミッションを取り戻す権利を持っています。
+<br>
+<br>注意４：弊社は盗難による／非公認のCPポイントを買ったり売ったりした不正行為に参加した人のアカウントをを停止／終了させることを厭いません。
+<br>
+<br>注意５：弊社はこれらの不正行為や露骨な盗難行為をした人を告訴することを厭いません。
+<br>
+<br>アンドリュー・リム博士
+<br>CEO
+<br>マキシム・キャピタル・リミテッド
+<br>
+<br>사기행위
+<br>
+<br>친애하는 파트너 및 국제회원 여러분
+<br>최근 몇몇 회원들로부터 회사 직원을 사칭하는 개인이 “도난/무단” CP1, CP2와 CP3포인트를 제안한다는 사실이 확인되었습니다.
+<br>
+<br>주의 1 : 회사는 절대 어떠한 개인 또는 회자 직원이 할인 가격으로 대량의 CP 포인트를 팔도록 승인하지 않습니다.
+<br>
+<br>주의2: 회사는 국제회원 여러분들이 승인받지 않은 다른 국제회원 또는 낯선 이로부터 CP 포인트를 사지 말 것을 당부합니다.
+<br>
+<br>주의 3: 회사는 도난/무단 CP로 활성화된 계좌 또는 위치를 무효화 할 권리가 있습니다. 더 나아가서, 회사는 도난/무단 CP 포인트로 결정된 배치에 의한 커미션을 모두 상환시킬 것입니다.
+<br>
+<br>주의4: 회사는 이러한 사기 행각에 가담하여 도난/무단 포인트의 판매 또는 구매한 회원 자격의 유예/박탈하는 것을 주저하지 않을 것입니다.
+<br>
+<br>주의5 : 회사는 이러한 사기 행위와 노골적인 절도행위에 가담한 사람들을 고소할 것을 주저하지 않을 것입니다.
+<br>
+<br>앤드류 림 박사
+<br>CEO
+<br>맥심 캐피탈 주식회사
                             </td>
                         </tr>
                     </tbody>
