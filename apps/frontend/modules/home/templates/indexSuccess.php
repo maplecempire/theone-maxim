@@ -1006,7 +1006,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='48'>Updating Back Office Passwords
+                <a href='#' class="page_link" ref='50'>Updating Back Office Passwords
                 <br>升级会员专区密码
                 <br>Officeのパスワードのバック更新
                 <br>오피스 암호를 돌아 업데이트</a><img src="/images/new_icon.gif">
@@ -1018,7 +1018,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_48" class="news_desc" style="text-align: left;">
+            <div id="page_50" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1072,7 +1072,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='47'>UNAUTHORIZED SITE
+                <a href='#' class="page_link" ref='49'>UNAUTHORIZED SITE
                 <br>未经授权认证的网站公告
                 <br>無許可の認定に関するお知らせ
                 <br>무단 인증 공지 사항</a><img src="/images/new_icon.gif">
@@ -1084,7 +1084,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_47" class="news_desc" style="text-align: left;">
+            <div id="page_49" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1142,6 +1142,152 @@ $(document).ready(function() {
 <br>앤드류 림 박사
 <br>CEO
 <br>맥심 캐피탈 주식회사
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='48'>iAccount Notice
+                <br>iAccount公告
+                <br>iAccount発表
+                <br>iAccount발표</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 December 2014";
+                ?>
+            </div>
+
+            <div id="page_48" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Notification to all members to open iAccount by 31 December 2014 in order to improve monthly withdrawal process:
+<br>
+<br>We wish to achieve greater efficiency, speed and economies of scale in the monthly withdrawal process. As such, we would like to introduce uniformity in the withdrawal mode and credit the withdrawal amounts into your e-wallet by the 11th of every month.
+<br>
+<br>In order to achieve this, we urge you to open an iAccount latest by 31 December 2014 so that all withdrawals could be credited into your personal iAccount from January 2015 onwards. Once credited into your iAccount, you may withdraw the amount anytime, at your convenience.
+<br>
+<br>Kindly log-on to www.maximtrader.com and click the iAcccount hyperlink to apply an iAccount and base debit card at the same time. Please ensure you upload your Passport or National ID and Proof of Mailing (POM) in colour, as part of the iAccount application requirements.
+<br>
+<br>Your kind co-operation and prompt action shall be highly appreciated.
+<br>
+<br>
+<br>
+<br>通知: 为了每月取现过程更加顺畅，请所有客户于2014.12.31日之前开通iAccount功能.
+<br>
+<br>近来公司每月取现额度越来越大，为了让该过程更加顺畅、高效，我们希望能够引用统一的取现通道，能够在每月11日之前将所有款项打入会员的电子钱包。
+<br>
+<br>为此，我们强烈建议所有会员于2014.12.31日之前开通iAccount功能，这样从2015.1月份开始所有的取现都将打入会员个人的iAccount中。一旦款项进入iAccount，会员可以决定随时取现。
+<br>
+<br>请登录www.maximtrader.com，并点击iAccount超链接以申请iAccount以及关联的Debit借记卡。请确保您及时上传您的护照或身份证以及地址证明的扫描件(均需彩色文件)，以完成整个申请流程。
+<br>
+<br>非常谢谢大家的理解与配合!
+<br>
+<br>
+<br>
+<br>2014年12月31日までにiAccountを開くすべてのメンバーへ月間引き出しプロセス改善のお知らせ
+<br>
+<br>私たちはより効率的でスピード感溢れる月間引き出しプロセスを提供したいと願っています。そこで、このたび引き出しモードにおいて一律、引き出し金額を毎月11日までにあなたのe-walletにクレジットすることになったことをご紹介します。
+<br>
+<br>これを達成するために、私たちは皆さまに2014年12月31日までにiAccountを開いていただくようお願いします。これにより、2015年1月以降、すべての引き出しはあなたの個人iAccount口座にクレジットされるようになります。一度iAccountにクレジットされましたら、その金額はいつでも都合のいいときに引き出すことができます。
+<br>
+<br>どうぞwww.maximtrader.comにログインし、iAccountのリンクをクリックしてiAccountとデビッドカードに同時にお申し込みください。どうぞ、iAccountのアプリケーションの求めに応じて、あなたのパスポートまたは個人証明書をメール証明（POM）をカラーでアップロードしてください。
+<br>
+<br>ご協力と迅速な行動に深く感謝します。
+<br>
+<br>
+<br>
+<br>월별 인출 프로세스 개선을 위하여 2014년 12월 31일까지 모든 회원의 i어카운트 개설 의무에 대한 통지 :
+<br>
+<br>효율성과 속도, 월별 인출 과정의 경제성을 고려하여 더 나은 서비스를 제공하기를 원합니다.  위를 위해, 인출 모드의 균일성을 소개하고자 하고 매월 11일에 귀하의 e-웰렛으로 인출시킬 수 있도록 하고자 합니다.
+<br>
+<br>이렇게 할 수 있기를 위하여, 늦어도 2014년 12월 31일까지 i어카운트를 개설하시기 바랍니다. 2015년 이후로 모든 인출은 귀하의 개인 i어카운트 계좌로 입금될 것이며, 편리한 시간에 어디서나 원하는 금액을 인출하실 수 있습니다.
+<br>
+<br>www.maximtrader.com에 로그인하셔서 i어카운트 링크를 클릭하시면 i어카운트의 구좌와 기본 데빗 카드를 동시에 신청하실 수 있습니다.  i어카운트 신청 조건의 일부인 여권이나 주민등록증과 주소 증빙서 (POM)을 첨부하시기 바랍니다.
+<br>
+<br>귀하의 협조에 감사드리며 조속한 신청을 부탁드립니다.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='47'>MBS Singapore Convention March 22nd 2015
+                <br>新加坡滨海湾金沙大酒店March 22nd 2015年会</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "10 December 2014";
+                ?>
+            </div>
+
+            <div id="page_47" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Don't you dare miss out on qualifying for our 2nd Annual Maxim Trader Convention which will be held at the pride and joy of Singapore... The Marina Bay Sands Expo and Convention Centre.
+<br>千万不容错失-马胜金融集团第二届全球年会将会在新加坡滨海湾金沙大酒店(MBS)会议中心盛大举行!
+<br>
+<br>Promo Period: November 20th 2014 to January 28th, 2015
+<br>优惠期限: 2014.11.20 至 2015.1.28日
+<br>
+<br>To Qualify: Sign Up USD30K or more in a Single Account for Maxim or AGL Package(s)
+<br>优惠条件: 单个账户购买3万美金的马胜或AGL配套
+<br>
+<br>Entitled: 1 door ticket to Maxim Trader Singapore Convention & Gala Dinner @ The Marina Bay Sands Expo and Convention Centre
+<br>优惠项目: 会员将获得新加坡MBS年会及晚宴入场门票一张
+<br>
+<br>Nb: 1 Ticket per UserID regardless of amounts in excess of USD30K
+<br>注: 单个账户ID (即使配套高出3万美金)只能享有1张门票
+<br>
+<br>LIMITED to 4,000 persons ONLY
+<br>名额有限，尊享4000位
+<br>
+<br>MBSシンガポール・コンベンション March 22nd 2015
+<br>
+<br>誇りと喜びに満ちたシンガポールのマリーナ・ベイ・サンズエキスポ＆コンベンションセンターにて開催される二回目となるマキシムトレーダー・コンベンションを見逃してはいけません。
+<br>
+<br>プロモーション期間: 2014年11月20日〜2015年1月28日
+<br>
+<br>資格条件:マキシムのシングルアカウントまたはAGLパッケージで、USD30Kまたはそれ以上へのサインアップ
+<br>
+<br>権利:マキシム・トレーダー・シンガポールコンベンション＆ガラディナーへのチケット1枚@マリーナ・ベイ・サンズエキスポ＆コンベンションセンター
+<br>
+<br>注意:USD30Kを超えた価格に対して金額に関係なくチケット1ユーザーIDあたり１枚
+<br>
+<br>4000名様限定
+<br>
+<br>MBS 싱가폴 컨벤션 March 22nd 2015
+<br>
+<br>자랑스럽고 활기찬 싱가폴 마리나 베이 샌드 엑스포 및 컨벤션 센터에서 열릴 우리의 두번째 애뉴얼 맥심 트레이더 컨벤션을 놓치고 싶지 않으시겠죠.
+<br>
+<br>프로모션 기간 : 2014년 11월 20일부터 2014년 1월 28일
+<br>
+<br>자격요건 : 3만불 패키지 또는 그 이상의 단일 맥심 계좌 또는 AGL 패키지(들) 구매
+<br>
+<br>혜택 : 마리나 배이 샌드 엑스포 및 컨벤션 센터에서 열릴 맥심 트레이더 싱가폴 컨벤션 및 갈라 디너 참석 티켓 1매
+<br>
+<br>주의 : 3만불 이상 시 금액에 관계없이 UserID 당 티켓 1매
+<br>
+<br>4,000명 한정입니다.
                             </td>
                         </tr>
                     </tbody>
