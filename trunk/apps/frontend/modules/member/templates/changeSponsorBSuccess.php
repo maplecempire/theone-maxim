@@ -47,9 +47,12 @@
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    error("<?php echo __('Invalid User Name or Invalid Tree Structure')?>");
-                    $('#sponsorId').val("");
-                    $('#sponsorId').focus();
+                    if (confirm("<?php echo __('Invalid User Name or Invalid Tree Structure. Proceed with caution. Continue?')?>")) {
+                        $.unblockUI();
+                    } else {
+                        $('#sponsorId').val("");
+                        $('#sponsorId').focus();
+                    }
                 } else {
                     $.unblockUI();
                 }
