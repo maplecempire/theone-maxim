@@ -92,6 +92,7 @@ $culture = $sf_user->getCulture();
                             <ol>
                                 <li>Korea</li>
                                 <li>Japan</li>
+                                <li>Hong Kong</li>
                             </ol>
                         </li>
                         <li>The bank account information are as follows (Please take note of the important notice at the bottom) :</li>
@@ -145,16 +146,16 @@ $culture = $sf_user->getCulture();
 			                </ul>
 			                <br><br>
 			                <ul class="page_ul">
-			                    <li>收款方银行名称：SHANGHAI PUDONG DEVELOPMENT BANK</li>
-			                    <li>收款方银行地址：12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
+			                    <li>收款方银行名称：BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+			                    <li>收款方银行地址：NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
 			                    <li>收款方银行国家：中国</li>
-			                    <li>SWIFT: SPDBCNSHOSA</li>
+			                    <li>SWIFT: COMMCN3XOBU</li>
 			                    <li>收款方账户名称：IACCOUNT SERVICES (HK) LIMITED</li>
-			                    <li>收款方地址: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
+			                    <li>收款方地址: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
 			                    <li>收款方账号（各币种账号不同）</li>
 			                    <li>收款方地区：香港</li>
 			                    <li>邮编： 999077</li>
-			                    <li>USD: OSA1144632571742</li>
+			                    <li>USD: OSA90000088020100</li>
 			                </ul>
                 <?php } else if ($culture == "kr") { ?>
                     은행 창구 또는 인터넷뱅킹을 이용하여 하기의 계좌로 국제송금 하여주십시오.
@@ -167,16 +168,16 @@ $culture = $sf_user->getCulture();
                 <br>
                 입금계좌 정보
                 <ul class="page_ul">
-                    <li>은행명: SHANGHAI PUDONG DEVELOPMENT BANK</li>
-                    <li>은행주소: 12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
+                    <li>은행명: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                    <li>은행주소: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
                     <li>은행국가: CHINA</li>
-                    <li>SWIFT: SPDBCNSHOSA</li>
+                    <li>SWIFT: COMMCN3XOBU</li>
                     <li>계좌명의: IACCOUNT SERVICES (HK) LIMITED</li>
-                    <li>계좌명의인 주소: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
+                    <li>계좌명의인 주소: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
                     <li>계좌번호：통화별로 계좌번호가 다릅니다</li>
                     <li>계좌명의인 국가: HONG KONG</li>
                     <li>우편번호: 999077</li>
-                    <li>USD계좌:OSA11443632571742</li>
+                    <li>USD계좌:OSA90000088020100</li>
                 </ul>
                 <?php } else if ($culture == "jp") { ?>
 
@@ -191,32 +192,52 @@ $culture = $sf_user->getCulture();
                 <br>
                 <br>
                 <ul class="page_ul">
-                    <li>銀行名: SHANGHAI PUDONG DEVELOPMENT BANK</li>
-                    <li>銀行住所: 12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
+                    <li>銀行名: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                    <li>銀行住所: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
                     <li>銀行国: CHINA</li>
-                    <li>SWIFT: SPDBCNSHOSA</li>
+                    <li>SWIFT: COMMCN3XOBU</li>
                     <li>口座名義: IACCOUNT SERVICES (HK) LIMITED</li>
-                    <li>口座名義人住所: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
+                    <li>口座名義人住所: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
                     <li>口座番号：各通貨ごとに異なります</li>
                     <li>口座名義人国: HONG KONG</li>
                     <li>郵便番号: 999077</li>
-                    <li>USD口座:OSA11443632571742</li>
+                    <li>USD口座:OSA90000088020100</li>
                 </ul>
                 <?php } else { ?>
-                    Beneficiary Account Information (International Transfer)
+                    Beneficiary Account information for International Transfer. Please note you have two options to choose from:
+                    <br>
+                    <br>
+                    <strong>OPTION 1:</strong>
                     <br>
                     <br>
                     <ul class="page_ul">
-                        <li>Name of Beneficiary Bank: SHANGHAI PUDONG DEVELOPMENT BANK</li>
-                        <li>Address of Beneficiary Bank: 12 ZHONG SHAN DONG YI LU SHANGHAI200002 CHINA</li>
+                        <li>Name of Beneficiary Bank: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                        <li>Address of Beneficiary Bank: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
                         <li>Country of Beneficiary Bank: CHINA</li>
-                        <li>SWIFT: SPDBCNSHOSA</li>
+                        <li>SWIFT: COMMCN3XOBU</li>
                         <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
-                        <li>Beneficiary Address: Room501,5/F,Workingport Commercial Building,3 Hau Fook Street,Tsim Sha Tsui,Kowloon,Hong Kong</li>
+                        <li>Beneficiary Address: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
                         <li>Beneficiary Account (each currency has respective account number)</li>
                         <li>Beneficiary Country: HONG KONG</li>
                         <li>Postcode: 999077</li>
-                        <li>USD:OSA11443632571742</li>
+                        <li>HKD Account: OSA90000088020100</li>
+                        <li>USD Account: OSA90000088020100</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <strong>OPTION 2:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: CHINA CONSTRUCTION BANK (ASIA) CORPORATION LIMITED</li>
+                        <li>Address of Beneficiary Bank: HONG KONG DEVON HOUSE, FLOOR 11:  979, KING’S ROAD</li>
+                        <li>Country of Beneficiary Bank: HONG KONG</li>
+                        <li>SWIFT: CCBQHKAX</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room 501,5/F, Workingport Commercial Building, 3 Hau Fook Street, Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>USD Account: 10343921</li>
+                        <li>HKD Account: 10343921</li>
                     </ul>
                     <?php } ?>
                 </td>
@@ -268,6 +289,9 @@ $culture = $sf_user->getCulture();
                     <br>** 「メッセージ」欄の記入漏れがあった場合には、送金を反映できかねますので、予めご了承ください。
                 <?php } else { ?>
                     Beneficiary Account Information (International Transfer)
+                    <br>
+                    <br>
+                    Please note the ultimate beneficiary for the above bank accounts in Option 1 and Option 2 is either Maxim Capital Limited or your personal i-Account, depending on what you write in the “Message or Remarks” column of the remittance application as stated below:
                     <br>
                     <br>
                     <ul class="page_ul">
