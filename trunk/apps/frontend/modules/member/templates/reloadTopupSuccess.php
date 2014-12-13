@@ -2,13 +2,12 @@
 
 <script type="text/javascript" language="javascript">
     $(function() {
-        $("#cbo_topupAmount").change(function(){
-            /*var result = parseFloat($(this).val()) * <?php //echo $usdToMyr;?>;*/
+        /*$("#cbo_topupAmount").change(function(){
+            *//*var result = parseFloat($(this).val()) * <?php //echo $usdToMyr;?>;*//*
             var result = parseFloat($(this).val());
             var epointBalance = $('#epointBalance').val();
             $("#convertedAmount").autoNumericSet(result);
-            $("#epointBalanceDisplay").autoNumericSet(epointBalance);
-        });
+        });*/
         $("#withdrawForm").validate({
             messages : {
                 transactionPassword: {
@@ -27,19 +26,22 @@
                     return false;
                 }
                 var epointBalance = $('#epointBalance').val();
-<!--                        var mt4Amount = $('#cbo_topupAmount').val() * --><?php //echo $usdToMyr;?><!--;-->
-                var mt4Amount = $('#cbo_topupAmount').val();
+                var mt4Amount = $('#mt4Amount').autoNumericGet();
 
                 if (parseFloat(mt4Amount) > parseFloat(epointBalance)) {
-                    alert("In-sufficient CP1");
+                    error("In-sufficient CP1");
                     return false;
                 }
                 waiting();
-
+                $('#mt4Amount').val(mt4Amount);
                 form.submit();
             }
         });
-        $("#cbo_topupAmount").trigger("change");
+        /*$("#cbo_topupAmount").trigger("change");*/
+
+        $('#mt4Amount').autoNumeric({
+            mDec: 2
+        });
     });
 </script>
 
@@ -133,18 +135,17 @@
                         <input name="epointBalance" id="epointBalance" type="hidden"
                                value="<?php echo $ledgerEpointBalance; ?>"/>
 
-                        <select name="mt4Amount" id="cbo_topupAmount" tabindex="2">
+                        <input name="mt4Amount" id="mt4Amount" type="text" value=""/>
+                        <!--<select name="mt4Amount" id="cbo_topupAmount" tabindex="2">
                             <?php
-                                //if ($distributorDB->getMt4UserName() != null) {
-                                    for ($i = 100; $i <= 10000; $i = $i + 100) {
+/*                                    for ($i = 100; $i <= 10000; $i = $i + 100) {
                                         echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                     }
                                     for ($i = 20000; $i <= 50000; $i = $i + 10000) {
                                         echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                     }
-                                //}
-                            ?>
-                        </select>
+                            */?>
+                        </select>-->
                         <!--&nbsp;USD-->
                         &nbsp;<?php echo $systemCurrency; ?>
                     </td>
@@ -155,7 +156,7 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('CP1 Balance'); ?></td>
                     <td>
-                        <input name="epointBalanceDisplay" id="epointBalanceDisplay" disabled="disabled" value=""/>
+                        <input name="epointBalanceDisplay" id="epointBalanceDisplay" disabled="disabled" value="<?php echo number_format($ledgerEpointBalance,2); ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
