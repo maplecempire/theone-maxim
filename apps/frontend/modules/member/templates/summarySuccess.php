@@ -196,7 +196,7 @@ $(function() {
                 var answer = confirm("<?php echo __("Are you sure want to renew your contract?") ?>");
                 if (answer){
                     waiting();
-                    $("#maturityAction").val("<?php echo __("RENEW") ?>");
+                    $("#maturityAction").val("RENEW");
                     $("#maturityForm").submit();
                 }
             },
@@ -204,7 +204,7 @@ $(function() {
                 var answer = confirm("<?php echo __("Are you sure want to terminate your contract?") ?>");
                 if (answer){
                     waiting();
-                    $("#maturityAction").val("<?php echo __("WITHDRAW") ?>");
+                    $("#maturityAction").val("WITHDRAW");
                     $("#maturityForm").submit();
                 }
             },

@@ -1022,6 +1022,7 @@
             <trans-unit><source>Do you want to navigate to MT4 Reload page?</source><target>导航到MT4充值页面？</target></trans-unit>
             <trans-unit><source>Are you sure want to renew your contract?</source><target>确定要续约您的合同？</target></trans-unit>
             <trans-unit><source>RENEW</source><target>续约</target></trans-unit>
+            <trans-unit><source>Renew Contract</source><target>续约</target></trans-unit>
             <trans-unit><source>Terminate Contract</source><target>终止合同</target></trans-unit>
             <trans-unit><source>Are you sure want to terminate your contract?</source><target>您确定要终止合同？</target></trans-unit>
             <trans-unit><source>WITHDRAW</source><target>兑现</target></trans-unit>
