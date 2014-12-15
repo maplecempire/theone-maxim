@@ -52,6 +52,7 @@
                     } else {
                         $('#sponsorId').val("");
                         $('#sponsorId').focus();
+                        $.unblockUI();
                     }
                 } else {
                     $.unblockUI();
