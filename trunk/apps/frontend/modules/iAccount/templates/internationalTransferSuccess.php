@@ -52,50 +52,67 @@ $culture = $sf_user->getCulture();
             <tr>
                 <td class="">
                 <?php if ($culture == "cn") { ?>
-                    Maxim Capital Limited Seychelles (公司名称)
+                    马胜资本有限公司(塞舌尔)
+                    <br><br>请通过银行柜台或者网络转账至以后银行账户；具体请参照下文B部分的账户信息。
+                    <br><br>
+                    <ul class="page_ul">
+                        <li>会员可以通过银行柜台或者网络转账从个人i-Account汇款至马胜金融集团的i-Account账户。一旦确认收到款项，公司会第一时间处理。</li>
+                        <li>另外，以下国家或地区的会员还可以通过本地银行，使用本地货币转账
+                            <ol>
+                                <li>韩国</li>
+                                <li>日本</li>
+                                <li>香港</li>
+                            </ol>
+                        </li>
+                        <li>下一部分列有具体银行账户信息(请留意页面底部的重要通知):</li>
+                    </ul>
                     <br><br>
                 <?php } else if ($culture == "kr") { ?>
-                        Maxim Capital Limited Seychelles (Company name)
-                    <!--<br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.
+                    马胜资本有限公司(塞舌尔)
+                    <br><br>请通过银行柜台或者网络转账至以后银行账户；具体请参照下文B部分的账户信息。
                     <br><br>
                     <ul class="page_ul">
-                        <li>You may transfer funds into your personal i-Account or Maxim’s corporate i-Account by international transfer via any bank counter or via internet banking. We will process your remittance as soon as we receive it.</li>
-                        <li>Alternatively, you may also do a local bank transfer in the following countries:
+                        <li>会员可以通过银行柜台或者网络转账从个人i-Account汇款至马胜金融集团的i-Account账户。一旦确认收到款项，公司会第一时间处理。</li>
+                        <li>另外，以下国家或地区的会员还可以通过本地银行，使用本地货币转账
                             <ol>
-                                <li>Korea</li>
-                                <li>Japan</li>
+                                <li>韩国</li>
+                                <li>日本</li>
+                                <li>香港</li>
                             </ol>
                         </li>
-                        <li>The bank account information are as follows (Please take note of the important notice at the bottom) :</li>
-                    </ul>-->
+                        <li>下一部分列有具体银行账户信息(请留意页面底部的重要通知):</li>
+                    </ul>
+                    <br><br>
                 <?php } else if ($culture == "jp") { ?>
-                        Maxim Capital Limited Seychelles (Company name)
-                    <!--<br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.
+                    マキシム・キャピタル・リミテッド（セーシェル）
+                    <br><br>どうぞあなたの銀行口座から以下のアカウントに銀行窓口またはネットバンキングによる国際送金で資金を送金してください。アカウントの情報は以下のセクションBに記載されています。
                     <br><br>
                     <ul class="page_ul">
-                        <li>You may transfer funds into your personal i-Account or Maxim’s corporate i-Account by international transfer via any bank counter or via internet banking. We will process your remittance as soon as we receive it.</li>
-                        <li>Alternatively, you may also do a local bank transfer in the following countries:
+                        <li>あなたはファンドを個人的なi-Accountまたはマキシムの社のi-アカウントに銀行窓口またはインターネットバンキングによる国際送金にて送るかもしれません。私たちは受け取ったら出来るだけ早く送金を処理します。</li>
+                        <li>別の方法として、以下の国においては、あなたは現地通貨を利用して現地の銀行送金を使用するかもしれません。
                             <ol>
-                                <li>Korea</li>
-                                <li>Japan</li>
+                                <li>韩国</li>
+                                <li>日本</li>
+                                <li>香港</li>
                             </ol>
                         </li>
-                        <li>The bank account information are as follows (Please take note of the important notice at the bottom) :</li>
-                    </ul>-->
+                        <li>銀行の情報は以下の通りです。（最後にある大切な情報にご注意ください）</li>
+                    </ul>
+                    <br><br>
                 <?php } else { ?>
-                    Maxim Capital Limited Seychelles (Company name)
-                    <br><br>Please deposit fund from your banking account to following account by international transfer via bank counter or internet banking. The account information is stated below.
+                    맥심 캐피탈 주식회사 (세이쉘)
+                    <br><br>귀하의 은행 계좌에서 아래의 계좌로 외환 거래 또는 인터넷 외환 거래로  자금을 입금하시기 바랍니다. 계좌정보는 아래 섹션 B에 명시되어 있습니다.
                     <br><br>
                     <ul class="page_ul">
-                        <li>You may transfer funds into your personal i-Account or Maxim’s corporate i-Account by international transfer via any bank counter or via internet banking. We will process your remittance as soon as we receive it.</li>
-                        <li>Alternatively, you may also do a local bank transfer in the following countries:
+                        <li>귀하의 자금을 귀하의 개인 i-어카운트 또는 맥심 회사 i-어카운트로 외환 송금을 직접 또는 인터넷을 통해 이체하시기 바랍니다. 자금을 받는 즉시 귀하의 송금을 진행할 것입니다.</li>
+                        <li>대안으로는, 아래의 국가에서는 자국의 통화로 국내 이체를 하실 수 있습니다.
                             <ol>
-                                <li>Korea</li>
-                                <li>Japan</li>
-                                <li>Hong Kong</li>
+                                <li>대한민국</li>
+                                <li>일본</li>
+                                <li>홍콩</li>
                             </ol>
                         </li>
-                        <li>The bank account information are as follows (Please take note of the important notice at the bottom) :</li>
+                        <li>은행 계좌 정보는 아래와 같습니다. (아래 중요한 노티스를 참고하시기 바랍니다.)</li>
                     </ul>
                     <?php } ?>
                 </td>
@@ -137,71 +154,114 @@ $culture = $sf_user->getCulture();
             <tr>
                 <td class="">
                     <?php if ($culture == "cn") { ?>
-                        	您可在银行柜台或网上银行，通过国际汇款从您自己的银行账户向以下账户汇款。账户信息如下。
-			                <br>
-			                <br>
-			                <ul class="page_ul">
-			                    <li>您可以通过任何银行柜台或网上银行，用国际汇款方式汇款到您的个人i-Account账户或Maxim企业i-Account账户。我们会在确认到汇款后立即进行处理。</li>
-			                    <li>银行账户信息如下 （请注意底部需要注意事项）</li>
-			                </ul>
-			                <br><br>
-			                <ul class="page_ul">
-			                    <li>收款方银行名称：BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
-			                    <li>收款方银行地址：NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
-			                    <li>收款方银行国家：中国</li>
-			                    <li>SWIFT: COMMCN3XOBU</li>
-			                    <li>收款方账户名称：IACCOUNT SERVICES (HK) LIMITED</li>
-			                    <li>收款方地址: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
-			                    <li>收款方账号（各币种账号不同）</li>
-			                    <li>收款方地区：香港</li>
-			                    <li>邮编： 999077</li>
-			                    <li>USD: OSA90000088020100</li>
-			                </ul>
-                <?php } else if ($culture == "kr") { ?>
-                    은행 창구 또는 인터넷뱅킹을 이용하여 하기의 계좌로 국제송금 하여주십시오.
+                    收款人信息如下。会员请注意以下两个选择:
+                    <br>
+                    <br>
+                    <strong>选择 1:</strong>
+                    <br>
+                    <br>
                     <ul class="page_ul">
-                    <li>은행 창구 또는 인터넷뱅킹을 이용하여, 고객님의i-Account또는Maxim사의 법인i-Account로 입금 하실수 있습니다. 고객님의 입금이 확인 되면, 즉시 송금처리 해드리겠습니다.</li>
-                    <li>국내송금에 대해서, Section C의 기재내용을 확인하여 주십시오.</li>
-                    <li>은행계좌 정보는 하기를 참조하여 주십시오. (자료 하단의 「중요」에 기재되어 있는 내용포함)</li>
+                        <li>银行: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                        <li>银行地址: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
+                        <li>银行国家: CHINA</li>
+                        <li>SWIFT: COMMCN3XOBU</li>
+                        <li>收款人姓名: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>收款人地址: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Account (each currency has respective account number)</li>
+                        <li>收款人国家/地区: HONG KONG</li>
+                        <li>Postcode: 999077</li>
+                        <li>美金账户号码: OSA90000088020100</li>
+                        <li>港币账户号码: OSA90000088020100</li>
                     </ul>
-                <br>
-                <br>
-                입금계좌 정보
-                <ul class="page_ul">
-                    <li>은행명: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
-                    <li>은행주소: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
-                    <li>은행국가: CHINA</li>
-                    <li>SWIFT: COMMCN3XOBU</li>
-                    <li>계좌명의: IACCOUNT SERVICES (HK) LIMITED</li>
-                    <li>계좌명의인 주소: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
-                    <li>계좌번호：통화별로 계좌번호가 다릅니다</li>
-                    <li>계좌명의인 국가: HONG KONG</li>
-                    <li>우편번호: 999077</li>
-                    <li>USD계좌:OSA90000088020100</li>
-                </ul>
+                    <br>
+                    <br>
+                    <strong>OPTION 2:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: CHINA CONSTRUCTION BANK (ASIA) CORPORATION LIMITED</li>
+                        <li>Address of Beneficiary Bank: HONG KONG DEVON HOUSE, FLOOR 11:  979, KING’S ROAD</li>
+                        <li>Country of Beneficiary Bank: HONG KONG</li>
+                        <li>SWIFT: CCBQHKAX</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room 501,5/F, Workingport Commercial Building, 3 Hau Fook Street, Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>美金账户号码: 10343921</li>
+                        <li>港币账户号码: 10343921</li>
+                    </ul>
+                <?php } else if ($culture == "kr") { ?>
+                    Beneficiary Account information for International Transfer. Please note you have two options to choose from:
+                    <br>
+                    <br>
+                    <strong>OPTION 1:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                        <li>Address of Beneficiary Bank: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
+                        <li>Country of Beneficiary Bank: CHINA</li>
+                        <li>SWIFT: COMMCN3XOBU</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Account (each currency has respective account number)</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>Postcode: 999077</li>
+                        <li>HKD Account: OSA90000088020100</li>
+                        <li>USD Account: OSA90000088020100</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <strong>OPTION 2:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: CHINA CONSTRUCTION BANK (ASIA) CORPORATION LIMITED</li>
+                        <li>Address of Beneficiary Bank: HONG KONG DEVON HOUSE, FLOOR 11:  979, KING’S ROAD</li>
+                        <li>Country of Beneficiary Bank: HONG KONG</li>
+                        <li>SWIFT: CCBQHKAX</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room 501,5/F, Workingport Commercial Building, 3 Hau Fook Street, Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>USD Account: 10343921</li>
+                        <li>HKD Account: 10343921</li>
+                    </ul>
                 <?php } else if ($culture == "jp") { ?>
 
-銀行窓口またはインターネットバンキングにて、お客様のお持ちの銀行口座から下記口座あてに国際送金してください。
-
-<ul class="page_ul">
-                    <li>資金を銀行の窓口またはネットバンキングより、お客様のi-AccountまたはMaximの法人i-Accountに入金することができます。お客様からの入金の確認が取れ次第、早急に送金の処理をさせていただきます。</li>
-<li>国内送金については、Section Cに記載の内容をご確認ください。</li>
-<li>銀行口座情報は下記の通りとなります。(資料下部の「重要」に記載されている内容も合わせてご確認ください。)</li>
-</ul>
-                        入金口座情報 (International Transfer)
-                <br>
-                <br>
-                <ul class="page_ul">
-                    <li>銀行名: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
-                    <li>銀行住所: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
-                    <li>銀行国: CHINA</li>
-                    <li>SWIFT: COMMCN3XOBU</li>
-                    <li>口座名義: IACCOUNT SERVICES (HK) LIMITED</li>
-                    <li>口座名義人住所: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
-                    <li>口座番号：各通貨ごとに異なります</li>
-                    <li>口座名義人国: HONG KONG</li>
-                    <li>郵便番号: 999077</li>
-                    <li>USD口座:OSA90000088020100</li>
+                    Beneficiary Account information for International Transfer. Please note you have two options to choose from:
+                    <br>
+                    <br>
+                    <strong>OPTION 1:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: BANK OF COMMUNICATIONS CO., LTD OFFSHORE BANKING UNIT</li>
+                        <li>Address of Beneficiary Bank: NO 188, YINCHENG ZHONG ROAD, SHANGHAI, CHINA</li>
+                        <li>Country of Beneficiary Bank: CHINA</li>
+                        <li>SWIFT: COMMCN3XOBU</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room501, 5/F, Workingport Commercial Building, 3 Hau Fook Street,Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Account (each currency has respective account number)</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>Postcode: 999077</li>
+                        <li>HKD Account: OSA90000088020100</li>
+                        <li>USD Account: OSA90000088020100</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <strong>OPTION 2:</strong>
+                    <br>
+                    <br>
+                    <ul class="page_ul">
+                        <li>Name of Beneficiary Bank: CHINA CONSTRUCTION BANK (ASIA) CORPORATION LIMITED</li>
+                        <li>Address of Beneficiary Bank: HONG KONG DEVON HOUSE, FLOOR 11:  979, KING’S ROAD</li>
+                        <li>Country of Beneficiary Bank: HONG KONG</li>
+                        <li>SWIFT: CCBQHKAX</li>
+                        <li>Beneficiary Name: IACCOUNT SERVICES (HK) LIMITED</li>
+                        <li>Beneficiary Address: Room 501,5/F, Workingport Commercial Building, 3 Hau Fook Street, Tsim Sha Tsui, Kowloon, Hong Kong</li>
+                        <li>Beneficiary Country: HONG KONG</li>
+                        <li>USD Account: 10343921</li>
+                        <li>HKD Account: 10343921</li>
+                    </ul>
                 </ul>
                 <?php } else { ?>
                     Beneficiary Account information for International Transfer. Please note you have two options to choose from:
