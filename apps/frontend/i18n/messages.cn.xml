@@ -1045,6 +1045,9 @@
             <trans-unit><source>Old Security password is not valid.</source><target>旧安全密码不正确。</target></trans-unit>
             <trans-unit><source>Fund Management Cost (FMC)</source><target>基金管理费用 (FMC)</target></trans-unit>
             <trans-unit><source>Share Placement Cost (SPC)</source><target>配股管理费用 (SPC)</target></trans-unit>
+            <trans-unit><source>i-Account Details</source><target>i-Account 明细</target></trans-unit>
+            <trans-unit><source>Account Name</source><target>帐户名</target></trans-unit>
+            <trans-unit><source>Account Number</source><target>帐户号码</target></trans-unit>
         </body>
     </file>
 </xliff>
