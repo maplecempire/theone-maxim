@@ -1006,10 +1006,46 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='51'>Announcement to all Malaysian Maxim Trader Members
+                <br>所有马来西亚的会员请注意</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "17 December 2014";
+                ?>
+            </div>
+
+            <div id="page_51" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Announcement to all Malaysian Maxim Trader Members:
+<br>所有马来西亚的会员请注意:
+<br>
+<br>It is the practice of the Company to maintain stable exchange rates by ignoring minor fluctuations as far as possible. However, of late the Malaysian Ringgit has fallen significantly against the US Dollar and these leaves Maxim with no choice but to adjust the rates upwards. From 23rd December 2014 onwards, members will have to remit RM3.90 for every US dollar. This includes 10% FMC charge. We thank you for your understanding of this unavoidable move.
+<br>一直以来, 公司政策都是尽量不受市场汇率价格的波动影响以保持配套价格不变. 但是最近马币兑美币贬值的幅度太大, 公司没有办法只能相应调整价格. 从2014.12.23日起, 马币购买公司配套的价格将为1美金等于3.9马币(此价格已含10%的FMC基金管理费用). 敬请谅解, 谢谢配合!
+<br>
+<br>CEO 首席执行官
+<br>Maxim Trader
+<br>马胜金融集团
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='50'>Updating Back Office Passwords
                 <br>升级会员专区密码
                 <br>Officeのパスワードのバック更新
-                <br>오피스 암호를 돌아 업데이트</a><img src="/images/new_icon.gif">
+                <br>오피스 암호를 돌아 업데이트</a>
             </div>
             <div class="news_date">
             <?php
@@ -1018,7 +1054,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_50" class="news_desc" style="text-align: left;">
+            <div id="page_50" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1075,7 +1111,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='49'>UNAUTHORIZED SITE
                 <br>未经授权认证的网站公告
                 <br>無許可の認定に関するお知らせ
-                <br>무단 인증 공지 사항</a><img src="/images/new_icon.gif">
+                <br>무단 인증 공지 사항</a>
             </div>
             <div class="news_date">
             <?php
@@ -1084,7 +1120,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_49" class="news_desc" style="text-align: left;">
+            <div id="page_49" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1156,7 +1192,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='48'>iAccount Notice
                 <br>iAccount公告
                 <br>iAccount発表
-                <br>iAccount발표</a><img src="/images/new_icon.gif">
+                <br>iAccount발표</a>
             </div>
             <div class="news_date">
             <?php
@@ -1165,7 +1201,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_48" class="news_desc" style="text-align: left;">
+            <div id="page_48" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1228,7 +1264,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='47'>MBS Singapore Convention March 22nd 2015
-                <br>新加坡滨海湾金沙大酒店March 22nd 2015年会</a><img src="/images/new_icon.gif">
+                <br>新加坡滨海湾金沙大酒店March 22nd 2015年会</a>
             </div>
             <div class="news_date">
             <?php
@@ -1237,7 +1273,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_47" class="news_desc" style="text-align: left;">
+            <div id="page_47" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1302,7 +1338,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='46'>STRICTLY NO CROSS LINE OF MEMBERS IN MAXIM & AGL
                 <br>马胜及AGL业务之间严格不可跨线
                 <br>マキシム＆AGLにおいてのメンバークロスライン行為禁止について
-                <br>맥심과  AGL 사이의 크로스 라인을 엄격히 금지합니다.</a><img src="/images/new_icon.gif">
+                <br>맥심과  AGL 사이의 크로스 라인을 엄격히 금지합니다.</a>
             </div>
             <div class="news_date">
             <?php
@@ -1311,7 +1347,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_46" class="news_desc" style="text-align: left;">
+            <div id="page_46" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1371,7 +1407,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='45'>FRAUDULENT Act
                 <br>欺诈性行为通告
                 <br>不正行為について
-                <br>사기행위</a><img src="/images/new_icon.gif">
+                <br>사기행위</a>
             </div>
             <div class="news_date">
             <?php
@@ -1380,7 +1416,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_45" class="news_desc" style="text-align: left;">
+            <div id="page_45" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1460,7 +1496,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='43a'>Notification to all members to open iAccount by 31 December 2014 in order to improve monthly withdrawal process</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='43a'>Notification to all members to open iAccount by 31 December 2014 in order to improve monthly withdrawal process</a>
             </div>
             <div class="news_date">
             <?php
@@ -1469,7 +1505,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_43a" class="news_desc" style="text-align: left;">
+            <div id="page_43a" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1497,7 +1533,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='44'>Change in CURRENCY EXCHANGE RATE (27/11Change in CURRENCY EXCHANGE RATE (27/11/2014):
-                    <br>2014.11.27日 货币兑换比例调整通知</a><img src="/images/new_icon.gif">
+                    <br>2014.11.27日 货币兑换比例调整通知</a>
             </div>
             <div class="news_date">
             <?php
@@ -1506,7 +1542,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_44" class="news_desc" style="text-align: left;">
+            <div id="page_44" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1576,7 +1612,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='43'>This coming US Thanksgiving holiday on 27th November 2014, the business will be as usual.</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='43'>This coming US Thanksgiving holiday on 27th November 2014, the business will be as usual.</a>
             </div>
             <div class="news_date">
             <?php
@@ -1585,7 +1621,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_43" class="news_desc" style="text-align: left;">
+            <div id="page_43" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1609,7 +1645,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='42'>Change in CURRENCY EXCHANGE RATE (21/11/2014)<br>2014.11.20日 货币兑换比例调整通知<br>환율 변경 (21/11/2014)<br></a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='42'>Change in CURRENCY EXCHANGE RATE (21/11/2014)<br>2014.11.20日 货币兑换比例调整通知<br>환율 변경 (21/11/2014)<br></a>
             </div>
             <div class="news_date">
             <?php
@@ -1618,7 +1654,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_42" class="news_desc" style="text-align: left;">
+            <div id="page_42" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1697,7 +1733,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_41" class="news_desc" style="text-align: left;">
+            <div id="page_41" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1757,7 +1793,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_40" class="news_desc" style="text-align: left;">
+            <div id="page_40" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1828,7 +1864,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_39" class="news_desc" style="text-align: left;">
+            <div id="page_39" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1888,7 +1924,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_38" class="news_desc" style="text-align: left;">
+            <div id="page_38" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -2891,13 +2927,13 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                <a href='#' class="page_link" ref='15'>新加坡国际游艇展-优惠计划</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='15'>新加坡国际游艇展-优惠计划</a>
                 <?php } else if ($culture == "kr") {?>
-                <a href='#' class="page_link" ref='15'>싱가포르 요트 쇼 라이프스타일 인센티브</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='15'>싱가포르 요트 쇼 라이프스타일 인센티브</a>
                 <?php } else if ($culture == "jp") {?>
-                <a href='#' class="page_link" ref='15'>ガポール・ヨットショー・ライフスタイル・インセンティブ</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='15'>ガポール・ヨットショー・ライフスタイル・インセンティブ</a>
                 <?php } else {?>
-                <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='15'>Singapore Yacht Show Lifestyle Incentive</a>
                 <?php } ?>
             </div>
             <div class="news_date">
@@ -3128,13 +3164,13 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                    <a href='#' class="page_link" ref='16'>新加坡国际游艇展挑战 <br>(期限：10th – 20th 3月 2014)</a><!--<img src="/images/new_icon.gif">-->
+                    <a href='#' class="page_link" ref='16'>新加坡国际游艇展挑战 <br>(期限：10th – 20th 3月 2014)</a>
                 <?php } else if ($culture == "kr") {?>
-                    <a href='#' class="page_link" ref='16'>싱가폴 요트쇼 라이프 스타일 챌린지 <br>(기간 : 2014년 3월 10일 ~ 20일)</a><!--<img src="/images/new_icon.gif">-->
+                    <a href='#' class="page_link" ref='16'>싱가폴 요트쇼 라이프 스타일 챌린지 <br>(기간 : 2014년 3월 10일 ~ 20일)</a>
                 <?php } else if ($culture == "jp") {?>
-                <a href='#' class="page_link" ref='16'>シンガポールヨットショー・ライフスタイルチャレンジ <br>（期間　2014年3月10〜20日）</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='16'>シンガポールヨットショー・ライフスタイルチャレンジ <br>（期間　2014年3月10〜20日）</a>
                 <?php } else {?>
-                <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='16'>Singapore Yacht Show Lifestyle Challenge <br>(Period: 10th – 20th March 2014)</a>
                 <?php }?>
             </div>
             <div class="news_date">
@@ -3287,13 +3323,13 @@ We are pleased to announce that the Door Tickets for our Maxim BALI IME Conventi
         <div class="page">
             <div class="poptitle">
                 <?php if ($culture == "cn") {?>
-                <a href='#' class="page_link" ref='17'>BMW X6挑战大奖 <br>(期限：3月10号 –  5月31号2014)</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='17'>BMW X6挑战大奖 <br>(期限：3月10号 –  5月31号2014)</a>
                 <?php } else if ($culture == "kr") {?>
-                    <a href='#' class="page_link" ref='17'>BMW X6 챌린지 <br>(기간 : 2014년 3월 10일 ~ 5월 31일)</a><!--<img src="/images/new_icon.gif">-->
+                    <a href='#' class="page_link" ref='17'>BMW X6 챌린지 <br>(기간 : 2014년 3월 10일 ~ 5월 31일)</a>
                 <?php } else if ($culture == "jp") {?>
-                    <a href='#' class="page_link" ref='17'>BMW X6　チャレンジ <br>（期間：２０１４年3月１０〜３１日）</a><!--<img src="/images/new_icon.gif">-->
+                    <a href='#' class="page_link" ref='17'>BMW X6　チャレンジ <br>（期間：２０１４年3月１０〜３１日）</a>
                 <?php } else {?>
-                <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a><!--<img src="/images/new_icon.gif">-->
+                <a href='#' class="page_link" ref='17'>BMW X6 CHALLENGE <br>(Period: 10th March – 31th  May 2014)</a>
                 <?php } ?>
             </div>
             <div class="news_date">
