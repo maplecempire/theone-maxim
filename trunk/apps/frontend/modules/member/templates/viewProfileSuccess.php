@@ -924,7 +924,7 @@ $(function() {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('i-Account Full Name') ?></td>
+                    <td><?php echo __('Account Name') ?></td>
                     <td>
                         <input name="iaccountUsername" type="text" id="iaccountUsername" size="30"
                                                          value="<?php echo $distDB->getIaccountUsername() ?>"/>
@@ -934,7 +934,7 @@ $(function() {
 
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
-                    <td><?php echo __('i-Account ID') ?></td>
+                    <td><?php echo __('Account Number') ?></td>
                     <td>
                         <input name="iaccount" type="text" id="iaccount" size="30" maxlength="16"
                                                          value="<?php echo $distDB->getIaccount() ?>"/>
