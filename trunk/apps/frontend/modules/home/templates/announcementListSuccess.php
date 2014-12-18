@@ -184,7 +184,13 @@ ul, ol {
                 <div id="feedContent">
             <?php
             $culture = $sf_user->getCulture();
-            foreach ($announcements as $announcement) { ?>
+            foreach ($announcements as $announcement) {
+                if ($announcement->getAnnouncementId() == 3 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) {
+                    continue;
+                } else if ($announcement->getAnnouncementId() == 3 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) {
+                    continue;
+                }
+            ?>
             <div class="entry">
             <h5>
                 <a href="<?php echo url_for("/home/announcement?id=".$announcement->getAnnouncementId())?>">
