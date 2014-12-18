@@ -187,7 +187,7 @@ ul, ol {
             foreach ($announcements as $announcement) {
                 if ($announcement->getAnnouncementId() == 3 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) {
                     continue;
-                } else if ($announcement->getAnnouncementId() == 3 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) {
+                } else if ($announcement->getAnnouncementId() == 4 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) {
                     continue;
                 }
             ?>
