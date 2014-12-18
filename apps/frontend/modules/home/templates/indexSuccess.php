@@ -1006,8 +1006,73 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-
+        <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) { ?>
         <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='53'>New exchange rates for investment in Maxim Trader packages, effective from 23rd Dec 2014 shall be as follows
+<br>从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "18 December 2014";
+                ?>
+            </div>
+
+            <div id="page_53" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear ALL,
+<br>
+<br>Kindly note the new exchange rates for investment in Maxim Trader packages, effective from 23rd Dec 2014 shall be as follows. This rate is inclusive of the 10% FMC charge. Please follow these rates so that your CP1 will be credited correctly and promptly. The purchase and withdrawal rates respectively are stated below:
+<br>
+<br>1. Malaysia RM - RM3.90
+<br>2. Thailand Baht - B36
+<br>3. Indonesia Rupiah - IDR13,500
+<br>4. China RMB - RMB7.00
+<br>5. Taiwan New Dollar - NTD34
+<br>6. Hong Kong Dollar - HKD8.5
+<br>7. Japanese Yen - JPY130
+<br>8. Korean Won - KRW1,250
+<br>9. Phillipine Peso - PHP50
+<br>10. Singapore Dollar - SGD1.40
+<br>11. Cambodia Riel - KHR4,500
+<br>12. Vietnam Dong - VND24,000
+<br>13. India Rupee - INR69
+<br>14. USD - USD1.1
+<br>
+<br>亲爱的会员及代理们：
+<br>
+<br>请注意从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化; 新的价钱将包含10%的基金管理费用FMC. 请参照新的价格表购买CP分数;具体列表如下:
+<br>
+<br>1. 马币 - RM3.90
+<br>2. 泰铢 - B36
+<br>3. 印尼盾 - IDR13,500
+<br>4. 人民币 - RMB7.00
+<br>5. 台币 - NTD34
+<br>6. 港币 - HKD8.5
+<br>7. 日元 - JPY130
+<br>8. 韩元 - KRW1,250
+<br>9. 菲律宾比索 - PHP50
+<br>10. 新币 - SGD1.40
+<br>11. 柬埔寨瑞尔 - KHR4,500
+<br>12. 越南盾 - VND24,000
+<br>13. 印度卢比 - INR69
+<br>14. 美金 - USD1.1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
+
+<div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='52'>Definition of Cross Lining
 <br>橫跨界線的定義</a><img src="/images/new_icon.gif">
