@@ -388,6 +388,15 @@ $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+    <?php if ($distDB->getDistributorId() == 1) { ?>
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Porsche Challenge'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/porscheChallenge"><span><?php echo __('Porsche Challenge'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+    </ul>
+    <?php } ?>
     <?php
     //if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
     ?>

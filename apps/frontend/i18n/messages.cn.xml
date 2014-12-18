@@ -937,12 +937,14 @@
             <trans-unit><source>Q3 Champions Challenge Ranking</source><target>第三季冠军挑战赛排名</target></trans-unit>
             <trans-unit><source>Q3 Champions Challenge – BMW 5 Series</source><target>第三季冠军挑战赛-宝马5 系列资格赛</target></trans-unit>
             <trans-unit><source>Qualifying period August 5th to September 30th 2013 (GMT+8)</source><target>2013年8 月5 日至9 月30 日 (GMT+8)</target></trans-unit>
+            <trans-unit><source>Qualifying period September 1st to December 31st 2014 (GMT+8)</source><target>2014年9 月1 日至21 月31 日 (GMT+8)</target></trans-unit>
             <trans-unit><source>Here is a challenge worthy of champions to be…</source><target>这是一项值得冠军参加的挑战</target></trans-unit>
             <trans-unit><source>your Challenge which kicks off on August 5th 2013 and ends on September 30th 2013(GMT+8)</source><target>竞争从2013年8 月5 日开始，截至2013年9 月30 日 (GMT+8)</target></trans-unit>
-            <trans-unit><source>Stage 1 : Qualify with Personal Sales of USD200,000</source><target>第一阶段: 个人销售额达到USD200,000即有参赛资格</target></trans-unit>
+            <trans-unit><source>Stage 1 : Qualify with Personal Sales of %1%</source><target>第一阶段: 个人销售额达到%1%即有参赛资格</target></trans-unit>
             <trans-unit><source>Stage 2</source><target>第二阶段:</target></trans-unit>
             <trans-unit><source>Top Performer</source><target>冠军</target></trans-unit>
             <trans-unit><source>during the Champions Challenge will win a Brand New BMW 5 Series 2013 model (regardless of country the winner is from)</source><target>挑战赛成绩最佳者将赢取一辆 2013年款式全新BMW 5 系列(优胜者国籍不拘)</target></trans-unit>
+            <trans-unit><source>during the Champions Challenge will win a Brand New Porsche (regardless of country the winner is from)</source><target>挑战赛成绩最佳者将赢取一辆全新款式保时捷系列(优胜者国籍不拘)</target></trans-unit>
             <trans-unit><source>1st Runner Up</source><target>亚军</target></trans-unit>
             <trans-unit><source>Fully Furnished Resort Apartment by Royale Harmony (Southern Thailand) worth USD100,000.</source><target>一间完全装饰的Royale Harmony (泰国南部) 度假公寓， 价值USD100,000 美元</target></trans-unit>
             <trans-unit><source>2nd Runner Up</source><target>季军</target></trans-unit>
@@ -955,6 +957,7 @@
             <trans-unit><source>I'm Joined!!!</source><target>我参与！！</target></trans-unit>
             <trans-unit><source>This Challenge is for Maxim Trader member who register this challenge on 5th &amp; 6th August 2013 only.</source><target>此挑战赛只限在2013年8 月5 日和6 日报名的马胜金融会员参加</target></trans-unit>
             <trans-unit><source>Challenge period start from 5th August 2013 till 30th September 2013 (GMT+8).</source><target>挑战赛期从2013年8 月5 日开始至2013年9 月30 日 (GMT+8)为止。</target></trans-unit>
+            <trans-unit><source>Challenge period start from 1st September 2014 till 31st December 2014 (GMT+8).</source><target>挑战赛期从2014年9 月1 日开始至2014年12 月31 日 (GMT+8)为止。</target></trans-unit>
             <trans-unit><source>There will be a Commitment Fee of 1,000CP (deducted from CP1/CP2/CP3) in the event that the Registrant fails to achieve at least USD100,000 of Personal Sales during Challenge Period.</source><target>如报名参赛者无法在挑战赛期间达到至少USD100,000的个人销售额，参赛者须支付1,000 CP的承诺费 (从CP1/CP2/CP3扣除)。</target></trans-unit>
             <trans-unit><source>The prize will not be transferable to another person.</source><target>奖品不得转让他人。</target></trans-unit>
             <trans-unit><source>No part of a prize is exchangeable for cash or any other prize.</source><target>奖品不得交换现金或其他奖品。</target></trans-unit>
@@ -1048,6 +1051,7 @@
             <trans-unit><source>i-Account Details</source><target>i-Account 明细</target></trans-unit>
             <trans-unit><source>Account Name</source><target>帐户名</target></trans-unit>
             <trans-unit><source>Account Number</source><target>帐户号码</target></trans-unit>
+            <trans-unit><source>Your current personal sales : %1%</source><target>您当前的个人销售 : %1%</target></trans-unit>
         </body>
     </file>
 </xliff>
