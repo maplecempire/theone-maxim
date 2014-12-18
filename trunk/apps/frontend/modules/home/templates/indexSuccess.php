@@ -1006,6 +1006,47 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='52'>Definition of Cross Lining
+<br>橫跨界線的定義</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "18 December 2014";
+                ?>
+            </div>
+
+            <div id="page_52" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>See Chinese below
+<br>請參閱以下中文
+<br>
+<br>“Members who open a Maxim Account in the same line of their Referring Member. Then that very same new Member either in person or through a Company, Trust or any other entity, opens another Account at some other line (whether that is a Maxim, AGL or other account at any other venture in any organization within any Related or Sister company inter-connected with Maxim Trader) where the same above referrer is not present in that line and does so without the written consent of his initial referrer, duly consummates the breach of CROSS LINING”
+<br>會員開設一個馬勝金融的戶口，作同一界線與他們的轉介會員。其後，該新會員以個人身份、或透過一間公司、信託、或任何其他實體，開設另一戶口於其他界線（無論是一個馬勝金融、AGL或其他戶口於任何其他企嶪在任何組織與馬勝金融有關聯或姐妹公司）當同一的上線推薦人並不存在於該界線，及如此作為並未得到其原先推薦人的書面同意，正式地構成違反橫跨界線。
+<br>
+<br>This is strictly forbidden and serious consequences will be imposed against members found guilty of cross lining, subject to due process. The Formal Complaint form can be obtained from Legal Watch (LW) …to be completed and submitted to LW for immediate investigation and action against alkeged Cross Liners.
+<br>這是嚴厲地被禁止，及嚴重後果將會實施於被發現違反橫跨界線之會員，受合法程序的管制。正式投訴表格可於法律監察中得到 …將要完成及提交去法律監察以對橫跨界線採取即時行動。
+<br>
+<br>Thank you.
+<br>LACD
+<br>法律事務與法規遵從部門
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='51'>Announcement to all Malaysian Maxim Trader Members
                 <br>所有马来西亚的会员请注意</a><img src="/images/new_icon.gif">
             </div>
