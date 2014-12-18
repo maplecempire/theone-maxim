@@ -78,7 +78,7 @@ $(function() {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Bentley Flying Spur Challenge Ranking') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Porsche Challenge') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -278,24 +278,24 @@ $(function() {
 });
 </script>
 
-<form action="/bentleyChallenge/submit" id="q3Form" name="q3Form" method="post">
+<form action="/porscheChallenge/submit" id="q3Form" name="q3Form" method="post">
 <table cellpadding="3" cellspacing="5">
     <tbody>
         <tr>
             <td><br></td>
         </tr>
         <tr>
-            <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Bentley Flying Spur Challenge') ?></span></td>
+            <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Porsche Challenge') ?></span></td>
         </tr>
         <tr>
-            <td class=""><span style="font-weight: bold;"><?php echo __('Qualifying period March 10th to December 31st 2014 (GMT+8)') ?></span></td>
+            <td class=""><span style="font-weight: bold;"><?php echo __('Qualifying period September 1st to December 31st 2014 (GMT+8)') ?></span></td>
         </tr>
         <tr>
             <td><br></td>
         </tr>
         <tr>
             <td><span class="blue_text">
-                    <?php echo __('Stage 1 : Qualify with Personal Sales of %1%', array("%1%" => "USD20,000,000"))?>
+                    <?php echo __('Stage 1 : Qualify with Personal Sales of %1%', array("%1%" => "USD800,000"))?>
                 </span>
             </td>
         </tr>
@@ -305,7 +305,7 @@ $(function() {
         <tr>
             <td><span class="blue_text">
                     <?php echo __('Stage 2')?> :
-                    <font color="#ff4500"><?php echo __('Top Performer')?></font> <?php echo __('during the Champions Challenge will win a Brand New Bentley Flying Spur (regardless of country the winner is from)')?><br><br>
+                    <font color="#ff4500"><?php echo __('Top Performer')?></font> <?php echo __('during the Champions Challenge will win a Brand New Porsche (regardless of country the winner is from)')?><br><br>
                 </span>
             </td>
         </tr>
@@ -320,7 +320,7 @@ $(function() {
                      class="ui-state-highlight ui-corner-all">
                     <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                   class="ui-icon ui-icon-info"></span>
-                        <strong><?php echo __("Your current personal sales : ".number_format($totalPersonalSales,2)) ?></strong></p>
+                        <strong><?php echo __("Your current personal sales : %1%", array("%1%" => number_format($totalPersonalSales,2))) ?></strong></p>
                 </div>
             </div>
             </td>
@@ -334,7 +334,7 @@ $(function() {
                 <span style="font-style: italic;"><?php echo __('Terms & Conditions')?></span><br><br>
                 <span style="font-style: italic;">
                     <ol>
-                        <li><?php echo __('Challenge period start from 10th March 2014 till 31st December 2014 (GMT+8).')?></li>
+                        <li><?php echo __('Challenge period start from 1st September 2014 till 31st December 2014 (GMT+8).')?></li>
                         <li><?php echo __('The prize will not be transferable to another person.')?></li>
                         <li><?php echo __('No part of a prize is exchangeable for cash or any other prize.')?></li>
                         <li><?php echo __('If an advertised prize is not available, we reserve the right to offer an alternative prize of equal or greater value.')?></li>

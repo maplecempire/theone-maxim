@@ -312,7 +312,7 @@ $(function() {
         </tr>
         <tr>
             <td><span class="blue_text">
-                    <?php echo __('Stage 1 : Qualify with Personal Sales of USD3,000,000')?>
+                    <?php echo __('Stage 1 : Qualify with Personal Sales of %1%', array("%1%" => "USD3,000,000"))?>
                 </span>
             </td>
         </tr>
