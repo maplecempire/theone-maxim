@@ -1027,7 +1027,7 @@ $(document).ready(function() {
                             <br>
 <br>Dear ALL,
 <br>
-<br>Kindly note the new exchange rates for investment in Maxim Trader packages, effective from 23rd Dec 2014 shall be as follows. This rate is inclusive of the 10% FMC charge. Please follow these rates so that your CP1 will be credited correctly and promptly. The purchase and withdrawal rates respectively are stated below:
+<br>Kindly note the new exchange rates for investment in Maxim Trader packages, effective from 23rd Dec 2014 shall be as follows. This rate is inclusive of the 10% FMC charge. Please follow these rates so that your CP1 will be credited correctly and promptly:
 <br>
 <br>1. Malaysia RM - RM3.90
 <br>2. Thailand Baht - B36
@@ -1046,7 +1046,7 @@ $(document).ready(function() {
 <br>
 <br>亲爱的会员及代理们：
 <br>
-<br>请注意从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化; 新的价钱将包含10%的基金管理费用FMC. 请参照新的价格表购买CP分数;具体列表如下:
+<br>请注意从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化; 新的价钱将包含10%的基金管理费用FMC. 请参照新的价格表购买CP分数:
 <br>
 <br>1. 马币 - RM3.90
 <br>2. 泰铢 - B36
@@ -1062,6 +1062,26 @@ $(document).ready(function() {
 <br>12. 越南盾 - VND24,000
 <br>13. 印度卢比 - INR69
 <br>14. 美金 - USD1.1
+<br>
+<br>여러분 안녕하십니까
+<br>
+<br>2014년 12월 23일부터 적용될 맥심 트레이더 패키지를 구입시 새로운 적용 환율을 알려드립니다.
+<br>본 환율은 FMC 비용 10%가 포함된 금액입니다. 아래의 환율을 확인하셔서 귀하의 CP1에 정확하고 신속하게 입금될 수 있도록 하여주십시요:
+<br>
+<br>1. 말레이시아 링깃 - RM3.90
+<br>2. 태국 바트 - B36
+<br>3.인도네시아 루피아 - IDR13,500
+<br>4. 중국 RMB - RMB7.00
+<br>5. 대만 뉴달러 - NTD34
+<br>6. 홍콩 달러 - HKD8.5
+<br>7. 일본 엔 - JPY130
+<br>8. 한국 원 - KRW1,250
+<br>9. 필리핀 페소 - PHP50
+<br>10. 싱가폴 달러 - SGD1.46
+<br>11. 캄보디아 리엘 -  KHR4,500
+<br>12. 베트남 동 - VND24,000
+<br>13. 인도 루피 - INR69
+<br>14. USD - USD1.1
                             </td>
                         </tr>
                     </tbody>
