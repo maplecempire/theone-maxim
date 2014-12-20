@@ -1057,7 +1057,7 @@ $(document).ready(function() {
 <br>7. 日元 - JPY130
 <br>8. 韩元 - KRW1,250
 <br>9. 菲律宾比索 - PHP50
-<br>10. 新币 - SGD1.40
+<br>10. 新币 - SGD1.46
 <br>11. 柬埔寨瑞尔 - KHR4,500
 <br>12. 越南盾 - VND24,000
 <br>13. 印度卢比 - INR69
