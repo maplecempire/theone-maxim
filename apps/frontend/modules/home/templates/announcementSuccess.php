@@ -196,9 +196,10 @@ ul, ol {
 
         <div class="news_date">
         <?php
-            $dateUtil = new DateUtil();
+            /*$dateUtil = new DateUtil();
             $currentDate = $dateUtil->formatDate("Y-m-d", $announcement->getCreatedOn());
-            echo $currentDate;
+            echo $currentDate;*/
+            echo "Updated on ".$announcement->getUpdatedOn();
             ?>
         </div>
         <div class="news_desc">
