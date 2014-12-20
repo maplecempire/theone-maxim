@@ -1038,7 +1038,7 @@ $(document).ready(function() {
 <br>7. Japanese Yen - JPY130
 <br>8. Korean Won - KRW1,250
 <br>9. Phillipine Peso - PHP50
-<br>10. Singapore Dollar - SGD1.40
+<br>10. Singapore Dollar - SGD1.46
 <br>11. Cambodia Riel - KHR4,500
 <br>12. Vietnam Dong - VND24,000
 <br>13. India Rupee - INR69
