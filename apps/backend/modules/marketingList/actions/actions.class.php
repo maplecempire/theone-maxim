@@ -1084,6 +1084,9 @@ class marketingListActions extends sfActions
         if ($this->getRequestParameter('filterEmail') != "") {
             $sWhere .= " AND dist.email LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterEmail')) . "%'";
         }
+        if ($this->getRequestParameter('filterContact') != "") {
+            $sWhere .= " AND dist.contact LIKE '%" . $this->getRequestParameter('filterContact') . "%'";
+        }
         if ($this->getRequestParameter('filterParentCode') != "") {
             $sWhere .= " AND dist.upline_dist_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterParentCode')) . "%'";
         }

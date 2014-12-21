@@ -26,6 +26,7 @@ $(function(){
             aoData.push( { "name": "filterEmail", "value": $("#search_email").val() } );
             aoData.push( { "name": "filterParentCode", "value": $("#search_parentCode").val() } );
             aoData.push( { "name": "filterStatusCode", "value": $("#search_statusCode").val() } );
+            aoData.push( { "name": "filterContact", "value": $("#search_contact").val() } );
 		},
 		"reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
 			reassignDatagridEventAttr();
@@ -309,7 +310,7 @@ function reassignDatagridEventAttr(){
                                 <td></td>
                                 <td></td>
                                 <td><input title="" size="10" type="text" id="search_email" value="" class="search_init"/></td>
-                                <td></td>
+                                <td><input title="" size="10" type="text" id="search_contact" value="" class="search_init"/></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
