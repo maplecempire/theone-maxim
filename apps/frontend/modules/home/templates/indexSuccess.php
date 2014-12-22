@@ -1006,6 +1006,43 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='54'>Unauthorized use of Maxim Materials, Trade Marks and Copyright
+<br>未經授權使用馬勝金融的材料、商標及版權</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "22 December 2014";
+                ?>
+            </div>
+
+            <div id="page_54" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>The Management has received  complaints of unauthorized distribution of Maxim Trader Information used at various unofficial websites & Facebook pages these past couple of months. Unless members obtain prior written approval from the Legal Office of the Company (LACD), this is a direct breach of Article 3 of the Maxim Code of Ethics, which is posted at the members area of the Back Office.
+<br>Kindly be reminded that the Maxim Trader name, logo &trademarks belong to  Maxim Capital Limited(MCL), or better known as Maxim Trader. Following a proper and just investigation, any Member found in breach of Article 3, may be imposed with the penalty of suspension or  termination. Please be guided by Article 3 the Code of Ethics on how to obtain approval for the use of such materials.
+<br>
+<br>過去數個月，管理層收到一些投訴，有關未經授權發送馬勝金融的資訊，用於非官方批准的網站及面書。除非會員得到由馬勝金融的法律部門（法律事務與法規遵從部門）事前面書許可，否則這是直接違反馬勝金融的道德規範第三項，而道德規範是發表於後勤部門的會員專區。
+<br>請緊記馬勝金融的名稱、標誌及商標屬於馬勝金融集團，或更好稱為馬勝金融。跟據一個適當及公正的調查後，任何會員被發現違反道德規範第三項，可被實施暫停或中止的處罰。請根據道德規範的引導有關如何得到許可。
+<br>
+<br>회사의허가를받지않은 Maxim Trader 정보를인터넷싸이트나페이스북에올리거나회사이름을적은명함을쓰는맴버들에대한고발을회사는지난몇개월동안받아왔습니다.  회사맴버창에공시되어있는대로회사법무팀의사전허가를받지않고이런정보를올리거나쓰는맴버들은맥심윤리강령 3조를위반하고있음을알려드립니다.
+<br>Maxim Trader 상호와이름, 로고들은 Maxim CaptialLimited(MCL) 또는 Maxim Trader 회사에속한재산권임을다시한번확인시켜드립니다.  맥심윤리강령 조를위반한맴버들에대해서는적법한조사를할것이며이를위반한맴버들에대해서는경고나맴버퇴출을집행할것임을알려드립니다.  회사의허가를어떻게받을수있는지에대해서는윤리강령을참고하시기바랍니다.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
         <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) { ?>
         <div class="page">
             <div class="poptitle">
@@ -1092,7 +1129,7 @@ $(document).ready(function() {
         </div>
         <?php } ?>
 
-<div class="page">
+        <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='52'>Definition of Cross Lining
 <br>橫跨界線的定義</a><img src="/images/new_icon.gif">
