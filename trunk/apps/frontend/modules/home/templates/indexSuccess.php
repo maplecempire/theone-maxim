@@ -1006,6 +1006,129 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+    <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) { ?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='56'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015
+<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "23 December 2014";
+                ?>
+            </div>
+
+            <div id="page_56" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear ALL,
+<br>
+<br>Further to our recent announcement, kindly note the new exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015. Please note these rates are inclusive of 10% FMC charge. Please follow these rates so that your CP1 will be credited correctly and promptly:
+<br>
+<br>1. Malaysia RM - RM3.90
+<br>2. Thailand Baht - B36
+<br>3. Indonesia Rupiah - IDR13,500
+<br>4. China RMB - RMB7.00
+<br>5. Taiwan New Dollar - NTD34
+<br>6. Hong Kong Dollar - HKD8.5
+<br>7. Japanese Yen - Bank rate + 10%
+<br>8. Korean Won - KRW1,250
+<br>9. Phillipine Peso - PHP50
+<br>10. Singapore Dollar - SGD1.46
+<br>11. Cambodia Riel - KHR4,500
+<br>12. Vietnam Dong - VND24,000
+<br>13. India Rupee - INR69
+<br>14. USD - USD1.1
+<br>
+<br>亲爱的会员及代理们:
+<br>
+<br>请注意我们最近发布的有关马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效; 公告价格包含10%的FMC外汇管理费用. 敬请留意政策变化, 以便公司及时正确处理CP1分数转款:
+<br>
+<br>1. 马币 - RM3.90
+<br>2. 泰铢 - B36
+<br>3. 印尼盾 - IDR13,500
+<br>4. 人民币 - RMB7.00
+<br>5. 台币 - NTD34
+<br>6. 港币 - HKD8.5
+<br>7. 日元 - 当前银行汇率价格+10%
+<br>8. 韩元 - KRW1,250
+<br>9. 菲律宾比索 - PHP50
+<br>10. 新币 - SGD1.46
+<br>11. 柬埔寨瑞尔 - KHR4,500
+<br>12. 越南盾 - VND24,000
+<br>13. 印度卢比 - INR69
+<br>14. 美金 - USD1.1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
+
+    <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) { ?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='55'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015
+<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "23 December 2014";
+                ?>
+            </div>
+
+            <div id="page_55" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear ALL,
+<br>
+<br>Further to our recent announcement, kindly note the new exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015. Please note these rates are NOT inclusive of 10% FMC charge. Please follow these rates so that your CP1 will be credited correctly and promptly:
+<br>
+<br>1. Malaysia RM - RM3.60
+<br>2. Thailand Baht - B33
+<br>3. Indonesia Rupiah - IDR12,000
+<br>4. China RMB - RMB6.3
+<br>5. Taiwan New Dollar - NTD31
+<br>6. Hong Kong Dollar - HKD7.8
+<br>7. Japanese Yen - Bank rate
+<br>8. Korean Won - KRW1,150
+<br>9. Phillipine Peso - PHP44
+<br>10. Singapore Dollar - SGD1.33
+<br>11. Cambodia Riel - KHR4,100
+<br>12. Vietnam Dong - VND22,000
+<br>13. India Rupee - INR62
+<br>14. USD - USD1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
 
 
         <div class="page">
