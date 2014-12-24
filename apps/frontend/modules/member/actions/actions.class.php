@@ -12943,7 +12943,7 @@ Wish you all the best.
     }
 
     public function executeChangeSponsorB(){
-    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==135){
+    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==60){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distId = $this->getRequestParameter('distId'); // downline
 	        if($sponsorId<>"" && $distId<>""){
