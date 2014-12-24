@@ -443,7 +443,7 @@ function populateDgAddPanel() {
     $(".indicator").show();
     $.ajax({
         type : 'POST',
-        url : "<?php echo url_for('finance/enquiryMt4BalanceAndCP') ?>",
+        url : "<?php echo url_for('finance/enquiryMt4Balance') ?>",
         dataType : 'json',
         cache: false,
         data: {
@@ -518,27 +518,27 @@ function populateDgAddPanel() {
             <td>Transfer CP3</td>
             <td>:</td>
             <td><input name="cp3Amount" id="cp3Amount" class="text ui-widget-content ui-corner-all" size="25"/></td>
-            <td style="color: blue; font-weight: bold;">CP1<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
-            <td>:</td>
-            <td><input name="cp1" id="cp1" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
+            <td style="color: blue; font-weight: bold; display: none;">CP1<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td style="display: none;">:</td>
+            <td style="display: none;"><input name="cp1" id="cp1" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>
             <td>Remark</td>
             <td>:</td>
             <td><input name="remark" id="remark" value="RENEW 18 MONTHS MATURITY" class="text ui-widget-content ui-corner-all" size="25"/></td>
-            <td style="color: blue; font-weight: bold;">CP2<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
-            <td>:</td>
-            <td><input name="cp2" id="cp2" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
+            <td style="color: blue; font-weight: bold; display: none;">CP2<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td style="display: none;">:</td>
+            <td style="display: none;"><input name="cp2" id="cp2" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>
             <td>Internal Remark</td>
             <td>:</td>
             <td><input name="internalRemark" id="internalRemark" value="RENEW 18 MONTHS MATURITY" class="text ui-widget-content ui-corner-all" size="25"/></td>
-            <td style="color: blue; font-weight: bold;">CP3<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
-            <td>:</td>
-            <td><input name="cp3" id="cp3" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
+            <td style="color: blue; font-weight: bold; display: none;">CP3<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td>
+            <td style="display: none;">:</td>
+            <td style="display: none;"><input name="cp3" id="cp3" class="text ui-widget-content ui-corner-all" size="25" disabled="disabled" style="color: yellow;"/></td>
         </tr>
 
         <tr>

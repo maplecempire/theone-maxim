@@ -376,6 +376,40 @@ class financeActions extends sfActions
         echo json_encode($arr);
         return sfView::HEADER_ONLY;
     }
+    public function executeEnquiryMt4Balance()
+    {
+        $noticeId = $this->getRequestParameter('noticeId');
+
+        $existNotificationOfMaturity = NotificationOfMaturityPeer::retrieveByPK($noticeId);
+
+        $arr = array();
+        if ($existNotificationOfMaturity) {
+
+            $existDist = MlmDistributorPeer::retrieveByPK($existNotificationOfMaturity->getDistId());
+            if ($existDist) {
+                $distId = $existNotificationOfMaturity->getDistId();
+                //$cp1 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
+                //$cp2 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                //$cp3 = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $cp1 = 0;
+                $cp2 = 0;
+                $cp3 = 0;
+                $mt4Balance = $this->getMt4Balance($distId, $existNotificationOfMaturity->getMt4UserName());
+
+                $arr = array(
+                    'cp1' => $cp1,
+                    'cp2' => $cp2,
+                    'cp3' => $cp3,
+                    'mt4Balance' => $mt4Balance,
+                    'remark' => $existDist->getRemark(),
+                    'principle_return' => $existDist->getPrincipleReturn()
+                );
+            }
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
     public function executeEnquiryMt4BalanceAndCP()
     {
         $noticeId = $this->getRequestParameter('noticeId');
