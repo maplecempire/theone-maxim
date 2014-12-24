@@ -1052,6 +1052,7 @@
             <trans-unit><source>Account Name</source><target>帐户名</target></trans-unit>
             <trans-unit><source>Account Number</source><target>帐户号码</target></trans-unit>
             <trans-unit><source>Your current personal sales : %1%</source><target>您当前的个人销售 : %1%</target></trans-unit>
+            <trans-unit><source>REMITTED</source><target>已汇款</target></trans-unit>
         </body>
     </file>
 </xliff>

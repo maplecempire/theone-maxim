@@ -1169,12 +1169,17 @@ class financeActions extends sfActions
         $pager->init();
 
         foreach ($pager->getResults() as $result) {
+            $statusCode = $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode());
+
+            if ($statusCode == "PAID") {
+                $statusCode = "REMITTED";
+            }
             $arr[] = array(
                 $result->getDistId() == null ? "" : $result->getDistId(),
                 $result->getDeduct() == null ? "" : $result->getDeduct(),
                 $result->getAmount() == null ? "" : $result->getAmount(),
                 $result->getBankInTo() == null ? "" : $result->getBankInTo(),
-                $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode()),
+                $statusCode,
                 $result->getRemarks() == null ? "" : $result->getRemarks(),
                 $result->getCreatedOn()  == null ? "" : $result->getCreatedOn()
             );
@@ -1412,12 +1417,17 @@ class financeActions extends sfActions
         $pager->init();
 
         foreach ($pager->getResults() as $result) {
+            $statusCode = $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode());
+
+            if ($statusCode == "PAID") {
+                $statusCode = "REMITTED";
+            }
             $arr[] = array(
                 $result->getDistId() == null ? "" : $result->getDistId(),
                 $result->getDeduct() == null ? "" : $result->getDeduct(),
                 $result->getAmount() == null ? "" : $result->getAmount(),
                 $result->getBankInTo() == null ? "" : $result->getBankInTo(),
-                $result->getStatusCode() == null ? "" : $this->getContext()->getI18N()->__($result->getStatusCode()),
+                $statusCode,
                 $result->getRemarks() == null ? "" : $result->getRemarks(),
                 $result->getCreatedOn()  == null ? "" : $result->getCreatedOn()
             );
