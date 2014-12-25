@@ -184,10 +184,22 @@ ul, ol {
                 <div id="feedContent">
             <?php
             $culture = $sf_user->getCulture();
+            $isFmc = false;
+            $pos = strrpos($distDB->getTreeStructure(), "|60|");
+            if ($pos === false) { // note: three equal signs
+                $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $isFmc = true;
+                }
+            } else {
+                $isFmc = true;
+            }
             foreach ($announcements as $announcement) {
-                if ($announcement->getAnnouncementId() == 3 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) {
+                if ($announcement->getAnnouncementId() == 3 && $isFmc == false) {
                     continue;
-                } else if ($announcement->getAnnouncementId() == 4 && $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) {
+                } else if ($announcement->getAnnouncementId() == 4 && $isFmc == true) {
                     continue;
                 }
             ?>
