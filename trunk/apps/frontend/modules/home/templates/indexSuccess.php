@@ -1004,9 +1004,21 @@ $(document).ready(function() {
 
     <?php
     $culture = $sf_user->getCulture();
+    $isFmc = false;
+    $pos = strrpos($distDB->getTreeStructure(), "|60|");
+    if ($pos === false) { // note: three equal signs
+        $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $isFmc = true;
+        }
+    } else {
+        $isFmc = true;
+    }
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
-    <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) <> 60) { ?>
+    <?php if ($isFmc == false) { ?>
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='56'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015
@@ -1072,7 +1084,8 @@ $(document).ready(function() {
         </div>
         <?php } ?>
 
-    <?php if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60) { ?>
+    <?php
+    if ($isFmc == true) { ?>
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='55'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015

@@ -1735,12 +1735,26 @@ class memberActions extends sfActions
         }
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $this->hasFmcCharges = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->hasFmcCharges = true;
+            }
+        } else {
+            $this->hasFmcCharges = true;
+        }
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
         //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
 //        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executePurchasePackageViaTree2()
     {
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
         if ($pos === false) { // note: three equal signs
@@ -1753,7 +1767,19 @@ class memberActions extends sfActions
             return $this->redirect('/member/placementTree');
         }
 
-        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $hasFmcCharges = false;
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $hasFmcCharges = true;
+            }
+        } else {
+            $hasFmcCharges = true;
+        }
+        //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
 //        $hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
 
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
@@ -1866,7 +1892,19 @@ class memberActions extends sfActions
         $this->distCode = $distCode;
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $this->hasFmcCharges = false;
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->hasFmcCharges = true;
+            }
+        } else {
+            $this->hasFmcCharges = true;
+        }
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
 //        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executeUnderMaintenance()
@@ -2726,7 +2764,20 @@ class memberActions extends sfActions
         }
 
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->hasFmcCharges = false;
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->hasFmcCharges = true;
+            }
+        } else {
+            $this->hasFmcCharges = true;
+        }
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
 //        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
     public function executeMemberRegistration2()
@@ -3301,7 +3352,20 @@ class memberActions extends sfActions
             return $this->redirect('/member/memberRegistration');
         }*/
 
-        $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $hasFmcCharges = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $hasFmcCharges = true;
+            }
+        } else {
+            $hasFmcCharges = true;
+        }
+        //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
 //        $hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
 
         $userName = $this->getRequestParameter('userName','');
@@ -10805,7 +10869,20 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         // FMC charges
         //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
-        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
+        $this->hasFmcCharges = false;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->hasFmcCharges = true;
+            }
+        } else {
+            $this->hasFmcCharges = true;
+        }
+        //$this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
 
     public function executePackageUpgrade()
@@ -10819,8 +10896,20 @@ We look forward to your custom in the near future. Should you have any queries, 
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-            $hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+            //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
+            $hasFmcCharges = false;
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getTreeStructure(), "|60|");
+            if ($pos === false) { // note: three equal signs
+                $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+                if ($pos === false) { // note: three equal signs
 
+                } else {
+                    $hasFmcCharges = true;
+                }
+            } else {
+                $hasFmcCharges = true;
+            }
             $distDB = null;
             $distId = null;
             if ($this->getRequestParameter('distCode') != "") {
@@ -11247,7 +11336,19 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
         
         // FMC charges
-        $this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
+        $this->hasFmcCharges = false;
+        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $this->hasFmcCharges = true;
+            }
+        } else {
+            $this->hasFmcCharges = true;
+        }
+        //$this->hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60));
 //        $this->hasFmcCharges = $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 60;
     }
 
