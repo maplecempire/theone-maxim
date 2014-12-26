@@ -91,7 +91,7 @@ $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
     <?php if ($onlyTransferRP == false) { ?>
     <?php
         // maximcapital
-        $isFmc = false;
+        /*$isFmc = false;
         $pos = strrpos($distDB->getTreeStructure(), "|60|");
         if ($pos === false) { // note: three equal signs
             $pos = strrpos($distDB->getTreeStructure(), "|1797|");
@@ -102,9 +102,10 @@ $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
             }
         } else {
             $isFmc = true;
-        }
-        //if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 1797) {
-        if ($isFmc == true) { ?>
+        }*/
+        if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 60 || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 682) {
+        //if ($isFmc == true) {
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/fmc"><span><?php echo __('FMC'); ?></span></a><img src="/images/new_icon.gif">
         </li>
