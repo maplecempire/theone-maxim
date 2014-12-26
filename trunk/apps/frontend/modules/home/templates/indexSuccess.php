@@ -1004,7 +1004,8 @@ $(document).ready(function() {
 
     <?php
     $culture = $sf_user->getCulture();
-    $isFmc = false;
+    $isFmc = in_array($sf_user->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
+    /*$isFmc = false;
     $pos = strrpos($distributor->getTreeStructure(), "|60|");
     if ($pos === false) { // note: three equal signs
         $pos = strrpos($distributor->getTreeStructure(), "|1797|");
@@ -1015,7 +1016,7 @@ $(document).ready(function() {
         }
     } else {
         $isFmc = true;
-    }
+    }*/
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
     <?php if ($isFmc == false) { ?>
