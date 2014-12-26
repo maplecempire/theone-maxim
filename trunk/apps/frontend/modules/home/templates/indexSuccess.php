@@ -1005,9 +1005,9 @@ $(document).ready(function() {
     <?php
     $culture = $sf_user->getCulture();
     $isFmc = false;
-    $pos = strrpos($distDB->getTreeStructure(), "|60|");
+    $pos = strrpos($distributor->getTreeStructure(), "|60|");
     if ($pos === false) { // note: three equal signs
-        $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+        $pos = strrpos($distributor->getTreeStructure(), "|1797|");
         if ($pos === false) { // note: three equal signs
 
         } else {
