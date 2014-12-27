@@ -80,7 +80,7 @@ $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
     <?php } ?>
-    <?php if ($distDB->getFromAbfx() == "N") { ?>
+    <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getFromAbfx() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/convertCp2ToRt"><span><?php echo __('Convert CP2 to RT'); ?></span></a>
         </li>
