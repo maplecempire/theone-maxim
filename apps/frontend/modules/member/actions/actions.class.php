@@ -7829,7 +7829,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($mlmDistributor->getFromAbfx() == "Y") {
+        if ($mlmDistributor->getFromAbfx() == "Y" && $mlmDistributor->getStatusCode() != Globals::STATUS_ACTIVE) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
@@ -7914,7 +7914,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($mlmDistributor->getFromAbfx() == "Y") {
+        if ($mlmDistributor->getFromAbfx() == "Y" && $mlmDistributor->getStatusCode() != Globals::STATUS_ACTIVE) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
@@ -10622,7 +10622,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'daily_pips' . DIRECTORY_SEPARATOR . $fileName;
                                     $file_handle = fopen($physicalDirectory, "rb");
 
-                                    $mlmDailyPipsFile = new MlmDailyPipsFile();
+                                    /*$mlmDailyPipsFile = new MlmDailyPipsFile();
                                     $mlmDailyPipsFile->setFileType("PIPS");
                                     $mlmDailyPipsFile->setFileSrc($physicalDirectory);
                                     $mlmDailyPipsFile->setFileName($fileName);
@@ -10631,7 +10631,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $mlmDailyPipsFile->setRemarks($remarks);
                                     $mlmDailyPipsFile->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlmDailyPipsFile->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                    $mlmDailyPipsFile->save();
+                                    $mlmDailyPipsFile->save();*/
 
                                     while (!feof($file_handle)) {
                                         $line_of_text = fgets($file_handle);
