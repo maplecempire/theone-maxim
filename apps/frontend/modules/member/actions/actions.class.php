@@ -678,7 +678,7 @@ class memberActions extends sfActions
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
-
+        $epointAmount = str_replace(",", "", $epointAmount);
         if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             //if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 262) {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::YES_Y, null, null, null, null, null, null, null)) {
