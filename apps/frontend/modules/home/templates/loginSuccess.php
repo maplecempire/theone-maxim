@@ -381,7 +381,12 @@
                             <tbody>
                             <tr>
                                 <td colspan="3">
+<?php
+                                    $closeLogin = false;
+                                    if ($closeLogin == false) {
 
+                                    } else {
+                                    ?>
 
                                     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
                          class="ui-state-highlight ui-corner-all">
@@ -435,7 +440,7 @@
 <br>マキシム・キャピタル・リミテッド
                             </strong>
                                     </p></div>
-
+<?php } ?>
                                     <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
                                 </td>
                             </tr>
@@ -443,7 +448,6 @@
                             <tr>
                                 <td class="tbl_content_top">
                                     <?php
-                                    $closeLogin = true;
                                     if ($closeLogin == false) {
                                     ?>
                                     <form action="/home/doLogin" id="loginForm" method="post">
