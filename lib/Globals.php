@@ -130,6 +130,7 @@ abstract class Globals {
     /*******************************/
     /*****    ACCOUNT LEDGER  ******/
     /*******************************/
+    const ACCOUNT_LEDGER_ACTION_CLOSING = 'CLOSING';
     const ACCOUNT_LEDGER_ACTION_DEBIT = 'DEBIT';
     const ACCOUNT_LEDGER_ACTION_ECASH_DEBIT = 'CP2 DEBIT';
     const ACCOUNT_LEDGER_ACTION_DEBIT_ACCOUNT = 'DEBIT ACCOUNT';

@@ -24,6 +24,142 @@ class businessActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeDoArchiveAccount()
+    {
+        $c = new Criteria();
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 161);
+        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        if ($this->getRequestParameter('q')) {
+            $c->add(MlmDistributorPeer::FROM_ABFX, $this->getRequestParameter('q'));
+        }
+        $c->setLimit(5000);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = 0;
+        foreach ($distDBs as $distDB) {
+            $idx++;
+
+            /*if ($distDB->getDistributorId() == 1) {
+                continue;
+            }*/
+            /*if ($idx > 10) {
+                break;
+            }*/
+
+            $queryDate = "2014-11-30";
+            $totalCp2 = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH, $queryDate);
+            $totalCp3 = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE, $queryDate);
+            $totalRt = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RT, $queryDate);
+            $totalCp1 = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT, $queryDate);
+            $totalDebitAccount = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT, $queryDate);
+            $totalDebit = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT, $queryDate);
+            $totalRp = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                print_r("<br>".$distDB->getDistributorId().":".$totalCp2.":".$totalCp3.":".$totalRt.":".$totalCp1.":".$totalDebitAccount.":".$totalDebit.":".$totalRp);
+                $this->removeAccountLedger($distDB->getDistributorId(), $queryDate);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalCp2);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalCp2);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalCp3);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalCp3);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalRt);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalRt);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalCp1);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalCp1);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalDebitAccount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalDebitAccount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalDebit);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalDebit);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                $mlm_account_ledger->setCredit($totalRp);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalRp);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $distDB->setBkkStatus("COMPLETE");
+                $distDB->save();
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("executeDoArchiveAccount Done");
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeDoArchivePairing()
     {
         $c = new Criteria();
@@ -1223,6 +1359,26 @@ class businessActions extends sfActions
         return 0;
     }
 
+    function getAccountLedgerBalance($distributorId, $accountType, $date)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
     function getPairingSumCredit($distributorId, $position, $date)
     {
         $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
@@ -1294,6 +1450,15 @@ class businessActions extends sfActions
     function removePairing($distributorId, $queryDate)
     {
         $query = "delete from mlm_dist_pairing_ledger where dist_id = ".$distributorId . " and created_on <= '".$queryDate . "23:59:59'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+
+        $resultset = $statement->executeQuery();
+    }
+    function removeAccountLedger($distributorId, $queryDate)
+    {
+        $query = "delete from mlm_account_ledger where dist_id = ".$distributorId . " and created_on <= '".$queryDate . "23:59:59'";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
