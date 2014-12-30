@@ -945,6 +945,7 @@
             <trans-unit><source>Top Performer</source><target>冠军</target></trans-unit>
             <trans-unit><source>during the Champions Challenge will win a Brand New BMW 5 Series 2013 model (regardless of country the winner is from)</source><target>挑战赛成绩最佳者将赢取一辆 2013年款式全新BMW 5 系列(优胜者国籍不拘)</target></trans-unit>
             <trans-unit><source>during the Champions Challenge will win a Brand New Porsche (regardless of country the winner is from)</source><target>挑战赛成绩最佳者将赢取一辆全新款式保时捷系列(优胜者国籍不拘)</target></trans-unit>
+            <trans-unit><source>will win a Brand New Porsche (regardless of country the winner is from)</source><target>将赢取一辆全新款式保时捷系列(优胜者国籍不拘)</target></trans-unit>
             <trans-unit><source>1st Runner Up</source><target>亚军</target></trans-unit>
             <trans-unit><source>Fully Furnished Resort Apartment by Royale Harmony (Southern Thailand) worth USD100,000.</source><target>一间完全装饰的Royale Harmony (泰国南部) 度假公寓， 价值USD100,000 美元</target></trans-unit>
             <trans-unit><source>2nd Runner Up</source><target>季军</target></trans-unit>
@@ -1053,6 +1054,8 @@
             <trans-unit><source>Account Number</source><target>帐户号码</target></trans-unit>
             <trans-unit><source>Your current personal sales : %1%</source><target>您当前的个人销售 : %1%</target></trans-unit>
             <trans-unit><source>REMITTED</source><target>已汇款</target></trans-unit>
+            <trans-unit><source>Top 5 Sales Producers</source><target>全球业绩前五名</target></trans-unit>
+            <trans-unit><source>Winner(s) entitled to claim only 1 challenge prize.</source><target>获奖者只能领取一次奖项</target></trans-unit>
         </body>
     </file>
 </xliff>
