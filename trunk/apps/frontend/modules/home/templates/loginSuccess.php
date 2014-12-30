@@ -381,6 +381,24 @@
                             <tbody>
                             <tr>
                                 <td colspan="3">
+
+
+                                    <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong>Dear IMs and Partners
+                                    <br>
+                                    <br>Please NOTE that the company server will be SHUT DOWN at 2359hrs December 31st 2014 for a period of 6 hours.
+                                    <br>
+                                    <br>This is necessary because we are UPGRADING our servers to better serve our IMs and to keep up abreast with the demands of our continued growth.
+                                    <br>
+                                    <br>We seek your kind understanding and apologize for any inconvenience caused.
+                                    <br>
+                                    <br>CEO
+                                    <br>Maxim Capital Limited </strong>
+                                    </p></div>
+
                                     <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
                                 </td>
                             </tr>
