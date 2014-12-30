@@ -442,6 +442,10 @@
 
                             <tr>
                                 <td class="tbl_content_top">
+                                    <?php
+                                    $closeLogin = true;
+                                    if ($closeLogin == false) {
+                                    ?>
                                     <form action="/home/doLogin" id="loginForm" method="post">
                                     <table border="0" width="256" cellspacing="0" cellpadding="0" class="tbl_login_grey_bg">
                                         <colgroup>
@@ -510,6 +514,7 @@
                                         </tbody>
                                     </table>
                                     </form>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             </tbody>
@@ -528,6 +533,10 @@
                 </table>
 
 <!--                    ####################################################            -->
+
+        <?php
+                        if ($closeLogin == false) {
+                        ?>
         <table cellpadding="0" cellspacing="0">
             <tbody>
 
@@ -551,6 +560,7 @@
                             <col width="1%">
                         </colgroup>
                         <tbody>
+
                         <tr>
                             <td></td>
                             <td class="tbl_content_top"><br>
@@ -564,7 +574,6 @@
                             </td>
                             <td></td>
                         </tr>
-
                         <tr>
                             <td></td>
                             <td><br></td>
@@ -590,6 +599,7 @@
             </tr>
             </tbody>
         </table>
+    <?php } ?>
 <!--                    ####################################################            -->
                 </td>
                 </tr>
