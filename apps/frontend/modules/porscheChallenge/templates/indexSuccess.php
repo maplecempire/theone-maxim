@@ -305,7 +305,7 @@ $(function() {
         <tr>
             <td><span class="blue_text">
                     <?php echo __('Stage 2')?> :
-                    <font color="#ff4500"><?php echo __('Top Performer')?></font> <?php echo __('during the Champions Challenge will win a Brand New Porsche (regardless of country the winner is from)')?><br><br>
+                    <font color="#ff4500"><?php echo __('Top 5 Sales Producers')?></font> <?php echo __('will win a Brand New Porsche (regardless of country the winner is from)')?><br><br>
                 </span>
             </td>
         </tr>
@@ -342,6 +342,7 @@ $(function() {
                         <li><?php echo __('Organizer will endeavor to send prizes within 6 month of the competition end date but cannot guarantee this delivery time.')?></li>
                         <li><?php echo __('If you win a competition, we will notify you by e-mail. The judges’ decision will be final, and no correspondence will be entered into.')?></li>
                         <li><?php echo __('This competition is being run by Maxim Capital Limited.')?></li>
+                        <li><?php echo __('Winner(s) entitled to claim only 1 challenge prize.')?></li>
                     </ol>
                 </span>
 
