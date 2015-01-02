@@ -13119,7 +13119,7 @@ Wish you all the best.
     }
 
     function checkFmcCharges(){
-        /*$this->hasFmcCharges = false;
+        $this->hasFmcCharges = false;
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($distDB->getTreeStructure(), "|60|");
         if ($pos === false) { // note: three equal signs
@@ -13132,8 +13132,8 @@ Wish you all the best.
         } else {
             $this->hasFmcCharges = true;
         }
-        return $this->hasFmcCharges;*/
+        return $this->hasFmcCharges;
 
-        return in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
+        //return in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
     }
 }
