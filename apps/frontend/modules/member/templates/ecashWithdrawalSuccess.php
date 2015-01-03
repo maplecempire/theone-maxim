@@ -239,7 +239,7 @@
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD; ?>">EzyAccount</option>
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" disabled="disabled" <?php //echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
                             <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC; ?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
                         </select>
                     </td>
