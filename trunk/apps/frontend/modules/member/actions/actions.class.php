@@ -8604,6 +8604,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
 
+            } elseif ($this->getRequestParameter('bankInTo') == "") {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
                 try {
@@ -8717,6 +8720,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+
+            } elseif ($this->getRequestParameter('bankInTo') == "") {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
 
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
