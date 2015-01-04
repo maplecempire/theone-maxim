@@ -548,13 +548,13 @@ class reportActions extends sfActions
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
         $str = "<table>";
+        $idx = 0;
         foreach ($distDBs as $distDB) {
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
-            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $distDB['leader_id']."</td></tr>";
-            /*$leaderId = 0;
+            $leaderId = 0;
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
                 } else {
@@ -566,7 +566,9 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $distDB->setLeaderId($leaderId);
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $leader."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
             $distDB->save();*/
         }
@@ -1688,7 +1690,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     function getDistributorList($distributorId, $dateFrom, $dateTo)
     {
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, leader.distributor_code as leader_id
-                        , package.price, dist.active_datetime
+                        , package.price, dist.active_datetime, dist.tree_structure
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_distributor leader ON leader.distributor_id = dist.leader_id
                         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
