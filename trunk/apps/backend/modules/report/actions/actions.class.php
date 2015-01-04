@@ -538,6 +538,45 @@ class reportActions extends sfActions
         print_r("executeSingaporeYachtShowLifestyleChallenge Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeMaxcapGalaDinner2015()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|43|%" , Criteria::LIKE);
+        $c->add(MlmDistributorPeer::LOAN_ACCOUNT, "N");
+        $c->add(MlmDistributorPeer::INIT_RANK_ID, 3, Criteria::GREATER_EQUAL);
+        $c->add(MlmDistributorPeer::CREATED_ON, "2014-08-29 00:00:00", Criteria::GREATER_EQUAL);
+        $c->add(MlmDistributorPeer::CREATED_ON, "2014-10-07 23:59:59", Criteria::LESS_EQUAL);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $dateFrom = "2014-08-29 00:00:00";
+        $dateTo = "2014-10-07 23:59:59";
+        foreach ($distDBs as $distDB) {
+            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            $distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();
+        }
+
+        print_r("executeMaxcapGalaDinner2015 Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeShanghaiConventionTrip()
     {
         $c = new Criteria();
