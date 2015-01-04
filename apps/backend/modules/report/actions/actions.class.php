@@ -540,21 +540,18 @@ class reportActions extends sfActions
     }
     public function executeMaxcapGalaDinner2015()
     {
-        $c = new Criteria();
-        $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|43|%" , Criteria::LIKE);
-        $c->add(MlmDistributorPeer::LOAN_ACCOUNT, "N");
-        $c->add(MlmDistributorPeer::INIT_RANK_ID, 3, Criteria::GREATER_EQUAL);
-        $c->add(MlmDistributorPeer::CREATED_ON, "2014-08-29 00:00:00", Criteria::GREATER_EQUAL);
-        $c->add(MlmDistributorPeer::CREATED_ON, "2014-10-07 23:59:59", Criteria::LESS_EQUAL);
-        $distDBs = MlmDistributorPeer::doSelect($c);
+        $dateFrom = "2014-08-29 00:00:00";
+        $dateTo = "2014-10-07 23:59:59";
+        $distDBs = $this->getDistributorList(43, $dateFrom, $dateTo);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
-        $dateFrom = "2014-08-29 00:00:00";
-        $dateTo = "2014-10-07 23:59:59";
+
+        $str = "<table>";
         foreach ($distDBs as $distDB) {
-            print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
-            $leaderId = 0;
+            //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['leader_id']."</td></tr>";
+            /*$leaderId = 0;
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
@@ -571,8 +568,9 @@ class reportActions extends sfActions
             }
             $distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
-            $distDB->save();
+            $distDB->save();*/
         }
+        $str = "<table>";
 
         print_r("executeMaxcapGalaDinner2015 Done");
         return sfView::HEADER_ONLY;
@@ -1686,5 +1684,25 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
             }
         }
         return 0;
+    }
+    function getDistributorList($distributorId, $dateFrom, $dateTo)
+    {
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, leader.distributor_code as leader_id
+                        , package.price
+                    FROM mlm_distributor dist
+                        LEFT JOIN mlm_distributor leader ON leader.distributor_id = dist.leader_id
+                        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+                    WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
+                            AND dist.tree_structure like '%|" . $distributorId . "|%'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
     }
 }
