@@ -570,7 +570,7 @@ class reportActions extends sfActions
             $distDB->setNomineeName($leader);
             $distDB->save();*/
         }
-        $str = "<table>";
+        $str .= "<table>";
         print_r($str);
         print_r("executeMaxcapGalaDinner2015 Done");
         return sfView::HEADER_ONLY;
@@ -1698,7 +1698,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
-        var_dump($query);
+        //var_dump($query);
         $arr = array();
         while ($resultset->next()) {
             $arr[] = $resultset->getRow();
