@@ -211,15 +211,20 @@
                     <td>
                         <select name="bankInTo" id="bankInTo">
                             <?php
-                            $disable = "";
+                            $disable = " disabled='disabled'";
                             $disableMoney = " disabled='disabled'";
+                            $disableIAccount = "";
 
-                            if ($distributorDB->getBankCountry() == "Malaysia") {
+                            /*if ($distributorDB->getBankCountry() == "Malaysia") {
                                 $disable = " disabled='disabled'";
                                 $disableMoney = "";
-                            } else if ($distributorDB->getBankCountry() == "Hong Kong") {
+                            }*/
+                            if ($distributorDB->getBankCountry() == "China (PRC)" || $distributorDB->getBankCountry() == "Thailand") {
                                 $disable = "";
                                 $disableMoney = "";
+                            }
+                            if ($distributorDB->getBankCountry() == "Indonesia") {
+                                $disableIAccount = " disabled='disabled'";
                             }
                             // bwhk (chales approved)
                             if ($distributorDB->getDistributorId() == 257749 || $distributorDB->getDistributorId() == 273758 || $distributorDB->getDistributorId() == 257792) {
@@ -227,20 +232,20 @@
                                 $disableMoney = "";
                             }
                             // special case (anna)
-                            if ($distributorDB->getDistributorId() ==  168) {
+                            if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219) {
                                 $disable = "";
                             }
                             if ($distributorDB->getIaccount() != "") { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>" <?php echo $disableIAccount;?>><?php echo __('i-Account'); ?></option>
                             <?php } ?>
                             <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>" disabled='disabled'><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_EZY_CASH_CARD; ?>">EzyAccount</option>
+                            <!--<option value="<?php /*echo Globals::WITHDRAWAL_EZY_CASH_CARD; */?>">EzyAccount</option>-->
                             <?php } ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" disabled="disabled" <?php //echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
-                            <option value="<?php echo Globals::WITHDRAWAL_MONEYTRAC; ?>" <?php echo $disableMoney;?>><?php echo __('Money Trac'); ?></option>
+                            <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+<!--                            <option value="--><?php //echo Globals::WITHDRAWAL_MONEYTRAC; ?><!--" --><?php //echo $disableMoney;?><!-->--><?php //echo __('Money Trac'); ?><!--</option>-->
                         </select>
                     </td>
                     <td>&nbsp;</td>
