@@ -550,7 +550,7 @@ class reportActions extends sfActions
         $str = "<table>";
         foreach ($distDBs as $distDB) {
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
-            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['leader_id']."</td></tr>";
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $distDB['leader_id']."</td></tr>";
             /*$leaderId = 0;
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
@@ -571,7 +571,7 @@ class reportActions extends sfActions
             $distDB->save();*/
         }
         $str = "<table>";
-
+        print_r($str);
         print_r("executeMaxcapGalaDinner2015 Done");
         return sfView::HEADER_ONLY;
     }
@@ -1688,12 +1688,12 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     function getDistributorList($distributorId, $dateFrom, $dateTo)
     {
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, leader.distributor_code as leader_id
-                        , package.price
+                        , package.price, dist.active_datetime
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_distributor leader ON leader.distributor_id = dist.leader_id
                         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
                     WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
-                            AND dist.tree_structure like '%|" . $distributorId . "|%'";
+                            AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= 3";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
