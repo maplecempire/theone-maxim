@@ -1019,11 +1019,65 @@ $(document).ready(function() {
     }
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='57'>iAccount Notice
+<br>iAccount通告
+<br>iAccount 고지</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "5 January 2015";
+                ?>
+            </div>
+
+            <div id="page_57" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear Members,
+<br>亲爱的会员:
+<br>
+<br>Further to our announcement on monthly withdrawals via iAccount to be made compulsory, please note with effect from January 2015, every member is required to open an iAccount and update it in their user profile, otherwise your January withdrawal will be rejected until you have opened your iAccount. In order to enable you to open the iAccount, January 2015 withdrawal period will be extended till 20 January 2015. Those of you who haven't opened your iAccount yet, please do so immediately.
+<br>鉴于此前发布的会员通过iAccount取现的政策, 请注意从2015年1月份开始, 所有会员需开通iAccount账户,并于会员区个人资料处更新：若然,本月的取现请求将会被系统拒绝. 为了给大家更多时间开通iAccount, 本月(2015.1月)的取现申请接收时间将会延迟至2015.1.20日.请所有会员尽快开通iAccount账户.
+<br>
+<br>Please note members in China, Thailand and Indonesia may do withdrawal request via local bank account or iAccount.
+<br>另外, 中国大陆, 泰国以及印度尼西亚的会员可以自由选择通过iAccount或者本地银行取现.
+<br>
+<br>Your prompt action and kind understanding of the matter is highly appreciated in order to enable us to serve you better.
+<br>敬请留意,谢谢大家的配合!我们一直努力,更好地服务所有会员!
+<br>
+<br>Thank you. 谢谢!
+<br>CEO 首席执行官
+<br>
+<br>친애하는 회원 여러분,
+<br>
+<br>매월 인출시 i어카운트로 인출하는 것이 의무사항이 됨에 따라, 2015년 1월부로 모든 회원들은   i어카운트 계좌를 개설하고 유저 프로필을 업데이트 하여야만 합니다. 만약 이를 실시하지 않을 경우, 귀하의 1월 인출은  i어카운트 계좌 개설시 까지 불가능합니다.  i어카운트 계좌를 개설 하실 수 있도록 2015 1월 인출 기간을 2015년 1월 20일까지 연장할 것입니다.   아직 i어카운트 계좌를 개설하지 않으신 회원분들은 즉시 개설하시기 바랍니다.
+<br>
+<br>중국, 태국, 인도네시아 회원분들은 현지 은행 계좌 또는 i어카운트 계좌에서 인출하실 수 있습니다.
+<br>
+<br>귀하의 빠른 계좌 개설과 본 사항에 대한 이해에 감사드리며 더 나은 서비스를 드릴 수 있도록 최선을 다하겠습니다.
+<br>
+<br>감사합니다.
+<br>CEO
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
     <?php if ($isFmc == false) { ?>
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='56'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015
-<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a><img src="/images/new_icon.gif">
+<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a>
             </div>
             <div class="news_date">
             <?php
@@ -1032,7 +1086,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_56" class="news_desc" style="text-align: left;">
+            <div id="page_56" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1090,7 +1144,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='55'>New exchange rates for investment in Maxim Trader packages, will take effect from 1st Jan 2015
-<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a><img src="/images/new_icon.gif">
+<br>马胜投资配套价格汇率价格公告将于2015.1.1日起正式生效</a>
             </div>
             <div class="news_date">
             <?php
@@ -1099,7 +1153,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_55" class="news_desc" style="text-align: left;">
+            <div id="page_55" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1133,22 +1187,10 @@ $(document).ready(function() {
         </div>
         <?php } ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='54'>Unauthorized use of Maxim Materials, Trade Marks and Copyright
-<br>未經授權使用馬勝金融的材料、商標及版權</a><img src="/images/new_icon.gif">
+<br>未經授權使用馬勝金融的材料、商標及版權</a>
             </div>
             <div class="news_date">
             <?php
@@ -1157,7 +1199,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_54" class="news_desc" style="text-align: left;">
+            <div id="page_54" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1184,7 +1226,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='53'>New exchange rates for investment in Maxim Trader packages, effective from 23rd Dec 2014 shall be as follows
-<br>从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化</a><img src="/images/new_icon.gif">
+<br>从2014.12.23日起, 购买公司美金配套的汇率价格将发生变化</a>
             </div>
             <div class="news_date">
             <?php
@@ -1193,7 +1235,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_53" class="news_desc" style="text-align: left;">
+            <div id="page_53" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1269,7 +1311,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='52'>Definition of Cross Lining
-<br>橫跨界線的定義</a><img src="/images/new_icon.gif">
+<br>橫跨界線的定義</a>
             </div>
             <div class="news_date">
             <?php
@@ -1278,7 +1320,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_52" class="news_desc" style="text-align: left;">
+            <div id="page_52" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1310,7 +1352,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='51'>Announcement to all Malaysian Maxim Trader Members
-                <br>所有马来西亚的会员请注意</a><img src="/images/new_icon.gif">
+                <br>所有马来西亚的会员请注意</a>
             </div>
             <div class="news_date">
             <?php
@@ -1319,7 +1361,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_51" class="news_desc" style="text-align: left;">
+            <div id="page_51" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
