@@ -195,9 +195,9 @@ $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
         </li>
     <?php } ?>
 
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/moneyTrac/createAccount") ?>"><span><?php echo __('Apply MoneyTrac'); ?><img src="/images/new_icon.gif"></span></a>
-        </li>
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php /*echo url_for("/moneyTrac/createAccount") */?>"><span><?php /*echo __('Apply MoneyTrac'); */?><img src="/images/new_icon.gif"></span></a>
+        </li>-->
 
         <?php
         // gj1092, ko4390, korean001, Nextbill1, Openman   - leader group
