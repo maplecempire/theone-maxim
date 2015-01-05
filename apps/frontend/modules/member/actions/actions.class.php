@@ -13128,8 +13128,11 @@ Wish you all the best.
         $this->hasFmcCharges = false;
 
         // 139 gideon 682 vivian329 1504 cnbiz1
+        // 301955 IndoWorld 276722	AsiaMiles
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 139
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 682
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 276722
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 301955
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1504) {
 
         } else {
