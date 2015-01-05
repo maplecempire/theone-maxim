@@ -13126,20 +13126,27 @@ Wish you all the best.
 
     function checkFmcCharges(){
         $this->hasFmcCharges = false;
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $pos = strrpos($distDB->getTreeStructure(), "|60|");
-        if ($pos === false) { // note: three equal signs
-            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
-            if ($pos === false) { // note: three equal signs
 
+        // 139 gideon 682 vivian329 1504 cnbiz1
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 139
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 682
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1504) {
+
+        } else {
+            $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $pos = strrpos($distDB->getTreeStructure(), "|60|");
+            if ($pos === false) { // note: three equal signs
+                $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $this->hasFmcCharges = true;
+                }
             } else {
                 $this->hasFmcCharges = true;
             }
-        } else {
-            $this->hasFmcCharges = true;
         }
         return $this->hasFmcCharges;
-
         //return in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
     }
 }
