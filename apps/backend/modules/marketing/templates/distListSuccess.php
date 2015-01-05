@@ -581,7 +581,7 @@ function populateDgAddPanel() {
                     <option value="INACTIVE">IN-ACTIVE</option>
                     <option value="PENDING">PENDING</option>
                     <option value="BLOCKED">BLOCKED</option>
-                    <option value="SUSPEND">SUSPEND</option>
+                    <option value="SUSPENDED">SUSPENDED</option>
                 </select>
             </td>
             <td>Add Date</td>
