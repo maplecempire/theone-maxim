@@ -19,9 +19,9 @@ class homeActions extends sfActions
         $c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_SUSPEND);
         $this->existUser = AppUserPeer::doSelectOne($c);
 
-        /*if (!$this->existUser) {
+        if (!$this->existUser) {
             return $this->redirect('home/login');
-        }*/
+        }
     }
     public function executeUpdatePassword()
     {
