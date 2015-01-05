@@ -503,6 +503,26 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	
 	protected $is_agl = 0;
 
+
+	
+	protected $iouwallet = 0;
+
+
+	
+	protected $owallet_20141214 = 0;
+
+
+	
+	protected $rwallet_20141214 = 0;
+
+
+	
+	protected $shortname;
+
+
+	
+	protected $is_block = 0;
+
 	
 	protected $alreadyInSave = false;
 
@@ -1480,6 +1500,41 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 	{
 
 		return $this->is_agl;
+	}
+
+	
+	public function getIouwallet()
+	{
+
+		return $this->iouwallet;
+	}
+
+	
+	public function getOwallet20141214()
+	{
+
+		return $this->owallet_20141214;
+	}
+
+	
+	public function getRwallet20141214()
+	{
+
+		return $this->rwallet_20141214;
+	}
+
+	
+	public function getShortname()
+	{
+
+		return $this->shortname;
+	}
+
+	
+	public function getIsBlock()
+	{
+
+		return $this->is_block;
 	}
 
 	
@@ -3168,6 +3223,64 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setIouwallet($v)
+	{
+
+		if ($this->iouwallet !== $v || $v === 0) {
+			$this->iouwallet = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::IOUWALLET;
+		}
+
+	} 
+	
+	public function setOwallet20141214($v)
+	{
+
+		if ($this->owallet_20141214 !== $v || $v === 0) {
+			$this->owallet_20141214 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::OWALLET_20141214;
+		}
+
+	} 
+	
+	public function setRwallet20141214($v)
+	{
+
+		if ($this->rwallet_20141214 !== $v || $v === 0) {
+			$this->rwallet_20141214 = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::RWALLET_20141214;
+		}
+
+	} 
+	
+	public function setShortname($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->shortname !== $v) {
+			$this->shortname = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::SHORTNAME;
+		}
+
+	} 
+	
+	public function setIsBlock($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->is_block !== $v || $v === 0) {
+			$this->is_block = $v;
+			$this->modifiedColumns[] = MlmDistributorPeer::IS_BLOCK;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -3420,11 +3533,21 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 
 			$this->is_agl = $rs->getInt($startcol + 123);
 
+			$this->iouwallet = $rs->getFloat($startcol + 124);
+
+			$this->owallet_20141214 = $rs->getFloat($startcol + 125);
+
+			$this->rwallet_20141214 = $rs->getFloat($startcol + 126);
+
+			$this->shortname = $rs->getString($startcol + 127);
+
+			$this->is_block = $rs->getInt($startcol + 128);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 124; 
+						return $startcol + 129; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDistributor object", $e);
 		}
@@ -3933,6 +4056,21 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 123:
 				return $this->getIsAgl();
 				break;
+			case 124:
+				return $this->getIouwallet();
+				break;
+			case 125:
+				return $this->getOwallet20141214();
+				break;
+			case 126:
+				return $this->getRwallet20141214();
+				break;
+			case 127:
+				return $this->getShortname();
+				break;
+			case 128:
+				return $this->getIsBlock();
+				break;
 			default:
 				return null;
 				break;
@@ -4067,6 +4205,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			$keys[121] => $this->getRtwallet(),
 			$keys[122] => $this->getRankA(),
 			$keys[123] => $this->getIsAgl(),
+			$keys[124] => $this->getIouwallet(),
+			$keys[125] => $this->getOwallet20141214(),
+			$keys[126] => $this->getRwallet20141214(),
+			$keys[127] => $this->getShortname(),
+			$keys[128] => $this->getIsBlock(),
 		);
 		return $result;
 	}
@@ -4454,6 +4597,21 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 			case 123:
 				$this->setIsAgl($value);
 				break;
+			case 124:
+				$this->setIouwallet($value);
+				break;
+			case 125:
+				$this->setOwallet20141214($value);
+				break;
+			case 126:
+				$this->setRwallet20141214($value);
+				break;
+			case 127:
+				$this->setShortname($value);
+				break;
+			case 128:
+				$this->setIsBlock($value);
+				break;
 		} 	}
 
 	
@@ -4585,6 +4743,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[121], $arr)) $this->setRtwallet($arr[$keys[121]]);
 		if (array_key_exists($keys[122], $arr)) $this->setRankA($arr[$keys[122]]);
 		if (array_key_exists($keys[123], $arr)) $this->setIsAgl($arr[$keys[123]]);
+		if (array_key_exists($keys[124], $arr)) $this->setIouwallet($arr[$keys[124]]);
+		if (array_key_exists($keys[125], $arr)) $this->setOwallet20141214($arr[$keys[125]]);
+		if (array_key_exists($keys[126], $arr)) $this->setRwallet20141214($arr[$keys[126]]);
+		if (array_key_exists($keys[127], $arr)) $this->setShortname($arr[$keys[127]]);
+		if (array_key_exists($keys[128], $arr)) $this->setIsBlock($arr[$keys[128]]);
 	}
 
 	
@@ -4716,6 +4879,11 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDistributorPeer::RTWALLET)) $criteria->add(MlmDistributorPeer::RTWALLET, $this->rtwallet);
 		if ($this->isColumnModified(MlmDistributorPeer::RANK_A)) $criteria->add(MlmDistributorPeer::RANK_A, $this->rank_a);
 		if ($this->isColumnModified(MlmDistributorPeer::IS_AGL)) $criteria->add(MlmDistributorPeer::IS_AGL, $this->is_agl);
+		if ($this->isColumnModified(MlmDistributorPeer::IOUWALLET)) $criteria->add(MlmDistributorPeer::IOUWALLET, $this->iouwallet);
+		if ($this->isColumnModified(MlmDistributorPeer::OWALLET_20141214)) $criteria->add(MlmDistributorPeer::OWALLET_20141214, $this->owallet_20141214);
+		if ($this->isColumnModified(MlmDistributorPeer::RWALLET_20141214)) $criteria->add(MlmDistributorPeer::RWALLET_20141214, $this->rwallet_20141214);
+		if ($this->isColumnModified(MlmDistributorPeer::SHORTNAME)) $criteria->add(MlmDistributorPeer::SHORTNAME, $this->shortname);
+		if ($this->isColumnModified(MlmDistributorPeer::IS_BLOCK)) $criteria->add(MlmDistributorPeer::IS_BLOCK, $this->is_block);
 
 		return $criteria;
 	}
@@ -4991,6 +5159,16 @@ abstract class BaseMlmDistributor extends BaseObject  implements Persistent {
 		$copyObj->setRankA($this->rank_a);
 
 		$copyObj->setIsAgl($this->is_agl);
+
+		$copyObj->setIouwallet($this->iouwallet);
+
+		$copyObj->setOwallet20141214($this->owallet_20141214);
+
+		$copyObj->setRwallet20141214($this->rwallet_20141214);
+
+		$copyObj->setShortname($this->shortname);
+
+		$copyObj->setIsBlock($this->is_block);
 
 
 		$copyObj->setNew(true);

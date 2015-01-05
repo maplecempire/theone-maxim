@@ -13,7 +13,7 @@ abstract class BaseGgMemberWithdrawPeer {
 	const CLASS_DEFAULT = 'lib.model.GgMemberWithdraw';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,6 +27,18 @@ abstract class BaseGgMemberWithdrawPeer {
 
 	
 	const AMOUNT = 'gg_member_withdraw.AMOUNT';
+
+	
+	const WITHDRAW_AMOUNT = 'gg_member_withdraw.WITHDRAW_AMOUNT';
+
+	
+	const CHARGES = 'gg_member_withdraw.CHARGES';
+
+	
+	const RATE = 'gg_member_withdraw.RATE';
+
+	
+	const CONVERT_AMOUNT = 'gg_member_withdraw.CONVERT_AMOUNT';
 
 	
 	const PAYMENT_TYPE = 'gg_member_withdraw.PAYMENT_TYPE';
@@ -64,18 +76,18 @@ abstract class BaseGgMemberWithdrawPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Amount', 'PaymentType', 'AccName', 'AccPayeeName', 'AccNo', 'PaymentDate', 'PaymentRemark', 'Remark', 'Autowit', 'Status', 'Cdate', ),
-		BasePeer::TYPE_COLNAME => array (GgMemberWithdrawPeer::ID, GgMemberWithdrawPeer::UID, GgMemberWithdrawPeer::AMOUNT, GgMemberWithdrawPeer::PAYMENT_TYPE, GgMemberWithdrawPeer::ACC_NAME, GgMemberWithdrawPeer::ACC_PAYEE_NAME, GgMemberWithdrawPeer::ACC_NO, GgMemberWithdrawPeer::PAYMENT_DATE, GgMemberWithdrawPeer::PAYMENT_REMARK, GgMemberWithdrawPeer::REMARK, GgMemberWithdrawPeer::AUTOWIT, GgMemberWithdrawPeer::STATUS, GgMemberWithdrawPeer::CDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'amount', 'payment_type', 'acc_name', 'acc_payee_name', 'acc_no', 'payment_date', 'payment_remark', 'remark', 'autowit', 'status', 'cdate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Amount', 'WithdrawAmount', 'Charges', 'Rate', 'ConvertAmount', 'PaymentType', 'AccName', 'AccPayeeName', 'AccNo', 'PaymentDate', 'PaymentRemark', 'Remark', 'Autowit', 'Status', 'Cdate', ),
+		BasePeer::TYPE_COLNAME => array (GgMemberWithdrawPeer::ID, GgMemberWithdrawPeer::UID, GgMemberWithdrawPeer::AMOUNT, GgMemberWithdrawPeer::WITHDRAW_AMOUNT, GgMemberWithdrawPeer::CHARGES, GgMemberWithdrawPeer::RATE, GgMemberWithdrawPeer::CONVERT_AMOUNT, GgMemberWithdrawPeer::PAYMENT_TYPE, GgMemberWithdrawPeer::ACC_NAME, GgMemberWithdrawPeer::ACC_PAYEE_NAME, GgMemberWithdrawPeer::ACC_NO, GgMemberWithdrawPeer::PAYMENT_DATE, GgMemberWithdrawPeer::PAYMENT_REMARK, GgMemberWithdrawPeer::REMARK, GgMemberWithdrawPeer::AUTOWIT, GgMemberWithdrawPeer::STATUS, GgMemberWithdrawPeer::CDATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'amount', 'withdraw_amount', 'charges', 'rate', 'convert_amount', 'payment_type', 'acc_name', 'acc_payee_name', 'acc_no', 'payment_date', 'payment_remark', 'remark', 'autowit', 'status', 'cdate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Amount' => 2, 'PaymentType' => 3, 'AccName' => 4, 'AccPayeeName' => 5, 'AccNo' => 6, 'PaymentDate' => 7, 'PaymentRemark' => 8, 'Remark' => 9, 'Autowit' => 10, 'Status' => 11, 'Cdate' => 12, ),
-		BasePeer::TYPE_COLNAME => array (GgMemberWithdrawPeer::ID => 0, GgMemberWithdrawPeer::UID => 1, GgMemberWithdrawPeer::AMOUNT => 2, GgMemberWithdrawPeer::PAYMENT_TYPE => 3, GgMemberWithdrawPeer::ACC_NAME => 4, GgMemberWithdrawPeer::ACC_PAYEE_NAME => 5, GgMemberWithdrawPeer::ACC_NO => 6, GgMemberWithdrawPeer::PAYMENT_DATE => 7, GgMemberWithdrawPeer::PAYMENT_REMARK => 8, GgMemberWithdrawPeer::REMARK => 9, GgMemberWithdrawPeer::AUTOWIT => 10, GgMemberWithdrawPeer::STATUS => 11, GgMemberWithdrawPeer::CDATE => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'amount' => 2, 'payment_type' => 3, 'acc_name' => 4, 'acc_payee_name' => 5, 'acc_no' => 6, 'payment_date' => 7, 'payment_remark' => 8, 'remark' => 9, 'autowit' => 10, 'status' => 11, 'cdate' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Amount' => 2, 'WithdrawAmount' => 3, 'Charges' => 4, 'Rate' => 5, 'ConvertAmount' => 6, 'PaymentType' => 7, 'AccName' => 8, 'AccPayeeName' => 9, 'AccNo' => 10, 'PaymentDate' => 11, 'PaymentRemark' => 12, 'Remark' => 13, 'Autowit' => 14, 'Status' => 15, 'Cdate' => 16, ),
+		BasePeer::TYPE_COLNAME => array (GgMemberWithdrawPeer::ID => 0, GgMemberWithdrawPeer::UID => 1, GgMemberWithdrawPeer::AMOUNT => 2, GgMemberWithdrawPeer::WITHDRAW_AMOUNT => 3, GgMemberWithdrawPeer::CHARGES => 4, GgMemberWithdrawPeer::RATE => 5, GgMemberWithdrawPeer::CONVERT_AMOUNT => 6, GgMemberWithdrawPeer::PAYMENT_TYPE => 7, GgMemberWithdrawPeer::ACC_NAME => 8, GgMemberWithdrawPeer::ACC_PAYEE_NAME => 9, GgMemberWithdrawPeer::ACC_NO => 10, GgMemberWithdrawPeer::PAYMENT_DATE => 11, GgMemberWithdrawPeer::PAYMENT_REMARK => 12, GgMemberWithdrawPeer::REMARK => 13, GgMemberWithdrawPeer::AUTOWIT => 14, GgMemberWithdrawPeer::STATUS => 15, GgMemberWithdrawPeer::CDATE => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'amount' => 2, 'withdraw_amount' => 3, 'charges' => 4, 'rate' => 5, 'convert_amount' => 6, 'payment_type' => 7, 'acc_name' => 8, 'acc_payee_name' => 9, 'acc_no' => 10, 'payment_date' => 11, 'payment_remark' => 12, 'remark' => 13, 'autowit' => 14, 'status' => 15, 'cdate' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -134,6 +146,14 @@ abstract class BaseGgMemberWithdrawPeer {
 		$criteria->addSelectColumn(GgMemberWithdrawPeer::UID);
 
 		$criteria->addSelectColumn(GgMemberWithdrawPeer::AMOUNT);
+
+		$criteria->addSelectColumn(GgMemberWithdrawPeer::WITHDRAW_AMOUNT);
+
+		$criteria->addSelectColumn(GgMemberWithdrawPeer::CHARGES);
+
+		$criteria->addSelectColumn(GgMemberWithdrawPeer::RATE);
+
+		$criteria->addSelectColumn(GgMemberWithdrawPeer::CONVERT_AMOUNT);
 
 		$criteria->addSelectColumn(GgMemberWithdrawPeer::PAYMENT_TYPE);
 

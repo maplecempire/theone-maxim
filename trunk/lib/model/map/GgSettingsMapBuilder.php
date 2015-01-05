@@ -36,7 +36,7 @@ class GgSettingsMapBuilder {
 
 		$tMap->addColumn('PARAM', 'Param', 'string', CreoleTypes::VARCHAR, true, 255);
 
-		$tMap->addColumn('VALUE', 'Value', 'string', CreoleTypes::VARCHAR, true, 255);
+		$tMap->addColumn('VALUE', 'Value', 'string', CreoleTypes::LONGVARCHAR, true, null);
 
 	} 
 } 
