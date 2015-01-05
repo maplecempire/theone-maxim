@@ -235,7 +235,7 @@
                             if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219 || $distributorDB->getDistributorId() == 256078) {
                                 $disable = "";
                             }
-                            if ($distributorDB->getIaccount() != "") { ?>
+                            if ($distributorDB->getIaccount() != "" && $disableIAccount == "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>" <?php echo $disableIAccount;?>><?php echo __('i-Account'); ?></option>
                             <?php } ?>
                             <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
@@ -244,7 +244,9 @@
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <!--<option value="<?php /*echo Globals::WITHDRAWAL_EZY_CASH_CARD; */?>">EzyAccount</option>-->
                             <?php } ?>
+                            <?php if ($disable == "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_LOCAL_BANK; ?>" <?php echo $disable;?>><?php echo __('Local Bank Transfer'); ?></option>
+                            <?php } ?>
 <!--                            <option value="--><?php //echo Globals::WITHDRAWAL_MONEYTRAC; ?><!--" --><?php //echo $disableMoney;?><!-->--><?php //echo __('Money Trac'); ?><!--</option>-->
                         </select>
                     </td>
