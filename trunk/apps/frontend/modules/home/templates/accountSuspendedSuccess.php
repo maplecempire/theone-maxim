@@ -273,7 +273,7 @@
     <!--<div class="content_line"></div>-->
     <br class="clear">
 
-    <?php if ($appUser->getRemark() == "{ASNS}") { ?>
+    <?php if ($existUser->getRemark() == "{ASNS}") { ?>
     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
         <p style="margin: 10px"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
             <strong><?php echo __('Your account has been suspended.') ?></strong>
@@ -282,7 +282,7 @@
 
     <br>
     <img src="/uploads/legal_watch_dicta/IMG_20141223_0001.png" alt="ASNS" style="width: 600px;">
-    <?php } else if ($appUser->getRemark() == "{UNAUTHORIZED}") { ?>
+    <?php } else if ($existUser->getRemark() == "{UNAUTHORIZED}") { ?>
     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
         <p style="margin: 10px"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
             <strong><?php echo __('Your account has been suspended due to purchase unauthorized CP1.') ?></strong>
