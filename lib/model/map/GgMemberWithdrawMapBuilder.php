@@ -38,6 +38,14 @@ class GgMemberWithdrawMapBuilder {
 
 		$tMap->addColumn('AMOUNT', 'Amount', 'double', CreoleTypes::DECIMAL, true, 15);
 
+		$tMap->addColumn('WITHDRAW_AMOUNT', 'WithdrawAmount', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('CHARGES', 'Charges', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RATE', 'Rate', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('CONVERT_AMOUNT', 'ConvertAmount', 'double', CreoleTypes::DECIMAL, true, 15);
+
 		$tMap->addColumn('PAYMENT_TYPE', 'PaymentType', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('ACC_NAME', 'AccName', 'string', CreoleTypes::VARCHAR, true, 100);

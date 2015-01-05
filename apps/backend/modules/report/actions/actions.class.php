@@ -10,6 +10,32 @@
  */
 class reportActions extends sfActions
 {
+    public function executeQueryAccountLedger20141231()
+    {
+        $c = new Criteria();
+        $c->add(MlmAccountLedger20141231Peer::DIST_ID, $this->getRequestParameter('id'));
+        $c->addAscendingOrderByColumn(MlmAccountLedger20141231Peer::CREATED_ON);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $accountLedgerDBs = MlmAccountLedger20141231Peer::doSelect($c);
+
+        $str = "<table>";
+        $idx = 1;
+        foreach ($accountLedgerDBs as $accountLedgerDB) {
+            $str.= "<tr><td>" . $idx++."</td><td>" . $accountLedgerDB->getAccountType()."</td>
+            <td>" . $accountLedgerDB->getTransactionType()."</td>
+            <td>" . $accountLedgerDB->getCredit()."</td>
+            <td>" . $accountLedgerDB->getDebit()."</td>
+            <td>" . $accountLedgerDB->getBalance()."</td>
+            <td>" . $accountLedgerDB->getRemark()."</td>
+            <td>" . $accountLedgerDB->getInternalRemark()."</td>
+            <td>" . $accountLedgerDB->getCreatedBy()."</td>
+            <td>" . $accountLedgerDB->getCreatedOn()."</td></tr>";
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeQueryAccountLedger20141231 Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeBmwX6Challenge()
     {
         $this->resultList = $this->findPersonalSalesList(null, "2014-03-10 00:00:00", "2014-05-31 00:00:00", null);
@@ -577,6 +603,7 @@ class reportActions extends sfActions
         print_r("executeMaxcapGalaDinner2015 Done");
         return sfView::HEADER_ONLY;
     }
+
     public function executeShanghaiConventionTrip()
     {
         $c = new Criteria();

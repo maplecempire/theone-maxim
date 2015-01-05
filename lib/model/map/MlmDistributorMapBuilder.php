@@ -280,5 +280,15 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('IS_AGL', 'IsAgl', 'int', CreoleTypes::TINYINT, true, null);
 
+		$tMap->addColumn('IOUWALLET', 'Iouwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('OWALLET_20141214', 'Owallet20141214', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RWALLET_20141214', 'Rwallet20141214', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('SHORTNAME', 'Shortname', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('IS_BLOCK', 'IsBlock', 'int', CreoleTypes::TINYINT, true, null);
+
 	} 
 } 

@@ -21,6 +21,22 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 
 
 	
+	protected $withdraw_amount = 0;
+
+
+	
+	protected $charges = 0;
+
+
+	
+	protected $rate = 0;
+
+
+	
+	protected $convert_amount = 0;
+
+
+	
 	protected $payment_type;
 
 
@@ -84,6 +100,34 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 	{
 
 		return $this->amount;
+	}
+
+	
+	public function getWithdrawAmount()
+	{
+
+		return $this->withdraw_amount;
+	}
+
+	
+	public function getCharges()
+	{
+
+		return $this->charges;
+	}
+
+	
+	public function getRate()
+	{
+
+		return $this->rate;
+	}
+
+	
+	public function getConvertAmount()
+	{
+
+		return $this->convert_amount;
 	}
 
 	
@@ -221,6 +265,46 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 		if ($this->amount !== $v || $v === 0) {
 			$this->amount = $v;
 			$this->modifiedColumns[] = GgMemberWithdrawPeer::AMOUNT;
+		}
+
+	} 
+	
+	public function setWithdrawAmount($v)
+	{
+
+		if ($this->withdraw_amount !== $v || $v === 0) {
+			$this->withdraw_amount = $v;
+			$this->modifiedColumns[] = GgMemberWithdrawPeer::WITHDRAW_AMOUNT;
+		}
+
+	} 
+	
+	public function setCharges($v)
+	{
+
+		if ($this->charges !== $v || $v === 0) {
+			$this->charges = $v;
+			$this->modifiedColumns[] = GgMemberWithdrawPeer::CHARGES;
+		}
+
+	} 
+	
+	public function setRate($v)
+	{
+
+		if ($this->rate !== $v || $v === 0) {
+			$this->rate = $v;
+			$this->modifiedColumns[] = GgMemberWithdrawPeer::RATE;
+		}
+
+	} 
+	
+	public function setConvertAmount($v)
+	{
+
+		if ($this->convert_amount !== $v || $v === 0) {
+			$this->convert_amount = $v;
+			$this->modifiedColumns[] = GgMemberWithdrawPeer::CONVERT_AMOUNT;
 		}
 
 	} 
@@ -381,31 +465,39 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 
 			$this->amount = $rs->getFloat($startcol + 2);
 
-			$this->payment_type = $rs->getString($startcol + 3);
+			$this->withdraw_amount = $rs->getFloat($startcol + 3);
 
-			$this->acc_name = $rs->getString($startcol + 4);
+			$this->charges = $rs->getFloat($startcol + 4);
 
-			$this->acc_payee_name = $rs->getString($startcol + 5);
+			$this->rate = $rs->getFloat($startcol + 5);
 
-			$this->acc_no = $rs->getString($startcol + 6);
+			$this->convert_amount = $rs->getFloat($startcol + 6);
 
-			$this->payment_date = $rs->getTimestamp($startcol + 7, null);
+			$this->payment_type = $rs->getString($startcol + 7);
 
-			$this->payment_remark = $rs->getString($startcol + 8);
+			$this->acc_name = $rs->getString($startcol + 8);
 
-			$this->remark = $rs->getString($startcol + 9);
+			$this->acc_payee_name = $rs->getString($startcol + 9);
 
-			$this->autowit = $rs->getString($startcol + 10);
+			$this->acc_no = $rs->getString($startcol + 10);
 
-			$this->status = $rs->getString($startcol + 11);
+			$this->payment_date = $rs->getTimestamp($startcol + 11, null);
 
-			$this->cdate = $rs->getTimestamp($startcol + 12, null);
+			$this->payment_remark = $rs->getString($startcol + 12);
+
+			$this->remark = $rs->getString($startcol + 13);
+
+			$this->autowit = $rs->getString($startcol + 14);
+
+			$this->status = $rs->getString($startcol + 15);
+
+			$this->cdate = $rs->getTimestamp($startcol + 16, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 13; 
+						return $startcol + 17; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgMemberWithdraw object", $e);
 		}
@@ -542,33 +634,45 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 				return $this->getAmount();
 				break;
 			case 3:
-				return $this->getPaymentType();
+				return $this->getWithdrawAmount();
 				break;
 			case 4:
-				return $this->getAccName();
+				return $this->getCharges();
 				break;
 			case 5:
-				return $this->getAccPayeeName();
+				return $this->getRate();
 				break;
 			case 6:
-				return $this->getAccNo();
+				return $this->getConvertAmount();
 				break;
 			case 7:
-				return $this->getPaymentDate();
+				return $this->getPaymentType();
 				break;
 			case 8:
-				return $this->getPaymentRemark();
+				return $this->getAccName();
 				break;
 			case 9:
-				return $this->getRemark();
+				return $this->getAccPayeeName();
 				break;
 			case 10:
-				return $this->getAutowit();
+				return $this->getAccNo();
 				break;
 			case 11:
-				return $this->getStatus();
+				return $this->getPaymentDate();
 				break;
 			case 12:
+				return $this->getPaymentRemark();
+				break;
+			case 13:
+				return $this->getRemark();
+				break;
+			case 14:
+				return $this->getAutowit();
+				break;
+			case 15:
+				return $this->getStatus();
+				break;
+			case 16:
 				return $this->getCdate();
 				break;
 			default:
@@ -584,16 +688,20 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getUid(),
 			$keys[2] => $this->getAmount(),
-			$keys[3] => $this->getPaymentType(),
-			$keys[4] => $this->getAccName(),
-			$keys[5] => $this->getAccPayeeName(),
-			$keys[6] => $this->getAccNo(),
-			$keys[7] => $this->getPaymentDate(),
-			$keys[8] => $this->getPaymentRemark(),
-			$keys[9] => $this->getRemark(),
-			$keys[10] => $this->getAutowit(),
-			$keys[11] => $this->getStatus(),
-			$keys[12] => $this->getCdate(),
+			$keys[3] => $this->getWithdrawAmount(),
+			$keys[4] => $this->getCharges(),
+			$keys[5] => $this->getRate(),
+			$keys[6] => $this->getConvertAmount(),
+			$keys[7] => $this->getPaymentType(),
+			$keys[8] => $this->getAccName(),
+			$keys[9] => $this->getAccPayeeName(),
+			$keys[10] => $this->getAccNo(),
+			$keys[11] => $this->getPaymentDate(),
+			$keys[12] => $this->getPaymentRemark(),
+			$keys[13] => $this->getRemark(),
+			$keys[14] => $this->getAutowit(),
+			$keys[15] => $this->getStatus(),
+			$keys[16] => $this->getCdate(),
 		);
 		return $result;
 	}
@@ -619,33 +727,45 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 				$this->setAmount($value);
 				break;
 			case 3:
-				$this->setPaymentType($value);
+				$this->setWithdrawAmount($value);
 				break;
 			case 4:
-				$this->setAccName($value);
+				$this->setCharges($value);
 				break;
 			case 5:
-				$this->setAccPayeeName($value);
+				$this->setRate($value);
 				break;
 			case 6:
-				$this->setAccNo($value);
+				$this->setConvertAmount($value);
 				break;
 			case 7:
-				$this->setPaymentDate($value);
+				$this->setPaymentType($value);
 				break;
 			case 8:
-				$this->setPaymentRemark($value);
+				$this->setAccName($value);
 				break;
 			case 9:
-				$this->setRemark($value);
+				$this->setAccPayeeName($value);
 				break;
 			case 10:
-				$this->setAutowit($value);
+				$this->setAccNo($value);
 				break;
 			case 11:
-				$this->setStatus($value);
+				$this->setPaymentDate($value);
 				break;
 			case 12:
+				$this->setPaymentRemark($value);
+				break;
+			case 13:
+				$this->setRemark($value);
+				break;
+			case 14:
+				$this->setAutowit($value);
+				break;
+			case 15:
+				$this->setStatus($value);
+				break;
+			case 16:
 				$this->setCdate($value);
 				break;
 		} 	}
@@ -658,16 +778,20 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setUid($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setAmount($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setPaymentType($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setAccName($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAccPayeeName($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setAccNo($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setPaymentDate($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setPaymentRemark($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setRemark($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setAutowit($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setStatus($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCdate($arr[$keys[12]]);
+		if (array_key_exists($keys[3], $arr)) $this->setWithdrawAmount($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCharges($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setRate($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setConvertAmount($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPaymentType($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setAccName($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAccPayeeName($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setAccNo($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPaymentDate($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setPaymentRemark($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setRemark($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setAutowit($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setStatus($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCdate($arr[$keys[16]]);
 	}
 
 	
@@ -678,6 +802,10 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgMemberWithdrawPeer::ID)) $criteria->add(GgMemberWithdrawPeer::ID, $this->id);
 		if ($this->isColumnModified(GgMemberWithdrawPeer::UID)) $criteria->add(GgMemberWithdrawPeer::UID, $this->uid);
 		if ($this->isColumnModified(GgMemberWithdrawPeer::AMOUNT)) $criteria->add(GgMemberWithdrawPeer::AMOUNT, $this->amount);
+		if ($this->isColumnModified(GgMemberWithdrawPeer::WITHDRAW_AMOUNT)) $criteria->add(GgMemberWithdrawPeer::WITHDRAW_AMOUNT, $this->withdraw_amount);
+		if ($this->isColumnModified(GgMemberWithdrawPeer::CHARGES)) $criteria->add(GgMemberWithdrawPeer::CHARGES, $this->charges);
+		if ($this->isColumnModified(GgMemberWithdrawPeer::RATE)) $criteria->add(GgMemberWithdrawPeer::RATE, $this->rate);
+		if ($this->isColumnModified(GgMemberWithdrawPeer::CONVERT_AMOUNT)) $criteria->add(GgMemberWithdrawPeer::CONVERT_AMOUNT, $this->convert_amount);
 		if ($this->isColumnModified(GgMemberWithdrawPeer::PAYMENT_TYPE)) $criteria->add(GgMemberWithdrawPeer::PAYMENT_TYPE, $this->payment_type);
 		if ($this->isColumnModified(GgMemberWithdrawPeer::ACC_NAME)) $criteria->add(GgMemberWithdrawPeer::ACC_NAME, $this->acc_name);
 		if ($this->isColumnModified(GgMemberWithdrawPeer::ACC_PAYEE_NAME)) $criteria->add(GgMemberWithdrawPeer::ACC_PAYEE_NAME, $this->acc_payee_name);
@@ -721,6 +849,14 @@ abstract class BaseGgMemberWithdraw extends BaseObject  implements Persistent {
 		$copyObj->setUid($this->uid);
 
 		$copyObj->setAmount($this->amount);
+
+		$copyObj->setWithdrawAmount($this->withdraw_amount);
+
+		$copyObj->setCharges($this->charges);
+
+		$copyObj->setRate($this->rate);
+
+		$copyObj->setConvertAmount($this->convert_amount);
 
 		$copyObj->setPaymentType($this->payment_type);
 
