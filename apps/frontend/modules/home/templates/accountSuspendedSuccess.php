@@ -281,7 +281,7 @@
     </div>
 
     <br>
-    <img src="/uploads/legal_watch_dicta/IMG_20141223_0001.png" alt="ASNS" style="width: 600px;">
+    <img src="/uploads/legal_watch_dicta/IMG_20141223_0002.png" alt="ASNS" style="width: 600px;">
     <?php } else if ($existUser->getRemark() == "{UNAUTHORIZED}") { ?>
     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
         <p style="margin: 10px"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
@@ -289,8 +289,6 @@
         </p>
     </div>
 
-    <br>
-    <img src="/uploads/legal_watch_dicta/IMG_20141223_0001.png" alt="ASNS" style="width: 600px;">
     <?php } else { ?>
     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;" class="ui-state-error ui-corner-all">
         <p style="margin: 10px"><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
