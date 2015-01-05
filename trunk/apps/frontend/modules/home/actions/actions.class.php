@@ -10,6 +10,19 @@
  */
 class homeActions extends sfActions
 {
+    public function executeAccountSuspended()
+    {
+        $username = $this->getRequestParameter('q');
+
+        $c = new Criteria();
+        $c->add(AppUserPeer::USERNAME, $username);
+        $c->add(AppUserPeer::STATUS_CODE, Globals::STATUS_SUSPEND);
+        $this->existUser = AppUserPeer::doSelectOne($c);
+
+        /*if (!$this->existUser) {
+            return $this->redirect('home/login');
+        }*/
+    }
     public function executeUpdatePassword()
     {
 //        if ($this->getUser()->hasCredential(array(Globals::PROJECT_NAME . Globals::ROLE_DISTRIBUTOR), false)) {
@@ -524,8 +537,8 @@ class homeActions extends sfActions
             $existUser = null;
             if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_DEV && $this->getRequestParameter('username') == "" && $this->getRequestParameter('userpassword') == "") {
                 // ******************* uncomment for testing purpose ****************
-                //$existUser = AppUserPeer::retrieveByPk(3);
-                $existUser = AppUserPeer::retrieveByPk(611);
+                $existUser = AppUserPeer::retrieveByPk(3);
+//                $existUser = AppUserPeer::retrieveByPk(611);
             } else {
                 if ($this->getUser()->getAttribute(Globals::LOGIN_RETRY) >= 3) {
                     require_once('recaptchalib.php');
@@ -569,7 +582,7 @@ class homeActions extends sfActions
             if ($existUser) {
                 if ($existUser->getStatusCode() == Globals::STATUS_SUSPEND) {
                     $this->setFlash('errorMsg', "You account has been suspended.");
-                    return $this->redirect('home/login');
+                    return $this->redirect('home/accountSuspended?q='.$existUser->getUsername());
                 }
 
                 $this->getUser()->getAttributeHolder()->clear();
