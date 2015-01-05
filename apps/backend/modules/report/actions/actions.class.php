@@ -18,10 +18,30 @@ class reportActions extends sfActions
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
         $accountLedgerDBs = MlmAccountLedger20141231Peer::doSelect($c);
 
-        $str = "<table>";
+        $str = "<table><tr>
+        <td>#</td>
+        <td>Account Type</td>
+        <td>Transaction Type</td>
+        <td>Credit</td>
+        <td>Debit</td>
+        <td>Balance</td>
+        <td>Remark</td>
+        <td>Internal Remark</td>
+        <td>Credited By</td>
+        <td>Credited On</td>
+        </tr>";
         $idx = 1;
         foreach ($accountLedgerDBs as $accountLedgerDB) {
-            $str.= "<tr><td>" . $idx++."</td><td>" . $accountLedgerDB->getAccountType()."</td>
+            $accountType = $accountLedgerDB->getAccountType();
+
+            if ($accountLedgerDB->getAccountType() == "EPOINT") {
+                $accountType = "CP1";
+            } else if ($accountLedgerDB->getAccountType() == "ECASH") {
+                $accountType = "CP2";
+            } else if ($accountLedgerDB->getAccountType() == "MAINTENANCE") {
+                $accountType = "CP3";
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $accountType."</td>
             <td>" . $accountLedgerDB->getTransactionType()."</td>
             <td>" . $accountLedgerDB->getCredit()."</td>
             <td>" . $accountLedgerDB->getDebit()."</td>
