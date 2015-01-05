@@ -232,7 +232,7 @@
                                 $disableMoney = "";
                             }
                             // special case (anna)
-                            if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219) {
+                            if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219 || $distributorDB->getDistributorId() == 256078) {
                                 $disable = "";
                             }
                             if ($distributorDB->getIaccount() != "") { ?>
