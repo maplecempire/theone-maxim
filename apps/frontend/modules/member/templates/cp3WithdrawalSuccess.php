@@ -227,7 +227,7 @@
                             <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>" <?php echo $disableIAccount;?>><?php echo __('i-Account'); ?></option>
                             <?php } ?>
                             <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?>" disabled='disabled'><?php echo __('Maxim Trader VISA Debit Card'); ?></option>
+<!--                            <option value="--><?php //echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?><!--" disabled='disabled'>--><?php //echo __('Maxim Trader VISA Debit Card'); ?><!--</option>-->
                             <?php } ?>
                             <?php if (Globals::APPLY_EZYCASHCARD_ENABLE == true) { ?>
                             <!--<option value="<?php /*echo Globals::WITHDRAWAL_EZY_CASH_CARD; */?>">EzyAccount</option>-->
