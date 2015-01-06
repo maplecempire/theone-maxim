@@ -13138,18 +13138,21 @@ Wish you all the best.
         } else {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
-            $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
-            if ($isVivian === false) { // note: three equal signs
-                $pos = strrpos($distDB->getTreeStructure(), "|60|");
-                if ($pos === false) { // note: three equal signs
-                    $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+            $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
+            if ($isLadyConquer === false) { // note: three equal signs
+                $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
+                if ($isVivian === false) { // note: three equal signs
+                    $pos = strrpos($distDB->getTreeStructure(), "|60|");
                     if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+                        if ($pos === false) { // note: three equal signs
 
+                        } else {
+                            $this->hasFmcCharges = true;
+                        }
                     } else {
                         $this->hasFmcCharges = true;
                     }
-                } else {
-                    $this->hasFmcCharges = true;
                 }
             }
         }
