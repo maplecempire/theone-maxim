@@ -1022,6 +1022,72 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='58'>e-wallet Notice
+<br>e-wallet 通告
+<br>e-wallet 고지
+<br>e-wallet のお知らせ</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+            <?php
+                $dateUtil = new DateUtil();
+                echo "6 January 2015";
+                ?>
+            </div>
+
+            <div id="page_58" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>
+<br>Dear IMs &amp; Partners,
+<br>亲爱的代理及伙伴们:
+<br>
+<br>Effective 1st Jan 2015, all transactions in your e-wallet which are more than 3 months old will be archived. You will be able to view current and immediate past 3 months transactions.
+<br>从2015.1.1日生效-会员专区内超过3个月之久的金融钱包声明将会被存档. 会员只能看见最近3个月之内的交易明细.
+<br>
+<br>Anyone requiring archived statements, please write to <a href="mailto:support@maximtrader.com">support@maximtrader.com</a>.
+<br>如果需要查看3个月之前的明细, 请邮件至 <a href="mailto:support@maximtrader.com">support@maximtrader.com</a> 申请.
+<br>
+<br>There will be a nominal charge of 10 CPs per month, for requests processed. Please give 3 working days for processing.
+<br>针对此类申请,系统将收取10CP点数/每月(明细). 处理时间为三个工作日.
+<br>
+<br>Thank you.
+<br>谢谢配合!
+<br>
+<br>CEO 首席执行官
+<br>
+<br>친애하는 맥심 회원 및 파트너 여러분,
+<br>
+<br>2015년 1월 1일부로, 3개월 이상된  e-월렛에서 이루어지는 모든 거래는 기록으로 남겨질 것입니다. 현재 상태를 보실 수 있으면 지난 3개월 동안의 거래 내역도 확인하실 수 있습니다.
+<br>
+<br>거래 내역서를 원하신다면, <a href="mailto:support@maximtrader.com">support@maximtrader.com</a> 으로 메일 보내주시기 바랍니다.
+<br>
+<br>신청을 진행함에 있어서 매달 10 CPs의 수수료가 발생하며 근무일 3일의 시간이 소요됩니다.
+<br>
+<br>감사합니다.
+<br>CEO
+<br>
+<br>親愛なるIMおよびパートナーの皆様
+<br>
+<br>2015年1月1日より、お客様のe-walletにおける三ヶ月以上前のすべての取引はアーカイブされます。ご覧いただけるのは、現在および三ヶ月以内のお取引となります。
+<br>
+<br>
+<br>アーカイブをご覧になりたい方は、どうぞCSセンターまでご連絡ください。一度リクエストが処理されますと10CPのわずかな手数料が毎月発生します。処理には3営業日いただきます。
+<br>
+<br>ありがとうございます。
+<br>CEO
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='57'>iAccount Notice
 <br>iAccount通告
 <br>iAccount 고지</a><img src="/images/new_icon.gif">
