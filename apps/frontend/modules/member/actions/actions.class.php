@@ -13013,9 +13013,13 @@ Wish you all the best.
 							$newTreeLevel = $upline->getTreeLevel();
 							
                             $downline->setUplineDistId($upline->getDistributorID());
-                            $downline->setUplineDistCode($sponsorId);
+                            $downline->setUplineDistCode($upline->getDistributorCode());
 		                    $downline->setTreeLevel($upline->getTreeLevel()+1);
 		                    $downline->setTreeStructure($newTreeStructure);
+                            if($downline->getRemark()=="")
+		                        $downline->setRemark(date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
+                            else
+                                $downline->setRemark($downline->getRemark().". ".date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
 		                    $downline->save();
 
                             $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
@@ -13086,9 +13090,13 @@ Wish you all the best.
                                 $oldTreeLevel = $dl->getTreeLevel();
 
                                 $dl->setUplineDistId($upline->getDistributorID());
-                                $dl->setUplineDistCode($sponsorId);
+                                $dl->setUplineDistCode($upline->getDistributorCode());
                                 $dl->setTreeLevel($upline->getTreeLevel()+1);
                                 $dl->setTreeStructure($newTreeStructure);
+                                if($dl->getRemark()=="")
+                                    $dl->setRemark(date('Y-m-d').": change sponsor from ".$dl->getUplineDistCode()." to ".$upline->getDistributorCode());
+                                else
+                                    $dl->setRemark($dl->getRemark().". ".date('Y-m-d').": change sponsor from ".$dl->getUplineDistCode()." to ".$upline->getDistributorCode());
                                 $dl->save();
 
                                 $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
