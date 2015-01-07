@@ -213,6 +213,7 @@
                             }
                             if ($distributorDB->getBankCountry() == "Indonesia") {
                                 $disableIAccount = " disabled='disabled'";
+                                $disable = "";
                             }
                             // bwhk (chales approved)
                             if ($distributorDB->getDistributorId() == 257749 || $distributorDB->getDistributorId() == 273758 || $distributorDB->getDistributorId() == 257792) {
