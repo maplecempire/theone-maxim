@@ -1006,16 +1006,32 @@ $(document).ready(function() {
     $culture = $sf_user->getCulture();
     //$isFmc = in_array($sf_user->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
     $isFmc = false;
-    $pos = strrpos($distributor->getTreeStructure(), "|60|");
-    if ($pos === false) { // note: three equal signs
-        $pos = strrpos($distributor->getTreeStructure(), "|1797|");
-        if ($pos === false) { // note: three equal signs
+    if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 139
+            || $sf_user->getAttribute(Globals::SESSION_DISTID) == 682
+            || $sf_user->getAttribute(Globals::SESSION_DISTID) == 276722
+            || $sf_user->getAttribute(Globals::SESSION_DISTID) == 301955
+            || $sf_user->getAttribute(Globals::SESSION_DISTID) == 1504) {
 
-        } else {
-            $isFmc = true;
-        }
     } else {
-        $isFmc = true;
+        $distDB = MlmDistributorPeer::retrieveByPK($sf_user->getAttribute(Globals::SESSION_DISTID));
+
+        $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
+        if ($isLadyConquer === false) { // note: three equal signs
+            $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
+            if ($isVivian === false) { // note: three equal signs
+                $pos = strrpos($distDB->getTreeStructure(), "|60|");
+                if ($pos === false) { // note: three equal signs
+                    $pos = strrpos($distDB->getTreeStructure(), "|1797|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $isFmc = true;
+                    }
+                } else {
+                    $isFmc = true;
+                }
+            }
+        }
     }
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
