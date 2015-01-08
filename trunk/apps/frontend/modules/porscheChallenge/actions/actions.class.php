@@ -55,7 +55,7 @@ class porscheChallengeActions extends sfActions
             HAVING SUB_TOTAL >= 100000
                 ORDER BY 3 DESC ";
 
-        $connection = Propel::getConnection();
+        /*$connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
         $resultArray = array();
@@ -65,7 +65,24 @@ class porscheChallengeActions extends sfActions
         $arr = $resultset->getRow();
         $resultArray[$count] = $arr;
         $count++;
-        }
+        }*/
+
+        $resultArray = array();
+        $resultArray[0]['distributor_code'] = "TWOSASA";
+        $resultArray[0]['country'] = "Taiwan";
+        $resultArray[0]['SUB_TOTAL'] = "33265000";
+        $resultArray[1]['distributor_code'] = "monkey";
+        $resultArray[1]['country'] = "China (PRC)";
+        $resultArray[1]['SUB_TOTAL'] = "12045000";
+        $resultArray[2]['distributor_code'] = "MaximTaiwan6";
+        $resultArray[2]['country'] = "Taiwan";
+        $resultArray[2]['SUB_TOTAL'] = "9530000";
+        $resultArray[3]['distributor_code'] = "money168";
+        $resultArray[3]['country'] = "China (PRC)";
+        $resultArray[3]['SUB_TOTAL'] = "9025000";
+        $resultArray[4]['distributor_code'] = "lc1992";
+        $resultArray[4]['country'] = "China (PRC)";
+        $resultArray[4]['SUB_TOTAL'] = "7210000";
         $this->resultArray = $resultArray;
     }
 
