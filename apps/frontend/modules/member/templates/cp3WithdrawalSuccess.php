@@ -28,30 +28,34 @@
                     }
                 },
                 submitHandler: function(form) {
-                    waiting();
-                    var ecashBalance = $('#ecashBalance').autoNumericGet();
+                    if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_IACCOUNT?>" && $("#iaccountChecking").val() == "Y") {
+                        error("Please Apply for i-Account now before submit.");
+                    } else {
+                        waiting();
+                        var ecashBalance = $('#ecashBalance').autoNumericGet();
                     <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
-                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
-                    <?php } else { ?>
-                    var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
-                    <?php } ?>
-                    if (withdrawAmount <= 30) {
-                        error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
-                        return false;
-                    }
-                    if (withdrawAmount > parseFloat(ecashBalance)) {
-                        error("<?php echo __("In-sufficient CP3") ?>");
-                        return false;
-                    }
-                    if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" && moneytracCustomerId == "") {
-                        error("<?php echo __("Please update Money Trac Information in User Profile.") ?>");
-                        return false;
-                    }
+                        var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
+                        <?php } else { ?>
+                        var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
+                        <?php } ?>
+                        if (withdrawAmount <= 30) {
+                            error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
+                            return false;
+                        }
+                        if (withdrawAmount > parseFloat(ecashBalance)) {
+                            error("<?php echo __("In-sufficient CP3") ?>");
+                            return false;
+                        }
+                        if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>" && moneytracCustomerId == "") {
+                            error("<?php echo __("Please update Money Trac Information in User Profile.") ?>");
+                            return false;
+                        }
 
                     <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
-                    $("#cbo_cp3Amount").val(withdrawAmount);
-                    <?php } ?>
-                    form.submit();
+                        $("#cbo_cp3Amount").val(withdrawAmount);
+                        <?php } ?>
+                        form.submit();
+                    }
                 }
             });
 
@@ -59,6 +63,8 @@
             if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_MONEYTRAC?>") {
                 $("#moneyTracNote").show(500);
                 $("#moneyTracNote2").show(500);
+            } else if ($("#bankInTo").val() == "<?php echo Globals::WITHDRAWAL_IACCOUNT?>" && $("#iaccountChecking").val() == "Y") {
+                error("Please Apply for i-Account now.");
             } else {
                 $("#moneyTracNote").hide(500);
                 $("#moneyTracNote2").hide(500);
@@ -90,7 +96,13 @@
         <?php echo __('CP3 Withdrawal'); ?>
     </a>
 </div>
-
+<?php
+$toApplyIaccount = "N";
+if ($distributorDB->getIaccount() == "") {
+    $toApplyIaccount = "Y";
+}
+?>
+<input type="hidden" id="iaccountChecking" value="<?php echo $toApplyIaccount?>">
 <table cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
@@ -224,8 +236,9 @@
                             if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219 || $distributorDB->getDistributorId() == 256078) {
                                 $disable = "";
                             }
-                            if ($distributorDB->getIaccount() != "" && $disableIAccount == "") { ?>
-                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>" <?php echo $disableIAccount;?>><?php echo __('i-Account'); ?></option>
+                            //if ($distributorDB->getIaccount() != "" && $disableIAccount == "") {
+                            if ($disableIAccount == "") { ?>
+                            <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
                             <?php } ?>
                             <?php if ($distributorDB->getVisaDebitCard() != "") { ?>
 <!--                            <option value="--><?php //echo Globals::WITHDRAWAL_VISA_DEBIT_CARD; ?><!--" disabled='disabled'>--><?php //echo __('Maxim Trader VISA Debit Card'); ?><!--</option>-->
