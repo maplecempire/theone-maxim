@@ -13154,12 +13154,7 @@ Wish you all the best.
                     if ($isVivian === false) { // note: three equal signs
                         $pos = strrpos($distDB->getTreeStructure(), "|60|");
                         if ($pos === false) { // note: three equal signs
-                            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
-                            if ($pos === false) { // note: three equal signs
 
-                            } else {
-                                $this->hasFmcCharges = true;
-                            }
                         } else {
                             $this->hasFmcCharges = true;
                         }
