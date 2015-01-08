@@ -9540,7 +9540,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::TREE_UPLINE_DIST_ID, null, Criteria::ISNULL);
         $c->add(MlmDistributorPeer::ACTIVE_DATETIME, $dividendDate, Criteria::LESS_THAN);
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1, Criteria::NOT_EQUAL);
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 308347, Criteria::NOT_EQUAL);
         $c->add(MlmDistributorPeer::RANK_ID, null, Criteria::ISNOTNULL);
         $c->addAscendingOrderByColumn(MlmDistributorPeer::ACTIVE_DATETIME);
         $c->setOffset($this->getRequestParameter('q') * $queryRecord);
