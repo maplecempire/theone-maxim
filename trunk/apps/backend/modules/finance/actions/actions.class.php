@@ -53,7 +53,7 @@ class financeActions extends sfActions
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
-                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
                 if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
                     $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
@@ -137,7 +137,7 @@ class financeActions extends sfActions
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
-                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
+                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
                 if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
                     $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
