@@ -201,12 +201,7 @@ ul, ol {
                     if ($isVivian === false) { // note: three equal signs
                         $pos = strrpos($distDB->getTreeStructure(), "|60|");
                         if ($pos === false) { // note: three equal signs
-                            $pos = strrpos($distDB->getTreeStructure(), "|1797|");
-                            if ($pos === false) { // note: three equal signs
 
-                            } else {
-                                $isFmc = true;
-                            }
                         } else {
                             $isFmc = true;
                         }
