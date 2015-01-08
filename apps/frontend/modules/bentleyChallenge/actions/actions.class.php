@@ -21,7 +21,7 @@ class bentleyChallengeActions extends sfActions
         $dateTo = '2014-12-31 23:59:59';
         $this->totalPersonalSales = $this->getTotalPersonalSales($dateFrom, $dateTo);
 
-        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+        /*$query = "SELECT reg.upline_dist_id, dist.distributor_code
                         , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
                         , Coalesce(reg._SUM, 0) AS register_sum
                         , Coalesce(upgrade._SUM, 0) AS upgrade_sum
@@ -62,7 +62,23 @@ class bentleyChallengeActions extends sfActions
             $arr = $resultset->getRow();
             $resultArray[$count] = $arr;
             $count++;
-        }
+        }*/
+        $resultArray = array();
+        $resultArray[0]['distributor_code'] = "TWOSASA";
+        $resultArray[0]['country'] = "Taiwan";
+        $resultArray[0]['SUB_TOTAL'] = "46180000";
+        $resultArray[1]['distributor_code'] = "monkey";
+        $resultArray[1]['country'] = "China (PRC)";
+        $resultArray[1]['SUB_TOTAL'] = "29927000";
+        $resultArray[2]['distributor_code'] = "money168";
+        $resultArray[2]['country'] = "China (PRC)";
+        $resultArray[2]['SUB_TOTAL'] = "12027000";
+        $resultArray[3]['distributor_code'] = "MaximTaiwan6";
+        $resultArray[3]['country'] = "Taiwan";
+        $resultArray[3]['SUB_TOTAL'] = "9530000";
+        $resultArray[4]['distributor_code'] = "Kuan001";
+        $resultArray[4]['country'] = "Taiwan";
+        $resultArray[4]['SUB_TOTAL'] = "8220000";
         $this->resultArray = $resultArray;
     }
 
