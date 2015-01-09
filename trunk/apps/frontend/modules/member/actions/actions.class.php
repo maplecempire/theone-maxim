@@ -13074,6 +13074,19 @@ Wish you all the best.
 	            try {
 	                $con->begin();
 
+                    if ($nod) {
+                        $c = new Criteria();
+                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
+                        $distDB = MlmDistributorPeer::doSelectOne($c);
+
+                        if ($distDB) {
+                            $distId = $distDB->getDistributorId();
+                        } else {
+	                	    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (distributor code not found)"));
+                            return;
+                        }
+                    }
+
 	                $c = new Criteria();
 	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
 	                //$c->addAnd(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
