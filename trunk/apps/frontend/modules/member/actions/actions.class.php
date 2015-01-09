@@ -13067,14 +13067,14 @@ Wish you all the best.
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distId = $this->getRequestParameter('distId'); // downline
-            $nod = $this->getRequestParameter('nod'); // flag to prevent timeout
+            $this->nod = $this->getRequestParameter('nod', false); // flag to prevent timeout
 
 	        if($sponsorId<>"" && $distId<>""){
 	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
 	            try {
 	                $con->begin();
 
-                    if ($nod) {
+                    if ($this->nod) {
                         $c = new Criteria();
                         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
                         $distDB = MlmDistributorPeer::doSelectOne($c);
@@ -13138,9 +13138,7 @@ Wish you all the best.
 	            }
 	        }
 
-            if ($nod) {
-                $this->nod = 1;
-            } else {
+            if (!$this->nod) {
                 $c = new Criteria();
 //                $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
                 $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
