@@ -5435,6 +5435,20 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
         $distId = $this->getRequestParameter('distId');
+        $manualMode = $this->getRequestParameter('manualMode');
+
+        if ($manualMode == '1') {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
+            $distDB = MlmDistributorPeer::doSelectOne($c);
+
+            if ($distDB) {
+                $distId = $distDB->getDistributorId();
+            } else {
+                echo null;
+                return sfView::HEADER_ONLY;
+            }
+        }
 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
@@ -13067,14 +13081,17 @@ Wish you all the best.
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distId = $this->getRequestParameter('distId'); // downline
-            $this->nod = $this->getRequestParameter('nod', false); // flag to prevent timeout
+
+            // flag to prevent timeout for user that have too many downline.
+            // access url: /member/changeSponsorB?manualMode=1
+            $this->manualMode = $this->getRequestParameter('manualMode', false);
 
 	        if($sponsorId<>"" && $distId<>""){
 	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
 	            try {
 	                $con->begin();
 
-                    if ($this->nod) {
+                    if ($this->manualMode) {
                         $c = new Criteria();
                         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
                         $distDB = MlmDistributorPeer::doSelectOne($c);
@@ -13138,7 +13155,7 @@ Wish you all the best.
 	            }
 	        }
 
-            if (!$this->nod) {
+            if (!$this->manualMode) {
                 $c = new Criteria();
 //                $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
                 $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);

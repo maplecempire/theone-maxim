@@ -43,7 +43,8 @@
             cache: false,
             data: {
                 sponsorId : $('#sponsorId').val(),
-                distId : $('#distId').val()
+                distId : $('#distId').val(),
+                manualMode : '<?php echo ($manualMode ? 1 : 0) ?>'
             },
             success : function(data) {
                 if (data == null || data == "") {
@@ -102,8 +103,8 @@
         <td>
             <form action="<?php echo url_for("/member/changeSponsorB")?>" id="transferForm" name="transferForm" method="post">
 
-            <?php if ($nod) { ?>
-            <input name="nod" type="hidden" id="nod" value="1" />
+            <?php if ($manualMode) { ?>
+            <input type="hidden" id="manualMode" name="manualMode" value="1" />
             <?php } ?>
 
             <table cellspacing="0" cellpadding="0" class="tbl_form">
@@ -129,7 +130,7 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('Direct Downline'); ?></td>
                     <td>
-                        <?php if ($nod) { ?>
+                        <?php if ($manualMode) { ?>
                         <input name="distId" type="text" id="distId" tabindex="1"/>
                         <?php } else { ?>
                         <select name="distId" id="distId" tabindex="1">
