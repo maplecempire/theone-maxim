@@ -13062,11 +13062,13 @@ Wish you all the best.
     }
 
     public function executeChangeSponsorB(){
-        $distIds = array(63, 64, 200, 135, 595, 60, 308688); // Append allowed distId at here.
+        $distIds = array(43, 135, 595, 60, 308688); // Append allowed distId at here.
         
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distId = $this->getRequestParameter('distId'); // downline
+            $nod = $this->getRequestParameter('nod'); // flag to prevent timeout
+
 	        if($sponsorId<>"" && $distId<>""){
 	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
 	            try {
@@ -13123,12 +13125,16 @@ Wish you all the best.
 	            }
 	        }
 
-	        $c = new Criteria();
-//	        $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
-	        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-	        $distDDs = MlmDistributorPeer::doSelect($c);
-	        $this->distDDs = $distDDs;
+            if ($nod) {
+                $this->nod = 1;
+            } else {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+                $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+                $distDDs = MlmDistributorPeer::doSelect($c);
+                $this->distDDs = $distDDs;
+            }
     	}else{
     		return $this->redirect('/member/summary');
     	}
