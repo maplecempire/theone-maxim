@@ -124,6 +124,9 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('Direct Downline'); ?></td>
                     <td>
+                        <?php if ($nod) { ?>
+                        <input name="distId" type="text" id="distId" tabindex="1"/>
+                        <?php } else { ?>
                         <select name="distId" id="distId" tabindex="1">
                             <?php
                                 if (count($distDDs) >= 1) {
@@ -135,6 +138,7 @@
                                 }
                             ?>
                         </select>
+                        <?php } ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
