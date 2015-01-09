@@ -13062,7 +13062,9 @@ Wish you all the best.
     }
 
     public function executeChangeSponsorB(){
-    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==288 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==595 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==60 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==308688){
+        $distIds = array(45, 288, 135, 595, 60, 308688); // Append allowed distId at here.
+        
+        if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distId = $this->getRequestParameter('distId'); // downline
 	        if($sponsorId<>"" && $distId<>""){
