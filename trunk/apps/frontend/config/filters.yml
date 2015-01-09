@@ -3,8 +3,8 @@ web_debug: ~
 security:  ~
 
 # generally, you will want to insert your own filters here
-remember:                 # Filters need a unique name
-  class: sfGoogleAnalyticsFilter
+#remember:                 # Filters need a unique name
+#  class: sfGoogleAnalyticsFilter
 
 datepickerLanguagePack:                 # Filters need a unique name
   class: sfDatepickerLanguagePackFilter
