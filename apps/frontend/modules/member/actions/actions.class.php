@@ -13148,24 +13148,41 @@ Wish you all the best.
         } else {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
+            /*var_dump($distDB->getTreeStructure());
             $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
-            if ($isPeter1 === false) { // note: three equal signs
-                $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
-                if ($isLadyConquer === false) { // note: three equal signs
-                    $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
-                    if ($isVivian === false) { // note: three equal signs
-                        $pos = strrpos($distDB->getTreeStructure(), "|60|");
-                        if ($pos === false) { // note: three equal signs
+            if ($isPeter1 === false) {
+                var_dump("no");
+            } else {
+                var_dump("yes");
+            }
+            var_dump($isPeter1);*/
+            //exit();
+            // 1504 cnbiz1, 61 kaseong, 257250 Vincentteh remove FMC
+            if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
+                if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
+                    if (strrpos($distDB->getTreeStructure(), "|257250|") === false) {
+                        $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
+                        if ($isPeter1 === false) { // note: three equal signs
+                            $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
+                            if ($isLadyConquer === false) { // note: three equal signs
+                                $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
+                                if ($isVivian === false) { // note: three equal signs
+                                    $pos = strrpos($distDB->getTreeStructure(), "|60|");
+                                    if ($pos === false) { // note: three equal signs
 
+                                    } else {
+                                        $this->hasFmcCharges = true;
+                                    }
+                                }
+                            }
                         } else {
                             $this->hasFmcCharges = true;
                         }
                     }
                 }
-            } else {
-                $this->hasFmcCharges = true;
             }
         }
+        //exit();
         return $this->hasFmcCharges;
         //return in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
     }
