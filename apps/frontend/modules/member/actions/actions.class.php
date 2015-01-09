@@ -13108,17 +13108,17 @@ Wish you all the best.
                             }
 
 			                $con->commit();
-			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $sponsorId . ")"));
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $distId . ")"));
 	                    }else{
-	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $sponsorId . ")"));
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
 	                    }
 	                }else{
-	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $sponsorId . ")"));
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
 	                }
 
 	            } catch (PropelException $e) {
 	                $con->rollback();
-	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $sponsorId . ")"));
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
 	                throw $e;
 	            }
 	        }
