@@ -1015,15 +1015,26 @@ $(document).ready(function() {
     } else {
         $distDB = MlmDistributorPeer::retrieveByPK($sf_user->getAttribute(Globals::SESSION_DISTID));
 
-        $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
-        if ($isLadyConquer === false) { // note: three equal signs
-            $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
-            if ($isVivian === false) { // note: three equal signs
-                $pos = strrpos($distDB->getTreeStructure(), "|60|");
-                if ($pos === false) { // note: three equal signs
+        if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
+            if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
+                if (strrpos($distDB->getTreeStructure(), "|257250|") === false) {
+                    $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
+                    if ($isPeter1 === false) { // note: three equal signs
+                        $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
+                        if ($isLadyConquer === false) { // note: three equal signs
+                            $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
+                            if ($isVivian === false) { // note: three equal signs
+                                $pos = strrpos($distDB->getTreeStructure(), "|60|");
+                                if ($pos === false) { // note: three equal signs
 
-                } else {
-                    $isFmc = true;
+                                } else {
+                                    $isFmc = true;
+                                }
+                            }
+                        }
+                    } else {
+                        $isFmc = true;
+                    }
                 }
             }
         }
