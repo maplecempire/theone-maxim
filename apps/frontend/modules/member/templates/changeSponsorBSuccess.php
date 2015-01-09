@@ -101,6 +101,11 @@
     <tr>
         <td>
             <form action="<?php echo url_for("/member/changeSponsorB")?>" id="transferForm" name="transferForm" method="post">
+
+            <?php if ($nod) { ?>
+            <input name="nod" type="hidden" id="nod" value="1" />
+            <?php } ?>
+
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
