@@ -5868,7 +5868,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $ecash = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
-            $rt = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
+            //$rt = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
             $cp4 = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_CP4);
 
             $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);

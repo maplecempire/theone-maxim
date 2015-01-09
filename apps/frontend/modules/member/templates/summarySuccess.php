@@ -572,7 +572,7 @@ function reassignDatagridAnnouncementEventAttr() {
     <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('RT Account') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo number_format($rt,2); ?>"></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($distributor->getRtwallet(),2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
 <?php } ?>
