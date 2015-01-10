@@ -13002,7 +13002,7 @@ Wish you all the best.
     }
     
     public function executeChangeSponsor(){
-    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 595 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==60){
+    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==-135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == -595 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==-60){
 	        $sponsorId = $this->getRequestParameter('sponsorId');
 	        $distId = $this->getRequestParameter('distId');
 	        if($sponsorId<>"" && $distId<>""){
@@ -13076,7 +13076,7 @@ Wish you all the best.
     }
 
     public function executeChangeSponsorB(){
-        $distIds = array(43, 135, 595, 60, 308688, 288, 262593); // Append allowed distId at here.
+        $distIds = array(-43, -135, -595, -60, -308688, -288, -262593); // Append allowed distId at here.
         
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline

@@ -32,11 +32,11 @@ if ($distDB->getDistributorId() == 296707 || $distDB->getDistributorId() == 2967
 }
 
 $allowChangeSponsor = false;
-if ($distDB->getDistributorId() == 135) {
+if ($distDB->getDistributorId() == -135) {
     $allowChangeSponsor = true;
 }
 $allowChangeSponsor2 = false;
-if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288) {
+if ($distDB->getDistributorId() == -595 || $distDB->getDistributorId() == -288) {
     $allowChangeSponsor2 = true;
 }
 
