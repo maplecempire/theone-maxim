@@ -580,6 +580,24 @@ class homeActions extends sfActions
             }
 
             if ($existUser) {
+                if ($existUser->getUserId() == 261725 ||
+                        $existUser->getUserId() == 282126 ||
+                        $existUser->getUserId() == 306853 ||
+                        $existUser->getUserId() == 282190 ||
+                        $existUser->getUserId() == 301276 ||
+                        $existUser->getUserId() == 283564 ||
+                        $existUser->getUserId() == 282190 ||
+                        $existUser->getUserId() == 283566 ||
+                        $existUser->getUserId() == 299607 ||
+                        $existUser->getUserId() == 301276 ||
+                        $existUser->getUserId() == 307815 ||
+                        $existUser->getUserId() == 307816 ||
+                        $existUser->getUserId() == 311950) {
+                    $existUser->setStatusCode(Globals::STATUS_SUSPEND);
+                    $existUser->setRemark("{UNAUTHORIZED}");
+                    $existUser->save();
+                }
+
                 if ($existUser->getStatusCode() == Globals::STATUS_SUSPEND) {
                     $this->setFlash('errorMsg', "You account has been suspended.");
                     return $this->redirect('home/accountSuspended?q='.$existUser->getUsername());
