@@ -137,7 +137,7 @@
                             <?php
                                 if (count($distDDs) >= 1) {
                                     foreach ($distDDs as $distDD) {
-                                        echo "<option value='".$distDD->getDistributorId()."'>".$distDD->getDistributorCode()."</option>";
+                                        echo "<option value='".$distDD->getDistributorId()."'>".$distDD->getDistributorCode()." (ref: ".$distDD->getUplineDistCode().")</option>";
                                     }
                                 } else {
                                     echo "<option value=''>--</option>";
