@@ -281,9 +281,9 @@ if ($distributorDB->getIaccount() == "") {
                             <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
                             <li><?php echo __('Payout time for monthly CP2 withdrawals to be credited to your account:') ?>
                                 <ul>
-                                    <li style="padding-left: 15px;"><?php echo __('Local bank accounts - by 25th') ?></li>
-                                    <li style="padding-left: 15px;"><?php echo __('i-Account - by 11th') ?></li>
-                                    <li style="padding-left: 15px;"><?php echo __('Money Trac - by 20th') ?></li>
+                                    <li style="padding-left: 15px;"><?php echo __('Local bank accounts - by 25th') . " ".__('(Excluding non-working days)')  ?></li>
+                                    <li style="padding-left: 15px;"><?php echo __('i-Account - by 11th') . " ".__('(Excluding non-working days)')  ?></li>
+<!--                                    <li style="padding-left: 15px;">--><?php //echo __('Money Trac - by 20th') ?><!--</li>-->
                                 </ul>
                             </li>
                         </ol>
