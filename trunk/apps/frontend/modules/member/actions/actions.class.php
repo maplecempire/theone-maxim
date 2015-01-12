@@ -13076,7 +13076,7 @@ Wish you all the best.
     }
 
     public function executeChangeSponsorB(){
-        $distIds = array(595,288,317307); // Append allowed distId at here.
+        $distIds = array(595,288,317307,1); // Append allowed distId at here.
         
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
