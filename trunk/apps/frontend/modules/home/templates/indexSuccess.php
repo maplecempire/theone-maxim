@@ -1044,10 +1044,57 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='59'>Market Holidays Notice
+                    <br>市场假期通告</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "13 January 2015";
+                ?>
+            </div>
+
+            <div id="page_59" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Please take note of the upcoming market holiday(s) below.
+<br>
+<br>19 Jan 2015 - US, Dr. Martin Luther King, Jr. Day
+<br>
+<br>While FX and Precious Metals trading hours remain the same, a lack of liquidity may lead to wider spreads; please plan your trades accordingly.
+<br>
+<br>For Precious Metals, due to the closure of futures markets during the period as stated below, liquidity may be especially thin and there may be no bid/offers at times:
+<br>20 Jan 2015 0200hrs (SGT/HKT) - 20 Jan 2015 0700hrs (SGT/HKT).
+<br>
+<br>*******************************************************************************
+<br>
+<br>尊敬的客户，
+<br>
+<br>以下是即将来临的市场假期 。
+<br>
+<br>19 Jan 2015 - US Dr. Martin Luther King, Jr. Day
+<br>
+<br>当日外汇与贵金属照常交易，但潜在市场流通性不足的情况，有可能导致点差扩大，请相应地计划您的交易。
+<br>
+<br>至于贵金属，尤其是在以下时段，ＣＭＥ黄金与白银期货交易停止，比较少银行会报价：
+<br>20 Jan 2015 0200hrs (SGT/HKT) - 20 Jan 2015 0700hrs (SGT/HKT).
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='58'>e-wallet Notice
 <br>e-wallet 通告
 <br>e-wallet 고지
-<br>e-wallet のお知らせ</a><img src="/images/new_icon.gif">
+<br>e-wallet のお知らせ</a>
             </div>
             <div class="news_date">
             <?php
@@ -1056,7 +1103,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_58" class="news_desc" style="text-align: left;">
+            <div id="page_58" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
@@ -1112,7 +1159,7 @@ $(document).ready(function() {
             <div class="poptitle">
                 <a href='#' class="page_link" ref='57'>iAccount Notice
 <br>iAccount通告
-<br>iAccount 고지</a><img src="/images/new_icon.gif">
+<br>iAccount 고지</a>
             </div>
             <div class="news_date">
             <?php
@@ -1121,7 +1168,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_57" class="news_desc" style="text-align: left;">
+            <div id="page_57" class="news_desc" style="text-align: left; display: none">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                         <tr>
