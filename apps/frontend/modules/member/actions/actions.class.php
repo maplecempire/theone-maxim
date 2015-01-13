@@ -13080,7 +13080,7 @@ Wish you all the best.
         
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
-	        $distId = $this->getRequestParameter('distId'); // downline
+	        $distCode = $distId = $this->getRequestParameter('distId'); // downline
 
             // flag to prevent timeout for user that have too many downline.
             // access url: /member/changeSponsorB?manualMode=1
@@ -13140,17 +13140,17 @@ Wish you all the best.
                             }
 
 			                $con->commit();
-			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $distId . ")"));
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $distCode ." - " . $sponsorId . ")"));
 	                    }else{
-	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
 	                    }
 	                }else{
-	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
 	                }
 
 	            } catch (PropelException $e) {
 	                $con->rollback();
-	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distId . ")"));
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
 	                throw $e;
 	            }
 	        }
