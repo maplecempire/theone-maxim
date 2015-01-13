@@ -1044,6 +1044,59 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='60'>iAccount Notice
+<br>iAccount 通告
+<br>iAccount 고지
+<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "13 January 2015";
+                ?>
+            </div>
+
+            <div id="page_60" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>亲爱的会员,
+<br>
+<br>Please take note that iAccount website is under maintenance, as such online iAccount new applications cannot be processed now. The website is expected to be back to normal by tomorrow morning. Very sorry for the inconvenience caused.
+<br>请注意, 目前iAccount网站正在维护当中, 因此新iAccount申请将暂停处理;预计iAccount网站明天早晨会恢复正常. 为此造成的不便,我们表示非常抱歉.
+<br>
+<br>Thank you. 谢谢!
+<br>
+<br>Revi Pillai CFO 首席财务官
+<br>
+<br>친애하는 회원 여러분,
+<br>
+<br>i어카운트 웹사이트가 유지보수 중이므로 현재 새로운 신청이 진행되지 않고 있습니다. 내일 아침에 정상진행이 될 예정입니다. 불편을 끼쳐  대단히 죄송합니다.
+<br>
+<br>감사합니다.
+<br>
+<br>레비 필라이 CFO
+<br>
+<br>メンバーのみなさま
+<br>
+<br>どうぞiAccountのウエブサイトが現在メンテナンス中であることにご注意ください。そのためiAccountの新しいアプリケーションは現在お使いいただけません。ウエブサイトは明日の朝には通常通りお使いいただける見込みです。ご不便をおかけして大変申し訳ございません。
+<br>
+<br>ありがとうございます。
+<br>
+<br>Revi Pillai CFO
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='59'>Market Holidays Notice
                     <br>市场假期通告</a><img src="/images/new_icon.gif">
             </div>
