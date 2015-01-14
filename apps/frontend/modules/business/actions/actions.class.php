@@ -10,6 +10,50 @@
  */
 class businessActions extends sfActions
 {
+    public function executeDoCorrectRP()
+    {
+        $queryDate = "2014-11-30";
+        $distArray = explode(',', "57");
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distArray, Criteria::IN);
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+
+        foreach ($mlmDistributors as $distDB) {
+            $totalRpCredit = $this->getAccountLedgerCreditBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            $totalRpDebit = $this->getAccountLedgerDebitBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            print_r("<br>".$distDB->getDistributorId());
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, "RP");
+            $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "CLOSING");
+            $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
+
+            if ($mlm_account_ledger) {
+                $mlm_account_ledger->setCredit($totalRpCredit);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalRpCredit);
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                if ($totalRpDebit > 0) {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                    $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($totalRpDebit);
+                    $mlm_account_ledger->setBalance($totalRpCredit - $totalRpDebit);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+            }
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoCorrectPairingPoint()
     {
         return sfView::HEADER_ONLY;
