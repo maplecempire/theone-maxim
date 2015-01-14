@@ -96,7 +96,7 @@
     </tr>
     <tr>
         <td>
-            <form action="<?php echo url_for("/member/changeSponsor")?>" id="transferForm" name="transferForm" method="post">
+            <form action="<?php echo url_for("/member/changeSponsorA")?>" id="transferForm" name="transferForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">

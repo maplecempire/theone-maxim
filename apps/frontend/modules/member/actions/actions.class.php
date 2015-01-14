@@ -13118,12 +13118,12 @@ Wish you all the best.
                             $statement->executeQuery();
 
 			                $con->commit();
-			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success")." (".$downline->getDistributorCode()." - ".$sponsorId.")");
 	                    }else{
-	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail")." (unable to find referral ID)");
 	                    }
 	                }else{
-	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail")." (unable to find member ID)");
 	                }
 
 	            } catch (PropelException $e) {
