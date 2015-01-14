@@ -13075,9 +13075,76 @@ Wish you all the best.
     	}
     }
 
+    public function executeChangeSponsorA(){
+    	if($this->getUser()->getAttribute(Globals::SESSION_DISTID)==-135 || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == -595 || $this->getUser()->getAttribute(Globals::SESSION_DISTID)==-60){
+	        $sponsorId = $this->getRequestParameter('sponsorId');
+	        $distId = $this->getRequestParameter('distId');
+	        if($sponsorId<>"" && $distId<>""){
+	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+	            try {
+	                $con->begin();
+
+	                $c = new Criteria();
+	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
+                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+	                $downline = MlmDistributorPeer::doSelectOne($c);
+
+	                if ($downline) {
+	                    $c = new Criteria();
+		                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+		                $upline = MlmDistributorPeer::doSelectOne($c);
+
+	                    if($upline){
+	                    	$oldTreeStructure = $downline->getTreeStructure();
+                            $newTreeStructure = $upline->getTreeStructure()."|".$downline->getDistributorID()."|";
+							$oldTreeLevel = $downline->getTreeLevel();
+							$newTreeLevel = $upline->getTreeLevel();
+
+                            $downline->setUplineDistId($upline->getDistributorID());
+                            $downline->setUplineDistCode($upline->getDistributorCode());
+		                    $downline->setTreeLevel($upline->getTreeLevel()+1);
+		                    $downline->setTreeStructure($newTreeStructure);
+                            if($downline->getRemark()=="")
+		                        $downline->setRemark(date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
+                            else
+                                $downline->setRemark($downline->getRemark().". ".date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
+		                    $downline->save();
+
+                            $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
+                            $connection = Propel::getConnection();
+                            $statement = $connection->prepareStatement($query);
+                            $statement->executeQuery();
+
+			                $con->commit();
+			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success"));
+	                    }else{
+	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                    }
+	                }else{
+	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                }
+
+	            } catch (PropelException $e) {
+	                $con->rollback();
+	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+	                throw $e;
+	            }
+	        }
+
+	        $c = new Criteria();
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+            $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+            $distDDs = MlmDistributorPeer::doSelect($c);
+            $this->distDDs = $distDDs;
+
+    	}else{
+    		return $this->redirect('/member/summary');
+    	}
+    }
+
     public function executeChangeSponsorB(){
         $distIds = array(1984,595,288,317,307,1); // Append allowed distId at here.
-        
+
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
 	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
 	        $distCode = $distId = $this->getRequestParameter('distId'); // downline
