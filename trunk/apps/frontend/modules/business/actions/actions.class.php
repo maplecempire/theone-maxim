@@ -10,6 +10,51 @@
  */
 class businessActions extends sfActions
 {
+    public function executeDoCorrectPairingPoint()
+    {
+        $queryDate = "2014-11-30";
+        $distArray = explode(',', "15,57,60,61,71,104,115,124,135,142,143,164,203,237,240,349,481,564,595,665,682,715,763,831,1077,1561,1797,1802,1982,2290,126269,254828,255019,255607,255709,256078,256205,256508,257749,260249,264845,265720,268743,270596,272708,273056,273166,276789,291665,295337,296707,296708,296709");
+
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distArray, Criteria::IN);
+        $mlmDistributors = MlmDistributorPeer::doSelect($c);
+
+        foreach ($mlmDistributors as $distDB) {
+            $totalRpCredit = $this->getAccountLedgerCreditBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            $totalRpDebit = $this->getAccountLedgerDebitBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            print_r("<br>".$distDB->getDistributorId());
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $distDB->getDistributorId());
+            $c->add(MlmAccountLedgerPeer::ACCOUNT_TYPE, "RP");
+            $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "CLOSING");
+            $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
+
+            if ($mlm_account_ledger) {
+                $mlm_account_ledger->setCredit($totalRpCredit);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($totalRpCredit);
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                if ($totalRpDebit > 0) {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                    $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($totalRpDebit);
+                    $mlm_account_ledger->setBalance($totalRpCredit - $totalRpDebit);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+            }
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeArchivePairing()
     {
         $this->executeDoArchivePairing();
@@ -53,13 +98,14 @@ class businessActions extends sfActions
             $totalCp1 = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT, $queryDate);
             $totalDebitAccount = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT, $queryDate);
             $totalDebit = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_DEBIT, $queryDate);
-            $totalRp = $this->getAccountLedgerBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            $totalRpCredit = $this->getAccountLedgerCreditBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
+            $totalRpDebit = $this->getAccountLedgerDebitBalance($distDB->getDistributorId(), Globals::ACCOUNT_TYPE_RP, $queryDate);
 
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
             try {
                 $con->begin();
 
-                print_r("<br>".$distDB->getDistributorId().":".$totalCp2.":".$totalCp3.":".$totalRt.":".$totalCp1.":".$totalDebitAccount.":".$totalDebit.":".$totalRp);
+                print_r("<br>".$distDB->getDistributorId().":".$totalCp2.":".$totalCp3.":".$totalRt.":".$totalCp1.":".$totalDebitAccount.":".$totalDebit.":".$totalRpCredit.":".$totalRpDebit);
                 $this->removeAccountLedger($distDB->getDistributorId(), $queryDate);
 
                 if ($totalCp2 > 0) {
@@ -140,15 +186,28 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalRp > 0) {
+                if ($totalRpCredit > 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
                     $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
-                    $mlm_account_ledger->setCredit($totalRp);
+                    $mlm_account_ledger->setCredit($totalRpCredit);
                     $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($totalRp);
+                    $mlm_account_ledger->setBalance($totalRpCredit);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+                if ($totalRpDebit > 0) {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distDB->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CLOSING);
+                    $mlm_account_ledger->setRemark("CLOSING ".$queryDate);
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($totalRpDebit);
+                    $mlm_account_ledger->setBalance($totalRpCredit - $totalRpDebit);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
@@ -1369,6 +1428,48 @@ class businessActions extends sfActions
     function getAccountLedgerBalance($distributorId, $accountType, $date)
     {
         $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getAccountLedgerCreditBalance($distributorId, $accountType, $date)
+    {
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_account_ledger_20141231 WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getAccountLedgerDebitBalance($distributorId, $accountType, $date)
+    {
+        $query = "SELECT SUM(debit) AS SUB_TOTAL FROM mlm_account_ledger_20141231 WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
         if ($date != null) {
             $query .= " AND created_on <= '" . $date . " 23:59:59'";
         }
