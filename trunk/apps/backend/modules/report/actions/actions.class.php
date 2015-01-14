@@ -10,6 +10,45 @@
  */
 class reportActions extends sfActions
 {
+    public function executeNextBill120150114()
+    {
+        $dateFrom = "2014-11-21 00:00:00";
+        $dateTo = "2015-01-07 23:59:59";
+        $distDBs = $this->getDistributorList(264845, $dateFrom, $dateTo);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $str = "<table>";
+        $idx = 0;
+        foreach ($distDBs as $distDB) {
+            //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $leader."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();*/
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeMaxcapGalaDinner2015 Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeQueryAccountLedger20141231()
     {
         $c = new Criteria();
@@ -1744,6 +1783,27 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                     WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."' AND dist.active_datetime <= '".$dateTo."'
                             AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= 3";
 
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
+    }
+    function getTotalSponsor($distributorId, $dateFrom, $dateTo, $packageId)
+    {
+        $query = "SELECT COUNT(dist.upline_dist_id), uplinedist.distributor_id, uplinedist.distributor_code, uplinedist.full_name
+                        , package.price, dist.active_datetime, dist.tree_structure
+                    FROM mlm_distributor dist
+                        LEFT JOIN mlm_distributor uplinedist ON uplinedist.distributor_id = dist.upline_dist_id
+                        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+                    WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."'
+                        AND dist.active_datetime <= '".$dateTo."'
+                        AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= 5
+            group by dist.upline_dist_id";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
