@@ -19,7 +19,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
-        $str = "<table>";
+        $str = "<table><tr><td>Member ID</td><td>Full Name</td><td>FMC</td><td>Date</td><td>Leader</td></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
@@ -38,7 +38,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['credit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
