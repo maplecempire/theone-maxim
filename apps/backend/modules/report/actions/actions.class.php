@@ -14,7 +14,7 @@ class reportActions extends sfActions
     {
         $dateFrom = "2014-11-21 00:00:00";
         $dateTo = "2015-01-07 23:59:59";
-        $distDBs = $this->getDistributorList(264845, $dateFrom, $dateTo);
+        $distDBs = $this->getTotalSponsor(264845, $dateFrom, $dateTo, 5);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -1802,7 +1802,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
                     WHERE dist.loan_account = 'N' AND dist.active_datetime >= '".$dateFrom."'
                         AND dist.active_datetime <= '".$dateTo."'
-                        AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= 5
+                        AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= ".$packageId."
             group by dist.upline_dist_id";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
