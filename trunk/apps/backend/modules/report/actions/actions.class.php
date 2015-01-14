@@ -38,7 +38,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $leader."</td></tr>";
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['price']."</td><td>" . $distDB['active_datetime']."</td><td>" . $distDB['total_count']."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
@@ -1795,7 +1795,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     }
     function getTotalSponsor($distributorId, $dateFrom, $dateTo, $packageId)
     {
-        $query = "SELECT COUNT(dist.upline_dist_id), uplinedist.distributor_id, uplinedist.distributor_code, uplinedist.full_name
+        $query = "SELECT COUNT(dist.upline_dist_id) as total_count, uplinedist.distributor_id, uplinedist.distributor_code, uplinedist.full_name
                         , package.price, dist.active_datetime, dist.tree_structure
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_distributor uplinedist ON uplinedist.distributor_id = dist.upline_dist_id
