@@ -13088,7 +13088,7 @@ Wish you all the best.
 
 	                $c = new Criteria();
 	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
-                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+                    $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
 	                $downline = MlmDistributorPeer::doSelectOne($c);
 
 	                if ($downline) {
