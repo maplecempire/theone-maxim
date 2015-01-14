@@ -10,6 +10,45 @@
  */
 class reportActions extends sfActions
 {
+    public function executeFmcReport()
+    {
+        $dateFrom = "2014-11-21 00:00:00";
+        $dateTo = "2015-01-11 23:59:59";
+        $distDBs = $this->getFmcList($dateFrom, $dateTo);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $str = "<table>";
+        $idx = 1;
+        foreach ($distDBs as $distDB) {
+            //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['credit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();*/
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeFmcReport Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeNextBill120150114()
     {
         $dateFrom = "2014-11-21 00:00:00";
@@ -1804,6 +1843,28 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                         AND dist.active_datetime <= '".$dateTo."'
                         AND dist.tree_structure like '%|" . $distributorId . "|%' AND dist.init_rank_id >= ".$packageId."
             group by dist.upline_dist_id";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
+    }
+    function getFmcList($dateFrom, $dateTo)
+    {
+        $query = "SELECT acc.account_id, acc.dist_id, acc.account_type, acc.transaction_type
+                        , acc.rolling_point, acc.credit, acc.debit, acc.balance, acc.remark
+                        , acc.internal_remark, acc.referer_id, acc.referer_type, acc.created_by
+                        , acc.created_on, acc.updated_by, acc.updated_on
+                        , dist.tree_structure, dist.distributor_code, dist.full_name
+                    FROM mlm_account_ledger acc
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = acc.dist_id
+                        where
+                acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'
+                        AND acc.created_on <= '".$dateTo."'";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
