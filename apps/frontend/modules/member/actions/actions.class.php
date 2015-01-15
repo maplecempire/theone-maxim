@@ -5954,6 +5954,65 @@ We look forward to your custom in the near future. Should you have any queries, 
                 break;
             }
         }*/
+        $message = "Dear Maxim Members
+<br>亲爱的马胜会员:
+<br>
+<br>We have been notified that there has been a breach of our Code of Ethics, which has resulted in us not fulfilling local legislation, all investment payments must be made through I-Account and a 10% FMC will be charged according to the purchased package starting from 19/1/2015.
+<br>最近公司注意到市场上有人违反公司道德行为准则,结果导致公司受到地方法规的调查;现决定从2015.1.19日起,所有投资金额都必须通过i-Account汇给公司,且每个配套都必须支付10%的FMC基金管理费用.
+<br>
+<br>For example, $11,000 is required to purchase a $10,000 package
+<br>例如: 若需购买1万美金的配套,则需支付11000美金.
+<br>
+<br>This system will be implemented on 19/1/2015 and there will be NO extensions
+<br>该政策将于2015.1.19日正式生效,且不做任何延期.
+<br>
+<br>Your prompt action and kind understanding on this matter is highly appreciated
+<br>敬请留意,非常谢谢大家的理解与配合!
+<br>
+<br>Thank you!
+<br>谢谢!
+<br>
+<br>친애하는 맥심 회원 여러분,
+<br>
+<br>당사는 당사의 윤리규정을 어기고 있는 회원이 있다고 통보받아왔으며, 각 지역의 법을 충분히 지키지 못한 결과를 초래하게 되었습니다.  모든 투자에 대한 지불은 I-어카운트를 통해서만 이루어져야 하며, 2015년 1월 19일부터 구매한 패키지에 대한 10%의 FMC (펀드 매니지먼트 코스트)가 부과될 것입니다.
+<br>
+<br>예를 들어, 미화 10,000달러 패키지를 구매하기 위하여서는 미화11,000달러가 필요합니다.
+<br>
+<br>이 시스템은 2015년 1월 9일부터 실행될 것이며, 기한 연장은 없을 것입니다.
+<br>
+<br>귀하의 빠른 조치와 이해해 대해 심심한 감사를 드립니다.
+<br>
+<br>감사합니다.
+<br>
+<br>マキシム・メンバーの皆様
+<br>
+<br>我々の倫理規定への違反により、現地の法律を満たしていないとの通達がありました。2015年1月19日より、すべての投資支払いはi-Accountを通じて行われ、購入されたパッケージに応じ、10％のFMCが課金されます。
+<br>
+<br>例えば、11,000ドルが10,000ドルのパッケージを購入するために必要になります。
+<br>
+<br>このシステムは2015年1月19日に実装され、延期はありません。
+<br>
+<br>皆様の迅速な行動とご理解、ご協力に感謝します。
+<br>
+<br>ありがとうございます。";
+
+        // 255709	korean001
+        // 273058	Yongman
+        $isKorean001YongMan = false;
+        $pos = strrpos($distributor->getTreeStructure(), "|255709|");
+        if ($pos === false) { // note: three equal signs
+            $pos = strrpos($distributor->getTreeStructure(), "|273058|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                $isKorean001YongMan = true;
+            }
+        } else {
+            $isKorean001YongMan = true;
+        }
+        if ($isKorean001YongMan) {
+            $this->setFlash('successMsg', $this->getContext()->getI18N()->__($message));
+        }
     }
 
     public function executeAnnouncementList()
