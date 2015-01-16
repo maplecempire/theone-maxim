@@ -5435,20 +5435,6 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $sponsorId = $this->getRequestParameter('sponsorId');
         $distId = $this->getRequestParameter('distId');
-        $manualMode = $this->getRequestParameter('manualMode');
-
-        if ($manualMode == '1') {
-            $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
-            $distDB = MlmDistributorPeer::doSelectOne($c);
-
-            if ($distDB) {
-                $distId = $distDB->getDistributorId();
-            } else {
-                echo null;
-                return sfView::HEADER_ONLY;
-            }
-        }
 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
@@ -13209,94 +13195,70 @@ Wish you all the best.
         $distIds = array(1984,595,288,317,307,1); // Append allowed distId at here.
 
         if(in_array($this->getUser()->getAttribute(Globals::SESSION_DISTID), $distIds)){
-	        $sponsorId = $this->getRequestParameter('sponsorId'); // upline
-	        $distCode = $distId = $this->getRequestParameter('distId'); // downline
+            $sponsorId = $this->getRequestParameter('sponsorId'); // upline
+            $distCode = $this->getRequestParameter('distId'); // downline
 
-            // flag to prevent timeout for user that have too many downline.
-            // access url: /member/changeSponsorB?manualMode=1
-            $this->manualMode = $this->getRequestParameter('manualMode', false);
+            if($sponsorId<>"" && $distCode<>""){
+                $con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
 
-	        if($sponsorId<>"" && $distId<>""){
-	        	$con = Propel::getConnection(MlmDistributorPeer::DATABASE_NAME);
-	            try {
-	                $con->begin();
+                    $c = new Criteria();
+                    $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distCode);
+                    $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+                    $downline = MlmDistributorPeer::doSelectOne($c);
 
-                    if ($this->manualMode) {
+                    if ($downline) {
                         $c = new Criteria();
-                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distId);
-                        $distDB = MlmDistributorPeer::doSelectOne($c);
+                        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
+                        $upline = MlmDistributorPeer::doSelectOne($c);
 
-                        if ($distDB) {
-                            $distId = $distDB->getDistributorId();
-                        } else {
-	                	    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (distributor code not found)"));
-                            return;
+                        if($upline){
+                            $oldTreeStructure = $downline->getTreeStructure();
+                            $newTreeStructure = $upline->getTreeStructure()."|".$downline->getDistributorID()."|";
+                            $oldTreeLevel = $downline->getTreeLevel();
+                            $newTreeLevel = $upline->getTreeLevel();
+
+                            if($downline->getRemark()=="")
+                                $downline->setRemark(date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
+                            else
+                                $downline->setRemark($downline->getRemark().". ".date('Y-m-d').": change sponsor from ".$downline->getUplineDistCode()." to ".$upline->getDistributorCode());
+
+                            $downline->setUplineDistId($upline->getDistributorID());
+                            $downline->setUplineDistCode($upline->getDistributorCode());
+                            $downline->setTreeLevel($upline->getTreeLevel()+1);
+                            $downline->setTreeStructure($newTreeStructure);
+                            $downline->save();
+
+                            $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
+                            $connection = Propel::getConnection();
+                            $statement = $connection->prepareStatement($query);
+                            $statement->executeQuery();
+
+                            $con->commit();
+                            $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $downline->getDistributorCode() ." - " . $sponsorId . ")"));
+                        }else{
+                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail, referrer not found."));
                         }
+                    }else{
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail, distributor not found."));
                     }
 
-	                $c = new Criteria();
-	                $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $distId);
-	                //$c->addAnd(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
-	                $downline = MlmDistributorPeer::doSelect($c);
-
-	                if ($downline) {
-	                    $c = new Criteria();
-		                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $sponsorId);
-		                $upline = MlmDistributorPeer::doSelectOne($c);
-
-	                    if($upline){
-
-                            foreach ($downline as $dl) {
-                                $oldTreeStructure = $dl->getTreeStructure();
-                                $newTreeStructure = $upline->getTreeStructure()."|".$dl->getDistributorID()."|";
-                                $newTreeLevel = $upline->getTreeLevel();
-                                $oldTreeLevel = $dl->getTreeLevel();
-
-                                if($dl->getRemark()=="")
-                                    $dl->setRemark(date('Y-m-d').": change sponsor from ".$dl->getUplineDistCode()." to ".$upline->getDistributorCode());
-                                else
-                                    $dl->setRemark($dl->getRemark().". ".date('Y-m-d').": change sponsor from ".$dl->getUplineDistCode()." to ".$upline->getDistributorCode());
-
-                                $dl->setUplineDistId($upline->getDistributorID());
-                                $dl->setUplineDistCode($upline->getDistributorCode());
-                                $dl->setTreeLevel($upline->getTreeLevel()+1);
-                                $dl->setTreeStructure($newTreeStructure);
-                                $dl->save();
-
-                                $query = "UPDATE mlm_distributor SET tree_level=tree_level-".$oldTreeLevel."+".$newTreeLevel."+1, tree_structure=REPLACE(tree_structure, '".$oldTreeStructure."', '".$newTreeStructure."') WHERE tree_structure LIKE '%".$oldTreeStructure."%'";
-                                $connection = Propel::getConnection();
-                                $statement = $connection->prepareStatement($query);
-                                $statement->executeQuery();
-                            }
-
-			                $con->commit();
-			                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Change referrer ID success (" . $distCode ." - " . $sponsorId . ")"));
-	                    }else{
-	                    	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
-	                    }
-	                }else{
-	                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
-	                }
-
-	            } catch (PropelException $e) {
-	                $con->rollback();
-	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail (" . $distCode . ")"));
-	                throw $e;
-	            }
-	        }
-
-            if (!$this->manualMode) {
-                $c = new Criteria();
-//                $c->add(MlmDistributorPeer::UPLINE_DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
-                $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
-                $distDDs = MlmDistributorPeer::doSelect($c);
-                $this->distDDs = $distDDs;
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Change referrer ID fail"));
+                    throw $e;
+                }
             }
-    	}else{
-    		return $this->redirect('/member/summary');
-    	}
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%", Criteria::LIKE);
+            $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+            $distDDs = MlmDistributorPeer::doSelect($c);
+            $this->distDDs = $distDDs;
+        }else{
+            return $this->redirect('/member/summary');
+        }
     }
 
     function checkFmcCharges(){
