@@ -33,7 +33,6 @@
         });
     });
 
-
     function verifySponsorId() {
         waiting();
         $.ajax({
@@ -43,18 +42,14 @@
             cache: false,
             data: {
                 sponsorId : $('#sponsorId').val(),
-                distId : $('#distId').val(),
-                manualMode : '<?php echo ($manualMode ? 1 : 0) ?>'
+                distId : $('#distId').val()
             },
             success : function(data) {
                 if (data == null || data == "") {
-                    if (confirm("<?php echo __('Invalid User Name or Invalid Tree Structure. Proceed with caution. Continue?')?>")) {
-                        $.unblockUI();
-                    } else {
-                        $('#sponsorId').val("");
-                        $('#sponsorId').focus();
-                        $.unblockUI();
-                    }
+                    $.unblockUI();
+                    error("<?php echo __('Invalid User Name or Invalid Tree Structure: ')?>" + $('#sponsorId').val());
+                    $('#sponsorId').val("");
+                    $('#sponsorId').focus();
                 } else {
                     $.unblockUI();
                 }
@@ -103,10 +98,6 @@
         <td>
             <form action="<?php echo url_for("/member/changeSponsorB")?>" id="transferForm" name="transferForm" method="post">
 
-            <?php if ($manualMode) { ?>
-            <input type="hidden" id="manualMode" name="manualMode" value="1" />
-            <?php } ?>
-
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -130,9 +121,6 @@
                     <td>&nbsp;</td>
                     <td><?php echo __('Direct Downline'); ?></td>
                     <td>
-                        <?php if ($manualMode) { ?>
-                        <input name="distId" type="text" id="distId" tabindex="1"/>
-                        <?php } else { ?>
                         <select name="distId" id="distId" tabindex="1">
                             <?php
                                 if (count($distDDs) >= 1) {
@@ -144,7 +132,6 @@
                                 }
                             ?>
                         </select>
-                        <?php } ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
