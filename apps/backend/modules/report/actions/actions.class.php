@@ -10,6 +10,30 @@
  */
 class reportActions extends sfActions
 {
+    public function executeTestFmcReport()
+    {
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leaderId = 0;
+            $leader = "";
+            $treeStr = "|308347||308348||308349||1||9||274020||314539||314540||314542||175||43||49||57||58||60||140||142||298||1201||260946||273267||311511|";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                print_r($leaderArrs[$i]."<br>");
+                $pos = strrpos($treeStr, "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+        print_r($leader."::".$leaderId);
+        return sfView::HEADER_ONLY;
+
+    }
     public function executeFmcReport()
     {
         $dateFrom = "2014-11-21 00:00:00";
@@ -38,7 +62,8 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+            //$str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td><td>" . $distDB['tree_structure']."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
