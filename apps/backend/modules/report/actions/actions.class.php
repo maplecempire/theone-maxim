@@ -19,7 +19,7 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
-        $str = "<table><tr><td>Member ID</td><td>Full Name</td><td>FMC</td><td>Date</td><td>Leader</td></tr>";
+        $str = "<table><tr><td>Member ID </td><td>Full Name</td><td>FMC</td><td>Date</td><td>Leader</td></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
@@ -52,7 +52,7 @@ class reportActions extends sfActions
     public function executeNextBill120150114()
     {
         $dateFrom = "2014-11-21 00:00:00";
-        $dateTo = "2015-01-07 23:59:59";
+        $dateTo = "2014-12-31 23:59:59";
         $distDBs = $this->getTotalSponsor(264845, $dateFrom, $dateTo, 5);
 
         $idx = count($distDBs);
