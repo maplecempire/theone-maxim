@@ -62,8 +62,8 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            //$str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
-            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td><td>" . $distDB['tree_structure']."</td></tr>";
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+//            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td><td>" . $distDB['tree_structure']."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
