@@ -1933,7 +1933,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                         LEFT JOIN mlm_distributor dist ON dist.distributor_id = acc.dist_id
                         where
                 acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'
-                        AND acc.created_on <= '".$dateTo."'";
+                        AND acc.created_on <= '".$dateTo."' and acc.dist_id > 0";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
