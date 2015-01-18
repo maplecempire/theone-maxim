@@ -1044,6 +1044,60 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='61'>iAccount Notice
+<br>iAccount 通告
+<br>iAccount 고지
+<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "18 January 2015";
+                ?>
+            </div>
+
+            <div id="page_61" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>2015年1月份取现通知
+<br>
+<br>In the process of implementing iAccount, a sudden surge in the number of applicants is being experienced by iAccount processing centre. As such some members may not have received their iAccount yet in order to make January withdrawals. Such members are advised to email anna@maximtrader.com or contact her at +6012 226 3718 by 5pm on 23rd January (GMT +8) and we will assist to process your request as a special case. We apologize for any inconvenience caused.
+<br>在实施iAccount的过程中, iAccount处理中心接到的客户申请数量出现了爆炸性的增长;因此导致目前尚有部分会员未收到iAccount账户以及时申请接收2015年1月份的取现. 我们建议此类会员尽快在2015.1.23日下午5点(GMT+8)之前邮件至anna@maximtrader.com或电话至+6012 226 3718,以便我们为您做特殊处理. 为此造成的不便,我们深表歉意.
+<br>
+<br>Thank you.谢谢!
+<br>CEO 首席执行官
+<br>
+<br>2015년 인출 공지 :
+<br>
+<br>i어카운트를 실행하는 과정에서, i어카운트 프로세싱 센터는 신청자 수의 갑작스런 급증을 경험하게 되었습니다.  이러한 이유로 회원들 중 1월 인출을 위한  i어카운트를 아직 받지 못한 분들이 발생하였습니다.  만약 아직 i어카운트를 받지 못한 회원이 계시다면  1월 23일 오후 5시까지 (GMT+8) anna@maximtrader.com로 이메일을 보내주시거나  +6012 226 3718로 전화주시기 바랍니다.  특별한 케이스로 진행될 수 있도록 도와드리겠습니다. 불편을 끼쳐드려서 죄송합니다.
+<br>
+<br>감사합니다.
+<br>CEO
+<br>
+<br>2015年1月　引き出しに関わるお知らせ
+<br>
+<br>iAccount実施の過程におきまして、
+<br>iAccountの処理センターに突然、多大な申し込み数がよせられました。そのため、メンバーの皆様のなかには、まだ１月の支払いのための
+<br>iAccount口座を受け取っていない方もいるのではないかと思われます。そのようなメンバーの皆様は、1月23日(GMT
+<br>+8)までに、anna@maximtrader.comへメールされるか、または  +6012 226
+<br>3718へ電話してください。私たちがお客様を特別なケースとして取り扱うようにお手伝いします。ご不便をおかけし申し訳ありません。
+<br>
+<br>ありがとうございます。
+<br>
+<br>CEO
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='60'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
