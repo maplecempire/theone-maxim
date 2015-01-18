@@ -1011,6 +1011,7 @@ class memberActions extends sfActions
             $c = new Criteria();
             $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
             $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
+            $c->setLimit(1000);
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
