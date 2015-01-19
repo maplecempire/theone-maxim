@@ -159,7 +159,7 @@ class reportActions extends sfActions
     {
         $dateFrom = "2014-11-20 00:00:00";
         $dateTo = "2015-01-28 23:59:59";
-        $distDBs = $this->getMbsList(null, $dateFrom, $dateTo, 3);
+        $distDBs = $this->getMbsList($dateFrom, $dateTo);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -167,9 +167,6 @@ class reportActions extends sfActions
         $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
-            if ($distDB['total_count'] < 2) {
-                continue;
-            }
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
             $leaderId = 0;
             $leader = "";
@@ -1992,19 +1989,19 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     function getMbsList($dateFrom, $dateTo)
     {
         $query = "SELECT dist.distributor_code, dist.full_name
-                    , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure
+                    , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure, dist.active_datetime
             FROM mlm_distributor dist
                 LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
             WHERE
-                dist.loan_account = 'N' AND dist.init_rank_id >= 5 AND active_datetime >= '".$dateFrom."'
-                and active_datetime <= '".$dateTo."'
+                dist.loan_account = 'N' AND dist.init_rank_id >= 5 AND dist.active_datetime >= '".$dateFrom."'
+                and dist.active_datetime <= '".$dateTo."'
             UNION
             SELECT ggdist.distributor_code, ggdist.full_name
-                    , gg.amount, ggdist.active_datetime, ggdist.email, ggdist.contact, ggdist.tree_structure
+                    , gg.amount, ggdist.active_datetime, ggdist.email, ggdist.contact, ggdist.tree_structure, gg.cdate
             FROM gg_purchase gg
                 LEFT JOIN mlm_distributor ggdist ON gg.uid = ggdist.distributor_id
             WHERE gg.amount >= 30000 AND gg.cdate >= '".$dateFrom."'
-                and gg.cdate <= '".$dateTo."'";
+                and gg.cdate <= '".$dateTo."' order by dist.active_datetime";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
