@@ -2001,7 +2001,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
             FROM gg_purchase gg
                 LEFT JOIN mlm_distributor ggdist ON gg.uid = ggdist.distributor_id
             WHERE gg.amount >= 30000 AND gg.cdate >= '".$dateFrom."'
-                and gg.cdate <= '".$dateTo."' order by dist.active_datetime";
+                and gg.cdate <= '".$dateTo."'";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
