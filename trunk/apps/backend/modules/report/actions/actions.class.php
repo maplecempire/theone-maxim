@@ -52,11 +52,12 @@ class reportActions extends sfActions
         $resultset = $statement->executeQuery();
         $resultArray = array();
         $result = 0;
+        var_dump($query);
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             $result = $arr["SUB_TOTAL"];
         }
-        print_r($result);
+        print_r("<br><br>".$result);
         return sfView::HEADER_ONLY;
     }
     public function executeTestFmcReport()
