@@ -10,6 +10,55 @@
  */
 class reportActions extends sfActions
 {
+    public function executeCheckPersonalSales()
+    {
+        $memberId = $this->getRequestParameter('id');
+        $dateFrom = $this->getRequestParameter('dateFrom');
+        $dateTo = $this->getRequestParameter('dateTo');
+
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $memberId . "
+                            AND newDist.created_on >= '" . $dateFrom . "' AND newDist.created_on <= '" . $dateTo . "' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.upline_dist_id = " . $memberId . "
+                            AND history.created_on >= '" . $dateFrom . "' AND history.created_on <= '" . $dateTo . "' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
+            WHERE dist.distributor_id = " . $memberId;
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $result = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $result = $arr["SUB_TOTAL"];
+        }
+        print_r($result);
+        return sfView::HEADER_ONLY;
+    }
     public function executeTestFmcReport()
     {
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -732,7 +781,7 @@ class reportActions extends sfActions
             $distDB->setBkkQualify1("N");
             $distDB->setBkkQualify2("N");
             $distDB->setBkkQualify3("N");
-            $distDB->setBkkPersonalSales(0);
+            $distDB->setBkkPersonalSalessetBkkPersonalSales(0);
 
             print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
             $signPackageAmount = $this->getSignPackageAmount($distDB->getDistributorId(), $dateFrom, $dateTo);
