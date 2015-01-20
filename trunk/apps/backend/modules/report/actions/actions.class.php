@@ -2002,10 +2002,10 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
             $query .= " AND dist.tree_structure like '%|" . $distributorId . "|%'";
         }
         if ($packageId != null) {
-            $query .= " AND dist.init_rank_id >= ".$packageId.";
+            $query .= " AND dist.init_rank_id >= ".$packageId;
         }
         if ($packageAmount != null) {
-            $query .= " AND package.price >= ".$packageAmount.";
+            $query .= " AND package.price >= ".$packageAmount;
         }
         $query .= " group by dist.upline_dist_id";
 
