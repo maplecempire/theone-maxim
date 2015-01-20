@@ -1036,7 +1036,7 @@ class memberActions extends sfActions
                 //var_dump("hihi");
                 $c->addAnd(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDateFrom, Criteria::GREATER_EQUAL);
             }
-            $c->setLimit(500);
+            $c->setLimit(50);
             //var_dump($c);
             //exit();
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
