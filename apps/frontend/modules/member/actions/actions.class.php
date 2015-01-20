@@ -1071,6 +1071,8 @@ class memberActions extends sfActions
                     var_dump($packagePrice);
                     var_dump("<br>");
                     var_dump(is_numeric($packagePrice));
+                    $mlmRoiDividend->setStatusCode("ERROR");
+                    $mlmRoiDividend->save();
                     continue;
                 }
 
