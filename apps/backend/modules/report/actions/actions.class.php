@@ -233,6 +233,9 @@ class reportActions extends sfActions
                     break;
                 }
             }
+            if ($leader == "") {
+                continue;
+            }
             $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['contact']."</td><td>" . $distDB['email']."</td><td>" . $distDB['active_datetime']."</td><td>" . $leader."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
