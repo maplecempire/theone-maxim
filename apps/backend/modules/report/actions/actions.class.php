@@ -128,7 +128,7 @@ class reportActions extends sfActions
     {
         $dateFrom = "2014-11-21 00:00:00";
         $dateTo = "2014-12-31 23:59:59";
-        $distDBs = $this->getTotalSponsor(264845, $dateFrom, $dateTo, 5);
+        $distDBs = $this->getTotalSponsor(264845, $dateFrom, $dateTo, 5, null);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -167,7 +167,7 @@ class reportActions extends sfActions
     {
         $dateFrom = "2014-10-01 00:00:00";
         $dateTo = "2014-10-31 23:59:59";
-        $distDBs = $this->getTotalSponsor(null, $dateFrom, $dateTo, 3);
+        $distDBs = $this->getTotalSponsor(null, $dateFrom, $dateTo, null, 100000);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -1988,7 +1988,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         }
         return $arr;
     }
-    function getTotalSponsor($distributorId, $dateFrom, $dateTo, $packageId)
+    function getTotalSponsor($distributorId, $dateFrom, $dateTo, $packageId, $packageAmount)
     {
         $query = "SELECT COUNT(dist.upline_dist_id) as total_count, uplinedist.distributor_id, uplinedist.distributor_code, uplinedist.full_name
                         , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure
@@ -2001,9 +2001,14 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         if ($distributorId != null) {
             $query .= " AND dist.tree_structure like '%|" . $distributorId . "|%'";
         }
+        if ($packageId != null) {
+            $query .= " AND dist.init_rank_id >= ".$packageId.";
+        }
+        if ($packageAmount != null) {
+            $query .= " AND package.price >= ".$packageAmount.";
+        }
+        $query .= " group by dist.upline_dist_id";
 
-        $query .= " AND dist.init_rank_id >= ".$packageId."
-            group by dist.upline_dist_id";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
