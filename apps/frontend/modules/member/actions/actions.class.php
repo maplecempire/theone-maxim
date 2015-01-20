@@ -10,7 +10,25 @@
 class memberActions extends sfActions
 {
     public function executeTest() {
-        $exp_date = "2014-07-31";
+        $params = array();
+        $params['login'] = "80119931";
+
+        $mt4request = new CMT4DataReciver;
+        $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+        $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+        $packagePrice = $answer['balance'];
+        var_dump($answer);
+        if ($packagePrice == null) {
+            var_dump("none");
+        } else {
+            var_dump(is_numeric($packagePrice));
+            var_dump("==>".$packagePrice);
+        }
+
+        $mt4request->CloseConnection();
+        var_dump($packagePrice);
+        /*$exp_date = "2014-07-31";
         $todays_date = date("Y-m-d");
         $today = strtotime($todays_date);
         $expiration_date = strtotime($exp_date);
@@ -19,7 +37,7 @@ class memberActions extends sfActions
         } else {
             $valid = "no";
         }
-        var_dump($valid);
+        var_dump($valid);*/
         //echo $this->getRollingPointData();
 
         /*$query = "SELECT mt4_user_name, dist_id FROM mlm_roi_dividend group by mt4_user_name";
@@ -998,7 +1016,7 @@ class memberActions extends sfActions
         return $this->redirect('/member/applyDebitCard');
     }
     public function executeManualRetrieveGmailMailAttachment() {
-        $this->retrieveGmailMailAttachment();
+        //$this->retrieveGmailMailAttachment();
 
         print_r("+++++ ROI Dividend +++++<br>");
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
@@ -1007,11 +1025,20 @@ class memberActions extends sfActions
             $con->begin();
 
             $dateUtil = new DateUtil();
+            $bonusDateFrom = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 00:00:00";
             $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
             $c = new Criteria();
             $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
+            //$c->add(MlmRoiDividendPeer::MT4_USER_NAME, "8003141");
             $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
-            $c->setLimit(1000);
+            if ($this->getRequestParameter('all') == "Y") {
+            } else {
+                //var_dump("hihi");
+                $c->addAnd(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDateFrom, Criteria::GREATER_EQUAL);
+            }
+            $c->setLimit(500);
+            //var_dump($c);
+            //exit();
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
@@ -1027,7 +1054,162 @@ class memberActions extends sfActions
                 $dividendDate = $mlmRoiDividend->getDividendDate();
                 print_r("DistId " . $distId . "<br>");
 
-                $dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
+                // api ******
+                $params = array();
+                $params['login'] = $mt4UserName;
+
+                $mt4request = new CMT4DataReciver;
+                $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+                $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+
+                $packagePrice = $answer['balance'];
+                if ($packagePrice == null && is_numeric($packagePrice) == false) {
+                    var_dump($answer);
+                    var_dump($mt4UserName);
+                    var_dump($packagePrice);
+                    var_dump("<br>");
+                    var_dump(is_numeric($packagePrice));
+                    continue;
+                }
+
+                if ($packagePrice < 0) {
+                    $packagePrice = 0;
+                }
+                $mt4request->CloseConnection();
+
+                $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
+
+                $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
+                $mlm_account_ledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", ".$mt4UserName." #".$idx);
+                $mlm_account_ledger->setCredit($dividendAmount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->mirroringAccountLedger($mlm_account_ledger, "49");
+
+                $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                $sponsorDistCommissionledger->setMonthTraded(date('m'));
+                $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                $sponsorDistCommissionledger->setDistId($distId);
+                $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                $sponsorDistCommissionledger->setCredit($dividendAmount);
+                $sponsorDistCommissionledger->setDebit(0);
+                $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                $sponsorDistCommissionledger->setBalance($fundManagementBalance + $dividendAmount);
+                $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", ".$mt4UserName." #".$idx);
+                $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistCommissionledger->save();
+
+                //$this->revalidateCommission($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                if ($mlmRoiDividend->getExceedDistId() != null) {
+                    $exceedDividendAmount = $packagePrice * $mlmRoiDividend->getExceedRoiPercentage() / 100;
+
+                    $accountBalance = $this->getAccountBalance($mlmRoiDividend->getExceedDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $fundManagementBalance = $this->getCommissionBalance($mlmRoiDividend->getExceedDistId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($mlmRoiDividend->getExceedDistId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
+                    $mlm_account_ledger->setRemark($mt4UserName." #".$idx." (EXCEEDING)");
+                    $mlm_account_ledger->setCredit($exceedDividendAmount);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($accountBalance + $exceedDividendAmount);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $this->mirroringAccountLedger($mlm_account_ledger, "50");
+
+                    $sponsorDistCommissionledger = new MlmDistCommissionLedger();
+                    $sponsorDistCommissionledger->setMonthTraded(date('m'));
+                    $sponsorDistCommissionledger->setYearTraded(date('Y'));
+                    $sponsorDistCommissionledger->setDistId($mlmRoiDividend->getExceedDistId());
+                    $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
+                    $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
+                    //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
+                    $sponsorDistCommissionledger->setCredit($exceedDividendAmount);
+                    $sponsorDistCommissionledger->setDebit(0);
+                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
+                    $sponsorDistCommissionledger->setBalance($fundManagementBalance + $exceedDividendAmount);
+                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getExceedRoiPercentage()."%, Fund:".$packagePrice.", #".$idx." (EXCEEDING)");
+                    $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sponsorDistCommissionledger->save();
+
+                    $mlmRoiDividend->setExceedDividendAmount($exceedDividendAmount);
+                }
+
+                $mt4Username = $mlmRoiDividend->getMt4UserName();
+                // new implement ********************************************************************
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+                $totalRecords = MlmRoiDividendPeer::doCount($c);
+
+                if ($totalRecords < Globals::DIVIDEND_TIMES_ENTITLEMENT) {
+                    $c = new Criteria();
+                    $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
+                    $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
+                    $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+                    if ($mlmRoiDividendDB) {
+                        $idx = $mlmRoiDividendDB->getIdx() + 1;
+                        for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
+                            $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
+
+                            $monthAdded = $idx - 1;
+                            $dividendDate = strtotime("+".$monthAdded." months", $firstDividendTime);
+
+                            $mlm_roi_dividend = new MlmRoiDividend();
+                            $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
+                            $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
+                            $mlm_roi_dividend->setIdx($idx);
+                            //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
+                            $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
+                            $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
+                            $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
+                            $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
+                            $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                            $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
+                            $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
+                            //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
+                            //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
+                            $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
+                            $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_roi_dividend->save();
+
+                            $idx = $idx + 1;
+                        }
+                    }
+                }
+                // new implement end ~ ********************************************************************
+
+                print_r($mlmRoiDividend->getMt4UserName() . ":" . $packagePrice . "<br>");
+                $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
+                $mlmRoiDividend->setDividendAmount($dividendAmount);
+                $mlmRoiDividend->setMt4Balance($packagePrice);
+                $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
+                //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
+                $mlmRoiDividend->save();
+                // api end ******
+
+                /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
                 $dividendDateFrom = $dividendDateStr . " 00:00:00";
                 $dividendDateTo = $dividendDateStr . " 23:59:59";
 
@@ -1038,8 +1220,6 @@ class memberActions extends sfActions
                      . " AND dist_id = '" . $distId . "' AND mt4_user_name = '" . $mt4UserName . "'"
                      . " AND traded_datetime >= '" . date("Y-m-d H:i:s", $dividendDateFromTS) . "' AND traded_datetime <= '" . date("Y-m-d H:i:s", $dividendDateToTS) . "'";
 
-                //var_dump($query);
-                //exit();
                 $connection = Propel::getConnection();
                 $statement = $connection->prepareStatement($query);
                 $resultset = $statement->executeQuery();
@@ -1052,150 +1232,7 @@ class memberActions extends sfActions
 
                     if ($packagePrice < 0) {
                         $packagePrice = 0;
-                    }
-                /*$dividendDateStr = $dateUtil->formatDate("Y-m-j", $dividendDate);
-                $dividendDateFrom = date('Y-m-j', $dividendDateStr) . " 00:00:00";
-                $dividendDateTo = date('Y-m-j', $dividendDateStr) . " 23:59:59";
-
-                $c = new Criteria();
-                $c->add(MlmDailyDistMt4CreditPeer::DIST_ID, $distId);
-                $c->add(MlmDailyDistMt4CreditPeer::TRADED_DATETIME, $dividendDateFrom, Criteria::GREATER_EQUAL);
-                $c->add(MlmDailyDistMt4CreditPeer::TRADED_DATETIME, $dividendDateTo, Criteria::LESS_EQUAL);
-                $mlmDailyDistMt4CreditDB = MlmDailyDistMt4CreditPeer::doSelectOne($c);
-
-                if ($mlmDailyDistMt4CreditDB) {
-                    if ($packagePrice > $mlmDailyDistMt4CreditDB->getMt4Credit()) {
-                        $packagePrice = $mlmDailyDistMt4CreditDB->getMt4Credit();
                     }*/
-                    $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
-
-                    $accountBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-
-                    $mlm_account_ledger = new MlmAccountLedger();
-                    $mlm_account_ledger->setDistId($distId);
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
-                    $mlm_account_ledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", ".$mt4UserName." #".$idx);
-                    $mlm_account_ledger->setCredit($dividendAmount);
-                    $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($accountBalance + $dividendAmount);
-                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
-
-                    $this->mirroringAccountLedger($mlm_account_ledger, "49");
-
-                    $fundManagementBalance = $this->getCommissionBalance($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-
-                    $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                    $sponsorDistCommissionledger->setMonthTraded(date('m'));
-                    $sponsorDistCommissionledger->setYearTraded(date('Y'));
-                    $sponsorDistCommissionledger->setDistId($distId);
-                    $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-                    $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
-                    //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                    $sponsorDistCommissionledger->setCredit($dividendAmount);
-                    $sponsorDistCommissionledger->setDebit(0);
-                    $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                    $sponsorDistCommissionledger->setBalance($fundManagementBalance + $dividendAmount);
-                    $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getRoiPercentage()."%, Fund:".$packagePrice.", ".$mt4UserName." #".$idx);
-                    $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $sponsorDistCommissionledger->save();
-
-                    $this->revalidateCommission($distId, Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-
-                    if ($mlmRoiDividend->getExceedDistId() != null) {
-                        $exceedDividendAmount = $packagePrice * $mlmRoiDividend->getExceedRoiPercentage() / 100;
-
-                        $accountBalance = $this->getAccountBalance($mlmRoiDividend->getExceedDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
-                        $fundManagementBalance = $this->getCommissionBalance($mlmRoiDividend->getExceedDistId(), Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-
-                        $mlm_account_ledger = new MlmAccountLedger();
-                        $mlm_account_ledger->setDistId($mlmRoiDividend->getExceedDistId());
-                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FUND_MANAGEMENT);
-                        $mlm_account_ledger->setRemark($mt4UserName." #".$idx." (EXCEEDING)");
-                        $mlm_account_ledger->setCredit($exceedDividendAmount);
-                        $mlm_account_ledger->setDebit(0);
-                        $mlm_account_ledger->setBalance($accountBalance + $exceedDividendAmount);
-                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $mlm_account_ledger->save();
-
-                        $this->mirroringAccountLedger($mlm_account_ledger, "50");
-
-                        $sponsorDistCommissionledger = new MlmDistCommissionLedger();
-                        $sponsorDistCommissionledger->setMonthTraded(date('m'));
-                        $sponsorDistCommissionledger->setYearTraded(date('Y'));
-                        $sponsorDistCommissionledger->setDistId($mlmRoiDividend->getExceedDistId());
-                        $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_FUND_MANAGEMENT);
-                        $sponsorDistCommissionledger->setTransactionType(Globals::COMMISSION_LEDGER_DIVIDEND);
-                        //$sponsorDistCommissionledger->setRefId($mlm_pip_csv->getPipId());
-                        $sponsorDistCommissionledger->setCredit($exceedDividendAmount);
-                        $sponsorDistCommissionledger->setDebit(0);
-                        $sponsorDistCommissionledger->setStatusCode(Globals::STATUS_ACTIVE);
-                        $sponsorDistCommissionledger->setBalance($fundManagementBalance + $exceedDividendAmount);
-                        $sponsorDistCommissionledger->setRemark($mlmRoiDividend->getExceedRoiPercentage()."%, Fund:".$packagePrice.", #".$idx." (EXCEEDING)");
-                        $sponsorDistCommissionledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistCommissionledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                        $sponsorDistCommissionledger->save();
-
-                        $mlmRoiDividend->setExceedDividendAmount($exceedDividendAmount);
-                    }
-
-                    $mt4Username = $mlmRoiDividend->getMt4UserName();
-                    // new implement ********************************************************************
-                    $c = new Criteria();
-                    $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
-                    $totalRecords = MlmRoiDividendPeer::doCount($c);
-
-                    if ($totalRecords < Globals::DIVIDEND_TIMES_ENTITLEMENT) {
-                        $c = new Criteria();
-                        $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
-                        $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
-                        $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
-
-                        if ($mlmRoiDividendDB) {
-                            $idx = $mlmRoiDividendDB->getIdx() + 1;
-                            for ($i = $idx; $i <= Globals::DIVIDEND_TIMES_ENTITLEMENT; $i++) {
-                                $firstDividendTime = strtotime($mlmRoiDividendDB->getFirstDividendDate());
-
-                                $monthAdded = $idx - 1;
-                                $dividendDate = strtotime("+".$monthAdded." months", $firstDividendTime);
-
-                                $mlm_roi_dividend = new MlmRoiDividend();
-                                $mlm_roi_dividend->setDistId($mlmRoiDividendDB->getDistId());
-                                $mlm_roi_dividend->setMt4UserName($mlmRoiDividendDB->getMt4UserName());
-                                $mlm_roi_dividend->setIdx($idx);
-                                //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
-                                $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
-                                $mlm_roi_dividend->setFirstDividendDate($mlmRoiDividendDB->getFirstDividendDate());
-                                $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
-                                $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
-                                $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
-                                $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
-                                $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
-                                //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
-                                //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                                $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
-                                $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $mlm_roi_dividend->save();
-
-                                $idx = $idx + 1;
-                            }
-                        }
-                    }
-                    // new implement end ~ ********************************************************************
-
-                    print_r($mlmRoiDividend->getMt4UserName() . ":" . $packagePrice . "<br>");
-                    $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
-                    $mlmRoiDividend->setDividendAmount($dividendAmount);
-                    $mlmRoiDividend->setMt4Balance($packagePrice);
-                    $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
-                    //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
-                    $mlmRoiDividend->save();
 
                     /*if ($mlmRoiDividend->getIdx() <= Globals::DIVIDEND_TIMES_ENTITLEMENT) {
                         print_r("DividendDate: " . $mlmRoiDividend->getDividendDate() . "<br>");
@@ -1224,8 +1261,9 @@ class memberActions extends sfActions
                         $mlm_roi_dividend->save();
                     }*/
 
-                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-                }
+                    //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                //}
+                sleep(3);
             }
             $con->commit();
         } catch (PropelException $e) {
@@ -10173,7 +10211,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         //exit();
         if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD && $fromAbfx == "N") {
             print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
-            $this->retrieveGmailMailAttachment();
+            //$this->retrieveGmailMailAttachment();
 
             print_r("+++++ ROI Dividend +++++<br>");
             $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
