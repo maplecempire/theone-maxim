@@ -1040,8 +1040,9 @@ class memberActions extends sfActions
             //var_dump($c);
             //exit();
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
-
+            $countIdx = 1;
             foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+                print_r("<br>".$countIdx++);
                 $mlmRoiDividendValidator = MlmRoiDividendPeer::retrieveByPK($mlmRoiDividend->getDevidendId());
                 if ($mlmRoiDividendValidator->getStatusCode() != Globals::DIVIDEND_STATUS_PENDING) {
                     break;
