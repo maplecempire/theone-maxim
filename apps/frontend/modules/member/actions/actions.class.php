@@ -29,7 +29,7 @@ class memberActions extends sfActions
             $mlmRoiDividend->setDividendAmount($dividendAmount);
             $mlmRoiDividend->save();
 
-            $mlm_account_ledger = MlmAccountLedgerPeer::retrieveByPK($mlmRoiDividend->getAccountId());
+            $mlm_account_ledger = MlmAccountLedgerPeer::retrieveByPK($mlmRoiDividend->getAccountLedgerId());
             if ($mlm_account_ledger) {
                 print_r("::".$dividendAmount);
                 $mlm_account_ledger->setCredit($dividendAmount);
