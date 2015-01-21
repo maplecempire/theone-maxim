@@ -1242,7 +1242,11 @@ class memberActions extends sfActions
                 $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                 $mlmRoiDividend->setDividendAmount($dividendAmount);
                 $mlmRoiDividend->setMt4Balance($packagePrice);
-                $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
+                if ($packagePrice <= 0) {
+                    $mlmRoiDividend->setStatusCode("ERROR");
+                } else {
+                    $mlmRoiDividend->setStatusCode(Globals::DIVIDEND_STATUS_SUCCESS);
+                }
                 //$mlm_gold_dividend->setRemarks($this->getRequestParameter('remarks'));
                 $mlmRoiDividend->save();
                 // api end ******
