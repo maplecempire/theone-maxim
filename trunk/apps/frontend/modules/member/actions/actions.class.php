@@ -9,6 +9,34 @@
  */
 class memberActions extends sfActions
 {
+    public function executeCorrectRoi() {
+        $query = "SELECT * FROM maxim.mlm_roi_dividend
+             where
+            mt4_balance > package_price";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mlmRoiDividend = MlmRoiDividendPeer::doSelect($arr['devidend_id']);
+            print_r("<br>".$mlmRoiDividend->getMt4Balance().":".$mlmRoiDividend->getPackagePrice());
+            $packagePrice = $mlmRoiDividend->getPackagePrice();
+
+            $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
+
+            $mlmRoiDividend->setDividendAmount($dividendAmount);
+            $mlmRoiDividend->save();
+
+            $mlm_account_ledger = MlmAccountLedgerPeer::retrieveByPK($mlmRoiDividend->getAccountId());
+            if ($mlm_account_ledger) {
+                print_r("::".$dividendAmount);
+                $mlm_account_ledger->setCredit($dividendAmount);
+                $mlm_account_ledger->save();
+            }
+        }
+    }
     public function executeTest() {
         $params = array();
         $params['login'] = "80119931";
@@ -1074,6 +1102,10 @@ class memberActions extends sfActions
                     $mlmRoiDividend->setStatusCode("ERROR");
                     $mlmRoiDividend->save();
                     continue;
+                }
+
+                if ($packagePrice > $mlmRoiDividend->getPackagePrice()) {
+                    $packagePrice = $mlmRoiDividend->getPackagePrice();
                 }
 
                 if ($packagePrice < 0) {
