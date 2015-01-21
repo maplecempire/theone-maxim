@@ -26,16 +26,19 @@ class memberActions extends sfActions
 
             $dividendAmount = $packagePrice * $mlmRoiDividend->getRoiPercentage() / 100;
 
-            $mlmRoiDividend->setDividendAmount($dividendAmount);
-            $mlmRoiDividend->save();
-
             $mlm_account_ledger = MlmAccountLedgerPeer::retrieveByPK($mlmRoiDividend->getAccountLedgerId());
             if ($mlm_account_ledger) {
                 print_r("::".$dividendAmount);
                 $mlm_account_ledger->setCredit($dividendAmount);
                 $mlm_account_ledger->save();
+
+                $mlmRoiDividend->setDividendAmount($dividendAmount);
+                $mlmRoiDividend->save();
             }
         }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
     }
     public function executeTest() {
         $params = array();
