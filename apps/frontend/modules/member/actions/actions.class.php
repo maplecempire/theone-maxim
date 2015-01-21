@@ -20,7 +20,7 @@ class memberActions extends sfActions
 
         while ($resultset->next()) {
             $arr = $resultset->getRow();
-            $mlmRoiDividend = MlmRoiDividendPeer::doSelect($arr['devidend_id']);
+            $mlmRoiDividend = MlmRoiDividendPeer::retrieveByPK($arr['devidend_id']);
             print_r("<br>".$mlmRoiDividend->getMt4Balance().":".$mlmRoiDividend->getPackagePrice());
             $packagePrice = $mlmRoiDividend->getPackagePrice();
 
