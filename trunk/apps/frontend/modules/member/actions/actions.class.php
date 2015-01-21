@@ -13326,6 +13326,8 @@ Wish you all the best.
             }
             var_dump($isPeter1);*/
             //exit();
+
+            // 273058 yongman
             // 1504 cnbiz1, 61 kaseong, 257250 Vincentteh remove FMC
             if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
                 if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
@@ -13338,7 +13340,12 @@ Wish you all the best.
                                 if ($isVivian === false) { // note: three equal signs
                                     $pos = strrpos($distDB->getTreeStructure(), "|60|");
                                     if ($pos === false) { // note: three equal signs
+                                        $isYongman = strrpos($distDB->getTreeStructure(), "|273058|");
+                                        if ($isYongman === false) { // note: three equal signs
 
+                                        } else {
+                                            $this->hasFmcCharges = true;
+                                        }
                                     } else {
                                         $this->hasFmcCharges = true;
                                     }
