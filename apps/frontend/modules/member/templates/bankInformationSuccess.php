@@ -118,7 +118,7 @@
                     <td>&nbsp;</td>
                     <td class="caption" colspan="2">
                         <span style="color: #dc143c">
-                            <?php echo __('NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849'); ?></span>
+<!--                            --><?php //echo __('NOTE: Please write at REFERENCE : Maxim Capital Limited - 9120028849'); ?><!--</span>-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>

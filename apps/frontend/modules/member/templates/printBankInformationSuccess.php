@@ -196,7 +196,7 @@
         <td class="value">
         <!--<span id="paymentReferenceSpan" style="color: red"><?php /*echo $paymentReference; */?></span>
         <br><br>Note: <br>Please write at REFERENCE : Maxim Capital Limited - 9120028849 and payment reference number.-->
-        Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited - 9120028849</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $paymentReference; ?></span>
+        Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited Member ID</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $paymentReference; ?></span>
         </td>
     </tr>
 </table>
