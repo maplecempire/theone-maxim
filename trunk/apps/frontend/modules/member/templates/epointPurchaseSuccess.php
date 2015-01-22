@@ -611,8 +611,8 @@ $(function() {
                 <strong><?php echo __('Payment Reference'); ?></strong>
             </td>
             <td class="value">
-                <!--<span id="paymentReferenceSpan" style="color: red"><?php /*echo $sf_flash->get('paymentReference'); */?></span>-->
-            <!--<br><br>-->Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited - 9120028849</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $sf_flash->get('paymentReference'); ?></span>
+                <!--<span id="paymentReferenceSpan" style="color: red"><?php /*echo $sf_flash->get('paymentReference'); */?></span>Maxim Capital Limited - 9120028849-->
+            <!--<br><br>-->Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited Member ID</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $sf_flash->get('paymentReference'); ?></span>
             </td>
         </tr>
         <tr>
