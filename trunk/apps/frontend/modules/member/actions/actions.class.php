@@ -1067,7 +1067,7 @@ class memberActions extends sfActions
                 //var_dump("hihi");
                 $c->addAnd(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDateFrom, Criteria::GREATER_EQUAL);
             }
-            $c->setLimit(50);
+            $c->setLimit(10);
             //var_dump($c);
             //exit();
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
@@ -1305,7 +1305,7 @@ class memberActions extends sfActions
 
                     //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
                 //}
-                sleep(3);
+                sleep(1);
             }
             $con->commit();
         } catch (PropelException $e) {
@@ -5950,7 +5950,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
             //$rt = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
-            $cp4 = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_CP4);
+            //$cp4 = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_CP4);
 
             $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
             $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
@@ -5958,10 +5958,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             //$rp = $rp - $debitAccount;
 
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->add(MlmDistributorPeer::TREE_STRUCTURE, "%|".$distributor->getDistributorId()."|%", Criteria::LIKE);
             $c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-            $totalNetworks = MlmDistributorPeer::doCount($c);
+            $totalNetworks = MlmDistributorPeer::doCount($c);*/
         }
 
         $this->ecash = $ecash;
@@ -10382,6 +10382,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
                                 $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
                                 $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                                $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
+                                $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
                                 //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                                 //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                                 $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
@@ -13074,7 +13076,30 @@ Wish you all the best.
 
     function getMt4Balance($distributorId, $mt4Username)
     {
-        $query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
+        $arr = array();
+
+        $mt4request = new CMT4DataReciver;
+        $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+        $params = array();
+        $params['login'] = $mt4Username;
+
+        $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+
+        $packagePrice = $answer['balance'];
+        if ($packagePrice == null && is_numeric($packagePrice) == false) {
+            //var_dump($answer);
+            //var_dump($mt4UserName);
+            //var_dump($packagePrice);
+            //var_dump("<br>");
+            //var_dump(is_numeric($packagePrice));
+        } else {
+            $arr['mt4_credit'] = $answer['balance'];
+            $arr['traded_datetime'] = date("Y-m-d h:i:s");
+        }
+
+        $mt4request->CloseConnection();
+        /*$query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
           	FROM mlm_daily_dist_mt4_credit WHERE dist_id = ".$distributorId. " AND mt4_user_name = '".$mt4Username ."' ORDER BY traded_datetime DESC LIMIT 1";
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -13085,6 +13110,7 @@ Wish you all the best.
             $arr = $resultset->getRow();
             return $arr;
         }
+        */
         return null;
     }
 
