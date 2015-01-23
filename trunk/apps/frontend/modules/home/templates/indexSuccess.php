@@ -1044,6 +1044,50 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='62'>Maxim Annual Convention Notice</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "23 January 2015";
+                ?>
+            </div>
+
+            <div id="page_62" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear IMs and Partners
+<br>亲爱的代理及伙伴们:
+<br>
+<br>CONGRATULATIONS .... We have COMPLETELY SOLD OUT our Maxim Annual Convention to be held in Marina Bay Sands on March 22nd 2015.
+<br>热烈恭喜!我们将于2015.3.22日在新加坡金沙湾酒店盛大开幕的年会门票正式售罄!!
+<br>
+<br>ALL PROMOs FOR THIS EVENT WILL EFFECTIVELY END AS OF 2359 Hours (GMT+8) December 31st, 2014.
+<br>所有有关此次年会的优惠促销活动于2014.12.31日23:59分(GMT+8)正式结束!
+<br>
+<br>See you in Singapore !!!!!
+<br>与您相约在新加坡!!!!!
+<br>
+<br>친애하는 국제회원 및 파트너 여러분,
+<br>
+<br>축하합니다 .... 2015년 3월 22일 마리나 베이 샌드에서 열릴 맥심 애뉴얼 컨벤션 티켓이 완판되었습니다.
+<br>
+<br>이 행사 관련 모든 프로모션은 2014년 12월 31일 오전 9시 (GMT+8)에 마감됩니다.
+<br>
+<br>싱가폴에서 뵙기를 기원합니다!!!!!
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='61'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
@@ -1101,7 +1145,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='60'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
-<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+<br>iAccount お知らせ</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1110,7 +1154,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_60" class="news_desc" style="text-align: left;">
+            <div id="page_60" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
@@ -1152,7 +1196,7 @@ $(document).ready(function() {
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='59'>Market Holidays Notice
-                    <br>市场假期通告</a><img src="/images/new_icon.gif">
+                    <br>市场假期通告</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1161,7 +1205,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_59" class="news_desc" style="text-align: left;">
+            <div id="page_59" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
