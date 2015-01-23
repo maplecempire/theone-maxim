@@ -10251,7 +10251,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             throw $e;
         }
         //exit();
-        if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD && $fromAbfx == "N") {
+        $toStop = true;
+        if (sfConfig::get('sf_environment') == Globals::SF_ENVIRONMENT_PROD && $fromAbfx == "N" && $toStop == false) {
             print_r("+++++ Retrieve Gmail Mail Attachment +++++<br>");
             //$this->retrieveGmailMailAttachment();
 
@@ -13094,8 +13095,10 @@ Wish you all the best.
             //var_dump("<br>");
             //var_dump(is_numeric($packagePrice));
         } else {
+            $arr = array();
             $arr['mt4_credit'] = $answer['balance'];
             $arr['traded_datetime'] = date("Y-m-d h:i:s");
+            return $arr;
         }
 
         $mt4request->CloseConnection();
