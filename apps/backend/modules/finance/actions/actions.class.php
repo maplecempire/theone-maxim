@@ -987,6 +987,8 @@ class financeActions extends sfActions
                         $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
                         $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
                         $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                        $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
+                        $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
                         //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                         //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                         $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
@@ -3258,7 +3260,32 @@ class financeActions extends sfActions
 
     function getMt4Balance($distributorId, $mt4Username)
     {
-        $query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
+        $arr = array();
+
+        $mt4request = new CMT4DataReciver;
+        $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+        $params = array();
+        $params['login'] = $mt4Username;
+
+        $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+
+        $packagePrice = $answer['balance'];
+        if ($packagePrice == null && is_numeric($packagePrice) == false) {
+            //var_dump($answer);
+            //var_dump($mt4UserName);
+            //var_dump($packagePrice);
+            //var_dump("<br>");
+            //var_dump(is_numeric($packagePrice));
+        } else {
+            $arr = array();
+            $arr['mt4_credit'] = $answer['balance'];
+            $arr['traded_datetime'] = date("Y-m-d h:i:s");
+            return $arr;
+        }
+
+        $mt4request->CloseConnection();
+        /*$query = "SELECT credit_id, dist_id, mt4_user_name, mt4_credit, traded_datetime, created_by, created_on, updated_by, updated_on
           	FROM mlm_daily_dist_mt4_credit WHERE dist_id = ".$distributorId. " AND mt4_user_name = '".$mt4Username ."' ORDER BY traded_datetime DESC LIMIT 1";
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -3267,12 +3294,9 @@ class financeActions extends sfActions
 
         if ($resultset->next()) {
             $arr = $resultset->getRow();
-            if ($arr["mt4_credit"] != null) {
-                return $arr["mt4_credit"]." (".$arr["traded_datetime"].")";
-            } else {
-                return "--";
-            }
+            return $arr;
         }
+        */
         return "--";
     }
 

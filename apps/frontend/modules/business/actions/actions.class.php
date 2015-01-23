@@ -153,7 +153,7 @@ class businessActions extends sfActions
                 print_r("<br>".$distDB->getDistributorId().":".$totalCp2.":".$totalCp3.":".$totalRt.":".$totalCp1.":".$totalDebitAccount.":".$totalDebit.":".$totalRpCredit.":".$totalRpDebit);
                 $this->removeAccountLedger($distDB->getDistributorId(), $queryDate);
 
-                if ($totalCp2 > 0) {
+                if ($totalCp2 <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
@@ -166,7 +166,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalCp3 > 0) {
+                if ($totalCp3 <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -179,7 +179,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalRt > 0) {
+                if ($totalRt <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
@@ -192,7 +192,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalCp1 > 0) {
+                if ($totalCp1 <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
@@ -205,7 +205,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalDebitAccount > 0) {
+                if ($totalDebitAccount <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
@@ -218,7 +218,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalDebit > 0) {
+                if ($totalDebit <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT);
@@ -231,7 +231,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalRpCredit > 0) {
+                if ($totalRpCredit <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
@@ -244,7 +244,7 @@ class businessActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
                 }
-                if ($totalRpDebit > 0) {
+                if ($totalRpDebit <> 0) {
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distDB->getDistributorId());
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RP);
