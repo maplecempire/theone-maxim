@@ -284,6 +284,8 @@ class financeActions extends sfActions
                     $mlm_roi_dividend->setPackageId($mlmRoiDividendDB->getPackageId());
                     $mlm_roi_dividend->setPackagePrice($mlmRoiDividendDB->getPackagePrice());
                     $mlm_roi_dividend->setRoiPercentage($mlmRoiDividendDB->getRoiPercentage());
+                    $mlm_roi_dividend->setExceedDistId($mlmRoiDividendDB->getExceedDistId());
+                    $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
                     //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                     //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                     $mlm_roi_dividend->setStatusCode($mlmRoiDividendDB->getStatusCode());
