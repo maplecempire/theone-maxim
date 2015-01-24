@@ -1067,7 +1067,7 @@ class memberActions extends sfActions
                 //var_dump("hihi");
                 $c->addAnd(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDateFrom, Criteria::GREATER_EQUAL);
             }
-            $c->setLimit(10);
+            $c->setLimit(15);
             //var_dump($c);
             //exit();
             $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
@@ -8736,6 +8736,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/cp3Withdrawal');
             }
 
+
+
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($withdrawAmount > $ledgerAccountBalance) {
@@ -13429,5 +13431,24 @@ Wish you all the best.
         //exit();
         return $this->hasFmcCharges;
         //return in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(60, 682));
+    }
+
+    function checkDoubleSubmittedCp2Withdrawal($distributorId)
+    {
+        $query = "SELECT count(account_id) as _COUNT
+          	FROM mlm_account_ledger WHERE dist_id = ".$distributorId. " AND account_type = '".Globals::ACCOUNT_TYPE_RP ."'";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr['_COUNT'] > 0) {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }
