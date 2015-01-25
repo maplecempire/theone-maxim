@@ -5448,6 +5448,69 @@ We look forward to your custom in the near future. Should you have any queries, 
     // *******************   ~ end      For broker registeration       end ~   **********************
     // **********************************************************************************************
 
+    public function executeVerifySponsorGroupById()
+    {
+        //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
+        $sponsorId = $this->getRequestParameter('sponsorId');
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
+            FROM mlm_distributor dist
+                LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
+                    WHERE appUser.username = '".$sponsorId."'";
+//                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
+
+        $arr = "";
+
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $isFound = false;
+
+        if ($resultset->next()) {
+            $resultArr = $resultset->getRow();
+
+            //$pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+            //if ($pos === false) { // note: three equal signs
+                $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $isFound = true;
+                }
+            //} else {
+            //    $isFound = true;
+            //}
+
+            if ($isFound == false) {
+                $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                if ($existDist) {
+                    //$pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                    //if ($pos === false) { // note: three equal signs
+                        $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                        if ($pos === false) { // note: three equal signs
+
+                        } else {
+                            $isFound = true;
+                        }
+                    //} else {
+                    //    $isFound = true;
+                    //}
+                }
+            }
+            if ($isFound) {
+                $arr = array(
+                    'userId' => $resultArr["distributor_id"],
+                    'userName' => $resultArr["distributor_code"],
+                    'fullname' => $resultArr["full_name"],
+                    'nickname' => $resultArr["full_name"]
+                );
+            }
+        }
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
     public function executeVerifySameGroupSponsorId()
     {
         //var_dump($this->getUser()->getAttribute(Globals::SESSION_USERNAME));
@@ -7273,32 +7336,31 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($resultset->next()) {
                     $resultArr = $resultset->getRow();
 
-                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
-                    if ($pos === false) { // note: three equal signs
+                    //$pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                    //if ($pos === false) { // note: three equal signs
                         $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                         if ($pos === false) { // note: three equal signs
 
                         } else {
                             $isFound = true;
                         }
-                    } else {
-                        $isFound = true;
-                    }
+                    //} else {
+                    //    $isFound = true;
+                    //}
 
                     if ($isFound == false) {
                         $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                         if ($existDist) {
-                            $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
-                            if ($pos === false) { // note: three equal signs
+                            //$pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                            //if ($pos === false) { // note: three equal signs
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                     return $this->redirect('/member/transferEpoint');
                                 }
-                            }
+                            //}
                         }
                     }
-
                     // block worldpeace upline transfer worldpeace downline
                     $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|557|");
                     if ($pos === false) { // note: three equal signs
@@ -7506,29 +7568,29 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($resultset->next()) {
                     $resultArr = $resultset->getRow();
 
-                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
-                    if ($pos === false) { // note: three equal signs
+                    //$pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                    //if ($pos === false) { // note: three equal signs
                         $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                         if ($pos === false) { // note: three equal signs
 
                         } else {
                             $isFound = true;
                         }
-                    } else {
-                        $isFound = true;
-                    }
+                    //} else {
+                    //    $isFound = true;
+                    //}
 
                     if ($isFound == false) {
                         $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                         if ($existDist) {
-                            $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
-                            if ($pos === false) { // note: three equal signs
+                            //$pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                            //if ($pos === false) { // note: three equal signs
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                     return $this->redirect('/member/transferCp2');
                                 }
-                            }
+                            //}
                         }
                     }
 
@@ -7764,23 +7826,23 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if ($resultset->next()) {
                     $resultArr = $resultset->getRow();
 
-                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
-                    if ($pos === false) { // note: three equal signs
+                    //$pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
+                    //if ($pos === false) { // note: three equal signs
                         $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                         if ($pos === false) { // note: three equal signs
 
                         } else {
                             $isFound = true;
                         }
-                    } else {
-                        $isFound = true;
-                    }
+                    //} else {
+                    //    $isFound = true;
+                    //}
 
                     if ($isFound == false) {
                         $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                         if ($existDist) {
-                            $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
-                            if ($pos === false) { // note: three equal signs
+                            //$pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                            //if ($pos === false) { // note: three equal signs
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
@@ -7788,7 +7850,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 }
                                 //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                 //return $this->redirect('/member/transferCp3');
-                            }
+                            //}
                         }
                     }
 
