@@ -232,7 +232,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['contact']."</td><td>" . $distDB['email']."</td><td>" . $distDB['package_price']."</td><td>" . $leader."</td></tr>";
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['contact']."</td><td>" . $distDB['email']."</td><td>" . $distDB['price']."</td><td>" . $leader."</td></tr>";
 
             /*$distDB->setLeaderId($leaderId);
             $distDB->setNomineeName($leader);
