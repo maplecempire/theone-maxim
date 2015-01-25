@@ -2110,12 +2110,12 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     }
     function getEntitledMemberList($dateFrom, $dateTo, $amountMore)
     {
-        $query = "SELECT dist.distributor_code, package.package_price
+        $query = "SELECT dist.distributor_code, package.price
                         , dist.email, dist.full_name, dist.contact, dist.country
                 , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
-                    WHERE package.package_price >= ".$amountMore." AND dist.active_datetime >= '" . $dateFrom . "' AND dist.active_datetime <= '" . $dateTo . "'";
+                    WHERE package.price >= ".$amountMore." AND dist.active_datetime >= '" . $dateFrom . "' AND dist.active_datetime <= '" . $dateTo . "'";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
