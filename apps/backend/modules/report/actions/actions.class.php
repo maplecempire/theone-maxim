@@ -205,6 +205,44 @@ class reportActions extends sfActions
         print_r("executeGoldCoin Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeGoldCoin2()
+    {
+        $dateFrom = "2014-09-21 00:00:00";
+        $dateTo = "2014-09-30 23:59:59";
+        $distDBs = $this->getEntitledMemberList($dateFrom, $dateTo, 100000);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+        $idx = 1;
+        foreach ($distDBs as $distDB) {
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['contact']."</td><td>" . $distDB['email']."</td><td>" . $distDB['SUB_TOTAL']."</td><td>" . $leader."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();*/
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeGoldCoin2 Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeMbs()
     {
         $dateFrom = "2014-11-20 00:00:00";
@@ -2060,6 +2098,48 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                 LEFT JOIN mlm_distributor ggdist ON gg.uid = ggdist.distributor_id
             WHERE gg.amount >= 30000 AND gg.cdate >= '".$dateFrom."'
                 and gg.cdate <= '".$dateTo."'";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
+    }
+    function getEntitledMemberList($dateFrom, $dateTo, $amountMore)
+    {
+        $query = "SELECT reg.upline_dist_id, dist.distributor_code
+                        , (Coalesce(reg._SUM, 0) + Coalesce(upgrade._SUM,0)) AS SUB_TOTAL
+                        , Coalesce(reg._SUM, 0) AS register_sum
+                        , Coalesce(upgrade._SUM, 0) AS upgrade_sum
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on
+                    FROM
+                (
+                    SELECT SUM(package.price) AS _SUM, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package package ON package.package_id = newDist.init_rank_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND newDist.created_on >= '" . $dateFrom . "' AND newDist.created_on <= '" . $dateTo . "' group by upline_dist_id
+                ) reg
+                LEFT JOIN
+                (
+                    SELECT SUM(package.price) AS _sum, newDist.upline_dist_id
+                        FROM mlm_distributor newDist
+                            LEFT JOIN mlm_package_upgrade_history history ON history.dist_id = newDist.distributor_id
+                            LEFT JOIN mlm_package package ON package.package_id = history.package_id
+                            LEFT JOIN mlm_distributor dist ON dist.distributor_id = newDist.upline_dist_id
+                        WHERE newDist.loan_account = 'N'
+                            AND newDist.from_abfx = 'N'
+                            AND history.created_on >= '" . $dateFrom . "' AND history.created_on <= '" . $dateTo . "' group by upline_dist_id
+                ) upgrade ON reg.upline_dist_id = upgrade.upline_dist_id
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = reg.upline_dist_id
+                    HAVING SUB_TOTAL >= ".$amountMore."
+                        ORDER BY 3 DESC";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
