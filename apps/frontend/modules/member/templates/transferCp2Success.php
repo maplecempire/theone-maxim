@@ -53,10 +53,10 @@
         $.ajax({
             type : 'POST',
     <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
-            url : "/member/verifySameGroupSponsorId",
+            url : "/member/verifySponsorGroupById",
     <?php } else { ?>
-//            url : "/member/verifySponsorId",
-            url : "/member/verifySameGroupSponsorId",
+//            url : "/member/verifySameGroupSponsorId",
+            url : "/member/verifySponsorGroupById",
     <?php } ?>
             dataType : 'json',
             cache: false,
