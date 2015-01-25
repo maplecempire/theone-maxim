@@ -7314,7 +7314,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     if ($isFound == false) {
                         $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                         if ($existDist) {
-                            //$pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
+                            $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
                             if ($pos === false) { // note: three equal signs
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
