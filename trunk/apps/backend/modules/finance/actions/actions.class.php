@@ -86,6 +86,83 @@ class financeActions extends sfActions
         print_r("<br>executeAutoRejectDoubleSubmitedCp2Withdrawal Done");
         return sfView::HEADER_ONLY;
     }
+
+    public function executeAutoRejectDoubleSubmitedCp3Withdrawal()
+    {
+        $statusCodeArr = array(Globals::WITHDRAWAL_PENDING);
+
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, $statusCodeArr, Criteria::IN);
+        $mlm_ecash_withdraws = MlmCp3WithdrawPeer::doSelect($c);
+        //var_dump($mlm_ecash_withdraws);
+        foreach ($mlm_ecash_withdraws as $mlm_ecash_withdraw) {
+            $query = "SELECT count(*) as _count
+                FROM mlm_cp3_withdraw
+                    where created_on >= '2015-01-01 00:00:00' AND created_on < '2015-01-08 00:00:00' AND dist_id = ".$mlm_ecash_withdraw->getDistId()
+                . " AND status_code IN ('PENDING','PROCESSING', 'PAID')";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+
+            if ($resultset->next()) {
+                $arr = $resultset->getRow();
+
+                $totalCount = $arr['_count'];
+                print_r("<br>".$mlm_ecash_withdraw->getDistId().":".$totalCount);
+                $remark = "WITHDRAWAL CAN ONLY BE SUBMITTED ONCE A MONTH";
+                if ($totalCount > 0) {
+                    $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+                    try {
+                        $con->begin();
+                        print_r("<br>".$remark);
+                        $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                        $mlm_ecash_withdraw->setStatusCode($statusCode);
+                        $mlm_ecash_withdraw->setRemarks($remark);
+                        $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                        if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+                            $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                        $mlm_ecash_withdraw->save();
+
+                        if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                            $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                            $distId = $mlm_ecash_withdraw->getDistId();
+                            /******************************/
+                            /*  Account
+                            /******************************/
+                            $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($distId);
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                            $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                            $mlm_account_ledger->setCredit($refundEcash);
+                            $mlm_account_ledger->setDebit(0);
+                            $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger, "34X");
+
+                            //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        }
+                        $con->commit();
+                    } catch (PropelException $e) {
+                        $con->rollback();
+                        throw $e;
+                    }
+                }
+            }
+        }
+
+        print_r("<br>executeAutoRejectDoubleSubmitedCp2Withdrawal Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAutoRejectInvalidIaccountCp2Withdrawal()
     {
         $query = "SELECT cp2.`withdraw_id`,
