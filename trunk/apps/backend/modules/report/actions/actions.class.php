@@ -87,7 +87,7 @@ class reportActions extends sfActions
     public function executeFmcReport()
     {
         $dateFrom = "2014-11-21 00:00:00";
-        $dateTo = "2015-01-11 23:59:59";
+        $dateTo = "2015-01-26 23:59:59";
         $distDBs = $this->getFmcList($dateFrom, $dateTo);
 
         $idx = count($distDBs);
