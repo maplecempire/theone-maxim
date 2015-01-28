@@ -108,6 +108,7 @@
                     <td><?php echo __('Member ID'); ?></td>
                     <td>
                         <select name="memberId" id="memberId" tabindex="2">
+                            <option value="281324">agwignall</option>
                             <option value="295704">Behnho2</option>
                             <option value="301904">bobwu63</option>
                             <option value="284946">CHICKADEE1</option>
