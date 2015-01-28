@@ -1085,7 +1085,7 @@ $(document).ready(function() {
 
             <div class="popdivider"></div>
         </div>
-
+<!--
         <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='61'>iAccount Notice
@@ -1095,9 +1095,9 @@ $(document).ready(function() {
             </div>
             <div class="news_date">
                 <?php
-                $dateUtil = new DateUtil();
+/*                $dateUtil = new DateUtil();
                 echo "18 January 2015";
-                ?>
+                */?>
             </div>
 
             <div id="page_61" class="news_desc" style="text-align: left;">
@@ -1138,7 +1138,7 @@ $(document).ready(function() {
             </div>
 
             <div class="popdivider"></div>
-        </div>
+        </div>-->
 
         <div class="page">
             <div class="poptitle">
