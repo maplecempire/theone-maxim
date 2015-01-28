@@ -160,6 +160,20 @@
                 <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
+                        <?php echo __('cp2/cp3'); ?>
+                    </td>
+                    <td>
+                        <select name="cp2cp3" id="cp2cp3">
+                            <option value="CP2">CP2</option>
+                            <option value="CP3">CP3</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td>
                         <?php echo __('Credit To'); ?>
                     </td>
                     <td>
