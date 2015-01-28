@@ -8838,55 +8838,112 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeCp3Withdrawal2()
     {
         $memberId = $this->getRequestParameter('memberId');
+        $cp2cp3 = $this->getRequestParameter('cp2cp3');
 
         if ($memberId != "") {
-            $ledgerAccountBalance = $this->getAccountBalance($memberId, Globals::ACCOUNT_TYPE_MAINTENANCE);
-            $this->ledgerAccountBalance = $ledgerAccountBalance;
-            $this->distributorDB = MlmDistributorPeer::retrieveByPk($memberId);
+            if ($cp2cp3 == "CP3") {
+                $ledgerAccountBalance = $this->getAccountBalance($memberId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $this->ledgerAccountBalance = $ledgerAccountBalance;
+                $this->distributorDB = MlmDistributorPeer::retrieveByPk($memberId);
 
-            $withdrawAmount = $this->getRequestParameter('cp3Amount');
-            $processFee = 30;
+                $withdrawAmount = $this->getRequestParameter('cp3Amount');
+                $processFee = 30;
 
-            if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
+                if ($withdrawAmount > $ledgerAccountBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
 
-            } elseif ($this->getRequestParameter('bankInTo') == "") {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                } elseif ($this->getRequestParameter('bankInTo') == "") {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
 
-            } elseif ($withdrawAmount > 0) {
-                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
-                try {
-                    $con->begin();
+                } elseif ($withdrawAmount > 0) {
+                    $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                    try {
+                        $con->begin();
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
-                    $tbl_account_ledger->setDistId($memberId);
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
-                    $tbl_account_ledger->setCredit(0);
-                    $tbl_account_ledger->setDebit($withdrawAmount);
-                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->save();
+                        $tbl_account_ledger = new MlmAccountLedger();
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $tbl_account_ledger->setDistId($memberId);
+                        $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                        $tbl_account_ledger->setCredit(0);
+                        $tbl_account_ledger->setDebit($withdrawAmount);
+                        $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
+                        $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->save();
 
-                    $tbl_cp3_withdraw = new MlmCp3Withdraw();
-                    $tbl_cp3_withdraw->setDistId($memberId);
-                    $tbl_cp3_withdraw->setDeduct($withdrawAmount);
-                    $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
-                    $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
-                    $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PROCESSING);
-                    $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_cp3_withdraw->save();
+                        $tbl_cp3_withdraw = new MlmCp3Withdraw();
+                        $tbl_cp3_withdraw->setDistId($memberId);
+                        $tbl_cp3_withdraw->setDeduct($withdrawAmount);
+                        $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                        $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
+                        $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PROCESSING);
+                        $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_cp3_withdraw->save();
 
-                    $con->commit();
-                } catch (PropelException $e) {
-                    $con->rollback();
-                    throw $e;
+                        $con->commit();
+                    } catch (PropelException $e) {
+                        $con->rollback();
+                        throw $e;
+                    }
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.".$ledgerAccountBalance.":".$memberId.":".$withdrawAmount));
+
+                    return $this->redirect('/member/cp3Withdrawal2');
                 }
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.".$ledgerAccountBalance.":".$memberId.":".$withdrawAmount));
+            } else if ($cp2cp3 == "CP2") {
+                $ledgerAccountBalance = $this->getAccountBalance($memberId, Globals::ACCOUNT_TYPE_ECASH);
+                $this->ledgerAccountBalance = $ledgerAccountBalance;
+                $this->distributorDB = MlmDistributorPeer::retrieveByPk($memberId);
 
-                return $this->redirect('/member/cp3Withdrawal2');
+                $withdrawAmount = $this->getRequestParameter('cp3Amount');
+                $processFee = 60;
+
+                $percentageProcessFee = $this->getRequestParameter('cp3Amount') * 5 / 100;
+
+                if ($percentageProcessFee > $processFee)
+                    $processFee = $percentageProcessFee;
+
+                if ($withdrawAmount > $ledgerAccountBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
+
+                } elseif ($this->getRequestParameter('bankInTo') == "") {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+
+                } elseif ($withdrawAmount > 0) {
+                    $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                    try {
+                        $con->begin();
+
+                        $tbl_account_ledger = new MlmAccountLedger();
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $tbl_account_ledger->setDistId($memberId);
+                        $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                        $tbl_account_ledger->setCredit(0);
+                        $tbl_account_ledger->setDebit($withdrawAmount);
+                        $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
+                        $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->save();
+
+                        $tbl_ecash_withdraw = new MlmEcashWithdraw();
+                        $tbl_ecash_withdraw->setDistId($memberId);
+                        $tbl_ecash_withdraw->setDeduct($withdrawAmount);
+                        $tbl_ecash_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                        $tbl_ecash_withdraw->setAmount($withdrawAmount - $processFee);
+                        $tbl_ecash_withdraw->setStatusCode(Globals::WITHDRAWAL_PROCESSING);
+                        $tbl_ecash_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_ecash_withdraw->save();
+
+                        $con->commit();
+                    } catch (PropelException $e) {
+                        $con->rollback();
+                        throw $e;
+                    }
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.".$ledgerAccountBalance.":".$memberId.":".$withdrawAmount));
+
+                    return $this->redirect('/member/cp3Withdrawal2');
+                }
             }
         }
     }
