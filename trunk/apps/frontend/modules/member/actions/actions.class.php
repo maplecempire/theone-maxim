@@ -8884,7 +8884,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $con->rollback();
                     throw $e;
                 }
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted."));
+                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.".$ledgerAccountBalance.":".$memberId.":".$withdrawAmount));
 
                 return $this->redirect('/member/cp3Withdrawal2');
             }
