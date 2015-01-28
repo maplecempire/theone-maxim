@@ -3434,7 +3434,7 @@ class financeActions extends sfActions
             $arr = array();
             $arr['mt4_credit'] = $answer['balance'];
             $arr['traded_datetime'] = date("Y-m-d h:i:s");
-            return $arr;
+            return $arr['mt4_credit'];
         }
 
         $mt4request->CloseConnection();
