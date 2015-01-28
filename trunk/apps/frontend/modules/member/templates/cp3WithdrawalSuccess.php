@@ -236,6 +236,25 @@ if ($distributorDB->getIaccount() == "") {
                             if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219 || $distributorDB->getDistributorId() == 256078) {
                                 $disable = "";
                             }
+
+                            if ($distributorDB->getCloseAccount() == "Y" && $distributorDB->getIaccount() == "") {
+                                $c = new Criteria();
+                                $c = new Criteria();
+                                $c->add(NotificationOfMaturityPeer::DIST_ID, $distributorDB->getDistributorId());
+                                $c->add(NotificationOfMaturityPeer::STATUS_CODE, Globals::STATUS_MATURITY_WITHDRAW);
+                                $c->addAscendingOrderByColumn(NotificationOfMaturityPeer::DIVIDEND_DATE);
+                                $notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
+
+                                if ($notificationOfMaturity) {
+                                    $exp_date = "2015-02-28 00:00:00";
+                                    $todays_date = $notificationOfMaturity->getDividendDate();
+                                    $today = strtotime($todays_date);
+                                    $expiration_date = strtotime($exp_date);
+                                    if ($expiration_date > $today) {
+                                        $disable = "";
+                                    }
+                                }
+                            }
                             //if ($distributorDB->getIaccount() != "" && $disableIAccount == "") {
                             if ($disableIAccount == "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
