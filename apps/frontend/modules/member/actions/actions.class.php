@@ -8915,7 +8915,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $con->begin();
 
                         $tbl_account_ledger = new MlmAccountLedger();
-                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                         $tbl_account_ledger->setDistId($memberId);
                         $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
                         $tbl_account_ledger->setCredit(0);
