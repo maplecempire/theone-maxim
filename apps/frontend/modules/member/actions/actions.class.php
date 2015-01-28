@@ -1096,7 +1096,7 @@ class memberActions extends sfActions
                 $answer = $mt4request->MakeRequest("getaccountbalance", $params);
 
                 $packagePrice = $answer['balance'];
-                if ($packagePrice == null && is_numeric($packagePrice) == false) {
+                if ($packagePrice == null || is_numeric($packagePrice) == false) {
                     var_dump($answer);
                     var_dump($mt4UserName);
                     var_dump($packagePrice);
@@ -8904,7 +8904,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $processFee = $percentageProcessFee;
 
                 if ($withdrawAmount > $ledgerAccountBalance) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
 
                 } elseif ($this->getRequestParameter('bankInTo') == "") {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
