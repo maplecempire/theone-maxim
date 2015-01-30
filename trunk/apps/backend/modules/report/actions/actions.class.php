@@ -852,7 +852,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            //$distDB->setNomineeName($leader);
             $distDB->save();
         }
 
@@ -945,7 +945,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            //$distDB->setNomineeName($leader);
             $distDB->save();
         }
 
@@ -998,7 +998,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            //$distDB->setNomineeName($leader);
             $distDB->save();
         }
 
@@ -1051,7 +1051,7 @@ class reportActions extends sfActions
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            //$distDB->setNomineeName($leader);
             $distDB->save();
         }
 
