@@ -664,21 +664,22 @@ class businessActions extends sfActions
             if ($sponsorDistPairingLedgerDB) {
                 $legBalance = $sponsorDistPairingLedgerDB->getBalance();
             }
+            if ($uplineDistDB->getRankId() > 0) {
+                $sponsorDistPairingledger = new MlmDistPairingLedger();
+                $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                $sponsorDistPairingledger->setCredit($pairingPoint);
+                $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                $sponsorDistPairingledger->setDebit(0);
+                $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
 
-            $sponsorDistPairingledger = new MlmDistPairingLedger();
-            $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
-            $sponsorDistPairingledger->setLeftRight($uplinePosition);
-            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
-            $sponsorDistPairingledger->setCredit($pairingPoint);
-            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
-            $sponsorDistPairingledger->setDebit(0);
-            $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
-            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
-            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-            $sponsorDistPairingledger->save();
-
-            $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+                //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+            }
 
             if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                 break;
