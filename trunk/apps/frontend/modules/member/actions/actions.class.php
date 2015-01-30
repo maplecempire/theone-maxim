@@ -23,14 +23,15 @@ class memberActions extends sfActions
             $arr = $resultset->getRow();
 
             if ($arr['_total'] > 1) {
-
-            }
-            $c = new Criteria();
-            $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "FUND MANAGEMENT");
-            $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
-            $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
-            if ($mlm_account_ledger) {
-                $mlm_account_ledger->delete();
+                $c = new Criteria();
+                $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "FUND MANAGEMENT");
+                $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+                $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
+                if ($mlm_account_ledger) {
+                    $mlm_account_ledger->delete();
+                }
+            } else {
+                break;
             }
         }
 
