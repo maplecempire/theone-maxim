@@ -382,10 +382,10 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     if ($closeLogin == false) {
 
-                                    //} else {
+                                    } else {
                                     ?>
 
                                     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
