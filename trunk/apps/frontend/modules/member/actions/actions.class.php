@@ -48,6 +48,7 @@ class memberActions extends sfActions
         $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+        //$packagePrice = $answer['balance'];
         $packagePrice = $answer['balance'];
         var_dump($answer);
         if ($packagePrice == null) {
@@ -1093,11 +1094,12 @@ class memberActions extends sfActions
                 $mt4request = new CMT4DataReciver;
                 $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
 
-                $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+                //$answer = $mt4request->MakeRequest("getaccountbalance", $params);
 
-                $packagePrice = $answer['balance'];
+                //$packagePrice = $answer['balance'];
+                $packagePrice = $this->getMt4Balance(null, $mt4UserName);
                 if ($packagePrice == null || is_numeric($packagePrice) == false) {
-                    var_dump($answer);
+                    //var_dump($answer);
                     var_dump($mt4UserName);
                     var_dump($packagePrice);
                     var_dump("<br>");
@@ -13226,19 +13228,22 @@ Wish you all the best.
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-
-        $packagePrice = $answer['balance'];
-        if ($packagePrice == null && is_numeric($packagePrice) == false) {
+        //var_dump($answer['balance']);
+        //exit();
+        //$packagePrice = $answer['balance'];
+        $packagePrice = null;
+        if ($answer == null || is_numeric($answer['balance']) == false) {
             //var_dump($answer);
             //var_dump($mt4UserName);
             //var_dump($packagePrice);
             //var_dump("<br>");
             //var_dump(is_numeric($packagePrice));
         } else {
-            $arr = array();
-            $arr['mt4_credit'] = $answer['balance'];
-            $arr['traded_datetime'] = date("Y-m-d h:i:s");
-            return $arr;
+            //$arr = array();
+            //$arr['mt4_credit'] = $answer['balance'];
+            //$arr['traded_datetime'] = date("Y-m-d h:i:s");
+            //return $arr['mt4_credit'];
+            $packagePrice = $answer['balance'];
         }
 
         $mt4request->CloseConnection();
@@ -13254,7 +13259,7 @@ Wish you all the best.
             return $arr;
         }
         */
-        return null;
+        return $packagePrice;
     }
 
     function checkRpUser($distributorId)

@@ -3479,19 +3479,22 @@ class financeActions extends sfActions
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-
-        $packagePrice = $answer['balance'];
-        if ($packagePrice == null && is_numeric($packagePrice) == false) {
+        //var_dump($answer['balance']);
+        //exit();
+        //$packagePrice = $answer['balance'];
+        $packagePrice = null;
+        if ($answer == null || is_numeric($answer['balance']) == false) {
             //var_dump($answer);
             //var_dump($mt4UserName);
             //var_dump($packagePrice);
             //var_dump("<br>");
             //var_dump(is_numeric($packagePrice));
         } else {
-            $arr = array();
-            $arr['mt4_credit'] = $answer['balance'];
-            $arr['traded_datetime'] = date("Y-m-d h:i:s");
-            return $arr['mt4_credit'];
+            //$arr = array();
+            //$arr['mt4_credit'] = $answer['balance'];
+            //$arr['traded_datetime'] = date("Y-m-d h:i:s");
+            //return $arr['mt4_credit'];
+            $packagePrice = $answer['balance'];
         }
 
         $mt4request->CloseConnection();
@@ -3507,7 +3510,7 @@ class financeActions extends sfActions
             return $arr;
         }
         */
-        return "--";
+        return $packagePrice;
     }
 
     function getCommissionBalance($distributorId, $commissionType)
