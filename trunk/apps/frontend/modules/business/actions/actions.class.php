@@ -292,7 +292,7 @@ class businessActions extends sfActions
             /*if ($idx > 10) {
                 break;
             }*/
-            $queryDate = "2014-12-30";
+            $queryDate = "2015-01-31";
             $totalLeft = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
             $totalRight = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
             $totalLeftActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
@@ -328,7 +328,7 @@ class businessActions extends sfActions
                 $sponsorDistPairingledger->setCreditActual($totalRightActual);
                 $sponsorDistPairingledger->setDebit(0);
                 $sponsorDistPairingledger->setBalance($totalRight);
-                $sponsorDistPairingledger->setRemark("CLOSING 2014-09-06".$queryDate);
+                $sponsorDistPairingledger->setRemark("CLOSING ".$queryDate);
                 $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingledger->save();

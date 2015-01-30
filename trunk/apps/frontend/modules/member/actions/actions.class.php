@@ -25,6 +25,7 @@ class memberActions extends sfActions
             if ($arr['_total'] > 1) {
                 $c = new Criteria();
                 $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "FUND MANAGEMENT");
+                $c->add(MlmAccountLedgerPeer::DIST_ID, "FUND MANAGEMENT");
                 $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
                 $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
                 if ($mlm_account_ledger) {
