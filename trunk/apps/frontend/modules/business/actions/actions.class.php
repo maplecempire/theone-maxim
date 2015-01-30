@@ -279,7 +279,7 @@ class businessActions extends sfActions
         if ($this->getRequestParameter('q')) {
             $c->add(MlmDistributorPeer::FROM_ABFX, $this->getRequestParameter('q'));
         }
-        $c->setLimit(5000);
+        $c->setLimit(1000);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = 0;
