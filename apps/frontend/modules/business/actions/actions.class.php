@@ -377,7 +377,7 @@ class businessActions extends sfActions
         $c = new Criteria();
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 161);
         $c->add(MlmDistributorPeer::BKK_STATUS, "COMPLETE");
-        $c->setLimit(1000);
+        $c->setLimit(5000);
         $distDBs = MlmDistributorPeer::doSelect($c);
 
         $idx = 0;
