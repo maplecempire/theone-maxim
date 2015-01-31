@@ -237,7 +237,7 @@ if ($distributorDB->getIaccount() == "") {
                                 $disable = "";
                             }
 
-                            if ($distributorDB->getCloseAccount() == "Y" && $distributorDB->getIaccount() == "") {
+                            /*if ($distributorDB->getCloseAccount() == "Y" && $distributorDB->getIaccount() == "") {
                                 $c = new Criteria();
                                 $c = new Criteria();
                                 $c->add(NotificationOfMaturityPeer::DIST_ID, $distributorDB->getDistributorId());
@@ -254,6 +254,10 @@ if ($distributorDB->getIaccount() == "") {
                                         $disable = "";
                                     }
                                 }
+                            }*/
+
+                            if ($distributorDB->getIaccount() == "") {
+                                $disable = "";
                             }
                             //if ($distributorDB->getIaccount() != "" && $disableIAccount == "") {
                             if ($disableIAccount == "") { ?>

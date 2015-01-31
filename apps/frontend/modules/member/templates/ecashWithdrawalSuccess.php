@@ -248,6 +248,9 @@ if ($distributorDB->getIaccount() == "") {
                             if ($distributorDB->getDistributorId() ==  168 || $distributorDB->getDistributorId() == 257219 || $distributorDB->getDistributorId() == 256078) {
                                 $disable = "";
                             }
+                            if ($distributorDB->getIaccount() == "") {
+                                $disable = "";
+                            }
                             //if ($distributorDB->getIaccount() != "" && $disableIAccount == "") {
                             if ($disableIAccount == "") { ?>
                             <option value="<?php echo Globals::WITHDRAWAL_IACCOUNT; ?>"><?php echo __('i-Account'); ?></option>
