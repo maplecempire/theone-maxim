@@ -275,7 +275,7 @@ class businessActions extends sfActions
     {
         $c = new Criteria();
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 161);
-        $c->add(MlmDistributorPeer::BKK_STATUS, "PENDING");
+        $c->add(MlmDistributorPeer::BKK_STATUS, "COMPLETE");
         if ($this->getRequestParameter('q')) {
             $c->add(MlmDistributorPeer::FROM_ABFX, $this->getRequestParameter('q'));
         }
@@ -359,7 +359,103 @@ class businessActions extends sfActions
                 $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sponsorDistPairingledger->save();
 
-                $distDB->setBkkStatus("COMPLETE");
+                $distDB->setBkkStatus("SUCCESS");
+                $distDB->save();
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("executeDoArchivePairing Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoArchivePairingExt()
+    {
+        $c = new Criteria();
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 161);
+        $c->add(MlmDistributorPeer::BKK_STATUS, "COMPLETE");
+        $c->setLimit(1000);
+        $distDBs = MlmDistributorPeer::doSelect($c);
+
+        $idx = 0;
+        foreach ($distDBs as $distDB) {
+            $idx++;
+
+            /*if ($distDB->getDistributorId() == 1) {
+                continue;
+            }*/
+            /*if ($idx > 10) {
+                break;
+            }*/
+            $queryDate = "2015-01-31";
+            $totalLeft = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRight = $this->getPairingSumCredit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
+            $totalLeftActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRightActual = $this->getPairingSumCreditActual($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
+            $totalLeftPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $queryDate);
+            $totalRightPaired = $this->getPairingSumDebit($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $queryDate);
+
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                $c = new Criteria();
+                $c->add(MlmDistPairingLedgerPeer::REMARK, "CLOSING 2015-01-31");
+                $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distDB->getDistributorId());
+                $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_LEFT);
+                $c->add(MlmDistPairingLedgerPeer::TRANSACTION_TYPE, Globals::PAIRING_LEDGER_REGISTER);
+                $sponsorDistPairingledger = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                print_r("<br>".$distDB->getDistributorId().":".$totalLeft.":".$totalRight.":".$totalLeftPaired.":".$totalRightPaired);
+                //$this->removePairing($distDB->getDistributorId(), $queryDate);
+                $sponsorDistPairingledger->setCredit($totalLeft);
+                $sponsorDistPairingledger->setCreditActual($totalLeftActual);
+                $sponsorDistPairingledger->setBalance($totalLeft);
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
+
+                $c = new Criteria();
+                $c->add(MlmDistPairingLedgerPeer::REMARK, "CLOSING 2015-01-31");
+                $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distDB->getDistributorId());
+                $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_RIGHT);
+                $c->add(MlmDistPairingLedgerPeer::TRANSACTION_TYPE, Globals::PAIRING_LEDGER_REGISTER);
+                $sponsorDistPairingledger = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                $sponsorDistPairingledger->setCredit($totalRight);
+                $sponsorDistPairingledger->setCreditActual($totalRightActual);
+                $sponsorDistPairingledger->setBalance($totalRight);
+                $sponsorDistPairingledger->setRemark("CLOSING ".$queryDate);
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
+
+                $c = new Criteria();
+                $c->add(MlmDistPairingLedgerPeer::REMARK, "CLOSING 2015-01-31");
+                $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distDB->getDistributorId());
+                $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_LEFT);
+                $c->add(MlmDistPairingLedgerPeer::TRANSACTION_TYPE, Globals::PAIRING_LEDGER_PAIRED);
+                $sponsorDistPairingledger = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                $sponsorDistPairingledger->setDebit($totalLeftPaired);
+                $sponsorDistPairingledger->setBalance($totalLeft - $totalLeftPaired);
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
+
+                $c = new Criteria();
+                $c->add(MlmDistPairingLedgerPeer::REMARK, "CLOSING 2015-01-31");
+                $c->add(MlmDistPairingLedgerPeer::DIST_ID, $distDB->getDistributorId());
+                $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, Globals::PLACEMENT_RIGHT);
+                $c->add(MlmDistPairingLedgerPeer::TRANSACTION_TYPE, Globals::PAIRING_LEDGER_PAIRED);
+                $sponsorDistPairingledger = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                $sponsorDistPairingledger->setDebit($totalRightPaired);
+                $sponsorDistPairingledger->setBalance($totalRight - $totalRightPaired);
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
+
+                $distDB->setBkkStatus("SUCCESS");
                 $distDB->save();
 
                 $con->commit();
@@ -1535,7 +1631,7 @@ class businessActions extends sfActions
     }
     function getPairingSumCredit($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger_20150131 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -1558,7 +1654,7 @@ class businessActions extends sfActions
 
     function getPairingSumCreditActual($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit_actual) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit_actual) AS SUB_TOTAL FROM mlm_dist_pairing_ledger_20150131 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
@@ -1581,7 +1677,7 @@ class businessActions extends sfActions
 
     function getPairingSumDebit($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger2 WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger_20150131 WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
