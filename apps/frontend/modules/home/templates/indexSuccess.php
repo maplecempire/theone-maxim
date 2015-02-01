@@ -1044,7 +1044,82 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='62'>Maxim Annual Convention Notice</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='61'>iAccount Notice
+<br>iAccount 通告
+<br>iAccount 고지
+<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "1 February 2015";
+                ?>
+            </div>
+
+            <div id="page_61" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>亲爱的会员,
+<br>
+<br>Pls note withdrawal process for February 2015 will be as follows:
+<br>请注意2015年2月份取现安排将会如下:
+<br>
+<br>1. Withdrawal period: 1 to 7 February only.
+<br>取现申请时间: 2月1号-7号
+<br>
+<br>2. Members who have iAccount will be able to select iAccount option only.
+<br>拥有iAccount账户的会员,将只能通过iAccount进行取现.
+<br>
+<br>3. For members without iAccount, the system will automatically allow them only to select local bank transfer.
+<br>尚未开通iAccount账户的会员, 系统将自动只允许其通过本地银行进行转账.
+<br>
+<br>4. Pls note after February, withdrawal option will be available only via iAccount, as such please apply for your iAccount immediately.
+<br>请注意, 从2月份开始以后的月份, 取现只可以通过iAccount进行. 所以请尽快申请iAccount账户.
+<br>
+<br>Thank you, 谢谢
+<br>
+<br>CFO 首席财务官
+<br>Maxim Trader 马胜金融
+<br>
+<br>친애하는 회원여러분
+<br>
+<br>2015년 2월 인출이 아래와 같이 진행될 것입니다.
+<br>
+<br>1. 인출기간 : 2월 1일에서 7일 까지 한정
+<br>2. I-어카트를 가진 회원은 I어카운트 옵션만 선택할 수 있습니다.
+<br>3. I어카운트를 가지고 있지 않은 회원은 시스템이 자동적으로 현지 은행만 선택할 수 있도록 합니다.
+<br>4. 2월 이후부터 인출 옵션은 i어카운트만 가능할 것이므로 i어카운트를 즉시 신청하시기 바랍니다.
+<br>
+<br>감사합니다.
+<br>CFO
+<br>
+<br>メンバーの皆さま
+<br>
+<br>2015年2月の引き出し手順は以下の通りになりますのでお知らせします。
+<br>
+<br>1..引き出し期間:2月1日から7日のみとなります。
+<br>2. iAccountをお持ちのお客様はiAccountオプションのみを選択いただけます。
+<br>3.iAccountをお持ちでないお客様はシステムにより自動的に地域の銀行送金を選択することになります。
+<br>4. どうぞ2月以降、引き出しオプションはiAccountを通してのみ可能になりますことをご注意ください。そのため、どうぞiAccountに至急お申し込みください。
+<br>
+<br>ありがとうございます。
+<br>CFO
+<br>マキシムトレーダー
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='62'>Maxim Annual Convention Notice</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1053,7 +1128,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_62" class="news_desc" style="text-align: left;">
+            <div id="page_62" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
@@ -1091,7 +1166,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='61'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
-<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+<br>iAccount お知らせ</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1100,7 +1175,7 @@ $(document).ready(function() {
                 */?>
             </div>
 
-            <div id="page_61" class="news_desc" style="text-align: left;">
+            <div id="page_61" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
