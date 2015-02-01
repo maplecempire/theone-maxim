@@ -13,7 +13,7 @@ class memberActions extends sfActions
         $query = "SELECT count(dist_id) as _total, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
               and created_on >= '2015-01-29 00:00:00' and dist_id > 0 AND CREDIT >0
-              and created_on <= '2015-02-01 23:59:59' group by dist_id, credit order by 1 desc";
+              and created_on <= '2015-02-02 23:59:59' group by dist_id, credit order by 1 desc";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
