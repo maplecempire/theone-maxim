@@ -10,10 +10,10 @@
 class memberActions extends sfActions
 {
     public function executeCorrectRoi2() {
-        $query = "SELECT count(dist_id) as _total, dist_id, credit FROM maxim.mlm_account_ledger
+        $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
               and created_on >= '2015-01-29 00:00:00' and dist_id > 0 AND CREDIT >0
-              and created_on <= '2015-02-02 23:59:59' group by dist_id, credit order by 1 desc";
+              and created_on <= '2015-02-02 23:59:59' group by dist_id, remark, credit order by 1 desc";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -1081,6 +1081,33 @@ class memberActions extends sfActions
     }
     public function executeManualRetrieveGmailMailAttachment() {
         //$this->retrieveGmailMailAttachment();
+
+        $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
+            where transaction_type IN ('FUND MANAGEMENT')
+              and created_on >= '2015-01-29 00:00:00' and dist_id > 0 AND CREDIT >0
+              and created_on <= '2015-02-02 23:59:59' group by dist_id, remark, credit order by 1 desc";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            if ($arr['_total'] > 1) {
+                $c = new Criteria();
+                $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "FUND MANAGEMENT");
+                $c->add(MlmAccountLedgerPeer::DIST_ID, $arr['dist_id']);
+                $c->addDescendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+                $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
+                if ($mlm_account_ledger) {
+                    $mlm_account_ledger->setDistId($mlm_account_ledger->getDistId() * -1);
+                    $mlm_account_ledger->save();
+                }
+            } else {
+                break;
+            }
+        }
 
         print_r("+++++ ROI Dividend +++++<br>");
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
