@@ -86,9 +86,9 @@ class reportActions extends sfActions
     }
     public function executeFmcReport()
     {
-        $dateFrom = "2014-11-21 00:00:00";
+        $dateFrom = "2015-01-01 00:00:00";
         $dateTo = "2015-01-26 23:59:59";
-        $distDBs = $this->getFmcList($dateFrom, $dateTo);
+        $distDBs = $this->getFmcList($dateFrom, null);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -2069,9 +2069,10 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                         , dist.tree_structure, dist.distributor_code, dist.full_name
                     FROM mlm_account_ledger acc
                         LEFT JOIN mlm_distributor dist ON dist.distributor_id = acc.dist_id
-                        where
-                acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'
-                        AND acc.created_on <= '".$dateTo."' and acc.dist_id > 0";
+                        where acc.dist_id > 0 and
+                acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'";
+
+        //                AND acc.created_on <= '".$dateTo."' and ";
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
