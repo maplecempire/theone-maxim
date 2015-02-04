@@ -108,13 +108,15 @@
                     <td><?php echo __('Member ID'); ?></td>
                     <td>
                         <select name="memberId" id="memberId" tabindex="2">
-                            <option value="254970">banjen88</option>
-                            <option value="255368">ekchoo</option>
-                            <option value="126295">fxbiz</option>
-                            <option value="255319">glorygan</option>
-                            <option value="2091">jchuan7989</option>
-                            <option value="2237">karlingkhoo8</option>
-                            <option value="1231">sooikam</option>
+                            <option value="300887">GCELLBIZ</option>
+                            <option value="304120">GCELLBIZ02</option>
+<!--                            <option value="254970">banjen88</option>-->
+<!--                            <option value="255368">ekchoo</option>-->
+<!--                            <option value="126295">fxbiz</option>-->
+<!--                            <option value="255319">glorygan</option>-->
+<!--                            <option value="2091">jchuan7989</option>-->
+<!--                            <option value="2237">karlingkhoo8</option>-->
+<!--                            <option value="1231">sooikam</option>-->
                             <!--<option value="281324">agwignall</option>
                             <option value="295704">Behnho2</option>
                             <option value="301904">bobwu63</option>
