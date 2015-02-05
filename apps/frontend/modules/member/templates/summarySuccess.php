@@ -334,6 +334,28 @@ function reassignDatagridAnnouncementEventAttr() {
 </tr>
 <tr>
     <td><br>
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-highlight ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-info"></span>
+                    <strong>Dear Members,
+<br>亲爱的会员,
+<br>
+<br>Our data centre experienced some technical problems at 2PM Malaysian time (GMT +8) today which resulted in loss of certain data.
+<br>The system is presently down and we expect to restore the system by 9PM Malaysian time. Once the system is up, all members are kindly requested to re-key in all AGL and Maxim Trader transactions starting from 11AM today, 5 February 2015.
+<br>
+<br>很抱歉从今天下午2点(GMT+8)开始, 我们的数据中心出现了一些技术问题, 造成少许数据的丢失; 目前我们已经关闭系统服务器, 预计今天晚上9点会恢复正常; 一旦系统恢复, 请会员配合 - 如果您于今天(2015.2.5日)上午11点后有AGL或者马胜的入单或交易, 请重新操作.
+<br>
+<br>We truly apologize for any inconvenience caused.
+<br>为此造成的不便,我们表示万分的抱歉!
+<br>
+<br>Thank you, 谢谢!
+<br>CEO
+<br>Maxim Trader
+<br>马胜金融首席执行官</strong></p>
+            </div>
+        </div>
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">
             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -444,7 +466,7 @@ function reassignDatagridAnnouncementEventAttr() {
         foreach ($distMt4s as $distMt4) {
             $joinDate = $distMt4->getCreatedOn();
 
-            /*$c = new Criteria();
+            $c = new Criteria();
             $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $distMt4->getMt4UserName());
             $c->add(MlmRoiDividendPeer::IDX, 1);
             $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
@@ -454,7 +476,7 @@ function reassignDatagridAnnouncementEventAttr() {
 
                 $timevalue = strtotime($joinDate);
                 $joinDate = date("Y-m-d h:i:s", strtotime("-1 months", $timevalue));
-            }*/
+            }
             $arr = explode(" ", $joinDate);
             $joinDate = $arr[0];
             echo "<span style='margin:1px;' class='".$colorArr[$distMt4->getRankId()]."_tags'>".$distMt4->getMt4UserName()." [".$joinDate."]</span>&nbsp;";
