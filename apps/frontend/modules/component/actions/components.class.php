@@ -12,9 +12,9 @@ class componentComponents extends sfComponents
     }
     public function executeHomeLeftMenu()
     {
-        $distDB = MlmDistributorPeer::retrieveByPK($this->param);
+        //$distDB = MlmDistributorPeer::retrieveByPK($this->param);
 
-        $this->distDB = $distDB;
+        //$this->distDB = $distDB;
         $this->showLink = $this->showLink;
     }
     public function executeCountrySelectOption()
