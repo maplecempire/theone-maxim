@@ -1079,6 +1079,9 @@ $(document).ready(function() {
 <br>4. Pls note after February, withdrawal option will be available only via iAccount, as such please apply for your iAccount immediately.
 <br>请注意, 从2月份开始以后的月份, 取现只可以通过iAccount进行. 所以请尽快申请iAccount账户.
 <br>
+<br>5. The above does not apply to members in China, Indonesia and Thailand whose present withdrawal system will remain unchanged.
+<br>以上变更不适用于来自中国、泰国以及印度尼西亚的会员; 以上三个国家的本地银行取现政策保持不变.
+<br>
 <br>Thank you, 谢谢
 <br>
 <br>CFO 首席财务官
@@ -1092,6 +1095,7 @@ $(document).ready(function() {
 <br>2. I-어카트를 가진 회원은 I어카운트 옵션만 선택할 수 있습니다.
 <br>3. I어카운트를 가지고 있지 않은 회원은 시스템이 자동적으로 현지 은행만 선택할 수 있도록 합니다.
 <br>4. 2월 이후부터 인출 옵션은 i어카운트만 가능할 것이므로 i어카운트를 즉시 신청하시기 바랍니다.
+<br>5. The above does not apply to members in China, Indonesia and Thailand whose present withdrawal system will remain unchanged.
 <br>
 <br>감사합니다.
 <br>CFO
@@ -1104,6 +1108,7 @@ $(document).ready(function() {
 <br>2. iAccountをお持ちのお客様はiAccountオプションのみを選択いただけます。
 <br>3.iAccountをお持ちでないお客様はシステムにより自動的に地域の銀行送金を選択することになります。
 <br>4. どうぞ2月以降、引き出しオプションはiAccountを通してのみ可能になりますことをご注意ください。そのため、どうぞiAccountに至急お申し込みください。
+<br>5. The above does not apply to members in China, Indonesia and Thailand whose present withdrawal system will remain unchanged.
 <br>
 <br>ありがとうございます。
 <br>CFO
