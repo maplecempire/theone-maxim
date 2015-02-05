@@ -382,7 +382,7 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     if ($closeLogin == false) {
 
                                     } else {
@@ -395,49 +395,14 @@
                             <strong>Dear IMs and Partners
 <br>亲爱的代理及会员们:
 <br>
-<br>Please NOTE that the company server will be SHUT DOWN at 2359hrs December 30th 2014 for a period of 7 hours.
-<br>请注意公司将于2015.01.30日晚23:59分关闭服务器, 时长为7小时.
-<br>
-<br>This is necessary because we are UPGRADING our servers to better serve our IMs and to keep up abreast with the demands of our continued growth.
-<br>这一操作是因为我们需要升级服务器,也是为了满足我们不断快速成长的需求, 更好地服务所有代理及会员.
+<br>Please NOTE that the company server will be SHUT DOWN for a period of 3 hours.
+<br>请注意公司将关闭服务器, 时长为3小时.
 <br>
 <br>We seek your kind understanding and apologize for any inconvenience caused. 敬请留意,谢谢大家的理解!为此造成任何不便,我们深表歉意.
 <br>
 <br>CEO 首席执行官
 <br>Maxim Capital Limited
 <br>马胜金融集团
-<br>
-<br>친애하는 국제회원 및 파트너 여러분
-<br>
-<br>회사 서버가 2015년 01월 30일 23시59분부터 7시간동안 연결되지 않을 것입니다.
-<br>
-<br>이는 국제회원 여러분에게 더 나은 서비스와 지속적으로 늘어나는 요구를 충족시킬 수 있도록 서버를 업그레이드 하기 위함입니다.
-<br>
-<br>여러분의 이해에 감사드리며 불편를 끼쳐드려서 죄송합니다.
-<br>
-<br>CEO
-<br>맥심 캐피탈 주식회사
-<br>
-<br>친애하는 국제회원 및 파트너 여러분
-<br>
-<br>회사 서버가 2015년 01 30일 23시59분부터 7시간동안 연결되지 않을 것입니다.
-<br>
-<br>이는 국제회원 여러분에게 더 나은 서비스와 지속적으로 늘어나는 요구를 충족시킬 수 있도록 서버를 업그레이드 하기 위함입니다.
-<br>
-<br>여러분의 이해에 감사드리며 불편를 끼쳐드려서 죄송합니다.
-<br>
-<br>CEO
-<br>맥심 캐피탈 주식회사
-<br>
-<br>IMおよびパートナーの皆様
-<br>
-<br>弊社サーバーが2015年01月30日23時59分より7時間停止しますので、ご注意ください。
-<br>これはIMの皆様により良いサービスを提供すると共に、需要の増大に対応するため、弊社サーバーをアップグレードするものです。
-<br>
-<br>ご不便をおかけすることをお詫びします。どうぞ皆様のご理解をお願いいたします。
-<br>
-<br>CEO
-<br>マキシム・キャピタル・リミテッド
                             </strong>
                                     </p></div>
 <?php } ?>
