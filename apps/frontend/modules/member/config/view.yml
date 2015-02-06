@@ -45,3 +45,11 @@ epointPurchaseGozSuccess:
 epointPurchasePaPSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+paymentGatewaySuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
+paymentGatewayGozSuccess:
+  has_layout:     off
+  stylesheets: 	  []
