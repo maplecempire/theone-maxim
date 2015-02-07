@@ -209,7 +209,7 @@
 
             var errorPanel = "<div style='padding: 10px; line-height :normal' class='ui-state-error ui-corner-all'>";
             errorPanel += "<p><span style='float: left; margin-right: .3em;' class='ui-icon ui-icon-alert'></span>";
-            errorPanel += msgs + "</p></div>";
+            errorPanel += msgs + "</p><br><button id='errorPanelCloseButton'  class='btn btn-danger'>Close</button></div>";
             $("#waitingLB h3").html(errorPanel);
             $.blockUI({
                         message: $("#waitingLB")
@@ -248,6 +248,13 @@
             $(".blockOverlay").css("z-index", 1010);
             $(".blockPage").css("z-index", 1011);
         }
+
+        $(function() {
+            $("#errorPanelCloseButton").live("click", function(event){
+                event.preventDefault();
+                $.unblockUI();
+            });
+        });
     </script>
 </head>
 
