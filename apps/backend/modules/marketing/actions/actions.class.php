@@ -337,7 +337,7 @@ class marketingActions extends sfActions
                         $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
                         $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
                         $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
-                        $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyRoi());
+                        $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
                         //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                         //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
                         $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
