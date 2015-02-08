@@ -2347,22 +2347,56 @@ class memberActions extends sfActions
     }
 
     public function executePaymentGatewaySuccessRedirect() {
-        $sign = $this->getRequestParameter("sign");
-        $transtat = $this->getRequestParameter("transtat");
-        $amount = $this->getRequestParameter("amount");
+        $billno = $this->getRequestParameter('billno');
+        $amount = $this->getRequestParameter('amount');
+        $mydate = $this->getRequestParameter('date');
+        $succ = $this->getRequestParameter('succ');
+        $msg = $this->getRequestParameter('msg');
+        $attach = $this->getRequestParameter('attach');
+        $ipsbillno = $this->getRequestParameter('ipsbillno');
+        $retEncodeType = $this->getRequestParameter('retencodetype');
+        $currency_type = $this->getRequestParameter('Currency_type');
+        $signature = $this->getRequestParameter('signature');
+
+        $content = 'billno'.$billno.'currencytype'.$currency_type.'amount'.$amount.'date'.$mydate.'succ'.$succ.'ipsbillno'.$ipsbillno.'retencodetype'.$retEncodeType;
+        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证书
+        $cert = Globals::PAYMENT_GATEWAY_MER_KEY;
+        if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
+            $cert = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
+        }
+        $signature_1ocal = md5($content . $cert);
 
         $c = new Criteria();
-        $c->add(MlmDistEpointPurchasePeer::PG_SIGNATURE, $sign);
+        $c->add(MlmDistEpointPurchasePeer::PAYMENT_REFERENCE, $billno);
         $mlmDistEpointPurchase = MlmDistEpointPurchasePeer::doSelectOne($c);
+        //var_dump($ipsbillno);
+        //var_dump($billno);
+        //exit();
+        if (!$mlmDistEpointPurchase) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+            return $this->redirect('/member/paymentGateway');
+        }
+        $mlmDistEpointPurchase->setPgBillNo($ipsbillno);
+        $mlmDistEpointPurchase->setPgRetEncodeType($retEncodeType);
+        $mlmDistEpointPurchase->setPgCurrencyType($currency_type);
+        $mlmDistEpointPurchase->setPgSignature($signature);
 
-        if ($mlmDistEpointPurchase) {
-            if ($transtat == '000') {
+        if ($signature_1ocal == $signature)
+        {
+            //----------------------------------------------------
+            //  判断交易是否成功
+            //  See the successful flag of this transaction
+            //----------------------------------------------------
+            if ($succ == 'Y')
+            {
+                $dist = MlmDistributorPeer::retrieveByPK($mlmDistEpointPurchase->getDistId());
+
                 $mlmDistEpointPurchase->setPgSuccess("Y");
-                $mlmDistEpointPurchase->setPgMsg("SUCCESS");
+                $mlmDistEpointPurchase->setPgMsg($msg);
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_COMPLETE);
                 $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
-                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmDistEpointPurchase->setApprovedByUserid($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
                 $mlmDistEpointPurchase->save();
 
@@ -2370,7 +2404,7 @@ class memberActions extends sfActions
                 return $this->redirect('/member/paymentGateway?pg=Y');
             } else {
                 $mlmDistEpointPurchase->setPgSuccess("N");
-                $mlmDistEpointPurchase->setPgMsg("transtat not 000");
+                $mlmDistEpointPurchase->setPgMsg($msg);
                 $mlmDistEpointPurchase->setStatusCode(Globals::STATUS_REJECT);
                 $mlmDistEpointPurchase->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmDistEpointPurchase->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
@@ -2396,7 +2430,7 @@ class memberActions extends sfActions
 
     public function executePapSuccessRedirect() {
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transaction Successful."));
-        return $this->redirect('/member/epointPurchase?pg=Y');
+        return $this->redirect('/member/paymentGateway?pg=Y');
     }
 
     public function executePapSuccessDatafeed() {
@@ -2734,8 +2768,8 @@ class memberActions extends sfActions
             $dispAmount = $amount;
             $paymentMethod = $this->getRequestParameter('paymentMethod', 'LB');
 
-            if ($paymentMethod == "GOZ" && $amount > 200000) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Maximum Payment RMB 200,000 per transaction"));
+            if ($paymentMethod == "PG" && $amount > 50000) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Maximum Payment RMB PG,000 per transaction"));
                 return $this->redirect('/member/epointPurchase');
             }
 
@@ -2756,46 +2790,26 @@ class memberActions extends sfActions
 
             $paymentReference = $mlmDistEpointPurchase->getPaymentReference();
 
-            $ver = "1.0";
-            $merid = "100009";
-            $orderid = $paymentReference;
-            $amount = number_format($dispAmount,2);
-            $orderdate = date("Ymd");
-            $curtype = "RMB";
-            $paytype = "01";
-            $lang = "GB";
-            $returnurl = "http://partner.maximtrader.com/member/paymentGatewaySuccessRedirect";
-            $errorurl = "http://partner.maximtrader.com/member/gozErrorRedirect";
-            $remark = "Public Register";
-            $enctype = "1";
-            $channelid = $this->getRequestParameter('channelid', "CMB");
+            $this->billNo = $paymentReference;
+            $this->amount = $dispAmount;
+            $this->paymentDate = date('Ymd');
+            $this->currencyType = "RMB";
+            $this->gatewayType = "01";
+            $this->lang = "GB";
+            $this->attach = "";
+            $this->dispAmount = $dispAmount;
+            $this->orderEncodeType = "5";  // md5摘要
+            $this->retEncodeType = "17"; // md5摘要
+            $this->rettype = "1";  // 有Server to Server
+            $this->merCode = Globals::PAYMENT_GATEWAY_MER_CODE;
+            $this->merKey = Globals::PAYMENT_GATEWAY_MER_KEY;
+            $this->test = "0";
 
-            $this->ver = $ver;
-            $this->merid = $merid;
-            $this->orderid = $orderid;
-            $this->amount = $amount;
-            $this->orderdate = $orderdate;
-            $this->curtype = $curtype;
-            $this->paytype = $paytype;
-            $this->lang = $lang;
-            $this->returnurl = $returnurl;
-            $this->errorurl = $errorurl;
-            $this->remark = $remark;
-            $this->enctype = $enctype;
-            $this->channelid = $channelid;
-
-            $md5Key = "88496625849445331821427993934397583101845496550535688096140279054296113998693043340961948795056633136331268949200793818235742794";
-            $orge = 'ver='.$ver.'&merid='.$merid.'&orderid='.$orderid.'&amount='.$amount.'&orderdate='.$orderdate.'&curtype='.$curtype.'&paytype='.$paytype.'&lang='.$lang.'&returnurl='.$returnurl.'&errorurl='.$errorurl.'&remark1='.$remark.'&enctype='.$enctype.'&notifytype=2&urltype=1&s2surl='.$errorurl.'&goodsname=goods&channelid='.$channelid;
-              //echo  $orge;
-            $this->SignMD5 = md5($orge.$md5Key) ;
-
-            $mlmDistEpointPurchase->setCurrencyType($curtype);
-            $mlmDistEpointPurchase->setPgMsg($orge);
-            $mlmDistEpointPurchase->setPgBillNo($orderid);
-            $mlmDistEpointPurchase->setPgRetEncodeType($channelid);
-            $mlmDistEpointPurchase->setPgCurrencyType($curtype);
-            $mlmDistEpointPurchase->setPgSignature($this->SignMD5);
-            $mlmDistEpointPurchase->save();
+            if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
+                $this->test = "1";
+                $this->merCode = "000015";
+                $this->merKey = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
+            }
 
             $this->setTemplate('paymentGatewayGoz');
         }
