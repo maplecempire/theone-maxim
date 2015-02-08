@@ -193,56 +193,6 @@
     }
 </script>
 
-<script type='text/javascript' src='/js/jquery/jquery.validate.min.js'></script>
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-        $("#username, #userpassword").keydown(function(e) {
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) { //Enter keycode
-                $("#submitLink").trigger("click");
-            }
-        });
-        $("#updatePasswordForm").validate({
-            rules: {
-                "oldPassword" : {
-                    required : true
-                },
-                "newPassword" : {
-                    required : true,
-                    minlength : 6
-                },
-                "newPassword2" : {
-                    required : true,
-                    minlength : 6,
-                    equalTo: "#newPassword"
-                },
-                "oldSecurityPassword" : {
-                    required : true
-                },
-                "newSecurityPassword" : {
-                    required : true,
-                    minlength : 6
-                },
-                "newSecurityPassword2" : {
-                    required : true,
-                    minlength : 6,
-                    equalTo: "#newSecurityPassword"
-                }
-            },
-            messages: {
-                newPassword2: {
-                    equalTo: "<?php echo __('Please enter the same password as above') ?>"
-                },
-                newSecurityPassword2: {
-                    equalTo: "<?php echo __('Please enter the same password as above') ?>"
-                }
-            },
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
-    });
-</script>
 </head>
 
 <!--<img src="/images/loading.gif" style="display: none;">-->
@@ -337,8 +287,8 @@
                     waiting();
                     var amount = $('#epointAmount').autoNumericGet();
                     var paymentMethod = $('#paymentMethod').val();
-                    if (amount > 200000) {
-                        error("<?php echo __('Maximum Payment RMB 200,000 per transaction') ?>");
+                    if (amount > 50000) {
+                        error("<?php echo __('Maximum Payment RMB 50,000 per transaction') ?>");
                         return false;
                     }
                     $("#epointAmount").val(amount);
@@ -420,40 +370,12 @@
                         <td><?php echo __('Payment Method'); ?></td>
                         <td>
                             <select name="paymentMethod" id="paymentMethod">
-                                <option value="GOZ" <?php echo $disabled;?>><?php echo __("Online Payment Gateway");?></option>
+                                <option value="PG"><?php echo __("IPS"); ?> 环迅支付</option>
                             </select>
                         </td>
                         <td>&nbsp;</td>
                     </tr>
 
-                    <tr class="tbl_form_row_even" id="tr_channelid">
-                        <td>&nbsp;</td>
-                        <td><?php echo __('Bank'); ?></td>
-                        <td>
-                            <select name="channelid" id="channelid">
-                                <option value="ABC">中国农业银行</option>
-                                <option value="CCB">中国建设银行</option>
-                                <option value="CIB">兴业银行</option>
-                                <option value="CMB">招商银行</option>
-                                <option value="CMBC">民生银行</option>
-                                <option value="HXB">华夏银行</option>
-                                <option value="ICBC">中国工商银行</option>
-                                <option value="BOCSH">中国银行</option>
-                                <option value="COMM">交通银行</option>
-                                <option value="SPDB">浦发银行</option>
-                                <option value="GDB">广发银行</option>
-                                <option value="SDB">深圳发展银行</option>
-                                <option value="POSTGC">中国邮政储蓄</option>
-                                <option value="SHRCB">上海农村商业银行</option>
-                                <option value="BOB">北京银行</option>
-                                <option value="GZCB">广州商业银行</option>
-                                <option value="CEB">光大银行</option>
-                                <option value="BOWZ">温州银行</option>
-                                <option value="CNCB">中信银行</option>
-                            </select>
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
                     <tr class="tbl_form_row_odd">
                         <td>&nbsp;</td>
                         <td></td>
