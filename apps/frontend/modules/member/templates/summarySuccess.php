@@ -334,7 +334,7 @@ function reassignDatagridAnnouncementEventAttr() {
 </tr>
 <tr>
     <td><br>
-        <div class="ui-widget">
+        <!--<div class="ui-widget">
             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
                  class="ui-state-highlight ui-corner-all">
                 <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
@@ -355,7 +355,7 @@ function reassignDatagridAnnouncementEventAttr() {
 <br>Maxim Trader
 <br>马胜金融首席执行官</strong></p>
             </div>
-        </div>
+        </div>-->
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">
             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
