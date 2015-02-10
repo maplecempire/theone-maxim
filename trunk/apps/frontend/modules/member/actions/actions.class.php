@@ -574,7 +574,7 @@ class memberActions extends sfActions
                         if ($sponsorDistPairingLedgerDB) {
                             $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                         }
-                        if ($uplineDistDB->getRankId() > 0) {
+                        //if ($uplineDistDB->getRankId() > 0) {
                             $sponsorDistPairingledger = new MlmDistPairingLedger();
                             $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                             $sponsorDistPairingledger->setLeftRight($treePosition);
@@ -589,7 +589,7 @@ class memberActions extends sfActions
                             $sponsorDistPairingledger->save();
 
                             //$this->revalidatePairing($uplineDistDB->getDistributorId(), $treePosition);
-                        }
+                        //}
 
                         if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                             break;
@@ -1797,7 +1797,7 @@ class memberActions extends sfActions
                             $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                         }
 
-                        if ($uplineDistDB->getRankId() > 0) {
+                        //if ($uplineDistDB->getRankId() > 0) {
                             $sponsorDistPairingledger = new MlmDistPairingLedger();
                             $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                             $sponsorDistPairingledger->setLeftRight($treePositione);
@@ -1810,7 +1810,7 @@ class memberActions extends sfActions
                             $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $sponsorDistPairingledger->save();
-                        }
+                        //}
 
                         // upgrade package +++++++++++++++++++++++++++++++++++++++++
                         /*foreach ($mlmPackageUpgradeHistories as $mlmPackageUpgradeHistory) {
@@ -4574,7 +4574,7 @@ class memberActions extends sfActions
                                     $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                                 }
 
-                                if ($uplineDistDB->getRankId() > 0) {
+                                //if ($uplineDistDB->getRankId() > 0) {
                                     $sponsorDistPairingledger = new MlmDistPairingLedger();
                                     $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
@@ -4587,7 +4587,7 @@ class memberActions extends sfActions
                                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->save();
-                                }
+                                //}
 
                                 /*if ($uplineDistDB->getDistributorId() == 595) {
                                     // OPRNMAN
@@ -6607,7 +6607,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         if ($sponsorDistPairingLedgerDB) {
                             $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                         }
-                        if ($uplineDistDB->getRankId() > 0) {
+                        //if ($uplineDistDB->getRankId() > 0) {
                             $sponsorDistPairingledger = new MlmDistPairingLedger();
                             $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                             $sponsorDistPairingledger->setLeftRight($uplinePosition);
@@ -6620,7 +6620,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                             $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $sponsorDistPairingledger->save();
-                        }
+                        //}
 
                         //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
@@ -10176,7 +10176,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     if ($sponsorDistPairingLedgerDB) {
                         $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                     }
-                    if ($uplineDistDB->getRankId() > 0) {
+                    //if ($uplineDistDB->getRankId() > 0) {
                         $sponsorDistPairingledger = new MlmDistPairingLedger();
                         $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                         $sponsorDistPairingledger->setLeftRight($uplinePosition);
@@ -10189,7 +10189,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $sponsorDistPairingledger->save();
-                    }
+                    //}
 
                     if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
                         break;
@@ -11642,7 +11642,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 if ($sponsorDistPairingLedgerDB) {
                                     $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                                 }
-                                if ($uplineDistDB->getRankId() > 0) {
+                                //if ($uplineDistDB->getRankId() > 0) {
                                     $sponsorDistPairingledger = new MlmDistPairingLedger();
                                     $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
@@ -11655,7 +11655,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $sponsorDistPairingledger->save();
-                                }
+                                //}
 
                                 //$this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
 
