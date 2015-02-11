@@ -1044,6 +1044,40 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='61'>Forex Markets Notice</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "11 February 2015";
+                ?>
+            </div>
+
+            <div id="page_61" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>
+<br>Please take note of the upcoming market holiday(s) below.
+<br>
+<br>17 Feb 2015 - US, Presidents' Day
+<br>
+<br>The Forex markets will be open throughout this period but liquidity is expected to be lower than normal. The Gold and Silver Markets will be closed at 2.00am - 7.00am SGT/HKT
+<br>
+<br>Kindly plan your trades accordingly.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='61'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
