@@ -577,6 +577,15 @@ class homeActions extends sfActions
                 $c->add(AppUserPeer::STATUS_CODE, $array, Criteria::IN);
                 $existUser = AppUserPeer::doSelectOne($c);
 
+                /*if ($existUser) {
+                    //$encryptedPassword = md5(strtoupper($password).Globals::SALT_SOURCE);
+                    $encryptedPassword = $password;
+                    if ($existUser->getUserpassword() == $encryptedPassword) {
+
+                    } else {
+                        $existUser = null;
+                    }
+                }*/
             }
 
             if ($existUser) {
@@ -592,6 +601,13 @@ class homeActions extends sfActions
                         $existUser->getUserId() == 301276 ||
                         $existUser->getUserId() == 307815 ||
                         $existUser->getUserId() == 307816 ||
+                        $existUser->getUserId() == 261986 ||
+                        $existUser->getUserId() == 278592 ||
+                        $existUser->getUserId() == 283117 ||
+                        $existUser->getUserId() == 283124 ||
+                        $existUser->getUserId() == 292178 ||
+                        $existUser->getUserId() == 322763 ||
+                        $existUser->getUserId() == 323061 ||
                         $existUser->getUserId() == 311950) {
                     $existUser->setStatusCode(Globals::STATUS_SUSPEND);
                     $existUser->setRemark("{UNAUTHORIZED}");
