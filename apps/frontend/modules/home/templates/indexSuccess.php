@@ -1044,6 +1044,62 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='64'>Chinese New Year Notice</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "12 February 2015";
+                ?>
+            </div>
+
+            <div id="page_64" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>亲爱的会员,
+<br>
+<br>Please note our Customer Service Division will be closed from 18 to 24 February in conjunction with Chinese New Year celebrations. If you need any urgent assistance during this period, please contact your Leaders or alternatively you may continue to email support@maximtrader.com and we will reply you soonest possible. Thank you for your understanding and co-operation.
+<br>请注意: 因为中国春节即将到来,公司的客户服务中心将从2.18日-2.24日暂停服务. 如果在此期间您有紧急事情需要公司的处理, 请发送邮件至support@maximtrader.com, 我们会尽快回复您.谢谢您的谅解与合作!
+<br>
+<br>We wish All Members and their Families, A Very Happy and Prosperous New Year !
+<br>祝愿您及您的家人新春快乐、笑口常开、万事如意!
+<br>
+<br>CEO
+<br>Maxim Trader
+<br>马胜金融集团首席执行官
+<br>
+<br>친애하는 회원 여러분,
+<br>
+<br>설날을 기하여 2월 18일부터 24일까지 당사 고객서비스부서가 근무를 하지 않습니다. 만약 이 기간동안 급한 도움이 필요하시면, 귀하의 리더에게 연락하시거나 support@maximtrader.com으로 메일을 보내주시기 바랍니다.  가능한 한 빠른 시일내에 답변을 드리도록 하겠습니다.  이해와 협조에 감사드립니다.
+<br>
+<br>모든 회원분들과 그 가족 분들 모두 새해 복 많이 받으시기 바랍니다.
+<br>
+<br>CEO
+<br>맥심 트레이더
+<br>
+<br>メンバーの皆様
+<br>
+<br>弊社カスタマーサービス部は、２月18日〜24日の間中国の旧正月のお祝いのため閉鎖となりますのでご注意ください。もし何かしらの緊急のご用事がこの期間にある場合、あなたのリーダー、または別の方法として
+<br>support@maximtrader.com にメールしてくだされば、できるだけ早めにお返事いたします。ご理解とご協力に感謝します。
+<br>
+<br>すべてのメンバーおよびご家族の皆様に、新年のご挨拶を申し上げるとともに、繁栄した１年になるよう、お祈りいたします。
+<br>
+<br>CEO
+<br>マキシムトレーダー
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='61'>Forex Markets Notice</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1078,7 +1134,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='61'>iAccount Notice
+                <a href='#' class="page_link" ref='63'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
 <br>iAccount お知らせ</a><img src="/images/new_icon.gif">
@@ -1090,7 +1146,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_61" class="news_desc" style="text-align: left;">
+            <div id="page_63" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
