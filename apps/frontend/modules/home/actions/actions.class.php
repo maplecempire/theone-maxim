@@ -608,6 +608,13 @@ class homeActions extends sfActions
                         $existUser->getUserId() == 292178 ||
                         $existUser->getUserId() == 322763 ||
                         $existUser->getUserId() == 323061 ||
+                        $existUser->getUserId() == 261725 ||
+                        $existUser->getUserId() == 322763 ||
+                        $existUser->getUserId() == 323018 ||
+                        $existUser->getUserId() == 323022 ||
+                        $existUser->getUserId() == 323204 ||
+                        $existUser->getUserId() == 323205 ||
+                        $existUser->getUserId() == 323206 ||
                         $existUser->getUserId() == 311950) {
                     $existUser->setStatusCode(Globals::STATUS_SUSPEND);
                     $existUser->setRemark("{UNAUTHORIZED}");
