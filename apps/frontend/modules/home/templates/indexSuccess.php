@@ -1044,7 +1044,10 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='65'>Chinese New Year Notice</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='65'>iAccount Notice
+<br>iAccount 通告
+<br>iAccount 고지
+<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
                 <?php
