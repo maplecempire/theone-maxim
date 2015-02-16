@@ -1044,6 +1044,68 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='65'>Chinese New Year Notice</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "14 February 2015";
+                ?>
+            </div>
+
+            <div id="page_65" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>亲爱的会员,
+<br>
+<br>Your February 2015 withdrawals have been processed by Maxim. We have been informed by iAccount that the crediting into individual iAccounts are going on progressively but some delays are expected due to the festive season which is hindered by manpower shortages as result of Chinese New Year celebrations.
+<br>针对本月(2015.2月)的取现, 都已经在处理当中. 有关iAccount的取现, 公司得到通知已经在稳序进行当中; 因为中国假期的到来, 部分iAccount员工已经休假, 因此可能会因人手问题而出现稍许延误.
+<br>
+<br>iAccount has assured us that they will complete the crediting soonest possible.
+<br>请放心, iAccount已经在快马加鞭, 承诺会以最快的速度处理所有客户的转款.
+<br>
+<br>Your kind understanding and patience is much appreciated over this isolated delay.
+<br>为此造成的延误,我们表示十分的抱歉; 也万分感谢您的谅解与理解!
+<br>
+<br>Thank you 非常感谢!
+<br>CFO
+<br>Maxim Trader
+<br>马胜金融首席财务官
+<br>
+<br>친애하는 회원  여러분
+<br>
+<br>맥심 2015년 2월 인출이 진행되었습니다.  i어카운트에서 설날을 기하여 많은 직원들의 휴가로 인한 인력 부족으로 개인의 계좌로의 진행이 조금 늦어질 수 있다는 연락을 받았습니다.
+<br>
+<br>i어카운트는 가능한한 가장 빠른 시간에 작업을 완수할 것을 약속했습니다.
+<br>
+<br>여러분의 이해와 인내에 깊은 감사드립니다.
+<br>
+<br>감사합니다.
+<br>CFO
+<br>맥심 트레이더
+<br>
+<br>メンバーの皆様
+<br>
+<br>皆様の2015年２月の引き出しは現在マキシムによって処理中です。弊社はiAccountより、個人のお客様へのへのiAccountsへの入金作業は現在進行中ながら、中国正月による人出不足が見込まれるため、若干の遅れが予測されるとの知らせを受けています。
+<br>iAccountは可能な限り早急に入金を完了させると私たちに確約しています。
+<br>この遅れに対して、皆様のご理解およびご協力をいただければ幸いです。
+<br>
+<br>ありがとうございます。
+<br>CFO
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='64'>Chinese New Year Notice</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1137,7 +1199,7 @@ $(document).ready(function() {
                 <a href='#' class="page_link" ref='63'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
-<br>iAccount お知らせ</a><img src="/images/new_icon.gif">
+<br>iAccount お知らせ</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1146,7 +1208,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_63" class="news_desc" style="text-align: left;">
+            <div id="page_63" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
