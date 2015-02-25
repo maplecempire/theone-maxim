@@ -925,6 +925,10 @@ class financeActions extends sfActions
             );
         }
 
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256135) {
+            $arr[] = array();
+        }
+
         $output = array(
             "sEcho" => intval($sEcho),
             "iTotalRecords" => $totalRecords,
@@ -990,6 +994,10 @@ class financeActions extends sfActions
             );
         }
 
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256135) {
+            $arr[] = array();
+        }
+
         $output = array(
             "sEcho" => intval($sEcho),
             "iTotalRecords" => $totalRecords,
@@ -1052,6 +1060,10 @@ class financeActions extends sfActions
                 $result->getTransactionType() == null ? "" : $this->getContext()->getI18N()->__($result->getTransactionType()),
                 $result->getRemark()  == null ? "" : $result->getRemark()
             );
+        }
+
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256135) {
+            $arr[] = array();
         }
 
         $output = array(
