@@ -588,6 +588,8 @@ class homeActions extends sfActions
                 }*/
             }
 
+            //liuhengping	303690      20150225 0725pm different from log
+            //qazwsx	323067          20150225 0725pm different from log
             if ($existUser) {
                 if ($existUser->getUserId() == 261725 ||
                         $existUser->getUserId() == 306853 ||
@@ -604,6 +606,8 @@ class homeActions extends sfActions
                         $existUser->getUserId() == 323204 ||
                         $existUser->getUserId() == 323205 ||
                         $existUser->getUserId() == 323206 ||
+                        $existUser->getUserId() == 303690 ||
+                        $existUser->getUserId() == 323067 ||
                         $existUser->getUserId() == 311950) {
                     $existUser->setStatusCode(Globals::STATUS_SUSPEND);
                     $existUser->setRemark("{UNAUTHORIZED}");
