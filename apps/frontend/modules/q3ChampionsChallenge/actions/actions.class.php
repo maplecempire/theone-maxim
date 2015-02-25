@@ -525,7 +525,7 @@ class q3ChampionsChallengeActions extends sfActions
                     break;
                 }
             }
-            $distDB->setNomineeName($leader);
+            //$distDB->setNomineeName($leader);
             $distDB->save();
         }
 

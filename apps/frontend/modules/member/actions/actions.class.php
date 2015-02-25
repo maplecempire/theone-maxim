@@ -1085,7 +1085,7 @@ class memberActions extends sfActions
 
         $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
-              and created_on >= '2015-02-02 00:00:00' and dist_id > 0 AND CREDIT >0
+              and created_on >= '2015-02-20 00:00:00' and dist_id > 0 AND CREDIT >0
               group by dist_id, remark, credit order by 1 desc";
         // and created_on <= '2015-02-02 23:59:59'
         //var_dump($query);
@@ -1158,7 +1158,8 @@ class memberActions extends sfActions
                 //$answer = $mt4request->MakeRequest("getaccountbalance", $params);
 
                 //$packagePrice = $answer['balance'];
-                $packagePrice = $this->getMt4Balance(null, $mt4UserName);
+                $mt4Balance = $this->getMt4Balance(null, $mt4UserName);
+                $packagePrice = $mt4Balance;
                 if ($packagePrice == null || is_numeric($packagePrice) == false) {
                     //var_dump($answer);
                     var_dump($mt4UserName);
@@ -1301,10 +1302,10 @@ class memberActions extends sfActions
                 }
                 // new implement end ~ ********************************************************************
 
-                print_r($mlmRoiDividend->getMt4UserName() . ":" . $packagePrice . "<br>");
+                print_r($mlmRoiDividend->getMt4UserName() . ":" . $mt4Balance . "<br>");
                 $mlmRoiDividend->setAccountLedgerId($mlm_account_ledger->getAccountId());
                 $mlmRoiDividend->setDividendAmount($dividendAmount);
-                $mlmRoiDividend->setMt4Balance($packagePrice);
+                $mlmRoiDividend->setMt4Balance($mt4Balance);
                 if ($packagePrice <= 0) {
                     $mlmRoiDividend->setStatusCode("ERROR");
                 } else {
@@ -11449,7 +11450,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $packagePriceCharges = ($hasFmcCharges ? $amountNeeded * 10 / 100 : 0); // 10% FMC charges.
 
             if (($amountNeeded + $packagePriceCharges) > $ledgerECashBalance && $paymentType == "ecash") {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient MT4 Credit amount"));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient Cp2 amount"));
                 return $this->redirect('/member/packageUpgrade');
             } else if (($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance && $paymentType == "epoint") {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
