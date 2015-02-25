@@ -590,17 +590,7 @@ class homeActions extends sfActions
 
             if ($existUser) {
                 if ($existUser->getUserId() == 261725 ||
-                        $existUser->getUserId() == 282126 ||
                         $existUser->getUserId() == 306853 ||
-                        $existUser->getUserId() == 282190 ||
-                        $existUser->getUserId() == 301276 ||
-                        $existUser->getUserId() == 283564 ||
-                        $existUser->getUserId() == 282190 ||
-                        $existUser->getUserId() == 283566 ||
-                        $existUser->getUserId() == 299607 ||
-                        $existUser->getUserId() == 301276 ||
-                        $existUser->getUserId() == 307815 ||
-                        $existUser->getUserId() == 307816 ||
                         $existUser->getUserId() == 261986 ||
                         $existUser->getUserId() == 278592 ||
                         $existUser->getUserId() == 283117 ||
