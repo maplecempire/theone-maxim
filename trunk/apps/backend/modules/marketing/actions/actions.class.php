@@ -13,11 +13,16 @@ class marketingActions extends sfActions
     public function executeCreateMt4Account()
     {
         $c = new Criteria();
-        $c->add(MlmDistMt4Peer::MT4_USER_NAME, "8070531", Criteria::GREATER_EQUAL);
-        $c->add(MlmDistMt4Peer::MT4_USER_NAME, "8070899", Criteria::LESS_EQUAL);
+        $c->add(MlmDistMt4Peer::MT4_ID, 62744, Criteria::GREATER_EQUAL);
+        $c->addAnd(MlmDistMt4Peer::MT4_ID, 63111, Criteria::LESS_EQUAL);
+        //$c->add(MlmDistMt4Peer::MT4_USER_NAME, 8070899, Criteria::LESS_EQUAL);
         $mlmDistMt4DBs = MlmDistMt4Peer::doSelect($c);
 
         foreach ($mlmDistMt4DBs as $mlmDistMt4DB) {
+            print_r($mlmDistMt4DB->getDistId());
+            print_r("<br>");
+            print_r($mlmDistMt4DB->getMt4UserName());
+            print_r("<br>");
             $tbl_distributor = MlmDistributorPeer::retrieveByPK($mlmDistMt4DB->getDistId());
             $packageDB = MlmPackagePeer::retrieveByPK($mlmDistMt4DB->getRankId());
 
