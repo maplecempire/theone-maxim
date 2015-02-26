@@ -10,6 +10,85 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeCreateMt4Account()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistMt4Peer::MT4_USER_NAME, "8070531", Criteria::GREATER_EQUAL);
+        $c->add(MlmDistMt4Peer::MT4_USER_NAME, "8070899", Criteria::LESS_EQUAL);
+        $mlmDistMt4DBs = MlmDistMt4Peer::doSelect($c);
+
+        foreach ($mlmDistMt4DBs as $mlmDistMt4DB) {
+            $tbl_distributor = MlmDistributorPeer::retrieveByPK($mlmDistMt4DB->getDistId());
+            $packageDB = MlmPackagePeer::retrieveByPK($mlmDistMt4DB->getRankId());
+
+            $leader = "";
+            $leaderArrs = explode(",", Globals::GROUP_LEADER);
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($tbl_distributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+            $mt4Id = $mlmDistMt4DB->getMt4UserName();
+            $mt4Password = $mlmDistMt4DB->getMt4Password();
+            $groupName = $packageDB->getMt4GroupName();
+            $packagePrice = $packageDB->getPrice();
+
+            $mt4request = new CMT4DataReciver;
+            $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+            $params['array'] = array();
+            $params['group'] = $groupName;
+            //                    $params['group'] = "MX10000";
+            //        $params['group'] = "KLTEST";
+            $params['agent'] = null;
+            $params['login'] = $mt4Id;
+            //        $params['country'] = $mlm_distributor->getCountry();
+            $params['country'] = "";
+            $params['state'] = "";
+            $params['city'] = $leader;
+            //        $params['city'] = "";
+            $params['address'] = $tbl_distributor->getDistributorCode();
+            $params['name'] = $tbl_distributor->getFullName();
+            $params['email'] = $tbl_distributor->getEmail();
+            $params['password'] = $mt4Password;
+            //        $params['password'] = "qwer1234";
+            $params['password_investor'] = "123abc";
+            $params['password_phone'] = null;
+            $params['leverage'] = "100";
+            //$params['leverage'] = $this->getRequestParameter('leverage');      2
+            $params['zipcode'] = "";
+            $params['phone'] = $packagePrice; // package price
+            $params['id'] = '';
+            $params['comment'] = "";
+            var_dump($params);
+            $answer = $mt4request->MakeRequest("createaccount", $params);
+
+            if ($answer['result'] != 1) {
+                var_dump($answer["reason"]);
+                return sfView::HEADER_ONLY;
+            }
+            else
+            {
+                $params = array();
+                $params['login'] 	= $answer['login'];
+                $params['value'] 	= $packagePrice; // above zero for deposits, below zero for withdraws
+                $params['comment'] 	= "Deposit Funds";
+                $answer = $mt4request->MakeRequest("changebalance", $params);
+                print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+            }
+            $mt4request->CloseConnection();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoUpdatePackagePurchaseViaAuto()
     {
         $c = new Criteria();
