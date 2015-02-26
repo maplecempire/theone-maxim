@@ -9,6 +9,24 @@
  */
 class memberActions extends sfActions
 {
+    public function executeEnquiryMt4Balance()
+    {
+        $distributor = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('q'));
+
+        $c = new Criteria();
+        $c->add(MlmDistMt4Peer::DIST_ID, $distributor->getDistributorId());
+        $this->mlmDistMt4s = MlmDistMt4Peer::doSelect($c);
+
+        if (count($this->mlmDistMt4s) > 0) {
+            foreach ($this->mlmDistMt4s as $mlmDistMt4) {
+                print_r("<br><br>".$mlmDistMt4->getMt4UserName());
+                print_r("<br>".$this->getMt4Balance(null, $mlmDistMt4->getMt4UserName()));
+            }
+        }
+
+        print_r("<br><br>Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCorrectRoi2() {
         $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
@@ -13435,6 +13453,9 @@ Wish you all the best.
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
+        var_dump($answer);
+        var_dump("<br>");
+        var_dump("<br>");
         //var_dump($answer['balance']);
         //exit();
         //$packagePrice = $answer['balance'];
