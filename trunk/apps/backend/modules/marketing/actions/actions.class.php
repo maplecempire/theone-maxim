@@ -4029,12 +4029,12 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
                     LEFT JOIN (
                         SELECT SUM(credit-debit) AS _PIPS_BONUS, dist_id
                             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_PIPS_BONUS."' AND dist_id = ".$distId."
-                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-20 23:59:59'
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-28 23:59:59'
                     ) sales ON dist.distributor_id = sales.dist_id
                     LEFT JOIN (
                         SELECT SUM(credit-debit) AS _CREDIT_REFUND, dist_id
                             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_CREDIT_REFUND."' AND dist_id = ".$distId."
-                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-20 23:59:59'
+                                AND created_on >= '".date("Y-m")."-01 00:00:00' AND created_on <= '".date("Y-m")."-28 23:59:59'
                     ) cf ON dist.distributor_id = cf.dist_id
             WHERE dist.distributor_id = ".$distId;
 
