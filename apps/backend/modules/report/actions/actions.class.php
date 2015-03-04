@@ -10,6 +10,24 @@
  */
 class reportActions extends sfActions
 {
+    public function executeMatchMbsFromExcel()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "maxim-trader-2nd-annual-convention-2015-02-11.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 0;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 1; $x <= $totalRow; $x++) {
+            $counter++;
+            print_r("===>user name:".$data->val($x, "A").",Full Name:".$data->val($x, "B")."<br>");
+            $userName = trim($data->val($x, "A"));
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCheckPersonalSales()
     {
         $memberId = $this->getRequestParameter('id');
@@ -293,7 +311,53 @@ class reportActions extends sfActions
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
         $accountLedgerDBs = MlmAccountLedger20141231Peer::doSelect($c);
 
-        $str = "<table><tr>
+        $str = $this->getRequestParameter('id')."<table><tr>
+        <td>#</td>
+        <td>Account Type</td>
+        <td>Transaction Type</td>
+        <td>Credit</td>
+        <td>Debit</td>
+        <td>Balance</td>
+        <td>Remark</td>
+        <td>Internal Remark</td>
+        <td>Credited By</td>
+        <td>Credited On</td>
+        </tr>";
+        $idx = 1;
+        foreach ($accountLedgerDBs as $accountLedgerDB) {
+            $accountType = $accountLedgerDB->getAccountType();
+
+            if ($accountLedgerDB->getAccountType() == "EPOINT") {
+                $accountType = "CP1";
+            } else if ($accountLedgerDB->getAccountType() == "ECASH") {
+                $accountType = "CP2";
+            } else if ($accountLedgerDB->getAccountType() == "MAINTENANCE") {
+                $accountType = "CP3";
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $accountType."</td>
+            <td>" . $accountLedgerDB->getTransactionType()."</td>
+            <td>" . $accountLedgerDB->getCredit()."</td>
+            <td>" . $accountLedgerDB->getDebit()."</td>
+            <td>" . $accountLedgerDB->getBalance()."</td>
+            <td>" . $accountLedgerDB->getRemark()."</td>
+            <td>" . $accountLedgerDB->getInternalRemark()."</td>
+            <td>" . $accountLedgerDB->getCreatedBy()."</td>
+            <td>" . $accountLedgerDB->getCreatedOn()."</td></tr>";
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeQueryAccountLedger20141231 Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeQueryAccountLedger()
+    {
+        $c = new Criteria();
+        $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getRequestParameter('id'));
+        $c->addAscendingOrderByColumn(MlmAccountLedgerPeer::CREATED_ON);
+//        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, $accountTypeArr , Criteria::IN);
+        $accountLedgerDBs = MlmAccountLedgerPeer::doSelect($c);
+
+        $str = $this->getRequestParameter('id')."<table><tr>
         <td>#</td>
         <td>Account Type</td>
         <td>Transaction Type</td>
