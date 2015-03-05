@@ -716,9 +716,9 @@ class businessActions extends sfActions
         $pairingPointActual = $this->getRequestParameter('point');
         $level = 0;
         while ($level < 200) {
-            //var_dump($uplineDistDB->getUplineDistId());
+            var_dump($uplineDistDB->getDistributorId());
             //var_dump($uplineDistDB->getUplineDistCode());
-            //print_r("<br>");
+            print_r("<br>");
             $c = new Criteria();
             $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
             $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
