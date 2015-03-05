@@ -1044,6 +1044,34 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='66'>US Daylight Changing Notice</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "5 March 2015";
+                ?>
+            </div>
+
+            <div id="page_66" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Members,
+                            <br>
+                            <br>Please note the US daylight changing will starts on Sunday 8/3/2015, 2am. The MT4 day end time will be adjusted to 5am. Metal trading session starts on 6am on Monday.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='65'>iAccount Notice
 <br>iAccount 通告
 <br>iAccount 고지
@@ -1109,7 +1137,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='64'>Chinese New Year Notice</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='64'>Chinese New Year Notice</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1118,7 +1146,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_64" class="news_desc" style="text-align: left;">
+            <div id="page_64" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
@@ -1165,7 +1193,7 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='61'>Forex Markets Notice</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='61'>Forex Markets Notice</a>
             </div>
             <div class="news_date">
                 <?php
@@ -1174,7 +1202,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_61" class="news_desc" style="text-align: left;">
+            <div id="page_61" class="news_desc" style="text-align: left; display: none;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
