@@ -321,12 +321,12 @@ function reassignDatagridEventAttr(){
         }
 
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[0]['_left_this_month_sales'],0)."'";
@@ -419,13 +419,13 @@ function reassignDatagridEventAttr(){
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[1]['_left_this_month_sales'],0)."'";
@@ -501,13 +501,13 @@ function reassignDatagridEventAttr(){
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[2]['_left_this_month_sales'],0)."'";
@@ -627,13 +627,13 @@ if ($anode[1]['distCode'] != "") { ?>
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[3]['_left_this_month_sales'],0)."'";
@@ -711,13 +711,13 @@ if ($anode[1]['distCode'] != "") { ?>
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[4]['_left_this_month_sales'],0)."'";
@@ -795,13 +795,13 @@ if ($anode[1]['distCode'] != "") { ?>
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[5]['_left_this_month_sales'],0)."'";
@@ -879,13 +879,13 @@ if ($anode[1]['distCode'] != "") { ?>
             }
         }
         $headColor = $colorArr[$distDB->getRankId()]."_";
-        $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
+        //$distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
 
         $classAndAttr .= " class='logoTooltip'";
         $classAndAttr .= " distCode='".$distCode."'";
         $classAndAttr .= " activeDatetime='".$distDB->getActiveDatetime()."'";
         $classAndAttr .= " rankCode='".$distDB->getRankCode()."'";
-        $classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
+        //$classAndAttr .= " daily='".number_format($distPairingLedgerDB->getFlushLimit(),0)."'";
 /*        $classAndAttr .= " carry_left='".number_format($distPairingLedgerDB->getLeftBalance(),0)."'";
         $classAndAttr .= " carry_right='".number_format($distPairingLedgerDB->getRightBalance(),0)."'";
         $classAndAttr .= " sales_left='".number_format($anode[6]['_left_this_month_sales'],0)."'";
