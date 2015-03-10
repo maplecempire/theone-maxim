@@ -27,7 +27,7 @@ $(function() {
                 alert("In-sufficient CP3 Credit");
                 return false;
             }
-            $("#epointAmount").val(epointAmount);
+            $("#epointAmount").val(epointAmount * <?php echo $convertRate ?>);
             form.submit();
         }
     });
@@ -188,7 +188,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('CP1 Converted Amount'); ?></td>
                     <td>
-                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" readonly="readonly"/>
+                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" disabled="disabled" readonly="readonly"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
