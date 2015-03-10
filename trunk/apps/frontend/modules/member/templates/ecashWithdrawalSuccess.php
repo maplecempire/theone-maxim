@@ -223,6 +223,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>
                         <select name="bankInTo" id="bankInTo">
                             <?php
+                            // TODO: Amend backend code as well for validation.
                             $disable = " disabled='disabled'";
                             $disableMoney = " disabled='disabled'";
                             $disableIAccount = "";
@@ -352,13 +353,7 @@ if ($distributorDB->getIaccount() == "") {
                 //var_dump($distributorDB->getBankHolderName());
                 //var_dump($distributorDB->getFullName());
                 //exit();
-                if ($distributorDB->getBankAccNo() == "" || $distributorDB->getBankAccNo() == null
-                    || $distributorDB->getBankName() == "" || $distributorDB->getBankName() == null
-                    || $distributorDB->getBankBranchName() == "" || $distributorDB->getBankBranchName() == null
-                    || $distributorDB->getBankAddress() == "" || $distributorDB->getBankAddress() == null
-                    || $distributorDB->getBankHolderName() == "" || $distributorDB->getBankHolderName() == null
-                    || $distributorDB->getFileBankPassBook() == "" || $distributorDB->getFileBankPassBook() == null
-                    || $distributorDB->getFileNric() == "" || $distributorDB->getFileNric() == null) {
+                if (!$validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg)) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td colspan="3">
@@ -367,114 +362,7 @@ if ($distributorDB->getIaccount() == "") {
                              class="ui-state-error ui-corner-all">
                             <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                           class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if ($distributorDB->getBankCountry() <> "China (PRC)" && $distributorDB->getBankCountry() <> "Australia" && (strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName()))) {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Holder Name is not same as your full name') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if ($distributorDB->getBankCountry() == "Singapore" && $distributorDB->getBankCode() == "") {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Bank Code is required') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if ($distributorDB->getBankCountry() == "Taiwan"
-                           &&
-                           (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1)) {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('You need to update all your Bank Account Details must be latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if (($distributorDB->getBankCountry() == "Korea North" || $distributorDB->getBankCountry() == "Korea South")
-                        &&
-                           (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 1
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 1)) {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Please ensure all your Bank Account Details is latin word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if ($distributorDB->getBankCountry() == "China (PRC)"
-                           &&
-                           $distributorDB->getDistributorId() != 255828
-                           &&
-                           (preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankName()) == 0
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankBranchName()) == 0
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankAddress()) == 0
-                           || preg_match('/[^\\p{Common}\\p{Latin}]/u', $distributorDB->getBankHolderName()) == 0)) {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Please ensure all your Bank Account Details is chinese word') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <?php
-                } else if ($distributorDB->getVisaDebitCard() != "" && strlen($distributorDB->getVisaDebitCard()) != 16) {
-                ?>
-                <tr class="tbl_form_row_odd">
-                    <td colspan="3">
-                    <div class="ui-widget">
-                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                             class="ui-state-error ui-corner-all">
-                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                          class="ui-icon ui-icon-alert"></span>
-                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __('Maxim Trader VISA Debit Card must be 16 characters') ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
+                                <strong><?php echo __('You are not allowed to submit withdrawal, due to') ?> : <br><br><?php echo __($errorMsg) ?>. <a href="<?php echo url_for("/member/viewProfile")?>" style="color: #0080c8;"><?php echo __('Update Here') ?></a></strong></p>
                         </div>
                     </div>
                     </td>

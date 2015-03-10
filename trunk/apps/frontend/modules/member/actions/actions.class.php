@@ -456,13 +456,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc.旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc.旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>
@@ -966,21 +966,21 @@ class memberActions extends sfActions
     {
 		if ($this->getUser()->getCulture() == 'cn') {
 			$message = "
-				请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额�?014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account�?
+				请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额在2014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account。
 				<br><br>
 				为此给您带来的不便我们深表歉意；但公司这样做正是因为我们一直将客户的利益谨记于心。谢谢大家的理解与配合！ 
 			";
 		} else if ($this->getUser()->getCulture() == "kr") {
 			$message = "
-				지�?MBank 비자카드�?문제 발생 이후�? 회사�?�?서비스를 종료하기�?결정하였음을 알려드립니다. 계좌�?있는 모든 잔액은 2014�?10�?1일까지 우리�?회원 CP3 계좌�?다시 예치�?것입니다. 이후 홈페이지 멤버 에리어에�?i-account�?신청 하시�?바랍니다. 
+				지난 MBank 비자카드의 문제 발생 이후로, 회사는 본 서비스를 종료하기로 결정하였음을 알려드립니다. 계좌에 있는 모든 잔액은 2014년 10월31일까지 우리의 회원 CP3 계좌로 다시 예치될 것입니다. 이후 홈페이지 멤버 에리어에서 i-account를 신청 하시기 바랍니다. 
 				<br><br>
-				다시 한번 불편�?끼쳐드린 �?죄송하게 생각하며, 회사�?회원들이 최상�?서비스를 드리�?위해�?이런 결정�?내리�?되었음을 이해�?주시�?바랍니다. 여러분의 이해와 협력�?깊은 감사�?드립니다. 
+				다시 한번 불편을 끼쳐드린 점 죄송하게 생각하며, 회사는 회원들이 최상의 서비스를 드리기 위해서 이런 결정을 내리게 되었음을 이해해 주시기 바랍니다. 여러분의 이해와 협력에 깊은 감사를 드립니다. 
 			";
 		} else if ($this->getUser()->getCulture() == "jp") {
 			$message = "
-				過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに�?014�?0�?1日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します�?
+				過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに、2014年10月31日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します。 
 				<br><br>
-				さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します�?
+				さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します！ 
 			";
 		} else {
 			$message = "
@@ -1465,36 +1465,36 @@ class memberActions extends sfActions
         if (filter_var($distDB->getEmail(), FILTER_VALIDATE_EMAIL)) {
         	if($distDB->getPreferLanguage()=='cn'){
         		$subject = '此为系统自动回复';
-        		$body = '尊敬的客户您�?<br><br>
-					       谢谢您的来信；我们的客户服务人员会尽快回复您�?br><br>
-					       请注意我们的工作时间是周一至周�?0:00-18:00 (GMT+8)；我们会�?个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答�?列表，以帮助所有的会员�?br><br>
-					   	�?来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们�?br><br>
+        		$body = '尊敬的客户您好!<br><br>
+					       谢谢您的来信；我们的客户服务人员会尽快回复您。<br><br>
+					       请注意我们的工作时间是周一至周五10:00-18:00 (GMT+8)；我们会在3个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答案)列表，以帮助所有的会员。<br><br>
+					   	注:来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们。<br><br>
 					       谢谢!<br><br>
-					       商祺�?br>
-					       客户服务�?br>
+					       商祺，<br>
+					       客户服务部<br>
 					    www.maximtrader.com<br>
-						此为系统自动回复；请勿直接回复该邮件�?;
+						此为系统自动回复；请勿直接回复该邮件。';
         	}elseif($distDB->getPreferLanguage()=='jp'){
-        		$subject = 'このメールは自動応答メールとなっておりま�?;
-        		$body = 'お客様各位�?br><br>
-						このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします�?br><br>
-						弊社の営業時間は月曜日から金曜日�?0:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です�?br><br>
-						注：日本／韓国のメンバーの皆様は、それぞ�?japan@maximtrader.com また�?korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます�?br><br>
-						ありがとうございました�?br><br>
+        		$subject = 'このメールは自動応答メールとなっております';
+        		$body = 'お客様各位、<br><br>
+						このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします。<br><br>
+						弊社の営業時間は月曜日から金曜日の10:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です。<br><br>
+						注：日本／韓国のメンバーの皆様は、それぞれ japan@maximtrader.com または korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます。<br><br>
+						ありがとうございました。<br><br>
 						敬具<br>
-						カスタマーサービ�?br>
+						カスタマーサービス<br>
 						www.maximtrader.com<br>
-						このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください�?;
+						このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください。';
         	}elseif($distDB->getPreferLanguage()=='kr'){
-        		$subject = '�?메일은 자동응답 메일�?답장은 받을 �?없습니다';
+        		$subject = '본 메일은 자동응답 메일로 답장은 받을 수 없습니다';
         		$body = '고객님께! <br><br>
-						연락주셔�?감사합니�?  고객�?메일은 �?받았습니�? �?고객서비스팀에서 답장드릴 것입니다. <br><br>
-						당사�? 근무시간은 월요일부�?금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무�?이내�?보내드리�?있습니다.  근무일이 아닌 경우 답변�?지연되�?�?양해바랍니다.  또한 이미 개설되어 있는 FAQ �?즉시 이용가능하십니�?  <br><br>
-						참고) 한국 회원은 한국�?지원을 위해 korea@maximtrader.com �?이용�?주시�?바랍니다..  <br><br>
-						감사합니�? <br><br>
+						연락주셔서 감사합니다.  고객님 메일은 잘 받았습니다. 곧 고객서비스팀에서 답장드릴 것입니다. <br><br>
+						당사의  근무시간은 월요일부터 금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무일 이내에 보내드리고 있습니다.  근무일이 아닌 경우 답변이 지연되는 점 양해바랍니다.  또한 이미 개설되어 있는 FAQ 는 즉시 이용가능하십니다.  <br><br>
+						참고) 한국 회원은 한국어 지원을 위해 korea@maximtrader.com 을 이용해 주시기 바랍니다..  <br><br>
+						감사합니다. <br><br>
 						고객지원팀<br>
 						www.maximtrader.com<br>
-						�?메일은 자동응답 메일�?답장은 받을 �?없습니다. ';
+						본 메일은 자동응답 메일로 답장은 받을 수 없습니다. ';
         	}else{
         		$subject = 'This is an automated response';
         		$body = 'Dear Customer,
@@ -1518,34 +1518,34 @@ class memberActions extends sfActions
 		*/
 		
 		if($distDB->getPreferLanguage()=='cn'){
-    		$body = '尊敬的客户您�?<br><br>
-				       谢谢您的来信；我们的客户服务人员会尽快回复您�?br><br>
-				       请注意我们的工作时间是周一至周�?0:00-18:00 (GMT+8)；我们会�?个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答�?列表，以帮助所有的会员�?br><br>
-				   	�?来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们�?br><br>
+    		$body = '尊敬的客户您好!<br><br>
+				       谢谢您的来信；我们的客户服务人员会尽快回复您。<br><br>
+				       请注意我们的工作时间是周一至周五10:00-18:00 (GMT+8)；我们会在3个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答案)列表，以帮助所有的会员。<br><br>
+				   	注:来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们。<br><br>
 				       谢谢!<br><br>
-				       商祺�?br>
-				       客户服务�?br>
+				       商祺，<br>
+				       客户服务部<br>
 				    www.maximtrader.com<br>
-					此为系统自动回复；请勿直接回复该邮件�?;
+					此为系统自动回复；请勿直接回复该邮件。';
     	}elseif($distDB->getPreferLanguage()=='jp'){
-    		$body = 'お客様各位�?br><br>
-					このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします�?br><br>
-					弊社の営業時間は月曜日から金曜日�?0:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です�?br><br>
-					注：日本／韓国のメンバーの皆様は、それぞ�?japan@maximtrader.com また�?korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます�?br><br>
-					ありがとうございました�?br><br>
+    		$body = 'お客様各位、<br><br>
+					このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします。<br><br>
+					弊社の営業時間は月曜日から金曜日の10:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です。<br><br>
+					注：日本／韓国のメンバーの皆様は、それぞれ japan@maximtrader.com または korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます。<br><br>
+					ありがとうございました。<br><br>
 					敬具<br>
-					カスタマーサービ�?br>
+					カスタマーサービス<br>
 					www.maximtrader.com<br>
-					このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください�?;
+					このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください。';
     	}elseif($distDB->getPreferLanguage()=='kr'){
     		$body = '고객님께! <br><br>
-					연락주셔�?감사합니�?  고객�?메일은 �?받았습니�? �?고객서비스팀에서 답장드릴 것입니다. <br><br>
-					당사�? 근무시간은 월요일부�?금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무�?이내�?보내드리�?있습니다.  근무일이 아닌 경우 답변�?지연되�?�?양해바랍니다.  또한 이미 개설되어 있는 FAQ �?즉시 이용가능하십니�?  <br><br>
-					참고) 한국 회원은 한국�?지원을 위해 korea@maximtrader.com �?이용�?주시�?바랍니다..  <br><br>
-					감사합니�? <br><br>
+					연락주셔서 감사합니다.  고객님 메일은 잘 받았습니다. 곧 고객서비스팀에서 답장드릴 것입니다. <br><br>
+					당사의  근무시간은 월요일부터 금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무일 이내에 보내드리고 있습니다.  근무일이 아닌 경우 답변이 지연되는 점 양해바랍니다.  또한 이미 개설되어 있는 FAQ 는 즉시 이용가능하십니다.  <br><br>
+					참고) 한국 회원은 한국어 지원을 위해 korea@maximtrader.com 을 이용해 주시기 바랍니다..  <br><br>
+					감사합니다. <br><br>
 					고객지원팀<br>
 					www.maximtrader.com<br>
-					�?메일은 자동응답 메일�?답장은 받을 �?없습니다. ';
+					본 메일은 자동응답 메일로 답장은 받을 수 없습니다. ';
     	}else{
     		$body = 'Dear Customer,
 					<br><br>
@@ -2391,7 +2391,7 @@ class memberActions extends sfActions
         $signature = $this->getRequestParameter('signature');
 
         $content = 'billno'.$billno.'currencytype'.$currency_type.'amount'.$amount.'date'.$mydate.'succ'.$succ.'ipsbillno'.$ipsbillno.'retencodetype'.$retEncodeType;
-        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证�?
+        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证书
         $cert = Globals::PAYMENT_GATEWAY_MER_KEY;
         if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
             $cert = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
@@ -2572,7 +2572,7 @@ class memberActions extends sfActions
             //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             //return $this->redirect('/member/epointPurchase');
         }
-        // Print out ‘OK�?to notify us you have received the payment result
+        // Print out ‘OK’ to notify us you have received the payment result
         echo "OK";
         return sfView::HEADER_ONLY;
     }
@@ -2860,7 +2860,7 @@ class memberActions extends sfActions
         $signature = $this->getRequestParameter('signature');
 
         $content = 'billno'.$billno.'currencytype'.$currency_type.'amount'.$amount.'date'.$mydate.'succ'.$succ.'ipsbillno'.$ipsbillno.'retencodetype'.$retEncodeType;
-        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证�?
+        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证书
         $cert = Globals::PAYMENT_GATEWAY_MER_KEY;
         if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
             $cert = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
@@ -3599,13 +3599,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>
@@ -4903,13 +4903,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>
@@ -5032,7 +5032,7 @@ class memberActions extends sfActions
 
             $mlm_mt4_demo_request->save();
 
-            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐�?;
+            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐户";
             //$subject = "Thank you for register Maxim Trader Demo Account";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -5157,10 +5157,10 @@ class memberActions extends sfActions
 														<tr>
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-																	亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
-																	你的免费模拟帐户将使你可以进行“纸上贸易”，我们很自豪能够提供最先进的交易平台，提供业界领先的性能和稳定性，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
+																	亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
+																	你的免费模拟帐户将使你可以进行“纸上贸易”，我们很自豪能够提供最先进的交易平台，提供业界领先的性能和稳定性，使用MetaTrader 4可以允许你开发和测试您的交易策略。
 
-																	<br><br>如想立刻体验交易，请下载并安装MT4�?
+																	<br><br>如想立刻体验交易，请下载并安装MT4。
 																	<br>
 																</font>
 																<br>
@@ -5281,13 +5281,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>
@@ -5504,39 +5504,39 @@ We look forward to your custom in the near future. Should you have any queries, 
 										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
 										<td valign='top' style='line-height:17px'>
 										<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-                                                        亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
-                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
+                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
+                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
 
 
-                                                        感谢您申请Maxim Trader的交易账户�?
+                                                        感谢您申请Maxim Trader的交易账户。
                                                 <br><br>
-我们很高兴地告诉你，你的开户申请已经被接受�?
+我们很高兴地告诉你，你的开户申请已经被接受。
 <br><br>
-您已选择（个人）以美元交易的账户�?
+您已选择（个人）以美元交易的账户。
 <br><br>
 为了让我们激活您的帐户，我们需要您尽快尽快提交以下的文件与资料:
 <br><br>
-请发送给我们<STRONG>一�?/strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段�?
+请发送给我们<STRONG>一份</strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段：
 <br><br>
 
 （ii）身份验证（未过期）
 <BR>1. 护照;
 <BR>2. 驾驶执照;
-<BR>3. 国民身分�?
+<BR>3. 国民身分证
 <br><br>
-（ii）地址验证�?
-<BR>1. 银行对账�?
+（ii）地址验证码*
+<BR>1. 银行对账单;
 <BR>2. 水电费帐单（煤气，水，电或陆地线路电话）;
-<BR>3. 信用卡对帐单�?
+<BR>3. 信用卡对帐单。
 <br><br>
-*本文件必须是最�?个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的�?
+*本文件必须是最近3个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的。
 <br><br>
 <br><br>
-请扫描所需的文件和电子邮件发送给我们�?strong> account@maximtrader.com </strong>
+请扫描所需的文件和电子邮件发送给我们在<strong> account@maximtrader.com </strong>
 <br><br>
-您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码�?
+您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码。
 <br><br>
-我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系�?
+我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系。
                                                         <br>
                                                     </font>
                                                     <br>
@@ -5657,13 +5657,13 @@ We look forward to your custom in the near future. Should you have any queries, 
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 									</font>
 								</p>
 							</td>
@@ -6277,16 +6277,16 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         }*/
         $message = "Dear Maxim Members
-<br>亲爱的马胜会�?
+<br>亲爱的马胜会员:
 <br>
 <br>We have been notified that there has been a breach of our Code of Ethics, which has resulted in us not fulfilling local legislation, all investment payments must be made through I-Account and a 10% FMC will be charged according to the purchased package starting from 19/1/2015.
-<br>最近公司注意到市场上有人违反公司道德行为准�?结果导致公司受到地方法规的调�?现决定从2015.1.19日起,所有投资金额都必须通过i-Account汇给公司,且每个配套都必须支付10%的FMC基金管理费用.
+<br>最近公司注意到市场上有人违反公司道德行为准则,结果导致公司受到地方法规的调查;现决定从2015.1.19日起,所有投资金额都必须通过i-Account汇给公司,且每个配套都必须支付10%的FMC基金管理费用.
 <br>
 <br>For example, $11,000 is required to purchase a $10,000 package
 <br>例如: 若需购买1万美金的配套,则需支付11000美金.
 <br>
 <br>This system will be implemented on 19/1/2015 and there will be NO extensions
-<br>该政策将�?015.1.19日正式生�?且不做任何延�?
+<br>该政策将于2015.1.19日正式生效,且不做任何延期.
 <br>
 <br>Your prompt action and kind understanding on this matter is highly appreciated
 <br>敬请留意,非常谢谢大家的理解与配合!
@@ -6294,29 +6294,29 @@ We look forward to your custom in the near future. Should you have any queries, 
 <br>Thank you!
 <br>谢谢!
 <br>
-<br>친애하는 맥심 회원 여러�?
+<br>친애하는 맥심 회원 여러분,
 <br>
-<br>당사�?당사�?윤리규정�?어기�?있는 회원�?있다�?통보받아왔으�? �?지역의 법을 충분�?지키지 못한 결과�?초래하게 되었습니�?  모든 투자�?대�?지불은 I-어카운트�?통해서만 이루어져�?하며, 2015�?1�?19일부�?구매�?패키지�?대�?10%�?FMC (펀�?매니지먼트 코스�?가 부과될 것입니다.
+<br>당사는 당사의 윤리규정을 어기고 있는 회원이 있다고 통보받아왔으며, 각 지역의 법을 충분히 지키지 못한 결과를 초래하게 되었습니다.  모든 투자에 대한 지불은 I-어카운트를 통해서만 이루어져야 하며, 2015년 1월 19일부터 구매한 패키지에 대한 10%의 FMC (펀드 매니지먼트 코스트)가 부과될 것입니다.
 <br>
-<br>예를 들어, 미화 10,000달러 패키지�?구매하기 위하여서�?미화11,000달러가 필요합니�?
+<br>예를 들어, 미화 10,000달러 패키지를 구매하기 위하여서는 미화11,000달러가 필요합니다.
 <br>
-<br>�?시스템은 2015�?1�?9일부�?실행�?것이�? 기한 연장은 없을 것입니다.
+<br>이 시스템은 2015년 1월 9일부터 실행될 것이며, 기한 연장은 없을 것입니다.
 <br>
-<br>귀하의 빠른 조치와 이해�?대�?심심�?감사�?드립니다.
+<br>귀하의 빠른 조치와 이해해 대해 심심한 감사를 드립니다.
 <br>
-<br>감사합니�?
+<br>감사합니다.
 <br>
 <br>マキシム・メンバーの皆様
 <br>
-<br>我々の倫理規定への違反により、現地の法律を満たしていないとの通達がありました�?015�?�?9日より、すべての投資支払いはi-Accountを通じて行われ、購入されたパッケージに応じ�?0％のFMCが課金されます�?
+<br>我々の倫理規定への違反により、現地の法律を満たしていないとの通達がありました。2015年1月19日より、すべての投資支払いはi-Accountを通じて行われ、購入されたパッケージに応じ、10％のFMCが課金されます。
 <br>
-<br>例えば�?1,000ドル�?0,000ドルのパッケージを購入するために必要になります�?
+<br>例えば、11,000ドルが10,000ドルのパッケージを購入するために必要になります。
 <br>
-<br>このシステム�?015�?�?9日に実装され、延期はありません�?
+<br>このシステムは2015年1月19日に実装され、延期はありません。
 <br>
-<br>皆様の迅速な行動とご理解、ご協力に感謝します�?
+<br>皆様の迅速な行動とご理解、ご協力に感謝します。
 <br>
-<br>ありがとうございます�?;
+<br>ありがとうございます。";
 
         // 255709	korean001
         // 273058	Yongman
@@ -13141,7 +13141,7 @@ And upload all the documents at website.
 <br><br>
 Note:
 <br><br>
-Please logon to http://partner.maximtrader.com. Click “User Profile�?to upload all the documents at “Upload Document�?
+Please logon to http://partner.maximtrader.com. Click “User Profile” to upload all the documents at “Upload Document”.
 <br><br>
 Thank you for your highly cooperation.
 <br><br>
@@ -13176,25 +13176,25 @@ Wish you all the best.
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
 												亲爱的会员，
 <br><br>
-您好�?
+您好。
 <br><br>
 由于外汇的要求严谨，请您将您的文件包括：
 <br><br>
-1�?身份证（正反面在同一页）
+1） 身份证（正反面在同一页）
 <br><br>
-2�?地址证明（银�?信用卡明细单，或�?电明细单，或电话/网络明细单）
+2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）
 <br><br>
--          明细单必须清楚列明您的姓名，目前住址及最�?个月日期�?
+-          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。
 <br><br>
-3�?下载并签署外汇合约�?
+3） 下载并签署外汇合约。
 <br><br>
-上传给公司，否则这会影响您日后的提现�?
+上传给公司，否则这会影响您日后的提现。
 <br><br>
-注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）�?
+注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）。
 <br><br>
-谢谢您的鼎力合作�?
+谢谢您的鼎力合作。
 <br><br>
-祝：一切顺�?
+祝：一切顺利
 
 												<br>
 											</font>
@@ -13243,13 +13243,13 @@ Wish you all the best.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>

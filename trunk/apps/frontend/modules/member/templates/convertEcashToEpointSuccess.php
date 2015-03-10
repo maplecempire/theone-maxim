@@ -40,7 +40,7 @@ $(function() {
         //convertedAmount = parseFloat(epointAmount);
         //convertedAmount = Math.floor(convertedAmount);
 
-        $("#epointConvertedAmount").val(epointAmount);
+        $("#epointConvertedAmount").val(epointAmount * <?php echo $convertRate ?>);
     });
     $('#epointConvertedAmount').autoNumeric({
         mDec: 2
@@ -188,7 +188,7 @@ $(function() {
                     <td>&nbsp;</td>
                     <td><?php echo __('CP1 Converted Amount'); ?></td>
                     <td>
-                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" readonly="readonly"/>
+                        <input name="epointConvertedAmount" id="epointConvertedAmount" tabindex="3" disabled="disabled" readonly="readonly"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
