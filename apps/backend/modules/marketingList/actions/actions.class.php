@@ -10,6 +10,88 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeAnnouncementList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = " FROM app_news announcement ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1 ";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        //var_dump($sql);
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterTitle') != "") {
+            $sWhere .= " AND announcement.ns_title like '%" . $this->getRequestParameter('filterTitle') ."%'";
+        }
+        if ($this->getRequestParameter('filterStatusCode') != "") {
+            $sStatus = "";
+
+            if ($this->getRequestParameter('filterStatusCode') == Globals::STATUS_ACTIVE) {
+                $sStatus = " AND announcement.ns_end_date > NOW()";
+            }
+
+            $sWhere .= " AND announcement.ns_status like '%" . $this->getRequestParameter('filterStatusCode') ."%'" . $sStatus;
+        }
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . ", IF(announcement.ns_end_date > NOW(), announcement.ns_status, 'CLOSED') ns_status2 " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['id'] == null ? "" : $resultArr['id'],
+                $resultArr['id'] == null ? "" : $resultArr['id'],
+                $resultArr['ns_title'] == null ? "" : $resultArr['ns_title'],
+                $resultArr['ns_status'] == null ? "" : $resultArr['ns_status2'],
+                $resultArr['ns_start_date'] == null ? "" : $resultArr['ns_start_date'],
+                $resultArr['ns_end_date'] == null ? "" : $resultArr['ns_end_date'],
+                $resultArr['updated_on'] == null ? "" : $resultArr['updated_on']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeCommissionList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

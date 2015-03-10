@@ -456,13 +456,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc.旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc.旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 								</font>
 							</p>
 						</tr>
@@ -685,16 +685,20 @@ class memberActions extends sfActions
         $epointAmount = $this->getRequestParameter('epointAmount');
         $epointAmount = str_replace(",", "", $epointAmount);
         $this->toHideCp2Cp3Transfer = false;
+        $this->convertRate = 1;
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $muUtil = MUserUtil::init($this);
+
         // amz001 chales (20131223)
         $pos = strrpos($distDB->getTreeStructure(), "|1458|");
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
-            return $this->redirect('/member/summary');
+            $msg = $this->getContext()->getI18N()->__("Invalid action.");
+            return $muUtil->updateLog($msg)->response("/member/summary", 0, $msg);
         }
-        if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+        if (is_numeric($epointAmount) && $epointAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
@@ -711,11 +715,13 @@ class memberActions extends sfActions
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
-
+                $msg = $this->getContext()->getI18N()->__("In-sufficient CP3");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/convertCp3ToCp1", 0, $msg);
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
-
+                $msg = $this->getContext()->getI18N()->__("Invalid Security password");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/convertCp3ToCp1", 0, $msg);
             } elseif ($epointAmount > 0) {
                 $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
                 try {
@@ -757,15 +763,22 @@ class memberActions extends sfActions
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
+                    $con->commit();
                     $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to CP1 successful."));
 
-                    $con->commit();
+                    return $muUtil->response("/member/convertCp3ToCp1", 1);
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
                 }
-                return $this->redirect('/member/convertCp3ToCp1');
             }
+        } elseif ($muUtil->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp3Balance = number_format($this->ledgerAccountBalance, 2);
+            $muObj->convertRate = $this->convertRate;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", "convertCp3ToCp1");
         }
     }
 
@@ -953,21 +966,21 @@ class memberActions extends sfActions
     {
 		if ($this->getUser()->getCulture() == 'cn') {
 			$message = "
-				请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额在2014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account。
+				请注意，鉴于MBank的Visa Card多次出现问题，公司决定终止与其的合作关系。公司会安排所有客户Visa卡的余额�?014.10.31日之前返还至CP3账户。之后欢迎会员申请i-Account�?
 				<br><br>
 				为此给您带来的不便我们深表歉意；但公司这样做正是因为我们一直将客户的利益谨记于心。谢谢大家的理解与配合！ 
 			";
 		} else if ($this->getUser()->getCulture() == "kr") {
 			$message = "
-				지난 MBank 비자카드의 문제 발생 이후로, 회사는 본 서비스를 종료하기로 결정하였음을 알려드립니다. 계좌에 있는 모든 잔액은 2014년 10월31일까지 우리의 회원 CP3 계좌로 다시 예치될 것입니다. 이후 홈페이지 멤버 에리어에서 i-account를 신청 하시기 바랍니다. 
+				지�?MBank 비자카드�?문제 발생 이후�? 회사�?�?서비스를 종료하기�?결정하였음을 알려드립니다. 계좌�?있는 모든 잔액은 2014�?10�?1일까지 우리�?회원 CP3 계좌�?다시 예치�?것입니다. 이후 홈페이지 멤버 에리어에�?i-account�?신청 하시�?바랍니다. 
 				<br><br>
-				다시 한번 불편을 끼쳐드린 점 죄송하게 생각하며, 회사는 회원들이 최상의 서비스를 드리기 위해서 이런 결정을 내리게 되었음을 이해해 주시기 바랍니다. 여러분의 이해와 협력에 깊은 감사를 드립니다. 
+				다시 한번 불편�?끼쳐드린 �?죄송하게 생각하며, 회사�?회원들이 최상�?서비스를 드리�?위해�?이런 결정�?내리�?되었음을 이해�?주시�?바랍니다. 여러분의 이해와 협력�?깊은 감사�?드립니다. 
 			";
 		} else if ($this->getUser()->getCulture() == "jp") {
 			$message = "
-				過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに、2014年10月31日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します。 
+				過去にあった問題により、MBankビザカードのサービスを終了することになったことをお知らせします。この口座のすべての残高はメンバーのCP3アカウントに�?014�?0�?1日までにお戻しします。その後、メンバーエリアのi-Accountsへの申し込みを歓迎します�?
 				<br><br>
-				さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します！ 
+				さらなるご不便をおかけすることをお詫びします。弊社がこのような措置を取ったのは、弊社メンバーの皆様に最良のサービスがふさわしいと信じているからだということをご理解ください。ご協力とご理解に感謝します�?
 			";
 		} else {
 			$message = "
@@ -1452,36 +1465,36 @@ class memberActions extends sfActions
         if (filter_var($distDB->getEmail(), FILTER_VALIDATE_EMAIL)) {
         	if($distDB->getPreferLanguage()=='cn'){
         		$subject = '此为系统自动回复';
-        		$body = '尊敬的客户您好!<br><br>
-					       谢谢您的来信；我们的客户服务人员会尽快回复您。<br><br>
-					       请注意我们的工作时间是周一至周五10:00-18:00 (GMT+8)；我们会在3个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答案)列表，以帮助所有的会员。<br><br>
-					   	注:来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们。<br><br>
+        		$body = '尊敬的客户您�?<br><br>
+					       谢谢您的来信；我们的客户服务人员会尽快回复您�?br><br>
+					       请注意我们的工作时间是周一至周�?0:00-18:00 (GMT+8)；我们会�?个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答�?列表，以帮助所有的会员�?br><br>
+					   	�?来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们�?br><br>
 					       谢谢!<br><br>
-					       商祺，<br>
-					       客户服务部<br>
+					       商祺�?br>
+					       客户服务�?br>
 					    www.maximtrader.com<br>
-						此为系统自动回复；请勿直接回复该邮件。';
+						此为系统自动回复；请勿直接回复该邮件�?;
         	}elseif($distDB->getPreferLanguage()=='jp'){
-        		$subject = 'このメールは自動応答メールとなっております';
-        		$body = 'お客様各位、<br><br>
-						このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします。<br><br>
-						弊社の営業時間は月曜日から金曜日の10:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です。<br><br>
-						注：日本／韓国のメンバーの皆様は、それぞれ japan@maximtrader.com または korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます。<br><br>
-						ありがとうございました。<br><br>
+        		$subject = 'このメールは自動応答メールとなっておりま�?;
+        		$body = 'お客様各位�?br><br>
+						このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします�?br><br>
+						弊社の営業時間は月曜日から金曜日�?0:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です�?br><br>
+						注：日本／韓国のメンバーの皆様は、それぞ�?japan@maximtrader.com また�?korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます�?br><br>
+						ありがとうございました�?br><br>
 						敬具<br>
-						カスタマーサービス<br>
+						カスタマーサービ�?br>
 						www.maximtrader.com<br>
-						このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください。';
+						このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください�?;
         	}elseif($distDB->getPreferLanguage()=='kr'){
-        		$subject = '본 메일은 자동응답 메일로 답장은 받을 수 없습니다';
+        		$subject = '�?메일은 자동응답 메일�?답장은 받을 �?없습니다';
         		$body = '고객님께! <br><br>
-						연락주셔서 감사합니다.  고객님 메일은 잘 받았습니다. 곧 고객서비스팀에서 답장드릴 것입니다. <br><br>
-						당사의  근무시간은 월요일부터 금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무일 이내에 보내드리고 있습니다.  근무일이 아닌 경우 답변이 지연되는 점 양해바랍니다.  또한 이미 개설되어 있는 FAQ 는 즉시 이용가능하십니다.  <br><br>
-						참고) 한국 회원은 한국어 지원을 위해 korea@maximtrader.com 을 이용해 주시기 바랍니다..  <br><br>
-						감사합니다. <br><br>
+						연락주셔�?감사합니�?  고객�?메일은 �?받았습니�? �?고객서비스팀에서 답장드릴 것입니다. <br><br>
+						당사�? 근무시간은 월요일부�?금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무�?이내�?보내드리�?있습니다.  근무일이 아닌 경우 답변�?지연되�?�?양해바랍니다.  또한 이미 개설되어 있는 FAQ �?즉시 이용가능하십니�?  <br><br>
+						참고) 한국 회원은 한국�?지원을 위해 korea@maximtrader.com �?이용�?주시�?바랍니다..  <br><br>
+						감사합니�? <br><br>
 						고객지원팀<br>
 						www.maximtrader.com<br>
-						본 메일은 자동응답 메일로 답장은 받을 수 없습니다. ';
+						�?메일은 자동응답 메일�?답장은 받을 �?없습니다. ';
         	}else{
         		$subject = 'This is an automated response';
         		$body = 'Dear Customer,
@@ -1505,34 +1518,34 @@ class memberActions extends sfActions
 		*/
 		
 		if($distDB->getPreferLanguage()=='cn'){
-    		$body = '尊敬的客户您好!<br><br>
-				       谢谢您的来信；我们的客户服务人员会尽快回复您。<br><br>
-				       请注意我们的工作时间是周一至周五10:00-18:00 (GMT+8)；我们会在3个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答案)列表，以帮助所有的会员。<br><br>
-				   	注:来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们。<br><br>
+    		$body = '尊敬的客户您�?<br><br>
+				       谢谢您的来信；我们的客户服务人员会尽快回复您�?br><br>
+				       请注意我们的工作时间是周一至周�?0:00-18:00 (GMT+8)；我们会�?个工作日之内回复您；由于非工作时间造成的延误，我们表示抱歉。另外我们会尽快生成FAQ(常见问题与答�?列表，以帮助所有的会员�?br><br>
+				   	�?来自日本/韩国的会员还可通过japan@maximtrader.com或者korea@maximtrader.com联系我们�?br><br>
 				       谢谢!<br><br>
-				       商祺，<br>
-				       客户服务部<br>
+				       商祺�?br>
+				       客户服务�?br>
 				    www.maximtrader.com<br>
-					此为系统自动回复；请勿直接回复该邮件。';
+					此为系统自动回复；请勿直接回复该邮件�?;
     	}elseif($distDB->getPreferLanguage()=='jp'){
-    		$body = 'お客様各位、<br><br>
-					このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします。<br><br>
-					弊社の営業時間は月曜日から金曜日の10:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です。<br><br>
-					注：日本／韓国のメンバーの皆様は、それぞれ japan@maximtrader.com または korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます。<br><br>
-					ありがとうございました。<br><br>
+    		$body = 'お客様各位�?br><br>
+					このたびはご連絡ありがとうございます。お客様からのメールを受け取りました。カスタマーサービスがお客様にまもなくご連絡いたします�?br><br>
+					弊社の営業時間は月曜日から金曜日�?0:00-18:00(GMT+8)となります。通常、問い合わせにかかる日にちは３営業日以内です。営業時間以外のための遅れにつきましては大変申し訳ありませんがご容赦ください。また、弊社では現在FAQを作成しており、間もなく公開される予定です�?br><br>
+					注：日本／韓国のメンバーの皆様は、それぞ�?japan@maximtrader.com また�?korea@maximtrader.com に日本語／韓国語サポートのためにお申し込みいただけます�?br><br>
+					ありがとうございました�?br><br>
 					敬具<br>
-					カスタマーサービス<br>
+					カスタマーサービ�?br>
 					www.maximtrader.com<br>
-					このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください。';
+					このメールは自動応答メールとなっております。本メールへの直接の返信はご遠慮ください�?;
     	}elseif($distDB->getPreferLanguage()=='kr'){
     		$body = '고객님께! <br><br>
-					연락주셔서 감사합니다.  고객님 메일은 잘 받았습니다. 곧 고객서비스팀에서 답장드릴 것입니다. <br><br>
-					당사의  근무시간은 월요일부터 금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무일 이내에 보내드리고 있습니다.  근무일이 아닌 경우 답변이 지연되는 점 양해바랍니다.  또한 이미 개설되어 있는 FAQ 는 즉시 이용가능하십니다.  <br><br>
-					참고) 한국 회원은 한국어 지원을 위해 korea@maximtrader.com 을 이용해 주시기 바랍니다..  <br><br>
-					감사합니다. <br><br>
+					연락주셔�?감사합니�?  고객�?메일은 �?받았습니�? �?고객서비스팀에서 답장드릴 것입니다. <br><br>
+					당사�? 근무시간은 월요일부�?금요일까지 10:00 ~ 18:00 (GMT +8기준) 이며, 답변은 3 근무�?이내�?보내드리�?있습니다.  근무일이 아닌 경우 답변�?지연되�?�?양해바랍니다.  또한 이미 개설되어 있는 FAQ �?즉시 이용가능하십니�?  <br><br>
+					참고) 한국 회원은 한국�?지원을 위해 korea@maximtrader.com �?이용�?주시�?바랍니다..  <br><br>
+					감사합니�? <br><br>
 					고객지원팀<br>
 					www.maximtrader.com<br>
-					본 메일은 자동응답 메일로 답장은 받을 수 없습니다. ';
+					�?메일은 자동응답 메일�?답장은 받을 �?없습니다. ';
     	}else{
     		$body = 'Dear Customer,
 					<br><br>
@@ -2378,7 +2391,7 @@ class memberActions extends sfActions
         $signature = $this->getRequestParameter('signature');
 
         $content = 'billno'.$billno.'currencytype'.$currency_type.'amount'.$amount.'date'.$mydate.'succ'.$succ.'ipsbillno'.$ipsbillno.'retencodetype'.$retEncodeType;
-        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证书
+        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证�?
         $cert = Globals::PAYMENT_GATEWAY_MER_KEY;
         if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
             $cert = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
@@ -2559,7 +2572,7 @@ class memberActions extends sfActions
             //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             //return $this->redirect('/member/epointPurchase');
         }
-        // Print out ‘OK’ to notify us you have received the payment result
+        // Print out ‘OK�?to notify us you have received the payment result
         echo "OK";
         return sfView::HEADER_ONLY;
     }
@@ -2847,7 +2860,7 @@ class memberActions extends sfActions
         $signature = $this->getRequestParameter('signature');
 
         $content = 'billno'.$billno.'currencytype'.$currency_type.'amount'.$amount.'date'.$mydate.'succ'.$succ.'ipsbillno'.$ipsbillno.'retencodetype'.$retEncodeType;
-        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证书
+        //请在该字段中放置商户登陆merchant.ips.com.cn下载的证�?
         $cert = Globals::PAYMENT_GATEWAY_MER_KEY;
         if (Globals::PAYMENT_GATEWAY_ENVIRONMENT == "DEV") {
             $cert = "GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ";
@@ -3182,8 +3195,15 @@ class memberActions extends sfActions
 
     public function executeUpdateProfile()
     {
+        $muUtil = MUserUtil::init($this);
         $mlm_distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        $this->forward404Unless($mlm_distributor);
+
+        if (!$mlm_distributor) {
+            if ($muUtil->isMobileUser()) {
+                return $muUtil->updateLog("Invalid user or user not found.")->response("", 0, $this->getContext()->getI18N()->__("Invalid user or user not found."));
+            }
+            return $this->forward404();
+        }
 
         //$mlm_distributor->setNickname($this->getRequestParameter('nickName'));
         //$mlm_distributor->setFullName($this->getRequestParameter('fullname'));
@@ -3212,9 +3232,10 @@ class memberActions extends sfActions
         $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
         $mlm_distributor->save();
 
-        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Profile update successfully"));
+        $msg = $this->getContext()->getI18N()->__("Profile update successfully");
+        $this->setFlash('successMsg', $msg);
 
-        return $this->redirect('/member/viewProfile');
+        return $muUtil->response("/member/viewProfile", 1, $msg);
     }
 
     public function executeUpdateBankInformation()
@@ -3284,10 +3305,11 @@ class memberActions extends sfActions
         $mlm_distributor->setNomineeContactno($this->getRequestParameter('nomineeContactNo'));
         $mlm_distributor->save();
 
-        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Beneficiary update successfully"));
+        $msg = $this->getContext()->getI18N()->__("Beneficiary update successfully");
+        $this->setFlash('successMsg', $msg);
 
         //return $this->redirect('/member/viewBankInformation');
-        return $this->redirect('/member/viewProfile');
+        return MUserUtil::init($this)->response("/member/viewProfile", 1, $msg);
     }
 
     public function executeDoRegister()
@@ -3577,13 +3599,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 								</font>
 							</p>
 						</tr>
@@ -4881,13 +4903,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 								</font>
 							</p>
 						</tr>
@@ -5010,7 +5032,7 @@ class memberActions extends sfActions
 
             $mlm_mt4_demo_request->save();
 
-            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐户";
+            $subject = "Thank you for register Maxim Trader Demo Account 感谢您申请马胜金融交易模拟帐�?;
             //$subject = "Thank you for register Maxim Trader Demo Account";
 
             $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
@@ -5135,10 +5157,10 @@ class memberActions extends sfActions
 														<tr>
 															<td valign='top' style='padding-top:15px;padding-left:10px'>
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-																	亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-																	你的免费模拟帐户将使你可以进行“纸上贸易”，我们很自豪能够提供最先进的交易平台，提供业界领先的性能和稳定性，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+																	亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
+																	你的免费模拟帐户将使你可以进行“纸上贸易”，我们很自豪能够提供最先进的交易平台，提供业界领先的性能和稳定性，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
 
-																	<br><br>如想立刻体验交易，请下载并安装MT4。
+																	<br><br>如想立刻体验交易，请下载并安装MT4�?
 																	<br>
 																</font>
 																<br>
@@ -5259,13 +5281,13 @@ class memberActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 								</font>
 							</p>
 						</tr>
@@ -5482,39 +5504,39 @@ We look forward to your custom in the near future. Should you have any queries, 
 										<td valign='top' style='font-size:0;line-height:0' width='86'><img src='http://partner.maximtrader.com/images/email/transparent.gif' width='86' height='1'></td>
 										<td valign='top' style='line-height:17px'>
 										<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
-                                                        亲爱的 <STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>，<br><br>
-                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略。
+                                                        亲爱�?<STRONG>".$this->getRequestParameter('l-name')." ".$this->getRequestParameter('f-name')."</strong>�?br><br>
+                                                        你的MT4帐户将使你可以进行贸易，使用MetaTrader 4可以允许你开发和测试您的交易策略�?
 
 
-                                                        感谢您申请Maxim Trader的交易账户。
+                                                        感谢您申请Maxim Trader的交易账户�?
                                                 <br><br>
-我们很高兴地告诉你，你的开户申请已经被接受。
+我们很高兴地告诉你，你的开户申请已经被接受�?
 <br><br>
-您已选择（个人）以美元交易的账户。
+您已选择（个人）以美元交易的账户�?
 <br><br>
 为了让我们激活您的帐户，我们需要您尽快尽快提交以下的文件与资料:
 <br><br>
-请发送给我们<STRONG>一份</strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段：
+请发送给我们<STRONG>一�?/strong>（必须认证）**文件列表（i）及<STRONG>两份</strong>（必须认证）**文件列表（ii）段�?
 <br><br>
 
 （ii）身份验证（未过期）
 <BR>1. 护照;
 <BR>2. 驾驶执照;
-<BR>3. 国民身分证
+<BR>3. 国民身分�?
 <br><br>
-（ii）地址验证码*
-<BR>1. 银行对账单;
+（ii）地址验证�?
+<BR>1. 银行对账�?
 <BR>2. 水电费帐单（煤气，水，电或陆地线路电话）;
-<BR>3. 信用卡对帐单。
+<BR>3. 信用卡对帐单�?
 <br><br>
-*本文件必须是最近3个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的。
+*本文件必须是最�?个月内，文件里包括您的姓名和现住址，发行人及日期必须是清楚可见的�?
 <br><br>
 <br><br>
-请扫描所需的文件和电子邮件发送给我们在<strong> account@maximtrader.com </strong>
+请扫描所需的文件和电子邮件发送给我们�?strong> account@maximtrader.com </strong>
 <br><br>
-您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码。
+您的文件得到了成功验证后，我们会通知您，您的帐户号码/用户名和密码�?
 <br><br>
-我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系。
+我们期待着在不久的将来，您的自定义。如果您有任何疑问，请不要犹豫与我们联系�?
                                                         <br>
                                                     </font>
                                                     <br>
@@ -5635,13 +5657,13 @@ We look forward to your custom in the near future. Should you have any queries, 
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 									</font>
 								</p>
 							</td>
@@ -5730,6 +5752,15 @@ We look forward to your custom in the near future. Should you have any queries, 
                     'nickname' => $resultArr["full_name"]
                 );
             }
+        }
+
+        $muUtil = MUserUtil::init($this);
+
+        if ($muUtil->isMobileUser()) {
+            $result = ($arr == "" ? 0 : 1);
+            $msg = ($result !== 1 ? $this->getContext()->getI18N()->__("Invalid receiver.") : "");
+            echo $muUtil->updateLog($msg)->getJson($result, $msg, array("data" => $arr));
+            return sfView::HEADER_ONLY;
         }
 
         echo json_encode($arr);
@@ -6246,16 +6277,16 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         }*/
         $message = "Dear Maxim Members
-<br>亲爱的马胜会员:
+<br>亲爱的马胜会�?
 <br>
 <br>We have been notified that there has been a breach of our Code of Ethics, which has resulted in us not fulfilling local legislation, all investment payments must be made through I-Account and a 10% FMC will be charged according to the purchased package starting from 19/1/2015.
-<br>最近公司注意到市场上有人违反公司道德行为准则,结果导致公司受到地方法规的调查;现决定从2015.1.19日起,所有投资金额都必须通过i-Account汇给公司,且每个配套都必须支付10%的FMC基金管理费用.
+<br>最近公司注意到市场上有人违反公司道德行为准�?结果导致公司受到地方法规的调�?现决定从2015.1.19日起,所有投资金额都必须通过i-Account汇给公司,且每个配套都必须支付10%的FMC基金管理费用.
 <br>
 <br>For example, $11,000 is required to purchase a $10,000 package
 <br>例如: 若需购买1万美金的配套,则需支付11000美金.
 <br>
 <br>This system will be implemented on 19/1/2015 and there will be NO extensions
-<br>该政策将于2015.1.19日正式生效,且不做任何延期.
+<br>该政策将�?015.1.19日正式生�?且不做任何延�?
 <br>
 <br>Your prompt action and kind understanding on this matter is highly appreciated
 <br>敬请留意,非常谢谢大家的理解与配合!
@@ -6263,29 +6294,29 @@ We look forward to your custom in the near future. Should you have any queries, 
 <br>Thank you!
 <br>谢谢!
 <br>
-<br>친애하는 맥심 회원 여러분,
+<br>친애하는 맥심 회원 여러�?
 <br>
-<br>당사는 당사의 윤리규정을 어기고 있는 회원이 있다고 통보받아왔으며, 각 지역의 법을 충분히 지키지 못한 결과를 초래하게 되었습니다.  모든 투자에 대한 지불은 I-어카운트를 통해서만 이루어져야 하며, 2015년 1월 19일부터 구매한 패키지에 대한 10%의 FMC (펀드 매니지먼트 코스트)가 부과될 것입니다.
+<br>당사�?당사�?윤리규정�?어기�?있는 회원�?있다�?통보받아왔으�? �?지역의 법을 충분�?지키지 못한 결과�?초래하게 되었습니�?  모든 투자�?대�?지불은 I-어카운트�?통해서만 이루어져�?하며, 2015�?1�?19일부�?구매�?패키지�?대�?10%�?FMC (펀�?매니지먼트 코스�?가 부과될 것입니다.
 <br>
-<br>예를 들어, 미화 10,000달러 패키지를 구매하기 위하여서는 미화11,000달러가 필요합니다.
+<br>예를 들어, 미화 10,000달러 패키지�?구매하기 위하여서�?미화11,000달러가 필요합니�?
 <br>
-<br>이 시스템은 2015년 1월 9일부터 실행될 것이며, 기한 연장은 없을 것입니다.
+<br>�?시스템은 2015�?1�?9일부�?실행�?것이�? 기한 연장은 없을 것입니다.
 <br>
-<br>귀하의 빠른 조치와 이해해 대해 심심한 감사를 드립니다.
+<br>귀하의 빠른 조치와 이해�?대�?심심�?감사�?드립니다.
 <br>
-<br>감사합니다.
+<br>감사합니�?
 <br>
 <br>マキシム・メンバーの皆様
 <br>
-<br>我々の倫理規定への違反により、現地の法律を満たしていないとの通達がありました。2015年1月19日より、すべての投資支払いはi-Accountを通じて行われ、購入されたパッケージに応じ、10％のFMCが課金されます。
+<br>我々の倫理規定への違反により、現地の法律を満たしていないとの通達がありました�?015�?�?9日より、すべての投資支払いはi-Accountを通じて行われ、購入されたパッケージに応じ�?0％のFMCが課金されます�?
 <br>
-<br>例えば、11,000ドルが10,000ドルのパッケージを購入するために必要になります。
+<br>例えば�?1,000ドル�?0,000ドルのパッケージを購入するために必要になります�?
 <br>
-<br>このシステムは2015年1月19日に実装され、延期はありません。
+<br>このシステム�?015�?�?9日に実装され、延期はありません�?
 <br>
-<br>皆様の迅速な行動とご理解、ご協力に感謝します。
+<br>皆様の迅速な行動とご理解、ご協力に感謝します�?
 <br>
-<br>ありがとうございます。";
+<br>ありがとうございます�?;
 
         // 255709	korean001
         // 273058	Yongman
@@ -6303,6 +6334,27 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
         if ($isKorean001YongMan) {
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__($message));
+        }
+
+        if (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->distMt4s = $distMt4s;
+            $muObj->colorArr = $this->colorArr;
+            $muObj->distributorCode = $distributor->getDistributorCode();
+            $muObj->ranking = $this->ranking;
+            $muObj->statusCode = $distributor->getStatusCode();
+            $muObj->lastLogin = $this->lastLogin;
+            $muObj->currencyCode = $this->currencyCode;
+            $muObj->cp1Account = number_format($this->epoint, 2);
+            $muObj->cp2Account = number_format($this->ecash, 2);
+            $muObj->cp3Account = number_format($this->maintenancePoint, 2);
+            $muObj->rpAccount = number_format($this->rp, 2);
+            $muObj->rpAccountVisible = ($this->rp > 0 ? "true" : "false");
+            $muObj->rtAccount = number_format($distributor->getRtwallet(), 2);
+            $muObj->rtAccountVisible = ($distributor->getFromAbfx() == "N" ? "true" : "false");
+
+            $muObj->saveToSession($this);
+            return $this->forward("mobileService", "memberSummary");
         }
     }
 
@@ -6429,6 +6481,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c->add(AppUserPeer::STATUS_CODE, $array, Criteria::IN);
 
         $existUser = AppUserPeer::doSelectOne($c);
+        $muUtil = MUserUtil::init($this);
+
+        if ($muUtil->isMobileUser()) {
+            $result = ($existUser ? 1 : 0);
+            $msg = ($result !== 1 ? $this->getContext()->getI18N()->__("Security Password is not valid") : "");
+            echo $muUtil->updateLog($msg)->getJson($result, $msg);
+            return sfView::HEADER_ONLY;
+        }
 
         if ($existUser) {
             echo 'true';
@@ -7478,11 +7538,12 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $settingDB->getSettingValue();
         }*/
         $this->processFee = $processFee;
+        $muUtil = MUserUtil::init($this);
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, Globals::YES_Y, null, null)) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP1 Transfer temporary out of service."));
-                return $this->redirect('/member/transferEpoint');
+                return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
             }
 
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -7560,7 +7621,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                    return $this->redirect('/member/transferEpoint');
+                                    return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
                                 }
                             }
                         }
@@ -7576,12 +7637,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
                             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
-                            return $this->redirect('/member/transferEpoint');
+                            return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
                         }
                     }
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                    return $this->redirect('/member/transferEpoint');
+                    return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
                 }
             //}
 
@@ -7590,17 +7651,17 @@ We look forward to your custom in the near future. Should you have any queries, 
             if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
-                return $this->redirect('/member/transferEpoint');
+                return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
 
             } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
-                return $this->redirect('/member/transferEpoint');
+                return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
 
             } elseif (strtoupper($sponsorId) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
-                return $this->redirect('/member/transferEpoint');
+                return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
 
             } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
@@ -7636,7 +7697,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
-                        return $this->redirect('/member/transferEpoint');
+                        return $muUtil->updateLog(null, true)->response("/member/transferEpoint");
                     }
 
                     $c = new Criteria();
@@ -7709,7 +7770,16 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
-                return $this->redirect('/member/transferEpoint');
+                return $muUtil->response("/member/transferEpoint", 1);
+            }
+        } else {
+            if ($muUtil->isMobileUser($this)) {
+                $muObj = new MUserObj();
+                $muObj->cp1Balance = number_format($ledgerAccountBalance, 2);
+                $muObj->processFee = $this->processFee;
+
+                $muObj->saveToSession($this);
+                $this->forward("mobileService", "TransferCp1");
             }
         }
     }
@@ -7736,11 +7806,12 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $settingDB->getSettingValue();
         }*/
         $this->processFee = $processFee;
+        $muUtil = MUserUtil::init($this);
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, Globals::YES_Y, null)) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP2 Transfer temporary out of service."));
-                return $this->redirect('/member/transferCp2');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp2");
             }
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
@@ -7792,7 +7863,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                    return $this->redirect('/member/transferCp2');
+                                    return $muUtil->updateLog(null, true)->response("/member/transferCp2");
                                 }
                             }
                         }
@@ -7809,12 +7880,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
                             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
-                            return $this->redirect('/member/transferCp2');
+                            return $muUtil->updateLog(null, true)->response("/member/transferCp2");
                         }
                     }
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                    return $this->redirect('/member/transferCp2');
+                    return $muUtil->updateLog(null, true)->response("/member/transferCp2");
                 }
             //}
 
@@ -7823,17 +7894,17 @@ We look forward to your custom in the near future. Should you have any queries, 
             if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
-                return $this->redirect('/member/transferCp2');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp2");
 
             } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
-                return $this->redirect('/member/transferCp2');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp2");
 
             } elseif (strtoupper($sponsorId) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
-                return $this->redirect('/member/transferCp2');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp2");
 
             } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
@@ -7866,7 +7937,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
-                        return $this->redirect('/member/transferCp2');
+                        return $muUtil->updateLog(null, true)->response("/member/transferCp2");
                     }
 
                     $c = new Criteria();
@@ -7963,12 +8034,21 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $con->commit();
                     $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
-                    return $this->redirect('/member/transferCp2');
+                    return $muUtil->response("/member/transferCp2", 1);
 
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
                 }
+            }
+        } else {
+            if ($muUtil->isMobileUser()) {
+                $muObj = new MUserObj();
+                $muObj->cp2Balance = number_format($ledgerAccountBalance, 2);
+                $muObj->processFee = $this->processFee;
+
+                $muObj->saveToSession($this);
+                $this->forward("mobileService", "TransferCp2");
             }
         }
     }
@@ -7994,11 +8074,12 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $settingDB->getSettingValue();
         }*/
         $this->processFee = $processFee;
+        $muUtil = MUserUtil::init($this);
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, null, Globals::YES_Y)) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Transfer temporary out of service."));
-                return $this->redirect('/member/transferCp3');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp3");
             }
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             /*$pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
@@ -8050,7 +8131,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
                                 if ($pos === false) { // note: three equal signs
                                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                    return $this->redirect('/member/transferCp3');
+                                    return $muUtil->updateLog(null, true)->response("/member/transferCp3");
                                 }
                                 //$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                 //return $this->redirect('/member/transferCp3');
@@ -8069,12 +8150,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
                             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
-                            return $this->redirect('/member/transferCp3');
+                            return $muUtil->updateLog(null, true)->response("/member/transferCp3");
                         }
                     }
                 } else {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                    return $this->redirect('/member/transferCp3');
+                    return $muUtil->updateLog(null, true)->response("/member/transferCp3");
                 }
             //}
 
@@ -8083,17 +8164,17 @@ We look forward to your custom in the near future. Should you have any queries, 
             if (($epointAmount + $processFee) > $ledgerAccountBalance) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1"));
-                return $this->redirect('/member/transferCp3');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp3");
 
             } elseif (strtoupper($appUser->getUserPassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
-                return $this->redirect('/member/transferCp3');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp3");
 
             } elseif (strtoupper($sponsorId) == strtoupper($this->getUser()->getAttribute(Globals::SESSION_DISTCODE))) {
 
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You are not allow to transfer to own account."));
-                return $this->redirect('/member/transferCp3');
+                return $muUtil->updateLog(null, true)->response("/member/transferCp3");
 
             } elseif ($sponsorId <> "" && $epointAmount > 0) {
 
@@ -8125,7 +8206,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $toName = $resultArr["full_name"];
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid User Name."));
-                        return $this->redirect('/member/transferCp3');
+                        return $muUtil->updateLog(null, true)->response("/member/transferCp3");
                     }
 
                     $c = new Criteria();
@@ -8226,7 +8307,16 @@ We look forward to your custom in the near future. Should you have any queries, 
                 }
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
-                return $this->redirect('/member/transferCp3');
+                return $muUtil->response("/member/transferCp3", 1);
+            }
+        } else {
+            if ($muUtil->isMobileUser()) {
+                $muObj = new MUserObj();
+                $muObj->cp3Balance = number_format($ledgerAccountBalance, 2);
+                $muObj->processFee = $this->processFee;
+
+                $muObj->saveToSession($this);
+                $this->forward("mobileService", "TransferCp3");
             }
         }
     }
@@ -8723,7 +8813,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             //return $this->redirect('/member/loginPassword');
         }
 
-        if ($no_redirect) {
+        if (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->result = $result;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", $this->getRequestParameter(MUserUtil::REQ_MACT));
+        } elseif ($no_redirect) {
             if ($result) {
                 return array("result" => true, "role" => $exist->getUserRole());
             } else {
@@ -8760,7 +8856,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             //return $this->redirect('/member/transactionPassword');
         }
 
-        if ($update_pw_expire) {
+        if (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->result = $result;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", $this->getRequestParameter(MUserUtil::REQ_MACT));
+        } elseif ($update_pw_expire) {
             if ($result) {
                 return array("result" => true, "role" => $exist->getUserRole());
             } else {
@@ -8964,14 +9066,16 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
-        $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->distributorDB = $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $muUtil = MUserUtil::init($this);
+        $this->validatorLib = $validatorLib = new ValidatorLib($this);
 
         $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
-            return $this->redirect('/member/summary');
+            return $muUtil->response("/member/summary", 0, $this->getContext()->getI18N()->__("Invalid action: not allowed to access this feature."));
         }
 
         $withdrawAmount = $this->getRequestParameter('cp3Amount');
@@ -8979,41 +9083,76 @@ We look forward to your custom in the near future. Should you have any queries, 
         //var_dump($withdrawAmount);
         //exit();
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->distributorDB->getCloseAccount() == "Y") {
+            if ($distributorDB->getCloseAccount() == "Y") {
                 // Allow free text for closed account.
                 if ($withdrawAmount <= $processFee) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP3 Withdrawal Amount"), "%2%" => $processFee.".00")));
-                	return $this->redirect('/member/cp3Withdrawal');
+                    $msg = $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP3 Withdrawal Amount"), "%2%" => $processFee.".00"));
+                    $this->setFlash('errorMsg', $msg);
+                    return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
                 }
             }
-            
+
             if (date("d") > Globals::WITHDRAWAL_DAY) {
                 $distributorcodes = array('LAY_YEE','money168','micken7','barabara','u212alc','hideko1','cho7510','Jieilove','tanpopo1','kakko1','ichigo1','sakura1959','aki900','pinmomie','MIYARYU23','shima101','MIEKOIKE','tomitomi','Hebori','hirokatsu1','firemoon','hy1805','megumi1110','KINGDAM','sekiken','dandy_oge','aiko-1','shinnsei','sueko1','toshimi26','KEIKO3','kikotan','mikuni456','Mayumi','skisa01','jamacyan','yuki3319','maximaichi','janneenciel','kimura34','kyoko7','Tomoya','Toku335','susan1','chiechan1','aura0928','teruyo1','OOTSU510','Nemoma','sethu1629','sin-yukito','shima101','Kimikimi3','kaka33','kaka138','saku1006','yukiko1','terutoyo','nakayoshi','atsuko1','eikotan','S351215yu','shita369','S2019yu','hfj281129','Masato0821','gorogoro','mayutan1','mirai2','mirai-12','Takayan','sab15595','suzuff01','katsu6000','kazuhisa1','rensi3333','YASUHIRO0516','kyoko7','rumiko1','fujisan1','ritsuko1','ritsuko1','ritsuko1','masaya1','hisayo28','kyoko7','u212alc','Kazucyan1','kaorin','princess7','mitsuru1','Kent1668','yukikohim','Takahiro','level0','yama517','runrun55','otiasi','mmika1','rikapii','kan2014','toshizo','TAKA2976','nobu3ocha','heart614sa','heart614','sunhigh1','chihiromama','naochan1','Crown48','shin0126','Toku335','Sachiko0139','seiwa1997tk','kokyuu43','Niwa3110','hypernomado1','ctl11240','fivestar1','Setuko0604','Jun19601212','MKJ5921','hypernomado1');
                 if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
                 	//can withdraw
                 }else{
-	                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
-	                return $this->redirect('/member/cp3Withdrawal');
+                    $msg = $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month");
+                    $this->setFlash('errorMsg', $msg);
+                    return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
                 }
             }
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
-            //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP3 Withdrawal temporary out of service."));
-                return $this->redirect('/member/cp3Withdrawal');
+
+            // Validate bank into options.
+            $bankInTo = $this->getRequestParameter('bankInTo');
+            $distId = $distributorDB->getDistributorId();
+            $distBankCountry = $distributorDB->getBankCountry();
+            if (in_array($distBankCountry, array("China (PRC)", "Thailand"))) {
+                // Is valid. Do nothing.
+            } elseif (in_array($distId, array(257749, 273758, 257792))) {
+                // bwhk (chales approved)
+                // Is valid. Do nothing.
+            } elseif (in_array($distId, array(168, 257219, 256078, 270107)) && in_array($bankInTo, array(Globals::WITHDRAWAL_IACCOUNT, Globals::WITHDRAWAL_LOCAL_BANK))) {
+                // special case (anna), allow to use iAccount and local bank.
+                // Is valid. Do nothing.
+            } elseif ($distBankCountry == "Indonesia" && $bankInTo != Globals::WITHDRAWAL_IACCOUNT) {
+                // Indonesia cannot use iAccount.
+                // Is valid. Do nothing.
+            } elseif ($distBankCountry == "Australia" && $bankInTo == Globals::WITHDRAWAL_LOCAL_BANK) {
+                // Is valid. Do nothing.
+            } else {
+                // Default error.
+                $msg = $this->getContext()->getI18N()->__("You are not allowed to use this bank. Please select another options.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
             }
 
+            $validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg);
 
+            if (strlen($errorMsg)) {
+                $msg = $this->getContext()->getI18N()->__('You are not allowed to submit withdrawal, due to') . ": " . $this->getContext()->getI18N()->__($errorMsg);
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
+            }
+
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
+            //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
+                $msg = $this->getContext()->getI18N()->__("CP3 Withdrawal temporary out of service.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
+            }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $errorMsg = "";
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
+                $errorMsg = $this->getContext()->getI18N()->__("In-sufficient CP3");
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Security password");
 
             } elseif ($this->getRequestParameter('bankInTo') == "") {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Action");
 
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
@@ -9065,14 +9204,22 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_cp3_withdraw->save();
 
                     $con->commit();
+
+                    $msg = $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.");
+                    $this->setFlash('successMsg', $msg);
+                    return $muUtil->response("/member/cp3Withdrawal", 1, $msg);
+
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
                 }
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted."));
-
-                return $this->redirect('/member/cp3Withdrawal');
             }
+        } elseif (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp3Balance = $this->ledgerAccountBalance;
+            $muObj->distributorDB = $this->distributorDB;
+            $muObj->saveToSession($this);
+            $this->forward("mobileService", "cp3Withdrawal");
         }
     }
 
@@ -9193,13 +9340,16 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
-        $this->distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->distributorDB = $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
+        $muUtil = MUserUtil::init($this);
+        $this->validatorLib = $validatorLib = new ValidatorLib($this);
+
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
-            return $this->redirect('/member/summary');
+            return $muUtil->response("/member/summary", 0, $this->getContext()->getI18N()->__("Invalid action: not allowed to access this feature."));
         }
 
         $withdrawAmount = $this->getRequestParameter('ecashAmount');
@@ -9211,11 +9361,12 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->distributorDB->getCloseAccount() == "Y") {
+            if ($distributorDB->getCloseAccount() == "Y") {
                 // Allow free text for closed account.
                 if ($withdrawAmount <= $processFee) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP2 Withdrawal Amount"), "%2%" => $processFee.".00")));
-                	return $this->redirect('/member/ecashWithdrawal');
+                    $msg = $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP2 Withdrawal Amount"), "%2%" => $processFee.".00"));
+                    $this->setFlash('errorMsg', $msg);
+                	return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
                 }
             }
 
@@ -9224,26 +9375,61 @@ We look forward to your custom in the near future. Should you have any queries, 
                 if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
                 	//can withdraw
                 }else{
-                	$this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month"));
-                	return $this->redirect('/member/ecashWithdrawal');
+                    $msg = $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month");
+                	$this->setFlash('errorMsg', $msg);
+                	return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
                 }
             }
 
+            // Validate bank into options.
+            $bankInTo = $this->getRequestParameter('bankInTo');
+            $distId = $distributorDB->getDistributorId();
+            $distBankCountry = $distributorDB->getBankCountry();
+            if (in_array($distBankCountry, array("China (PRC)", "Thailand"))) {
+                // Is valid. Do nothing.
+            } elseif (in_array($distId, array(257749, 273758, 257792))) {
+                // bwhk (chales approved)
+                // Is valid. Do nothing.
+            } elseif (in_array($distId, array(168, 257219, 256078)) && in_array($bankInTo, array(Globals::WITHDRAWAL_IACCOUNT, Globals::WITHDRAWAL_LOCAL_BANK))) {
+                // special case (anna), allow to use iAccount and local bank.
+                // Is valid. Do nothing.
+            } elseif ($distBankCountry == "Indonesia" && $bankInTo != Globals::WITHDRAWAL_IACCOUNT) {
+                // Indonesia cannot use iAccount.
+                // Is valid. Do nothing.
+            } elseif ($distBankCountry == "Australia" && $bankInTo == Globals::WITHDRAWAL_LOCAL_BANK) {
+                // Is valid. Do nothing.
+            } else {
+                // Default error.
+                $msg = $this->getContext()->getI18N()->__("You are not allowed to use this bank. Please select another options.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
+            }
+
+            $validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg);
+
+            if (strlen($errorMsg)) {
+                $msg = $this->getContext()->getI18N()->__('You are not allowed to submit withdrawal, due to') . ": " . $this->getContext()->getI18N()->__($errorMsg);
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
+            }
+
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP2 Withdrawal temporary out of service."));
-                return $this->redirect('/member/ecashWithdrawal');
+                $msg = $this->getContext()->getI18N()->__("CP2 Withdrawal temporary out of service.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $errorMsg = "";
 
             if ($withdrawAmount > $ledgerAccountBalance) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+                $errorMsg = $this->getContext()->getI18N()->__("In-sufficient CP2");
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Security password");
 
             } elseif ($this->getRequestParameter('bankInTo') == "") {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action"));
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Action");
 
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
@@ -9295,14 +9481,27 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_ecash_withdraw->save();
 
                     $con->commit();
+
+                    $msg = $this->getContext()->getI18N()->__("Your CP2 withdrawal has been submitted.");
+                    $this->setFlash('successMsg', $msg);
+                    return $muUtil->response("/member/ecashWithdrawal", 1, $msg);
+
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
                 }
-                $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your CP2 withdrawal has been submitted."));
-
-                return $this->redirect('/member/ecashWithdrawal');
             }
+
+            if (strlen($errorMsg)) {
+                $this->setFlash("errorMsg", $errorMsg);
+                return $muUtil->updateLog($errorMsg)->response("/member/ecashWithdrawal", 0, $errorMsg);
+            }
+        } elseif (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp2Balance = $this->ledgerAccountBalance;
+            $muObj->distributorDB = $this->distributorDB;
+            $muObj->saveToSession($this);
+            $this->forward("mobileService", "cp2Withdrawal");
         }
     }
 
@@ -9351,16 +9550,19 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c->add(MlmDistMt4Peer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $distMt4DBs = MlmDistMt4Peer::doSelect($c);
         $this->distMt4DBs = $distMt4DBs;
+        $muUtil = MUserUtil::init($this);
 
         if ($this->getRequestParameter('mt4Amount') > 0 && $this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('paymentType') <> "") {
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
-
+                $msg = $this->getContext()->getI18N()->__("Invalid Security password");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/mt4Withdrawal", 0, $msg);
             } else if (!$this->getRequestParameter('mt4Id')) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid MT4 ID."));
-
+                $msg = $this->getContext()->getI18N()->__("Invalid MT4 ID.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/mt4Withdrawal", 0, $msg);
             } else {
                 $paymentType = $this->getRequestParameter('paymentType');
                 $usdAmount = $this->getRequestParameter('mt4Amount');
@@ -9415,9 +9617,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $mt4Withdraw->save();
 
                 $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your MT4 withdrawal has been submitted."));
-
-                return $this->redirect('/member/mt4Withdrawal');
+                return $muUtil->response("/member/mt4Withdrawal", 1);
             }
+        } elseif ($muUtil->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->usdToMyr = $this->usdToMyr;
+            $muObj->handlingCharge = $this->handlingCharge;
+            $muObj->handlingChargeInUsd = $this->handlingChargeInUsd;
+            $muObj->distMt4DBs = $this->distMt4DBs;
+            $muObj->saveToSession($this);
+
+            $this->forward("mobileService", "mt4Withdrawal");
         }
     }
 
@@ -9517,9 +9727,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
 
     public function executeBonusDetails() {
+        // Note: update mobileService/commissionDetails as well if any changes made on this page.
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($distDB->getHideGenealogy() == "Y") {
-            return $this->redirect('/member/summary');
+            return $this->redirect("/member/summary");
         }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=C');
@@ -9697,9 +9908,15 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeViewProfile()
     {
-        if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
+        $muUtil = MUserUtil::init($this);
+
+        if (!$muUtil->isMobileUser()
+            && $this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_VIEW_PROFILE, false) == false
+            && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
+
             return $this->redirect('/member/securityPasswordRequired?doAction=VP');
         }
+
         $distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->forward404Unless($distDB);
 
@@ -9714,6 +9931,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->distDB = $distDB;
         
         $iaccount = str_replace('-','',$distDB->getIaccount());
+
+        if ($muUtil->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->sponsor = $sponsor;
+            $muObj->distDB = $distDB;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", $this->getRequestParameter(MUserUtil::REQ_MACT));
+        }
     }
     public function executeBankInformation()
     {
@@ -11295,18 +11521,22 @@ We look forward to your custom in the near future. Should you have any queries, 
         $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         // amz001 chales (20131223)
         $pos = strrpos($distDB->getTreeStructure(), "|1458|");
+        $muUtil = MUserUtil::init($this);
+
         if ($pos === false) { // note: three equal signs
 
         } else {
             $this->toHideCp2Cp3Transfer = true;
-            return $this->redirect('/member/summary');
+            $msg = $this->getContext()->getI18N()->__("Invalid action.");
+            return $muUtil->updateLog($msg)->response("/member/summary", 0, $msg);
         }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
+        $this->convertRate = 1;
 
         $epointAmount = $this->getRequestParameter('epointAmount');
         $epointAmount = str_replace(",", "", $epointAmount);
-        if ($this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+        if (is_numeric($epointAmount) && $epointAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             /*$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
             $pos = strrpos($distDB->getPlacementTreeStructure(), Globals::ABFX_GROUP);
             if ($pos === false) { // note: three equal signs
@@ -11316,17 +11546,20 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/convertEcashToEpoint');
             }*/
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, Globals::YES_Y, null, null, null, null)) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Convert CP2 To CP1 temporary out of service."));
-                return $this->redirect('/member/convertEcashToEpoint');
+                $msg = $this->getContext()->getI18N()->__("Convert CP2 To CP1 temporary out of service.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/convertEcashToEpoint", 0, $msg);
             }
 
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             if ($epointAmount > $ledgerAccountBalance) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+                return $muUtil->updateLog(null, true)->response("/member/convertEcashToEpoint");
 
             } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+                return $muUtil->updateLog(null, true)->response("/member/convertEcashToEpoint");
 
             } elseif ($epointAmount > 0) {
 
@@ -11372,14 +11605,22 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
 
-                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to CP1 successful."));
                     $con->commit();
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to CP1 successful."));
+
+                    return $muUtil->response("/member/convertEcashToEpoint", 1);
                 } catch (PropelException $e) {
                     $con->rollback();
                     throw $e;
                 }
-                return $this->redirect('/member/convertEcashToEpoint');
             }
+        } elseif ($muUtil->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp2Balance = number_format($this->ledgerAccountBalance, 2);
+            $muObj->convertRate = $this->convertRate;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", "convertCp2ToCp1");
         }
     }
 
@@ -12900,7 +13141,7 @@ And upload all the documents at website.
 <br><br>
 Note:
 <br><br>
-Please logon to http://partner.maximtrader.com. Click “User Profile” to upload all the documents at “Upload Document”.
+Please logon to http://partner.maximtrader.com. Click “User Profile�?to upload all the documents at “Upload Document�?
 <br><br>
 Thank you for your highly cooperation.
 <br><br>
@@ -12935,25 +13176,25 @@ Wish you all the best.
 																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:17px'>
 												亲爱的会员，
 <br><br>
-您好。
+您好�?
 <br><br>
 由于外汇的要求严谨，请您将您的文件包括：
 <br><br>
-1） 身份证（正反面在同一页）
+1�?身份证（正反面在同一页）
 <br><br>
-2） 地址证明（银行/信用卡明细单，或水/电明细单，或电话/网络明细单）
+2�?地址证明（银�?信用卡明细单，或�?电明细单，或电话/网络明细单）
 <br><br>
--          明细单必须清楚列明您的姓名，目前住址及最近3个月日期。
+-          明细单必须清楚列明您的姓名，目前住址及最�?个月日期�?
 <br><br>
-3） 下载并签署外汇合约。
+3�?下载并签署外汇合约�?
 <br><br>
-上传给公司，否则这会影响您日后的提现。
+上传给公司，否则这会影响您日后的提现�?
 <br><br>
-注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）。
+注：请登入http://partner.maximtrader.com，点击“用户个人资料”将所有文件上传给公司（点击“上传文件”）�?
 <br><br>
-谢谢您的鼎力合作。
+谢谢您的鼎力合作�?
 <br><br>
-祝：一切顺利
+祝：一切顺�?
 
 												<br>
 											</font>
@@ -13002,13 +13243,13 @@ Wish you all the best.
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
-<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
-<br>邮箱： support@maximtrader.com
-<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
+<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
+<br>邮箱�?support@maximtrader.com
+<br><br>马胜金融集团是Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子公司�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
 								</font>
 							</p>
 						</tr>

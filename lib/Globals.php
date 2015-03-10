@@ -71,6 +71,8 @@ abstract class Globals {
 	const STATUS_COMPLETE = 'COMPLETE';
     const STATUS_SUCCESS = 'SUCCESS';
     const STATUS_SUSPEND = 'SUSPENDED';
+    const STATUS_CLOSED = 'CLOSED';
+    const STATUS_EXPIRED = 'EXPIRED';
 
     /************************************/
     /*****    Maturity Status      ******/
