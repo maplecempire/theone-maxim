@@ -26,7 +26,7 @@ class MUserUtil
 
     public function response($redirectUrl, $result = 0, $message = null, $data = null)
     {
-        if (MUserUtil::isMobileUser()) {
+        if ($this->isMobileUser()) {
             if (!strlen($message)) {
                 if ($result === 1 && $this->action->hasFlash("successMsg")) {
                     $message = $this->action->getFlash("successMsg");
@@ -35,7 +35,7 @@ class MUserUtil
                 }
             }
 
-            echo MUserUtil::GetJson($result, $message, $data);
+            echo $this->getJson($result, $message, $data);
             return sfView::HEADER_ONLY;
         }
 
@@ -47,7 +47,7 @@ class MUserUtil
         $result = $this->action->getRequestParameter(MUserUtil::REQ_MUSER, false);
 
         if ($result && $autoVerify) {
-            return MUserUtil::VerifyMobileUser($this->action, $errMsg);
+            return $this->verifyMobileUser($errMsg);
         }
 
         return $result;
@@ -76,7 +76,7 @@ class MUserUtil
             return false;
         }
 
-        if (!MUserUtil::IsSecretValid($username, $existUser->getUserpassword(), $secret)) {
+        if (!$this->isSecretValid($username, $existUser->getUserpassword(), $secret)) {
             // MD5 encrypt mismatch.
             $errMsg = $this->action->getContext()->getI18N()->__("Invalid action: security data mismatch.");
             return false;
