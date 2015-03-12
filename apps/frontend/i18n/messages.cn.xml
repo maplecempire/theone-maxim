@@ -1063,6 +1063,7 @@
             <trans-unit><source>(Excluding non-working days)</source><target>（除了非工作日）</target></trans-unit>
             <trans-unit><source>Please Apply for i-Account now.</source><target>请申请 i-Account</target></trans-unit>
             <trans-unit><source>Please Apply for i-Account now before submit.</source><target>请在提交前申请 i-Account</target></trans-unit>
+            <trans-unit><source>Invalid receiver.</source><target>无效的接收者</target></trans-unit>
         </body>
     </file>
 </xliff>

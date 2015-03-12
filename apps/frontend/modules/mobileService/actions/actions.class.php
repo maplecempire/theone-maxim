@@ -235,6 +235,21 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "sponsor_id" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
+                    ),
+                    "member_name" => array(
+                        "label" => $this->getContext()->getI18N()->__("Member Name"),
+                    ),
+                    "transfer_amount" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer CP1 Amount"),
+                    ),
+                    "reference_remark" => array(
+                        "label" => $this->getContext()->getI18N()->__("Reference Remark"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp1_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP1 Balance"),
                         "value" => $muObj->cp1Balance
@@ -269,6 +284,21 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "sponsor_id" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
+                    ),
+                    "member_name" => array(
+                        "label" => $this->getContext()->getI18N()->__("Member Name"),
+                    ),
+                    "transfer_amount" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer CP2 Amount"),
+                    ),
+                    "reference_remark" => array(
+                        "label" => $this->getContext()->getI18N()->__("Reference Remark"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
                         "value" => $muObj->cp2Balance
@@ -303,6 +333,21 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "sponsor_id" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
+                    ),
+                    "member_name" => array(
+                        "label" => $this->getContext()->getI18N()->__("Member Name"),
+                    ),
+                    "transfer_amount" => array(
+                        "label" => $this->getContext()->getI18N()->__("Transfer CP3 Amount"),
+                    ),
+                    "reference_remark" => array(
+                        "label" => $this->getContext()->getI18N()->__("Reference Remark"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
                         "value" => $muObj->cp3Balance
@@ -1281,7 +1326,7 @@ class mobileServiceActions extends sfActions
     private function isValidAccess($logAccess = true)
     {
         if ($this->getRequest()->getMethod() !== sfRequest::POST) {
-            return false;
+//            return false; TODO
         }
 
         $muUtil = MUserUtil::init($this);
