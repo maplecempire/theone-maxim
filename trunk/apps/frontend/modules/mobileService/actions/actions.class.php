@@ -878,6 +878,25 @@ class mobileServiceActions extends sfActions
 
     public function executeUpdateLoginPassword()
     {
+        $jsonData = array(
+            "data" => array(
+                "change_login_password" => array(
+                    "label" => $this->getContext()->getI18N()->__("Change Account login Password"),
+                    "value" => array(
+                        "oldPassword" => array(
+                            "label" => $this->getContext()->getI18N()->__("Old Login Password")
+                        ),
+                        "newPassword" => array(
+                            "label" => $this->getContext()->getI18N()->__("New Login Password")
+                        ),
+                        "newPassword2" => array(
+                            "label" => $this->getContext()->getI18N()->__("Re-enter Login Password")
+                        )
+                    )
+                )
+            )
+        );
+
         if ($this->isResponded()) {
             $muObj = new MUserObj();
             $muObj->loadFromSession($this);
@@ -887,10 +906,10 @@ class mobileServiceActions extends sfActions
             }
 
             if ($muObj->result) {
-                echo MUserUtil::init($this)->getJson(1, $this->getFlash("successMsg"));
+                echo MUserUtil::init($this)->getJson(1, $this->getFlash("successMsg"), $jsonData);
             } else {
                 $msg = $this->getFlash("errorMsg");
-                echo MUserUtil::init($this)->updateLog($msg)->getJson(0, $msg);
+                echo MUserUtil::init($this)->updateLog($msg)->getJson(0, $msg, $jsonData);
             }
 
             return sfView::HEADER_ONLY;
@@ -899,13 +918,37 @@ class mobileServiceActions extends sfActions
                 return sfView::HEADER_ONLY;
             }
 
-            $this->getRequest()->setParameter(MUserUtil::REQ_MACT, "updateLoginPassword");
-            return $this->forward("member", "loginPassword");
+            if ($this->getRequestParameter("doSave") == "y") {
+                $this->getRequest()->setParameter(MUserUtil::REQ_MACT, "updateLoginPassword");
+                return $this->forward("member", "loginPassword");
+            } else {
+                echo MUserUtil::init($this)->getJson(0, null, $jsonData);
+                return sfView::HEADER_ONLY;
+            }
         }
     }
 
     public function executeUpdateTransactionPassword()
     {
+        $jsonData = array(
+            "data" => array(
+                "change_transaction_password" => array(
+                    "label" => $this->getContext()->getI18N()->__("Change Security Password"),
+                    "value" => array(
+                        "oldSecurityPassword" => array(
+                            "label" => $this->getContext()->getI18N()->__("Old Security Password")
+                        ),
+                        "newSecurityPassword" => array(
+                            "label" => $this->getContext()->getI18N()->__("New Security Password")
+                        ),
+                        "newSecurityPassword2" => array(
+                            "label" => $this->getContext()->getI18N()->__("Re-enter Security Password")
+                        )
+                    )
+                )
+            )
+        );
+
         if ($this->isResponded()) {
             $muObj = new MUserObj();
             $muObj->loadFromSession($this);
@@ -915,10 +958,10 @@ class mobileServiceActions extends sfActions
             }
 
             if ($muObj->result) {
-                echo MUserUtil::init($this)->getJson(1, $this->getFlash("successMsg"));
+                echo MUserUtil::init($this)->getJson(1, $this->getFlash("successMsg"), $jsonData);
             } else {
                 $msg = $this->getFlash("errorMsg");
-                echo MUserUtil::init($this)->updateLog($msg)->getJson(0, $msg);
+                echo MUserUtil::init($this)->updateLog($msg)->getJson(0, $msg, $jsonData);
             }
 
             return sfView::HEADER_ONLY;
@@ -927,8 +970,13 @@ class mobileServiceActions extends sfActions
                 return sfView::HEADER_ONLY;
             }
 
-            $this->getRequest()->setParameter(MUserUtil::REQ_MACT, "updateTransactionPassword");
-            return $this->forward("member", "transactionPassword");
+            if ($this->getRequestParameter("doSave") == "y") {
+                $this->getRequest()->setParameter(MUserUtil::REQ_MACT, "updateTransactionPassword");
+                return $this->forward("member", "transactionPassword");
+            } else {
+                echo MUserUtil::init($this)->getJson(0, null, $jsonData);
+                return sfView::HEADER_ONLY;
+            }
         }
     }
 
