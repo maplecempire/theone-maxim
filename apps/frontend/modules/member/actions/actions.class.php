@@ -14024,11 +14024,15 @@ Wish you all the best.
             }
             var_dump($isPeter1);*/
             //exit();
-
             // 273058 yongman
             // 1504 cnbiz1, 61 kaseong, 257250 Vincentteh remove FMC
+            // 141 Kaseong2, 261620 KASEONG04, 261621 KASEONG03, 276789 KASON1 remove FMC
             if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
-                if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
+                if (strrpos($distDB->getTreeStructure(), "|61|") === false
+                    || strrpos($distDB->getTreeStructure(), "|141|") === false
+                    || strrpos($distDB->getTreeStructure(), "|261620|") === false
+                    || strrpos($distDB->getTreeStructure(), "|261621|") === false
+                    || strrpos($distDB->getTreeStructure(), "|276789|") === false) {
                     if (strrpos($distDB->getTreeStructure(), "|257250|") === false) {
                         $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
                         if ($isPeter1 === false) { // note: three equal signs
