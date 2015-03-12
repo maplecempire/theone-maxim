@@ -135,6 +135,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("Summary"),
+                    ),
                     "account_info" => array(
                         "label" => $this->getContext()->getI18N()->__("Account Information"),
                         "value" => array(
@@ -235,6 +238,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP1 Transfer"),
+                    ),
                     "sponsor_id" => array(
                         "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
                     ),
@@ -293,6 +299,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP2 Transfer"),
+                    ),
                     "sponsor_id" => array(
                         "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
                     ),
@@ -345,6 +354,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP3 Transfer"),
+                    ),
                     "sponsor_id" => array(
                         "label" => $this->getContext()->getI18N()->__("Transfer To User Name"),
                     ),
@@ -397,6 +409,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("Convert CP2 To CP1"),
+                    ),
                     "amount_to_convert" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Amount"),
                     ),
@@ -450,6 +465,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("Convert CP3 To CP1"),
+                    ),
                     "amount_to_convert" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Amount"),
                     ),
@@ -584,6 +602,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("MT4 Withdrawal"),
+                    ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
                     ),
@@ -595,6 +616,12 @@ class mobileServiceActions extends sfActions
                     ),
                     "handling_charge_in_usd" => array(
                         "value" => $muObj->handlingChargeInUsd
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "mt4_fund_withdrawal" => array(
                         "label" => $this->getContext()->getI18N()->__("MT4 Fund Withdrawal Amount In USD"),
@@ -682,11 +709,20 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP2 Withdrawal"),
+                    ),
                     "after_handling_fee" => array(
                         "label" => $this->getContext()->getI18N()->__("After handling fee"),
                     ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
@@ -780,11 +816,20 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP3 Withdrawal"),
+                    ),
                     "after_handling_fee" => array(
                         "label" => $this->getContext()->getI18N()->__("After handling fee"),
                     ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
@@ -864,6 +909,12 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("Personal Detail"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Update"),
+                    ),
                     "fullname" => array(
                         "label" => $this->getContext()->getI18N()->__("Full Name"),
                         "value" => $muObj->distDB->getFullName()
@@ -947,6 +998,12 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "main_title" => array(
+                        "label" => $this->getContext()->getI18N()->__("Beneficiary Nominee"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Update"),
+                    ),
                     "nomineeName" => array(
                         "label" => $this->getContext()->getI18N()->__("Name"),
                         "value" => strval($muObj->distDB->getNomineeName())
@@ -989,6 +1046,9 @@ class mobileServiceActions extends sfActions
                 "change_login_password" => array(
                     "label" => $this->getContext()->getI18N()->__("Change Account login Password"),
                     "value" => array(
+                        "submit" => array(
+                            "label" => $this->getContext()->getI18N()->__("Update"),
+                        ),
                         "oldPassword" => array(
                             "label" => $this->getContext()->getI18N()->__("Old Login Password")
                         ),
@@ -1041,6 +1101,9 @@ class mobileServiceActions extends sfActions
                 "change_transaction_password" => array(
                     "label" => $this->getContext()->getI18N()->__("Change Security Password"),
                     "value" => array(
+                        "submit" => array(
+                            "label" => $this->getContext()->getI18N()->__("Update"),
+                        ),
                         "oldSecurityPassword" => array(
                             "label" => $this->getContext()->getI18N()->__("Old Security Password")
                         ),
