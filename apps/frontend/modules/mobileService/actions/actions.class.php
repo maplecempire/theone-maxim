@@ -382,6 +382,15 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "amount_to_convert" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP2 Amount"),
+                    ),
+                    "converted_amount" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP1 Converted Amount"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
                         "value" => $muObj->cp2Balance
@@ -420,6 +429,15 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "amount_to_convert" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP3 Amount"),
+                    ),
+                    "converted_amount" => array(
+                        "label" => $this->getContext()->getI18N()->__("CP1 Converted Amount"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
                         "value" => $muObj->cp3Balance
@@ -539,6 +557,9 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "usd_to_myr" => array(
                         "value" => $muObj->usdToMyr
                     ),
@@ -633,6 +654,12 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "after_handling_fee" => array(
+                        "label" => $this->getContext()->getI18N()->__("After handling fee"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
                         "value" => $muObj->cp2Balance
@@ -725,6 +752,12 @@ class mobileServiceActions extends sfActions
 
             $jsonData = array(
                 "data" => array(
+                    "after_handling_fee" => array(
+                        "label" => $this->getContext()->getI18N()->__("After handling fee"),
+                    ),
+                    "transaction_password" => array(
+                        "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
                         "value" => $muObj->cp2Balance
