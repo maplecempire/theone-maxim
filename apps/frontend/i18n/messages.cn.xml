@@ -289,6 +289,7 @@
             <trans-unit><source>Activate Trader</source><target>激活会员</target></trans-unit>
             <trans-unit><source>Old Login Password</source><target>旧登录密码</target></trans-unit>
             <trans-unit><source>New Login Password</source><target>新登录密码</target></trans-unit>
+            <trans-unit><source>Login Password</source><target>登录密码</target></trans-unit>
             <trans-unit><source>Re-enter Login Password</source><target>确认新登录密码</target></trans-unit>
             <trans-unit><source>Old Transaction Password</source><target>旧交易密码</target></trans-unit>
             <trans-unit><source>New Transaction Password</source><target>新交易密码</target></trans-unit>
@@ -673,6 +674,7 @@
             <trans-unit><source>CP2 Account</source><target>CP2 户口</target></trans-unit>
             <trans-unit><source>CP3 Account</source><target>CP3 户口</target></trans-unit>
             <trans-unit><source>RT Account</source><target>RT 户口</target></trans-unit>
+            <trans-unit><source>RP Account</source><target>RP 户口</target></trans-unit>
             <trans-unit><source>Upgrade Package</source><target>升级配套</target></trans-unit>
             <trans-unit><source>Package Upgrade History</source><target>升级配套记录表</target></trans-unit>
             <trans-unit><source>Transaction Code</source><target>交易代码</target></trans-unit>
@@ -1056,6 +1058,11 @@
             <trans-unit><source>REMITTED</source><target>已汇款</target></trans-unit>
             <trans-unit><source>Top 5 Sales Producers</source><target>全球业绩前五名</target></trans-unit>
             <trans-unit><source>Winner(s) entitled to claim only 1 challenge prize.</source><target>获奖者只能领取一次奖项</target></trans-unit>
+            <trans-unit><source>Login Password is required</source><target>需要验证登录密码</target></trans-unit>
+            <trans-unit><source>Please key in your login password</source><target>请输入登录密码</target></trans-unit>
+            <trans-unit><source>(Excluding non-working days)</source><target>（除了非工作日）</target></trans-unit>
+            <trans-unit><source>Please Apply for i-Account now.</source><target>请申请 i-Account</target></trans-unit>
+            <trans-unit><source>Please Apply for i-Account now before submit.</source><target>请在提交前申请 i-Account</target></trans-unit>
         </body>
     </file>
 </xliff>

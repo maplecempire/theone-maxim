@@ -1224,8 +1224,18 @@ class mobileServiceActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    private function isSignatureValid()
+    {
+        // TODO
+        return false;
+    }
+
     private function isValidAccess($logAccess = true)
     {
+        if ($this->getRequest()->getMethod() !== sfRequest::POST) {
+            return false;
+        }
+
         $muUtil = MUserUtil::init($this);
         $result = $muUtil->verifyMobileUser($errMsg);
 
