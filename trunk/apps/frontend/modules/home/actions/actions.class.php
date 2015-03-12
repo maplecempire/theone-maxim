@@ -308,13 +308,13 @@ class homeActions extends sfActions
 									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
 									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
 									<br><br>
-马胜金融集团公司于新西兰总部地址�?新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12�?�?1套房
-<br>电话(国际): (+64) 9925 0379 电话(新西�?: 09 925 0379
-<br>邮箱�?support@maximtrader.com
-<br><br>马胜资本有限公司是皇家控股集团Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子企业�?该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构�?
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜资本有限公司是皇家控股集团Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子企业。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
 <br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
-<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议�?
-<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入�?请根据您可以承受的损失程度理性参与投资�?在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见�?
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
 								</font>
 							</p>
 						</tr>
@@ -900,12 +900,12 @@ class homeActions extends sfActions
     {
         if ($this->getUser()->getCulture() == "cn") {
             echo '{
-                "sProcessing":   "处理�?..",
-                "sLengthMenu":   "显示 _MENU_ 项结�?,
+                "sProcessing":   "处理中...",
+                "sLengthMenu":   "显示 _MENU_ 项结果",
                 "sZeroRecords":  "没有匹配结果",
-                "sInfo":         "显示�?_START_ �?_END_ 项结果，�?_TOTAL_ �?,
-                "sInfoEmpty":    "显示�?0 �?0 项结果，�?0 �?,
-                "sInfoFiltered": "(�?_MAX_ 项结果过�?",
+                "sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
                 "sInfoPostFix":  "",
                 "sSearch":       "搜索:",
                 "sUrl":          "",
@@ -922,11 +922,11 @@ class homeActions extends sfActions
         /*else if ($this->getUser()->getCulture() == "kr") {
             echo '{
                 "sProcessing":   "処理...",
-                "sLengthMenu":   "ショ�?_MENU_ 結果",
+                "sLengthMenu":   "ショー _MENU_ 結果",
                 "sZeroRecords":  "一致する結果がない",
-                "sInfo":         "ディスプレイ _START_ �?_END_ 結果，完全に _TOTAL_ アイテム",
-                "sInfoEmpty":    "显示�?0 �?0 项结果，�?0 �?,
-                "sInfoFiltered": "(�?_MAX_ 项结果过�?",
+                "sInfo":         "ディスプレイ _START_ へ _END_ 結果，完全に _TOTAL_ アイテム",
+                "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
                 "sInfoPostFix":  "",
                 "sSearch":       "搜索:",
                 "sUrl":          "",
