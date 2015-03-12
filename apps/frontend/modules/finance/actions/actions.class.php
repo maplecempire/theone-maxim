@@ -159,7 +159,7 @@ class financeActions extends sfActions
             "aaData" => $arr
         );
         if ($this->getRequestParameter("t_columns")) {
-            $output["t_columns"] = $this->getRequestParameter("t_columns");
+            $output["t_columns"] = json_decode($this->getRequestParameter("t_columns"));
         }
         echo json_encode($output);
 
@@ -251,7 +251,7 @@ class financeActions extends sfActions
             "aaData" => $arr
         );
         if ($this->getRequestParameter("t_columns")) {
-            $output["t_columns"] = $this->getRequestParameter("t_columns");
+            $output["t_columns"] = json_decode($this->getRequestParameter("t_columns"));
         }
         echo json_encode($output);
 
@@ -1212,7 +1212,7 @@ class financeActions extends sfActions
             "aaData" => $arr
         );
         if ($this->getRequestParameter("t_columns")) {
-            $output["t_columns"] = $this->getRequestParameter("t_columns");
+            $output["t_columns"] = json_decode($this->getRequestParameter("t_columns"));
         }
         echo json_encode($output);
 
@@ -1463,7 +1463,7 @@ class financeActions extends sfActions
             "aaData" => $arr
         );
         if ($this->getRequestParameter("t_columns")) {
-            $output["t_columns"] = $this->getRequestParameter("t_columns");
+            $output["t_columns"] = json_decode($this->getRequestParameter("t_columns"));
         }
         echo json_encode($output);
 
@@ -1546,7 +1546,7 @@ class financeActions extends sfActions
             "aaData" => $arr
         );
         if ($this->getRequestParameter("t_columns")) {
-            $output["t_columns"] = $this->getRequestParameter("t_columns");
+            $output["t_columns"] = json_decode($this->getRequestParameter("t_columns"));
         }
         echo json_encode($output);
 
