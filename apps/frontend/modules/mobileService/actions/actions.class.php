@@ -250,6 +250,15 @@ class mobileServiceActions extends sfActions
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
                     ),
+                    "optional" => array(
+                        "label" => $this->getContext()->getI18N()->__("(optional)"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
+                    ),
                     "cp1_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP1 Balance"),
                         "value" => $muObj->cp1Balance
@@ -293,11 +302,14 @@ class mobileServiceActions extends sfActions
                     "transfer_amount" => array(
                         "label" => $this->getContext()->getI18N()->__("Transfer CP2 Amount"),
                     ),
-                    "reference_remark" => array(
-                        "label" => $this->getContext()->getI18N()->__("Reference Remark"),
-                    ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
@@ -342,11 +354,14 @@ class mobileServiceActions extends sfActions
                     "transfer_amount" => array(
                         "label" => $this->getContext()->getI18N()->__("Transfer CP3 Amount"),
                     ),
-                    "reference_remark" => array(
-                        "label" => $this->getContext()->getI18N()->__("Reference Remark"),
-                    ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
@@ -390,6 +405,12 @@ class mobileServiceActions extends sfActions
                     ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp2_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP2 Balance"),
@@ -437,6 +458,12 @@ class mobileServiceActions extends sfActions
                     ),
                     "transaction_password" => array(
                         "label" => $this->getContext()->getI18N()->__("Security Password"),
+                    ),
+                    "submit" => array(
+                        "label" => $this->getContext()->getI18N()->__("Submit"),
+                    ),
+                    "Note" => array(
+                        "label" => $this->getContext()->getI18N()->__("Note"),
                     ),
                     "cp3_balance" => array(
                         "label" => $this->getContext()->getI18N()->__("CP3 Balance"),
@@ -624,6 +651,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_6", "true");
         $this->getRequest()->setParameter("bSortable_7", "true");
         $this->getRequest()->setParameter("bSortable_8", "true");
+        $this->getRequest()->setParameter("trColumns", "true");
 
         return $this->forward("finance", "mt4WithdrawalList");
     }
