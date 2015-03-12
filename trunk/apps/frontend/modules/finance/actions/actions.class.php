@@ -158,8 +158,8 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
-        if ($this->getRequestParameter("tColumns")) {
-            $output["tColumns"] = $this->getRequestParameter("tColumns");
+        if ($this->getRequestParameter("t_columns")) {
+            $output["t_columns"] = $this->getRequestParameter("t_columns");
         }
         echo json_encode($output);
 
@@ -250,8 +250,8 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
-        if ($this->getRequestParameter("tColumns")) {
-            $output["tColumns"] = $this->getRequestParameter("tColumns");
+        if ($this->getRequestParameter("t_columns")) {
+            $output["t_columns"] = $this->getRequestParameter("t_columns");
         }
         echo json_encode($output);
 
@@ -1211,6 +1211,9 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
+        if ($this->getRequestParameter("t_columns")) {
+            $output["t_columns"] = $this->getRequestParameter("t_columns");
+        }
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;
@@ -1459,6 +1462,9 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
+        if ($this->getRequestParameter("t_columns")) {
+            $output["t_columns"] = $this->getRequestParameter("t_columns");
+        }
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;
@@ -1539,6 +1545,9 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
+        if ($this->getRequestParameter("t_columns")) {
+            $output["t_columns"] = $this->getRequestParameter("t_columns");
+        }
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;

@@ -532,7 +532,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_3", "true");
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
-        $this->getRequest()->setParameter("tColumns", json_encode(array(
+        $this->getRequest()->setParameter("t_columns", json_encode(array(
                 "created_on" => $this->getContext()->getI18N()->__('Date'),
                 "_DRB" => $this->getContext()->getI18N()->__('Direct Referrer Bonus'),
                 "_GDB" => $this->getContext()->getI18N()->__('Group Development Bonus'),
@@ -578,7 +578,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_3", "true");
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
-        $this->getRequest()->setParameter("tColumns", json_encode(array(
+        $this->getRequest()->setParameter("t_columns", json_encode(array(
                 "created_on" => $this->getContext()->getI18N()->__('Date'),
                 "credit" => $this->getContext()->getI18N()->__('Credit'),
                 "debit" => $this->getContext()->getI18N()->__('Debit'),
@@ -696,6 +696,18 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_7", "true");
         $this->getRequest()->setParameter("bSortable_8", "true");
         $this->getRequest()->setParameter("trColumns", "true");
+        $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "dist_id" => "",
+                "currency_code" => $this->getContext()->getI18N()->__('Currency Code'),
+                "created_on" => $this->getContext()->getI18N()->__('Date'),
+                "amount_requested" => $this->getContext()->getI18N()->__('Amount Requested (USD)'),
+                "handling_fee" => $this->getContext()->getI18N()->__('Bank Charges (USD)'),
+                "grand_amount" => $this->getContext()->getI18N()->__('Grand Amount (USD)'),
+                "payment_type" => $this->getContext()->getI18N()->__('Payment Type'),
+                "status_code" => $this->getContext()->getI18N()->__('Status'),
+                "remarks" => $this->getContext()->getI18N()->__('Remarks')
+            ))
+        );
 
         return $this->forward("finance", "mt4WithdrawalList");
     }
@@ -803,6 +815,16 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("bSortable_6", "true");
+        $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "dist_id" => "",
+                "deduct" => $this->getContext()->getI18N()->__('Withdrawal'),
+                "amount" => $this->getContext()->getI18N()->__('Amount'),
+                "bank_in_to" => $this->getContext()->getI18N()->__('Credit To'),
+                "status_code" => $this->getContext()->getI18N()->__('Status'),
+                "remarks" => $this->getContext()->getI18N()->__('Remarks'),
+                "created_on" => $this->getContext()->getI18N()->__('Date')
+            ))
+        );
 
         return $this->forward("finance", "ecashWithdrawalList");
     }
@@ -910,6 +932,16 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("bSortable_6", "true");
+        $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "dist_id" => "",
+                "deduct" => $this->getContext()->getI18N()->__('Withdrawal'),
+                "amount" => $this->getContext()->getI18N()->__('Amount'),
+                "bank_in_to" => $this->getContext()->getI18N()->__('Credit To'),
+                "status_code" => $this->getContext()->getI18N()->__('Status'),
+                "remarks" => $this->getContext()->getI18N()->__('Remarks'),
+                "created_on" => $this->getContext()->getI18N()->__('Date')
+            ))
+        );
 
         return $this->forward("finance", "cp3WithdrawalList");
     }
