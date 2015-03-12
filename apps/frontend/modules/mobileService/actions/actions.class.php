@@ -533,6 +533,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "main_title" => $this->getContext()->getI18N()->__('Commission'),
                 "created_on" => $this->getContext()->getI18N()->__('Date'),
                 "_DRB" => $this->getContext()->getI18N()->__('Direct Referrer Bonus'),
                 "_GDB" => $this->getContext()->getI18N()->__('Group Development Bonus'),
@@ -579,6 +580,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "main_title" => $this->getContext()->getI18N()->__('Commission Details'),
                 "created_on" => $this->getContext()->getI18N()->__('Date'),
                 "credit" => $this->getContext()->getI18N()->__('Credit'),
                 "debit" => $this->getContext()->getI18N()->__('Debit'),
@@ -697,6 +699,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_8", "true");
         $this->getRequest()->setParameter("trColumns", "true");
         $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "main_title" => $this->getContext()->getI18N()->__('MT4 Withdrawal Status'),
                 "dist_id" => "",
                 "currency_code" => $this->getContext()->getI18N()->__('Currency Code'),
                 "created_on" => $this->getContext()->getI18N()->__('Date'),
@@ -772,7 +775,7 @@ class mobileServiceActions extends sfActions
                             "3. " . $this->getContext()->getI18N()->__("Processing time will be at least 3 days") . "<br/>" .
                             "4. " . $this->getContext()->getI18N()->__("Payout will be by the 15th of each month") . "<br/>" .
                             "5. " . $this->getContext()->getI18N()->__("Handling Fee USD60 or 5% whichever is higher") . "<br/>" .
-                            "6. " . $this->getContext()->getI18N()->__("All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges") . "<br/>" .
+                            "6. " . $this->getContext()->getI18N()->__("All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges") . "<br/>" .
                             "7. " . $this->getContext()->getI18N()->__("Payout time for monthly CP2 withdrawals to be credited to your account:") . "<br/>" .
                             "&nbsp;&nbsp;a. " . $this->getContext()->getI18N()->__("Local bank accounts - by 25th") . " " . $this->getContext()->getI18N()->__("(Excluding non-working days)") . "<br/>" .
                             "&nbsp;&nbsp;b. " . $this->getContext()->getI18N()->__("i-Account - by 11th") . " " . $this->getContext()->getI18N()->__("(Excluding non-working days)")
@@ -816,6 +819,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("bSortable_6", "true");
         $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "main_title" => $this->getContext()->getI18N()->__('CP2 Withdrawal Status'),
                 "dist_id" => "",
                 "deduct" => $this->getContext()->getI18N()->__('Withdrawal'),
                 "amount" => $this->getContext()->getI18N()->__('Amount'),
@@ -889,7 +893,7 @@ class mobileServiceActions extends sfActions
                             "3. " . $this->getContext()->getI18N()->__("Processing time will be at least 3 days") . "<br/>" .
                             "4. " . $this->getContext()->getI18N()->__("Payout will be by the 15th of each month") . "<br/>" .
                             "5. " . $this->getContext()->getI18N()->__("Handling Fee is USD30") . "<br/>" .
-                            "6. " . $this->getContext()->getI18N()->__("All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges") . "<br/>" .
+                            "6. " . $this->getContext()->getI18N()->__("All withdrawals shall be paid out based on current days' prevailing exchange rate and subject to local bank charges") . "<br/>" .
                             "7. " . $this->getContext()->getI18N()->__("Payout time for monthly CP3 withdrawals to be credited to your account:") . "<br/>" .
                             "&nbsp;&nbsp;a. " . $this->getContext()->getI18N()->__("Local bank accounts - by 25th") . " " . $this->getContext()->getI18N()->__("(Excluding non-working days)") . "<br/>" .
                             "&nbsp;&nbsp;b. " . $this->getContext()->getI18N()->__("i-Account - by 11th") . " " . $this->getContext()->getI18N()->__("(Excluding non-working days)")
@@ -933,6 +937,7 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_5", "true");
         $this->getRequest()->setParameter("bSortable_6", "true");
         $this->getRequest()->setParameter("t_columns", json_encode(array(
+                "main_title" => $this->getContext()->getI18N()->__('CP3 Withdrawal Status'),
                 "dist_id" => "",
                 "deduct" => $this->getContext()->getI18N()->__('Withdrawal'),
                 "amount" => $this->getContext()->getI18N()->__('Amount'),
