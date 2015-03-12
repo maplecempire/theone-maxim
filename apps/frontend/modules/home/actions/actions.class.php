@@ -592,6 +592,14 @@ class homeActions extends sfActions
 
             //liuhengping	303690      20150225 0725pm different from log
             //qazwsx	323067          20150225 0725pm different from log
+            // 277451	dps1000   tony group unlock
+//277452	qt100        tony group unlock
+//290609	wh002         tony group unlock
+//274885	wlm1002         tony group unlock
+//271018	zsf629           tony group unlock
+//300542	zztd213             tony group unlock
+//300546	zztd2131          tony group unlock
+//300549	zztd2132            tony group unlock
             if ($existUser) {
                 if ($existUser->getUserId() == 261725 ||
                         $existUser->getUserId() == 306853 ||
