@@ -532,6 +532,15 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_3", "true");
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
+        $this->getRequest()->setParameter("tColumns", json_encode(array(
+                "created_on" => $this->getContext()->getI18N()->__('Date'),
+                "_DRB" => $this->getContext()->getI18N()->__('Direct Referrer Bonus'),
+                "_GDB" => $this->getContext()->getI18N()->__('Group Development Bonus'),
+                "_PIPS_BONUS" => $this->getContext()->getI18N()->__('Generation Bonus'),
+                "_SPECIAL_BONUS" => $this->getContext()->getI18N()->__('Special Bonus'),
+                "SUB_TOTAL" => $this->getContext()->getI18N()->__('Sub Total')
+            ))
+        );
 
         return $this->forward("finance", "bonusDetailLogList");
     }
@@ -548,7 +557,7 @@ class mobileServiceActions extends sfActions
         $dDate = $this->getRequestParameter("fdate", false);
 
         if (!$dAction || !$dDate) {
-            $msg = $this->action->getContext()->getI18N()->__("Invalid action: missing required parameters.");
+            $msg = $this->getContext()->getI18N()->__("Invalid action: missing required parameters.");
             echo MUserUtil::init($this)->updateLog($msg)->getJson(0, $msg);
             return sfView::HEADER_ONLY;
         }
@@ -569,6 +578,14 @@ class mobileServiceActions extends sfActions
         $this->getRequest()->setParameter("bSortable_3", "true");
         $this->getRequest()->setParameter("bSortable_4", "true");
         $this->getRequest()->setParameter("bSortable_5", "true");
+        $this->getRequest()->setParameter("tColumns", json_encode(array(
+                "created_on" => $this->getContext()->getI18N()->__('Date'),
+                "credit" => $this->getContext()->getI18N()->__('Credit'),
+                "debit" => $this->getContext()->getI18N()->__('Debit'),
+                "balance" => $this->getContext()->getI18N()->__('Balance'),
+                "remark" => $this->getContext()->getI18N()->__('Remarks')
+            ))
+        );
 
         return $this->forward("finance", "bonusDetailList");
     }
@@ -1151,8 +1168,8 @@ class mobileServiceActions extends sfActions
 
     public function executeCheckPasswordExpiry()
     {
-        $username = $this->action->getRequestParameter(MUserUtil::REQ_MUSER);
-        $secret = $this->action->getRequestParameter(MUserUtil::REQ_MSECR);
+        $username = $this->getRequestParameter(MUserUtil::REQ_MUSER);
+        $secret = $this->getRequestParameter(MUserUtil::REQ_MSECR);
         $muUtil = MUserUtil::init($this);
         $result = 0;
 
