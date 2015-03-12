@@ -158,6 +158,9 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
+        if ($this->getRequestParameter("tColumns")) {
+            $output["tColumns"] = $this->getRequestParameter("tColumns");
+        }
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;
@@ -247,6 +250,9 @@ class financeActions extends sfActions
             "iTotalDisplayRecords" => $totalFilteredRecords,
             "aaData" => $arr
         );
+        if ($this->getRequestParameter("tColumns")) {
+            $output["tColumns"] = $this->getRequestParameter("tColumns");
+        }
         echo json_encode($output);
 
         return sfView::HEADER_ONLY;
