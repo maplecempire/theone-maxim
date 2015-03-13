@@ -94,6 +94,17 @@ class marketingListActions extends sfActions
 
     public function executeCommissionList()
     {
+        if ($this->getRequestParameter('filterRemark') == "") {
+            $output = array(
+                "sEcho" => intval($this->getRequestParameter('sEcho')),
+                "iTotalRecords" => 0,
+                "iTotalDisplayRecords" => 0,
+                "aaData" => array()
+            );
+            echo json_encode($output);
+            return sfView::HEADER_ONLY;
+        }
+
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
         $sColumns = str_replace("leader.distributor_code", "leader.distributor_code as leader_dist_code", $sColumns);
