@@ -1505,9 +1505,11 @@ class mobileServiceActions extends sfActions
         $result = $muUtil->verifyMobileUser($errMsg);
 
         // Check signature upon each request.
-        if (!$muUtil->isPostSignatureValid()) {
-            $errMsg = $this->getContext()->getI18N()->__("Invalid action: security data mismatch.");
-            $result = false;
+        if ($this->getRequestParameter(MUserUtil::REQ_MSIGN)) {
+            if (!$muUtil->isPostSignatureValid()) {
+                $errMsg = $this->getContext()->getI18N()->__("Invalid action: security data mismatch.");
+                $result = false;
+            }
         }
 
         if ($logAccess) {
