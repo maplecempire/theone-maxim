@@ -73,7 +73,7 @@ class MUserUtil
 
         if (!$existUser) {
             // AppUser not found.
-            $errMsg = $this->action->getContext()->getI18N()->__("Invalid action: user not found.");
+            $errMsg = $this->action->getContext()->getI18N()->__("Invalid user or user not found.");
             return false;
         }
 
@@ -95,7 +95,7 @@ class MUserUtil
 
         if (!$existDist) {
             // Distributor not found.
-            $errMsg = $this->action->getContext()->getI18N()->__("Invalid action: user not found.");
+            $errMsg = $this->action->getContext()->getI18N()->__("Invalid user or user not found.");
             return false;
         }
 

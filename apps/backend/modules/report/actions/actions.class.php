@@ -10,6 +10,10 @@
  */
 class reportActions extends sfActions
 {
+    public function executeMobileActivityLog()
+    {
+    }
+
     public function executeMatchMbsFromExcel()
     {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "maxim-trader-2nd-annual-convention-2015-02-11.xls";

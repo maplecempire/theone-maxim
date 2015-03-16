@@ -5758,7 +5758,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($muUtil->isMobileUser()) {
             $result = ($arr == "" ? 0 : 1);
-            $msg = ($result !== 1 ? $this->getContext()->getI18N()->__("Invalid receiver.") : "");
+            $msg = ($result !== 1 ? $this->getContext()->getI18N()->__("Invalid Member ID.") : "");
             echo $muUtil->updateLog($msg)->getJson($result, $msg, array("data" => $arr));
             return sfView::HEADER_ONLY;
         }
@@ -9152,7 +9152,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $errorMsg = $this->getContext()->getI18N()->__("Invalid Security password");
 
             } elseif ($this->getRequestParameter('bankInTo') == "") {
-                $errorMsg = $this->getContext()->getI18N()->__("Invalid Action");
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid action.");
 
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
@@ -9429,7 +9429,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $errorMsg = $this->getContext()->getI18N()->__("Invalid Security password");
 
             } elseif ($this->getRequestParameter('bankInTo') == "") {
-                $errorMsg = $this->getContext()->getI18N()->__("Invalid Action");
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid action.");
 
             } elseif ($withdrawAmount > 0) {
                 $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
@@ -9560,7 +9560,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/mt4Withdrawal", 0, $msg);
             } else if (!$this->getRequestParameter('mt4Id')) {
-                $msg = $this->getContext()->getI18N()->__("Invalid MT4 ID.");
+                $msg = $this->getContext()->getI18N()->__("Invalid MT4 ID");
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/mt4Withdrawal", 0, $msg);
             } else {
