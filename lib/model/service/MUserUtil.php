@@ -146,19 +146,24 @@ class MUserUtil
         return true;
     }
 
-    public function isPostSignatureValid()
+    public function isPostSignatureValid(&$debug = null)
     {
         $msign = $this->action->getRequestParameter(MUserUtil::REQ_MSIGN);
 
         if (strlen($msign)) {
+            $postParam = $this->action->getRequest()->getParameterHolder()->getAll();
+//            ksort($postParam);
             $tempstr = "";
+            $tempstrk = "";
+            $skip = array(MUserUtil::REQ_MSIGN, "module", "action");
 
-            foreach ($this->action->getRequest()->getParameterHolder()->getAll() as $key => $val) {
-                if ($key !== MUserUtil::REQ_MSIGN) {
+            foreach ($postParam as $key => $val) {
+                if (!in_array($key, $skip)) {
+                    $tempstrk .= $key . "|";
                     $tempstr .= $val;
                 }
             }
-
+            $debug = md5($tempstr . MUserUtil::SECRET_CODE) . " | " . $tempstrk;
             return md5($tempstr . MUserUtil::SECRET_CODE) === $msign;
         }
 
