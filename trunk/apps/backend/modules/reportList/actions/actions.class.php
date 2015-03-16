@@ -10,6 +10,97 @@
  */
 class reportListActions extends sfActions
 {
+    public function executeMobileActivityLogList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " FROM app_mobile_log a
+            INNER JOIN app_user b ON b.user_id = a.user_id ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1 ";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterUsername') != "") {
+            $sWhere .= " AND b.username LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterUsername')) . "%'";
+        }
+        if ($this->getRequestParameter('filterIp') != "") {
+            $sWhere .= " AND a.access_ip LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullname')) . "%'";
+        }
+        if ($this->getRequestParameter('filterAction') != "") {
+            $sWhere .= " AND a.trans_action LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterAction')) . "%'";
+        }
+        if ($this->getRequestParameter('filterData') != "") {
+            $sWhere .= " AND a.trans_data LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterData')) . "%'";
+        }
+        if ($this->getRequestParameter('filterRemark') != "") {
+            $sWhere .= " AND a.remark LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterRemark')) . "%'";
+        }
+        if ($this->getRequestParameter('filterDateFrom') != "") {
+            $sWhere .= " AND a.created_on >= '" . mysql_real_escape_string($this->getRequestParameter('filterDateFrom')) . " 00:00:00'";
+        }
+        if ($this->getRequestParameter('filterDateTo') != "") {
+            $sWhere .= " AND a.created_on <= '" . mysql_real_escape_string($this->getRequestParameter('filterDateTo')) . " 23:59:59'";
+        }
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['log_id'] == null ? "" : $resultArr['log_id'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['username'] == null ? "" : $resultArr['username'],
+                $resultArr['access_ip'] == null ? "" : $resultArr['access_ip'],
+                $resultArr['trans_action'] == null ? "" : $resultArr['trans_action'],
+                $resultArr['trans_data'] == null ? "" : $resultArr['trans_data'],
+                $resultArr['remark'] == null ? "" : $resultArr['remark'],
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeConvertEcashToEpointList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

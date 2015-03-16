@@ -46,5 +46,9 @@ totalVolumeTraded:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_TOTAL_VOLUME_TRADED ]]
 
+mobileActivityLog:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_REPORT_MOBILE_ACTIVITY_LOG ]]
+
 all:
   is_secure:  off        # off is the default value anyway

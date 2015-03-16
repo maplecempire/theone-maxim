@@ -849,6 +849,7 @@
             <trans-unit><source>Security Password updated</source><target>更新交易密码</target></trans-unit>
             <trans-unit><source>Your CP3 withdrawal has been submitted.</source><target>您的CP3兑现申请已提交成功</target></trans-unit>
             <trans-unit><source>Your CP2 withdrawal has been submitted.</source><target>您的CP2兑现申请已提交成功</target></trans-unit>
+            <trans-unit><source>Your MT4 withdrawal has been submitted.</source><target>您的MT4兑现申请已提交成功</target></trans-unit>
             <trans-unit><source>Your MT4 Fund Reload has been submitted.</source><target>您的MT4基金充值已提交成功</target></trans-unit>
             <trans-unit><source>CP2 convert to CP1 successful.</source><target>CP2转换到CP1成功</target></trans-unit>
             <trans-unit><source>CP3 convert to CP1 successful.</source><target>CP3转换到CP1成功</target></trans-unit>
@@ -1063,9 +1064,28 @@
             <trans-unit><source>(Excluding non-working days)</source><target>（除了非工作日）</target></trans-unit>
             <trans-unit><source>Please Apply for i-Account now.</source><target>请申请 i-Account</target></trans-unit>
             <trans-unit><source>Please Apply for i-Account now before submit.</source><target>请在提交前申请 i-Account</target></trans-unit>
-            <trans-unit><source>Invalid receiver.</source><target>无效的接收者</target></trans-unit>
+            <trans-unit><source>Invalid Member ID.</source><target>无效的会员账号</target></trans-unit>
+            <trans-unit><source>Invalid User Name.</source><target>无效的用户名</target></trans-unit>
             <trans-unit><source>(optional)</source><target>（非必要）</target></trans-unit>
             <trans-unit><source>Note</source><target>注</target></trans-unit>
+            <trans-unit><source>You do not have the right to proceed this action.</source><target>您的账号无法进行此操作</target></trans-unit>
+            <trans-unit><source>Invalid action: not allowed to access this feature.</source><target>您的账号无法进行此操作</target></trans-unit>
+            <trans-unit><source>CP1 Transfer temporary out of service.</source><target>CP1转账暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>CP2 Transfer temporary out of service.</source><target>CP2转账暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>CP3 Transfer temporary out of service.</source><target>CP3转账暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>Convert CP2 To CP1 temporary out of service.</source><target>CP2转换为CP1暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>Convert CP3 To CP1 temporary out of service.</source><target>CP3转换为CP1暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>CP2 Withdrawal temporary out of service.</source><target>CP2兑现暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>CP3 Withdrawal temporary out of service.</source><target>CP3兑现暂时无法提供服务</target></trans-unit>
+            <trans-unit><source>You are not allowed to use this bank. Please select another options.</source><target>您不能使用此银行，请选择其它选项</target></trans-unit>
+            <trans-unit><source>Invalid user or user not found.</source><target>无效的账号，或账号不存在</target></trans-unit>
+            <trans-unit><source>Invalid login password.</source><target>登入密码不正确</target></trans-unit>
+            <trans-unit><source>Invalid transaction password.</source><target>安全密码不正确</target></trans-unit>
+            <trans-unit><source>Invalid action: security data mismatch.</source><target>无效的操作：安全验证失败</target></trans-unit>
+            <trans-unit><source>Invalid action: no data received from server.</source><target>无效的操作：与服务器失联</target></trans-unit>
+            <trans-unit><source>Invalid action: missing required parameters.</source><target>无效的操作：需要的数据不完整</target></trans-unit>
+            <trans-unit><source>Invalid action: account status is not activated.</source><target>无效的操作：账号状态未被激活</target></trans-unit>
+            <trans-unit><source>Invalid action: account password is expired.</source><target>无效的操作：账号密码已过期、失效</target></trans-unit>
         </body>
     </file>
 </xliff>
