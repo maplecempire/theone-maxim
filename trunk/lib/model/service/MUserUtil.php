@@ -152,7 +152,7 @@ class MUserUtil
 
         if (strlen($msign)) {
             $postParam = $this->action->getRequest()->getParameterHolder()->getAll();
-//            ksort($postParam);
+            ksort($postParam);
             $tempstr = "";
             $tempstrk = "";
             $skip = array(MUserUtil::REQ_MSIGN, "module", "action");
