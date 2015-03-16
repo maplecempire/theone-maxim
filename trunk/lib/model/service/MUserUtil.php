@@ -7,6 +7,7 @@ class MUserUtil
 {
     const REQ_MUSER = "muser";
     const REQ_MSECR = "msc";
+    const REQ_MSIGN = "msign";
     const REQ_MLANG = "mlang";
     const REQ_MLOG_ID = "m@logid";
     const REQ_MACT = "m@act";
@@ -143,6 +144,25 @@ class MUserUtil
         $this->action->getUser()->setCulture($lang);
 
         return true;
+    }
+
+    public function isPostSignatureValid()
+    {
+        $msign = $this->action->getRequestParameter(MUserUtil::REQ_MSIGN);
+
+        if (strlen($msign)) {
+            $tempstr = "";
+
+            foreach ($this->action->getRequest()->getParameterHolder()->getAll() as $key => $val) {
+                if ($key !== MUserUtil::REQ_MSIGN) {
+                    $tempstr .= $val;
+                }
+            }
+
+            return md5($tempstr . MUserUtil::SECRET_CODE) === $msign;
+        }
+
+        return false;
     }
 
     public function getJson($result = 0, $message = null, $data = null)

@@ -1495,12 +1495,6 @@ class mobileServiceActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
-    private function isSignatureValid()
-    {
-        // TODO
-        return false;
-    }
-
     private function isValidAccess($logAccess = true)
     {
         if ($this->getRequest()->getMethod() !== sfRequest::POST) {
@@ -1509,6 +1503,12 @@ class mobileServiceActions extends sfActions
 
         $muUtil = MUserUtil::init($this);
         $result = $muUtil->verifyMobileUser($errMsg);
+
+        // Check signature upon each request.
+        if (!$muUtil->isPostSignatureValid()) {
+            $errMsg = $this->getContext()->getI18N()->__("Invalid action: security data mismatch.");
+            $result = false;
+        }
 
         if ($logAccess) {
             // Log mobile access to database.
