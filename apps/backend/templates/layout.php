@@ -513,6 +513,15 @@ $(function() {
                     --><?php //} ?>
 
                     <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_ANNOUNCEMENT, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                        <a href="<?php echo url_for('marketing/announcementList') ?>" title="Announcement">
+                            <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                                 border="0">
+                            &nbsp;<?php echo __('Announcement'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
+                    <?php
                     if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_CUSTOMER_ENQUIRY, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/customerEnquiryList') ?>" title="Customer Enquiry">
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
