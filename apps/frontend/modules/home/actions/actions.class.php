@@ -609,7 +609,6 @@ class homeActions extends sfActions
                         $existUser->getUserId() == 292178 ||
                         $existUser->getUserId() == 322763 ||
                         $existUser->getUserId() == 323061 ||
-                        $existUser->getUserId() == 261725 ||
                         $existUser->getUserId() == 322763 ||
                         $existUser->getUserId() == 323018 ||
                         $existUser->getUserId() == 323022 ||
