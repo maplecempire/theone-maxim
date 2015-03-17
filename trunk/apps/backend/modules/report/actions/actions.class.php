@@ -241,6 +241,15 @@ class reportActions extends sfActions
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
 
+        $leaderSummaryArr = array();
+        for ($i = 0; $i < count($leaderArrs); $i++) {
+            $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+            if ($dist) {
+                $leaderSummaryArr[$dist->getDistributorCode()] = 0;
+            }
+        }
+        //var_dump($leaderArr);
+        //exit();
         $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
@@ -260,6 +269,7 @@ class reportActions extends sfActions
                     if ($dist) {
                         $leader = $dist->getDistributorCode();
                         $leaderId = $dist->getDistributorId();
+                        $leaderSummaryArr[$leader] = $leaderSummaryArr[$leader] + 1;
                     }
                     break;
                 }
@@ -272,6 +282,16 @@ class reportActions extends sfActions
         }
         $str .= "<table>";
         print_r($str);
+        print_r("<br><br><br>");
+        print_r("<table>");
+        for ($i = 0; $i < count($leaderArrs); $i++) {
+            $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+            if ($leaderSummaryArr[$dist->getDistributorCode()] == 0) {
+                continue;
+            }
+            print_r("<tr><td>".$dist->getDistributorCode()."</td><td>".$leaderSummaryArr[$dist->getDistributorCode()]."</td></tr>");
+        }
+        print_r("</table>");
         print_r("executeGoldCoin2 Done");
         return sfView::HEADER_ONLY;
     }
