@@ -200,7 +200,7 @@ class reportActions extends sfActions
             if ($distDB['total_count'] < 2) {
                 continue;
             }
-            $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
+            $appUser = AppUserPeer::retrieveByPK($distDB['user_id']);
             if ($appUser->getStatusCode() != "ACTIVE") {
                 print_r("=============".$distDB->getDistributorCode());
                 continue;
@@ -244,7 +244,7 @@ class reportActions extends sfActions
         $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
-            $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
+            $appUser = AppUserPeer::retrieveByPK($distDB['user_id']);
             if ($appUser->getStatusCode() != "ACTIVE") {
                 print_r("=============".$distDB->getDistributorCode());
                 continue;
@@ -2110,7 +2110,7 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
     function getTotalSponsor($distributorId, $dateFrom, $dateTo, $packageId, $packageAmount)
     {
         $query = "SELECT COUNT(dist.upline_dist_id) as total_count, uplinedist.distributor_id, uplinedist.distributor_code, uplinedist.full_name
-                        , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure
+                        , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure, dist.user_id
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_distributor uplinedist ON uplinedist.distributor_id = dist.upline_dist_id
                         LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
