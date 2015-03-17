@@ -58,5 +58,13 @@ superIbList:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_PLACEMENT_TREE ]]
 
+announcementList:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_ANNOUNCEMENT ]]
+
+announcementDetail:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_ANNOUNCEMENT ]]
+
 all:
   is_secure:  off        # off is the default value anyway
