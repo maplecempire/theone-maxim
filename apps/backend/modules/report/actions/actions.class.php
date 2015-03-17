@@ -200,6 +200,11 @@ class reportActions extends sfActions
             if ($distDB['total_count'] < 2) {
                 continue;
             }
+            $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
+            if ($appUser->getStatusCode() != "ACTIVE") {
+                print_r("=============".$distDB->getDistributorCode());
+                continue;
+            }
             //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
             $leaderId = 0;
             $leader = "";
@@ -239,6 +244,11 @@ class reportActions extends sfActions
         $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         $idx = 1;
         foreach ($distDBs as $distDB) {
+            $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
+            if ($appUser->getStatusCode() != "ACTIVE") {
+                print_r("=============".$distDB->getDistributorCode());
+                continue;
+            }
             $leaderId = 0;
             $leader = "";
             for ($i = 0; $i < count($leaderArrs); $i++) {
