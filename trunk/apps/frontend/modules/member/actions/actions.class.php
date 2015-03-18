@@ -14026,7 +14026,7 @@ Wish you all the best.
             //exit();
             // 273058 yongman
             // 1504 cnbiz1, 61 kaseong, 257250 Vincentteh remove FMC
-            // 141 Kaseong2, 261620 KASEONG04, 261621 KASEONG03, 276789 KASON1 remove FMC
+            // 141 Kaseong2, 261620 KASEONG04, 261621 KASEONG03, 276789 KASON1, 279103 fukuoka04 remove FMC
             if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
                 if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
                     if (strrpos($distDB->getTreeStructure(), "|141|") === false) {
@@ -14034,27 +14034,29 @@ Wish you all the best.
                             if (strrpos($distDB->getTreeStructure(), "|261621|") === false) {
                                 if (strrpos($distDB->getTreeStructure(), "|276789|") === false) {
                                     if (strrpos($distDB->getTreeStructure(), "|257250|") === false) {
-                                        $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
-                                        if ($isPeter1 === false) { // note: three equal signs
-                                            $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
-                                            if ($isLadyConquer === false) { // note: three equal signs
-                                                $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
-                                                if ($isVivian === false) { // note: three equal signs
-                                                    $pos = strrpos($distDB->getTreeStructure(), "|60|");
-                                                    if ($pos === false) { // note: three equal signs
-                                                        $isYongman = strrpos($distDB->getTreeStructure(), "|273058|");
-                                                        if ($isYongman === false) { // note: three equal signs
+                                        if (strrpos($distDB->getTreeStructure(), "|279103|") === false) {
+                                            $isPeter1 = strrpos($distDB->getTreeStructure(), "|15|");
+                                            if ($isPeter1 === false) { // note: three equal signs
+                                                $isLadyConquer = strrpos($distDB->getTreeStructure(), "|269293|");
+                                                if ($isLadyConquer === false) { // note: three equal signs
+                                                    $isVivian = strrpos($distDB->getTreeStructure(), "|682|");
+                                                    if ($isVivian === false) { // note: three equal signs
+                                                        $pos = strrpos($distDB->getTreeStructure(), "|60|");
+                                                        if ($pos === false) { // note: three equal signs
+                                                            $isYongman = strrpos($distDB->getTreeStructure(), "|273058|");
+                                                            if ($isYongman === false) { // note: three equal signs
 
+                                                            } else {
+                                                                $this->hasFmcCharges = true;
+                                                            }
                                                         } else {
                                                             $this->hasFmcCharges = true;
                                                         }
-                                                    } else {
-                                                        $this->hasFmcCharges = true;
                                                     }
                                                 }
+                                            } else {
+                                                $this->hasFmcCharges = true;
                                             }
-                                        } else {
-                                            $this->hasFmcCharges = true;
                                         }
                                     }
                                 }
