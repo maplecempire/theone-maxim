@@ -406,6 +406,44 @@ class financeActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeUpdateDistPairing20141231()
+    {
+        $distId = $this->getRequestParameter('distId');
+        $distDB = MlmDistributorPeer::retrieveByPK($distId);
+
+        print_r("======================================================");
+        print_r("dist code=".$distDB->getDistributorId());
+        print_r("<br>");
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingLedger20150131Peer::DIST_ID, $distId);
+        $c->add(MlmDistPairingLedger20150131Peer::LEFT_RIGHT, Globals::PLACEMENT_LEFT);
+        $c->addAscendingOrderByColumn(MlmDistPairingLedger20150131Peer::CREATED_ON);
+        $sponsorDistPairingLedgerDBs = MlmDistPairingLedger20150131Peer::doSelect($c);
+
+        $balance = 0;
+        foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
+            $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            $sponsorDistPairingLedgerDB->setBalance($balance);
+            $sponsorDistPairingLedgerDB->save();
+        }
+
+        $c = new Criteria();
+        $c->add(MlmDistPairingLedger20150131Peer::DIST_ID, $distId);
+        $c->add(MlmDistPairingLedger20150131Peer::LEFT_RIGHT, Globals::PLACEMENT_RIGHT);
+        $c->addAscendingOrderByColumn(MlmDistPairingLedger20150131Peer::CREATED_ON);
+        $sponsorDistPairingLedgerDBs = MlmDistPairingLedger20150131Peer::doSelect($c);
+
+        $balance = 0;
+        foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
+            $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            $sponsorDistPairingLedgerDB->setBalance($balance);
+            $sponsorDistPairingLedgerDB->save();
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeUpdateDistCommission()
     {
         $distId = $this->getRequestParameter('distId');
