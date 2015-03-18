@@ -1737,6 +1737,7 @@ class financeListActions extends sfActions
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
         $sColumns = str_replace("leader_code", "leader.distributor_code as leader_code", $sColumns);
+        $sColumns = str_replace("accountLedger._ecash", "", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 
@@ -1744,7 +1745,7 @@ class financeListActions extends sfActions
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
-        $sql = " FROM mlm_cp3_withdraw withdraw
+        $sql_bak = " FROM mlm_cp3_withdraw withdraw
                 LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
                 LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
                 LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
@@ -1753,6 +1754,12 @@ class financeListActions extends sfActions
             SELECT SUM(credit-debit) AS _ecash, dist_id
                 FROM mlm_account_ledger accountLedger WHERE account_type = 'MAINTENANCE' GROUP BY dist_id
             ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
+                WHERE 1=1
+        ";
+        $sql = " FROM mlm_cp3_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
                 WHERE 1=1
         ";
 
@@ -1813,7 +1820,8 @@ class financeListActions extends sfActions
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
                 $resultArr['amount'] == null ? "" : $resultArr['amount'],
-                $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
+//                $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
+                "-",
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['ic'] == null ? "" : $resultArr['ic'],
