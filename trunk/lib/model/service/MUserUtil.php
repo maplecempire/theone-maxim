@@ -146,7 +146,7 @@ class MUserUtil
         return true;
     }
 
-    public function isPostSignatureValid(&$debug = null)
+    public function isPostSignatureValid()
     {
         $msign = $this->action->getRequestParameter(MUserUtil::REQ_MSIGN);
 
@@ -154,16 +154,14 @@ class MUserUtil
             $postParam = $this->action->getRequest()->getParameterHolder()->getAll();
             ksort($postParam);
             $tempstr = "";
-            $tempstrk = "";
             $skip = array(MUserUtil::REQ_MSIGN, "module", "action");
 
             foreach ($postParam as $key => $val) {
                 if (!in_array($key, $skip)) {
-                    $tempstrk .= $key . "|";
                     $tempstr .= $val;
                 }
             }
-            $debug = md5($tempstr . MUserUtil::SECRET_CODE) . " | " . $tempstrk;
+
             return md5($tempstr . MUserUtil::SECRET_CODE) === $msign;
         }
 
