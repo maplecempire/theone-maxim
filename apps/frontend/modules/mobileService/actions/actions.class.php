@@ -1498,7 +1498,7 @@ class mobileServiceActions extends sfActions
     private function isValidAccess($logAccess = true)
     {
         if ($this->getRequest()->getMethod() !== sfRequest::POST) {
-//            return false; TODO
+            return false;
         }
 
         $muUtil = MUserUtil::init($this);
@@ -1506,9 +1506,8 @@ class mobileServiceActions extends sfActions
 
         // Check signature upon each request.
         if ($this->getRequestParameter(MUserUtil::REQ_MSIGN)) {
-            if (!$muUtil->isPostSignatureValid($debug)) {
+            if (!$muUtil->isPostSignatureValid()) {
                 $errMsg = $this->getContext()->getI18N()->__("Invalid action: security data mismatch.");
-//                $errMsg = $this->getContext()->getI18N()->__("Invalid action: security data mismatch: " . $debug);
                 $result = false;
             }
         }
