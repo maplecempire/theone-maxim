@@ -287,8 +287,8 @@
                     waiting();
                     var amount = $('#epointAmount').autoNumericGet();
                     var paymentMethod = $('#paymentMethod').val();
-                    if (amount > 50000) {
-                        error("<?php echo __('Maximum Payment RMB 50,000 per transaction') ?>");
+                    if (amount > 200000) {
+                        error("<?php echo __('Maximum Payment RMB 200,000 per transaction') ?>");
                         return false;
                     }
                     $("#epointAmount").val(amount);
