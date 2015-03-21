@@ -235,7 +235,7 @@ class reportActions extends sfActions
     public function executeGoldCoin2()
     {
         $dateFrom = "2014-09-21 00:00:00";
-        $dateTo = "2014-09-30 23:59:59";
+        $dateTo = "2014-09-28 23:59:59";
         $distDBs = $this->getEntitledMemberList($dateFrom, $dateTo, 100000);
 
         $idx = count($distDBs);
