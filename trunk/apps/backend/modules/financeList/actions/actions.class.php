@@ -175,11 +175,25 @@ class financeListActions extends sfActions
         $aColumns = explode(",", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
+        $isTrigger = $this->getRequestParameter('filterSearch_trigger');
 
         $offset = $this->getRequestParameter('iDisplayStart');
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
+
+        if ($isTrigger == "N") {
+            $output = array(
+                "sEcho" => intval($sEcho),
+                "iTotalRecords" => 0,
+                "iTotalDisplayRecords" => 0,
+                "aaData" => $arr
+            );
+            echo json_encode($output);
+
+            return sfView::HEADER_ONLY;
+        }
+
         $sql = " 	FROM mlm_account_ledger account
         LEFT JOIN mlm_distributor dist ON dist.distributor_id = account.dist_id ";
 
