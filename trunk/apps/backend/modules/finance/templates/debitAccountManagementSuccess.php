@@ -55,10 +55,6 @@ $(function() {
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
     });
-    $("#btnRefresh").button().click(function(event){
-        $("#search_trigger").val("Y");
-        walletDatagrid.fnDraw();
-    });
     $("#btnSubmit").button().click(function(event){
         event.preventDefault();
 
@@ -223,6 +219,12 @@ $(function() {
                         ]
                     });
 
+                    $("#btnRefresh").button().click(function(event){
+                        $("#search_trigger").val("Y");
+                        walletDatagrid.fnDraw();
+
+                        return false;
+                    });
                 }); // end $(function())
 
             </script>
