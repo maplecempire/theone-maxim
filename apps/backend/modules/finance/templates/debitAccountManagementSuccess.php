@@ -55,6 +55,10 @@ $(function() {
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
     });
+    $("#btnRefresh").button().click(function(event){
+        $("#search_trigger").val("Y");
+        walletDatagrid.fnDraw();
+    });
     $("#btnSubmit").button().click(function(event){
         event.preventDefault();
 
@@ -174,6 +178,7 @@ $(function() {
                         <td>&nbsp;</td>
                         <td>
                             <button id="btnSubmit"><?php echo __('Submit') ?></button>
+                            <button id="btnRefresh"><?php echo __('Refresh List') ?></button>
                         </td>
                     </tr>
                 </table>
@@ -181,8 +186,6 @@ $(function() {
             <script type="text/javascript">
 
                 $(function() {
-
-
                     walletDatagrid = $("#walletDatagrid").r9jasonDataTable({
                         // online1DataTable extra params
                         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
@@ -190,6 +193,7 @@ $(function() {
                             aoData.push({ "name": "filterSearch_walletType", "value": "<?php echo Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT; ?>"  });
                             aoData.push({ "name": "filterSearch_distCode", "value": $("#search_distCode").val()  });
                             aoData.push({ "name": "filterSearch_fullname", "value": $("#search_fullname").val()  });
+                            aoData.push({ "name": "filterSearch_trigger", "value": $("#search_trigger").val()  });
                         },
                         "reassignEvent" : function() { // extra function for reassignEvent when JSON is back from server
                         },
@@ -225,6 +229,7 @@ $(function() {
             <br>
 
             <div id="tabs-pipsBonus">
+                <input type="text" id="search_trigger" value="N">
                 <table class="display" id="walletDatagrid" border="0" width="100%" cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
