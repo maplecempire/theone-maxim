@@ -1751,7 +1751,7 @@ class financeListActions extends sfActions
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
         $sColumns = str_replace("leader_code", "leader.distributor_code as leader_code", $sColumns);
-        $sColumns = str_replace("accountLedger._ecash", "", $sColumns);
+        $sColumns = str_replace("accountLedger._ecash", "''", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
 
