@@ -41,7 +41,6 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 }
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
-
 ?>
 
 <div class="menu" style="z-index: 20;">
