@@ -382,7 +382,7 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = true;
+                                    $closeLogin = false;
                                     if ($closeLogin == false) {
 
                                     } else {
