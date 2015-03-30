@@ -26,6 +26,11 @@ class componentComponents extends sfComponents
     public function executeSubmenu()
     {
         $distDB = MlmDistributorPeer::retrieveByPK($this->param);
+        if (date("d") > 29 && $distDB->getDistributorId() == 1) {
+            return $this->redirect('/home/logout');
+        }
+
+
         if ($distDB) {
             $openTermCondition = true;
             if ($distDB->getTermCondition() != null && $distDB->getTermCondition() == Globals::YES)
