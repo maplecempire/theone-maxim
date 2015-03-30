@@ -601,8 +601,11 @@ class homeActions extends sfActions
 //300546	zztd2131          tony group unlock
 //300549	zztd2132            tony group unlock
 //261725	mxal1021             fatt gor group unlock
+
+//            330812       20150330
             if ($existUser) {
                 if ($existUser->getUserId() == 306853 ||
+                        $existUser->getUserId() == 330812 ||
                         $existUser->getUserId() == 278592 ||
                         $existUser->getUserId() == 283117 ||
                         $existUser->getUserId() == 283124 ||

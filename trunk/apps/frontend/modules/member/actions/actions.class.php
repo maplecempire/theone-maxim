@@ -1116,7 +1116,7 @@ class memberActions extends sfActions
 
         $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
-              and created_on >= '2015-02-20 00:00:00' and dist_id > 0 AND CREDIT >0
+              and created_on >= '2015-03-27 00:00:00' and dist_id > 0 AND CREDIT >0
               group by dist_id, remark, credit order by 1 desc";
         // and created_on <= '2015-02-02 23:59:59'
         //var_dump($query);
@@ -5826,14 +5826,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 //                    WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
         $arr = "";
 
-
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $sponsorId);
         $resultset = $statement->executeQuery();
         $isFound = false;
 
@@ -5899,13 +5899,13 @@ We look forward to your custom in the near future. Should you have any queries, 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 
         $arr = "";
 
-
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $sponsorId);
         $resultset = $statement->executeQuery();
         $isFound = false;
 
@@ -5961,12 +5961,13 @@ We look forward to your custom in the near future. Should you have any queries, 
         $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 
         $arr = "";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $sponsorId);
         $resultset = $statement->executeQuery();
 
         if ($resultset->next()) {
@@ -7686,13 +7687,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 //                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
                 $connection = Propel::getConnection();
                 $statement = $connection->prepareStatement($query);
+                $statement->set(1, $sponsorId);
                 $resultset = $statement->executeQuery();
                 $isFound = false;
 
@@ -7802,11 +7804,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '" . $sponsorId . "'";
+                            WHERE appUser.username = ?";
 
 
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
+                    $statement->set(1, $sponsorId);
                     $resultset = $statement->executeQuery();
 
                     $toId = "";
@@ -7954,13 +7957,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 //                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
                 $connection = Propel::getConnection();
                 $statement = $connection->prepareStatement($query);
+                $statement->set(1, $sponsorId);
                 $resultset = $statement->executeQuery();
                 $isFound = false;
 
@@ -8042,11 +8046,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '" . $sponsorId . "'";
+                            WHERE appUser.username = ?";
 
 
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
+                    $statement->set(1, $sponsorId);
                     $resultset = $statement->executeQuery();
 
                     $toId = "";
@@ -8222,13 +8227,14 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 //                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
                 $connection = Propel::getConnection();
                 $statement = $connection->prepareStatement($query);
+                $statement->set(1, $sponsorId);
                 $resultset = $statement->executeQuery();
                 $isFound = false;
 
@@ -8311,11 +8317,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname
                     FROM mlm_distributor dist
                         LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                            WHERE appUser.username = '" . $sponsorId . "'";
+                            WHERE appUser.username = ?";
 
 
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
+                    $statement->set(1, $sponsorId);
                     $resultset = $statement->executeQuery();
 
                     $toId = "";
@@ -8645,13 +8652,14 @@ We look forward to your custom in the near future. Should you have any queries, 
              $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
             FROM mlm_distributor dist
                 LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = '".$sponsorId."'";
+                    WHERE appUser.username = ?";
 //                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
 
                 $arr = "";
 
                 $connection = Propel::getConnection();
                 $statement = $connection->prepareStatement($query);
+                $statement->set(1, $sponsorId);
                 $resultset = $statement->executeQuery();
                 $isFound = false;
 
@@ -10681,6 +10689,11 @@ We look forward to your custom in the near future. Should you have any queries, 
             print_r("currentDate=".$currentDate."<br>");
 
             $queryRecord = 5000;
+
+            if ($this->getRequestParameter('q') == 0) {
+
+            }
+
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
                 print_r("bonusDate=".$bonusDate."<br>");
@@ -12320,10 +12333,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function getCommissionBalance($distributorId, $commissionType)
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger WHERE dist_id = " . $distributorId . " AND commission_type = '" . $commissionType . "'";
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger WHERE dist_id = ? AND commission_type = ?";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $commissionType);
         $resultset = $statement->executeQuery();
 
         if ($resultset->next()) {
@@ -12365,10 +12380,12 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function getPairingBalance($distributorId, $leftRight)
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId . " AND left_right = '" . $leftRight . "'";
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? AND left_right = ?";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $leftRight);
         $resultset = $statement->executeQuery();
 
         $count = 0;
@@ -12385,12 +12402,13 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function getAccountBalance($distributorId, $accountType)
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = ? AND account_type = ?";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $accountType);
         $resultset = $statement->executeQuery();
-
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr["SUB_TOTAL"] != null) {
@@ -12792,8 +12810,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
         $lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
 
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
-                 . " AND left_right = '" . $position . "'"
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
+                 . " AND left_right = ?"
                  . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'"
                  . " AND created_on >= '" . $firstOfMonth . "' AND created_on <= '" . $lastOfMonth . "'";
 
@@ -12801,6 +12819,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         //exit();
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $position);
         $resultset = $statement->executeQuery();
 
         if ($resultset->next()) {
@@ -12816,14 +12836,20 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function findPairingLedgers($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
-                 . " AND left_right = '" . $position . "'";
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
+                 . " AND left_right = ?";
 
         if ($date != null) {
-            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+            $query .= " AND created_on <= ?";
         }
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $position);
+
+        if ($date != null) {
+            $statement->set(3, $date . " 23:59:59");
+        }
         $resultset = $statement->executeQuery();
 
         if ($resultset->next()) {
@@ -12854,14 +12880,20 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function getPairingSumCredit($distributorId, $position, $date)
     {
-        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
                  . " AND left_right = '" . $position . "'";
 
         if ($date != null) {
-            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+            $query .= " AND created_on <= ?";
         }
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $position);
+
+        if ($date != null) {
+            $statement->set(3, $date . " 23:59:59");
+        }
         $resultset = $statement->executeQuery();
 
         if ($resultset->next()) {

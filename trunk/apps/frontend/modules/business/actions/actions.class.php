@@ -1316,94 +1316,6 @@ class businessActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
-    public function executePlacementLogList()
-    {
-        $sColumns = $this->getRequestParameter('sColumns');
-        $aColumns = explode(",", $sColumns);
-
-        $iColumns = $this->getRequestParameter('iColumns');
-
-        $offset = $this->getRequestParameter('iDisplayStart');
-        $sEcho = $this->getRequestParameter('sEcho');
-        $limit = $this->getRequestParameter('iDisplayLength');
-        $arr = array();
-
-        $sql = "FROM tbl_placement placement
-            LEFT JOIN tbl_distributor distributor ON placement.f_dist_id2 = distributor.f_id ";
-
-        /******   total records  *******/
-        $sWhere = " WHERE placement.f_dist_id =" . $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-        $totalRecords = $this->getTotalRecords($sql . $sWhere);
-
-        /******   total filtered records  *******/
-        if ($this->getRequestParameter('filterDistcode') != "") {
-            $sWhere .= " AND placement.f_dist_code2 LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%";
-            //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);
-        }
-        if ($this->getRequestParameter('filterPlacementcode') != "") {
-            $sWhere .= " AND placement.f_parentid_code2 LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterPlacementcode')) . "%";
-            //$c->addAnd(sfPropelPager::F_PARENTID_CODE2, "%" . $this->getRequestParameter('filterPlacementcode') . "%", Criteria::LIKE);
-        }
-        if ($this->getRequestParameter('filterPosition') != "") {
-            $sWhere .= " AND placement.f_position LIKE %" . mysql_real_escape_string($this->getRequestParameter('filterPosition')) . "%";
-            //$c->addAnd(TblPlacementPeer::F_POSITION, "%" . $this->getRequestParameter('filterPosition') . "%", Criteria::LIKE);
-        }
-        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
-
-        /******   sorting  *******/
-        $sOrder = "ORDER BY  ";
-        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
-        {
-            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
-                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
-                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
-            }
-        }
-
-        $sOrder = substr_replace($sOrder, "", -2);
-        if ($sOrder == "ORDER BY") {
-            $sOrder = "";
-        }
-        //var_dump($sOrder);
-        /******   pagination  *******/
-        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
-
-        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
-        $connection = Propel::getConnection();
-        $statement = $connection->prepareStatement($query);
-        $resultset = $statement->executeQuery();
-
-        while ($resultset->next())
-        {
-            $resultArr = $resultset->getRow();
-
-            $position = "";
-            if ($resultArr['f_position'] <> null && $this->getUser()->getCulture() == "cn") {
-                if ("left" == $resultArr['f_position']) {
-                    $position = $this->getContext()->getI18N()->__("left");
-                } else {
-                    $position = $this->getContext()->getI18N()->__("right");
-                }
-            }
-            $arr[] = array(
-                $resultArr['f_dist_code2'] == null ? "" : $resultArr['f_dist_code2'],
-                $resultArr['f_name'] == null ? "" : $resultArr['f_name'],
-                $resultArr['f_parentid_code2'] == null ? "" : $resultArr['f_parentid_code2'],
-                $position,
-                $resultArr['f_created_datetime'] == null ? "" : $resultArr['f_created_datetime']
-            );
-        }
-        $output = array(
-            "sEcho" => intval($sEcho),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalFilteredRecords,
-            "aaData" => $arr
-        );
-        echo json_encode($output);
-
-        return sfView::HEADER_ONLY;
-    }
-
     public function executeDownlineMemberList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
@@ -1430,6 +1342,7 @@ class businessActions extends sfActions
         $totalRecords = $this->getTotalRecords($sql . $sWhere);
 
         /******   total filtered records  *******/
+        $paramIdx = 1;
         if ($this->getRequestParameter('search_memberId') != "") {
             $sWhere .= " AND distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('search_memberId')) . "%'";
             //$c->addAnd(sfPropelPager::F_DIST_CODE2, "%" . $this->getRequestParameter('filterDistcode') . "%", Criteria::LIKE);

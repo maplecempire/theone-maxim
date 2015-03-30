@@ -10,6 +10,9 @@
  */
 class reportActions extends sfActions
 {
+    public function executeWithdrawalReport()
+    {
+    }
     public function executeMobileActivityLog()
     {
     }
