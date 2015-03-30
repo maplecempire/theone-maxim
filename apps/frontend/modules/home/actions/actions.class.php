@@ -366,19 +366,6 @@ class homeActions extends sfActions
     {
     }
 
-    public function executeIndex()
-    {
-        $this->distributor = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-
-        $totalCount = $this->getTotalMemberEntitle();
-        $balance = 2200 - $totalCount;
-
-        if ($balance < 0) {
-            $balance = 0;
-        }
-        $this->totalMemberEntitle = $balance;
-    }
-
     public function executeIndex2()
     {
     }
