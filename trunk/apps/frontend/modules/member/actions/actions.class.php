@@ -9236,7 +9236,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
 
             // Validate bank into options.
-            $bankInTo = $this->getRequestParameter('bankInTo');
+            /*$bankInTo = $this->getRequestParameter('bankInTo');
             $distId = $distributorDB->getDistributorId();
             $distBankCountry = $distributorDB->getBankCountry();
             if (in_array($distBankCountry, array("China (PRC)", "Thailand"))) {
@@ -9265,7 +9265,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $msg = $this->getContext()->getI18N()->__('You are not allowed to submit withdrawal, due to') . ": " . $this->getContext()->getI18N()->__($errorMsg);
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
-            }
+            }*/
 
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
             //if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID))) {
@@ -9514,7 +9514,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
 
             // Validate bank into options.
-            $bankInTo = $this->getRequestParameter('bankInTo');
+            /*$bankInTo = $this->getRequestParameter('bankInTo');
             $distId = $distributorDB->getDistributorId();
             $distBankCountry = $distributorDB->getBankCountry();
             if (in_array($distBankCountry, array("China (PRC)", "Thailand"))) {
@@ -9537,7 +9537,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
             }
 
-            $validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg);
+            $validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg);*/
 
             if (strlen($errorMsg)) {
                 $msg = $this->getContext()->getI18N()->__('You are not allowed to submit withdrawal, due to') . ": " . $this->getContext()->getI18N()->__($errorMsg);
