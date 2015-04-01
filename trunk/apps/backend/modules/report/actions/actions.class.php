@@ -340,6 +340,48 @@ class reportActions extends sfActions
         print_r("executeMbs Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeAustraliaGalaDinner()
+    {
+        $dateFrom = "2014-03-01 00:00:00";
+        $dateTo = "2015-04-31 23:59:59";
+        $distDBs = $this->getMbsList($dateFrom, $dateTo);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Date</td><td>leader</td></a></tr>";
+        $idx = 1;
+        foreach ($distDBs as $distDB) {
+            //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            if ($leader == "") {
+                continue;
+            }
+            $str.= "<tr><td>" . $idx++."</td><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['contact']."</td><td>" . $distDB['email']."</td><td>" . $distDB['active_datetime']."</td><td>" . $leader."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();*/
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeMbs Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeQueryAccountLedger20141231()
     {
         $c = new Criteria();
@@ -2185,6 +2227,33 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         return $arr;
     }
     function getMbsList($dateFrom, $dateTo)
+    {
+        $query = "SELECT dist.distributor_code, dist.full_name
+                    , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure, dist.active_datetime
+            FROM mlm_distributor dist
+                LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+            WHERE
+                dist.loan_account = 'N' AND dist.init_rank_id >= 5 AND dist.active_datetime >= '".$dateFrom."'
+                and dist.active_datetime <= '".$dateTo."'
+            UNION
+            SELECT ggdist.distributor_code, ggdist.full_name
+                    , gg.amount, ggdist.active_datetime, ggdist.email, ggdist.contact, ggdist.tree_structure, gg.cdate
+            FROM gg_purchase gg
+                LEFT JOIN mlm_distributor ggdist ON gg.uid = ggdist.distributor_id
+            WHERE gg.amount >= 30000 AND gg.cdate >= '".$dateFrom."'
+                and gg.cdate <= '".$dateTo."'";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
+    }
+
+    function getAustralia($dateFrom, $dateTo)
     {
         $query = "SELECT dist.distributor_code, dist.full_name
                     , package.price, dist.active_datetime, dist.email, dist.contact, dist.tree_structure, dist.active_datetime
