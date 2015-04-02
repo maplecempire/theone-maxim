@@ -1044,6 +1044,38 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='66'>03 April 2015 - US, Good Friday</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "1 April 2015";
+                ?>
+            </div>
+
+            <div id="page_67" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Members,
+                            <br>
+
+<br>FX and Precious Metals trading hours remain the same, a lack of liquidity may lead to wider spreads; please plan your trades accordingly.
+<br>
+<br>For Precious Metals, due to the closure of futures markets during the period as stated below, liquidity may be especially thin and there may be no bid/offers:
+<br>03 April 2015 0500hrs (SGT/HKT) - 04 April 2015 0500hrs (SGT/HKT).
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='66'>US Daylight Changing Notice</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
