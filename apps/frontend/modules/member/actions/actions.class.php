@@ -3830,9 +3830,9 @@ class memberActions extends sfActions
             return $this->redirect('/member/memberRegistration');
         }
 
-        $fcode = $userName;
-        $password = $this->getRequestParameter('userpassword');
-        $password2 = $this->getRequestParameter('securityPassword');
+        $fcode = trim($userName);
+        $password = trim($this->getRequestParameter('userpassword'));
+        $password2 = trim($this->getRequestParameter('securityPassword'));
         $packageId = $this->getRequestParameter('packageId');
         $position = $this->getRequestParameter('position1');
         $amountNeeded = $this->getRequestParameter('amountNeeded');
@@ -8933,8 +8933,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             if (!$exist) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old password is not valid."));
             } else {
-                $exist->setUserpassword($this->getRequestParameter('newPassword'));
-                $exist->setKeepPassword($this->getRequestParameter('newPassword'));
+                $exist->setUserpassword(trim($this->getRequestParameter('newPassword')));
+                $exist->setKeepPassword(trim($this->getRequestParameter('newPassword')));
                 $exist->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
                 $exist->setPasswordExpireDate(date("Y-m-d H:i:s", strtotime('+1 years'))); // Extend expire date to 1 year from now.
                 $exist->save();
@@ -8976,8 +8976,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             if (!$exist) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Old Security password is not valid."));
             } else {
-                $exist->setUserpassword2($this->getRequestParameter('newSecurityPassword'));
-                $exist->setKeepPassword2($this->getRequestParameter('newSecurityPassword'));
+                $exist->setUserpassword2(trim($this->getRequestParameter('newSecurityPassword')));
+                $exist->setKeepPassword2(trim($this->getRequestParameter('newSecurityPassword')));
                 $exist->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID));
                 $exist->setPasswordExpireDate(date("Y-m-d H:i:s", strtotime('+1 years'))); // Extend expire date to 1 year from now.
                 $exist->save();
@@ -9539,11 +9539,11 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $validatorLib->isBankAccountDetailsUpdated2($distributorDB, $errorMsg);*/
 
-            if (strlen($errorMsg)) {
+            /*if (strlen($errorMsg)) {
                 $msg = $this->getContext()->getI18N()->__('You are not allowed to submit withdrawal, due to') . ": " . $this->getContext()->getI18N()->__($errorMsg);
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
-            }
+            }*/
 
             if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, Globals::YES_Y, null, null, null)) {
                 $msg = $this->getContext()->getI18N()->__("CP2 Withdrawal temporary out of service.");
