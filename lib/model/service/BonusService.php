@@ -24,6 +24,7 @@ class BonusService
 
             if ($distAccountEcashBalance <= 0) {
                 $distDB->setPackagePurchaseFlag(Globals::YES);
+                $distDB->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
                 $distDB->save();
             } else {
@@ -81,6 +82,7 @@ class BonusService
 
             if ($completeStatus && $totalDebit > 0) {
                 $distDB->setPackagePurchaseFlag("Y");
+                $distDB->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
                 $distDB->save();
 
@@ -389,6 +391,7 @@ class BonusService
 
             if ($completeStatus && $totalDebit > 0) {
                 $distDB->setPackagePurchaseFlag("Y");
+                $distDB->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $distDB->setDebitStatusCode(Globals::STATUS_COMPLETE);
                 $distDB->save();
 
