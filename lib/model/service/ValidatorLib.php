@@ -30,7 +30,7 @@ class ValidatorLib
             $errorMsg = 'You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID';
         } elseif ($distributorDB->getBankCountry() <> "China (PRC)"
             && $distributorDB->getBankCountry() <> "Australia"
-            && (strtoupper($distributorDB->getBankHolderName()) <> strtoupper($distributorDB->getFullName()))
+            && (trim(strtoupper($distributorDB->getBankHolderName())) <> trim(strtoupper($distributorDB->getFullName())))
         ) {
 
             $errorMsg = 'Bank Holder Name is not same as your full name';
