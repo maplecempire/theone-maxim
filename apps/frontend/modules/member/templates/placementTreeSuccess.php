@@ -320,6 +320,15 @@ function reassignDatagridEventAttr(){
             }
         }
 
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
         $classAndAttr .= " class='logoTooltip'";
@@ -418,6 +427,15 @@ function reassignDatagridEventAttr(){
                 $distDB->setDistributorCode($distCode);
             }
         }
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
 
@@ -496,6 +514,16 @@ function reassignDatagridEventAttr(){
         $distDB = $anode[2]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
+
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -626,6 +654,16 @@ if ($anode[1]['distCode'] != "") { ?>
                 $distDB->setDistributorCode($distCode);
             }
         }
+
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
 
@@ -706,6 +744,16 @@ if ($anode[1]['distCode'] != "") { ?>
         $distDB = $anode[4]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
+
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -794,6 +842,16 @@ if ($anode[1]['distCode'] != "") { ?>
                 $distDB->setDistributorCode($distCode);
             }
         }
+
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
 
@@ -874,6 +932,16 @@ if ($anode[1]['distCode'] != "") { ?>
         $distDB = $anode[6]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+            }
+        }
+
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
