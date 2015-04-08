@@ -25,7 +25,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 
 
 	
-	protected $nid;
+	protected $nid = '0';
 
 
 	
@@ -41,7 +41,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 
 
 	
-	protected $volume_type;
+	protected $volume_type = 0;
 
 
 	
@@ -49,7 +49,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 
 
 	
-	protected $amount2;
+	protected $amount2 = 0;
 
 
 	
@@ -57,63 +57,47 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 
 
 	
-	protected $percent2;
+	protected $percent2 = 0;
 
 
 	
-	protected $leg1;
+	protected $leg1 = 0;
 
 
 	
-	protected $leg1_id;
+	protected $leg1_id = '0';
 
 
 	
-	protected $leg1_amount;
+	protected $leg1_amount = 0;
 
 
 	
-	protected $leg2;
+	protected $leg2 = 0;
 
 
 	
-	protected $leg2_id;
+	protected $leg2_id = '0';
 
 
 	
-	protected $leg2_amount;
+	protected $leg2_amount = 0;
 
 
 	
-	protected $paired_unit;
+	protected $paired_unit = 0;
 
 
 	
-	protected $level;
+	protected $level = 0;
 
 
 	
-	protected $level2;
+	protected $level2 = 0;
 
 
 	
-	protected $year;
-
-
-	
-	protected $month;
-
-
-	
-	protected $week;
-
-
-	
-	protected $day;
-
-
-	
-	protected $status;
+	protected $status = 'pending';
 
 
 	
@@ -292,34 +276,6 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getYear()
-	{
-
-		return $this->year;
-	}
-
-	
-	public function getMonth()
-	{
-
-		return $this->month;
-	}
-
-	
-	public function getWeek()
-	{
-
-		return $this->week;
-	}
-
-	
-	public function getDay()
-	{
-
-		return $this->day;
-	}
-
-	
 	public function getStatus()
 	{
 
@@ -448,7 +404,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->nid !== $v) {
+		if ($this->nid !== $v || $v === '0') {
 			$this->nid = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::NID;
 		}
@@ -500,7 +456,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	public function setVolumeType($v)
 	{
 
-		if ($this->volume_type !== $v) {
+		if ($this->volume_type !== $v || $v === 0) {
 			$this->volume_type = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::VOLUME_TYPE;
 		}
@@ -520,7 +476,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	public function setAmount2($v)
 	{
 
-		if ($this->amount2 !== $v) {
+		if ($this->amount2 !== $v || $v === 0) {
 			$this->amount2 = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::AMOUNT2;
 		}
@@ -540,7 +496,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	public function setPercent2($v)
 	{
 
-		if ($this->percent2 !== $v) {
+		if ($this->percent2 !== $v || $v === 0) {
 			$this->percent2 = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::PERCENT2;
 		}
@@ -554,7 +510,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->leg1 !== $v) {
+		if ($this->leg1 !== $v || $v === 0) {
 			$this->leg1 = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG1;
 		}
@@ -568,7 +524,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->leg1_id !== $v) {
+		if ($this->leg1_id !== $v || $v === '0') {
 			$this->leg1_id = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG1_ID;
 		}
@@ -578,7 +534,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	public function setLeg1Amount($v)
 	{
 
-		if ($this->leg1_amount !== $v) {
+		if ($this->leg1_amount !== $v || $v === 0) {
 			$this->leg1_amount = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG1_AMOUNT;
 		}
@@ -592,7 +548,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->leg2 !== $v) {
+		if ($this->leg2 !== $v || $v === 0) {
 			$this->leg2 = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG2;
 		}
@@ -606,7 +562,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->leg2_id !== $v) {
+		if ($this->leg2_id !== $v || $v === '0') {
 			$this->leg2_id = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG2_ID;
 		}
@@ -616,7 +572,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 	public function setLeg2Amount($v)
 	{
 
-		if ($this->leg2_amount !== $v) {
+		if ($this->leg2_amount !== $v || $v === 0) {
 			$this->leg2_amount = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEG2_AMOUNT;
 		}
@@ -630,7 +586,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->paired_unit !== $v) {
+		if ($this->paired_unit !== $v || $v === 0) {
 			$this->paired_unit = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::PAIRED_UNIT;
 		}
@@ -644,7 +600,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->level !== $v) {
+		if ($this->level !== $v || $v === 0) {
 			$this->level = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEVEL;
 		}
@@ -658,65 +614,9 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->level2 !== $v) {
+		if ($this->level2 !== $v || $v === 0) {
 			$this->level2 = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::LEVEL2;
-		}
-
-	} 
-	
-	public function setYear($v)
-	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
-
-		if ($this->year !== $v) {
-			$this->year = $v;
-			$this->modifiedColumns[] = GgMemberCommPeer::YEAR;
-		}
-
-	} 
-	
-	public function setMonth($v)
-	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
-
-		if ($this->month !== $v) {
-			$this->month = $v;
-			$this->modifiedColumns[] = GgMemberCommPeer::MONTH;
-		}
-
-	} 
-	
-	public function setWeek($v)
-	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
-
-		if ($this->week !== $v) {
-			$this->week = $v;
-			$this->modifiedColumns[] = GgMemberCommPeer::WEEK;
-		}
-
-	} 
-	
-	public function setDay($v)
-	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
-
-		if ($this->day !== $v) {
-			$this->day = $v;
-			$this->modifiedColumns[] = GgMemberCommPeer::DAY;
 		}
 
 	} 
@@ -728,7 +628,7 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->status !== $v) {
+		if ($this->status !== $v || $v === 'pending') {
 			$this->status = $v;
 			$this->modifiedColumns[] = GgMemberCommPeer::STATUS;
 		}
@@ -845,29 +745,21 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 
 			$this->level2 = $rs->getInt($startcol + 21);
 
-			$this->year = $rs->getInt($startcol + 22);
+			$this->status = $rs->getString($startcol + 22);
 
-			$this->month = $rs->getInt($startcol + 23);
+			$this->descr = $rs->getString($startcol + 23);
 
-			$this->week = $rs->getInt($startcol + 24);
+			$this->bonus_date = $rs->getDate($startcol + 24, null);
 
-			$this->day = $rs->getInt($startcol + 25);
+			$this->cdate = $rs->getTimestamp($startcol + 25, null);
 
-			$this->status = $rs->getString($startcol + 26);
-
-			$this->descr = $rs->getString($startcol + 27);
-
-			$this->bonus_date = $rs->getDate($startcol + 28, null);
-
-			$this->cdate = $rs->getTimestamp($startcol + 29, null);
-
-			$this->flag = $rs->getInt($startcol + 30);
+			$this->flag = $rs->getInt($startcol + 26);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 31; 
+						return $startcol + 27; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgMemberComm object", $e);
 		}
@@ -1061,30 +953,18 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 				return $this->getLevel2();
 				break;
 			case 22:
-				return $this->getYear();
-				break;
-			case 23:
-				return $this->getMonth();
-				break;
-			case 24:
-				return $this->getWeek();
-				break;
-			case 25:
-				return $this->getDay();
-				break;
-			case 26:
 				return $this->getStatus();
 				break;
-			case 27:
+			case 23:
 				return $this->getDescr();
 				break;
-			case 28:
+			case 24:
 				return $this->getBonusDate();
 				break;
-			case 29:
+			case 25:
 				return $this->getCdate();
 				break;
-			case 30:
+			case 26:
 				return $this->getFlag();
 				break;
 			default:
@@ -1119,15 +999,11 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 			$keys[19] => $this->getPairedUnit(),
 			$keys[20] => $this->getLevel(),
 			$keys[21] => $this->getLevel2(),
-			$keys[22] => $this->getYear(),
-			$keys[23] => $this->getMonth(),
-			$keys[24] => $this->getWeek(),
-			$keys[25] => $this->getDay(),
-			$keys[26] => $this->getStatus(),
-			$keys[27] => $this->getDescr(),
-			$keys[28] => $this->getBonusDate(),
-			$keys[29] => $this->getCdate(),
-			$keys[30] => $this->getFlag(),
+			$keys[22] => $this->getStatus(),
+			$keys[23] => $this->getDescr(),
+			$keys[24] => $this->getBonusDate(),
+			$keys[25] => $this->getCdate(),
+			$keys[26] => $this->getFlag(),
 		);
 		return $result;
 	}
@@ -1210,30 +1086,18 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 				$this->setLevel2($value);
 				break;
 			case 22:
-				$this->setYear($value);
-				break;
-			case 23:
-				$this->setMonth($value);
-				break;
-			case 24:
-				$this->setWeek($value);
-				break;
-			case 25:
-				$this->setDay($value);
-				break;
-			case 26:
 				$this->setStatus($value);
 				break;
-			case 27:
+			case 23:
 				$this->setDescr($value);
 				break;
-			case 28:
+			case 24:
 				$this->setBonusDate($value);
 				break;
-			case 29:
+			case 25:
 				$this->setCdate($value);
 				break;
-			case 30:
+			case 26:
 				$this->setFlag($value);
 				break;
 		} 	}
@@ -1265,15 +1129,11 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[19], $arr)) $this->setPairedUnit($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setLevel($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setLevel2($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setYear($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setMonth($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setWeek($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setDay($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setStatus($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setDescr($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setBonusDate($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setCdate($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setFlag($arr[$keys[30]]);
+		if (array_key_exists($keys[22], $arr)) $this->setStatus($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setDescr($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setBonusDate($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCdate($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setFlag($arr[$keys[26]]);
 	}
 
 	
@@ -1303,10 +1163,6 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgMemberCommPeer::PAIRED_UNIT)) $criteria->add(GgMemberCommPeer::PAIRED_UNIT, $this->paired_unit);
 		if ($this->isColumnModified(GgMemberCommPeer::LEVEL)) $criteria->add(GgMemberCommPeer::LEVEL, $this->level);
 		if ($this->isColumnModified(GgMemberCommPeer::LEVEL2)) $criteria->add(GgMemberCommPeer::LEVEL2, $this->level2);
-		if ($this->isColumnModified(GgMemberCommPeer::YEAR)) $criteria->add(GgMemberCommPeer::YEAR, $this->year);
-		if ($this->isColumnModified(GgMemberCommPeer::MONTH)) $criteria->add(GgMemberCommPeer::MONTH, $this->month);
-		if ($this->isColumnModified(GgMemberCommPeer::WEEK)) $criteria->add(GgMemberCommPeer::WEEK, $this->week);
-		if ($this->isColumnModified(GgMemberCommPeer::DAY)) $criteria->add(GgMemberCommPeer::DAY, $this->day);
 		if ($this->isColumnModified(GgMemberCommPeer::STATUS)) $criteria->add(GgMemberCommPeer::STATUS, $this->status);
 		if ($this->isColumnModified(GgMemberCommPeer::DESCR)) $criteria->add(GgMemberCommPeer::DESCR, $this->descr);
 		if ($this->isColumnModified(GgMemberCommPeer::BONUS_DATE)) $criteria->add(GgMemberCommPeer::BONUS_DATE, $this->bonus_date);
@@ -1383,14 +1239,6 @@ abstract class BaseGgMemberComm extends BaseObject  implements Persistent {
 		$copyObj->setLevel($this->level);
 
 		$copyObj->setLevel2($this->level2);
-
-		$copyObj->setYear($this->year);
-
-		$copyObj->setMonth($this->month);
-
-		$copyObj->setWeek($this->week);
-
-		$copyObj->setDay($this->day);
 
 		$copyObj->setStatus($this->status);
 

@@ -13,7 +13,7 @@ abstract class BaseGgPurchasePeer {
 	const CLASS_DEFAULT = 'lib.model.GgPurchase';
 
 	
-	const NUM_COLUMNS = 36;
+	const NUM_COLUMNS = 41;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -101,6 +101,21 @@ abstract class BaseGgPurchasePeer {
 	const PAYMENT_TYPE = 'gg_purchase.PAYMENT_TYPE';
 
 	
+	const ESWALLET = 'gg_purchase.ESWALLET';
+
+	
+	const EWALLET = 'gg_purchase.EWALLET';
+
+	
+	const CWALLET = 'gg_purchase.CWALLET';
+
+	
+	const RTWALLET = 'gg_purchase.RTWALLET';
+
+	
+	const IOUWALLET = 'gg_purchase.IOUWALLET';
+
+	
 	const COLLECTED = 'gg_purchase.COLLECTED';
 
 	
@@ -133,18 +148,18 @@ abstract class BaseGgPurchasePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Creator', 'Cid', 'Refno', 'MemberSale', 'NmName', 'NmContact', 'Uid', 'Sid', 'StockistSale', 'CollectAddress', 'CollectCity', 'CollectZip', 'CollectState', 'CollectCountry', 'MailType', 'SharePrice', 'Amount', 'TotalBv', 'ActualBv', 'TotalDp', 'ActualDp', 'TotalRp', 'ActualRp', 'TotalCp', 'DeliveryCost', 'PaymentType', 'Collected', 'CollectedDate', 'FirstSale', 'NoBv', 'RankA', 'Status', 'Remark', 'Cdate', 'Edate', ),
-		BasePeer::TYPE_COLNAME => array (GgPurchasePeer::ID, GgPurchasePeer::CREATOR, GgPurchasePeer::CID, GgPurchasePeer::REFNO, GgPurchasePeer::MEMBER_SALE, GgPurchasePeer::NM_NAME, GgPurchasePeer::NM_CONTACT, GgPurchasePeer::UID, GgPurchasePeer::SID, GgPurchasePeer::STOCKIST_SALE, GgPurchasePeer::COLLECT_ADDRESS, GgPurchasePeer::COLLECT_CITY, GgPurchasePeer::COLLECT_ZIP, GgPurchasePeer::COLLECT_STATE, GgPurchasePeer::COLLECT_COUNTRY, GgPurchasePeer::MAIL_TYPE, GgPurchasePeer::SHARE_PRICE, GgPurchasePeer::AMOUNT, GgPurchasePeer::TOTAL_BV, GgPurchasePeer::ACTUAL_BV, GgPurchasePeer::TOTAL_DP, GgPurchasePeer::ACTUAL_DP, GgPurchasePeer::TOTAL_RP, GgPurchasePeer::ACTUAL_RP, GgPurchasePeer::TOTAL_CP, GgPurchasePeer::DELIVERY_COST, GgPurchasePeer::PAYMENT_TYPE, GgPurchasePeer::COLLECTED, GgPurchasePeer::COLLECTED_DATE, GgPurchasePeer::FIRST_SALE, GgPurchasePeer::NO_BV, GgPurchasePeer::RANK_A, GgPurchasePeer::STATUS, GgPurchasePeer::REMARK, GgPurchasePeer::CDATE, GgPurchasePeer::EDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'creator', 'cid', 'refno', 'member_sale', 'nm_name', 'nm_contact', 'uid', 'sid', 'stockist_sale', 'collect_address', 'collect_city', 'collect_zip', 'collect_state', 'collect_country', 'mail_type', 'share_price', 'amount', 'total_bv', 'actual_bv', 'total_dp', 'actual_dp', 'total_rp', 'actual_rp', 'total_cp', 'delivery_cost', 'payment_type', 'collected', 'collected_date', 'first_sale', 'no_bv', 'rank_a', 'status', 'remark', 'cdate', 'edate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Creator', 'Cid', 'Refno', 'MemberSale', 'NmName', 'NmContact', 'Uid', 'Sid', 'StockistSale', 'CollectAddress', 'CollectCity', 'CollectZip', 'CollectState', 'CollectCountry', 'MailType', 'SharePrice', 'Amount', 'TotalBv', 'ActualBv', 'TotalDp', 'ActualDp', 'TotalRp', 'ActualRp', 'TotalCp', 'DeliveryCost', 'PaymentType', 'Eswallet', 'Ewallet', 'Cwallet', 'Rtwallet', 'Iouwallet', 'Collected', 'CollectedDate', 'FirstSale', 'NoBv', 'RankA', 'Status', 'Remark', 'Cdate', 'Edate', ),
+		BasePeer::TYPE_COLNAME => array (GgPurchasePeer::ID, GgPurchasePeer::CREATOR, GgPurchasePeer::CID, GgPurchasePeer::REFNO, GgPurchasePeer::MEMBER_SALE, GgPurchasePeer::NM_NAME, GgPurchasePeer::NM_CONTACT, GgPurchasePeer::UID, GgPurchasePeer::SID, GgPurchasePeer::STOCKIST_SALE, GgPurchasePeer::COLLECT_ADDRESS, GgPurchasePeer::COLLECT_CITY, GgPurchasePeer::COLLECT_ZIP, GgPurchasePeer::COLLECT_STATE, GgPurchasePeer::COLLECT_COUNTRY, GgPurchasePeer::MAIL_TYPE, GgPurchasePeer::SHARE_PRICE, GgPurchasePeer::AMOUNT, GgPurchasePeer::TOTAL_BV, GgPurchasePeer::ACTUAL_BV, GgPurchasePeer::TOTAL_DP, GgPurchasePeer::ACTUAL_DP, GgPurchasePeer::TOTAL_RP, GgPurchasePeer::ACTUAL_RP, GgPurchasePeer::TOTAL_CP, GgPurchasePeer::DELIVERY_COST, GgPurchasePeer::PAYMENT_TYPE, GgPurchasePeer::ESWALLET, GgPurchasePeer::EWALLET, GgPurchasePeer::CWALLET, GgPurchasePeer::RTWALLET, GgPurchasePeer::IOUWALLET, GgPurchasePeer::COLLECTED, GgPurchasePeer::COLLECTED_DATE, GgPurchasePeer::FIRST_SALE, GgPurchasePeer::NO_BV, GgPurchasePeer::RANK_A, GgPurchasePeer::STATUS, GgPurchasePeer::REMARK, GgPurchasePeer::CDATE, GgPurchasePeer::EDATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'creator', 'cid', 'refno', 'member_sale', 'nm_name', 'nm_contact', 'uid', 'sid', 'stockist_sale', 'collect_address', 'collect_city', 'collect_zip', 'collect_state', 'collect_country', 'mail_type', 'share_price', 'amount', 'total_bv', 'actual_bv', 'total_dp', 'actual_dp', 'total_rp', 'actual_rp', 'total_cp', 'delivery_cost', 'payment_type', 'eswallet', 'ewallet', 'cwallet', 'rtwallet', 'iouwallet', 'collected', 'collected_date', 'first_sale', 'no_bv', 'rank_a', 'status', 'remark', 'cdate', 'edate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Creator' => 1, 'Cid' => 2, 'Refno' => 3, 'MemberSale' => 4, 'NmName' => 5, 'NmContact' => 6, 'Uid' => 7, 'Sid' => 8, 'StockistSale' => 9, 'CollectAddress' => 10, 'CollectCity' => 11, 'CollectZip' => 12, 'CollectState' => 13, 'CollectCountry' => 14, 'MailType' => 15, 'SharePrice' => 16, 'Amount' => 17, 'TotalBv' => 18, 'ActualBv' => 19, 'TotalDp' => 20, 'ActualDp' => 21, 'TotalRp' => 22, 'ActualRp' => 23, 'TotalCp' => 24, 'DeliveryCost' => 25, 'PaymentType' => 26, 'Collected' => 27, 'CollectedDate' => 28, 'FirstSale' => 29, 'NoBv' => 30, 'RankA' => 31, 'Status' => 32, 'Remark' => 33, 'Cdate' => 34, 'Edate' => 35, ),
-		BasePeer::TYPE_COLNAME => array (GgPurchasePeer::ID => 0, GgPurchasePeer::CREATOR => 1, GgPurchasePeer::CID => 2, GgPurchasePeer::REFNO => 3, GgPurchasePeer::MEMBER_SALE => 4, GgPurchasePeer::NM_NAME => 5, GgPurchasePeer::NM_CONTACT => 6, GgPurchasePeer::UID => 7, GgPurchasePeer::SID => 8, GgPurchasePeer::STOCKIST_SALE => 9, GgPurchasePeer::COLLECT_ADDRESS => 10, GgPurchasePeer::COLLECT_CITY => 11, GgPurchasePeer::COLLECT_ZIP => 12, GgPurchasePeer::COLLECT_STATE => 13, GgPurchasePeer::COLLECT_COUNTRY => 14, GgPurchasePeer::MAIL_TYPE => 15, GgPurchasePeer::SHARE_PRICE => 16, GgPurchasePeer::AMOUNT => 17, GgPurchasePeer::TOTAL_BV => 18, GgPurchasePeer::ACTUAL_BV => 19, GgPurchasePeer::TOTAL_DP => 20, GgPurchasePeer::ACTUAL_DP => 21, GgPurchasePeer::TOTAL_RP => 22, GgPurchasePeer::ACTUAL_RP => 23, GgPurchasePeer::TOTAL_CP => 24, GgPurchasePeer::DELIVERY_COST => 25, GgPurchasePeer::PAYMENT_TYPE => 26, GgPurchasePeer::COLLECTED => 27, GgPurchasePeer::COLLECTED_DATE => 28, GgPurchasePeer::FIRST_SALE => 29, GgPurchasePeer::NO_BV => 30, GgPurchasePeer::RANK_A => 31, GgPurchasePeer::STATUS => 32, GgPurchasePeer::REMARK => 33, GgPurchasePeer::CDATE => 34, GgPurchasePeer::EDATE => 35, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'creator' => 1, 'cid' => 2, 'refno' => 3, 'member_sale' => 4, 'nm_name' => 5, 'nm_contact' => 6, 'uid' => 7, 'sid' => 8, 'stockist_sale' => 9, 'collect_address' => 10, 'collect_city' => 11, 'collect_zip' => 12, 'collect_state' => 13, 'collect_country' => 14, 'mail_type' => 15, 'share_price' => 16, 'amount' => 17, 'total_bv' => 18, 'actual_bv' => 19, 'total_dp' => 20, 'actual_dp' => 21, 'total_rp' => 22, 'actual_rp' => 23, 'total_cp' => 24, 'delivery_cost' => 25, 'payment_type' => 26, 'collected' => 27, 'collected_date' => 28, 'first_sale' => 29, 'no_bv' => 30, 'rank_a' => 31, 'status' => 32, 'remark' => 33, 'cdate' => 34, 'edate' => 35, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Creator' => 1, 'Cid' => 2, 'Refno' => 3, 'MemberSale' => 4, 'NmName' => 5, 'NmContact' => 6, 'Uid' => 7, 'Sid' => 8, 'StockistSale' => 9, 'CollectAddress' => 10, 'CollectCity' => 11, 'CollectZip' => 12, 'CollectState' => 13, 'CollectCountry' => 14, 'MailType' => 15, 'SharePrice' => 16, 'Amount' => 17, 'TotalBv' => 18, 'ActualBv' => 19, 'TotalDp' => 20, 'ActualDp' => 21, 'TotalRp' => 22, 'ActualRp' => 23, 'TotalCp' => 24, 'DeliveryCost' => 25, 'PaymentType' => 26, 'Eswallet' => 27, 'Ewallet' => 28, 'Cwallet' => 29, 'Rtwallet' => 30, 'Iouwallet' => 31, 'Collected' => 32, 'CollectedDate' => 33, 'FirstSale' => 34, 'NoBv' => 35, 'RankA' => 36, 'Status' => 37, 'Remark' => 38, 'Cdate' => 39, 'Edate' => 40, ),
+		BasePeer::TYPE_COLNAME => array (GgPurchasePeer::ID => 0, GgPurchasePeer::CREATOR => 1, GgPurchasePeer::CID => 2, GgPurchasePeer::REFNO => 3, GgPurchasePeer::MEMBER_SALE => 4, GgPurchasePeer::NM_NAME => 5, GgPurchasePeer::NM_CONTACT => 6, GgPurchasePeer::UID => 7, GgPurchasePeer::SID => 8, GgPurchasePeer::STOCKIST_SALE => 9, GgPurchasePeer::COLLECT_ADDRESS => 10, GgPurchasePeer::COLLECT_CITY => 11, GgPurchasePeer::COLLECT_ZIP => 12, GgPurchasePeer::COLLECT_STATE => 13, GgPurchasePeer::COLLECT_COUNTRY => 14, GgPurchasePeer::MAIL_TYPE => 15, GgPurchasePeer::SHARE_PRICE => 16, GgPurchasePeer::AMOUNT => 17, GgPurchasePeer::TOTAL_BV => 18, GgPurchasePeer::ACTUAL_BV => 19, GgPurchasePeer::TOTAL_DP => 20, GgPurchasePeer::ACTUAL_DP => 21, GgPurchasePeer::TOTAL_RP => 22, GgPurchasePeer::ACTUAL_RP => 23, GgPurchasePeer::TOTAL_CP => 24, GgPurchasePeer::DELIVERY_COST => 25, GgPurchasePeer::PAYMENT_TYPE => 26, GgPurchasePeer::ESWALLET => 27, GgPurchasePeer::EWALLET => 28, GgPurchasePeer::CWALLET => 29, GgPurchasePeer::RTWALLET => 30, GgPurchasePeer::IOUWALLET => 31, GgPurchasePeer::COLLECTED => 32, GgPurchasePeer::COLLECTED_DATE => 33, GgPurchasePeer::FIRST_SALE => 34, GgPurchasePeer::NO_BV => 35, GgPurchasePeer::RANK_A => 36, GgPurchasePeer::STATUS => 37, GgPurchasePeer::REMARK => 38, GgPurchasePeer::CDATE => 39, GgPurchasePeer::EDATE => 40, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'creator' => 1, 'cid' => 2, 'refno' => 3, 'member_sale' => 4, 'nm_name' => 5, 'nm_contact' => 6, 'uid' => 7, 'sid' => 8, 'stockist_sale' => 9, 'collect_address' => 10, 'collect_city' => 11, 'collect_zip' => 12, 'collect_state' => 13, 'collect_country' => 14, 'mail_type' => 15, 'share_price' => 16, 'amount' => 17, 'total_bv' => 18, 'actual_bv' => 19, 'total_dp' => 20, 'actual_dp' => 21, 'total_rp' => 22, 'actual_rp' => 23, 'total_cp' => 24, 'delivery_cost' => 25, 'payment_type' => 26, 'eswallet' => 27, 'ewallet' => 28, 'cwallet' => 29, 'rtwallet' => 30, 'iouwallet' => 31, 'collected' => 32, 'collected_date' => 33, 'first_sale' => 34, 'no_bv' => 35, 'rank_a' => 36, 'status' => 37, 'remark' => 38, 'cdate' => 39, 'edate' => 40, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, )
 	);
 
 	
@@ -251,6 +266,16 @@ abstract class BaseGgPurchasePeer {
 		$criteria->addSelectColumn(GgPurchasePeer::DELIVERY_COST);
 
 		$criteria->addSelectColumn(GgPurchasePeer::PAYMENT_TYPE);
+
+		$criteria->addSelectColumn(GgPurchasePeer::ESWALLET);
+
+		$criteria->addSelectColumn(GgPurchasePeer::EWALLET);
+
+		$criteria->addSelectColumn(GgPurchasePeer::CWALLET);
+
+		$criteria->addSelectColumn(GgPurchasePeer::RTWALLET);
+
+		$criteria->addSelectColumn(GgPurchasePeer::IOUWALLET);
 
 		$criteria->addSelectColumn(GgPurchasePeer::COLLECTED);
 

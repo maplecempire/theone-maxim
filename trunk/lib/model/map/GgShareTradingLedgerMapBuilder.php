@@ -36,6 +36,8 @@ class GgShareTradingLedgerMapBuilder {
 
 		$tMap->addColumn('TRADING_ID', 'TradingId', 'int', CreoleTypes::INTEGER, true, null);
 
+		$tMap->addColumn('TRADING_ID2', 'TradingId2', 'int', CreoleTypes::INTEGER, true, null);
+
 		$tMap->addColumn('UID', 'Uid', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('BUY_UID', 'BuyUid', 'int', CreoleTypes::INTEGER, true, null);

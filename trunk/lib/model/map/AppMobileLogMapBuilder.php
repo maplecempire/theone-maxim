@@ -32,11 +32,11 @@ class AppMobileLogMapBuilder {
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->addPrimaryKey('LOG_ID', 'LogId', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addPrimaryKey('LOG_ID', 'LogId', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('ACCESS_IP', 'AccessIp', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('USER_ID', 'UserId', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('USER_ID', 'UserId', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('TRANS_ACTION', 'TransAction', 'string', CreoleTypes::VARCHAR, true, 150);
 
@@ -44,11 +44,11 @@ class AppMobileLogMapBuilder {
 
 		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
-		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
-		$tMap->addColumn('UPDATED_BY', 'UpdatedBy', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('UPDATED_BY', 'UpdatedBy', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 

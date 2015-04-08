@@ -33,19 +33,19 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 
 	
-	protected $created_on;
-
-
-	
 	protected $created_by;
 
 
 	
-	protected $updated_on;
+	protected $created_on;
 
 
 	
 	protected $updated_by;
+
+
+	
+	protected $updated_on;
 
 	
 	protected $alreadyInSave = false;
@@ -126,6 +126,13 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getCreatedBy()
+	{
+
+		return $this->created_by;
+	}
+
+	
 	public function getCreatedOn($format = 'Y-m-d H:i:s')
 	{
 
@@ -148,10 +155,10 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getCreatedBy()
+	public function getUpdatedBy()
 	{
 
-		return $this->created_by;
+		return $this->updated_by;
 	}
 
 	
@@ -174,13 +181,6 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
-	}
-
-	
-	public function getUpdatedBy()
-	{
-
-		return $this->updated_by;
 	}
 
 	
@@ -274,6 +274,20 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCreatedBy($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->created_by !== $v) {
+			$this->created_by = $v;
+			$this->modifiedColumns[] = AppNewsPeer::CREATED_BY;
+		}
+
+	} 
+	
 	public function setCreatedOn($v)
 	{
 
@@ -291,16 +305,16 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setCreatedBy($v)
+	public function setUpdatedBy($v)
 	{
 
 						if ($v !== null && !is_string($v)) {
 			$v = (string) $v; 
 		}
 
-		if ($this->created_by !== $v) {
-			$this->created_by = $v;
-			$this->modifiedColumns[] = AppNewsPeer::CREATED_BY;
+		if ($this->updated_by !== $v) {
+			$this->updated_by = $v;
+			$this->modifiedColumns[] = AppNewsPeer::UPDATED_BY;
 		}
 
 	} 
@@ -322,20 +336,6 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setUpdatedBy($v)
-	{
-
-						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->updated_by !== $v) {
-			$this->updated_by = $v;
-			$this->modifiedColumns[] = AppNewsPeer::UPDATED_BY;
-		}
-
-	} 
-	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -352,13 +352,13 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 			$this->ns_end_date = $rs->getTimestamp($startcol + 5, null);
 
-			$this->created_on = $rs->getTimestamp($startcol + 6, null);
+			$this->created_by = $rs->getString($startcol + 6);
 
-			$this->created_by = $rs->getString($startcol + 7);
+			$this->created_on = $rs->getTimestamp($startcol + 7, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 8, null);
+			$this->updated_by = $rs->getString($startcol + 8);
 
-			$this->updated_by = $rs->getString($startcol + 9);
+			$this->updated_on = $rs->getTimestamp($startcol + 9, null);
 
 			$this->resetModified();
 
@@ -520,16 +520,16 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 				return $this->getNsEndDate();
 				break;
 			case 6:
-				return $this->getCreatedOn();
-				break;
-			case 7:
 				return $this->getCreatedBy();
 				break;
+			case 7:
+				return $this->getCreatedOn();
+				break;
 			case 8:
-				return $this->getUpdatedOn();
+				return $this->getUpdatedBy();
 				break;
 			case 9:
-				return $this->getUpdatedBy();
+				return $this->getUpdatedOn();
 				break;
 			default:
 				return null;
@@ -547,10 +547,10 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 			$keys[3] => $this->getNsStatus(),
 			$keys[4] => $this->getNsStartDate(),
 			$keys[5] => $this->getNsEndDate(),
-			$keys[6] => $this->getCreatedOn(),
-			$keys[7] => $this->getCreatedBy(),
-			$keys[8] => $this->getUpdatedOn(),
-			$keys[9] => $this->getUpdatedBy(),
+			$keys[6] => $this->getCreatedBy(),
+			$keys[7] => $this->getCreatedOn(),
+			$keys[8] => $this->getUpdatedBy(),
+			$keys[9] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -585,16 +585,16 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 				$this->setNsEndDate($value);
 				break;
 			case 6:
-				$this->setCreatedOn($value);
-				break;
-			case 7:
 				$this->setCreatedBy($value);
 				break;
+			case 7:
+				$this->setCreatedOn($value);
+				break;
 			case 8:
-				$this->setUpdatedOn($value);
+				$this->setUpdatedBy($value);
 				break;
 			case 9:
-				$this->setUpdatedBy($value);
+				$this->setUpdatedOn($value);
 				break;
 		} 	}
 
@@ -609,10 +609,10 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setNsStatus($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setNsStartDate($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setNsEndDate($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCreatedOn($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCreatedBy($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setUpdatedOn($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCreatedBy($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCreatedOn($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setUpdatedBy($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setUpdatedOn($arr[$keys[9]]);
 	}
 
 	
@@ -626,10 +626,10 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AppNewsPeer::NS_STATUS)) $criteria->add(AppNewsPeer::NS_STATUS, $this->ns_status);
 		if ($this->isColumnModified(AppNewsPeer::NS_START_DATE)) $criteria->add(AppNewsPeer::NS_START_DATE, $this->ns_start_date);
 		if ($this->isColumnModified(AppNewsPeer::NS_END_DATE)) $criteria->add(AppNewsPeer::NS_END_DATE, $this->ns_end_date);
-		if ($this->isColumnModified(AppNewsPeer::CREATED_ON)) $criteria->add(AppNewsPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(AppNewsPeer::CREATED_BY)) $criteria->add(AppNewsPeer::CREATED_BY, $this->created_by);
-		if ($this->isColumnModified(AppNewsPeer::UPDATED_ON)) $criteria->add(AppNewsPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(AppNewsPeer::CREATED_ON)) $criteria->add(AppNewsPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(AppNewsPeer::UPDATED_BY)) $criteria->add(AppNewsPeer::UPDATED_BY, $this->updated_by);
+		if ($this->isColumnModified(AppNewsPeer::UPDATED_ON)) $criteria->add(AppNewsPeer::UPDATED_ON, $this->updated_on);
 
 		return $criteria;
 	}
@@ -670,13 +670,13 @@ abstract class BaseAppNews extends BaseObject  implements Persistent {
 
 		$copyObj->setNsEndDate($this->ns_end_date);
 
-		$copyObj->setCreatedOn($this->created_on);
-
 		$copyObj->setCreatedBy($this->created_by);
 
-		$copyObj->setUpdatedOn($this->updated_on);
+		$copyObj->setCreatedOn($this->created_on);
 
 		$copyObj->setUpdatedBy($this->updated_by);
+
+		$copyObj->setUpdatedOn($this->updated_on);
 
 
 		$copyObj->setNew(true);

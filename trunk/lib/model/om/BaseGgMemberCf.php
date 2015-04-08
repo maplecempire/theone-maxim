@@ -13,15 +13,19 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 
 
 	
+	protected $tree_upline_dist_id = 0;
+
+
+	
 	protected $uid = '0';
 
 
 	
-	protected $leg;
+	protected $leg = 0;
 
 
 	
-	protected $volume_type;
+	protected $volume_type = 0;
 
 
 	
@@ -29,7 +33,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 
 
 	
-	protected $amount;
+	protected $amount = 0;
 
 
 	
@@ -43,6 +47,10 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	
 	protected $cdate;
 
+
+	
+	protected $descr;
+
 	
 	protected $alreadyInSave = false;
 
@@ -54,6 +62,13 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	{
 
 		return $this->id;
+	}
+
+	
+	public function getTreeUplineDistId()
+	{
+
+		return $this->tree_upline_dist_id;
 	}
 
 	
@@ -128,6 +143,13 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getDescr()
+	{
+
+		return $this->descr;
+	}
+
+	
 	public function setId($v)
 	{
 
@@ -138,6 +160,20 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		if ($this->id !== $v) {
 			$this->id = $v;
 			$this->modifiedColumns[] = GgMemberCfPeer::ID;
+		}
+
+	} 
+	
+	public function setTreeUplineDistId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->tree_upline_dist_id !== $v || $v === 0) {
+			$this->tree_upline_dist_id = $v;
+			$this->modifiedColumns[] = GgMemberCfPeer::TREE_UPLINE_DIST_ID;
 		}
 
 	} 
@@ -163,7 +199,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 			$v = (int) $v;
 		}
 
-		if ($this->leg !== $v) {
+		if ($this->leg !== $v || $v === 0) {
 			$this->leg = $v;
 			$this->modifiedColumns[] = GgMemberCfPeer::LEG;
 		}
@@ -173,7 +209,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	public function setVolumeType($v)
 	{
 
-		if ($this->volume_type !== $v) {
+		if ($this->volume_type !== $v || $v === 0) {
 			$this->volume_type = $v;
 			$this->modifiedColumns[] = GgMemberCfPeer::VOLUME_TYPE;
 		}
@@ -193,7 +229,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	public function setAmount($v)
 	{
 
-		if ($this->amount !== $v) {
+		if ($this->amount !== $v || $v === 0) {
 			$this->amount = $v;
 			$this->modifiedColumns[] = GgMemberCfPeer::AMOUNT;
 		}
@@ -237,33 +273,51 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setDescr($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->descr !== $v) {
+			$this->descr = $v;
+			$this->modifiedColumns[] = GgMemberCfPeer::DESCR;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
 
 			$this->id = $rs->getString($startcol + 0);
 
-			$this->uid = $rs->getString($startcol + 1);
+			$this->tree_upline_dist_id = $rs->getInt($startcol + 1);
 
-			$this->leg = $rs->getInt($startcol + 2);
+			$this->uid = $rs->getString($startcol + 2);
 
-			$this->volume_type = $rs->getFloat($startcol + 3);
+			$this->leg = $rs->getInt($startcol + 3);
 
-			$this->bv = $rs->getFloat($startcol + 4);
+			$this->volume_type = $rs->getFloat($startcol + 4);
 
-			$this->amount = $rs->getFloat($startcol + 5);
+			$this->bv = $rs->getFloat($startcol + 5);
 
-			$this->pair_amount = $rs->getFloat($startcol + 6);
+			$this->amount = $rs->getFloat($startcol + 6);
 
-			$this->flash_amount = $rs->getFloat($startcol + 7);
+			$this->pair_amount = $rs->getFloat($startcol + 7);
 
-			$this->cdate = $rs->getDate($startcol + 8, null);
+			$this->flash_amount = $rs->getFloat($startcol + 8);
+
+			$this->cdate = $rs->getDate($startcol + 9, null);
+
+			$this->descr = $rs->getString($startcol + 10);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 9; 
+						return $startcol + 11; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgMemberCf object", $e);
 		}
@@ -394,28 +448,34 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getUid();
+				return $this->getTreeUplineDistId();
 				break;
 			case 2:
-				return $this->getLeg();
+				return $this->getUid();
 				break;
 			case 3:
-				return $this->getVolumeType();
+				return $this->getLeg();
 				break;
 			case 4:
-				return $this->getBv();
+				return $this->getVolumeType();
 				break;
 			case 5:
-				return $this->getAmount();
+				return $this->getBv();
 				break;
 			case 6:
-				return $this->getPairAmount();
+				return $this->getAmount();
 				break;
 			case 7:
-				return $this->getFlashAmount();
+				return $this->getPairAmount();
 				break;
 			case 8:
+				return $this->getFlashAmount();
+				break;
+			case 9:
 				return $this->getCdate();
+				break;
+			case 10:
+				return $this->getDescr();
 				break;
 			default:
 				return null;
@@ -428,14 +488,16 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		$keys = GgMemberCfPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getUid(),
-			$keys[2] => $this->getLeg(),
-			$keys[3] => $this->getVolumeType(),
-			$keys[4] => $this->getBv(),
-			$keys[5] => $this->getAmount(),
-			$keys[6] => $this->getPairAmount(),
-			$keys[7] => $this->getFlashAmount(),
-			$keys[8] => $this->getCdate(),
+			$keys[1] => $this->getTreeUplineDistId(),
+			$keys[2] => $this->getUid(),
+			$keys[3] => $this->getLeg(),
+			$keys[4] => $this->getVolumeType(),
+			$keys[5] => $this->getBv(),
+			$keys[6] => $this->getAmount(),
+			$keys[7] => $this->getPairAmount(),
+			$keys[8] => $this->getFlashAmount(),
+			$keys[9] => $this->getCdate(),
+			$keys[10] => $this->getDescr(),
 		);
 		return $result;
 	}
@@ -455,28 +517,34 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setUid($value);
+				$this->setTreeUplineDistId($value);
 				break;
 			case 2:
-				$this->setLeg($value);
+				$this->setUid($value);
 				break;
 			case 3:
-				$this->setVolumeType($value);
+				$this->setLeg($value);
 				break;
 			case 4:
-				$this->setBv($value);
+				$this->setVolumeType($value);
 				break;
 			case 5:
-				$this->setAmount($value);
+				$this->setBv($value);
 				break;
 			case 6:
-				$this->setPairAmount($value);
+				$this->setAmount($value);
 				break;
 			case 7:
-				$this->setFlashAmount($value);
+				$this->setPairAmount($value);
 				break;
 			case 8:
+				$this->setFlashAmount($value);
+				break;
+			case 9:
 				$this->setCdate($value);
+				break;
+			case 10:
+				$this->setDescr($value);
 				break;
 		} 	}
 
@@ -486,14 +554,16 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		$keys = GgMemberCfPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setUid($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setLeg($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setVolumeType($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setBv($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAmount($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setPairAmount($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFlashAmount($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCdate($arr[$keys[8]]);
+		if (array_key_exists($keys[1], $arr)) $this->setTreeUplineDistId($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setUid($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setLeg($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setVolumeType($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setBv($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAmount($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPairAmount($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFlashAmount($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCdate($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDescr($arr[$keys[10]]);
 	}
 
 	
@@ -502,6 +572,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		$criteria = new Criteria(GgMemberCfPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(GgMemberCfPeer::ID)) $criteria->add(GgMemberCfPeer::ID, $this->id);
+		if ($this->isColumnModified(GgMemberCfPeer::TREE_UPLINE_DIST_ID)) $criteria->add(GgMemberCfPeer::TREE_UPLINE_DIST_ID, $this->tree_upline_dist_id);
 		if ($this->isColumnModified(GgMemberCfPeer::UID)) $criteria->add(GgMemberCfPeer::UID, $this->uid);
 		if ($this->isColumnModified(GgMemberCfPeer::LEG)) $criteria->add(GgMemberCfPeer::LEG, $this->leg);
 		if ($this->isColumnModified(GgMemberCfPeer::VOLUME_TYPE)) $criteria->add(GgMemberCfPeer::VOLUME_TYPE, $this->volume_type);
@@ -510,6 +581,7 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgMemberCfPeer::PAIR_AMOUNT)) $criteria->add(GgMemberCfPeer::PAIR_AMOUNT, $this->pair_amount);
 		if ($this->isColumnModified(GgMemberCfPeer::FLASH_AMOUNT)) $criteria->add(GgMemberCfPeer::FLASH_AMOUNT, $this->flash_amount);
 		if ($this->isColumnModified(GgMemberCfPeer::CDATE)) $criteria->add(GgMemberCfPeer::CDATE, $this->cdate);
+		if ($this->isColumnModified(GgMemberCfPeer::DESCR)) $criteria->add(GgMemberCfPeer::DESCR, $this->descr);
 
 		return $criteria;
 	}
@@ -540,6 +612,8 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setTreeUplineDistId($this->tree_upline_dist_id);
+
 		$copyObj->setUid($this->uid);
 
 		$copyObj->setLeg($this->leg);
@@ -555,6 +629,8 @@ abstract class BaseGgMemberCf extends BaseObject  implements Persistent {
 		$copyObj->setFlashAmount($this->flash_amount);
 
 		$copyObj->setCdate($this->cdate);
+
+		$copyObj->setDescr($this->descr);
 
 
 		$copyObj->setNew(true);

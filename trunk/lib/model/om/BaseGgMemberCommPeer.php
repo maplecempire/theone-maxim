@@ -13,7 +13,7 @@ abstract class BaseGgMemberCommPeer {
 	const CLASS_DEFAULT = 'lib.model.GgMemberComm';
 
 	
-	const NUM_COLUMNS = 31;
+	const NUM_COLUMNS = 27;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -86,18 +86,6 @@ abstract class BaseGgMemberCommPeer {
 	const LEVEL2 = 'gg_member_comm.LEVEL2';
 
 	
-	const YEAR = 'gg_member_comm.YEAR';
-
-	
-	const MONTH = 'gg_member_comm.MONTH';
-
-	
-	const WEEK = 'gg_member_comm.WEEK';
-
-	
-	const DAY = 'gg_member_comm.DAY';
-
-	
 	const STATUS = 'gg_member_comm.STATUS';
 
 	
@@ -118,18 +106,18 @@ abstract class BaseGgMemberCommPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Mid', 'Pid', 'Cid', 'Nid', 'Uid', 'FromUid', 'Type', 'VolumeType', 'Amount', 'Amount2', 'Percent', 'Percent2', 'Leg1', 'Leg1Id', 'Leg1Amount', 'Leg2', 'Leg2Id', 'Leg2Amount', 'PairedUnit', 'Level', 'Level2', 'Year', 'Month', 'Week', 'Day', 'Status', 'Descr', 'BonusDate', 'Cdate', 'Flag', ),
-		BasePeer::TYPE_COLNAME => array (GgMemberCommPeer::ID, GgMemberCommPeer::MID, GgMemberCommPeer::PID, GgMemberCommPeer::CID, GgMemberCommPeer::NID, GgMemberCommPeer::UID, GgMemberCommPeer::FROM_UID, GgMemberCommPeer::TYPE, GgMemberCommPeer::VOLUME_TYPE, GgMemberCommPeer::AMOUNT, GgMemberCommPeer::AMOUNT2, GgMemberCommPeer::PERCENT, GgMemberCommPeer::PERCENT2, GgMemberCommPeer::LEG1, GgMemberCommPeer::LEG1_ID, GgMemberCommPeer::LEG1_AMOUNT, GgMemberCommPeer::LEG2, GgMemberCommPeer::LEG2_ID, GgMemberCommPeer::LEG2_AMOUNT, GgMemberCommPeer::PAIRED_UNIT, GgMemberCommPeer::LEVEL, GgMemberCommPeer::LEVEL2, GgMemberCommPeer::YEAR, GgMemberCommPeer::MONTH, GgMemberCommPeer::WEEK, GgMemberCommPeer::DAY, GgMemberCommPeer::STATUS, GgMemberCommPeer::DESCR, GgMemberCommPeer::BONUS_DATE, GgMemberCommPeer::CDATE, GgMemberCommPeer::FLAG, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'mid', 'pid', 'cid', 'nid', 'uid', 'from_uid', 'type', 'volume_type', 'amount', 'amount2', 'percent', 'percent2', 'leg1', 'leg1_id', 'leg1_amount', 'leg2', 'leg2_id', 'leg2_amount', 'paired_unit', 'level', 'level2', 'year', 'month', 'week', 'day', 'status', 'descr', 'bonus_date', 'cdate', 'flag', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Mid', 'Pid', 'Cid', 'Nid', 'Uid', 'FromUid', 'Type', 'VolumeType', 'Amount', 'Amount2', 'Percent', 'Percent2', 'Leg1', 'Leg1Id', 'Leg1Amount', 'Leg2', 'Leg2Id', 'Leg2Amount', 'PairedUnit', 'Level', 'Level2', 'Status', 'Descr', 'BonusDate', 'Cdate', 'Flag', ),
+		BasePeer::TYPE_COLNAME => array (GgMemberCommPeer::ID, GgMemberCommPeer::MID, GgMemberCommPeer::PID, GgMemberCommPeer::CID, GgMemberCommPeer::NID, GgMemberCommPeer::UID, GgMemberCommPeer::FROM_UID, GgMemberCommPeer::TYPE, GgMemberCommPeer::VOLUME_TYPE, GgMemberCommPeer::AMOUNT, GgMemberCommPeer::AMOUNT2, GgMemberCommPeer::PERCENT, GgMemberCommPeer::PERCENT2, GgMemberCommPeer::LEG1, GgMemberCommPeer::LEG1_ID, GgMemberCommPeer::LEG1_AMOUNT, GgMemberCommPeer::LEG2, GgMemberCommPeer::LEG2_ID, GgMemberCommPeer::LEG2_AMOUNT, GgMemberCommPeer::PAIRED_UNIT, GgMemberCommPeer::LEVEL, GgMemberCommPeer::LEVEL2, GgMemberCommPeer::STATUS, GgMemberCommPeer::DESCR, GgMemberCommPeer::BONUS_DATE, GgMemberCommPeer::CDATE, GgMemberCommPeer::FLAG, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'mid', 'pid', 'cid', 'nid', 'uid', 'from_uid', 'type', 'volume_type', 'amount', 'amount2', 'percent', 'percent2', 'leg1', 'leg1_id', 'leg1_amount', 'leg2', 'leg2_id', 'leg2_amount', 'paired_unit', 'level', 'level2', 'status', 'descr', 'bonus_date', 'cdate', 'flag', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Mid' => 1, 'Pid' => 2, 'Cid' => 3, 'Nid' => 4, 'Uid' => 5, 'FromUid' => 6, 'Type' => 7, 'VolumeType' => 8, 'Amount' => 9, 'Amount2' => 10, 'Percent' => 11, 'Percent2' => 12, 'Leg1' => 13, 'Leg1Id' => 14, 'Leg1Amount' => 15, 'Leg2' => 16, 'Leg2Id' => 17, 'Leg2Amount' => 18, 'PairedUnit' => 19, 'Level' => 20, 'Level2' => 21, 'Year' => 22, 'Month' => 23, 'Week' => 24, 'Day' => 25, 'Status' => 26, 'Descr' => 27, 'BonusDate' => 28, 'Cdate' => 29, 'Flag' => 30, ),
-		BasePeer::TYPE_COLNAME => array (GgMemberCommPeer::ID => 0, GgMemberCommPeer::MID => 1, GgMemberCommPeer::PID => 2, GgMemberCommPeer::CID => 3, GgMemberCommPeer::NID => 4, GgMemberCommPeer::UID => 5, GgMemberCommPeer::FROM_UID => 6, GgMemberCommPeer::TYPE => 7, GgMemberCommPeer::VOLUME_TYPE => 8, GgMemberCommPeer::AMOUNT => 9, GgMemberCommPeer::AMOUNT2 => 10, GgMemberCommPeer::PERCENT => 11, GgMemberCommPeer::PERCENT2 => 12, GgMemberCommPeer::LEG1 => 13, GgMemberCommPeer::LEG1_ID => 14, GgMemberCommPeer::LEG1_AMOUNT => 15, GgMemberCommPeer::LEG2 => 16, GgMemberCommPeer::LEG2_ID => 17, GgMemberCommPeer::LEG2_AMOUNT => 18, GgMemberCommPeer::PAIRED_UNIT => 19, GgMemberCommPeer::LEVEL => 20, GgMemberCommPeer::LEVEL2 => 21, GgMemberCommPeer::YEAR => 22, GgMemberCommPeer::MONTH => 23, GgMemberCommPeer::WEEK => 24, GgMemberCommPeer::DAY => 25, GgMemberCommPeer::STATUS => 26, GgMemberCommPeer::DESCR => 27, GgMemberCommPeer::BONUS_DATE => 28, GgMemberCommPeer::CDATE => 29, GgMemberCommPeer::FLAG => 30, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mid' => 1, 'pid' => 2, 'cid' => 3, 'nid' => 4, 'uid' => 5, 'from_uid' => 6, 'type' => 7, 'volume_type' => 8, 'amount' => 9, 'amount2' => 10, 'percent' => 11, 'percent2' => 12, 'leg1' => 13, 'leg1_id' => 14, 'leg1_amount' => 15, 'leg2' => 16, 'leg2_id' => 17, 'leg2_amount' => 18, 'paired_unit' => 19, 'level' => 20, 'level2' => 21, 'year' => 22, 'month' => 23, 'week' => 24, 'day' => 25, 'status' => 26, 'descr' => 27, 'bonus_date' => 28, 'cdate' => 29, 'flag' => 30, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Mid' => 1, 'Pid' => 2, 'Cid' => 3, 'Nid' => 4, 'Uid' => 5, 'FromUid' => 6, 'Type' => 7, 'VolumeType' => 8, 'Amount' => 9, 'Amount2' => 10, 'Percent' => 11, 'Percent2' => 12, 'Leg1' => 13, 'Leg1Id' => 14, 'Leg1Amount' => 15, 'Leg2' => 16, 'Leg2Id' => 17, 'Leg2Amount' => 18, 'PairedUnit' => 19, 'Level' => 20, 'Level2' => 21, 'Status' => 22, 'Descr' => 23, 'BonusDate' => 24, 'Cdate' => 25, 'Flag' => 26, ),
+		BasePeer::TYPE_COLNAME => array (GgMemberCommPeer::ID => 0, GgMemberCommPeer::MID => 1, GgMemberCommPeer::PID => 2, GgMemberCommPeer::CID => 3, GgMemberCommPeer::NID => 4, GgMemberCommPeer::UID => 5, GgMemberCommPeer::FROM_UID => 6, GgMemberCommPeer::TYPE => 7, GgMemberCommPeer::VOLUME_TYPE => 8, GgMemberCommPeer::AMOUNT => 9, GgMemberCommPeer::AMOUNT2 => 10, GgMemberCommPeer::PERCENT => 11, GgMemberCommPeer::PERCENT2 => 12, GgMemberCommPeer::LEG1 => 13, GgMemberCommPeer::LEG1_ID => 14, GgMemberCommPeer::LEG1_AMOUNT => 15, GgMemberCommPeer::LEG2 => 16, GgMemberCommPeer::LEG2_ID => 17, GgMemberCommPeer::LEG2_AMOUNT => 18, GgMemberCommPeer::PAIRED_UNIT => 19, GgMemberCommPeer::LEVEL => 20, GgMemberCommPeer::LEVEL2 => 21, GgMemberCommPeer::STATUS => 22, GgMemberCommPeer::DESCR => 23, GgMemberCommPeer::BONUS_DATE => 24, GgMemberCommPeer::CDATE => 25, GgMemberCommPeer::FLAG => 26, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mid' => 1, 'pid' => 2, 'cid' => 3, 'nid' => 4, 'uid' => 5, 'from_uid' => 6, 'type' => 7, 'volume_type' => 8, 'amount' => 9, 'amount2' => 10, 'percent' => 11, 'percent2' => 12, 'leg1' => 13, 'leg1_id' => 14, 'leg1_amount' => 15, 'leg2' => 16, 'leg2_id' => 17, 'leg2_amount' => 18, 'paired_unit' => 19, 'level' => 20, 'level2' => 21, 'status' => 22, 'descr' => 23, 'bonus_date' => 24, 'cdate' => 25, 'flag' => 26, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, )
 	);
 
 	
@@ -226,14 +214,6 @@ abstract class BaseGgMemberCommPeer {
 		$criteria->addSelectColumn(GgMemberCommPeer::LEVEL);
 
 		$criteria->addSelectColumn(GgMemberCommPeer::LEVEL2);
-
-		$criteria->addSelectColumn(GgMemberCommPeer::YEAR);
-
-		$criteria->addSelectColumn(GgMemberCommPeer::MONTH);
-
-		$criteria->addSelectColumn(GgMemberCommPeer::WEEK);
-
-		$criteria->addSelectColumn(GgMemberCommPeer::DAY);
 
 		$criteria->addSelectColumn(GgMemberCommPeer::STATUS);
 

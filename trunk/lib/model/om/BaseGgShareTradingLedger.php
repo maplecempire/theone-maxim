@@ -17,6 +17,10 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 
 
 	
+	protected $trading_id2 = 0;
+
+
+	
 	protected $uid = 0;
 
 
@@ -61,6 +65,13 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 	{
 
 		return $this->trading_id;
+	}
+
+	
+	public function getTradingId2()
+	{
+
+		return $this->trading_id2;
 	}
 
 	
@@ -152,6 +163,20 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 		if ($this->trading_id !== $v || $v === 0) {
 			$this->trading_id = $v;
 			$this->modifiedColumns[] = GgShareTradingLedgerPeer::TRADING_ID;
+		}
+
+	} 
+	
+	public function setTradingId2($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->trading_id2 !== $v || $v === 0) {
+			$this->trading_id2 = $v;
+			$this->modifiedColumns[] = GgShareTradingLedgerPeer::TRADING_ID2;
 		}
 
 	} 
@@ -261,25 +286,27 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 
 			$this->trading_id = $rs->getInt($startcol + 1);
 
-			$this->uid = $rs->getInt($startcol + 2);
+			$this->trading_id2 = $rs->getInt($startcol + 2);
 
-			$this->buy_uid = $rs->getInt($startcol + 3);
+			$this->uid = $rs->getInt($startcol + 3);
 
-			$this->sell_uid = $rs->getInt($startcol + 4);
+			$this->buy_uid = $rs->getInt($startcol + 4);
 
-			$this->price = $rs->getFloat($startcol + 5);
+			$this->sell_uid = $rs->getInt($startcol + 5);
 
-			$this->qty = $rs->getInt($startcol + 6);
+			$this->price = $rs->getFloat($startcol + 6);
 
-			$this->type = $rs->getString($startcol + 7);
+			$this->qty = $rs->getInt($startcol + 7);
 
-			$this->cdate = $rs->getTimestamp($startcol + 8, null);
+			$this->type = $rs->getString($startcol + 8);
+
+			$this->cdate = $rs->getTimestamp($startcol + 9, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 9; 
+						return $startcol + 10; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgShareTradingLedger object", $e);
 		}
@@ -413,24 +440,27 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 				return $this->getTradingId();
 				break;
 			case 2:
-				return $this->getUid();
+				return $this->getTradingId2();
 				break;
 			case 3:
-				return $this->getBuyUid();
+				return $this->getUid();
 				break;
 			case 4:
-				return $this->getSellUid();
+				return $this->getBuyUid();
 				break;
 			case 5:
-				return $this->getPrice();
+				return $this->getSellUid();
 				break;
 			case 6:
-				return $this->getQty();
+				return $this->getPrice();
 				break;
 			case 7:
-				return $this->getType();
+				return $this->getQty();
 				break;
 			case 8:
+				return $this->getType();
+				break;
+			case 9:
 				return $this->getCdate();
 				break;
 			default:
@@ -445,13 +475,14 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 		$result = array(
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getTradingId(),
-			$keys[2] => $this->getUid(),
-			$keys[3] => $this->getBuyUid(),
-			$keys[4] => $this->getSellUid(),
-			$keys[5] => $this->getPrice(),
-			$keys[6] => $this->getQty(),
-			$keys[7] => $this->getType(),
-			$keys[8] => $this->getCdate(),
+			$keys[2] => $this->getTradingId2(),
+			$keys[3] => $this->getUid(),
+			$keys[4] => $this->getBuyUid(),
+			$keys[5] => $this->getSellUid(),
+			$keys[6] => $this->getPrice(),
+			$keys[7] => $this->getQty(),
+			$keys[8] => $this->getType(),
+			$keys[9] => $this->getCdate(),
 		);
 		return $result;
 	}
@@ -474,24 +505,27 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 				$this->setTradingId($value);
 				break;
 			case 2:
-				$this->setUid($value);
+				$this->setTradingId2($value);
 				break;
 			case 3:
-				$this->setBuyUid($value);
+				$this->setUid($value);
 				break;
 			case 4:
-				$this->setSellUid($value);
+				$this->setBuyUid($value);
 				break;
 			case 5:
-				$this->setPrice($value);
+				$this->setSellUid($value);
 				break;
 			case 6:
-				$this->setQty($value);
+				$this->setPrice($value);
 				break;
 			case 7:
-				$this->setType($value);
+				$this->setQty($value);
 				break;
 			case 8:
+				$this->setType($value);
+				break;
+			case 9:
 				$this->setCdate($value);
 				break;
 		} 	}
@@ -503,13 +537,14 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setTradingId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setUid($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setBuyUid($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setSellUid($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setPrice($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setQty($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setType($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCdate($arr[$keys[8]]);
+		if (array_key_exists($keys[2], $arr)) $this->setTradingId2($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setUid($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setBuyUid($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setSellUid($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPrice($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setQty($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setType($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCdate($arr[$keys[9]]);
 	}
 
 	
@@ -519,6 +554,7 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 
 		if ($this->isColumnModified(GgShareTradingLedgerPeer::ID)) $criteria->add(GgShareTradingLedgerPeer::ID, $this->id);
 		if ($this->isColumnModified(GgShareTradingLedgerPeer::TRADING_ID)) $criteria->add(GgShareTradingLedgerPeer::TRADING_ID, $this->trading_id);
+		if ($this->isColumnModified(GgShareTradingLedgerPeer::TRADING_ID2)) $criteria->add(GgShareTradingLedgerPeer::TRADING_ID2, $this->trading_id2);
 		if ($this->isColumnModified(GgShareTradingLedgerPeer::UID)) $criteria->add(GgShareTradingLedgerPeer::UID, $this->uid);
 		if ($this->isColumnModified(GgShareTradingLedgerPeer::BUY_UID)) $criteria->add(GgShareTradingLedgerPeer::BUY_UID, $this->buy_uid);
 		if ($this->isColumnModified(GgShareTradingLedgerPeer::SELL_UID)) $criteria->add(GgShareTradingLedgerPeer::SELL_UID, $this->sell_uid);
@@ -557,6 +593,8 @@ abstract class BaseGgShareTradingLedger extends BaseObject  implements Persisten
 	{
 
 		$copyObj->setTradingId($this->trading_id);
+
+		$copyObj->setTradingId2($this->trading_id2);
 
 		$copyObj->setUid($this->uid);
 
