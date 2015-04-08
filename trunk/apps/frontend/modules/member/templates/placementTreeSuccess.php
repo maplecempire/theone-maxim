@@ -324,7 +324,9 @@ function reassignDatagridEventAttr(){
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -431,7 +433,9 @@ function reassignDatagridEventAttr(){
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -523,7 +527,9 @@ function reassignDatagridEventAttr(){
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -659,7 +665,9 @@ if ($anode[1]['distCode'] != "") { ?>
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -753,7 +761,9 @@ if ($anode[1]['distCode'] != "") { ?>
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -847,7 +857,9 @@ if ($anode[1]['distCode'] != "") { ?>
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
@@ -941,7 +953,9 @@ if ($anode[1]['distCode'] != "") { ?>
         if ($pos === false) { // note: three equal signs
 
         } else {
-            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) == 1 || $sf_user->getAttribute(Globals::SESSION_DISTID) == 339377) {
+
+            } else {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
             }
