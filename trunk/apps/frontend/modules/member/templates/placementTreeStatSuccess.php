@@ -260,6 +260,17 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                    $restricted = true;
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -406,6 +417,16 @@ function reassignDatagridEventAttr(){
                 $restricted = true;
             }
         }
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+                $restricted = true;
+            }
+        }
         $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -534,6 +555,16 @@ function reassignDatagridEventAttr(){
         $distDB = $anode[2]['_self'];
         if ($hideDistGroup == true) {
             if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                $distCode = "Restricted to view member information";
+                $distDB->setDistributorCode($distCode);
+                $restricted = true;
+            }
+        }
+        $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                 $distCode = "Restricted to view member information";
                 $distDB->setDistributorCode($distCode);
                 $restricted = true;
@@ -687,6 +718,17 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                    $restricted = true;
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -817,6 +859,17 @@ function reassignDatagridEventAttr(){
             $distDB = $anode[4]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                    $restricted = true;
+                }
+            }
+
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                     $restricted = true;
@@ -956,6 +1009,17 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                    $restricted = true;
+                }
+            }
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -1085,6 +1149,17 @@ function reassignDatagridEventAttr(){
             $distDB = $anode[6]['_self'];
             if ($hideDistGroup == true) {
                 if ($apService->blockGenealogy($sf_user->getAttribute(Globals::SESSION_DISTID), $distDB->getPlacementTreeStructure()) == true) { // note: three equal signs
+                    $distCode = "Restricted to view member information";
+                    $distDB->setDistributorCode($distCode);
+                    $restricted = true;
+                }
+            }
+
+            $pos = strrpos($distDB->getPlacementTreeStructure(), "|339377|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                if ($sf_user->getAttribute(Globals::SESSION_DISTID) != 1) {
                     $distCode = "Restricted to view member information";
                     $distDB->setDistributorCode($distCode);
                     $restricted = true;
