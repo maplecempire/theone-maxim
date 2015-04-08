@@ -13,7 +13,7 @@ abstract class BaseGgSharePeer {
 	const CLASS_DEFAULT = 'lib.model.GgShare';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,7 +26,13 @@ abstract class BaseGgSharePeer {
 	const UID = 'gg_share.UID';
 
 	
+	const ACCOUNT_TYPE = 'gg_share.ACCOUNT_TYPE';
+
+	
 	const TOTAL_UNIT = 'gg_share.TOTAL_UNIT';
+
+	
+	const ORIGINAL_TOTAL_UNIT = 'gg_share.ORIGINAL_TOTAL_UNIT';
 
 	
 	const BUY_PRICE = 'gg_share.BUY_PRICE';
@@ -58,18 +64,18 @@ abstract class BaseGgSharePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'TotalUnit', 'BuyPrice', 'SellPrice', 'BuyDate', 'SellDate', 'TradeDate', 'Replica', 'Status', 'SellingDatetime', ),
-		BasePeer::TYPE_COLNAME => array (GgSharePeer::ID, GgSharePeer::UID, GgSharePeer::TOTAL_UNIT, GgSharePeer::BUY_PRICE, GgSharePeer::SELL_PRICE, GgSharePeer::BUY_DATE, GgSharePeer::SELL_DATE, GgSharePeer::TRADE_DATE, GgSharePeer::REPLICA, GgSharePeer::STATUS, GgSharePeer::SELLING_DATETIME, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'total_unit', 'buy_price', 'sell_price', 'buy_date', 'sell_date', 'trade_date', 'replica', 'status', 'selling_datetime', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'AccountType', 'TotalUnit', 'OriginalTotalUnit', 'BuyPrice', 'SellPrice', 'BuyDate', 'SellDate', 'TradeDate', 'Replica', 'Status', 'SellingDatetime', ),
+		BasePeer::TYPE_COLNAME => array (GgSharePeer::ID, GgSharePeer::UID, GgSharePeer::ACCOUNT_TYPE, GgSharePeer::TOTAL_UNIT, GgSharePeer::ORIGINAL_TOTAL_UNIT, GgSharePeer::BUY_PRICE, GgSharePeer::SELL_PRICE, GgSharePeer::BUY_DATE, GgSharePeer::SELL_DATE, GgSharePeer::TRADE_DATE, GgSharePeer::REPLICA, GgSharePeer::STATUS, GgSharePeer::SELLING_DATETIME, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'account_type', 'total_unit', 'original_total_unit', 'buy_price', 'sell_price', 'buy_date', 'sell_date', 'trade_date', 'replica', 'status', 'selling_datetime', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'TotalUnit' => 2, 'BuyPrice' => 3, 'SellPrice' => 4, 'BuyDate' => 5, 'SellDate' => 6, 'TradeDate' => 7, 'Replica' => 8, 'Status' => 9, 'SellingDatetime' => 10, ),
-		BasePeer::TYPE_COLNAME => array (GgSharePeer::ID => 0, GgSharePeer::UID => 1, GgSharePeer::TOTAL_UNIT => 2, GgSharePeer::BUY_PRICE => 3, GgSharePeer::SELL_PRICE => 4, GgSharePeer::BUY_DATE => 5, GgSharePeer::SELL_DATE => 6, GgSharePeer::TRADE_DATE => 7, GgSharePeer::REPLICA => 8, GgSharePeer::STATUS => 9, GgSharePeer::SELLING_DATETIME => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'total_unit' => 2, 'buy_price' => 3, 'sell_price' => 4, 'buy_date' => 5, 'sell_date' => 6, 'trade_date' => 7, 'replica' => 8, 'status' => 9, 'selling_datetime' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'AccountType' => 2, 'TotalUnit' => 3, 'OriginalTotalUnit' => 4, 'BuyPrice' => 5, 'SellPrice' => 6, 'BuyDate' => 7, 'SellDate' => 8, 'TradeDate' => 9, 'Replica' => 10, 'Status' => 11, 'SellingDatetime' => 12, ),
+		BasePeer::TYPE_COLNAME => array (GgSharePeer::ID => 0, GgSharePeer::UID => 1, GgSharePeer::ACCOUNT_TYPE => 2, GgSharePeer::TOTAL_UNIT => 3, GgSharePeer::ORIGINAL_TOTAL_UNIT => 4, GgSharePeer::BUY_PRICE => 5, GgSharePeer::SELL_PRICE => 6, GgSharePeer::BUY_DATE => 7, GgSharePeer::SELL_DATE => 8, GgSharePeer::TRADE_DATE => 9, GgSharePeer::REPLICA => 10, GgSharePeer::STATUS => 11, GgSharePeer::SELLING_DATETIME => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'account_type' => 2, 'total_unit' => 3, 'original_total_unit' => 4, 'buy_price' => 5, 'sell_price' => 6, 'buy_date' => 7, 'sell_date' => 8, 'trade_date' => 9, 'replica' => 10, 'status' => 11, 'selling_datetime' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -127,7 +133,11 @@ abstract class BaseGgSharePeer {
 
 		$criteria->addSelectColumn(GgSharePeer::UID);
 
+		$criteria->addSelectColumn(GgSharePeer::ACCOUNT_TYPE);
+
 		$criteria->addSelectColumn(GgSharePeer::TOTAL_UNIT);
+
+		$criteria->addSelectColumn(GgSharePeer::ORIGINAL_TOTAL_UNIT);
 
 		$criteria->addSelectColumn(GgSharePeer::BUY_PRICE);
 

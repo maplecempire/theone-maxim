@@ -76,17 +76,9 @@ class GgMemberCommMapBuilder {
 
 		$tMap->addColumn('LEVEL2', 'Level2', 'int', CreoleTypes::SMALLINT, true, null);
 
-		$tMap->addColumn('YEAR', 'Year', 'int', CreoleTypes::SMALLINT, true, null);
-
-		$tMap->addColumn('MONTH', 'Month', 'int', CreoleTypes::TINYINT, true, null);
-
-		$tMap->addColumn('WEEK', 'Week', 'int', CreoleTypes::TINYINT, true, null);
-
-		$tMap->addColumn('DAY', 'Day', 'int', CreoleTypes::TINYINT, true, null);
-
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('DESCR', 'Descr', 'string', CreoleTypes::LONGVARCHAR, true, null);
+		$tMap->addColumn('DESCR', 'Descr', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('BONUS_DATE', 'BonusDate', 'int', CreoleTypes::DATE, true, null);
 

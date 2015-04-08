@@ -13,7 +13,7 @@ abstract class BaseGgMemberCfPeer {
 	const CLASS_DEFAULT = 'lib.model.GgMemberCf';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -21,6 +21,9 @@ abstract class BaseGgMemberCfPeer {
 
 	
 	const ID = 'gg_member_cf.ID';
+
+	
+	const TREE_UPLINE_DIST_ID = 'gg_member_cf.TREE_UPLINE_DIST_ID';
 
 	
 	const UID = 'gg_member_cf.UID';
@@ -47,23 +50,26 @@ abstract class BaseGgMemberCfPeer {
 	const CDATE = 'gg_member_cf.CDATE';
 
 	
+	const DESCR = 'gg_member_cf.DESCR';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Leg', 'VolumeType', 'Bv', 'Amount', 'PairAmount', 'FlashAmount', 'Cdate', ),
-		BasePeer::TYPE_COLNAME => array (GgMemberCfPeer::ID, GgMemberCfPeer::UID, GgMemberCfPeer::LEG, GgMemberCfPeer::VOLUME_TYPE, GgMemberCfPeer::BV, GgMemberCfPeer::AMOUNT, GgMemberCfPeer::PAIR_AMOUNT, GgMemberCfPeer::FLASH_AMOUNT, GgMemberCfPeer::CDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'leg', 'volume_type', 'bv', 'amount', 'pair_amount', 'flash_amount', 'cdate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'TreeUplineDistId', 'Uid', 'Leg', 'VolumeType', 'Bv', 'Amount', 'PairAmount', 'FlashAmount', 'Cdate', 'Descr', ),
+		BasePeer::TYPE_COLNAME => array (GgMemberCfPeer::ID, GgMemberCfPeer::TREE_UPLINE_DIST_ID, GgMemberCfPeer::UID, GgMemberCfPeer::LEG, GgMemberCfPeer::VOLUME_TYPE, GgMemberCfPeer::BV, GgMemberCfPeer::AMOUNT, GgMemberCfPeer::PAIR_AMOUNT, GgMemberCfPeer::FLASH_AMOUNT, GgMemberCfPeer::CDATE, GgMemberCfPeer::DESCR, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'tree_upline_dist_id', 'uid', 'leg', 'volume_type', 'bv', 'amount', 'pair_amount', 'flash_amount', 'cdate', 'descr', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Leg' => 2, 'VolumeType' => 3, 'Bv' => 4, 'Amount' => 5, 'PairAmount' => 6, 'FlashAmount' => 7, 'Cdate' => 8, ),
-		BasePeer::TYPE_COLNAME => array (GgMemberCfPeer::ID => 0, GgMemberCfPeer::UID => 1, GgMemberCfPeer::LEG => 2, GgMemberCfPeer::VOLUME_TYPE => 3, GgMemberCfPeer::BV => 4, GgMemberCfPeer::AMOUNT => 5, GgMemberCfPeer::PAIR_AMOUNT => 6, GgMemberCfPeer::FLASH_AMOUNT => 7, GgMemberCfPeer::CDATE => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'leg' => 2, 'volume_type' => 3, 'bv' => 4, 'amount' => 5, 'pair_amount' => 6, 'flash_amount' => 7, 'cdate' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'TreeUplineDistId' => 1, 'Uid' => 2, 'Leg' => 3, 'VolumeType' => 4, 'Bv' => 5, 'Amount' => 6, 'PairAmount' => 7, 'FlashAmount' => 8, 'Cdate' => 9, 'Descr' => 10, ),
+		BasePeer::TYPE_COLNAME => array (GgMemberCfPeer::ID => 0, GgMemberCfPeer::TREE_UPLINE_DIST_ID => 1, GgMemberCfPeer::UID => 2, GgMemberCfPeer::LEG => 3, GgMemberCfPeer::VOLUME_TYPE => 4, GgMemberCfPeer::BV => 5, GgMemberCfPeer::AMOUNT => 6, GgMemberCfPeer::PAIR_AMOUNT => 7, GgMemberCfPeer::FLASH_AMOUNT => 8, GgMemberCfPeer::CDATE => 9, GgMemberCfPeer::DESCR => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'tree_upline_dist_id' => 1, 'uid' => 2, 'leg' => 3, 'volume_type' => 4, 'bv' => 5, 'amount' => 6, 'pair_amount' => 7, 'flash_amount' => 8, 'cdate' => 9, 'descr' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -119,6 +125,8 @@ abstract class BaseGgMemberCfPeer {
 
 		$criteria->addSelectColumn(GgMemberCfPeer::ID);
 
+		$criteria->addSelectColumn(GgMemberCfPeer::TREE_UPLINE_DIST_ID);
+
 		$criteria->addSelectColumn(GgMemberCfPeer::UID);
 
 		$criteria->addSelectColumn(GgMemberCfPeer::LEG);
@@ -134,6 +142,8 @@ abstract class BaseGgMemberCfPeer {
 		$criteria->addSelectColumn(GgMemberCfPeer::FLASH_AMOUNT);
 
 		$criteria->addSelectColumn(GgMemberCfPeer::CDATE);
+
+		$criteria->addSelectColumn(GgMemberCfPeer::DESCR);
 
 	}
 

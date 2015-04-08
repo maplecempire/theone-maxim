@@ -117,6 +117,26 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 
 
 	
+	protected $eswallet = 0;
+
+
+	
+	protected $ewallet = 0;
+
+
+	
+	protected $cwallet = 0;
+
+
+	
+	protected $rtwallet = 0;
+
+
+	
+	protected $iouwallet = 0;
+
+
+	
 	protected $collected;
 
 
@@ -344,6 +364,41 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 	{
 
 		return $this->payment_type;
+	}
+
+	
+	public function getEswallet()
+	{
+
+		return $this->eswallet;
+	}
+
+	
+	public function getEwallet()
+	{
+
+		return $this->ewallet;
+	}
+
+	
+	public function getCwallet()
+	{
+
+		return $this->cwallet;
+	}
+
+	
+	public function getRtwallet()
+	{
+
+		return $this->rtwallet;
+	}
+
+	
+	public function getIouwallet()
+	{
+
+		return $this->iouwallet;
 	}
 
 	
@@ -793,6 +848,56 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setEswallet($v)
+	{
+
+		if ($this->eswallet !== $v || $v === 0) {
+			$this->eswallet = $v;
+			$this->modifiedColumns[] = GgPurchasePeer::ESWALLET;
+		}
+
+	} 
+	
+	public function setEwallet($v)
+	{
+
+		if ($this->ewallet !== $v || $v === 0) {
+			$this->ewallet = $v;
+			$this->modifiedColumns[] = GgPurchasePeer::EWALLET;
+		}
+
+	} 
+	
+	public function setCwallet($v)
+	{
+
+		if ($this->cwallet !== $v || $v === 0) {
+			$this->cwallet = $v;
+			$this->modifiedColumns[] = GgPurchasePeer::CWALLET;
+		}
+
+	} 
+	
+	public function setRtwallet($v)
+	{
+
+		if ($this->rtwallet !== $v || $v === 0) {
+			$this->rtwallet = $v;
+			$this->modifiedColumns[] = GgPurchasePeer::RTWALLET;
+		}
+
+	} 
+	
+	public function setIouwallet($v)
+	{
+
+		if ($this->iouwallet !== $v || $v === 0) {
+			$this->iouwallet = $v;
+			$this->modifiedColumns[] = GgPurchasePeer::IOUWALLET;
+		}
+
+	} 
+	
 	public function setCollected($v)
 	{
 
@@ -982,29 +1087,39 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 
 			$this->payment_type = $rs->getString($startcol + 26);
 
-			$this->collected = $rs->getString($startcol + 27);
+			$this->eswallet = $rs->getFloat($startcol + 27);
 
-			$this->collected_date = $rs->getTimestamp($startcol + 28, null);
+			$this->ewallet = $rs->getFloat($startcol + 28);
 
-			$this->first_sale = $rs->getString($startcol + 29);
+			$this->cwallet = $rs->getFloat($startcol + 29);
 
-			$this->no_bv = $rs->getString($startcol + 30);
+			$this->rtwallet = $rs->getFloat($startcol + 30);
 
-			$this->rank_a = $rs->getFloat($startcol + 31);
+			$this->iouwallet = $rs->getFloat($startcol + 31);
 
-			$this->status = $rs->getString($startcol + 32);
+			$this->collected = $rs->getString($startcol + 32);
 
-			$this->remark = $rs->getString($startcol + 33);
+			$this->collected_date = $rs->getTimestamp($startcol + 33, null);
 
-			$this->cdate = $rs->getTimestamp($startcol + 34, null);
+			$this->first_sale = $rs->getString($startcol + 34);
 
-			$this->edate = $rs->getTimestamp($startcol + 35, null);
+			$this->no_bv = $rs->getString($startcol + 35);
+
+			$this->rank_a = $rs->getFloat($startcol + 36);
+
+			$this->status = $rs->getString($startcol + 37);
+
+			$this->remark = $rs->getString($startcol + 38);
+
+			$this->cdate = $rs->getTimestamp($startcol + 39, null);
+
+			$this->edate = $rs->getTimestamp($startcol + 40, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 36; 
+						return $startcol + 41; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgPurchase object", $e);
 		}
@@ -1213,30 +1328,45 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 				return $this->getPaymentType();
 				break;
 			case 27:
-				return $this->getCollected();
+				return $this->getEswallet();
 				break;
 			case 28:
-				return $this->getCollectedDate();
+				return $this->getEwallet();
 				break;
 			case 29:
-				return $this->getFirstSale();
+				return $this->getCwallet();
 				break;
 			case 30:
-				return $this->getNoBv();
+				return $this->getRtwallet();
 				break;
 			case 31:
-				return $this->getRankA();
+				return $this->getIouwallet();
 				break;
 			case 32:
-				return $this->getStatus();
+				return $this->getCollected();
 				break;
 			case 33:
-				return $this->getRemark();
+				return $this->getCollectedDate();
 				break;
 			case 34:
-				return $this->getCdate();
+				return $this->getFirstSale();
 				break;
 			case 35:
+				return $this->getNoBv();
+				break;
+			case 36:
+				return $this->getRankA();
+				break;
+			case 37:
+				return $this->getStatus();
+				break;
+			case 38:
+				return $this->getRemark();
+				break;
+			case 39:
+				return $this->getCdate();
+				break;
+			case 40:
 				return $this->getEdate();
 				break;
 			default:
@@ -1276,15 +1406,20 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 			$keys[24] => $this->getTotalCp(),
 			$keys[25] => $this->getDeliveryCost(),
 			$keys[26] => $this->getPaymentType(),
-			$keys[27] => $this->getCollected(),
-			$keys[28] => $this->getCollectedDate(),
-			$keys[29] => $this->getFirstSale(),
-			$keys[30] => $this->getNoBv(),
-			$keys[31] => $this->getRankA(),
-			$keys[32] => $this->getStatus(),
-			$keys[33] => $this->getRemark(),
-			$keys[34] => $this->getCdate(),
-			$keys[35] => $this->getEdate(),
+			$keys[27] => $this->getEswallet(),
+			$keys[28] => $this->getEwallet(),
+			$keys[29] => $this->getCwallet(),
+			$keys[30] => $this->getRtwallet(),
+			$keys[31] => $this->getIouwallet(),
+			$keys[32] => $this->getCollected(),
+			$keys[33] => $this->getCollectedDate(),
+			$keys[34] => $this->getFirstSale(),
+			$keys[35] => $this->getNoBv(),
+			$keys[36] => $this->getRankA(),
+			$keys[37] => $this->getStatus(),
+			$keys[38] => $this->getRemark(),
+			$keys[39] => $this->getCdate(),
+			$keys[40] => $this->getEdate(),
 		);
 		return $result;
 	}
@@ -1382,30 +1517,45 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 				$this->setPaymentType($value);
 				break;
 			case 27:
-				$this->setCollected($value);
+				$this->setEswallet($value);
 				break;
 			case 28:
-				$this->setCollectedDate($value);
+				$this->setEwallet($value);
 				break;
 			case 29:
-				$this->setFirstSale($value);
+				$this->setCwallet($value);
 				break;
 			case 30:
-				$this->setNoBv($value);
+				$this->setRtwallet($value);
 				break;
 			case 31:
-				$this->setRankA($value);
+				$this->setIouwallet($value);
 				break;
 			case 32:
-				$this->setStatus($value);
+				$this->setCollected($value);
 				break;
 			case 33:
-				$this->setRemark($value);
+				$this->setCollectedDate($value);
 				break;
 			case 34:
-				$this->setCdate($value);
+				$this->setFirstSale($value);
 				break;
 			case 35:
+				$this->setNoBv($value);
+				break;
+			case 36:
+				$this->setRankA($value);
+				break;
+			case 37:
+				$this->setStatus($value);
+				break;
+			case 38:
+				$this->setRemark($value);
+				break;
+			case 39:
+				$this->setCdate($value);
+				break;
+			case 40:
 				$this->setEdate($value);
 				break;
 		} 	}
@@ -1442,15 +1592,20 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[24], $arr)) $this->setTotalCp($arr[$keys[24]]);
 		if (array_key_exists($keys[25], $arr)) $this->setDeliveryCost($arr[$keys[25]]);
 		if (array_key_exists($keys[26], $arr)) $this->setPaymentType($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setCollected($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setCollectedDate($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setFirstSale($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setNoBv($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setRankA($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setStatus($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setRemark($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setCdate($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setEdate($arr[$keys[35]]);
+		if (array_key_exists($keys[27], $arr)) $this->setEswallet($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setEwallet($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setCwallet($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setRtwallet($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setIouwallet($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCollected($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCollectedDate($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setFirstSale($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setNoBv($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setRankA($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setStatus($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setRemark($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setCdate($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setEdate($arr[$keys[40]]);
 	}
 
 	
@@ -1485,6 +1640,11 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgPurchasePeer::TOTAL_CP)) $criteria->add(GgPurchasePeer::TOTAL_CP, $this->total_cp);
 		if ($this->isColumnModified(GgPurchasePeer::DELIVERY_COST)) $criteria->add(GgPurchasePeer::DELIVERY_COST, $this->delivery_cost);
 		if ($this->isColumnModified(GgPurchasePeer::PAYMENT_TYPE)) $criteria->add(GgPurchasePeer::PAYMENT_TYPE, $this->payment_type);
+		if ($this->isColumnModified(GgPurchasePeer::ESWALLET)) $criteria->add(GgPurchasePeer::ESWALLET, $this->eswallet);
+		if ($this->isColumnModified(GgPurchasePeer::EWALLET)) $criteria->add(GgPurchasePeer::EWALLET, $this->ewallet);
+		if ($this->isColumnModified(GgPurchasePeer::CWALLET)) $criteria->add(GgPurchasePeer::CWALLET, $this->cwallet);
+		if ($this->isColumnModified(GgPurchasePeer::RTWALLET)) $criteria->add(GgPurchasePeer::RTWALLET, $this->rtwallet);
+		if ($this->isColumnModified(GgPurchasePeer::IOUWALLET)) $criteria->add(GgPurchasePeer::IOUWALLET, $this->iouwallet);
 		if ($this->isColumnModified(GgPurchasePeer::COLLECTED)) $criteria->add(GgPurchasePeer::COLLECTED, $this->collected);
 		if ($this->isColumnModified(GgPurchasePeer::COLLECTED_DATE)) $criteria->add(GgPurchasePeer::COLLECTED_DATE, $this->collected_date);
 		if ($this->isColumnModified(GgPurchasePeer::FIRST_SALE)) $criteria->add(GgPurchasePeer::FIRST_SALE, $this->first_sale);
@@ -1575,6 +1735,16 @@ abstract class BaseGgPurchase extends BaseObject  implements Persistent {
 		$copyObj->setDeliveryCost($this->delivery_cost);
 
 		$copyObj->setPaymentType($this->payment_type);
+
+		$copyObj->setEswallet($this->eswallet);
+
+		$copyObj->setEwallet($this->ewallet);
+
+		$copyObj->setCwallet($this->cwallet);
+
+		$copyObj->setRtwallet($this->rtwallet);
+
+		$copyObj->setIouwallet($this->iouwallet);
 
 		$copyObj->setCollected($this->collected);
 

@@ -21,14 +21,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 
 
 	
-	protected $completed;
-
-
-	
-	protected $success;
-
-
-	
 	protected $ended;
 
 
@@ -42,10 +34,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 
 	
 	protected $day;
-
-
-	
-	protected $week;
 
 
 	
@@ -94,20 +82,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getCompleted()
-	{
-
-		return $this->completed;
-	}
-
-	
-	public function getSuccess()
-	{
-
-		return $this->success;
-	}
-
-	
 	public function getEnded($format = 'Y-m-d H:i:s')
 	{
 
@@ -148,13 +122,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 	{
 
 		return $this->day;
-	}
-
-	
-	public function getWeek()
-	{
-
-		return $this->week;
 	}
 
 	
@@ -206,34 +173,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 		if ($this->started !== $ts) {
 			$this->started = $ts;
 			$this->modifiedColumns[] = GgCronPeer::STARTED;
-		}
-
-	} 
-	
-	public function setCompleted($v)
-	{
-
-						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->completed !== $v) {
-			$this->completed = $v;
-			$this->modifiedColumns[] = GgCronPeer::COMPLETED;
-		}
-
-	} 
-	
-	public function setSuccess($v)
-	{
-
-						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->success !== $v) {
-			$this->success = $v;
-			$this->modifiedColumns[] = GgCronPeer::SUCCESS;
 		}
 
 	} 
@@ -297,20 +236,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setWeek($v)
-	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
-
-		if ($this->week !== $v) {
-			$this->week = $v;
-			$this->modifiedColumns[] = GgCronPeer::WEEK;
-		}
-
-	} 
-	
 	public function setMessage($v)
 	{
 
@@ -335,27 +260,21 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 
 			$this->started = $rs->getTimestamp($startcol + 2, null);
 
-			$this->completed = $rs->getString($startcol + 3);
+			$this->ended = $rs->getTimestamp($startcol + 3, null);
 
-			$this->success = $rs->getString($startcol + 4);
+			$this->year = $rs->getInt($startcol + 4);
 
-			$this->ended = $rs->getTimestamp($startcol + 5, null);
+			$this->month = $rs->getInt($startcol + 5);
 
-			$this->year = $rs->getInt($startcol + 6);
+			$this->day = $rs->getInt($startcol + 6);
 
-			$this->month = $rs->getInt($startcol + 7);
-
-			$this->day = $rs->getInt($startcol + 8);
-
-			$this->week = $rs->getInt($startcol + 9);
-
-			$this->message = $rs->getString($startcol + 10);
+			$this->message = $rs->getString($startcol + 7);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 8; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgCron object", $e);
 		}
@@ -492,27 +411,18 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 				return $this->getStarted();
 				break;
 			case 3:
-				return $this->getCompleted();
-				break;
-			case 4:
-				return $this->getSuccess();
-				break;
-			case 5:
 				return $this->getEnded();
 				break;
-			case 6:
+			case 4:
 				return $this->getYear();
 				break;
-			case 7:
+			case 5:
 				return $this->getMonth();
 				break;
-			case 8:
+			case 6:
 				return $this->getDay();
 				break;
-			case 9:
-				return $this->getWeek();
-				break;
-			case 10:
+			case 7:
 				return $this->getMessage();
 				break;
 			default:
@@ -528,14 +438,11 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getType(),
 			$keys[2] => $this->getStarted(),
-			$keys[3] => $this->getCompleted(),
-			$keys[4] => $this->getSuccess(),
-			$keys[5] => $this->getEnded(),
-			$keys[6] => $this->getYear(),
-			$keys[7] => $this->getMonth(),
-			$keys[8] => $this->getDay(),
-			$keys[9] => $this->getWeek(),
-			$keys[10] => $this->getMessage(),
+			$keys[3] => $this->getEnded(),
+			$keys[4] => $this->getYear(),
+			$keys[5] => $this->getMonth(),
+			$keys[6] => $this->getDay(),
+			$keys[7] => $this->getMessage(),
 		);
 		return $result;
 	}
@@ -561,27 +468,18 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 				$this->setStarted($value);
 				break;
 			case 3:
-				$this->setCompleted($value);
-				break;
-			case 4:
-				$this->setSuccess($value);
-				break;
-			case 5:
 				$this->setEnded($value);
 				break;
-			case 6:
+			case 4:
 				$this->setYear($value);
 				break;
-			case 7:
+			case 5:
 				$this->setMonth($value);
 				break;
-			case 8:
+			case 6:
 				$this->setDay($value);
 				break;
-			case 9:
-				$this->setWeek($value);
-				break;
-			case 10:
+			case 7:
 				$this->setMessage($value);
 				break;
 		} 	}
@@ -594,14 +492,11 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setType($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setStarted($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCompleted($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setSuccess($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setEnded($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setYear($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setMonth($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setDay($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setWeek($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setMessage($arr[$keys[10]]);
+		if (array_key_exists($keys[3], $arr)) $this->setEnded($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setYear($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonth($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDay($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMessage($arr[$keys[7]]);
 	}
 
 	
@@ -612,13 +507,10 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgCronPeer::ID)) $criteria->add(GgCronPeer::ID, $this->id);
 		if ($this->isColumnModified(GgCronPeer::TYPE)) $criteria->add(GgCronPeer::TYPE, $this->type);
 		if ($this->isColumnModified(GgCronPeer::STARTED)) $criteria->add(GgCronPeer::STARTED, $this->started);
-		if ($this->isColumnModified(GgCronPeer::COMPLETED)) $criteria->add(GgCronPeer::COMPLETED, $this->completed);
-		if ($this->isColumnModified(GgCronPeer::SUCCESS)) $criteria->add(GgCronPeer::SUCCESS, $this->success);
 		if ($this->isColumnModified(GgCronPeer::ENDED)) $criteria->add(GgCronPeer::ENDED, $this->ended);
 		if ($this->isColumnModified(GgCronPeer::YEAR)) $criteria->add(GgCronPeer::YEAR, $this->year);
 		if ($this->isColumnModified(GgCronPeer::MONTH)) $criteria->add(GgCronPeer::MONTH, $this->month);
 		if ($this->isColumnModified(GgCronPeer::DAY)) $criteria->add(GgCronPeer::DAY, $this->day);
-		if ($this->isColumnModified(GgCronPeer::WEEK)) $criteria->add(GgCronPeer::WEEK, $this->week);
 		if ($this->isColumnModified(GgCronPeer::MESSAGE)) $criteria->add(GgCronPeer::MESSAGE, $this->message);
 
 		return $criteria;
@@ -654,10 +546,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 
 		$copyObj->setStarted($this->started);
 
-		$copyObj->setCompleted($this->completed);
-
-		$copyObj->setSuccess($this->success);
-
 		$copyObj->setEnded($this->ended);
 
 		$copyObj->setYear($this->year);
@@ -665,8 +553,6 @@ abstract class BaseGgCron extends BaseObject  implements Persistent {
 		$copyObj->setMonth($this->month);
 
 		$copyObj->setDay($this->day);
-
-		$copyObj->setWeek($this->week);
 
 		$copyObj->setMessage($this->message);
 

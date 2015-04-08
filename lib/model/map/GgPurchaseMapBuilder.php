@@ -86,6 +86,16 @@ class GgPurchaseMapBuilder {
 
 		$tMap->addColumn('PAYMENT_TYPE', 'PaymentType', 'string', CreoleTypes::VARCHAR, true, 20);
 
+		$tMap->addColumn('ESWALLET', 'Eswallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('EWALLET', 'Ewallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('CWALLET', 'Cwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('RTWALLET', 'Rtwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
+		$tMap->addColumn('IOUWALLET', 'Iouwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
 		$tMap->addColumn('COLLECTED', 'Collected', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('COLLECTED_DATE', 'CollectedDate', 'int', CreoleTypes::TIMESTAMP, true, null);

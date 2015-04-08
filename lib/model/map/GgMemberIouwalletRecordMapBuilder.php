@@ -38,6 +38,8 @@ class GgMemberIouwalletRecordMapBuilder {
 
 		$tMap->addColumn('AID', 'Aid', 'string', CreoleTypes::BIGINT, true, null);
 
+		$tMap->addColumn('ACTION_TYPE', 'ActionType', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addColumn('TYPE', 'Type', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('AMOUNT', 'Amount', 'double', CreoleTypes::DECIMAL, true, 15);

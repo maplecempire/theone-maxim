@@ -34,6 +34,8 @@ class GgMemberCfMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'string', CreoleTypes::BIGINT, true, null);
 
+		$tMap->addColumn('TREE_UPLINE_DIST_ID', 'TreeUplineDistId', 'int', CreoleTypes::INTEGER, true, null);
+
 		$tMap->addColumn('UID', 'Uid', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('LEG', 'Leg', 'int', CreoleTypes::SMALLINT, true, null);
@@ -49,6 +51,8 @@ class GgMemberCfMapBuilder {
 		$tMap->addColumn('FLASH_AMOUNT', 'FlashAmount', 'double', CreoleTypes::DECIMAL, true, 15);
 
 		$tMap->addColumn('CDATE', 'Cdate', 'int', CreoleTypes::DATE, true, null);
+
+		$tMap->addColumn('DESCR', 'Descr', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 	} 
 } 

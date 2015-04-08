@@ -46,25 +46,51 @@ class GgMemberWithdrawMapBuilder {
 
 		$tMap->addColumn('CONVERT_AMOUNT', 'ConvertAmount', 'double', CreoleTypes::DECIMAL, true, 15);
 
-		$tMap->addColumn('PAYMENT_TYPE', 'PaymentType', 'string', CreoleTypes::VARCHAR, true, 1);
+		$tMap->addColumn('PAYMENT_TYPE', 'PaymentType', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ACC_NAME', 'AccName', 'string', CreoleTypes::VARCHAR, true, 100);
+		$tMap->addColumn('BANK_NAME', 'BankName', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ACC_PAYEE_NAME', 'AccPayeeName', 'string', CreoleTypes::VARCHAR, true, 100);
+		$tMap->addColumn('BANK_BRANCH_NAME', 'BankBranchName', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ACC_NO', 'AccNo', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('BANK_ADDRESS', 'BankAddress', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('PAYMENT_DATE', 'PaymentDate', 'int', CreoleTypes::TIMESTAMP, true, null);
+		$tMap->addColumn('BANK_ACC_NO', 'BankAccNo', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('PAYMENT_REMARK', 'PaymentRemark', 'string', CreoleTypes::LONGVARCHAR, true, null);
+		$tMap->addColumn('BANK_HOLDER_NAME', 'BankHolderName', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, true, null);
+		$tMap->addColumn('BANK_SWIFT_CODE', 'BankSwiftCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('AUTOWIT', 'Autowit', 'string', CreoleTypes::VARCHAR, true, 1);
+		$tMap->addColumn('IACCOUNT', 'Iaccount', 'string', CreoleTypes::VARCHAR, false, 45);
+
+		$tMap->addColumn('IACCOUNT_USERNAME', 'IaccountUsername', 'string', CreoleTypes::VARCHAR, false, 200);
+
+		$tMap->addColumn('PAYMENT_DATE', 'PaymentDate', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('PAYMENT_REMARK', 'PaymentRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('AUTOWIT', 'Autowit', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('CDATE', 'Cdate', 'int', CreoleTypes::TIMESTAMP, true, null);
+		$tMap->addColumn('CDATE', 'Cdate', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('LEADER_DIST_ID', 'LeaderDistId', 'int', CreoleTypes::INTEGER, true, null);
+
+		$tMap->addColumn('BRANCH_CODE', 'BranchCode', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('ABA_ROUTING', 'AbaRouting', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('BSB_CODE', 'BsbCode', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('TRANSIT_NUMBER', 'TransitNumber', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('IBAN', 'Iban', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('ACCOUNT_TYPE', 'AccountType', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('BANK_ACCOUNT_CURRENCY', 'BankAccountCurrency', 'string', CreoleTypes::VARCHAR, false, 100);
 
 	} 
 } 

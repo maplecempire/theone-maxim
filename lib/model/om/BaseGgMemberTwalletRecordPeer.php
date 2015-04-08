@@ -13,7 +13,7 @@ abstract class BaseGgMemberTwalletRecordPeer {
 	const CLASS_DEFAULT = 'lib.model.GgMemberTwalletRecord';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,6 +27,9 @@ abstract class BaseGgMemberTwalletRecordPeer {
 
 	
 	const AID = 'gg_member_twallet_record.AID';
+
+	
+	const ACTION_TYPE = 'gg_member_twallet_record.ACTION_TYPE';
 
 	
 	const TYPE = 'gg_member_twallet_record.TYPE';
@@ -49,18 +52,18 @@ abstract class BaseGgMemberTwalletRecordPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Aid', 'Type', 'Amount', 'Bal', 'Descr', 'Cdate', ),
-		BasePeer::TYPE_COLNAME => array (GgMemberTwalletRecordPeer::ID, GgMemberTwalletRecordPeer::UID, GgMemberTwalletRecordPeer::AID, GgMemberTwalletRecordPeer::TYPE, GgMemberTwalletRecordPeer::AMOUNT, GgMemberTwalletRecordPeer::BAL, GgMemberTwalletRecordPeer::DESCR, GgMemberTwalletRecordPeer::CDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'aid', 'type', 'amount', 'bal', 'descr', 'cdate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Aid', 'ActionType', 'Type', 'Amount', 'Bal', 'Descr', 'Cdate', ),
+		BasePeer::TYPE_COLNAME => array (GgMemberTwalletRecordPeer::ID, GgMemberTwalletRecordPeer::UID, GgMemberTwalletRecordPeer::AID, GgMemberTwalletRecordPeer::ACTION_TYPE, GgMemberTwalletRecordPeer::TYPE, GgMemberTwalletRecordPeer::AMOUNT, GgMemberTwalletRecordPeer::BAL, GgMemberTwalletRecordPeer::DESCR, GgMemberTwalletRecordPeer::CDATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'aid', 'action_type', 'type', 'amount', 'bal', 'descr', 'cdate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Aid' => 2, 'Type' => 3, 'Amount' => 4, 'Bal' => 5, 'Descr' => 6, 'Cdate' => 7, ),
-		BasePeer::TYPE_COLNAME => array (GgMemberTwalletRecordPeer::ID => 0, GgMemberTwalletRecordPeer::UID => 1, GgMemberTwalletRecordPeer::AID => 2, GgMemberTwalletRecordPeer::TYPE => 3, GgMemberTwalletRecordPeer::AMOUNT => 4, GgMemberTwalletRecordPeer::BAL => 5, GgMemberTwalletRecordPeer::DESCR => 6, GgMemberTwalletRecordPeer::CDATE => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'aid' => 2, 'type' => 3, 'amount' => 4, 'bal' => 5, 'descr' => 6, 'cdate' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Aid' => 2, 'ActionType' => 3, 'Type' => 4, 'Amount' => 5, 'Bal' => 6, 'Descr' => 7, 'Cdate' => 8, ),
+		BasePeer::TYPE_COLNAME => array (GgMemberTwalletRecordPeer::ID => 0, GgMemberTwalletRecordPeer::UID => 1, GgMemberTwalletRecordPeer::AID => 2, GgMemberTwalletRecordPeer::ACTION_TYPE => 3, GgMemberTwalletRecordPeer::TYPE => 4, GgMemberTwalletRecordPeer::AMOUNT => 5, GgMemberTwalletRecordPeer::BAL => 6, GgMemberTwalletRecordPeer::DESCR => 7, GgMemberTwalletRecordPeer::CDATE => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'aid' => 2, 'action_type' => 3, 'type' => 4, 'amount' => 5, 'bal' => 6, 'descr' => 7, 'cdate' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -119,6 +122,8 @@ abstract class BaseGgMemberTwalletRecordPeer {
 		$criteria->addSelectColumn(GgMemberTwalletRecordPeer::UID);
 
 		$criteria->addSelectColumn(GgMemberTwalletRecordPeer::AID);
+
+		$criteria->addSelectColumn(GgMemberTwalletRecordPeer::ACTION_TYPE);
 
 		$criteria->addSelectColumn(GgMemberTwalletRecordPeer::TYPE);
 

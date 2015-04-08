@@ -13,7 +13,7 @@ abstract class BaseGgShareTradingLedgerPeer {
 	const CLASS_DEFAULT = 'lib.model.GgShareTradingLedger';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseGgShareTradingLedgerPeer {
 
 	
 	const TRADING_ID = 'gg_share_trading_ledger.TRADING_ID';
+
+	
+	const TRADING_ID2 = 'gg_share_trading_ledger.TRADING_ID2';
 
 	
 	const UID = 'gg_share_trading_ledger.UID';
@@ -52,18 +55,18 @@ abstract class BaseGgShareTradingLedgerPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'TradingId', 'Uid', 'BuyUid', 'SellUid', 'Price', 'Qty', 'Type', 'Cdate', ),
-		BasePeer::TYPE_COLNAME => array (GgShareTradingLedgerPeer::ID, GgShareTradingLedgerPeer::TRADING_ID, GgShareTradingLedgerPeer::UID, GgShareTradingLedgerPeer::BUY_UID, GgShareTradingLedgerPeer::SELL_UID, GgShareTradingLedgerPeer::PRICE, GgShareTradingLedgerPeer::QTY, GgShareTradingLedgerPeer::TYPE, GgShareTradingLedgerPeer::CDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'trading_id', 'uid', 'buy_uid', 'sell_uid', 'price', 'qty', 'type', 'cdate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'TradingId', 'TradingId2', 'Uid', 'BuyUid', 'SellUid', 'Price', 'Qty', 'Type', 'Cdate', ),
+		BasePeer::TYPE_COLNAME => array (GgShareTradingLedgerPeer::ID, GgShareTradingLedgerPeer::TRADING_ID, GgShareTradingLedgerPeer::TRADING_ID2, GgShareTradingLedgerPeer::UID, GgShareTradingLedgerPeer::BUY_UID, GgShareTradingLedgerPeer::SELL_UID, GgShareTradingLedgerPeer::PRICE, GgShareTradingLedgerPeer::QTY, GgShareTradingLedgerPeer::TYPE, GgShareTradingLedgerPeer::CDATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'trading_id', 'trading_id2', 'uid', 'buy_uid', 'sell_uid', 'price', 'qty', 'type', 'cdate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'TradingId' => 1, 'Uid' => 2, 'BuyUid' => 3, 'SellUid' => 4, 'Price' => 5, 'Qty' => 6, 'Type' => 7, 'Cdate' => 8, ),
-		BasePeer::TYPE_COLNAME => array (GgShareTradingLedgerPeer::ID => 0, GgShareTradingLedgerPeer::TRADING_ID => 1, GgShareTradingLedgerPeer::UID => 2, GgShareTradingLedgerPeer::BUY_UID => 3, GgShareTradingLedgerPeer::SELL_UID => 4, GgShareTradingLedgerPeer::PRICE => 5, GgShareTradingLedgerPeer::QTY => 6, GgShareTradingLedgerPeer::TYPE => 7, GgShareTradingLedgerPeer::CDATE => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'trading_id' => 1, 'uid' => 2, 'buy_uid' => 3, 'sell_uid' => 4, 'price' => 5, 'qty' => 6, 'type' => 7, 'cdate' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'TradingId' => 1, 'TradingId2' => 2, 'Uid' => 3, 'BuyUid' => 4, 'SellUid' => 5, 'Price' => 6, 'Qty' => 7, 'Type' => 8, 'Cdate' => 9, ),
+		BasePeer::TYPE_COLNAME => array (GgShareTradingLedgerPeer::ID => 0, GgShareTradingLedgerPeer::TRADING_ID => 1, GgShareTradingLedgerPeer::TRADING_ID2 => 2, GgShareTradingLedgerPeer::UID => 3, GgShareTradingLedgerPeer::BUY_UID => 4, GgShareTradingLedgerPeer::SELL_UID => 5, GgShareTradingLedgerPeer::PRICE => 6, GgShareTradingLedgerPeer::QTY => 7, GgShareTradingLedgerPeer::TYPE => 8, GgShareTradingLedgerPeer::CDATE => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'trading_id' => 1, 'trading_id2' => 2, 'uid' => 3, 'buy_uid' => 4, 'sell_uid' => 5, 'price' => 6, 'qty' => 7, 'type' => 8, 'cdate' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -120,6 +123,8 @@ abstract class BaseGgShareTradingLedgerPeer {
 		$criteria->addSelectColumn(GgShareTradingLedgerPeer::ID);
 
 		$criteria->addSelectColumn(GgShareTradingLedgerPeer::TRADING_ID);
+
+		$criteria->addSelectColumn(GgShareTradingLedgerPeer::TRADING_ID2);
 
 		$criteria->addSelectColumn(GgShareTradingLedgerPeer::UID);
 

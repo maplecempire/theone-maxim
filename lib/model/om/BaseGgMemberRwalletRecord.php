@@ -21,6 +21,10 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 
 
 	
+	protected $action_type;
+
+
+	
 	protected $type;
 
 
@@ -64,6 +68,13 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 	{
 
 		return $this->aid;
+	}
+
+	
+	public function getActionType()
+	{
+
+		return $this->action_type;
 	}
 
 	
@@ -159,6 +170,20 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 
 	} 
 	
+	public function setActionType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->action_type !== $v) {
+			$this->action_type = $v;
+			$this->modifiedColumns[] = GgMemberRwalletRecordPeer::ACTION_TYPE;
+		}
+
+	} 
+	
 	public function setType($v)
 	{
 
@@ -234,21 +259,23 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 
 			$this->aid = $rs->getString($startcol + 2);
 
-			$this->type = $rs->getString($startcol + 3);
+			$this->action_type = $rs->getString($startcol + 3);
 
-			$this->amount = $rs->getFloat($startcol + 4);
+			$this->type = $rs->getString($startcol + 4);
 
-			$this->bal = $rs->getFloat($startcol + 5);
+			$this->amount = $rs->getFloat($startcol + 5);
 
-			$this->descr = $rs->getString($startcol + 6);
+			$this->bal = $rs->getFloat($startcol + 6);
 
-			$this->cdate = $rs->getTimestamp($startcol + 7, null);
+			$this->descr = $rs->getString($startcol + 7);
+
+			$this->cdate = $rs->getTimestamp($startcol + 8, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 9; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgMemberRwalletRecord object", $e);
 		}
@@ -385,18 +412,21 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 				return $this->getAid();
 				break;
 			case 3:
-				return $this->getType();
+				return $this->getActionType();
 				break;
 			case 4:
-				return $this->getAmount();
+				return $this->getType();
 				break;
 			case 5:
-				return $this->getBal();
+				return $this->getAmount();
 				break;
 			case 6:
-				return $this->getDescr();
+				return $this->getBal();
 				break;
 			case 7:
+				return $this->getDescr();
+				break;
+			case 8:
 				return $this->getCdate();
 				break;
 			default:
@@ -412,11 +442,12 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getUid(),
 			$keys[2] => $this->getAid(),
-			$keys[3] => $this->getType(),
-			$keys[4] => $this->getAmount(),
-			$keys[5] => $this->getBal(),
-			$keys[6] => $this->getDescr(),
-			$keys[7] => $this->getCdate(),
+			$keys[3] => $this->getActionType(),
+			$keys[4] => $this->getType(),
+			$keys[5] => $this->getAmount(),
+			$keys[6] => $this->getBal(),
+			$keys[7] => $this->getDescr(),
+			$keys[8] => $this->getCdate(),
 		);
 		return $result;
 	}
@@ -442,18 +473,21 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 				$this->setAid($value);
 				break;
 			case 3:
-				$this->setType($value);
+				$this->setActionType($value);
 				break;
 			case 4:
-				$this->setAmount($value);
+				$this->setType($value);
 				break;
 			case 5:
-				$this->setBal($value);
+				$this->setAmount($value);
 				break;
 			case 6:
-				$this->setDescr($value);
+				$this->setBal($value);
 				break;
 			case 7:
+				$this->setDescr($value);
+				break;
+			case 8:
 				$this->setCdate($value);
 				break;
 		} 	}
@@ -466,11 +500,12 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setUid($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setAid($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setType($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setAmount($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setBal($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setDescr($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCdate($arr[$keys[7]]);
+		if (array_key_exists($keys[3], $arr)) $this->setActionType($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setType($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAmount($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setBal($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDescr($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCdate($arr[$keys[8]]);
 	}
 
 	
@@ -481,6 +516,7 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::ID)) $criteria->add(GgMemberRwalletRecordPeer::ID, $this->id);
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::UID)) $criteria->add(GgMemberRwalletRecordPeer::UID, $this->uid);
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::AID)) $criteria->add(GgMemberRwalletRecordPeer::AID, $this->aid);
+		if ($this->isColumnModified(GgMemberRwalletRecordPeer::ACTION_TYPE)) $criteria->add(GgMemberRwalletRecordPeer::ACTION_TYPE, $this->action_type);
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::TYPE)) $criteria->add(GgMemberRwalletRecordPeer::TYPE, $this->type);
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::AMOUNT)) $criteria->add(GgMemberRwalletRecordPeer::AMOUNT, $this->amount);
 		if ($this->isColumnModified(GgMemberRwalletRecordPeer::BAL)) $criteria->add(GgMemberRwalletRecordPeer::BAL, $this->bal);
@@ -519,6 +555,8 @@ abstract class BaseGgMemberRwalletRecord extends BaseObject  implements Persiste
 		$copyObj->setUid($this->uid);
 
 		$copyObj->setAid($this->aid);
+
+		$copyObj->setActionType($this->action_type);
 
 		$copyObj->setType($this->type);
 

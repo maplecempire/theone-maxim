@@ -25,6 +25,11 @@ abstract class Mails {
     const EMAIL_SENDER = "account@maximtrader.com";
     const EMAIL_PASSWORD = "maximaccount";
 
+    const PIA_EMAIL_FROM = "pia@maximtrader.com";
+    const PIA_EMAIL_FROM_NOREPLY = "pia@maximtrader.com";
+    const PIA_EMAIL_SENDER = "pia@maximtrader.com";
+    const PIA_EMAIL_PASSWORD = "maximtraderpia868";
+
 //    const EMAIL_FROM = "account@maximtrader.com";
 //    const EMAIL_FROM_NOREPLY = "account@maximtrader.com";
 //    const EMAIL_SENDER = "account@maximtrader.com";

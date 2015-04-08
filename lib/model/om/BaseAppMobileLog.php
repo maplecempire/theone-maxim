@@ -157,8 +157,8 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 	public function setLogId($v)
 	{
 
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
 		}
 
 		if ($this->log_id !== $v) {
@@ -185,8 +185,8 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 	public function setUserId($v)
 	{
 
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
 		}
 
 		if ($this->user_id !== $v) {
@@ -241,8 +241,8 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 	public function setCreatedBy($v)
 	{
 
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
 		}
 
 		if ($this->created_by !== $v) {
@@ -272,8 +272,8 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 	public function setUpdatedBy($v)
 	{
 
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
 		}
 
 		if ($this->updated_by !== $v) {
@@ -304,11 +304,11 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->log_id = $rs->getInt($startcol + 0);
+			$this->log_id = $rs->getString($startcol + 0);
 
 			$this->access_ip = $rs->getString($startcol + 1);
 
-			$this->user_id = $rs->getInt($startcol + 2);
+			$this->user_id = $rs->getString($startcol + 2);
 
 			$this->trans_action = $rs->getString($startcol + 3);
 
@@ -316,11 +316,11 @@ abstract class BaseAppMobileLog extends BaseObject  implements Persistent {
 
 			$this->remark = $rs->getString($startcol + 5);
 
-			$this->created_by = $rs->getInt($startcol + 6);
+			$this->created_by = $rs->getString($startcol + 6);
 
 			$this->created_on = $rs->getTimestamp($startcol + 7, null);
 
-			$this->updated_by = $rs->getInt($startcol + 8);
+			$this->updated_by = $rs->getString($startcol + 8);
 
 			$this->updated_on = $rs->getTimestamp($startcol + 9, null);
 

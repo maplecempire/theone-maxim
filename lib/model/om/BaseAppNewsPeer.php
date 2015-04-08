@@ -38,16 +38,16 @@ abstract class BaseAppNewsPeer {
 	const NS_END_DATE = 'app_news.NS_END_DATE';
 
 	
-	const CREATED_ON = 'app_news.CREATED_ON';
-
-	
 	const CREATED_BY = 'app_news.CREATED_BY';
 
 	
-	const UPDATED_ON = 'app_news.UPDATED_ON';
+	const CREATED_ON = 'app_news.CREATED_ON';
 
 	
 	const UPDATED_BY = 'app_news.UPDATED_BY';
+
+	
+	const UPDATED_ON = 'app_news.UPDATED_ON';
 
 	
 	private static $phpNameMap = null;
@@ -55,17 +55,17 @@ abstract class BaseAppNewsPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'NsTitle', 'NsContent', 'NsStatus', 'NsStartDate', 'NsEndDate', 'CreatedOn', 'CreatedBy', 'UpdatedOn', 'UpdatedBy', ),
-		BasePeer::TYPE_COLNAME => array (AppNewsPeer::ID, AppNewsPeer::NS_TITLE, AppNewsPeer::NS_CONTENT, AppNewsPeer::NS_STATUS, AppNewsPeer::NS_START_DATE, AppNewsPeer::NS_END_DATE, AppNewsPeer::CREATED_ON, AppNewsPeer::CREATED_BY, AppNewsPeer::UPDATED_ON, AppNewsPeer::UPDATED_BY, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'ns_title', 'ns_content', 'ns_status', 'ns_start_date', 'ns_end_date', 'created_on', 'created_by', 'updated_on', 'updated_by', ),
+		BasePeer::TYPE_PHPNAME => array ('Id', 'NsTitle', 'NsContent', 'NsStatus', 'NsStartDate', 'NsEndDate', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (AppNewsPeer::ID, AppNewsPeer::NS_TITLE, AppNewsPeer::NS_CONTENT, AppNewsPeer::NS_STATUS, AppNewsPeer::NS_START_DATE, AppNewsPeer::NS_END_DATE, AppNewsPeer::CREATED_BY, AppNewsPeer::CREATED_ON, AppNewsPeer::UPDATED_BY, AppNewsPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'ns_title', 'ns_content', 'ns_status', 'ns_start_date', 'ns_end_date', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'NsTitle' => 1, 'NsContent' => 2, 'NsStatus' => 3, 'NsStartDate' => 4, 'NsEndDate' => 5, 'CreatedOn' => 6, 'CreatedBy' => 7, 'UpdatedOn' => 8, 'UpdatedBy' => 9, ),
-		BasePeer::TYPE_COLNAME => array (AppNewsPeer::ID => 0, AppNewsPeer::NS_TITLE => 1, AppNewsPeer::NS_CONTENT => 2, AppNewsPeer::NS_STATUS => 3, AppNewsPeer::NS_START_DATE => 4, AppNewsPeer::NS_END_DATE => 5, AppNewsPeer::CREATED_ON => 6, AppNewsPeer::CREATED_BY => 7, AppNewsPeer::UPDATED_ON => 8, AppNewsPeer::UPDATED_BY => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'ns_title' => 1, 'ns_content' => 2, 'ns_status' => 3, 'ns_start_date' => 4, 'ns_end_date' => 5, 'created_on' => 6, 'created_by' => 7, 'updated_on' => 8, 'updated_by' => 9, ),
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'NsTitle' => 1, 'NsContent' => 2, 'NsStatus' => 3, 'NsStartDate' => 4, 'NsEndDate' => 5, 'CreatedBy' => 6, 'CreatedOn' => 7, 'UpdatedBy' => 8, 'UpdatedOn' => 9, ),
+		BasePeer::TYPE_COLNAME => array (AppNewsPeer::ID => 0, AppNewsPeer::NS_TITLE => 1, AppNewsPeer::NS_CONTENT => 2, AppNewsPeer::NS_STATUS => 3, AppNewsPeer::NS_START_DATE => 4, AppNewsPeer::NS_END_DATE => 5, AppNewsPeer::CREATED_BY => 6, AppNewsPeer::CREATED_ON => 7, AppNewsPeer::UPDATED_BY => 8, AppNewsPeer::UPDATED_ON => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'ns_title' => 1, 'ns_content' => 2, 'ns_status' => 3, 'ns_start_date' => 4, 'ns_end_date' => 5, 'created_by' => 6, 'created_on' => 7, 'updated_by' => 8, 'updated_on' => 9, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
@@ -132,13 +132,13 @@ abstract class BaseAppNewsPeer {
 
 		$criteria->addSelectColumn(AppNewsPeer::NS_END_DATE);
 
-		$criteria->addSelectColumn(AppNewsPeer::CREATED_ON);
-
 		$criteria->addSelectColumn(AppNewsPeer::CREATED_BY);
 
-		$criteria->addSelectColumn(AppNewsPeer::UPDATED_ON);
+		$criteria->addSelectColumn(AppNewsPeer::CREATED_ON);
 
 		$criteria->addSelectColumn(AppNewsPeer::UPDATED_BY);
+
+		$criteria->addSelectColumn(AppNewsPeer::UPDATED_ON);
 
 	}
 

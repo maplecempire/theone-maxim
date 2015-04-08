@@ -21,11 +21,11 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 
 
 	
-	protected $iid;
+	protected $iid = '0';
 
 
 	
-	protected $wid;
+	protected $wid = '0';
 
 
 	
@@ -37,11 +37,11 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 
 
 	
-	protected $pid;
+	protected $pid = '0';
 
 
 	
-	protected $slid;
+	protected $slid = '0';
 
 
 	
@@ -210,7 +210,7 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->iid !== $v) {
+		if ($this->iid !== $v || $v === '0') {
 			$this->iid = $v;
 			$this->modifiedColumns[] = GgActivityLogPeer::IID;
 		}
@@ -224,7 +224,7 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->wid !== $v) {
+		if ($this->wid !== $v || $v === '0') {
 			$this->wid = $v;
 			$this->modifiedColumns[] = GgActivityLogPeer::WID;
 		}
@@ -266,7 +266,7 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->pid !== $v) {
+		if ($this->pid !== $v || $v === '0') {
 			$this->pid = $v;
 			$this->modifiedColumns[] = GgActivityLogPeer::PID;
 		}
@@ -280,7 +280,7 @@ abstract class BaseGgActivityLog extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->slid !== $v) {
+		if ($this->slid !== $v || $v === '0') {
 			$this->slid = $v;
 			$this->modifiedColumns[] = GgActivityLogPeer::SLID;
 		}

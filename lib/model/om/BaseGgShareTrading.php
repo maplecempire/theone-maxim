@@ -37,7 +37,15 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 
 	
+	protected $convert_rogp = '';
+
+
+	
 	protected $cdate;
+
+
+	
+	protected $cancel_datetime;
 
 	
 	protected $alreadyInSave = false;
@@ -95,6 +103,13 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getConvertRogp()
+	{
+
+		return $this->convert_rogp;
+	}
+
+	
 	public function getCdate($format = 'Y-m-d H:i:s')
 	{
 
@@ -106,6 +121,28 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 			}
 		} else {
 			$ts = $this->cdate;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getCancelDatetime($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->cancel_datetime === null || $this->cancel_datetime === '') {
+			return null;
+		} elseif (!is_int($this->cancel_datetime)) {
+						$ts = strtotime($this->cancel_datetime);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [cancel_datetime] as date/time value: " . var_export($this->cancel_datetime, true));
+			}
+		} else {
+			$ts = $this->cancel_datetime;
 		}
 		if ($format === null) {
 			return $ts;
@@ -147,10 +184,6 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 	
 	public function setPrice($v)
 	{
-
-						if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
-		}
 
 		if ($this->price !== $v || $v === 0) {
 			$this->price = $v;
@@ -215,6 +248,20 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setConvertRogp($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->convert_rogp !== $v || $v === '') {
+			$this->convert_rogp = $v;
+			$this->modifiedColumns[] = GgShareTradingPeer::CONVERT_ROGP;
+		}
+
+	} 
+	
 	public function setCdate($v)
 	{
 
@@ -232,6 +279,23 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCancelDatetime($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [cancel_datetime] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->cancel_datetime !== $ts) {
+			$this->cancel_datetime = $ts;
+			$this->modifiedColumns[] = GgShareTradingPeer::CANCEL_DATETIME;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -240,7 +304,7 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 			$this->uid = $rs->getInt($startcol + 1);
 
-			$this->price = $rs->getInt($startcol + 2);
+			$this->price = $rs->getFloat($startcol + 2);
 
 			$this->qty = $rs->getInt($startcol + 3);
 
@@ -250,13 +314,17 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 			$this->payment_type = $rs->getString($startcol + 6);
 
-			$this->cdate = $rs->getTimestamp($startcol + 7, null);
+			$this->convert_rogp = $rs->getString($startcol + 7);
+
+			$this->cdate = $rs->getTimestamp($startcol + 8, null);
+
+			$this->cancel_datetime = $rs->getTimestamp($startcol + 9, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 10; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgShareTrading object", $e);
 		}
@@ -405,7 +473,13 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 				return $this->getPaymentType();
 				break;
 			case 7:
+				return $this->getConvertRogp();
+				break;
+			case 8:
 				return $this->getCdate();
+				break;
+			case 9:
+				return $this->getCancelDatetime();
 				break;
 			default:
 				return null;
@@ -424,7 +498,9 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 			$keys[4] => $this->getMatchQty(),
 			$keys[5] => $this->getType(),
 			$keys[6] => $this->getPaymentType(),
-			$keys[7] => $this->getCdate(),
+			$keys[7] => $this->getConvertRogp(),
+			$keys[8] => $this->getCdate(),
+			$keys[9] => $this->getCancelDatetime(),
 		);
 		return $result;
 	}
@@ -462,7 +538,13 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 				$this->setPaymentType($value);
 				break;
 			case 7:
+				$this->setConvertRogp($value);
+				break;
+			case 8:
 				$this->setCdate($value);
+				break;
+			case 9:
+				$this->setCancelDatetime($value);
 				break;
 		} 	}
 
@@ -478,7 +560,9 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setMatchQty($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setType($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setPaymentType($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCdate($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setConvertRogp($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCdate($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCancelDatetime($arr[$keys[9]]);
 	}
 
 	
@@ -493,7 +577,9 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgShareTradingPeer::MATCH_QTY)) $criteria->add(GgShareTradingPeer::MATCH_QTY, $this->match_qty);
 		if ($this->isColumnModified(GgShareTradingPeer::TYPE)) $criteria->add(GgShareTradingPeer::TYPE, $this->type);
 		if ($this->isColumnModified(GgShareTradingPeer::PAYMENT_TYPE)) $criteria->add(GgShareTradingPeer::PAYMENT_TYPE, $this->payment_type);
+		if ($this->isColumnModified(GgShareTradingPeer::CONVERT_ROGP)) $criteria->add(GgShareTradingPeer::CONVERT_ROGP, $this->convert_rogp);
 		if ($this->isColumnModified(GgShareTradingPeer::CDATE)) $criteria->add(GgShareTradingPeer::CDATE, $this->cdate);
+		if ($this->isColumnModified(GgShareTradingPeer::CANCEL_DATETIME)) $criteria->add(GgShareTradingPeer::CANCEL_DATETIME, $this->cancel_datetime);
 
 		return $criteria;
 	}
@@ -536,7 +622,11 @@ abstract class BaseGgShareTrading extends BaseObject  implements Persistent {
 
 		$copyObj->setPaymentType($this->payment_type);
 
+		$copyObj->setConvertRogp($this->convert_rogp);
+
 		$copyObj->setCdate($this->cdate);
+
+		$copyObj->setCancelDatetime($this->cancel_datetime);
 
 
 		$copyObj->setNew(true);

@@ -17,7 +17,15 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 
 	
+	protected $account_type;
+
+
+	
 	protected $total_unit = 0;
+
+
+	
+	protected $original_total_unit = 0;
 
 
 	
@@ -72,10 +80,24 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getAccountType()
+	{
+
+		return $this->account_type;
+	}
+
+	
 	public function getTotalUnit()
 	{
 
 		return $this->total_unit;
+	}
+
+	
+	public function getOriginalTotalUnit()
+	{
+
+		return $this->original_total_unit;
 	}
 
 	
@@ -223,12 +245,36 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setAccountType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->account_type !== $v) {
+			$this->account_type = $v;
+			$this->modifiedColumns[] = GgSharePeer::ACCOUNT_TYPE;
+		}
+
+	} 
+	
 	public function setTotalUnit($v)
 	{
 
 		if ($this->total_unit !== $v || $v === 0) {
 			$this->total_unit = $v;
 			$this->modifiedColumns[] = GgSharePeer::TOTAL_UNIT;
+		}
+
+	} 
+	
+	public function setOriginalTotalUnit($v)
+	{
+
+		if ($this->original_total_unit !== $v || $v === 0) {
+			$this->original_total_unit = $v;
+			$this->modifiedColumns[] = GgSharePeer::ORIGINAL_TOTAL_UNIT;
 		}
 
 	} 
@@ -357,29 +403,33 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 			$this->uid = $rs->getInt($startcol + 1);
 
-			$this->total_unit = $rs->getFloat($startcol + 2);
+			$this->account_type = $rs->getString($startcol + 2);
 
-			$this->buy_price = $rs->getFloat($startcol + 3);
+			$this->total_unit = $rs->getFloat($startcol + 3);
 
-			$this->sell_price = $rs->getFloat($startcol + 4);
+			$this->original_total_unit = $rs->getFloat($startcol + 4);
 
-			$this->buy_date = $rs->getTimestamp($startcol + 5, null);
+			$this->buy_price = $rs->getFloat($startcol + 5);
 
-			$this->sell_date = $rs->getTimestamp($startcol + 6, null);
+			$this->sell_price = $rs->getFloat($startcol + 6);
 
-			$this->trade_date = $rs->getDate($startcol + 7, null);
+			$this->buy_date = $rs->getTimestamp($startcol + 7, null);
 
-			$this->replica = $rs->getInt($startcol + 8);
+			$this->sell_date = $rs->getTimestamp($startcol + 8, null);
 
-			$this->status = $rs->getInt($startcol + 9);
+			$this->trade_date = $rs->getDate($startcol + 9, null);
 
-			$this->selling_datetime = $rs->getTimestamp($startcol + 10, null);
+			$this->replica = $rs->getInt($startcol + 10);
+
+			$this->status = $rs->getInt($startcol + 11);
+
+			$this->selling_datetime = $rs->getTimestamp($startcol + 12, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 13; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgShare object", $e);
 		}
@@ -513,30 +563,36 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 				return $this->getUid();
 				break;
 			case 2:
-				return $this->getTotalUnit();
+				return $this->getAccountType();
 				break;
 			case 3:
-				return $this->getBuyPrice();
+				return $this->getTotalUnit();
 				break;
 			case 4:
-				return $this->getSellPrice();
+				return $this->getOriginalTotalUnit();
 				break;
 			case 5:
-				return $this->getBuyDate();
+				return $this->getBuyPrice();
 				break;
 			case 6:
-				return $this->getSellDate();
+				return $this->getSellPrice();
 				break;
 			case 7:
-				return $this->getTradeDate();
+				return $this->getBuyDate();
 				break;
 			case 8:
-				return $this->getReplica();
+				return $this->getSellDate();
 				break;
 			case 9:
-				return $this->getStatus();
+				return $this->getTradeDate();
 				break;
 			case 10:
+				return $this->getReplica();
+				break;
+			case 11:
+				return $this->getStatus();
+				break;
+			case 12:
 				return $this->getSellingDatetime();
 				break;
 			default:
@@ -551,15 +607,17 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getUid(),
-			$keys[2] => $this->getTotalUnit(),
-			$keys[3] => $this->getBuyPrice(),
-			$keys[4] => $this->getSellPrice(),
-			$keys[5] => $this->getBuyDate(),
-			$keys[6] => $this->getSellDate(),
-			$keys[7] => $this->getTradeDate(),
-			$keys[8] => $this->getReplica(),
-			$keys[9] => $this->getStatus(),
-			$keys[10] => $this->getSellingDatetime(),
+			$keys[2] => $this->getAccountType(),
+			$keys[3] => $this->getTotalUnit(),
+			$keys[4] => $this->getOriginalTotalUnit(),
+			$keys[5] => $this->getBuyPrice(),
+			$keys[6] => $this->getSellPrice(),
+			$keys[7] => $this->getBuyDate(),
+			$keys[8] => $this->getSellDate(),
+			$keys[9] => $this->getTradeDate(),
+			$keys[10] => $this->getReplica(),
+			$keys[11] => $this->getStatus(),
+			$keys[12] => $this->getSellingDatetime(),
 		);
 		return $result;
 	}
@@ -582,30 +640,36 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 				$this->setUid($value);
 				break;
 			case 2:
-				$this->setTotalUnit($value);
+				$this->setAccountType($value);
 				break;
 			case 3:
-				$this->setBuyPrice($value);
+				$this->setTotalUnit($value);
 				break;
 			case 4:
-				$this->setSellPrice($value);
+				$this->setOriginalTotalUnit($value);
 				break;
 			case 5:
-				$this->setBuyDate($value);
+				$this->setBuyPrice($value);
 				break;
 			case 6:
-				$this->setSellDate($value);
+				$this->setSellPrice($value);
 				break;
 			case 7:
-				$this->setTradeDate($value);
+				$this->setBuyDate($value);
 				break;
 			case 8:
-				$this->setReplica($value);
+				$this->setSellDate($value);
 				break;
 			case 9:
-				$this->setStatus($value);
+				$this->setTradeDate($value);
 				break;
 			case 10:
+				$this->setReplica($value);
+				break;
+			case 11:
+				$this->setStatus($value);
+				break;
+			case 12:
 				$this->setSellingDatetime($value);
 				break;
 		} 	}
@@ -617,15 +681,17 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setUid($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setTotalUnit($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setBuyPrice($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setSellPrice($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setBuyDate($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setSellDate($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setTradeDate($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setReplica($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setStatus($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setSellingDatetime($arr[$keys[10]]);
+		if (array_key_exists($keys[2], $arr)) $this->setAccountType($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setTotalUnit($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setOriginalTotalUnit($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setBuyPrice($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setSellPrice($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setBuyDate($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setSellDate($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTradeDate($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setReplica($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setStatus($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setSellingDatetime($arr[$keys[12]]);
 	}
 
 	
@@ -635,7 +701,9 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(GgSharePeer::ID)) $criteria->add(GgSharePeer::ID, $this->id);
 		if ($this->isColumnModified(GgSharePeer::UID)) $criteria->add(GgSharePeer::UID, $this->uid);
+		if ($this->isColumnModified(GgSharePeer::ACCOUNT_TYPE)) $criteria->add(GgSharePeer::ACCOUNT_TYPE, $this->account_type);
 		if ($this->isColumnModified(GgSharePeer::TOTAL_UNIT)) $criteria->add(GgSharePeer::TOTAL_UNIT, $this->total_unit);
+		if ($this->isColumnModified(GgSharePeer::ORIGINAL_TOTAL_UNIT)) $criteria->add(GgSharePeer::ORIGINAL_TOTAL_UNIT, $this->original_total_unit);
 		if ($this->isColumnModified(GgSharePeer::BUY_PRICE)) $criteria->add(GgSharePeer::BUY_PRICE, $this->buy_price);
 		if ($this->isColumnModified(GgSharePeer::SELL_PRICE)) $criteria->add(GgSharePeer::SELL_PRICE, $this->sell_price);
 		if ($this->isColumnModified(GgSharePeer::BUY_DATE)) $criteria->add(GgSharePeer::BUY_DATE, $this->buy_date);
@@ -676,7 +744,11 @@ abstract class BaseGgShare extends BaseObject  implements Persistent {
 
 		$copyObj->setUid($this->uid);
 
+		$copyObj->setAccountType($this->account_type);
+
 		$copyObj->setTotalUnit($this->total_unit);
+
+		$copyObj->setOriginalTotalUnit($this->original_total_unit);
 
 		$copyObj->setBuyPrice($this->buy_price);
 

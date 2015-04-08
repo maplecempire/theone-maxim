@@ -13,7 +13,7 @@ abstract class BaseGgNewsPeer {
 	const CLASS_DEFAULT = 'lib.model.GgNews';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,21 @@ abstract class BaseGgNewsPeer {
 	const F_CONTENT = 'gg_news.F_CONTENT';
 
 	
+	const F_LANGUAGE = 'gg_news.F_LANGUAGE';
+
+	
+	const F_START_DATE = 'gg_news.F_START_DATE';
+
+	
+	const F_END_DATE = 'gg_news.F_END_DATE';
+
+	
+	const F_CREATED_ON = 'gg_news.F_CREATED_ON';
+
+	
+	const F_MODIFIED_ON = 'gg_news.F_MODIFIED_ON';
+
+	
 	const F_CONTENT_CN = 'gg_news.F_CONTENT_CN';
 
 	
@@ -46,18 +61,18 @@ abstract class BaseGgNewsPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('FId', 'FTitle', 'FTitleCn', 'FContent', 'FContentCn', 'FDate', 'FStatus', ),
-		BasePeer::TYPE_COLNAME => array (GgNewsPeer::F_ID, GgNewsPeer::F_TITLE, GgNewsPeer::F_TITLE_CN, GgNewsPeer::F_CONTENT, GgNewsPeer::F_CONTENT_CN, GgNewsPeer::F_DATE, GgNewsPeer::F_STATUS, ),
-		BasePeer::TYPE_FIELDNAME => array ('f_id', 'f_title', 'f_title_cn', 'f_content', 'f_content_cn', 'f_date', 'f_status', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('FId', 'FTitle', 'FTitleCn', 'FContent', 'FLanguage', 'FStartDate', 'FEndDate', 'FCreatedOn', 'FModifiedOn', 'FContentCn', 'FDate', 'FStatus', ),
+		BasePeer::TYPE_COLNAME => array (GgNewsPeer::F_ID, GgNewsPeer::F_TITLE, GgNewsPeer::F_TITLE_CN, GgNewsPeer::F_CONTENT, GgNewsPeer::F_LANGUAGE, GgNewsPeer::F_START_DATE, GgNewsPeer::F_END_DATE, GgNewsPeer::F_CREATED_ON, GgNewsPeer::F_MODIFIED_ON, GgNewsPeer::F_CONTENT_CN, GgNewsPeer::F_DATE, GgNewsPeer::F_STATUS, ),
+		BasePeer::TYPE_FIELDNAME => array ('f_id', 'f_title', 'f_title_cn', 'f_content', 'f_language', 'f_start_date', 'f_end_date', 'f_created_on', 'f_modified_on', 'f_content_cn', 'f_date', 'f_status', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('FId' => 0, 'FTitle' => 1, 'FTitleCn' => 2, 'FContent' => 3, 'FContentCn' => 4, 'FDate' => 5, 'FStatus' => 6, ),
-		BasePeer::TYPE_COLNAME => array (GgNewsPeer::F_ID => 0, GgNewsPeer::F_TITLE => 1, GgNewsPeer::F_TITLE_CN => 2, GgNewsPeer::F_CONTENT => 3, GgNewsPeer::F_CONTENT_CN => 4, GgNewsPeer::F_DATE => 5, GgNewsPeer::F_STATUS => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('f_id' => 0, 'f_title' => 1, 'f_title_cn' => 2, 'f_content' => 3, 'f_content_cn' => 4, 'f_date' => 5, 'f_status' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('FId' => 0, 'FTitle' => 1, 'FTitleCn' => 2, 'FContent' => 3, 'FLanguage' => 4, 'FStartDate' => 5, 'FEndDate' => 6, 'FCreatedOn' => 7, 'FModifiedOn' => 8, 'FContentCn' => 9, 'FDate' => 10, 'FStatus' => 11, ),
+		BasePeer::TYPE_COLNAME => array (GgNewsPeer::F_ID => 0, GgNewsPeer::F_TITLE => 1, GgNewsPeer::F_TITLE_CN => 2, GgNewsPeer::F_CONTENT => 3, GgNewsPeer::F_LANGUAGE => 4, GgNewsPeer::F_START_DATE => 5, GgNewsPeer::F_END_DATE => 6, GgNewsPeer::F_CREATED_ON => 7, GgNewsPeer::F_MODIFIED_ON => 8, GgNewsPeer::F_CONTENT_CN => 9, GgNewsPeer::F_DATE => 10, GgNewsPeer::F_STATUS => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('f_id' => 0, 'f_title' => 1, 'f_title_cn' => 2, 'f_content' => 3, 'f_language' => 4, 'f_start_date' => 5, 'f_end_date' => 6, 'f_created_on' => 7, 'f_modified_on' => 8, 'f_content_cn' => 9, 'f_date' => 10, 'f_status' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -118,6 +133,16 @@ abstract class BaseGgNewsPeer {
 		$criteria->addSelectColumn(GgNewsPeer::F_TITLE_CN);
 
 		$criteria->addSelectColumn(GgNewsPeer::F_CONTENT);
+
+		$criteria->addSelectColumn(GgNewsPeer::F_LANGUAGE);
+
+		$criteria->addSelectColumn(GgNewsPeer::F_START_DATE);
+
+		$criteria->addSelectColumn(GgNewsPeer::F_END_DATE);
+
+		$criteria->addSelectColumn(GgNewsPeer::F_CREATED_ON);
+
+		$criteria->addSelectColumn(GgNewsPeer::F_MODIFIED_ON);
 
 		$criteria->addSelectColumn(GgNewsPeer::F_CONTENT_CN);
 

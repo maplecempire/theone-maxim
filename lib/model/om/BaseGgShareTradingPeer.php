@@ -13,7 +13,7 @@ abstract class BaseGgShareTradingPeer {
 	const CLASS_DEFAULT = 'lib.model.GgShareTrading';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,7 +41,13 @@ abstract class BaseGgShareTradingPeer {
 	const PAYMENT_TYPE = 'gg_share_trading.PAYMENT_TYPE';
 
 	
+	const CONVERT_ROGP = 'gg_share_trading.CONVERT_ROGP';
+
+	
 	const CDATE = 'gg_share_trading.CDATE';
+
+	
+	const CANCEL_DATETIME = 'gg_share_trading.CANCEL_DATETIME';
 
 	
 	private static $phpNameMap = null;
@@ -49,18 +55,18 @@ abstract class BaseGgShareTradingPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Price', 'Qty', 'MatchQty', 'Type', 'PaymentType', 'Cdate', ),
-		BasePeer::TYPE_COLNAME => array (GgShareTradingPeer::ID, GgShareTradingPeer::UID, GgShareTradingPeer::PRICE, GgShareTradingPeer::QTY, GgShareTradingPeer::MATCH_QTY, GgShareTradingPeer::TYPE, GgShareTradingPeer::PAYMENT_TYPE, GgShareTradingPeer::CDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'price', 'qty', 'match_qty', 'type', 'payment_type', 'cdate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Price', 'Qty', 'MatchQty', 'Type', 'PaymentType', 'ConvertRogp', 'Cdate', 'CancelDatetime', ),
+		BasePeer::TYPE_COLNAME => array (GgShareTradingPeer::ID, GgShareTradingPeer::UID, GgShareTradingPeer::PRICE, GgShareTradingPeer::QTY, GgShareTradingPeer::MATCH_QTY, GgShareTradingPeer::TYPE, GgShareTradingPeer::PAYMENT_TYPE, GgShareTradingPeer::CONVERT_ROGP, GgShareTradingPeer::CDATE, GgShareTradingPeer::CANCEL_DATETIME, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'price', 'qty', 'match_qty', 'type', 'payment_type', 'convert_rogp', 'cdate', 'cancel_datetime', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Price' => 2, 'Qty' => 3, 'MatchQty' => 4, 'Type' => 5, 'PaymentType' => 6, 'Cdate' => 7, ),
-		BasePeer::TYPE_COLNAME => array (GgShareTradingPeer::ID => 0, GgShareTradingPeer::UID => 1, GgShareTradingPeer::PRICE => 2, GgShareTradingPeer::QTY => 3, GgShareTradingPeer::MATCH_QTY => 4, GgShareTradingPeer::TYPE => 5, GgShareTradingPeer::PAYMENT_TYPE => 6, GgShareTradingPeer::CDATE => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'price' => 2, 'qty' => 3, 'match_qty' => 4, 'type' => 5, 'payment_type' => 6, 'cdate' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Price' => 2, 'Qty' => 3, 'MatchQty' => 4, 'Type' => 5, 'PaymentType' => 6, 'ConvertRogp' => 7, 'Cdate' => 8, 'CancelDatetime' => 9, ),
+		BasePeer::TYPE_COLNAME => array (GgShareTradingPeer::ID => 0, GgShareTradingPeer::UID => 1, GgShareTradingPeer::PRICE => 2, GgShareTradingPeer::QTY => 3, GgShareTradingPeer::MATCH_QTY => 4, GgShareTradingPeer::TYPE => 5, GgShareTradingPeer::PAYMENT_TYPE => 6, GgShareTradingPeer::CONVERT_ROGP => 7, GgShareTradingPeer::CDATE => 8, GgShareTradingPeer::CANCEL_DATETIME => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'price' => 2, 'qty' => 3, 'match_qty' => 4, 'type' => 5, 'payment_type' => 6, 'convert_rogp' => 7, 'cdate' => 8, 'cancel_datetime' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -128,7 +134,11 @@ abstract class BaseGgShareTradingPeer {
 
 		$criteria->addSelectColumn(GgShareTradingPeer::PAYMENT_TYPE);
 
+		$criteria->addSelectColumn(GgShareTradingPeer::CONVERT_ROGP);
+
 		$criteria->addSelectColumn(GgShareTradingPeer::CDATE);
+
+		$criteria->addSelectColumn(GgShareTradingPeer::CANCEL_DATETIME);
 
 	}
 

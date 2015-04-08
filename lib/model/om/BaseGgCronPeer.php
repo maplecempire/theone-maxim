@@ -13,7 +13,7 @@ abstract class BaseGgCronPeer {
 	const CLASS_DEFAULT = 'lib.model.GgCron';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,12 +29,6 @@ abstract class BaseGgCronPeer {
 	const STARTED = 'gg_cron.STARTED';
 
 	
-	const COMPLETED = 'gg_cron.COMPLETED';
-
-	
-	const SUCCESS = 'gg_cron.SUCCESS';
-
-	
 	const ENDED = 'gg_cron.ENDED';
 
 	
@@ -47,9 +41,6 @@ abstract class BaseGgCronPeer {
 	const DAY = 'gg_cron.DAY';
 
 	
-	const WEEK = 'gg_cron.WEEK';
-
-	
 	const MESSAGE = 'gg_cron.MESSAGE';
 
 	
@@ -58,18 +49,18 @@ abstract class BaseGgCronPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Type', 'Started', 'Completed', 'Success', 'Ended', 'Year', 'Month', 'Day', 'Week', 'Message', ),
-		BasePeer::TYPE_COLNAME => array (GgCronPeer::ID, GgCronPeer::TYPE, GgCronPeer::STARTED, GgCronPeer::COMPLETED, GgCronPeer::SUCCESS, GgCronPeer::ENDED, GgCronPeer::YEAR, GgCronPeer::MONTH, GgCronPeer::DAY, GgCronPeer::WEEK, GgCronPeer::MESSAGE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'type', 'started', 'completed', 'success', 'ended', 'year', 'month', 'day', 'week', 'message', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Type', 'Started', 'Ended', 'Year', 'Month', 'Day', 'Message', ),
+		BasePeer::TYPE_COLNAME => array (GgCronPeer::ID, GgCronPeer::TYPE, GgCronPeer::STARTED, GgCronPeer::ENDED, GgCronPeer::YEAR, GgCronPeer::MONTH, GgCronPeer::DAY, GgCronPeer::MESSAGE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'type', 'started', 'ended', 'year', 'month', 'day', 'message', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Type' => 1, 'Started' => 2, 'Completed' => 3, 'Success' => 4, 'Ended' => 5, 'Year' => 6, 'Month' => 7, 'Day' => 8, 'Week' => 9, 'Message' => 10, ),
-		BasePeer::TYPE_COLNAME => array (GgCronPeer::ID => 0, GgCronPeer::TYPE => 1, GgCronPeer::STARTED => 2, GgCronPeer::COMPLETED => 3, GgCronPeer::SUCCESS => 4, GgCronPeer::ENDED => 5, GgCronPeer::YEAR => 6, GgCronPeer::MONTH => 7, GgCronPeer::DAY => 8, GgCronPeer::WEEK => 9, GgCronPeer::MESSAGE => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'type' => 1, 'started' => 2, 'completed' => 3, 'success' => 4, 'ended' => 5, 'year' => 6, 'month' => 7, 'day' => 8, 'week' => 9, 'message' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Type' => 1, 'Started' => 2, 'Ended' => 3, 'Year' => 4, 'Month' => 5, 'Day' => 6, 'Message' => 7, ),
+		BasePeer::TYPE_COLNAME => array (GgCronPeer::ID => 0, GgCronPeer::TYPE => 1, GgCronPeer::STARTED => 2, GgCronPeer::ENDED => 3, GgCronPeer::YEAR => 4, GgCronPeer::MONTH => 5, GgCronPeer::DAY => 6, GgCronPeer::MESSAGE => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'type' => 1, 'started' => 2, 'ended' => 3, 'year' => 4, 'month' => 5, 'day' => 6, 'message' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -129,10 +120,6 @@ abstract class BaseGgCronPeer {
 
 		$criteria->addSelectColumn(GgCronPeer::STARTED);
 
-		$criteria->addSelectColumn(GgCronPeer::COMPLETED);
-
-		$criteria->addSelectColumn(GgCronPeer::SUCCESS);
-
 		$criteria->addSelectColumn(GgCronPeer::ENDED);
 
 		$criteria->addSelectColumn(GgCronPeer::YEAR);
@@ -140,8 +127,6 @@ abstract class BaseGgCronPeer {
 		$criteria->addSelectColumn(GgCronPeer::MONTH);
 
 		$criteria->addSelectColumn(GgCronPeer::DAY);
-
-		$criteria->addSelectColumn(GgCronPeer::WEEK);
 
 		$criteria->addSelectColumn(GgCronPeer::MESSAGE);
 
