@@ -8513,6 +8513,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $bal = $mlm_distributor->getRtwallet() + $epointConvertedAmount;
                     $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
                     $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_rtwallet_record->setActionType('Transfer from Maxim');
                     $gg_member_rtwallet_record->setType('c');
                     $gg_member_rtwallet_record->setAmount($epointConvertedAmount);
                     $gg_member_rtwallet_record->setBal($bal);
@@ -8598,6 +8599,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $bal = $mlm_distributor->getRtwallet() + $epointConvertedAmount;
                     $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
                     $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_rtwallet_record->setActionType('Transfer from Maxim');
                     $gg_member_rtwallet_record->setType('c');
                     $gg_member_rtwallet_record->setAmount($epointConvertedAmount);
                     $gg_member_rtwallet_record->setBal($bal);
