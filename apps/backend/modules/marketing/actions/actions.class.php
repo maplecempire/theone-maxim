@@ -10,6 +10,27 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeEmailPIA()
+    {
+        $c = new Criteria();
+        $c->add(MlmPackageContractPeer::DIST_ID, 1);
+        $c->add(MlmPackageContractPeer::EMAIL_STATUS, Globals::STATUS_PENDING);
+        $mlmPackageContracts = MlmPackageContractPeer::doSelect($c);
+
+        foreach ($mlmPackageContracts as $mlmPackageContract) {
+            $mlmDistributor = MlmDistributorPeer::retrieveByPK($mlmPackageContract->getDistId());
+
+            $successfulSent = $this->sendEmailForPIA($mlmPackageContract, $mlmDistributor);
+            var_dump($successfulSent);
+            if ($successfulSent == true) {
+                $mlmPackageContract->setEmailStatus("SENT");
+                $mlmPackageContract->save();
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
 
     public function executeAnnouncementList()
     {
@@ -179,6 +200,10 @@ class marketingActions extends sfActions
 
         print_r("Done");
         return sfView::HEADER_ONLY;
+    }
+    public function executeDoGetAccount()
+    {
+
     }
     public function executeDoUpdatePackagePurchaseViaAuto()
     {
@@ -1958,6 +1983,35 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     }
 
     public function executeDoUploadPips()
+    {
+        if ($this->getRequest()->getFileName('file_upload') != "") {
+            $uploadedFilename = $this->getRequest()->getFileName('file_upload');
+            $tradingMonth = $this->getRequestParameter('tradingMonth');
+            $tradingYear = $this->getRequestParameter('tradingYear');
+            $ext = explode(".", $this->getRequest()->getFileName('file_upload'));
+            $extensionName = $ext[count($ext) - 1];
+
+            $this->getRequest()->moveFile('file_upload', sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename);
+
+            $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'pips' . DIRECTORY_SEPARATOR . $uploadedFilename;
+
+            $mlm_file_download = new MlmFileDownload();
+            $mlm_file_download->setFileType("PIPS");
+            $mlm_file_download->setFileSrc($physicalDirectory);
+            $mlm_file_download->setFileName($uploadedFilename);
+            $mlm_file_download->setContentType("application/csv");
+            $mlm_file_download->setStatusCode(Globals::STATUS_ACTIVE);
+            $mlm_file_download->setRemarks("");
+            $mlm_file_download->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlm_file_download->save();
+
+            $this->setFlash('successMsg', "Files was successfully uploaded.");
+            return $this->redirect('/marketing/pipsUpload?doAction=show_pips');
+        }
+    }
+
+    public function executeDoUploadPips_ori()
     {
         if ($this->getRequest()->getFileName('file_upload') != "") {
             $uploadedFilename = $this->getRequest()->getFileName('file_upload');
@@ -3940,6 +3994,142 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
             }
             return "";
         }
+    }
+
+    function sendEmailForPIA($mlmPackageContract, $mlmDistributor)
+    {
+        $subject = "Maxim Trader Private Investment Agreement";
+
+        if ($mlmPackageContract) {
+            $serverKey = md5($mlmPackageContract->getMt4Id() . $mlmPackageContract->getCreatedOn() . Globals::SALT_SOURCE);
+
+            $body = "<table width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#939393' align='center'>
+	<tbody>
+		<tr>
+			<td style='padding:20px 0px'>
+				<table width='606' cellspacing='0' cellpadding='0' border='0' align='center' style='background:white;font-family:Arial,Helvetica,sans-serif'>
+					<tbody>
+						<tr>
+							<td colspan='2'>
+								<a target='_blank' href='http://www.maximtrader.com'><img width='606' height='115' border='0' src='http://partner.maximtrader.com/images/email/banner.png' alt='Maxim Trader'></a></td>
+						</tr>
+
+						<tr>
+							<td colspan='2'>
+								<table cellspacing='0' cellpadding='10' border='0'>
+									<tbody>
+										<tr>
+											<td colspan='2'>
+												<table style='background-color:rgb(246,246,246)'>
+													<tbody>
+														<tr>
+															<td valign='top' style='padding-top:15px;padding-left:10px'>
+																<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:14px;line-height:17px'>
+                                                                    Dear <strong>" . $mlmDistributor->getFullName() . "</strong>,<br><br>
+                                                                    Below are the contractural terms and agreements that you are bound by as a client of MaximTrader. We recommend that you take the time to read each of them carefully.<br><br>
+                                                                    We look forward to your custom in the near future. Should you have any
+                                                                    queries, please do not hesitate to get back to us.<br>
+                                                                </font>
+                                                <br>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr><td style='font-size:0;line-height:0' colspan='2'><img src='http://partner.maximtrader.com/images/email/transparent.gif' height='42'></td></tr>
+									<tr>
+										<td valign='top' width='551' colspan='2'>
+											<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+												<tbody>
+													<tr>
+														<td style='font-size:0;line-height:0' align='center'>
+														<a href='http://partner.maximtrader.com/download/privateInvestmentAgreementContractEK?q=".$mlmPackageContract->getMt4Id()."&k=".$serverKey."' target='_blank'>
+														<img src='http://partner.maximtrader.com/images/common/download_pdf.png' height='60'>
+														</a>
+														</td>
+													</tr>
+													<tr>
+														<td style='text-align:center;line-height:15px' align='center'>
+															<font face='Arial, Verdana, sans-serif' size='3' color='#58584b' style='font-size:11px;line-height:15px'>
+																<strong>Download<br> PIA</strong>
+															</font>
+														</td>
+													</tr>
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+
+											</tbody></table>
+										</td>
+									</tr>
+
+
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' bgcolor='#0080C8'>
+							<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='1'>
+							</td>
+						</tr>
+						<tr>
+							<td width='606' style='font-size:0;line-height:0' colspan='2'>
+								<img src='http://partner.maximtrader.com/images/email/transparent.gif' height='10'>
+							</td>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:15px 15px 0px;color:rgb(153,153,153);font-size:11px' colspan='2' align='right'>
+							<font face='Arial, Verdana, sans-serif' size='3' color='#000000' style='font-size:12px;line-height:15px'>
+								<em>
+									Best Regards,<br>
+									<strong>Maxim Trader Account Opening Team</strong><br>
+								</em>
+							</font>
+							<br>
+							<a href='http://maximtrader.com/' target='_blank'><img src='http://partner.maximtrader.com/images/email/logo.png' width='254' height='87' border='0'></a>
+							<br>
+						</tr>
+
+						<tr>
+							<td width='606' style='padding:5px 15px 20px;color:rgb(153,153,153);font-size:11px' colspan='2'>
+							<p align='justify'>
+								<font face='Arial, Verdana, sans-serif' size='3' color='#666666' style='font-size:10px;line-height:15px'>
+									Maxim Trader is managed by Maxim Capital Limited. Registered Office: Level 8, 10/12 Scotia Place, Suite 11, Auckland City Centre, Auckland, 1010, New Zealand. Tel (International): (+64) 9925 0379 Tel (Dial within NZ): 09 925 0379, Email support@maximtrader.com
+									<br><br>Maxim Capital Limited is a subsidiary of Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.) a public listed company in USA.
+									<br><br>CONFIDENTIALITY: This e-mail and any files transmitted with it are confidential and intended solely for the use of the recipient(s) only. Any review, retransmission, dissemination or other use of, or taking any action in reliance upon this information by persons or entities other than the intended recipient(s) is prohibited. If you have received this e-mail in error please notify the sender immediately and destroy the material whether stored on a computer or otherwise.
+									<br><br>DISCLAIMER: Any views or opinions presented within this e-mail are solely those of the author and do not necessarily represent those of Maxim capital Limited, unless otherwise specifically stated. The content of this message does not constitute Investment Advice.
+									<br><br>RISK WARNING: Forex, spread bets, and CFDs carry a high degree of risk to your capital and it is possible to lose more than your initial investment. Only speculate with money you can afford to lose. As with any trading, you should not engage in it unless you understand the nature of the transaction you are entering into and, the true extent of your exposure to the risk of loss. These products may not be suitable for all investors, therefore if you do not fully understand the risks involved, please seek independent advice.
+									<br><br>
+马胜金融集团公司于新西兰总部地址为:新西兰奥克兰奥克兰市中心1010号思科迪亚广场10/12号8楼11套房
+<br>电话(国际): (+64) 9925 0379 电话(新西兰): 09 925 0379
+<br>邮箱： support@maximtrader.com
+<br><br>马胜资本有限公司是皇家控股集团Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.)旗下的子企业。 该母公司是一家已在美国公开上市，拥有卓越信誉的金融和投资机构。
+<br><br>保密条款: 本邮件及其附件仅限于发送给上面地址中列出的个人、群组。禁止任何其他人以任何形式使用（包括但不限于全部或部分的泄露、复制、或散发）本邮件中的信息。如果您错收了本邮件，请您立即电话或邮件通知发件人，并删除任何您存于电脑或者其他终端的本邮件！
+<br><br>免责声明: 本邮件中任何观点和意见仅代表邮件发件人个人观点； 且除非特别声明，本邮件中的任何观点或意见并不代表马胜金融集团的立场。另本邮件中所含信息并不构成投资建议。
+<br><br>风险警示:外汇、差价赌注、差价合同交易均为高风险操作，您的损失可能会超出您的初始投入。 请根据您可以承受的损失程度理性参与投资。 在您决定参与任何交易前，请一定了解您正在接触的交易其本质，并全面理解您个人的风险暴露程度。这些产品可能不适用于所有的投资者，所以若您未能充分了解所涉及的风险，请您寻求独立意见。
+								</font>
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>";
+            $sendMailService = new SendMailService();
+
+            $return = $sendMailService->sendMailPia($mlmDistributor->getEmail(), $mlmDistributor->getFullName(), $subject, $body);
+
+            if ($return == "") {
+                return true;
+            }
+        }
+
+
+        return false;
     }
 
     function sendEmailForLoginPassword($existDistributor, $username, $password, $password2)
