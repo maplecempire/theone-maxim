@@ -38,11 +38,17 @@ class GgUploadMapBuilder {
 
 		$tMap->addColumn('AID', 'Aid', 'string', CreoleTypes::BIGINT, true, null);
 
-		$tMap->addColumn('UREMARK', 'Uremark', 'string', CreoleTypes::LONGVARCHAR, true, null);
+		$tMap->addColumn('UREMARK', 'Uremark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
-		$tMap->addColumn('AREMARK', 'Aremark', 'string', CreoleTypes::LONGVARCHAR, true, null);
+		$tMap->addColumn('AREMARK', 'Aremark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('FILENAME', 'Filename', 'string', CreoleTypes::VARCHAR, true, 255);
+
+		$tMap->addColumn('BANKPASSBOOK', 'Bankpassbook', 'string', CreoleTypes::VARCHAR, true, 255);
+
+		$tMap->addColumn('PROOFOFRESIDENCE', 'Proofofresidence', 'string', CreoleTypes::VARCHAR, true, 255);
+
+		$tMap->addColumn('NRIC', 'Nric', 'string', CreoleTypes::VARCHAR, true, 255);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 20);
 

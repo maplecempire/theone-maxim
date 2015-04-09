@@ -33,6 +33,18 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 
 
 	
+	protected $bankpassbook;
+
+
+	
+	protected $proofofresidence;
+
+
+	
+	protected $nric;
+
+
+	
 	protected $status = 'pending';
 
 
@@ -89,6 +101,27 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 	{
 
 		return $this->filename;
+	}
+
+	
+	public function getBankpassbook()
+	{
+
+		return $this->bankpassbook;
+	}
+
+	
+	public function getProofofresidence()
+	{
+
+		return $this->proofofresidence;
+	}
+
+	
+	public function getNric()
+	{
+
+		return $this->nric;
 	}
 
 	
@@ -227,6 +260,48 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setBankpassbook($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->bankpassbook !== $v) {
+			$this->bankpassbook = $v;
+			$this->modifiedColumns[] = GgUploadPeer::BANKPASSBOOK;
+		}
+
+	} 
+	
+	public function setProofofresidence($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->proofofresidence !== $v) {
+			$this->proofofresidence = $v;
+			$this->modifiedColumns[] = GgUploadPeer::PROOFOFRESIDENCE;
+		}
+
+	} 
+	
+	public function setNric($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->nric !== $v) {
+			$this->nric = $v;
+			$this->modifiedColumns[] = GgUploadPeer::NRIC;
+		}
+
+	} 
+	
 	public function setStatus($v)
 	{
 
@@ -291,17 +366,23 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 
 			$this->filename = $rs->getString($startcol + 5);
 
-			$this->status = $rs->getString($startcol + 6);
+			$this->bankpassbook = $rs->getString($startcol + 6);
 
-			$this->cdate = $rs->getTimestamp($startcol + 7, null);
+			$this->proofofresidence = $rs->getString($startcol + 7);
 
-			$this->adate = $rs->getTimestamp($startcol + 8, null);
+			$this->nric = $rs->getString($startcol + 8);
+
+			$this->status = $rs->getString($startcol + 9);
+
+			$this->cdate = $rs->getTimestamp($startcol + 10, null);
+
+			$this->adate = $rs->getTimestamp($startcol + 11, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 9; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating GgUpload object", $e);
 		}
@@ -447,12 +528,21 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 				return $this->getFilename();
 				break;
 			case 6:
-				return $this->getStatus();
+				return $this->getBankpassbook();
 				break;
 			case 7:
-				return $this->getCdate();
+				return $this->getProofofresidence();
 				break;
 			case 8:
+				return $this->getNric();
+				break;
+			case 9:
+				return $this->getStatus();
+				break;
+			case 10:
+				return $this->getCdate();
+				break;
+			case 11:
 				return $this->getAdate();
 				break;
 			default:
@@ -471,9 +561,12 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 			$keys[3] => $this->getUremark(),
 			$keys[4] => $this->getAremark(),
 			$keys[5] => $this->getFilename(),
-			$keys[6] => $this->getStatus(),
-			$keys[7] => $this->getCdate(),
-			$keys[8] => $this->getAdate(),
+			$keys[6] => $this->getBankpassbook(),
+			$keys[7] => $this->getProofofresidence(),
+			$keys[8] => $this->getNric(),
+			$keys[9] => $this->getStatus(),
+			$keys[10] => $this->getCdate(),
+			$keys[11] => $this->getAdate(),
 		);
 		return $result;
 	}
@@ -508,12 +601,21 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 				$this->setFilename($value);
 				break;
 			case 6:
-				$this->setStatus($value);
+				$this->setBankpassbook($value);
 				break;
 			case 7:
-				$this->setCdate($value);
+				$this->setProofofresidence($value);
 				break;
 			case 8:
+				$this->setNric($value);
+				break;
+			case 9:
+				$this->setStatus($value);
+				break;
+			case 10:
+				$this->setCdate($value);
+				break;
+			case 11:
 				$this->setAdate($value);
 				break;
 		} 	}
@@ -529,9 +631,12 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setUremark($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setAremark($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFilename($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setStatus($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCdate($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setAdate($arr[$keys[8]]);
+		if (array_key_exists($keys[6], $arr)) $this->setBankpassbook($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setProofofresidence($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setNric($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setStatus($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCdate($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setAdate($arr[$keys[11]]);
 	}
 
 	
@@ -545,6 +650,9 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GgUploadPeer::UREMARK)) $criteria->add(GgUploadPeer::UREMARK, $this->uremark);
 		if ($this->isColumnModified(GgUploadPeer::AREMARK)) $criteria->add(GgUploadPeer::AREMARK, $this->aremark);
 		if ($this->isColumnModified(GgUploadPeer::FILENAME)) $criteria->add(GgUploadPeer::FILENAME, $this->filename);
+		if ($this->isColumnModified(GgUploadPeer::BANKPASSBOOK)) $criteria->add(GgUploadPeer::BANKPASSBOOK, $this->bankpassbook);
+		if ($this->isColumnModified(GgUploadPeer::PROOFOFRESIDENCE)) $criteria->add(GgUploadPeer::PROOFOFRESIDENCE, $this->proofofresidence);
+		if ($this->isColumnModified(GgUploadPeer::NRIC)) $criteria->add(GgUploadPeer::NRIC, $this->nric);
 		if ($this->isColumnModified(GgUploadPeer::STATUS)) $criteria->add(GgUploadPeer::STATUS, $this->status);
 		if ($this->isColumnModified(GgUploadPeer::CDATE)) $criteria->add(GgUploadPeer::CDATE, $this->cdate);
 		if ($this->isColumnModified(GgUploadPeer::ADATE)) $criteria->add(GgUploadPeer::ADATE, $this->adate);
@@ -587,6 +695,12 @@ abstract class BaseGgUpload extends BaseObject  implements Persistent {
 		$copyObj->setAremark($this->aremark);
 
 		$copyObj->setFilename($this->filename);
+
+		$copyObj->setBankpassbook($this->bankpassbook);
+
+		$copyObj->setProofofresidence($this->proofofresidence);
+
+		$copyObj->setNric($this->nric);
 
 		$copyObj->setStatus($this->status);
 

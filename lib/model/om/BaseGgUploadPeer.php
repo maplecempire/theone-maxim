@@ -13,7 +13,7 @@ abstract class BaseGgUploadPeer {
 	const CLASS_DEFAULT = 'lib.model.GgUpload';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,15 @@ abstract class BaseGgUploadPeer {
 	const FILENAME = 'gg_upload.FILENAME';
 
 	
+	const BANKPASSBOOK = 'gg_upload.BANKPASSBOOK';
+
+	
+	const PROOFOFRESIDENCE = 'gg_upload.PROOFOFRESIDENCE';
+
+	
+	const NRIC = 'gg_upload.NRIC';
+
+	
 	const STATUS = 'gg_upload.STATUS';
 
 	
@@ -52,18 +61,18 @@ abstract class BaseGgUploadPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Aid', 'Uremark', 'Aremark', 'Filename', 'Status', 'Cdate', 'Adate', ),
-		BasePeer::TYPE_COLNAME => array (GgUploadPeer::ID, GgUploadPeer::UID, GgUploadPeer::AID, GgUploadPeer::UREMARK, GgUploadPeer::AREMARK, GgUploadPeer::FILENAME, GgUploadPeer::STATUS, GgUploadPeer::CDATE, GgUploadPeer::ADATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'aid', 'uremark', 'aremark', 'filename', 'status', 'cdate', 'adate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Uid', 'Aid', 'Uremark', 'Aremark', 'Filename', 'Bankpassbook', 'Proofofresidence', 'Nric', 'Status', 'Cdate', 'Adate', ),
+		BasePeer::TYPE_COLNAME => array (GgUploadPeer::ID, GgUploadPeer::UID, GgUploadPeer::AID, GgUploadPeer::UREMARK, GgUploadPeer::AREMARK, GgUploadPeer::FILENAME, GgUploadPeer::BANKPASSBOOK, GgUploadPeer::PROOFOFRESIDENCE, GgUploadPeer::NRIC, GgUploadPeer::STATUS, GgUploadPeer::CDATE, GgUploadPeer::ADATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'uid', 'aid', 'uremark', 'aremark', 'filename', 'bankPassBook', 'proofOfResidence', 'nric', 'status', 'cdate', 'adate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Aid' => 2, 'Uremark' => 3, 'Aremark' => 4, 'Filename' => 5, 'Status' => 6, 'Cdate' => 7, 'Adate' => 8, ),
-		BasePeer::TYPE_COLNAME => array (GgUploadPeer::ID => 0, GgUploadPeer::UID => 1, GgUploadPeer::AID => 2, GgUploadPeer::UREMARK => 3, GgUploadPeer::AREMARK => 4, GgUploadPeer::FILENAME => 5, GgUploadPeer::STATUS => 6, GgUploadPeer::CDATE => 7, GgUploadPeer::ADATE => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'aid' => 2, 'uremark' => 3, 'aremark' => 4, 'filename' => 5, 'status' => 6, 'cdate' => 7, 'adate' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Uid' => 1, 'Aid' => 2, 'Uremark' => 3, 'Aremark' => 4, 'Filename' => 5, 'Bankpassbook' => 6, 'Proofofresidence' => 7, 'Nric' => 8, 'Status' => 9, 'Cdate' => 10, 'Adate' => 11, ),
+		BasePeer::TYPE_COLNAME => array (GgUploadPeer::ID => 0, GgUploadPeer::UID => 1, GgUploadPeer::AID => 2, GgUploadPeer::UREMARK => 3, GgUploadPeer::AREMARK => 4, GgUploadPeer::FILENAME => 5, GgUploadPeer::BANKPASSBOOK => 6, GgUploadPeer::PROOFOFRESIDENCE => 7, GgUploadPeer::NRIC => 8, GgUploadPeer::STATUS => 9, GgUploadPeer::CDATE => 10, GgUploadPeer::ADATE => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'uid' => 1, 'aid' => 2, 'uremark' => 3, 'aremark' => 4, 'filename' => 5, 'bankPassBook' => 6, 'proofOfResidence' => 7, 'nric' => 8, 'status' => 9, 'cdate' => 10, 'adate' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -128,6 +137,12 @@ abstract class BaseGgUploadPeer {
 		$criteria->addSelectColumn(GgUploadPeer::AREMARK);
 
 		$criteria->addSelectColumn(GgUploadPeer::FILENAME);
+
+		$criteria->addSelectColumn(GgUploadPeer::BANKPASSBOOK);
+
+		$criteria->addSelectColumn(GgUploadPeer::PROOFOFRESIDENCE);
+
+		$criteria->addSelectColumn(GgUploadPeer::NRIC);
 
 		$criteria->addSelectColumn(GgUploadPeer::STATUS);
 

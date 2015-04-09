@@ -66,5 +66,7 @@ class MlmPackageContractMapBuilder {
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
 
+		$tMap->addColumn('EMAIL_STATUS', 'EmailStatus', 'string', CreoleTypes::VARCHAR, false, 10);
+
 	} 
 } 
