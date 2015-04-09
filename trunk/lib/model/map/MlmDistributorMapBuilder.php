@@ -48,9 +48,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('COUNTRY', 'Country', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ADDRESS', 'Address', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('ADDRESS', 'Address', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
-		$tMap->addColumn('ADDRESS2', 'Address2', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('ADDRESS2', 'Address2', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('CITY', 'City', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -80,6 +80,18 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('BANK_SWIFT_CODE', 'BankSwiftCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('BRANCH_CODE', 'BranchCode', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('ABA_ROUTING', 'AbaRouting', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('BSB_CODE', 'BsbCode', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('TRANSIT_NUMBER', 'TransitNumber', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('IBAN', 'Iban', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('ACCOUNT_TYPE', 'AccountType', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addColumn('BANK_CODE', 'BankCode', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('BANK_COUNTRY', 'BankCountry', 'string', CreoleTypes::VARCHAR, false, 100);
@@ -90,9 +102,9 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('EZY_CASH_CARD', 'EzyCashCard', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('IACCOUNT', 'Iaccount', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('IACCOUNT', 'Iaccount', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('IACCOUNT_USERNAME', 'IaccountUsername', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('IACCOUNT_USERNAME', 'IaccountUsername', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('TREE_LEVEL', 'TreeLevel', 'int', CreoleTypes::INTEGER, false, null);
 
@@ -276,6 +288,8 @@ class MlmDistributorMapBuilder {
 
 		$tMap->addColumn('RTWALLET', 'Rtwallet', 'double', CreoleTypes::DECIMAL, true, 15);
 
+		$tMap->addColumn('RPFWALLET', 'Rpfwallet', 'double', CreoleTypes::DECIMAL, true, 15);
+
 		$tMap->addColumn('RANK_A', 'RankA', 'double', CreoleTypes::DECIMAL, true, 5);
 
 		$tMap->addColumn('IS_AGL', 'IsAgl', 'int', CreoleTypes::TINYINT, true, null);
@@ -289,6 +303,16 @@ class MlmDistributorMapBuilder {
 		$tMap->addColumn('SHORTNAME', 'Shortname', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('IS_BLOCK', 'IsBlock', 'int', CreoleTypes::TINYINT, true, null);
+
+		$tMap->addColumn('FULL_RT', 'FullRt', 'int', CreoleTypes::TINYINT, true, null);
+
+		$tMap->addColumn('KYC_STATUS', 'KycStatus', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('KYC_REMARK', 'KycRemark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('KYC_USER_ID', 'KycUserId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('KYC_DATETIME', 'KycDatetime', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 	} 
 } 

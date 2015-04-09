@@ -75,6 +75,10 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 	
 	protected $updated_on;
 
+
+	
+	protected $email_status = 'SENT';
+
 	
 	protected $alreadyInSave = false;
 
@@ -228,6 +232,13 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getEmailStatus()
+	{
+
+		return $this->email_status;
 	}
 
 	
@@ -475,6 +486,20 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 
 	} 
 	
+	public function setEmailStatus($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->email_status !== $v || $v === 'SENT') {
+			$this->email_status = $v;
+			$this->modifiedColumns[] = MlmPackageContractPeer::EMAIL_STATUS;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -513,11 +538,13 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 
 			$this->updated_on = $rs->getTimestamp($startcol + 16, null);
 
+			$this->email_status = $rs->getString($startcol + 17);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 17; 
+						return $startcol + 18; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmPackageContract object", $e);
 		}
@@ -705,6 +732,9 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 			case 16:
 				return $this->getUpdatedOn();
 				break;
+			case 17:
+				return $this->getEmailStatus();
+				break;
 			default:
 				return null;
 				break;
@@ -732,6 +762,7 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 			$keys[14] => $this->getCreatedOn(),
 			$keys[15] => $this->getUpdatedBy(),
 			$keys[16] => $this->getUpdatedOn(),
+			$keys[17] => $this->getEmailStatus(),
 		);
 		return $result;
 	}
@@ -798,6 +829,9 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 			case 16:
 				$this->setUpdatedOn($value);
 				break;
+			case 17:
+				$this->setEmailStatus($value);
+				break;
 		} 	}
 
 	
@@ -822,6 +856,7 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 		if (array_key_exists($keys[14], $arr)) $this->setCreatedOn($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setUpdatedBy($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setUpdatedOn($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setEmailStatus($arr[$keys[17]]);
 	}
 
 	
@@ -846,6 +881,7 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 		if ($this->isColumnModified(MlmPackageContractPeer::CREATED_ON)) $criteria->add(MlmPackageContractPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmPackageContractPeer::UPDATED_BY)) $criteria->add(MlmPackageContractPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmPackageContractPeer::UPDATED_ON)) $criteria->add(MlmPackageContractPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(MlmPackageContractPeer::EMAIL_STATUS)) $criteria->add(MlmPackageContractPeer::EMAIL_STATUS, $this->email_status);
 
 		return $criteria;
 	}
@@ -907,6 +943,8 @@ abstract class BaseMlmPackageContract extends BaseObject  implements Persistent 
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setEmailStatus($this->email_status);
 
 
 		$copyObj->setNew(true);

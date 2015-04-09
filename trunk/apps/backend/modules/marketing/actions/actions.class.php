@@ -13,7 +13,7 @@ class marketingActions extends sfActions
     public function executeEmailPIA()
     {
         $c = new Criteria();
-        $c->add(MlmPackageContractPeer::DIST_ID, 1);
+        //$c->add(MlmPackageContractPeer::DIST_ID, 1);
         $c->add(MlmPackageContractPeer::EMAIL_STATUS, Globals::STATUS_PENDING);
         $mlmPackageContracts = MlmPackageContractPeer::doSelect($c);
 

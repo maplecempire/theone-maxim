@@ -13,7 +13,7 @@ abstract class BaseMlmPackageContractPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmPackageContract';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -71,23 +71,26 @@ abstract class BaseMlmPackageContractPeer {
 	const UPDATED_ON = 'mlm_package_contract.UPDATED_ON';
 
 	
+	const EMAIL_STATUS = 'mlm_package_contract.EMAIL_STATUS';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('ContractId', 'DistId', 'FullName', 'Username', 'Mt4Id', 'DistMt4Id', 'PackagePrice', 'SignDateDay', 'SignDateMonth', 'SignDateYear', 'InitialSignature', 'Remarks', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmPackageContractPeer::CONTRACT_ID, MlmPackageContractPeer::DIST_ID, MlmPackageContractPeer::FULL_NAME, MlmPackageContractPeer::USERNAME, MlmPackageContractPeer::MT4_ID, MlmPackageContractPeer::DIST_MT4_ID, MlmPackageContractPeer::PACKAGE_PRICE, MlmPackageContractPeer::SIGN_DATE_DAY, MlmPackageContractPeer::SIGN_DATE_MONTH, MlmPackageContractPeer::SIGN_DATE_YEAR, MlmPackageContractPeer::INITIAL_SIGNATURE, MlmPackageContractPeer::REMARKS, MlmPackageContractPeer::STATUS_CODE, MlmPackageContractPeer::CREATED_BY, MlmPackageContractPeer::CREATED_ON, MlmPackageContractPeer::UPDATED_BY, MlmPackageContractPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('contract_id', 'dist_id', 'full_name', 'username', 'mt4_id', 'dist_mt4_id', 'package_price', 'sign_date_day', 'sign_date_month', 'sign_date_year', 'initial_signature', 'remarks', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('ContractId', 'DistId', 'FullName', 'Username', 'Mt4Id', 'DistMt4Id', 'PackagePrice', 'SignDateDay', 'SignDateMonth', 'SignDateYear', 'InitialSignature', 'Remarks', 'StatusCode', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'EmailStatus', ),
+		BasePeer::TYPE_COLNAME => array (MlmPackageContractPeer::CONTRACT_ID, MlmPackageContractPeer::DIST_ID, MlmPackageContractPeer::FULL_NAME, MlmPackageContractPeer::USERNAME, MlmPackageContractPeer::MT4_ID, MlmPackageContractPeer::DIST_MT4_ID, MlmPackageContractPeer::PACKAGE_PRICE, MlmPackageContractPeer::SIGN_DATE_DAY, MlmPackageContractPeer::SIGN_DATE_MONTH, MlmPackageContractPeer::SIGN_DATE_YEAR, MlmPackageContractPeer::INITIAL_SIGNATURE, MlmPackageContractPeer::REMARKS, MlmPackageContractPeer::STATUS_CODE, MlmPackageContractPeer::CREATED_BY, MlmPackageContractPeer::CREATED_ON, MlmPackageContractPeer::UPDATED_BY, MlmPackageContractPeer::UPDATED_ON, MlmPackageContractPeer::EMAIL_STATUS, ),
+		BasePeer::TYPE_FIELDNAME => array ('contract_id', 'dist_id', 'full_name', 'username', 'mt4_id', 'dist_mt4_id', 'package_price', 'sign_date_day', 'sign_date_month', 'sign_date_year', 'initial_signature', 'remarks', 'status_code', 'created_by', 'created_on', 'updated_by', 'updated_on', 'email_status', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('ContractId' => 0, 'DistId' => 1, 'FullName' => 2, 'Username' => 3, 'Mt4Id' => 4, 'DistMt4Id' => 5, 'PackagePrice' => 6, 'SignDateDay' => 7, 'SignDateMonth' => 8, 'SignDateYear' => 9, 'InitialSignature' => 10, 'Remarks' => 11, 'StatusCode' => 12, 'CreatedBy' => 13, 'CreatedOn' => 14, 'UpdatedBy' => 15, 'UpdatedOn' => 16, ),
-		BasePeer::TYPE_COLNAME => array (MlmPackageContractPeer::CONTRACT_ID => 0, MlmPackageContractPeer::DIST_ID => 1, MlmPackageContractPeer::FULL_NAME => 2, MlmPackageContractPeer::USERNAME => 3, MlmPackageContractPeer::MT4_ID => 4, MlmPackageContractPeer::DIST_MT4_ID => 5, MlmPackageContractPeer::PACKAGE_PRICE => 6, MlmPackageContractPeer::SIGN_DATE_DAY => 7, MlmPackageContractPeer::SIGN_DATE_MONTH => 8, MlmPackageContractPeer::SIGN_DATE_YEAR => 9, MlmPackageContractPeer::INITIAL_SIGNATURE => 10, MlmPackageContractPeer::REMARKS => 11, MlmPackageContractPeer::STATUS_CODE => 12, MlmPackageContractPeer::CREATED_BY => 13, MlmPackageContractPeer::CREATED_ON => 14, MlmPackageContractPeer::UPDATED_BY => 15, MlmPackageContractPeer::UPDATED_ON => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('contract_id' => 0, 'dist_id' => 1, 'full_name' => 2, 'username' => 3, 'mt4_id' => 4, 'dist_mt4_id' => 5, 'package_price' => 6, 'sign_date_day' => 7, 'sign_date_month' => 8, 'sign_date_year' => 9, 'initial_signature' => 10, 'remarks' => 11, 'status_code' => 12, 'created_by' => 13, 'created_on' => 14, 'updated_by' => 15, 'updated_on' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('ContractId' => 0, 'DistId' => 1, 'FullName' => 2, 'Username' => 3, 'Mt4Id' => 4, 'DistMt4Id' => 5, 'PackagePrice' => 6, 'SignDateDay' => 7, 'SignDateMonth' => 8, 'SignDateYear' => 9, 'InitialSignature' => 10, 'Remarks' => 11, 'StatusCode' => 12, 'CreatedBy' => 13, 'CreatedOn' => 14, 'UpdatedBy' => 15, 'UpdatedOn' => 16, 'EmailStatus' => 17, ),
+		BasePeer::TYPE_COLNAME => array (MlmPackageContractPeer::CONTRACT_ID => 0, MlmPackageContractPeer::DIST_ID => 1, MlmPackageContractPeer::FULL_NAME => 2, MlmPackageContractPeer::USERNAME => 3, MlmPackageContractPeer::MT4_ID => 4, MlmPackageContractPeer::DIST_MT4_ID => 5, MlmPackageContractPeer::PACKAGE_PRICE => 6, MlmPackageContractPeer::SIGN_DATE_DAY => 7, MlmPackageContractPeer::SIGN_DATE_MONTH => 8, MlmPackageContractPeer::SIGN_DATE_YEAR => 9, MlmPackageContractPeer::INITIAL_SIGNATURE => 10, MlmPackageContractPeer::REMARKS => 11, MlmPackageContractPeer::STATUS_CODE => 12, MlmPackageContractPeer::CREATED_BY => 13, MlmPackageContractPeer::CREATED_ON => 14, MlmPackageContractPeer::UPDATED_BY => 15, MlmPackageContractPeer::UPDATED_ON => 16, MlmPackageContractPeer::EMAIL_STATUS => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('contract_id' => 0, 'dist_id' => 1, 'full_name' => 2, 'username' => 3, 'mt4_id' => 4, 'dist_mt4_id' => 5, 'package_price' => 6, 'sign_date_day' => 7, 'sign_date_month' => 8, 'sign_date_year' => 9, 'initial_signature' => 10, 'remarks' => 11, 'status_code' => 12, 'created_by' => 13, 'created_on' => 14, 'updated_by' => 15, 'updated_on' => 16, 'email_status' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -174,6 +177,8 @@ abstract class BaseMlmPackageContractPeer {
 		$criteria->addSelectColumn(MlmPackageContractPeer::UPDATED_BY);
 
 		$criteria->addSelectColumn(MlmPackageContractPeer::UPDATED_ON);
+
+		$criteria->addSelectColumn(MlmPackageContractPeer::EMAIL_STATUS);
 
 	}
 
