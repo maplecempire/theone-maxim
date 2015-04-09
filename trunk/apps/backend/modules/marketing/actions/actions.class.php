@@ -381,6 +381,7 @@ class marketingActions extends sfActions
                         $mlmPackageContract->setUsername($userDB->getUsername());
                         $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
                         $mlmPackageContract->setPackagePrice($packageDB->getPrice());
+                        $mlmPackageContract->setEmailStatus(Globals::STATUS_PENDING);
                         $mlmPackageContract->setSignDateDay(date("d"));
                         $mlmPackageContract->setSignDateMonth(date("F"));
                         $mlmPackageContract->setSignDateYear(date("Y"));
@@ -520,6 +521,16 @@ class marketingActions extends sfActions
                     $currentDate = $dateUtil->formatDate("Y-m-d", $packageUpgradeHistoryDB->getCreatedOn()) . " 00:00:00";
                     $currentDate_timestamp = strtotime($currentDate);
                     $firstDividendDate = strtotime("+1 months", $currentDate_timestamp);
+
+                    // MV168 all referrer exceeded 3% will transfer to his account
+                    $exceedRoiSpecialCase = false;
+                    $pos = strrpos($tbl_distributor->getTreeStructure(), "|295032|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $exceedRoiSpecialCase = true;
+                    }
+
                     for ($x=1; $x <= 18; $x++) {
                         $dividendDate = strtotime("+" . $x . " months", $currentDate_timestamp);
 
@@ -532,14 +543,50 @@ class marketingActions extends sfActions
                         $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $dividendDate));
                         $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
                         $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
-                        $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                        if ($exceedRoiSpecialCase == false) {
+                            $mlm_roi_dividend->setRoiPercentage($packageDB->getMonthlyPerformance());
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                        } else {
+                            $roi = $packageDB->getMonthlyPerformance();
+                            $exceedRoi = 0;
+                            if ($roi > 3) {
+                                $exceedRoi = $roi - 3;
+                                $roi = $roi - 3;
+                            }
+                            $mlm_roi_dividend->setRoiPercentage($roi);
+                            $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
+                            $mlm_roi_dividend->setExceedDistId(295032);
+                            $mlm_roi_dividend->setExceedRoiPercentage($exceedRoi);
+                        }
                         //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
                         //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-                        $mlm_roi_dividend->setStatusCode(Globals::DIVIDEND_STATUS_PENDING);
                         $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_roi_dividend->save();
                     }
+
+                    $userDB = AppUserPeer::retrieveByPK($tbl_distributor->getUserId());
+
+                    $mlmPackageContract = new MlmPackageContract();
+                    $mlmPackageContract->setDistId($tbl_distributor->getDistributorId());
+                    $mlmPackageContract->setFullName($tbl_distributor->getFullName());
+                    $mlmPackageContract->setUsername($userDB->getUsername());
+                    $mlmPackageContract->setMt4Id($mt4Id);
+                    $mlmPackageContract->setPackagePrice($packageDB->getPrice());
+                    $mlmPackageContract->setEmailStatus(Globals::STATUS_PENDING);
+                    $mlmPackageContract->setSignDateDay(date("d"));
+                    $mlmPackageContract->setSignDateMonth(date("F"));
+                    $mlmPackageContract->setSignDateYear(date("Y"));
+                    $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
+                    $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
+                    if ($exceedRoiSpecialCase == false) {
+                        $mlmPackageContract->setStatusCode(Globals::STATUS_ACTIVE);
+                    } else {
+                        $mlmPackageContract->setStatusCode(Globals::STATUS_COMPLETE);
+                    }
+                    $mlmPackageContract->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlmPackageContract->save();
 
                     $appSettingDB->setSettingValue($mt4Id + 1);
                     $appSettingDB->save();
