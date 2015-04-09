@@ -11,7 +11,7 @@
 <style type="text/css">
 .caption{
 background:#e8e8e8;
-width:25%;
+width:25%;                                                     ]
 }
 .ui-widget-content .display a, .ui-widget-content a{
     color: #0066bb !important;
@@ -466,6 +466,13 @@ $(function() {
                              border="0">
                         &nbsp;<?php echo __('Distributor Listing'); ?></a><br/>
                     <?php } ?>
+
+                    <?php //if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_KYC_LIST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('marketing/kycList') ?>" title="<?php echo __('KYC Listing'); ?>">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('KYC Listing'); ?></a><br/>
+                    <?php //} ?>
 
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_SUPER_IB_LIST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <a href="<?php echo url_for('marketing/superIbList') ?>" title="<?php echo __('Super IB Listing'); ?>">
