@@ -78,20 +78,19 @@ $(function(){
                                 , leader : oObj.aData[idx++]
                                 , remark : oObj.aData[idx++]
                           });
-		  				  return "<a id='editLink' href='#' title='Edit Member Profile'>Edit</a>&nbsp;<a id='loginLink' href='<?php echo url_for('admin/masterLogin') ?>?distId=" + oObj.aData[0] + "' title='Login'>Login</a>"
-		  				  + "<br><a id='resendPasswordLink' href='#' title='Resend Password'>Resend_Password</a><br><a id='resendMt4Link' href='#' title='Resend MT4'>Resend_MT4</a>";
+		  				  return "<a id='editLink' href='#' title='KYC'>KYC</a>";
 		  				}},
 		              { "sName" : "dist.distributor_code",  "bSortable": true},
 		              { "sName" : "dist.rank_code",  "bSortable": true},
 		              { "sName" : "tblUser.userpassword",  "bVisible": false},
 		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
-		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
-		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
+		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
+		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
 		              /*{ "sName" : "dist.mt4_user_name",  "bSortable": false},
 		              { "sName" : "dist.mt4_password",  "bSortable": false},*/
 		              { "sName" : "dist.full_name",  "bSortable": true},
-		              { "sName" : "dist.nickname",  "bSortable": true},
-		              { "sName" : "dist.ic",  "bSortable": true},
+		              { "sName" : "dist.nickname",  "bVisible": false},
+		              { "sName" : "dist.ic",  "bVisible": false},
 		              { "sName" : "dist.country",  "bSortable": true},
 		              { "sName" : "dist.address",  "bSortable": true},
 		              { "sName" : "dist.postcode",  "bSortable": true},
@@ -104,7 +103,7 @@ $(function(){
 		              { "sName" : "dist.bank_holder_name",  "bSortable": true},
 		              { "sName" : "dist.bank_swift_code",  "bSortable": true},
 		              { "sName" : "dist.visa_debit_card",  "bSortable": true},
-		              { "sName" : "dist.upline_dist_code",  "bSortable": true},
+		              { "sName" : "dist.upline_dist_code",  "bVisible": false},
 		              { "sName" : "dist.status_code",  "bSortable": true},
 		              { "sName" : "dist.created_on",  "bSortable": true}
 		              , { "sName" : "dist.file_bank_pass_book",  "bSortable": true, "fnRender": function ( oObj ) {
@@ -128,7 +127,7 @@ $(function(){
                                 return "";
                             }
                       }}
-                , { "sName" : "dist.created_on",  "bSortable": false}
+                , { "sName" : "dist.created_on",  "bVisible": false}
                 , { "sName" : "dist.remark",  "bVisible": false}
                 , { "sName" : "dist.hide_genealogy",  "bVisible": false}
 		]

@@ -1334,9 +1334,9 @@ class marketingListActions extends sfActions
         if ($this->getRequestParameter('filterContact') != "") {
             $sWhere .= " AND dist.contact LIKE '%" . $this->getRequestParameter('filterContact') . "%'";
         }
-        if ($this->getRequestParameter('filterParentCode') != "") {
+        /*if ($this->getRequestParameter('filterParentCode') != "") {
             $sWhere .= " AND dist.upline_dist_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterParentCode')) . "%'";
-        }
+        }*/
         if ($this->getRequestParameter('filterStatusCode') != "") {
             $sWhere .= " AND dist.status_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterStatusCode')) . "%'";
         }
