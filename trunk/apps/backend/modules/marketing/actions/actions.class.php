@@ -10,6 +10,10 @@
  */
 class marketingActions extends sfActions
 {
+    public function executePackageUpgradeContract()
+    {
+
+    }
     public function executeEmailPIA()
     {
         $c = new Criteria();
@@ -2946,6 +2950,10 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
     }
 
     public function executeDistList()
+    {
+    }
+
+    public function executeKycList()
     {
     }
 
