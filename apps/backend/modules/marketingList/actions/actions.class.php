@@ -1325,7 +1325,7 @@ class marketingListActions extends sfActions
             $sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%'";
         }
         if ($this->getRequestParameter('filterKycStatus') != "") {
-            $sWhere .= " AND dist.kyc_status LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterKycStatus')) . "%'";
+            $sWhere .= " AND dist.kyc_status = '" . mysql_real_escape_string($this->getRequestParameter('filterKycStatus')) . "'";
         }
 
         if ($this->getRequestParameter('filterFullName') != "") {
