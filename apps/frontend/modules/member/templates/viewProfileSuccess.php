@@ -1071,7 +1071,7 @@ $(function() {
                     </td>
                     <td>
                         <?php
-                        if ($distDB->getKivStatus() != "APPROVE") {
+                        if ($distDB->getKycStatus() != "APPROVE") {
                             echo input_file_tag('bankPassBook', array("id" => "bankPassBook", "name" => "bankPassBook"));
                         } ?>
                         <?php
@@ -1096,7 +1096,7 @@ $(function() {
                     </td>
                     <td>
                         <?php
-                            if ($distDB->getKivStatus() != "APPROVE") {
+                            if ($distDB->getKycStatus() != "APPROVE") {
                                 echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence"));
                             }
                             ?>
@@ -1122,7 +1122,7 @@ $(function() {
                     </td>
                     <td>
                         <?php
-                        if ($distDB->getKivStatus() != "APPROVE") {
+                        if ($distDB->getKycStatus() != "APPROVE") {
                             echo input_file_tag('nric', array("id" => "nric", "name" => "nric"));
                         }
                         ?>
