@@ -308,7 +308,7 @@ function reassignDatagridEventAttr(){
                                         <option value="APPROVE">APPROVE</option>
                                         <option value="KIV">KIV</option>
                                         <option value="DISAPPROVE">DISAPPROVE</option>
-                                        <option value="ALL">ALL</option>
+                                        <option value="">ALL</option>
                                     </select>
 								<td></td>
                                 <td></td>
