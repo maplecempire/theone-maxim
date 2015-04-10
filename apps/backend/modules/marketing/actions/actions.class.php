@@ -10,6 +10,130 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeUpdateKIV()
+    {
+        $mlmDistributor = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
+
+        if ($mlmDistributor) {
+            $mlmDistributor->setKycRemark($this->getRequestParameter('kycRemark'));
+            $mlmDistributor->setKycStatus($this->getRequestParameter('kycStatus'));
+
+            if ($this->getRequestParameter('kycStatus') == "APPROVE") {
+                $mlmDistributor->setkycUserId($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmDistributor->setkycDatetime(date("Y-m-d h:i:s"));
+            }
+            $mlmDistributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmDistributor->save();
+        }
+
+        return sfView::NONE;
+    }
+    public function executePersonalProfile()
+    {
+    }
+    public function executeProofOfResidence()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('q'));
+
+        if ($distDB) {
+            $fileName = $distDB->getFileProofOfResidence();
+
+            $response = $this->getResponse();
+            $response->clearHttpHeaders();
+            $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+            $response->setContentType('application/pdf');
+            $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
+            $response->sendHttpHeaders();
+
+            readfile(sfConfig::get('sf_upload_dir')."/proof_of_residence/".$fileName);
+        }
+
+        return sfView::NONE;
+    }
+    public function executeBankPassBook()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('q'));
+
+        if ($distDB) {
+            $fileName = $distDB->getFileBankPassBook();
+
+            $response = $this->getResponse();
+            $response->clearHttpHeaders();
+            $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+            $response->setContentType('application/pdf');
+            $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
+            $response->sendHttpHeaders();
+
+            readfile(sfConfig::get('sf_upload_dir')."/bank_pass_book/".$fileName);
+        }
+
+        return sfView::NONE;
+    }
+    public function executeNric()
+    {
+        $distDB = MlmDistributorPeer::retrieveByPk($this->getRequestParameter('q'));
+
+        if ($distDB) {
+            $fileName = $distDB->getFileNric();
+
+            $response = $this->getResponse();
+            $response->clearHttpHeaders();
+            $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+            $response->setContentType('application/pdf');
+            $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+            $response->setHttpHeader('Content-Disposition','attachment; filename='.$fileName, TRUE);
+            $response->sendHttpHeaders();
+
+            readfile(sfConfig::get('sf_upload_dir')."/nric/".$fileName);
+        }
+
+        return sfView::NONE;
+    }
+    public function executeRetrievePersonalProfile()
+    {
+        $distributorDB = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
+
+        $arr = array(
+            'fullName' => $distributorDB->getFullName()
+            ,'country' => $distributorDB->getCountry()
+            ,'dob' => $distributorDB->getDob()
+            ,'address' => $distributorDB->getAddress()
+            ,'address2' => $distributorDB->getAddress2()
+            ,'city' => $distributorDB->getCity()
+            ,'state' => $distributorDB->getState()
+            ,'email' => $distributorDB->getEmail()
+            ,'alternateEmail' => $distributorDB->getAlternateEmail()
+            ,'contact' => $distributorDB->getContact()
+            ,'gender' => $distributorDB->getGender()
+            ,'nomineeName' => $distributorDB->getNomineeName()
+            ,'nomineeRelationship' => $distributorDB->getNomineeRelationship()
+            ,'nomineeIc' => $distributorDB->getNomineeIc()
+            ,'nomineeContactNo' => $distributorDB->getNomineeContactNo()
+            ,'bankName' => $distributorDB->getBankName()
+            ,'bankBranchName' => $distributorDB->getBankBranchName()
+            ,'bankAddress' => $distributorDB->getBankAddress()
+            ,'bankCountry' => $distributorDB->getBankCountry()
+            ,'bankAccountCurrency' => $distributorDB->getBankAccountCurrency()
+            ,'bankAccNo' => $distributorDB->getBankAccNo()
+            ,'bankHolderName' => $distributorDB->getBankHolderName()
+            ,'bankSwiftCode' => $distributorDB->getBankSwiftCode()
+            ,'bankCode' => $distributorDB->getBankCode()
+            ,'visaDebitCard' => $distributorDB->getVisaDebitCard()
+            ,'iaccountUsername' => $distributorDB->getIaccountUsername()
+            ,'iaccount' => $distributorDB->getIaccount()
+            ,'fileBankPassBook' => $distributorDB->getFileBankPassBook()
+            ,'fileProofOfResidence' => $distributorDB->getFileProofOfResidence()
+            ,'fileNric' => $distributorDB->getFileNric()
+            ,'remark' => $distributorDB->getRemark()
+            ,'kycRemark' => $distributorDB->getKycRemark()
+            ,'kycStatus' => $distributorDB->getKycStatus()
+        );
+
+        echo json_encode($arr);
+        return sfView::HEADER_ONLY;
+    }
     public function executePackageUpgradeContract()
     {
 

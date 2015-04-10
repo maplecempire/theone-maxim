@@ -66,5 +66,13 @@ announcementDetail:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_ANNOUNCEMENT ]]
 
+personalProfile:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
+
+retrievePersonalProfile:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_DIST_LIST ]]
+
 all:
   is_secure:  off        # off is the default value anyway
