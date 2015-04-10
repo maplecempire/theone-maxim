@@ -2072,6 +2072,38 @@ class financeListActions extends sfActions
         }
     }
 
+    public function executeUpdateLeaderForCp3Withdrawal()
+    {
+        $c = new Criteria();
+        //$c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
+        $mlmCp3Withdraws = MlmCp3WithdrawPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        foreach ($mlmCp3Withdraws as $mlmCp3Withdraw) {
+
+            $distDB = MlmDistributorPeer::retrieveByPK($mlmCp3Withdraw->getDistId());
+
+            if (!$distDB) {
+                print_r($mlmCp3Withdraw->getDistId()."<br>");
+                continue;
+            }
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $mlmCp3Withdraw->setLeaderDistId($dist->getDistributorId());
+                        $mlmCp3Withdraw->save();
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     function updateLeaderForCp2Withdrawal()
     {
         $c = new Criteria();
@@ -2084,6 +2116,37 @@ class financeListActions extends sfActions
 
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
 
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $mlmCp2Withdraw->setLeaderDistId($dist->getDistributorId());
+                        $mlmCp2Withdraw->save();
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    public function executeUpdateLeaderForCp2Withdrawal()
+    {
+        $c = new Criteria();
+        //$c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
+        $mlmCp2Withdraws = MlmEcashWithdrawPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        foreach ($mlmCp2Withdraws as $mlmCp2Withdraw) {
+
+            $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
+            if (!$distDB) {
+                print_r($mlmCp2Withdraw->getDistId()."<br>");
+                continue;
+            }
             for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
