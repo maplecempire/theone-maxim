@@ -253,7 +253,7 @@ function reassignDatagridEventAttr(){
 <?php echo form_tag('admin/doLogin', 'id=loginForm') ?>
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
 <div class="portlet">
-    <div class="portlet-header">Distributor Listing</div>
+    <div class="portlet-header">KYC Listing</div>
     <div class="portlet-content">
 	<table width="100%" border="0">
 		<tr>
