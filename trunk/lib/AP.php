@@ -21,6 +21,7 @@ abstract class AP {
 
     const AL_DIST_ADD = 'AL_DIST_ADD';
     const AL_DIST_LIST = 'AL_DIST_LIST';
+    const AL_KYC_LIST = 'AL_KYC_LIST';
     const AL_IB_LIST = 'AL_IB_LIST';
     const AL_SPONSOR_TREE = 'AL_SPONSOR_TREE';
     const AL_PLACEMENT_TREE = 'AL_PLACEMENT_TREE';
