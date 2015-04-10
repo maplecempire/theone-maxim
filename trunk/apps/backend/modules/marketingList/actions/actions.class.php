@@ -1324,6 +1324,9 @@ class marketingListActions extends sfActions
         if ($this->getRequestParameter('filterDistcode') != "") {
             $sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%'";
         }
+        if ($this->getRequestParameter('filterKycStatus') != "") {
+            $sWhere .= " AND dist.kyc_status LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterKycStatus')) . "%'";
+        }
 
         if ($this->getRequestParameter('filterFullName') != "") {
             $sWhere .= " AND dist.full_name LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterFullName')) . "%'";
@@ -1377,7 +1380,7 @@ class marketingListActions extends sfActions
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
                 $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
-                $resultArr['rank_code'] == null ? "" : $resultArr['rank_code'],
+                $resultArr['kyc_status'] == null ? "" : $resultArr['kyc_status'],
                 //$resultArr['userpassword'] == null ? "" : $resultArr['userpassword'],
                 //$resultArr['userpassword2'] == null ? "" : $resultArr['userpassword2'],
                 "******",

@@ -1070,7 +1070,10 @@ $(function() {
                         <?php echo __('Bank Account Proof') ?>
                     </td>
                     <td>
-                        <?php echo input_file_tag('bankPassBook', array("id" => "bankPassBook", "name" => "bankPassBook")); ?>
+                        <?php
+                        if ($distDB->getKivStatus() != "APPROVE") {
+                            echo input_file_tag('bankPassBook', array("id" => "bankPassBook", "name" => "bankPassBook"));
+                        } ?>
                         <?php
                         if ($distDB->getFileBankPassBook() != "") {
                         ?>
@@ -1092,7 +1095,11 @@ $(function() {
                         <?php echo __('Proof of Residence') ?>
                     </td>
                     <td>
-                        <?php echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence")); ?>
+                        <?php
+                            if ($distDB->getKivStatus() != "APPROVE") {
+                                echo input_file_tag('proofOfResidence', array("id" => "proofOfResidence", "name" => "proofOfResidence"));
+                            }
+                            ?>
                         <?php
                         if ($distDB->getFileProofOfResidence() != "") {
                         ?>
@@ -1114,7 +1121,11 @@ $(function() {
                         <?php echo __('Passport/Photo ID') ?>
                     </td>
                     <td>
-                        <?php echo input_file_tag('nric', array("id" => "nric", "name" => "nric")); ?>
+                        <?php
+                        if ($distDB->getKivStatus() != "APPROVE") {
+                            echo input_file_tag('nric', array("id" => "nric", "name" => "nric"));
+                        }
+                        ?>
                         <?php
                         if ($distDB->getFileNric() != "") {
                         ?>

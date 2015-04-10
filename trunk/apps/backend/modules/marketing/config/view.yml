@@ -1,3 +1,7 @@
 manipulatePipsSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+personalProfileSuccess:
+  has_layout:     off
+  stylesheets: 	  []

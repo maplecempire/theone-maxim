@@ -3957,6 +3957,7 @@ class memberActions extends sfActions
                 $mlm_distributor->setInitRankCode($packageDB->getPackageName());
                 $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
                 $mlm_distributor->setPackagePurchaseFlag("Y");
+                $mlm_distributor->setKycStatus("PENDING");
                 $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
