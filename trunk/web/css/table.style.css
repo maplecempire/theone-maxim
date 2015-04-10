@@ -1,0 +1,507 @@
+.tbl_menutab td {
+    color: #808080;
+}
+
+.tbl_menutab td {
+    background: url('../images/maxim/tab/tab.gif') repeat-x 0 -39px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tbl_menutab_current td a {
+    display: block;
+    height: 100%;
+}
+
+.tbl_menutab_current td {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.tbl_menutab_current td, .tbl_menutab_current td a, .tbl_menutab_current td a:hover {
+    color: #b5be02;
+    font-weight: bold;
+}
+
+.tbl_menutab_current td {
+    background: url('../images/maxim/tab/tab.gif') repeat-x 0 0;
+    text-align: center;
+}
+
+.tbl_menutab_spacer {
+    background: url('../images/maxim/tab/tab.gif') repeat-x 0 -115px;
+}
+
+.tab_left_grey {
+    width: 1px;
+    height: 36px;
+    margin-bottom: 3px;
+    background: url('../images/maxim/tab/tab.gif') no-repeat 0 -154px;
+}
+
+.tab_right_grey {
+    width: 3px;
+    height: 36px;
+    margin-bottom: 3px;
+    background: url('../images/maxim/tab/tab.gif') no-repeat 0 -194px;
+}
+
+.tbl_layout {
+    border: none;
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+.tbl_sprt_bottom {
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 1px;
+    height: 25px;
+}
+
+.tbl_sprt_side {
+    border: 0 solid #d7d7d7;
+    border-left-width: 1px;
+    border-right-width: 1px;
+}
+
+.tbl_sprt_right {
+    border: 0 solid #d7d7d7;
+    border-right-width: 1px;
+}
+
+.tbl_heading td {
+    padding: 0 5px 0 5px;
+}
+
+.tbl_heading_left {
+    padding: 0 5px 0 5px;
+    text-align: left;
+    font-weight: normal;
+    color: #808080;
+    height: 28px;
+    background: url("../images/maxim/header_grey_bar.jpg") repeat-x;
+}
+
+.tbl_heading_right {
+    padding: 0 5px 0 5px;
+    text-align: right;
+    color: #808080;
+    height: 28px;
+    background: url("../images/maxim/header_grey_bar.jpg") repeat-x;
+}
+
+.tbl_header, .tbl_header_left, .tbl_header_right, .tbl_footer_left, .tbl_footer_right {
+    background-color: white;
+    vertical-align: top;
+}
+
+.tbl_header_left div.border_left_grey {
+    width: 5px;
+    height: 25px;
+    background: transparent url('../images/maxim/header.gif') no-repeat 0 0;
+}
+
+.tbl_header_right div.border_right_grey {
+    width: 7px;
+    background: transparent url('../images/maxim/header.gif') no-repeat -3px 0;
+}
+
+.tbl_header_left div.border_left_green {
+    width: 7px;
+    height: 25px;
+    background: transparent url('../images/maxim/header.gif') no-repeat 0 -28px;
+}
+
+.tbl_header_right div.border_right_green {
+    width: 6px;
+    background: transparent url('../images/maxim/header.gif') no-repeat -4px -28px;
+}
+
+.tbl_header_left div.border_left_blue {
+    width: 7px;
+    height: 25px;
+    background: transparent url('../images/maxim/header.gif') no-repeat 0 -53px;
+}
+
+.tbl_header_right div.border_right_blue {
+    width: 7px;
+    background: transparent url('../images/maxim/header.gif') no-repeat -3px -53px;
+}
+
+.tbl_header_right, .tbl_content_right, .tbl_footer_right, .tbl_paging_header {
+    text-align: right;
+}
+
+.tbl_content_top {
+    vertical-align: top;
+    height: 50px;
+}
+
+.tbl_content_middle {
+    text-align: center;
+}
+
+.tbl_content_bottom {
+    vertical-align: bottom;
+}
+
+.tbl_info_blue th {
+    color: white;
+    background: #005E9B url('../images/maxim/header.gif') repeat-x 0 -107px;
+}
+
+.tbl_info_blue2 th {
+    color: white;
+    background: #005E9B url('../images/maxim/header.gif') repeat-x 0 -107px;
+}
+
+.tbl_info_blue td {
+    color: #d7d7d7;
+    background-color: #f0f0f0;
+    border: 0 solid white;
+    border-top-width: 1px;
+    font-weight: bold;
+}
+
+.tbl_info_blue td a {
+    display: block;
+    height: 100%;
+}
+
+.tbl_info_blue td a:hover {
+    background-color: #b5be02;
+    color: white;
+}
+
+.tbl_info_blue_bottom td {
+    background-color: white;
+    height: 0;
+}
+
+.tbl_info_green th {
+    color: white;
+    background: transparent url('../images/maxim/header.gif') repeat-x 0 -80px;
+}
+
+.tbl_info_green td {
+    background-color: #fafafa;
+    color: #808080;
+    border: 0 solid white;
+    border-top-width: 1px;
+}
+
+.tbl_info_green_bottom td {
+    background-color: white;
+    height: 0;
+}
+
+.tbl_info_grey th, .tbl_login_grey th {
+    color: white;
+    background: #808080 url('../images/maxim/header.gif') repeat-x 0 -134px;
+}
+
+.tbl_info_grey td {
+    background-color: #f0f0f0;
+    color: #808080;
+    border: 0 solid white;
+    border-top-width: 1px;
+}
+
+.tbl_login_grey td {
+    background-color: #fafafa;
+    color: #808080;
+    border: 0;
+}
+
+.tbl_login_grey_bg td {
+    /*background-color: #e5eef5;*/
+    color: black;
+    border: 0;
+}
+
+.tbl_info_grey_bg th, .tbl_login_grey_bg th {
+    color: white;
+    background: #808080 url('../images/maxim/header.gif') repeat-x 0 -134px;
+}
+
+.tbl_info_grey_bg td {
+    background-color: #fafafa;
+    color: #808080;
+}
+
+.tbl_info_grey_bg_overall {
+    background-color: #fafafa;
+}
+
+.tbl_info_grey_bg_overall th {
+    color: white;
+    background: #808080 url('../images/maxim/header.gif') repeat-x 0 -134px;
+}
+
+.tbl_info_grey_bg_overall td {
+    background-color: #fafafa;
+    color: #808080;
+}
+
+.tbl_info_grey_bottom td {
+    background-color: white;
+    height: 0;
+}
+
+.tbl_info_grey_current td {
+    background-color: #daedc1;
+    color: black;
+    font-weight: bold;
+}
+
+.tbl_info_grey_complete td {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+.tbl_info_white td {
+    background-color: #fff;
+    color: #666;
+    font-weight: bold;
+}
+
+.tbl_listing th, .tbl_form th {
+    color: white;
+    background: #808080 url('../images/maxim/header.gif') repeat-x 0 -134px;
+}
+
+.tbl_listing td, .tbl_content_left, .tbl_content_right {
+    padding: 0 1px 0 1px;
+}
+
+.tbl_listing td {
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 1px;
+}
+
+.tbl_listing_end td, .tbl_form_end td {
+    /*background-color: white;*/
+    border: 0 solid #808080;
+    border-top-width: 2px;
+}
+
+.tbl_listing_row_even, .tbl_listing_row_odd, .tbl_listing_row_grey, .tbl_listing_row_grey2 {
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 1px;
+}
+
+.tbl_listing_row_even {
+    background-color: #e5eef5;
+}
+
+.tbl_listing_row_odd {
+    background-color: white;
+}
+
+.tbl_listing_row_grey {
+    background-color: #efefef;
+}
+
+.tbl_listing_row_grey2 td {
+    background-color: #f0f0f0;
+    color: #666;
+    font-weight: bold;
+}
+
+.tbl_listing_header, .tbl_listing_header td {
+    background-color: #e5eef5;
+    border: 0;
+    color: #005d9a;
+    font-weight: bold;
+}
+
+.tbl_form td {
+    padding: 3px 1px 3px 1px;
+}
+
+.tbl_form_row_even td, .tbl_form_row_odd td {
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 0px;
+}
+
+.tbl_form_row_even {
+    background-color: #f0f0f0;
+}
+
+.tbl_form_row_odd {
+    background-color: white;
+}
+
+.tbl_footer_right {
+    font-weight: bold;
+}
+
+.tbl_form_row_clean td {
+    border: 0 solid #d7d7d7;
+}
+
+.tbl_introduction td {
+    background: #f0f1f0 url('../images/maxim/gradient_msg.gif') repeat-x 0 0;
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 1px;
+    color: #808080;
+    height: 20px;
+}
+
+.tbl_instructions td {
+    background: #f0f1f0 url('../images/maxim/gradient_msg.gif') repeat-x 0 0;
+    border: 0 solid #d7d7d7;
+    border-bottom-width: 1px;
+    color: #42ab52;
+    font-weight: bold;
+    height: 20px;
+}
+
+.tbl_notice, .tbl_notice_left, .tbl_notice_right, .tbl_notice_end td {
+    background-color: #fafafa;
+    border: 0 solid #d7d7d7;
+}
+
+.tbl_notice_left {
+    border-left-width: 1px;
+}
+
+.tbl_notice_right {
+    border-right-width: 1px;
+}
+
+.tbl_notice_end td {
+    background-color: white;
+    border-top-width: 1px;
+}
+
+.tbl_result_box td {
+    border: 1px solid #d7d7d7;
+}
+
+.tbl_result td {
+    padding: 3px 1px 3px 1px;
+}
+
+.tbl_result_left, .tbl_result_right, .tbl_result_top, .tbl_result_bottom, .tbl_result_topleft, .tbl_result_topright, .tbl_result_bottomleft, .tbl_result_bottomright {
+    border: 0 solid #d7d7d7;
+}
+
+.tbl_result_left, .tbl_result_topleft, .tbl_result_bottomleft {
+    border-left-width: 1px;
+}
+
+.tbl_result_right, .tbl_result_topright, .tbl_result_bottomright {
+    border-right-width: 1px;
+}
+
+.tbl_result_top, .tbl_result_topleft, .tbl_result_topright {
+    border-top-width: 1px;
+}
+
+.tbl_result_bottom, .tbl_result_bottomleft, .tbl_result_bottomright {
+    border-bottom-width: 1px;
+}
+
+.tbl_header_grey, .tbl_header_grey_left, .tbl_header_grey_right {
+    color: white;
+    background: #808080 url('../images/maxim/hdr-gry-bg.gif') repeat-x 0 0;
+}
+
+.tbl_header_grey_right {
+    text-align: right;
+}
+
+.tbl_display_grey {
+    background-color: #f0f0f0;
+    border: 0 solid #d7d7d7;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.tbl_display_grey td {
+    height: 23px;
+}
+
+.tbl_bigbox_form {
+    background-color: #FFF;
+    border: solid #F6F6F6;
+    margin-left: 0;
+}
+
+.tbl_bigbox_left {
+    border-bottom: 1px solid #EFEFEF;
+}
+
+.tbl_bigbox_right {
+    border-left: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF;
+}
+
+.tbl_lagout {
+    border: none;
+    align: center;
+    width: 300px;
+}
+
+.tbl_box {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#tbl_border_none td {
+    padding: 0;
+    border: 0;
+}
+
+.tbl_maintenance, .tbl_maintenance td {
+    border: 1px solid #CCC;
+}
+
+.tbl_maintenance td {
+    padding: 0 3px 0 3px;
+}
+
+.tbl_maintenance_label {
+    background-color: #066ec1;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.tbl_broadcast, .tbl_summary_box {
+    border: 1px solid #D7D7D7;
+    color: #808080;
+}
+
+.tbl_broadcast td {
+    background: #F0F0F0 url(../images/maxim/broadcast.png) repeat-x;
+    padding: 3px 0 3px 0;
+}
+
+.tbl_summary_box {
+    border: 2px solid #D7D7D7;
+    padding: 10px;
+}
+
+td.tbl_content_top_right {
+    padding-right: 0;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.hr_heading {
+    border: none;
+    border-top: 3px solid;
+}
+
+.hr_spacer {
+    line-height: 5px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.tbl_list_info {
+    height: auto;
+}
