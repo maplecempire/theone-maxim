@@ -3957,9 +3957,9 @@ class memberActions extends sfActions
                 $mlm_distributor->setInitRankCode($packageDB->getPackageName());
                 $mlm_distributor->setStatusCode(Globals::STATUS_ACTIVE);
                 $mlm_distributor->setPackagePurchaseFlag("Y");
-                $mlm_distributor->setKycStatus("PENDING");
                 $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $mlm_distributor->setKycStatus("PENDING");
 
                 if ($this->getRequestParameter('productCode') == "fxgold") {
                     $mlm_distributor->setProductMte("Y");
@@ -4061,6 +4061,7 @@ class memberActions extends sfActions
                 }
                 $mlm_distributor->setActiveDatetime(date("Y/m/d h:i:s A"));
                 $mlm_distributor->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                $mlm_distributor->setKycStatus("PENDING");
 
                 if ($this->getRequestParameter('productCode') == "fxgold") {
                     $mlm_distributor->setProductMte("Y");
@@ -11947,6 +11948,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     if ($distPackageDB && $selectedPackage->getPrice() > $distPackageDB->getPrice()) {
                         $distDB->setRankId($selectedPackage->getPackageId());
                         $distDB->setRankCode($selectedPackage->getPackageName());
+
+                        if ($distDB->getInitRankId() == 0) {
+                            $distDB->setActiveDatetime(date("Y/m/d h:i:s A"));
+                            $distDB->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                            $distDB->setKycStatus("PENDING");
+                        }
                         $distDB->save();
                     }
 
@@ -12502,6 +12509,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $sponsoredDistDB->setPackagePurchaseFlag("Y");
             $sponsoredDistDB->setActiveDatetime(date("Y/m/d h:i:s A"));
             $sponsoredDistDB->setActivatedBy($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $sponsoredDistDB->setKycStatus("PENDING");
             $sponsoredDistDB->save();
 
             $userDB->setStatusCode(Globals::STATUS_ACTIVE);
