@@ -21,11 +21,8 @@ $(function(){
 		"idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
 		"extraParam" : function(aoData){ // pass extra params to server
 			aoData.push( { "name": "filterDistcode", "value": $("#search_distCode").val()  } );
-            aoData.push( { "name": "filterMt4Userame", "value": $("#search_mt4Username").val() } );
             aoData.push( { "name": "filterFullName", "value": $("#search_fullName").val() } );
             aoData.push( { "name": "filterEmail", "value": $("#search_email").val() } );
-            aoData.push( { "name": "filterParentCode", "value": $("#search_parentCode").val() } );
-            aoData.push( { "name": "filterStatusCode", "value": $("#search_statusCode").val() } );
 		},
 		"reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
 			reassignDatagridEventAttr();
@@ -39,7 +36,7 @@ $(function(){
         "bAutoWidth": false,
         "sScrollX": "100%",
         //"sScrollXInner": "150%",
-		"sAjaxSource": "<?php echo url_for('marketingList/distList') ?>",
+		"sAjaxSource": "<?php echo url_for('marketingList/kycList') ?>",
 		"sPaginationType": "full_numbers",
 		"aoColumns": [
 		              { "sName" : "dist.distributor_id", "bVisible" : false},
@@ -84,7 +81,7 @@ $(function(){
 		              { "sName" : "dist.rank_code",  "bVisible": false},
 		              { "sName" : "tblUser.userpassword",  "bVisible": false},
 		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
-		              { "sName" : "tblUser.userpassword2",  "bSortable": true},
+		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
 		              { "sName" : "tblUser.userpassword2",  "bVisible": false},
 		              /*{ "sName" : "dist.mt4_user_name",  "bSortable": true},
 		              { "sName" : "dist.mt4_password",  "bSortable": true},*/
@@ -103,8 +100,8 @@ $(function(){
 		              { "sName" : "dist.bank_holder_name",  "bVisible": false},
 		              { "sName" : "dist.bank_swift_code",  "bVisible": false},
 		              { "sName" : "dist.visa_debit_card",  "bVisible": false},
-		              { "sName" : "dist.upline_dist_code",  "bSortable": false},
-		              { "sName" : "dist.status_code",  "bSortable": true},
+		              { "sName" : "dist.upline_dist_code",  "bVisible": false},
+		              { "sName" : "dist.status_code",  "bVisible": false},
 		              { "sName" : "dist.created_on",  "bVisible": false},
 		              { "sName" : "dist.created_on",  "bVisible": false},
 		              { "sName" : "dist.created_on",  "bVisible": false},
