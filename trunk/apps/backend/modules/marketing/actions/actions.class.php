@@ -752,9 +752,19 @@ class marketingActions extends sfActions
             $strArr = explode("Username:", $line);
 
             if (count($strArr) < 2) {
-                var_dump("=================>");
-                var_dump($strArr);
-                print_r("<br>");
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, trim($strArr[0]));
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+
+                if ($distDB) {
+                    print_r($strArr[0]."Open Successfully<br><br>");
+                    $distDB->setHideGenealogy("N");
+                    $distDB->save();
+                } else {
+                    var_dump("=================>");
+                    var_dump($strArr);
+                    print_r("<br>");
+                }
             } else {
                 print_r($idx."<br><br>");
                 $memberId = trim($strArr[1]);
@@ -764,6 +774,7 @@ class marketingActions extends sfActions
                 $distDB = MlmDistributorPeer::doSelectOne($c);
 
                 if ($distDB) {
+                    print_r($memberId."Open Successfully<br><br>");
                     $distDB->setHideGenealogy("N");
                     $distDB->save();
                 } else {
@@ -772,8 +783,7 @@ class marketingActions extends sfActions
                 $idx++;
             }
         }
-
-        exit();
+        print_r("Done");
         return sfView::HEADER_ONLY;
     }
     public function executeDoRoiNoReturn()
