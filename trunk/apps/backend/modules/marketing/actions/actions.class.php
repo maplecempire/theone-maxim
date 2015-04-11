@@ -434,14 +434,13 @@ class marketingActions extends sfActions
                             $params['login'] = $mt4Id;
 
                             $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-
+                            var_dump("<br>getaccountbalance<br>");
+                            var_dump($answer);
                             if ($answer == null || is_numeric($answer['balance']) == false) {
 
                             } else {
                                 $appSettingDB->setSettingValue($mt4Id + 1);
                                 $appSettingDB->save();
-
-                                $con->commit();
                             }
 
                             $mt4request->CloseConnection();
