@@ -451,6 +451,10 @@ class marketingActions extends sfActions
                             $params['value'] 	= $packagePrice; // above zero for deposits, below zero for withdraws
                             $params['comment'] 	= "Deposit Funds";
                             $answer = $mt4request->MakeRequest("changebalance", $params);
+
+                            var_dump("<br>changebalance<br>");
+                            var_dump($answer);
+
                             print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
 
                             $mt4request->CloseConnection();
