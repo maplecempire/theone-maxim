@@ -455,6 +455,9 @@ class marketingActions extends sfActions
                             var_dump("<br>changebalance<br>");
                             var_dump($answer);
 
+                            if ($answer['result'] != 1) {
+                                print "<p style='background-color:red'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+                            }
                             print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
 
                             $mt4request->CloseConnection();
