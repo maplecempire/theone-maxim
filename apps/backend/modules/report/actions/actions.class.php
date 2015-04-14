@@ -191,7 +191,7 @@ class reportActions extends sfActions
     public function executeGoldCoinPangkorSelfPurchase()
     {
         $dateFrom = "2015-02-01 00:00:00";
-        $dateTo = "2015-03-15 23:59:59";
+        $dateTo = "2015-03-18 23:59:59";
 
         $query = "SELECT dist.distributor_id, dist.distributor_code, package.price, uplineDist.distributor_code as upline_member_code
                         , dist.email, dist.full_name, dist.contact, dist.country
@@ -212,7 +212,7 @@ class reportActions extends sfActions
 
         $idx = 1;
         $arr = array();
-        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Upline Member</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         while ($resultset->next()) {
             $arr = $resultset->getRow();
 
@@ -235,7 +235,7 @@ class reportActions extends sfActions
                     }
                 }
 
-                $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
+                $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['upline_member_code']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
             }
         }
         print_r($str);
@@ -246,7 +246,7 @@ class reportActions extends sfActions
     public function executeGoldCoinPangkorPersonalSales()
     {
         $dateFrom = "2015-02-01 00:00:00";
-        $dateTo = "2015-03-15 23:59:59";
+        $dateTo = "2015-03-18 23:59:59";
 
         $query = "SELECT dist.distributor_id, dist.distributor_code
         , personalSales.total_personal_sales
