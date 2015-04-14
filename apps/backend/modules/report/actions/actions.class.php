@@ -188,6 +188,126 @@ class reportActions extends sfActions
         print_r("executeMaxcapGalaDinner2015 Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeGoldCoinPangkorSelfPurchase()
+    {
+        $dateFrom = "2015-02-01 00:00:00";
+        $dateTo = "2015-03-15 23:59:59";
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code, package.price, uplineDist.distributor_code as upline_member_code
+                        , dist.email, dist.full_name, dist.contact, dist.country
+                , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on, dist.user_id
+                    FROM mlm_distributor dist
+                        LEFT JOIN mlm_distributor uplineDist ON uplineDist.distributor_id = dist.upline_dist_id
+                        LEFT JOIN mlm_package package ON package.package_id = dist.init_rank_id
+                    WHERE dist.active_datetime >= '" . $dateFrom . "' AND dist.active_datetime <= '" . $dateTo . "'
+                        AND dist.loan_account = 'N'
+                        AND dist.tree_structure like '%|43|%'  and dist.tree_structure not like '%|595|%'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        var_dump($query);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $idx = 1;
+        $arr = array();
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $totalPurchaseAmount = $arr['price'];
+            $totalUpgradedPackageAmount = $this->getTotalUpgradedPackageAmount($arr['distributor_id'], $dateFrom, $dateTo);
+            $totalPrice = $totalPurchaseAmount + $totalUpgradedPackageAmount;
+            //var_dump($totalPrice);
+            if ($totalPrice >= 20000) {
+                for ($i = 0; $i < count($leaderArrs); $i++) {
+                    $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                        if ($dist) {
+                            $leader = $dist->getDistributorCode();
+                            $leaderId = $dist->getDistributorId();
+                        }
+                        break;
+                    }
+                }
+
+                $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
+            }
+        }
+        print_r($str);
+        print_r("</table>");
+        print_r("executeGoldCoinPangkor Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeGoldCoinPangkorPersonalSales()
+    {
+        $dateFrom = "2015-02-01 00:00:00";
+        $dateTo = "2015-03-15 23:59:59";
+
+        $query = "SELECT dist.distributor_id, dist.distributor_code
+        , personalSales.total_personal_sales
+        , upgradeHistory.total_upgrade_sales
+        , (Coalesce(personalSales.total_personal_sales, 0) + Coalesce(upgradeHistory.total_upgrade_sales, 0)) AS _total
+        , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country
+    FROM mlm_distributor dist
+        LEFT JOIN
+        (
+            SELECT SUM(package.price) AS total_personal_sales, upline_dist_id FROM mlm_distributor downline
+                LEFT JOIN mlm_package package ON package.package_id = downline.init_rank_id
+            WHERE downline.loan_account = 'N'
+                AND downline.active_datetime >= '" . $dateFrom . "'
+                AND downline.active_datetime <= '" . $dateTo . "' GROUP BY upline_dist_id
+        ) personalSales ON personalSales.upline_dist_id = dist.distributor_id
+        LEFT JOIN
+        (
+            SELECT SUM(history.amount) AS total_upgrade_sales, upgrade_dist.upline_dist_id, dist_id FROM mlm_package_upgrade_history history
+                LEFT JOIN mlm_distributor upgrade_dist ON history.dist_id = upgrade_dist.distributor_id
+            WHERE history.created_on >= '" . $dateFrom . "'
+                AND history.created_on <= '" . $dateTo . "' GROUP BY upline_dist_id
+        ) upgradeHistory ON upgradeHistory.upline_dist_id = dist.distributor_id
+WHERE dist.tree_structure like '%|43|%'  and dist.tree_structure not like '%|595|%'
+HAVING _total >= 50000";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        var_dump($query);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $idx = 1;
+        $arr = array();
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $totalPrice = $arr['_total'];
+            //var_dump($totalPrice);
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($arr['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+
+            $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
+        }
+        print_r($str);
+        print_r("</table>");
+        print_r("executeGoldCoinPangkorPersonalSales Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeGoldCoin()
     {
         $dateFrom = "2014-10-01 00:00:00";
