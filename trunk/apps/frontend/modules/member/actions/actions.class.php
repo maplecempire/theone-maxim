@@ -6886,7 +6886,9 @@ We look forward to your custom in the near future. Should you have any queries, 
         // TO_HIDE_DIST_GROUP end ~
 
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
+        if (!$this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1) {
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
+        }
         //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
         $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
         $distDB = MlmDistributorPeer::doSelectOne($c);
@@ -13877,9 +13879,9 @@ Wish you all the best.
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-        var_dump($answer);
-        var_dump("<br>");
-        var_dump("<br>");
+        //var_dump($answer);
+        //var_dump("<br>");
+        //var_dump("<br>");
         //var_dump($answer['balance']);
         //exit();
         //$packagePrice = $answer['balance'];
