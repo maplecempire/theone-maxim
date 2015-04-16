@@ -390,7 +390,8 @@ function reassignDatagridEventAttr(){
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -508,7 +509,8 @@ function reassignDatagridEventAttr(){
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -615,7 +617,8 @@ function reassignDatagridEventAttr(){
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -767,7 +770,8 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -877,7 +881,8 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -987,7 +992,8 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
@@ -1097,7 +1103,8 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                if ($posDUS === false) { // note: three equal signs
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
 
                 } else {
                     $lastChar = substr($distCode, -2);
