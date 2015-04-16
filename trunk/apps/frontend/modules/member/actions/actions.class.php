@@ -6888,9 +6888,9 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c = new Criteria();
         $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode);
         //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-        if (!$this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1) {
+        //if (!$this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1) {
             $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
-        }
+        //}
         $distDB = MlmDistributorPeer::doSelectOne($c);
 
         // maxworld = 175
