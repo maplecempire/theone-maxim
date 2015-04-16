@@ -6903,6 +6903,15 @@ We look forward to your custom in the near future. Should you have any queries, 
             $distDB = MlmDistributorPeer::doSelectOne($c);
         }
 
+        $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
+        if (!$distDB && $posDUS === true) {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode."__");
+            //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+            $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
+            $distDB = MlmDistributorPeer::doSelectOne($c);
+        }
+
         if (!$distDB) {
             $this->errorSearch = true;
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
