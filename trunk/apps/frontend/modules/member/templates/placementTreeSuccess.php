@@ -403,11 +403,11 @@ function reassignDatagridEventAttr(){
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -530,11 +530,11 @@ function reassignDatagridEventAttr(){
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -646,11 +646,11 @@ function reassignDatagridEventAttr(){
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -807,11 +807,11 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -926,11 +926,11 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -1045,11 +1045,11 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
@@ -1164,11 +1164,11 @@ if ($anode[1]['distCode'] != "") { ?>
                 }
                 if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
-                    if ($lastChar == "__") {
+                    if ($lastChar == "**") {
                         $distCode = substr($distCode, 0, -2);
 
                         $lastChar = substr($userName, -2);
-                        if ($lastChar == "__") {
+                        if ($lastChar == "**") {
                             $userName = substr($userName, 0, -2);
                         }
                     }
