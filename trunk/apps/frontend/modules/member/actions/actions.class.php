@@ -6698,8 +6698,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             return $this->redirect('/member/securityPasswordRequired?doAction=G');
         }
 
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($distDB->getHideGenealogy() == "Y") {
+        $distSelfDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($distSelfDB->getHideGenealogy() == "Y") {
             return $this->redirect('/member/summary');
         }
         $dateUtil = new DateUtil();
@@ -6903,7 +6903,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $distDB = MlmDistributorPeer::doSelectOne($c);
         }
 
-        $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
+        $posDUS = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
         if (!$distDB && $posDUS === true) {
             $c = new Criteria();
             $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode."__");
