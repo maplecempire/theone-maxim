@@ -6907,7 +6907,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             // 343149 luoping6688__
             $posDUS = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
             // 254827 amtf0123__
-            $posDUS2 = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
+            $posDUS2 = strrpos($distSelfDB->getPlacementTreeStructure(), "|254827|");
             if ($posDUS === false) {
 
             } else {
