@@ -391,9 +391,7 @@ function reassignDatagridEventAttr(){
 
                 $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
                 $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
-
-                } else {
+                if ($posDUS === true || $posDUS2 == true) { // note: three equal signs
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
