@@ -6904,9 +6904,21 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
 
         if (!$distDB) {
+            // 343149 luoping6688__
             $posDUS = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
-
+            // 254827 amtf0123__
+            $posDUS2 = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
             if ($posDUS === false) {
+
+            } else {
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode."__");
+                //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
+                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+            }
+
+            if ($posDUS2 === false) {
 
             } else {
                 $c = new Criteria();

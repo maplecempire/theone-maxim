@@ -389,8 +389,8 @@ function reassignDatagridEventAttr(){
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
                 if ($posDUS === false) { // note: three equal signs
 
                 } else {
@@ -516,11 +516,19 @@ function reassignDatagridEventAttr(){
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
@@ -624,11 +632,19 @@ function reassignDatagridEventAttr(){
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
@@ -777,11 +793,19 @@ if ($anode[1]['distCode'] != "") { ?>
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
@@ -888,11 +912,19 @@ if ($anode[1]['distCode'] != "") { ?>
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
@@ -999,11 +1031,19 @@ if ($anode[1]['distCode'] != "") { ?>
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
@@ -1110,11 +1150,19 @@ if ($anode[1]['distCode'] != "") { ?>
                     }
                 }
 
-                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
-                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");
-                if ($posDUS === false && $posDUS2 === false) { // note: three equal signs
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");    // 343149 luoping6688__
+                $posDUS2 = strrpos($distDB->getPlacementTreeStructure(), "|254827|");   // 254827 amtf0123__
+                if ($posDUS === false) { // note: three equal signs
 
                 } else {
+                    $isRemoveUS = true;
+                }
+                if ($posDUS2 === false) { // note: three equal signs
+
+                } else {
+                    $isRemoveUS = true;
+                }
+                if ($isRemoveUS == true) {
                     $lastChar = substr($distCode, -2);
                     if ($lastChar == "__") {
                         $distCode = substr($distCode, 0, -2);
