@@ -1011,6 +1011,21 @@ if ($anode[1]['distCode'] != "") { ?>
                     }
                 }
 
+                $posDUS = strrpos($distDB->getPlacementTreeStructure(), "|317307|");
+                if ($posDUS === false) { // note: three equal signs
+
+                } else {
+                    $lastChar = substr($distCode, -2);
+                    if ($lastChar == "__") {
+                        $distCode = substr($distCode, 0, -2);
+
+                        $lastChar = substr($userName, -2);
+                        if ($lastChar == "__") {
+                            $userName = substr($userName, 0, -2);
+                        }
+                    }
+                }
+
                 echo $distCode." (".$userName.")";
             } else {
                 echo $distDB->getDistributorCode();
