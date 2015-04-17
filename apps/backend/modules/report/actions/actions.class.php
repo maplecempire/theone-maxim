@@ -12,7 +12,20 @@ class reportActions extends sfActions
 {
     public function executeCompanyCapitalReport()
     {
-        $dateFrom = "2015-05-01 00:00:00";
+        $dateFrom = "2015-01-01 00:00:00";
+        $dateTo = "2015-12-31 23:59:59";
+
+        $totalMaturityArrs = $this->getTotalAmountOfInvestmentByMonth($dateFrom, $dateTo);
+        print_r("<br>");
+        print_r("<br>");
+        print_r("<br>");
+        print_r("Total Amount of Investment:-<br>");
+        foreach ($totalMaturityArrs as $totalMaturityArr) {
+            print_r("<br>");
+            print_r($totalMaturityArr['year']."-".$totalMaturityArr['month']." : ". number_format($totalMaturityArr['_total'], 0));
+        }
+
+        $dateFrom = "2015-01-01 00:00:00";
         $dateTo = "2015-12-31 23:59:59";
 
         $totalMaturityArrs = $this->getTotalMaturityByMonth($dateFrom, $dateTo);
@@ -2443,6 +2456,23 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         while ($resultset->next()) {
             $arr[] = $resultset->getRow();
         }
+        return $arr;
+    }
+    function getTotalAmountOfInvestmentByMonth($dateFrom, $dateTo)
+    {
+        $query = "SELECT SUM(package_price) AS _total, YEAR(dividend_date) AS year, MONTH(dividend_date) as month
+                        FROM mlm_roi_dividend WHERE dividend_date >= '".$dateFrom."'
+                    AND dividend_date <= '".$dateTo."' and idx = 1 AND status_code IN ('SUCCESS', 'PENDING')
+                  GROUP BY YEAR(dividend_date), MONTH(dividend_date)";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+
         return $arr;
     }
     function getTotalMaturityByMonth($dateFrom, $dateTo)
