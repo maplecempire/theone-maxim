@@ -28,6 +28,49 @@ class memberActions extends sfActions
         return sfView::HEADER_ONLY;
     }
     public function executeCorrectRoi2() {
+        $query = "SELECT
+            roi.`devidend_id`,
+            acct.credit,
+            roi.`dist_id`,
+            roi.`mt4_user_name`,
+            roi.`idx`,
+            roi.`account_ledger_id`,
+            roi.`dividend_date`,
+            roi.`package_id`,
+            roi.`package_price`,
+            roi.`roi_percentage`,
+            roi.`mt4_balance`,
+            roi.`dividend_amount`,
+            roi.`remarks`
+            FROM `maxim`.mlm_roi_dividend roi
+            left join mlm_account_ledger acct ON acct.account_id = roi.account_ledger_id
+            where dividend_date >= '2015-04-01 00:00:00' and dividend_date <= '2015-04-17 00:00:00'
+            and acct.dist_id < 0 and status_code = 'SUCCESS'";
+        //and created_on <= '2015-02-02 23:59:59'
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $c = new Criteria();
+            $c->add(MlmAccountLedgerPeer::TRANSACTION_TYPE, "FUND MANAGEMENT");
+            $c->add(MlmAccountLedgerPeer::DIST_ID, $arr['dist_id']);
+            $c->add(MlmAccountLedgerPeer::REMARK, "%".$arr['mt4_user_name']." #".$arr['idx']."%", Criteria::LIKE);
+            $mlm_account_ledger = MlmAccountLedgerPeer::doSelectOne($c);
+            if ($mlm_account_ledger) {
+
+            } else {
+                print_r("<br><br>".$arr['dist_id']." : ".$arr['mt4_user_name']);
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeCorrectRoi2_bak() {
         $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
               and created_on >= '2015-02-02 00:00:00' and dist_id > 0 AND CREDIT >0
