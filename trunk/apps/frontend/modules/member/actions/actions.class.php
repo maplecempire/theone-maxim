@@ -10771,7 +10771,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
-                print_r("bonusDate=".$bonusDate."<br>");
+                print_r("bonusDate=".$bonusDate."::".$this->getRequestParameter('q')."<br>");
 
                 $level = 0;
                 while ($level < 10) {
@@ -10779,6 +10779,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         print_r("break<br>");
                         break;
                     }
+
                     print_r("level start :".$level."<br><br>");
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
@@ -10792,6 +10793,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                     print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
 //                    foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
+                        if ($this->isGdbIssue($dist->getDistributorId(), $currentDate) == true) {
+                            continue;
+                        }
+
                         $c = new Criteria();
                         $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
                         $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
@@ -14318,6 +14323,26 @@ Wish you all the best.
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
 
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr['_COUNT'] > 0) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function isGdbIssue($distId, $currentDate)
+    {
+        $query = "SELECT count(account_id) as _COUNT
+          	FROM mlm_account_ledger WHERE dist_id = ".$distId.
+                 " AND transaction_type = 'GDB' AND created_on > '".$currentDate." 00:00:00'";
+        var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        exit();
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr['_COUNT'] > 0) {
