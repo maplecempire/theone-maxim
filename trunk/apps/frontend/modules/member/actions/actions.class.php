@@ -12953,8 +12953,8 @@ We look forward to your custom in the near future. Should you have any queries, 
     function findPairingLedgersBonus($distributorId, $position, $date)
     {
         $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($date)));
-        //var_dump($yesterday);
-        //exit();
+        var_dump($yesterday);
+        exit();
         $totalCredit = $this->getPairingSumCredit($distributorId, $position, $yesterday);
         $totalDebit = $this->getPairingSumDebit($distributorId, $position, null);
 
@@ -12968,7 +12968,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     function getPairingSumCredit($distributorId, $position, $date)
     {
         $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
-                 . " AND left_right = '" . $position . "'";
+                 . " AND left_right = ?";
 
         if ($date != null) {
             $query .= " AND created_on <= ?";
