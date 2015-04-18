@@ -12953,8 +12953,8 @@ We look forward to your custom in the near future. Should you have any queries, 
     function findPairingLedgersBonus($distributorId, $position, $date)
     {
         $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($date)));
-        var_dump($yesterday);
-        exit();
+        //var_dump($yesterday);
+        //exit();
         $totalCredit = $this->getPairingSumCredit($distributorId, $position, $yesterday);
         $totalDebit = $this->getPairingSumDebit($distributorId, $position, null);
 
