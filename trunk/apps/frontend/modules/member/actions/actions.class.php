@@ -14342,7 +14342,7 @@ Wish you all the best.
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
-        exit();
+        //exit();
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr['_COUNT'] > 0) {
