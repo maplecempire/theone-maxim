@@ -14338,7 +14338,7 @@ Wish you all the best.
         $query = "SELECT count(account_id) as _COUNT
           	FROM mlm_account_ledger WHERE dist_id = ".$distId.
                  " AND transaction_type = 'GDB' AND created_on > '".$currentDate." 00:00:00'";
-        var_dump($query);
+        //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
