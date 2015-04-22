@@ -257,7 +257,8 @@ $(function() {
                         $disabled = "";
                         $disabledPaP = "";
                         $disabledIps = "";
-                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 161 || $distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 682 || $distDB->getDistributorId() == 255670) {
+                        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2 || $distDB->getDistributorId() == 161 || $distDB->getDistributorId() == 595
+                            || $distDB->getDistributorId() == 682 || $distDB->getDistributorId() == 255670 || $distDB->getDistributorId() == 317571 || $distDB->getDistributorId() == 259794) {
 
                         } else {
                             $disabled = "disabled='disabled'";
