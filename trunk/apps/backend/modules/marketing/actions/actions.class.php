@@ -898,6 +898,100 @@ class marketingActions extends sfActions
         $this->screenLebel = $screenLebel;
     }
 
+    public function executeDeductIaccountCharges() {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "I-account_visa_debit_card.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 2; $x <= $totalRow; $x++) {
+            $distCode = $data->val($x, "C");
+
+            //print_r($distCode."<br>");
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode);
+            $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+            if ($mlmDistributor) {
+                $distAccountCp3Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                if ($distAccountCp3Balance >= 30) {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType("APPLY DEBIT CARD");
+                    $mlm_account_ledger->setRemark("APPLY I-ACCOUNT VISA DEBIT CARD");
+                    $mlm_account_ledger->setInternalRemark("APPLY BASE CARD");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit(30);
+                    $mlm_account_ledger->setBalance($distAccountCp3Balance - 30);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                } else {
+                    $distAccountCp2Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                    if ($distAccountCp2Balance >= 30) {
+                        print_r($distCode." PAID BY CP2 <br>");
+
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setTransactionType("APPLY DEBIT CARD");
+                        $mlm_account_ledger->setRemark("APPLY I-ACCOUNT VISA DEBIT CARD");
+                        $mlm_account_ledger->setInternalRemark("APPLY BASE CARD");
+                        $mlm_account_ledger->setCredit(0);
+                        $mlm_account_ledger->setDebit(30);
+                        $mlm_account_ledger->setBalance($distAccountCp2Balance - 30);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
+                    } else {
+                        $distAccountCp1Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+                        if ($distAccountCp1Balance >= 30) {
+                            print_r($distCode." PAID BY CP3 <br>");
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                            $mlm_account_ledger->setTransactionType("APPLY DEBIT CARD");
+                            $mlm_account_ledger->setRemark("APPLY I-ACCOUNT VISA DEBIT CARD");
+                            $mlm_account_ledger->setInternalRemark("APPLY BASE CARD");
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit(30);
+                            $mlm_account_ledger->setBalance($distAccountCp1Balance - 30);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+                        } else {
+                            print_r("<br><br>".$distCode." ++++++++ Totally Empty, CP3 negative 30 <br><br>");
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                            $mlm_account_ledger->setTransactionType("APPLY DEBIT CARD");
+                            $mlm_account_ledger->setRemark("APPLY I-ACCOUNT VISA DEBIT CARD");
+                            $mlm_account_ledger->setInternalRemark("APPLY BASE CARD");
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit(30);
+                            $mlm_account_ledger->setBalance($distAccountCp3Balance - 30);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+                        }
+                    }
+                }
+            } else {
+                print_r("Not found ".$distCode."<br>");
+            }
+        }
+
+        return sfView::NONE;
+    }
     public function executeUpdateMemberData() {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "distList.xls";
 
