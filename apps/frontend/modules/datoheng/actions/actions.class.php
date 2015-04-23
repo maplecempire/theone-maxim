@@ -67,7 +67,9 @@ class datohengActions extends sfActions
 
         print_r("<table><tr><td>Member ID </td><td>01 2014</td><td>02 2014</td><td>03 2014</td><td>04 2014</td><td>05 2014</td><td>06 2014</td><td>07 2014</td><td>08 2014</td><td>09 2014</td><td>10 2014</td><td>11 2014</td><td>12 2014</td><td>01 2015</td><td>02 2015</td><td>03 2015</td><td>04 2015</td></tr>");
         foreach ($leaderArrs as $leaderId) {
+            $mlmDistributor = MlmDistributorPeer::retrieveByPK($leaderId);
             print_r("<tr>");
+            print_r("<td>".$mlmDistributor->gegtDistributorCode()."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-01-01 00:00:00", "2014-02-01 00:00:00")."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-02-01 00:00:00", "2014-03-01 00:00:00")."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-03-01 00:00:00", "2014-04-01 00:00:00")."</td>");
