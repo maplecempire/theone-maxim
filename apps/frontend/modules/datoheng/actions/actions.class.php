@@ -69,7 +69,7 @@ class datohengActions extends sfActions
         foreach ($leaderArrs as $leaderId) {
             $mlmDistributor = MlmDistributorPeer::retrieveByPK($leaderId);
             print_r("<tr>");
-            print_r("<td>".$mlmDistributor->gegtDistributorCode()."</td>");
+            print_r("<td>".$mlmDistributor->getDistributorCode()."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-01-01 00:00:00", "2014-02-01 00:00:00")."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-02-01 00:00:00", "2014-03-01 00:00:00")."</td>");
             print_r("<td>".$this->getMonthlySales($leaderId, "2014-03-01 00:00:00", "2014-04-01 00:00:00")."</td>");
