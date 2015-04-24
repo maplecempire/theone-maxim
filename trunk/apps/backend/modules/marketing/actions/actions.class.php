@@ -339,7 +339,7 @@ class marketingActions extends sfActions
 //        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
         $c->add(MlmDistributorPeer::PACKAGE_PURCHASE_FLAG, "Y");
 //        $c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
-        $c->setLimit(30);
+        $c->setLimit(1);
         $distributorDBs = MlmDistributorPeer::doSelect($c);
 
         if (count($distributorDBs) > 0) {
