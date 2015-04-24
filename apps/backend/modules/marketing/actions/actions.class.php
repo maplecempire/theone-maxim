@@ -498,7 +498,7 @@ class marketingActions extends sfActions
                                 $mlm_roi_dividend->setMt4UserName($mt4Id);
                                 //$mlm_roi_dividend->setAccountLedgerId($this->getRequestParameter('account_ledger_id'));
                                 $mlm_roi_dividend->setDividendDate(date("Y-m-d h:i:s", $dividendDate));
-                                $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $currentDate));
+                                $mlm_roi_dividend->setFirstDividendDate(date("Y-m-d h:i:s", $currentDate_timestamp));
                                 $mlm_roi_dividend->setPackageId($packageDB->getPackageId());
                                 $mlm_roi_dividend->setPackagePrice($packageDB->getPrice());
 
