@@ -6,6 +6,10 @@ class componentComponents extends sfComponents
     {
 
     }
+    public function executeAlert()
+    {
+
+    }
     public function executeFooterInformation()
     {
 
