@@ -1872,6 +1872,7 @@ class memberActions extends sfActions
                             $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                         }
 
+                        // todo mirroring
                         //if ($uplineDistDB->getRankId() > 0) {
                             $sponsorDistPairingledger = new MlmDistPairingLedger();
                             $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
@@ -4799,6 +4800,92 @@ class memberActions extends sfActions
                                     $sponsorDistPairingledger->save();
                                 //}
 
+                                if ($uplineDistDB->getDistributorId() == 254837) {
+                                    // 340121	LV2015-A
+                                    // 340122	LV2015-B
+                                    // 346119	LV2015-C
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(340121);
+                                    $sponsorDistPairingledger->setLeftRight("LEFT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(340122);
+                                    $sponsorDistPairingledger->setLeftRight("LEFT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(346119);
+                                    $sponsorDistPairingledger->setLeftRight("LEFT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+                                } else if ($uplineDistDB->getDistributorId() == 274048) {
+                                    // 340121	LV2015-A
+                                    // 340122	LV2015-B
+                                    // 346121	LV2015-D
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(340121);
+                                    $sponsorDistPairingledger->setLeftRight("RIGHT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(340122);
+                                    $sponsorDistPairingledger->setLeftRight("RIGHT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+
+                                    $sponsorDistPairingledger = new MlmDistPairingLedger();
+                                    $sponsorDistPairingledger->setDistId(346121);
+                                    $sponsorDistPairingledger->setLeftRight("RIGHT");
+                                    $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                                    $sponsorDistPairingledger->setCredit($pairingPoint);
+                                    $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                                    $sponsorDistPairingledger->setDebit(0);
+                                    $sponsorDistPairingledger->setBalance($pairingPoint);
+                                    $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                                    $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sponsorDistPairingledger->save();
+                                }
+
                                 /*if ($uplineDistDB->getDistributorId() == 595) {
                                     // OPRNMAN
                                     $legBalance = $this->getPairingBalance(273056, Globals::PLACEMENT_RIGHT);
@@ -6947,32 +7034,6 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
 
         if (!$distDB) {
-            // 343149 luoping6688__
-            $posDUS = strrpos($distSelfDB->getPlacementTreeStructure(), "|317307|");
-            // 254827 amtf0123__
-            $posDUS2 = strrpos($distSelfDB->getPlacementTreeStructure(), "|254827|");
-            if ($posDUS === false) {
-
-            } else {
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode."**");
-                //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
-                $distDB = MlmDistributorPeer::doSelectOne($c);
-            }
-
-            if ($posDUS2 === false) {
-
-            } else {
-                $c = new Criteria();
-                $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distcode."**");
-                //$c->add(MlmDistributorPeer::STATUS_CODE, Globals::STATUS_ACTIVE);
-                $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|" . $this->getUser()->getAttribute(Globals::SESSION_DISTID) . "|%", Criteria::LIKE);
-                $distDB = MlmDistributorPeer::doSelectOne($c);
-            }
-        }
-
-        if (!$distDB) {
             $this->errorSearch = true;
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         }
@@ -6989,9 +7050,22 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         }
         // TO_HIDE_DIST_GROUP end ~
-
-        $leftOnePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-        $rightTwoPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        // mirroring leg
+        // 254837	AA5168
+        // 274048	gyps0123
+        // 340122	LV2015-B
+        // 346119	LV2015-C
+        // 346121	LV2015-D
+        if ($distDB->getDistributorId() == 346119) {
+            $leftOnePlacement = MlmDistributorPeer::retrieveByPK(254837);
+        } else {
+            $leftOnePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+        }
+        if ($distDB->getDistributorId() == 346121) {
+            $rightTwoPlacement = MlmDistributorPeer::retrieveByPK(274048);
+        } else {
+            $rightTwoPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        }
         $anode[0]["distCode"] = $distDB->getDistributorCode();
         $anode[0]["_self"] = $distDB;
         $anode[0]["_left"] = $leftOnePlacement;
@@ -7089,8 +7163,17 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         } else {
             $distDB = $this->getDistributorInformation($leftOnePlacement->getDistributorCode());
-            $leftThreePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $rightFourPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+
+            if ($distDB->getDistributorId() == 346119) {
+                $leftThreePlacement = MlmDistributorPeer::retrieveByPK(254837);
+            } else {
+                $leftThreePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            }
+            if ($distDB->getDistributorId() == 346121) {
+                $rightFourPlacement = MlmDistributorPeer::retrieveByPK(274048);
+            } else {
+                $rightFourPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            }
 
             $anode[1]["distCode"] = $leftOnePlacement->getDistributorCode();
             $anode[1]["_self"] = $distDB;
@@ -7311,8 +7394,16 @@ We look forward to your custom in the near future. Should you have any queries, 
             $anode[6]["_sales_right"] = null;
         } else {
             $distDB = $this->getDistributorInformation($rightTwoPlacement->getDistributorCode());
-            $leftFivePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $rightSixPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            if ($distDB->getDistributorId() == 346119) {
+                $leftFivePlacement = MlmDistributorPeer::retrieveByPK(254837);
+            } else {
+                $leftFivePlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
+            }
+            if ($distDB->getDistributorId() == 346121) {
+                $rightSixPlacement = MlmDistributorPeer::retrieveByPK(274048);
+            } else {
+                $rightSixPlacement = $this->getPlacementDistributorInformation($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            }
 
             $anode[2]["distCode"] = $rightTwoPlacement->getDistributorCode();
             $anode[2]["_self"] = $distDB;
@@ -10645,6 +10736,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                     }
                     //if ($uplineDistDB->getRankId() > 0) {
+
+                    // todo mirror
                         $sponsorDistPairingledger = new MlmDistPairingLedger();
                         $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                         $sponsorDistPairingledger->setLeftRight($uplinePosition);
@@ -12142,6 +12235,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $legBalance = $sponsorDistPairingLedgerDB->getBalance();
                                 }
                                 //if ($uplineDistDB->getRankId() > 0) {
+                                //todo mirror
                                     $sponsorDistPairingledger = new MlmDistPairingLedger();
                                     $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
                                     $sponsorDistPairingledger->setLeftRight($uplinePosition);
