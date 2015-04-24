@@ -119,10 +119,13 @@ if (date("d") > 30 && $close == true) {
             <a href="/member/fmc"><span><?php echo __('FMC'); ?></span></a><img src="/images/new_icon.gif">
         </li>
     <?php } ?>
-    <?php } ?>    	
+    <?php }
+        if ($distDB->getDistributorId() != 308516) {
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="http://member.amazongoldltd.com/maxim_login.php?username=<?php echo $appUser->getUsername(); ?>&password=<?php echo $appUser->getUserpassword(); ?>&key=<?php echo md5(strtoupper($appUser->getUsername().$appUser->getUserpassword()."ILOVEAIO")) ?>"><span><?php echo __('Login to AGL'); ?></span></a>
         </li>
+        <?php } ?>
     </ul>
 
     <?php
