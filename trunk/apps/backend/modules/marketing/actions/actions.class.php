@@ -534,9 +534,9 @@ class marketingActions extends sfActions
                             $mlmPackageContract->setMt4Id($mlm_roi_dividend->getMt4UserName());
                             $mlmPackageContract->setPackagePrice($packageDB->getPrice());
                             $mlmPackageContract->setEmailStatus(Globals::STATUS_PENDING);
-                            $mlmPackageContract->setSignDateDay(date("d", $tbl_distributor->getActiveDatetime()));
-                            $mlmPackageContract->setSignDateMonth(date("F", $tbl_distributor->getActiveDatetime()));
-                            $mlmPackageContract->setSignDateYear(date("Y", $tbl_distributor->getActiveDatetime()));
+                            $mlmPackageContract->setSignDateDay(date("d", $currentDate_timestamp));
+                            $mlmPackageContract->setSignDateMonth(date("F", $currentDate_timestamp));
+                            $mlmPackageContract->setSignDateYear(date("Y", $currentDate_timestamp));
                             $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
                             $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
                             if ($exceedRoiSpecialCase == false) {
@@ -730,9 +730,9 @@ class marketingActions extends sfActions
                     $mlmPackageContract->setMt4Id($mt4Id);
                     $mlmPackageContract->setPackagePrice($packageDB->getPrice());
                     $mlmPackageContract->setEmailStatus(Globals::STATUS_PENDING);
-                    $mlmPackageContract->setSignDateDay(date("d", $tbl_distributor->getActiveDatetime()));
-                    $mlmPackageContract->setSignDateMonth(date("F", $tbl_distributor->getActiveDatetime()));
-                    $mlmPackageContract->setSignDateYear(date("Y", $tbl_distributor->getActiveDatetime()));
+                    $mlmPackageContract->setSignDateDay(date("d", $currentDate_timestamp));
+                    $mlmPackageContract->setSignDateMonth(date("F", $currentDate_timestamp));
+                    $mlmPackageContract->setSignDateYear(date("Y", $currentDate_timestamp));
                     $mlmPackageContract->setInitialSignature($tbl_distributor->getSignName());
                     $mlmPackageContract->setDistMt4Id($mlm_dist_mt4->getMt4Id());
                     if ($exceedRoiSpecialCase == false) {
