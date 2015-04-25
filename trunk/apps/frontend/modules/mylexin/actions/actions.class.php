@@ -14,22 +14,54 @@ class mylexinActions extends sfActions
      * Executes index action
      *
      */
-    public function executeTest()
+    public function executeTestMd5()
     {
+        $url = urlencode('{"transactionCode":"ff1fcc223640acfea3b8d2c559d2b647","paymentDate":"20150425","paymentTime":"043957","amount":3200,"aaData":[{"productId":"P0123456789","productName":"POLILEX","price":300,"qty":10,"total":3000},{"productId":"P2222222222","productName":"LEXLIPO","price":100,"qty":2,"total":200}]}');
+        var_dump($url);
 
-        $output = array();
-        //var_dump(date("Ymd"));
-//        var_dump(md5("q=checkout&a=MYLEXIN".date("Ymd")));
-//        exit();
-//        $json = '{"userId":2,"userName":"demo123","fullname":"demo123","nickname":"demo123"}';
+        var_dump(md5("q=checkout&a=MYLEXIN".date("Ymd")));
+        exit();
+    }
+    public function executeTestJsonEncode()
+    {
+        $arr = array();
+        $arr[] = array(
+            "productId" => "P0123456789",
+            "productName" => "POLILEX",
+            "price" => 300,
+            "qty" => 10,
+            "total" => 3000
+        );
+        $arr[] = array(
+            "productId" => "P2222222222",
+            "productName" => "LEXLIPO",
+            "price" => 100,
+            "qty" => 2,
+            "total" => 200
+        );
+        $output = array(
+            "transactionCode" => "ff1fcc223640acfea3b8d2c559d2b647",
+            "paymentDate" => "20150425",
+            "paymentTime" => "043957",
+            "amount" => 3200,
+            "aaData" => $arr
+        );
 
-//        $arr = json_decode($json);
-//        var_dump($arr->{"userId"});
-//        var_dump($arr->{"userName"});
-//        var_dump($arr['userId']);
-//        var_dump($arr['userName']);
+        echo json_encode($output);
         exit();
         //var_dump(json_decode($json, true));
+    }
+    public function executeTestJsonDecode()
+    {
+
+        $json = '{"transactionToken":"ff1fcc223640acfea3b8d2c559d2b647","paymentDate":"20150425","paymentTime":"043957","amount":3200,"aaData":[{"productId":"P0123456789","productName":"POLILEX","price":300,"qty":10,"total":3000},{"productId":"P2222222222","productName":"LEXLIPO","price":100,"qty":2,"total":200}]}';
+        $json = '{"transactionToken":"ff1fcc223640acfea3b8d2c559d2b647","paymentDate":"20150425","paymentTime":"043957","amount":3200,"aaData":[{"productId":"P0123456789","productName":"POLILEX","price":300,"qty":10,"total":3000},{"productId":"P2222222222","productName":"LEXLIPO","price":100,"qty":2,"total":200}]}';
+        $arr = json_decode($json);
+        var_dump($arr->{"[transactionToken]"});
+        var_dump($arr->{"paymentDate"});
+        var_dump($arr->{"amount"});
+        var_dump($arr->{"aaData"});
+        exit();
     }
     public function executeIndex()
     {
@@ -46,11 +78,92 @@ class mylexinActions extends sfActions
             return sfView::HEADER_ONLY;
         }
     }
-    public function executeCheckOut()
+    public function executeCheckout()
     {
+        $result = "FAIL";
+        $msg = "";
+
+        $data = $this->getRequestParameter('data');
+        $arr = json_decode($data);
+
+        $transactionToken = $arr->{"transactionToken"};
+
+        $c = new Criteria();
+        $c->add(ApiTransactionPeer::STATUS_CODE, "ACTIVE");
+        $c->add(ApiTransactionPeer::TOKEN, $transactionToken);
+        $apiTransaction = ApiTransactionPeer::doSelectOne($c);
+
+        if (!$apiTransaction) {
+            $msg = "INVALID TOKEN";
+        } else {
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::USER_ID, $apiTransaction->getUserId());
+            $existDist = MlmDistributorPeer::doSelectOne($c);
+
+            $rtBalance = $this->getAccountLedgerBalance($existDist->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
+
+            $amount = $arr->{"amount"};
+
+            if ($rtBalance < $amount) {
+                $msg = "Insufficient RT.";
+            } else {
+                $result = "SUCCESS";
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                $mlm_account_ledger->setDistId($existDist->getDistributorId());
+                $mlm_account_ledger->setTransactionType("MYLEXIN");
+                //$mlm_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ")");
+                $mlm_account_ledger->setRemark("");
+                $mlm_account_ledger->setInternalRemark("ID: ".$transactionToken);
+                $mlm_account_ledger->setCredit(0);
+                $mlm_account_ledger->setDebit($amount);
+                $mlm_account_ledger->setBalance($rtBalance - $amount);
+                $mlm_account_ledger->setCreatedBy(0);
+                $mlm_account_ledger->setUpdatedBy(0);
+                $mlm_account_ledger->save();
+
+                $apiTransaction->setRefId($mlm_account_ledger->getAccountId());
+                $apiTransaction->setRefType("ACCOUNT LEDGER");
+            }
+
+            $output = array(
+                "transactionToken" => $transactionToken,
+                "result" => $result,
+                "msg" => $msg
+            );
+
+            $responseData = json_encode($output);
+
+            $apiTransaction->setRequestData($data);
+            $apiTransaction->setResponseData($responseData);
+            $apiTransaction->setStatusCode("COMPLETE");
 
 
-        return $this->redirect('mylexin/index?q=checkout&a=');
+            $apiTransactionNew = new ApiTransaction();
+            $apiTransactionNew->setAccessIp($apiTransaction->getAccessIp());
+            $apiTransactionNew->setUserId($apiTransaction->getUserId());
+            $apiTransactionNew->setTransactionAction($apiTransaction->getTransactionAction());
+            $apiTransactionNew->setTransactionData($apiTransaction->getTransactionData());
+            $apiTransactionNew->setRemark($apiTransaction->getRemark());
+            $apiTransactionNew->setStatusCode($apiTransaction->getStatusCode());
+            $apiTransactionNew->setToken($apiTransaction->getToken());
+            $apiTransactionNew->setCreatedBy($apiTransaction->getCreatedBy());
+            $apiTransactionNew->setUpdatedBy($apiTransaction->getUpdatedBy());
+            $apiTransactionNew->setCreatedOn($apiTransaction->getCreatedOn());
+            $apiTransactionNew->setRequestData($apiTransaction->getRequestData());
+            $apiTransactionNew->setResponseData($apiTransaction->getResponseData());
+            $apiTransactionNew->setRefId($apiTransaction->getRefId());
+            $apiTransactionNew->setRefType($apiTransaction->getRefType());
+            $apiTransactionNew->save();
+            //var_dump($apiTransaction);
+            $apiTransaction->delete();
+        }
+
+        $this->transactionToken = $transactionToken;
+        $this->result = $result;
+        $this->msg = $msg;
+        $this->setTemplate("checkoutRedirect");
     }
 
     public function executeDoLogin()
@@ -167,9 +280,7 @@ class mylexinActions extends sfActions
     function getAccountLedgerBalance($distributorId, $accountType)
     {
         $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
-        if ($date != null) {
-            $query .= " AND created_on <= '" . $date . " 23:59:59'";
-        }
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
