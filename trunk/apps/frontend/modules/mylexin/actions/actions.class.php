@@ -16,14 +16,16 @@ class mylexinActions extends sfActions
      */
     public function executeTest()
     {
+
+        $output = array();
         //var_dump(date("Ymd"));
 //        var_dump(md5("q=checkout&a=MYLEXIN".date("Ymd")));
 //        exit();
-        $json = '{"userId":2,"userName":"demo123","fullname":"demo123","nickname":"demo123"}';
+//        $json = '{"userId":2,"userName":"demo123","fullname":"demo123","nickname":"demo123"}';
 
-        $arr = json_decode($json);
-        var_dump($arr->{"userId"});
-        var_dump($arr->{"userName"});
+//        $arr = json_decode($json);
+//        var_dump($arr->{"userId"});
+//        var_dump($arr->{"userName"});
 //        var_dump($arr['userId']);
 //        var_dump($arr['userName']);
         exit();
@@ -153,10 +155,33 @@ class mylexinActions extends sfActions
 
             $result = json_encode($arr);*/
             $this->transactionToken = $transactionToken;
+            $this->userId = $existUser->getUserName();
+            $this->rtBalance = $this->getAccountLedgerBalance($existDist->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
             $this->setTemplate("redirect");
         } else {
             $this->setFlash('errorMsg', "Invalid username or password.");
             return $this->redirect('mylexin/index?q='.$q."&a=".$a);
         }
+    }
+
+    function getAccountLedgerBalance($distributorId, $accountType)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = " . $distributorId . " AND account_type = '" . $accountType . "'";
+        if ($date != null) {
+            $query .= " AND created_on <= '" . $date . " 23:59:59'";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }
