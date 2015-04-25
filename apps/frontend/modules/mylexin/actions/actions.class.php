@@ -16,10 +16,11 @@ class mylexinActions extends sfActions
      */
     public function executeTestMd5()
     {
-        $url = urlencode('{"transactionCode":"ff1fcc223640acfea3b8d2c559d2b647","paymentDate":"20150425","paymentTime":"043957","amount":3200,"aaData":[{"productId":"P0123456789","productName":"POLILEX","price":300,"qty":10,"total":3000},{"productId":"P2222222222","productName":"LEXLIPO","price":100,"qty":2,"total":200}]}');
-        var_dump($url);
+        //$url = urlencode('{"transactionCode":"ff1fcc223640acfea3b8d2c559d2b647","paymentDate":"20150425","paymentTime":"043957","amount":3200,"aaData":[{"productId":"P0123456789","productName":"POLILEX","price":300,"qty":10,"total":3000},{"productId":"P2222222222","productName":"LEXLIPO","price":100,"qty":2,"total":200}]}');
+        //var_dump($url);
 
         var_dump(md5("q=checkout&a=MYLEXIN".date("Ymd")));
+        var_dump(md5("q=enquirybalance&a=MYLEXIN".date("Ymd")));
         exit();
     }
     public function executeTestJsonEncode()
@@ -171,7 +172,7 @@ class mylexinActions extends sfActions
         $existUser = null;
         $username = trim($this->getRequestParameter('username'));
         $password = trim($this->getRequestParameter('userpassword'));
-        $q = trim($this->getRequestParameter('q'));
+        $q = trim($this->getRequestParameter('q'));  // q = doaction
         $a = trim($this->getRequestParameter('a'));
 
         if ($username == '' || $password == '') {
@@ -248,10 +249,14 @@ class mylexinActions extends sfActions
             $apiTransaction = new ApiTransaction();
             $apiTransaction->setAccessIp($this->getRequest()->getHttpHeader('addr', 'remote'));
             $apiTransaction->setUserId($existUser->getUserId());
-            $apiTransaction->setTransactionAction("CHECKOUT");
+            $apiTransaction->setTransactionAction(strtoupper($q));
             $apiTransaction->setTransactionData("USERNAME:".$username.", PASSEWORD:".$password.", Q:".$q.", A:".$a);
             $apiTransaction->setRemark("");
-            $apiTransaction->setStatusCode("ACTIVE");
+            if (strtoupper($q) == "CHECKOUT") {
+                $apiTransaction->setStatusCode("ACTIVE");
+            } else if (strtoupper($q) == "ENQUIRYBALANCE") {
+                $apiTransaction->setStatusCode("COMPLETE");
+            }
             $apiTransaction->setToken("");
             $apiTransaction->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $apiTransaction->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
