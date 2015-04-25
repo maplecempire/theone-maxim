@@ -533,8 +533,9 @@ class businessActions extends sfActions
     public function executeCreateEmptyAccount()
     {
         $c = new Criteria();
-        $c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|256559|%", Criteria::LIKE);
-        $c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, "%|256559|%", Criteria::LIKE);
+        //$c->add(MlmDistributorPeer::PLACEMENT_TREE_STRUCTURE, "%|256559|%", Criteria::LIKE);
+        //$c->addAscendingOrderByColumn(MlmDistributorPeer::PLACEMENT_TREE_LEVEL);
         $mlmDistributors = MlmDistributorPeer::doSelect($c);
 
         $count = 0;
@@ -572,7 +573,7 @@ class businessActions extends sfActions
             }
 
             $mlm_distributor = new MlmDistributor();
-            $mlm_distributor->setDistributorCode($mlmDistributor->getDistributorCode()."_");
+            $mlm_distributor->setDistributorCode($mlmDistributor->getDistributorCode()."__");
             $mlm_distributor->setUserId($appUser->getUserId());
             $mlm_distributor->setStatusCode("BLOCKED");
             $mlm_distributor->setFullName($mlmDistributor->getFullName());
