@@ -16,7 +16,7 @@ header("Content-type:text/html; charset=gb2312");
 <!--	<input type="submit" />-->
     </form>
     <script language="javascript">
-//        document.getElementById("frm1").submit();
+        document.getElementById("frm1").submit();
     </script>
   </body>
 </html>
