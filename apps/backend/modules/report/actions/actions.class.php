@@ -152,12 +152,52 @@ class reportActions extends sfActions
     }
     public function executeFmcReport()
     {
-        $dateFrom = "2015-01-01 00:00:00";
+        $dateFrom = "2015-03-01 00:00:00";
         $dateTo = "2015-01-26 23:59:59";
         $distDBs = $this->getFmcList($dateFrom, null);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        $str = "<table><tr><td>Member ID </td><td>Full Name</td><td>FMC</td><td>Date</td><td>Leader</td></tr>";
+        $idx = 1;
+        foreach ($distDBs as $distDB) {
+            //print_r($idx-- . ":" . $distDB->getDistributorCode()."<br>");
+            $leaderId = 0;
+            $leader = "";
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($distDB['tree_structure'], "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                        $leaderId = $dist->getDistributorId();
+                    }
+                    break;
+                }
+            }
+            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td></tr>";
+//            $str.= "<tr><td>" . $distDB['distributor_code']."</td><td>" . $distDB['full_name']."</td><td>" . $distDB['debit']."</td><td>" . $distDB['created_on']."</td><td>" . $leader."</td><td>" . $distDB['tree_structure']."</td></tr>";
+
+            /*$distDB->setLeaderId($leaderId);
+            $distDB->setNomineeName($leader);
+            $distDB->save();*/
+        }
+        $str .= "<table>";
+        print_r($str);
+        print_r("executeFmcReport Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeFmcReportGideon()
+    {
+        $dateFrom = "2015-03-01 00:00:00";
+        $dateTo = "2015-01-26 23:59:59";
+        $distDBs = $this->getFmcList($dateFrom, null);
+
+        $idx = count($distDBs);
+        $leaderArrs = explode(",", Globals::GROUP_LEADER_GIDEON);
 
         $str = "<table><tr><td>Member ID </td><td>Full Name</td><td>FMC</td><td>Date</td><td>Leader</td></tr>";
         $idx = 1;
