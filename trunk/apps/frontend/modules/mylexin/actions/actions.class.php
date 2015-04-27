@@ -68,8 +68,9 @@ class mylexinActions extends sfActions
     {
         $this->doAction = trim($this->getRequestParameter('q'));
         $this->token = trim($this->getRequestParameter('a'));
+        $this->rid = trim($this->getRequestParameter('rid'));
 
-        $signatureString = "q=".$this->getRequestParameter('q')."&a=MYLEXIN";
+        $signatureString = "q=".$this->getRequestParameter('q')."&a=MYLEXIN&rid=".$this->getRequestParameter('rid');
         $signatureString = md5($signatureString.date("Ymd"));
 
         if ($this->token == $signatureString) {
@@ -174,10 +175,11 @@ class mylexinActions extends sfActions
         $password = trim($this->getRequestParameter('userpassword'));
         $q = trim($this->getRequestParameter('q'));  // q = doaction
         $a = trim($this->getRequestParameter('a'));
+        $rid = trim($this->getRequestParameter('rid'));
 
         if ($username == '' || $password == '') {
             $this->setFlash('warningMsg', "Invalid username or password.");
-            return $this->redirect('mylexin/index?q='.$q."&a=".$a);
+            return $this->redirect('mylexin/index?q='.$q."&a=".$a."&rid=".$rid);
         }
 
         /*require_once('recaptchalib.php');
@@ -227,7 +229,7 @@ class mylexinActions extends sfActions
                 $msg = $this->getContext()->getI18N()->__("You account has been suspended.");
                 $this->setFlash('errorMsg', $msg);
 
-                return $this->redirect('mylexin/index?q='.$q."&a=".$a);
+                return $this->redirect('mylexin/index?q='.$q."&a=".$a."&rid=".$rid);
             }
 
             $c = new Criteria();
@@ -274,11 +276,12 @@ class mylexinActions extends sfActions
             $result = json_encode($arr);*/
             $this->transactionToken = $transactionToken;
             $this->userId = $existUser->getUserName();
+            $this->rid = $rid;
             $this->rtBalance = $this->getAccountLedgerBalance($existDist->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
             $this->setTemplate("redirect");
         } else {
             $this->setFlash('errorMsg', "Invalid username or password.");
-            return $this->redirect('mylexin/index?q='.$q."&a=".$a);
+            return $this->redirect('mylexin/index?q='.$q."&a=".$a."&rid=".$rid);
         }
     }
 
