@@ -13,6 +13,7 @@ header("Content-type:text/html; charset=gb2312");
 	<input type="hidden" name="transactionToken" value="<?php echo $transactionToken ?>" />
 	<input type="hidden" name="userId" value="<?php echo $userId ?>" />
 	<input type="hidden" name="rtBalance" value="<?php echo $rtBalance ?>" />
+    <input type="hidden" name="rid" value="<?php echo $rid ?>" />
 <!--	<input type="submit" />-->
     </form>
     <script language="javascript">

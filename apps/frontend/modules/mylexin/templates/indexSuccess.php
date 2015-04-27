@@ -48,6 +48,7 @@
         <form class="m-t" role="form" id="loginForm" name="loginForm" action="/mylexin/doLogin" method="post">
             <input type="hidden" name="q" value="<?php echo $doAction;?>">
             <input type="hidden" name="a" value="<?php echo $token;?>">
+            <input type="hidden" name="rid" value="<?php echo $rid;?>">
             <div class="form-group">
                 <input type="text" id="username" name="username" class="form-control" placeholder="<?php echo __("User Name") ?>" required="" size="100">
             </div>
