@@ -14047,11 +14047,13 @@ Wish you all the best.
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-        //var_dump($answer);
-        //var_dump("<br>");
-        //var_dump("<br>");
-        //var_dump($answer['balance']);
-        //exit();
+        if ($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID) == 263646) {
+            var_dump($answer);
+            //var_dump("<br>");
+            //var_dump("<br>");
+            //var_dump($answer['balance']);
+            exit();
+        }
         //$packagePrice = $answer['balance'];
         $packagePrice = null;
         if ($answer == null || is_numeric($answer['balance']) == false) {
