@@ -443,6 +443,7 @@ function populateDgAddPanel() {
 	                <option value="2ND BMW X6 CHALLENGE">2ND BMW BMW X6 CHALLENGE</option>
 	                <option value="1ST BMW X6 CHALLENGE">1ST BMW BMW X6 CHALLENGE</option>
 	                <option value="Rookie CHALLENGE">Rookie CHALLENGE</option>								
+	                <option value="ION D ELEMEN">ION D ELEMEN</option>
                 </select>
             </td>
         </tr>
