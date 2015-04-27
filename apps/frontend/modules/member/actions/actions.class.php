@@ -13976,10 +13976,10 @@ Wish you all the best.
 
         $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
         $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
-        $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+        $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
 
         $result = 0;
-        if ($mlmRoiDividendDB) {
+        foreach ($mlmRoiDividendDBs as $mlmRoiDividendDB) {
             $result += $mlmRoiDividendDB->getPackagePrice() * $mlmRoiDividendDB->getRoiPercentage() / 100;
         }
 
