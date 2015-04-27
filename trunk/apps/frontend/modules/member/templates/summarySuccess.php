@@ -464,7 +464,7 @@ function reassignDatagridAnnouncementEventAttr() {
 
         <?php
         foreach ($distMt4s as $distMt4) {
-            $joinDate = $distMt4->getCreatedOn();
+            /*$joinDate = $distMt4->getCreatedOn();
 
             $c = new Criteria();
             $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $distMt4->getMt4UserName());
@@ -476,10 +476,11 @@ function reassignDatagridAnnouncementEventAttr() {
 
                 $timevalue = strtotime($joinDate);
                 $joinDate = date("Y-m-d h:i:s", strtotime("-1 months", $timevalue));
-            }
+            }*/
             $arr = explode(" ", $joinDate);
             $joinDate = $arr[0];
-            echo "<span style='margin:1px;' class='".$colorArr[$distMt4->getRankId()]."_tags'>".$distMt4->getMt4UserName()." [".$joinDate."]</span>&nbsp;";
+//            echo "<span style='margin:1px;' class='".$colorArr[$distMt4->getRankId()]."_tags'>".$distMt4->getMt4UserName()." [".$joinDate."]</span>&nbsp;";
+            echo "<span style='margin:1px;' class='".$colorArr[$distMt4->getRankId()]."_tags'>".$distMt4->getMt4UserName()."</span>&nbsp;";
         }
         ?>
         </td>
