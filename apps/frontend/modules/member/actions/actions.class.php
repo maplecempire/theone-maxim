@@ -6505,11 +6505,11 @@ We look forward to your custom in the near future. Should you have any queries, 
         $needTopup = "Y";
         $dateUtil = new DateUtil();
         if ($this->notificationOfMaturity) {
-            $maturityArr = $this->getMt4Balance($distributor->getDistributorId(), $this->notificationOfMaturity->getMt4UserName());
+            $mt4Balance = $this->getMt4Balance($distributor->getDistributorId(), $this->notificationOfMaturity->getMt4UserName());
 
-            if ($maturityArr != null) {
-                $mt4Balance = $maturityArr['mt4_credit'];
-                $mt4BalanceDate = $dateUtil->formatDate("d M Y", $maturityArr['traded_datetime']);
+            if ($mt4Balance != null) {
+                //$mt4BalanceDate = $dateUtil->formatDate("d M Y", $maturityArr['traded_datetime']);
+                $mt4BalanceDate = date("d M Y");
 
                 $c = new Criteria();
                 $c->add(MlmRoiDividendPeer::DIST_ID, $distributor->getDistributorId());
@@ -14047,13 +14047,13 @@ Wish you all the best.
         $params['login'] = $mt4Username;
 
         $answer = $mt4request->MakeRequest("getaccountbalance", $params);
-        if ($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID) == 263646) {
-            var_dump($answer);
+        //if ($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID) == 263646) {
+        //    var_dump($answer);
             //var_dump("<br>");
             //var_dump("<br>");
             //var_dump($answer['balance']);
-            exit();
-        }
+        //    exit();
+        //}
         //$packagePrice = $answer['balance'];
         $packagePrice = null;
         if ($answer == null || is_numeric($answer['balance']) == false) {
