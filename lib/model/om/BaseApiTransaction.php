@@ -29,6 +29,22 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 
 
 	
+	protected $request_data;
+
+
+	
+	protected $response_data;
+
+
+	
+	protected $ref_id;
+
+
+	
+	protected $ref_type;
+
+
+	
 	protected $remark;
 
 
@@ -94,6 +110,34 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 	{
 
 		return $this->transaction_data;
+	}
+
+	
+	public function getRequestData()
+	{
+
+		return $this->request_data;
+	}
+
+	
+	public function getResponseData()
+	{
+
+		return $this->response_data;
+	}
+
+	
+	public function getRefId()
+	{
+
+		return $this->ref_id;
+	}
+
+	
+	public function getRefType()
+	{
+
+		return $this->ref_type;
 	}
 
 	
@@ -246,6 +290,62 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRequestData($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->request_data !== $v) {
+			$this->request_data = $v;
+			$this->modifiedColumns[] = ApiTransactionPeer::REQUEST_DATA;
+		}
+
+	} 
+	
+	public function setResponseData($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->response_data !== $v) {
+			$this->response_data = $v;
+			$this->modifiedColumns[] = ApiTransactionPeer::RESPONSE_DATA;
+		}
+
+	} 
+	
+	public function setRefId($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->ref_id !== $v) {
+			$this->ref_id = $v;
+			$this->modifiedColumns[] = ApiTransactionPeer::REF_ID;
+		}
+
+	} 
+	
+	public function setRefType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->ref_type !== $v) {
+			$this->ref_type = $v;
+			$this->modifiedColumns[] = ApiTransactionPeer::REF_TYPE;
+		}
+
+	} 
+	
 	public function setRemark($v)
 	{
 
@@ -364,25 +464,33 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 
 			$this->transaction_data = $rs->getString($startcol + 4);
 
-			$this->remark = $rs->getString($startcol + 5);
+			$this->request_data = $rs->getString($startcol + 5);
 
-			$this->status_code = $rs->getString($startcol + 6);
+			$this->response_data = $rs->getString($startcol + 6);
 
-			$this->token = $rs->getString($startcol + 7);
+			$this->ref_id = $rs->getInt($startcol + 7);
 
-			$this->created_by = $rs->getString($startcol + 8);
+			$this->ref_type = $rs->getString($startcol + 8);
 
-			$this->created_on = $rs->getTimestamp($startcol + 9, null);
+			$this->remark = $rs->getString($startcol + 9);
 
-			$this->updated_by = $rs->getString($startcol + 10);
+			$this->status_code = $rs->getString($startcol + 10);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 11, null);
+			$this->token = $rs->getString($startcol + 11);
+
+			$this->created_by = $rs->getString($startcol + 12);
+
+			$this->created_on = $rs->getTimestamp($startcol + 13, null);
+
+			$this->updated_by = $rs->getString($startcol + 14);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 15, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating ApiTransaction object", $e);
 		}
@@ -535,24 +643,36 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 				return $this->getTransactionData();
 				break;
 			case 5:
-				return $this->getRemark();
+				return $this->getRequestData();
 				break;
 			case 6:
-				return $this->getStatusCode();
+				return $this->getResponseData();
 				break;
 			case 7:
-				return $this->getToken();
+				return $this->getRefId();
 				break;
 			case 8:
-				return $this->getCreatedBy();
+				return $this->getRefType();
 				break;
 			case 9:
-				return $this->getCreatedOn();
+				return $this->getRemark();
 				break;
 			case 10:
-				return $this->getUpdatedBy();
+				return $this->getStatusCode();
 				break;
 			case 11:
+				return $this->getToken();
+				break;
+			case 12:
+				return $this->getCreatedBy();
+				break;
+			case 13:
+				return $this->getCreatedOn();
+				break;
+			case 14:
+				return $this->getUpdatedBy();
+				break;
+			case 15:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -570,13 +690,17 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 			$keys[2] => $this->getUserId(),
 			$keys[3] => $this->getTransactionAction(),
 			$keys[4] => $this->getTransactionData(),
-			$keys[5] => $this->getRemark(),
-			$keys[6] => $this->getStatusCode(),
-			$keys[7] => $this->getToken(),
-			$keys[8] => $this->getCreatedBy(),
-			$keys[9] => $this->getCreatedOn(),
-			$keys[10] => $this->getUpdatedBy(),
-			$keys[11] => $this->getUpdatedOn(),
+			$keys[5] => $this->getRequestData(),
+			$keys[6] => $this->getResponseData(),
+			$keys[7] => $this->getRefId(),
+			$keys[8] => $this->getRefType(),
+			$keys[9] => $this->getRemark(),
+			$keys[10] => $this->getStatusCode(),
+			$keys[11] => $this->getToken(),
+			$keys[12] => $this->getCreatedBy(),
+			$keys[13] => $this->getCreatedOn(),
+			$keys[14] => $this->getUpdatedBy(),
+			$keys[15] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -608,24 +732,36 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 				$this->setTransactionData($value);
 				break;
 			case 5:
-				$this->setRemark($value);
+				$this->setRequestData($value);
 				break;
 			case 6:
-				$this->setStatusCode($value);
+				$this->setResponseData($value);
 				break;
 			case 7:
-				$this->setToken($value);
+				$this->setRefId($value);
 				break;
 			case 8:
-				$this->setCreatedBy($value);
+				$this->setRefType($value);
 				break;
 			case 9:
-				$this->setCreatedOn($value);
+				$this->setRemark($value);
 				break;
 			case 10:
-				$this->setUpdatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 11:
+				$this->setToken($value);
+				break;
+			case 12:
+				$this->setCreatedBy($value);
+				break;
+			case 13:
+				$this->setCreatedOn($value);
+				break;
+			case 14:
+				$this->setUpdatedBy($value);
+				break;
+			case 15:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -640,13 +776,17 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setUserId($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTransactionAction($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setTransactionData($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setRemark($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setStatusCode($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setToken($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedOn($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedBy($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUpdatedOn($arr[$keys[11]]);
+		if (array_key_exists($keys[5], $arr)) $this->setRequestData($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setResponseData($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setRefId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRefType($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setRemark($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStatusCode($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setToken($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCreatedBy($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCreatedOn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedOn($arr[$keys[15]]);
 	}
 
 	
@@ -659,6 +799,10 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ApiTransactionPeer::USER_ID)) $criteria->add(ApiTransactionPeer::USER_ID, $this->user_id);
 		if ($this->isColumnModified(ApiTransactionPeer::TRANSACTION_ACTION)) $criteria->add(ApiTransactionPeer::TRANSACTION_ACTION, $this->transaction_action);
 		if ($this->isColumnModified(ApiTransactionPeer::TRANSACTION_DATA)) $criteria->add(ApiTransactionPeer::TRANSACTION_DATA, $this->transaction_data);
+		if ($this->isColumnModified(ApiTransactionPeer::REQUEST_DATA)) $criteria->add(ApiTransactionPeer::REQUEST_DATA, $this->request_data);
+		if ($this->isColumnModified(ApiTransactionPeer::RESPONSE_DATA)) $criteria->add(ApiTransactionPeer::RESPONSE_DATA, $this->response_data);
+		if ($this->isColumnModified(ApiTransactionPeer::REF_ID)) $criteria->add(ApiTransactionPeer::REF_ID, $this->ref_id);
+		if ($this->isColumnModified(ApiTransactionPeer::REF_TYPE)) $criteria->add(ApiTransactionPeer::REF_TYPE, $this->ref_type);
 		if ($this->isColumnModified(ApiTransactionPeer::REMARK)) $criteria->add(ApiTransactionPeer::REMARK, $this->remark);
 		if ($this->isColumnModified(ApiTransactionPeer::STATUS_CODE)) $criteria->add(ApiTransactionPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(ApiTransactionPeer::TOKEN)) $criteria->add(ApiTransactionPeer::TOKEN, $this->token);
@@ -703,6 +847,14 @@ abstract class BaseApiTransaction extends BaseObject  implements Persistent {
 		$copyObj->setTransactionAction($this->transaction_action);
 
 		$copyObj->setTransactionData($this->transaction_data);
+
+		$copyObj->setRequestData($this->request_data);
+
+		$copyObj->setResponseData($this->response_data);
+
+		$copyObj->setRefId($this->ref_id);
+
+		$copyObj->setRefType($this->ref_type);
 
 		$copyObj->setRemark($this->remark);
 

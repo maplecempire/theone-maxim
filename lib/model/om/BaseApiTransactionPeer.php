@@ -13,7 +13,7 @@ abstract class BaseApiTransactionPeer {
 	const CLASS_DEFAULT = 'lib.model.ApiTransaction';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,6 +33,18 @@ abstract class BaseApiTransactionPeer {
 
 	
 	const TRANSACTION_DATA = 'api_transaction.TRANSACTION_DATA';
+
+	
+	const REQUEST_DATA = 'api_transaction.REQUEST_DATA';
+
+	
+	const RESPONSE_DATA = 'api_transaction.RESPONSE_DATA';
+
+	
+	const REF_ID = 'api_transaction.REF_ID';
+
+	
+	const REF_TYPE = 'api_transaction.REF_TYPE';
 
 	
 	const REMARK = 'api_transaction.REMARK';
@@ -61,18 +73,18 @@ abstract class BaseApiTransactionPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('TransactionId', 'AccessIp', 'UserId', 'TransactionAction', 'TransactionData', 'Remark', 'StatusCode', 'Token', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (ApiTransactionPeer::TRANSACTION_ID, ApiTransactionPeer::ACCESS_IP, ApiTransactionPeer::USER_ID, ApiTransactionPeer::TRANSACTION_ACTION, ApiTransactionPeer::TRANSACTION_DATA, ApiTransactionPeer::REMARK, ApiTransactionPeer::STATUS_CODE, ApiTransactionPeer::TOKEN, ApiTransactionPeer::CREATED_BY, ApiTransactionPeer::CREATED_ON, ApiTransactionPeer::UPDATED_BY, ApiTransactionPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('transaction_id', 'access_ip', 'user_id', 'transaction_action', 'transaction_data', 'remark', 'status_code', 'token', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('TransactionId', 'AccessIp', 'UserId', 'TransactionAction', 'TransactionData', 'RequestData', 'ResponseData', 'RefId', 'RefType', 'Remark', 'StatusCode', 'Token', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (ApiTransactionPeer::TRANSACTION_ID, ApiTransactionPeer::ACCESS_IP, ApiTransactionPeer::USER_ID, ApiTransactionPeer::TRANSACTION_ACTION, ApiTransactionPeer::TRANSACTION_DATA, ApiTransactionPeer::REQUEST_DATA, ApiTransactionPeer::RESPONSE_DATA, ApiTransactionPeer::REF_ID, ApiTransactionPeer::REF_TYPE, ApiTransactionPeer::REMARK, ApiTransactionPeer::STATUS_CODE, ApiTransactionPeer::TOKEN, ApiTransactionPeer::CREATED_BY, ApiTransactionPeer::CREATED_ON, ApiTransactionPeer::UPDATED_BY, ApiTransactionPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('transaction_id', 'access_ip', 'user_id', 'transaction_action', 'transaction_data', 'request_data', 'response_data', 'ref_id', 'ref_type', 'remark', 'status_code', 'token', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('TransactionId' => 0, 'AccessIp' => 1, 'UserId' => 2, 'TransactionAction' => 3, 'TransactionData' => 4, 'Remark' => 5, 'StatusCode' => 6, 'Token' => 7, 'CreatedBy' => 8, 'CreatedOn' => 9, 'UpdatedBy' => 10, 'UpdatedOn' => 11, ),
-		BasePeer::TYPE_COLNAME => array (ApiTransactionPeer::TRANSACTION_ID => 0, ApiTransactionPeer::ACCESS_IP => 1, ApiTransactionPeer::USER_ID => 2, ApiTransactionPeer::TRANSACTION_ACTION => 3, ApiTransactionPeer::TRANSACTION_DATA => 4, ApiTransactionPeer::REMARK => 5, ApiTransactionPeer::STATUS_CODE => 6, ApiTransactionPeer::TOKEN => 7, ApiTransactionPeer::CREATED_BY => 8, ApiTransactionPeer::CREATED_ON => 9, ApiTransactionPeer::UPDATED_BY => 10, ApiTransactionPeer::UPDATED_ON => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('transaction_id' => 0, 'access_ip' => 1, 'user_id' => 2, 'transaction_action' => 3, 'transaction_data' => 4, 'remark' => 5, 'status_code' => 6, 'token' => 7, 'created_by' => 8, 'created_on' => 9, 'updated_by' => 10, 'updated_on' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('TransactionId' => 0, 'AccessIp' => 1, 'UserId' => 2, 'TransactionAction' => 3, 'TransactionData' => 4, 'RequestData' => 5, 'ResponseData' => 6, 'RefId' => 7, 'RefType' => 8, 'Remark' => 9, 'StatusCode' => 10, 'Token' => 11, 'CreatedBy' => 12, 'CreatedOn' => 13, 'UpdatedBy' => 14, 'UpdatedOn' => 15, ),
+		BasePeer::TYPE_COLNAME => array (ApiTransactionPeer::TRANSACTION_ID => 0, ApiTransactionPeer::ACCESS_IP => 1, ApiTransactionPeer::USER_ID => 2, ApiTransactionPeer::TRANSACTION_ACTION => 3, ApiTransactionPeer::TRANSACTION_DATA => 4, ApiTransactionPeer::REQUEST_DATA => 5, ApiTransactionPeer::RESPONSE_DATA => 6, ApiTransactionPeer::REF_ID => 7, ApiTransactionPeer::REF_TYPE => 8, ApiTransactionPeer::REMARK => 9, ApiTransactionPeer::STATUS_CODE => 10, ApiTransactionPeer::TOKEN => 11, ApiTransactionPeer::CREATED_BY => 12, ApiTransactionPeer::CREATED_ON => 13, ApiTransactionPeer::UPDATED_BY => 14, ApiTransactionPeer::UPDATED_ON => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('transaction_id' => 0, 'access_ip' => 1, 'user_id' => 2, 'transaction_action' => 3, 'transaction_data' => 4, 'request_data' => 5, 'response_data' => 6, 'ref_id' => 7, 'ref_type' => 8, 'remark' => 9, 'status_code' => 10, 'token' => 11, 'created_by' => 12, 'created_on' => 13, 'updated_by' => 14, 'updated_on' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -135,6 +147,14 @@ abstract class BaseApiTransactionPeer {
 		$criteria->addSelectColumn(ApiTransactionPeer::TRANSACTION_ACTION);
 
 		$criteria->addSelectColumn(ApiTransactionPeer::TRANSACTION_DATA);
+
+		$criteria->addSelectColumn(ApiTransactionPeer::REQUEST_DATA);
+
+		$criteria->addSelectColumn(ApiTransactionPeer::RESPONSE_DATA);
+
+		$criteria->addSelectColumn(ApiTransactionPeer::REF_ID);
+
+		$criteria->addSelectColumn(ApiTransactionPeer::REF_TYPE);
 
 		$criteria->addSelectColumn(ApiTransactionPeer::REMARK);
 

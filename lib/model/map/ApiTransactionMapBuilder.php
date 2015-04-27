@@ -42,6 +42,14 @@ class ApiTransactionMapBuilder {
 
 		$tMap->addColumn('TRANSACTION_DATA', 'TransactionData', 'string', CreoleTypes::LONGVARCHAR, true, null);
 
+		$tMap->addColumn('REQUEST_DATA', 'RequestData', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('RESPONSE_DATA', 'ResponseData', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('REF_ID', 'RefId', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('REF_TYPE', 'RefType', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 150);
