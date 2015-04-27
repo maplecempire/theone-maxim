@@ -13975,11 +13975,12 @@ Wish you all the best.
         $c = new Criteria();
 
         $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $mt4Username);
-        $c->add(MlmRoiDividendPeer::IDX, 1);
+        $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
         $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
 
+        $result = 0;
         if ($mlmRoiDividendDB) {
-            $result = $mlmRoiDividendDB->getPackagePrice() * $mlmRoiDividendDB->getRoiPercentage() / 100 * Globals::DIVIDEND_TIMES_ENTITLEMENT;
+            $result += $mlmRoiDividendDB->getPackagePrice() * $mlmRoiDividendDB->getRoiPercentage() / 100;
         }
 
         return $result;
