@@ -70,7 +70,7 @@ class mylexinActions extends sfActions
         $this->token = trim($this->getRequestParameter('a'));
         $this->rid = trim($this->getRequestParameter('rid'));
 
-        $signatureString = "q=".$this->getRequestParameter('q')."&a=MYLEXIN&rid=".$this->getRequestParameter('rid');
+        $signatureString = "q=".$this->getRequestParameter('q')."&a=MYLEXIN";
         $signatureString = md5($signatureString.date("Ymd"));
 
         if ($this->token == $signatureString) {
