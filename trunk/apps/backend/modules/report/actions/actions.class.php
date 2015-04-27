@@ -154,7 +154,7 @@ class reportActions extends sfActions
     {
         $dateFrom = "2014-12-01 00:00:00";
         $dateTo = "2015-01-26 23:59:59";
-        $distDBs = $this->getFmcList($dateFrom, null);
+        $distDBs = $this->getFmcList20141201($dateFrom, null);
 
         $idx = count($distDBs);
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
@@ -2452,6 +2452,29 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
                         , acc.created_on, acc.updated_by, acc.updated_on
                         , dist.tree_structure, dist.distributor_code, dist.full_name
                     FROM mlm_account_ledger acc
+                        LEFT JOIN mlm_distributor dist ON dist.distributor_id = acc.dist_id
+                        where acc.dist_id > 0 and
+                acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'";
+
+        //                AND acc.created_on <= '".$dateTo."' and ";
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $arr = array();
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+        }
+        return $arr;
+    }
+    function getFmcList20141201($dateFrom, $dateTo)
+    {
+        $query = "SELECT acc.account_id, acc.dist_id, acc.account_type, acc.transaction_type
+                        , acc.rolling_point, acc.credit, acc.debit, acc.balance, acc.remark
+                        , acc.internal_remark, acc.referer_id, acc.referer_type, acc.created_by
+                        , acc.created_on, acc.updated_by, acc.updated_on
+                        , dist.tree_structure, dist.distributor_code, dist.full_name
+                    FROM mlm_account_ledger_20141231 acc
                         LEFT JOIN mlm_distributor dist ON dist.distributor_id = acc.dist_id
                         where acc.dist_id > 0 and
                 acc.transaction_type = '".Globals::ACCOUNT_LEDGER_ACTION_FMC."' AND acc.created_on >= '".$dateFrom."'";
