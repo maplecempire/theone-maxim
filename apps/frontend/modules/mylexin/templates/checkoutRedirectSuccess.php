@@ -9,7 +9,7 @@ header("Content-type:text/html; charset=gb2312");
   <body>
   <?php
   ?>
-    <form action="http://www.mylexin.com/loginmx" method="post" id="frm1">
+    <form action="http://www.mylexin.com/transactionmx" method="post" id="frm1">
 	<input type="hidden" name="transactionToken" value="<?php echo $transactionToken ?>" />
 	<input type="hidden" name="result" value="<?php echo $result ?>" />
 	<input type="hidden" name="msg" value="<?php echo $msg ?>" />
