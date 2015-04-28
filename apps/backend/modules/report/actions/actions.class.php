@@ -26,7 +26,7 @@ class reportActions extends sfActions
         }
 
         $dateFrom = "2015-01-01 00:00:00";
-        $dateTo = "2015-12-31 23:59:59";
+        $dateTo = "2015-06-31 23:59:59";
 
         $totalMaturityArrs = $this->getTotalMaturityByMonth($dateFrom, $dateTo);
         print_r("<br>");
