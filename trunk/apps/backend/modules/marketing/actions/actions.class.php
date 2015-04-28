@@ -999,6 +999,51 @@ class marketingActions extends sfActions
 
         return sfView::NONE;
     }
+
+    public function executeInsertMbs() {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "mbs.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 2; $x <= $totalRow; $x++) {
+            $distCode = $data->val($x, "A");
+            $leader = $data->val($x, "F");
+
+            if ($leader == "TWOSASA") {
+                continue;
+            }
+            //print_r($distCode."<br>");
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distCode);
+            $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+            if ($mlmDistributor) {
+                $distAccountCp3Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                $mlm_account_ledger->setTransactionType("MBS");
+                $mlm_account_ledger->setRemark("MBS");
+                $mlm_account_ledger->setInternalRemark("");
+                $mlm_account_ledger->setCredit(25);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distAccountCp3Balance + 25);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+            } else {
+                print_r("Not found ".$distCode."<br>");
+            }
+        }
+
+        return sfView::NONE;
+    }
     public function executeUpdateMemberData() {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "distList.xls";
 
