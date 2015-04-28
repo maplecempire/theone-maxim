@@ -749,6 +749,7 @@ class downloadActions extends sfActions
         $sign_time = DateTime::createFromFormat("d F Y H:i:s", $mlmPackageContract->getSignDateDay()." ".$mlmPackageContract->getSignDateMonth()." ".$mlmPackageContract->getSignDateYear()." 00:00:00"); //strtotime($mlmPackageContract->getSignDateDay()." ".$mlmPackageContract->getSignDateMonth()." ".$mlmPackageContract->getSignDateYear());
 
         $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/".($sign_time < $exp_time ? "old" : "new")."/";
+        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/new/";
         $client_name = $mlmPackageContract->getFullName();
         $account_id = $mlmPackageContract->getUsername()." (".$mlmPackageContract->getMt4Id().")";
         $init_fund = $mlmPackageContract->getPackagePrice();
