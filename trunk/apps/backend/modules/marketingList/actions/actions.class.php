@@ -1222,9 +1222,9 @@ class marketingListActions extends sfActions
             $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
             $distMt4s = MlmDistMt4Peer::doSelect($c);
 
-            $mt4Id = "";
-            $mt4Password = "";
-            if (count($distMt4s)) {
+            $mt4Id = "***";
+            $mt4Password = "***";
+            /*if (count($distMt4s)) {
                 foreach ($distMt4s as $distMt4) {
                     if ($mt4Id != "")
                         $mt4Id .= ",";
@@ -1233,10 +1233,10 @@ class marketingListActions extends sfActions
                     $mt4Id .= $distMt4->getMt4UserName();
                     $mt4Password .= $distMt4->getMt4Password();
                 }
-            }
+            }*/
 
-            $leader = "";
-            for ($i = 0; $i < count($leaderArrs); $i++) {
+            $leader = "***";
+            /*for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
 
@@ -1247,7 +1247,7 @@ class marketingListActions extends sfActions
                     }
                     break;
                 }
-            }
+            }*/
 
             $arr[] = array(
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
