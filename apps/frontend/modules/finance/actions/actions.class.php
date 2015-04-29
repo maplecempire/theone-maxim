@@ -414,7 +414,7 @@ class financeActions extends sfActions
         $distDB = MlmDistributorPeer::retrieveByPK($distId);
 
         print_r("======================================================");
-        print_r("dist code=".$distDB->getDistributorId());
+        print_r("20141231 dist code=".$distDB->getDistributorId());
         print_r("<br>");
 
         $c = new Criteria();
