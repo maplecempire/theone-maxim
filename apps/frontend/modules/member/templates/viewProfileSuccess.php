@@ -838,7 +838,7 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_even" style="display: none;">
                     <td>&nbsp;</td>
                     <td><?php echo __('Maxim Trader VISA Debit Card') ?></td>
                     <td>
