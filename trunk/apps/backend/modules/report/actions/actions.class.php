@@ -312,7 +312,7 @@ class reportActions extends sfActions
     public function executeGoldCoinPangkorSelfPurchase()
     {
         $dateFrom = "2015-02-01 00:00:00";
-        $dateTo = "2015-03-18 23:59:59";
+        $dateTo = "2015-03-19 23:59:59";
 
         $query = "SELECT dist.distributor_id, dist.distributor_code, package.price, uplineDist.distributor_code as upline_member_code
                         , dist.email, dist.full_name, dist.contact, dist.country
@@ -367,7 +367,7 @@ class reportActions extends sfActions
     public function executeGoldCoinPangkorPersonalSales()
     {
         $dateFrom = "2015-02-01 00:00:00";
-        $dateTo = "2015-03-18 23:59:59";
+        $dateTo = "2015-03-19 23:59:59";
 
         $query = "SELECT dist.distributor_id, dist.distributor_code
         , personalSales.total_personal_sales
