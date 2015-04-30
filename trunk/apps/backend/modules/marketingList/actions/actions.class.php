@@ -1134,7 +1134,7 @@ class marketingListActions extends sfActions
         //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
-
+        $doSearch = false;
         $offset = $this->getRequestParameter('iDisplayStart');
         $sEcho = $this->getRequestParameter('sEcho');
         $limit = $this->getRequestParameter('iDisplayLength');
@@ -1218,9 +1218,9 @@ class marketingListActions extends sfActions
         {
             $resultArr = $resultset->getRow();
 
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->add(MlmDistMt4Peer::DIST_ID, $resultArr['distributor_id']);
-            $distMt4s = MlmDistMt4Peer::doSelect($c);
+            $distMt4s = MlmDistMt4Peer::doSelect($c);*/
 
             $mt4Id = "***";
             $mt4Password = "***";
