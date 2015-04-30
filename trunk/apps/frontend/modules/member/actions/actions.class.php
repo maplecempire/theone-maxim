@@ -12144,7 +12144,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded);
                     } elseif ($paymentType == "epoint") {
                         $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                        $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded);
+                        $tbl_account_ledger->setBalance($ledgerEPointBalance - $amountNeeded);
                     }
                     $tbl_account_ledger->setDebit($amountNeeded);
                     $tbl_account_ledger->setRemark("PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
