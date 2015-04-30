@@ -8162,7 +8162,12 @@ We look forward to your custom in the near future. Should you have any queries, 
                     if ($pos === false) { // note: three equal signs
                         $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
                         if ($pos === false) { // note: three equal signs
-
+                            //20150428: 270598 rich3 268466 wf003 allow them to transfer cp3 to each other (charles)
+                            if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
+                                $isFound = true;
+                            } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
+                                $isFound = true;
+                            }
                         } else {
                             $isFound = true;
                         }
@@ -8199,8 +8204,15 @@ We look forward to your custom in the near future. Should you have any queries, 
                         }
                     }
                 } else {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                    return $muUtil->updateLog(null, true)->response("/member/transferCp2");
+                    //20150428: 270598 rich3 268466 wf003 allow them to transfer cp3 to each other (charles)
+                    if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
+
+                    } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
+
+                    } else {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
+                        return $muUtil->updateLog(null, true)->response("/member/transferCp2");
+                    }
                 }
             //}
 
