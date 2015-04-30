@@ -789,19 +789,25 @@ class memberActions extends sfActions
                     //$epointConvertedAmount = floor($epointAmount * 1.05);
                     $epointConvertedAmount = $epointAmount;
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                    $tbl_account_ledger->setCredit($epointConvertedAmount);
-                    $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
-                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP3 TO CP1, CP3:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger, "44");
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "44");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -876,19 +882,25 @@ class memberActions extends sfActions
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "45");
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                    $tbl_account_ledger->setCredit($epointAmount);
-                    $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setRemark("CONVERT RP TO CP1, RP:".$epointAmount);
-                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger2->setCredit($epointAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT RP TO CP1, RP:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger, "46");
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "46");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -8052,7 +8064,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setRefererId($mlm_account_ledger->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
+
+                    $mlm_account_ledger->setRefererId($tbl_account_ledger->getAccountId());
+                    $mlm_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "59");
 
@@ -8289,7 +8307,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setRefererId($mlm_account_ledger->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
+
+                    $mlm_account_ledger->setRefererId($tbl_account_ledger->getAccountId());
+                    $mlm_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "61");
 
@@ -8575,7 +8599,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setRefererId($mlm_account_ledger->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
+
+                    $mlm_account_ledger->setRefererId($tbl_account_ledger->getAccountId());
+                    $mlm_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "63");
 
@@ -8681,16 +8711,22 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $epointConvertedAmount = $epointAmount;
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
-                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP2);
-                    $tbl_account_ledger->setCredit($epointConvertedAmount);
-                    $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setRemark("CONVERT CP2 TO RT, CP2:".$epointAmount);
-                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP2);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP2 TO RT, CP2:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
                     
                     $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -8767,16 +8803,22 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $epointConvertedAmount = $epointAmount;
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
-                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP3);
-                    $tbl_account_ledger->setCredit($epointConvertedAmount);
-                    $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setRemark("CONVERT CP3 TO RT, CP3:".$epointAmount);
-                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP3);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP3 TO RT, CP3:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
                     
                     $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -8793,7 +8835,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlm_distributor->setRtwallet($bal);
                     $mlm_distributor->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger, "67");
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "67");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
@@ -8974,7 +9016,13 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $tbl_account_ledger->setBalance($toBalance + $epointAmount);
                     $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setRefererId($mlm_account_ledger->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
+
+                    $mlm_account_ledger->setRefererId($tbl_account_ledger->getAccountId());
+                    $mlm_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($tbl_account_ledger, "69");
 
@@ -11918,19 +11966,25 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $epointConvertedAmount = $epointAmount;
                     //}
 
-                    $tbl_account_ledger = new MlmAccountLedger();
-                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
-                    $tbl_account_ledger->setCredit($epointConvertedAmount);
-                    $tbl_account_ledger->setDebit(0);
-                    $tbl_account_ledger->setRemark("CONVERT CP2 TO CP1, CP2:".$epointAmount);
-                    $tbl_account_ledger->setBalance($ledgerEPointBalance + $epointConvertedAmount);
-                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP2 TO CP1, CP2:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
                     $tbl_account_ledger->save();
 
-                    $this->mirroringAccountLedger($tbl_account_ledger, "85");
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "85");
 
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                     $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
