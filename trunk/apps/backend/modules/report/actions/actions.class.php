@@ -315,7 +315,7 @@ class reportActions extends sfActions
         $dateTo = "2015-03-19 23:59:59";
 
         $query = "SELECT dist.distributor_id, dist.distributor_code, package.price, uplineDist.distributor_code as upline_member_code
-                        , dist.email, dist.full_name, dist.contact, dist.country
+                        , uplineDist.full_name as upline_full_name
                 , dist.tree_structure, dist.full_name, dist.email, dist.contact, dist.country, dist.created_on, dist.user_id
                     FROM mlm_distributor dist
                         LEFT JOIN mlm_distributor uplineDist ON uplineDist.distributor_id = dist.upline_dist_id
@@ -333,7 +333,7 @@ class reportActions extends sfActions
 
         $idx = 1;
         $arr = array();
-        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Upline Member</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+        $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Package</td><td>Upline ID</td><td>Upline Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
         while ($resultset->next()) {
             $arr = $resultset->getRow();
 
@@ -356,7 +356,7 @@ class reportActions extends sfActions
                     }
                 }
 
-                $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['upline_member_code']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
+                $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td><td>" . $arr['full_name']."</td><td>" . $arr['price']."</td><td>" . $arr['upline_member_code']."</td><td>" . $arr['upline_full_name']."</td><td>" . $arr['contact']."</td><td>" . $arr['email']."</td><td>" . $totalPrice."</td><td>" . $leader."</td></tr>";
             }
         }
         print_r($str);
