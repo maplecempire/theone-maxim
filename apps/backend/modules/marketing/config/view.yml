@@ -5,3 +5,7 @@ manipulatePipsSuccess:
 personalProfileSuccess:
   has_layout:     off
   stylesheets: 	  []
+
+genealogyManagement2:
+  has_layout:     off
+  stylesheets: 	  []
