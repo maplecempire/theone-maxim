@@ -1229,6 +1229,70 @@ class financeActions extends sfActions
         return sfView::HEADER_ONLY;
     }
 
+    public function executeRtLogList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        /******   total records  *******/
+        $c = new Criteria();
+        $c->add(MlmAccountLedgerPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $c->addAnd(MlmAccountLedgerPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_RT);
+        $totalRecords = MlmAccountLedgerPeer::doCount($c);
+
+        /******   total filtered records  *******/
+        if ($this->getRequestParameter('filterAction') != "") {
+            $c->addAnd(MlmAccountLedgerPeer::TRANSACTION_TYPE, "%" . $this->getRequestParameter('filterAction') . "%", Criteria::LIKE);
+        }
+        $totalFilteredRecords = MlmAccountLedgerPeer::doCount($c);
+
+        /******   sorting  *******/
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                if ("asc" == $this->getRequestParameter('sSortDir_' . $i)) {
+                    $c->addAscendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                } else {
+                    $c->addDescendingOrderByColumn($aColumns[intval($this->getRequestParameter('iSortCol_' . $i))]);
+                }
+            }
+        }
+
+        /******   pagination  *******/
+        $pager = new sfPropelPager('MlmAccountLedger', $limit);
+        $pager->setCriteria($c);
+        $pager->setPage(($offset / $limit) + 1);
+        $pager->init();
+
+        foreach ($pager->getResults() as $result) {
+            $arr[] = array(
+                $result->getCreatedOn()  == null ? "" : $result->getCreatedOn(),
+                $result->getCredit() == null ? "0" : $result->getCredit(),
+                $result->getDebit() == null ? "0" : $result->getDebit(),
+                $result->getBalance() == null ? "0" : $result->getBalance(),
+                $result->getTransactionType() == null ? "" : $this->getContext()->getI18N()->__($result->getTransactionType()),
+                $result->getRemark()  == null ? "" : $result->getRemark()
+            );
+        }
+
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeCp3WithdrawalList()
     {
         $sColumns = $this->getRequestParameter('sColumns');
