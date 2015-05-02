@@ -29,46 +29,47 @@ class ValidatorLib
 
             $errorMsg = 'You need to update all your Bank Account Details and upload Bank Account Proof, Proof of Residence and Passport/Photo ID';
         } elseif ($distributorDB->getBankCountry() <> "China (PRC)"
-            && $distributorDB->getBankCountry() <> "Australia"
-            && (trim(strtoupper($distributorDB->getBankHolderName())) <> trim(strtoupper($distributorDB->getFullName())))
+                  && $distributorDB->getBankCountry() <> "Australia"
+                  && (trim(strtoupper($distributorDB->getBankHolderName())) <> trim(strtoupper($distributorDB->getFullName())))
         ) {
 
             $errorMsg = 'Bank Holder Name is not same as your full name';
         } elseif ($distributorDB->getBankCountry() == "Singapore"
-            && $distributorDB->getBankCode() == ""
+                  && $distributorDB->getBankCode() == ""
         ) {
 
             $errorMsg = 'Bank Code is required';
         } elseif ($distributorDB->getBankCountry() == "Taiwan"
-            && ($this->isLatinWord($distributorDB->getBankName())
-                || $this->isLatinWord($distributorDB->getBankBranchName())
-                || $this->isLatinWord($distributorDB->getBankAddress())
-                || $this->isLatinWord($distributorDB->getBankHolderName()))
+                  && ($this->isLatinWord($distributorDB->getBankName())
+                      || $this->isLatinWord($distributorDB->getBankBranchName())
+                      || $this->isLatinWord($distributorDB->getBankAddress())
+                      || $this->isLatinWord($distributorDB->getBankHolderName()))
         ) {
 
             $errorMsg = 'You need to update all your Bank Account Details must be latin word';
         } elseif (($distributorDB->getBankCountry() == "Korea North" || $distributorDB->getBankCountry() == "Korea South")
-            && ($this->isLatinWord($distributorDB->getBankName())
-                || $this->isLatinWord($distributorDB->getBankBranchName())
-                || $this->isLatinWord($distributorDB->getBankAddress())
-                || $this->isLatinWord($distributorDB->getBankHolderName()))
+                  && ($this->isLatinWord($distributorDB->getBankName())
+                      || $this->isLatinWord($distributorDB->getBankBranchName())
+                      || $this->isLatinWord($distributorDB->getBankAddress())
+                      || $this->isLatinWord($distributorDB->getBankHolderName()))
         ) {
 
             $errorMsg = 'Please ensure all your Bank Account Details is latin word';
         } elseif ($distributorDB->getBankCountry() == "China (PRC)"
-            && (!$this->isLatinWord($distributorDB->getBankName())
-                || !$this->isLatinWord($distributorDB->getBankBranchName())
-                || !$this->isLatinWord($distributorDB->getBankAddress())
-                || !$this->isLatinWord($distributorDB->getBankHolderName()))
+                  && (!$this->isLatinWord($distributorDB->getBankName())
+                      || !$this->isLatinWord($distributorDB->getBankBranchName())
+                      || !$this->isLatinWord($distributorDB->getBankAddress())
+                      || !$this->isLatinWord($distributorDB->getBankHolderName()))
         ) {
 
             $errorMsg = 'Please ensure all your Bank Account Details is chinese word';
-        } elseif ($distributorDB->getVisaDebitCard() != ""
-            && strlen($distributorDB->getVisaDebitCard()) != 16
+        }
+        /*elseif ($distributorDB->getVisaDebitCard() != ""
+                  && strlen($distributorDB->getVisaDebitCard()) != 16
         ) {
 
             $errorMsg = 'Maxim Trader VISA Debit Card must be 16 characters';
-        }
+        }*/
 
         if ($errorMsg != null && strlen($errorMsg) > 0) {
             return false;
