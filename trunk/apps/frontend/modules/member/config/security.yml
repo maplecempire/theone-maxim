@@ -34,6 +34,10 @@ convertEcashToEpoint:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+cp3Log:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 doMemberRegistration:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
@@ -147,6 +151,14 @@ placementTree:
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
 reloadTopup:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+rpLog:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+rtLog:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
