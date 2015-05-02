@@ -1146,7 +1146,7 @@ class marketingListActions extends sfActions
 
          ";
 
-        if ($this->getRequestParameter('filterMt4Userame') != "") {
+        /*if ($this->getRequestParameter('filterMt4Userame') != "") {
             $sql .= " INNER JOIN ";
         } else {
             $sql .= " LEFT JOIN ";
@@ -1160,7 +1160,7 @@ class marketingListActions extends sfActions
         }
 
         $sql .= " group by dist_id
-        ) mt4 ON mt4.dist_id = dist.distributor_id ";
+        ) mt4 ON mt4.dist_id = dist.distributor_id ";*/
 
         /******   total records  *******/
         $sWhere = " WHERE 1=1 ";
