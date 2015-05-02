@@ -9089,6 +9089,10 @@ We look forward to your custom in the near future. Should you have any queries, 
             return $this->redirect('/member/summary');
         }
     }
+    public function executeRtLog()
+    {
+
+    }
     public function executeMaintenanceLog()
     {
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {

@@ -96,6 +96,9 @@ if (date("d") > 30 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/convertCp3ToRt"><span><?php echo __('Convert CP3 to RT'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/rtLog"><span><?php echo __('RT Statement'); ?></span></a>
+        </li>
     <?php } ?>
     <?php if ($onlyTransferRP == false) { ?>
     <?php
