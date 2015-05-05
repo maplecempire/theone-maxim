@@ -10,6 +10,31 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeFindLeader()
+    {
+        $c = new Criteria();
+        $c->addAnd(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('q'));
+        $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+        $leader = "";
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        if ($mlmDistributor) {
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($mlmDistributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+        }
+        print_r($this->getRequestParameter('q'). ": " .$leader);
+        return sfView::NONE;
+    }
     public function executeUpdateKIV()
     {
         $mlmDistributor = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('distId'));
@@ -1042,6 +1067,7 @@ class marketingActions extends sfActions
         $data = new Spreadsheet_Excel_Reader($physicalDirectory);
 
         $totalRow = $data->rowcount($sheet_index = 0);
+        $id = "";
         for ($x = 2; $x <= $totalRow; $x++) {
             $distCode = $data->val($x, "A");
             $leader = $data->val($x, "F");
@@ -1056,7 +1082,15 @@ class marketingActions extends sfActions
             $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
 
             if ($mlmDistributor) {
-                $distAccountCp3Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+                $pos = strrpos($mlmDistributor->getTreeStructure(), "|682|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    //print_r("<br>ID:".$mlmDistributor->getDistributorId().", Code:".$mlmDistributor->getDistributorCode());
+                    //print_r("<br>ID:".$mlmDistributor->getDistributorId().", Code:".$mlmDistributor->getDistributorCode());
+                    $id .= $mlmDistributor->getDistributorId().",";
+                }
+                /*$distAccountCp3Balance = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
 
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($mlmDistributor->getDistributorId());
@@ -1069,13 +1103,13 @@ class marketingActions extends sfActions
                 $mlm_account_ledger->setBalance($distAccountCp3Balance + 25);
                 $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                $mlm_account_ledger->save();
+                $mlm_account_ledger->save();*/
 
             } else {
-                print_r("Not found ".$distCode."<br>");
+                //print_r("Not found ".$distCode."<br>");
             }
         }
-
+        print_r($id);
         return sfView::NONE;
     }
     public function executeUpdateMemberData() {
@@ -1939,6 +1973,13 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         return sfView::HEADER_ONLY;
     }
     public function executeGenealogyManagement()
+    {
+//        $c = new Criteria();
+//        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
+//        $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_CODE);
+//        $this->dists = MlmDistributorPeer::doSelect($c);
+    }
+    public function executeGenealogyManagement2()
     {
 //        $c = new Criteria();
 //        $c->add(MlmDistributorPeer::FROM_ABFX, "N");
