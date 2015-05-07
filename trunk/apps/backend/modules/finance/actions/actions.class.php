@@ -1211,10 +1211,10 @@ class financeActions extends sfActions
                 }
 
                 // store pairing point ++++++++++++++++++++++++++++++
-                $uplinePosition = $existDist->getPlacementPosition();
-                $uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
+                //$uplinePosition = $existDist->getPlacementPosition();
+                //$uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
 
-                $dateUtil = new DateUtil();
+                /*$dateUtil = new DateUtil();
 
                 $sponsoredDistributorCode = $existDist->getDistributorCode();
                 $pairingPoint = $mlmRoiDividendDB->getPackagePrice();
@@ -1302,8 +1302,9 @@ class financeActions extends sfActions
                     $uplinePosition = $uplineDistDB->getPlacementPosition();
                     $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
                     $level++;
-                }
+                }*/
             }
+            $existDist->setEmailStatus("PAIRING");
             $existDist->setCloseAccount("N");
             $existDist->setSecondtimeRenewal("Y");
             $existDist->save();
