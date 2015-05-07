@@ -251,6 +251,7 @@ function reassignDatagridEventAttr(){
 <div class="portlet">
     <div class="portlet-header">Distributor Listing</div>
     <div class="portlet-content">
+        <div style="color: #ff0000;">*** Distributor Code is required and minimum 3 characters</div>
 	<table width="100%" border="0">
 		<tr>
 			<td>
