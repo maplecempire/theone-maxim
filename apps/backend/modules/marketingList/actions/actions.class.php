@@ -1180,7 +1180,8 @@ class marketingListActions extends sfActions
         //var_dump($sql);
         /******   total filtered records  *******/
         if ($this->getRequestParameter('filterDistcode') != "") {
-            $sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%'";
+            //$sWhere .= " AND dist.distributor_code LIKE '%" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "%'";
+            $sWhere .= " AND dist.distributor_code LIKE '" . mysql_real_escape_string($this->getRequestParameter('filterDistcode')) . "'";
         }
 
         if ($this->getRequestParameter('filterFullName') != "") {
