@@ -1154,9 +1154,9 @@ class marketingListActions extends sfActions
 
         $sql = " ,dist.tree_structure FROM mlm_distributor dist
             LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
-            LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
-
          ";
+
+        // LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
 
         /*if ($this->getRequestParameter('filterMt4Userame') != "") {
             $sql .= " INNER JOIN ";
