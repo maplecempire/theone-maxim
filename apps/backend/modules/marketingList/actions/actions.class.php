@@ -1140,6 +1140,18 @@ class marketingListActions extends sfActions
         $limit = $this->getRequestParameter('iDisplayLength');
         $arr = array();
 
+        if ($this->getRequestParameter('filterDistcode') == "" || strlen($this->getRequestParameter('filterDistcode')) < 3) {
+            $output = array(
+                "sEcho" => intval($sEcho),
+                "iTotalRecords" => 0,
+                "iTotalDisplayRecords" => 0,
+                "aaData" => $arr
+            );
+            echo json_encode($output);
+
+            return sfView::HEADER_ONLY;
+        }
+
         $sql = " ,dist.tree_structure FROM mlm_distributor dist
             LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
             LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
