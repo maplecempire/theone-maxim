@@ -90,6 +90,10 @@ fundManagementReport:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+fundManagementContract:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 loginPassword:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
