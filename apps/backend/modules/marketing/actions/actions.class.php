@@ -10,6 +10,121 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeDoRunPairingForMaturity()
+    {
+        $c = new Criteria();
+        $c->add(NotificationOfMaturityPeer::EMAIL_STATUS, "PAIRING");
+        $notificationOfMaturitys = NotificationOfMaturityPeer::doSelect($c);
+
+        foreach ($notificationOfMaturitys as $existNotificationOfMaturity) {
+            $existDist = MlmDistributorPeer::retrieveByPK($existNotificationOfMaturity->getDistId());
+
+            if (!$existDist) {
+                continue;
+            }
+
+            $c = new Criteria();
+            $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $existNotificationOfMaturity->getMt4UserName());
+            $c->addDescendingOrderByColumn(MlmRoiDividendPeer::IDX);
+            $mlmRoiDividendDB = MlmRoiDividendPeer::doSelectOne($c);
+
+            // store pairing point ++++++++++++++++++++++++++++++
+            $uplinePosition = $existDist->getPlacementPosition();
+            $uplineDistDB = MlmDistributorPeer::retrieveByPk($existDist->getTreeUplineDistId());
+
+            $dateUtil = new DateUtil();
+
+            $sponsoredDistributorCode = $existDist->getDistributorCode();
+            $pairingPoint = $mlmRoiDividendDB->getPackagePrice();
+            $pairingPointActual = $mlmRoiDividendDB->getPackagePrice();
+            $exp_date = "2014-08-01 ";
+            $todays_date = $dateUtil->formatDate("Y-m-d", $mlmRoiDividendDB->getDividendDate());
+            $today = strtotime($todays_date);
+            $expiration_date = strtotime($exp_date);
+            //if ()
+            if ($expiration_date > $today) {
+
+            } else {
+                $pairingPoint = $mlmRoiDividendDB->getPackagePrice() * Globals::PAIRING_POINT_BV;
+            }
+            $level = 0;
+            while ($level < 200) {
+                //var_dump($uplineDistDB->getUplineDistId());
+                //var_dump($uplineDistDB->getUplineDistCode());
+                //print_r("<br>");
+                $c = new Criteria();
+                $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                $addToLeft = 0;
+                $addToRight = 0;
+                $leftBalance = 0;
+                $rightBalance = 0;
+                if (!$sponsorDistPairingDB) {
+                    $sponsorDistPairingDB = new MlmDistPairing();
+                    $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                    $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                    if (!$packageDB) {
+                        $output = array(
+                            "error" => true,
+                            "errorMsg" => "Invalid Rank Id."
+                        );
+                        echo json_encode($output);
+                        return sfView::HEADER_ONLY;
+                    }
+
+                    $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                    $sponsorDistPairingDB->setRightBalance($rightBalance);
+                    $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                    $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                } else {
+                    $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                    $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                }
+                $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingDB->save();
+
+                $c = new Criteria();
+                $c->add(MlmDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                $c->add(MlmDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                $c->addDescendingOrderByColumn(MlmDistPairingLedgerPeer::CREATED_ON);
+                $sponsorDistPairingLedgerDB = MlmDistPairingLedgerPeer::doSelectOne($c);
+
+                $legBalance = 0;
+                if ($sponsorDistPairingLedgerDB) {
+                    $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                }
+
+                $sponsorDistPairingledger = new MlmDistPairingLedger();
+                $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                $sponsorDistPairingledger->setCredit($pairingPoint);
+                $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                $sponsorDistPairingledger->setDebit(0);
+                $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [MATURITY]");
+                $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sponsorDistPairingledger->save();
+
+                $this->revalidatePairing($uplineDistDB->getDistributorId(), $uplinePosition);
+
+                if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                    break;
+                }
+
+                $uplinePosition = $uplineDistDB->getPlacementPosition();
+                $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                $level++;
+            }
+        }
+
+        return sfView::NONE;
+    }
     public function executeFindLeader()
     {
         $c = new Criteria();
