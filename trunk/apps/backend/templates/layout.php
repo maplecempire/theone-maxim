@@ -704,6 +704,10 @@ $(function() {
                         <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
                              border="0">
                         &nbsp;<?php echo __('Genealogy Management'); ?></a><br/>
+                    <a href="<?php echo url_for('marketing/genealogyManagement2') ?>" title="Genealogy Management 2">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Genealogy Management 2'); ?></a><br/>
 <!--                    --><?php //} ?>
 
                     <!--<a href="<?php /*echo url_for('marketing/findUnderLeader') */?>" title="Find Under Leader">
