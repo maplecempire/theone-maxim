@@ -1304,7 +1304,7 @@ class financeActions extends sfActions
                     $level++;
                 }*/
             }
-            $existDist->setEmailStatus("PAIRING");
+            //$existDist->setEmailStatus();
             $existDist->setCloseAccount("N");
             $existDist->setSecondtimeRenewal("Y");
             $existDist->save();
@@ -1312,6 +1312,7 @@ class financeActions extends sfActions
             //$existNotificationOfMaturity->setMt4Balance($cp3Amount);
             $existNotificationOfMaturity->setRemark($remark);
             $existNotificationOfMaturity->setInternalRemark($internalRemark);
+            $existNotificationOfMaturity->setEmailStatus("PAIRING");
             $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_SUCCESS);
             //$existNotificationOfMaturity->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
             $existNotificationOfMaturity->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
