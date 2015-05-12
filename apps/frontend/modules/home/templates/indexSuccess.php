@@ -1044,7 +1044,55 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='66'>03 April 2015 - US, Good Friday</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='69'>Extend the IME 2015 qualifying date for another 30 days till May 31st 2015</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "02 May 2015";
+                ?>
+            </div>
+
+            <div id="page_69" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Based on your request......
+<br>
+<br>We are pleased to extend the qualifying date for another 30 days till May 31st 2015 to allow you to book your place for our IME 2015 which will be held in the magical wonderland of Gold Coast Australia.
+<br>
+<br>What are you waiting for ..... Less than 1,000 of the 3,500 tickets left !!!!!!
+<br>
+<br>应广大会员强烈要求！
+<br>
+<br>我们非常高兴地宣布马胜金融集团2015澳大利亚黄金海岸国际金融交流会优惠促销活动将延期30天至2015.5.30日.
+<br>
+<br>3500席位，只剩下最后的1000个名额，大家还等什么呢? 加油吧!!!!!!
+<br>
+<br>みなさまのリクエストにより…….
+<br>
+<br>私たちはオーストラリアのゴールドコーストのマジカルワンダーランドで開かれる予定のIME2015への資格日をさらに30日延長し、2015年５月31日まで予約ができるようにしたことを、喜んでお伝えします。
+<br>
+<br>あなたは何を待っているのですか….….3500のチケットのうち残りは1000以下になっています!!!!!!
+<br>
+<br>여러분의 요청에 따라....
+<br>
+<br>당사는 환상의 원더랜드인 호주 골드 코스트에서 열릴 2015 IME에 참석힐 수 있는 자격충족 기간을 2015년 5월 31일까지 30일 연장하게 되었음을 기쁘게 알려드립니다.
+<br>
+<br>무엇을 기다리고 계십니까.... 3,500 석중 1,000석도 남지않았습니다!!!!!!
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='68'>03 April 2015 - US, Good Friday</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
                 <?php
@@ -1053,7 +1101,7 @@ $(document).ready(function() {
                 ?>
             </div>
 
-            <div id="page_67" class="news_desc" style="text-align: left;">
+            <div id="page_68" class="news_desc" style="text-align: left;">
                 <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
                     <tbody>
                     <tr>
