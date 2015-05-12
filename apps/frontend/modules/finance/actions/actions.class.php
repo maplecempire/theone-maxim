@@ -467,8 +467,10 @@ class financeActions extends sfActions
         $sponsorDistPairingLedgerDBs = MlmDistPairingLedger20150331Peer::doSelect($c);
 
         $balance = 0;
+        print_r("LEFT<br>");
         foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
             $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            print_r($balance."<br>");
             $sponsorDistPairingLedgerDB->setBalance($balance);
             $sponsorDistPairingLedgerDB->save();
         }
@@ -480,8 +482,10 @@ class financeActions extends sfActions
         $sponsorDistPairingLedgerDBs = MlmDistPairingLedger20150331Peer::doSelect($c);
 
         $balance = 0;
+        print_r("RIGHT<br>");
         foreach ($sponsorDistPairingLedgerDBs as $sponsorDistPairingLedgerDB) {
             $balance = $balance + $sponsorDistPairingLedgerDB->getCredit() - $sponsorDistPairingLedgerDB->getDebit();
+            print_r($balance."<br>");
             $sponsorDistPairingLedgerDB->setBalance($balance);
             $sponsorDistPairingLedgerDB->save();
         }
