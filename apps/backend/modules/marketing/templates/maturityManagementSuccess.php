@@ -127,7 +127,7 @@ $(function(){
     $("#btnCommission").button({
         text: true
         , icons: {
-            primary: 'ui-icon-circle-plus'
+            primary: 'ui-icon-search'
         }
     }).click(function(event){
         event.preventDefault();
