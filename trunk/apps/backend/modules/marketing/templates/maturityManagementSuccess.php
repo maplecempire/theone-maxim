@@ -123,6 +123,17 @@ $(function(){
         $("#dgAddPanelId").val("");
         $("#dgAddPanel").dialog("open");
     });
+
+    $("#btnCommission").button({
+        text: true
+        , icons: {
+            primary: 'ui-icon-circle-plus'
+        }
+    }).click(function(event){
+        event.preventDefault();
+
+        datagridCommission.fnDraw();
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -439,7 +450,7 @@ function populateDgAddPanel() {
     }
 
     $("#search_remark").val(data.distributor_code);
-    datagridCommission.fnDraw();
+    // datagridCommission.fnDraw();
     $(".indicator").show();
     $.ajax({
         type : 'POST',
@@ -551,6 +562,12 @@ function populateDgAddPanel() {
             <td>Member Remark</td>
             <td>:</td>
             <td colspan="4"><textarea id="dgAddPanelRemark" class="text ui-widget-content ui-corner-all" readonly="readonly" rows="2" cols="60"></textarea></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td colspan="4"><button id="btnCommission">Query Commission List</button></td>
         </tr>
 
         <tr>
