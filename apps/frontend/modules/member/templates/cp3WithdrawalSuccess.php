@@ -303,16 +303,16 @@ if ($distributorDB->getIaccount() == "") {
                             <li><?php echo __('Minimum withdrawal amount is USD100') ?></li>
                             <li><?php echo __('Withdrawal request must be done during the first 7 days of each month') ?></li>
                             <li><?php echo __('Processing time will be at least 3 days') ?></li>
-                            <li><?php echo __('Payout will be by the 15th of each month') ?></li>
+<!--                            <li>--><?php //echo __('Payout will be by the 15th of each month') ?><!--</li>-->
                             <li><?php echo __('Handling Fee is USD30') ?></li>
                             <li><?php echo __('All withdrawals shall be paid out based on current days\' prevailing exchange rate and subject to local bank charges') ?></li>
-                            <li><?php echo __('Payout time for monthly CP3 withdrawals to be credited to your account:') ?>
+                            <!--<li><?php /*echo __('Payout time for monthly CP3 withdrawals to be credited to your account:') */?>
                                 <ul>
-                                    <li style="padding-left: 15px;"><?php echo __('Local bank accounts - by 25th') . " ".__('(Excluding non-working days)')  ?></li>
-                                    <li style="padding-left: 15px;"><?php echo __('i-Account - by 11th') . " ".__('(Excluding non-working days)')  ?></li>
-<!--                                    <li style="padding-left: 15px;">--><?php //echo __('Money Trac - by 20th') ?><!--</li>-->
+                                    <li style="padding-left: 15px;"><?php /*echo __('Local bank accounts - by 25th') . " ".__('(Excluding non-working days)')  */?></li>
+                                    <li style="padding-left: 15px;"><?php /*echo __('i-Account - by 11th') . " ".__('(Excluding non-working days)')  */?></li>
+<!--                                    <li style="padding-left: 15px;">--><?php /*//echo __('Money Trac - by 20th') */?><!--</li>-->
                                 </ul>
-                            </li>
+                            </li>-->
                         </ol>
 
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
