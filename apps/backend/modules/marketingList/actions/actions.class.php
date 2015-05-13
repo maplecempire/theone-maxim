@@ -10,6 +10,76 @@
  */
 class marketingListActions extends sfActions
 {
+    public function executeUploadMaterialList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+
+        $sql = " FROM mlm_upload_material a ";
+
+        /******   total records  *******/
+        $sWhere = " WHERE 1=1 ";
+        $totalRecords = $this->getTotalRecords($sql . $sWhere);
+        //var_dump($sql);
+        /******   total filtered records  *******/
+
+        $totalFilteredRecords = $this->getTotalRecords($sql . $sWhere);
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY  ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+        //var_dump($sOrder);
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $arr[] = array(
+                $resultArr['id'] == null ? "" : $resultArr['id'],
+                $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
+                $resultArr['file_name'] == null ? "" : $resultArr['file_name'],
+                $resultArr['file_thumbnail'] == null ? "" : $resultArr['file_thumbnail'],
+                $resultArr['description'] == null ? "" : $resultArr['description'],
+                $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
+                $resultArr['id'] == null ? "" : $resultArr['id']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
     public function executeAnnouncementList()
     {
         $sColumns = $this->getRequestParameter('sColumns');

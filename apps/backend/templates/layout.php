@@ -573,6 +573,15 @@ $(function() {
                     <?php
                     }
                     ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_UPLOAD_MATERIAL, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('marketing/uploadMaterial') ?>" title="Upload Metarial">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Upload Metarial'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DIST_LIST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <br>
                     <a href="<?php echo url_for('marketing/luckyDraw?doAction=WOF') ?>" title="Send Lucky Draw - Wheel of Fortune Million Dollar">

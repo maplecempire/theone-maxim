@@ -358,6 +358,9 @@ if (date("d") > 30 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/dailyFxGuide") ?>"><span><?php echo __('Download Daily FX Guide'); ?></span></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/member/downloadMaterial") ?>"><span><?php echo __('Download Materials'); ?></span></a>
+        </li>
         <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php /*echo url_for("/member/dailyAUGoldTradeGuide") */?>"><span><?php /*echo __('Download Daily XAU Gold Trade Guide (Coming Soon)'); */?></span></a>
         </li>-->
