@@ -74,5 +74,9 @@ retrievePersonalProfile:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_KYC_LIST ]]
 
+uploadMaterial:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_UPLOAD_MATERIAL ]]
+
 all:
   is_secure:  off        # off is the default value anyway

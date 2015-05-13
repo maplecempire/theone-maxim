@@ -1086,6 +1086,7 @@
             <trans-unit><source>Invalid action: missing required parameters.</source><target>无效的操作：需要的数据不完整</target></trans-unit>
             <trans-unit><source>Invalid action: account status is not activated.</source><target>无效的操作：账号状态未被激活</target></trans-unit>
             <trans-unit><source>Invalid action: account password is expired.</source><target>无效的操作：账号密码已过期、失效</target></trans-unit>
+            <trans-unit><source>Download Materials</source><target>下载资料</target></trans-unit>
         </body>
     </file>
 </xliff>

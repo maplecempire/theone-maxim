@@ -9,6 +9,13 @@
  */
 class memberActions extends sfActions
 {
+    public function executeDownloadMaterial()
+    {
+        $con = Propel::getConnection();
+        $stmt = $con->prepareStatement("SELECT id, file_name, file_size, description, file_thumbnail FROM mlm_upload_material WHERE status_code = ? ORDER BY created_on DESC, file_name");
+        $stmt->set(1, Globals::STATUS_ACTIVE);
+        $this->uploadMaterialRS = $stmt->executeQuery();
+    }
     public function executeEnquiryMt4Balance()
     {
         $distributor = MlmDistributorPeer::retrieveByPK($this->getRequestParameter('q'));

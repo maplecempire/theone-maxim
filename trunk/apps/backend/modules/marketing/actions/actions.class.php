@@ -10,6 +10,92 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeUploadMaterial()
+    {
+        if ($this->getRequestParameter("act")) {
+            // Ajax call.
+            if ($this->getRequestParameter("act") == "delete") {
+                // Delete file.
+                $con = Propel::getConnection();
+                $stmt = $con->prepareStatement("SELECT file_name_server FROM mlm_upload_material WHERE id = ?");
+                $stmt->set(1, $this->getRequestParameter("ref"));
+                $rs = $stmt->executeQuery();
+
+                if ($rs->next()) {
+                    $row = $rs->getRow();
+                    unlink(sfConfig::get('sf_upload_dir') . "/upload_material/" . $row["file_name_server"]);
+                }
+
+                $stmt2 = $con->prepareStatement("DELETE FROM mlm_upload_material WHERE id = ?");
+                $count = $stmt2->executeUpdate([
+                    $this->getRequestParameter("ref")
+                ]);
+
+//                $mlmUploadMaterial = MlmUploadMaterialPeer::retrieveByPk($this->getRequestParameter("ref"));
+//                unlink(sfConfig::get('sf_upload_dir') . "/upload_material/" . $mlmUploadMaterial->getFileNameServer());
+//                if ($mlmUploadMaterial->delete()) {
+//                    echo json_encode(["File deleted successfully."]);
+//                }
+
+                if ($count > 0) {
+                    echo json_encode(["File deleted successfully."]);
+                }
+            }
+
+            return sfView::HEADER_ONLY;
+        }
+
+        if ($this->getRequest()->getFileName('file_upload') != "") {
+            $uploadFolder = sfConfig::get('sf_upload_dir') . "/upload_material/";
+
+            $uploadedFilename = $this->getRequest()->getFileName('file_upload');
+            $ext = explode(".", $uploadedFilename);
+            $extensionName = $ext[count($ext) - 1];
+            $newFilename = date("YmdHis") . "_" . rand(1000, 9999) . "." . $extensionName;
+            $this->getRequest()->moveFile('file_upload', $uploadFolder . $newFilename);
+
+            $fileSize = filesize($uploadFolder . $newFilename);
+
+            if ($fileSize > 1024 * 1024 * 1024) {
+                $fileSize = number_format(($fileSize / 1024 / 1024 / 1024), 2) . " GB";
+            } elseif ($fileSize > 1024 * 1024) {
+                $fileSize = number_format(($fileSize / 1024 / 1024), 2) . " MB";
+            } elseif ($fileSize > 1024) {
+                $fileSize = number_format(($fileSize / 1024), 2) . " KB";
+            } else {
+                $fileSize .= " Bytes";
+            }
+
+//            $mlmUploadMaterialDB = new MlmUploadMaterial();
+//            $mlmUploadMaterialDB->setFileName($this->getRequestParameter("file_name"));
+//            $mlmUploadMaterialDB->setFileNameServer($this->getRequestParameter($newFilename));
+//            $mlmUploadMaterialDB->setFileExt($this->getRequestParameter($extensionName));
+//            $mlmUploadMaterialDB->setFileThumbnail($this->getRequestParameter("file_thumbnail"));
+//            $mlmUploadMaterialDB->setFileSize($fileSize);
+//            $mlmUploadMaterialDB->setStatusCode($this->getRequestParameter("status_code"));
+//            $mlmUploadMaterialDB->setDescription($this->getRequestParameter("description"));
+//            $mlmUploadMaterialDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//            $mlmUploadMaterialDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+//            $mlmUploadMaterialDB->save();
+
+            $con = Propel::getConnection();
+            $stmt = $con->prepareStatement("INSERT INTO mlm_upload_material (file_name, file_name_server, file_ext, file_thumbnail, file_size, status_code, description, created_by, created_on, updated_by, updated_on) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW())");
+            $stmt->executeUpdate([
+                $this->getRequestParameter("file_name"),
+                $newFilename,
+                $extensionName,
+                $this->getRequestParameter("file_thumbnail"),
+                $fileSize,
+                $this->getRequestParameter("status_code"),
+                $this->getRequestParameter("description"),
+                $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
+                $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID)
+            ]);
+
+            $this->setFlash('successMsg', "Files was successfully uploaded.");
+            return $this->redirect('/marketing/uploadMaterial');
+        }
+    }
     public function executeDoRunPairingForMaturity()
     {
         $c = new Criteria();
