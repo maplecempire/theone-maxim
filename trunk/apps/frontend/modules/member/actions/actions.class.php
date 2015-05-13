@@ -10947,7 +10947,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $currentDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"));
             print_r("currentDate=".$currentDate."<br>");
 
-            $queryRecord = 5000;
+            $queryRecord = 2500;
 
             if ($this->getRequestParameter('q') == 0) {
 
