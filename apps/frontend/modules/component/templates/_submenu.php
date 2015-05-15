@@ -226,10 +226,10 @@ if (date("d") > 30 && $close == true) {
             || $sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 273056) { */
             ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?><img src="/images/new_icon.gif"></span></a>
+            <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="<?php echo url_for("/iAccount/internationalTransfer") ?>"><span><?php echo __('i-Account International Transfer'); ?><img src="/images/new_icon.gif"></span></a>
+            <a href="<?php echo url_for("/iAccount/internationalTransfer") ?>"><span><?php echo __('i-Account International Transfer'); ?></span></a>
         </li>
         <?php //} ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -402,8 +402,26 @@ if (date("d") > 30 && $close == true) {
             <a href="/maxStore/history"><span><?php /*echo __('Transaction History'); */?></span></a>
         </li>-->
     </ul>
+
     <?php
     }
+    ?>
+
+    <br class="clear"><br>
+    <ul>
+        <li class="menu_title"><?php echo __('Offer to Swap R-Share'); ?></li>
+        <li style="display: none;" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare"><span><?php echo __('APPLICATION FOR DISPENSATION 18 month investment term'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap -SSS Note'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+    </ul>
+
+    <?php
+    $closeChallenge = true;
+
+    if ($closeChallenge == false) {
     ?>
     <br class="clear"><br>
     <ul>
@@ -433,7 +451,7 @@ if (date("d") > 30 && $close == true) {
             <a href="/porscheChallenge"><span><?php echo __('Porsche Challenge'); ?><img src="/images/new_icon.gif"></a>
         </li>
     </ul>
-    <?php //} ?>
+    <?php } ?>
     <?php
     //if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 2) {
     ?>
@@ -444,7 +462,7 @@ if (date("d") > 30 && $close == true) {
             <a href="/legalWatch"><span><?php echo __('Ask and be answered'); ?></span></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/uploads/Maxim-Code-of-Ethic.pdf" target="_blank"><span><?php echo __('Maxim Code of Ethic'); ?> (9.5MB)</span><img src="/images/new_icon.gif"></a>
+            <a href="/uploads/Maxim-Code-of-Ethic.pdf" target="_blank"><span><?php echo __('Maxim Code of Ethic'); ?> (9.5MB)</span></a>
         </li>
     </ul>
     <?php
