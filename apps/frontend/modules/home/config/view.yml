@@ -26,6 +26,10 @@ activitiesSuccess:
   has_layout:     off
   stylesheets: 	  []
 
+eventCalendarSuccess:
+  has_layout:     off
+  stylesheets: 	  []
+
 announcementListSuccess:
   has_layout:     off
   stylesheets: 	  []

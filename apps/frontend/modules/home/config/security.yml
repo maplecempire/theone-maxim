@@ -30,6 +30,10 @@ contactUs:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+eventCalendar:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 updatePassword:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR_PW_EXPIRED ]]

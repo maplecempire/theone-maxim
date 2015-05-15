@@ -15,22 +15,17 @@ class downloadActions extends sfActions
         if ($this->getRequestParameter("q")) {
             $uploadFolder = sfConfig::get('sf_upload_dir') . "/upload_material/";
 
-            $con = Propel::getConnection();
-            $stmt = $con->prepareStatement("SELECT file_name, file_ext, file_name_server FROM mlm_upload_material WHERE id = ?");
-            $stmt->set(1, $this->getRequestParameter("q"));
-            $rs = $stmt->executeQuery();
+            $mlmUploadMaterialDB = MlmUploadMaterialPeer::retrieveByPK($this->getRequestParameter("q"));
 
-            if ($rs->next()) {
-                $r = $rs->getRow();
-
+            if ($mlmUploadMaterialDB) {
                 $response = $this->getResponse();
                 $response->clearHttpHeaders();
                 $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
-                $response->setContentType('application/' . $r["file_ext"]);
+                $response->setContentType('application/' . $mlmUploadMaterialDB->getFileExt());
                 $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
-                $response->setHttpHeader('Content-Disposition','attachment; filename=' . $r["file_name"] . "." . $r["file_ext"], TRUE);
+                $response->setHttpHeader('Content-Disposition','attachment; filename=' . $mlmUploadMaterialDB->getFileName() . "." . $mlmUploadMaterialDB->getFileExt(), TRUE);
                 $response->sendHttpHeaders();
-                readfile($uploadFolder . $r["file_name_server"]);
+                readfile($uploadFolder . $mlmUploadMaterialDB->getFileNameServer());
             }
         }
 
