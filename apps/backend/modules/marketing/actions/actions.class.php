@@ -5100,4 +5100,21 @@ b.) 提款要求 : 提款只能从签订日起180天以内,180天后将不能兑
         $log_account_ledger->setUpdatedBy($mlmAccountLedger->getUpdatedBy());
         $log_account_ledger->save();
     }
+
+    function revalidatePairing($distributorId, $leftRight)
+    {
+        $c = new Criteria();
+        $c->add(MlmDistPairingPeer::DIST_ID, $distributorId);
+        $tbl_account = MlmDistPairingPeer::doSelectOne($c);
+
+        if (!$tbl_account) {
+            $tbl_account = new MlmDistPairing();
+            $tbl_account->setDistId($distributorId);
+            $tbl_account->setLeftBalance(0);
+            $tbl_account->setRightBalance(0);
+            $tbl_account->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account->save();
+        }
+    }
 }
