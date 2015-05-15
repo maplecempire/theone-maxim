@@ -10,6 +10,118 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeEventCalendar()
+    {
+        $act = $this->getRequestParameter("act");
+
+        if ($act == "load") {
+            $dateFrom = $this->getRequestParameter("start") . " 00:00:00";
+            $dateTo = $this->getRequestParameter("end") . " 00:00:00";
+
+            $con = Propel::getConnection();
+            $stmt = $con->prepareStatement("SELECT id, event_title, event_detail, date_start, date_end, all_day FROM mlm_event_calendar WHERE date_start >= ? AND date_end <= ? ORDER BY date_start, id");
+            $stmt->set(1, $dateFrom);
+            $stmt->set(2, $dateTo);
+            $rs = $stmt->executeQuery();
+            $data = array();
+
+            while ($rs->next()) {
+                $r = $rs->getRow();
+                $arr = array(
+                    "id" => $r["id"],
+                    "title" => $r["event_title"],
+                    "detail" => $r["event_detail"],
+                    "all_day" => $r["all_day"]
+                );
+
+                if ($r["all_day"] == "Y") {
+                    $arr["start"] = date("Y-m-d", strtotime($r["date_start"]));
+                } else {
+                    $arr["start"] = $r["date_start"];
+                }
+
+                if ($r["date_end"]) {
+                    if ($r["all_day"] == "Y") {
+                        $arr["end"] = date("Y-m-d", strtotime($r["date_end"]));
+                    } else {
+                        $arr["end"] = $r["date_end"];
+                    }
+                }
+
+                $data[] = $arr;
+            }
+
+            echo json_encode($data);
+            return sfView::HEADER_ONLY;
+        } elseif ($act == "new") {
+            if ($this->getRequestParameter("event_id")) {
+                // Update event.
+                $con = Propel::getConnection();
+                $stmt = $con->prepareStatement("UPDATE mlm_event_calendar SET event_title = ?, event_detail = ?, date_start = ?, date_end = ?, all_day = ?, updated_by = ?, updated_on = NOW() WHERE id = ?");
+                $count = $stmt->executeUpdate([
+                    $this->getRequestParameter("event_title"),
+                    $this->getRequestParameter("event_detail"),
+                    $this->getRequestParameter("date_start"),
+                    $this->getRequestParameter("date_end"),
+                    ($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"),
+                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
+                    $this->getRequestParameter("event_id")
+                ]);
+
+                if ($count) {
+                    $this->setFlash("successMsg", "Event saved successfully.");
+                } else {
+                    $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
+                }
+            } else {
+                // Create new event.
+                $con = Propel::getConnection();
+                $stmt = $con->prepareStatement("INSERT INTO mlm_event_calendar (event_title, event_detail, date_start, date_end, all_day, created_by, created_on, updated_by, updated_on) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, NOW())");
+                $count = $stmt->executeUpdate([
+                    $this->getRequestParameter("event_title"),
+                    $this->getRequestParameter("event_detail"),
+                    $this->getRequestParameter("date_start"),
+                    $this->getRequestParameter("date_end"),
+                    ($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"),
+                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
+                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID)
+                ]);
+
+                if ($count) {
+                    $this->setFlash("successMsg", "Event saved successfully.");
+                } else {
+                    $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
+                }
+            }
+
+            return $this->redirect("marketing/eventCalendar");
+        } elseif ($act == "calendar") {
+            $con = Propel::getConnection();
+            $con->begin();
+
+            try {
+                $events = json_decode($this->getRequestParameter("events"));
+
+                foreach ($events as $event) {
+                    $stmt = $con->prepareStatement("UPDATE mlm_event_calendar SET date_start = ?, date_end = ?, updated_by = ?, updated_on = NOW() WHERE id = ?");
+                    $stmt->executeUpdate([
+                        $event->date_start,
+                        $event->date_end,
+                        $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
+                        $event->id
+                    ]);
+                }
+
+                $con->commit();
+                $this->setFlash("successMsg", "Event saved successfully.");
+            } catch (Exception $e) {
+                $con->rollback();
+                $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
+            }
+
+            return $this->redirect("marketing/eventCalendar");
+        }
+    }
     public function executeUploadMaterial()
     {
         if ($this->getRequestParameter("act")) {

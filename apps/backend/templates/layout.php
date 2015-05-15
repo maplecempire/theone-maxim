@@ -582,6 +582,15 @@ $(function() {
                     <?php
                     }
                     ?>
+                    <?php
+                    if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_EVENT_CALENDAR, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+                    <a href="<?php echo url_for('marketing/eventCalendar') ?>" title="Event Calendar">
+                        <img src="/images/common/fileopen.png" style="padding-bottom: 4px; vertical-align: middle;"
+                             border="0">
+                        &nbsp;<?php echo __('Event Calendar'); ?></a><br/>
+                    <?php
+                    }
+                    ?>
                     <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_DIST_LIST, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
                     <br>
                     <a href="<?php echo url_for('marketing/luckyDraw?doAction=WOF') ?>" title="Send Lucky Draw - Wheel of Fortune Million Dollar">

@@ -13,7 +13,7 @@
 //                aoData.push( { "name": "filterFilename", "value": $("#search_filename").val()  } );
             },
             "reassignEvent" : function(){ // extra function for reassignEvent when JSON is back from server
-                reassignDatagridEventAttr();
+//                reassignDatagridEventAttr();
             },
 
             // datatables params

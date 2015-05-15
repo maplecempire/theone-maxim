@@ -78,5 +78,9 @@ uploadMaterial:
   is_secure:   on
   credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_UPLOAD_MATERIAL ]]
 
+eventCalendar:
+  is_secure:   on
+  credentials: [[ MAXIM_SUPERADMIN, MAXIM_AL_UPLOAD_CALENDAR ]]
+
 all:
   is_secure:  off        # off is the default value anyway
