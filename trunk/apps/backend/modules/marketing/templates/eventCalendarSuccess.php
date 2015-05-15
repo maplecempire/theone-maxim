@@ -176,6 +176,11 @@
                 }
             },
             submitHandler: function(form) {
+                if ($("#act").val() == "delete") {
+                    form.submit();
+                    return true;
+                }
+
                 var confirmMsg = "Confirm create new event?";
 
                 if ($("#event_id").val().length) {
@@ -191,11 +196,21 @@
             }
         });
 
+        $("#btnDelete").click(function() {
+            if (confirm("Confirm delete this event?")) {
+                $("#act").val("delete");
+
+                $("#newForm").validate().cancelSubmit = true;
+                $("#newForm").submit();
+            }
+        });
+
         $("#btnCancel").click(function() {
             // Reset all form inputs to blank.
             var form = $("#newForm");
 
             $("h3", form).html("Create New Event");
+            $("#act", form).val("new");
             $("#event_id", form).val("");
             $("#event_title", form).val("");
             $("#event_detail", form).val("");
@@ -203,6 +218,7 @@
             $("#date_end", form).val("");
             $("#all_day", form).prop("checked", false);
 
+            $("#btnDelete", form).hide();
             $("#btnCancel", form).hide();
         });
     });
@@ -222,6 +238,7 @@
         var form = $("#newForm");
 
         $("h3", form).html("Edit Event");
+        $("#act", form).val("new");
         $("#event_id", form).val(event.id);
         $("#event_title", form).val(event.title);
         $("#event_detail", form).val(event.detail);
@@ -229,6 +246,7 @@
         $("#date_end", form).val(event.end.format("YYYY-MM-DD HH:mm"));
         $("#all_day", form).prop("checked", (event.all_day == "Y"));
 
+        $("#btnDelete", form).show();
         $("#btnCancel", form).show();
     }
 </script>
@@ -295,7 +313,7 @@
 
             <form id="newForm" method="post" action="<?php echo url_for("/marketing/eventCalendar") ?>">
 
-                <input type="hidden" name="act" value="new">
+                <input type="hidden" id="act" name="act" value="new">
                 <input type="hidden" id="event_id" name="event_id" value="">
 
                 <h3>Create New Event</h3>
@@ -343,6 +361,7 @@
                     <tr>
                         <td colspan="2">
                             <button type="submit">Submit</button>&nbsp;&nbsp;
+                            <button type="button" id="btnDelete" style="display: none;">Delete</button>&nbsp;&nbsp;
                             <button type="button" id="btnCancel" style="display: none;">Cancel</button>
                         </td>
                     </tr>

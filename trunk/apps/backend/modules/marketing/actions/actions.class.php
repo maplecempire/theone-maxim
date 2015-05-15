@@ -15,36 +15,35 @@ class marketingActions extends sfActions
         $act = $this->getRequestParameter("act");
 
         if ($act == "load") {
+            // Ajax load data for calendar.
             $dateFrom = $this->getRequestParameter("start") . " 00:00:00";
             $dateTo = $this->getRequestParameter("end") . " 00:00:00";
-
-            $con = Propel::getConnection();
-            $stmt = $con->prepareStatement("SELECT id, event_title, event_detail, date_start, date_end, all_day FROM mlm_event_calendar WHERE date_start >= ? AND date_end <= ? ORDER BY date_start, id");
-            $stmt->set(1, $dateFrom);
-            $stmt->set(2, $dateTo);
-            $rs = $stmt->executeQuery();
             $data = array();
 
-            while ($rs->next()) {
-                $r = $rs->getRow();
+            $c = new Criteria();
+            $c->add(MlmEventCalendarPeer::DATE_START, $dateFrom, Criteria::GREATER_EQUAL);
+            $c->add(MlmEventCalendarPeer::DATE_END, $dateTo, Criteria::LESS_EQUAL);
+            $mlmEventCalendarDB = MlmEventCalendarPeer::doSelect($c);
+
+            foreach ($mlmEventCalendarDB as $event) {
                 $arr = array(
-                    "id" => $r["id"],
-                    "title" => $r["event_title"],
-                    "detail" => $r["event_detail"],
-                    "all_day" => $r["all_day"]
+                    "id" => $event->getId(),
+                    "title" => $event->getEventTitle(),
+                    "detail" => $event->getEventDetail(),
+                    "all_day" => $event->getAllDay()
                 );
 
-                if ($r["all_day"] == "Y") {
-                    $arr["start"] = date("Y-m-d", strtotime($r["date_start"]));
+                if ($event->getAllDay() == "Y") {
+                    $arr["start"] = date("Y-m-d", strtotime($event->getDateStart()));
                 } else {
-                    $arr["start"] = $r["date_start"];
+                    $arr["start"] = $event->getDateStart();
                 }
 
-                if ($r["date_end"]) {
-                    if ($r["all_day"] == "Y") {
-                        $arr["end"] = date("Y-m-d", strtotime($r["date_end"]));
+                if ($event->getDateEnd()) {
+                    if ($event->getAllDay() == "Y") {
+                        $arr["end"] = date("Y-m-d", strtotime($event->getDateEnd()));
                     } else {
-                        $arr["end"] = $r["date_end"];
+                        $arr["end"] = $event->getDateEnd();
                     }
                 }
 
@@ -56,38 +55,38 @@ class marketingActions extends sfActions
         } elseif ($act == "new") {
             if ($this->getRequestParameter("event_id")) {
                 // Update event.
-                $con = Propel::getConnection();
-                $stmt = $con->prepareStatement("UPDATE mlm_event_calendar SET event_title = ?, event_detail = ?, date_start = ?, date_end = ?, all_day = ?, updated_by = ?, updated_on = NOW() WHERE id = ?");
-                $count = $stmt->executeUpdate([
-                    $this->getRequestParameter("event_title"),
-                    $this->getRequestParameter("event_detail"),
-                    $this->getRequestParameter("date_start"),
-                    $this->getRequestParameter("date_end"),
-                    ($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"),
-                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
-                    $this->getRequestParameter("event_id")
-                ]);
+                $mlmEventCalendarDB = MlmEventCalendarPeer::retrieveByPK($this->getRequestParameter("event_id"));
+                $hasError = true;
 
-                if ($count) {
-                    $this->setFlash("successMsg", "Event saved successfully.");
-                } else {
+                if ($mlmEventCalendarDB) {
+                    $mlmEventCalendarDB->setEventTitle($this->getRequestParameter("event_title"));
+                    $mlmEventCalendarDB->setEventDetail($this->getRequestParameter("event_detail"));
+                    $mlmEventCalendarDB->setDateStart($this->getRequestParameter("date_start"));
+                    $mlmEventCalendarDB->setDateEnd($this->getRequestParameter("date_end"));
+                    $mlmEventCalendarDB->setAllDay(($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"));
+                    $mlmEventCalendarDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                    $mlmEventCalendarDB->save();
+                    $hasError = false;
+                }
+
+                if ($hasError) {
                     $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
+                } else {
+                    $this->setFlash("successMsg", "Event saved successfully.");
                 }
             } else {
                 // Create new event.
-                $con = Propel::getConnection();
-                $stmt = $con->prepareStatement("INSERT INTO mlm_event_calendar (event_title, event_detail, date_start, date_end, all_day, created_by, created_on, updated_by, updated_on) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, NOW())");
-                $count = $stmt->executeUpdate([
-                    $this->getRequestParameter("event_title"),
-                    $this->getRequestParameter("event_detail"),
-                    $this->getRequestParameter("date_start"),
-                    $this->getRequestParameter("date_end"),
-                    ($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"),
-                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
-                    $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID)
-                ]);
+                $mlmEventCalendarDB = new MlmEventCalendar();
+                $mlmEventCalendarDB->setEventTitle($this->getRequestParameter("event_title"));
+                $mlmEventCalendarDB->setEventDetail($this->getRequestParameter("event_detail"));
+                $mlmEventCalendarDB->setDateStart($this->getRequestParameter("date_start"));
+                $mlmEventCalendarDB->setDateEnd($this->getRequestParameter("date_end"));
+                $mlmEventCalendarDB->setAllDay(($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"));
+                $mlmEventCalendarDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlmEventCalendarDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
-                if ($count) {
+                if ($mlmEventCalendarDB->save()) {
                     $this->setFlash("successMsg", "Event saved successfully.");
                 } else {
                     $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
@@ -96,6 +95,7 @@ class marketingActions extends sfActions
 
             return $this->redirect("marketing/eventCalendar");
         } elseif ($act == "calendar") {
+            // Save calendar grad & drop changes.
             $con = Propel::getConnection();
             $con->begin();
 
@@ -103,13 +103,15 @@ class marketingActions extends sfActions
                 $events = json_decode($this->getRequestParameter("events"));
 
                 foreach ($events as $event) {
-                    $stmt = $con->prepareStatement("UPDATE mlm_event_calendar SET date_start = ?, date_end = ?, updated_by = ?, updated_on = NOW() WHERE id = ?");
-                    $stmt->executeUpdate([
-                        $event->date_start,
-                        $event->date_end,
-                        $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
-                        $event->id
-                    ]);
+                    $mlmEventCalendarDB = MlmEventCalendarPeer::retrieveByPK($event->id);
+
+                    if ($mlmEventCalendarDB) {
+                        $mlmEventCalendarDB->setDateStart($event->date_start);
+                        $mlmEventCalendarDB->setDateEnd($event->date_end);
+                        $mlmEventCalendarDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                        $mlmEventCalendarDB->save();
+                    }
                 }
 
                 $con->commit();
@@ -117,6 +119,26 @@ class marketingActions extends sfActions
             } catch (Exception $e) {
                 $con->rollback();
                 $this->setFlash("errorMsg", "Unable to save event. Please try again later.");
+            }
+
+            return $this->redirect("marketing/eventCalendar");
+        } elseif ($act == "delete") {
+            $hasError = true;
+
+            if ($this->getRequestParameter("event_id")) {
+                // Delete event.
+                $mlmEventCalendarDB = MlmEventCalendarPeer::retrieveByPK($this->getRequestParameter("event_id"));
+
+                if ($mlmEventCalendarDB) {
+                    $mlmEventCalendarDB->delete();
+                    $hasError = false;
+                }
+            }
+
+            if ($hasError) {
+                $this->setFlash("errorMsg", "Unable to delete event. Please try again later.");
+            } else {
+                $this->setFlash("successMsg", "Event deleted successfully.");
             }
 
             return $this->redirect("marketing/eventCalendar");
@@ -128,28 +150,13 @@ class marketingActions extends sfActions
             // Ajax call.
             if ($this->getRequestParameter("act") == "delete") {
                 // Delete file.
-                $con = Propel::getConnection();
-                $stmt = $con->prepareStatement("SELECT file_name_server FROM mlm_upload_material WHERE id = ?");
-                $stmt->set(1, $this->getRequestParameter("ref"));
-                $rs = $stmt->executeQuery();
+                $mlmUploadMaterialDB = MlmUploadMaterialPeer::retrieveByPK($this->getRequestParameter("ref"));
 
-                if ($rs->next()) {
-                    $row = $rs->getRow();
-                    unlink(sfConfig::get('sf_upload_dir') . "/upload_material/" . $row["file_name_server"]);
+                if ($mlmUploadMaterialDB) {
+                    unlink(sfConfig::get('sf_upload_dir') . "/upload_material/" . $mlmUploadMaterialDB->getFileNameServer());
                 }
 
-                $stmt2 = $con->prepareStatement("DELETE FROM mlm_upload_material WHERE id = ?");
-                $count = $stmt2->executeUpdate([
-                    $this->getRequestParameter("ref")
-                ]);
-
-//                $mlmUploadMaterial = MlmUploadMaterialPeer::retrieveByPk($this->getRequestParameter("ref"));
-//                unlink(sfConfig::get('sf_upload_dir') . "/upload_material/" . $mlmUploadMaterial->getFileNameServer());
-//                if ($mlmUploadMaterial->delete()) {
-//                    echo json_encode(["File deleted successfully."]);
-//                }
-
-                if ($count > 0) {
+                if ($mlmUploadMaterialDB->delete()) {
                     echo json_encode(["File deleted successfully."]);
                 }
             }
@@ -178,31 +185,17 @@ class marketingActions extends sfActions
                 $fileSize .= " Bytes";
             }
 
-//            $mlmUploadMaterialDB = new MlmUploadMaterial();
-//            $mlmUploadMaterialDB->setFileName($this->getRequestParameter("file_name"));
-//            $mlmUploadMaterialDB->setFileNameServer($this->getRequestParameter($newFilename));
-//            $mlmUploadMaterialDB->setFileExt($this->getRequestParameter($extensionName));
-//            $mlmUploadMaterialDB->setFileThumbnail($this->getRequestParameter("file_thumbnail"));
-//            $mlmUploadMaterialDB->setFileSize($fileSize);
-//            $mlmUploadMaterialDB->setStatusCode($this->getRequestParameter("status_code"));
-//            $mlmUploadMaterialDB->setDescription($this->getRequestParameter("description"));
-//            $mlmUploadMaterialDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-//            $mlmUploadMaterialDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-//            $mlmUploadMaterialDB->save();
-
-            $con = Propel::getConnection();
-            $stmt = $con->prepareStatement("INSERT INTO mlm_upload_material (file_name, file_name_server, file_ext, file_thumbnail, file_size, status_code, description, created_by, created_on, updated_by, updated_on) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW())");
-            $stmt->executeUpdate([
-                $this->getRequestParameter("file_name"),
-                $newFilename,
-                $extensionName,
-                $this->getRequestParameter("file_thumbnail"),
-                $fileSize,
-                $this->getRequestParameter("status_code"),
-                $this->getRequestParameter("description"),
-                $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID),
-                $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID)
-            ]);
+            $mlmUploadMaterialDB = new MlmUploadMaterial();
+            $mlmUploadMaterialDB->setFileName($this->getRequestParameter("file_name"));
+            $mlmUploadMaterialDB->setFileNameServer($newFilename);
+            $mlmUploadMaterialDB->setFileExt($extensionName);
+            $mlmUploadMaterialDB->setFileThumbnail($this->getRequestParameter("file_thumbnail"));
+            $mlmUploadMaterialDB->setFileSize($fileSize);
+            $mlmUploadMaterialDB->setStatusCode($this->getRequestParameter("status_code"));
+            $mlmUploadMaterialDB->setDescription($this->getRequestParameter("description"));
+            $mlmUploadMaterialDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmUploadMaterialDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $mlmUploadMaterialDB->save();
 
             $this->setFlash('successMsg', "Files was successfully uploaded.");
             return $this->redirect('/marketing/uploadMaterial');

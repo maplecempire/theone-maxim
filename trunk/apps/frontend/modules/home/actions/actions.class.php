@@ -10,6 +10,49 @@
  */
 class homeActions extends sfActions
 {
+    public function executeEventCalendar()
+    {
+        $act = $this->getRequestParameter("act");
+
+        if ($act == "load") {
+            $dateFrom = $this->getRequestParameter("start") . " 00:00:00";
+            $dateTo = $this->getRequestParameter("end") . " 00:00:00";
+            $data = array();
+
+            $c = new Criteria();
+            $c->add(MlmEventCalendarPeer::DATE_START, $dateFrom, Criteria::GREATER_EQUAL);
+            $c->add(MlmEventCalendarPeer::DATE_END, $dateTo, Criteria::LESS_EQUAL);
+            $mlmEventCalendarDB = MlmEventCalendarPeer::doSelect($c);
+
+            foreach ($mlmEventCalendarDB as $event) {
+                $arr = array(
+                    "id" => $event->getId(),
+                    "title" => $event->getEventTitle(),
+                    "detail" => nl2br($event->getEventDetail()),
+                    "all_day" => $event->getAllDay()
+                );
+
+                if ($event->getAllDay() == "Y") {
+                    $arr["start"] = date("Y-m-d", strtotime($event->getDateStart()));
+                } else {
+                    $arr["start"] = $event->getDateStart();
+                }
+
+                if ($event->getDateEnd()) {
+                    if ($event->getAllDay() == "Y") {
+                        $arr["end"] = date("Y-m-d", strtotime($event->getDateEnd()));
+                    } else {
+                        $arr["end"] = $event->getDateEnd();
+                    }
+                }
+
+                $data[] = $arr;
+            }
+
+            echo json_encode($data);
+            return sfView::HEADER_ONLY;
+        }
+    }
     public function executeAccountSuspended()
     {
         $username = $this->getRequestParameter('q');

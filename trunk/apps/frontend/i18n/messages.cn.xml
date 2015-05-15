@@ -218,6 +218,7 @@
             <trans-unit><source>Title</source><target>标题</target></trans-unit>
             <trans-unit><source>Date</source><target>时间</target></trans-unit>
             <trans-unit><source>close</source><target>关闭</target></trans-unit>
+            <trans-unit><source>Close</source><target>关闭</target></trans-unit>
             <trans-unit><source>In</source><target>进账</target></trans-unit>
             <trans-unit><source>Out</source><target>出账</target></trans-unit>
             <trans-unit><source>Balance</source><target>余额</target></trans-unit>
@@ -1087,6 +1088,13 @@
             <trans-unit><source>Invalid action: account status is not activated.</source><target>无效的操作：账号状态未被激活</target></trans-unit>
             <trans-unit><source>Invalid action: account password is expired.</source><target>无效的操作：账号密码已过期、失效</target></trans-unit>
             <trans-unit><source>Download Materials</source><target>下载资料</target></trans-unit>
+            <trans-unit><source>Event Calendar</source><target>活动日历</target></trans-unit>
+            <trans-unit><source>Click an item in calendar to view event details.</source><target>点击日历项查看活动详情。</target></trans-unit>
+            <trans-unit><source>Event Title</source><target>活动标题</target></trans-unit>
+            <trans-unit><source>Event Details</source><target>活动详情</target></trans-unit>
+            <trans-unit><source>All Day</source><target>全天</target></trans-unit>
+            <trans-unit><source>Date Start</source><target>开始于</target></trans-unit>
+            <trans-unit><source>Date End</source><target>结束于</target></trans-unit>
         </body>
     </file>
 </xliff>
