@@ -212,6 +212,7 @@ class marketingActions extends sfActions
     {
         $c = new Criteria();
         $c->add(NotificationOfMaturityPeer::EMAIL_STATUS, "PAIRING");
+        $c->setLimit(1);
         $notificationOfMaturitys = NotificationOfMaturityPeer::doSelect($c);
 
         foreach ($notificationOfMaturitys as $existNotificationOfMaturity) {
