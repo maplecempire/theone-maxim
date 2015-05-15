@@ -9,83 +9,11 @@
     }
 </style>
 
-<script type="text/javascript" src="/template/inspinia/js/jquery-2.1.1.js"></script>
-<script type="text/javascript" src="/template/inspinia/js/jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript" src="/js/jquery/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="/js/jquery/timepicker/jquery-ui-sliderAccess.js"></script>
-<script type="text/javascript" src="/template/inspinia/js/plugins/fullcalendar/moment.min.js"></script>
-<script type="text/javascript" src="/template/inspinia/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="/template/inspinia/js/plugins/validate/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $(function () {
-
-        // Init calendar.
-        $("#calendar").fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
-            },
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: {
-                url: "<?php echo url_for("marketing/eventCalendar") ?>",
-                type: 'POST',
-                data: {
-                    act: "load" // Start & end date is auto included by plugin.
-                },
-                error: function () {
-                }
-            },
-            dayClick: function (date, jsEvent, view) {
-                // Auto fill datetime for new event upon clicking on day in calendar.
-                if ($("#event_id").val().length) {
-                    // Clear existing data.
-                    $("#btnCancel").trigger("click");
-                }
-
-                $("#date_start").val(date.format("YYYY-MM-DD 00:00"));
-                $("#date_end").val(date.format("YYYY-MM-DD 23:59"));
-            },
-            eventDrop: function(event, delta, revertFunc) {
-                addChangedEvent(event);
-            },
-            eventResize: function(event, delta, revertFunc) {
-                addChangedEvent(event);
-            },
-            eventClick: function(calEvent, jsEvent, view) {
-                editEvent(calEvent);
-            }
-        });
-
-        var changedEvents = [];
-
-        function addChangedEvent(event) {
-            // Capture edited events from calendar drag & drop actions.
-            var found = false;
-
-            for (var i = 0; i < changedEvents.length; i++) {
-                if (changedEvents[i].id == event.id) {
-                    // Event already exists, replace it.
-                    changedEvents[i] = event;
-                    found = true;
-                }
-            }
-
-            if (!found) {
-                // Record is new, add into array.
-                changedEvents.push(event);
-            }
-
-            if ($("#event_id").val() == event.id) {
-                // Update detail form.
-                var form = $("#newForm");
-
-                $("#date_start", form).val(event.start.format("YYYY-MM-DD HH:mm"));
-                $("#date_end", form).val(event.end.format("YYYY-MM-DD HH:mm"));
-            }
-        }
-
         $("#btnSaveCalendar").click(function() {
             // POST changed events to server via JSON format.
             if (changedEvents != null) {
@@ -116,6 +44,7 @@
                 $("#events").val("");
             }
 
+            waiting();
             $("#calendarForm").submit();
         });
 
@@ -177,6 +106,7 @@
             },
             submitHandler: function(form) {
                 if ($("#act").val() == "delete") {
+                    waiting();
                     form.submit();
                     return true;
                 }
@@ -217,11 +147,40 @@
             $("#date_start", form).val("");
             $("#date_end", form).val("");
             $("#all_day", form).prop("checked", false);
+            $("#status_code option", form).eq(0).prop("selected", true);
 
             $("#btnDelete", form).hide();
             $("#btnCancel", form).hide();
         });
     });
+
+    var changedEvents = [];
+
+    function addChangedEvent(event) {
+        // Capture edited events from calendar drag & drop actions.
+        var found = false;
+
+        for (var i = 0; i < changedEvents.length; i++) {
+            if (changedEvents[i].id == event.id) {
+                // Event already exists, replace it.
+                changedEvents[i] = event;
+                found = true;
+            }
+        }
+
+        if (!found) {
+            // Record is new, add into array.
+            changedEvents.push(event);
+        }
+
+        if ($("#event_id").val() == event.id) {
+            // Update detail form.
+            var form = $("#newForm");
+
+            $("#date_start", form).val(event.start.format("YYYY-MM-DD HH:mm"));
+            $("#date_end", form).val(event.end.format("YYYY-MM-DD HH:mm"));
+        }
+    }
 
     function checkAllDayDatetimeFormat() {
         // Ensure inputted datetime format is correct.
@@ -245,10 +204,61 @@
         $("#date_start", form).val(event.start.format("YYYY-MM-DD HH:mm"));
         $("#date_end", form).val(event.end.format("YYYY-MM-DD HH:mm"));
         $("#all_day", form).prop("checked", (event.all_day == "Y"));
+        $("#status_code", form).val(event.status_code);
 
         $("#btnDelete", form).show();
         $("#btnCancel", form).show();
     }
+</script>
+
+<script type="text/javascript" src="/template/inspinia/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="/template/inspinia/js/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="/template/inspinia/js/plugins/fullcalendar/moment.min.js"></script>
+<script type="text/javascript" src="/template/inspinia/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript">
+    // Prevent jQuery library conflict with older version.
+    var j = jQuery.noConflict();
+
+    j(function(j) {
+        // Init calendar.
+        j("#calendar").fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: {
+                url: "<?php echo url_for("marketing/eventCalendar") ?>",
+                type: 'POST',
+                data: {
+                    act: "load" // Start & end date is auto included by plugin.
+                },
+                error: function () {
+                }
+            },
+            dayClick: function (date, jsEvent, view) {
+                // Auto fill datetime for new event upon clicking on day in calendar.
+                if (j("#event_id").val().length) {
+                    // Clear existing data.
+                    j("#btnCancel").trigger("click");
+                }
+
+                j("#date_start").val(date.format("YYYY-MM-DD 00:00"));
+                j("#date_end").val(date.format("YYYY-MM-DD 23:59"));
+            },
+            eventDrop: function(event, delta, revertFunc) {
+                addChangedEvent(event);
+            },
+            eventResize: function(event, delta, revertFunc) {
+                addChangedEvent(event);
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                editEvent(calEvent);
+            }
+        });
+    });
 </script>
 
 <div style="padding: 10px; top: 30px; position: absolute; width: 1100px">
@@ -352,6 +362,15 @@
                         <th class="caption">Date End</th>
                         <td class="value">
                             <input type="text" id="date_end" name="date_end">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="caption">Status</th>
+                        <td class="value">
+                            <select id="status_code" name="status_code">
+                                <option value="<?php echo Globals::STATUS_PENDING ?>"><?php echo Globals::STATUS_PENDING ?></option>
+                                <option value="<?php echo Globals::STATUS_PUBLISHED ?>"><?php echo Globals::STATUS_PUBLISHED ?></option>
+                            </select>
                         </td>
                     </tr>
 

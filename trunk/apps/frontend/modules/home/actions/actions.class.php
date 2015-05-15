@@ -22,6 +22,7 @@ class homeActions extends sfActions
             $c = new Criteria();
             $c->add(MlmEventCalendarPeer::DATE_START, $dateFrom, Criteria::GREATER_EQUAL);
             $c->add(MlmEventCalendarPeer::DATE_END, $dateTo, Criteria::LESS_EQUAL);
+            $c->add(MlmEventCalendarPeer::STATUS_CODE, Globals::STATUS_PUBLISHED);
             $mlmEventCalendarDB = MlmEventCalendarPeer::doSelect($c);
 
             foreach ($mlmEventCalendarDB as $event) {

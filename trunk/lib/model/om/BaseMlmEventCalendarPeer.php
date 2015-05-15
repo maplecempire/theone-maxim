@@ -13,7 +13,7 @@ abstract class BaseMlmEventCalendarPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmEventCalendar';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,6 +44,9 @@ abstract class BaseMlmEventCalendarPeer {
 	const CREATED_ON = 'mlm_event_calendar.CREATED_ON';
 
 	
+	const STATUS_CODE = 'mlm_event_calendar.STATUS_CODE';
+
+	
 	const UPDATED_BY = 'mlm_event_calendar.UPDATED_BY';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseMlmEventCalendarPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'EventTitle', 'EventDetail', 'DateStart', 'DateEnd', 'AllDay', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmEventCalendarPeer::ID, MlmEventCalendarPeer::EVENT_TITLE, MlmEventCalendarPeer::EVENT_DETAIL, MlmEventCalendarPeer::DATE_START, MlmEventCalendarPeer::DATE_END, MlmEventCalendarPeer::ALL_DAY, MlmEventCalendarPeer::CREATED_BY, MlmEventCalendarPeer::CREATED_ON, MlmEventCalendarPeer::UPDATED_BY, MlmEventCalendarPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'event_title', 'event_detail', 'date_start', 'date_end', 'all_day', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'EventTitle', 'EventDetail', 'DateStart', 'DateEnd', 'AllDay', 'CreatedBy', 'CreatedOn', 'StatusCode', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmEventCalendarPeer::ID, MlmEventCalendarPeer::EVENT_TITLE, MlmEventCalendarPeer::EVENT_DETAIL, MlmEventCalendarPeer::DATE_START, MlmEventCalendarPeer::DATE_END, MlmEventCalendarPeer::ALL_DAY, MlmEventCalendarPeer::CREATED_BY, MlmEventCalendarPeer::CREATED_ON, MlmEventCalendarPeer::STATUS_CODE, MlmEventCalendarPeer::UPDATED_BY, MlmEventCalendarPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'event_title', 'event_detail', 'date_start', 'date_end', 'all_day', 'created_by', 'created_on', 'status_code', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EventTitle' => 1, 'EventDetail' => 2, 'DateStart' => 3, 'DateEnd' => 4, 'AllDay' => 5, 'CreatedBy' => 6, 'CreatedOn' => 7, 'UpdatedBy' => 8, 'UpdatedOn' => 9, ),
-		BasePeer::TYPE_COLNAME => array (MlmEventCalendarPeer::ID => 0, MlmEventCalendarPeer::EVENT_TITLE => 1, MlmEventCalendarPeer::EVENT_DETAIL => 2, MlmEventCalendarPeer::DATE_START => 3, MlmEventCalendarPeer::DATE_END => 4, MlmEventCalendarPeer::ALL_DAY => 5, MlmEventCalendarPeer::CREATED_BY => 6, MlmEventCalendarPeer::CREATED_ON => 7, MlmEventCalendarPeer::UPDATED_BY => 8, MlmEventCalendarPeer::UPDATED_ON => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'event_title' => 1, 'event_detail' => 2, 'date_start' => 3, 'date_end' => 4, 'all_day' => 5, 'created_by' => 6, 'created_on' => 7, 'updated_by' => 8, 'updated_on' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EventTitle' => 1, 'EventDetail' => 2, 'DateStart' => 3, 'DateEnd' => 4, 'AllDay' => 5, 'CreatedBy' => 6, 'CreatedOn' => 7, 'StatusCode' => 8, 'UpdatedBy' => 9, 'UpdatedOn' => 10, ),
+		BasePeer::TYPE_COLNAME => array (MlmEventCalendarPeer::ID => 0, MlmEventCalendarPeer::EVENT_TITLE => 1, MlmEventCalendarPeer::EVENT_DETAIL => 2, MlmEventCalendarPeer::DATE_START => 3, MlmEventCalendarPeer::DATE_END => 4, MlmEventCalendarPeer::ALL_DAY => 5, MlmEventCalendarPeer::CREATED_BY => 6, MlmEventCalendarPeer::CREATED_ON => 7, MlmEventCalendarPeer::STATUS_CODE => 8, MlmEventCalendarPeer::UPDATED_BY => 9, MlmEventCalendarPeer::UPDATED_ON => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'event_title' => 1, 'event_detail' => 2, 'date_start' => 3, 'date_end' => 4, 'all_day' => 5, 'created_by' => 6, 'created_on' => 7, 'status_code' => 8, 'updated_by' => 9, 'updated_on' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -135,6 +138,8 @@ abstract class BaseMlmEventCalendarPeer {
 		$criteria->addSelectColumn(MlmEventCalendarPeer::CREATED_BY);
 
 		$criteria->addSelectColumn(MlmEventCalendarPeer::CREATED_ON);
+
+		$criteria->addSelectColumn(MlmEventCalendarPeer::STATUS_CODE);
 
 		$criteria->addSelectColumn(MlmEventCalendarPeer::UPDATED_BY);
 

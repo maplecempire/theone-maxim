@@ -30,7 +30,8 @@ class marketingActions extends sfActions
                     "id" => $event->getId(),
                     "title" => $event->getEventTitle(),
                     "detail" => $event->getEventDetail(),
-                    "all_day" => $event->getAllDay()
+                    "all_day" => $event->getAllDay(),
+                    "status_code" => $event->getStatusCode()
                 );
 
                 if ($event->getAllDay() == "Y") {
@@ -64,6 +65,7 @@ class marketingActions extends sfActions
                     $mlmEventCalendarDB->setDateStart($this->getRequestParameter("date_start"));
                     $mlmEventCalendarDB->setDateEnd($this->getRequestParameter("date_end"));
                     $mlmEventCalendarDB->setAllDay(($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"));
+                    $mlmEventCalendarDB->setStatusCode($this->getRequestParameter("status_code"));
                     $mlmEventCalendarDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 
                     $mlmEventCalendarDB->save();
@@ -83,6 +85,7 @@ class marketingActions extends sfActions
                 $mlmEventCalendarDB->setDateStart($this->getRequestParameter("date_start"));
                 $mlmEventCalendarDB->setDateEnd($this->getRequestParameter("date_end"));
                 $mlmEventCalendarDB->setAllDay(($this->getRequestParameter("all_day") == "Y" ? "Y" : "N"));
+                $mlmEventCalendarDB->setStatusCode($this->getRequestParameter("status_code"));
                 $mlmEventCalendarDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlmEventCalendarDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
 

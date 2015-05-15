@@ -41,6 +41,10 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 
 
 	
+	protected $status_code;
+
+
+	
 	protected $updated_by;
 
 
@@ -152,6 +156,13 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getStatusCode()
+	{
+
+		return $this->status_code;
 	}
 
 	
@@ -305,6 +316,20 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setStatusCode($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->status_code !== $v) {
+			$this->status_code = $v;
+			$this->modifiedColumns[] = MlmEventCalendarPeer::STATUS_CODE;
+		}
+
+	} 
+	
 	public function setUpdatedBy($v)
 	{
 
@@ -356,15 +381,17 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 
 			$this->created_on = $rs->getTimestamp($startcol + 7, null);
 
-			$this->updated_by = $rs->getInt($startcol + 8);
+			$this->status_code = $rs->getString($startcol + 8);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 9, null);
+			$this->updated_by = $rs->getInt($startcol + 9);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 10, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 10; 
+						return $startcol + 11; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmEventCalendar object", $e);
 		}
@@ -526,9 +553,12 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 				return $this->getCreatedOn();
 				break;
 			case 8:
-				return $this->getUpdatedBy();
+				return $this->getStatusCode();
 				break;
 			case 9:
+				return $this->getUpdatedBy();
+				break;
+			case 10:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -549,8 +579,9 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 			$keys[5] => $this->getAllDay(),
 			$keys[6] => $this->getCreatedBy(),
 			$keys[7] => $this->getCreatedOn(),
-			$keys[8] => $this->getUpdatedBy(),
-			$keys[9] => $this->getUpdatedOn(),
+			$keys[8] => $this->getStatusCode(),
+			$keys[9] => $this->getUpdatedBy(),
+			$keys[10] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -591,9 +622,12 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 				$this->setCreatedOn($value);
 				break;
 			case 8:
-				$this->setUpdatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 9:
+				$this->setUpdatedBy($value);
+				break;
+			case 10:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -611,8 +645,9 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setAllDay($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCreatedBy($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCreatedOn($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setUpdatedBy($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUpdatedOn($arr[$keys[9]]);
+		if (array_key_exists($keys[8], $arr)) $this->setStatusCode($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setUpdatedOn($arr[$keys[10]]);
 	}
 
 	
@@ -628,6 +663,7 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmEventCalendarPeer::ALL_DAY)) $criteria->add(MlmEventCalendarPeer::ALL_DAY, $this->all_day);
 		if ($this->isColumnModified(MlmEventCalendarPeer::CREATED_BY)) $criteria->add(MlmEventCalendarPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmEventCalendarPeer::CREATED_ON)) $criteria->add(MlmEventCalendarPeer::CREATED_ON, $this->created_on);
+		if ($this->isColumnModified(MlmEventCalendarPeer::STATUS_CODE)) $criteria->add(MlmEventCalendarPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(MlmEventCalendarPeer::UPDATED_BY)) $criteria->add(MlmEventCalendarPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(MlmEventCalendarPeer::UPDATED_ON)) $criteria->add(MlmEventCalendarPeer::UPDATED_ON, $this->updated_on);
 
@@ -673,6 +709,8 @@ abstract class BaseMlmEventCalendar extends BaseObject  implements Persistent {
 		$copyObj->setCreatedBy($this->created_by);
 
 		$copyObj->setCreatedOn($this->created_on);
+
+		$copyObj->setStatusCode($this->status_code);
 
 		$copyObj->setUpdatedBy($this->updated_by);
 
