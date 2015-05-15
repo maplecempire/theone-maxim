@@ -240,6 +240,7 @@ class marketingActions extends sfActions
             $todays_date = $dateUtil->formatDate("Y-m-d", $mlmRoiDividendDB->getDividendDate());
             $today = strtotime($todays_date);
             $expiration_date = strtotime($exp_date);
+            print_r("<br>".$sponsoredDistributorCode);
             //if ()
             if ($expiration_date > $today) {
 
@@ -324,6 +325,7 @@ class marketingActions extends sfActions
             $existNotificationOfMaturity->save();
         }
 
+        print_r("<br>Done");
         return sfView::NONE;
     }
     public function executeFindLeader()
