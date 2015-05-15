@@ -320,6 +320,8 @@ class marketingActions extends sfActions
                 $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
                 $level++;
             }
+            $existNotificationOfMaturity->setEmailStatus("COMPLETE");
+            $existNotificationOfMaturity->save();
         }
 
         return sfView::NONE;
