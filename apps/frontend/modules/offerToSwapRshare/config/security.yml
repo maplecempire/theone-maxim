@@ -1,0 +1,2 @@
+all:
+  is_secure:  on        # off is the default value anyway
