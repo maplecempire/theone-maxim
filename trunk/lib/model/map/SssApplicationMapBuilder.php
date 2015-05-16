@@ -54,6 +54,8 @@ class SssApplicationMapBuilder {
 
 		$tMap->addColumn('TOTAL_SHARE_CONVERTED', 'TotalShareConverted', 'double', CreoleTypes::DECIMAL, false, 12);
 
+		$tMap->addColumn('SIGNATURE', 'Signature', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);

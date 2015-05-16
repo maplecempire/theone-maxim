@@ -53,6 +53,10 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 
 	
+	protected $signature;
+
+
+	
 	protected $remarks;
 
 
@@ -156,6 +160,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 	{
 
 		return $this->total_share_converted;
+	}
+
+	
+	public function getSignature()
+	{
+
+		return $this->signature;
 	}
 
 	
@@ -361,6 +372,20 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setSignature($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->signature !== $v) {
+			$this->signature = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::SIGNATURE;
+		}
+
+	} 
+	
 	public function setRemarks($v)
 	{
 
@@ -477,23 +502,25 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 			$this->total_share_converted = $rs->getFloat($startcol + 10);
 
-			$this->remarks = $rs->getString($startcol + 11);
+			$this->signature = $rs->getString($startcol + 11);
 
-			$this->status_code = $rs->getString($startcol + 12);
+			$this->remarks = $rs->getString($startcol + 12);
 
-			$this->created_by = $rs->getInt($startcol + 13);
+			$this->status_code = $rs->getString($startcol + 13);
 
-			$this->created_on = $rs->getTimestamp($startcol + 14, null);
+			$this->created_by = $rs->getInt($startcol + 14);
 
-			$this->updated_by = $rs->getInt($startcol + 15);
+			$this->created_on = $rs->getTimestamp($startcol + 15, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 16, null);
+			$this->updated_by = $rs->getInt($startcol + 16);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 17, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 17; 
+						return $startcol + 18; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating SssApplication object", $e);
 		}
@@ -664,21 +691,24 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				return $this->getTotalShareConverted();
 				break;
 			case 11:
-				return $this->getRemarks();
+				return $this->getSignature();
 				break;
 			case 12:
-				return $this->getStatusCode();
+				return $this->getRemarks();
 				break;
 			case 13:
-				return $this->getCreatedBy();
+				return $this->getStatusCode();
 				break;
 			case 14:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 15:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 16:
+				return $this->getUpdatedBy();
+				break;
+			case 17:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -702,12 +732,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			$keys[8] => $this->getRoiPercentage(),
 			$keys[9] => $this->getShareValue(),
 			$keys[10] => $this->getTotalShareConverted(),
-			$keys[11] => $this->getRemarks(),
-			$keys[12] => $this->getStatusCode(),
-			$keys[13] => $this->getCreatedBy(),
-			$keys[14] => $this->getCreatedOn(),
-			$keys[15] => $this->getUpdatedBy(),
-			$keys[16] => $this->getUpdatedOn(),
+			$keys[11] => $this->getSignature(),
+			$keys[12] => $this->getRemarks(),
+			$keys[13] => $this->getStatusCode(),
+			$keys[14] => $this->getCreatedBy(),
+			$keys[15] => $this->getCreatedOn(),
+			$keys[16] => $this->getUpdatedBy(),
+			$keys[17] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -757,21 +788,24 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				$this->setTotalShareConverted($value);
 				break;
 			case 11:
-				$this->setRemarks($value);
+				$this->setSignature($value);
 				break;
 			case 12:
-				$this->setStatusCode($value);
+				$this->setRemarks($value);
 				break;
 			case 13:
-				$this->setCreatedBy($value);
+				$this->setStatusCode($value);
 				break;
 			case 14:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 15:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 16:
+				$this->setUpdatedBy($value);
+				break;
+			case 17:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -792,12 +826,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setRoiPercentage($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setShareValue($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setTotalShareConverted($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setRemarks($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setStatusCode($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCreatedBy($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setCreatedOn($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUpdatedBy($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setUpdatedOn($arr[$keys[16]]);
+		if (array_key_exists($keys[11], $arr)) $this->setSignature($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setRemarks($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setStatusCode($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCreatedBy($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCreatedOn($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setUpdatedBy($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedOn($arr[$keys[17]]);
 	}
 
 	
@@ -816,6 +851,7 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(SssApplicationPeer::ROI_PERCENTAGE)) $criteria->add(SssApplicationPeer::ROI_PERCENTAGE, $this->roi_percentage);
 		if ($this->isColumnModified(SssApplicationPeer::SHARE_VALUE)) $criteria->add(SssApplicationPeer::SHARE_VALUE, $this->share_value);
 		if ($this->isColumnModified(SssApplicationPeer::TOTAL_SHARE_CONVERTED)) $criteria->add(SssApplicationPeer::TOTAL_SHARE_CONVERTED, $this->total_share_converted);
+		if ($this->isColumnModified(SssApplicationPeer::SIGNATURE)) $criteria->add(SssApplicationPeer::SIGNATURE, $this->signature);
 		if ($this->isColumnModified(SssApplicationPeer::REMARKS)) $criteria->add(SssApplicationPeer::REMARKS, $this->remarks);
 		if ($this->isColumnModified(SssApplicationPeer::STATUS_CODE)) $criteria->add(SssApplicationPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_BY)) $criteria->add(SssApplicationPeer::CREATED_BY, $this->created_by);
@@ -871,6 +907,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		$copyObj->setShareValue($this->share_value);
 
 		$copyObj->setTotalShareConverted($this->total_share_converted);
+
+		$copyObj->setSignature($this->signature);
 
 		$copyObj->setRemarks($this->remarks);
 
