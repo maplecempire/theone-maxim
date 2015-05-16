@@ -205,15 +205,13 @@ class offerToSwapRshareActions extends sfActions
                 $tbl_account_ledger->save();
             }
 
-            $query = "UPDATE mlm_roi_dividend SET status_code = 'SSS' WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+            $query = "UPDATE mlm_roi_dividend SET status_code = 'SSS', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
             $query = $query . " AND mt4_user_name = ?";
-            $query = $query . " AND updated_on = ?";
-            $query = $query . " AND updated_by = ?";
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
-            $statement->set(1, $mt4UserName);
-            $statement->set(2, date('Y-m-d H:i:s'));
-            $statement->set(3, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $statement->set(1, date('Y-m-d H:i:s'));
+            $statement->set(2, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $statement->set(3, $mt4UserName);
             $statement->executeUpdate();
 
             $con->commit();
