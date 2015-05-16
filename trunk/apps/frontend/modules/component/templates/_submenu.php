@@ -410,7 +410,7 @@ if (date("d") > 30 && $close == true) {
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('Offer to Swap R-Share'); ?></li>
-        <li style="display: none;" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare"><span><?php echo __('APPLICATION FOR DISPENSATION 18 month investment term'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
