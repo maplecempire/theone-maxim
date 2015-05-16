@@ -168,6 +168,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setShareValue(0.8);
             $sss_application->setTotalShareConverted($totalRshare);
             $sss_application->setRemarks("");
+            $sss_application->setSignature($this->signature);
             $sss_application->setStatusCode("PENDING");
             $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
