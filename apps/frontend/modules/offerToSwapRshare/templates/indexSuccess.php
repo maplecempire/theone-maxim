@@ -3,6 +3,164 @@ include('scripts.php');
 $culture = $sf_user->getCulture();
 ?>
 
+<style type="text/css">
+.text_green {
+    color: #ffff00;
+    font-size: 14px;
+}
+.text_green {
+    color: #009900;
+    font-size: 14px;
+    font-weight: bold;
+}
+.text_red {
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: bold;
+}
+.text_blue {
+    color: #003399;
+    font-weight: bold;
+}
+.text_bold {
+    color: #000000;
+    font-weight: bold;
+}
+</style>
+
+<script type="text/javascript">
+$(function() {
+    $("#sssForm").validate({
+        messages : {
+            transactionPassword: {
+                remote: "<?php echo __("Security Password is not valid")?>"
+            }
+        },
+        rules : {
+            "mt4Id" : {
+                required : true
+            },
+            "txtSignature" : {
+                required : true
+            },
+            "transactionPassword" : {
+                required : true,
+                remote: "/member/verifyTransactionPassword"
+            }
+        },
+        submitHandler: function(form) {
+            var sure = confirm("<?php echo __('Are you sure want to proceed Super Share Swap?') ?>");
+            if (sure) {
+                waiting();
+
+                var cp2 = $('#convertedCp2').autoNumericGet();
+                $("#convertedCp2").val(cp2);
+
+                var cp3= $('#convertedCp3').autoNumericGet();
+                $("#convertedCp3").val(cp3);
+                form.submit();
+            }
+        },
+        success: function(label) {
+            //label.addClass("valid").text("Valid captcha!")
+        }
+    });
+
+    $("#link_moreExample").click(function(event){
+        event.preventDefault();
+        $(this).hide();
+        $("#divExample").show(500);
+    });
+
+    $('#convertedCp2').autoNumeric({
+        mDec: 0
+    }).keyup(function(){
+        calculateRshare();
+    });
+
+    $('#convertedCp3').autoNumeric({
+        mDec: 0
+    }).keyup(function(){
+        calculateRshare();
+    }).trigger("keyup");
+
+    $("#mt4Id").change(function(event){
+        event.preventDefault();
+        $(".indicator").show();
+        $.ajax({
+            type : 'POST',
+            url : "<?php echo url_for('offerToSwapRshare/enquiryMt4Balance') ?>",
+            dataType : 'json',
+            cache: false,
+            data: {
+                mt4Id : $('#mt4Id').val()
+            },
+            success : function(data) {
+                if (data.error) {
+                    alert(data.errorMsg);
+                } else {
+                    $(".indicator").hide();
+
+                    $("#textFormattedDecimal").autoNumericSet(data.mt4Balance);
+                    var mt4Balance = $('#textFormattedDecimal').val();
+                    $("#td_mt4Balance").html(mt4Balance);
+                    $("#txtMt4Balance").val(mt4Balance);
+
+                    $("#textFormattedDecimal").autoNumericSet(data.remainingRoiAmount);
+                    var $remainingRoiAmount = $('#textFormattedDecimal').val();
+                    $("#txtRemainingRoiAmount").val($remainingRoiAmount);
+                    $("#roiRemainingMonth").val(data.roiRemainingMonth);
+                    $("#roiPercentage").val(data.roiPercentage);
+
+                    calculateRshare();
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Server connection error.");
+            }
+        });
+    });
+});
+
+function calculateRshare() {
+    var mt4Balance = parseFloat($('#txtMt4Balance').autoNumericGet());
+    var remainingRoiAmount = parseFloat($('#txtRemainingRoiAmount').autoNumericGet());
+    var convertedCp2 = parseFloat($('#convertedCp2').autoNumericGet());
+    var convertedCp3 = parseFloat($('#convertedCp3').autoNumericGet());
+    var roiRemainingMonth = $('#roiRemainingMonth').val();
+    var roiPercentage = $('#roiPercentage').val();
+
+    var totalAmountConverted = mt4Balance + (mt4Balance * roiRemainingMonth * roiPercentage / 100);
+    var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
+    totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
+
+    var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
+    totalRshare = Math.round(totalRshare);
+
+    var spanFormula = "$0K + ($0K x 0 months x 8%) = $0";
+    var spanFormulaCp2 = "CP2 (Optional) = $0";
+    var spanFormulaCp3 = "CP3 (Optional) = $0";
+    var spanFormulaTotalAmount = "is $0 / 0.80";
+    var spanFormulaRshare = "= 0 R-Shares";
+
+    if (totalRshare >= 1) {
+        spanFormula = "$" + mt4Balance + "K + ($" + mt4Balance + "K x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
+        spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
+        spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
+        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
+        spanFormulaRshare = "= " + totalRshare + " R-Shares";
+
+        $("#spanFormula").html(spanFormula);
+        $("#spanFormulaCp2").html(spanFormulaCp2);
+        $("#spanFormulaCp3").html(spanFormulaCp3);
+        $("#spanFormulaTotalAmount").html(spanFormulaTotalAmount);
+        $("#spanFormulaRshare").html(spanFormulaRshare);
+    }
+}
+
+</script>
+
+<input type="hidden" id="textFormattedDecimal">
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
@@ -42,6 +200,7 @@ $culture = $sf_user->getCulture();
 </tr>
 <tr>
     <td>
+        <form id="sssForm" method="post" action="/offerToSwapRshare/confirmation">
         <table cellpadding="3" cellspacing="5">
             <tbody>
             <tr>
@@ -52,19 +211,19 @@ $culture = $sf_user->getCulture();
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        <span class="txt_title"><?php echo __('1. Share swap option offered to Maxim members ') ?></span>
+                        <span class="txt_title">Special R-Share Swap Promo </span>
                     <?php
                     } else if ($culture == "kr") {
                     ?>
-                        <span class="txt_title"><?php echo __('1. Share swap option offered to Maxim members ') ?></span>
+                        <span class="txt_title">Special R-Share Swap Promo </span>
                     <?php
                     } else if ($culture == "jp") {
                     ?>
-                        <span class="txt_title"><?php echo __('1. Share swap option offered to Maxim members ') ?></span>
+                        <span class="txt_title">Special R-Share Swap Promo </span>
                     <?php
                     } else {
                     ?>
-                        <span class="txt_title"><?php echo __('1. Share swap option offered to Maxim members ') ?></span>
+                        <span class="txt_title">Special R-Share Swap Promo </span>
                     <?php
                     }
                      ?>
@@ -72,391 +231,573 @@ $culture = $sf_user->getCulture();
             </tr>
             <tr>
                 <td>
+                    <br>
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        As a result of popular requests from members, we will be offering the following options to Maxim members who have completed a minimum of 12 months under the Maxim Investment Package. This offers is also open to members who are going to reach 18 months maturity soon:
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
                     <?php
                     } else if ($culture == "kr") {
                     ?>
-                        As a result of popular requests from members, we will be offering the following options to Maxim members who have completed a minimum of 12 months under the Maxim Investment Package. This offers is also open to members who are going to reach 18 months maturity soon:
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
                     <?php
                     } else if ($culture == "jp") {
                     ?>
-                        As a result of popular requests from members, we will be offering the following options to Maxim members who have completed a minimum of 12 months under the Maxim Investment Package. This offers is also open to members who are going to reach 18 months maturity soon:
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
                     <?php
                     } else {
                     ?>
-                        As a result of popular requests from members, we will be offering the following options to Maxim members who have completed a minimum of 12 months under the Maxim Investment Package. This offers is also open to members who are going to reach 18 months maturity soon:
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
                     <?php
                     }
                     ?>
-                    <ol style="padding-left: 20px;">
-                        <?php if ($culture == "cn") { ?>
-                        <li>You may convert your investment capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this offer is open only during the period from 12 to 31 May 2015.</li>
-                        <li>Once you opt to swap your Maxim investment to R-Shares, you may continue to promote Maxim business and you will still be entitled to earn the bonuses in the usual manner as offered by our referral programs in Maxim ie. Direct Referral Bonus and Development Bonus. You will enjoy this benefit for a further 18 months from your original date of maturity. </li>
-                        <li>Upon conversion to R-Share, your up-line will be able to enjoy a one time development bonus in Maxim.</li>
-                        <li>If you do not already have your AGL account, when you opt for share swap, your R-shares will be automatically credited into an AGL S4 wallet and you may access them with your existing Maxim user ID and password. However if you wish to do AGL business, you will have to open your own AGL account.</li>
-                        <?php } else if ($culture == "kr") { ?>
-                        <li>You may convert your investment capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this offer is open only during the period from 12 to 31 May 2015.</li>
-                        <li>Once you opt to swap your Maxim investment to R-Shares, you may continue to promote Maxim business and you will still be entitled to earn the bonuses in the usual manner as offered by our referral programs in Maxim ie. Direct Referral Bonus and Development Bonus. You will enjoy this benefit for a further 18 months from your original date of maturity. </li>
-                        <li>Upon conversion to R-Share, your up-line will be able to enjoy a one time development bonus in Maxim.</li>
-                        <li>If you do not already have your AGL account, when you opt for share swap, your R-shares will be automatically credited into an AGL S4 wallet and you may access them with your existing Maxim user ID and password. However if you wish to do AGL business, you will have to open your own AGL account.</li>
-                        <?php } else if ($culture == "jp") { ?>
-                        <li>You may convert your investment capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this offer is open only during the period from 12 to 31 May 2015.</li>
-                        <li>Once you opt to swap your Maxim investment to R-Shares, you may continue to promote Maxim business and you will still be entitled to earn the bonuses in the usual manner as offered by our referral programs in Maxim ie. Direct Referral Bonus and Development Bonus. You will enjoy this benefit for a further 18 months from your original date of maturity. </li>
-                        <li>Upon conversion to R-Share, your up-line will be able to enjoy a one time development bonus in Maxim.</li>
-                        <li>If you do not already have your AGL account, when you opt for share swap, your R-shares will be automatically credited into an AGL S4 wallet and you may access them with your existing Maxim user ID and password. However if you wish to do AGL business, you will have to open your own AGL account.</li>
-                        <?php } else { ?>
-                        <li>You may convert your investment capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this offer is open only during the period from 12 to 31 May 2015.</li>
-                        <li>Once you opt to swap your Maxim investment to R-Shares, you may continue to promote Maxim business and you will still be entitled to earn the bonuses in the usual manner as offered by our referral programs in Maxim ie. Direct Referral Bonus and Development Bonus. You will enjoy this benefit for a further 18 months from your original date of maturity. </li>
-                        <li>Upon conversion to R-Share, your up-line will be able to enjoy a one time development bonus in Maxim.</li>
-                        <li>If you do not already have your AGL account, when you opt for share swap, your R-shares will be automatically credited into an AGL S4 wallet and you may access them with your existing Maxim user ID and password. However if you wish to do AGL business, you will have to open your own AGL account.</li>
-                        <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td>
 
+                <table>
+                    <tr>
+                        <td class="tbl_sprt_bottom">
+<?php
+                        if ($culture == "cn") {
+    ?>
+    <span class="txt_title">Example 1: VVIP $30K with 6 months PR left</span>
+    <?php
+
+} else if ($culture == "kr") {
+    ?>
+    <span class="txt_title">Example 1: VVIP $30K with 6 months PR left</span>
+    <?php
+
+} else if ($culture == "jp") {
+    ?>
+    <span class="txt_title">Example 1: VVIP $30K with 6 months PR left</span>
+    <?php
+
+} else {
+    ?>
+    <span class="txt_title">Example 1: VVIP $30K with 6 months PR left</span>
+    <?php
+
+}
+    ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+<?php
+                        if ($culture == "cn") {
+    ?>
+    <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
+    <br>
+    <br>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <?php
+
+} else if ($culture == "kr") {
+    ?>
+    <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
+    <br>
+    <br>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <?php
+
+} else if ($culture == "jp") {
+    ?>
+    <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
+    <br>
+    <br>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <?php
+
+} else {
+    ?>
+    <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
+    <br>
+    <br>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <?php
+
+}
+    ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" id="link_moreExample">More Example</a></td>
+                    </tr>
+                </table>
+
+                    <div id="divExample" style="display: none;">
+                        <table cellpadding="3" cellspacing="5">
+                <tbody>
+                <tr>
+                    <td class="tbl_sprt_bottom">
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="txt_title">Example 2: VVIP $30K with 6 months PR left but with $10k MT4 Balance</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="txt_title">Example 2: VVIP $30K with 6 months PR left but with $10k MT4 Balance</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="txt_title">Example 2: VVIP $30K with 6 months PR left but with $10k MT4 Balance</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="txt_title">Example 2: VVIP $30K with 6 months PR left but with $10k MT4 Balance</span>
+                        <?php
+                        }
+                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td class="tbl_sprt_bottom">
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="txt_title">Example 3: 	VVIP $30K with 3 months PR left</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="txt_title">Example 3: 	VVIP $30K with 3 months PR left</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="txt_title">Example 3: 	VVIP $30K with 3 months PR left</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="txt_title">Example 3: 	VVIP $30K with 3 months PR left</span>
+                        <?php
+                        }
+                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td class="tbl_sprt_bottom">
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="txt_title">Example 4: VVIP $30K with 3 months PR left but with 10K MT4 balance</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="txt_title">Example 4: VVIP $30K with 3 months PR left but with 10K MT4 balance</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="txt_title">Example 4: VVIP $30K with 3 months PR left but with 10K MT4 balance</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="txt_title">Example 4: VVIP $30K with 3 months PR left but with 10K MT4 balance</span>
+                        <?php
+                        }
+                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
+                            <br>
+                            <br>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td class="tbl_sprt_bottom">
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="txt_title">Example 5: VVIP $30K Maturity</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="txt_title">Example 5: VVIP $30K Maturity</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="txt_title">Example 5: VVIP $30K Maturity</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="txt_title">Example 5: VVIP $30K Maturity</span>
+                        <?php
+                        }
+                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td class="tbl_sprt_bottom">
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="txt_title">Example 6: CP2 Account or / Plus CP3 Account</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="txt_title">Example 6: CP2 Account or / Plus CP3 Account</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="txt_title">Example 6: CP2 Account or / Plus CP3 Account</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="txt_title">Example 6: CP2 Account or / Plus CP3 Account</span>
+                        <?php
+                        }
+                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is </span> <span class="text_green">Optional</span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is </span> <span class="text_green">Optional</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is </span> <span class="text_green">Optional</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="text_green">SSS</span> <span class="text_red">is </span> <span class="text_green">Optional</span>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+
+                </tbody>
+                </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td class="tbl_sprt_bottom">
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: bold; font-size: 16px;">TO: The Maxim Trader Legal Office (LACD).</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="3" cellspacing="3">
+                        <input type="hidden" id="roiRemainingMonth" name="roiRemainingMonth" value="<?php echo $roiRemainingMonth;?>">
+                        <input type="hidden" id="roiPercentage" name="roiPercentage" value="<?php echo $roiPercentage;?>">
+                        <tr><td class="text_bold" style="width: 150px;">User ID</td><td>:</td><td><?php echo $distributorDB->getDistributorCode();?></td></tr>
+                        <tr><td class="text_bold">Member</td><td>:</td><td><?php echo $distributorDB->getFullName();?></td></tr>
+                        <tr><td class="text_bold">Members Home address</td><td>:</td><td><?php echo $distributorDB->getAddress();?></td></tr>
+                        <tr><td class="text_bold"></td><td></td><td><?php echo $distributorDB->getAddress2();?></td></tr>
+                        <tr><td class="text_bold"></td><td></td><td><?php echo $distributorDB->getPostcode(). " ". $distributorDB->getCity(). " ". $distributorDB->getState();?></td></tr>
+                        <tr><td class="text_bold">Country</td><td>:</td><td><?php echo $distributorDB->getCountry();?></td></tr>
+                        <tr><td class="text_bold"><br></td></tr>
+                        <tr><td class="text_bold">Members current email</td><td>:</td><td><?php echo $distributorDB->getEmail();?></td></tr>
+                        <tr><td class="text_bold">Mobile</td><td>:</td><td><?php echo $distributorDB->getContact();?></td></tr>
+                        <tr><td class="text_bold"><br></td></tr>
+                        <tr><td class="text_bold">MT4 ID</td><td>:</td><td>
+                            <select name="mt4Id" id="mt4Id">
+                                <?php
+                                if (count($mt4Ids) > 0) {
+                                    echo "<option value=''>Please select MT4 ID</option>";
+                                    foreach ($mt4Ids as $mt4Id) {
+                                    ?>
+                                    <option value="<?php echo $mt4Id?>"><?php echo $mt4Id;?></option>
+                                    <?php
+                                    }
+                                } else {
+                                ?>
+                                    <option value="">(empty)</option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </td></tr>
+                        <tr><td class="text_bold">MT4 Balance<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td id="td_mt4Balance"><?php echo number_format($mt4Balance,0);?></td></tr>
+                        <tr><td class="text_bold">Contract date<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td><?php echo $distributorDB->getActiveDateTime();?></td></tr>
+                        <tr><td class="text_bold">CP2</td><td>:</td><td><?php echo number_format($cp2Balance,0);?></td></tr>
+                        <tr><td class="text_bold">CP3</td><td>:</td><td><?php echo number_format($cp3Balance,0);?></td></tr>
+                    </table>
+                    <br>
+                    <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
+                    <br>
+                    <br>
+                    <br>
+                    <ol>
+                        <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 12 months, of my 18 months term so far.</li>
+                        <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 31st May 2015. Any application outside this  period is auto void.</li>
+                        <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,0);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,0);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
+                        <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,0);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,0);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
                     </ol>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">2. Members who have just renewed their contract</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">2. Members who have just renewed their contract</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">2. Members who have just renewed their contract</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">2. Members who have just renewed their contract</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        Members who have just renewed their contract for another 18 months will have to wait for a minimum of 12 months before they can qualify for share swap option.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        Members who have just renewed their contract for another 18 months will have to wait for a minimum of 12 months before they can qualify for share swap option.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        Members who have just renewed their contract for another 18 months will have to wait for a minimum of 12 months before they can qualify for share swap option.
-                    <?php
-                    } else {
-                    ?>
-                        Members who have just renewed their contract for another 18 months will have to wait for a minimum of 12 months before they can qualify for share swap option.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">3. Other options upon reaching maturity</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">3. Other options upon reaching maturity</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">3. Other options upon reaching maturity</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">3. Other options upon reaching maturity</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        If you do not want to select the above promotional offer R-Share swap, once your account reaches maturity, you will not be entitled to earn from our referral and investment programs. We therefore recommend that you go into the website and select the ‘renew’ option. Once you renew, you will be entitled to earn the bonuses offered by our referral programs and earn monthly performance returns.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        If you do not want to select the above promotional offer R-Share swap, once your account reaches maturity, you will not be entitled to earn from our referral and investment programs. We therefore recommend that you go into the website and select the ‘renew’ option. Once you renew, you will be entitled to earn the bonuses offered by our referral programs and earn monthly performance returns.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        If you do not want to select the above promotional offer R-Share swap, once your account reaches maturity, you will not be entitled to earn from our referral and investment programs. We therefore recommend that you go into the website and select the ‘renew’ option. Once you renew, you will be entitled to earn the bonuses offered by our referral programs and earn monthly performance returns.
-                    <?php
-                    } else {
-                    ?>
-                        If you do not want to select the above promotional offer R-Share swap, once your account reaches maturity, you will not be entitled to earn from our referral and investment programs. We therefore recommend that you go into the website and select the ‘renew’ option. Once you renew, you will be entitled to earn the bonuses offered by our referral programs and earn monthly performance returns.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">4. Shortfall in the MT4 account</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">4. Shortfall in the MT4 account</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">4. Shortfall in the MT4 account</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">4. Shortfall in the MT4 account</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        If you decide to renew your existing Maxim package and if your balance in the MT4 has fallen below your initial capital investment amount, we invite you to top-up to its original sum so that you can continue to be entitled to bonuses offered by our referral programs and enjoy monthly performance returns. If you do not top-up by the maturity date, your account will be put on hold until you fully top-up to its original sum. Once topped up, you will be entitled to our referral program and earn monthly performance returns from the date of top up.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        If you decide to renew your existing Maxim package and if your balance in the MT4 has fallen below your initial capital investment amount, we invite you to top-up to its original sum so that you can continue to be entitled to bonuses offered by our referral programs and enjoy monthly performance returns. If you do not top-up by the maturity date, your account will be put on hold until you fully top-up to its original sum. Once topped up, you will be entitled to our referral program and earn monthly performance returns from the date of top up.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        If you decide to renew your existing Maxim package and if your balance in the MT4 has fallen below your initial capital investment amount, we invite you to top-up to its original sum so that you can continue to be entitled to bonuses offered by our referral programs and enjoy monthly performance returns. If you do not top-up by the maturity date, your account will be put on hold until you fully top-up to its original sum. Once topped up, you will be entitled to our referral program and earn monthly performance returns from the date of top up.
-                    <?php
-                    } else {
-                    ?>
-                        If you decide to renew your existing Maxim package and if your balance in the MT4 has fallen below your initial capital investment amount, we invite you to top-up to its original sum so that you can continue to be entitled to bonuses offered by our referral programs and enjoy monthly performance returns. If you do not top-up by the maturity date, your account will be put on hold until you fully top-up to its original sum. Once topped up, you will be entitled to our referral program and earn monthly performance returns from the date of top up.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">5. Non-renewal of contract</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">5. Non-renewal of contract</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">5. Non-renewal of contract</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">5. Non-renewal of contract</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        For any reason, if you wish not to renew your contract, please go to the website and select the ‘non-renewal’ option. You are also required to complete the ‘non-renewal of contract’ form and email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> Your FINAL MT4 BALANCE (Initial Capital Investment which is represented by the balance in the MT4 account as of the maturity date) will then be credited into your CP3 account within 14 days after maturity date. You may then withdraw your CP2 and CP3 balances in the usual manner at the next withdrawal cycle. Once the payment is made, your account will be closed.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        For any reason, if you wish not to renew your contract, please go to the website and select the ‘non-renewal’ option. You are also required to complete the ‘non-renewal of contract’ form and email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> Your FINAL MT4 BALANCE (Initial Capital Investment which is represented by the balance in the MT4 account as of the maturity date) will then be credited into your CP3 account within 14 days after maturity date. You may then withdraw your CP2 and CP3 balances in the usual manner at the next withdrawal cycle. Once the payment is made, your account will be closed.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        For any reason, if you wish not to renew your contract, please go to the website and select the ‘non-renewal’ option. You are also required to complete the ‘non-renewal of contract’ form and email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> Your FINAL MT4 BALANCE (Initial Capital Investment which is represented by the balance in the MT4 account as of the maturity date) will then be credited into your CP3 account within 14 days after maturity date. You may then withdraw your CP2 and CP3 balances in the usual manner at the next withdrawal cycle. Once the payment is made, your account will be closed.
-                    <?php
-                    } else {
-                    ?>
-                        For any reason, if you wish not to renew your contract, please go to the website and select the ‘non-renewal’ option. You are also required to complete the ‘non-renewal of contract’ form and email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> Your FINAL MT4 BALANCE (Initial Capital Investment which is represented by the balance in the MT4 account as of the maturity date) will then be credited into your CP3 account within 14 days after maturity date. You may then withdraw your CP2 and CP3 balances in the usual manner at the next withdrawal cycle. Once the payment is made, your account will be closed.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">6. Six months exclusion</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">6. Six months exclusion</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">6. Six months exclusion</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">6. Six months exclusion</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        Please note if you decide not to renew your contract, you are not allowed to re-join Maximtrader for a period of 6 months after the maturity date.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        Please note if you decide not to renew your contract, you are not allowed to re-join Maximtrader for a period of 6 months after the maturity date.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        Please note if you decide not to renew your contract, you are not allowed to re-join Maximtrader for a period of 6 months after the maturity date.
-                    <?php
-                    } else {
-                    ?>
-                        Please note if you decide not to renew your contract, you are not allowed to re-join Maximtrader for a period of 6 months after the maturity date.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="tbl_sprt_bottom">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="txt_title">7. Members with the same user ID</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="txt_title">7. Members with the same user ID</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="txt_title">7. Members with the same user ID</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="txt_title">7. Members with the same user ID</span>
-                    <?php
-                    }
-                     ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        Please note that Maxim members who have more than one package under the same user ID will need to renew all the packages when they fall due in order to be entitled to bonuses offered by Maxim’s referral programs and enjoy monthly performance returns. If anyone one of the packages are not renewed, all the remaining packages under the same user ID will cease to earn any referral and development bonus.
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        Please note that Maxim members who have more than one package under the same user ID will need to renew all the packages when they fall due in order to be entitled to bonuses offered by Maxim’s referral programs and enjoy monthly performance returns. If anyone one of the packages are not renewed, all the remaining packages under the same user ID will cease to earn any referral and development bonus.
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        Please note that Maxim members who have more than one package under the same user ID will need to renew all the packages when they fall due in order to be entitled to bonuses offered by Maxim’s referral programs and enjoy monthly performance returns. If anyone one of the packages are not renewed, all the remaining packages under the same user ID will cease to earn any referral and development bonus.
-                    <?php
-                    } else {
-                    ?>
-                        Please note that Maxim members who have more than one package under the same user ID will need to renew all the packages when they fall due in order to be entitled to bonuses offered by Maxim’s referral programs and enjoy monthly performance returns. If anyone one of the packages are not renewed, all the remaining packages under the same user ID will cease to earn any referral and development bonus.
-                    <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td class="">
-                    <?php
-                    if ($culture == "cn") {
-                    ?>
-                        <span class="">Please email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> if you need further clarifications.</span>
-                    <?php
-                    } else if ($culture == "kr") {
-                    ?>
-                        <span class="">Please email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> if you need further clarifications.</span>
-                    <?php
-                    } else if ($culture == "jp") {
-                    ?>
-                        <span class="">Please email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> if you need further clarifications.</span>
-                    <?php
-                    } else {
-                    ?>
-                        <span class="">Please email to <a href="mailto:maturity@maximtrader.com" target="_blank" style="color: blue">maturity@maximtrader.com</a> if you need further clarifications.</span>
-                    <?php
-                    }
-                     ?>
+                    <br>
+                    <br>
+                    <span class="text_red" id="spanFormula">$0K + ($0K x 0 months x 8%) = $0</span>
+                    <br>
+                    <br>
+                    <span class="text_red" id="spanFormulaCp2">CP2 (Optional) = $0</span>
+                    <br>
+                    <span class="text_red" id="spanFormulaCp3">CP3 (Optional) = $0</span>
+                    <br>
+                    <br>
+                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 R-Shares</span>
+                    <br>
+                    <br>
                 </td>
             </tr>
 
             <tr>
-                <td><br></td>
+                <td>
+                    <table cellpadding="3" cellspacing="3">
+                        <tr>
+                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of May 2015 - SIGN</td>
+                            <td>:</td>
+                            <td><input type="text" name="txtSignature" id="txtSignature" value="" size="30"></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Security Password') ?></td>
+                            <td>:</td>
+                            <td><input name="transactionPassword" type="password" id="transactionPassword" size="30"/></td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
-
-
             <tr>
                 <td>
-                    <span style="font-weight: bold;">
-                    Thank you,
-<br>
-<br>Dr. Andrew Lim
-<br>Chief Executive Officer
-<br>Maxim Capital Limited
-                        </span>
-</td>
+                    <hr>
+                </td>
             </tr>
 
+            <tr>
+                <td align="right">
+                    <?php if (count($mt4Ids) > 0) { ?>
+                    <button id="btnTransfer"><?php echo __('Submit') ?></button>
+                    <?php } ?>
+                </td>
+            </tr>
             </tbody>
         </table>
+        </form>
     </td>
 </tr>
 <tr>
