@@ -311,8 +311,8 @@ if ($distributorDB->getIaccount() == "") {
                                     <li style="padding-left: 15px;"><?php /*echo __('Local bank accounts - by 25th') . " ".__('(Excluding non-working days)')  */?></li>
                                     <li style="padding-left: 15px;"><?php /*echo __('i-Account - by 11th') . " ".__('(Excluding non-working days)')  */?></li>
 <!--                                    <li style="padding-left: 15px;">--><?php /*//echo __('Money Trac - by 20th') */?><!--</li>-->
-                                </ul>
-                            </li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
                         </ol>
 
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
