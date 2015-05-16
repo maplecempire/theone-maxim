@@ -51,7 +51,7 @@ class offerToSwapRshareActions extends sfActions
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
         $roiPercentage = $roiArr['roi_percentage'];
-        $roiRemainingMonth = 18 - $roiArr['idx'];
+        $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -114,7 +114,7 @@ class offerToSwapRshareActions extends sfActions
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
         $roiPercentage = $roiArr['roi_percentage'];
-        $roiRemainingMonth = 18 - $roiArr['idx'];
+        $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -296,7 +296,7 @@ class offerToSwapRshareActions extends sfActions
             $roiArr = $this->getRoiInformation($distId, $mt4Id);
 
             $roiPercentage = $roiArr['roi_percentage'];
-            $roiRemainingMonth = 18 - $roiArr['idx'];
+            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
             $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
             //var_dump($remainingRoiAmount);
             $arr = array(
