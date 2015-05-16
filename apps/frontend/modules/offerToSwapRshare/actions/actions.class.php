@@ -232,7 +232,8 @@ class offerToSwapRshareActions extends sfActions
     function getFetchMt4List($distId, $mt4UserName)
     {
         $query = "SELECT distinct dist_id, mt4_user_name
-	      FROM mlm_roi_dividend WHERE idx >= 12 and idx <= 18 AND status_code = 'PENDING' AND dist_id = " . $distId;
+	        FROM mlm_roi_dividend WHERE idx >= 12 and idx <= 18 AND status_code = 'PENDING'
+	        AND dist_id = " . $distId;
         //var_dump($query);
 
         if ($mt4UserName != "") {
@@ -248,6 +249,19 @@ class offerToSwapRshareActions extends sfActions
         $arr = array();
         while ($resultset->next()) {
             $arrResult = $resultset->getRow();
+
+            $c = new Criteria();
+            $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $arrResult['mt4_user_name']);
+            $c->add(MlmRoiDividendPeer::IDX, 11);
+            $c->add(MlmRoiDividendPeer::STATUS_CODE, "SUCCESS");
+            $existRoi = MlmRoiDividendPeer::doSelectOne($c);
+
+            //var_dump($existRoi);
+            //exit();
+            if (!$existRoi) {
+                continue;
+            }
+
             $arr[] = $arrResult['mt4_user_name'];
         }
         return $arr;
