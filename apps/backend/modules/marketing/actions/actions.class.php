@@ -10,6 +10,58 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeTestSssApplication()
+    {
+        $sssApplicationDB = SssApplicationPeer::retrieveByPK(3);
+        $mlmDistributerDB = MlmDistributorPeer::retrieveByPK($sssApplicationDB->getDistId());
+
+        if ($sssApplicationDB && $mlmDistributerDB) {
+            $user_id = $mlmDistributerDB->getDistributorCode();
+            $member_name = $mlmDistributerDB->getFullName();
+            $member_home_address = $mlmDistributerDB->getAddress();
+            $member_home_address2 = $mlmDistributerDB->getAddress2();
+            $country = $mlmDistributerDB->getCountry();
+            $member_current_email = $mlmDistributerDB->getEmail();
+            $mobile = $mlmDistributerDB->getContact();
+            $contract_date = date("Y-m-d", strtotime($sssApplicationDB->getCreatedOn()));
+            $mt4_balance = number_format($sssApplicationDB->getMt4Balance(), 2);
+            $cp23_balance = number_format($sssApplicationDB->getCp2Balance(), 2) . " & " . number_format($sssApplicationDB->getCp3Balance(), 2);
+            $roi_remaining_month = $sssApplicationDB->getRoiRemainingMonth();
+            $total_converted = number_format($sssApplicationDB->getTotalShareConverted(), 2);
+            $dated_day = date("d", strtotime($sssApplicationDB->getCreatedOn()));
+            $sign = $sssApplicationDB->getSignature();
+
+            require_once("dompdf/dompdf_config.inc.php");
+
+            $html = file_get_contents('assets/html_template/sss-application/template.html');
+
+            // Apply parameters into html.
+            $html = str_replace("%user_id%", $user_id, $html);
+            $html = str_replace("%member_name%", $member_name, $html);
+            $html = str_replace("%member_home_address%", $member_home_address, $html);
+            $html = str_replace("%member_home_address2%", $member_home_address2, $html);
+            $html = str_replace("%country%", $country, $html);
+            $html = str_replace("%member_current_email%", $member_current_email, $html);
+            $html = str_replace("%mobile%", $mobile, $html);
+            $html = str_replace("%contract_date%", $contract_date, $html);
+            $html = str_replace("%mt4_balance%", $mt4_balance, $html);
+            $html = str_replace("%cp23_balance%", $cp23_balance, $html);
+            $html = str_replace("%roi_remaining_month%", $roi_remaining_month, $html);
+            $html = str_replace("%total_converted%", $total_converted, $html);
+            $html = str_replace("%dated_day%", $dated_day, $html);
+            $html = str_replace("%sign%", $sign, $html);
+
+            $dompdf = new DOMPDF();
+            $dompdf->set_paper('A4');
+            $dompdf->load_html($html);
+            $dompdf->render();
+            $dompdf->stream("dispensation_application.pdf");
+        }
+
+        echo "ok";
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeEventCalendar()
     {
         $act = $this->getRequestParameter("act");
