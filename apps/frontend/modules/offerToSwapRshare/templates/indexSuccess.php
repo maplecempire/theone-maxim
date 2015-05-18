@@ -788,13 +788,26 @@ function calculateRshare() {
                 </td>
             </tr>
 
+            <?php if (count($mt4Ids) > 0) { ?>
             <tr>
                 <td align="right">
-                    <?php if (count($mt4Ids) > 0) { ?>
                     <button id="btnTransfer"><?php echo __('Submit') ?></button>
-                    <?php } ?>
                 </td>
             </tr>
+            <?php } else { ?>
+            <tr>
+                <td>
+                    <div class="ui-widget">
+                        <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                             class="ui-state-error ui-corner-all">
+                            <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                          class="ui-icon ui-icon-alert"></span>
+                                <strong>You are not entitled to Special R-Share Swap</strong></p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php }  ?>
             </tbody>
         </table>
         </form>
