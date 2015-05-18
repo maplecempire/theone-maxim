@@ -1,0 +1,118 @@
+﻿<html>
+<head>
+<style type="text/css">
+	@page { margin: 19mm 19mm !important; }
+
+    .lang-en * { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; font-size: 14px; color: #000; }
+    .lang-en p, .lang-en li { text-align: justify; }
+    .lang-cn * { font-family: firefly, verdana, sans-serif; font-size: 14px; color: #000; white-space: nowrap; }
+    li { margin-bottom: 18px; }
+    li:last-child { margin-bottom: 0px; }
+    /*body > div > strong, body > div > p, body > div > table { margin-left: 40px; }*/
+    table { width: 100%; }
+
+    table.header { padding-bottom: 5px; }
+    table.header td:first-child { width: 10%; }
+    table.header td:last-child { font-size: 12px; vertical-align: top; text-align: right; }
+    table.header img { height: 51px; }
+
+    hr { border: 0px none; border-bottom: 1px #000 solid; }
+    hr.bold-line { border-bottom: 2px #000 solid !important; }
+
+    table.content { border-collapse: collapse; }
+    table.content td { vertical-align: top; }
+    table.content td:first-child { width: 20%; }
+
+    .title { font-weight: bold; font-size: 18px; padding-top: 8px; }
+    .title-nop { font-weight: bold; font-size: 18px; }
+	.bold-with-line { font-weight: bold; text-decoration: underline; }
+
+    .break-page { page-break-after: always; }
+    
+    input[type="text"] { border: 0px none; border-bottom: 1px #000 solid; text-align: center; font-size: 14px; height: 20px; }
+</style>
+</head>
+<body>
+    <div class="lang-en">
+        <!-- English -->
+        <p style="text-align: center;">
+			<span class="title-nop">APPLICATION FOR DISPENSATION</span>
+			<br /><span class="title-nop">18 month investment term</span>
+			<br /><span>{Only applicable from 12 May 2015 to 31 May 2015}</span>
+		</p>
+		<p><span class="title-nop">TO: The Maxim Trader Legal Office (LACD).</span></p>
+		<p><span>User ID <input type="text" value="%user_id%" class="lang-cn" style="width: 150px;" /> Member: <input type="text" value="%member_name%" class="lang-cn" style="width: 375px;" /></span></p>
+		<p><span>Members Home address: <input type="text" value="%member_home_address%" class="lang-cn" style="width: 480px;" /></span></p>
+		<p><span><input type="text" value="%member_home_address2%" class="lang-cn" style="width: 639px; text-align: left;" /></span></p>
+		<p><span>Country: <input type="text" value="%country%" class="lang-cn" style="width: 160px;" /> Members current email: <input type="text" value="%member_current_email%" class="lang-cn" style="width: 265px;" /></span></p>
+		<p><span>Mobile: <input type="text" value="%mobile%" class="lang-cn" style="width: 245px;" /> Contract Date: <input type="text" value="%contract_date%" class="lang-cn" style="width: 247px;" /></span></p>
+		<p><span>MT4 Balance: $<input type="text" value="%mt4_balance%" class="lang-cn" style="width: 217px;" /> CP2&amp;3 Balances: <input type="text" value="%cp23_balance%" class="lang-cn" style="width: 217px;" /></span></p>
+		<p><span>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the term of my Contract with Maxim Trader, on the following grounds;</span></p>
+		<p><span class="bold-with-line">1) THAT</span><span> I have on [<input type="text" value="%roi_remaining_month%" class="lang-cn" style="width: 170px;" />] completed 12 months, of my 18 months term so far.</span></p>
+		<p><span class="bold-with-line">2) THAT</span><span> I file this request on a date, NO EARLIER THAN the 12<sup>th</sup> May 2015 and NO LATER THAN the 31<sup>st</sup> May 2015. Any application outside this period is auto void.</span></p>
+		<p><span class="bold-with-line">3) THAT</span><span> subsequent to approval of this Dispensation Request, I herein consent to, and instruct Maxim Trader to debit from my {MT4 Balance} or {CP2 Account} or {CP3 Account} the total Cash Points equivalent to <br/>USD$[<input type="text" value="%total_converted%" class="lang-cn" style="width: 170px;" />], and to swap this value to be applied towards the purchase of ROGP Shares (R-Shares), at USD$.80 Cents each, and I shall expect my Certificate of R-Shares to be issued to me via email, and duly register my name in the ROGP share register, showing the number of R-Shares held by me.</span></p>
+		<p><span>DATED: This <input type="text" value="%dated_day%" class="lang-cn" style="width: 80px;" /> day of May 2015 - SIGN: <input type="text" value="%sign%" class="lang-cn" style="width: 313px;" /></span></p>
+		<p><span><input type="text" value="{SUBMIT}" class="lang-cn" style="text-align: right; font-weight: bold; width: 639px;" /></span></p>
+		
+		<span class="break-page"></span>
+		
+		<p><span class="bold-with-line">FOR OFFICE USE ONLY:</span></p>
+		<p><span>We at the LACD, on behalf of Maxim Trader, decide this application as follows:</span></p>
+		<p><strong>APPLICATION DENIED {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</strong><span> Or </span><strong>APPLICATION APPROVED {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</strong><span> and debited from above <br />said accounts AND convert the sum of USD$[<input type="text" class="lang-cn" style="width: 170px;" />] for the purchase of <br />{<input type="text" class="lang-cn" style="width: 170px;" />} R-Shares. TOTAL DEBITED USD$[<input type="text" class="lang-cn" style="width: 170px;" />] <br />FROM {MT4} or {CP2} or {CP3}.</span></p>
+		<p><span>NOTES: <input type="text" class="lang-cn" style="width: 585px;" /></span></p>
+		<p><span><input type="text" class="lang-cn" style="width: 639px;" /></span></p>
+		<div style="float:right;">
+			<table>
+				<tr>
+					<td style="text-align: right;">
+						Sign:
+					</td>
+					<td style="width: 290px;">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						.............................................................................
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						<strong>Mr. W. Royce (Rocky) Lane.</strong>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						<strong>CHIEF LEGAL COUNSEL - ROGP GROUP</strong>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						Current member of the Int'l Bar-No.1080394
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</body>
