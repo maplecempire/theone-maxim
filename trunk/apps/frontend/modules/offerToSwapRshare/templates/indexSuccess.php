@@ -73,13 +73,13 @@ $(function() {
     });
 
     $('#convertedCp2').autoNumeric({
-        mDec: 0
+        mDec: 2
     }).keyup(function(){
         calculateRshare();
     });
 
     $('#convertedCp3').autoNumeric({
-        mDec: 0
+        mDec: 2
     }).keyup(function(){
         calculateRshare();
     }).trigger("keyup");
@@ -734,10 +734,10 @@ function calculateRshare() {
                                 ?>
                             </select>
                         </td></tr>
-                        <tr><td class="text_bold">MT4 Balance<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td id="td_mt4Balance"><?php echo number_format($mt4Balance,0);?></td></tr>
+                        <tr><td class="text_bold">MT4 Balance<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td id="td_mt4Balance"><?php echo number_format($mt4Balance,2);?></td></tr>
                         <tr><td class="text_bold">Contract date<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td><?php echo $distributorDB->getActiveDateTime();?></td></tr>
-                        <tr><td class="text_bold">CP2</td><td>:</td><td><?php echo number_format($cp2Balance,0);?></td></tr>
-                        <tr><td class="text_bold">CP3</td><td>:</td><td><?php echo number_format($cp3Balance,0);?></td></tr>
+                        <tr><td class="text_bold">CP2</td><td>:</td><td><?php echo number_format($cp2Balance,2);?></td></tr>
+                        <tr><td class="text_bold">CP3</td><td>:</td><td><?php echo number_format($cp3Balance,2);?></td></tr>
                     </table>
                     <br>
                     <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
@@ -747,8 +747,8 @@ function calculateRshare() {
                     <ol>
                         <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 12 months, of my 18 months term so far.</li>
                         <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 31st May 2015. Any application outside this  period is auto void.</li>
-                        <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,0);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,0);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
-                        <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,0);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,0);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
+                        <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
+                        <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
                     </ol>
                     <br>
                     <br>
