@@ -384,8 +384,9 @@
 <?php
                                     $closeLogin = true;
                                     $monthStr = "05";
+                                    $monthEngStr = "May";
                                     $dayStr = "18";
-                                    $HourStr = "10";
+                                    $hourStr = "10";
                                     $totalHourStopStr = "2";
                                     if ($closeLogin == false) {
 
@@ -399,8 +400,8 @@
                             <strong>Dear IMs and Partners
 <br>亲爱的代理及会员们:
 <br>
-<br>Please NOTE that the company server will be SHUT DOWN at 1000hrs March 31th 2015 for a period of 2 hours.
-<br>请注意公司将于2015.<?php echo $monthStr;?>.<?php echo $dayStr;?>日晚<?php echo $HourStr;?>:00分关闭服务器, 时长为<?php echo $totalHourStopStr;?>小时.
+<br>Please NOTE that the company server will be SHUT DOWN at <?php echo $hourStr;?>:00hrs <?php echo $monthEngStr;?> <?php echo $dayStr;?> 2015 for a period of <?php echo $totalHourStopStr;?> hours.
+<br>请注意公司将于2015.<?php echo $monthStr;?>.<?php echo $dayStr;?>日<?php echo $hourStr;?>:00分关闭服务器, 时长为<?php echo $totalHourStopStr;?>小时.
 <br>
 <!--<br>This is necessary because we are UPGRADING our servers to better serve our IMs and to keep up abreast with the demands of our continued growth.-->
 <!--<br>这一操作是因为我们需要升级服务器,也是为了满足我们不断快速成长的需求, 更好地服务所有代理及会员.-->
@@ -413,7 +414,7 @@
 <br>
 <br>친애하는 국제회원 및 파트너 여러분
 <br>
-<br>회사 서버가 2015년 <?php echo $monthStr;?>월 <?php echo $dayStr;?>일 <?php echo $HourStr;?>시00분부터 <?php echo $totalHourStopStr;?>시간동안 연결되지 않을 것입니다.
+<br>회사 서버가 2015년 <?php echo $monthStr;?>월 <?php echo $dayStr;?>일 <?php echo $hourStr;?>시00분부터 <?php echo $totalHourStopStr;?>시간동안 연결되지 않을 것입니다.
 <br>
 <br>이는 국제회원 여러분에게 더 나은 서비스와 지속적으로 늘어나는 요구를 충족시킬 수 있도록 서버를 업그레이드 하기 위함입니다.
 <br>
@@ -426,7 +427,7 @@
 <br>
 <br>IMおよびパートナーの皆様
 <br>
-<br>弊社サーバーが2015年<?php echo $monthStr;?>月<?php echo $dayStr;?>日<?php echo $HourStr;?>時00分より<?php echo $totalHourStopStr;?>時間停止しますので、ご注意ください。
+<br>弊社サーバーが2015年<?php echo $monthStr;?>月<?php echo $dayStr;?>日<?php echo $hourStr;?>時00分より<?php echo $totalHourStopStr;?>時間停止しますので、ご注意ください。
 <br>これはIMの皆様により良いサービスを提供すると共に、需要の増大に対応するため、弊社サーバーをアップグレードするものです。
 <br>
 <br>ご不便をおかけすることをお詫びします。どうぞ皆様のご理解をお願いいたします。
