@@ -795,7 +795,7 @@ function calculateRshare() {
                 </td>
             </tr>
             <?php } else { ?>
-            <tr>
+            <!--<tr>
                 <td>
                     <div class="ui-widget">
                         <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -806,7 +806,7 @@ function calculateRshare() {
                         </div>
                     </div>
                 </td>
-            </tr>
+            </tr>-->
             <?php }  ?>
             </tbody>
         </table>
