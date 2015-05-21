@@ -43,7 +43,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
 $close = false;
-if (date("d") > 17 && $close == true) {
+if (date("d") > 21 && $close == true) {
 ?>
 <script type="text/javascript">
     window.location = "http://partner.maximtrader.com/home/logout";
@@ -411,7 +411,10 @@ if (date("d") > 17 && $close == true) {
     <ul>
         <li class="menu_title"><?php echo __('Offer to Swap R-Share'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/offerToSwapRshare"><span><?php echo __('APPLICATION FOR DISPENSATION 18 month investment term'); ?><img src="/images/new_icon.gif"></a>
+            <a href="/offerToSwapRshare"><span><?php echo __('Application for Dispensation 18 Month Investment Term'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/list"><span><?php echo __('Approval Status'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap -SSS Note'); ?><img src="/images/new_icon.gif"></a>
