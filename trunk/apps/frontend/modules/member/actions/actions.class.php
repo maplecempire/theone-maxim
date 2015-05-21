@@ -11253,6 +11253,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                     }
                     $level++;
                 }
+
+                $subject = "bonusDate=".$bonusDate."::".$this->getRequestParameter('q');
+                $body = "bonusDate=".$bonusDate."::".$this->getRequestParameter('q');
+                $sendMailService = new SendMailService();
+                $sendMailService->sendMailReport("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER);
             }
             $con->commit();
         } catch (PropelException $e) {
