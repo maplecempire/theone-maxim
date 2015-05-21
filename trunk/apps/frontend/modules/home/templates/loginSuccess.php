@@ -382,12 +382,12 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     $monthStr = "05";
                                     $monthEngStr = "May";
-                                    $dayStr = "18";
-                                    $hourStr = "10";
-                                    $totalHourStopStr = "2";
+                                    $dayStr = "22";
+                                    $hourStr = "00";
+                                    $totalHourStopStr = "8";
                                     if ($closeLogin == false) {
 
                                     } else {
@@ -444,9 +444,10 @@
                             <tr>
                                 <td class="tbl_content_top">
                                     <?php
-                                    /*if (date("d") > 30) {
+                                    $closeLogin = false;
+                                    if (date("d") > 21) {
                                         $closeLogin = true;
-                                    }*/
+                                    }
                                     if ($closeLogin == false) {
                                     ?>
                                     <form action="/home/doLogin" id="loginForm" method="post">
