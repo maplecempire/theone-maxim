@@ -156,7 +156,7 @@ function calculateRshare() {
 </tr>
 <tr>
     <td class="tbl_sprt_bottom" align="center">
-        <span class="txt_title"><?php echo __('APPLICATION FOR DISPENSATION 18 month investment term') ?></span>
+        <span class="txt_title"><?php echo __('APPLICATION FOR DISPENSATION 18 MONTH INVESTMENT TERM') ?></span>
         <br>
         <i>(Only applicable from 12 May 2015 to 31 May 2015)</i>
     </td>
