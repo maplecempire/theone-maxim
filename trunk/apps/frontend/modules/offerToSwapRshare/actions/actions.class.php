@@ -14,6 +14,12 @@ class offerToSwapRshareActions extends sfActions
      * Executes index action
      *
      */
+    public function executeList()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->sssApplications = SssApplicationPeer::doSelect($c);
+    }
     public function executeIndex()
     {
         $this->distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -33,7 +39,7 @@ class offerToSwapRshareActions extends sfActions
         $this->mt4Id = $this->getRequestParameter('mt4Id');
 
         if (!$this->mt4Id) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err804:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/index');
         }
         $this->mt4Ids = $this->getFetchMt4List($this->getUser()->getAttribute(Globals::SESSION_DISTID), $this->getRequestParameter('mt4Id'));
@@ -43,7 +49,7 @@ class offerToSwapRshareActions extends sfActions
         $mt4UserName = $this->getRequestParameter('mt4Id');
         $distId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         if (count($this->mt4Ids) <= 0) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err805:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/index');
         }
 
@@ -96,7 +102,7 @@ class offerToSwapRshareActions extends sfActions
         $this->mt4Id = $this->getRequestParameter('mt4Id');
 
         if (!$this->mt4Id) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/index');
         }
         $this->mt4Ids = $this->getFetchMt4List($this->getUser()->getAttribute(Globals::SESSION_DISTID), $this->getRequestParameter('mt4Id'));
@@ -106,12 +112,17 @@ class offerToSwapRshareActions extends sfActions
         $mt4UserName = $this->getRequestParameter('mt4Id');
         $distId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         if (count($this->mt4Ids) <= 0) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err802:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/index');
         }
 
         $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
+
+        if ($mt4Balance == null) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/index');
+        }
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
@@ -231,7 +242,7 @@ class offerToSwapRshareActions extends sfActions
     function getFetchMt4List($distId, $mt4UserName)
     {
         $query = "SELECT distinct dist_id, mt4_user_name
-	        FROM mlm_roi_dividend WHERE idx > 12 and idx <= 18 AND status_code = 'PENDING'
+	        FROM mlm_roi_dividend WHERE idx > 6 and idx <= 18 AND status_code = 'PENDING'
 	        AND dist_id = " . $distId;
         //var_dump($query);
 
@@ -251,7 +262,7 @@ class offerToSwapRshareActions extends sfActions
 
             $c = new Criteria();
             $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $arrResult['mt4_user_name']);
-            $c->add(MlmRoiDividendPeer::IDX, 12);
+            $c->add(MlmRoiDividendPeer::IDX, 6);
             $c->add(MlmRoiDividendPeer::STATUS_CODE, "SUCCESS");
             $existRoi = MlmRoiDividendPeer::doSelectOne($c);
 
