@@ -873,7 +873,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "7");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_DEBIT);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_DEBIT);
             } else if ($doAction == "epoint") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
@@ -892,7 +892,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "8");
 
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+                //$this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
@@ -910,7 +910,28 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "9");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+
+            } else if ($doAction == "ecash") {
+                $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $mlm_account_ledger->setTransactionType($transactionType);
+                $mlm_account_ledger->setRollingPoint("N");
+                $mlm_account_ledger->setRemark($remark);
+                $mlm_account_ledger->setInternalRemark($internalRemark);
+                $mlm_account_ledger->setCredit($epointAmount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distEPointBalance + $epointAmount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+
+                $this->mirroringAccountLedger($mlm_account_ledger, "10a");
+
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             } else if ($doAction == "transfer_cp3") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -931,7 +952,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "10");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             } else if ($doAction == "deduct_epoint") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_EPOINT);
@@ -952,7 +973,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "11");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_EPOINT);
 
             } else if ($doAction == "deduct_cp2") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
@@ -973,7 +994,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "12");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
             } else if ($doAction == "deduct_cp3") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -994,7 +1015,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "13");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
 
             } else if ($doAction == "transfer") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
@@ -1013,7 +1034,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "14");
 
-                $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
+                //$this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);
 
                 $mlm_account_ledger = new MlmAccountLedger();
                 $mlm_account_ledger->setDistId($distId);
@@ -1031,7 +1052,7 @@ class financeActions extends sfActions
 
                 $this->mirroringAccountLedger($mlm_account_ledger, "15");
 
-                $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
+                //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
             } else if ($doAction == "RECALL") {
                 $distEPointBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RP);
 
@@ -1054,7 +1075,7 @@ class financeActions extends sfActions
 
                     $this->mirroringAccountLedger($mlm_account_ledger, "16");
 
-                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
+                    //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_RP);
                 }
             }
             $con->commit();
