@@ -1266,6 +1266,44 @@ class marketingActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+
+    public function executeFindPassword()
+    {
+        $bulkContent = $this->getRequestParameter('bulkContentHiddenPassword');
+
+        $lineArr = explode("\n", $bulkContent); // break line
+//        $arr = explode("Username:", $bulkContent);
+
+        $idx = 1;
+        foreach ($lineArr as $line) {
+            $strArr = explode("Username:", $line);
+
+            if ($idx == 1) {
+                if (trim($line) != date("Ymd")) {
+                    break;
+                }
+
+                $idx++;
+                continue;
+            }
+
+            $c = new Criteria();
+            $c->add(AppUserPeer::USERNAME, trim($line));
+            $appUserDB = AppUserPeer::doSelectOne($c);
+
+            if ($appUserDB) {
+                print_r("<br><br>");
+                print_r($line."<br>P1: ".$appUserDB->getUserpassword()."<br>P2: ".$appUserDB->getUserpassword2()."<br><br>");
+            } else {
+                var_dump("=================>");
+                var_dump($strArr);
+                print_r("<br>");
+            }
+            $idx++;
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoRoiNoReturn()
     {
         $accountTypeArr = array(265754,265733,265734,265750,265738,265755,265756,265714,265751,265752,265753,265737,265736,265735,265726,265727,265749,265741,265740,265739);
