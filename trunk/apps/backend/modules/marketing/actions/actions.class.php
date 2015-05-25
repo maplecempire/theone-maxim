@@ -13,21 +13,25 @@ class marketingActions extends sfActions
     public function executeCorrectDoublePairing()
     {
         $query = "SELECT * FROM maxim.mlm_dist_pairing_ledger
-            where
-        remark like '%(".$this->getRequestParameter('q').")%' order by dist_id";
+            WHERE
+        remark LIKE '%(".$this->getRequestParameter('q').")%'
+            AND created_on >= '2015-05-24 00:00:00'
+        ORDER BY dist_id";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
 
         $distIdStr = "";
-        if ($resultset->next()) {
+        while ($resultset->next()) {
             $arr = $resultset->getRow();
             var_dump("<br>".$arr['dist_id']);
             $pos = strrpos($distIdStr, "|".$arr['dist_id']."|");
             if ($pos === false) { // note: three equal signs
 
             } else {
+                $mlmDistPairinLedgerDB = MlmDistPairingLedgerPeer::retrieveByPK($arr['pairing_id']);
+                $mlmDistPairinLedgerDB->delete();
                 var_dump("<br>remove".$arr['dist_id']);
             }
 
