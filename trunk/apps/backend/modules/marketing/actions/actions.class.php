@@ -10,6 +10,33 @@
  */
 class marketingActions extends sfActions
 {
+    public function executeCorrectDoublePairing()
+    {
+        $query = "SELECT * FROM maxim.mlm_dist_pairing_ledger
+            where
+        remark like '%(".$this->getRequestParameter('q').")%' order by dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $distIdStr = "";
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            var_dump("<br>".$arr['dist_id']);
+            $pos = strrpos($distIdStr, "|".$arr['dist_id']."|");
+            if ($pos === false) { // note: three equal signs
+
+            } else {
+                var_dump("<br>remove".$arr['dist_id']);
+            }
+
+            $distIdStr = $distIdStr."|".$arr['dist_id']."|";
+        }
+
+        echo "ok";
+        return sfView::HEADER_ONLY;
+    }
     public function executeTestSssApplication()
     {
         $sssApplicationDB = SssApplicationPeer::retrieveByPK(3);
