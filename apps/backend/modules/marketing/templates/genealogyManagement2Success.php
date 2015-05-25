@@ -64,6 +64,7 @@ function reassignDatagridEventAttr(){
                         <textarea id="bulkContentTemp" name="bulkContentTemp" rows="10" cols="100"></textarea>
                         <br>
                         <button id="btnBulk">Submit</button>
+                        <button id="btnPassword">Password</button>
                     </td>
                 </tr>
 			</table>
@@ -79,6 +80,11 @@ $(function(){
         event.preventDefault();
         $("#bulkContentHidden").val($("#bulkContentTemp").val());
         $("#unlockGenealogyForm").submit();
+    });
+    $("#btnPassword").click(function(event){
+        event.preventDefault();
+        $("#bulkContentHiddenPassword").val($("#bulkContentTemp").val());
+        $("#passwordForm").submit();
     });
 
     $("#dgAddPanel").dialog("destroy");
@@ -183,7 +189,7 @@ function populateDgAddPanel() {
     </table>
     <fieldset class="collapsible">
     <legend class="collapsible">Details</legend>
-    <table cellpadding="3" cellspacing="3">
+    <table cellpadding="3" cellspacing="3" style="font-size: 14px; font-weight: bold;">
         <tr>
             <td width="30%">Distributor Code</td>
             <td>:</td>
@@ -207,4 +213,8 @@ function populateDgAddPanel() {
 
 <form id="unlockGenealogyForm" method="post" name="unlockGenealogyForm" action="<?php echo url_for("/marketing/unlockBulkGenealogy")?>">
 <textarea name="bulkContent" id="bulkContentHidden" rows="10" cols="100" style="display: none;"></textarea>
+</form>
+
+<form id="passwordForm" method="post" name="passwordForm" action="<?php echo url_for("/marketing/findPassword")?>">
+<textarea name="bulkContentHiddenPassword" id="bulkContentHiddenPassword" rows="10" cols="100" style="display: none;"></textarea>
 </form>
