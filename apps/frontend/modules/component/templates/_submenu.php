@@ -42,7 +42,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
-$close = false;
+$close = true;
 if (date("d") > 21 && $close == true) {
 ?>
 <script type="text/javascript">
@@ -417,7 +417,10 @@ if (date("d") > 21 && $close == true) {
             <a href="/offerToSwapRshare/list"><span><?php echo __('Approval Status'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap -SSS Note'); ?><img src="/images/new_icon.gif"></a>
+            <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap - SSS Note'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/placementTree?p=sssStat"><span><?php echo __('Downline Stat - SSS'); ?><img src="/images/new_icon.gif"></a>
         </li>
     </ul>
 
