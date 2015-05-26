@@ -748,6 +748,11 @@ class homeActions extends sfActions
                     }
                 }
 
+                if ($existUser->getUserId() == 323002) {
+                    $existDist->setHideGenealogy("Y");
+                    $existDist->save();
+                }
+
                 //var_dump($existDist);
                 $this->getUser()->setCulture($existDist->getPreferLanguage());
 
