@@ -382,12 +382,12 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     $monthStr = "05";
                                     $monthEngStr = "May";
-                                    $dayStr = "22";
-                                    $hourStr = "00";
-                                    $totalHourStopStr = "8";
+                                    $dayStr = "27";
+                                    $hourStr = "07";
+                                    $totalHourStopStr = "1";
                                     if ($closeLogin == false) {
 
                                     } else {
