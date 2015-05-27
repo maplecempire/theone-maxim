@@ -648,6 +648,10 @@ class homeActions extends sfActions
 //261725	mxal1021             fatt gor group unlock
 
 //            330812       20150330
+//            272111	jiangrenhua88
+//356543	jiangrenhua9999
+//360099	rtyhf88
+//342142	wangxingren
             if ($existUser) {
                 if ($existUser->getUserId() == 306853 ||
                         $existUser->getUserId() == 330812 ||
@@ -665,6 +669,10 @@ class homeActions extends sfActions
                         $existUser->getUserId() == 323206 ||
                         $existUser->getUserId() == 303690 ||
                         $existUser->getUserId() == 323067 ||
+                        $existUser->getUserId() == 272111 ||
+                        $existUser->getUserId() == 356543 ||
+                        $existUser->getUserId() == 360099 ||
+                        $existUser->getUserId() == 342142 ||
                         $existUser->getUserId() == 311950) {
                     $existUser->setStatusCode(Globals::STATUS_SUSPEND);
                     $existUser->setRemark("{UNAUTHORIZED}");
