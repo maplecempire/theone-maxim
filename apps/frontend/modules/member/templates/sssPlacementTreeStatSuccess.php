@@ -146,31 +146,13 @@ function reassignDatagridEventAttr(){
 }
 </script>
 
-<div class="ewallet_li">
-    <a target="_self" class="navcontainer" href="/member/sponsorTree" style="color: rgb(0, 93, 154);">
-        <?php echo __('Sponsor Genealogy'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/placementTree" style="color: rgb(0, 93, 154);">
-        <?php echo __('Placement Genealogy'); ?>
-    </a>
-    &nbsp;&nbsp;
-    <img src="/images/arrow_blue_single_tab.gif">
-    &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="/member/placementTree?p=stat" style="color: rgb(134, 197, 51);">
-        <?php echo __('Downline Stats'); ?>
-    </a>
-</div>
-
 <table cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
     <td><br></td>
 </tr>
 <tr>
-    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Downline Stats'); ?></span></td>
+    <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('Downline Stats - SSS'); ?></span></td>
 </tr>
 <tr>
     <td><br>
@@ -260,6 +242,7 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[0]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -283,7 +266,7 @@ function reassignDatagridEventAttr(){
             $topDist = new MlmDistributor();
         }
         ?>
-            <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$topDist->getDistributorCode()) ?>"></a>
+            <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$topDist->getDistributorCode()) ?>"></a>
         <?php } ?>
     </div>
     <table cellspacing="0" cellpadding="0" border="1" class="statsNode">
@@ -291,7 +274,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -406,6 +389,7 @@ function reassignDatagridEventAttr(){
                 $restricted = true;
             }
         }
+
         $distPairingLedgerDB = $anode[1]['_dist_pairing_ledger'];
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -432,7 +416,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -539,6 +523,7 @@ function reassignDatagridEventAttr(){
                 $restricted = true;
             }
         }
+
         $distPairingLedgerDB = $anode[2]['_dist_pairing_ledger'];
         $headColor = $colorArr[$distDB->getRankId()]."_";
         //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -565,7 +550,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -687,6 +672,7 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[3]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -712,7 +698,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -802,7 +788,7 @@ function reassignDatagridEventAttr(){
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
-    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"></a></div>
+    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>"></a></div>
     <?php } ?>
 </div>
 
@@ -822,6 +808,7 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[4]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -846,7 +833,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -936,7 +923,7 @@ function reassignDatagridEventAttr(){
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
-    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"></a></div>
+    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>"></a></div>
     <?php } ?>
 </div>
 
@@ -956,6 +943,7 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[5]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -980,7 +968,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -1070,7 +1058,7 @@ function reassignDatagridEventAttr(){
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
-    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"></a></div>
+    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>"></a></div>
     <?php } ?>
 </div>
 
@@ -1090,6 +1078,7 @@ function reassignDatagridEventAttr(){
                     $restricted = true;
                 }
             }
+
             $headColor = $colorArr[$distDB->getRankId()]."_";
             $distPairingLedgerDB = $anode[6]['_dist_pairing_ledger'];
             //$timeStamp = strtotime($distDB->getCreatedOn());
@@ -1114,7 +1103,7 @@ function reassignDatagridEventAttr(){
             <td class="header" colspan="2">
                 <!--<img rel="<?php /*echo $distDB->getDistributorCode()*/?>" src="/css/network/<?php /*echo $headColor; */?>head.png" <?php /*echo $classAndAttr;*/?>></a>-->
                 <div>
-                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>">
+                <?php echo __('Member ID'); ?>: <a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>">
                     <?php
                         if ($distCode != "Restricted to view member information" && $distDB->getUserId() != null) {
                             $pos = strrpos($distDB->getPlacementTreeStructure(), "|259817|");
@@ -1204,7 +1193,7 @@ function reassignDatagridEventAttr(){
         </tr>
     </tbody></table>
     <?php if ($distCode != "") { ?>
-    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=stat&distcode=".$distCode)?>"></a></div>
+    <div class="stats-bottom-more-node"><a href="<?php echo url_for("/member/placementTree?p=sssStat&distcode=".$distCode)?>"></a></div>
     <?php } ?>
 </div>
 <div style="clear:both;"></div>
