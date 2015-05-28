@@ -19,36 +19,25 @@ class offerToSwapRshareActions extends sfActions
         $mt4request = new CMT4DataReciver;
         $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
 
+        $mt4Id = "6000113";
+
         $params['array'] = array();
-        $params['group'] = $groupName;
-        //                    $params['group'] = "MX10000";
-        //        $params['group'] = "KLTEST";
-        $params['agent'] = null;
         $params['login'] = $mt4Id;
-        //        $params['country'] = $mlm_distributor->getCountry();
-        $params['country'] = "";
-        $params['state'] = "";
-        $params['city'] = $leader;
-        //        $params['city'] = "";
-        $params['address'] = $tbl_distributor->getDistributorCode();
-        $params['name'] = $tbl_distributor->getFullName();
-        $params['email'] = $tbl_distributor->getEmail();
-        $params['password'] = $mt4Password;
-        //        $params['password'] = "qwer1234";
-        $params['password_investor'] = "123abc";
-        $params['password_phone'] = null;
-        $params['leverage'] = "100";
-        //$params['leverage'] = $this->getRequestParameter('leverage');      2
-        $params['zipcode'] = "";
-        $params['phone'] = $packagePrice; // package price
-        $params['id'] = '';
-        $params['comment'] = "";
         var_dump($params);
-        $answer = $mt4request->MakeRequest("createaccount", $params);
-
+        $answer = $mt4request->MakeRequest("getaccountinfo", $params);
+        var_dump($answer);
+        print_r("<br><br>");
         if ($answer['result'] != 1) {
-
+            var_dump("<br>error:".$answer["reason"]);
+            return sfView::HEADER_ONLY;
+        } else {
+            //$params['comment'] = "";
+            //$answer = $mt4request->MakeRequest("modifyaccount", $params);
+            //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
         }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
     }
     public function executeDoGeneratePairingPoint()
     {
