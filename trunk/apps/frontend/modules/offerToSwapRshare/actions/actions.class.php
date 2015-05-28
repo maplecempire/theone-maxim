@@ -14,6 +14,42 @@ class offerToSwapRshareActions extends sfActions
      * Executes index action
      *
      */
+    public function executeDoTestDisabledMt4()
+    {
+        $mt4request = new CMT4DataReciver;
+        $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+        $params['array'] = array();
+        $params['group'] = $groupName;
+        //                    $params['group'] = "MX10000";
+        //        $params['group'] = "KLTEST";
+        $params['agent'] = null;
+        $params['login'] = $mt4Id;
+        //        $params['country'] = $mlm_distributor->getCountry();
+        $params['country'] = "";
+        $params['state'] = "";
+        $params['city'] = $leader;
+        //        $params['city'] = "";
+        $params['address'] = $tbl_distributor->getDistributorCode();
+        $params['name'] = $tbl_distributor->getFullName();
+        $params['email'] = $tbl_distributor->getEmail();
+        $params['password'] = $mt4Password;
+        //        $params['password'] = "qwer1234";
+        $params['password_investor'] = "123abc";
+        $params['password_phone'] = null;
+        $params['leverage'] = "100";
+        //$params['leverage'] = $this->getRequestParameter('leverage');      2
+        $params['zipcode'] = "";
+        $params['phone'] = $packagePrice; // package price
+        $params['id'] = '';
+        $params['comment'] = "";
+        var_dump($params);
+        $answer = $mt4request->MakeRequest("createaccount", $params);
+
+        if ($answer['result'] != 1) {
+
+        }
+    }
     public function executeDoGeneratePairingPoint()
     {
         $c = new Criteria();
@@ -311,6 +347,9 @@ class offerToSwapRshareActions extends sfActions
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        if ($roiRemainingMonth >= 10) {
+            $roiPercentage = 0;
+        }
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -380,6 +419,11 @@ class offerToSwapRshareActions extends sfActions
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        $remarks = "";
+        if ($roiRemainingMonth >= 10) {
+            $remarks = "ROI:".$roiPercentage."%";
+            $roiPercentage = 0;
+        }
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -432,7 +476,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setRoiPercentage($roiPercentage);
             $sss_application->setShareValue(0.8);
             $sss_application->setTotalShareConverted($totalRshare);
-            $sss_application->setRemarks("");
+            $sss_application->setRemarks($remarks);
             $sss_application->setSignature($this->signature);
             $sss_application->setStatusCode("PENDING");
             $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -804,6 +848,9 @@ class offerToSwapRshareActions extends sfActions
 
             $roiPercentage = $roiArr['roi_percentage'];
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            if ($roiRemainingMonth >= 10) {
+                $roiPercentage = 0;
+            }
             $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
             //var_dump($remainingRoiAmount);
             $arr = array(
