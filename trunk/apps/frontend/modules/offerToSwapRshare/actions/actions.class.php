@@ -364,8 +364,8 @@ class offerToSwapRshareActions extends sfActions
             return $this->redirect('/offerToSwapRshare/index');
         }
 
-//        $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
-        $mt4Balance = 5000;
+        $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+//        $mt4Balance = 5000;
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
         if ($mt4Balance == null) {
