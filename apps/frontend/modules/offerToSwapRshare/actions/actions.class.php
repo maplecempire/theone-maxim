@@ -31,9 +31,21 @@ class offerToSwapRshareActions extends sfActions
             var_dump("<br>error:".$answer["reason"]);
             return sfView::HEADER_ONLY;
         } else {
-            //$params['comment'] = "";
-            //$answer = $mt4request->MakeRequest("modifyaccount", $params);
+            $comment = $answer["comment"];
+            if ($comment != "") {
+                $comment .= ";";
+            }
+            $comment = $comment . "20150528:DISABLED (SSS)";
+            $params['comment'] = $comment;
+            $params['enable'] = "false";
+            $answer = $mt4request->MakeRequest("modifyaccount", $params);
             //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+            if ($answer['result'] != 1) {
+                var_dump("<br>error:".$answer["reason"]);
+                return sfView::HEADER_ONLY;
+            } else {
+
+            }
         }
 
         print_r("Done");
