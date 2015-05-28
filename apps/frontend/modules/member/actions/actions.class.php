@@ -6848,7 +6848,11 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executePlacementTree()
     {
+        $pageDirection = $this->getRequestParameter('p', "");
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
+            if ($pageDirection == "sssStat") {
+                return $this->redirect('/member/securityPasswordRequired?doAction=SSS');
+            }
             return $this->redirect('/member/securityPasswordRequired?doAction=G');
         }
 
@@ -9274,7 +9278,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $c->add(AppUserPeer::USER_ID, $this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($doAction == "VP") {
                 $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
-            } else if ($doAction == "G") {
+            } else if ($doAction == "G" || $doAction == "SSS") {
                 $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
             } else if ($doAction == "C") {
                 $c->add(AppUserPeer::USERPASSWORD, $this->getRequestParameter('transactionPassword'));
@@ -9300,6 +9304,9 @@ We look forward to your custom in the near future. Should you have any queries, 
             } else if ($doAction == "W") {
                 $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, true);
                 return $this->redirect('/member/epointLog');
+            } else if ($doAction == "SSS") {
+                $this->getUser()->setAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_GENEALOGY, true);
+                return $this->redirect('/member/placementTree?p=sssStat');
             }
         }
     }
