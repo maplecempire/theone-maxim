@@ -419,9 +419,12 @@ if (date("d") > 21 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap - SSS Note'); ?><img src="/images/new_icon.gif"></a>
         </li>
+        <?php
+        if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $distDB->getHideGenealogy() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/placementTree?p=sssStat"><span><?php echo __('Downline Stat - SSS'); ?><img src="/images/new_icon.gif"></a>
         </li>
+        <?php } ?>
     </ul>
 
     <?php

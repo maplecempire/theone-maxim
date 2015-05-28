@@ -7095,26 +7095,26 @@ We look forward to your custom in the near future. Should you have any queries, 
         $anode[0]["_left"] = $leftOnePlacement;
         $anode[0]["_right"] = $rightTwoPlacement;
         $anode[0]["_available"] = false;
-        if ($pageDirection == "stat") {
-            $anode[0]["_left_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $anode[0]["_right_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+        if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+            $anode[0]["_left_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+            $anode[0]["_right_this_month_sales"] = $this->getThisMonthSales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
             $anode[0]["_dist_pairing_ledger"] = $this->queryDistPairing($distDB->getDistributorId());
-            $anode[0]["_accumulate_left"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $anode[0]["_accumulate_right"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
-            $anode[0]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-            $anode[0]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            $anode[0]["_accumulate_left"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+            $anode[0]["_accumulate_right"] = $this->getAccumulateGroupBvs($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+            $anode[0]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+            $anode[0]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-            $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[0]["_today_left"];
+            $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[0]["_today_left"];
             if ($_carry_left < 0)
                 $_carry_left = 0;
-            $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[0]["_today_right"];
+            $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[0]["_today_right"];
             if ($_carry_right < 0)
                 $_carry_right = 0;
 
             $anode[0]["_carry_left"] = $_carry_left;
             $anode[0]["_carry_right"] = $_carry_right;
-            $anode[0]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-            $anode[0]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+            $anode[0]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+            $anode[0]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
 
             if ($anode[0]["_sales_left"] < 0) {
                 $anode[0]["_sales_left"] = 0;
@@ -7205,27 +7205,27 @@ We look forward to your custom in the near future. Should you have any queries, 
             $anode[1]["_right"] = $rightFourPlacement;
             $anode[1]["_available"] = false;
 
-            if ($pageDirection == "stat") {
-                $anode[1]["_left_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[1]["_right_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                $anode[1]["_left_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[1]["_right_this_month_sales"] = $this->getThisMonthSales($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                 $anode[1]["_dist_pairing_ledger"] = $this->queryDistPairing($leftOnePlacement->getDistributorId());
-                $anode[1]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[1]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                $anode[1]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[1]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[1]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[1]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftOnePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                $anode[1]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[1]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-                $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[1]["_today_left"];
+                $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[1]["_today_left"];
                 if ($_carry_left < 0)
                     $_carry_left = 0;
-                $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[1]["_today_right"];
+                $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[1]["_today_right"];
                 if ($_carry_right < 0)
                     $_carry_right = 0;
 
                 $anode[1]["_carry_left"] = $_carry_left;
                 $anode[1]["_carry_right"] = $_carry_right;
 
-                $anode[1]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                $anode[1]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                $anode[1]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                $anode[1]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                 if ($anode[1]["_sales_left"] < 0) {
                     $anode[1]["_sales_left"] = 0;
                 }
@@ -7266,26 +7266,26 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[3]["_left"] = null;
                 $anode[3]["_right"] = null;
                 $anode[3]["_available"] = false;
-                if ($pageDirection == "stat") {
-                    $anode[3]["_left_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[3]["_right_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                    $anode[3]["_left_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[3]["_right_this_month_sales"] = $this->getThisMonthSales($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                     $anode[3]["_dist_pairing_ledger"] = $this->queryDistPairing($leftThreePlacement->getDistributorId());
-                    $anode[3]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[3]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                    $anode[3]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[3]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[3]["_today_left"];
+                    $anode[3]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[3]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftThreePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                    $anode[3]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[3]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[3]["_today_left"];
                     if ($_carry_left < 0)
                         $_carry_left = 0;
-                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[3]["_today_right"];
+                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[3]["_today_right"];
                     if ($_carry_right < 0)
                         $_carry_right = 0;
 
                     $anode[3]["_carry_left"] = $_carry_left;
                     $anode[3]["_carry_right"] = $_carry_right;
 
-                    $anode[3]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                    $anode[3]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                    $anode[3]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                    $anode[3]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                     if ($anode[3]["_sales_left"] < 0) {
                         $anode[3]["_sales_left"] = 0;
                     }
@@ -7326,27 +7326,27 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[4]["_left"] = null;
                 $anode[4]["_right"] = null;
                 $anode[4]["_available"] = false;
-                if ($pageDirection == "stat") {
-                    $anode[4]["_left_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[4]["_right_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                    $anode[4]["_left_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[4]["_right_this_month_sales"] = $this->getThisMonthSales($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                     $anode[4]["_dist_pairing_ledger"] = $this->queryDistPairing($rightFourPlacement->getDistributorId());
-                    $anode[4]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[4]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                    $anode[4]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[4]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                    $anode[4]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[4]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightFourPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                    $anode[4]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[4]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[4]["_today_left"];
+                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[4]["_today_left"];
                     if ($_carry_left < 0)
                         $_carry_left = 0;
-                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[4]["_today_right"];
+                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[4]["_today_right"];
                     if ($_carry_right < 0)
                         $_carry_right = 0;
 
                     $anode[4]["_carry_left"] = $_carry_left;
                     $anode[4]["_carry_right"] = $_carry_right;
 
-                    $anode[4]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                    $anode[4]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                    $anode[4]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                    $anode[4]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                     if ($anode[4]["_sales_left"] < 0) {
                         $anode[4]["_sales_left"] = 0;
                     }
@@ -7434,27 +7434,27 @@ We look forward to your custom in the near future. Should you have any queries, 
             $anode[2]["_left"] = $leftFivePlacement;
             $anode[2]["_right"] = $rightSixPlacement;
             $anode[2]["_available"] = false;
-            if ($pageDirection == "stat") {
-                $anode[2]["_left_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[2]["_right_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+            if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                $anode[2]["_left_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[2]["_right_this_month_sales"] = $this->getThisMonthSales($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                 $anode[2]["_dist_pairing_ledger"] = $this->queryDistPairing($rightTwoPlacement->getDistributorId());
-                $anode[2]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[2]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                $anode[2]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                $anode[2]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                $anode[2]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[2]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightTwoPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                $anode[2]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                $anode[2]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-                $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[2]["_today_left"];
+                $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[2]["_today_left"];
                 if ($_carry_left < 0)
                     $_carry_left = 0;
-                $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[2]["_today_right"];
+                $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[2]["_today_right"];
                 if ($_carry_right < 0)
                     $_carry_right = 0;
 
                 $anode[2]["_carry_left"] = $_carry_left;
                 $anode[2]["_carry_right"] = $_carry_right;
 
-                $anode[2]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                $anode[2]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                $anode[2]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                $anode[2]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                 if ($anode[2]["_sales_left"] < 0) {
                     $anode[2]["_sales_left"] = 0;
                 }
@@ -7494,27 +7494,27 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[5]["_left"] = null;
                 $anode[5]["_right"] = null;
                 $anode[5]["_available"] = false;
-                if ($pageDirection == "stat") {
-                    $anode[5]["_left_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[5]["_right_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                    $anode[5]["_left_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[5]["_right_this_month_sales"] = $this->getThisMonthSales($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                     $anode[5]["_dist_pairing_ledger"] = $this->queryDistPairing($leftFivePlacement->getDistributorId());
-                    $anode[5]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[5]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                    $anode[5]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[5]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                    $anode[5]["_accumulate_left"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[5]["_accumulate_right"] = $this->getAccumulateGroupBvs($leftFivePlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                    $anode[5]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[5]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[5]["_today_left"];
+                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[5]["_today_left"];
                     if ($_carry_left < 0)
                         $_carry_left = 0;
-                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[5]["_today_right"];
+                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[5]["_today_right"];
                     if ($_carry_right < 0)
                         $_carry_right = 0;
 
                     $anode[5]["_carry_left"] = $_carry_left;
                     $anode[5]["_carry_right"] = $_carry_right;
 
-                    $anode[5]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                    $anode[5]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                    $anode[5]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                    $anode[5]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                     if ($anode[5]["_sales_left"] < 0) {
                         $anode[5]["_sales_left"] = 0;
                     }
@@ -7555,26 +7555,26 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $anode[6]["_left"] = null;
                 $anode[6]["_right"] = null;
                 $anode[6]["_available"] = false;
-                if ($pageDirection == "stat") {
-                    $anode[6]["_left_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[6]["_right_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                if ($pageDirection == "stat" || $pageDirection == "sssStat") {
+                    $anode[6]["_left_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[6]["_right_this_month_sales"] = $this->getThisMonthSales($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
                     $anode[6]["_dist_pairing_ledger"] = $this->queryDistPairing($rightSixPlacement->getDistributorId());
-                    $anode[6]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[6]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT);
-                    $anode[6]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT);
-                    $anode[6]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT);
+                    $anode[6]["_accumulate_left"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[6]["_accumulate_right"] = $this->getAccumulateGroupBvs($rightSixPlacement->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
+                    $anode[6]["_today_left"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, $pageDirection);
+                    $anode[6]["_today_right"] = $this->getTodaySales($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, $pageDirection);
 
-                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null) - $anode[6]["_today_left"];
+                    $_carry_left = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection) - $anode[6]["_today_left"];
                     if ($_carry_left < 0)
                         $_carry_left = 0;
-                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null) - $anode[6]["_today_right"];
+                    $_carry_right = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection) - $anode[6]["_today_right"];
                     if ($_carry_right < 0)
                         $_carry_right = 0;
 
                     $anode[6]["_carry_left"] = $_carry_left;
                     $anode[6]["_carry_right"] = $_carry_right;
-                    $anode[6]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null);
-                    $anode[6]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null);
+                    $anode[6]["_sales_left"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_LEFT, null, $pageDirection);
+                    $anode[6]["_sales_right"] = $this->findPairingLedgers($distDB->getDistributorId(), Globals::PLACEMENT_RIGHT, null, $pageDirection);
                     if ($anode[6]["_sales_left"] < 0) {
                         $anode[6]["_sales_left"] = 0;
                     }
@@ -7605,6 +7605,8 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         if ($pageDirection == "stat") {
             $this->setTemplate('placementTreeStat');
+        } else if ($pageDirection == "sssStat") {
+            $this->setTemplate('sssPlacementTreeStat');
         }
     }
 
@@ -13085,7 +13087,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         return $mlmDist;
     }
 
-    function getThisMonthSales($distributorId, $position)
+    function getThisMonthSales($distributorId, $position, $pageDirection = "")
     {
         $dateUtil = new DateUtil();
 
@@ -13093,7 +13095,12 @@ We look forward to your custom in the near future. Should you have any queries, 
         $firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
         $lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
 
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
+        $tableName = "mlm_dist_pairing_ledger";
+        if ($pageDirection == "sssStat") {
+            $tableName = "sss_dist_pairing_ledger";
+        }
+
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM ".$tableName." WHERE dist_id = ? "
                  . " AND left_right = ?"
                  . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'"
                  . " AND created_on >= '" . $firstOfMonth . "' AND created_on <= '" . $lastOfMonth . "'";
@@ -13117,9 +13124,14 @@ We look forward to your custom in the near future. Should you have any queries, 
         return 0;
     }
 
-    function findPairingLedgers($distributorId, $position, $date)
+    function findPairingLedgers($distributorId, $position, $date, $pageDirection = "")
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = ? "
+        $tableName = "mlm_dist_pairing_ledger";
+        if ($pageDirection == "sssStat") {
+            $tableName = "sss_dist_pairing_ledger";
+        }
+
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM ".$tableName." WHERE dist_id = ? "
                  . " AND left_right = ?";
 
         if ($date != null) {
@@ -13479,7 +13491,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         return $packageArray;
     }
 
-    function getAccumulateGroupBvs($distributorId, $position)
+    function getAccumulateGroupBvs($distributorId, $position, $pageDirection = "")
     {
         $dateUtil = new DateUtil();
 
@@ -13487,7 +13499,12 @@ We look forward to your custom in the near future. Should you have any queries, 
         $firstOfMonth = date('Y-m-j', $d["first_of_month"]) . " 00:00:00";
         $lastOfMonth = date('Y-m-j', $d["last_of_month"]) . " 23:59:59";
 
-        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $tableName = "mlm_dist_pairing_ledger";
+        if ($pageDirection == "sssStat") {
+            $tableName = "sss_dist_pairing_ledger";
+        }
+
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM ".$tableName." WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'"
                  . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'";
 
@@ -13508,7 +13525,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         return 0;
     }
 
-    function getTodaySales($distributorId, $position)
+    function getTodaySales($distributorId, $position, $pageDirection = "")
     {
         $dateUtil = new DateUtil();
 
@@ -13516,7 +13533,12 @@ We look forward to your custom in the near future. Should you have any queries, 
         $firstOfMonth = date('Y-m-j') . " 00:00:00";
         $lastOfMonth = date('Y-m-j') . " 23:59:59";
 
-        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM mlm_dist_pairing_ledger WHERE dist_id = " . $distributorId
+        $tableName = "mlm_dist_pairing_ledger";
+        if ($pageDirection == "sssStat") {
+            $tableName = "sss_dist_pairing_ledger";
+        }
+
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM ".$tableName." WHERE dist_id = " . $distributorId
                  . " AND left_right = '" . $position . "'"
                  . " AND transaction_type = '" . Globals::PAIRING_LEDGER_REGISTER . "'"
                  . " AND created_on >= '" . $firstOfMonth . "' AND created_on <= '" . $lastOfMonth . "'";
