@@ -348,9 +348,9 @@ class offerToSwapRshareActions extends sfActions
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-        if ($roiRemainingMonth >= 10) {
+        /*if ($roiRemainingMonth >= 10) {
             $roiPercentage = 0;
-        }
+        }*/
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -421,10 +421,10 @@ class offerToSwapRshareActions extends sfActions
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
         $remarks = "";
-        if ($roiRemainingMonth >= 10) {
+        /*if ($roiRemainingMonth >= 10) {
             $remarks = "ROI:".$roiPercentage."%";
             $roiPercentage = 0;
-        }
+        }*/
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
         $this->mt4Balance = $mt4Balance;
@@ -783,7 +783,7 @@ class offerToSwapRshareActions extends sfActions
     function getFetchMt4List($distId, $mt4UserName)
     {
         $query = "SELECT distinct dist_id, mt4_user_name
-	        FROM mlm_roi_dividend WHERE idx > 9 and idx <= 18 AND status_code = 'PENDING'
+	        FROM mlm_roi_dividend WHERE idx > 0 and idx <= 18 AND status_code = 'PENDING'
 	        AND dist_id = " . $distId;
 
 
@@ -802,17 +802,17 @@ class offerToSwapRshareActions extends sfActions
         while ($resultset->next()) {
             $arrResult = $resultset->getRow();
 
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $arrResult['mt4_user_name']);
             $c->add(MlmRoiDividendPeer::IDX, 9);
             $c->add(MlmRoiDividendPeer::STATUS_CODE, "SUCCESS");
-            $existRoi = MlmRoiDividendPeer::doSelectOne($c);
+            $existRoi = MlmRoiDividendPeer::doSelectOne($c);*/
 
             //var_dump($existRoi);
             //exit();
-            if (!$existRoi) {
+            /*if (!$existRoi) {
                 continue;
-            }
+            }*/
 
             $arr[] = $arrResult['mt4_user_name'];
         }
@@ -849,9 +849,9 @@ class offerToSwapRshareActions extends sfActions
 
             $roiPercentage = $roiArr['roi_percentage'];
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-            if ($roiRemainingMonth >= 10) {
+            /*if ($roiRemainingMonth >= 10) {
                 $roiPercentage = 0;
-            }
+            }*/
             $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
             //var_dump($remainingRoiAmount);
             $arr = array(
