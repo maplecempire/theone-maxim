@@ -13,7 +13,7 @@ abstract class BaseMlmDailyBonusLogPeer {
 	const CLASS_DEFAULT = 'lib.model.MlmDailyBonusLog';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,6 +30,9 @@ abstract class BaseMlmDailyBonusLogPeer {
 
 	
 	const BONUS_DATE = 'mlm_daily_bonus_log.BONUS_DATE';
+
+	
+	const REMARK = 'mlm_daily_bonus_log.REMARK';
 
 	
 	const CREATED_BY = 'mlm_daily_bonus_log.CREATED_BY';
@@ -49,18 +52,18 @@ abstract class BaseMlmDailyBonusLogPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LogId', 'AccessIp', 'BonusType', 'BonusDate', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (MlmDailyBonusLogPeer::LOG_ID, MlmDailyBonusLogPeer::ACCESS_IP, MlmDailyBonusLogPeer::BONUS_TYPE, MlmDailyBonusLogPeer::BONUS_DATE, MlmDailyBonusLogPeer::CREATED_BY, MlmDailyBonusLogPeer::CREATED_ON, MlmDailyBonusLogPeer::UPDATED_BY, MlmDailyBonusLogPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('log_id', 'access_ip', 'bonus_type', 'bonus_date', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('LogId', 'AccessIp', 'BonusType', 'BonusDate', 'Remark', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (MlmDailyBonusLogPeer::LOG_ID, MlmDailyBonusLogPeer::ACCESS_IP, MlmDailyBonusLogPeer::BONUS_TYPE, MlmDailyBonusLogPeer::BONUS_DATE, MlmDailyBonusLogPeer::REMARK, MlmDailyBonusLogPeer::CREATED_BY, MlmDailyBonusLogPeer::CREATED_ON, MlmDailyBonusLogPeer::UPDATED_BY, MlmDailyBonusLogPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('log_id', 'access_ip', 'bonus_type', 'bonus_date', 'remark', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LogId' => 0, 'AccessIp' => 1, 'BonusType' => 2, 'BonusDate' => 3, 'CreatedBy' => 4, 'CreatedOn' => 5, 'UpdatedBy' => 6, 'UpdatedOn' => 7, ),
-		BasePeer::TYPE_COLNAME => array (MlmDailyBonusLogPeer::LOG_ID => 0, MlmDailyBonusLogPeer::ACCESS_IP => 1, MlmDailyBonusLogPeer::BONUS_TYPE => 2, MlmDailyBonusLogPeer::BONUS_DATE => 3, MlmDailyBonusLogPeer::CREATED_BY => 4, MlmDailyBonusLogPeer::CREATED_ON => 5, MlmDailyBonusLogPeer::UPDATED_BY => 6, MlmDailyBonusLogPeer::UPDATED_ON => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('log_id' => 0, 'access_ip' => 1, 'bonus_type' => 2, 'bonus_date' => 3, 'created_by' => 4, 'created_on' => 5, 'updated_by' => 6, 'updated_on' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('LogId' => 0, 'AccessIp' => 1, 'BonusType' => 2, 'BonusDate' => 3, 'Remark' => 4, 'CreatedBy' => 5, 'CreatedOn' => 6, 'UpdatedBy' => 7, 'UpdatedOn' => 8, ),
+		BasePeer::TYPE_COLNAME => array (MlmDailyBonusLogPeer::LOG_ID => 0, MlmDailyBonusLogPeer::ACCESS_IP => 1, MlmDailyBonusLogPeer::BONUS_TYPE => 2, MlmDailyBonusLogPeer::BONUS_DATE => 3, MlmDailyBonusLogPeer::REMARK => 4, MlmDailyBonusLogPeer::CREATED_BY => 5, MlmDailyBonusLogPeer::CREATED_ON => 6, MlmDailyBonusLogPeer::UPDATED_BY => 7, MlmDailyBonusLogPeer::UPDATED_ON => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('log_id' => 0, 'access_ip' => 1, 'bonus_type' => 2, 'bonus_date' => 3, 'remark' => 4, 'created_by' => 5, 'created_on' => 6, 'updated_by' => 7, 'updated_on' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -121,6 +124,8 @@ abstract class BaseMlmDailyBonusLogPeer {
 		$criteria->addSelectColumn(MlmDailyBonusLogPeer::BONUS_TYPE);
 
 		$criteria->addSelectColumn(MlmDailyBonusLogPeer::BONUS_DATE);
+
+		$criteria->addSelectColumn(MlmDailyBonusLogPeer::REMARK);
 
 		$criteria->addSelectColumn(MlmDailyBonusLogPeer::CREATED_BY);
 

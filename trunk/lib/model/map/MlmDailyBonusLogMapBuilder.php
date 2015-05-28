@@ -40,6 +40,8 @@ class MlmDailyBonusLogMapBuilder {
 
 		$tMap->addColumn('BONUS_DATE', 'BonusDate', 'int', CreoleTypes::TIMESTAMP, true, null);
 
+		$tMap->addColumn('REMARK', 'Remark', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);

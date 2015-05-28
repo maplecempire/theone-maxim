@@ -25,6 +25,10 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 
 
 	
+	protected $remark;
+
+
+	
 	protected $created_by;
 
 
@@ -86,6 +90,13 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getRemark()
+	{
+
+		return $this->remark;
 	}
 
 	
@@ -206,6 +217,20 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRemark($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->remark !== $v) {
+			$this->remark = $v;
+			$this->modifiedColumns[] = MlmDailyBonusLogPeer::REMARK;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -280,19 +305,21 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 
 			$this->bonus_date = $rs->getTimestamp($startcol + 3, null);
 
-			$this->created_by = $rs->getInt($startcol + 4);
+			$this->remark = $rs->getString($startcol + 4);
 
-			$this->created_on = $rs->getTimestamp($startcol + 5, null);
+			$this->created_by = $rs->getInt($startcol + 5);
 
-			$this->updated_by = $rs->getInt($startcol + 6);
+			$this->created_on = $rs->getTimestamp($startcol + 6, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 7, null);
+			$this->updated_by = $rs->getInt($startcol + 7);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 8, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 9; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating MlmDailyBonusLog object", $e);
 		}
@@ -442,15 +469,18 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 				return $this->getBonusDate();
 				break;
 			case 4:
-				return $this->getCreatedBy();
+				return $this->getRemark();
 				break;
 			case 5:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 6:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 7:
+				return $this->getUpdatedBy();
+				break;
+			case 8:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -467,10 +497,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 			$keys[1] => $this->getAccessIp(),
 			$keys[2] => $this->getBonusType(),
 			$keys[3] => $this->getBonusDate(),
-			$keys[4] => $this->getCreatedBy(),
-			$keys[5] => $this->getCreatedOn(),
-			$keys[6] => $this->getUpdatedBy(),
-			$keys[7] => $this->getUpdatedOn(),
+			$keys[4] => $this->getRemark(),
+			$keys[5] => $this->getCreatedBy(),
+			$keys[6] => $this->getCreatedOn(),
+			$keys[7] => $this->getUpdatedBy(),
+			$keys[8] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -499,15 +530,18 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 				$this->setBonusDate($value);
 				break;
 			case 4:
-				$this->setCreatedBy($value);
+				$this->setRemark($value);
 				break;
 			case 5:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 6:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 7:
+				$this->setUpdatedBy($value);
+				break;
+			case 8:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -521,10 +555,11 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setAccessIp($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setBonusType($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setBonusDate($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCreatedBy($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCreatedOn($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setUpdatedBy($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setUpdatedOn($arr[$keys[7]]);
+		if (array_key_exists($keys[4], $arr)) $this->setRemark($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCreatedBy($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCreatedOn($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setUpdatedBy($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setUpdatedOn($arr[$keys[8]]);
 	}
 
 	
@@ -536,6 +571,7 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::ACCESS_IP)) $criteria->add(MlmDailyBonusLogPeer::ACCESS_IP, $this->access_ip);
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::BONUS_TYPE)) $criteria->add(MlmDailyBonusLogPeer::BONUS_TYPE, $this->bonus_type);
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::BONUS_DATE)) $criteria->add(MlmDailyBonusLogPeer::BONUS_DATE, $this->bonus_date);
+		if ($this->isColumnModified(MlmDailyBonusLogPeer::REMARK)) $criteria->add(MlmDailyBonusLogPeer::REMARK, $this->remark);
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::CREATED_BY)) $criteria->add(MlmDailyBonusLogPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::CREATED_ON)) $criteria->add(MlmDailyBonusLogPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(MlmDailyBonusLogPeer::UPDATED_BY)) $criteria->add(MlmDailyBonusLogPeer::UPDATED_BY, $this->updated_by);
@@ -575,6 +611,8 @@ abstract class BaseMlmDailyBonusLog extends BaseObject  implements Persistent {
 		$copyObj->setBonusType($this->bonus_type);
 
 		$copyObj->setBonusDate($this->bonus_date);
+
+		$copyObj->setRemark($this->remark);
 
 		$copyObj->setCreatedBy($this->created_by);
 
