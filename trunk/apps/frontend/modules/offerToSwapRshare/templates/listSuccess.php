@@ -26,6 +26,9 @@ $culture = $sf_user->getCulture();
     color: #000000;
     font-weight: bold;
 }
+.pbl_table td {
+    padding: 4px !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -210,11 +213,11 @@ function calculateRshare() {
                     }
             ?>
             <tr class="row<?php echo $trStyle; ?>">
-                <td><?php echo $idx++; ?></td>
-                <td><?php echo $sssApplication->getCreatedOn(); ?></td>
-                <td><?php echo $sssApplication->getMt4UserName(); ?></td>
-                <td><?php echo "MT4:<b>".number_format($sssApplication->getMt4Balance(),2)."</b><br>CP2:<b>".number_format($sssApplication->getCp2Balance(),2)."</b><br>CP3:<b>".number_format($sssApplication->getCp3Balance(),2); ?></b></td>
-                <td><?php
+                <td valign="top" ><br><?php echo $idx++; ?></td>
+                <td valign="top"><br><?php echo $sssApplication->getCreatedOn(); ?></td>
+                <td valign="top"><br><?php echo $sssApplication->getMt4UserName(); ?></td>
+                <td valign="top"><br><?php echo "MT4:<b>".number_format($sssApplication->getMt4Balance(),2)."</b><br>CP2:<b>".number_format($sssApplication->getCp2Balance(),2)."</b><br>CP3:<b>".number_format($sssApplication->getCp3Balance(),2); ?></b></td>
+                <td valign="top"><br><?php
                         $totalAmountConverted = $sssApplication->getMt4Balance() + ($sssApplication->getMt4Balance() * $sssApplication->getRoiRemainingMonth() * $sssApplication->getRoiPercentage() / 100);
                         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $sssApplication->getCp2Balance() + $sssApplication->getCp3Balance();
                         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
@@ -225,9 +228,10 @@ function calculateRshare() {
                     echo "<br>CP3 (Optional) = <b>$" . number_format($sssApplication->getCp3Balance(),2)."</b>";
                     echo "<br><br>is $" .number_format($totalAmountConvertedWithCp2Cp3,2). " / 0.80 = <b>" . number_format($totalRshare,2) . "</b> R-Shares";
                     ?>
+                    <br>
                 </td>
-                <td align="right"><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
-                <td><?php echo $sssApplication->getStatusCode(); ?></td>
+                <td valign="top" align="right"><br><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
+                <td valign="top"><br><?php echo $sssApplication->getStatusCode(); ?></td>
             </tr>
             <?php
                 }
