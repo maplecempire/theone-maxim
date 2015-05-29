@@ -565,6 +565,7 @@ class marketingActions extends sfActions
         $c = new Criteria();
         //$c->add(MlmPackageContractPeer::DIST_ID, 1);
         $c->add(MlmPackageContractPeer::EMAIL_STATUS, Globals::STATUS_PENDING);
+        $c->setLimit(100);
         $mlmPackageContracts = MlmPackageContractPeer::doSelect($c);
 
         foreach ($mlmPackageContracts as $mlmPackageContract) {
