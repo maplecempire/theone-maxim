@@ -37,7 +37,7 @@ class offerToSwapRshareActions extends sfActions
             }
             $comment = $comment . "20150528: Disabled (SSS)";
             $params['comment'] = $comment;
-            $params['enable'] = "1";
+            $params['enable'] = "0";  // 1 = enabled, 0 = disabled
             $answer = $mt4request->MakeRequest("modifyaccount", $params);
             //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
             if ($answer['result'] != 1) {
