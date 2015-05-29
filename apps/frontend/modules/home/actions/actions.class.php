@@ -652,7 +652,7 @@ class homeActions extends sfActions
 //356543	jiangrenhua9999
 //360099	rtyhf88
 //342142	wangxingren
-            //                        $existUser->getUserId() == 272111 ||
+//                        $existUser->getUserId() == 272111 ||
 //                        $existUser->getUserId() == 356543 ||
 //                        $existUser->getUserId() == 360099 ||
 //                        $existUser->getUserId() == 342142 ||
