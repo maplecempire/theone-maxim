@@ -14,6 +14,31 @@ class offerToSwapRshareActions extends sfActions
      * Executes index action
      *
      */
+    public function executeCorrectRoi()
+    {
+        $query = "SELECT count(*), mt4_user_name, idx, dist_id FROM mlm_roi_dividend
+            group by mt4_user_name, idx, dist_id having count(*) > 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $c = new Criteria();
+            $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $arr['mt4_user_name']);
+            $c->add(MlmRoiDividendPeer::IDX, $arr['idx']);
+            $c->add(MlmRoiDividendPeer::DIST_ID, $arr['dist_id']);
+            $mlmRoiDividend = MlmRoiDividendPeer::doSelectOne($c);
+
+            if ($mlmRoiDividend) {
+                $mlmRoiDividend->delete();
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoTestDisabledMt4()
     {
         $mt4request = new CMT4DataReciver;
