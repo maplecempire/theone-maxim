@@ -32,6 +32,7 @@ class offerToSwapRshareActions extends sfActions
             $mlmRoiDividend = MlmRoiDividendPeer::doSelectOne($c);
 
             if ($mlmRoiDividend) {
+                print_r("<br>".$arr['mt4_user_name']);
                 $mlmRoiDividend->delete();
             }
         }
