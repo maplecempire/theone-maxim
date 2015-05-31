@@ -894,8 +894,9 @@ class offerToSwapRshareActions extends sfActions
 
     function getFetchMt4List($distId, $mt4UserName)
     {
+        // FROM mlm_roi_dividend WHERE idx > 0 and idx <= 18 AND status_code = 'PENDING'
         $query = "SELECT distinct dist_id, mt4_user_name
-	        FROM mlm_roi_dividend WHERE idx > 0 and idx <= 18 AND status_code = 'PENDING'
+	        FROM mlm_roi_dividend WHERE idx > 0 AND status_code = 'PENDING'
 	        AND dist_id = " . $distId ;
 
 
@@ -961,7 +962,12 @@ class offerToSwapRshareActions extends sfActions
             $roiArr = $this->getRoiInformation($distId, $mt4Id);
 
             $roiPercentage = $roiArr['roi_percentage'];
-            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            $roiRemainingMonth = 0;
+            if ($roiArr['idx'] < 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 0;
+            }
             /*if ($roiRemainingMonth >= 10) {
                 $roiPercentage = 0;
             }*/
