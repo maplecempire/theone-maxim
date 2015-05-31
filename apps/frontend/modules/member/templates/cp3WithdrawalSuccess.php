@@ -406,7 +406,7 @@ if ($distributorDB->getIaccount() == "") {
                                      class="ui-state-error ui-corner-all">
                                     <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                                   class="ui-icon ui-icon-alert"></span>
-                                        <strong><?php echo __('Withdrawal will be open on 1am.') ?></strong></p>
+                                        <strong><?php echo __('Withdrawal will be open on 2am.') ?></strong></p>
                                 </div>
                             </div>
                         </td>
