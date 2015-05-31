@@ -1,7 +1,3 @@
-doTestDisabledMt4:
-  is_secure:   off
-  credentials: [[ MAXIM_DISTRIBUTOR ]]
-
 correctRoi:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]

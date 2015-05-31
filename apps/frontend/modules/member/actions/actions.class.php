@@ -3629,6 +3629,7 @@ class memberActions extends sfActions
 
             $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
             $mlm_distributor->setTreeStructure($treeStructure);
+            $mlm_distributor->setLeaderId($uplineDistDB->getLeaderId());
             $mlm_distributor->save();
             /****************************/
             /*****  Send email **********/
@@ -4030,6 +4031,7 @@ class memberActions extends sfActions
                 if ($this->getRequestParameter('productCode') == "mte") {
                     $mlm_distributor->setProductFxgold("Y");
                 }
+                $mlm_distributor->setLeaderId($uplineDistDB->getLeaderId());
                 $mlm_distributor->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $mlm_distributor->save();
@@ -4144,6 +4146,7 @@ class memberActions extends sfActions
 
                 $treeStructure = $uplineDistDB->getTreeStructure() . "|" . $mlm_distributor->getDistributorId() . "|";
                 $mlm_distributor->setTreeStructure($treeStructure);
+                $mlm_distributor->setLeaderId($uplineDistDB->getLeaderId());
                 $mlm_distributor->save();
 
             }
@@ -14495,6 +14498,7 @@ Wish you all the best.
             }
             var_dump($isPeter1);*/
             //exit();
+            // 273056 openman
             // 273058 yongman
             // 1504 cnbiz1, 61 kaseong, 257250 Vincentteh remove FMC
             // 141 Kaseong2, 261620 KASEONG04, 261621 KASEONG03, 276789 KASON1, 279103 fukuoka04 remove FMC
