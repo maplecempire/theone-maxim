@@ -42,8 +42,8 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
-$close = false;
-if (date("d") > 21 && $close == true) {
+$close = true;
+if (date("d") >= 1 && $close == true) {
 ?>
 <script type="text/javascript">
     window.location = "http://partner.maximtrader.com/home/logout";

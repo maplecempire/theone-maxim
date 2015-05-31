@@ -383,10 +383,10 @@
                                 <td colspan="3">
 <?php
                                     $closeLogin = false;
-                                    $monthStr = "05";
-                                    $monthEngStr = "May";
-                                    $dayStr = "31";
-                                    $hourStr = "10";
+                                    $monthStr = "06";
+                                    $monthEngStr = "June";
+                                    $dayStr = "01";
+                                    $hourStr = "06";
                                     $totalHourStopStr = "1";
                                     if ($closeLogin == false) {
 
