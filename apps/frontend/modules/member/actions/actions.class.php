@@ -9490,6 +9490,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
             }
+            if ($withdrawAmount > $this->monthlyPerformanceReturnAmount) {
+                $msg = $this->getContext()->getI18N()->__("Maximum withdrawal is limited to your monthly Performance Return amount");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
+            }
 
             if ($distributorDB->getCloseAccount() == "Y") {
                 // Allow free text for closed account.
@@ -14600,7 +14605,7 @@ Wish you all the best.
 
     function getMonthlyPerformanceReturnAmount($distId)
     {
-        $query = "SELECT SUM(package_price) AS SUB_TOTAL
+        $query = "SELECT SUM(package_price * roi_percentage / 100) AS SUB_TOTAL
 	        FROM mlm_roi_dividend WHERE idx = 1 AND status_code NOT IN ('CANCEL')
 	        AND dist_id = ".$distId;
         //var_dump($query);
