@@ -14,6 +14,16 @@ class offerToSwapRshareActions extends sfActions
      * Executes index action
      *
      */
+    public function executeReport()
+    {
+        print_r("Total: ".number_format($this->totalCountOfSss(), 2));
+        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance"), 2));
+        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance"), 2));
+        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance"), 2));
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCorrectRoi()
     {
         $query = "SELECT count(*), mt4_user_name, idx, dist_id FROM mlm_roi_dividend
@@ -77,12 +87,16 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
-    public function executeDoMt4()
+    public function executeDoDisabledMt4AndCheckForMaturity()
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, "PENDING");
         $c->setLimit(30);
         $sssApplications = SssApplicationPeer::doSelect($c);
+
+        foreach ($sssApplications as $sssApplication) {
+            //$sssApplication
+        }
     }
     public function executeDoGeneratePairingPoint()
     {
@@ -1064,6 +1078,44 @@ class offerToSwapRshareActions extends sfActions
                 LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
         WHERE roi.status_code = 'PENDING' AND dist.leader_id = ".$distId."
             ) roi_table";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_TOTAL"] != null) {
+                $count = $arr["_TOTAL"];
+            } else {
+                $count = 0;
+            }
+        }
+        return $count;
+    }
+    function totalCountOfSss()
+    {
+        $query = "SELECT count(*) as _TOTAL FROM sss_application ";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_TOTAL"] != null) {
+                $count = $arr["_TOTAL"];
+            } else {
+                $count = 0;
+            }
+        }
+        return $count;
+    }
+    function totalSumOfSss($fieldName)
+    {
+        $query = "SELECT SUM(".$fieldName.") as _TOTAL FROM sss_application ";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);

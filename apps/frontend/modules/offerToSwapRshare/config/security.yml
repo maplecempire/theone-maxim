@@ -2,5 +2,9 @@ correctRoi:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+report:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 all:
   is_secure:  on        # off is the default value anyway
