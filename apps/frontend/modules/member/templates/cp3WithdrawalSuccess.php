@@ -301,6 +301,7 @@ if ($distributorDB->getIaccount() == "") {
                         <br>
                         <ol style="color: #dc143c; padding-left: 20px;">
                             <li><?php echo __('Minimum withdrawal amount is USD100') ?></li>
+                            <li><?php echo __('Maximum withdrawal is limited to your monthly Performance Return amount') ?></li>
                             <li><?php echo __('Withdrawal request must be done during the first 7 days of each month') ?></li>
                             <li><?php echo __('Processing time will be at least 3 days') ?></li>
 <!--                            <li>--><?php //echo __('Payout will be by the 15th of each month') ?><!--</li>-->
@@ -315,6 +316,14 @@ if ($distributorDB->getIaccount() == "") {
 <!--                            </li>-->
                         </ol>
 
+                        <div class="ui-widget">
+                            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                                 class="ui-state-highlight ui-corner-all">
+                                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                              class="ui-icon ui-icon-info"></span>
+                                    <strong>Effective 1st June 2015, CP3 withdrawals will be limited to Performance Return amount. This is done to avoid attracting unnecessary attention to IMs withdrawal amount by their respective banks.</strong></p>
+                            </div>
+                        </div>
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
                             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
                                  class="ui-state-highlight ui-corner-all">
@@ -390,14 +399,26 @@ if ($distributorDB->getIaccount() == "") {
                 <?php
                 } else {
                 ?>
-                <tr class="tbl_form_row_odd">
+                    <tr class="tbl_form_row_odd">
+                        <td colspan="3">
+                            <div class="ui-widget">
+                                <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                                     class="ui-state-error ui-corner-all">
+                                    <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                                  class="ui-icon ui-icon-alert"></span>
+                                        <strong><?php echo __('Withdrawal will be open on 1am.') ?></strong></p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <!--<tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnTransfer"><?php echo __('Submit') ?></button>
+                        <button id="btnTransfer"><?php /*echo __('Submit') */?></button>
                     </td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>-->
                 <?php
                 }
                 ?>
