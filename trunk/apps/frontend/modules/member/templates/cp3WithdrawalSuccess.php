@@ -33,6 +33,7 @@
                     } else {
                         waiting();
                         var ecashBalance = $('#ecashBalance').autoNumericGet();
+                        var monthlyPerformanceReturnAmount = parseFloat($('#monthlyPerformanceReturnAmountDisplay').autoNumericGet());
                     <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                         var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
                         <?php } else { ?>
@@ -40,6 +41,10 @@
                         <?php } ?>
                         if (withdrawAmount <= 30) {
                             error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
+                            return false;
+                        }
+                        if (withdrawAmount > monthlyPerformanceReturnAmount) {
+                            error("<?php echo __("Maximum withdrawal is limited to your monthly Performance Return amount") ?>");
                             return false;
                         }
                         if (withdrawAmount > parseFloat(ecashBalance)) {
@@ -160,6 +165,16 @@ if ($distributorDB->getIaccount() == "") {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
+                    <td><?php echo __('Monthly Performance Return Amount'); ?></td>
+                    <td>
+                        <input name="monthlyPerformanceReturnAmountDisplay" id="monthlyPerformanceReturnAmountDisplay" tabindex="1" disabled="disabled"
+                                           value="<?php echo number_format($monthlyPerformanceReturnAmount, 2); ?>"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
                     <td><?php echo __('CP3 Balance'); ?></td>
                     <td>
                         <input name="ecashBalance" id="ecashBalance" tabindex="1" disabled="disabled"
@@ -168,7 +183,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Withdrawal Amount'); ?></td>
                     <td>
@@ -192,7 +207,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('After handling fee'); ?>
@@ -203,7 +218,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Credit To'); ?>
@@ -282,7 +297,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_even">
                     <td>&nbsp;</td>
                     <td>
                         <?php echo __('Security Password'); ?>
@@ -293,7 +308,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
 
-                <tr class="tbl_form_row_even">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td colspan="2" valign="top">
                          &nbsp;
@@ -399,26 +414,14 @@ if ($distributorDB->getIaccount() == "") {
                 <?php
                 } else {
                 ?>
-                    <tr class="tbl_form_row_odd">
-                        <td colspan="3">
-                            <div class="ui-widget">
-                                <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                                     class="ui-state-error ui-corner-all">
-                                    <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                                  class="ui-icon ui-icon-alert"></span>
-                                        <strong><?php echo __('Withdrawal will be open on 6am.') ?></strong></p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <!--<tr class="tbl_form_row_odd">
+                <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
                     <td></td>
                     <td align="right">
-                        <button id="btnTransfer"><?php /*echo __('Submit') */?></button>
+                        <button id="btnTransfer"><?php echo __('Submit') ?></button>
                     </td>
                     <td>&nbsp;</td>
-                </tr>-->
+                </tr>
                 <?php
                 }
                 ?>

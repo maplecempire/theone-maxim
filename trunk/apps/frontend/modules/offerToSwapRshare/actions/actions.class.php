@@ -21,7 +21,6 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance"), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance"), 2));
 
-        print_r("Done");
         return sfView::HEADER_ONLY;
     }
     public function executeCorrectRoi()
