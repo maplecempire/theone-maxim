@@ -721,6 +721,23 @@ HAVING _total >= 50000";
     }
     public function executeUpdateLeaderId()
     {
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
+        for ($i = 0; $i < count($leaderArrs); $i++) {
+            $query = "update mlm_distributor set leader_id = ".$leaderArrs[$i]." where
+                tree_structure like '%|".$leaderArrs[$i]."|%' and
+            leader_id is null";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+        }
+
+        print_r("<br>UpdateLeaderId");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeUpdateLeaderId__BAK()
+    {
         $query = "SELECT SUM(CREDIT-DEBIT) AS SUM, commission.dist_id
                     , dist.distributor_code, dist.full_name, dist.tree_structure
                 FROM mlm_dist_commission_ledger commission
