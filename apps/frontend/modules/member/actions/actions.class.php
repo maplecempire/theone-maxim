@@ -9485,7 +9485,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         //var_dump($withdrawAmount);
         //exit();
         if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->getTotalOfCp3Withdrawal($this->getUser()->getAttribute(Globals::SESSION_DISTID)) > 1) {
+            if ($this->getTotalOfCp3Withdrawal($this->getUser()->getAttribute(Globals::SESSION_DISTID)) >= 1) {
                 $msg = $this->getContext()->getI18N()->__("Withdrawal can only be submitted once a month");
                 $this->setFlash('errorMsg', $msg);
                 return $muUtil->updateLog($msg)->response("/member/cp3Withdrawal", 0, $msg);
@@ -9769,6 +9769,12 @@ We look forward to your custom in the near future. Should you have any queries, 
             $processFee = $percentageProcessFee;
 
         if ($this->getRequestParameter('ecashAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            if ($this->getTotalOfCp2Withdrawal($this->getUser()->getAttribute(Globals::SESSION_DISTID)) >= 1) {
+                $msg = $this->getContext()->getI18N()->__("Withdrawal can only be submitted once a month");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/ecashWithdrawal", 0, $msg);
+            }
+
             if ($distributorDB->getCloseAccount() == "Y") {
                 // Allow free text for closed account.
                 if ($withdrawAmount <= $processFee) {
@@ -14618,6 +14624,28 @@ Wish you all the best.
     {
         $query = "SELECT count(*) AS SUB_TOTAL
 	        FROM mlm_cp3_withdraw WHERE status_code IN ('PROCESSING', 'PENDING')
+	            AND dist_id = ".$distId;
+        //var_dump($query);
+        //exit();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getTotalOfCp2Withdrawal($distId)
+    {
+        $query = "SELECT count(*) AS SUB_TOTAL
+	        FROM mlm_ecash_withdraw WHERE status_code IN ('PROCESSING', 'PENDING')
 	            AND dist_id = ".$distId;
         //var_dump($query);
         //exit();
