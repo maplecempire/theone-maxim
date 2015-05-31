@@ -425,6 +425,12 @@ if (date("d") > 21 && $close == true) {
             <a href="/member/placementTree?p=sssStat"><span><?php echo __('Downline Stat - SSS'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <?php } ?>
+        <?php
+        if ($distDB->getDistributorId() == $distDB->getLeaderId()) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/memberList"><span><?php echo __('Member List - SSS'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <?php } ?>
     </ul>
 
     <?php
