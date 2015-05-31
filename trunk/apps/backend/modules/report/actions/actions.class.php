@@ -728,6 +728,7 @@ HAVING _total >= 50000";
                 tree_structure like '%|".$leaderArrs[$i]."|%' and
             leader_id is null";
 
+            var_dump("<br>".$query);
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
             $resultset = $statement->executeQuery();
