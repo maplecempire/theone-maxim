@@ -815,17 +815,94 @@ class offerToSwapRshareActions extends sfActions
     public function executeSwapNote()
     {
     }
+    public function executeMemberList()
+    {
+    }
+    public function executeDownlineMemberList()
+    {
+        $sColumns = $this->getRequestParameter('sColumns');
+        $aColumns = explode(",", $sColumns);
+
+        $sColumns = " distinct ".$sColumns;
+
+        $iColumns = $this->getRequestParameter('iColumns');
+
+        $offset = $this->getRequestParameter('iDisplayStart');
+        $sEcho = $this->getRequestParameter('sEcho');
+        $limit = $this->getRequestParameter('iDisplayLength');
+        $arr = array();
+        $sql = " FROM mlm_roi_dividend roi
+        LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id   ";
+
+        /******   total records  *******/
+        $sWhere = "  WHERE roi.status_code = 'PENDING' AND dist.leader_id =".$this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        /******   total filtered records  *******/
+
+        $totalRecords = $this->getTotalRecordsFromRoiTable($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $totalFilteredRecords = $totalRecords;
+
+        /******   sorting  *******/
+        $sOrder = "ORDER BY ";
+        for ($i = 0; $i < intval($this->getRequestParameter('iSortingCols')); $i++)
+        {
+            if ($this->getRequestParameter('bSortable_' . intval($this->getRequestParameter('iSortCol_' . $i))) == "true") {
+                $sOrder .= $aColumns[intval($this->getRequestParameter('iSortCol_' . $i))] . "
+                    " . mysql_real_escape_string($this->getRequestParameter('sSortDir_' . $i)) . ", ";
+            }
+        }
+
+        $sOrder = substr_replace($sOrder, "", -2);
+        if ($sOrder == "ORDER BY") {
+            $sOrder = "";
+        }
+
+        /******   pagination  *******/
+        $sLimit = " LIMIT " . mysql_real_escape_string($offset) . ", " . mysql_real_escape_string($limit);
+
+//        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+        $query = "SELECT " . $sColumns . " " . $sql . " " . $sWhere . " " . $sOrder . " " . $sLimit;
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next())
+        {
+            $resultArr = $resultset->getRow();
+
+            $remark = $resultArr['remark'];
+
+            $arr[] = array(
+                $resultArr['dist_id'] == null ? "" : $resultArr['dist_id'],
+                $resultArr['mt4_user_name'] == null ? "" : $resultArr['mt4_user_name'],
+                $resultArr['distributor_code'] == null ? "" : $resultArr['distributor_code'],
+                $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
+                $resultArr['contact'] == null ? "" : $resultArr['contact'],
+                $resultArr['email'] == null ? "" : $resultArr['email']
+            );
+        }
+        $output = array(
+            "sEcho" => intval($sEcho),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalFilteredRecords,
+            "aaData" => $arr
+        );
+        echo json_encode($output);
+
+        return sfView::HEADER_ONLY;
+    }
 
     function getFetchMt4List($distId, $mt4UserName)
     {
         $query = "SELECT distinct dist_id, mt4_user_name
 	        FROM mlm_roi_dividend WHERE idx > 0 and idx <= 18 AND status_code = 'PENDING'
-	        AND dist_id = " . $distId;
+	        AND dist_id = " . $distId ;
 
 
         if ($mt4UserName != "") {
             $query = $query . " AND mt4_user_name = ?";
         }
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         if ($mt4UserName != "") {
@@ -970,5 +1047,31 @@ class offerToSwapRshareActions extends sfActions
             }
         }
         return 0;
+    }
+
+    function getTotalRecordsFromRoiTable($distId)
+    {
+        $query = "SELECT count(*) AS _TOTAL FROM
+        (
+        SELECT distinct roi.dist_id, roi.mt4_user_name, dist.full_name, dist.contact, dist.email
+            FROM mlm_roi_dividend roi
+                LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
+        WHERE roi.status_code = 'PENDING' AND dist.leader_id = ".$distId."
+            ) roi_table";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_TOTAL"] != null) {
+                $count = $arr["_TOTAL"];
+            } else {
+                $count = 0;
+            }
+        }
+        return $count;
     }
 }
