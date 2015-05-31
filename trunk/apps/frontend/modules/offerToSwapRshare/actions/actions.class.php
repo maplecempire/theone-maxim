@@ -77,11 +77,18 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeDoMt4()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, "PENDING");
+        $c->setLimit(30);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+    }
     public function executeDoGeneratePairingPoint()
     {
         $c = new Criteria();
-        //$c->add(SssApplicationPeer::STATUS_CODE, "PAIRING");
-        $c->setLimit(1);
+        $c->add(SssApplicationPeer::STATUS_CODE, "PAIRING");
+        $c->setLimit(30);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
