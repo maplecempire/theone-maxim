@@ -10,6 +10,13 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeUpdateRWallet()
+    {
+        $this->updateRwallet($this->getRequestParameter('q'));
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeUpdatePairingCreatedDate()
     {
         $c = new Criteria();
@@ -171,7 +178,7 @@ class offerToSwapRshareActions extends sfActions
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
                 $level = 0;
-                while ($level < 10) {
+                while ($level < 1) {
                     if ($bonusDate == $currentDate) {
                         print_r("break<br>");
                         break;
@@ -182,8 +189,18 @@ class offerToSwapRshareActions extends sfActions
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_ID);
                     $dists = MlmDistributorPeer::doSelect($c);
-                    print_r("total Dist:".count($dists)."<br><br>");
-                    foreach ($dists as $dist) {
+
+                    $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on <= ''";
+
+                    $connection = Propel::getConnection();
+                    $statement = $connection->prepareStatement($query);
+                    $resultset = $statement->executeQuery();
+                    $resultArray = array();
+                    $count = 0;
+                    while ($resultset->next()) {
+                        $dist = MlmDistributorPeer::retrieveByPK($resultArray['dist_id']);
+                        print_r("total Dist:".count($dists)."<br><br>");
+                    //foreach ($dists as $dist) {
                         $c = new Criteria();
                         $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
                         $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
@@ -197,8 +214,8 @@ class offerToSwapRshareActions extends sfActions
                         $flushLimit = $packageDB->getDailyMaxPairing();
                         $legFlushLimit = $packageDB->getDailyMaxPairing() * 10;
                         print_r("DistId ".$distId."<br>");
-                        $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $currentDate);
-                        $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $currentDate);
+                        $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $bonusDate);
+                        $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $bonusDate);
 
                         if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
@@ -1821,5 +1838,49 @@ class offerToSwapRshareActions extends sfActions
         $distributorDB->save();
 
         return sfView::HEADER_ONLY;
+    }
+
+    function findPairingLedgersBonus($distributorId, $position, $date)
+    {
+        $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($date)));
+        //var_dump($yesterday);
+        //exit();
+        $totalCredit = $this->getPairingSumCredit($distributorId, $position, $yesterday);
+        $totalDebit = $this->getPairingSumDebit($distributorId, $position, null);
+
+        if ($totalCredit > $totalDebit) {
+            return $totalCredit - $totalDebit;
+        } else {
+            return 0;
+        }
+    }
+
+    function getPairingSumCredit($distributorId, $position, $date)
+    {
+        $query = "SELECT SUM(credit) AS SUB_TOTAL FROM sss_dist_pairing_ledger WHERE dist_id = ? "
+                 . " AND left_right = ?";
+
+        if ($date != null) {
+            $query .= " AND created_on <= ?";
+        }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $position);
+
+        if ($date != null) {
+            $statement->set(3, $date . " 23:59:59");
+        }
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }
