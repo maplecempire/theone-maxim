@@ -148,6 +148,7 @@ class offerToSwapRshareActions extends sfActions
                 } else {
                     $comment = $answer["comment"];
                     $mt4Enable = $answer["enable"];
+                    $mt4Balance = $answer["balance"];
                     if ($comment != "") {
                         $comment .= ";";
                     }
@@ -168,6 +169,7 @@ class offerToSwapRshareActions extends sfActions
                             $sssApplication->setStatusCode("ERROR");
                             $sssApplication->save();
                         } else {
+                            $sssApplication->setMt4Balance($mt4Balance);
                             $sssApplication->setStatusCode("PAIRING");
                             $sssApplication->save();
                         }
