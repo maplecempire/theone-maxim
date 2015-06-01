@@ -1488,7 +1488,7 @@ class offerToSwapRshareActions extends sfActions
     function getRoiInformation($distId, $mt4UserName)
     {
         $query = "SELECT devidend_id, dist_id, mt4_user_name, idx, account_ledger_id, dividend_date, package_id, package_price, roi_percentage, mt4_balance, dividend_amount, remarks, exceed_dist_id, exceed_roi_percentage, exceed_dividend_amount, status_code, created_by, created_on, updated_by, updated_on, first_dividend_date
-	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('PENDING') AND dist_id = ? ORDER BY idx limit 1 ";
+	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('PENDING','SSS') AND dist_id = ? ORDER BY idx limit 1 ";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
