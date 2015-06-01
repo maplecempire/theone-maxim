@@ -1785,13 +1785,13 @@ class offerToSwapRshareActions extends sfActions
             print_r("======================================================");
             print_r("dist code=".$distId);
             print_r("<br>");
-            var_dump($ggMemberRwalletRecord);
+            //var_dump($ggMemberRwalletRecord);
             if ($ggMemberRwalletRecord->getType() == "c" || $ggMemberRwalletRecord->getType() == "credit") {
                 $balance = $balance + $ggMemberRwalletRecord->getAmount();
             } else if ($ggMemberRwalletRecord->getType() == "debit") {
                 $balance = $balance - $ggMemberRwalletRecord->getAmount();
             }
-            $ggMemberRwalletRecord->setBalance($balance);
+            $ggMemberRwalletRecord->setBal($balance);
             $ggMemberRwalletRecord->save();
             print_r("balance=".$balance);
             print_r("<br>");
