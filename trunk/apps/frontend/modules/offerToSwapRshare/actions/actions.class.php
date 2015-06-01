@@ -189,6 +189,9 @@ class offerToSwapRshareActions extends sfActions
                 throw $e;
             }
         }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
     }
     public function executeDoGeneratePairingPoint()
     {
