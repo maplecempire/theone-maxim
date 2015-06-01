@@ -235,6 +235,8 @@ class offerToSwapRshareActions extends sfActions
                 $pairingPoint = $totalAmountConvertedWithCp2Cp3 * Globals::PAIRING_POINT_BV;
                 $pairingPointActual = $totalAmountConvertedWithCp2Cp3;
 
+                print_r("<br>".$distributorDB->getDistributorId());
+
                 if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
                     $level = 0;
                     $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
