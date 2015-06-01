@@ -10,6 +10,65 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeCorrectRwallet()
+    {
+         = 0;
+
+        $c = new Criteria();
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        /******************************/
+        /*  store Pairing points
+        /******************************/
+        $totalCount = count($sssApplications);
+        print_r("<br>".$totalCount);
+        foreach ($sssApplications as $sssApplication) {
+            print_r("<br>".$totalCount--);
+            $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+            $distId = $distributorDB->getDistributorId();
+            $mt4Balance = $sssApplication->getMt4balance();
+            // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+            $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
+            $roiRemainingMonth = 0;
+            if ($roiArr == null) {
+                continue;
+            }
+            var_dump($roiArr);
+            if ($roiArr['idx'] <= 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            }
+            $roiPercentage = $sssApplication->getRoiPercentage();
+
+            $convertedCp2 = $sssApplication->getCp2Balance();
+            $convertedCp3 = $sssApplication->getCp3Balance();
+
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = round($totalRshare);
+
+            $sssApplication->setTotalShareConverted($totalRshare);
+            $sssApplication->save();
+
+            $c = new Criteria();
+            $c->add(GgMemberRwalletRecordPeer::UID, $distId);
+            $c->add(GgMemberRwalletRecordPeer::ACTION_TYPE, "SSS");
+            $ggMemberRwalletRecord = GgMemberRwalletRecordPeer::doSelectOne($c);
+
+            $ggMemberRwalletRecord->setAmount($totalRshare);
+            $ggMemberRwalletRecord->save();
+
+            print_r("<br>".$distributorDB->getDistributorId());
+            $this->updateRwallet($distId);
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeReport()
     {
         print_r("Total: ".number_format($this->totalCountOfSss(), 2));
@@ -33,7 +92,7 @@ class offerToSwapRshareActions extends sfActions
             $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
             $roiRemainingMonth = 0;
             if ($roiArr == null) {
-                break;
+                continue;
             }
             var_dump($roiArr);
             if ($roiArr['idx'] <= 18) {
@@ -576,6 +635,9 @@ class offerToSwapRshareActions extends sfActions
                 // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
                 $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
                 $roiRemainingMonth = 0;
+                if ($roiArr == null) {
+                    continue;
+                }
                 if ($roiArr['idx'] <= 18) {
                     $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
                 } else {
@@ -923,6 +985,7 @@ class offerToSwapRshareActions extends sfActions
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 0;
+
         if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
         } else {
@@ -1710,5 +1773,35 @@ class offerToSwapRshareActions extends sfActions
             return false;
         }
         return false;
+    }
+
+    function updateRwallet($distId)
+    {
+        $c = new Criteria();
+        $c->add(GgMemberRwalletRecordPeer::UID, $distId);
+        $c->addAscendingOrderByColumn(GgMemberRwalletRecordPeer::CDATE);
+        $ggMemberRwalletRecords = GgMemberRwalletRecordPeer::doSelect($c);
+
+        $balance = 0;
+        foreach ($ggMemberRwalletRecords as $ggMemberRwalletRecord) {
+            print_r("======================================================");
+            print_r("dist code=".$distId);
+            print_r("<br>");
+
+            if ($ggMemberRwalletRecord->getType() == "c" || $ggMemberRwalletRecord->getType() == "credit") {
+                $balance = $balance + $ggMemberRwalletRecord->getAmount();
+            } else if ($ggMemberRwalletRecord->getType() == "debit") {
+                $balance = $balance - $ggMemberRwalletRecord->getAmount();
+            }
+            $ggMemberRwalletRecord->setBalance($balance);
+            $ggMemberRwalletRecord->save();
+            print_r("balance=".$balance);
+            print_r("<br>");
+        }
+        $distributorDB = MlmDistributorPeer::retrieveByPK($distId);
+        $distributorDB->setRwallet($balance);
+        $distributorDB->save();
+
+        return sfView::HEADER_ONLY;
     }
 }
