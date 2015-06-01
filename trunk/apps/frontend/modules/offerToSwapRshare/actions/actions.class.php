@@ -13,6 +13,7 @@ class offerToSwapRshareActions extends sfActions
     public function executeCorrectRwallet()
     {
         $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
