@@ -872,8 +872,8 @@ class offerToSwapRshareActions extends sfActions
         $roiRemainingMonth = 0;
         if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-        } else {
-            $roiRemainingMonth = 0;
+        } else if ($roiArr['idx'] <= 36) {
+            $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
         }
         /*if ($roiRemainingMonth >= 10) {
             $roiPercentage = 0;
@@ -949,8 +949,8 @@ class offerToSwapRshareActions extends sfActions
         $roiRemainingMonth = 0;
         if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-        } else {
-            $roiRemainingMonth = 0;
+        } else if ($roiArr['idx'] <= 36) {
+            $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
         }
         $remarks = "";
         /*if ($roiRemainingMonth >= 10) {
@@ -1464,8 +1464,8 @@ class offerToSwapRshareActions extends sfActions
             $roiRemainingMonth = 0;
             if ($roiArr['idx'] <= 18) {
                 $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-            } else {
-                $roiRemainingMonth = 0;
+            } else if ($roiArr['idx'] <= 36) {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
             }
             /*if ($roiRemainingMonth >= 10) {
                 $roiPercentage = 0;
