@@ -51,8 +51,10 @@ class offerToSwapRshareActions extends sfActions
 
             $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
 
-            var_dump("<br>Total R-Share".$totalRshare);
-            var_dump("<br>Total Amount".$totalAmountConvertedWithCp2Cp3);
+            var_dump("<br>Total mt4:".$mt4Balance);
+            var_dump("<br>Total roi remaining:".$roiRemainingMonth);
+            var_dump("<br>Total R-Share:".$totalRshare);
+            var_dump("<br>Total Amount:".$totalAmountConvertedWithCp2Cp3);
 
             print_r("<br>".$distributorDB->getDistributorId());
         }
