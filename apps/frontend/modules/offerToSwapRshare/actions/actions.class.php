@@ -25,7 +25,7 @@ class offerToSwapRshareActions extends sfActions
             $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
             print_r("<br>".$totalCount--);
             $query = "UPDATE sss_dist_pairing_ledger SET created_on = '" .$sssApplication->getCreatedOn()."' WHERE remarks LIKE '%".$distributorDB->getDistributorCode()."%'";
-            //var_dump($query);
+            var_dump($query);
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
             $statement->executeQuery();
