@@ -76,6 +76,14 @@ abstract class Globals {
     const STATUS_PUBLISHED = 'PUBLISHED';
 
     /************************************/
+    /*****    SSS      ******/
+    /************************************/
+    const STATUS_SSS_PENDING = 'PENDING';
+    const STATUS_SSS_SUCCESS = 'SUCCESS';
+    const STATUS_SSS_ERROR = 'ERROR';
+    const STATUS_SSS_PAIRING = 'PAIRING';
+
+    /************************************/
     /*****    Maturity Status      ******/
     /************************************/
     const STATUS_MATURITY_PENDING = 'PENDING';
