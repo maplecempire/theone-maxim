@@ -50,6 +50,8 @@ class SssApplicationMapBuilder {
 
 		$tMap->addColumn('ROI_PERCENTAGE', 'RoiPercentage', 'double', CreoleTypes::DECIMAL, false, 12);
 
+		$tMap->addColumn('TOTAL_AMOUNT_CONVERTED_WITH_CP2CP3', 'TotalAmountConvertedWithCp2cp3', 'double', CreoleTypes::DECIMAL, true, 12);
+
 		$tMap->addColumn('SHARE_VALUE', 'ShareValue', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('TOTAL_SHARE_CONVERTED', 'TotalShareConverted', 'double', CreoleTypes::DECIMAL, false, 12);
