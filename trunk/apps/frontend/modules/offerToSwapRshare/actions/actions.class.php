@@ -10,6 +10,31 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeUpdatePairingCreatedDate()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        /******************************/
+        /*  store Pairing points
+        /******************************/
+        $totalCount = count($sssApplications);
+        print_r("<br>".$totalCount);
+        foreach ($sssApplications as $sssApplication) {
+            $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+            print_r("<br>".$totalCount--);
+            $query = "UPDATE sss_dist_pairing_ledger SET created_on = '" .$sssApplication->getCreatedOn()."' WHERE remarks LIKE '%".$distributorDB->getDistributorCode()."%'";
+            //var_dump($query);
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $statement->executeQuery();
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
+
     public function executeCorrectRwallet()
     {
         $c = new Criteria();
@@ -133,7 +158,7 @@ class offerToSwapRshareActions extends sfActions
 
             print_r("Start<br>");
             $c = new Criteria();
-            $c->add(MlmDailyBonusLogPeer::BONUS_TYPE, Globals::DAILY_BONUS_LOG_TYPE_DAILY);
+            $c->add(MlmDailyBonusLogPeer::BONUS_TYPE, Globals::DAILY_BONUS_LOG_TYPE_DAILY_SSS);
             $c->addDescendingOrderByColumn(MlmDailyBonusLogPeer::BONUS_DATE);
             $mlmDailyBonusLogDB = MlmDailyBonusLogPeer::doSelectOne($c);
             print_r("Fetch Daily Bonus Log<br>");
@@ -144,8 +169,6 @@ class offerToSwapRshareActions extends sfActions
 
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
-                print_r("bonusDate=".$bonusDate."::".$this->getRequestParameter('q')."<br>");
-
                 $level = 0;
                 while ($level < 10) {
                     if ($bonusDate == $currentDate) {
@@ -156,15 +179,10 @@ class offerToSwapRshareActions extends sfActions
                     print_r("level start :".$level."<br><br>");
                     $c = new Criteria();
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
-                    $c->setOffset($this->getRequestParameter('q'));
                     $c->addAscendingOrderByColumn(MlmDistributorPeer::DISTRIBUTOR_ID);
                     $dists = MlmDistributorPeer::doSelect($c);
                     print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
-                        if ($this->isSssGdbIssue($dist->getDistributorId(), $currentDate) == true) {
-                            continue;
-                        }
-
                         $c = new Criteria();
                         $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
                         $mlmDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
