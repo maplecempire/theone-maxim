@@ -14649,8 +14649,9 @@ Wish you all the best.
 
     function getTotalOfCp2Withdrawal($distId)
     {
+        //FROM mlm_ecash_withdraw WHERE status_code IN ('PROCESSING', 'PENDING')
         $query = "SELECT count(*) AS SUB_TOTAL
-	        FROM mlm_ecash_withdraw WHERE status_code IN ('PROCESSING', 'PENDING')
+	        FROM mlm_ecash_withdraw WHERE status_code IN ('PENDING')
 	            AND dist_id = ".$distId;
         //var_dump($query);
         //exit();
