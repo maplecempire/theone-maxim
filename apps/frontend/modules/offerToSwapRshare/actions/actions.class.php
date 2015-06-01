@@ -24,7 +24,7 @@ class offerToSwapRshareActions extends sfActions
         foreach ($sssApplications as $sssApplication) {
             $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
             print_r("<br>".$totalCount--);
-            $query = "UPDATE sss_dist_pairing_ledger SET created_on = '" .$sssApplication->getCreatedOn()."' WHERE remarks LIKE '%".$distributorDB->getDistributorCode()."%'";
+            $query = "UPDATE sss_dist_pairing_ledger SET created_on = '" .$sssApplication->getCreatedOn()."' WHERE remark LIKE '%".$distributorDB->getDistributorCode()."%'";
             var_dump($query);
             exit();
             $connection = Propel::getConnection();
