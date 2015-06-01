@@ -17,6 +17,47 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance"), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance"), 2));
 
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
+        $c->add(SssApplicationPeer::DIST_ID, 268436);
+        $c->setLimit(1);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        /******************************/
+        /*  store Pairing points
+        /******************************/
+        print_r("<br>".count($sssApplications));
+        foreach ($sssApplications as $sssApplication) {
+            $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+            $mt4Balance = $sssApplication->getMt4balance();
+            // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+            $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
+            $roiRemainingMonth = 0;
+            if ($roiArr['idx'] <= 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            }
+            $roiPercentage = $sssApplication->getRoiPercentage();
+
+            $convertedCp2 = $sssApplication->getCp2Balance();
+            $convertedCp3 = $sssApplication->getCp3Balance();
+
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = round($totalRshare);
+
+            $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
+
+            var_dump("<br>Total R-Share".$totalRshare);
+            var_dump("<br>Total Amount".$totalAmountConvertedWithCp2Cp3);
+
+            print_r("<br>".$distributorDB->getDistributorId());
+        }
+
         return sfView::HEADER_ONLY;
     }
     public function executeDailyBonus()
@@ -1441,7 +1482,7 @@ class offerToSwapRshareActions extends sfActions
     function getRoiInformation($distId, $mt4UserName)
     {
         $query = "SELECT devidend_id, dist_id, mt4_user_name, idx, account_ledger_id, dividend_date, package_id, package_price, roi_percentage, mt4_balance, dividend_amount, remarks, exceed_dist_id, exceed_roi_percentage, exceed_dividend_amount, status_code, created_by, created_on, updated_by, updated_on, first_dividend_date
-	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code = 'PENDING' AND dist_id = ? ORDER BY idx limit 1 ";
+	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code = ('PENDING') AND dist_id = ? ORDER BY idx limit 1 ";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
