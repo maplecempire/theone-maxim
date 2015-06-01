@@ -295,6 +295,7 @@ abstract class Globals {
     /*****   Daily Bonus Log  ******/
     /*******************************/
     const DAILY_BONUS_LOG_TYPE_DAILY = 'DAILY';
+    const DAILY_BONUS_LOG_TYPE_DAILY_SSS = 'DAILY SSS';
 
     /*******************************/
     /*****   Purchase Package  *****/

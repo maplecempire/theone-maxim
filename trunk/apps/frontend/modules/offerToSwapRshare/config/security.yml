@@ -1,3 +1,7 @@
+dailyBonus:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 doDisabledMt4AndCheckForMaturity:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
