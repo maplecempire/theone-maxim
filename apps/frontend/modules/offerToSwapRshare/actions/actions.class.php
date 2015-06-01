@@ -32,6 +32,7 @@ class offerToSwapRshareActions extends sfActions
             // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
             $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
             $roiRemainingMonth = 0;
+            var_dump($roiArr);
             if ($roiArr['idx'] <= 18) {
                 $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
             } else {
