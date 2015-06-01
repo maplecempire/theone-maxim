@@ -26,6 +26,7 @@ class offerToSwapRshareActions extends sfActions
             print_r("<br>".$totalCount--);
             $query = "UPDATE sss_dist_pairing_ledger SET created_on = '" .$sssApplication->getCreatedOn()."' WHERE remarks LIKE '%".$distributorDB->getDistributorCode()."%'";
             var_dump($query);
+            exit();
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
             $statement->executeQuery();
