@@ -14628,7 +14628,7 @@ Wish you all the best.
     function getTotalOfCp3Withdrawal($distId)
     {
         $query = "SELECT count(*) AS SUB_TOTAL
-	        FROM mlm_cp3_withdraw WHERE status_code IN ('PROCESSING', 'PENDING')
+	        FROM mlm_cp3_withdraw WHERE status_code IN ('PENDING')
 	            AND dist_id = ".$distId;
         //var_dump($query);
         //exit();
