@@ -205,6 +205,7 @@ class offerToSwapRshareActions extends sfActions
         /******************************/
         /*  store Pairing points
         /******************************/
+        print_r("<br>".count($sssApplications));
         foreach ($sssApplications as $sssApplication) {
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
             try {
