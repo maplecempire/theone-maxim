@@ -141,10 +141,10 @@ class offerToSwapRshareActions extends sfActions
                     if ($remark != ""){
                         $remark .= "; ";
                     }
-                    $remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
-                    $sssApplication->setRemarks($remark);
-                    $sssApplication->setStatusCode("ERROR");
-                    $sssApplication->save();
+                    //$remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
+                    //$sssApplication->setRemarks($remark);
+                    //$sssApplication->setStatusCode("ERROR");
+                    //$sssApplication->save();
                 } else {
                     $comment = $answer["comment"];
                     $mt4Enable = $answer["enable"];
@@ -199,7 +199,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, "PAIRING");
-        $c->setLimit(30);
+        $c->setLimit(1);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
