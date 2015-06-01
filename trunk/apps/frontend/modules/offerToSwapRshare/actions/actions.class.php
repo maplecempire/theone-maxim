@@ -90,11 +90,104 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, "PENDING");
-        $c->setLimit(30);
+        $c->setLimit(1);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
-            //$sssApplication
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                $mt4Id = $sssApplication->getMt4UserName();
+
+                $array = explode(',', Globals::STATUS_MATURITY_PENDING.",".Globals::STATUS_MATURITY_CLIENT_WITHDRAW.",".Globals::STATUS_MATURITY_WITHDRAW.",".Globals::STATUS_MATURITY_ON_HOLD);
+
+                $c = new Criteria();
+                $c->add(NotificationOfMaturityPeer::MT4_USER_NAME, $mt4Id);
+                $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
+                $notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
+
+                if ($notificationOfMaturity) {
+                    $notificationStatus = $notificationOfMaturity->getStatusCode();
+                    $notificationOfMaturity->setInternalRemark("STATUS: ".$notificationStatus);
+                    $notificationOfMaturity->setStatusCode("SSS");
+                    $notificationOfMaturity->save();
+
+                    if ($notificationStatus == Globals::STATUS_MATURITY_WITHDRAW) {
+                        $remark = $sssApplication->getRemarks();
+                        if ($remark != ""){
+                            $remark .= "; ";
+                        }
+                        $remark .= date('Y-m-d H:i:s') .": Notification of Maturity already withdrawn.";
+                        $sssApplication->setRemarks($remark);
+                        $sssApplication->setStatusCode("ERROR");
+                        $sssApplication->save();
+                    }
+                }
+
+                // disabled MT4
+                $mt4request = new CMT4DataReciver;
+                $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+                $params['array'] = array();
+                $params['login'] = $mt4Id;
+                var_dump($params);
+                $answer = $mt4request->MakeRequest("getaccountinfo", $params);
+                var_dump($answer);
+                print_r("<br><br>");
+                if ($answer['result'] != 1) {
+                    var_dump("<br>error:".$answer["reason"]);
+                    //return sfView::HEADER_ONLY;
+                    $remark = $sssApplication->getRemarks();
+                    if ($remark != ""){
+                        $remark .= "; ";
+                    }
+                    $remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
+                    $sssApplication->setRemarks($remark);
+                    $sssApplication->setStatusCode("ERROR");
+                    $sssApplication->save();
+                } else {
+                    $comment = $answer["comment"];
+                    $mt4Enable = $answer["enable"];
+                    if ($comment != "") {
+                        $comment .= ";";
+                    }
+                    if ($mt4Enable == "1") {
+                        $comment = $comment . date('Y-m-d H:i:s').": Disabled (SSS)";
+                        $params['comment'] = $comment;
+                        $params['enable'] = "0";  // 1 = enabled, 0 = disabled
+                        $answer = $mt4request->MakeRequest("modifyaccount", $params);
+                        //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+                        if ($answer['result'] != 1) {
+                            var_dump("<br>error:".$answer["reason"]);
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != ""){
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') .": MT4 Account cannot be disabled.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setStatusCode("ERROR");
+                            $sssApplication->save();
+                        } else {
+                            $sssApplication->setStatusCode("PAIRING");
+                            $sssApplication->save();
+                        }
+                    } else {
+                        $remark = $sssApplication->getRemarks();
+                        if ($remark != ""){
+                            $remark .= "; ";
+                        }
+                        $remark .= date('Y-m-d H:i:s') .": MT4 Account disabled.";
+                        $sssApplication->setRemarks($remark);
+                        $sssApplication->setStatusCode("ERROR");
+                        $sssApplication->save();
+                    }
+                }
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
         }
     }
     public function executeDoGeneratePairingPoint()
