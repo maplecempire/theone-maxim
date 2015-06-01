@@ -793,14 +793,14 @@ class offerToSwapRshareActions extends sfActions
                     }
                 }
 
-                $c = new Criteria();
+                /*$c = new Criteria();
                 $c->addDescendingOrderByColumn(GgMemberRwalletRecordPeer::CDATE);
-                $ggMemberRwalletRecordDB = GgMemberRwalletRecordPeer::doSelectOne($c);
+                $ggMemberRwalletRecordDB = GgMemberRwalletRecordPeer::doSelectOne($c);*/
 
-                $rwalletBalance = 0;
-                if ($ggMemberRwalletRecordDB) {
+                $rwalletBalance = $distributorDB->getRwallet();
+                /*if ($ggMemberRwalletRecordDB) {
                     $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
-                }
+                }*/
                 $rwalletBalance = $rwalletBalance + $totalRshare;
                 // credited S4
                 $ggMemberRwalletRecord = new GgMemberRwalletRecord();
