@@ -491,7 +491,12 @@ class offerToSwapRshareActions extends sfActions
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
         $roiPercentage = $roiArr['roi_percentage'];
-        $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        $roiRemainingMonth = 0;
+        if ($roiArr['idx'] < 18) {
+            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        } else {
+            $roiRemainingMonth = 0;
+        }
         /*if ($roiRemainingMonth >= 10) {
             $roiPercentage = 0;
         }*/
@@ -563,7 +568,12 @@ class offerToSwapRshareActions extends sfActions
         }
 
         $roiPercentage = $roiArr['roi_percentage'];
-        $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        $roiRemainingMonth = 0;
+        if ($roiArr['idx'] < 18) {
+            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        } else {
+            $roiRemainingMonth = 0;
+        }
         $remarks = "";
         /*if ($roiRemainingMonth >= 10) {
             $remarks = "ROI:".$roiPercentage."%";
