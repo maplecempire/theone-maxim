@@ -1,4 +1,8 @@
-correctRoi:
+doDisabledMt4AndCheckForMaturity:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+doGeneratePairingPoint:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
