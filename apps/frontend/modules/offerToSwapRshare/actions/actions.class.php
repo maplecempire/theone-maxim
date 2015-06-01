@@ -12,8 +12,6 @@ class offerToSwapRshareActions extends sfActions
 {
     public function executeCorrectRwallet()
     {
-         = 0;
-
         $c = new Criteria();
         $sssApplications = SssApplicationPeer::doSelect($c);
 

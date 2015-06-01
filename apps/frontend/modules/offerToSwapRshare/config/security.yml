@@ -1,3 +1,7 @@
+correctRwallet:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 dailyBonus:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
