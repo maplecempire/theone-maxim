@@ -404,7 +404,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
-        $c->setLimit(10);
+        $c->setLimit(30);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
@@ -513,7 +513,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
-        $c->setLimit(15);
+        $c->setLimit(30);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
