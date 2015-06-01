@@ -337,7 +337,6 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
-
     public function executeCorrectRoi()
     {
         $query = "SELECT count(*), mt4_user_name, idx, dist_id FROM mlm_roi_dividend
@@ -525,9 +524,16 @@ class offerToSwapRshareActions extends sfActions
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
             try {
                 $con->begin();
-
+                $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
                 $mt4Balance = $sssApplication->getMt4balance();
-                $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+                // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+                $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
+                $roiRemainingMonth = 0;
+                if ($roiArr['idx'] <= 18) {
+                    $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                } else {
+                    $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                }
                 $roiPercentage = $sssApplication->getRoiPercentage();
 
                 $convertedCp2 = $sssApplication->getCp2Balance();
@@ -545,7 +551,6 @@ class offerToSwapRshareActions extends sfActions
                 $sssApplication->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
                 $sssApplication->save();
 
-                $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
                 $mlm_distributor = $distributorDB;
                 $uplinePosition = $mlm_distributor->getPlacementPosition();
                 $pairingPoint = $totalAmountConvertedWithCp2Cp3 * Globals::PAIRING_POINT_BV;
@@ -872,7 +877,7 @@ class offerToSwapRshareActions extends sfActions
         $roiRemainingMonth = 0;
         if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-        } else if ($roiArr['idx'] <= 36) {
+        } else {
             $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
         }
         /*if ($roiRemainingMonth >= 10) {
@@ -949,7 +954,7 @@ class offerToSwapRshareActions extends sfActions
         $roiRemainingMonth = 0;
         if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-        } else if ($roiArr['idx'] <= 36) {
+        } else {
             $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
         }
         $remarks = "";
@@ -1464,7 +1469,7 @@ class offerToSwapRshareActions extends sfActions
             $roiRemainingMonth = 0;
             if ($roiArr['idx'] <= 18) {
                 $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-            } else if ($roiArr['idx'] <= 36) {
+            } else {
                 $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
             }
             /*if ($roiRemainingMonth >= 10) {
