@@ -18,7 +18,6 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance"), 2));
 
         $c = new Criteria();
-        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
         $c->add(SssApplicationPeer::DIST_ID, 268436);
         $c->setLimit(1);
         $sssApplications = SssApplicationPeer::doSelect($c);
