@@ -544,6 +544,7 @@ class offerToSwapRshareActions extends sfActions
                 $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
                 $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                $totalRshare = round($totalRshare);
 
                 $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
 
