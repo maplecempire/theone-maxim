@@ -199,7 +199,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
-        $c->setLimit(1);
+        $c->setLimit(15);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
@@ -214,8 +214,11 @@ class offerToSwapRshareActions extends sfActions
                 $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
                 $roiPercentage = $sssApplication->getRoiPercentage();
 
+                $convertedCp2 = $sssApplication->getCp2Balance();
+                $convertedCp3 = $sssApplication->getCp3Balance();
+
                 $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
-                $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+                $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
                 $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
                 $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
@@ -223,9 +226,11 @@ class offerToSwapRshareActions extends sfActions
                 $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
 
                 $sssApplication->setTotalShareConverted($totalRshare);
+                $sssApplication->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
                 $sssApplication->save();
 
-                $mlm_distributor = $this->distributorDB;
+                $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                $mlm_distributor = $distributorDB;
                 $uplinePosition = $mlm_distributor->getPlacementPosition();
                 $pairingPoint = $totalAmountConvertedWithCp2Cp3 * Globals::PAIRING_POINT_BV;
                 $pairingPointActual = $totalAmountConvertedWithCp2Cp3;
@@ -465,27 +470,26 @@ class offerToSwapRshareActions extends sfActions
                 }
 
                 $c = new Criteria();
-                $c->addDescendingOrderByColumn(GgMemberEwalletRecordPeer::CDATE);
-                $ggMemberEwalletRecordDB = GgMemberEwalletRecordPeer::doSelectOne($c);
+                $c->addDescendingOrderByColumn(GgMemberRwalletRecordPeer::CDATE);
+                $ggMemberRwalletRecordDB = GgMemberRwalletRecordPeer::doSelectOne($c);
 
                 $rwalletBalance = 0;
-                if ($ggMemberEwalletRecordDB) {
-                    $rwalletBalance = $ggMemberEwalletRecordDB->getBal();
+                if ($ggMemberRwalletRecordDB) {
+                    $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
                 }
                 $rwalletBalance = $rwalletBalance + $totalRshare;
                 // credited S4
-                $ggMemberEwalletRecord = new GgMemberEwalletRecord();
-                $ggMemberEwalletRecord->setUid($sssApplication->getDistId());
-                $ggMemberEwalletRecord->setAid(0);
-                $ggMemberEwalletRecord->setActionType("SSS");
-                $ggMemberEwalletRecord->setType("credit");
-                $ggMemberEwalletRecord->setAmount($totalRshare);
-                $ggMemberEwalletRecord->setBal($rwalletBalance);
-                $ggMemberEwalletRecord->setDescr("Super Share Swap");
-                $ggMemberEwalletRecord->setCdate(date('Y-m-d H:i:s'));
-                $ggMemberEwalletRecord->save();
+                $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                $ggMemberRwalletRecord->setAid(0);
+                $ggMemberRwalletRecord->setActionType("SSS");
+                $ggMemberRwalletRecord->setType("credit");
+                $ggMemberRwalletRecord->setAmount($totalRshare);
+                $ggMemberRwalletRecord->setBal($rwalletBalance);
+                $ggMemberRwalletRecord->setDescr("Super Share Swap");
+                $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                $ggMemberRwalletRecord->save();
 
-                $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
                 if ($distributorDB) {
                     $distributorDB->setRwallet($rwalletBalance);
                     $distributorDB->save();
