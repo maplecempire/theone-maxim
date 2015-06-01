@@ -90,7 +90,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, "PENDING");
-        $c->setLimit(1);
+        $c->setLimit(10);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
