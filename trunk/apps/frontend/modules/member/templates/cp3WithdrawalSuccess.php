@@ -336,7 +336,7 @@ if ($distributorDB->getIaccount() == "") {
                                  class="ui-state-highlight ui-corner-all">
                                 <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
                                                               class="ui-icon ui-icon-info"></span>
-                                    <strong>Effective 1st June 2015, CP3 withdrawals will be limited to Performance Return amount. This is done to avoid attracting unnecessary attention to IMs withdrawal amount by their respective banks.</strong></p>
+                                    <strong>Effective, 1st June 2015, CP3 withdrawals will be limited to the actual monthly Performance Return amount. Accumulation is therefore not allowed. This is done to avoid attracting unnecessary attention to IMs' withdrawal amounts by their respective banks. Please further note that for investment packages of USD1,000, the performance returns withdrawal amount shall be a minimum of USD100 and a maximum of USD540.</strong></p>
                             </div>
                         </div>
                         <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
