@@ -45,6 +45,47 @@ class offerToSwapRshareActions extends sfActions
 
     public function executeCorrectRwallet()
     {
+        $query = "SELECT count(*),uid FROM gg_member_rwallet_record where action_type = 'SSS' group by uid
+                having count(*) > 1";
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //exit();
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $distId = $arr['uid'];
+
+            $c = new Criteria();
+            $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
+            $c->add(SssApplicationPeer::DIST_ID, $distId);
+            $sssApplications = SssApplicationPeer::doSelect($c);
+
+            $c = new Criteria();
+            $c->add(GgMemberRwalletRecordPeer::UID, $distId);
+            $c->add(GgMemberRwalletRecordPeer::ACTION_TYPE, "SSS");
+            $ggMemberRwalletRecords = GgMemberRwalletRecordPeer::doSelect($c);
+
+            $idx = 0;
+            foreach ($sssApplications as $sssApplication) {
+                $ggIdx = 0;
+                foreach ($ggMemberRwalletRecords as $ggMemberRwalletRecord) {
+                    if ($idx == $ggIdx) {
+                        $ggMemberRwalletRecord->setAmount($sssApplication->getTotalShareConverted());
+                        $ggMemberRwalletRecord->save();
+                    }
+                    $ggIdx++;
+                }
+                $idx++;
+            }
+            $this->updateRwallet($distId);
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeCorrectRwallet_ori()
+    {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
         $sssApplications = SssApplicationPeer::doSelect($c);
