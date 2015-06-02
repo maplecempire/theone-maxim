@@ -273,17 +273,17 @@ function reassignDatagridEventAttr(){
                             <tr>
                                 <td>Member ID</td>
                                 <td>:</td>
-                                <td><input title="" size="10" type="text" id="search_distCode" value="" class="search_init"/></td>
+                                <td><input title="" size="20" type="text" id="search_distCode" value="" class="search_init"/></td>
                             </tr>
                             <tr>
                                 <td>MT4 ID</td>
                                 <td>:</td>
-                                <td><input title="" size="10" type="text" id="search_mt4Username" value="" class="search_init"/></td>
+                                <td><input title="" size="20" type="text" id="search_mt4Username" value="" class="search_init"/></td>
                             </tr>
                             <tr>
                                 <td>Full Name</td>
                                 <td>:</td>
-                                <td><input title="" size="10" type="text" id="search_fullName" value="" class="search_init"/></td>
+                                <td><input title="" size="20" type="text" id="search_fullName" value="" class="search_init"/></td>
                             </tr>
                             <tr>
                                 <td></td>
