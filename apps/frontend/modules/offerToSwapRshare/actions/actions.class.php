@@ -683,7 +683,8 @@ class offerToSwapRshareActions extends sfActions
                 print_r("<br>".$distributorDB->getDistributorId());
 
                 if ($entitledPairing == false) {
-                    $pairingPoint = 0;
+                    $pairingPointActual = $mt4Balance + $convertedCp2 + $convertedCp3;
+                    $pairingPoint = $pairingPointActual * Globals::PAIRING_POINT_BV;
                 }
                 if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
                     $level = 0;
