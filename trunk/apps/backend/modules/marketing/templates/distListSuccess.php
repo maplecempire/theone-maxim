@@ -149,7 +149,7 @@ $(function(){
     $("#btnSearch").button({
         text: true
         , icons: {
-            primary: 'ui-icon-circle-search'
+            primary: 'ui-icon-circle-find'
         }
     }).click(function(event){
         event.preventDefault();
@@ -269,7 +269,7 @@ function reassignDatagridEventAttr(){
 			<table width="100%">
 				<tr>
 					<td>
-                        <table>
+                        <table style="width: 50%">
                             <tr>
                                 <td>Member ID</td>
                                 <td>:</td>
@@ -286,7 +286,11 @@ function reassignDatagridEventAttr(){
                                 <td><input title="" size="10" type="text" id="search_fullName" value="" class="search_init"/></td>
                             </tr>
                             <tr>
-                                <button id="btnSearch">Search</button>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button id="btnSearch">Search</button>
+                                </td>
                             </tr>
                         </table>
 
