@@ -727,7 +727,8 @@ class memberActions extends sfActions
         $this->packageDBs = $packageDBs;
         $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
     }
-    public function executeConvertCp3ToCp1()
+    
+	public function executeConvertCp3ToCp1()
     {
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
@@ -922,6 +923,8 @@ class memberActions extends sfActions
             }
         }
     }
+	
+	
 
     public function executeApplyDebitCardHistory()
     {
@@ -6003,7 +6006,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $isFound = true;
                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
                         $isFound = true;
-                    }
+					//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
+                    } else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+						$isFound = true;
+					}
                 } else {
                     $isFound = true;
                 }
@@ -8182,8 +8188,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                             if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
                                 $isFound = true;
                             } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
-                                $isFound = true;
-                            }
+                                $isFound = true;                            
+							//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
+							} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+								$isFound = true;
+							}
                         } else {
                             $isFound = true;
                         }
@@ -8486,8 +8495,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
 
                                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
-
-                                    } else {
+									                            
+									//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
+									} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+									
+									} else {
                                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                                         return $muUtil->updateLog(null, true)->response("/member/transferCp3");
                                     }
@@ -8518,6 +8530,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
 
+					//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
+					} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+					
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
                         return $muUtil->updateLog(null, true)->response("/member/transferCp3");
@@ -8878,6 +8893,193 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         }
     }
+	
+	public function executeConvertCp2ToA1()
+    {
+        $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($mlmDistributor->getFromAbfx() == "Y" && $mlmDistributor->getStatusCode() != Globals::STATUS_ACTIVE) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+            return $this->redirect('/member/summary');
+        }
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        $epointAmount = $this->getRequestParameter('epointAmount');
+        $epointAmount = str_replace(",", "", $epointAmount);
+        if ($this->getRequestParameter('transactionPassword') <> "") {
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if ($epointAmount > $ledgerAccountBalance) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP2"));
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+
+            } elseif ($epointAmount > 0) {
+
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_A1);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_A1);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                    $tbl_account_ledger->setRemark("CONVERT CP2 TO A1");
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "64");
+
+                    $epointConvertedAmount = $epointAmount;
+
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_A1);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP2);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP2 TO A1, CP2:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger->save();
+                    
+                    $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $bal = $mlm_distributor->getEswallet() + $epointConvertedAmount;
+                    $gg_member_eswallet_record = new GgMemberEswalletRecord();
+                    $gg_member_eswallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_eswallet_record->setActionType('Transfer from Maxim');
+                    $gg_member_eswallet_record->setType('c');
+                    $gg_member_eswallet_record->setAmount($epointConvertedAmount);
+                    $gg_member_eswallet_record->setBal($bal);
+                    $gg_member_eswallet_record->setDescr("CONVERT CP2 TO A1, CP2:".$epointAmount);
+                    $gg_member_eswallet_record->setCdate(date('Y-m-d H:i:s'));
+                    $gg_member_eswallet_record->save();
+                    $mlm_distributor->setEswallet($bal);
+                    $mlm_distributor->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "65");
+
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP2 convert to A1 successful."));
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
+                return $this->redirect('/member/convertCp2ToA1');
+            }
+        }
+    }
+	
+    public function executeConvertCp3ToA1()
+    {
+        $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        if ($mlmDistributor->getFromAbfx() == "Y" && $mlmDistributor->getStatusCode() != Globals::STATUS_ACTIVE) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+            return $this->redirect('/member/summary');
+        }
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+
+        $epointAmount = $this->getRequestParameter('epointAmount');
+        $epointAmount = str_replace(",", "", $epointAmount);
+        if ($this->getRequestParameter('transactionPassword') <> "") {
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            if ($epointAmount > $ledgerAccountBalance) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP3"));
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
+
+            } elseif ($epointAmount > 0) {
+
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_A1);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_A1);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($epointAmount);
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $epointAmount);
+                    $tbl_account_ledger->setRemark("CONVERT CP3 TO A1");
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "66");
+
+                    $epointConvertedAmount = $epointAmount;
+
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_A1);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_FROM_CP3);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT CP3 TO A1, CP3:".$epointAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger->save();
+                    
+                    $mlm_distributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $bal = $mlm_distributor->getEswallet() + $epointConvertedAmount;
+                    $gg_member_eswallet_record = new GgMemberEswalletRecord();
+                    $gg_member_eswallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $gg_member_eswallet_record->setActionType('Transfer from Maxim');
+                    $gg_member_eswallet_record->setType('c');
+                    $gg_member_eswallet_record->setAmount($epointConvertedAmount);
+                    $gg_member_eswallet_record->setBal($bal);
+                    $gg_member_eswallet_record->setDescr("CONVERT CP3 TO A1, CP3:".$epointAmount);
+                    $gg_member_eswallet_record->setCdate(date('Y-m-d H:i:s'));
+                    $gg_member_eswallet_record->save();
+                    $mlm_distributor->setEswallet($bal);
+                    $mlm_distributor->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "67");
+
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to A1 successful."));
+                    $con->commit();
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
+                return $this->redirect('/member/convertCp3ToA1');
+            }
+        }
+    }
+	
     public function executeTransferRP()
     {
         $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
