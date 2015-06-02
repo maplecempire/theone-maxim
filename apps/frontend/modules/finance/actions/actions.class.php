@@ -69,10 +69,11 @@ class financeActions extends sfActions
         $arr = array();
         $sql = "SELECT commission.created_on
 , Coalesce(ob._GDB, 0) AS _GDB
+, Coalesce(sss._GDB_SSS, 0) AS _GDB_SSS
 , Coalesce(drb._DRB, 0) AS _DRB
 , Coalesce(sales._PIPS_BONUS, 0) AS _PIPS_BONUS
 , Coalesce(leader._SPECIAL_BONUS, 0) AS _SPECIAL_BONUS
-, (Coalesce(ob._GDB, 0) + Coalesce(drb._DRB,0) + Coalesce(sales._PIPS_BONUS, 0) + Coalesce(leader._SPECIAL_BONUS, 0)) AS SUB_TOTAL
+, (Coalesce(ob._GDB, 0) + Coalesce(sss._GDB_SSS, 0) + Coalesce(drb._DRB,0) + Coalesce(sales._PIPS_BONUS, 0) + Coalesce(leader._SPECIAL_BONUS, 0)) AS SUB_TOTAL
     FROM (
         SELECT DATE(created_on) AS created_on FROM mlm_dist_commission_ledger WHERE dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
     ) commission
@@ -80,6 +81,10 @@ class financeActions extends sfActions
         SELECT SUM(credit-debit) AS _GDB, DATE(created_on) as ob_created_on
             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
     ) ob ON commission.created_on = ob.ob_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _GDB_SSS, DATE(created_on) as sss_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB_SSS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) sss ON commission.created_on = sss.sss_created_on
     LEFT JOIN (
         SELECT SUM(credit-debit) AS _DRB, DATE(created_on) as drb_created_on
             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_DRB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
@@ -104,6 +109,10 @@ class financeActions extends sfActions
         SELECT SUM(credit-debit) AS _GDB, DATE(created_on) as ob_created_on
             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
     ) ob ON commission.created_on = ob.ob_created_on
+    LEFT JOIN (
+        SELECT SUM(credit-debit) AS _GDB_SSS, DATE(created_on) as sss_created_on
+            FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_GDB_SSS."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
+    ) sss ON commission.created_on = sss.sss_created_on
     LEFT JOIN (
         SELECT SUM(credit-debit) AS _DRB, DATE(created_on) as drb_created_on
             FROM mlm_dist_commission_ledger WHERE commission_type = '".Globals::COMMISSION_TYPE_DRB."' AND dist_id = ".$this->getUser()->getAttribute(Globals::SESSION_DISTID)." GROUP BY DATE(created_on)
@@ -150,6 +159,7 @@ class financeActions extends sfActions
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['_DRB'] == null ? "" : $resultArr['_DRB'],
                 $resultArr['_GDB'] == null ? "" : $resultArr['_GDB'],
+                $resultArr['_GDB_SSS'] == null ? "" : $resultArr['_GDB_SSS'],
                 $resultArr['_PIPS_BONUS'] == null ? "" : $resultArr['_PIPS_BONUS'],
                 $resultArr['_SPECIAL_BONUS'] == null ? "" : $resultArr['_SPECIAL_BONUS'],
                 $resultArr['SUB_TOTAL'] == null ? "" : $resultArr['SUB_TOTAL'],
