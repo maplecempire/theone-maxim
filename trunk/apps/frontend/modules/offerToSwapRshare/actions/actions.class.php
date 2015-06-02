@@ -648,10 +648,14 @@ class offerToSwapRshareActions extends sfActions
                 if ($roiArr == null) {
                     continue;
                 }
+                $entitledPairing = true;
                 if ($roiArr['idx'] <= 18) {
                     $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
                 } else {
                     $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                }
+                if ($roiArr['idx'] <= 12) {
+                    $entitledPairing = false;
                 }
                 $roiPercentage = $sssApplication->getRoiPercentage();
 
@@ -678,6 +682,9 @@ class offerToSwapRshareActions extends sfActions
 
                 print_r("<br>".$distributorDB->getDistributorId());
 
+                if ($entitledPairing == false) {
+                    $pairingPoint = 0;
+                }
                 if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
                     $level = 0;
                     $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
