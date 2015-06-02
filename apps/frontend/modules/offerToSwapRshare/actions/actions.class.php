@@ -1839,8 +1839,8 @@ class offerToSwapRshareActions extends sfActions
             $query .= " AND created_on <= ?";
         }
 
-        var_dump($query."<br>");
-        var_dump($date."<br><br>");
+        //var_dump($query."<br>");
+        //var_dump($date."<br><br>");
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);
@@ -1912,8 +1912,8 @@ class offerToSwapRshareActions extends sfActions
         if ($date != null) {
             $query .= " AND created_on <= ?";
         }
-        var_dump("<br><br>".$query);
-        var_dump("<br><br>".$date);
+        //var_dump("<br><br>".$query);
+        //var_dump("<br><br>".$date);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);
