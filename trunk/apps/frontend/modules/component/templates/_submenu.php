@@ -89,6 +89,15 @@ if (date("d") >= 1 && $close == true) {
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
     <?php } ?>
+    <?php if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 255180) { ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/convertCp2ToA1"><span><?php echo __('Convert CP2 to A1'); ?></span></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/convertCp3ToA1"><span><?php echo __('Convert CP3 to A1'); ?></span></a>
+        </li>
+    <?php } ?>
+
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getFromAbfx() == "N") { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/convertCp2ToRt"><span><?php echo __('Convert CP2 to RT'); ?></span></a>
