@@ -386,7 +386,7 @@
                                     $monthStr = "06";
                                     $monthEngStr = "June";
                                     $dayStr = "02";
-                                    $hourStr = "11";
+                                    $hourStr = "12";
                                     $totalHourStopStr = "1";
                                     if ($closeLogin == false) {
 
