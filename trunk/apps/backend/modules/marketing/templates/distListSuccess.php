@@ -146,6 +146,17 @@ $(function(){
         $("#dgAddPanel").dialog("open");
     });
 
+    $("#btnSearch").button({
+        text: true
+        , icons: {
+            primary: 'ui-icon-circle-search'
+        }
+    }).click(function(event){
+        event.preventDefault();
+
+        datagrid.fnDraw();
+    });
+
     $("#checkboxFullName").click(function(){
         if ($("#checkboxFullName").is(':checked')) {
             $("#dgAddPanelName").attr("readonly", false);
@@ -258,6 +269,27 @@ function reassignDatagridEventAttr(){
 			<table width="100%">
 				<tr>
 					<td>
+                        <table>
+                            <tr>
+                                <td>Member ID</td>
+                                <td>:</td>
+                                <td><input title="" size="10" type="text" id="search_distCode" value="" class="search_init"/></td>
+                            </tr>
+                            <tr>
+                                <td>MT4 ID</td>
+                                <td>:</td>
+                                <td><input title="" size="10" type="text" id="search_mt4Username" value="" class="search_init"/></td>
+                            </tr>
+                            <tr>
+                                <td>Full Name</td>
+                                <td>:</td>
+                                <td><input title="" size="10" type="text" id="search_fullName" value="" class="search_init"/></td>
+                            </tr>
+                            <tr>
+                                <button id="btnSearch">Search</button>
+                            </tr>
+                        </table>
+
                     <div style="width: 1050px">
 					<table class="display" id="datagrid" border="0" width="100%">
                         <thead>
@@ -298,13 +330,13 @@ function reassignDatagridEventAttr(){
                             <tr>
                                 <td></td>
                                 <td></td>
-								<td><input title="" size="10" type="text" id="search_distCode" value="" class="search_init"/></td>
+								<td></td>
 								<td></td>
 								<td></td>
                                 <td></td>
-                                <td><input title="" size="10" type="text" id="search_mt4Username" value="" class="search_init"/></td>
                                 <td></td>
-                                <td><input title="" size="10" type="text" id="search_fullName" value="" class="search_init"/></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
