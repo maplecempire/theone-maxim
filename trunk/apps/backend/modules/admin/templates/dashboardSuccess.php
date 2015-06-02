@@ -158,7 +158,10 @@ $(function() {
             { "sName" : "upgrade.created_on",  "bSortable": true}
         ]
     });
-
+<?php
+$tempOff = true;
+if ($tempOff == false) {
+?>
     datagridPackagePurchase = $("#datagridPackagePurchase").r9jasonDataTable({
         // online1DataTable extra params
         "idTr" : true, // assign <tr id='xxx'> from 1st columns array(aoColumns);
@@ -240,6 +243,9 @@ $(function() {
             { "sName" : "dist.active_datetime",  "bSortable": false}
         ]
     });
+<?php
+}
+?>
 });
 
 function reassignDatagridEventAttr(){
@@ -470,7 +476,8 @@ function reassignDatagridEventAttr(){
                 </table>
             </div>
         </div>-->
-        <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false)) { ?>
+
+        <?php if ($sf_user->hasCredential(array(Globals::PROJECT_NAME.AP::AL_PACKAGE_PURCHASE, Globals::PROJECT_NAME.Globals::ROLE_SUPERADMIN), false) && $tempOff == false) { ?>
         <div class="portlet">
             <div class="portlet-header">Package Purchase</div>
             <div class="portlet-content">
