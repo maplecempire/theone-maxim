@@ -9673,7 +9673,9 @@ We look forward to your custom in the near future. Should you have any queries, 
         $muUtil = MUserUtil::init($this);
         $this->validatorLib = $validatorLib = new ValidatorLib($this);
         $this->monthlyPerformanceReturnAmount = $this->getMonthlyPerformanceReturnAmount($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-
+        if ($this->monthlyPerformanceReturnAmount < 100) {
+            $this->monthlyPerformanceReturnAmount = 100;
+        }
         $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
         if ($pos === false) { // note: three equal signs
 
