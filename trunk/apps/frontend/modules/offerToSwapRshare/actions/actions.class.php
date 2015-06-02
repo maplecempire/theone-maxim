@@ -440,8 +440,8 @@ class offerToSwapRshareActions extends sfActions
 
                 $subject = "SSS bonusDate=".$bonusDate."::".$this->getRequestParameter('q');
                 $body = "SSS bonusDate=".$bonusDate."::".$this->getRequestParameter('q');
-                //$sendMailService = new SendMailService();
-                //$sendMailService->sendMailReport("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER);
+                $sendMailService = new SendMailService();
+                $sendMailService->sendMailReport("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER);
             }
             $con->commit();
         } catch (PropelException $e) {
@@ -1837,6 +1837,9 @@ class offerToSwapRshareActions extends sfActions
         if ($date != null) {
             $query .= " AND created_on <= ?";
         }
+
+        var_dump($query."<br>");
+        var_dump($date."<br><br>");
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);
@@ -1908,6 +1911,8 @@ class offerToSwapRshareActions extends sfActions
         if ($date != null) {
             $query .= " AND created_on <= ?";
         }
+        var_dump("<br><br>".$query);
+        var_dump("<br><br>".$date);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);

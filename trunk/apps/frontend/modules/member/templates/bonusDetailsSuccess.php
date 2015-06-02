@@ -33,11 +33,14 @@
                 { "sName" : "_GDB",  "bSortable": true, "fnRender": function ( oObj ) {
                     return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='GDB' href='#'>" + oObj.aData[2] + "</a>";
                 }},
+                { "sName" : "_GDB_SSS",  "bSortable": true, "fnRender": function ( oObj ) {
+                    return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='GDB SSS' href='#'>" + oObj.aData[3] + "</a>";
+                }},
                 { "sName" : "_PIPS_BONUS",  "bSortable": true, "fnRender": function ( oObj ) {
-                    return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='PIPS_BONUS' href='#'>" + oObj.aData[3] + "</a>";
+                    return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='PIPS_BONUS' href='#'>" + oObj.aData[4] + "</a>";
                 }},
                 { "sName" : "_SPECIAL_BONUS",  "bSortable": true, "fnRender": function ( oObj ) {
-                    return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='SPECIAL_BONUS' href='#'>" + oObj.aData[4] + "</a>";
+                    return "<a class='detailLink' ref='" + oObj.aData[0] + "' transaction='SPECIAL_BONUS' href='#'>" + oObj.aData[5] + "</a>";
                 }},
                 { "sName" : "SUB_TOTAL",  "bSortable": true}
             ]
@@ -114,6 +117,7 @@
                                 <th><?php echo __('Date') ?></th>
                                 <th><?php echo __('Direct Referrer Bonus') ?></th>
                                 <th><?php echo __('Group Development Bonus') ?></th>
+                                <th><?php echo __('Group Development Bonus - SSS') ?></th>
                                 <th><?php echo __('Generation Bonus') ?></th>
                                 <th><?php echo __('Special Bonus') ?></th>
                                 <th><?php echo __('Sub Total') ?></th>
