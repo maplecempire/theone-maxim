@@ -62,6 +62,8 @@ class SssApplicationMapBuilder {
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
+		$tMap->addColumn('SWAP_TYPE', 'SwapType', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
