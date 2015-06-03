@@ -330,13 +330,13 @@ class offerToSwapRshareActions extends sfActions
                                 /******************************/
                                 /*  Account
                                 /******************************/
-                                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_RT);
 
                                 // pairing amount
                                 $ecashBalance = $distAccountEcashBalance + $pairingBonusAmount;
-                                $mlm_account_ledger = new MlmAccountLedger();
+                                /*$mlm_account_ledger = new MlmAccountLedger();
                                 $mlm_account_ledger->setDistId($distId);
-                                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
                                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB_SSS);
                                 $mlm_account_ledger->setRemark("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
                                 $mlm_account_ledger->setCredit($pairingBonusAmount);
@@ -346,13 +346,12 @@ class offerToSwapRshareActions extends sfActions
                                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $mlm_account_ledger->save();
 
-                                $this->mirroringAccountLedger($mlm_account_ledger, "75 SSS");
+                                $this->mirroringAccountLedger($mlm_account_ledger, "75 SSS");*/
 
-                                $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
-                                if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
-                                    $mlm_account_ledger = new MlmAccountLedger();
+                                if ($dist && $dist->getCloseAccount() == "Y") {
+                                    /*$mlm_account_ledger = new MlmAccountLedger();
                                     $mlm_account_ledger->setDistId($distId);
-                                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
                                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB_SSS);
                                     $mlm_account_ledger->setRemark("COMMISSION NOT ENTITLED DUE TO ACCOUNT CLOSED");
                                     $mlm_account_ledger->setCredit(0);
@@ -362,10 +361,11 @@ class offerToSwapRshareActions extends sfActions
                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->save();
 
-                                    $this->mirroringAccountLedger($mlm_account_ledger, "76 SSS");
+                                    $this->mirroringAccountLedger($mlm_account_ledger, "76 SSS");*/
                                 } else {
                                     //commission
                                     $commissionBalance = $gdbBalance + $pairingBonusAmount;
+
                                     $sponsorDistCommissionledger = new MlmDistCommissionLedger();
                                     $sponsorDistCommissionledger->setDistId($distId);
                                     $sponsorDistCommissionledger->setCommissionType(Globals::COMMISSION_TYPE_GDB_SSS);
@@ -382,9 +382,9 @@ class offerToSwapRshareActions extends sfActions
                                     // flush amount
                                     if ($flushAmount != 0) {
                                         $ecashBalance = $ecashBalance - $flushAmount;
-                                        $mlm_account_ledger = new MlmAccountLedger();
+                                        /*$mlm_account_ledger = new MlmAccountLedger();
                                         $mlm_account_ledger->setDistId($distId);
-                                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_RT);
                                         $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB_SSS);
                                         $mlm_account_ledger->setRemark("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
                                         $mlm_account_ledger->setCredit(0);
@@ -394,7 +394,7 @@ class offerToSwapRshareActions extends sfActions
                                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $mlm_account_ledger->save();
 
-                                        $this->mirroringAccountLedger($mlm_account_ledger, "77 SSS");
+                                        $this->mirroringAccountLedger($mlm_account_ledger, "77 SSS");*/
 
                                         $commissionBalance = $commissionBalance - $flushAmount;
                                         $sponsorDistCommissionledger = new MlmDistCommissionLedger();
@@ -412,17 +412,39 @@ class offerToSwapRshareActions extends sfActions
 
                                         $pairingBonusAmount = $pairingBonusAmount - $flushAmount;
                                     }
+                                }
 
-                                    $bonusService = new BonusService();
-                                    //print_r($bonusService->checkDebitAccount($distId)."<br>");
-                                    //print_r($pairingBonusAmount."<br>");
-                                    //print_r($flushAmount."<br>");
-                                    //exit();
-                                    if ($bonusService->checkDebitAccount($distId) == true) {
-                                        $debitAccountRemark = "GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")";
-                                        $bonusService->contraDebitAccount($distId, $debitAccountRemark, $pairingBonusAmount);
-                                    }
-                                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                                if ($dist && $dist->getCloseAccount() == "Y") {
+
+                                } else {
+                                    $tbl_account_ledger2 = new MlmAccountLedger();
+                                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                                    $tbl_account_ledger2->setDistId($distId);
+                                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB_SSS);
+                                    $tbl_account_ledger2->setCredit($pairingBonusAmount);
+                                    $tbl_account_ledger2->setDebit(0);
+                                    $tbl_account_ledger2->setRemark("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
+                                    $tbl_account_ledger2->setBalance($ecashBalance);
+                                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $tbl_account_ledger2->save();
+
+                                    $dist = MlmDistributorPeer::retrieveByPk($distId);
+                                    $bal = $dist->getRtwallet() + $pairingBonusAmount;
+                                    $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                    $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                                    $gg_member_rtwallet_record->setActionType('Transfer from Maxim');
+                                    $gg_member_rtwallet_record->setType('c');
+                                    $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
+                                    $gg_member_rtwallet_record->setBal($bal);
+                                    $gg_member_rtwallet_record->setDescr("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
+                                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                    $gg_member_rtwallet_record->save();
+
+                                    $dist->setRtwallet($bal);
+                                    $dist->save();
+
+                                    $this->mirroringAccountLedger($tbl_account_ledger2, "65 SSS");
                                 }
                             }
                         }
