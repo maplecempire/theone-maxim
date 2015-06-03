@@ -19,6 +19,43 @@ class offerToSwapRshareActions extends sfActions
     }
     public function executeUpdatePairingCreatedDate()
     {
+        // update RT from CP2
+        $query = "SELECT SUM(credit - debit) as _total, dist_id FROM mlm_account_ledger WHERE transaction_type = 'GDB SSS'
+                    AND account_type = 'RT'
+                  GROUP BY dist_id";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $resultArray = array();
+        $count = 0;
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+
+            $distId = $arr['dist_id'];
+            $totalAmount = $arr['_total'];
+
+            $dist = MlmDistributorPeer::retrieveByPk($distId);
+            $bal = $dist->getRtwallet() + $totalAmount;
+            $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+            $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $gg_member_rtwallet_record->setActionType('GDB SSS from Maxim');
+            $gg_member_rtwallet_record->setType('c');
+            $gg_member_rtwallet_record->setAmount($totalAmount);
+            $gg_member_rtwallet_record->setBal($bal);
+            $gg_member_rtwallet_record->setDescr("GROUP PAIRING BONUS AMOUNT");
+            $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+            $gg_member_rtwallet_record->save();
+
+            $dist->setRtwallet($bal);
+            $dist->save();
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeUpdatePairingCreatedDate_ORI()
+    {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
         $sssApplications = SssApplicationPeer::doSelect($c);
@@ -433,7 +470,7 @@ class offerToSwapRshareActions extends sfActions
                                     $bal = $dist->getRtwallet() + $pairingBonusAmount;
                                     $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
                                     $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                                    $gg_member_rtwallet_record->setActionType('Transfer from Maxim');
+                                    $gg_member_rtwallet_record->setActionType('GDB SSS from Maxim');
                                     $gg_member_rtwallet_record->setType('c');
                                     $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
                                     $gg_member_rtwallet_record->setBal($bal);
