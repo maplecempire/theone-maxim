@@ -88,7 +88,7 @@ class offerToSwapRshareActions extends sfActions
             $dist = MlmDistributorPeer::retrieveByPk($distId);
             $bal = $dist->getRtwallet() + $totalAmount;
             $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
-            $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+            $gg_member_rtwallet_record->setUid($distId);
             $gg_member_rtwallet_record->setActionType('GDB SSS from Maxim');
             $gg_member_rtwallet_record->setType('c');
             $gg_member_rtwallet_record->setAmount($totalAmount);
