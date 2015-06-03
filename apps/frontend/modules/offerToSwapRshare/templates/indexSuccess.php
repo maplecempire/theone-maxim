@@ -200,7 +200,7 @@ function calculateRshare() {
     <td class="tbl_sprt_bottom" align="center">
         <span class="txt_title"><?php echo __('APPLICATION FOR DISPENSATION 18 MONTH INVESTMENT TERM') ?></span>
         <br>
-        <i>(Only applicable from 12 May 2015 to 30 June 2015)</i>
+        <i><?php echo __('(Only applicable from 12 May 2015 to 30 June 2015)') ?></i>
     </td>
 </tr>
 <tr>
@@ -241,7 +241,7 @@ function calculateRshare() {
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        <span class="txt_title">Special R-Share Swap Promo </span>
+                        <span class="txt_title">R股转换优惠 </span>
                     <?php
                     } else if ($culture == "kr") {
                     ?>
@@ -723,7 +723,26 @@ function calculateRshare() {
             </tr>
             <tr>
                 <td>
-                    <span style="font-weight: bold; font-size: 16px;">TO: The Maxim Trader Legal Office (LACD).</span>
+                    <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <span style="font-weight: bold; font-size: 16px;">致: 马胜金融集团法律部(LACD) </span>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <span style="font-weight: bold; font-size: 16px;">TO: The Maxim Trader Legal Office (LACD).</span>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <span style="font-weight: bold; font-size: 16px;">TO: The Maxim Trader Legal Office (LACD).</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span style="font-weight: bold; font-size: 16px;">TO: The Maxim Trader Legal Office (LACD).</span>
+                        <?php
+                        }
+                        ?>
+
                 </td>
             </tr>
             <tr>
@@ -770,15 +789,61 @@ function calculateRshare() {
                         <tr><td class="text_bold">CP3</td><td>:</td><td><?php echo number_format($cp3Balance,2);?></td></tr>
                     </table>
                     <br>
-                    <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
+                    <?php
+                    if ($culture == "cn") {
+                    ?>
+                        <br>基于本人真实意愿且无任何利诱情况，本人在此正式申请18个月投资周期的豁免，并按照以下条款代替该18个月投资周期；
+                    <?php
+                    } else if ($culture == "kr") {
+                    ?>
+                        <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
+                    <?php
+                    } else if ($culture == "jp") {
+                    ?>
+                        <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
+                    <?php
+                    } else {
+                    ?>
+                        <br>Upon my OWN VOLITION and without any invitation to treat presented to me, I hereby apply for dispensation from my 18 month term obligation, and seek repudiation of the 18 Month  term of my Contract with Maxim Trader, on the following grounds;
+                    <?php
+                    }
+                    ?>
+
                     <br>
                     <br>
                     <br>
                     <ol>
-                        <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 1 months, of my 18 months term so far.</li>
-                        <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 30th June 2015. Any application outside this  period is auto void.</li>
-                        <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
-                        <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
+                        <?php
+                        if ($culture == "cn") {
+                        ?>
+                            <li style="padding-bottom: 10px;">本人已于 [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] 完成18个月投资周期中的1个月。</li>
+                            <li style="padding-bottom: 10px;">本人知晓该豁免申请时间不得早于2015.5.12日，且不得晚于2015.6.30日。任何此时间段之外的申请，自动无效。</li>
+                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将投资本金(等同于MT4交易账户余额) {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} 及剩余的月投资分红总额USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} 全部用于以0.8美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
+                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将CP2账户{USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} 或/和CP3账户{USD$ <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} 用于以0.8美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
+                        <?php
+                        } else if ($culture == "kr") {
+                        ?>
+                            <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 1 months, of my 18 months term so far.</li>
+                            <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 30th June 2015. Any application outside this  period is auto void.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
+                        <?php
+                        } else if ($culture == "jp") {
+                        ?>
+                            <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 1 months, of my 18 months term so far.</li>
+                            <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 30th June 2015. Any application outside this  period is auto void.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
+                        <?php
+                        } else {
+                        ?>
+                            <li style="padding-bottom: 10px;">THAT as at [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] I have completed 1 months, of my 18 months term so far.</li>
+                            <li style="padding-bottom: 10px;">THAT I file this request on a date, NO EARLIER THAN the 12th May 2015 and NO LATER THAN the 30th June 2015. Any application outside this  period is auto void.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to approval of this Dispensation Request, I herein consent to, and  instruct that, my principle sum of {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} as per the MT4 and balance Maxim account, plus any remaining ROI of {USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} is to be swapped for, or applied to purchase ROGP Shares (R-Shares), at USD$.80 Cents each, and shall expect my certificate of R-Shares to be issued to me in due course.</li>
+                            <li style="padding-bottom: 10px;">THAT subsequent to the same approval of this Dispensation Request, I also herein consent to, and instruct, that my CP2 account {USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} or/plus Cp3 account {USD <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} is to be swapped for, or applied to purchase R-Share, USD$.80  each and shall expect my Certificate of R-Shares to be issued to me in due course.</li>
+                        <?php
+                        }
+                        ?>
                     </ol>
                     <br>
                     <br>

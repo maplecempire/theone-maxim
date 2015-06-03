@@ -1095,6 +1095,14 @@
             <trans-unit><source>All Day</source><target>全天</target></trans-unit>
             <trans-unit><source>Date Start</source><target>开始于</target></trans-unit>
             <trans-unit><source>Date End</source><target>结束于</target></trans-unit>
+            <trans-unit><source>Offer to Swap R-Share</source><target>R股转换优惠</target></trans-unit>
+            <trans-unit><source>Application for Dispensation 18 Month Investment Term</source><target>18个月投资周期豁免申请</target></trans-unit>
+            <trans-unit><source>Approval Status</source><target>审批状态</target></trans-unit>
+            <trans-unit><source>Super Share Swap - SSS Note</source><target>股票转换 - SSS备注</target></trans-unit>
+            <trans-unit><source>Downline Stat - SSS</source><target>团队统计简介 - SSS</target></trans-unit>
+            <trans-unit><source>Member List - SSS</source><target>会员列表 - SSS</target></trans-unit>
+            <trans-unit><source>APPLICATION FOR DISPENSATION 18 MONTH INVESTMENT TERM</source><target>18个月投资周期豁免申请</target></trans-unit>
+            <trans-unit><source>(Only applicable from 12 May 2015 to 30 June 2015)</source><target>只适用于2015.5.12日至6.30日之间申请</target></trans-unit>
         </body>
     </file>
 </xliff>
