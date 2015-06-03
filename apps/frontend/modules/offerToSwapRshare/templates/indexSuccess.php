@@ -49,7 +49,13 @@ $(function() {
             }
         },
         submitHandler: function(form) {
-            var sure = confirm("<?php echo __('Are you sure want to proceed Super Share Swap?') ?>");
+            var isRt = $('#swapToRt').val();
+
+            var msg = "";
+            if (isRt == "Y") {
+                msg = " (RT)";
+            }
+            var sure = confirm("<?php echo __('Are you sure want to proceed Super Share Swap?') ?> " + msg);
             if (sure) {
                 waiting();
 
@@ -84,6 +90,18 @@ $(function() {
         calculateRshare();
     }).trigger("keyup");
 
+    $('#swapToRt').change(function(event){
+        event.preventDefault();
+        calculateRshare();
+    });
+
+<?php
+    // 254781 monkey
+if ($distributorDB->getLeaderId() == 254781) { ?>
+    $('#tr_swapToRt').show();
+    <?php
+}
+?>
     $("#mt4Id").change(function(event){
         event.preventDefault();
         $(".indicator").show();
@@ -129,6 +147,7 @@ function calculateRshare() {
     var convertedCp3 = parseFloat($('#convertedCp3').autoNumericGet());
     var roiRemainingMonth = $('#roiRemainingMonth').val();
     var roiPercentage = $('#roiPercentage').val();
+    var isRt = $('#swapToRt').val();
 
     var totalAmountConverted = mt4Balance + (mt4Balance * roiRemainingMonth * roiPercentage / 100);
     var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
@@ -143,12 +162,23 @@ function calculateRshare() {
     var spanFormulaTotalAmount = "is $0 / 0.80";
     var spanFormulaRshare = "= 0 R-Shares";
 
+    if (isRt == "Y") {
+        spanFormulaRshare = "= 0 RT";
+        totalRshare = totalAmountConvertedWithCp2Cp3;
+        totalRshare = Math.round(totalRshare);
+    }
+
     if (totalRshare >= 1) {
         spanFormula = "$" + mt4Balance + "K + ($" + mt4Balance + "K x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
         spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
         spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
         spanFormulaRshare = "= " + totalRshare + " R-Shares";
+
+        if (isRt == "Y") {
+            spanFormulaTotalAmount = "is " + totalAmountConvertedWithCp2Cp3;
+            spanFormulaRshare = "= " + totalRshare + " RT";
+        }
 
         $("#spanFormula").html(spanFormula);
         $("#spanFormulaCp2").html(spanFormulaCp2);
@@ -170,7 +200,7 @@ function calculateRshare() {
     <td class="tbl_sprt_bottom" align="center">
         <span class="txt_title"><?php echo __('APPLICATION FOR DISPENSATION 18 MONTH INVESTMENT TERM') ?></span>
         <br>
-        <i>(Only applicable from 12 May 2015 to 31 May 2015)</i>
+        <i>(Only applicable from 12 May 2015 to 30 June 2015)</i>
     </td>
 </tr>
 <tr>
@@ -770,10 +800,22 @@ function calculateRshare() {
                 <td>
                     <table cellpadding="3" cellspacing="3">
                         <tr>
-                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of May 2015 - SIGN</td>
+                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
                             <td>:</td>
                             <td><input type="text" name="txtSignature" id="txtSignature" value="" size="30"></td>
                         </tr>
+
+                        <tr style="display: none;" id="tr_swapToRt">
+                            <td>Swap to RT</td>
+                            <td>:</td>
+                            <td>
+                                <select id="swapToRt" name="swapToRt">
+                                    <option value="N">NO</option>
+                                    <option value="Y">YES</option>
+                                </select>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td><?php echo __('Security Password') ?></td>
                             <td>:</td>

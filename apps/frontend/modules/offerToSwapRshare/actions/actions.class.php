@@ -10,6 +10,56 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeDoTesting()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::DIST_ID, 1);
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
+        $c->add(SssApplicationPeer::SWAP_TYPE, "RT");
+        $c->setLimit(30);
+        $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+        var_dump($sssApplication);
+
+        if ($sssApplication->getSwapType() == "RT") {
+            $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+
+            $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+            $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT);
+
+            $tbl_account_ledger2 = new MlmAccountLedger();
+            $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+            $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+            $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+            $tbl_account_ledger2->setCredit($pairingBonusAmount);
+            $tbl_account_ledger2->setDebit(0);
+            $tbl_account_ledger2->setRemark("");
+            $tbl_account_ledger2->setBalance($ecashBalance);
+            $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account_ledger2->save();
+
+            $dist = MlmDistributorPeer::retrieveByPk($sssApplication->getDistId());
+
+            $bal = $dist->getRtwallet() + $pairingBonusAmount;
+            $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+            $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+            $gg_member_rtwallet_record->setActionType('SWAP SSS from Maxim');
+            $gg_member_rtwallet_record->setType('c');
+            $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
+            $gg_member_rtwallet_record->setBal($bal);
+            $gg_member_rtwallet_record->setDescr("");
+            $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+            $gg_member_rtwallet_record->save();
+
+            $dist->setRtwallet($bal);
+            $dist->save();
+            $sssApplication->save();
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeUpdateRWallet()
     {
         $this->updateRwallet($this->getRequestParameter('q'));
@@ -469,7 +519,7 @@ class offerToSwapRshareActions extends sfActions
                                     $dist = MlmDistributorPeer::retrieveByPk($distId);
                                     $bal = $dist->getRtwallet() + $pairingBonusAmount;
                                     $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
-                                    $gg_member_rtwallet_record->setUid($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                                    $gg_member_rtwallet_record->setUid($distId);
                                     $gg_member_rtwallet_record->setActionType('GDB SSS from Maxim');
                                     $gg_member_rtwallet_record->setType('c');
                                     $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
@@ -659,7 +709,42 @@ class offerToSwapRshareActions extends sfActions
                             $sssApplication->save();
                         } else {
                             $sssApplication->setMt4Balance($mt4Balance);
-                            $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                            if ($sssApplication->getSwapType() == "RT") {
+                                $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+
+                                $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+                                $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT);
+
+                                $tbl_account_ledger2 = new MlmAccountLedger();
+                                $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                                $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+                                $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+                                $tbl_account_ledger2->setCredit($pairingBonusAmount);
+                                $tbl_account_ledger2->setDebit(0);
+                                $tbl_account_ledger2->setRemark("");
+                                $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
+                                $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger2->save();
+
+                                $dist = MlmDistributorPeer::retrieveByPk($sssApplication->getDistId());
+
+                                $bal = $dist->getRtwallet() + $pairingBonusAmount;
+                                $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+                                $gg_member_rtwallet_record->setActionType('SWAP SSS from Maxim');
+                                $gg_member_rtwallet_record->setType('c');
+                                $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
+                                $gg_member_rtwallet_record->setBal($bal);
+                                $gg_member_rtwallet_record->setDescr("");
+                                $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                $gg_member_rtwallet_record->save();
+
+                                $dist->setRtwallet($bal);
+                                $dist->save();
+                            } else {
+                                $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                            }
                             $sssApplication->save();
                         }
                     } else {
@@ -1073,6 +1158,7 @@ class offerToSwapRshareActions extends sfActions
         }*/
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
+        $this->swapToRt = $this->getRequestParameter('swapToRt');
         $this->mt4Balance = $mt4Balance;
         $this->remainingRoiAmount = $remainingRoiAmount;
 
@@ -1104,6 +1190,10 @@ class offerToSwapRshareActions extends sfActions
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
         $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+        if ($this->swapToRt == "Y") {
+            $totalRshare = $totalAmountConvertedWithCp2Cp3;
+        }
+
         $this->totalRshare = round($totalRshare);
 
         $this->signature = $this->getRequestParameter('txtSignature');
@@ -1152,6 +1242,7 @@ class offerToSwapRshareActions extends sfActions
         }*/
         $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
 
+        $this->swapToRt = $this->getRequestParameter('swapToRt');
         $this->mt4Balance = $mt4Balance;
         $this->remainingRoiAmount = $remainingRoiAmount;
 
@@ -1183,6 +1274,9 @@ class offerToSwapRshareActions extends sfActions
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
         $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+        if ($this->swapToRt == "Y") {
+            $totalRshare = $totalAmountConvertedWithCp2Cp3;
+        }
         $this->totalRshare = round($totalRshare);
 
         $this->signature = $this->getRequestParameter('txtSignature');
@@ -1205,6 +1299,9 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setRemarks($remarks);
             $sss_application->setSignature($this->signature);
             $sss_application->setStatusCode(Globals::STATUS_SSS_PENDING);
+            if ($this->swapToRt == "Y") {
+                $sss_application->setSwapType("RT");
+            }
             $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->save();
