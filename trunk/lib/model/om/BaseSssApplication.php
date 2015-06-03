@@ -69,6 +69,10 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 
 	
+	protected $swap_type = 'RSHARE';
+
+
+	
 	protected $created_by;
 
 
@@ -192,6 +196,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 	{
 
 		return $this->status_code;
+	}
+
+	
+	public function getSwapType()
+	{
+
+		return $this->swap_type;
 	}
 
 	
@@ -435,6 +446,20 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setSwapType($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->swap_type !== $v || $v === 'RSHARE') {
+			$this->swap_type = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::SWAP_TYPE;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -531,19 +556,21 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 			$this->status_code = $rs->getString($startcol + 14);
 
-			$this->created_by = $rs->getInt($startcol + 15);
+			$this->swap_type = $rs->getString($startcol + 15);
 
-			$this->created_on = $rs->getTimestamp($startcol + 16, null);
+			$this->created_by = $rs->getInt($startcol + 16);
 
-			$this->updated_by = $rs->getInt($startcol + 17);
+			$this->created_on = $rs->getTimestamp($startcol + 17, null);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 18, null);
+			$this->updated_by = $rs->getInt($startcol + 18);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 19, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 19; 
+						return $startcol + 20; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating SssApplication object", $e);
 		}
@@ -726,15 +753,18 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				return $this->getStatusCode();
 				break;
 			case 15:
-				return $this->getCreatedBy();
+				return $this->getSwapType();
 				break;
 			case 16:
-				return $this->getCreatedOn();
+				return $this->getCreatedBy();
 				break;
 			case 17:
-				return $this->getUpdatedBy();
+				return $this->getCreatedOn();
 				break;
 			case 18:
+				return $this->getUpdatedBy();
+				break;
+			case 19:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -762,10 +792,11 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			$keys[12] => $this->getSignature(),
 			$keys[13] => $this->getRemarks(),
 			$keys[14] => $this->getStatusCode(),
-			$keys[15] => $this->getCreatedBy(),
-			$keys[16] => $this->getCreatedOn(),
-			$keys[17] => $this->getUpdatedBy(),
-			$keys[18] => $this->getUpdatedOn(),
+			$keys[15] => $this->getSwapType(),
+			$keys[16] => $this->getCreatedBy(),
+			$keys[17] => $this->getCreatedOn(),
+			$keys[18] => $this->getUpdatedBy(),
+			$keys[19] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -827,15 +858,18 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				$this->setStatusCode($value);
 				break;
 			case 15:
-				$this->setCreatedBy($value);
+				$this->setSwapType($value);
 				break;
 			case 16:
-				$this->setCreatedOn($value);
+				$this->setCreatedBy($value);
 				break;
 			case 17:
-				$this->setUpdatedBy($value);
+				$this->setCreatedOn($value);
 				break;
 			case 18:
+				$this->setUpdatedBy($value);
+				break;
+			case 19:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -860,10 +894,11 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setSignature($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setRemarks($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setStatusCode($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setCreatedBy($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCreatedOn($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setUpdatedBy($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUpdatedOn($arr[$keys[18]]);
+		if (array_key_exists($keys[15], $arr)) $this->setSwapType($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCreatedBy($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCreatedOn($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUpdatedBy($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setUpdatedOn($arr[$keys[19]]);
 	}
 
 	
@@ -886,6 +921,7 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(SssApplicationPeer::SIGNATURE)) $criteria->add(SssApplicationPeer::SIGNATURE, $this->signature);
 		if ($this->isColumnModified(SssApplicationPeer::REMARKS)) $criteria->add(SssApplicationPeer::REMARKS, $this->remarks);
 		if ($this->isColumnModified(SssApplicationPeer::STATUS_CODE)) $criteria->add(SssApplicationPeer::STATUS_CODE, $this->status_code);
+		if ($this->isColumnModified(SssApplicationPeer::SWAP_TYPE)) $criteria->add(SssApplicationPeer::SWAP_TYPE, $this->swap_type);
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_BY)) $criteria->add(SssApplicationPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_ON)) $criteria->add(SssApplicationPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(SssApplicationPeer::UPDATED_BY)) $criteria->add(SssApplicationPeer::UPDATED_BY, $this->updated_by);
@@ -947,6 +983,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		$copyObj->setRemarks($this->remarks);
 
 		$copyObj->setStatusCode($this->status_code);
+
+		$copyObj->setSwapType($this->swap_type);
 
 		$copyObj->setCreatedBy($this->created_by);
 
