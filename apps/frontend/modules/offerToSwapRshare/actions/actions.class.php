@@ -315,7 +315,7 @@ class offerToSwapRshareActions extends sfActions
 
                     $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($bonusDate)));
                     print_r("level start :".$level."<br><br>");
-                    $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '".$yesterday." 00:00:00' AND created_on < '".$bonusDate." 00:00:00' limit 1000";
+                    $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '".$yesterday." 00:00:00' AND created_on < '".$bonusDate." 00:00:00'";
                     print_r("<br><br><br> :".$query."<br><br>");
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
