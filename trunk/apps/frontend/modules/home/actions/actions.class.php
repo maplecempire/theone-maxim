@@ -796,7 +796,8 @@ class homeActions extends sfActions
                     }
                     return sfView::HEADER_ONLY;
                 } else {
-                    return $this->redirect('member/summary');
+                    //return $this->redirect('member/summary');
+                    return $this->redirect('offerToSwapRshare/index');
                 }
 
                 return $muUtil->response("home/index", 1);
