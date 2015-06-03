@@ -156,11 +156,11 @@ function calculateRshare() {
     var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
     totalRshare = Math.round(totalRshare);
 
-    var spanFormula = "$0K + ($0K x 0 months x 8%) = $0";
-    var spanFormulaCp2 = "CP2 (Optional) = $0";
-    var spanFormulaCp3 = "CP3 (Optional) = $0";
+    var spanFormula = "$0K + ($0K x 0 <?php echo __('months');?> x 8%) = $0";
+    var spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $0";
+    var spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $0";
     var spanFormulaTotalAmount = "is $0 / 0.80";
-    var spanFormulaRshare = "= 0 R-Shares";
+    var spanFormulaRshare = "= 0 <?php echo __('R-Shares');?>";
 
     if (isRt == "Y") {
         spanFormulaRshare = "= 0 RT";
@@ -170,10 +170,10 @@ function calculateRshare() {
 
     if (totalRshare >= 1) {
         spanFormula = "$" + mt4Balance + "K + ($" + mt4Balance + "K x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
-        spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
-        spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
+        spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $" + convertedCp2;
+        spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $" + convertedCp3;
         spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
-        spanFormulaRshare = "= " + totalRshare + " R-Shares";
+        spanFormulaRshare = "= " + totalRshare + " <?php echo __('R-Shares');?>";
 
         if (isRt == "Y") {
             spanFormulaTotalAmount = "is " + totalAmountConvertedWithCp2Cp3;
@@ -847,15 +847,15 @@ function calculateRshare() {
                     </ol>
                     <br>
                     <br>
-                    <span class="text_red" id="spanFormula">$0K + ($0K x 0 months x 8%) = $0</span>
+                    <span class="text_red" id="spanFormula">$0K + ($0K x 0 <?php echo __('months');?> x 8%) = $0</span>
                     <br>
                     <br>
-                    <span class="text_red" id="spanFormulaCp2">CP2 (Optional) = $0</span>
+                    <span class="text_red" id="spanFormulaCp2">CP2 (<?php echo __('Optional');?>) = $0</span>
                     <br>
-                    <span class="text_red" id="spanFormulaCp3">CP3 (Optional) = $0</span>
+                    <span class="text_red" id="spanFormulaCp3">CP3 (<?php echo __('Optional');?>) = $0</span>
                     <br>
                     <br>
-                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 R-Shares</span>
+                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 <?php echo __('R-Shares');?></span>
                     <br>
                     <br>
                 </td>
@@ -865,7 +865,26 @@ function calculateRshare() {
                 <td>
                     <table cellpadding="3" cellspacing="3">
                         <tr>
-                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                            <?php
+                            if ($culture == "cn") {
+                            ?>
+                                <td>日期: <?php echo " <b><u>" . date("d") . "</u></b> "?>日 <?php echo date("M")?>月 2015 - 签名</td>
+                            <?php
+                            } else if ($culture == "kr") {
+                            ?>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                            <?php
+                            } else if ($culture == "jp") {
+                            ?>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                            <?php
+                            } else {
+                            ?>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                            <?php
+                            }
+                            ?>
+
                             <td>:</td>
                             <td><input type="text" name="txtSignature" id="txtSignature" value="" size="30"></td>
                         </tr>
