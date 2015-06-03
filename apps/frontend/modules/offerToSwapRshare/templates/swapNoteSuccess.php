@@ -102,42 +102,62 @@ $culture = $sf_user->getCulture();
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        基于市场的强烈要求, 已于马胜金融集团投资长达12个月或以上的投资会可以拥有以下转换选择; 该转换选择也向18个月投资周期即将结束的会员开放:
+                        基于市场的强烈要求, 已于马胜金融集团投资长达12个月或以上的投资会可以拥有以下转换选择; 该转换选择也向1个月投资周期即将结束的会员开放:
                     <?php
                     } else if ($culture == "kr") {
                     ?>
-                        회원들의 요청에 의해, 맥심 투자 패키지에 최소 12개월 예치 완료한 맥심 트레이더 회원을 대상으로 다음과 같은 옵션을 제안할 것입니다. 이번 제안은 또한 곧 18개월 만료가 되는 회원에게도 열려 있습니다.
+                        회원들의 요청에 의해, 맥심 투자 패키지에 최소 12개월 예치 완료한 맥심 트레이더 회원을 대상으로 다음과 같은 옵션을 제안할 것입니다. 이번 제안은 또한 곧 1개월 만료가 되는 회원에게도 열려 있습니다.
                     <?php
                     } else if ($culture == "jp") {
                     ?>
-                        市場の強い願望より、以下が最低12ヶ月以上投資したマキシムのメンバーにオープンになる。マキシムトレーダー（以下会社と略す）は12ヶ月あるいはそれ以上、マキシム投資パッケージに投資した会員へ以下のオプションを提供する。これはまた18ヶ月投資の満期に達する会員にも提供する。
+                        市場の強い願望より、以下が最低12ヶ月以上投資したマキシムのメンバーにオープンになる。マキシムトレーダー（以下会社と略す）は12ヶ月あるいはそれ以上、マキシム投資パッケージに投資した会員へ以下のオプションを提供する。これはまた1ヶ月投資の満期に達する会員にも提供する。
                     <?php
                     } else {
                     ?>
-                        As a result of popular requests from members, the following is open to Maxim members who have completed a <u>minimum of 12 months</u> under the Maxim Investment Package which is also open to members who are going to reach 18 months maturity soon:
+                        As a result of popular requests from members, the following is open to Maxim members who have completed a <u>minimum of 1 months</u> under the Maxim Investment Package which is also open to members who are going to reach 18 months maturity soon:
                     <?php
                     }
                     ?>
                     <ol style="padding-left: 20px;">
                         <?php if ($culture == "cn") { ?>
-                        <li>您可以选择将投资本金以及尚未实现的投资分红利润(CP3)以0.8美金一股的价格转换成ROGP股票。该转换期限仅限于2015.5.12日至5.31日</li>
+                        <li>您可以选择将投资本金以及尚未实现的投资分红利润(CP3)以0.8美金一股的价格转换成ROGP股票。该转换期限仅限于2015.5.12日至6.30日</li>
                         <li>一旦您决定将您的马胜投资转换成R股, 您仍然可以继续发展您的马胜事业, 享受系统的奖金制度，即直接推荐奖和组织奖。在您合同原到期日之外, 公司特额外再赠送18个月的账户有效时间</li>
-                        <li>如果您选择了将投资转换成R股, 您的直接推荐人将会于马胜系统内再获得一次组织奖金</li>
+                        <li>如果您选择了将投资转换成R股, 您的直接推荐人将会于马胜系统内再获得一次组织奖金
+                            <ol>
+                                <li>如果您的投资合同已达12个月或以上，那么您的推荐人将会以您的投资本金加剩余月投资分红总额为销售业绩，再享受一次组织奖金。</li>
+                                <li>如果您的投资合同尚未达12个月，那么您的推荐人将会（只）以您的投资本金为销售业绩，再享受一次组织奖金。</li>
+                            </ol>
+                        </li>
                         <li>如果您尚未激活AGL账户，当您选择转换时，系统会自动将等额的S4股票数额放置于您的S4账户; 您可以使用同一账户ID及密码登陆AGL系统。如果您希望开展AGL事业，您也是需要有自己的账户的</li>
                         <?php } else if ($culture == "kr") { ?>
-                        <li>귀하는 현재 만료일까지의 수당지급 (CP3)을 더한 투자금을 ROGP (R-Share)로 전환할 수 있으며, 가격은 USD80센트입니다. 본 제안은 2015년 5월 12일부터 31일까지만 가능합니다</li>
+                        <li>귀하는 현재 만료일까지의 수당지급 (CP3)을 더한 투자금을 ROGP (R-Share)로 전환할 수 있으며, 가격은 USD80센트입니다. 본 제안은 2015년 5월 12일부터 6월 30일까지만 가능합니다</li>
                         <li>귀하의 맥심 투자금을 R-주식으로 전환을 결정하시면, 맥심 비즈니스를  계속하게 되어, 직접 소개 수당 및 개발 수당과 같은 맥심의 소개 보너스를 예전과 같이 받을 수 있는 자격은 유지됩니다. 귀하는 다가오는 계약 만료일부터 18개월 동안 더 이러한 혜택을 받을 수 있습니다</li>
-                        <li>R-주식으로 전환하면, 귀하의 업라인은 한차례 맥심 개발 수당 혜택을 받을 수 있습니다</li>
+                        <li>R-주식으로 전환하면, 귀하의 업라인은 한차례 맥심 개발 수당 혜택을 받을 수 있습니다
+                            <ol>
+                                <li>만약 귀하의 계약이 12개월 또는 그 이상을 완료한 상태라면, 귀하의 어퍼 멤버는 귀하의 원금과 받지 못한 투자 이윤에 대한 개발 보너스를 받으실 수 있습니다.</li>
+                                <li>만약 귀하의 계약이 12개월 미만을 완료한 상태라면, 귀하의 어퍼 멤버는 귀하의 원금에 대한 개발 보너스를 받으실 수 있습니다.</li>
+                            </ol>
+                        </li>
                         <li>AGL 계좌를 가지고 있지 않으면, 주식 스왑시, 귀하의 R-주식은 자동으로 AGL S4 지갑으로 이전되고, 귀하는 현재의 ID와 패스워드로 여기에 접근할 수 있습니다. 그럼에도 불구하고 AGL 사업진행을 원하시면 , AGL 계좌를 오픈해야 합니다</li>
                         <?php } else if ($culture == "jp") { ?>
-                        <li>会員様は投資元本および投資周期残りの月間配当（CP3）を0.8ドル/株の株価でROGP株に転換することが可能である。申請期間は2015年5月12日から2015年5月31日まで</li>
+                        <li>会員様は投資元本および投資周期残りの月間配当（CP3）を0.8ドル/株の株価でROGP株に転換することが可能である。申請期間は2015年5月12日から2015年6月30日まで</li>
                         <li>マキシムトレーダーへの投資をROGP株へ転換することを決めたあとで、マキシムトレーダーへの投資をビジネスとして継続することが可能で、今までの直接紹介ボーナスや組織発展ボーナスが発生します。18ヶ月の投資契約満了した後、会社はさらに18ヶ月間の口座有効期間を提供します</li>
-                        <li>ROGP株への転換を選択した場合、あなたの上位のメンバーベースはマキシムトレーダーのシステム内で、もう一度組織発展ボーナスが発生します</li>
+                        <li>ROGP株への転換を選択した場合、あなたの上位のメンバーベースはマキシムトレーダーのシステム内で、もう一度組織発展ボーナスが発生します
+                            <ol>
+                                <li>会員様の投資は12ヶ月以上となった場合、その元本および残りの月間配当の合計がアップラインの業績として蓄積される</li>
+                                <li>会員様の投資は12ヶ月未満の場合、その元本のみがアップラインの業績として蓄積される。</li>
+                            </ol>
+                        </li>
                         <li>あなたはAGL口座をアクティブしてない場合、システムが自動的に同額の株をAGL口座のS4に移管する。それによって、マキシムトレーダーと同じIDとパスワードでAGLに登録できます。AGLをビジネスとして展開したい場合、有効な口座が必要である</li>
                         <?php } else { ?>
-                        <li>You may convert your investment, capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this is open only during the period from 12 to 31 May 2015.</li>
+                        <li>You may convert your investment, capital plus the remaining unearned Performance Returns (CP3) till the maturity date, into ROGP shares (R-Shares) at promotional price of USD80 cents. Please note this is open only during the period from 12 May to 30 June 2015.</li>
                         <li>Once you decide to swap your Maxim investment to R-Shares, you may continue to promote Maxim business and you will still be entitled to earn the bonuses in the usual manner as offered by our referral programs in Maxim ie. Direct Referral Bonus and Development Bonus. You will enjoy this benefit for a further 18 months from your upcoming date of 18 months maturity. </li>
-                        <li>Upon conversion to R-Share, your higher member base will be able to enjoy a one time development bonus in Maxim.</li>
+                        <li>Upon conversion to R-Share, your higher member base will be able to enjoy a one time development bonus in Maxim.
+                            <ol>
+                                <li>If your contract has completed 12 months or more, your upper member will be able to earn development bonus on your principal sum plus the remaining unearned return on investment.</li>
+                                <li>If your contract has completed less than 12 months your upper member will be able to earn development bonus on your principal sum only.</li>
+                            </ol>
+                        </li>
                         <li>If you do not already have your AGL account, when you elect to share swap, your R-shares will be automatically credited into an AGL S4 wallet and you may access them with your existing Maxim user ID and password. However if you wish to do AGL business, you will have to open your own AGL account.</li>
                         <?php } ?>
 
