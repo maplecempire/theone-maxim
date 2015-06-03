@@ -118,7 +118,7 @@ tinyMCE.init({
                     <td>
                         <select name='category' id='category'>
                         	<option value=''><?php echo __('Please Select Category') ?></option>
-                        	<option value='Genealogy'><?php echo __('Genealogy') ?></option>
+<!--                        	<option value='Genealogy'>--><?php //echo __('Genealogy') ?><!--</option>-->
                         	<option value='User Profile/Credentials'><?php echo __('User Profile/Credentials') ?></option>
                         	<option value='Deposit/CP Points'><?php echo __('Deposit/CP Points') ?></option>
                         	<option value='Investment Returns/Bonuses'><?php echo __('Investment Returns/Bonuses') ?></option>
