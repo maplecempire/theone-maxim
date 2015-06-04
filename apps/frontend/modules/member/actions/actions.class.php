@@ -8902,7 +8902,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
-        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180) {
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 254781) {
+        } else {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
@@ -8999,7 +9000,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
-        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180) {
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 254781) {
+        } else {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
