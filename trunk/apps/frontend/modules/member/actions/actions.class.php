@@ -8902,6 +8902,10 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+            return $this->redirect('/member/summary');
+        }
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
@@ -8992,6 +8996,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         $mlmDistributor = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         //$isRpUser = $this->checkRpUser($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         if ($mlmDistributor->getFromAbfx() == "Y" && $mlmDistributor->getStatusCode() != Globals::STATUS_ACTIVE) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+            return $this->redirect('/member/summary');
+        }
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
