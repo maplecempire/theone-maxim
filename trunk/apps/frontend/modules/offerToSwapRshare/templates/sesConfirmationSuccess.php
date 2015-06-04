@@ -55,12 +55,6 @@ $(function() {
         }
     });
 
-    $("#link_moreExample").click(function(event){
-        event.preventDefault();
-        $(this).hide();
-        $("#divExample").show(500);
-    });
-
     $('#convertedCp2').autoNumeric({
         mDec: 2
     }).keyup(function(){
@@ -76,14 +70,8 @@ $(function() {
     $('#swapToRt').change(function(event){
         event.preventDefault();
         calculateRshare();
-    });
-<?php
-    // 254781 monkey
-if ($distributorDB->getLeaderId() == 254781) { ?>
-    $('#tr_swapToRt').show();
-    <?php
-}
-?>
+    }).trigger("change");
+
     $("#mt4Id").change(function(event){
         event.preventDefault();
         $(".indicator").show();
@@ -142,11 +130,11 @@ function calculateRshare() {
     var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
     totalRshare = Math.round(totalRshare);
 
-    var spanFormula = "$0K + ($0K x 0 months x 8%) = $0";
-    var spanFormulaCp2 = "CP2 (Optional) = $0";
-    var spanFormulaCp3 = "CP3 (Optional) = $0";
+    var spanFormula = "$0K = $0";
+    var spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $0";
+    var spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $0";
     var spanFormulaTotalAmount = "is $0 / 0.80";
-    var spanFormulaRshare = "= 0 R-Shares";
+    var spanFormulaRshare = "= 0 <?php echo __('R-Shares');?>";
 
     if (isRt == "Y") {
         spanFormulaRshare = "= 0 RT";
@@ -154,13 +142,12 @@ function calculateRshare() {
         totalRshare = Math.round(totalRshare);
     }
 
-
     if (totalRshare >= 1) {
-        spanFormula = "$" + mt4Balance + "K + ($" + mt4Balance + "K x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
-        spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
-        spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
+        spanFormula = "$" + mt4Balance + "K = $" + totalAmountConverted + "";
+        spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $" + convertedCp2;
+        spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $" + convertedCp3;
         spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
-        spanFormulaRshare = "= " + totalRshare + " R-Shares";
+        spanFormulaRshare = "= " + totalRshare + " <?php echo __('R-Shares');?>";
 
         if (isRt == "Y") {
             spanFormulaTotalAmount = "is " + totalAmountConvertedWithCp2Cp3;
