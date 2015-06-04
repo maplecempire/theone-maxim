@@ -1268,7 +1268,9 @@ class offerToSwapRshareActions extends sfActions
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP2 Balance."));
             return $this->redirect('/offerToSwapRshare/index');
         }
-
+        if ($this->swapToRt == "Y") {
+            $roiRemainingMonth = 0;
+        }
         $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
