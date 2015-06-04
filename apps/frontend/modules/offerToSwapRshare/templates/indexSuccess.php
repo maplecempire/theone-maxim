@@ -149,6 +149,10 @@ function calculateRshare() {
     var roiPercentage = $('#roiPercentage').val();
     var isRt = $('#swapToRt').val();
 
+    if (isRt == "Y") {
+        roiRemainingMonth = 0;
+    }
+
     var totalAmountConverted = mt4Balance + (mt4Balance * roiRemainingMonth * roiPercentage / 100);
     var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
     totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
