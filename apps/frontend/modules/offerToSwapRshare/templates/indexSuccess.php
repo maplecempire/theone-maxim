@@ -755,21 +755,21 @@ function calculateRshare() {
                     <table cellpadding="3" cellspacing="3">
                         <input type="hidden" id="roiRemainingMonth" name="roiRemainingMonth" value="<?php echo $roiRemainingMonth;?>">
                         <input type="hidden" id="roiPercentage" name="roiPercentage" value="<?php echo $roiPercentage;?>">
-                        <tr><td class="text_bold" style="width: 150px;">User ID</td><td>:</td><td><?php echo $distributorDB->getDistributorCode();?></td></tr>
-                        <tr><td class="text_bold">Member</td><td>:</td><td><?php echo $distributorDB->getFullName();?></td></tr>
-                        <tr><td class="text_bold">Members Home address</td><td>:</td><td><?php echo $distributorDB->getAddress();?></td></tr>
+                        <tr><td class="text_bold" style="width: 150px;"><?php echo __('Member ID');?></td><td>:</td><td><?php echo $distributorDB->getDistributorCode();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Full Name');?></td><td>:</td><td><?php echo $distributorDB->getFullName();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Home address');?></td><td>:</td><td><?php echo $distributorDB->getAddress();?></td></tr>
                         <tr><td class="text_bold"></td><td></td><td><?php echo $distributorDB->getAddress2();?></td></tr>
                         <tr><td class="text_bold"></td><td></td><td><?php echo $distributorDB->getPostcode(). " ". $distributorDB->getCity(). " ". $distributorDB->getState();?></td></tr>
-                        <tr><td class="text_bold">Country</td><td>:</td><td><?php echo $distributorDB->getCountry();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Country');?></td><td>:</td><td><?php echo $distributorDB->getCountry();?></td></tr>
                         <tr><td class="text_bold"><br></td></tr>
-                        <tr><td class="text_bold">Members current email</td><td>:</td><td><?php echo $distributorDB->getEmail();?></td></tr>
-                        <tr><td class="text_bold">Mobile</td><td>:</td><td><?php echo $distributorDB->getContact();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Members current email');?></td><td>:</td><td><?php echo $distributorDB->getEmail();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Mobile');?></td><td>:</td><td><?php echo $distributorDB->getContact();?></td></tr>
                         <tr><td class="text_bold"><br></td></tr>
-                        <tr><td class="text_bold">MT4 ID</td><td>:</td><td>
+                        <tr><td class="text_bold"><?php echo __('MT4 ID');?></td><td>:</td><td>
                             <select name="mt4Id" id="mt4Id">
                                 <?php
                                 if (count($mt4Ids) > 0) {
-                                    echo "<option value=''>Please select MT4 ID</option>";
+                                    echo "<option value=''><?php echo __('Please select MT4 ID');?></option>";
                                     foreach ($mt4Ids as $mt4Id) {
                                     ?>
                                     <option value="<?php echo $mt4Id?>"><?php echo $mt4Id;?></option>
@@ -777,14 +777,14 @@ function calculateRshare() {
                                     }
                                 } else {
                                 ?>
-                                    <option value="">(empty)</option>
+                                    <option value=""><?php echo __('(empty)');?></option>
                                 <?php
                                 }
                                 ?>
                             </select>
                         </td></tr>
-                        <tr><td class="text_bold">MT4 Balance<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td id="td_mt4Balance"><?php echo number_format($mt4Balance,2);?></td></tr>
-                        <tr><td class="text_bold">Contract date<img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td><?php echo $distributorDB->getActiveDateTime();?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('MT4 Balance');?><img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td id="td_mt4Balance"><?php echo number_format($mt4Balance,2);?></td></tr>
+                        <tr><td class="text_bold"><?php echo __('Contract date');?><img src="/images/common/indicator.gif" class="indicator" style="display: none;"></td><td>:</td><td><?php echo $distributorDB->getActiveDateTime();?></td></tr>
                         <tr><td class="text_bold">CP2</td><td>:</td><td><?php echo number_format($cp2Balance,2);?></td></tr>
                         <tr><td class="text_bold">CP3</td><td>:</td><td><?php echo number_format($cp3Balance,2);?></td></tr>
                     </table>

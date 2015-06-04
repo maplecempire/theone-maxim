@@ -1113,6 +1113,15 @@
             <trans-unit><source>Legal Watch</source><target>法律顾问</target></trans-unit>
             <trans-unit><source>Ask and be answered</source><target>询问和回答</target></trans-unit>
             <trans-unit><source>Maxim Code of Ethic</source><target>马胜的伦理守则</target></trans-unit>
+            <trans-unit><source>Home address</source><target>地址</target></trans-unit>
+            <trans-unit><source>Country</source><target>国家</target></trans-unit>
+            <trans-unit><source>Members current email</source><target>会员的电邮</target></trans-unit>
+            <trans-unit><source>Mobile</source><target>电话</target></trans-unit>
+            <trans-unit><source>Please select MT4 ID</source><target>请选择MT4号</target></trans-unit>
+            <trans-unit><source>MT4 ID</source><target>MT4号</target></trans-unit>
+            <trans-unit><source>(empty)</source><target>(无)</target></trans-unit>
+            <trans-unit><source>MT4 Balance</source><target>MT4余额</target></trans-unit>
+            <trans-unit><source>Contract date</source><target>合同日期</target></trans-unit>
         </body>
     </file>
 </xliff>
