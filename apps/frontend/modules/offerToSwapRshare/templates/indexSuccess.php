@@ -97,10 +97,11 @@ $(function() {
 
 <?php
     // 254781 monkey
-if ($distributorDB->getLeaderId() == 254781) { ?>
-    $('#tr_swapToRt').show();
+//if ($distributorDB->getLeaderId() == 254781) {
+    ?>
+//    $('#tr_swapToRt').show();
     <?php
-}
+//}
 ?>
     $("#mt4Id").change(function(event){
         event.preventDefault();

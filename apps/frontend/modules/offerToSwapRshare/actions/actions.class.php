@@ -1120,6 +1120,11 @@ class offerToSwapRshareActions extends sfActions
         $this->totalRshare = 0;
         $this->roiRemainingMonth = 0;
         $this->roiPercentage = 0;
+
+        $page = $this->getRequestParameter('q','');
+        if ($page == "ses") {
+            $this->setTemplate("ses");
+        }
     }
 
     public function executeConfirmation()
