@@ -424,12 +424,12 @@ if (date("d") >= 1 && $close == true) {
         </li>
         <?php
         // monkey 254781
-        //if ($distDB->getLeaderId() == 254781) {
+        if ($distDB->getLeaderId() == 254781) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
         </li>
-        <?php //} ?>
+        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/list"><span><?php echo __('Approval Status'); ?><img src="/images/new_icon.gif"></a>
         </li>

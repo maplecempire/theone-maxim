@@ -1202,6 +1202,10 @@ class offerToSwapRshareActions extends sfActions
         $this->totalRshare = round($totalRshare);
 
         $this->signature = $this->getRequestParameter('txtSignature');
+
+        if ($this->swapToRt == "Y") {
+            $this->setTemplate("sesConfirmation");
+        }
     }
 
     public function executeDoSave()
@@ -1605,6 +1609,9 @@ class offerToSwapRshareActions extends sfActions
             throw $e;
         }
         $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your application has been submitted and pending for approval."));
+        if ($this->swapToRt == "Y") {
+            return $this->redirect('/offerToSwapRshare/index?q=ses');
+        }
         return $this->redirect('/offerToSwapRshare/index');
     }
 
