@@ -270,12 +270,12 @@ function calculateRshare() {
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">符合资格: </span>
-                        <br>
-                        <span style="font-size: 12px; font-weight: bold;">合同至少1个月</span>
-                        <br>
-                        <br>
-                        <br>
+<!--                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">符合资格: </span>-->
+<!--                        <br>-->
+<!--                        <span style="font-size: 12px; font-weight: bold;">合同至少1个月</span>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS 公式: </span>
                         <br>
                         <span style="font-size: 12px; font-weight: bold;">本金基于MT4余额 + 剩余的返利回报（月）<br>+ CP2 & CP3余额 (自选)</span>
@@ -288,12 +288,12 @@ function calculateRshare() {
                     <?php
                     } else if ($culture == "kr") {
                     ?>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
-                        <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
-                        <br>
-                        <br>
-                        <br>
+<!--                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>-->
+<!--                        <br>-->
+<!--                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
                         <br>
                         <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
@@ -306,12 +306,12 @@ function calculateRshare() {
                     <?php
                     } else if ($culture == "jp") {
                     ?>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
-                        <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
-                        <br>
-                        <br>
-                        <br>
+<!--                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>-->
+<!--                        <br>-->
+<!--                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
                         <br>
                         <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
@@ -324,12 +324,12 @@ function calculateRshare() {
                     <?php
                     } else {
                     ?>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
-                        <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
-                        <br>
-                        <br>
-                        <br>
+<!--                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>-->
+<!--                        <br>-->
+<!--                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
                         <br>
                         <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
