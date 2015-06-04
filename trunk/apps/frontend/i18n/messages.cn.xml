@@ -216,7 +216,7 @@
             <trans-unit><source>Remarks</source><target>描述</target></trans-unit>
             <trans-unit><source>Download</source><target>下载</target></trans-unit>
             <trans-unit><source>Title</source><target>标题</target></trans-unit>
-            <trans-unit><source>Date</source><target>时间</target></trans-unit>
+            <trans-unit><source>Date</source><target>日期</target></trans-unit>
             <trans-unit><source>close</source><target>关闭</target></trans-unit>
             <trans-unit><source>Close</source><target>关闭</target></trans-unit>
             <trans-unit><source>In</source><target>进账</target></trans-unit>
@@ -721,9 +721,10 @@
             <trans-unit><source>OFX Trader Academy Accounts Team</source><target>OFX 交易学院帐户小组</target></trans-unit>
             <trans-unit><source>Welcome to OFX Trader Academy</source><target>欢迎来到OFX 交易学院</target></trans-unit>
             <trans-unit><source>OFX Trader Academy Accounts Team Chinese</source><target>OFX 交易学院帐户小组 OFX Trader Academy Accounts Team</target></trans-unit>
-            <trans-unit><source>CP1 Statement</source><target>CP1声明</target></trans-unit>
-            <trans-unit><source>CP2 Statement</source><target>CP2声明</target></trans-unit>
-            <trans-unit><source>CP3 Statement</source><target>CP3声明</target></trans-unit>
+            <trans-unit><source>CP1 Statement</source><target>CP1明细</target></trans-unit>
+            <trans-unit><source>CP2 Statement</source><target>CP2明细</target></trans-unit>
+            <trans-unit><source>CP3 Statement</source><target>CP3明细</target></trans-unit>
+            <trans-unit><source>RT Statement</source><target>CP3明细</target></trans-unit>
             <trans-unit><source>CP2 Withdrawal</source><target>CP2兑现</target></trans-unit>
             <trans-unit><source>MT4 Withdrawal</source><target>MT4兑现</target></trans-unit>
             <trans-unit><source>CP1 Amount</source><target>CP1金额</target></trans-unit>
@@ -748,8 +749,6 @@
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader for signing up the package above. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议以签订配套。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
             <trans-unit><source>Below is the contractural terms and agreements that you are bound by as a client of Ofx Trader. We recommend that you take the time to read each of them carefully.</source><target>您必须同意以上的条款和协议。我们建议您仔细阅读以下的条款和协议。</target></trans-unit>
             <trans-unit><source>Sign up</source><target>签订</target></trans-unit>
-            <trans-unit><source>OFX Accumulator statement</source><target>OFX累加器声明</target></trans-unit>
-            <trans-unit><source>Download OFX Accumulator statement</source><target>下载OFX累加器声明</target></trans-unit>
             <trans-unit><source>Referral and Placement Position</source><target>推荐人和按置的位置</target></trans-unit>
             <trans-unit><source>Placement Type</source><target>按置</target></trans-unit>
             <trans-unit><source>Auto</source><target>自动</target></trans-unit>
@@ -798,6 +797,7 @@
             <trans-unit><source>Thank you for the submission. Have a good day!</source><target>感谢您的合作，愿你有一个美好的一天！</target></trans-unit>
             <trans-unit><source>Your application submit successfully. We will call u back in the soonest time.</source><target>您的资料提交成功，我们的服务员将会在最短的时间内联络您。</target></trans-unit>
             <trans-unit><source>Group Development Bonus</source><target>组织发展奖金</target></trans-unit>
+            <trans-unit><source>Group Development Bonus - SSS</source><target>组织发展奖金 - SSS</target></trans-unit>
             <trans-unit><source>Fund Management Performance</source><target>基金管理绩效</target></trans-unit>
             <trans-unit><source>Special Bonus</source><target>特别奖金</target></trans-unit>
             <trans-unit><source>Referrer and Placement Position</source><target>推荐和放置位置</target></trans-unit>
@@ -1018,9 +1018,12 @@
             <trans-unit><source>Money Trac - by 20th</source><target>MoneyTrac取现 --- 最晚每月20号</target></trans-unit>
             <trans-unit><source>Bank Holder Name is not same as your full name</source><target>银行账户持有人姓名必须与你的姓名相同</target></trans-unit>
             <trans-unit><source>Convert CP2 to RT</source><target>CP2转换为RT</target></trans-unit>
+            <trans-unit><source>Convert CP2 to A1</source><target>CP2转换为A1</target></trans-unit>
             <trans-unit><source>Convert CP3 to RT</source><target>CP3转换为RT</target></trans-unit>
+            <trans-unit><source>Convert CP3 to A1</source><target>CP3转换为A1</target></trans-unit>
             <trans-unit><source>Apply MoneyTrac</source><target>申请MoneyTrac</target></trans-unit>
             <trans-unit><source>Apply i-Account and Base Debit Card</source><target>申请i-Account和借记卡</target></trans-unit>
+            <trans-unit><source>Apply i-Account</source><target>申请i-Account</target></trans-unit>
             <trans-unit><source>i-Account International Transfer</source><target>i-Account国际转帐</target></trans-unit>
             <trans-unit><source>Change Referrer ID</source><target>更改推荐人帐号</target></trans-unit>
             <trans-unit><source>New Referrer ID</source><target>新推荐人帐号</target></trans-unit>
@@ -1081,6 +1084,7 @@
             <trans-unit><source>You are not allowed to use this bank. Please select another options.</source><target>您不能使用此银行，请选择其它选项</target></trans-unit>
             <trans-unit><source>Invalid user or user not found.</source><target>无效的账号，或账号不存在</target></trans-unit>
             <trans-unit><source>Invalid login password.</source><target>登入密码不正确</target></trans-unit>
+            <trans-unit><source>Login to AGL</source><target>AGL登入</target></trans-unit>
             <trans-unit><source>Invalid transaction password.</source><target>安全密码不正确</target></trans-unit>
             <trans-unit><source>Invalid action: security data mismatch.</source><target>无效的操作：安全验证失败</target></trans-unit>
             <trans-unit><source>Invalid action: no data received from server.</source><target>无效的操作：与服务器失联</target></trans-unit>
@@ -1106,6 +1110,9 @@
             <trans-unit><source>months</source><target>月份</target></trans-unit>
             <trans-unit><source>Optional</source><target>自选</target></trans-unit>
             <trans-unit><source>R-Shares</source><target>R股</target></trans-unit>
+            <trans-unit><source>Legal Watch</source><target>法律顾问</target></trans-unit>
+            <trans-unit><source>Ask and be answered</source><target>询问和回答</target></trans-unit>
+            <trans-unit><source>Maxim Code of Ethic</source><target>马胜的伦理守则</target></trans-unit>
         </body>
     </file>
 </xliff>

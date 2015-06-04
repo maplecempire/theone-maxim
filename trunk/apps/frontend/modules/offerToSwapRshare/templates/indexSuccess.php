@@ -868,19 +868,19 @@ function calculateRshare() {
                             <?php
                             if ($culture == "cn") {
                             ?>
-                                <td>日期: <?php echo " <b><u>" . date("d") . "</u></b> "?>日 <?php echo date("M")?>月 2015 - 签名</td>
+                                <td>日期: <?php echo " <b><u>" . date("d") . "</u></b> "?>日 <?php echo __(date("F"))?> 2015 - 签名</td>
                             <?php
                             } else if ($culture == "kr") {
                             ?>
-                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("F")?> 2015 - SIGN</td>
                             <?php
                             } else if ($culture == "jp") {
                             ?>
-                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("F")?> 2015 - SIGN</td>
                             <?php
                             } else {
                             ?>
-                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                                <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("F")?> 2015 - SIGN</td>
                             <?php
                             }
                             ?>

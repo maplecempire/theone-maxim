@@ -283,7 +283,7 @@ function calculateRshare() {
                 <td>
                     <table cellpadding="3" cellspacing="3">
                         <tr>
-                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("M")?> 2015 - SIGN</td>
+                            <td>DATED: This <?php echo " <b><u>" . date("d") . "</u></b> "?> day of <?php echo date("F")?> 2015 - SIGN</td>
                             <td>:</td>
                             <td><input type="text" id="txtSignature" value="<?php echo $signature; ?>" size="30" readonly="readonly"></td>
                         </tr>
