@@ -1060,6 +1060,8 @@ $(document).ready(function() {
                         <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
                             <br>Dear Shareholders,
 <br>
+<br>Dear Shareholders,
+<br>
 <br>We are pleased to inform all shareholders that our group of company RGF has on the 2nd June 2015 successfully acquired shareholding of the single largest stakeholder of ASX Top 200 Australian Public Listed Company: Citigold Corp Ltd (www.Citigold.com) which is an Australian gold mining company with operations based at Charters Towers in north eastern Australia. Citigold hold's all of the high grade Charters Towers goldfield where a Mineral Resource of 11,000,000 ounces of gold (342 tonnes) at an average grade of 14g/t gold has been defined (25 million tonnes @ 14g/t gold) and documented, to JORC (Joint Ore Reserves Committee) Code reporting standards at current reserve value at approximately USD11Billion. Our reserve value is USD1.28Billion and shall be injected into ROGP once we have finalize the corporate exercise.
 <br>
 <br>Thank you.
@@ -1074,18 +1076,25 @@ $(document).ready(function() {
 <br>
 <br>親愛なる株主の皆様：
 <br>
-<br>朗報：ローヤル・グローブ・ホルディング子会社RGF有限会社はオーストラリアCitigold Corporation に株式参加し、当社の最大株主となった。Citigold Corporation はオーストラリアの金工業会社であり、主な業務が金の発掘・生産である。オーストラリア証券取引所に上場しASXランキングにおいてトップ200の会社である。本社はオーストラリア北部のCharters Towersに所在し、成長型の会社である。その目標は金の発掘・生産を拡大しキャッシュフローを継続的に増加すること。Charters Towersの金・銀鉱は独特な鉱脈システムであり、オーストラリアにおいて最高グレードと評価された。Charters Towersの鉱脈に対する調査が進み、現段階では発展・産能増加の段階に突入した。Citigold Corporation はCharters Towersのハイグレード鉱脈を全部所有し、その鉱脈では14グラム/トンのグレードで、合計342トンの金が埋蔵されている（JORC 鉱石埋蔵量委員会の報告書により)。当鉱脈の金埋蔵量は110億米の価値に達す。その中、現段階我が社取得した埋蔵量の価値は12.8億ドルである。関連手続きは交付中で、完了した次第、資産としてローヤル・グローブ・ホルディングに注入する。
+<br>朗報：ローヤル・グローブ・ホルディング子会社RGF有限会社はオーストラリアCitigold Corporation に株式参加し、当社の最大株主となった。Citigold Corporation (www.Citigold.com) はオーストラリアの金工業会社であり、主な業務が金の発掘・生産である。オーストラリア証券取引所に上場しASXランキングにおいてトップ200の会社である。本社はオーストラリア北部のCharters Towersに所在し、成長型の会社である。その目標は金の発掘・生産を拡大しキャッシュフローを継続的に増加すること。Charters Towersの金・銀鉱は独特な鉱脈システムであり、オーストラリアにおいて最高グレードと評価された。Charters Towersの鉱脈に対する調査が進み、現段階では発展・産能増加の段階に突入した。Citigold Corporation はCharters Towersのハイグレード鉱脈を全部所有し、その鉱脈では14グラム/トンのグレードで、合計342トンの金が埋蔵されている（JORC 鉱石埋蔵量委員会の報告書により)。当鉱脈の金埋蔵量は110億米の価値に達す。その中、現段階我が社取得した埋蔵量の価値は12.8億ドルである。関連手続きは交付中で、完了した次第、資産としてローヤル・グローブ・ホルディングに注入する。
 <br>
 <br>ありがとうございます。
 <br>ローヤル・グローブ・ホルディング役員会
 <br>
-<br>친애하는 주주 여러분,
+<br>친애하는 주주 여러분
 <br>
-<br>모든 주주에게 통지합니다. 우리의 그룹 회사 인 RGF는 2015 년 6 월 2 일, ASX 톱 200 호주의 상장 기업인  스테이크 홀더시티골드 주식회사(www.citigold.com)의단독으로 최대의 주주로써의 주식 보유에 성공했습니다. 시티골드 주식회사는  동북 호주의 차터스 타워스 기반하여 운영되고있는 호주의 광업 회사입니다.
-<br>씨티골드는  차터스 타워스 고급 금광을 소지하고 있습니다. 금광은 11,000,000 온스의 금 (343 톤)의 평균 14 금 금의 존재 (2500 만톤의 14 금)가  기록되어 있는차터스 타워스 고급 금광을 소지하고 있습니다.  JORC (조인트 금광 리저브 커미티) 코드의 보고서에 따르면 현재 보유 가치는 약 110 억 USD이며,  우리의 회사의 일을 마무리하게 되면, 12억 8000 만 USD의 가치가 ROGP에 포함됩니다.
+<br>당사는 주주여러분께 다음과 같은 공시를 하게되어 무척 기쁘게 생각합니다.
+<br>당사 그룹사인 RGF사가 6월2일자로  ASX(호주증권거래소) Top 200 사 중 하나인 Citigold Corp. Ltd.( www.Citigold.com)의, 단일 최대 주주 지위를 확보하는 주식을 성공적으로 취득하게 되었습니다.
+<br>이 회사는 호주 북동부에 위치한
+<br>최상의 품질 금 매장지역인
+<br>차타드 타우어즈에서 채굴중인 금광회사로 금 1천1백만 온스(342 톤) 평균 14g/t(14금)을 매장하고 있습니다. JORC(광물부존조사위원회)
+<br>보고서에 의하면 금광의 부존가치가 미화 약 110억불에 달하며, 따라서 이 일이 성공적으로 성사되면
+<br>ROGP는 미화 12 억8천만뷸의 회사가치를 취득하게 될 것입니다.
 <br>
 <br>감사합니다.
 <br>매니지먼트
+<br>
+<br>Updated on 4th June 2015
                             
                             <br>
                             <br>
