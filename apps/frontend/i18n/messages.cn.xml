@@ -1122,6 +1122,7 @@
             <trans-unit><source>(empty)</source><target>(无)</target></trans-unit>
             <trans-unit><source>MT4 Balance</source><target>MT4余额</target></trans-unit>
             <trans-unit><source>Contract date</source><target>合同日期</target></trans-unit>
+            <trans-unit><source>More Example</source><target>更多示例</target></trans-unit>
         </body>
     </file>
 </xliff>

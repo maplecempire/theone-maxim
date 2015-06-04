@@ -265,27 +265,27 @@ function calculateRshare() {
                     <?php
                     if ($culture == "cn") {
                     ?>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">符合资格: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
-                        <br>
-                        <br>
-                        <br>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS Formula: </span>
-                        <br>
-                        <span style="font-size: 12px; font-weight: bold;">Principal Sum based on MT4 Balance + Remaining Performance Return (Months) <br>+ CP2 & CP3 balance (Optional)</span>
+                        <span style="font-size: 12px; font-weight: bold;">合同至少1个月</span>
                         <br>
                         <br>
                         <br>
-                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">SSS 公式: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
+                        <span style="font-size: 12px; font-weight: bold;">本金基于MT4余额 + 剩余的返利回报（月）<br>+ CP2 & CP3余额 (自选)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="txt_title" style="font-size: 12px; color: #ff0000;">转换: </span>
+                        <br>
+                        <span style="font-size: 12px; font-weight: bold;">R股 @ <u>每股US$0.80</u></span>
                     <?php
                     } else if ($culture == "kr") {
                     ?>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
                         <br>
                         <br>
                         <br>
@@ -303,7 +303,7 @@ function calculateRshare() {
                     ?>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
                         <br>
                         <br>
                         <br>
@@ -321,7 +321,7 @@ function calculateRshare() {
                     ?>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">To Qualify: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 12 months or more</span>
+                        <span style="font-size: 12px; font-weight: bold;">Contract(s) at least 1 months or more</span>
                         <br>
                         <br>
                         <br>
@@ -351,7 +351,7 @@ function calculateRshare() {
 <?php
                         if ($culture == "cn") {
     ?>
-    <span class="txt_title">Example 1: VVIP $30K with 6 months PR left</span>
+    <span class="txt_title">实例1: VVIP$30K与剩余6个月的返利</span>
     <?php
 
 } else if ($culture == "kr") {
@@ -378,7 +378,7 @@ function calculateRshare() {
 <?php
                         if ($culture == "cn") {
     ?>
-    <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
+    <span class="text_red">$30K + ($30K x 6个月 x 8%) = $44,400</span>
     <br>
     <br>
     <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
@@ -416,7 +416,7 @@ function calculateRshare() {
                         <td><br></td>
                     </tr>
                     <tr>
-                        <td><a href="#" id="link_moreExample">More Example</a></td>
+                        <td><a href="#" id="link_moreExample"><?php echo __('More Example');?></a></td>
                     </tr>
                 </table>
 
@@ -428,7 +428,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="txt_title">Example 2: VVIP $30K with 6 months PR left but with $10k MT4 Balance</span>
+                            <span class="txt_title">实例2: VVIP$30K与剩余6个月的返利不过剩余10k的MT4余额</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
@@ -451,7 +451,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
+                            <span class="text_red">$10K + ($10K x 6个月 x 8%) = $14,800</span>
                             <br>
                             <br>
                             <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
@@ -512,7 +512,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
+                            <span class="text_red">$30K + ($30K x 3个月  x 8%) = $37,200</span>
                             <br>
                             <br>
                             <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
@@ -573,7 +573,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
+                            <span class="text_red">$10K + ($10K x 3个月 x 8%) = $12,400</span>
                             <br>
                             <br>
                             <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
@@ -683,7 +683,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="text_green">SSS</span> <span class="text_red">is </span> <span class="text_green">Optional</span>
+                            <span class="text_green">SSS</span> <span class="text_red">是</span> <span class="text_green">自选</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
