@@ -715,6 +715,25 @@ HAVING _total >= 50000";
         print_r("executeQueryAccountLedger20141231 Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeQueryAccount()
+    {
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('id'));
+        $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+        if ($mlmDistributor) {
+            $cp1 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
+            $cp2 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
+            $cp3 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+            print_r("<br>CP1:".$cp1);
+            print_r("<br>CP2:".$cp2);
+            print_r("<br>CP3:".$cp3);
+        }
+
+        print_r("executeQueryAccount Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeBmwX6Challenge()
     {
         $this->resultList = $this->findPersonalSalesList(null, "2014-03-10 00:00:00", "2014-05-31 00:00:00", null);
@@ -2629,5 +2648,25 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         }
 
         return $arr;
+    }
+
+    function getAccountBalance($distributorId, $accountType)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_account_ledger WHERE dist_id = ? AND account_type = ?";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, $accountType);
+        $resultset = $statement->executeQuery();
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }
