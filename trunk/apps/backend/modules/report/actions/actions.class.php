@@ -722,6 +722,9 @@ HAVING _total >= 50000";
         $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
 
         if ($mlmDistributor) {
+            print_r("<br>Member ID:".$mlmDistributor->getDistributorCode());
+            print_r("<br>Full Name:".$mlmDistributor->getFullName());
+
             $cp1 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $cp2 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_ECASH);
             $cp3 = $this->getAccountBalance($mlmDistributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
