@@ -1044,6 +1044,47 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='71'>Annoucement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "04 June 2015";
+                ?>
+            </div>
+
+            <div id="page_71" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Shareholders,
+<br>
+<br>We are pleased to inform all shareholders that our group of company RGF has on the 2nd June 2015 successfully acquired shareholding of the single largest stakeholder of ASX Top 200 Australian Public Listed Company: Citigold Corp Ltd (www.Citigold.com) which is an Australian gold mining company with operations based at Charters Towers in north eastern Australia. Citigold hold's all of the high grade Charters Towers goldfield where a Mineral Resource of 11,000,000 ounces of gold (342 tonnes) at an average grade of 14g/t gold has been defined (25 million tonnes @ 14g/t gold) and documented, to JORC (Joint Ore Reserves Committee) Code reporting standards at current reserve value at approximately USD11Billion. Our reserve value is USD1.28Billion and shall be injected into ROGP once we have finalize the corporate exercise.
+<br>
+<br>Thank you.
+<br>The Management.
+<br>
+<br>股东们，大家好！
+<br>
+<br>在此我们非常荣幸地向大家宣布: 皇家控股集团旗下RGF有限公司已成功入股澳大利亚金城矿业集团（CITIGOLD) 成为该集团第一大股东。金城公司(www.Citigold.com)是一家澳大利亚黄金开采公司，是澳大利亚交易所ASX排名前200的一家上市公司；运营部设在澳大利亚东北部的查特斯堡。公司为一成长型公司，其目标为通过扩大黄金开采业务实现现金流量的不断增长。查特斯堡金银矿是一个独特的矿脉系统，在澳大利亚为品味最高的金矿之一。随着对查特斯堡矿体的深入研究，查特斯堡项目现在进入了发展和产能提升阶段，这将使生产水平得到显著提高。 金城拥有全部查特斯堡高品位的金矿区，矿区内有平均品味为14克黄金/吨的1100,0000盎司(342吨)的黄金矿产资源，已根据JORC(矿石储量联合委员会)规范的报告标准进行定义(2500,0000吨，14克/吨 金)及文件编制。该矿区储备价值高达110亿美金。其中我们占股拥有的储备价值达12.8亿美金，我们将尽快完成相关手续，将此部分入注皇家控股集团！
+<br>
+<br>谢谢！
+<br>公司管理层
+                            
+                            <br>
+                            <br>
+                            <img src="/images/email/932c47aeff3c55351a26764c2dcf666d.jpg" alt="" style="width:610px;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+<div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='70'>Super Share Swap -SSS Note</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
