@@ -19,7 +19,7 @@ class offerToSwapRshareActions extends sfActions
 //        $c->add(SssApplicationPeer::SWAP_TYPE, "SES");
         //$c->setLimit(30);
 //        $sssApplication = SssApplicationPeer::doSelectOne($c);
-        $sssApplication = SssApplicationPeer::retrieveByPK(2213);
+        $sssApplication = SssApplicationPeer::retrieveByPK(2214);
 
         var_dump($sssApplication);
 
