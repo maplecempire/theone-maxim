@@ -105,7 +105,7 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/convertCp3ToRt"><span><?php echo __('Convert CP3 to RT'); ?></span></a>
         </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="display: none;">
             <a href="/member/rtLog"><span><?php echo __('RT Statement'); ?></span></a>
         </li>
     <?php } ?>
@@ -428,6 +428,9 @@ if (date("d") >= 1 && $close == true) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
