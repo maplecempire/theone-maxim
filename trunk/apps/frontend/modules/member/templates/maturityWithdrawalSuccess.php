@@ -5,11 +5,7 @@
     var moneytracCustomerId = "<?php echo $distributorDB->getMoneytracCustomerId()?>";
     $(function() {
         $("#cbo_cp3Amount").change(function(){
-            <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
             var ecashFinal = $("#cbo_cp3Amount").autoNumericGet() - 30;
-            <?php } else { ?>
-            var ecashFinal = $("#cbo_cp3Amount").val() - 30;
-            <?php } ?>
             $("#ecashFinal").autoNumericSet(ecashFinal);
         }).change();
             $("#withdrawForm").validate({
@@ -33,17 +29,13 @@
                     } else {
                         waiting();
                         var ecashBalance = $('#ecashBalance').autoNumericGet();
-                        var monthlyPerformanceReturnAmount = parseFloat($('#monthlyPerformanceReturnAmountDisplay').autoNumericGet());
-                    <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
+                        var principalAmount = parseFloat($('#principalAmount').autoNumericGet());
                         var withdrawAmount = parseFloat($("#cbo_cp3Amount").autoNumericGet());
-                        <?php } else { ?>
-                        var withdrawAmount = parseFloat($("#cbo_cp3Amount").val());
-                        <?php } ?>
                         if (withdrawAmount <= 30) {
                             error("<?php echo __("%1% must greater than %2%.", array("%1%" => __("CP3 Withdrawal Amount"), "%2%" => "30.00")) ?>");
                             return false;
                         }
-                        if (withdrawAmount > monthlyPerformanceReturnAmount) {
+                        if (withdrawAmount > principalAmount) {
                             error("<?php echo __("Maximum withdrawal is limited to your monthly Performance Return amount") ?>");
                             return false;
                         }
@@ -56,9 +48,7 @@
                             return false;
                         }
 
-                    <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                         $("#cbo_cp3Amount").val(withdrawAmount);
-                        <?php } ?>
                         form.submit();
                     }
                 }
@@ -76,11 +66,9 @@
             }
         }).trigger("change");
 
-        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
         $('#cbo_cp3Amount').autoNumeric({
             mDec: 2
         });
-        <?php } ?>
     });
 </script>
 
@@ -97,14 +85,14 @@
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/cp3Withdrawal");?>" style="color: rgb(134, 197, 51);">
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/cp3Withdrawal");?>" style="color: rgb(0, 93, 154);">
         <?php echo __('CP3 Withdrawal'); ?>
     </a>
     &nbsp;&nbsp;
     <img src="/images/arrow_blue_single_tab.gif">
     &nbsp;&nbsp;
-    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maturityWithdrawal");?>" style="color: rgb(0, 93, 154);">
-        <?php echo __('CP2 Withdrawal (Maturity)'); ?>
+    <a target="_self" class="navcontainer" href="<?php echo url_for("/member/maturityWithdrawal");?>" style="color: rgb(134, 197, 51);">
+        <?php echo __('CP3 Withdrawal (Maturity)'); ?>
     </a>
     &nbsp;&nbsp;
 </div>
@@ -121,7 +109,7 @@ if ($distributorDB->getIaccount() == "") {
         <td><br></td>
     </tr>
     <tr>
-        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP3 Withdrawal') ?></span></td>
+        <td class="tbl_sprt_bottom"><span class="txt_title"><?php echo __('CP3 Withdrawal (Maturity)') ?></span></td>
     </tr>
     <tr>
         <td><br>
@@ -150,7 +138,7 @@ if ($distributorDB->getIaccount() == "") {
     </tr>
     <tr>
         <td>
-            <form action="/member/cp3Withdrawal" id="withdrawForm" name="withdrawForm" method="post">
+            <form action="/member/maturityWithdrawal" id="withdrawForm" name="withdrawForm" method="post">
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
@@ -163,7 +151,7 @@ if ($distributorDB->getIaccount() == "") {
                     <th class="tbl_header_left">
                         <div class="border_left_grey">&nbsp;</div>
                     </th>
-                    <th colspan="2"><?php echo __('CP3 Withdrawal') ?></th>
+                    <th colspan="2"><?php echo __('CPe Withdrawal (Maturity)') ?></th>
 <!--                    <th class="tbl_content_right"></th>-->
                     <th class="tbl_header_right">
                         <div class="border_right_grey">&nbsp;</div>
@@ -172,10 +160,10 @@ if ($distributorDB->getIaccount() == "") {
 
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
-                    <td><?php echo __('Monthly Performance Return Amount'); ?></td>
+                    <td><?php echo __('Principal Amount may withdraw'); ?></td>
                     <td>
-                        <input name="monthlyPerformanceReturnAmountDisplay" id="monthlyPerformanceReturnAmountDisplay" tabindex="1" disabled="disabled"
-                                           value="<?php echo number_format($monthlyPerformanceReturnAmount, 2); ?>"/>
+                        <input name="principalAmount" id="principalAmount" tabindex="1" disabled="disabled"
+                                           value="<?php echo number_format($principalAmount, 2); ?>"/>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -194,28 +182,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                     <td><?php echo __('CP3 Withdrawal Amount'); ?></td>
                     <td>
-                        <?php if ($distributorDB->getCloseAccount() == "Y") { ?>
                         <input name="cp3Amount" id="cbo_cp3Amount" tabindex="2"/>
-                        <?php } else { ?>
-                        <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2" style="text-align:right">
-                            <?php
-                                //if ($distributorDB->getMt4UserName() != null) {
-                                for ($i = 100; $i <= 550; $i = $i + 10) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-                                for ($i = 600; $i <= 1000; $i = $i + 50) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-                                for ($i = 1100; $i <= 10000; $i = $i + 100) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-                                for ($i = 10500; $i <= 100000; $i = $i + 500) {
-                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
-                                }
-                                //}
-                            ?>
-                        </select>
-                        <?php } ?>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -329,7 +296,7 @@ if ($distributorDB->getIaccount() == "") {
                         <br>
                         <ol style="color: #dc143c; padding-left: 20px;">
                             <li><?php echo __('Minimum withdrawal amount is USD100') ?></li>
-                            <li><?php echo __('Maximum withdrawal is limited to your monthly Performance Return amount') ?></li>
+                            <li><?php echo __('Maximum withdrawal is limited to your principal amount') ?></li>
                             <li><?php echo __('Withdrawal request must be done during the first 7 days of each month') ?></li>
                             <li><?php echo __('Processing time will be at least 3 days') ?></li>
 <!--                            <li>--><?php //echo __('Payout will be by the 15th of each month') ?><!--</li>-->
@@ -343,31 +310,6 @@ if ($distributorDB->getIaccount() == "") {
 <!--                                </ul>-->
 <!--                            </li>-->
                         </ol>
-
-                        <div class="ui-widget">
-                            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                                 class="ui-state-highlight ui-corner-all">
-                                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                              class="ui-icon ui-icon-info"></span>
-                                    <strong>Effective, 1st June 2015, CP3 withdrawals will be limited to the actual monthly Performance Return amount. Accumulation is therefore not allowed. This is done to avoid attracting unnecessary attention to IMs' withdrawal amounts by their respective banks. Please further note that for investment packages of USD1,000, the performance returns withdrawal amount shall be a minimum of USD100 and a maximum of USD540.</strong></p>
-                            </div>
-                        </div>
-                        <!--<div class="ui-widget" style="display: none" id="moneyTracNote">
-                            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
-                                 class="ui-state-highlight ui-corner-all">
-                                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
-                                                              class="ui-icon ui-icon-info"></span>
-                                    <strong><?php /*echo __("For community transfers, kindly go to \"<strong>Add Community Member</strong>\" and fill in <br>
-                                    <ol>
-                                        <li>Customer Name: Maxim Capital Limited</li>
-                                        <li>Customer Number: 000028911</li>
-                                        <li>Customer Email Address: finance@maximtrader.com</li>
-                                    </ol>
-                                    Tick \"Receive Funds From this Customer\" and Send Connection Request"); */?></strong>
-                                    <br>
-                                    </p>
-                            </div>
-                        </div>-->
 
                         <div class="ui-widget" style="display: none" id="moneyTracNote2">
                             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"

@@ -9850,6 +9850,157 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
     }
 
+    public function executeMaturityWithdrawal()
+    {
+        $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->ledgerAccountBalance = $ledgerAccountBalance;
+        $this->distributorDB = $distributorDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $muUtil = MUserUtil::init($this);
+        $this->validatorLib = $validatorLib = new ValidatorLib($this);
+        $this->principalAmount = $this->getPrincipalAmount($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+
+        $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $this->toHideCp2Cp3Transfer = true;
+            return $muUtil->response("/member/summary", 0, $this->getContext()->getI18N()->__("Invalid action: not allowed to access this feature."));
+        }
+
+        $withdrawAmount = $this->getRequestParameter('cp3Amount');
+        $processFee = 30;
+        //var_dump($withdrawAmount);
+        //exit();
+        if ($withdrawAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            /*if ($this->getTotalOfCp3Withdrawal($this->getUser()->getAttribute(Globals::SESSION_DISTID)) >= 1) {
+                $msg = $this->getContext()->getI18N()->__("Withdrawal can only be submitted once a month");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/maturityWithdrawal", 0, $msg);
+            }*/
+            if ($withdrawAmount > $this->principalAmount) {
+                $msg = $this->getContext()->getI18N()->__("Maximum withdrawal is limited to your principal amount");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/maturityWithdrawal", 0, $msg);
+            }
+
+            if ($distributorDB->getCloseAccount() == "Y") {
+                // Allow free text for closed account.
+                if ($withdrawAmount <= $processFee) {
+                    $msg = $this->getContext()->getI18N()->__("%1% must greater than %2%.", array("%1%" => $this->getContext()->getI18N()->__("CP3 Withdrawal Amount"), "%2%" => $processFee.".00"));
+                    $this->setFlash('errorMsg', $msg);
+                    return $muUtil->updateLog($msg)->response("/member/maturityWithdrawal", 0, $msg);
+                }
+            }
+
+            if (date("d") > Globals::WITHDRAWAL_DAY) {
+                $distributorcodes = array('LAY_YEE','money168','micken7','barabara','u212alc','hideko1','cho7510','Jieilove','tanpopo1','kakko1','ichigo1','sakura1959','aki900','pinmomie','MIYARYU23','shima101','MIEKOIKE','tomitomi','Hebori','hirokatsu1','firemoon','hy1805','megumi1110','KINGDAM','sekiken','dandy_oge','aiko-1','shinnsei','sueko1','toshimi26','KEIKO3','kikotan','mikuni456','Mayumi','skisa01','jamacyan','yuki3319','maximaichi','janneenciel','kimura34','kyoko7','Tomoya','Toku335','susan1','chiechan1','aura0928','teruyo1','OOTSU510','Nemoma','sethu1629','sin-yukito','shima101','Kimikimi3','kaka33','kaka138','saku1006','yukiko1','terutoyo','nakayoshi','atsuko1','eikotan','S351215yu','shita369','S2019yu','hfj281129','Masato0821','gorogoro','mayutan1','mirai2','mirai-12','Takayan','sab15595','suzuff01','katsu6000','kazuhisa1','rensi3333','YASUHIRO0516','kyoko7','rumiko1','fujisan1','ritsuko1','ritsuko1','ritsuko1','masaya1','hisayo28','kyoko7','u212alc','Kazucyan1','kaorin','princess7','mitsuru1','Kent1668','yukikohim','Takahiro','level0','yama517','runrun55','otiasi','mmika1','rikapii','kan2014','toshizo','TAKA2976','nobu3ocha','heart614sa','heart614','sunhigh1','chihiromama','naochan1','Crown48','shin0126','Toku335','Sachiko0139','seiwa1997tk','kokyuu43','Niwa3110','hypernomado1','ctl11240','fivestar1','Setuko0604','Jun19601212','MKJ5921','hypernomado1');
+                if(date("Y-m-d")>="2014-10-15" && date("Y-m-d")<="2014-10-23" && in_array($this->getUser()->getAttribute(Globals::SESSION_DISTCODE), $distributorcodes)){
+                	//can withdraw
+                }else{
+                    $msg = $this->getContext()->getI18N()->__("Withdrawal request must be done during the first 7 days of each month");
+                    $this->setFlash('errorMsg', $msg);
+                    return $muUtil->updateLog($msg)->response("/member/maturityWithdrawal", 0, $msg);
+                }
+            }
+            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, Globals::YES_Y, null, null, null, null, null)) {
+                $msg = $this->getContext()->getI18N()->__("CP3 Withdrawal temporary out of service.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/maturityWithdrawal", 0, $msg);
+            }
+
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+            $errorMsg = "";
+
+            if ($withdrawAmount > $ledgerAccountBalance) {
+                $errorMsg = $this->getContext()->getI18N()->__("In-sufficient CP3");
+
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid Security password");
+
+            } elseif ($this->getRequestParameter('bankInTo') == "") {
+                $errorMsg = $this->getContext()->getI18N()->__("Invalid action.");
+
+            } elseif ($withdrawAmount > 0) {
+                $con = Propel::getConnection(MlmDistEpointPurchasePeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($withdrawAmount);
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $withdrawAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "70m");
+
+                    // ******       company account      ****************
+                    $companyEcashBalance = $this->getAccountBalance(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL);
+                    $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_WITHDRAWAL . " " . $this->getUser()->getAttribute(Globals::SESSION_DISTCODE));
+                    $tbl_account_ledger->setCredit($processFee);
+                    $tbl_account_ledger->setDebit(0);
+                    $tbl_account_ledger->setBalance($companyEcashBalance + $processFee);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "71m");
+
+                    $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $tbl_cp3_withdraw = new MlmCp3Withdraw();
+                    $tbl_cp3_withdraw->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_cp3_withdraw->setDeduct($withdrawAmount);
+                    $tbl_cp3_withdraw->setBankInTo($this->getRequestParameter('bankInTo'));
+                    $tbl_cp3_withdraw->setAmount($withdrawAmount - $processFee);
+                    $tbl_cp3_withdraw->setStatusCode(Globals::WITHDRAWAL_PENDING);
+                    $tbl_cp3_withdraw->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_cp3_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_cp3_withdraw->save();
+
+                    $c = new Criteria();
+                    $c->add(NotificationOfMaturityPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $c->add(NotificationOfMaturityPeer::STATUS_CODE, "WITHDRAW");
+                    $c->add(NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS, "PENDING");
+                    $notificationOfMaturityDBs = NotificationOfMaturityPeer::doSelect($c);
+
+                    foreach ($notificationOfMaturityDBs as $notificationOfMaturityDB) {
+                        $notificationOfMaturityDB->setMaturityWithdrawalStatus("SUCCESS");
+                        $notificationOfMaturityDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $notificationOfMaturityDB->save();
+                    }
+
+                    $con->commit();
+
+                    $msg = $this->getContext()->getI18N()->__("Your CP3 withdrawal has been submitted.");
+                    $this->setFlash('successMsg', $msg);
+                    return $muUtil->response("/member/maturityWithdrawal", 1, $msg);
+
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
+            }
+        } elseif (MUserUtil::init($this)->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp3Balance = $this->ledgerAccountBalance;
+            $muObj->distributorDB = $this->distributorDB;
+            $muObj->saveToSession($this);
+            $this->forward("mobileService", "maturityWithdrawal");
+        }
+    }
+
     public function executeCp3Withdrawal2()
     {
         $memberId = $this->getRequestParameter('memberId');
@@ -14822,6 +14973,30 @@ Wish you all the best.
         $query = "SELECT SUM(package_price * roi_percentage / 100) AS SUB_TOTAL
 	        FROM mlm_roi_dividend WHERE idx = 1 AND status_code NOT IN ('CANCEL')
 	        AND dist_id = ".$distId;
+        //var_dump($query);
+        //exit();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getPrincipalAmount($distId)
+    {
+        $query = "SELECT SUM(mt4_balance) as SUB_TOTAL
+	            FROM notification_of_maturity where approve_reject_datetime >= '2015-05-08 00:00:00'
+	                AND status_code = 'WITHDRAW'
+	                AND maturity_withdrawal_status = 'PENDING'
+	                AND dist_id = ".$distId;
         //var_dump($query);
         //exit();
         $connection = Propel::getConnection();
