@@ -100,6 +100,13 @@
     <a target="_self" class="navcontainer" href="<?php echo url_for("/member/cp3Withdrawal");?>" style="color: rgb(134, 197, 51);">
         <?php echo __('CP3 Withdrawal'); ?>
     </a>
+    &nbsp;&nbsp;
+    <!--<img src="/images/arrow_blue_single_tab.gif">
+    &nbsp;&nbsp;
+    <a target="_self" class="navcontainer" href="<?php /*echo url_for("/member/maturityWithdrawal");*/?>" style="color: rgb(0, 93, 154);">
+        <?php /*echo __('CP2 Withdrawal (Maturity)'); */?>
+    </a>
+    &nbsp;&nbsp;-->
 </div>
 <?php
 $toApplyIaccount = "N";
@@ -147,8 +154,8 @@ if ($distributorDB->getIaccount() == "") {
             <table cellspacing="0" cellpadding="0" class="tbl_form">
                 <colgroup>
                     <col width="1%">
-                    <col width="30%">
-                    <col width="69%">
+                    <col width="40%">
+                    <col width="59%">
                     <col width="1%">
                 </colgroup>
                 <tbody>
@@ -193,7 +200,10 @@ if ($distributorDB->getIaccount() == "") {
                         <select name="cp3Amount" id="cbo_cp3Amount" tabindex="2" style="text-align:right">
                             <?php
                                 //if ($distributorDB->getMt4UserName() != null) {
-                                for ($i = 100; $i <= 1000; $i = $i + 50) {
+                                for ($i = 100; $i <= 550; $i = $i + 10) {
+                                    echo "<option value='".$i."'>".number_format($i, 0)."</option>";
+                                }
+                                for ($i = 600; $i <= 1000; $i = $i + 50) {
                                     echo "<option value='".$i."'>".number_format($i, 0)."</option>";
                                 }
                                 for ($i = 1100; $i <= 10000; $i = $i + 100) {
