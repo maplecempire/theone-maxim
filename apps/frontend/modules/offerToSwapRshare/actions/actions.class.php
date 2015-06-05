@@ -1330,6 +1330,11 @@ class offerToSwapRshareActions extends sfActions
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setRefererId($sss_application->getSssId());
                 $tbl_account_ledger->setRefererType("SSS");
+                if ($this->swapToRt == "Y") {
+                    $tbl_account_ledger->setRefererType("SES");
+                    $tbl_account_ledger->setTransactionType("SES");
+                    $tbl_account_ledger->setRemark("SUPER E-SHARE SWAP");
+                }
                 $tbl_account_ledger->save();
             }
 
@@ -1346,10 +1351,20 @@ class offerToSwapRshareActions extends sfActions
                 $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $tbl_account_ledger->setRefererId($sss_application->getSssId());
                 $tbl_account_ledger->setRefererType("SSS");
+                if ($this->swapToRt == "Y") {
+                    $tbl_account_ledger->setRefererType("SES");
+                    $tbl_account_ledger->setTransactionType("SES");
+                    $tbl_account_ledger->setRemark("SUPER E-SHARE SWAP");
+                }
                 $tbl_account_ledger->save();
             }
 
-            $query = "UPDATE mlm_roi_dividend SET status_code = 'SSS', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+            $roiStatus = "SSS";
+            if ($this->swapToRt == "Y") {
+                $roiStatus = "SES";
+            }
+
+            $query = "UPDATE mlm_roi_dividend SET status_code = '".$roiStatus."', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
             $query = $query . " AND mt4_user_name = ?";
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
