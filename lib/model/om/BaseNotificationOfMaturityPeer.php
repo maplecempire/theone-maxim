@@ -13,7 +13,7 @@ abstract class BaseNotificationOfMaturityPeer {
 	const CLASS_DEFAULT = 'lib.model.NotificationOfMaturity';
 
 	
-	const NUM_COLUMNS = 20;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -68,6 +68,12 @@ abstract class BaseNotificationOfMaturityPeer {
 	const LEADER_DIST_ID = 'notification_of_maturity.LEADER_DIST_ID';
 
 	
+	const CLIENT_ACTION = 'notification_of_maturity.CLIENT_ACTION';
+
+	
+	const MATURITY_WITHDRAWAL_STATUS = 'notification_of_maturity.MATURITY_WITHDRAWAL_STATUS';
+
+	
 	const CREATED_BY = 'notification_of_maturity.CREATED_BY';
 
 	
@@ -85,18 +91,18 @@ abstract class BaseNotificationOfMaturityPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('NoticeId', 'DistId', 'Mt4UserName', 'DividendDate', 'MaturityType', 'Email', 'Retry', 'Remark', 'InternalRemark', 'EmailStatus', 'StatusCode', 'ApproveRejectDatetime', 'ClientResponseDatatime', 'Mt4Balance', 'PackagePrice', 'LeaderDistId', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (NotificationOfMaturityPeer::NOTICE_ID, NotificationOfMaturityPeer::DIST_ID, NotificationOfMaturityPeer::MT4_USER_NAME, NotificationOfMaturityPeer::DIVIDEND_DATE, NotificationOfMaturityPeer::MATURITY_TYPE, NotificationOfMaturityPeer::EMAIL, NotificationOfMaturityPeer::RETRY, NotificationOfMaturityPeer::REMARK, NotificationOfMaturityPeer::INTERNAL_REMARK, NotificationOfMaturityPeer::EMAIL_STATUS, NotificationOfMaturityPeer::STATUS_CODE, NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME, NotificationOfMaturityPeer::CLIENT_RESPONSE_DATATIME, NotificationOfMaturityPeer::MT4_BALANCE, NotificationOfMaturityPeer::PACKAGE_PRICE, NotificationOfMaturityPeer::LEADER_DIST_ID, NotificationOfMaturityPeer::CREATED_BY, NotificationOfMaturityPeer::CREATED_ON, NotificationOfMaturityPeer::UPDATED_BY, NotificationOfMaturityPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('notice_id', 'dist_id', 'mt4_user_name', 'dividend_date', 'maturity_type', 'email', 'retry', 'remark', 'internal_remark', 'email_status', 'status_code', 'approve_reject_datetime', 'client_response_datatime', 'mt4_balance', 'package_price', 'leader_dist_id', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('NoticeId', 'DistId', 'Mt4UserName', 'DividendDate', 'MaturityType', 'Email', 'Retry', 'Remark', 'InternalRemark', 'EmailStatus', 'StatusCode', 'ApproveRejectDatetime', 'ClientResponseDatatime', 'Mt4Balance', 'PackagePrice', 'LeaderDistId', 'ClientAction', 'MaturityWithdrawalStatus', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
+		BasePeer::TYPE_COLNAME => array (NotificationOfMaturityPeer::NOTICE_ID, NotificationOfMaturityPeer::DIST_ID, NotificationOfMaturityPeer::MT4_USER_NAME, NotificationOfMaturityPeer::DIVIDEND_DATE, NotificationOfMaturityPeer::MATURITY_TYPE, NotificationOfMaturityPeer::EMAIL, NotificationOfMaturityPeer::RETRY, NotificationOfMaturityPeer::REMARK, NotificationOfMaturityPeer::INTERNAL_REMARK, NotificationOfMaturityPeer::EMAIL_STATUS, NotificationOfMaturityPeer::STATUS_CODE, NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME, NotificationOfMaturityPeer::CLIENT_RESPONSE_DATATIME, NotificationOfMaturityPeer::MT4_BALANCE, NotificationOfMaturityPeer::PACKAGE_PRICE, NotificationOfMaturityPeer::LEADER_DIST_ID, NotificationOfMaturityPeer::CLIENT_ACTION, NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS, NotificationOfMaturityPeer::CREATED_BY, NotificationOfMaturityPeer::CREATED_ON, NotificationOfMaturityPeer::UPDATED_BY, NotificationOfMaturityPeer::UPDATED_ON, ),
+		BasePeer::TYPE_FIELDNAME => array ('notice_id', 'dist_id', 'mt4_user_name', 'dividend_date', 'maturity_type', 'email', 'retry', 'remark', 'internal_remark', 'email_status', 'status_code', 'approve_reject_datetime', 'client_response_datatime', 'mt4_balance', 'package_price', 'leader_dist_id', 'client_action', 'maturity_withdrawal_status', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('NoticeId' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'DividendDate' => 3, 'MaturityType' => 4, 'Email' => 5, 'Retry' => 6, 'Remark' => 7, 'InternalRemark' => 8, 'EmailStatus' => 9, 'StatusCode' => 10, 'ApproveRejectDatetime' => 11, 'ClientResponseDatatime' => 12, 'Mt4Balance' => 13, 'PackagePrice' => 14, 'LeaderDistId' => 15, 'CreatedBy' => 16, 'CreatedOn' => 17, 'UpdatedBy' => 18, 'UpdatedOn' => 19, ),
-		BasePeer::TYPE_COLNAME => array (NotificationOfMaturityPeer::NOTICE_ID => 0, NotificationOfMaturityPeer::DIST_ID => 1, NotificationOfMaturityPeer::MT4_USER_NAME => 2, NotificationOfMaturityPeer::DIVIDEND_DATE => 3, NotificationOfMaturityPeer::MATURITY_TYPE => 4, NotificationOfMaturityPeer::EMAIL => 5, NotificationOfMaturityPeer::RETRY => 6, NotificationOfMaturityPeer::REMARK => 7, NotificationOfMaturityPeer::INTERNAL_REMARK => 8, NotificationOfMaturityPeer::EMAIL_STATUS => 9, NotificationOfMaturityPeer::STATUS_CODE => 10, NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME => 11, NotificationOfMaturityPeer::CLIENT_RESPONSE_DATATIME => 12, NotificationOfMaturityPeer::MT4_BALANCE => 13, NotificationOfMaturityPeer::PACKAGE_PRICE => 14, NotificationOfMaturityPeer::LEADER_DIST_ID => 15, NotificationOfMaturityPeer::CREATED_BY => 16, NotificationOfMaturityPeer::CREATED_ON => 17, NotificationOfMaturityPeer::UPDATED_BY => 18, NotificationOfMaturityPeer::UPDATED_ON => 19, ),
-		BasePeer::TYPE_FIELDNAME => array ('notice_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'dividend_date' => 3, 'maturity_type' => 4, 'email' => 5, 'retry' => 6, 'remark' => 7, 'internal_remark' => 8, 'email_status' => 9, 'status_code' => 10, 'approve_reject_datetime' => 11, 'client_response_datatime' => 12, 'mt4_balance' => 13, 'package_price' => 14, 'leader_dist_id' => 15, 'created_by' => 16, 'created_on' => 17, 'updated_by' => 18, 'updated_on' => 19, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('NoticeId' => 0, 'DistId' => 1, 'Mt4UserName' => 2, 'DividendDate' => 3, 'MaturityType' => 4, 'Email' => 5, 'Retry' => 6, 'Remark' => 7, 'InternalRemark' => 8, 'EmailStatus' => 9, 'StatusCode' => 10, 'ApproveRejectDatetime' => 11, 'ClientResponseDatatime' => 12, 'Mt4Balance' => 13, 'PackagePrice' => 14, 'LeaderDistId' => 15, 'ClientAction' => 16, 'MaturityWithdrawalStatus' => 17, 'CreatedBy' => 18, 'CreatedOn' => 19, 'UpdatedBy' => 20, 'UpdatedOn' => 21, ),
+		BasePeer::TYPE_COLNAME => array (NotificationOfMaturityPeer::NOTICE_ID => 0, NotificationOfMaturityPeer::DIST_ID => 1, NotificationOfMaturityPeer::MT4_USER_NAME => 2, NotificationOfMaturityPeer::DIVIDEND_DATE => 3, NotificationOfMaturityPeer::MATURITY_TYPE => 4, NotificationOfMaturityPeer::EMAIL => 5, NotificationOfMaturityPeer::RETRY => 6, NotificationOfMaturityPeer::REMARK => 7, NotificationOfMaturityPeer::INTERNAL_REMARK => 8, NotificationOfMaturityPeer::EMAIL_STATUS => 9, NotificationOfMaturityPeer::STATUS_CODE => 10, NotificationOfMaturityPeer::APPROVE_REJECT_DATETIME => 11, NotificationOfMaturityPeer::CLIENT_RESPONSE_DATATIME => 12, NotificationOfMaturityPeer::MT4_BALANCE => 13, NotificationOfMaturityPeer::PACKAGE_PRICE => 14, NotificationOfMaturityPeer::LEADER_DIST_ID => 15, NotificationOfMaturityPeer::CLIENT_ACTION => 16, NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS => 17, NotificationOfMaturityPeer::CREATED_BY => 18, NotificationOfMaturityPeer::CREATED_ON => 19, NotificationOfMaturityPeer::UPDATED_BY => 20, NotificationOfMaturityPeer::UPDATED_ON => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('notice_id' => 0, 'dist_id' => 1, 'mt4_user_name' => 2, 'dividend_date' => 3, 'maturity_type' => 4, 'email' => 5, 'retry' => 6, 'remark' => 7, 'internal_remark' => 8, 'email_status' => 9, 'status_code' => 10, 'approve_reject_datetime' => 11, 'client_response_datatime' => 12, 'mt4_balance' => 13, 'package_price' => 14, 'leader_dist_id' => 15, 'client_action' => 16, 'maturity_withdrawal_status' => 17, 'created_by' => 18, 'created_on' => 19, 'updated_by' => 20, 'updated_on' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -181,6 +187,10 @@ abstract class BaseNotificationOfMaturityPeer {
 		$criteria->addSelectColumn(NotificationOfMaturityPeer::PACKAGE_PRICE);
 
 		$criteria->addSelectColumn(NotificationOfMaturityPeer::LEADER_DIST_ID);
+
+		$criteria->addSelectColumn(NotificationOfMaturityPeer::CLIENT_ACTION);
+
+		$criteria->addSelectColumn(NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS);
 
 		$criteria->addSelectColumn(NotificationOfMaturityPeer::CREATED_BY);
 

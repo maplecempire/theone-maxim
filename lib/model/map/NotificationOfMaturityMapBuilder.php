@@ -64,6 +64,10 @@ class NotificationOfMaturityMapBuilder {
 
 		$tMap->addColumn('LEADER_DIST_ID', 'LeaderDistId', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('CLIENT_ACTION', 'ClientAction', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('MATURITY_WITHDRAWAL_STATUS', 'MaturityWithdrawalStatus', 'string', CreoleTypes::VARCHAR, true, 20);
+
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('CREATED_ON', 'CreatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
