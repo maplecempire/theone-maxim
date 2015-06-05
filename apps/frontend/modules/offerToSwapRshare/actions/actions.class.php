@@ -732,7 +732,7 @@ class offerToSwapRshareActions extends sfActions
                                 $bal = $dist->getRtwallet() + $pairingBonusAmount;
                                 $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
                                 $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
-                                $gg_member_rtwallet_record->setActionType('SWAP SSS from Maxim');
+                                $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
                                 $gg_member_rtwallet_record->setType('c');
                                 $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
                                 $gg_member_rtwallet_record->setBal($bal);
