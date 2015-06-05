@@ -1311,7 +1311,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setSignature($this->signature);
             $sss_application->setStatusCode(Globals::STATUS_SSS_PENDING);
             if ($this->swapToRt == "Y") {
-                $sss_application->setSwapType("RT");
+                $sss_application->setSwapType("SES");
             }
             $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
