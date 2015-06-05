@@ -73,6 +73,14 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 
 	
+	protected $client_action;
+
+
+	
+	protected $maturity_withdrawal_status = 'PENDING';
+
+
+	
 	protected $created_by;
 
 
@@ -248,6 +256,20 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 	{
 
 		return $this->leader_dist_id;
+	}
+
+	
+	public function getClientAction()
+	{
+
+		return $this->client_action;
+	}
+
+	
+	public function getMaturityWithdrawalStatus()
+	{
+
+		return $this->maturity_withdrawal_status;
 	}
 
 	
@@ -534,6 +556,34 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 	} 
 	
+	public function setClientAction($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->client_action !== $v) {
+			$this->client_action = $v;
+			$this->modifiedColumns[] = NotificationOfMaturityPeer::CLIENT_ACTION;
+		}
+
+	} 
+	
+	public function setMaturityWithdrawalStatus($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->maturity_withdrawal_status !== $v || $v === 'PENDING') {
+			$this->maturity_withdrawal_status = $v;
+			$this->modifiedColumns[] = NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -632,19 +682,23 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 
 			$this->leader_dist_id = $rs->getInt($startcol + 15);
 
-			$this->created_by = $rs->getInt($startcol + 16);
+			$this->client_action = $rs->getString($startcol + 16);
 
-			$this->created_on = $rs->getTimestamp($startcol + 17, null);
+			$this->maturity_withdrawal_status = $rs->getString($startcol + 17);
 
-			$this->updated_by = $rs->getInt($startcol + 18);
+			$this->created_by = $rs->getInt($startcol + 18);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 19, null);
+			$this->created_on = $rs->getTimestamp($startcol + 19, null);
+
+			$this->updated_by = $rs->getInt($startcol + 20);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 21, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 20; 
+						return $startcol + 22; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating NotificationOfMaturity object", $e);
 		}
@@ -830,15 +884,21 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 				return $this->getLeaderDistId();
 				break;
 			case 16:
-				return $this->getCreatedBy();
+				return $this->getClientAction();
 				break;
 			case 17:
-				return $this->getCreatedOn();
+				return $this->getMaturityWithdrawalStatus();
 				break;
 			case 18:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 19:
+				return $this->getCreatedOn();
+				break;
+			case 20:
+				return $this->getUpdatedBy();
+				break;
+			case 21:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -867,10 +927,12 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 			$keys[13] => $this->getMt4Balance(),
 			$keys[14] => $this->getPackagePrice(),
 			$keys[15] => $this->getLeaderDistId(),
-			$keys[16] => $this->getCreatedBy(),
-			$keys[17] => $this->getCreatedOn(),
-			$keys[18] => $this->getUpdatedBy(),
-			$keys[19] => $this->getUpdatedOn(),
+			$keys[16] => $this->getClientAction(),
+			$keys[17] => $this->getMaturityWithdrawalStatus(),
+			$keys[18] => $this->getCreatedBy(),
+			$keys[19] => $this->getCreatedOn(),
+			$keys[20] => $this->getUpdatedBy(),
+			$keys[21] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -935,15 +997,21 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 				$this->setLeaderDistId($value);
 				break;
 			case 16:
-				$this->setCreatedBy($value);
+				$this->setClientAction($value);
 				break;
 			case 17:
-				$this->setCreatedOn($value);
+				$this->setMaturityWithdrawalStatus($value);
 				break;
 			case 18:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 19:
+				$this->setCreatedOn($value);
+				break;
+			case 20:
+				$this->setUpdatedBy($value);
+				break;
+			case 21:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -969,10 +1037,12 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		if (array_key_exists($keys[13], $arr)) $this->setMt4Balance($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setPackagePrice($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setLeaderDistId($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCreatedBy($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setCreatedOn($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUpdatedBy($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setUpdatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[16], $arr)) $this->setClientAction($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setMaturityWithdrawalStatus($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCreatedBy($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCreatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setUpdatedBy($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setUpdatedOn($arr[$keys[21]]);
 	}
 
 	
@@ -996,6 +1066,8 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		if ($this->isColumnModified(NotificationOfMaturityPeer::MT4_BALANCE)) $criteria->add(NotificationOfMaturityPeer::MT4_BALANCE, $this->mt4_balance);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::PACKAGE_PRICE)) $criteria->add(NotificationOfMaturityPeer::PACKAGE_PRICE, $this->package_price);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::LEADER_DIST_ID)) $criteria->add(NotificationOfMaturityPeer::LEADER_DIST_ID, $this->leader_dist_id);
+		if ($this->isColumnModified(NotificationOfMaturityPeer::CLIENT_ACTION)) $criteria->add(NotificationOfMaturityPeer::CLIENT_ACTION, $this->client_action);
+		if ($this->isColumnModified(NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS)) $criteria->add(NotificationOfMaturityPeer::MATURITY_WITHDRAWAL_STATUS, $this->maturity_withdrawal_status);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::CREATED_BY)) $criteria->add(NotificationOfMaturityPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::CREATED_ON)) $criteria->add(NotificationOfMaturityPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(NotificationOfMaturityPeer::UPDATED_BY)) $criteria->add(NotificationOfMaturityPeer::UPDATED_BY, $this->updated_by);
@@ -1059,6 +1131,10 @@ abstract class BaseNotificationOfMaturity extends BaseObject  implements Persist
 		$copyObj->setPackagePrice($this->package_price);
 
 		$copyObj->setLeaderDistId($this->leader_dist_id);
+
+		$copyObj->setClientAction($this->client_action);
+
+		$copyObj->setMaturityWithdrawalStatus($this->maturity_withdrawal_status);
 
 		$copyObj->setCreatedBy($this->created_by);
 
