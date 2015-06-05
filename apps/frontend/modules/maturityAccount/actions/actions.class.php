@@ -333,8 +333,10 @@ class maturityAccountActions extends sfActions
                 }
 
                 $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_CLIENT_RENEW);
+                $existNotificationOfMaturity->setClientAction(Globals::STATUS_MATURITY_CLIENT_RENEW);
             } else if ($maturityAction == "WITHDRAW") {
                 $existNotificationOfMaturity->setStatusCode(Globals::STATUS_MATURITY_CLIENT_WITHDRAW);
+                $existNotificationOfMaturity->setClientAction(Globals::STATUS_MATURITY_CLIENT_WITHDRAW);
             } else {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action.") + " [error:904]");
                 return $this->redirect('member/summary');
