@@ -21,7 +21,7 @@ class offerToSwapRshareActions extends sfActions
 
         var_dump($sssApplication);
 
-        if ($sssApplication->getSwapType() == "RT") {
+        if ($sssApplication->getSwapType() == "SES") {
             $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
 
             $pairingBonusAmount = $sssApplication->getTotalShareConverted();
@@ -709,7 +709,7 @@ class offerToSwapRshareActions extends sfActions
                             $sssApplication->save();
                         } else {
                             $sssApplication->setMt4Balance($mt4Balance);
-                            if ($sssApplication->getSwapType() == "RT") {
+                            if ($sssApplication->getSwapType() == "SES") {
                                 $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
 
                                 $pairingBonusAmount = $sssApplication->getTotalShareConverted();
