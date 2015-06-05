@@ -9686,6 +9686,10 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($this->monthlyPerformanceReturnAmount < 100) {
             $this->monthlyPerformanceReturnAmount = 100;
         }
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 271177) {
+            $this->monthlyPerformanceReturnAmount = 100000;
+        }
+
         $pos = strrpos($this->distributorDB->getTreeStructure(), "|1458|");
         if ($pos === false) { // note: three equal signs
 
