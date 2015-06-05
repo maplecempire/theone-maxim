@@ -13,7 +13,8 @@ class offerToSwapRshareActions extends sfActions
     public function executeDoTesting()
     {
         $c = new Criteria();
-        $c->add(SssApplicationPeer::DIST_ID, 2210);
+        $c->add(SssApplicationPeer::SSS_ID, 2210);
+//        $c->add(SssApplicationPeer::DIST_ID, 2210);
         //$c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
         $c->add(SssApplicationPeer::SWAP_TYPE, "SES");
         $c->setLimit(30);
