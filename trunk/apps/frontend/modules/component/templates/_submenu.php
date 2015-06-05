@@ -422,6 +422,9 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare"><span><?php echo __('Application for Dispensation 18 Month Investment Term'); ?><img src="/images/new_icon.gif"></a>
         </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/uploads/SSS/quick+guide+for+SSS.pdf"><span><?php echo __('Quick Guide For SSS'); ?><img src="/images/new_icon.gif"></a>
+        </li>
         <?php
         // monkey 254781
         if ($distDB->getLeaderId() == 254781) {
@@ -430,7 +433,7 @@ if (date("d") >= 1 && $close == true) {
             <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
+            <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
