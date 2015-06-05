@@ -13,9 +13,9 @@ class offerToSwapRshareActions extends sfActions
     public function executeDoTesting()
     {
         $c = new Criteria();
-        $c->add(SssApplicationPeer::DIST_ID, 1);
-        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
-        $c->add(SssApplicationPeer::SWAP_TYPE, "RT");
+        $c->add(SssApplicationPeer::DIST_ID, 2210);
+        //$c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
+        $c->add(SssApplicationPeer::SWAP_TYPE, "SES");
         $c->setLimit(30);
         $sssApplication = SssApplicationPeer::doSelectOne($c);
 
@@ -44,7 +44,7 @@ class offerToSwapRshareActions extends sfActions
             $bal = $dist->getRtwallet() + $pairingBonusAmount;
             $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
             $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
-            $gg_member_rtwallet_record->setActionType('SWAP SSS from Maxim');
+            $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
             $gg_member_rtwallet_record->setType('c');
             $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
             $gg_member_rtwallet_record->setBal($bal);
