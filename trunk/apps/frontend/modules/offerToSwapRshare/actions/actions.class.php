@@ -237,7 +237,7 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
-        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+//        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
 
         return sfView::HEADER_ONLY;
     }
