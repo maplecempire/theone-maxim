@@ -1860,10 +1860,10 @@ class offerToSwapRshareActions extends sfActions
         $query = "SELECT count(*) as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
 
         if ($dateFrom != null) {
-            $query .= " AND created_on >= '".$dateFrom." 00:00:00";
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00'";
         }
         if ($dateTo != null) {
-            $query .= " AND created_on <= '".$dateTo." 23:59:59";
+            $query .= " AND created_on <= '".$dateTo." 23:59:59'";
         }
 
         $connection = Propel::getConnection();
@@ -1886,10 +1886,10 @@ class offerToSwapRshareActions extends sfActions
         $query = "SELECT SUM(".$fieldName.") as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
 
         if ($dateFrom != null) {
-            $query .= " AND created_on >= '".$dateFrom." 00:00:00";
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00'";
         }
         if ($dateTo != null) {
-            $query .= " AND created_on <= '".$dateTo." 23:59:59";
+            $query .= " AND created_on <= '".$dateTo." 23:59:59'";
         }
 
         $connection = Propel::getConnection();
