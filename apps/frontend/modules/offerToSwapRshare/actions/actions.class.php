@@ -233,57 +233,11 @@ class offerToSwapRshareActions extends sfActions
     }
     public function executeReport()
     {
-        print_r("Total: ".number_format($this->totalCountOfSss(), 2));
-        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance"), 2));
-        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance"), 2));
-        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance"), 2));
-
-        $c = new Criteria();
-        $c->add(SssApplicationPeer::DIST_ID, 268436);
-        $c->setLimit(1);
-        $sssApplications = SssApplicationPeer::doSelect($c);
-
-        /******************************/
-        /*  store Pairing points
-        /******************************/
-        print_r("<br>".count($sssApplications));
-        foreach ($sssApplications as $sssApplication) {
-            $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
-            $mt4Balance = $sssApplication->getMt4balance();
-            // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
-            $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
-            $roiRemainingMonth = 0;
-            if ($roiArr == null) {
-                continue;
-            }
-            var_dump($roiArr);
-            if ($roiArr['idx'] <= 18) {
-                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
-            } else {
-                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
-            }
-            $roiPercentage = $sssApplication->getRoiPercentage();
-
-            $convertedCp2 = $sssApplication->getCp2Balance();
-            $convertedCp3 = $sssApplication->getCp3Balance();
-
-            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
-            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
-            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
-
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
-            $totalRshare = round($totalRshare);
-
-            $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
-
-            var_dump("<br>Total idx:".$roiArr['idx']);
-            var_dump("<br>Total mt4:".$mt4Balance);
-            var_dump("<br>Total roi remaining:".$roiRemainingMonth);
-            var_dump("<br>Total R-Share:".$totalRshare);
-            var_dump("<br>Total Amount:".$totalAmountConvertedWithCp2Cp3);
-
-            print_r("<br>".$distributorDB->getDistributorId());
-        }
+        print_r("Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
 
         return sfView::HEADER_ONLY;
     }
@@ -1901,9 +1855,16 @@ class offerToSwapRshareActions extends sfActions
         }
         return $count;
     }
-    function totalCountOfSss()
+    function totalCountOfSss($dateFrom, $dateTo)
     {
-        $query = "SELECT count(*) as _TOTAL FROM sss_application ";
+        $query = "SELECT count(*) as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
+
+        if ($dateFrom != null) {
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00";
+        }
+        if ($dateTo != null) {
+            $query .= " AND created_on <= '".$dateTo." 23:59:59";
+        }
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -1920,9 +1881,16 @@ class offerToSwapRshareActions extends sfActions
         }
         return $count;
     }
-    function totalSumOfSss($fieldName)
+    function totalSumOfSss($fieldName, $dateFrom, $dateTo)
     {
-        $query = "SELECT SUM(".$fieldName.") as _TOTAL FROM sss_application ";
+        $query = "SELECT SUM(".$fieldName.") as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
+
+        if ($dateFrom != null) {
+            $query .= " AND created_on >= '".$dateFrom." 00:00:00";
+        }
+        if ($dateTo != null) {
+            $query .= " AND created_on <= '".$dateTo." 23:59:59";
+        }
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
