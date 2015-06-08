@@ -416,6 +416,11 @@ if (date("d") >= 1 && $close == true) {
     }
     ?>
 
+    <?php
+    // monkey 254781
+    $close = true;
+    if ($distDB->getLeaderId() == 254781 && $close == false) {
+    ?>
     <br class="clear"><br>
     <ul>
         <li class="menu_title"><?php echo __('Offer to Swap R-Share'); ?></li>
@@ -456,6 +461,7 @@ if (date("d") >= 1 && $close == true) {
         </li>
         <?php } ?>
     </ul>
+    <?php } ?>
 
     <?php
     $closeChallenge = true;
