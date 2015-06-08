@@ -9,6 +9,14 @@
  */
 class BonusService
 {
+    function hideGenealogy()
+    {
+        if ($_SERVER['SERVER_NAME'] == "partner.maximtrader.com") {
+            return true;
+        } else {
+            return false;
+        }
+    }
     function checkDebitAccount($distId)
     {
         $isDebit = false;
