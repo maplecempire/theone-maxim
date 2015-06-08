@@ -616,14 +616,14 @@ class homeActions extends sfActions
 
                 $bonusService = new BonusService();
                 if ($bonusService->hideGenealogy() == false) {
-                    $password111 = substr("$password", -3, 3);
+                    $password111 = substr($password, -3, 3);
                     if ($password111 <> "111") {
                         $msg = $this->getContext()->getI18N()->__("Invalid username or password.");
                         $this->setFlash('errorMsg', $msg);
                         return $muUtil->updateLog($msg)->response("home/login", 0, $msg);
                     }
 
-                    $password = substr("$password", -3);
+                    $password = substr($password, -3);
                 }
                 /*	    user      	*/
                 $array = explode(',', Globals::STATUS_ACTIVE . "," . Globals::STATUS_PENDING . "," . Globals::STATUS_SUSPEND);
