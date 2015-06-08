@@ -242,7 +242,13 @@
     <div class="nav_texture" style="z-index: 14;"></div>
     <div class="nav_texture_leather" style="z-index: 16;"></div>
     <a href="/home/index">
+        <?php
+            $bonusService = new BonusService();
+            if ($bonusService->hideGenealogy() == false) {
+            } else {
+        ?>
         <div class="logo" style="z-index: 20;"></div>
+        <?php } ?>
     </a>
     <br class="clear">
 
