@@ -418,8 +418,9 @@ if (date("d") >= 1 && $close == true) {
 
     <?php
     // monkey 254781
-    $close = true;
-    if ($distDB->getLeaderId() == 254781 && $close == false) {
+    if ($distDB->getLeaderId() == 254781) {
+
+    } else {
     ?>
     <br class="clear"><br>
     <ul>
