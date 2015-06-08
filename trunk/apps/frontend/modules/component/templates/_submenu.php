@@ -172,7 +172,10 @@ if (date("d") >= 1 && $close == true) {
     <ul>
         <li class="menu_title"><?php echo __('ACCOUNT INFORMATION'); ?></li>
     <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE) { ?>
-        <?php if ($distDB->getHideGenealogy() == "N") { ?>
+        <?php
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == false) {
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/bonusDetails"><span><?php echo __('Commission'); ?></span></a>
         </li>
@@ -271,7 +274,7 @@ if (date("d") >= 1 && $close == true) {
     </ul>-->
     <br class="clear"><br>
     <?php
-    if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $distDB->getHideGenealogy() == "N") { ?>
+    if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $bonusService->hideGenealogy() == false) { ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
@@ -450,7 +453,7 @@ if (date("d") >= 1 && $close == true) {
             <a href="/offerToSwapRshare/swapNote"><span><?php echo __('Super Share Swap - SSS Note'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <?php
-        if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $distDB->getHideGenealogy() == "N") { ?>
+        if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $bonusService->hideGenealogy() == false) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/placementTree?p=sssStat"><span><?php echo __('Downline Stat - SSS'); ?><img src="/images/new_icon.gif"></a>
         </li>

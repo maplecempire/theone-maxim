@@ -6865,8 +6865,8 @@ We look forward to your custom in the near future. Should you have any queries, 
             return $this->redirect('/member/securityPasswordRequired?doAction=G');
         }
 
-        $distSelfDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($distSelfDB->getHideGenealogy() == "Y") {
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true) {
             return $this->redirect('/member/summary');
         }
         $dateUtil = new DateUtil();
@@ -9543,7 +9543,8 @@ We look forward to your custom in the near future. Should you have any queries, 
         $id = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
 
-        if ($distinfo->getHideGenealogy() == "Y") {
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true) {
             return $this->redirect('/member/summary');
         }
 
@@ -10516,8 +10517,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeBonusDetails() {
         // Note: update mobileService/commissionDetails as well if any changes made on this page.
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        if ($distDB->getHideGenealogy() == "Y") {
+        //$distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true) {
             return $this->redirect("/member/summary");
         }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_COMMISSION, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {

@@ -817,7 +817,8 @@ function reassignDatagridAnnouncementEventAttr() {
                             }
 
                             $hideRestructureButton = "";
-                            if ($distributor->getHideGenealogy() == "Y") {
+                            $bonusService = new BonusService();
+                            if ($bonusService->hideGenealogy() == true) {
                                 $hideRestructureButton = "display:none";
                             }
                     echo "<tr class='row" . $trStyle . "'>
