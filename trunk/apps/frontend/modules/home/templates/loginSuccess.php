@@ -331,6 +331,7 @@
         <?php
             $bonusService = new BonusService();
             if ($bonusService->hideGenealogy() == false) {
+            } else {
         ?>
         <div class="logo" style="z-index: 20;"></div>
         <?php } ?>
