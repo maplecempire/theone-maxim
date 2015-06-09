@@ -388,11 +388,11 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     $monthStr = "06";
                                     $monthEngStr = "June";
-                                    $dayStr = "08";
-                                    $hourStr = "8";
+                                    $dayStr = "09";
+                                    $hourStr = "10";
                                     $totalHourStopStr = "1";
                                     if ($closeLogin == false) {
 
