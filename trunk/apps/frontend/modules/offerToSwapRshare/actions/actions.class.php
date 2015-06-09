@@ -10,6 +10,200 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeDoAutoConvertEShare()
+    {
+        // monkey 254781
+        $query = "SELECT roi.devidend_id, roi.dist_id, roi.mt4_user_name, roi.idx, roi.account_ledger_id
+                    , roi.dividend_date, roi.package_id, roi.package_price, roi.roi_percentage
+                    , roi.mt4_balance, roi.dividend_amount, roi.remarks, roi.status_code
+                    , roi.created_by, roi.created_on, roi.updated_by, roi.updated_on
+                    , roi.first_dividend_date
+                    , dist.leader_id
+                FROM mlm_roi_dividend roi
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
+                WHERE roi.idx = 36 and dist.leader_id = 254781 limit 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //exit();
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mt4UserName = $arr['mt4_user_name'];
+            $distId = $arr['dist_id'];
+
+            print_r("<br>mt4:".$mt4UserName);
+
+            $this->mt4Id = $this->getRequestParameter('mt4Id');
+
+            if (!$this->mt4Id) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
+                return $this->redirect('/offerToSwapRshare/index');
+            }
+            $this->mt4Balance = 0;
+            $this->remainingRoiAmount = 0;
+
+            $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+            $roiArr = $this->getRoiInformation($distId, $mt4UserName);
+
+            if ($mt4Balance == null) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
+                return $this->redirect('/offerToSwapRshare/index');
+            }
+
+            $roiPercentage = $roiArr['roi_percentage'];
+            $roiRemainingMonth = 0;
+            $remarks = "AUTO SWAP R-SHARE";
+
+            $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+            $this->swapToRt = $this->getRequestParameter('swapToRt', '');
+            $this->mt4Balance = $mt4Balance;
+            $this->remainingRoiAmount = $remainingRoiAmount;
+
+            $this->convertedCp2 = $this->getRequestParameter('convertedCp2', 0);
+            $this->convertedCp3 = $this->getRequestParameter('convertedCp3', 0);
+
+            $this->convertedCp2 = str_replace(",", "", $this->convertedCp2);
+            $this->convertedCp3 = str_replace(",", "", $this->convertedCp3);
+
+            $this->roiRemainingMonth = $roiRemainingMonth;
+            $this->roiPercentage = $roiPercentage;
+
+            if ($this->swapToRt == "Y") {
+                $roiRemainingMonth = 0;
+            }
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            if ($this->swapToRt == "Y") {
+                $totalRshare = $totalAmountConvertedWithCp2Cp3;
+            }
+            $this->totalRshare = round($totalRshare);
+
+            $this->signature = $this->getRequestParameter('txtSignature');
+
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                $sss_application = new SssApplication();
+                $sss_application->setDistId($distId);
+                $sss_application->setDividendId($roiArr['devidend_id']);
+                $sss_application->setMt4UserName($mt4UserName);
+                $sss_application->setCp2Balance(0);
+                $sss_application->setCp3Balance(0);
+                $sss_application->setMt4Balance($this->mt4Balance);
+                $sss_application->setRoiRemainingMonth($roiRemainingMonth);
+                $sss_application->setRoiPercentage($roiPercentage);
+                $sss_application->setShareValue(0.8);
+                $sss_application->setTotalShareConverted($totalRshare);
+                $sss_application->setRemarks($remarks);
+                $sss_application->setSignature($this->signature);
+                $sss_application->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                $sss_application->setSwapType("ASS");
+                $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sss_application->save();
+
+                $roiStatus = "SSS";
+                $query = "UPDATE mlm_roi_dividend SET status_code = '" . $roiStatus . "', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                $query = $query . " AND mt4_user_name = ?";
+                $connection = Propel::getConnection();
+                $statement = $connection->prepareStatement($query);
+                $statement->set(1, date('Y-m-d H:i:s'));
+                $statement->set(2, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $statement->set(3, $mt4UserName);
+                $statement->executeUpdate();
+
+                // disabled MT4
+                $mt4request = new CMT4DataReciver;
+                $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+
+                $params['array'] = array();
+                $params['login'] = $mt4UserName;
+                var_dump($params);
+                $answer = $mt4request->MakeRequest("getaccountinfo", $params);
+                var_dump($answer);
+                print_r("<br><br>");
+                if ($answer['result'] != 1) {
+                    var_dump("<br>error:" . $answer["reason"]);
+                    //return sfView::HEADER_ONLY;
+                    $remark = $sss_application->getRemarks();
+                    if ($remark != "") {
+                        $remark .= "; ";
+                    }
+                    //$remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
+                    $sss_application->setRemarks($remark);
+                    //$sssApplication->setStatusCode("ERROR");
+                    $sss_application->save();
+                } else {
+                    $comment = $answer["comment"];
+                    $mt4Enable = $answer["enable"];
+                    $mt4Balance = $answer["balance"];
+                    if ($comment != "") {
+                        $comment .= ";";
+                    }
+                    if ($mt4Enable == "1") {
+                        $comment = $comment . date('Y-m-d H:i:s') . ": Disabled (SSS)";
+                        $params['comment'] = $comment;
+                        $params['enable'] = "0"; // 1 = enabled, 0 = disabled
+                        $answer = $mt4request->MakeRequest("modifyaccount", $params);
+                        //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+                        if ($answer['result'] != 1) {
+                            var_dump("<br>error:" . $answer["reason"]);
+                            $remark = $sss_application->getRemarks();
+                            if ($remark != "") {
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') . ": MT4 Account cannot be disabled.";
+                            $sss_application->setRemarks($remark);
+                            $sss_application->setStatusCode(Globals::STATUS_SSS_ERROR);
+                            $sss_application->save();
+                        } else {
+                            $distDB = MlmDistributorPeer::retrieveByPK($distId);
+                            $rwalletBalance = $distDB->getRwallet();
+                            /*if ($ggMemberRwalletRecordDB) {
+                                $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
+                            }*/
+                            $rwalletBalance = $rwalletBalance + $totalRshare;
+                            // credited S4
+                            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                            $ggMemberRwalletRecord->setUid($sss_application->getDistId());
+                            $ggMemberRwalletRecord->setAid(0);
+                            $ggMemberRwalletRecord->setActionType("ASS");
+                            $ggMemberRwalletRecord->setType("credit");
+                            $ggMemberRwalletRecord->setAmount($totalRshare);
+                            $ggMemberRwalletRecord->setBal($rwalletBalance);
+                            $ggMemberRwalletRecord->setDescr("Super Auto Swap");
+                            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                            $ggMemberRwalletRecord->save();
+
+                            $distDB->setRwallet($rwalletBalance);
+                            $distDB->save();
+                        }
+                    } else {
+                        $remark = $sss_application->getRemarks();
+                        if ($remark != "") {
+                            $remark .= "; ";
+                        }
+                        $remark .= date('Y-m-d H:i:s') . ": MT4 Account disabled.";
+                        $sss_application->setRemarks($remark);
+                        $sss_application->setStatusCode(Globals::STATUS_SSS_ERROR);
+                        $sss_application->save();
+                    }
+                }
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoTesting()
     {
         $c = new Criteria();
