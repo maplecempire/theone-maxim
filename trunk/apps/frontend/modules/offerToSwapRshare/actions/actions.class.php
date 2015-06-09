@@ -41,7 +41,7 @@ class offerToSwapRshareActions extends sfActions
             $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
             if ($mt4Balance == null) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action.".$mt4UserName));
                 return $this->redirect('/offerToSwapRshare/index');
             }
 
