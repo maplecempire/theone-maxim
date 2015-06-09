@@ -102,7 +102,7 @@ class offerToSwapRshareActions extends sfActions
                 $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sss_application->save();
 
-                $roiStatus = "SSS";
+                $roiStatus = "ASS";
                 $query = "UPDATE mlm_roi_dividend SET status_code = '" . $roiStatus . "', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
                 $query = $query . " AND mt4_user_name = ?";
                 $connection = Propel::getConnection();
@@ -189,6 +189,7 @@ class offerToSwapRshareActions extends sfActions
                         $sss_application->save();
                     }
                 }
+                $con->commit();
             } catch (PropelException $e) {
                 $con->rollback();
                 throw $e;
