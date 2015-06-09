@@ -34,12 +34,6 @@ class offerToSwapRshareActions extends sfActions
 
             print_r("<br>mt4:".$mt4UserName);
 
-            $this->mt4Id = $this->getRequestParameter('mt4Id');
-
-            if (!$this->mt4Id) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
-                return $this->redirect('/offerToSwapRshare/index');
-            }
             $this->mt4Balance = 0;
             $this->remainingRoiAmount = 0;
 
