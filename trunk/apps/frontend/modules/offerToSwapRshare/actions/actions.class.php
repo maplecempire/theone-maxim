@@ -21,7 +21,7 @@ class offerToSwapRshareActions extends sfActions
                     , dist.leader_id
                 FROM mlm_roi_dividend roi
                     LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
-                WHERE roi.idx = 36 and dist.leader_id = 254781 limit 50";
+                WHERE roi.idx = 36 and roi.status_code = 'PENDING' and dist.leader_id = 254781 limit 50";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
