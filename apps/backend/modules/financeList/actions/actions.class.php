@@ -21,7 +21,7 @@ class financeListActions extends sfActions
         foreach ($mlmCp3Withdraws as $mlmCp3Withdraw) {
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp3Withdraw->getDistId());
 
-            $mlmCp3Withdraw->setLeaderDistId($distDB->getLeaderDistId());
+            $mlmCp3Withdraw->setLeaderDistId($distDB->getLeaderId());
             $mlmCp3Withdraw->save();
         }
 
@@ -34,7 +34,7 @@ class financeListActions extends sfActions
         foreach ($mlmCp2Withdraws as $mlmCp2Withdraw) {
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
 
-            $mlmCp2Withdraw->setLeaderDistId($distDB->getLeaderDistId());
+            $mlmCp2Withdraw->setLeaderDistId($distDB->getLeaderId());
             $mlmCp2Withdraw->save();
         }
 
