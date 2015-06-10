@@ -1222,7 +1222,7 @@ class marketingListActions extends sfActions
             return sfView::HEADER_ONLY;
         }
 
-        $sql = " ,dist.tree_structure FROM mlm_distributor dist
+        $sql = " ,dist.tree_structure,dist.leader_dist_id FROM mlm_distributor dist
             LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
          ";
         $sql = " ,dist.tree_structure FROM mlm_distributor dist ";
@@ -1320,18 +1320,10 @@ class marketingListActions extends sfActions
             }*/
 
             $leader = "***";
-            /*for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($resultArr['tree_structure'], "|".$leaderArrs[$i]."|");
-                if ($pos === false) { // note: three equal signs
-
-                } else {
-                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
-                    if ($dist) {
-                        $leader = $dist->getDistributorCode();
-                    }
-                    break;
-                }
-            }*/
+            $dist = MlmDistributorPeer::retrieveByPK($resultArr['leader_dist_id']);
+            if ($dist) {
+                $leader = $dist->getDistributorCode();
+            }
 
             $arr[] = array(
                 $resultArr['distributor_id'] == null ? "" : $resultArr['distributor_id'],
