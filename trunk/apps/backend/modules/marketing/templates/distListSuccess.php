@@ -104,7 +104,7 @@ $(function(){
 		              { "sName" : "dist.bank_holder_name",  "bSortable": true},
 		              { "sName" : "dist.bank_swift_code",  "bSortable": true},
 		              { "sName" : "dist.visa_debit_card",  "bSortable": true},
-		              { "sName" : "dist.upline_dist_code",  "bSortable": true},
+		              { "sName" : "parent_nickname",  "bSortable": true},
 		              { "sName" : "dist.status_code",  "bSortable": true},
 		              { "sName" : "dist.created_on",  "bSortable": true}
 		              , { "sName" : "dist.file_bank_pass_book",  "bSortable": true, "fnRender": function ( oObj ) {
