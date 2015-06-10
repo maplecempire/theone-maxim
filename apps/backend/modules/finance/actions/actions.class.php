@@ -10,6 +10,118 @@
  */
 class financeActions extends sfActions
 {
+    public function executeAutoRejectTwosasaCp3Withdrawal()
+    {
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, 595);
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
+        $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
+
+        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            $remark = "PLEASE REFER TO UPPER SUPREME MEMBER. UPPER MEMBER REQUEST TO SWAP SSS<br>如有疑虑, 请联系您的推荐人。推荐人要求特别SSS股票转换.";
+
+            $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+                $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                $mlm_ecash_withdraw->setStatusCode($statusCode);
+                $mlm_ecash_withdraw->setRemarks($remark);
+                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+                    $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                $mlm_ecash_withdraw->save();
+
+                if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                    $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                    $distId = $mlm_ecash_withdraw->getDistId();
+                    /******************************/
+                    /*  Account
+                    /******************************/
+                    $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoRejectLocalBankCp2Withdrawal Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeAutoRejectTwosasaCp2Withdrawal()
+    {
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, 595);
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
+        $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
+
+        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            $remark = "PLEASE REFER TO UPPER SUPREME MEMBER. UPPER MEMBER REQUEST TO SWAP SSS<br>如有疑虑, 请联系您的推荐人。推荐人要求特别SSS股票转换.";
+
+            $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+                $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                $mlm_ecash_withdraw->setStatusCode($statusCode);
+                $mlm_ecash_withdraw->setRemarks($remark);
+                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+                    $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                $mlm_ecash_withdraw->save();
+
+                if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                    $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                    $distId = $mlm_ecash_withdraw->getDistId();
+                    /******************************/
+                    /*  Account
+                    /******************************/
+                    $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoRejectLocalBankCp2Withdrawal Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAutoRejectLocalBankCp2Withdrawal()
     {
         $cp3IdArray = explode(',', "10810,10823,10839,10873,10880,10881,10899,10903,10931,10955,10959,10989,11012,11013,11015,11025,11033,11066,11068,11070,11085,11087,11099,11100,11115,11120,11125,11132");
