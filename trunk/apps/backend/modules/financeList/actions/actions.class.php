@@ -10,6 +10,37 @@
  */
 class financeListActions extends sfActions
 {
+    public function executeUpdateCp2Cp3Withdrawal()
+    {
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, "PENDING");
+        $mlmCp3Withdraws = MlmCp3WithdrawPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        foreach ($mlmCp3Withdraws as $mlmCp3Withdraw) {
+            $distDB = MlmDistributorPeer::retrieveByPK($mlmCp3Withdraw->getDistId());
+
+            $mlmCp3Withdraw->setLeaderDistId($distDB->getLeaderDistId());
+            $mlmCp3Withdraw->save();
+        }
+
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, "PENDING");
+        $mlmCp2Withdraws = MlmEcashWithdrawPeer::doSelect($c);
+
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+        $leader = "";
+        foreach ($mlmCp2Withdraws as $mlmCp2Withdraw) {
+            $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
+
+            $mlmCp2Withdraw->setLeaderDistId($distDB->getLeaderDistId());
+            $mlmCp2Withdraw->save();
+        }
+
+        echo "Done";
+        return sfView::HEADER_ONLY;
+    }
 
     public function executeProductPurchaseList()
     {
@@ -2075,7 +2106,7 @@ class financeListActions extends sfActions
     public function executeUpdateLeaderForCp3Withdrawal()
     {
         $c = new Criteria();
-        //$c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
+        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, null, Criteria::ISNULL);
         $mlmCp3Withdraws = MlmCp3WithdrawPeer::doSelect($c);
 
         $leaderArrs = explode(",", Globals::GROUP_LEADER);
