@@ -1201,7 +1201,7 @@ class marketingListActions extends sfActions
     {
         $sColumns = $this->getRequestParameter('sColumns');
         $aColumns = explode(",", $sColumns);
-        //$sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
+        $sColumns = str_replace("parent_nickname", "parentUser.distributor_code as parent_nickname", $sColumns);
 
         $iColumns = $this->getRequestParameter('iColumns');
         $doSearch = false;
@@ -1225,9 +1225,11 @@ class marketingListActions extends sfActions
         $sql = " ,dist.tree_structure,dist.leader_id FROM mlm_distributor dist
             LEFT JOIN app_user tblUser ON dist.user_id = tblUser.user_id
          ";
-        $sql = " ,dist.tree_structure,dist.leader_id FROM mlm_distributor dist ";
+        $sql = " ,dist.tree_structure,dist.leader_id FROM mlm_distributor dist
+            LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
+        ";
 
-        // LEFT JOIN mlm_distributor parentUser ON dist.upline_dist_id = parentUser.distributor_id
+
 
         /*if ($this->getRequestParameter('filterMt4Userame') != "") {
             $sql .= " INNER JOIN ";
@@ -1353,7 +1355,7 @@ class marketingListActions extends sfActions
                 $resultArr['bank_holder_name'] == null ? "" : $resultArr['bank_holder_name'],
                 $resultArr['bank_swift_code'] == null ? "" : $resultArr['bank_swift_code'],
                 $resultArr['visa_debit_card'] == null ? "" : $resultArr['visa_debit_card'],
-                $resultArr['upline_dist_code'] == null ? "" : $resultArr['upline_dist_code'],
+                $resultArr['parent_nickname'] == null ? "" : $resultArr['parent_nickname'],
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on']
                 , $resultArr['file_bank_pass_book'] == null ? "" : $resultArr['file_bank_pass_book']
