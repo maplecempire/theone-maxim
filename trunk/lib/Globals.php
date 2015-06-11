@@ -134,6 +134,7 @@ abstract class Globals {
     const ACCOUNT_TYPE_EPOINT = 'EPOINT';
     const ACCOUNT_TYPE_CP4 = 'CP4';
     const ACCOUNT_TYPE_RT = 'RT';
+    const ACCOUNT_TYPE_RT2 = 'RT2';
     const ACCOUNT_TYPE_MAXSTORE = 'MAX STORE';
     const ACCOUNT_TYPE_RP = 'RP';
     const ACCOUNT_TYPE_DEBIT = 'DEBIT';
