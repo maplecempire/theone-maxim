@@ -421,9 +421,9 @@ if (date("d") >= 1 && $close == true) {
 
     <?php
     // monkey 254781
-    if ($distDB->getLeaderId() == 254781) {
+    //if ($distDB->getLeaderId() == 254781) {
 
-    } else {
+    //} else {
     ?>
     <br class="clear"><br>
     <ul>
@@ -465,7 +465,7 @@ if (date("d") >= 1 && $close == true) {
         </li>
         <?php } ?>
     </ul>
-    <?php } ?>
+    <?php //} ?>
 
     <?php
     $closeChallenge = true;
