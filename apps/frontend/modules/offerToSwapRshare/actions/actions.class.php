@@ -777,19 +777,19 @@ class offerToSwapRshareActions extends sfActions
 
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
-                $bonusDate = "2015-06-10";
+                //$bonusDate = "2015-06-10";
                 print_r("bonusDate=".$bonusDate."<br>");
                 $level = 0;
                 while ($level < 1) {
-                    //if ($bonusDate == $currentDate) {
-                    //    print_r("break<br>");
-                    //    break;
-                    //}
+                    if ($bonusDate == $currentDate) {
+                        print_r("break<br>");
+                        break;
+                    }
 
                     $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($bonusDate)));
                     print_r("level start :".$level."<br><br>");
                     $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '".$yesterday." 00:00:00' AND created_on < '".$bonusDate." 00:00:00'";
-                    $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '2015-06-09 00:00:00' AND created_on < '2015-06-10 00:00:00'";
+                    //$query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '2015-06-09 00:00:00' AND created_on < '2015-06-10 00:00:00'";
                     print_r("<br><br><br> :".$query."<br><br>");
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
