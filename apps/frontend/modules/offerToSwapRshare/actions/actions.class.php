@@ -785,10 +785,15 @@ class offerToSwapRshareActions extends sfActions
                         print_r("break<br>");
                         break;
                     }
-
+                    $limit = $this->getRequestParameter('q','');
                     $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($bonusDate)));
                     print_r("level start :".$level."<br><br>");
                     $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '".$yesterday." 00:00:00' AND created_on < '".$bonusDate." 00:00:00'";
+
+                    if ($limit != "") {
+                        $query .= " LIMIT ".$limit;
+                    }
+
                     //$query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '2015-06-09 00:00:00' AND created_on < '2015-06-10 00:00:00'";
                     print_r("<br><br><br> :".$query."<br><br>");
                     $connection = Propel::getConnection();
@@ -1099,6 +1104,67 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeDoDisabledMt4AndCheckForMaturity_testing()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
+        $c->add(SssApplicationPeer::DIST_ID, 275251);
+        $c->setLimit(30);
+        $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+        if ($sssApplication->getSwapType() == "SES") {
+            $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+
+            $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+            $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
+
+            $tbl_account_ledger2 = new MlmAccountLedger();
+            $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
+            $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+            $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+            $tbl_account_ledger2->setCredit($pairingBonusAmount);
+            $tbl_account_ledger2->setDebit(0);
+            $tbl_account_ledger2->setRemark("");
+            $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
+            $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $tbl_account_ledger2->save();
+
+            $c = new Criteria();
+            $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
+            $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
+
+            $balance = 0;
+            if (!$ggMemberWallet) {
+                $ggMemberWallet = new GgMemberWallet();
+                $ggMemberWallet->setUid($sssApplication->getDistId());
+                $ggMemberWallet->setRt2wallet(0);
+                $ggMemberWallet->setDescr("");
+                $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
+                $ggMemberWallet->save();
+            }
+            $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
+
+            $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
+            $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+            $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
+            $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
+            $gg_member_rtwallet_record->setDebit(0);
+            $gg_member_rtwallet_record->setBalance($balance);
+            $gg_member_rtwallet_record->setDescr("");
+            $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+            $gg_member_rtwallet_record->save();
+
+            $ggMemberWallet->setRt2wallet($balance);
+            $ggMemberWallet->save();
+        } else {
+            $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+        }
+        $sssApplication->save();
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoDisabledMt4AndCheckForMaturity()
     {
         $c = new Criteria();
@@ -1187,10 +1253,10 @@ class offerToSwapRshareActions extends sfActions
                                 $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
 
                                 $pairingBonusAmount = $sssApplication->getTotalShareConverted();
-                                $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT);
+                                $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
 
                                 $tbl_account_ledger2 = new MlmAccountLedger();
-                                $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
+                                $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
                                 $tbl_account_ledger2->setDistId($sssApplication->getDistId());
                                 $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
                                 $tbl_account_ledger2->setCredit($pairingBonusAmount);
@@ -1201,21 +1267,33 @@ class offerToSwapRshareActions extends sfActions
                                 $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $tbl_account_ledger2->save();
 
-                                $dist = MlmDistributorPeer::retrieveByPk($sssApplication->getDistId());
+                                $c = new Criteria();
+                                $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
+                                $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
 
-                                $bal = $dist->getRtwallet() + $pairingBonusAmount;
-                                $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                $balance = 0;
+                                if (!$ggMemberWallet) {
+                                    $ggMemberWallet = new GgMemberWallet();
+                                    $ggMemberWallet->setUid($sssApplication->getDistId());
+                                    $ggMemberWallet->setRt2wallet(0);
+                                    $ggMemberWallet->setDescr("");
+                                    $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
+                                    $ggMemberWallet->save();
+                                }
+                                $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
+
+                                $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
                                 $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
                                 $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
-                                $gg_member_rtwallet_record->setType('c');
-                                $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
-                                $gg_member_rtwallet_record->setBal($bal);
+                                $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
+                                $gg_member_rtwallet_record->setDebit(0);
+                                $gg_member_rtwallet_record->setBalance($balance);
                                 $gg_member_rtwallet_record->setDescr("");
                                 $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
                                 $gg_member_rtwallet_record->save();
 
-                                $dist->setRtwallet($bal);
-                                $dist->save();
+                                $ggMemberWallet->setRt2wallet($balance);
+                                $ggMemberWallet->save();
                             } else {
                                 $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
                             }
