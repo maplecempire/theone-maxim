@@ -128,11 +128,11 @@
                 <?php echo __('In line with resource pooling, Maxim Trader will match clients’ capital up to a maximum bonus of a dollar to dollar capital enhancement. This also means that you could have up to twice your original capital working for you. The reason for this is simple. With the Maxim Trader, more profits are generated not only for you, but for the company as well. Moreover, we take the risk with you so you can have peace of mind that we will do our utmost to ensure positive results.') ?>
                 <br>
                 <br>
-                <strong>•	<?php echo __('Our confidence') ?></strong>
-                <br>
-                <?php echo __('All client funds are insured in the form of a parental guarantee provided by our parent company Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.) Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
-                <br>
-                <br>
+<!--                <strong>•	--><?php //echo __('Our confidence') ?><!--</strong>-->
+<!--                <br>-->
+<!--                --><?php //echo __('All client funds are insured in the form of a parental guarantee provided by our parent company Royale Globe Holding Inc. (Formerly known as Royale Group Holding Inc.) Specifically, every dollar invested by our client is backed by a corresponding share of the parent company. With this unique arrangement, investors have the comfort and knowledge that in the unlikely event of insolvency of Maxim Trader, they have in their hands the shares of a public listed company in which they can use to mitigate such risks.') ?>
+<!--                <br>-->
+<!--                <br>-->
                 <strong><?php echo __('Sustained Profits') ?></strong>
                 <br>
                 <?php echo __('With the two key elements in place; leverage through resource pooling and effective Fund Management, Maxim Trader is able to achieve even greater revenue than what has been regularly attained over the past decade. As our system produces profits for you, it is simultaneously producing profits off you, because Maxim Trader achieves revenue through the number of lots traded and trading profits. This creates a win-win situation through a fair system that yields profits for both parties.') ?>

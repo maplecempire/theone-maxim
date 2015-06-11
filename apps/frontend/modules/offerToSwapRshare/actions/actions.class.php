@@ -21,7 +21,335 @@ class offerToSwapRshareActions extends sfActions
                     , dist.leader_id
                 FROM mlm_roi_dividend roi
                     LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
-                WHERE roi.idx = 36 and roi.status_code = 'PENDING' and dist.leader_id = 254781 limit 50";
+                WHERE roi.idx = 18 and roi.status_code = 'PENDING'";
+
+        $query2 = "and dist.leader_id = 254781 limit 50";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //exit();
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mt4UserName = $arr['mt4_user_name'];
+            $distId = $arr['dist_id'];
+            $package_price = $arr['package_price'];
+
+            print_r("<br>mt4:".$mt4UserName);
+
+            $this->remainingRoiAmount = 0;
+
+            $mt4Balance = $package_price;
+            $roiArr = $this->getRoiInformation($distId, $mt4UserName);
+
+            $roiPercentage = $roiArr['roi_percentage'];
+            $roiRemainingMonth = 0;
+            $remarks = "AUTO SWAP R-SHARE";
+
+            $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+            $this->swapToRt = $this->getRequestParameter('swapToRt', '');
+            $this->mt4Balance = $mt4Balance;
+            $this->remainingRoiAmount = $remainingRoiAmount;
+
+            $this->convertedCp2 = $this->getRequestParameter('convertedCp2', 0);
+            $this->convertedCp3 = $this->getRequestParameter('convertedCp3', 0);
+
+            $this->convertedCp2 = str_replace(",", "", $this->convertedCp2);
+            $this->convertedCp3 = str_replace(",", "", $this->convertedCp3);
+
+            $this->roiRemainingMonth = $roiRemainingMonth;
+            $this->roiPercentage = $roiPercentage;
+
+            if ($this->swapToRt == "Y") {
+                $roiRemainingMonth = 0;
+            }
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            if ($this->swapToRt == "Y") {
+                $totalRshare = $totalAmountConvertedWithCp2Cp3;
+            }
+            $this->totalRshare = round($totalRshare);
+
+            $this->signature = $this->getRequestParameter('txtSignature');
+
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                $mlm_distributor = MlmDistributorPeer::retrieveByPk($distId);
+                if (!$mlm_distributor) {
+                    continue;
+                }
+                $uplinePosition = $mlm_distributor->getPlacementPosition();
+                $pairingPoint = $totalAmountConvertedWithCp2Cp3 * Globals::PAIRING_POINT_BV;
+                $pairingPointActual = $totalAmountConvertedWithCp2Cp3;
+
+                print_r("<br>".$mlm_distributor->getDistributorId());
+
+                $pairingPointActual = $totalAmountConverted;
+                $pairingPoint = $pairingPointActual * Globals::PAIRING_POINT_BV;
+                if ($mlm_distributor->getTreeUplineDistId() != 0 && $mlm_distributor->getTreeUplineDistCode() != null) {
+                    $level = 0;
+                    $uplineDistDB = MlmDistributorPeer::retrieveByPk($mlm_distributor->getTreeUplineDistId());
+                    $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
+                    while ($level < 400) {
+                        //var_dump($uplineDistDB->getUplineDistId());
+                        //var_dump($uplineDistDB->getUplineDistCode());
+                        //print_r("<br>");
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        $addToLeft = 0;
+                        $addToRight = 0;
+                        $leftBalance = 0;
+                        $rightBalance = 0;
+                        if (!$sponsorDistPairingDB) {
+                            $sponsorDistPairingDB = new MlmDistPairing();
+                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            if (!$packageDB) {
+                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+                                return $this->redirect('/offerToSwapRshare/index');
+                            }
+
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance);
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                        }
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingDB->save();
+
+                        $c = new Criteria();
+                        $c->add(SssDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $c->add(SssDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                        $c->addDescendingOrderByColumn(SssDistPairingLedgerPeer::CREATED_ON);
+                        $sponsorDistPairingLedgerDB = SssDistPairingLedgerPeer::doSelectOne($c);
+
+                        $legBalance = 0;
+                        if ($sponsorDistPairingLedgerDB) {
+                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                        }
+
+                        //if ($uplineDistDB->getRankId() > 0) {
+                        $sponsorDistPairingledger = new SssDistPairingLedger();
+                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                        $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                        $sponsorDistPairingledger->setDebit(0);
+                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ")");
+                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->save();
+                        //}
+
+                        if ($uplineDistDB->getDistributorId() == 254837) {
+                            // 340121	LV2015-A
+                            // 340122	LV2015-B
+                            // 346119	LV2015-C
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(340121);
+                            $sponsorDistPairingledger->setLeftRight("LEFT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(340122);
+                            $sponsorDistPairingledger->setLeftRight("LEFT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(346119);
+                            $sponsorDistPairingledger->setLeftRight("LEFT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #AA5168");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+                        } else if ($uplineDistDB->getDistributorId() == 274048) {
+                            // 340121	LV2015-A
+                            // 340122	LV2015-B
+                            // 346121	LV2015-D
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(340121);
+                            $sponsorDistPairingledger->setLeftRight("RIGHT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(340122);
+                            $sponsorDistPairingledger->setLeftRight("RIGHT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+
+                            $sponsorDistPairingledger = new SssDistPairingLedger();
+                            $sponsorDistPairingledger->setDistId(346121);
+                            $sponsorDistPairingledger->setLeftRight("RIGHT");
+                            $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                            $sponsorDistPairingledger->setCredit($pairingPoint);
+                            $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                            $sponsorDistPairingledger->setDebit(0);
+                            $sponsorDistPairingledger->setBalance($pairingPoint);
+                            $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") #gyps0123");
+                            $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sponsorDistPairingledger->save();
+                        }
+
+                        if ($uplineDistDB->getTreeUplineDistId() == 0 || $uplineDistDB->getTreeUplineDistCode() == null) {
+                            break;
+                        }
+
+                        $uplinePosition = $uplineDistDB->getPlacementPosition();
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk($uplineDistDB->getTreeUplineDistId());
+                        $level++;
+                    }
+                    // **tips worlspeace sales link kashventure and eesiang01
+                    // **tips 558 kashventure
+                    // **tips kashventure sales entitled for  after 124	MaxProLtd1 to 132	MaxProLtd6   & worldpeace
+                    $pos = strrpos($mlm_distributor->getPlacementTreeStructure(), "|558|");
+                    if ($pos === false) { // note: three equal signs
+
+                    } else {
+                        // **tips 879 eesiang01 :: worldpeace downline eesiang01 not maxproltd6 but for chris5 (globalchina)
+                        /*$pos2 = strrpos($mlm_distributor->getPlacementTreeStructure(), "|879|");
+                      if ($pos2 === false) { // note: three equal signs
+
+                      } else {*/
+                        $level = 0;
+                        $uplineDistDB = MlmDistributorPeer::retrieveByPk(557);
+                        $uplinePosition = Globals::PLACEMENT_LEFT;
+                        $sponsoredDistributorCode = $mlm_distributor->getDistributorCode();
+
+                        $c = new Criteria();
+                        $c->add(MlmDistPairingPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $sponsorDistPairingDB = MlmDistPairingPeer::doSelectOne($c);
+
+                        $addToLeft = 0;
+                        $addToRight = 0;
+                        $leftBalance = 0;
+                        $rightBalance = 0;
+                        if (!$sponsorDistPairingDB) {
+                            $sponsorDistPairingDB = new MlmDistPairing();
+                            $sponsorDistPairingDB->setDistId($uplineDistDB->getDistributorId());
+
+                            $packageDB = MlmPackagePeer::retrieveByPK($uplineDistDB->getRankId());
+                            if (!$packageDB) {
+                                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
+                                return $this->redirect('/offerToSwapRshare/index');
+                            }
+
+                            $sponsorDistPairingDB->setLeftBalance($leftBalance);
+                            $sponsorDistPairingDB->setRightBalance($rightBalance);
+                            $sponsorDistPairingDB->setFlushLimit($packageDB->getDailyMaxPairing());
+                            $sponsorDistPairingDB->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        } else {
+                            $leftBalance = $sponsorDistPairingDB->getLeftBalance();
+                            $rightBalance = $sponsorDistPairingDB->getRightBalance();
+                        }
+                        $sponsorDistPairingDB->setLeftBalance($leftBalance + $addToLeft);
+                        $sponsorDistPairingDB->setRightBalance($rightBalance + $addToRight);
+                        $sponsorDistPairingDB->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingDB->save();
+
+                        $c = new Criteria();
+                        $c->add(SssDistPairingLedgerPeer::DIST_ID, $uplineDistDB->getDistributorId());
+                        $c->add(SssDistPairingLedgerPeer::LEFT_RIGHT, $uplinePosition);
+                        $c->addDescendingOrderByColumn(SssDistPairingLedgerPeer::CREATED_ON);
+                        $sponsorDistPairingLedgerDB = SssDistPairingLedgerPeer::doSelectOne($c);
+
+                        $legBalance = 0;
+                        if ($sponsorDistPairingLedgerDB) {
+                            $legBalance = $sponsorDistPairingLedgerDB->getBalance();
+                        }
+
+                        $sponsorDistPairingledger = new SssDistPairingLedger();
+                        $sponsorDistPairingledger->setDistId($uplineDistDB->getDistributorId());
+                        $sponsorDistPairingledger->setLeftRight($uplinePosition);
+                        $sponsorDistPairingledger->setTransactionType(Globals::PAIRING_LEDGER_REGISTER);
+                        $sponsorDistPairingledger->setCredit($pairingPoint);
+                        $sponsorDistPairingledger->setCreditActual($pairingPointActual);
+                        $sponsorDistPairingledger->setDebit(0);
+                        $sponsorDistPairingledger->setBalance($legBalance + $pairingPoint);
+                        $sponsorDistPairingledger->setRemark("PAIRING POINT AMOUNT (" . $sponsoredDistributorCode . ") [kashventure]");
+                        $sponsorDistPairingledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sponsorDistPairingledger->save();
+                        //}
+                    }
+                }
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoAutoConvertEShare_ori()
+    {
+        // monkey 254781
+        $query = "SELECT roi.devidend_id, roi.dist_id, roi.mt4_user_name, roi.idx, roi.account_ledger_id
+                    , roi.dividend_date, roi.package_id, roi.package_price, roi.roi_percentage
+                    , roi.mt4_balance, roi.dividend_amount, roi.remarks, roi.status_code
+                    , roi.created_by, roi.created_on, roi.updated_by, roi.updated_on
+                    , roi.first_dividend_date
+                    , dist.leader_id
+                FROM mlm_roi_dividend roi
+                    LEFT JOIN mlm_distributor dist ON dist.distributor_id = roi.dist_id
+                WHERE roi.idx = 36 and roi.status_code = 'PENDING'";
+
+        $query2 = "and dist.leader_id = 254781 limit 50";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -433,9 +761,8 @@ class offerToSwapRshareActions extends sfActions
     public function executeDailyBonus()
     {
         $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
-        $fromAbfx = "N";
-        try {
-            $con->begin();
+        /*try {
+            $con->begin();*/
 
             print_r("Start<br>");
             $c = new Criteria();
@@ -450,17 +777,19 @@ class offerToSwapRshareActions extends sfActions
 
             if ($mlmDailyBonusLogDB) {
                 $bonusDate = $dateUtil->formatDate("Y-m-d", $mlmDailyBonusLogDB->getBonusDate());
+                $bonusDate = "2015-06-10";
                 print_r("bonusDate=".$bonusDate."<br>");
                 $level = 0;
                 while ($level < 1) {
-                    if ($bonusDate == $currentDate) {
-                        print_r("break<br>");
-                        break;
-                    }
+                    //if ($bonusDate == $currentDate) {
+                    //    print_r("break<br>");
+                    //    break;
+                    //}
 
                     $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($bonusDate)));
                     print_r("level start :".$level."<br><br>");
                     $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '".$yesterday." 00:00:00' AND created_on < '".$bonusDate." 00:00:00'";
+                    $query = "SELECT distinct dist_id FROM sss_dist_pairing_ledger WHERE created_on >= '2015-06-09 00:00:00' AND created_on < '2015-06-10 00:00:00'";
                     print_r("<br><br><br> :".$query."<br><br>");
                     $connection = Propel::getConnection();
                     $statement = $connection->prepareStatement($query);
@@ -698,11 +1027,11 @@ class offerToSwapRshareActions extends sfActions
                 $sendMailService = new SendMailService();
                 $sendMailService->sendMailReport("r9jason@gmail.com", "jason", $subject, $body, Mails::EMAIL_SENDER);
             }
-            $con->commit();
+            /*$con->commit();
         } catch (PropelException $e) {
             $con->rollback();
             throw $e;
-        }
+        }*/
 
         print_r("Done");
         return sfView::HEADER_ONLY;
