@@ -1044,7 +1044,68 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='71'>Annoucement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='72'>Announcement</a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "11 June 2015";
+                ?>
+            </div>
+
+            <div id="page_72" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+                            <br>Dear Members,
+<br>
+<br>Maxim Trader will soon be entering its third year. The Company wishes to congratulate all its members for the income and benefits that they have enjoyed.
+<br>
+<br>The promotional Performance Returns rates of up to between 5% to 8% will be offered only until 30 June 2015. Effective 1 July 2015, the minimum investment package will be set at USD10,000. The Monthly Performance Returns will be revised to up to 3% for USD30,000 package, up to 2% for USD20,000 and up to 1% for USD10,000. We trust you will continue to be with the  Company in understanding these changes and promoting the same.
+<br>
+<br>Dr Andrew Lim,
+<br>CEO Maxim Trader
+<br>
+<br>亲爱的会员，
+<br>
+<br>时光飞逝! 马胜金融集团很快就会走近第三个年头... 再一次感谢大家一路以来的支持, 也对所有朋友所获得的收益及财富表示恭喜!
+<br>
+<br>为了更长远的发展, 公司现有5%-8%月投资回报优惠也以完成其使命, 并将2015.6.30日退出历史舞台. 从2015.7.1日起, 最低投资配套为1万美金; 月投资回报也将调整为: 3万美金及以上配套每月最高投资回报为3%; 2万美金配套每月最高投资回报为2%; 1万美金配套每月最高投资回报为1%. 相信大家都会真切了解公司的初衷与愿景, 一如即往的支持公司, 携手共进!
+<br>
+<br>Dr. Andrew Lim
+<br>马胜金融集团首席市场官
+<br>
+<br>친애하는 회원여러분,
+<br>
+<br>맥심 트레이더가 조만간 3년차가 됩니다. 회사는 모든 회원들이 받아온 수익과 이익에 대해 축하드립니다.
+<br>
+<br>3%에서 8%에 달하는 프로모션 퍼포먼스 이익율이 2015년 6월 30일부터 다음과 같이 변경됩니다. 2015년 7월 1일부터 최소 투자 패키지는 미화10,000달러로 조정될 것입니다. 월별 퍼포먼스 이익은 미화 30,000달러 패키지에 대해서는 3%로, 미화 20,000달러에 대해서는 2%로, 미화 10,000달러에 대해서는 1%로 됩니다. 회사와 계속 함께해 주실걸로 믿으며 본 변경에 대한 이해와 지족적인 프로모션을믿습니다.
+<br>
+<br>앤드류 림 박사,
+<br>CEO 맥심 트레이더
+<br>
+<br>メンバーの皆さま、
+<br>
+<br>マキシムトレーダーはもうすぐ３年目に入ります。弊社はメンバーの皆様すべてに対し、これまでにお楽しみいただいた収入や利益についてお祝い申し上げます。
+<br>
+<br>プロモーション用のパフォーマンス・リターン率3%〜8%は6月30日までの提供となります。2015年7月1日より、最小の投資パッケージはUSD10,000となります。月次パフォーマンスリターンは、USD30,000パッケージで3%まで、USD20,000パッケージで2%までとそれぞれ修正されます。皆様がこれらの変更についてご理解いただけますことと、変わらぬ販売促進をいただけることを信頼しております。
+<br>
+<br>アンドリュー・リム博士
+<br>マキシムトレーダーCEO
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='71'>Announcement</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
                 <?php
@@ -1095,7 +1156,7 @@ $(document).ready(function() {
 <br>매니지먼트
 <br>
 <br>Updated on 4th June 2015
-                            
+
                             <br>
                             <br>
                             <img src="/images/email/932c47aeff3c55351a26764c2dcf666d.jpg" alt="" style="width:610px;">
