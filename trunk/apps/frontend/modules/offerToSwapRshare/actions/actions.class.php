@@ -750,10 +750,22 @@ class offerToSwapRshareActions extends sfActions
     }
     public function executeReport()
     {
-        print_r("Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
-        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
-        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
-        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
+        //RSHARE
+        //SES
+        //ASS
+        $swapType = "SSS";
+        print_r("SSS");
+        print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+
+        $swapType = "SES";
+        print_r("<br><br>SES");
+        print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
 //        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
 
         return sfView::HEADER_ONLY;
@@ -2454,7 +2466,7 @@ class offerToSwapRshareActions extends sfActions
         }
         return $count;
     }
-    function totalCountOfSss($dateFrom, $dateTo)
+    function totalCountOfSss($dateFrom, $dateTo, $swapType)
     {
         $query = "SELECT count(*) as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
 
@@ -2463,6 +2475,12 @@ class offerToSwapRshareActions extends sfActions
         }
         if ($dateTo != null) {
             $query .= " AND created_on <= '".$dateTo." 23:59:59'";
+        }
+
+        if ($swapType == "SSS") {
+            $query .= " AND swap_type IN ('RSHARE','ASS')";
+        } else if ($swapType == "SSS") {
+            $query .= " AND swap_type IN ('SES')";
         }
 
         $connection = Propel::getConnection();
@@ -2480,7 +2498,7 @@ class offerToSwapRshareActions extends sfActions
         }
         return $count;
     }
-    function totalSumOfSss($fieldName, $dateFrom, $dateTo)
+    function totalSumOfSss($fieldName, $dateFrom, $dateTo, $swapType)
     {
         $query = "SELECT SUM(".$fieldName.") as _TOTAL FROM sss_application WHERE status_code not IN ('REJECTED','ERROR')";
 
@@ -2489,6 +2507,12 @@ class offerToSwapRshareActions extends sfActions
         }
         if ($dateTo != null) {
             $query .= " AND created_on <= '".$dateTo." 23:59:59'";
+        }
+
+        if ($swapType == "SSS") {
+            $query .= " AND swap_type IN ('RSHARE','ASS')";
+        } else if ($swapType == "SSS") {
+            $query .= " AND swap_type IN ('SES')";
         }
 
         $connection = Propel::getConnection();
