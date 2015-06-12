@@ -632,8 +632,8 @@ ul, ol {
 <!--            <p><iframe width="560" height="315" src="//www.youtube.com/embed/QBAn1YhZ-QI?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></p>-->
 <!--            <div class="hr2"></div>-->
 
-            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_2.jpg"><img src="/images/201412/news_2.jpg" alt="" title="MAXIM FINAL CHALLENGE 2014" class="aligncenter size-full wp-image-162"></a></p>
-            <div class="hr2"></div>
+<!--            <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_2.jpg"><img src="/images/201412/news_2.jpg" alt="" title="MAXIM FINAL CHALLENGE 2014" class="aligncenter size-full wp-image-162"></a></p>-->
+<!--            <div class="hr2"></div>-->
 
             <?php if ($culture == "kr") {?>
                 <p><a class="fancybox-thumbs" data-fancybox-group="thumb" href="/images/201412/news_1_kr.jpg"><img src="/images/201412/news_1_kr.jpg" alt="" title="SINGAPORE CONVENTION 2015" class="aligncenter size-full wp-image-162"></a></p>
