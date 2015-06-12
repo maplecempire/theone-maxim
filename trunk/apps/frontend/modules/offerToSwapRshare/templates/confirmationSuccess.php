@@ -155,7 +155,7 @@ function calculateRshare() {
 
 
     if (totalRshare >= 1) {
-        spanFormula = "$" + mt4Balance + "K + ($" + mt4Balance + "K x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
+        spanFormula = "$" + mt4Balance + " + ($" + mt4Balance + " x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
         spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
         spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
