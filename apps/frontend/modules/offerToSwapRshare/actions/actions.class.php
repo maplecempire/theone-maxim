@@ -1353,6 +1353,9 @@ class offerToSwapRshareActions extends sfActions
                 if ($roiArr['idx'] <= 12) {
                     $entitledPairing = false;
                 }
+                if ($roiArr['idx'] >= 19 && $roiArr['idx'] <= 30) {
+                    $entitledPairing = false;
+                }
                 $roiPercentage = $sssApplication->getRoiPercentage();
 
                 $convertedCp2 = $sssApplication->getCp2Balance();
