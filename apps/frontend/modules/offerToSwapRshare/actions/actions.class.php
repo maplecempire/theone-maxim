@@ -2479,7 +2479,7 @@ class offerToSwapRshareActions extends sfActions
 
         if ($swapType == "SSS") {
             $query .= " AND swap_type IN ('RSHARE','ASS')";
-        } else if ($swapType == "SSS") {
+        } else if ($swapType == "SES") {
             $query .= " AND swap_type IN ('SES')";
         }
 
@@ -2511,7 +2511,7 @@ class offerToSwapRshareActions extends sfActions
 
         if ($swapType == "SSS") {
             $query .= " AND swap_type IN ('RSHARE','ASS')";
-        } else if ($swapType == "SSS") {
+        } else if ($swapType == "SES") {
             $query .= " AND swap_type IN ('SES')";
         }
 
