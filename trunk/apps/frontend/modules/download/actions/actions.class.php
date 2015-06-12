@@ -769,8 +769,9 @@ class downloadActions extends sfActions
         $exp_time = DateTime::createFromFormat("d F Y H:i:s", "01 September 2014 00:00:00"); //strtotime("31 October 2014");
         $sign_time = DateTime::createFromFormat("d F Y H:i:s", $mlmPackageContract->getSignDateDay()." ".$mlmPackageContract->getSignDateMonth()." ".$mlmPackageContract->getSignDateYear()." 00:00:00"); //strtotime($mlmPackageContract->getSignDateDay()." ".$mlmPackageContract->getSignDateMonth()." ".$mlmPackageContract->getSignDateYear());
 
-        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/".($sign_time < $exp_time ? "old" : "new")."/";
-        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/new/";
+//        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/".($sign_time < $exp_time ? "old" : "new")."/";
+//        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/new/";
+        $agreement_path = sfConfig::get('sf_upload_dir')."/agreements/Private_Investment_Agreement/new_20150612/";
         $client_name = $mlmPackageContract->getFullName();
         $account_id = $mlmPackageContract->getUsername()." (".$mlmPackageContract->getMt4Id().")";
         $init_fund = $mlmPackageContract->getPackagePrice();
@@ -780,6 +781,49 @@ class downloadActions extends sfActions
         $prim_cust_sign = $mlmPackageContract->getInitialSignature();
         $prim_cust_name = $mlmPackageContract->getFullName();
 
+        // For old/new contract.
+//        $html = "<html>
+//<head>
+//<style type=\"text/css\">
+//@page { margin: 0px; }
+//body { margin: 0px; background-color: rgb(255, 254, 233); }
+//img.background { width: 100%; }
+//p.m { font-size: 14px; }
+//p.s { font-size: 12px; }
+//</style>
+//</head>
+//<body style=\"font-family: firefly, verdana, sans-serif;\">
+//<img src=\"".$agreement_path."agreement-cover-front.jpg\" class=\"background\" />
+//<img src=\"".$agreement_path."agreement-01.jpg\" class=\"background\" />
+//<p class=\"m\" style=\"position: absolute; top: 265px; left: 203px;\">" . $client_name . "</p>
+//<img src=\"".$agreement_path."agreement-02.jpg\" class=\"background\" />
+//<p class=\"s\" style=\"position: absolute; top: 295px; left: 110px;\">" . $account_id . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 295px; left: 463px;\">" . $init_fund . "</p>
+//<img src=\"".$agreement_path."agreement-03.jpg\" class=\"background\" />
+//<img src=\"".$agreement_path."agreement-04.jpg\" class=\"background\" />
+//<img src=\"".$agreement_path."agreement-05.jpg\" class=\"background\" />
+//<p class=\"m\" style=\"position: absolute; top: 426px; left: 347px;\">" . $auth_day . "</p>
+//<p class=\"m\" style=\"position: absolute; top: 426px; left: 460px;\">" . $auth_month . "</p>
+//<p class=\"m\" style=\"position: absolute; top: 426px; left: 583px;\">" . $auth_year . "</p>
+//<p class=\"m\" style=\"position: absolute; top: 510px; left: 327px;\">" . $prim_cust_sign . "</p>
+//<p class=\"m\" style=\"position: absolute; top: 544px; left: 327px;\">" . $prim_cust_name . "</p>
+//<img src=\"".$agreement_path."agreement-06.jpg\" class=\"background\" />
+//<p class=\"m\" style=\"position: absolute; top: 271px; left: 100px;\">" . $client_name . "</p>
+//<img src=\"".$agreement_path."agreement-07.jpg\" class=\"background\" />
+//<p class=\"s\" style=\"position: absolute; top: 274px; left: 415px;\">" . $account_id . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 288px; left: 105px;\">" . $init_fund . "</p>
+//<img src=\"".$agreement_path."agreement-08.jpg\" class=\"background\" />
+//<img src=\"".$agreement_path."agreement-09.jpg\" class=\"background\" />
+//<p class=\"s\" style=\"position: absolute; top: 419px; left: 124px;\">" . $auth_year . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 419px; left: 223px;\">" . $sign_time->format("m") . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 419px; left: 298px;\">" . $auth_day . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 497px; left: 227px;\">" . $prim_cust_sign . "</p>
+//<p class=\"s\" style=\"position: absolute; top: 545px; left: 227px;\">" . $prim_cust_name . "</p>
+//<img src=\"".$agreement_path."agreement-cover-back.jpg\" class=\"background\" />
+//</body>
+//</html>";
+
+        // For new_20150612 contract ONLY.
         $html = "<html>
 <head>
 <style type=\"text/css\">
@@ -801,8 +845,8 @@ p.s { font-size: 12px; }
 <img src=\"".$agreement_path."agreement-04.jpg\" class=\"background\" />
 <img src=\"".$agreement_path."agreement-05.jpg\" class=\"background\" />
 <p class=\"m\" style=\"position: absolute; top: 426px; left: 347px;\">" . $auth_day . "</p>
-<p class=\"m\" style=\"position: absolute; top: 426px; left: 460px;\">" . $auth_month . "</p>
-<p class=\"m\" style=\"position: absolute; top: 426px; left: 583px;\">" . $auth_year . "</p>
+<p class=\"m\" style=\"position: absolute; top: 426px; left: 500px;\">" . $auth_month . "</p>
+<p class=\"m\" style=\"position: absolute; top: 426px; left: 643px;\">" . $auth_year . "</p>
 <p class=\"m\" style=\"position: absolute; top: 510px; left: 327px;\">" . $prim_cust_sign . "</p>
 <p class=\"m\" style=\"position: absolute; top: 544px; left: 327px;\">" . $prim_cust_name . "</p>
 <img src=\"".$agreement_path."agreement-06.jpg\" class=\"background\" />
@@ -812,9 +856,9 @@ p.s { font-size: 12px; }
 <p class=\"s\" style=\"position: absolute; top: 288px; left: 105px;\">" . $init_fund . "</p>
 <img src=\"".$agreement_path."agreement-08.jpg\" class=\"background\" />
 <img src=\"".$agreement_path."agreement-09.jpg\" class=\"background\" />
-<p class=\"s\" style=\"position: absolute; top: 419px; left: 124px;\">" . $auth_year . "</p>
-<p class=\"s\" style=\"position: absolute; top: 419px; left: 223px;\">" . $sign_time->format("m") . "</p>
-<p class=\"s\" style=\"position: absolute; top: 419px; left: 298px;\">" . $auth_day . "</p>
+<p class=\"s\" style=\"position: absolute; top: 419px; left: 150px;\">" . $auth_year . "</p>
+<p class=\"s\" style=\"position: absolute; top: 419px; left: 323px;\">" . $sign_time->format("m") . "</p>
+<p class=\"s\" style=\"position: absolute; top: 419px; left: 508px;\">" . $auth_day . "</p>
 <p class=\"s\" style=\"position: absolute; top: 497px; left: 227px;\">" . $prim_cust_sign . "</p>
 <p class=\"s\" style=\"position: absolute; top: 545px; left: 227px;\">" . $prim_cust_name . "</p>
 <img src=\"".$agreement_path."agreement-cover-back.jpg\" class=\"background\" />
