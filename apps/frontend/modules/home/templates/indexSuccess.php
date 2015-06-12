@@ -1112,7 +1112,11 @@ $(document).ready(function() {
         </div>
         <div class="page">
             <div class="poptitle">
-                <a href='#' class="page_link" ref='72'>Announcement</a><img src="/images/new_icon.gif">
+                <a href='#' class="page_link" ref='72'>
+                <br>System Auto-Swap to SSS on 17th June 2015
+                <br>2015年6月17日 SSS - 股票自行转让
+                <br>タイトル: 2015年6月17日システム SSS株 自動転換
+                </a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
                 <?php
@@ -1128,21 +1132,104 @@ $(document).ready(function() {
                         <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
                             <br>Dear Members,
 <br>
-<br>Maxim Trader will soon be entering its third year. The Company wishes to congratulate all its members for the income and benefits that they have enjoyed.
+<br>How time flies! Over the past 36 months,  we have achieved a significant & phenomenal success around the world. And as more profitable projects are being injected into our mother company ROGP, company's management team and BOD are confident that ROGP will be listed in NYSE in 2016! Therefore today we take full pride to announce the following news:
 <br>
-<br>The promotional Performance Returns rates of up to between 5% to 8% will be offered only until 30 June 2015. Effective 1 July 2015, the minimum investment package will be set at USD10,000. The Monthly Performance Returns will be revised to up to 3% for USD30,000 package, up to 2% for USD20,000 and up to 1% for USD10,000. We trust you will continue to be with the  Company in understanding these changes and promoting the same.
+<br>1) We are pleased to inform all shareholders that RGF has acquired a substantial stake in CTO. This means RGF a member company of ROGP has been liseted as the single biggest shareholder of ASX Top 200 Australian Public Listed Company: Citigold Corp Ltd (www.Citigold.com). Citigold Corp known as CTO is an Australian gold mining company with operations based at Charters Towers in North Eastern Queensland , Australia. Citigold hold's all of the high grade Charters Towers Goldfield where a Mineral Resource of 11,000,000 ounces of gold (342 tonnes) at an average grade of 14g/t gold has been defined (25 million tonnes of oares @ 14g/tonne of  ore ) and documented, to JORC (Joint Ore Reserves Committee) Code reporting standards at current reserve value at approximately USD11Billion. Our reserve value is USD1.28Billion and shall be injected into ROGP once we have finalize the corporate exercise.
 <br>
-<br>Dr Andrew Lim,
-<br>CEO Maxim Trader
+<br>2) ROGP will be launching its ISGC : Integrated Smart Global City ,Hatyai in the near future , with the land size  of >3000 Rai /1200 Acres ,the land is > USD 250 Million. This will be a 10 year project with a GDV( Gross Development Value) of >USD 3 Billion. First Phase will be officially launched on June 10th, 2015.
+<br>ROGP is also proud to announce its rare & precious Joint Venture mega project with a Korean Entity  by building a Rich Cultured Korean City followed by :
+<br>- Green Universal City - China City/Taiwan City/Japan City
+<br>& other modern physical and technological connectivities
+<br>- Modern pollution free infrastructures
+<br>- Top Grade Facilities for residential and commercial activities
+<br>- Overall Best Facilities for MICE etc.
 <br>
-<br>亲爱的会员，
+<br>3) Other than the above mentioned projects, ROGP‘s diversification strategy is also reaching out to Agriculture/Plantation business - an exclusive area which is an essential supply to meet the global crisis in foods' demand . For this, ROGP has successfully acquired IMPC (Imperial Plantation Corporation) which is another OTC company in U.S. IMPC consists of  >5000 acres of land for Agarwood, Teak Wood, Banana, Cassava, etc in Malaysia. IMPC's  Agarwood already planted with 300,000 young trees in Sokor ,Malaysia with every plant @USD 2000 estimates value = USD 600 Million. IMPC will be injected into ROGP in the near future, which will increase  its market capitalization to a higher level , thus providing a solid roadmap to NYSE!
 <br>
-<br>时光飞逝! 马胜金融集团很快就会走近第三个年头... 再一次感谢大家一路以来的支持, 也对所有朋友所获得的收益及财富表示恭喜!
+<br>In order to comply with new globalization & developments, some strategies and changes have been taken into account. First of all, we realize that more and more countries have accepted Forex Trading with guided regulations, thus in order not to go against individual countries' banking regulations , management has decided: Effective from July 1st, 2015, all new business and renewal of new contracts will be restructured as below:(Existing packages will not be affected by the new guidelines)
 <br>
-<br>为了更长远的发展, 公司现有5%-8%月投资回报优惠也以完成其使命, 并将2015.6.30日退出历史舞台. 从2015.7.1日起, 最低投资配套为1万美金; 月投资回报也将调整为: 3万美金及以上配套每月最高投资回报为3%; 2万美金配套每月最高投资回报为2%; 1万美金配套每月最高投资回报为1%. 相信大家都会真切了解公司的初衷与愿景, 一如即往的支持公司, 携手共进!
+<br>Minimum Investment Package is USD10,000(or above); The Monthly Performance Return will be up to 3% for usd30,000/  2% for usd20,000/  1% for usd10,000.
+<br>
+<br>Due to an Overwhelming market response ;  management has decided to extend the Super Shares Swap program in order to allow more investors to enjoy this One off Privilege: Starting from June 17th, 2015, contracts reaching 12 Months or above (including maturing 18 months or above) will be auto converted into R share @ a special offer price of USD0.8/Share (R-share priced at USD2.00 as at 03 June 2015). Please take note that this SSS is Not Compulsory: members have the right to decide NOT to ACCEPT this Auto swap. HENCE you are Entiltled to a 14 Day Period that enables you to raise an objection (latest till June 30th 2015), members have the RIGHT to decide not to swap in this exercise! Any doubts or enquiry, you may contact company's CS /customer service Or via your Upper member.
+<br>
+<br>For Auto Swap SSS on 17th June 2015, company shall credit Development Bonus into RT account on July 23rd, 2015. @NOTE: There will be  no  "DAILY MAXIMUM LIMIT" in the bonus calculations for auto swap. Means the usual daily max out does not apply.
+<br>
+<br>**R-Shares Self-Trading Channel: Upon completion of the SSS, shareholder can buy or sell their R-shares via LEGACY TRUST by registering a trust member account with Legacy Trust. ◇Set-up fee is applicable as per Legacy Trust Rules.◇
+<br>
+<br>Let's work hand in hand & heart 2 heart, & Achieve more!!!
 <br>
 <br>Dr. Andrew Lim
-<br>马胜金融集团首席市场官
+<br>CEO - Maxim
+<br>
+<br>
+<br>各位尊贵的会员，
+<br>
+<br>光阴如梭，马胜金融集团历经3年，在世界多国迅速发展，母公司皇家控股集团也在多个领域中取得众多优质项目，集团总裁及全体高管已100%确信2016年ROGP将会在纽交所挂牌上市；为了集团在资源上更好的整合，集团管理层通过和马胜金融管理层和各国领导深入讨论后，我们很高兴的为大家带来这振奋人心的几项好消息！
+<br>
+<br>1)皇家控股集团旗下RGF有限公司成功入股澳大利亚金城矿业集团（CITIGOLD) 成为该集团第一大股东，此消息即将在官方作出公布，会员们可以在此网站www.citigold.com 获取更多信息。
+<br>金城公司是一家澳大利亚黄金开采公司，自1993年在澳大利亚交易所ASX上市，上市编号：CTO， 运营部设在澳大利亚东北部的查特斯堡。公司为一成长型公司，其目标为通过扩大黄金开采业务实现现金流量的不断增长。查特斯堡金银矿是一个独特的矿脉系统，在澳大利亚为品味最高的金矿之一。随着对查特斯堡矿体的深入研究，查特斯堡项目现在进入了发展和产能提升阶段，这将使生产水平得到显著提高。 金城拥有全部查特斯堡高品位的金矿区，矿区内有平均品味为14克黄金/吨的1100,0000盎司（342吨）的黄金矿产资源，已根据JORC （矿石储量联合委员会）规范的报告标准进行定义（2500,0000吨，14克/吨 金）及文件编制。该矿区储备价值高达110亿美金。其中我们占股拥有的储备价值达12.8亿美金，我们将尽快完成相关手续，将此部分入注皇家控股集团！
+<br>
+<br>2）皇家控股集团即将启动 泰国南部合艾面积达1200英亩的ISGC 项目（Integrated Smart Global City) ，土地市值2.5亿美元动土礼即将在2015年6月10号正式启动, 此综合地产开发项目总值 GDV 30亿美元，为期10年的发展计划。第一期将和韩国的集团公司联手打造《小韩国城》综合体项目。
+<br>新城发展概念：
+<br>- 绿色大学城，中国城/台湾城/日本城/韩国城
+<br>- 拥有最现代化的物理及科技设施连接
+<br>- 配备最高端的无污染设施
+<br>- 拥有完善的社区及商业配套
+<br>- 拥有最好的大型会议室/活动展览中心
+<br>
+<br>3) 皇家控股集团秉承一贯的市场敏锐触觉，我司已经进军进入全人类的必需品市场～ 农业市场 (种植业)。未来全球面对最大的危机就是粮食危机，我司已成功收购IMPC (御林集团),美国上市公司，并在马来西亚地区拥有超过5000英亩的土地种植沉香树、柚木、香蕉、木薯等等。目前，位于Sokor的沉香园已经培育了30万棵，每棵价值在2000美元， 总值6亿美元。IMPC也将在近期，注入皇家控股集团，为集团迈入纽交所带来更大更大的上市价值。
+<br>
+<br>除了以上种种利好消息，另外集团也为我们未来的发展路线作出战略性的调整和整合。 首先，随着各国金融政策陆续采取开放政策，我司预测在不久的将来，在目前我司占有重要市场份额的多个国家也即将开放外汇交易政策，为了迎合各国银行法的规定，我司也开始为未来的市场作出铺垫，为我们的会员带来更好的服务，所以，我司决定从7月1日起，所有（新生意/续约）的马胜基金配套的每月盈利分享将调整（未满18个月不受影响直至合约满期） 新配套盈利分享:
+<br>
+<br>3万美元或以上～ 每月高达3%  /2 万元@2% /1万元@1%
+<br>
+<br>同时，公司在此也通告，我们在月初推出的SSS计划获得空前激烈的反应，我司希望尊贵的客户排队等候方可获得转换接纳的通知，为此，公司深感抱歉！为了避免以上问题持续发生，我司决定将所有马胜配套满12个月及以上（包含18个月及以上）的客户享有特别优先权从6月17日以每股优惠价0.80美元 （3/6收市价2.00美元）直接自动转换为R股；* *所有的转换不属于强制性，每一位会员享有14天的冷静期 14天内（最晚6.30日之前）。会员拥有绝对的权力取消转换保留原有马胜基金配套，会员只需发送信息至客服中心或直接联系相关区域负责人。
+<br>
+<br>2015.6.17日自动股票SSS转换而生成的组织奖金，系统将于2015.7.23日发放至RT账户。另外针对此股票转换的组织奖金，系统不设每日上限，没有封顶限制。
+<br>
+<br>*R 股票自行转让管道：所有R股票持有者在认购/转R股以后，在任何时间可以「自行转卖/转移」股权于第三者提前套利。 同时MARATHON传承信托提醒所有R股票持有者必须向该公司注册后方以能够执行以上交易功能。
+<br>
+<br>心手相连，再创高峰!!!
+<br>Andrew Lim博士
+<br>马胜金融集团首席执行官
+<br>
+<br>
+<br>マキシム会員の皆様：
+<br>
+<br>光陰矢のごとし！マキシムトレーダーは設立して以来3年に立ち、世界多国で迅速に発展し、親会社のローヤルグローブホルディングも多数の領域にて優良なプロジェクトを開始した。会社の役員会は2016年ROGP株がニューヨーク証券取引所に上場すること、100%確信しています。グループ会社の資産をより統合するように、役員会および各国のリーダーは真剣に検討した上、下記の朗報を皆様へお伝えします。
+<br>
+<br>①ローヤル・グローブ・ホルディング子会社RGF有限会社はオーストラリアCitigold Corporation に株式参加し、当社の最大株主となった。Citigold Corporation はオーストラリアの金工業会社であり、主な業務が金の発掘・生産である。オーストラリア証券取引所に上場しASXランキングにおいてトップ200の会社である。本社はオーストラリア北部のCharters Towersに所在し、成長型の会社である。その目標は金の発掘・生産を拡大しキャッシュフローを継続的に増加すること。Charters Towersの金・銀鉱は独特な鉱脈システムであり、オーストラリアにおいて最高グレードと評価された。Charters Towersの鉱脈に対する調査が進み、現段階では発展・産能増加の段階に突入した。Citigold Corporation はCharters Towersのハイグレード鉱脈を全部所有し、その鉱脈では14グラム/トンのグレードで、合計342トンの金が埋蔵されている（JORC 鉱石埋蔵量委員会の報告書により)。当鉱脈の金埋蔵量は110億米の価値に達す。その中、現段階我が社取得した埋蔵量の価値は12.8億ドルである。関連手続きは交付中で、完了した次第、資産としてローヤル・グローブ・ホルディングに注入する。
+<br>
+<br>②ローヤルグローブホルディングはタイ国南部のハートヤイ（Hat Yai）で1200エーカー(4.86平方キロメートル)のISGC（Integrated Smart Global City) プロジェクトを正式に起動した。土地の時価は2.5億米ドル。プロジェクト起動セロモニーは2015年６月10日に開かれました。この総合的不動産開発プロジェクトはトータルコスト30億米ドル、開発期間10年と設定している。第1期は韓国のグループ会社と提携し「コリア（韓国）タウン」を構築する。
+<br>
+<br>ニュータウン発展コーセップト：
+<br>ⅰ.グリー大学シティー、チャイナタウン/タイワンタウン/ジャパンタウン/コリアタウン
+<br>ⅱ.最も先進な科学技術施設によって連結
+<br>ⅲ.最先端な汚染防止施設
+<br>Ⅳ.完備な住宅街と商業用地
+<br>ⅴ.大型国際会議室/展覧会施設
+<br>
+<br>③ローヤルグローブホルディングは一貫する優れたマーケットセンスを持って、全人類の必須品市場ーー農業市場に業務展開した。全世界が直面する最大の危機は食糧危機である。我が社はすでにIMPC（アメリカにて上場）を買収完了した。IMPCはマレイーシア各地で5000エーカー(23.23平方キロメートル)の農園を持ち、アガウード、チーク、バナナ、キャッサバなどを栽培している。現在、Sokorに位置するアガウード農園で栽培している30万本のアガウードが、一本あたり2000米ドルの価値があり、総価値6億米ドルに及ぶ。IMPCは時期にローヤルグローブホルディングに加入し、ROGP株がニューヨーク証券取引所にての上場に大きな力を貢献でき、より高い初値が実現できるでしょう。
+<br>
+<br>　上記複数の朗報と共に、マキシムは未来の発展のために、今までのシステムに対して戦略的な調整と統合を行う。まず、世界各国の金融政策は徐々に公開になり、我が社の予測において近い将来、マキシムが業務展開している地域も為替取引が公開される。世界各国の銀行法の諸規定に従い、そして継続的に会員様へよいサービスを提供するために、マキシムトレーダーは2015年7月1日より、新規および契約更新するとき（すでに契約した会員様へ影響なし）、マキシムのパッケージの配当は下記のように調整します：
+<br>
+<br>3万ドルあるいはその以上のパッケージ：毎月の配当が3%;
+<br>2万ドルパッケージ：毎月の配当が2%;
+<br>1万ドルパッケージ：毎月の配当が1%;
+<br>
+<br>また、今月から始まったSSS計画は市場での強烈に反響され、SSS計画の申請が大量に申し込まれている。申請に対する審査は莫大な作業量となっており、審査完了するまで時間がかかる状態となっております。こういった状態を改善するため、会社は6月17日より、12ヶ月以上に投資した会員様が0.8ドル/株の株価（６月3日の終値：2.00ドル/株）で、自動的にROGP株に転換されることを決定した。ただし、株への転換は強制的ではなく、14日間の考える時間が設けております（2015年6月30日まで）。期間内では、会員様がこの株転換をキャンセルする絶対権を持ちしております。キャンセルしたい方はサービスセンターへ送信してください。
+<br>
+<br>2015年６月17日より自動的に行われるSSS株転換によって生じる組織発展ボーナスは、2015年7月23日にRT口座に振り込まれる。株式転換によって発生する組織発展ボーナスは日上限が設けられておりません。
+<br>
+<br>＊ROGP株譲渡ルート：ROGP株へ転換完了後、所有者は任意の時間で「株の譲渡・移管」の形で現金化できる。ただし、注意事項として「株の譲渡・移管」を行うには、Marathōnに登録することが必須となっております。
+<br>
+<br>協力し合い、新たな頂点へ
+<br>
+<br>マキシムトレーダー役員会より
+<br>
+<br>アンドリュー・リム
+<br>CEO - マキシム・キャピタル・リミテッド
+<br>
 <br>
 <br>친애하는 회원여러분,
 <br>
