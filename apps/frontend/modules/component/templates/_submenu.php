@@ -436,7 +436,7 @@ if (date("d") >= 1 && $close == true) {
         </li>
         <?php
         // monkey 254781
-        $close = true;
+        $close = false;
         if ($distDB->getLeaderId() == 254781 && $close == false) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
