@@ -1044,6 +1044,74 @@ $(document).ready(function() {
 
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='73'>BREAKING NEWS – JUNE 10TH 2015
+                <br>重磅新闻—2015年6月10日
+                <br>속보 – 2015년 6월 10일
+                <br>ニュース速報 2015年6月10日
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "12 June 2015";
+                ?>
+            </div>
+
+            <div id="page_73" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>ROYALE INTEGRATED SMART GLOBAL CITY (R-ISGC) – Hatyai, Thailand
+<br>
+<br>ROYALE INTEGRATED SMART GLOBAL CITY is pleased to announce that today, marks another milestone in the company’s achievements and proudly adds to the company’s expanding investments and portfolios, thus further paving the road for the journey to the peak of success.
+<br>This project, represents the ultimate in A Class listings that is a mega iconic land and property, that has ever been seen before in Hatyai, Thailand.
+<br>R-ISGC, comprises of a massive land bank of over 52 million square feet of prime commercial space, or the equivalent of over 1,300 acres. With the comprehensive infrastructure development, this prime piece of property, is valued at no less than US$ two Hundred and Fifty Million (US$250,000,000). This long term project, has a GDV (Gross Development Value) of US$3 Billion over the 10 year development period.
+<br>The Ground Breaking Ceremony, whereby the laying of the first foundation stone, was carried out today, by the senior members of the Board, at 11:00am, this morning, and this is the beginning of the joint venture partnership with a renowned architectural team that is captained by Korean experts, with over 100 years of combined development experience, to design and develop a multi cultural city, commencing with the much anticipated LITTLE KOREAN CITY, which soon be followed by many more exciting developments, such as GREEN UNIVERSAL CITY,, just to mention a few. All these innovative projects, will use modern technologies, for the building of pollution free infrastructure, in addition to having top graded facilities for residential and commercial activities. The aim of this project, is to create the top destination and facilities for the MICE business, which is currently in very high demand.
+<br>The R-Integrated Smart Global City, will be an iconic ASEAN attraction and destination upon its completion, in the estimated 10 year development term, it will no doubt be a major contributor to the Thailand tourism industry, with annual projections of US$ 1 Billion dollars, not to mention, the thousands of new jobs that will be created for the Thai workforce and local partners.
+<br>This project, will clearly be a solid and major income stream, for all the company’s partners and investors alike, not only from rental incomes, but will be also from capital appreciation of land and assets, and this surely will bring high returns and value for many years to come.
+<br>
+<br>
+<br>泰国合艾-皇家综合智能新城（R-ISGC）开发计划正式启动
+<br>
+<br>今天，皇家综合智能新城开发计划宣布正式启动；这件标志着公司的另一个里程碑式的成就继续延伸公司多元化的发展风格，进一步地为通向成功的顶峰铺平道路。
+<br>此项目，代表着A类项目中的最高级别， 是在泰国合艾前所未见的大型标志性地产项目。
+<br>R-ISGC是由占地5200多万平方英尺，或1300多英亩的黄金商业地段组成的大型商业开发项目。随着综合性基础设施的发展，该黄金地段的估价不低于2.5亿美元。预计开发周期为10年，该项目的总发展价值（GDV）也预计将超过30亿美元。
+<br>项目动土仪式于今天上午11点举行，由公司董事会资深成员一起为该项目奠下第一块基石；这是与韩国专家率领的著名建筑师团队（该团队具有累计总共超过100年的合作开发经验）深度合作的开始。该项目设计将秉承多元化元素的风格，从备受期待的韩国城开发开始，之后会陆陆续续纳入其他更加激动人心的项目，如：绿色大学城等。整个项目开发都将拥有最现代化的物理机客户设施连接、配备最高端的无污染设施、最完善的社区及商业配套等。项目开发的另外一个重要目标，是根据强烈的市场需求而将整个区域打造成最好的大型会议室/活动展览中心。
+<br>R-ISGC一经完工将会成为东南亚国家联盟的地标性观光目的地；在可预计的10年发展期内，预计每年都将投入10亿美金的开发成本，无疑这定将成为泰国旅游业的主要贡献者，此外更是会为泰国劳动力市场以及当地合作伙伴创造数以千计的新工作岗位！
+<br>该项目无疑会公司所有的合作伙伴和投资者创造稳定的收益；在高额的出租回报之外，更多的收益也将来自于土地以及资产的升值，相信在未来的很多年里都将给所有投资者带来更多的价值。
+<br>
+<br>
+<br>로얄 통합 스마트 글로벌 시티 (R-ISGC) – 핫야이, 태국
+<br>
+<br>로얄 통합 스마트 글로벌 시티는 회사의 성과에 또 다른 이정표를 만들어 기업의 투자와 포트폴리에에 자랑스럽게 추가하게 되어 성공의 정점의 여행을 더 하게 된 점을 기쁘게 알려드립니다.
+<br>본 프로젝트는 이제껏 태국 핫야이 에서 확인된 어떠한 프로젝트보다 큰 상징적인 토지와 자산으로 A 클라스에 등록되어 있는 최상의 프로젝트입니다.
+<br>R-ISGC는 1,300에이커에 달하는 5천2백만 평방 피트 의 주요 상업 공간의 대규모 토지 은행으로 구성되어 있습니다. 포괄적인 인프라 개발로, 부동산의 주요 부분은 미화 2억5천 달러이상의 가치를 가지고 있습니다. 장기 프로젝트는 10년 넘는 개발 기간동안 미화 30억 달러의 총 개발 가치 (GDV)가 있습니다.
+<br>첫 번째 초석을 놓는 기공식이 오늘 오전 11시에  위원회의 수석 회원들에 의해 열렸습니다.  100년 넘는 개발 경험과 한국인 전문가가 팀장으로 있는 유명한 건축팀과의 파트너쉽의 시작이기도 합니다. 리틀 코리안 시티를 시작으로 그린 유니버살 시티와 같은 많은 개발을 하게 될 것ㅇ비니다.  이 모든 혁신적인 프로젝트들은 현대 기술을 이용하여 공해가 없는 인프라를 구축하고 최고의 주고 및 상업 공간을 개발할 것입니다.  본 프로젝트의 목표는 현재 최고의 수요가 있는MICE 비지니스를 위한 최고의 장소와시설을 창조해 내는 것입니다.
+<br>R-통합 스마트 글로발 시티는 아세아의 매력을 보여주는 상징일 될 것이며 10년 예상 개발 기간을 걸쳐 완공될 것입니다. 연간 미화10억달러를 투자하는 태국 관광사업에 큰 기여를 할 것임에 의심의 여지가 없으며 말하지 않아도 태국의 인력과 현지 파트너들을 위한  수많은 일자리 창출에 기여할 것입니다.
+<br>
+<br>본 프로젝트는 회사 파트너와 투자자 모두에게 동일하게 확실한 수익 사업이 될 것이며 또한 토지와 자산의 시세 차익 역시 수년간 확실한 고 수익과 가치를 제공할 것입니다.
+<br>
+<br>
+<br>ロワイヤル・インテグレイテッド・スマート・グローバル・シティ（R-ISGC）–タイ・ハートヤイ
+<br>
+<br>ロワイヤル・インテグレイテッド・スマート・グローバル・シティは、本日、会社が達成した新たなマイルストーン、投資とポートフォリオの拡大、すなわち将来の成功の頂点への旅の道のりを発表します。
+<br>このプロジェクトはタイのハートヤイでかつて見られた中で、巨大でアイコンとなるべき土地や不動産の究極の高級なリストを表しています。
+<br>R-ISGCは5200万平方フィーの一流の商業スペース、または1300エーカーを超える同等の巨大な土地バンクで構成されています。理解のあるインフラの開発者と一緒に、この一流の不動産は、USDにして2.5億ドル（50,000,000USD）の価値を下回ることはない価値があります。この長期プロジェクトは、10年以上の開発期間に渡り、30億ドルのGDV（グロス・デヴェロップメント・バリュー）を持っています。
+<br>グランド・ブレイキング・セレモニーは、最初の基礎の石の敷説により本日朝に重役会の幹部たちにより行われました。そしてこれは韓国の専門家たちに率いられた有名な建築チームとのジョイントベンチャーのパートナーシップのはじまりとなりました。彼らはデザインと多文化都市の建設において100年以上の開発の経験を持っています。待望のリトル・コリア・シティにはじまり、さらにたくさんのより多くの開発、わずかな数を上げただけでも、グリーン・ユニバーサル・シティなどが続きます。これらの革新的なプロジェクトではモダンな技術を使っています。建物は公害フリーの基盤となっており、さらにトップグレードの設備を住居部分や商業施設に使っています。このプロジェクトの目的は、現在、大変高い需要を持つMICEビジネスにとってトップとなる目的地や設備を作ることです。
+<br>R−インテグレイテッド・スマート・グローバル・シティは、ASEANの象徴的なアトラクションとなり、その完成の目的地となるでしょう。その10年にわたると見られる開発期間において、これが、タイの観光業界にとって、メジャーな貢献者になることは疑いがありません。年間10億USDのプロジェクト予算を使うことで、言うまでもないことですが、何千という仕事がタイの労働力および地元のパートナーに対して作られるでしょう。
+<br>このプロジェクトは、明らかにメジャーな収入の流れを作り、すべての会社のパートナーと投資家にも同様に、賃貸による収益だけでなく、土地と資産の資本増加により、そして間違いなく何年か後には高いリターンをもたらすでしょう。
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='72'>Announcement</a><img src="/images/new_icon.gif">
             </div>
             <div class="news_date">
@@ -1093,7 +1161,7 @@ $(document).ready(function() {
 <br>
 <br>アンドリュー・リム博士
 <br>マキシムトレーダーCEO
-                            
+
                         </td>
                     </tr>
                     </tbody>
