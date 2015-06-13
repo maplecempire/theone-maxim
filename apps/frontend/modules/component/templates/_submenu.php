@@ -42,7 +42,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
-$close = false;
+$close = true;
 if (date("d") >= 1 && $close == true) {
 ?>
 <script type="text/javascript">
@@ -437,7 +437,7 @@ if (date("d") >= 1 && $close == true) {
         <?php
         // monkey 254781
         $close = false;
-        if ($distDB->getLeaderId() == 254781 && $close == false) {
+        //if ($distDB->getLeaderId() == 254781 && $close == false) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
@@ -445,7 +445,7 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
-        <?php } ?>
+        <?php //} ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/list"><span><?php echo __('Approval Status'); ?><img src="/images/new_icon.gif"></a>
         </li>

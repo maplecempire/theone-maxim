@@ -71,13 +71,13 @@ class financeActions extends sfActions
     {
         $cp3IdArray = explode(',', "142,15");
         $c = new Criteria();
-        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
+        $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
         foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
-            $remark = "PLEASE REFER TO UPPER SUPREME MEMBER. UPPER MEMBER REQUEST TO SWAP SSS<br>如有疑虑, 请联系您的推荐人。推荐人要求特别SSS股票转换.";
+            $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
             try {
