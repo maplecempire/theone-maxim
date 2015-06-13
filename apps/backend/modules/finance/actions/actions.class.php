@@ -64,13 +64,13 @@ class financeActions extends sfActions
             }
         }
 
-        print_r("<br>executeAutoRejectJapanCp2Withdrawal Done");
+        print_r("<br>executeAutoRejectJapanCp3Withdrawal Done");
         return sfView::HEADER_ONLY;
     }
     public function executeAutoRejectJapanCp2Withdrawal()
     {
         $c = new Criteria();
-        $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, 595);
+        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, "9999");
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
