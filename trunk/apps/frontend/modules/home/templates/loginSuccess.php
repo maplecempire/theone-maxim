@@ -350,7 +350,7 @@
 
 
 <div class="top_item_frame">
-    <div class="left_item"><?php echo __('Welcome to Maxim Trader.') ?></b></div>
+    <div class="left_item"><?php if ($bonusService->hideGenealogy() == true) { echo __('Welcome to Maxim Trader.'); } ?></b></div>
     <div class="right_item">
 
         <div class="language"><?php echo __('Language') ?>: <a href="/home/language?lang=en">English</a> / <a href="/home/language?lang=cn">中文</a> / <a href="/home/language?lang=jp">日本語</a> / <a href="/home/language?lang=kr">한국어</a></div>
@@ -556,7 +556,7 @@
                         <tbody>
                         <tr>
                             <th class="tbl_header_left"><img src="/images/maxim/hdr-gry-left.gif"></th>
-                            <th colspan="2"><?php echo __('New to Maxim Trader') ?>?</th>
+                            <th colspan="2"><?php if ($bonusService->hideGenealogy() == true) { echo __('New to Maxim Trader'); } ?>?</th>
                             <th class="tbl_header_right"><img src="/images/maxim/hdr-gry-right.gif"></th>
                         </tr>
                         </tbody>
@@ -580,7 +580,7 @@
                                 <a href="<?php echo url_for("/member/register")?>"><b><?php echo __('Self Registration') ?></b></a> <span class="txt_new"><?php echo __("IT'S EASY!!") ?></span>
                                 <p>
                                     <a href="<?php echo url_for("/member/register")?>">
-                                        <?php echo __('Click here') ?></a> <?php echo __('to instantly register as Maxim Trader Member') ?>. </p>
+                                        <?php echo __('Click here') ?></a> <?php if ($bonusService->hideGenealogy() == true) { echo __('to instantly register as Maxim Trader Member'); } ?>. </p>
                             </td>
                             <td></td>
                         </tr>

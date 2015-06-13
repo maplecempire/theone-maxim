@@ -192,6 +192,12 @@ $(document).ready(function(){
             </div>
             <div id="node-id-<?php echo $distinfo->getDistributorId();?>" class="node-info-raw">
                 <div class="node-info">
+                    <?php
+                    $bonusService = new BonusService();
+                    if ($bonusService->hideGenealogy() == false) {
+                        $headColor = "";
+                    }
+                    ?>
                     <span class="user-rank"><img src="/css/network/<?php echo $headColor; ?>_head.png"></span>
                     <span class="user-id"><?php echo $distinfo->getDistributorCode(); ?></span>
                     <span class="user-joined"><?php echo __('Joined'); ?> <?php echo date('Y-m-d', strtotime($distinfo->getActiveDatetime())); ?></span>

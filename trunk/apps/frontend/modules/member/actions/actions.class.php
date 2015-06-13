@@ -9623,6 +9623,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                 $userDB = AppUserPeer::retrieveByPK($dist->getUserId());
 
+                $bonusService = new BonusService();
+                if ($bonusService->hideGenealogy() == false) {
+                    $headColor = "";
+                }
                 $html .= "<div class='".$treeControllerWrap."'>
                         <div class='controller-node-con'>
                             <div class='tree-controller ".$treeLine."'>
