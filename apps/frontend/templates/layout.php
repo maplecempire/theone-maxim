@@ -302,14 +302,19 @@
     <?php include_component('component', 'submenu', array('param' => $sf_user->getAttribute(Globals::SESSION_DISTID, 0))) ?>
 
     <div class="footer_frame" style="z-index: 20;">
+        <?php
+        if ($bonusService->hideGenealogy() == true) {
+        ?>
         <div class="footer_content">&copy; 2013 maximtrader.com <br> All rights reserved.</div>
+        <?php } ?>
     </div>
 </div>
 <br class="clear">
 
 
 <div class="top_item_frame">
-    <div class="left_item"><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME)?>, <?php echo __('Welcome to Maxim Trader.') ?></b></div>
+
+    <div class="left_item"><?php echo $sf_user->getAttribute(Globals::SESSION_USERNAME)?>, <?php if ($bonusService->hideGenealogy() == true) { echo __('Welcome to Maxim Trader.'); } ?></b></div>
     <div class="right_item">
 
         <div class="language"><?php echo __('Language') ?>: <a href="/home/language?lang=en">English</a> / <a href="/home/language?lang=cn">中文</a> / <a href="/home/language?lang=jp">日本語</a> / <a href="/home/language?lang=kr">한국어</a></div>
