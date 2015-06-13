@@ -388,7 +388,7 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     $monthStr = "06";
                                     $monthEngStr = "June";
                                     $dayStr = "13";
