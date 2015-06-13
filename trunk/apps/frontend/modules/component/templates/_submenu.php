@@ -444,12 +444,12 @@ if (date("d") >= 1 && $close == true) {
         $close = false;
         if ($distDB->getLeaderId() == 254781 && $close == false) {
         ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
+        <!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/index?q=ses"><span><?php /*echo __('Super e-Share Swap'); */?><img src="/images/new_icon.gif"></a>
         </li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-            <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
-        </li>
+            <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php /*echo __('Quick Guide For SES'); */?><img src="/images/new_icon.gif"></a>
+        </li>-->
         <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/list"><span><?php echo __('Approval Status'); ?><img src="/images/new_icon.gif"></a>
