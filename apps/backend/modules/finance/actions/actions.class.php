@@ -123,6 +123,7 @@ class financeActions extends sfActions
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
+        print_r("<br>".count($mlmCp3Withdrawals));
         foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
             $remark = "";
@@ -130,7 +131,6 @@ class financeActions extends sfActions
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
             try {
                 $con->begin();
-                print_r("<br>".$remark);
                 $statusCode = Globals::WITHDRAWAL_REJECTED ;
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
