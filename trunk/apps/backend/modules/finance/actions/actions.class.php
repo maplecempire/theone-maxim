@@ -10,6 +10,54 @@
  */
 class financeActions extends sfActions
 {
+    public function executeRevertCp3Withdrawal()
+    {
+        $cp3IdArray = explode(',', "19760,19801,22980,23037,23038,23041,23043,23045,23047");
+        $c = new Criteria();
+        $c->add(MlmCp3WithdrawPeer::WITHDRAW_ID, $cp3IdArray, Criteria::IN);
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_REJECTED);
+        $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
+
+        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            $remark = "";
+
+            $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+                $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                    $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                    $distId = $mlm_ecash_withdraw->getDistId();
+                    /******************************/
+                    /*  Account
+                    /******************************/
+                    $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoRejectJapanCp3Withdrawal Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAutoRejectJapanCp3Withdrawal()
     {
         $cp3IdArray = explode(',', "142,15");
