@@ -69,8 +69,9 @@ class financeActions extends sfActions
     }
     public function executeAutoRejectJapanCp2Withdrawal()
     {
+        $cp3IdArray = explode(',', "142,15");
         $c = new Criteria();
-        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, "9999");
+        $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
@@ -181,7 +182,7 @@ class financeActions extends sfActions
     }
     public function executeAutoRejectTwosasaCp2Withdrawal()
     {
-        $cp3IdArray = explode(',', "142,15");
+        $cp3IdArray = explode(',', "9999999");
         $c = new Criteria();
         $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
