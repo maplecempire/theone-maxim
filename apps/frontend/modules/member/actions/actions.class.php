@@ -9273,6 +9273,10 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeEcashLog()
     {
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+            return $this->redirect('/member/summary');
+        }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
@@ -9286,6 +9290,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeEpointLog()
     {
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+            return $this->redirect('/member/summary');
+        }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
@@ -9315,6 +9323,10 @@ We look forward to your custom in the near future. Should you have any queries, 
     }
     public function executeMaintenanceLog()
     {
+        $bonusService = new BonusService();
+        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+            return $this->redirect('/member/summary');
+        }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
         }
