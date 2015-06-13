@@ -66,8 +66,10 @@ class financeActions extends sfActions
         $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
 
+        $count = count($mlmCp3Withdrawals);
+        print_r("<br>".$count);
         foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
-            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            print_r("<br>".$count--.":".$mlm_ecash_withdraw->getDistId());
             $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
@@ -123,9 +125,10 @@ class financeActions extends sfActions
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
-        print_r("<br>".count($mlmCp3Withdrawals));
+        $count = count($mlmCp3Withdrawals);
+        print_r("<br>".$count);
         foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
-            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            print_r("<br>".$count--.":".$mlm_ecash_withdraw->getDistId());
             $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
