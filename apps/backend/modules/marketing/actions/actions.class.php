@@ -413,13 +413,30 @@ class marketingActions extends sfActions
         $c->addAnd(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('q'));
         $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
 
+        $leader = "";
+        $leader2 = "";
+        $leaderArrs = explode(",", Globals::GROUP_LEADER);
+
         if ($mlmDistributor) {
+            for ($i = 0; $i < count($leaderArrs); $i++) {
+                $pos = strrpos($mlmDistributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
+                if ($pos === false) { // note: three equal signs
+
+                } else {
+                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
+                    if ($dist) {
+                        $leader = $dist->getDistributorCode();
+                    }
+                    break;
+                }
+            }
+
             $dist = MlmDistributorPeer::retrieveByPK($mlmDistributor->getLeaderId());
             if ($dist) {
-                $leader = $dist->getDistributorCode();
+                $leader2 = $dist->getDistributorCode();
             }
         }
-        print_r($this->getRequestParameter('q'). ": " .$leader);
+        print_r($this->getRequestParameter('q'). ": " .$leader. ": " .$leader2);
         return sfView::NONE;
     }
     public function executeUpdateKIV()
