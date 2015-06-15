@@ -89,7 +89,7 @@ if (date("d") >= 1 && $close == true) {
             <a href="/member/transferRP"><span><?php echo __('RP Transfer'); ?></span></a>
         </li>
     <?php } ?>
-    <?php if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254781) { ?>
+    <?php if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 364043 || $distDB->getDistributorId() == 254781) { ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/convertCp2ToA1"><span><?php echo __('Convert CP2 to A1'); ?></span></a>
         </li>

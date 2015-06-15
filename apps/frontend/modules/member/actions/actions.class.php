@@ -5998,8 +5998,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $isFound = true;
                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
                         $isFound = true;
-					//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
-                    } else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+					//20150602: allow mk9999 && mk999999 to transfer and receive from all member, instruction from DCC
+                    } else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")
+                            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 364043 || strtoupper($sponsorId) == strtoupper("MK999999")) {
 						$isFound = true;
 					}
                 } else {
@@ -8203,7 +8204,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                             } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
                                 $isFound = true;                            
 							//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
-							} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+							} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")
+                                    || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 364043 || strtoupper($sponsorId) == strtoupper("MK999999")) {
 								$isFound = true;
 							}
                         } else {
@@ -8510,7 +8512,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
 									                            
 									//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
-									} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+									} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")
+                                        || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 364043 || strtoupper($sponsorId) == strtoupper("MK999999")) {
 									
 									} else {
                                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
@@ -8544,7 +8547,8 @@ We look forward to your custom in the near future. Should you have any queries, 
                     } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
 
 					//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
-					} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")) {
+					} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")
+                        || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 364043 || strtoupper($sponsorId) == strtoupper("MK999999")) {
 					
                     } else {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
@@ -8915,7 +8919,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
-        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 254781) {
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 364043 || $mlmDistributor->getDistributorId() == 254781) {
         } else {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
@@ -9013,7 +9017,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
         }
-        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 254781) {
+        if ($mlmDistributor->getDistributorId() == 1 || $mlmDistributor->getDistributorId() == 255180 || $mlmDistributor->getDistributorId() == 364043 || $mlmDistributor->getDistributorId() == 254781) {
         } else {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
             return $this->redirect('/member/summary');
