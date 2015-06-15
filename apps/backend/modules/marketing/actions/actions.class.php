@@ -413,20 +413,10 @@ class marketingActions extends sfActions
         $c->addAnd(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('q'));
         $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
 
-        $leader = "";
-        $leaderArrs = explode(",", Globals::GROUP_LEADER);
         if ($mlmDistributor) {
-            for ($i = 0; $i < count($leaderArrs); $i++) {
-                $pos = strrpos($mlmDistributor->getTreeStructure(), "|".$leaderArrs[$i]."|");
-                if ($pos === false) { // note: three equal signs
-
-                } else {
-                    $dist = MlmDistributorPeer::retrieveByPK($leaderArrs[$i]);
-                    if ($dist) {
-                        $leader = $dist->getDistributorCode();
-                    }
-                    break;
-                }
+            $dist = MlmDistributorPeer::retrieveByPK($mlmDistributor->getLeaderId());
+            if ($dist) {
+                $leader = $dist->getDistributorCode();
             }
         }
         print_r($this->getRequestParameter('q'). ": " .$leader);
