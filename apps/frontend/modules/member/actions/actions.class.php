@@ -6618,6 +6618,27 @@ We look forward to your custom in the near future. Should you have any queries, 
             $this->setFlash('successMsg', $this->getContext()->getI18N()->__($message));
         }
 
+        $japanMessage = "<strong>【重要】出金規制について</strong>
+<br>
+<br>台湾マキシムのリーダーが無計画に公的金融機関を利用して大量資金移動を行った事が発端で、台湾当局がリーダーを税法上の問題があると一時拘束しましたが、迅速なマキシム本部の対応によりこの一件は収束されました。
+<br>しかしこの事態を受け台湾、中国、韓国当局が取締りを強化。
+<br>それに伴いマキシム本部が換金を一時的に規制しています。
+<br>今月アイアカウントへの送金依頼を行ったメンバーの中にもCPに返金されているメンバーがいますが、これも規制の一環です。
+<br>他の国が台湾市場の二の舞とならないよう金融管理機関の目から離れるため、臨時な出金制限が不可欠となっています。
+<br>こういった出金制限が実行されますと、市場の不安を煽る事が予測されます。
+<br>急いで出金されるメンバーもおられますが、リーダーの皆様はこれらのメンバーの不安を解消していただきたいと思います。
+<br>今こそ「マキシムを守ることは、自分を守ることだ」と考えてください。
+<br>この臨時出金制限の実行は会社にとって重要な局面なので、どうしても納得出来ないメンバーがいるのであれば、CP3のレートを低くして買い取ってあげください。
+<br>そうすればまたそのCP3でビジネスを展開できWinWinとなります。
+<br>
+<br>さらに、近日中にマキシムパッケージを購入、もしくは購入予定の方がいましたら購入したパッケージを23日までに株転換する事を強くオススメします。
+<br>これが我々メンバーにとって現在考えられる最高の手段となります。
+<br>何卒よろしくお願いします。";
+
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15) {
+            $this->setFlash('successMsg', $japanMessage);
+        }
+
         if (MUserUtil::init($this)->isMobileUser()) {
             $muObj = new MUserObj();
             $muObj->distMt4s = $distMt4s;
