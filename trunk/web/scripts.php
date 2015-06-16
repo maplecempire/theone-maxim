@@ -44,5 +44,9 @@ echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.tr
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/css/jquery.checkboxtree.css'/>";
 echo "<link rel='stylesheet' type='text/css' media='screen' href='/js/bgstretcher/bgstretcher.css'/>";
 
-echo "<title>Maxim Partner</title>";
+
+$bonusService = new BonusService();
+if ($bonusService->hideGenealogy() == true) {
+    echo "<title>Maxim Partner</title>";
+}
 echo "<link rel='shortcut icon' href='/favicon.ico' />";
