@@ -2467,7 +2467,7 @@ class offerToSwapRshareActions extends sfActions
 
         $query = "SELECT notice_id, dist_id, mt4_user_name, dividend_date, maturity_type, email, retry, remark, internal_remark, email_status, status_code, approve_reject_datetime, client_response_datatime, mt4_balance, package_price, leader_dist_id, client_action, maturity_withdrawal_status, created_by, created_on, updated_by, updated_on
 	            FROM notification_of_maturity
-	        WHERE status_code IN ('".Globals::STATUS_MATURITY_PENDING."','".Globals::STATUS_MATURITY_CLIENT_RENEW."','".Globals::STATUS_MATURITY_CLIENT_WITHDRAW."','".Globals::STATUS_MATURITY_ON_HOLD."') dist_id = " . $distId ;
+	        WHERE status_code IN ('".Globals::STATUS_MATURITY_PENDING."','".Globals::STATUS_MATURITY_CLIENT_RENEW."','".Globals::STATUS_MATURITY_CLIENT_WITHDRAW."','".Globals::STATUS_MATURITY_ON_HOLD."') AND dist_id = " . $distId ;
 
 
         if ($mt4UserName != "") {
