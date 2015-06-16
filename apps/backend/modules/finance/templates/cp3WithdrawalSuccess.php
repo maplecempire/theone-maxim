@@ -86,7 +86,7 @@ $(function(){
         }
     }).click(function(event){
         event.preventDefault();
-        window.open("<?php echo url_for("finance/cp3WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#txtLeaderId").val() + "&statusCode=" + $("#search_combo_statusCode").val() + "&dateFrom=" + $("#txtDateFrom").val() + "&dateTo=" + $("#txtDateTo").val());
+        window.open("<?php echo url_for("finance/cp3WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#txtLeaderId").val() + "&statusCode=" + $("#txtStatus").val() + "&dateFrom=" + $("#txtDateFrom").val() + "&dateTo=" + $("#txtDateTo").val());
     });
 }); // end $(function())
 
@@ -219,7 +219,8 @@ function reassignDatagridEventAttr(){
             		<td>
             			<input id="txtDateFrom" size="20" readonly="readonly" value=""> to <input id="txtDateTo" size="20" readonly="readonly" value="">
                         <br>
-                        Leader : <input id="txtLeaderId" size="50" value="">
+                        Leader : <input id="txtLeaderId" size="20" value=""><br>
+                        Status : <input id="txtStatus" size="20" value="">
             		</td>
             		<td>
             			<button id="btnExport">Export</button>
