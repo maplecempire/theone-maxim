@@ -10,6 +10,155 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeDoCp2cp3Swap()
+    {
+        $this->distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->mt4Id = $this->getRequestParameter('mt4Id');
+
+        if (!$this->mt4Id) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
+        $this->mt4Ids = $this->getSwapedMt4($this->getUser()->getAttribute(Globals::SESSION_DISTID), $this->getRequestParameter('mt4Id'));
+        $this->mt4Balance = 0;
+        $this->remainingRoiAmount = 0;
+
+        $mt4UserName = $this->getRequestParameter('mt4Id');
+        $distId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
+        if (count($this->mt4Ids) <= 0) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err802:Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
+
+        $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+//        $mt4Balance = 5000;
+        $roiArr = $this->getRoiInformation($distId, $mt4UserName);
+
+        if ($mt4Balance == null) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
+
+        $roiPercentage = $roiArr['roi_percentage'];
+        $roiRemainingMonth = 0;
+        if ($roiArr['idx'] <= 18) {
+            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        } else {
+            $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+        }
+        $remarks = "";
+        /*if ($roiRemainingMonth >= 10) {
+            $remarks = "ROI:".$roiPercentage."%";
+            $roiPercentage = 0;
+        }*/
+        $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+        $this->swapToRt = $this->getRequestParameter('swapToRt');
+        $this->mt4Balance = $mt4Balance;
+        $this->remainingRoiAmount = $remainingRoiAmount;
+
+        $this->convertedCp2 = $this->getRequestParameter('convertedCp2', 0);
+        $this->convertedCp3 = $this->getRequestParameter('convertedCp3', 0);
+
+        $this->convertedCp2 = str_replace(",", "", $this->convertedCp2);
+        $this->convertedCp3 = str_replace(",", "", $this->convertedCp3);
+
+        $this->cp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->cp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->roiRemainingMonth = $roiRemainingMonth;
+        $this->roiPercentage = $roiPercentage;
+
+        //var_dump($this->convertedCp2);
+        //var_dump($this->cp2Balance);
+        //exit();
+        if ($this->convertedCp2 > $this->cp2Balance) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP2 Balance."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
+        if ($this->convertedCp3 > $this->cp3Balance) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP2 Balance."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
+        $totalAmountConvertedWithCp2Cp3 = $this->convertedCp2 + $this->convertedCp3;
+        $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+
+        $this->totalRshare = round($totalRshare);
+
+        $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+        try {
+            $con->begin();
+
+            $sss_application = new SssApplication();
+            $sss_application->setDistId($distId);
+            $sss_application->setDividendId(0);
+            $sss_application->setMt4UserName($mt4UserName);
+            $sss_application->setCp2Balance($this->convertedCp2);
+            $sss_application->setCp3Balance($this->convertedCp3);
+            $sss_application->setMt4Balance(0);
+            $sss_application->setRoiRemainingMonth(0);
+            $sss_application->setRoiPercentage(0);
+            $sss_application->setShareValue(0.8);
+            $sss_application->setTotalShareConverted($totalRshare);
+            $sss_application->setRemarks($remarks);
+            $sss_application->setSignature("");
+            $sss_application->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+            $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+            $sss_application->save();
+
+            if ($this->convertedCp2 > 0) {
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                $tbl_account_ledger->setDistId($distId);
+                $tbl_account_ledger->setTransactionType("SSS");
+                $tbl_account_ledger->setRemark("SUPER SHARE SWAP");
+                $tbl_account_ledger->setCredit(0);
+                $tbl_account_ledger->setDebit($this->convertedCp2);
+                $tbl_account_ledger->setBalance($this->cp2Balance - $this->convertedCp2);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setRefererId($sss_application->getSssId());
+                $tbl_account_ledger->setRefererType("SSS");
+                $tbl_account_ledger->save();
+            }
+
+            if ($this->convertedCp3 > 0) {
+                $tbl_account_ledger = new MlmAccountLedger();
+                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                $tbl_account_ledger->setDistId($distId);
+                $tbl_account_ledger->setTransactionType("SSS");
+                $tbl_account_ledger->setRemark("SUPER SHARE SWAP");
+                $tbl_account_ledger->setCredit(0);
+                $tbl_account_ledger->setDebit($this->convertedCp3);
+                $tbl_account_ledger->setBalance($this->cp3Balance - $this->convertedCp3);
+                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger->setRefererId($sss_application->getSssId());
+                $tbl_account_ledger->setRefererType("SSS");
+                $tbl_account_ledger->save();
+            }
+            $con->commit();
+        } catch (PropelException $e) {
+            $con->rollback();
+            throw $e;
+        }
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your application has been submitted and pending for approval."));
+        return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+    }
+    public function executeCp2cp3Swap()
+    {
+        $this->distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $this->mt4Ids = $this->getSwapedMt4($this->getUser()->getAttribute(Globals::SESSION_DISTID), "");
+        $this->mt4Balance = 0;
+        $this->remainingRoiAmount = 0;
+        $this->cp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->cp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+        $this->totalRshare = 0;
+        $this->roiRemainingMonth = 0;
+        $this->roiPercentage = 0;
+    }
     public function executeDoAutoConvertEShare()
     {
         // monkey 254781
@@ -2313,6 +2462,31 @@ class offerToSwapRshareActions extends sfActions
                 continue;
             }*/
 
+            $arr[] = $arrResult['mt4_user_name'];
+        }
+        return $arr;
+    }
+
+    function getSwapedMt4($distId, $mt4UserName)
+    {
+        $query = "SELECT sss_id, dist_id, dividend_id, mt4_user_name, cp2_balance, cp3_balance, rt_balance, mt4_balance, roi_remaining_month, roi_percentage, total_amount_converted_with_cp2cp3, share_value, total_share_converted, signature, remarks, status_code, swap_type, created_by, created_on, updated_by, updated_on
+            FROM sss_application where dist_id = ".$distId." AND status_code = 'SUCCESS'";
+
+        if ($mt4UserName != "") {
+            $query = $query . " AND mt4_user_name = ?";
+        }
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        if ($mt4UserName != "") {
+            $statement->set(1, $mt4UserName);
+        }
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        //exit();
+        $arr = array();
+        while ($resultset->next()) {
+            $arrResult = $resultset->getRow();
             $arr[] = $arrResult['mt4_user_name'];
         }
         return $arr;

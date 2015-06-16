@@ -220,7 +220,13 @@ function reassignDatagridEventAttr(){
             			<input id="txtDateFrom" size="20" readonly="readonly" value=""> to <input id="txtDateTo" size="20" readonly="readonly" value="">
                         <br>
                         Leader : <input id="txtLeaderId" size="20" value=""><br>
-                        Status : <input id="txtStatus" size="20" value="">
+                        Status : <select id="txtStatus">
+                                    <option value="">All</option>
+                                    <option value="PENDING" selected="selected">PENDING</option>
+                                    <option value="PROCESSING">PROCESSING</option>
+                                    <option value="REJECTED">REJECTED</option>
+                                    <option value="PAID">PAID</option>
+                                </select>
             		</td>
             		<td>
             			<button id="btnExport">Export</button>
