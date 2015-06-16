@@ -4223,6 +4223,22 @@ class financeActions extends sfActions
             ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
                 WHERE 1=1 ";
 
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
+                    ,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+                    ,withdraw.status_code,withdraw.created_on,dist.ic
+                    ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+                    ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+                    ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+                    ,dist.moneytrac_customer_id,dist.moneytrac_username
+                    ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
+                    ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount, dist.bank_account_currency
+            FROM mlm_cp3_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                WHERE 1=1 ";
+
         if ($this->getRequestParameter('statusCode') != "") {
             $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
         }
@@ -4294,7 +4310,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("C".$xlsRow, "Name");
         $sheet->setCellValue("D".$xlsRow, "Withdraw");
         $sheet->setCellValue("E".$xlsRow, "Withdraw after Deduction");
-        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
+//        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
         $sheet->setCellValue("G".$xlsRow, "Status");
         $sheet->setCellValue("H".$xlsRow, "Date");
         $sheet->setCellValue("I".$xlsRow, "IC");
@@ -4335,7 +4351,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("C".$xlsRow, $arr['full_name']);
             $sheet->setCellValue("D".$xlsRow, $arr['deduct']);
             $sheet->setCellValue("E".$xlsRow, $arr['amount']);
-            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
+//            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
             $sheet->setCellValue("G".$xlsRow, $arr['status_code']);
             $sheet->setCellValue("H".$xlsRow, $arr['created_on']);
             $sheet->setCellValue("I".$xlsRow, $arr['ic']);
@@ -4588,6 +4604,23 @@ class financeActions extends sfActions
             ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
                 WHERE 1=1 ";
 
+
+        $query = "SELECT dist.tree_structure, withdraw.withdraw_id,withdraw.dist_id
+                ,dist.distributor_code,dist.full_name,withdraw.deduct,withdraw.amount,withdraw.bank_in_to
+                ,withdraw.status_code,withdraw.created_on,dist.ic
+                ,dist.email,dist.contact,leader.distributor_code as leader_code,dist.bank_name
+                ,dist.bank_branch_name,dist.bank_acc_no,dist.bank_holder_name,dist.bank_swift_code
+                ,dist.visa_debit_card,pack.package_name,withdraw.remarks,dist.country
+                ,dist.moneytrac_customer_id,dist.moneytrac_username
+                ,dist.address, dist.address2, dist.city, dist.state, dist.postcode
+                ,dist.file_proof_of_residence, dist.file_nric, dist.file_bank_pass_book, dist.iaccount, dist.bank_account_currency
+            FROM mlm_ecash_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                WHERE 1=1 ";
+
         if ($this->getRequestParameter('statusCode') != "") {
             $query .= " AND withdraw.status_code = '" . $this->getRequestParameter('statusCode') . "'";
         }
@@ -4658,7 +4691,7 @@ class financeActions extends sfActions
         $sheet->setCellValue("C".$xlsRow, "Name");
         $sheet->setCellValue("D".$xlsRow, "Withdraw");
         $sheet->setCellValue("E".$xlsRow, "Withdraw after Deduction");
-        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
+//        $sheet->setCellValue("F".$xlsRow, "CP3 in wallet");
         $sheet->setCellValue("G".$xlsRow, "Status");
         $sheet->setCellValue("H".$xlsRow, "Date");
         $sheet->setCellValue("I".$xlsRow, "IC");
@@ -4699,7 +4732,7 @@ class financeActions extends sfActions
             $sheet->setCellValue("C".$xlsRow, $arr['full_name']);
             $sheet->setCellValue("D".$xlsRow, $arr['deduct']);
             $sheet->setCellValue("E".$xlsRow, $arr['amount']);
-            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
+//            $sheet->setCellValue("F".$xlsRow, $arr['_ecash']);
             $sheet->setCellValue("G".$xlsRow, $arr['status_code']);
             $sheet->setCellValue("H".$xlsRow, $arr['created_on']);
             $sheet->setCellValue("I".$xlsRow, $arr['ic']);
