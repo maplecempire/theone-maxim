@@ -144,7 +144,7 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <td>Member ID</td>
                             <td>:</td>
-                            <td><input title="" size="10" type="text" id="search_username" value="" class="search_init"/></td>
+                            <td><input title="" size="20" type="text" id="search_username" value="" class="search_init"/></td>
                         </tr>
                         <tr>
                             <td>Status</td>
@@ -160,7 +160,7 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <td>Leader ID</td>
                             <td>:</td>
-                            <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                            <td><input title="" size="20" type="text" id="search_leader" value="" class="search_init"/></td>
                         </tr>
                         <tr>
                             <td></td>
