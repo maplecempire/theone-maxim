@@ -1564,7 +1564,11 @@ class offerToSwapRshareActions extends sfActions
                                 $ggMemberWallet->setRt2wallet($balance);
                                 $ggMemberWallet->save();
                             } else {
-                                $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                                if ($sssApplication->getSwapType() == "ASSS") {
+                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+                                } else {
+                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                                }
                             }
                             $sssApplication->save();
                         }
@@ -2640,7 +2644,7 @@ class offerToSwapRshareActions extends sfActions
     function getRoiInformation($distId, $mt4UserName)
     {
         $query = "SELECT devidend_id, dist_id, mt4_user_name, idx, account_ledger_id, dividend_date, package_id, package_price, roi_percentage, mt4_balance, dividend_amount, remarks, exceed_dist_id, exceed_roi_percentage, exceed_dividend_amount, status_code, created_by, created_on, updated_by, updated_on, first_dividend_date
-	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('PENDING','SSS') AND dist_id = ? ORDER BY idx limit 1 ";
+	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('PENDING','SSS','ASSS') AND dist_id = ? ORDER BY idx limit 1 ";
         //var_dump($query);
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -2796,8 +2800,8 @@ class offerToSwapRshareActions extends sfActions
             $query .= " AND created_on <= '".$dateTo." 23:59:59'";
         }
 
-        if ($swapType == "SSS") {
-            $query .= " AND swap_type IN ('RSHARE','ASS')";
+        if ($swapType == "SSS" || $swapType == "ASSS") {
+            $query .= " AND swap_type IN ('RSHARE','ASS','ASSS')";
         } else if ($swapType == "SES") {
             $query .= " AND swap_type IN ('SES')";
         }
@@ -2828,8 +2832,8 @@ class offerToSwapRshareActions extends sfActions
             $query .= " AND created_on <= '".$dateTo." 23:59:59'";
         }
 
-        if ($swapType == "SSS") {
-            $query .= " AND swap_type IN ('RSHARE','ASS')";
+        if ($swapType == "SSS" || $swapType == "ASSS") {
+            $query .= " AND swap_type IN ('RSHARE','ASS','ASSS')";
         } else if ($swapType == "SES") {
             $query .= " AND swap_type IN ('SES')";
         }
