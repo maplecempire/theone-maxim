@@ -88,6 +88,16 @@ $(function(){
         event.preventDefault();
         window.open("<?php echo url_for("finance/cp2WithdrawalListInDetail")?>?filterUsername=" + $("#search_username").val() + "&filterLeader=" + $("#txtLeaderId").val() + "&statusCode=" + $("#txtStatus").val() + "&dateFrom=" + $("#txtDateFrom").val() + "&dateTo=" + $("#txtDateTo").val());
     });
+    $("#btnSearch").button({
+        text: true
+        , icons: {
+            primary: 'ui-icon-circle-find'
+        }
+    }).click(function(event){
+        event.preventDefault();
+
+        datagrid.fnDraw();
+    });
 }); // end $(function())
 
 //all event in detail datagrid need to reassign because, every remote call, the DOM will be restructure again.
@@ -130,6 +140,36 @@ function reassignDatagridEventAttr(){
 			<table width="100%">
 				<tr>
 					<td>
+                    <table style="width: 50%">
+                        <tr>
+                            <td>Member ID</td>
+                            <td>:</td>
+                            <td><input title="" size="10" type="text" id="search_username" value="" class="search_init"/></td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>:</td>
+                            <td><select id="search_combo_statusCode">
+                                    <option value="">All</option>
+                                    <option value="PENDING" selected="selected">PENDING</option>
+                                    <option value="PROCESSING">PROCESSING</option>
+                                    <option value="REJECTED">REJECTED</option>
+                                    <option value="PAID">PAID</option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td>Leader ID</td>
+                            <td>:</td>
+                            <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button id="btnSearch">Search</button>
+                            </td>
+                        </tr>
+                    </table>
                     <div style="width: 1050px">
 					<table class="display" id="datagrid" border="0" width="100%" cellpadding="0" cellspacing="0">
                         <thead>
@@ -163,25 +203,18 @@ function reassignDatagridEventAttr(){
                         <tr>
                             <td></td>
                             <td></td>
-                            <td><input title="" size="10" type="text" id="search_username" value="" class="search_init"/></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>
-                                <select id="search_combo_statusCode">
-                                    <option value="">All</option>
-                                    <option value="PENDING" selected="selected">PENDING</option>
-                                    <option value="PROCESSING">PROCESSING</option>
-                                    <option value="REJECTED">REJECTED</option>
-                                    <option value="PAID">PAID</option>
-                                </select>
                             </td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><input title="" size="10" type="text" id="search_leader" value="" class="search_init"/></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
