@@ -2087,6 +2087,10 @@ class financeListActions extends sfActions
 
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp3Withdraw->getDistId());
 
+            if (!$distDB) {
+                //print_r($mlmCp3Withdraw->getDistId()."<br>");
+                continue;
+            }
             for ($i = 0; $i < count($leaderArrs); $i++) {
                 $pos = strrpos($distDB->getTreeStructure(), "|".$leaderArrs[$i]."|");
                 if ($pos === false) { // note: three equal signs
@@ -2116,7 +2120,7 @@ class financeListActions extends sfActions
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp3Withdraw->getDistId());
 
             if (!$distDB) {
-                print_r($mlmCp3Withdraw->getDistId()."<br>");
+                //print_r($mlmCp3Withdraw->getDistId()."<br>");
                 continue;
             }
             for ($i = 0; $i < count($leaderArrs); $i++) {
@@ -2175,7 +2179,7 @@ class financeListActions extends sfActions
 
             $distDB = MlmDistributorPeer::retrieveByPK($mlmCp2Withdraw->getDistId());
             if (!$distDB) {
-                print_r($mlmCp2Withdraw->getDistId()."<br>");
+                //print_r($mlmCp2Withdraw->getDistId()."<br>");
                 continue;
             }
             for ($i = 0; $i < count($leaderArrs); $i++) {
