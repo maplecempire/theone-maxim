@@ -193,7 +193,7 @@ if (date("d") >= 1 && $close == true) {
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
         <?php } else {
-            if ($distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
+            if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
         ?>
             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
                 <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
@@ -307,7 +307,7 @@ if (date("d") >= 1 && $close == true) {
     <br class="clear"><br>
 
     <?php } else {
-        if ($distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
+        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
     ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
