@@ -28,9 +28,11 @@ class offerToSwapRshareActions extends sfActions
             $this->distributorDB = MlmDistributorPeer::retrieveByPK($arr['dist_id']);
             $this->mt4Id = $arr['mt4_user_name'];
 
+            print_r("<br>".$this->mt4Id);
+
             if (!$this->mt4Id) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
-                return $this->redirect('/offerToSwapRshare/index');
+                print_r("err801:Invalid Action.");
+                return sfView::HEADER_ONLY;
             }
             $distId = $arr['dist_id'];
             $this->mt4Ids = $this->getFetchMt4List($distId, $this->mt4Id);
