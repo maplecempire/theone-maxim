@@ -83,6 +83,7 @@ abstract class Globals {
     const STATUS_SSS_SUCCESS = 'SUCCESS';
     const STATUS_SSS_ERROR = 'ERROR';
     const STATUS_SSS_PAIRING = 'PAIRING';
+    const STATUS_SSS_PENDING_ASSS = 'ASSS PENDING';
 
     /************************************/
     /*****    Maturity Status      ******/
