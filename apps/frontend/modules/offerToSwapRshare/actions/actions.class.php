@@ -10,6 +10,55 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeDoUpdateAsssPendingToAsssPairing()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING_ASSS);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        foreach ($sssApplications as $sssApplication) {
+            print_r($sssApplication->getDistId()."<br>");
+            //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+            $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+            if ($distributorDB) {
+                $rwalletBalance = $distributorDB->getRwallet();
+
+                $totalRshare = $sssApplication->getTotalShareConverted();
+                $rwalletBalance = $rwalletBalance + $totalRshare;
+                // credited S4
+                $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                $ggMemberRwalletRecord->setAid(0);
+                $ggMemberRwalletRecord->setActionType("ASSS");
+                $ggMemberRwalletRecord->setType("credit");
+                $ggMemberRwalletRecord->setAmount($totalRshare);
+                $ggMemberRwalletRecord->setBal($rwalletBalance);
+                $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
+                $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                $ggMemberRwalletRecord->save();
+
+                if ($distributorDB) {
+                    $distributorDB->setRwallet($rwalletBalance);
+                    $distributorDB->save();
+                }
+
+                $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                $sssApplication->save();
+            } else {
+                $remark = $sssApplication->getRemarks();
+                if ($remark != ""){
+                    $remark .= "; ";
+                }
+                $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
+                $sssApplication->setRemarks($remark);
+                $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                $sssApplication->save();
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoAutoConvertSSS()
     {
         $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
@@ -1568,7 +1617,42 @@ class offerToSwapRshareActions extends sfActions
                                 $ggMemberWallet->save();
                             } else {
                                 if ($sssApplication->getSwapType() == "ASSS") {
-                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+                                    //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+                                    $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                                    if ($distributorDB) {
+                                        $rwalletBalance = $distributorDB->getRwallet();
+
+                                        $totalRshare = $sssApplication->getTotalShareConverted();
+                                        $rwalletBalance = $rwalletBalance + $totalRshare;
+                                        // credited S4
+                                        $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                                        $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                                        $ggMemberRwalletRecord->setAid(0);
+                                        $ggMemberRwalletRecord->setActionType("ASSS");
+                                        $ggMemberRwalletRecord->setType("credit");
+                                        $ggMemberRwalletRecord->setAmount($totalRshare);
+                                        $ggMemberRwalletRecord->setBal($rwalletBalance);
+                                        $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
+                                        $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                                        $ggMemberRwalletRecord->save();
+
+                                        if ($distributorDB) {
+                                            $distributorDB->setRwallet($rwalletBalance);
+                                            $distributorDB->save();
+                                        }
+
+                                        $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                                        $sssApplication->save();
+                                    } else {
+                                        $remark = $sssApplication->getRemarks();
+                                        if ($remark != ""){
+                                            $remark .= "; ";
+                                        }
+                                        $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
+                                        $sssApplication->setRemarks($remark);
+                                        $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                        $sssApplication->save();
+                                    }
                                 } else {
                                     $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
                                 }
