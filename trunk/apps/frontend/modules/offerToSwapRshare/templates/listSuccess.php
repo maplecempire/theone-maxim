@@ -231,7 +231,7 @@ function calculateRshare() {
                     <br>
                 </td>
                 <td valign="top" align="right"><br><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
-                <td valign="top"><br><?php echo $sssApplication->getStatusCode(); ?></td>
+                <td valign="top"><br><?php if ($sssApplication->getStatusCode() == "ASSS PAIRING") { echo "COOLING-OFF PERIOD"; } else { echo $sssApplication->getStatusCode(); } ?></td>
             </tr>
             <?php
                 }
