@@ -73,6 +73,9 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
+            if ($totalRshare < 0) {
+                $totalRshare = 0;
+            }
             $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
             $this->totalRshare = round($totalRshare);
 
