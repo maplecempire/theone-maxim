@@ -6,6 +6,10 @@ dailyBonus:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+doAutoConvertSSS:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 doAutoConvertEShare:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
