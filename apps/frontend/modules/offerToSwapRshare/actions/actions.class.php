@@ -10,6 +10,112 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeDoAutoConvertSSS()
+    {
+        $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
+                    INNER JOIN  mlm_roi_dividend roi2 ON roi.mt4_user_name = roi2.mt4_user_name
+                    INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
+                AND dist.leader_id not in (255709,264845,273056,255882,682)
+                    AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
+                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //exit();
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $this->distributorDB = MlmDistributorPeer::retrieveByPK($arr['dist_id']);
+            $this->mt4Id = $arr['mt4_user_name'];
+
+            if (!$this->mt4Id) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
+                return $this->redirect('/offerToSwapRshare/index');
+            }
+            $distId = $arr['dist_id'];
+            $this->mt4Ids = $this->getFetchMt4List($distId, $this->mt4Id);
+            $this->mt4Balance = 0;
+            $this->remainingRoiAmount = 0;
+
+            $mt4UserName = $this->mt4Id;
+
+            if (count($this->mt4Ids) <= 0) {
+                print_r("err802:Invalid Action.");
+                return sfView::HEADER_ONLY;
+            }
+
+            $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+            $roiArr = $this->getRoiInformation($distId, $mt4UserName);
+
+            if ($mt4Balance == null) {
+                print_r("err803:Invalid Action.");
+                return sfView::HEADER_ONLY;
+            }
+
+            $roiPercentage = $roiArr['roi_percentage'];
+            $roiRemainingMonth = 0;
+            if ($roiArr['idx'] <= 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            }
+            $remarks = "";
+            $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+            $this->mt4Balance = $mt4Balance;
+            $this->remainingRoiAmount = $remainingRoiAmount;
+            $this->roiRemainingMonth = $roiRemainingMonth;
+            $this->roiPercentage = $roiPercentage;
+
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $this->totalRshare = round($totalRshare);
+
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+
+                $roiStatus = "ASSS";
+                $sss_application = new SssApplication();
+                $sss_application->setDistId($distId);
+                $sss_application->setDividendId($roiArr['devidend_id']);
+                $sss_application->setMt4UserName($mt4UserName);
+                $sss_application->setCp2Balance(0);
+                $sss_application->setCp3Balance(0);
+                $sss_application->setMt4Balance($this->mt4Balance);
+                $sss_application->setRoiRemainingMonth($roiRemainingMonth);
+                $sss_application->setRoiPercentage($roiPercentage);
+                $sss_application->setShareValue(0.8);
+                $sss_application->setTotalShareConverted($totalRshare);
+                $sss_application->setRemarks($remarks);
+                $sss_application->setSignature($this->distributorDB->getDistributorCoded());
+                $sss_application->setSwapType($roiStatus);
+                $sss_application->setStatusCode(Globals::STATUS_SSS_PENDING);
+                $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sss_application->save();
+
+                $query = "UPDATE mlm_roi_dividend SET status_code = '".$roiStatus."', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                $query = $query . " AND mt4_user_name = ?";
+                $connection = Propel::getConnection();
+                $statement = $connection->prepareStatement($query);
+                $statement->set(1, date('Y-m-d H:i:s'));
+                $statement->set(2, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $statement->set(3, $mt4UserName);
+                $statement->executeUpdate();
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+        print_r("done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoCp2cp3Swap()
     {
         $this->distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -2994,43 +3100,3 @@ class offerToSwapRshareActions extends sfActions
         $tbl_account->save();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
