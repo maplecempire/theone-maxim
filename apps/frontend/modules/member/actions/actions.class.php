@@ -6880,8 +6880,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
 
         $bonusService = new BonusService();
-        if ($bonusService->hideGenealogy() == true) {
-            return $this->redirect('/member/summary');
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
+
+        } else {
+            if ($bonusService->hideGenealogy() == true) {
+                return $this->redirect('/member/summary');
+            }
         }
         $dateUtil = new DateUtil();
         /*if ($dateUtil->checkDateIsWithinRange(date("Y-m-d").' 00:00:00', date("Y-m-d").' 01:00:00', date("Y-m-d G:i:s"))) {
@@ -9299,8 +9306,15 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeEcashLog()
     {
         $bonusService = new BonusService();
-        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
-            return $this->redirect('/member/summary');
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
+
+        } else {
+            if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+                return $this->redirect('/member/summary');
+            }
         }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
@@ -9316,8 +9330,15 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeEpointLog()
     {
         $bonusService = new BonusService();
-        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
-            return $this->redirect('/member/summary');
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
+
+        } else {
+            if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+                return $this->redirect('/member/summary');
+            }
         }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
@@ -9349,8 +9370,15 @@ We look forward to your custom in the near future. Should you have any queries, 
     public function executeMaintenanceLog()
     {
         $bonusService = new BonusService();
-        if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
-            return $this->redirect('/member/summary');
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
+
+        } else {
+            if ($bonusService->hideGenealogy() == true && $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 595) {
+                return $this->redirect('/member/summary');
+            }
         }
         if ($this->getUser()->getAttribute(Globals::SESSION_SECURITY_PASSWORD_REQUIRED_WALLET, false) == false && $this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN, Globals::FALSE) == Globals::FALSE) {
             return $this->redirect('/member/securityPasswordRequired?doAction=W');
@@ -9573,8 +9601,15 @@ We look forward to your custom in the near future. Should you have any queries, 
         $distinfo = MlmDistributorPeer::retrieveByPk($id);
 
         $bonusService = new BonusService();
-        if ($bonusService->hideGenealogy() == true) {
-            return $this->redirect('/member/summary');
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
+
+        } else {
+            if ($bonusService->hideGenealogy() == true) {
+                return $this->redirect('/member/summary');
+            }
         }
 
         $this->distinfo = $distinfo;
