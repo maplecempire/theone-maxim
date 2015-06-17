@@ -25,7 +25,7 @@ class offerToSwapRshareActions extends sfActions
         //exit();
         while ($resultset->next()) {
             $arr = $resultset->getRow();
-            $this->distributorDB = MlmDistributorPeer::retrieveByPK($arr['dist_id']);
+            $distributorDB = MlmDistributorPeer::retrieveByPK($arr['dist_id']);
             $this->mt4Id = $arr['mt4_user_name'];
 
             print_r("<br>".$this->mt4Id);
@@ -93,7 +93,7 @@ class offerToSwapRshareActions extends sfActions
                 $sss_application->setShareValue(0.8);
                 $sss_application->setTotalShareConverted($totalRshare);
                 $sss_application->setRemarks($remarks);
-                $sss_application->setSignature($this->distributorDB->getDistributorCoded());
+                $sss_application->setSignature($distributorDB->getDistributorCode());
                 $sss_application->setSwapType($roiStatus);
                 $sss_application->setStatusCode(Globals::STATUS_SSS_PENDING);
                 $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
