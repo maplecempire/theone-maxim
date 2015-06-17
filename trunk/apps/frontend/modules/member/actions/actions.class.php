@@ -6881,6 +6881,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         $bonusService = new BonusService();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
@@ -9307,6 +9308,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $bonusService = new BonusService();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
@@ -9331,6 +9333,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $bonusService = new BonusService();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
@@ -9371,6 +9374,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         $bonusService = new BonusService();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
@@ -9602,6 +9606,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
         $bonusService = new BonusService();
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 263611
+            || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254828
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 254781) {
