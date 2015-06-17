@@ -192,7 +192,15 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
-        <?php } ?>
+        <?php } else {
+            if ($distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
+        ?>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
+            </li>
+        <?php }
+        }
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/mt4Withdrawal"><span><?php echo __('Withdrawal'); ?></span></a>
         </li>
@@ -298,6 +306,17 @@ if (date("d") >= 1 && $close == true) {
     </ul>
     <br class="clear"><br>
 
+    <?php } else {
+        if ($distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
+    ?>
+    <ul>
+        <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/member/sponsorTree"><span><?php echo __('Genealogy'); ?></span></a>
+        </li>
+    </ul>
+    <br class="clear"><br>
+    <?php   } ?>
     <?php } ?>
 
     <?php
