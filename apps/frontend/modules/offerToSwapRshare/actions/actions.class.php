@@ -66,7 +66,7 @@ class offerToSwapRshareActions extends sfActions
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
                 AND dist.leader_id not in (255709,264845,273056,255882,682)
                     AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
-                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 100";
+                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
