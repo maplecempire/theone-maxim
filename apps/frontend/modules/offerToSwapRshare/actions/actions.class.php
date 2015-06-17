@@ -100,7 +100,16 @@ class offerToSwapRshareActions extends sfActions
 
             if ($mt4Balance == null) {
                 print_r("err803:Invalid Action.");
-                return sfView::HEADER_ONLY;
+                $query = "UPDATE mlm_roi_dividend SET status_code = 'ASSS ERROR', updated_on = ?, updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                $query = $query . " AND mt4_user_name = ?";
+                $connection = Propel::getConnection();
+                $statement = $connection->prepareStatement($query);
+                $statement->set(1, date('Y-m-d H:i:s'));
+                $statement->set(2, $this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $statement->set(3, $mt4UserName);
+                $statement->executeUpdate();
+                continue;
+                //return sfView::HEADER_ONLY;
             }
 
             $roiPercentage = $roiArr['roi_percentage'];
