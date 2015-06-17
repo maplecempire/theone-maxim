@@ -17,7 +17,7 @@ class offerToSwapRshareActions extends sfActions
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
                 AND dist.leader_id not in (255709,264845,273056,255882,682)
                     AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
-                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 1";
+                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 100";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -70,7 +70,7 @@ class offerToSwapRshareActions extends sfActions
             $this->roiPercentage = $roiPercentage;
 
             $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
-            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
             $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
