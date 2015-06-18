@@ -356,6 +356,66 @@ function reassignDatagridAnnouncementEventAttr() {
 <br>马胜金融首席执行官</strong></p>
             </div>
         </div>-->
+        <div class="ui-widget">
+            <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                 class="ui-state-highlight ui-corner-all">
+                <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                         class="ui-icon ui-icon-info"></span>
+                    <strong>SSS Promo Cut Off Date !!!
+<br>
+<br>Dear IMs and Partners,
+<br>
+<br>The SSS Promo which is opened to anyone and everyone to enjoy preferred R-Shares @$0.80 will officially end at 2359hrs on June 30th 2015.
+<br>
+<br>Thereafter, the SSS R-Shares will be @$1.50 per R-Share.
+<br>
+<br>HESITATE NO MORE..... TAKE ADVANTAGE OF THIS ONCE IN A LIFETIME OPPORTUNITY TO SUPER MAXIMIZE YOUR INVESTMENT !!!
+<br>
+<br>In Service
+<br>Dr Andrew Lim
+<br>CEO - MCL
+<br>
+<br>超级股票转换优惠最后截止日期!!!
+<br>
+<br>亲爱的会员及伙伴们:
+<br>
+<br>请注意: 当前对所有会员开放的以0.8美金一股认购R股的超级股票转换优惠计划最后的截止日期为2015.6.30日晚上23:59分.
+<br>
+<br>之后，股票转换优惠R股认购的价格将为1.5美金一股.
+<br>
+<br>请大家不要再犹豫! 抓住这千载难逢的好机会, 最大化的实现您的投资利润!!!
+<br>
+<br>敬上,
+<br>Andrew Lim博士
+<br>马胜金融集团首席执行官
+<br>
+<br>SSS 프로모션 컷 오프 데이트!!!
+<br>
+<br>친애하는 국제회원 및 파트너 여러분
+<br>
+<br>모두에게 열려있으며 주당 0.80 달러의 R-쉐어의 특혜를 주는SSS 프로모션이 공식적으로 2015년 6월 30일 23시 59분에 마감됩니다.
+<br>
+<br>더 이상 망설이지 마십시오….  귀하의 투자를 극대화 시킬 수 있는 이 일생 한번 올 이 최고의 기회를 잡으십시오!!!
+<br>
+<br>귀하를 위하는
+<br>앤드류 림
+<br>CEO - MCL
+<br>
+<br>SSSプロモ・カットオフ日!!!
+<br>
+<br>IMおよびパートナーのみなさん
+<br>
+<br>全員に公開され、誰もが0.80USDで好きなR-シェアを入手できたSSSプロモは、公式に2015年6月30日の23時59分に終了します。
+<br>
+<br>その後、SSS RシェアはR-シェアあたり1.50USDとなります。
+<br>
+<br>もう迷っている時間はありません……。一生に一度の、あなたの投資を強力に最大化するこの機会を生かしましょう。
+<br>
+<br>いつでもあなたのそばに
+<br>アンドリュー・リム
+<br>CEO-MCL</strong></p>
+            </div>
+        </div>
         <?php if ($sf_flash->has('successMsg')): ?>
         <div class="ui-widget">
             <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
