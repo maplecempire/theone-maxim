@@ -722,7 +722,7 @@ class memberActions extends sfActions
         $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->packageDBs = $packageDBs;
         $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -1964,8 +1964,9 @@ class memberActions extends sfActions
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
         $this->packageDBs = $packageDBs;
 
         $this->uplineDistCode = $uplineDistCode;
@@ -2030,16 +2031,18 @@ class memberActions extends sfActions
 
         $this->uplineDistCode = $this->getRequestParameter('uplineDistCode');
         $this->position = $this->getRequestParameter('position');
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         //var_dump($this->getRequestParameter('uplineDistCode'));
         if ($this->getRequestParameter('pid') <> "") {
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $ledgerCp4Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
             if (!$selectedPackage) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid action."));
                 return $this->redirect('/member/purchasePackageViaTree');
             }
 
+            $payBy = $this->getRequestParameter('payBy','CP1');
             $amountNeeded = $selectedPackage->getPrice();
             $packagePriceCharges = ($hasFmcCharges ? $amountNeeded * 10 / 100 : 0); // 10% FMC charges.
 
@@ -2096,10 +2099,16 @@ class memberActions extends sfActions
                         return $this->redirect('/member/memberRegistration');
                     }
                 } else {
-                    if (($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance) {
+                    if ($payBy == "CP1" && ($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance) {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                         return $this->redirect('/member/purchasePackageViaTree');
                     }
+                    if ($payBy == "CP4" && ($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance) {
+                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP4 amount"));
+                        return $this->redirect('/member/purchasePackageViaTree');
+                    }
+
+                    $this->payBy = $payBy;
                 }
             }
 
@@ -2129,7 +2138,7 @@ class memberActions extends sfActions
 
         $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->packageDBs = $packageDBs;
         $this->distPackage = $distPackage;
@@ -2277,7 +2286,7 @@ class memberActions extends sfActions
             $this->countryOfBank = $this->getAppSetting(Globals::SETTING_COUNTRY_OF_BANK);
         }
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
     }
 
     public function executeIndex()
@@ -2717,7 +2726,7 @@ class memberActions extends sfActions
         $this->distDB = $distDB;
 
         $this->tradingCurrencyOnMT4 = "USD";
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
 
         $this->bankName = $this->getAppSetting(Globals::SETTING_BANK_NAME);
         $this->bankSwiftCode = $this->getAppSetting(Globals::SETTING_BANK_SWIFT_CODE);
@@ -3261,7 +3270,7 @@ class memberActions extends sfActions
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
         $this->packageDBs = $packageDBs;
@@ -10630,7 +10639,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $pointNeeded = $this->getRequestParameter('mt4Amount');
         $mt4UserName = $this->getRequestParameter('mt4UserName', "");
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
 
         if ($mt4Amount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
             $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
@@ -12635,7 +12644,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
         $this->pendingDistDB = $pendingDistDB;
         $this->packageDBs = $packageDBs;
@@ -13110,7 +13119,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $distPackage = MlmPackagePeer::retrieveByPK($distDB->getRankId());
 
-            $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+            $this->systemCurrency = "USD";
             $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;

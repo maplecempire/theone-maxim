@@ -233,6 +233,7 @@ function verifySponsorId____BAK() {
 <input type="hidden" name="cp1Paid" value="<?php echo $cp1Paid;?>">
 <input type="hidden" name="cp2cp3PaymentMethod" value="<?php echo $cp2cp3PaymentMethod;?>">
 <input type="hidden" name="cp2cp3Paid" value="<?php echo $cp2cp3Paid;?>">
+<input type="hidden" name="payBy" value="<?php echo $payBy;?>">
 
 <input type="hidden" class="inputbox" id="packageId" name="packageId" value="<?php echo $selectedPackage->getPackageId();?>" readonly="readonly">
 <input type="hidden" class="inputbox" id="productCode" name="productCode" value="<?php echo $productCode;?>" readonly="readonly">
