@@ -44,6 +44,8 @@ class SssApplicationMapBuilder {
 
 		$tMap->addColumn('CP3_BALANCE', 'Cp3Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 
+		$tMap->addColumn('RT_BALANCE', 'RtBalance', 'double', CreoleTypes::DECIMAL, false, 12);
+
 		$tMap->addColumn('MT4_BALANCE', 'Mt4Balance', 'double', CreoleTypes::DECIMAL, false, 12);
 
 		$tMap->addColumn('ROI_REMAINING_MONTH', 'RoiRemainingMonth', 'int', CreoleTypes::INTEGER, false, null);
@@ -63,6 +65,8 @@ class SssApplicationMapBuilder {
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('SWAP_TYPE', 'SwapType', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('CLIENT_ACTION', 'ClientAction', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('CREATED_BY', 'CreatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
