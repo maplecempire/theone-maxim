@@ -273,6 +273,7 @@ function verifyPlacementDistId() {
 <input type="hidden" name="cp1Paid" value="<?php echo $cp1Paid;?>">
 <input type="hidden" name="cp2cp3PaymentMethod" value="<?php echo $cp2cp3PaymentMethod;?>">
 <input type="hidden" name="cp2cp3Paid" value="<?php echo $cp2cp3Paid;?>">
+<input type="hidden" name="payBy" value="<?php echo $payBy;?>">
 <table cellspacing="0" cellpadding="0">
 <colgroup>
     <col width="1%">

@@ -635,13 +635,20 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 
-    <tr class="tbl_form_row_odd" style="display: none;">
+    <tr class="tbl_form_row_odd">
         <td>&nbsp;</td>
         <td><?php echo __('CP4 Account') ?></td>
         <td><input type="text" readonly="readonly" value="<?php echo number_format($cp4,2); ?>"></td>
         <td>&nbsp;</td>
     </tr>
-
+<?php if ($distributor->getFromAbfx() == "N") { ?>
+    <tr class="tbl_form_row_even">
+        <td>&nbsp;</td>
+        <td><?php echo __('RT Account') ?></td>
+        <td><input type="text" readonly="readonly" value="<?php echo number_format($distributor->getRtwallet(),2); ?>"></td>
+        <td>&nbsp;</td>
+    </tr>
+<?php } ?>
 <?php if ($rp > 0) { ?>
     <tr class="tbl_form_row_even">
         <td>&nbsp;</td>
@@ -650,16 +657,6 @@ function reassignDatagridAnnouncementEventAttr() {
         <td>&nbsp;</td>
     </tr>
 <?php } ?>
-
-<?php if ($distributor->getFromAbfx() == "N") { ?>
-    <tr class="tbl_form_row_odd">
-        <td>&nbsp;</td>
-        <td><?php echo __('RT Account') ?></td>
-        <td><input type="text" readonly="readonly" value="<?php echo number_format($distributor->getRtwallet(),2); ?>"></td>
-        <td>&nbsp;</td>
-    </tr>
-<?php } ?>
-
 
 <?php
     if ($distributor->getDebitAccount() == "Y") {

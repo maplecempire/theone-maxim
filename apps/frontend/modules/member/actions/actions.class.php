@@ -3263,6 +3263,7 @@ class memberActions extends sfActions
 
         $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
         $this->packageDBs = $packageDBs;
 
         // amz001 chales (20130113)
@@ -3293,7 +3294,7 @@ class memberActions extends sfActions
     public function executeMemberRegistration2()
     {
         //if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
-        $this->systemCurrency = $this->getAppSetting(Globals::SETTING_SYSTEM_CURRENCY);
+        $this->systemCurrency = "USD";
         if ($this->getRequestParameter('pid') <> "") {
             /*$tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
             if ($tbl_user->getUserpassword2() <> $this->getRequestParameter('transactionPassword')) {
@@ -3310,6 +3311,7 @@ class memberActions extends sfActions
             }*/
 
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $ledgerCp4Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
 
             $selectedPackage = MlmPackagePeer::retrieveByPK($this->getRequestParameter('pid'));
             if (!$selectedPackage) {
@@ -3322,6 +3324,7 @@ class memberActions extends sfActions
             /*if ($selectedPackage->getPackageId() == Globals::MAX_PACKAGE_ID) {
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
             }*/
+            $payBy = $this->getRequestParameter('payBy','CP1');
             if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 1458) {
                 $ledgerCp2Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
                 $ledgerCp3Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
@@ -3360,10 +3363,16 @@ class memberActions extends sfActions
                     return $this->redirect('/member/memberRegistration');
                 }
             } else {
-                if ($amountNeeded > $ledgerEPointBalance) {
+                if ($payBy == "CP1" && $amountNeeded > $ledgerEPointBalance) {
                     $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                     return $this->redirect('/member/memberRegistration');
                 }
+                if ($payBy == "CP4" && $amountNeeded > $ledgerCp4Balance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP4 amount"));
+                    return $this->redirect('/member/memberRegistration');
+                }
+
+                $this->payBy = $payBy;
             }
 
             $this->selectedPackage = $selectedPackage;
@@ -3902,6 +3911,7 @@ class memberActions extends sfActions
         $position = $this->getRequestParameter('position1');
         $amountNeeded = $this->getRequestParameter('amountNeeded');
         $doAction = $this->getRequestParameter('doAction', '');
+        $payBy = $this->getRequestParameter('payBy', 'CP1');
         /* ****************************************************
          * get distributor last account ledger epoint balance
          * ***************************************************/
@@ -3944,6 +3954,7 @@ class memberActions extends sfActions
         $packagePriceCharges = ($hasFmcCharges ? $packagePrice * 10 / 100 : 0); // 10% FMC charges.
 
         $sponsorAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $sponsorCp4Balance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
 
         if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
@@ -3986,8 +3997,12 @@ class memberActions extends sfActions
                     return $this->redirect('/member/memberRegistration');
                 }
             } else {
-                if (($packagePrice + $packagePriceCharges) > $sponsorAccountBalance) {
-                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient fund to purchase package."));
+                if ($payBy == "CP1" && ($packagePrice + $packagePriceCharges) > $sponsorAccountBalance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 to purchase package."));
+                    return $this->redirect('/member/memberRegistration');
+                }
+                if ($payBy == "CP4" && ($packagePrice + $packagePriceCharges) > $sponsorCp4Balance) {
+                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP4 to purchase package."));
                     return $this->redirect('/member/memberRegistration');
                 }
             }
@@ -4268,35 +4283,109 @@ class memberActions extends sfActions
                     }
 
                 } else {
-                    $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
+                    if ($payBy == "CP4") {
+                        $sponsorCp4Balance = $sponsorCp4Balance - $packagePrice;
 
-                    $mlm_account_ledger = new MlmAccountLedger();
-                    $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
-                    $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
-                    $mlm_account_ledger->setCredit(0);
-                    $mlm_account_ledger->setDebit($packagePrice);
-                    $mlm_account_ledger->setBalance($sponsorAccountBalance);
-                    $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
-                    $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
-                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
+                        $mlm_account_ledger = new MlmAccountLedger();
+                        $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_CP4);
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                        $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                        $mlm_account_ledger->setCredit(0);
+                        $mlm_account_ledger->setDebit($packagePrice);
+                        $mlm_account_ledger->setBalance($sponsorCp4Balance);
+                        $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
+                        $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
+                        $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $mlm_account_ledger->save();
 
-                    $this->mirroringAccountLedger($mlm_account_ledger, "53");
+                        $this->mirroringAccountLedger($mlm_account_ledger, "53-4");
 
-                    if ($hasFmcCharges) {
-                        // FMC charges
-                        $sponsorAccountBalance = $sponsorAccountBalance - $packagePriceCharges;
+                        if ($hasFmcCharges) {
+                            // FMC charges
+                            $sponsorCp4Balance = $sponsorCp4Balance - $packagePriceCharges;
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_CP4);
+                            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FMC);
+                            $mlm_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit($packagePriceCharges);
+                            $mlm_account_ledger->setBalance($sponsorCp4Balance);
+                            $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
+                            $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger, "53a");
+                        }
+
+                        $mlm_distributor->setPackagePurchaseFlag("N");
+                        $mlm_distributor->save();
+                        $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
+
+                        $mt4Balance = $packagePrice;
+                        $roiRemainingMonth = 18;
+                        $roiPercentage = $packageDB->getMonthlyPerformance();
+                        $mt4UserName = "CP4";
+
+                        $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+                        $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+                        $totalAmountConvertedWithCp2Cp3 = round($totalAmountConverted);
+
+                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+
+                        $sss_application = new SssApplication();
+                        $sss_application->setDistId($sponsorId);
+                        $sss_application->setDividendId(0);
+                        $sss_application->setMt4UserName($mt4UserName);
+                        $sss_application->setCp2Balance(0);
+                        $sss_application->setCp3Balance(0);
+                        $sss_application->setMt4Balance($mt4Balance);
+                        $sss_application->setRoiRemainingMonth($roiRemainingMonth);
+                        $sss_application->setRoiPercentage($roiPercentage);
+                        $sss_application->setShareValue(0.8);
+                        $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
+                        $sss_application->setTotalShareConverted($totalRshare);
+                        $sss_application->setRemarks("");
+                        $sss_application->setSignature($mlm_distributor->getDistributorCode());
+                        $sss_application->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                        $sss_application->setSwapType("CP4");
+                        $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $sss_application->save();
+
+                        $rwalletBalance = 0 + $totalRshare;
+                        // credited S4
+                        $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                        $ggMemberRwalletRecord->setUid($sss_application->getDistId());
+                        $ggMemberRwalletRecord->setAid(0);
+                        $ggMemberRwalletRecord->setActionType("CP4");
+                        $ggMemberRwalletRecord->setType("credit");
+                        $ggMemberRwalletRecord->setAmount($totalRshare);
+                        $ggMemberRwalletRecord->setBal($rwalletBalance);
+                        $ggMemberRwalletRecord->setDescr("Super Share Swap (CP4)");
+                        $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                        $ggMemberRwalletRecord->save();
+
+                        if ($mlm_distributor) {
+                            $mlm_distributor->setRwallet($rwalletBalance);
+                            $mlm_distributor->save();
+                        }
+                    } else {
+                        $sponsorAccountBalance = $sponsorAccountBalance - $packagePrice;
 
                         $mlm_account_ledger = new MlmAccountLedger();
                         $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
                         $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FMC);
-                        $mlm_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                        $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REGISTER);
+                        $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
                         $mlm_account_ledger->setCredit(0);
-                        $mlm_account_ledger->setDebit($packagePriceCharges);
+                        $mlm_account_ledger->setDebit($packagePrice);
                         $mlm_account_ledger->setBalance($sponsorAccountBalance);
                         $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
                         $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
@@ -4304,10 +4393,31 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
-                        $this->mirroringAccountLedger($mlm_account_ledger, "53a");
-                    }
+                        $this->mirroringAccountLedger($mlm_account_ledger, "53");
 
-                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                        if ($hasFmcCharges) {
+                            // FMC charges
+                            $sponsorAccountBalance = $sponsorAccountBalance - $packagePriceCharges;
+
+                            $mlm_account_ledger = new MlmAccountLedger();
+                            $mlm_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                            $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
+                            $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_FMC);
+                            $mlm_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE PURCHASE (".$packageDB->getPackageName().") - ".$mlm_distributor->getDistributorCode());
+                            $mlm_account_ledger->setCredit(0);
+                            $mlm_account_ledger->setDebit($packagePriceCharges);
+                            $mlm_account_ledger->setBalance($sponsorAccountBalance);
+                            $mlm_account_ledger->setRefererId($mlm_distributor->getDistributorId());
+                            $mlm_account_ledger->setRefererType(Globals::ROLE_DISTRIBUTOR);
+                            $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $mlm_account_ledger->save();
+
+                            $this->mirroringAccountLedger($mlm_account_ledger, "53a");
+                        }
+
+                        $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+                    }
                 }
 
                 /******************************/
@@ -6488,7 +6598,7 @@ We look forward to your custom in the near future. Should you have any queries, 
             $epoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_EPOINT);
             $maintenancePoint = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
             //$rt = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_RT);
-            //$cp4 = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_CP4);
+            $cp4 = $this->getAccountBalance($distributor->getDistributorId(), Globals::ACCOUNT_TYPE_CP4);
 
             $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
             $debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT_ACCOUNT);
@@ -13047,7 +13157,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     function revalidateAccount($distributorId, $accountType)
     {
-        $balance = $this->getAccountBalance($distributorId, $accountType);
+        /*$balance = $this->getAccountBalance($distributorId, $accountType);
 
         $c = new Criteria();
         $c->add(MlmAccountPeer::ACCOUNT_TYPE, $accountType);
@@ -13063,7 +13173,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         }
 
         $tbl_account->setBalance($balance);
-        $tbl_account->save();
+        $tbl_account->save();*/
     }
 
     function revalidateCommission($distributorId, $commissionType)
