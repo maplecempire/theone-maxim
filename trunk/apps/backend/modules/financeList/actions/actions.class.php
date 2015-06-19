@@ -1686,6 +1686,12 @@ class financeListActions extends sfActions
             ) accountLedger ON accountLedger.dist_id = withdraw.dist_id
                 WHERE 1=1
         ";
+        $sql = " FROM mlm_ecash_withdraw withdraw
+                LEFT JOIN mlm_distributor dist ON withdraw.dist_id = dist.distributor_id
+                LEFT JOIN mlm_distributor leader ON withdraw.leader_dist_id = leader.distributor_id
+                LEFT JOIN mlm_package pack ON pack.package_id = dist.rank_id
+                WHERE 1=1
+        ";
 
         /******   total records  *******/
         if ($this->getRequestParameter('statusCode') != "") {
@@ -1743,7 +1749,8 @@ class financeListActions extends sfActions
                 $resultArr['full_name'] == null ? "" : $resultArr['full_name'],
                 $resultArr['deduct'] == null ? "" : $resultArr['deduct'],
                 $resultArr['amount'] == null ? "" : $resultArr['amount'],
-                $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
+//                $resultArr['_ecash'] == null ? "" : $resultArr['_ecash'],
+                0,
                 $resultArr['status_code'] == null ? "" : $resultArr['status_code'],
                 $resultArr['created_on'] == null ? "" : $resultArr['created_on'],
                 $resultArr['ic'] == null ? "" : $resultArr['ic'],

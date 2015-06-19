@@ -12,8 +12,11 @@ class offerToSwapRshareActions extends sfActions
 {
     public function executeDoUpdateAsssPendingToAsssPairing()
     {
+        $sssIds = "14248,14405,14546,14561,14567,14708,17084,17089,17223,17461,17465,17485,19162,19335,20534,20536,20669,20671,20673,31256,31367,31616,32849,32850,32983,33008,33010,33284,33289,33382,33418,33506,33523,33548,33563,33577,33746";
+        $array = explode(',', $sssIds);
+
         $c = new Criteria();
-        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING_ASSS);
+        $c->add(SssApplicationPeer::SSS_ID, $array, Criteria::IN);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
@@ -21,7 +24,7 @@ class offerToSwapRshareActions extends sfActions
             //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
             $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
             if ($distributorDB) {
-                $rwalletBalance = $distributorDB->getRwallet();
+                $rwalletBalance = $this->getTotalOfRShare($sssApplication->getDistId());
 
                 $totalRshare = $sssApplication->getTotalShareConverted();
                 $rwalletBalance = $rwalletBalance + $totalRshare;
@@ -29,11 +32,11 @@ class offerToSwapRshareActions extends sfActions
                 $ggMemberRwalletRecord = new GgMemberRwalletRecord();
                 $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
                 $ggMemberRwalletRecord->setAid(0);
-                $ggMemberRwalletRecord->setActionType("ASSS");
+                $ggMemberRwalletRecord->setActionType("SSS");
                 $ggMemberRwalletRecord->setType("credit");
                 $ggMemberRwalletRecord->setAmount($totalRshare);
                 $ggMemberRwalletRecord->setBal($rwalletBalance);
-                $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
+                $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3)");
                 $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                 $ggMemberRwalletRecord->save();
 
@@ -42,7 +45,7 @@ class offerToSwapRshareActions extends sfActions
                     $distributorDB->save();
                 }
 
-                $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
                 $sssApplication->save();
             } else {
                 $remark = $sssApplication->getRemarks();
@@ -181,7 +184,7 @@ class offerToSwapRshareActions extends sfActions
     }
     public function executeDoCp2cp3Swap()
     {
-        $this->distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->mt4Id = $this->getRequestParameter('mt4Id');
 
         if (!$this->mt4Id) {
@@ -240,12 +243,16 @@ class offerToSwapRshareActions extends sfActions
         //var_dump($this->convertedCp2);
         //var_dump($this->cp2Balance);
         //exit();
+        if ($this->convertedCp2 <= 0 && $this->convertedCp3 <= 0) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid CP2 / CP3 Balance."));
+            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+        }
         if ($this->convertedCp2 > $this->cp2Balance) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP2 Balance."));
             return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
         }
         if ($this->convertedCp3 > $this->cp3Balance) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP2 Balance."));
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Insufficient CP3 Balance."));
             return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
         }
         $totalAmountConvertedWithCp2Cp3 = $this->convertedCp2 + $this->convertedCp3;
@@ -276,6 +283,26 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $sss_application->save();
+
+            $rwalletBalance = $distributorDB->getRwallet();
+            $totalRshare = $sss_application->getTotalShareConverted();
+            $rwalletBalance = $rwalletBalance + $totalRshare;
+            // credited S4
+            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+            $ggMemberRwalletRecord->setUid($sss_application->getDistId());
+            $ggMemberRwalletRecord->setAid(0);
+            $ggMemberRwalletRecord->setActionType("SSS");
+            $ggMemberRwalletRecord->setType("credit");
+            $ggMemberRwalletRecord->setAmount($totalRshare);
+            $ggMemberRwalletRecord->setBal($rwalletBalance);
+            $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3)");
+            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+            $ggMemberRwalletRecord->save();
+
+            if ($distributorDB) {
+                $distributorDB->setRwallet($rwalletBalance);
+                $distributorDB->save();
+            }
 
             if ($this->convertedCp2 > 0) {
                 $tbl_account_ledger = new MlmAccountLedger();
@@ -1499,7 +1526,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
-        $c->setLimit(30);
+        $c->setLimit(50);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
@@ -1515,6 +1542,7 @@ class offerToSwapRshareActions extends sfActions
                 $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
                 $notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
 
+                $isValid = true;
                 if ($notificationOfMaturity) {
                     $notificationStatus = $notificationOfMaturity->getStatusCode();
                     $notificationOfMaturity->setInternalRemark("STATUS: ".$notificationStatus);
@@ -1530,153 +1558,156 @@ class offerToSwapRshareActions extends sfActions
                         $sssApplication->setRemarks($remark);
                         $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
                         $sssApplication->save();
+                        $isValid = false;
                     }
                 }
 
-                // disabled MT4
-                $mt4request = new CMT4DataReciver;
-                $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
+                if ($isValid == true) {
+                    // disabled MT4
+                    $mt4request = new CMT4DataReciver;
+                    $mt4request->OpenConnection(Globals::MT4_SERVER, Globals::MT4_SERVER_PORT);
 
-                $params['array'] = array();
-                $params['login'] = $mt4Id;
-                var_dump($params);
-                $answer = $mt4request->MakeRequest("getaccountinfo", $params);
-                var_dump($answer);
-                print_r("<br><br>");
-                if ($answer['result'] != 1) {
-                    var_dump("<br>error:".$answer["reason"]);
-                    //return sfView::HEADER_ONLY;
-                    $remark = $sssApplication->getRemarks();
-                    if ($remark != ""){
-                        $remark .= "; ";
-                    }
-                    //$remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
-                    $sssApplication->setRemarks($remark);
-                    //$sssApplication->setStatusCode("ERROR");
-                    $sssApplication->save();
-                } else {
-                    $comment = $answer["comment"];
-                    $mt4Enable = $answer["enable"];
-                    $mt4Balance = $answer["balance"];
-                    if ($comment != "") {
-                        $comment .= ";";
-                    }
-                    if ($mt4Enable == "1") {
-                        $comment = $comment . date('Y-m-d H:i:s').": Disabled (SSS)";
-                        $params['comment'] = $comment;
-                        $params['enable'] = "0";  // 1 = enabled, 0 = disabled
-                        $answer = $mt4request->MakeRequest("modifyaccount", $params);
-                        //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
-                        if ($answer['result'] != 1) {
-                            var_dump("<br>error:".$answer["reason"]);
-                            $remark = $sssApplication->getRemarks();
-                            if ($remark != ""){
-                                $remark .= "; ";
-                            }
-                            $remark .= date('Y-m-d H:i:s') .": MT4 Account cannot be disabled.";
-                            $sssApplication->setRemarks($remark);
-                            $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
-                            $sssApplication->save();
-                        } else {
-                            $sssApplication->setMt4Balance($mt4Balance);
-                            if ($sssApplication->getSwapType() == "SES") {
-                                $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
-
-                                $pairingBonusAmount = $sssApplication->getTotalShareConverted();
-                                $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
-
-                                $tbl_account_ledger2 = new MlmAccountLedger();
-                                $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
-                                $tbl_account_ledger2->setDistId($sssApplication->getDistId());
-                                $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
-                                $tbl_account_ledger2->setCredit($pairingBonusAmount);
-                                $tbl_account_ledger2->setDebit(0);
-                                $tbl_account_ledger2->setRemark("");
-                                $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
-                                $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                                $tbl_account_ledger2->save();
-
-                                $c = new Criteria();
-                                $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
-                                $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
-
-                                $balance = 0;
-                                if (!$ggMemberWallet) {
-                                    $ggMemberWallet = new GgMemberWallet();
-                                    $ggMemberWallet->setUid($sssApplication->getDistId());
-                                    $ggMemberWallet->setRt2wallet(0);
-                                    $ggMemberWallet->setDescr("");
-                                    $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
-                                    $ggMemberWallet->save();
-                                }
-                                $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
-
-                                $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
-                                $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
-                                $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
-                                $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
-                                $gg_member_rtwallet_record->setDebit(0);
-                                $gg_member_rtwallet_record->setBalance($balance);
-                                $gg_member_rtwallet_record->setDescr("");
-                                $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
-                                $gg_member_rtwallet_record->save();
-
-                                $ggMemberWallet->setRt2wallet($balance);
-                                $ggMemberWallet->save();
-                            } else {
-                                if ($sssApplication->getSwapType() == "ASSS") {
-                                    //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
-                                    $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
-                                    if ($distributorDB) {
-                                        $rwalletBalance = $distributorDB->getRwallet();
-
-                                        $totalRshare = $sssApplication->getTotalShareConverted();
-                                        $rwalletBalance = $rwalletBalance + $totalRshare;
-                                        // credited S4
-                                        $ggMemberRwalletRecord = new GgMemberRwalletRecord();
-                                        $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
-                                        $ggMemberRwalletRecord->setAid(0);
-                                        $ggMemberRwalletRecord->setActionType("ASSS");
-                                        $ggMemberRwalletRecord->setType("credit");
-                                        $ggMemberRwalletRecord->setAmount($totalRshare);
-                                        $ggMemberRwalletRecord->setBal($rwalletBalance);
-                                        $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
-                                        $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
-                                        $ggMemberRwalletRecord->save();
-
-                                        if ($distributorDB) {
-                                            $distributorDB->setRwallet($rwalletBalance);
-                                            $distributorDB->save();
-                                        }
-
-                                        $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
-                                        $sssApplication->save();
-                                    } else {
-                                        $remark = $sssApplication->getRemarks();
-                                        if ($remark != ""){
-                                            $remark .= "; ";
-                                        }
-                                        $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
-                                        $sssApplication->setRemarks($remark);
-                                        $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
-                                        $sssApplication->save();
-                                    }
-                                } else {
-                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
-                                }
-                            }
-                            $sssApplication->save();
-                        }
-                    } else {
+                    $params['array'] = array();
+                    $params['login'] = $mt4Id;
+                    var_dump($params);
+                    $answer = $mt4request->MakeRequest("getaccountinfo", $params);
+                    var_dump($answer);
+                    print_r("<br><br>");
+                    if ($answer['result'] != 1) {
+                        var_dump("<br>error:".$answer["reason"]);
+                        //return sfView::HEADER_ONLY;
                         $remark = $sssApplication->getRemarks();
                         if ($remark != ""){
                             $remark .= "; ";
                         }
-                        $remark .= date('Y-m-d H:i:s') .": MT4 Account disabled.";
+                        //$remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
                         $sssApplication->setRemarks($remark);
                         $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
                         $sssApplication->save();
+                    } else {
+                        $comment = $answer["comment"];
+                        $mt4Enable = $answer["enable"];
+                        $mt4Balance = $answer["balance"];
+                        if ($comment != "") {
+                            $comment .= ";";
+                        }
+                        if ($mt4Enable == "1") {
+                            $comment = $comment . date('Y-m-d H:i:s').": Disabled (SSS)";
+                            $params['comment'] = $comment;
+                            $params['enable'] = "0";  // 1 = enabled, 0 = disabled
+                            $answer = $mt4request->MakeRequest("modifyaccount", $params);
+                            //print "<p style='background-color:#EEFFEE'>Account No. <b>".$answer["login"]."</b> credited to balance: ".$packagePrice.".</p>";
+                            if ($answer['result'] != 1) {
+                                var_dump("<br>error:".$answer["reason"]);
+                                $remark = $sssApplication->getRemarks();
+                                if ($remark != ""){
+                                    $remark .= "; ";
+                                }
+                                $remark .= date('Y-m-d H:i:s') .": MT4 Account cannot be disabled.";
+                                $sssApplication->setRemarks($remark);
+                                $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                $sssApplication->save();
+                            } else {
+                                $sssApplication->setMt4Balance($mt4Balance);
+                                if ($sssApplication->getSwapType() == "SES") {
+                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+
+                                    $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+                                    $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
+
+                                    $tbl_account_ledger2 = new MlmAccountLedger();
+                                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
+                                    $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+                                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+                                    $tbl_account_ledger2->setCredit($pairingBonusAmount);
+                                    $tbl_account_ledger2->setDebit(0);
+                                    $tbl_account_ledger2->setRemark("");
+                                    $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
+                                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $tbl_account_ledger2->save();
+
+                                    $c = new Criteria();
+                                    $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
+                                    $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
+
+                                    $balance = 0;
+                                    if (!$ggMemberWallet) {
+                                        $ggMemberWallet = new GgMemberWallet();
+                                        $ggMemberWallet->setUid($sssApplication->getDistId());
+                                        $ggMemberWallet->setRt2wallet(0);
+                                        $ggMemberWallet->setDescr("");
+                                        $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
+                                        $ggMemberWallet->save();
+                                    }
+                                    $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
+
+                                    $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
+                                    $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+                                    $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
+                                    $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
+                                    $gg_member_rtwallet_record->setDebit(0);
+                                    $gg_member_rtwallet_record->setBalance($balance);
+                                    $gg_member_rtwallet_record->setDescr("");
+                                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                    $gg_member_rtwallet_record->save();
+
+                                    $ggMemberWallet->setRt2wallet($balance);
+                                    $ggMemberWallet->save();
+                                } else {
+                                    if ($sssApplication->getSwapType() == "ASSS") {
+                                        //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+                                        $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                                        if ($distributorDB) {
+                                            $rwalletBalance = $distributorDB->getRwallet();
+
+                                            $totalRshare = $sssApplication->getTotalShareConverted();
+                                            $rwalletBalance = $rwalletBalance + $totalRshare;
+                                            // credited S4
+                                            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                                            $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                                            $ggMemberRwalletRecord->setAid(0);
+                                            $ggMemberRwalletRecord->setActionType("ASSS");
+                                            $ggMemberRwalletRecord->setType("credit");
+                                            $ggMemberRwalletRecord->setAmount($totalRshare);
+                                            $ggMemberRwalletRecord->setBal($rwalletBalance);
+                                            $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
+                                            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                                            $ggMemberRwalletRecord->save();
+
+                                            if ($distributorDB) {
+                                                $distributorDB->setRwallet($rwalletBalance);
+                                                $distributorDB->save();
+                                            }
+
+                                            $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                                            $sssApplication->save();
+                                        } else {
+                                            $remark = $sssApplication->getRemarks();
+                                            if ($remark != ""){
+                                                $remark .= "; ";
+                                            }
+                                            $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
+                                            $sssApplication->setRemarks($remark);
+                                            $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                            $sssApplication->save();
+                                        }
+                                    } else {
+                                        $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                                    }
+                                }
+                                $sssApplication->save();
+                            }
+                        } else {
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != ""){
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') .": MT4 Account disabled.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                            $sssApplication->save();
+                        }
                     }
                 }
 
@@ -1694,7 +1725,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
-        $c->setLimit(30);
+        $c->setLimit(50);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         /******************************/
@@ -1991,27 +2022,28 @@ class offerToSwapRshareActions extends sfActions
                 /*$c = new Criteria();
                 $c->addDescendingOrderByColumn(GgMemberRwalletRecordPeer::CDATE);
                 $ggMemberRwalletRecordDB = GgMemberRwalletRecordPeer::doSelectOne($c);*/
+                if ($sssApplication->getSwapType() == "RSHARE") {
+                    $rwalletBalance = $distributorDB->getRwallet();
+                    /*if ($ggMemberRwalletRecordDB) {
+                        $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
+                    }*/
+                    $rwalletBalance = $rwalletBalance + $totalRshare;
+                    // credited S4
+                    $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                    $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                    $ggMemberRwalletRecord->setAid(0);
+                    $ggMemberRwalletRecord->setActionType("SSS");
+                    $ggMemberRwalletRecord->setType("credit");
+                    $ggMemberRwalletRecord->setAmount($totalRshare);
+                    $ggMemberRwalletRecord->setBal($rwalletBalance);
+                    $ggMemberRwalletRecord->setDescr("Super Share Swap");
+                    $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberRwalletRecord->save();
 
-                $rwalletBalance = $distributorDB->getRwallet();
-                /*if ($ggMemberRwalletRecordDB) {
-                    $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
-                }*/
-                $rwalletBalance = $rwalletBalance + $totalRshare;
-                // credited S4
-                $ggMemberRwalletRecord = new GgMemberRwalletRecord();
-                $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
-                $ggMemberRwalletRecord->setAid(0);
-                $ggMemberRwalletRecord->setActionType("SSS");
-                $ggMemberRwalletRecord->setType("credit");
-                $ggMemberRwalletRecord->setAmount($totalRshare);
-                $ggMemberRwalletRecord->setBal($rwalletBalance);
-                $ggMemberRwalletRecord->setDescr("Super Share Swap");
-                $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
-                $ggMemberRwalletRecord->save();
-
-                if ($distributorDB) {
-                    $distributorDB->setRwallet($rwalletBalance);
-                    $distributorDB->save();
+                    if ($distributorDB) {
+                        $distributorDB->setRwallet($rwalletBalance);
+                        $distributorDB->save();
+                    }
                 }
 
                 $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
@@ -3075,6 +3107,26 @@ class offerToSwapRshareActions extends sfActions
         if ($date != null) {
             $query .= " AND created_on <= '" . $date . " 23:59:59'";
         }
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    function getTotalOfRShare($distributorId)
+    {
+        $query = "SELECT SUM(amount) AS SUB_TOTAL FROM gg_member_rwallet_record WHERE uid = " . $distributorId
+                 . " AND action_type IN ('credit','c')";
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
