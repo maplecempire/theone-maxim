@@ -50,7 +50,7 @@ $(function(){
             { "sName" : "dist.full_name",  "bSortable": true},
             { "sName" : "withdraw.deduct",  "bSortable": true},
             { "sName" : "withdraw.amount",  "bSortable": true},
-            { "sName" : "accountLedger._ecash",  "bSortable": true},
+            { "sName" : "withdraw.amount",  "bVisible": false},
             { "sName" : "withdraw.status_code",  "bSortable": true},
             { "sName" : "withdraw.created_on",  "bSortable": true}
             , { "sName" : "dist.ic",  "bSortable": true}
