@@ -111,6 +111,8 @@ $(function() {
             }
         });
     });
+
+    $(".buttonClass").button();
 });
 
 function calculateRshare() {
@@ -231,9 +233,25 @@ function calculateRshare() {
                     <br>
                 </td>
                 <td valign="top" align="right"><br><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
-                <td valign="top"><br><?php if ($sssApplication->getStatusCode() == "ASSS PAIRING") { echo "COOLING-OFF PERIOD"; } else { echo $sssApplication->getStatusCode(); } ?></td>
+                <td valign="top"><br><?php if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS) { echo "COOLING-OFF PERIOD"; } else { echo $sssApplication->getStatusCode(); } ?>
+                <?php
+                    if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
+                        echo "<br><br><span style='color:blue'>Client Action: ".$sssApplication->getClientAction()."</span>";
+                    }
+                ?>
+                </td>
             </tr>
             <?php
+                    if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
+            ?>
+                        <tr class="row<?php echo $trStyle; ?>" align="right">
+                            <td colspan="7">
+                                <a href="<?php echo url_for("/offerToSwapRshare/autoSwapMemberAction?doAction=confirm&id=".$sssApplication->getSssId());?>" class="buttonClass"><?php echo __('Confirm'); ?></a>
+                                <a href="<?php echo url_for("/offerToSwapRshare/autoSwapMemberAction?doAction=decline&id=".$sssApplication->getSssId());?>" class="buttonClass"><?php echo __('Decline'); ?></a>
+                            </td>
+                        </tr>
+            <?php
+                    }
                 }
             } else {
             ?>

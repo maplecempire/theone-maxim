@@ -33,6 +33,10 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 
 	
+	protected $rt_balance = 0;
+
+
+	
 	protected $mt4_balance = 0;
 
 
@@ -70,6 +74,10 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	
 	protected $swap_type = 'RSHARE';
+
+
+	
+	protected $client_action = 'PENDING';
 
 
 	
@@ -133,6 +141,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 	{
 
 		return $this->cp3_balance;
+	}
+
+	
+	public function getRtBalance()
+	{
+
+		return $this->rt_balance;
 	}
 
 	
@@ -203,6 +218,13 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 	{
 
 		return $this->swap_type;
+	}
+
+	
+	public function getClientAction()
+	{
+
+		return $this->client_action;
 	}
 
 	
@@ -340,6 +362,16 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRtBalance($v)
+	{
+
+		if ($this->rt_balance !== $v || $v === 0) {
+			$this->rt_balance = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::RT_BALANCE;
+		}
+
+	} 
+	
 	public function setMt4Balance($v)
 	{
 
@@ -460,6 +492,20 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setClientAction($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->client_action !== $v || $v === 'PENDING') {
+			$this->client_action = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::CLIENT_ACTION;
+		}
+
+	} 
+	
 	public function setCreatedBy($v)
 	{
 
@@ -538,39 +584,43 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 			$this->cp3_balance = $rs->getFloat($startcol + 5);
 
-			$this->mt4_balance = $rs->getFloat($startcol + 6);
+			$this->rt_balance = $rs->getFloat($startcol + 6);
 
-			$this->roi_remaining_month = $rs->getInt($startcol + 7);
+			$this->mt4_balance = $rs->getFloat($startcol + 7);
 
-			$this->roi_percentage = $rs->getFloat($startcol + 8);
+			$this->roi_remaining_month = $rs->getInt($startcol + 8);
 
-			$this->total_amount_converted_with_cp2cp3 = $rs->getFloat($startcol + 9);
+			$this->roi_percentage = $rs->getFloat($startcol + 9);
 
-			$this->share_value = $rs->getFloat($startcol + 10);
+			$this->total_amount_converted_with_cp2cp3 = $rs->getFloat($startcol + 10);
 
-			$this->total_share_converted = $rs->getFloat($startcol + 11);
+			$this->share_value = $rs->getFloat($startcol + 11);
 
-			$this->signature = $rs->getString($startcol + 12);
+			$this->total_share_converted = $rs->getFloat($startcol + 12);
 
-			$this->remarks = $rs->getString($startcol + 13);
+			$this->signature = $rs->getString($startcol + 13);
 
-			$this->status_code = $rs->getString($startcol + 14);
+			$this->remarks = $rs->getString($startcol + 14);
 
-			$this->swap_type = $rs->getString($startcol + 15);
+			$this->status_code = $rs->getString($startcol + 15);
 
-			$this->created_by = $rs->getInt($startcol + 16);
+			$this->swap_type = $rs->getString($startcol + 16);
 
-			$this->created_on = $rs->getTimestamp($startcol + 17, null);
+			$this->client_action = $rs->getString($startcol + 17);
 
-			$this->updated_by = $rs->getInt($startcol + 18);
+			$this->created_by = $rs->getInt($startcol + 18);
 
-			$this->updated_on = $rs->getTimestamp($startcol + 19, null);
+			$this->created_on = $rs->getTimestamp($startcol + 19, null);
+
+			$this->updated_by = $rs->getInt($startcol + 20);
+
+			$this->updated_on = $rs->getTimestamp($startcol + 21, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 20; 
+						return $startcol + 22; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating SssApplication object", $e);
 		}
@@ -726,45 +776,51 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				return $this->getCp3Balance();
 				break;
 			case 6:
-				return $this->getMt4Balance();
+				return $this->getRtBalance();
 				break;
 			case 7:
-				return $this->getRoiRemainingMonth();
+				return $this->getMt4Balance();
 				break;
 			case 8:
-				return $this->getRoiPercentage();
+				return $this->getRoiRemainingMonth();
 				break;
 			case 9:
-				return $this->getTotalAmountConvertedWithCp2cp3();
+				return $this->getRoiPercentage();
 				break;
 			case 10:
-				return $this->getShareValue();
+				return $this->getTotalAmountConvertedWithCp2cp3();
 				break;
 			case 11:
-				return $this->getTotalShareConverted();
+				return $this->getShareValue();
 				break;
 			case 12:
-				return $this->getSignature();
+				return $this->getTotalShareConverted();
 				break;
 			case 13:
-				return $this->getRemarks();
+				return $this->getSignature();
 				break;
 			case 14:
-				return $this->getStatusCode();
+				return $this->getRemarks();
 				break;
 			case 15:
-				return $this->getSwapType();
+				return $this->getStatusCode();
 				break;
 			case 16:
-				return $this->getCreatedBy();
+				return $this->getSwapType();
 				break;
 			case 17:
-				return $this->getCreatedOn();
+				return $this->getClientAction();
 				break;
 			case 18:
-				return $this->getUpdatedBy();
+				return $this->getCreatedBy();
 				break;
 			case 19:
+				return $this->getCreatedOn();
+				break;
+			case 20:
+				return $this->getUpdatedBy();
+				break;
+			case 21:
 				return $this->getUpdatedOn();
 				break;
 			default:
@@ -783,20 +839,22 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			$keys[3] => $this->getMt4UserName(),
 			$keys[4] => $this->getCp2Balance(),
 			$keys[5] => $this->getCp3Balance(),
-			$keys[6] => $this->getMt4Balance(),
-			$keys[7] => $this->getRoiRemainingMonth(),
-			$keys[8] => $this->getRoiPercentage(),
-			$keys[9] => $this->getTotalAmountConvertedWithCp2cp3(),
-			$keys[10] => $this->getShareValue(),
-			$keys[11] => $this->getTotalShareConverted(),
-			$keys[12] => $this->getSignature(),
-			$keys[13] => $this->getRemarks(),
-			$keys[14] => $this->getStatusCode(),
-			$keys[15] => $this->getSwapType(),
-			$keys[16] => $this->getCreatedBy(),
-			$keys[17] => $this->getCreatedOn(),
-			$keys[18] => $this->getUpdatedBy(),
-			$keys[19] => $this->getUpdatedOn(),
+			$keys[6] => $this->getRtBalance(),
+			$keys[7] => $this->getMt4Balance(),
+			$keys[8] => $this->getRoiRemainingMonth(),
+			$keys[9] => $this->getRoiPercentage(),
+			$keys[10] => $this->getTotalAmountConvertedWithCp2cp3(),
+			$keys[11] => $this->getShareValue(),
+			$keys[12] => $this->getTotalShareConverted(),
+			$keys[13] => $this->getSignature(),
+			$keys[14] => $this->getRemarks(),
+			$keys[15] => $this->getStatusCode(),
+			$keys[16] => $this->getSwapType(),
+			$keys[17] => $this->getClientAction(),
+			$keys[18] => $this->getCreatedBy(),
+			$keys[19] => $this->getCreatedOn(),
+			$keys[20] => $this->getUpdatedBy(),
+			$keys[21] => $this->getUpdatedOn(),
 		);
 		return $result;
 	}
@@ -831,45 +889,51 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 				$this->setCp3Balance($value);
 				break;
 			case 6:
-				$this->setMt4Balance($value);
+				$this->setRtBalance($value);
 				break;
 			case 7:
-				$this->setRoiRemainingMonth($value);
+				$this->setMt4Balance($value);
 				break;
 			case 8:
-				$this->setRoiPercentage($value);
+				$this->setRoiRemainingMonth($value);
 				break;
 			case 9:
-				$this->setTotalAmountConvertedWithCp2cp3($value);
+				$this->setRoiPercentage($value);
 				break;
 			case 10:
-				$this->setShareValue($value);
+				$this->setTotalAmountConvertedWithCp2cp3($value);
 				break;
 			case 11:
-				$this->setTotalShareConverted($value);
+				$this->setShareValue($value);
 				break;
 			case 12:
-				$this->setSignature($value);
+				$this->setTotalShareConverted($value);
 				break;
 			case 13:
-				$this->setRemarks($value);
+				$this->setSignature($value);
 				break;
 			case 14:
-				$this->setStatusCode($value);
+				$this->setRemarks($value);
 				break;
 			case 15:
-				$this->setSwapType($value);
+				$this->setStatusCode($value);
 				break;
 			case 16:
-				$this->setCreatedBy($value);
+				$this->setSwapType($value);
 				break;
 			case 17:
-				$this->setCreatedOn($value);
+				$this->setClientAction($value);
 				break;
 			case 18:
-				$this->setUpdatedBy($value);
+				$this->setCreatedBy($value);
 				break;
 			case 19:
+				$this->setCreatedOn($value);
+				break;
+			case 20:
+				$this->setUpdatedBy($value);
+				break;
+			case 21:
 				$this->setUpdatedOn($value);
 				break;
 		} 	}
@@ -885,20 +949,22 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setMt4UserName($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCp2Balance($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCp3Balance($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMt4Balance($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setRoiRemainingMonth($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setRoiPercentage($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setTotalAmountConvertedWithCp2cp3($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setShareValue($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setTotalShareConverted($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setSignature($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setRemarks($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setStatusCode($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setSwapType($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCreatedBy($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setCreatedOn($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUpdatedBy($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setUpdatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[6], $arr)) $this->setRtBalance($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMt4Balance($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setRoiRemainingMonth($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setRoiPercentage($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setTotalAmountConvertedWithCp2cp3($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setShareValue($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setTotalShareConverted($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setSignature($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setRemarks($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setStatusCode($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setSwapType($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setClientAction($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCreatedBy($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCreatedOn($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setUpdatedBy($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setUpdatedOn($arr[$keys[21]]);
 	}
 
 	
@@ -912,6 +978,7 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(SssApplicationPeer::MT4_USER_NAME)) $criteria->add(SssApplicationPeer::MT4_USER_NAME, $this->mt4_user_name);
 		if ($this->isColumnModified(SssApplicationPeer::CP2_BALANCE)) $criteria->add(SssApplicationPeer::CP2_BALANCE, $this->cp2_balance);
 		if ($this->isColumnModified(SssApplicationPeer::CP3_BALANCE)) $criteria->add(SssApplicationPeer::CP3_BALANCE, $this->cp3_balance);
+		if ($this->isColumnModified(SssApplicationPeer::RT_BALANCE)) $criteria->add(SssApplicationPeer::RT_BALANCE, $this->rt_balance);
 		if ($this->isColumnModified(SssApplicationPeer::MT4_BALANCE)) $criteria->add(SssApplicationPeer::MT4_BALANCE, $this->mt4_balance);
 		if ($this->isColumnModified(SssApplicationPeer::ROI_REMAINING_MONTH)) $criteria->add(SssApplicationPeer::ROI_REMAINING_MONTH, $this->roi_remaining_month);
 		if ($this->isColumnModified(SssApplicationPeer::ROI_PERCENTAGE)) $criteria->add(SssApplicationPeer::ROI_PERCENTAGE, $this->roi_percentage);
@@ -922,6 +989,7 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(SssApplicationPeer::REMARKS)) $criteria->add(SssApplicationPeer::REMARKS, $this->remarks);
 		if ($this->isColumnModified(SssApplicationPeer::STATUS_CODE)) $criteria->add(SssApplicationPeer::STATUS_CODE, $this->status_code);
 		if ($this->isColumnModified(SssApplicationPeer::SWAP_TYPE)) $criteria->add(SssApplicationPeer::SWAP_TYPE, $this->swap_type);
+		if ($this->isColumnModified(SssApplicationPeer::CLIENT_ACTION)) $criteria->add(SssApplicationPeer::CLIENT_ACTION, $this->client_action);
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_BY)) $criteria->add(SssApplicationPeer::CREATED_BY, $this->created_by);
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_ON)) $criteria->add(SssApplicationPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(SssApplicationPeer::UPDATED_BY)) $criteria->add(SssApplicationPeer::UPDATED_BY, $this->updated_by);
@@ -966,6 +1034,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 		$copyObj->setCp3Balance($this->cp3_balance);
 
+		$copyObj->setRtBalance($this->rt_balance);
+
 		$copyObj->setMt4Balance($this->mt4_balance);
 
 		$copyObj->setRoiRemainingMonth($this->roi_remaining_month);
@@ -985,6 +1055,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		$copyObj->setStatusCode($this->status_code);
 
 		$copyObj->setSwapType($this->swap_type);
+
+		$copyObj->setClientAction($this->client_action);
 
 		$copyObj->setCreatedBy($this->created_by);
 

@@ -10,6 +10,37 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeAutoSwapMemberAction()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::SSS_ID, $this->getRequestParameter('id'));
+        $c->add(SssApplicationPeer::DIST_ID, $this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+        if (!$sssApplication) {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Error801: Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/list');
+        }
+
+        if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
+
+        } else {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Error802: Invalid Action."));
+            return $this->redirect('/offerToSwapRshare/list');
+        }
+
+        $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+        if ($this->getRequestParameter('doAction') == "confirm") {
+            $sssApplication->setClientAction(Globals::STATUS_SSS_CLIENT_ACTION_CONFIRM);
+        } else if ($this->getRequestParameter('doAction') == "decline") {
+            $sssApplication->setClientAction(Globals::STATUS_SSS_CLIENT_ACTION_DECLINE);
+        }
+        $sssApplication->save();
+
+        $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Your application has been submitted successfully."));
+        return $this->redirect('/offerToSwapRshare/list');
+    }
     public function executeDoUpdateAsssPendingToAsssPairing()
     {
         $sssIds = "14248,14405,14546,14561,14567,14708,17084,17089,17223,17461,17465,17485,19162,19335,20534,20536,20669,20671,20673,31256,31367,31616,32849,32850,32983,33008,33010,33284,33289,33382,33418,33506,33523,33548,33563,33577,33746";
@@ -1526,7 +1557,7 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
-        $c->setLimit(50);
+        $c->setLimit(100);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         foreach ($sssApplications as $sssApplication) {
@@ -1569,9 +1600,9 @@ class offerToSwapRshareActions extends sfActions
 
                     $params['array'] = array();
                     $params['login'] = $mt4Id;
-                    var_dump($params);
+                    //var_dump($params);
                     $answer = $mt4request->MakeRequest("getaccountinfo", $params);
-                    var_dump($answer);
+                    //var_dump($answer);
                     print_r("<br><br>");
                     if ($answer['result'] != 1) {
                         var_dump("<br>error:".$answer["reason"]);

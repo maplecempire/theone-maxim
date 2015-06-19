@@ -86,6 +86,10 @@ abstract class Globals {
     const STATUS_SSS_PENDING_ASSS = 'ASSS PENDING';
     const STATUS_SSS_PAIRING_ASSS = 'ASSS PAIRING';
 
+    const STATUS_SSS_CLIENT_ACTION_CONFIRM = 'CONFIRM';
+    const STATUS_SSS_CLIENT_ACTION_PENDING = 'PENDING';
+    const STATUS_SSS_CLIENT_ACTION_DECLINE = 'DECLINE';
+
     /************************************/
     /*****    Maturity Status      ******/
     /************************************/

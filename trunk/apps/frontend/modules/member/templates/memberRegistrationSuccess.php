@@ -38,14 +38,24 @@ $(function() {
         },
         submitHandler: function(form) {
             var epoint = $('#topup_pointAvail').autoNumericGet();
+            var cp4 = $('#topup_cp4Avail').autoNumericGet();
             var epointPackageNeeded = $('#epointNeeded').autoNumericGet();
 
-            if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
-                error("<?php echo __("In-sufficient fund to purchase package.");?>");
-            } else {
-                waiting();
-                form.submit();
-            }/*else {
+            if ($("#payBy").val() == "CP1") {
+                if ($("#topup_pointAvail").val() == 0 || $("#topup_pointAvail").val() == "" || parseFloat(epoint) < parseFloat(epointPackageNeeded)) {
+                    error("<?php echo __("In-sufficient CP1 to purchase package.");?>");
+                    return false;
+                }
+            }
+            if ($("#payBy").val() == "CP4") {
+                if ($("#topup_cp4Avail").val() == 0 || $("#topup_cp4Avail").val() == "" || parseFloat(cp4) < parseFloat(epointPackageNeeded)) {
+                    error("<?php echo __("In-sufficient CP4 to purchase package.");?>");
+                    return false;
+                }
+            }
+            waiting();
+            form.submit();
+            /*else {
                 if ($.trim($("#transactionPassword").val()) == "") {
                     error("Security Password is empty");
                     $("#transactionPassword").focus();
@@ -155,6 +165,13 @@ $(function() {
                     <td>&nbsp;</td>
                 </tr>
 
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('CP4 Account') ?></td>
+                    <td><input type="text" readonly="readonly" id="topup_cp4Avail" size="20px" value="<?php echo number_format($cp4Available, 2); ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
+
                 <tr>
                     <td colspan="4">
                         <?php if ($hasFmcCharges) { ?>
@@ -229,6 +246,19 @@ $(function() {
                         </table>
                     </td>
                 </tr>
+
+                <tr class="tbl_form_row_even">
+                    <td>&nbsp;</td>
+                    <td><?php echo __('Pay by') ?></td>
+                    <td>
+                        <select name="payBy" id="payBy">
+                            <option value="CP1">CP1</option>
+                            <option value="CP4">CP4</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
 
                 <tr class="tbl_form_row_even" style="display: none">
                     <td>&nbsp;</td>
