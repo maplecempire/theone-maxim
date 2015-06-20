@@ -2768,8 +2768,13 @@ class offerToSwapRshareActions extends sfActions
                 /*if (!$existRoi) {
                     continue;
                 }*/
-
-                $arr[] = $arrResult['mt4_user_name'];
+                $c = new Criteria();
+                $c->add(SssApplicationPeer::DIST_ID, $arrResult['dist_id']);
+                $c->add(SssApplicationPeer::MT4_USER_NAME, $arrResult['mt4_user_name']);
+                $sssApplication = SssApplicationPeer::doSelectOne($c);
+                if (!$sssApplication) {
+                    $arr[] = $arrResult['mt4_user_name'];
+                }
             }
         }
         return $arr;

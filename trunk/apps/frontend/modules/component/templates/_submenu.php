@@ -73,6 +73,9 @@ if (date("d") >= 1 && $close == true) {
             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
                 <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
             </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/transferCp4"><span><?php echo __('Transfer CP4'); ?></span><img src="/images/new_icon.gif"></a>
+            </li>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="font-weight: bold;">
                 <a href="/member/packageUpgrade"><span><?php echo __('Package Upgrade'); ?></span></a>
@@ -253,7 +256,7 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/iAccount/index") ?>"><span><?php echo __('Apply i-Account'); ?></span></a>
         </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209" style="display: none;">
             <a href="<?php echo url_for("/iAccount/internationalTransfer") ?>"><span><?php echo __('i-Account International Transfer'); ?></span></a>
         </li>
         <?php //} ?>

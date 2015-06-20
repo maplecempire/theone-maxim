@@ -180,7 +180,7 @@ class financeActions extends sfActions
         $cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
         $c = new Criteria();
         $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
-        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
         $c->setLimit(100);
         $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
 
@@ -238,7 +238,7 @@ class financeActions extends sfActions
         $cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
         $c = new Criteria();
         $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
-        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PENDING);
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
         $c->setLimit(100);
         $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
 
