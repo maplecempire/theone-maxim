@@ -177,14 +177,39 @@ class financeActions extends sfActions
     }
     public function executeAutoRejectTwosasaCp3Withdrawal()
     {
-        $cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
+        /*$cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
         $c = new Criteria();
         $c->add(MlmCp3WithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
         $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
         $c->setLimit(100);
-        $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
+        $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);*/
 
-        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+        $query = "SELECT withdraw_id,
+            dist_id,
+            deduct,
+            amount,
+            bank_in_to,
+            status_code,
+            approve_reject_datetime,
+            remarks,
+            created_by,
+            created_on,
+            updated_by,
+            updated_on,
+            leader_dist_id
+        FROM maxim.mlm_cp3_withdraw
+            WHERE leader_dist_id IN (254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595)
+                AND status_code = 'PROCESSING'";
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPK($arr['withdraw_id']);
+
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
             $remark = "";
 
@@ -193,6 +218,10 @@ class financeActions extends sfActions
                 $con->begin();
                 print_r("<br>".$remark);
                 $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
+                    continue;
+                }
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
@@ -235,14 +264,38 @@ class financeActions extends sfActions
     }
     public function executeAutoRejectTwosasaCp2Withdrawal()
     {
-        $cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
+        /*$cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
         $c = new Criteria();
         $c->add(MlmEcashWithdrawPeer::LEADER_DIST_ID, $cp3IdArray, Criteria::IN);
         $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
         $c->setLimit(100);
-        $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
+        $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);*/
+        $query = "SELECT withdraw_id,
+            dist_id,
+            deduct,
+            amount,
+            bank_in_to,
+            status_code,
+            approve_reject_datetime,
+            remarks,
+            created_by,
+            created_on,
+            updated_by,
+            updated_on,
+            leader_dist_id
+        FROM maxim.mlm_ecash_withdraw
+            WHERE leader_dist_id IN (254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595)
+                AND status_code = 'PROCESSING'";
 
-        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mlm_ecash_withdraw = MlmEcashWithdrawPeer::retrieveByPK($arr['withdraw_id']);
+        //foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
             $remark = "";
 
@@ -251,6 +304,10 @@ class financeActions extends sfActions
                 $con->begin();
                 print_r("<br>".$remark);
                 $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
+                    continue;
+                }
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
