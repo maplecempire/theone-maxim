@@ -235,14 +235,16 @@ function calculateRshare() {
                 <td valign="top" align="right"><br><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
                 <td valign="top"><br><?php if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS) { echo "COOLING-OFF PERIOD"; } else { echo $sssApplication->getStatusCode(); } ?>
                 <?php
-                    if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
+                    /*if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
                         echo "<br><br><span style='color:blue'>Client Action: ".$sssApplication->getClientAction()."</span>";
-                    }
+                    }*/
                 ?>
                 </td>
             </tr>
             <?php
-                    if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
+                    $closeDecline = true;
+                    if ($closeDecline == false) {
+                        if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
             ?>
                         <tr class="row<?php echo $trStyle; ?>" align="right">
                             <td colspan="7">
@@ -251,6 +253,7 @@ function calculateRshare() {
                             </td>
                         </tr>
             <?php
+                        }
                     }
                 }
             } else {

@@ -127,6 +127,7 @@ tinyMCE.init({
                         	<option value='Contract Maturity'><?php echo __('Contract Maturity') ?></option>
                         	<option value='Maxim Visa Card'><?php echo __('Maxim Visa Card') ?></option>
                         	<option value='Events/Promotions'><?php echo __('Events/Promotions') ?></option>
+                        	<option value='Decline Auto Swap'><?php echo __('Decline Auto Swap') ?></option>
                         	<option value='Others'><?php echo __('Others') ?></option>
                         </select>
                         <br>

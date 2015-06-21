@@ -102,6 +102,13 @@ class offerToSwapRshareActions extends sfActions
                     AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
                 WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";
 
+        $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
+                    INNER JOIN  mlm_roi_dividend roi2 ON roi.mt4_user_name = roi2.mt4_user_name
+                    INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
+                AND dist.tree_structure like '%|270844|%'
+                    AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
+                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";
+
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();

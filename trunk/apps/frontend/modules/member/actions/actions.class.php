@@ -2103,7 +2103,7 @@ class memberActions extends sfActions
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
                         return $this->redirect('/member/purchasePackageViaTree');
                     }
-                    if ($payBy == "CP4" && ($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance) {
+                    if ($payBy == "CP4" && ($amountNeeded + $packagePriceCharges) > $ledgerCp4Balance) {
                         $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP4 amount"));
                         return $this->redirect('/member/purchasePackageViaTree');
                     }
