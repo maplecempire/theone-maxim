@@ -138,6 +138,7 @@ function reassignDatagridEventAttr(){
 	                        	<option value='Contract Maturity'>Contract Maturity</option>
 	                        	<option value='Maxim Visa Card'>Maxim Visa Card</option>
 	                        	<option value='Events/Promotions'>Events/Promotions</option>
+	                        	<option value='Decline Auto Swap'>Decline Auto Swap</option>
 	                        	<option value='Others'>Others</option>
 	                        </select>
                             </td>

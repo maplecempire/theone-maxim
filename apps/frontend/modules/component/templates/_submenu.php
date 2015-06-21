@@ -472,7 +472,20 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
-        <?php } ?>
+        <?php } else {
+        $pos = strrpos($distDB->getTreeStructure(), "|265817|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+        ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
+        </li>
+        <?php }
+        } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/cp2cp3Swap"><span><?php echo __('Swap with Cp2 / Cp3'); ?><img src="/images/new_icon.gif"></a>
         </li>
