@@ -1123,6 +1123,7 @@
             <trans-unit><source>MT4 Balance</source><target>MT4余额</target></trans-unit>
             <trans-unit><source>Contract date</source><target>合同日期</target></trans-unit>
             <trans-unit><source>More Example</source><target>更多示例</target></trans-unit>
+            <trans-unit><source>Pay by</source><target>付款方式</target></trans-unit>
             <trans-unit><source>Super e-Share Swap</source><target>超级电子股份转换</target></trans-unit>
             <trans-unit><source>Your application has been submitted and pending for approval.</source><target>您的申请已经成功提交。</target></trans-unit>
         </body>
