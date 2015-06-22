@@ -198,7 +198,7 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_cp3_withdraw
-            WHERE leader_dist_id IN (254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595)
+            WHERE leader_dist_id IN (61,1561,257250)
                 AND status_code = 'PROCESSING'";
 
         //var_dump($query);
@@ -284,7 +284,7 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_ecash_withdraw
-            WHERE leader_dist_id IN (254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595)
+            WHERE leader_dist_id IN (61,1561,257250)
                 AND status_code = 'PROCESSING'";
 
         //var_dump($query);

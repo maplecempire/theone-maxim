@@ -67,7 +67,7 @@ class offerToSwapRshareActions extends sfActions
                 $ggMemberRwalletRecord->setType("credit");
                 $ggMemberRwalletRecord->setAmount($totalRshare);
                 $ggMemberRwalletRecord->setBal($rwalletBalance);
-                $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3)");
+                $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3), REF:".$sssApplication->getSssId());
                 $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                 $ggMemberRwalletRecord->save();
 
@@ -315,6 +315,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setRoiPercentage(0);
             $sss_application->setShareValue(0.8);
             $sss_application->setTotalShareConverted($totalRshare);
+            $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
             $sss_application->setRemarks($remarks);
             $sss_application->setSignature("");
             $sss_application->setStatusCode(Globals::STATUS_SSS_SUCCESS);
@@ -333,7 +334,7 @@ class offerToSwapRshareActions extends sfActions
             $ggMemberRwalletRecord->setType("credit");
             $ggMemberRwalletRecord->setAmount($totalRshare);
             $ggMemberRwalletRecord->setBal($rwalletBalance);
-            $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3)");
+            $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3), REF:".$sss_application->getSssId());
             $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
             $ggMemberRwalletRecord->save();
 
@@ -882,7 +883,7 @@ class offerToSwapRshareActions extends sfActions
                             $ggMemberRwalletRecord->setType("credit");
                             $ggMemberRwalletRecord->setAmount($totalRshare);
                             $ggMemberRwalletRecord->setBal($rwalletBalance);
-                            $ggMemberRwalletRecord->setDescr("Super Auto Swap");
+                            $ggMemberRwalletRecord->setDescr("Super Auto Swap, REF:".$sss_application->getSssId());
                             $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                             $ggMemberRwalletRecord->save();
 
@@ -1375,9 +1376,9 @@ class offerToSwapRshareActions extends sfActions
                                     }
                                 }
 
-                                if ($dist && $dist->getCloseAccount() == "Y") {
+                                //if ($dist && $dist->getCloseAccount() == "Y") {
 
-                                } else {
+                                //} else {
                                     $tbl_account_ledger2 = new MlmAccountLedger();
                                     $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT);
                                     $tbl_account_ledger2->setDistId($distId);
@@ -1392,6 +1393,7 @@ class offerToSwapRshareActions extends sfActions
 
                                     $dist = MlmDistributorPeer::retrieveByPk($distId);
                                     $bal = $dist->getRtwallet() + $pairingBonusAmount;
+
                                     $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
                                     $gg_member_rtwallet_record->setUid($distId);
                                     $gg_member_rtwallet_record->setActionType('GDB SSS from Maxim');
@@ -1406,7 +1408,7 @@ class offerToSwapRshareActions extends sfActions
                                     $dist->save();
 
                                     $this->mirroringAccountLedger($tbl_account_ledger2, "65 SSS");
-                                }
+                                //}
                             }
                         }
                     }
@@ -1709,7 +1711,7 @@ class offerToSwapRshareActions extends sfActions
                                             $ggMemberRwalletRecord->setType("credit");
                                             $ggMemberRwalletRecord->setAmount($totalRshare);
                                             $ggMemberRwalletRecord->setBal($rwalletBalance);
-                                            $ggMemberRwalletRecord->setDescr("Auto Super Share Swap");
+                                            $ggMemberRwalletRecord->setDescr("Auto Super Share Swap, REF:".$sssApplication->getSssId());
                                             $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                                             $ggMemberRwalletRecord->save();
 
@@ -2074,7 +2076,7 @@ class offerToSwapRshareActions extends sfActions
                     $ggMemberRwalletRecord->setType("credit");
                     $ggMemberRwalletRecord->setAmount($totalRshare);
                     $ggMemberRwalletRecord->setBal($rwalletBalance);
-                    $ggMemberRwalletRecord->setDescr("Super Share Swap");
+                    $ggMemberRwalletRecord->setDescr("Super Share Swap, REF:".$sssApplication->getSssId());
                     $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                     $ggMemberRwalletRecord->save();
 
@@ -2790,7 +2792,7 @@ class offerToSwapRshareActions extends sfActions
     function getSwapedMt4($distId, $mt4UserName)
     {
         $query = "SELECT sss_id, dist_id, dividend_id, mt4_user_name, cp2_balance, cp3_balance, rt_balance, mt4_balance, roi_remaining_month, roi_percentage, total_amount_converted_with_cp2cp3, share_value, total_share_converted, signature, remarks, status_code, swap_type, created_by, created_on, updated_by, updated_on
-            FROM sss_application where dist_id = ".$distId." AND status_code IN ('SUCCESS','ASSS PAIRING','PENDING','ASSS PAIRING','PAIRING')";
+            FROM sss_application where dist_id = ".$distId." AND status_code IN ('SUCCESS','ASSS PAIRING','PENDING','ASSS PAIRING','PAIRING','ERROR')";
 
         if ($mt4UserName != "") {
             $query = $query . " AND mt4_user_name = ?";
