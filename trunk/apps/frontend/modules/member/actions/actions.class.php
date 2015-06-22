@@ -4368,7 +4368,7 @@ class memberActions extends sfActions
                         $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $sss_application->save();
 
-                        $rwalletBalance = 0 + $totalRshare;
+                        $rwalletBalance = $mlm_distributor->getRwallet() + $totalRshare;
                         // credited S4
                         $ggMemberRwalletRecord = new GgMemberRwalletRecord();
                         $ggMemberRwalletRecord->setUid($sss_application->getDistId());
@@ -4377,7 +4377,7 @@ class memberActions extends sfActions
                         $ggMemberRwalletRecord->setType("credit");
                         $ggMemberRwalletRecord->setAmount($totalRshare);
                         $ggMemberRwalletRecord->setBal($rwalletBalance);
-                        $ggMemberRwalletRecord->setDescr("Super Share Swap (CP4)");
+                        $ggMemberRwalletRecord->setDescr("Super Share Swap (CP4), REF: ". $sss_application->getSssId());
                         $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
                         $ggMemberRwalletRecord->save();
 
@@ -12963,6 +12963,7 @@ We look forward to your custom in the near future. Should you have any queries, 
         if ($this->getRequestParameter('transactionPassword') <> "" && $this->getRequestParameter('pid') <> "") {
             $ledgerECashBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
             $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
 
             //$hasFmcCharges = in_array($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID), array(15, 60));
             /*$hasFmcCharges = false;
@@ -13012,6 +13013,10 @@ We look forward to your custom in the near future. Should you have any queries, 
                 $amountNeeded = $this->getRequestParameter('specialPackagePrice');
             }*/
 
+            $payBy = $this->getRequestParameter('payBy', 'CP1');
+            if ($payBy == "CP4") {
+                $paymentType = "CP4";
+            }
             $packagePriceCharges = ($hasFmcCharges ? $amountNeeded * 10 / 100 : 0); // 10% FMC charges.
 
             if (($amountNeeded + $packagePriceCharges) > $ledgerECashBalance && $paymentType == "ecash") {
@@ -13019,6 +13024,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                 return $this->redirect('/member/packageUpgrade');
             } else if (($amountNeeded + $packagePriceCharges) > $ledgerEPointBalance && $paymentType == "epoint") {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP1 amount"));
+                return $this->redirect('/member/packageUpgrade');
+            } else if (($amountNeeded + $packagePriceCharges) > $cp4Available && $paymentType == "CP4") {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("In-sufficient CP4 amount"));
                 return $this->redirect('/member/packageUpgrade');
             } else if (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
                 $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Security password"));
@@ -13039,6 +13047,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     } elseif ($paymentType == "epoint") {
                         $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                         $tbl_account_ledger->setBalance($ledgerEPointBalance - $amountNeeded);
+                    } elseif ($paymentType == "CP4") {
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_CP4);
+                        $tbl_account_ledger->setBalance($cp4Available - $amountNeeded);
                     }
                     $tbl_account_ledger->setDebit($amountNeeded);
                     $tbl_account_ledger->setRemark("PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
@@ -13063,6 +13074,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                         } elseif ($paymentType == "epoint") {
                             $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
                             $tbl_account_ledger->setBalance($ledgerECashBalance - $amountNeeded - $packagePriceCharges);
+                        } elseif ($paymentType == "CP4") {
+                            $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_CP4);
+                            $tbl_account_ledger->setBalance($cp4Available - $amountNeeded - $packagePriceCharges);
                         }
                         $tbl_account_ledger->setDebit($packagePriceCharges);
                         $tbl_account_ledger->setRemark("FMC CHARGES 10% FOR PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
@@ -13073,6 +13087,56 @@ We look forward to your custom in the near future. Should you have any queries, 
                         $tbl_account_ledger->save();
 
                         $this->mirroringAccountLedger($tbl_account_ledger, "86a");
+                    }
+
+                    $mt4Balance = $amountNeeded;
+                    $roiRemainingMonth = 18;
+                    $roiPercentage = $selectedPackage->getMonthlyPerformance();
+                    $mt4UserName = "CP4";
+
+                    $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+                    $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+                    $totalAmountConvertedWithCp2Cp3 = round($totalAmountConverted);
+
+                    $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+
+                    $sss_application = new SssApplication();
+                    $sss_application->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $sss_application->setDividendId(0);
+                    $sss_application->setMt4UserName($mt4UserName);
+                    $sss_application->setCp2Balance(0);
+                    $sss_application->setCp3Balance(0);
+                    $sss_application->setMt4Balance($mt4Balance);
+                    $sss_application->setRoiRemainingMonth($roiRemainingMonth);
+                    $sss_application->setRoiPercentage($roiPercentage);
+                    $sss_application->setShareValue(0.8);
+                    $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
+                    $sss_application->setTotalShareConverted($totalRshare);
+                    $sss_application->setRemarks("");
+                    $sss_application->setSignature($distDB->getDistributorCode());
+                    $sss_application->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                    $sss_application->setSwapType("CP4");
+                    $sss_application->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sss_application->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $sss_application->save();
+
+                    $rwalletBalance = $distDB->getRwallet() + $totalRshare;
+                    // credited S4
+                    $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                    $ggMemberRwalletRecord->setUid($sss_application->getDistId());
+                    $ggMemberRwalletRecord->setAid(0);
+                    $ggMemberRwalletRecord->setActionType("CP4");
+                    $ggMemberRwalletRecord->setType("credit");
+                    $ggMemberRwalletRecord->setAmount($totalRshare);
+                    $ggMemberRwalletRecord->setBal($rwalletBalance);
+                    $ggMemberRwalletRecord->setDescr("Super Share Swap (CP4), REF: ". $sss_application->getSssId());
+                    $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberRwalletRecord->save();
+
+                    if ($distDB) {
+                        $distDB->setRwallet($rwalletBalance);
+                        $distDB->save();
                     }
 
                     if ($paymentType == "ecash") {
@@ -13087,7 +13151,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $mlmPackageUpgradeHistory->setTransactionCode(Globals::ACCOUNT_LEDGER_ACTION_PACKAGE_UPGRADE);
                     $mlmPackageUpgradeHistory->setAmount($amountNeeded);
                     $mlmPackageUpgradeHistory->setPackageId($selectedPackage->getPackageId());
-                    $mlmPackageUpgradeHistory->setStatusCode(Globals::STATUS_ACTIVE);
+                    if ($paymentType == "CP4") {
+                        $mlmPackageUpgradeHistory->setStatusCode(Globals::STATUS_COMPLETE);
+                    } else {
+                        $mlmPackageUpgradeHistory->setStatusCode(Globals::STATUS_ACTIVE);
+                    }
                     $mlmPackageUpgradeHistory->setRemarks("PACKAGE UPGRADED FROM ".$distPackage->getPackageName()." => ".$selectedPackage->getPackageName());
                     $mlmPackageUpgradeHistory->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlmPackageUpgradeHistory->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
@@ -13406,6 +13474,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 
             $this->systemCurrency = "USD";
             $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+            $this->cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
             $this->packageDBs = $packageDBs;
             $this->distPackage = $distPackage;
             $this->distDB = $distDB;

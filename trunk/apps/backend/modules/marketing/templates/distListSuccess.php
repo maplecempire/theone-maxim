@@ -445,7 +445,7 @@ $(function(){
                             error(data.errorMsg);
                         } else {
                             $("#dgAddPanel").dialog('close');
-                            datagrid.fnDraw();
+                            //datagrid.fnDraw();
                             alert("Record Save Successfully.");
                         }
                     },
