@@ -198,7 +198,7 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_cp3_withdraw
-            WHERE leader_dist_id IN (61,1561,257250)
+            WHERE leader_dist_id IN (481,135,558,1797)
                 AND status_code = 'PROCESSING'";
 
         //var_dump($query);
@@ -259,7 +259,7 @@ class financeActions extends sfActions
             }
         }
 
-        print_r("<br>executeAutoRejectLocalBankCp2Withdrawal Done");
+        print_r("<br>executeAutoRejectTwosasaCp3Withdrawal Done");
         return sfView::HEADER_ONLY;
     }
     public function executeAutoRejectTwosasaCp2Withdrawal()
@@ -284,7 +284,7 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_ecash_withdraw
-            WHERE leader_dist_id IN (61,1561,257250)
+            WHERE leader_dist_id IN (481,135,558,1797)
                 AND status_code = 'PROCESSING'";
 
         //var_dump($query);
@@ -345,20 +345,21 @@ class financeActions extends sfActions
             }
         }
 
-        print_r("<br>executeAutoRejectLocalBankCp2Withdrawal Done");
+        print_r("<br>executeAutoRejectTwosasaCp2Withdrawal Done");
         return sfView::HEADER_ONLY;
     }
-    public function executeAutoRejectLocalBankCp2Withdrawal()
+    public function executeAutoRejectLocalBankCp3Withdrawal()
     {
-        $cp3IdArray = explode(',', "10810,10823,10839,10873,10880,10881,10899,10903,10931,10955,10959,10989,11012,11013,11015,11025,11033,11066,11068,11070,11085,11087,11099,11100,11115,11120,11125,11132");
+        $cp3IdArray = explode(',', "259599,260669,260810,263919,266939,275304,285947,291355,312608");
 
         $c = new Criteria();
         $c->add(MlmCp3WithdrawPeer::WITHDRAW_ID, $cp3IdArray, Criteria::IN);
+        $c->add(MlmCp3WithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
         $mlmCp3Withdrawals = MlmCp3WithdrawPeer::doSelect($c);
 
         foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
-            $remark = "WITHDRAWAL MUST SUBMIT WITHIN 1st WEEK OF MONTH";
+            $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
             try {
@@ -386,6 +387,64 @@ class financeActions extends sfActions
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
+                    $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoRejectLocalBankCp3Withdrawal Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeAutoRejectLocalBankCp2Withdrawal()
+    {
+        $cp3IdArray = explode(',', "3417");
+
+        $c = new Criteria();
+        $c->add(MlmEcashWithdrawPeer::WITHDRAW_ID, $cp3IdArray, Criteria::IN);
+        $c->add(MlmEcashWithdrawPeer::STATUS_CODE, Globals::WITHDRAWAL_PROCESSING);
+        $mlmCp3Withdrawals = MlmEcashWithdrawPeer::doSelect($c);
+
+        foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
+            print_r("<br>".$mlm_ecash_withdraw->getDistId());
+            $remark = "";
+
+            $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+                $statusCode = Globals::WITHDRAWAL_REJECTED ;
+
+                $mlm_ecash_withdraw->setStatusCode($statusCode);
+                $mlm_ecash_withdraw->setRemarks($remark);
+                $mlm_ecash_withdraw->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+
+                if (Globals::WITHDRAWAL_PAID == $statusCode || Globals::WITHDRAWAL_REJECTED == $statusCode)
+                    $mlm_ecash_withdraw->setApproveRejectDatetime(date("Y/m/d h:i:s A"));
+
+                $mlm_ecash_withdraw->save();
+
+                if (Globals::WITHDRAWAL_REJECTED == $statusCode) {
+                    $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                    $distId = $mlm_ecash_withdraw->getDistId();
+                    /******************************/
+                    /*  Account
+                    /******************************/
+                    $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_REFUND);
                     $mlm_account_ledger->setRemark("REFUND (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
                     $mlm_account_ledger->setCredit($refundEcash);
