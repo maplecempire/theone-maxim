@@ -781,6 +781,14 @@ class downloadActions extends sfActions
         $prim_cust_sign = $mlmPackageContract->getInitialSignature();
         $prim_cust_name = $mlmPackageContract->getFullName();
 
+        /*$client_name = "";
+        $account_id = "";
+        $init_fund = "";
+        $auth_day = "";
+        $auth_month = "";
+        $auth_year = "";
+        $prim_cust_sign = "";
+        $prim_cust_name = "";*/
         // For old/new contract.
 //        $html = "<html>
 //<head>

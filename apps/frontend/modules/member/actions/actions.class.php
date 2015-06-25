@@ -839,8 +839,126 @@ class memberActions extends sfActions
         }
     }
 
+	public function executeConvertToCp4()
+    {
+        $this->cp1AccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->cp2AccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_ECASH);
+        $this->cp3AccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+        $convertAmount = $this->getRequestParameter('convertAmount');
+        $convertAmount = str_replace(",", "", $convertAmount);
+        $this->toHideCp2Cp3Transfer = false;
+        $this->convertRate = 1;
+        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+        $muUtil = MUserUtil::init($this);
+
+        if (is_numeric($convertAmount) && $convertAmount > 0 && $this->getRequestParameter('transactionPassword') <> "") {
+            $tbl_user = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
+
+            $ledgerAccountBalance = 0;
+            $accountType = Globals::ACCOUNT_TYPE_EPOINT;
+            if ($this->getRequestParameter('convertOption') == "CP1") {
+                $ledgerAccountBalance = $this->cp1AccountBalance;
+                $accountType = Globals::ACCOUNT_TYPE_EPOINT;
+            } else if ($this->getRequestParameter('convertOption') == "CP2") {
+                $ledgerAccountBalance = $this->cp2AccountBalance;
+                $accountType = Globals::ACCOUNT_TYPE_ECASH;
+            } else if ($this->getRequestParameter('convertOption') == "CP3") {
+                $ledgerAccountBalance = $this->cp3AccountBalance;
+                $accountType = Globals::ACCOUNT_TYPE_MAINTENANCE;
+            }
+
+            if ($convertAmount > $ledgerAccountBalance) {
+                $msg = $this->getContext()->getI18N()->__("In-sufficient fund.");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/convertToCp4", 0, $msg);
+            } elseif (strtoupper($tbl_user->getUserpassword2()) <> strtoupper($this->getRequestParameter('transactionPassword'))) {
+                $msg = $this->getContext()->getI18N()->__("Invalid Security password");
+                $this->setFlash('errorMsg', $msg);
+                return $muUtil->updateLog($msg)->response("/member/convertToCp4", 0, $msg);
+            } elseif ($convertAmount > 0) {
+                $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+                try {
+                    $con->begin();
+
+                    $ledgerEPointBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
+
+                    $tbl_account_ledger = new MlmAccountLedger();
+                    $tbl_account_ledger->setAccountType($accountType);
+                    $tbl_account_ledger->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT_CP4);
+                    $tbl_account_ledger->setCredit(0);
+                    $tbl_account_ledger->setDebit($convertAmount);
+                    $tbl_account_ledger->setRemark("CONVERT ".$this->getRequestParameter('convertOption')." TO CP4");
+                    $tbl_account_ledger->setBalance($ledgerAccountBalance - $convertAmount);
+                    $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger, "43 cp4");
+
+                    $epointConvertedAmount = $convertAmount;
+
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_CP4);
+                    $tbl_account_ledger2->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_CONVERT);
+                    $tbl_account_ledger2->setCredit($epointConvertedAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("CONVERT ".$this->getRequestParameter('convertOption')." TO CP4, ".$this->getRequestParameter('convertOption').":".$convertAmount);
+                    $tbl_account_ledger2->setBalance($ledgerEPointBalance + $epointConvertedAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setRefererId($tbl_account_ledger->getAccountId());
+                    $tbl_account_ledger2->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger2->save();
+
+                    $tbl_account_ledger->setRefererId($tbl_account_ledger2->getAccountId());
+                    $tbl_account_ledger->setRefererType("ACCOUNT LEDGER");
+                    $tbl_account_ledger->save();
+
+                    $this->mirroringAccountLedger($tbl_account_ledger2, "44 cp4");
+
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $this->revalidateAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+
+                    $con->commit();
+                    $this->setFlash('successMsg', $this->getContext()->getI18N()->__("CP3 convert to CP1 successful."));
+
+                    return $muUtil->response("/member/convertToCp4", 1);
+                } catch (PropelException $e) {
+                    $con->rollback();
+                    throw $e;
+                }
+            }
+        } elseif ($muUtil->isMobileUser()) {
+            $muObj = new MUserObj();
+            $muObj->cp3Balance = number_format($this->ledgerAccountBalance, 2);
+            $muObj->convertRate = $this->convertRate;
+            $muObj->saveToSession($this);
+
+            return $this->forward("mobileService", "convertToCp4");
+        }
+    }
+
     public function executeConvertRPToCp1()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256205 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 164 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 264845 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 273056 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256078 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1797 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 260249 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270596 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 142 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255882) {
+
+        } else {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/summary');
+        }
         $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
         //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 
@@ -6640,16 +6758,16 @@ We look forward to your custom in the near future. Should you have any queries, 
         // Maturity
         $array = explode(',', Globals::STATUS_MATURITY_ON_HOLD.",".Globals::STATUS_MATURITY_PENDING);
 
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(NotificationOfMaturityPeer::DIST_ID, $distributor->getDistributorId());
         $c->add(NotificationOfMaturityPeer::STATUS_CODE, $array, Criteria::IN);
-        $this->notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);
+        $this->notificationOfMaturity = NotificationOfMaturityPeer::doSelectOne($c);*/
 
         $mt4Balance = 0;
         $mt4BalanceDate = "";
         $needTopup = "Y";
         $dateUtil = new DateUtil();
-        if ($this->notificationOfMaturity) {
+        /*if ($this->notificationOfMaturity) {
             $mt4Balance = $this->getMt4Balance($distributor->getDistributorId(), $this->notificationOfMaturity->getMt4UserName());
 
             if ($mt4Balance != null) {
@@ -6666,7 +6784,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $needTopup = "N";
                 }
             }
-        }
+        }*/
         $this->mt4Balance = $mt4Balance;
         $this->mt4BalanceDate = $mt4BalanceDate;
         $this->needTopup = $needTopup;
@@ -9521,6 +9639,22 @@ We look forward to your custom in the near future. Should you have any queries, 
 	
     public function executeTransferRP()
     {
+        if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256205 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 164 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 264845 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 273056 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256078 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1797 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 260249 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270596 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 142 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255882) {
+
+        } else {
+            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Action."));
+            return $this->redirect('/member/summary');
+        }
         $rp = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_RP);
         //$debitAccount = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_DEBIT);
 

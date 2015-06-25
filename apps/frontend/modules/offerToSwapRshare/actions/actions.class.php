@@ -879,7 +879,7 @@ class offerToSwapRshareActions extends sfActions
                             $ggMemberRwalletRecord = new GgMemberRwalletRecord();
                             $ggMemberRwalletRecord->setUid($sss_application->getDistId());
                             $ggMemberRwalletRecord->setAid(0);
-                            $ggMemberRwalletRecord->setActionType("ASS");
+                            $ggMemberRwalletRecord->setActionType("ASSS");
                             $ggMemberRwalletRecord->setType("credit");
                             $ggMemberRwalletRecord->setAmount($totalRshare);
                             $ggMemberRwalletRecord->setBal($rwalletBalance);
@@ -1140,14 +1140,16 @@ class offerToSwapRshareActions extends sfActions
         $swapType = "SSS";
         print_r("SSS");
         print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
-        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>Mt4 (< 12): ".number_format($this->totalSumOfSssByMonth("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType, "<"), 2));
+        print_r("<br>Mt4 (>= 12): ".number_format($this->totalSumOfSssByMonth("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType, ">="), 2));
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
 
         $swapType = "SES";
         print_r("<br><br>SES");
         print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
-        print_r("<br>Mt4: ".number_format($this->totalSumOfSss("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
+        print_r("<br>Mt4 (< 12): ".number_format($this->totalSumOfSssByMonth("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType, "<"), 2));
+        print_r("<br>Mt4 (>= 12): ".number_format($this->totalSumOfSssByMonth("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType, ">="), 2));
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
 //        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
@@ -1695,7 +1697,7 @@ class offerToSwapRshareActions extends sfActions
                                     $ggMemberWallet->setRt2wallet($balance);
                                     $ggMemberWallet->save();
                                 } else {
-                                    if ($sssApplication->getSwapType() == "ASSS") {
+                                    if ($sssApplication->getSwapType() == "ASS") {
                                         //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
                                         $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
                                         if ($distributorDB) {
@@ -1761,10 +1763,16 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeRunGeneratePairingPoint()
+    {
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDoGeneratePairingPoint()
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
+        //$c->add(SssApplicationPeer::DIST_ID, 260039);
         $c->setLimit(50);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
@@ -1782,6 +1790,7 @@ class offerToSwapRshareActions extends sfActions
                 $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
                 $roiRemainingMonth = 0;
                 if ($roiArr == null) {
+                    print_r("<br>skip::: ".$distributorDB->getDistributorId());
                     continue;
                 }
                 $entitledPairing = true;
@@ -1790,10 +1799,13 @@ class offerToSwapRshareActions extends sfActions
                 } else {
                     $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
                 }
+                if ($roiArr['idx'] <= 0) {
+                    $roiRemainingMonth = 0;
+                }
                 if ($roiArr['idx'] <= 12) {
                     $entitledPairing = false;
                 }
-                if ($roiArr['idx'] >= 19 && $roiArr['idx'] <= 30) {
+                if ($roiArr['idx'] >= 19 && $roiArr['idx'] <= 36) {
                     $entitledPairing = false;
                 }
                 $roiPercentage = $sssApplication->getRoiPercentage();
@@ -2092,7 +2104,201 @@ class offerToSwapRshareActions extends sfActions
                 $con->commit();
             } catch (PropelException $e) {
                 $con->rollback();
-                throw $e;
+                var_dump($e);
+                //throw $e;
+                break;
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeDoRerunRshare()
+    {
+        $c = new Criteria();
+        //$c->add(SssApplicationPeer::DIST_ID, 262535);
+        $c->add(SssApplicationPeer::STATUS_CODE, "RERUN");
+        $c->add(SssApplicationPeer::SWAP_TYPE, "SES", Criteria::NOT_EQUAL);
+        $c->setLimit(100);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        /******************************/
+        /*  store Pairing points
+        /******************************/
+        print_r("<br>".count($sssApplications));
+        foreach ($sssApplications as $sssApplication) {
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                $mt4Balance = $sssApplication->getMt4balance();
+                $dividendId = $sssApplication->getDividendId();
+
+                print_r("<br><br>Dist:".$sssApplication->getDistId().",swap type:".$sssApplication->getSwapType());
+                if ($sssApplication->getSwapType() == "ASS") {
+                    print_r("<br>ASS");
+                    if ($distributorDB) {
+                        $rwalletBalance = $this->getTotalOfRShare($sssApplication->getDistId());
+
+                        $totalRshare = $sssApplication->getTotalShareConverted();
+                        $rwalletBalance = $rwalletBalance + $totalRshare;
+                        // credited S4
+                        $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                        $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                        $ggMemberRwalletRecord->setAid(0);
+                        $ggMemberRwalletRecord->setActionType("ASSS");
+                        $ggMemberRwalletRecord->setType("credit");
+                        $ggMemberRwalletRecord->setAmount($totalRshare);
+                        $ggMemberRwalletRecord->setBal($rwalletBalance);
+                        $ggMemberRwalletRecord->setDescr("Auto Super Share Swap, REF:".$sssApplication->getSssId());
+                        $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                        $ggMemberRwalletRecord->save();
+
+                        if ($distributorDB) {
+                            $distributorDB->setRwallet($rwalletBalance);
+                            $distributorDB->save();
+                        }
+
+                        $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                        $sssApplication->save();
+                    }
+                } else if ($sssApplication->getSwapType() == "CP4") {
+                    print_r("<br>CP4");
+                    $totalRshare = $sssApplication->getTotalShareConverted();
+                    $rwalletBalance = $this->getTotalOfRShare($sssApplication->getDistId()) + $totalRshare;
+                    // credited S4
+                    $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                    $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                    $ggMemberRwalletRecord->setAid(0);
+                    $ggMemberRwalletRecord->setActionType("CP4");
+                    $ggMemberRwalletRecord->setType("credit");
+                    $ggMemberRwalletRecord->setAmount($totalRshare);
+                    $ggMemberRwalletRecord->setBal($rwalletBalance);
+                    $ggMemberRwalletRecord->setDescr("Super Share Swap (CP4), REF: ". $sssApplication->getSssId());
+                    $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberRwalletRecord->save();
+
+                    if ($distributorDB) {
+                        $distributorDB->setRwallet($rwalletBalance);
+                        $distributorDB->save();
+                    }
+
+                    $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                    $sssApplication->save();
+                } else {
+                    print_r("<br>Else");
+                    if ($mt4Balance == 0 && $dividendId == 0) {
+                        // convert cp2/cp3 to rshare
+                        $rwalletBalance = $this->getTotalOfRShare($sssApplication->getDistId());
+                        $totalRshare = $sssApplication->getTotalShareConverted();
+                        $rwalletBalance = $rwalletBalance + $totalRshare;
+                        // credited S4
+                        $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                        $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                        $ggMemberRwalletRecord->setAid(0);
+                        $ggMemberRwalletRecord->setActionType("SSS");
+                        $ggMemberRwalletRecord->setType("credit");
+                        $ggMemberRwalletRecord->setAmount($totalRshare);
+                        $ggMemberRwalletRecord->setBal($rwalletBalance);
+                        $ggMemberRwalletRecord->setDescr("Super Share Swap (CP2/CP3), REF:".$sssApplication->getSssId());
+                        $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                        $ggMemberRwalletRecord->save();
+
+                        if ($distributorDB) {
+                            $distributorDB->setRwallet($rwalletBalance);
+                            $distributorDB->save();
+                        }
+
+                        $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                        $sssApplication->save();
+                    } else {
+                        // $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+                        $roiArr = $this->getRoiInformation($sssApplication->getDistId(), $sssApplication->getMt4UserName());
+                        $roiRemainingMonth = 0;
+                        if ($roiArr == null) {
+                            print_r("<br>skip::: ".$distributorDB->getDistributorId());
+                            continue;
+                        }
+                        $entitledPairing = true;
+                        if ($roiArr['idx'] <= 0) {
+                            $roiRemainingMonth = 0;
+                        } else {
+                            if ($roiArr['idx'] <= 18) {
+                                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                            } else {
+                                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                            }
+                        }
+                        if ($roiArr['idx'] <= 12) {
+                            $entitledPairing = false;
+                        }
+                        if ($roiArr['idx'] >= 19 && $roiArr['idx'] <= 36) {
+                            $entitledPairing = false;
+                        }
+                        $roiPercentage = $sssApplication->getRoiPercentage();
+
+                        $convertedCp2 = $sssApplication->getCp2Balance();
+                        $convertedCp3 = $sssApplication->getCp3Balance();
+
+                        $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+                        $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
+                        $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                        $totalRshare = round($totalRshare);
+
+                        $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
+
+                        $sssApplication->setRoiRemainingMonth($roiRemainingMonth);
+                        $sssApplication->setTotalShareConverted($totalRshare);
+                        $sssApplication->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
+                        $sssApplication->save();
+
+                        $mlm_distributor = $distributorDB;
+                        $uplinePosition = $mlm_distributor->getPlacementPosition();
+                        $pairingPoint = $totalAmountConvertedWithCp2Cp3 * Globals::PAIRING_POINT_BV;
+                        $pairingPointActual = $totalAmountConvertedWithCp2Cp3;
+
+                        print_r("<br>".$distributorDB->getDistributorId());
+
+                        /*$c = new Criteria();
+                      $c->addDescendingOrderByColumn(GgMemberRwalletRecordPeer::CDATE);
+                      $ggMemberRwalletRecordDB = GgMemberRwalletRecordPeer::doSelectOne($c);*/
+                        if ($sssApplication->getSwapType() == "RSHARE") {
+                            $rwalletBalance = $this->getTotalOfRShare($sssApplication->getDistId());
+                            /*if ($ggMemberRwalletRecordDB) {
+                                $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
+                            }*/
+                            $rwalletBalance = $rwalletBalance + $totalRshare;
+                            // credited S4
+                            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                            $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                            $ggMemberRwalletRecord->setAid(0);
+                            $ggMemberRwalletRecord->setActionType("SSS");
+                            $ggMemberRwalletRecord->setType("credit");
+                            $ggMemberRwalletRecord->setAmount($totalRshare);
+                            $ggMemberRwalletRecord->setBal($rwalletBalance);
+                            $ggMemberRwalletRecord->setDescr("Super Share Swap, REF:".$sssApplication->getSssId());
+                            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                            $ggMemberRwalletRecord->save();
+
+                            if ($distributorDB) {
+                                $distributorDB->setRwallet($rwalletBalance);
+                                $distributorDB->save();
+                            }
+                        }
+
+                        $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                        $sssApplication->save();
+                    }
+                }
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                var_dump($e);
+                //throw $e;
+                break;
             }
         }
 
@@ -2830,6 +3036,39 @@ class offerToSwapRshareActions extends sfActions
             $arr = array();
             $arr = $resultset->getRow();
         }
+        if ($arr == null) {
+            $query = "SELECT count(*) AS _count
+	                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('SUCCESS') AND dist_id = ? ";
+            //var_dump($query);
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $statement->set(1, $mt4UserName);
+            $statement->set(2, $distId);
+            $resultset = $statement->executeQuery();
+            //exit();
+            $arr = null;
+            if ($resultset->next()) {
+                $arr = array();
+                $arr = $resultset->getRow();
+
+                if ($arr['_count'] == 18) {
+                    $query = "SELECT devidend_id, dist_id, mt4_user_name, idx, account_ledger_id, dividend_date, package_id, package_price, roi_percentage, mt4_balance, dividend_amount, remarks, exceed_dist_id, exceed_roi_percentage, exceed_dividend_amount, status_code, created_by, created_on, updated_by, updated_on, first_dividend_date
+                                FROM mlm_roi_dividend WHERE mt4_user_name = ? AND status_code IN ('SUCCESS') AND dist_id = ? AND idx = 18 ";
+                    //var_dump($query);
+                    $connection = Propel::getConnection();
+                    $statement = $connection->prepareStatement($query);
+                    $statement->set(1, $mt4UserName);
+                    $statement->set(2, $distId);
+                    $resultset = $statement->executeQuery();
+                    //exit();
+                    $arr = null;
+                    if ($resultset->next()) {
+                        $arr = array();
+                        $arr = $resultset->getRow();
+                    }
+                }
+            }
+        }
         return $arr;
     }
 
@@ -3027,6 +3266,47 @@ class offerToSwapRshareActions extends sfActions
         return $count;
     }
 
+    function totalSumOfSssByMonth($fieldName, $dateFrom, $dateTo, $swapType, $criteriaGL)
+    {
+        $query = "SELECT SUM(sss.".$fieldName.") as _TOTAL FROM sss_application sss
+            INNER JOIN mlm_roi_dividend roi ON roi.devidend_id = sss.dividend_id
+        WHERE sss.status_code not IN ('REJECTED','ERROR') ";
+
+        if ($dateFrom != null) {
+            $query .= " AND sss.created_on >= '".$dateFrom." 00:00:00'";
+        }
+        if ($dateTo != null) {
+            $query .= " AND sss.created_on <= '".$dateTo." 23:59:59'";
+        }
+
+        if ($swapType == "SSS" || $swapType == "ASSS") {
+            $query .= " AND sss.swap_type IN ('RSHARE','ASS','ASSS')";
+        } else if ($swapType == "SES") {
+            $query .= " AND sss.swap_type IN ('SES')";
+        }
+        if ($criteriaGL == "<") {
+            $query .= " AND roi.idx < 12";
+        } else if ($criteriaGL == ">=") {
+            $query .= " AND roi.idx >= 12";
+        }
+        //var_dump($query);
+        //exit();
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        $count = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["_TOTAL"] != null) {
+                $count = $arr["_TOTAL"];
+            } else {
+                $count = 0;
+            }
+        }
+        return $count;
+    }
+
     function isSssGdbIssue($distId, $currentDate)
     {
         $query = "SELECT count(account_id) as _COUNT
@@ -3170,21 +3450,36 @@ class offerToSwapRshareActions extends sfActions
     function getTotalOfRShare($distributorId)
     {
         $query = "SELECT SUM(amount) AS SUB_TOTAL FROM gg_member_rwallet_record WHERE uid = " . $distributorId
-                 . " AND action_type IN ('credit','c')";
+                 . " AND type IN ('credit','c')";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
         $resultset = $statement->executeQuery();
-
+        $totalCredit = 0;
         if ($resultset->next()) {
             $arr = $resultset->getRow();
             if ($arr["SUB_TOTAL"] != null) {
-                return $arr["SUB_TOTAL"];
+                $totalCredit = $arr["SUB_TOTAL"];
             } else {
-                return 0;
+                $totalCredit = 0;
             }
         }
-        return 0;
+        $query = "SELECT SUM(amount) AS SUB_TOTAL FROM gg_member_rwallet_record WHERE uid = " . $distributorId
+                 . " AND type IN ('debit','d')";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        $totalDebit = 0;
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                $totalDebit = $arr["SUB_TOTAL"];
+            } else {
+                $totalDebit = 0;
+            }
+        }
+        return $totalCredit - $totalDebit;
     }
     
     function updateDistPairingLeader($distId, $position, $debit, $remark="PAIRED", $transactionType=Globals::PAIRING_LEDGER_PAIRED)

@@ -26,6 +26,10 @@ cp3Withdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+convertToCp4:
+  is_secure:   on
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 maturityWithdrawal:
   is_secure:   on
   credentials: [[ MAXIM_DISTRIBUTOR ]]

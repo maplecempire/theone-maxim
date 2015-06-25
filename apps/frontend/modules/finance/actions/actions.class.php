@@ -327,6 +327,11 @@ class financeActions extends sfActions
             if ($result->getStatusCode() == "PENDING") {
                 $percentage = 0;
             }
+            $statusCode = $result->getStatusCode()  == null ? "" : $result->getStatusCode();
+
+            if ($statusCode == "ASSS") {
+                $statusCode = "Auto - SSS";
+            }
             $arr[] = array(
                 $result->getIdx() == null ? "0" : $result->getIdx(),
                 $result->getDividendDate() == null ? "" : $result->getDividendDate(),
@@ -334,7 +339,7 @@ class financeActions extends sfActions
                 $result->getMt4Balance() == null ? "0" : number_format($result->getMt4Balance(),2),
                 $percentage,
                 $result->getDividendAmount() == null ? "0" : number_format($result->getDividendAmount(),2),
-                $result->getStatusCode()  == null ? "" : $result->getStatusCode()
+                $statusCode
             );
         }
         $output = array(

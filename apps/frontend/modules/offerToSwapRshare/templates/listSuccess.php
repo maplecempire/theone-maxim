@@ -233,7 +233,14 @@ function calculateRshare() {
                     <br>
                 </td>
                 <td valign="top" align="right"><br><?php echo number_format($sssApplication->getTotalShareConverted(),2); ?></td>
-                <td valign="top"><br><?php if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS) { echo "COOLING-OFF PERIOD"; } else { echo $sssApplication->getStatusCode(); } ?>
+                <td valign="top"><br>
+                <?php if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS) {
+                    echo "COOLING-OFF PERIOD";
+                } else if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING) {
+                    echo "PROCESSING";
+                } else {
+                    echo $sssApplication->getStatusCode();
+                } ?>
                 <?php
                     /*if ($sssApplication->getSwapType() == "ASSS" && ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING_ASSS || $sssApplication->getStatusCode() == Globals::STATUS_SSS_PENDING)) {
                         echo "<br><br><span style='color:blue'>Client Action: ".$sssApplication->getClientAction()."</span>";

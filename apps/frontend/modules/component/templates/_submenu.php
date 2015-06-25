@@ -74,6 +74,9 @@ if (date("d") >= 1 && $close == true) {
                 <a href="<?php echo url_for("/member/transferEpoint")?>"><span><?php echo __('Funds Deposit'); ?></span></a>
             </li>
             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+                <a href="/member/convertToCp4"><span><?php echo __('Convert To CP4'); ?></span><img src="/images/new_icon.gif"></a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
                 <a href="/member/transferCp4"><span><?php echo __('Transfer CP4'); ?></span><img src="/images/new_icon.gif"></a>
             </li>
         <?php if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getDistributorId() != 263640 && $distDB->getNormalInvestor() == "N") { ?>
@@ -473,10 +476,39 @@ if (date("d") >= 1 && $close == true) {
             <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
         <?php } else {
-        $pos = strrpos($distDB->getTreeStructure(), "|265817|");
-        if ($pos === false) { // note: three equal signs
+            $enableSes = false;
+            if ($distDB->getDistributorId() == 287842
+                    || $distDB->getDistributorId() == 308014
+                    || $distDB->getDistributorId() == 308018
+                    || $distDB->getDistributorId() == 313988
+                    || $distDB->getDistributorId() == 313990
+                    || $distDB->getDistributorId() == 318766
+                    || $distDB->getDistributorId() == 318768
+                    || $distDB->getDistributorId() == 283974
+                    || $distDB->getDistributorId() == 284155
+                    || $distDB->getDistributorId() == 284156
+                    || $distDB->getDistributorId() == 311768
+                    || $distDB->getDistributorId() == 318075
+                    || $distDB->getDistributorId() == 324813
+                    || $distDB->getDistributorId() == 324816
+                    || $distDB->getDistributorId() == 324805) {
+                $enableSes = true;
+            }
+            if ($enableSes == false) {
+                $pos = strrpos($distDB->getTreeStructure(), "|265817|");
+                if ($pos === false) { // note: three equal signs
+                    $pos = strrpos($distDB->getTreeStructure(), "|256385|");
+                    if ($pos === false) { // note: three equal signs
 
-        } else {
+                    } else {
+                        $enableSes = true;
+                    }
+                } else {
+                    $enableSes = true;
+                }
+            }
+
+            if ($enableSes == true) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/index?q=ses"><span><?php echo __('Super e-Share Swap'); ?><img src="/images/new_icon.gif"></a>
@@ -484,8 +516,10 @@ if (date("d") >= 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/uploads/SSS/quick+guide+for+SES.pdf"><span><?php echo __('Quick Guide For SES'); ?><img src="/images/new_icon.gif"></a>
         </li>
-        <?php }
-        } ?>
+        <?php
+            }
+        }
+        ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/offerToSwapRshare/cp2cp3Swap"><span><?php echo __('Swap with Cp2 / Cp3'); ?><img src="/images/new_icon.gif"></a>
         </li>

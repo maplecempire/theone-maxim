@@ -26,6 +26,10 @@ doGeneratePairingPoint:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+doRerunRshare:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 doTestDisabledMt4:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
