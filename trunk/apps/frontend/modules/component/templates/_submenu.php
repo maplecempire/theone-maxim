@@ -43,7 +43,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
 $close = false;
-if (date("d") >= 1 && $close == true) {
+if (date("d") == 1 && $close == true) {
 ?>
 <script type="text/javascript">
     window.location = "http://partner.maximtrader.com/home/logout";
@@ -193,7 +193,7 @@ if (date("d") >= 1 && $close == true) {
         </li>
         <?php } ?>
         <?php
-        if ($bonusService->hideGenealogy() == false && $distDB->getLeaderId() != 595) {
+        if ($bonusService->hideGenealogy() == false) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>

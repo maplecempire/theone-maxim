@@ -719,11 +719,19 @@ class memberActions extends sfActions
     public function executePackagePurchase()
     {
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        $this->cp1Enable = false;
+        if ($this->isKoreanGroup() == true) {
+            $this->cp1Enable = true;
+            $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $packageDBs = MlmPackagePeer::doSelect($c);
-
+        //var_dump($packageDBs);
+        //exit();
         $this->systemCurrency = "USD";
         $this->pointAvailable = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_EPOINT);
+        $this->cp4Available = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
         $this->packageDBs = $packageDBs;
         $this->distDB = MlmDistributorPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_DISTID));
     }
@@ -2077,7 +2085,13 @@ class memberActions extends sfActions
         if ($this->getUser()->getAttribute(Globals::SESSION_MASTER_LOGIN) == Globals::TRUE && $this->getUser()->getAttribute(Globals::SESSION_DISTID) == Globals::LOAN_ACCOUNT_CREATOR_DIST_ID) {
 
         } else {
-            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+            $this->cp1Enable = false;
+            if ($this->isKoreanGroup() == true) {
+                $this->cp1Enable = true;
+                $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+            } else {
+                $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+            }
         }
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
@@ -2241,7 +2255,13 @@ class memberActions extends sfActions
     {
         $distCode = $this->getRequestParameter('distcode');
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        $this->cp1Enable = false;
+        if ($this->isKoreanGroup() == true) {
+            $this->cp1Enable = true;
+            $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -2414,7 +2434,13 @@ class memberActions extends sfActions
 
     public function executePackagePurchaseViaBankTransfer() {
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        $this->cp1Enable = false;
+        if ($this->isKoreanGroup() == true) {
+            $this->cp1Enable = true;
+            $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $c->addDescendingOrderByColumn(MlmPackagePeer::PRICE);
         $packages = MlmPackagePeer::doSelect($c);
 
@@ -3384,7 +3410,13 @@ class memberActions extends sfActions
     public function executeMemberRegistration()
     {
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        $this->cp1Enable = false;
+        if ($this->isKoreanGroup() == true) {
+            $this->cp1Enable = true;
+            $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
         $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -8674,118 +8706,17 @@ We look forward to your custom in the near future. Should you have any queries, 
 
     public function executeTransferCp4()
     {
-        $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-        // amz001 chales (20131223)
-        $pos = strrpos($distDB->getTreeStructure(), "|1458|");
-        if ($pos === false) { // note: three equal signs
-
-        } else {
-            $this->toHideCp2Cp3Transfer = true;
-        }
-
         $ledgerAccountBalance = $this->getAccountBalance($this->getUser()->getAttribute(Globals::SESSION_DISTID), Globals::ACCOUNT_TYPE_CP4);
         $this->ledgerAccountBalance = $ledgerAccountBalance;
 
         $processFee = 0;
-        /*$c = new Criteria();
-        $c->add(AppSettingPeer::SETTING_PARAMETER, Globals::SETTING_TRANSFER_PROCESS_FEE);
-        $settingDB = AppSettingPeer::doSelectOne($c);
-        if ($settingDB) {
-            $processFee = $settingDB->getSettingValue();
-        }*/
         $this->processFee = $processFee;
         $muUtil = MUserUtil::init($this);
 
         if ($this->getRequestParameter('sponsorId') <> "" && $this->getRequestParameter('epointAmount') > 0 && $this->getRequestParameter('transactionPassword') <> "") {
-            if ($this->checkIsDebitedAccount($this->getUser()->getAttribute(Globals::SESSION_DISTID), null, null, null, null, null, null, Globals::YES_Y, null)) {
-                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("CP4 Transfer temporary out of service."));
-                return $muUtil->updateLog(null, true)->response("/member/transferCp4");
-            }
-
             $appUser = AppUserPeer::retrieveByPk($this->getUser()->getAttribute(Globals::SESSION_USERID));
 
             $sponsorId = $this->getRequestParameter('sponsorId');
-
-            //if ($this->getUser()->getAttribute(Globals::SESSION_USERNAME) == "thorsengwah") {
-                $query = "SELECT dist.distributor_id, dist.distributor_code, dist.full_name, dist.nickname, dist.PLACEMENT_TREE_STRUCTURE, dist.TREE_STRUCTURE
-            FROM mlm_distributor dist
-                LEFT JOIN app_user appUser ON appUser.user_id = dist.user_id
-                    WHERE appUser.username = ?";
-//                        WHERE appUser.username = '".$sponsorId."' AND dist.TREE_STRUCTURE LIKE '%|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|%'";
-
-                $arr = "";
-
-                $connection = Propel::getConnection();
-                $statement = $connection->prepareStatement($query);
-                $statement->set(1, $sponsorId);
-                $resultset = $statement->executeQuery();
-                $isFound = false;
-
-                if ($resultset->next()) {
-                    $resultArr = $resultset->getRow();
-
-                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
-                    if ($pos === false) { // note: three equal signs
-                        $pos = strrpos($resultArr["TREE_STRUCTURE"], "|".$this->getUser()->getAttribute(Globals::SESSION_DISTID)."|");
-                        if ($pos === false) { // note: three equal signs
-                            //20150428: 270598 rich3 268466 wf003 allow them to transfer cp3 to each other (charles)
-                            if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
-                                $isFound = true;
-                            } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
-                                $isFound = true;
-							//20150602: allow mk9999 to transfer and receive from all member, instruction from DCC
-							} else if($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 255180 || strtoupper($sponsorId) == strtoupper("MK9999")
-                                    || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 364043 || strtoupper($sponsorId) == strtoupper("MK999999")) {
-								$isFound = true;
-							}
-                        } else {
-                            $isFound = true;
-                        }
-                    } else {
-                        $isFound = true;
-                    }
-
-                    if ($isFound == false) {
-                        $existDist = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
-                        if ($existDist) {
-                            $pos = strrpos($existDist->getPlacementTreeStructure(), "|".$resultArr["distributor_id"]."|");
-                            if ($pos === false) { // note: three equal signs
-                                $pos = strrpos($existDist->getTreeStructure(), "|".$resultArr["distributor_id"]."|");
-                                if ($pos === false) { // note: three equal signs
-                                    $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                                    return $muUtil->updateLog(null, true)->response("/member/transferCp4");
-                                }
-                            }
-                        }
-                    }
-
-                    // block worldpeace upline transfer worldpeace downline
-                    $pos = strrpos($resultArr["PLACEMENT_TREE_STRUCTURE"], "|557|");
-                    if ($pos === false) { // note: three equal signs
-
-                    } else {
-                        $worldPeaceDist = MlmDistributorPeer::retrieveByPK(557);
-
-                        $worldPeacePlacementTreeLevel = $worldPeaceDist->getPlacementTreeLevel();
-
-                        if ($distDB->getPlacementTreeLevel() < $worldPeacePlacementTreeLevel) {
-                            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("You do not have the right to proceed this action."));
-                            return $muUtil->updateLog(null, true)->response("/member/transferCp4");
-                        }
-                    }
-                } else {
-                    //20150428: 270598 rich3 268466 wf003 allow them to transfer cp3 to each other (charles)
-                    if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 270598 && strtoupper($sponsorId) == strtoupper("WF003")) {
-
-                    } else if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 268466 && strtoupper($sponsorId) == strtoupper("RICH3")) {
-
-                    } else {
-                        $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("Invalid Member ID."));
-                        return $muUtil->updateLog(null, true)->response("/member/transferCp4");
-                    }
-                }
-            //}
-
             $epointAmount = $this->getRequestParameter('epointAmount');
             $epointAmount = str_replace(",", "", $epointAmount);
             if (($epointAmount + $processFee) > $ledgerAccountBalance) {
@@ -8901,40 +8832,6 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                     $this->revalidateAccount($toId, Globals::ACCOUNT_TYPE_CP4);
 
-                    // ******       processing fees      ****************
-                    /*$tbl_account_ledger = new MlmAccountLedger();
-                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
-                   $tbl_account_ledger->setDistId($fromId);
-                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE);
-                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO . " " . $toCode . " (" . $toName . ") PROCESS CHARGES");
-                   $tbl_account_ledger->setCredit(0);
-                   $tbl_account_ledger->setDebit($processFee);
-                   $tbl_account_ledger->setBalance($fromBalance - ($this->getRequestParameter('ecashAmount') + $processFee));
-                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->save();
-
-                   $this->revalidateAccount($fromId, Globals::ACCOUNT_TYPE_ECASH);*/
-
-                    // ******       company account      ****************
-                    /*$c = new Criteria();
-                   $c->add(MlmAccountPeer::ACCOUNT_TYPE, Globals::ACCOUNT_TYPE_EPOINT);
-                   $c->addAnd(MlmAccountPeer::DIST_ID, Globals::SYSTEM_COMPANY_DIST_ID);
-                   $companyAccount = MlmAccountPeer::doSelectOne($c);
-
-                   $tbl_account_ledger = new MlmAccountLedger();
-                   $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_EPOINT);
-                   $tbl_account_ledger->setDistId(Globals::SYSTEM_COMPANY_DIST_ID);
-                   $tbl_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER);
-                   $tbl_account_ledger->setRemark(Globals::ACCOUNT_LEDGER_ACTION_PROCESS_CHARGE . " " . $fromCode . " -> " . $toCode);
-                   $tbl_account_ledger->setCredit($processFee);
-                   $tbl_account_ledger->setDebit(0);
-                   $tbl_account_ledger->setBalance($companyAccount->getBalance() + $processFee);
-                   $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                   $tbl_account_ledger->save();
-
-                   $this->revalidateAccount(Globals::SYSTEM_COMPANY_DIST_ID, Globals::ACCOUNT_TYPE_EPOINT);*/
                     $con->commit();
                     $this->setFlash('successMsg', $this->getContext()->getI18N()->__("Transfer success"));
 
@@ -13060,7 +12957,13 @@ We look forward to your custom in the near future. Should you have any queries, 
         $this->forward404Unless($pendingDistDB);
 
         $c = new Criteria();
-        $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        $this->cp1Enable = false;
+        if ($this->isKoreanGroup() == true) {
+            $this->cp1Enable = true;
+            $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+        } else {
+            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+        }
         $packageDBs = MlmPackagePeer::doSelect($c);
 
         $this->systemCurrency = "USD";
@@ -13593,7 +13496,13 @@ We look forward to your custom in the near future. Should you have any queries, 
             }
         } else {
             $c = new Criteria();
-            $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+            $this->cp1Enable = false;
+            if ($this->isKoreanGroup() == true) {
+                $this->cp1Enable = true;
+                $c->add(MlmPackagePeer::PACKAGE_ID, 28, Criteria::GREATER_EQUAL);
+            } else {
+                $c->add(MlmPackagePeer::PUBLIC_PURCHASE, 1);
+            }
             $c->addAscendingOrderByColumn(MlmPackagePeer::PRICE);
             $packageDBs = MlmPackagePeer::doSelect($c);
 
@@ -15741,5 +15650,18 @@ Wish you all the best.
             }
         }
         return 0;
+    }
+
+    function isKoreanGroup()
+    {
+        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255709
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 264845
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 273056
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
+
+            return true;
+        }
+        return false;
     }
 }

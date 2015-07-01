@@ -55,8 +55,8 @@
     <?php if ($sf_user->getAttribute(Globals::SESSION_USERNAME) =="thorsengwah") { ?>
             url : "/member/verifySameGroupSponsorId",
     <?php } else { ?>
-//            url : "/member/verifySponsorId",
-            url : "/member/verifySameGroupSponsorId",
+            url : "/member/verifySponsorId",
+//            url : "/member/verifySameGroupSponsorId",
     <?php } ?>
             dataType : 'json',
             cache: false,
