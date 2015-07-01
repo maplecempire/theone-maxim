@@ -1041,8 +1041,247 @@ $(document).ready(function() {
     }
     //foreach ($announcements as $announcement) { ?>
     <div class="popinfo1">
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='77'>Important Annoucement!!
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "30 June 2015";
+                ?>
+            </div>
+
+            <div id="page_77" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Please note that due to a change in CME Precious Metals hours on 30 June / 1 July, there will be no bids/offers for XAU & XAG pairs during the period below :- 01 July 0500 - 0845 SGT/HKT
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+    <?php
+    if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255709
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255607
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 264845
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 273056
+            || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
+
+            } else {
+    ?>
 
         <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='75'>AUTO SWAP SSS FOR EXISTING CONTRACTS ON 1st JULY 2015:
+                <br>2015.7.1日所有既行合同自动股票转换公告
+                <br>2015년 7월 1일 현존하는 계약의 자동 SSS 스왑:
+                <br>최근 발생한 당사의 서버 다운에 대해 심심한 사과의 말씀 드립니다.  이는 SSS의 뜨거운 요구때문이었습니다.
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "30 June 2015";
+                ?>
+            </div>
+
+            <div id="page_75" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>We sincerely apologize for the recent downtime of our server due to an overload caused by overwhelming DEMAND of SSS.
+<br>As such, and in order not to disappoint those that missed out.
+<br>
+<br>On 1st July 2015, ALL EXISTING CONTRACTS (old contracts) will be AUTO SWAP to SSS @ US$0.80 / R-Share (R-Share priced at US$2.10 as at 29th June 2015).
+<br>
+<br>SSS is our best defense and safe guard towards fulfilling our continued commitment to ensure that your investment is securely managed and converted into a funding mechanism that will realize profitable returns. The consultants that we have engaged to help us with ROGP are very confident that this WILL be achieved when R-Shares is listed on NYSE in Q1 of 2016.
+<br>
+<br>If you are still undecided about SSS, you may contact company's customer service or your Upper Member for more info and clarification.
+<br>
+<br>Auto SSS on July 1st 2015, company shall credit Development Bonus into RT account on Aug 5th, 2015.
+<br>NB: There will be no "DAILY MAXIMUM LIMIT" in the bonus calculations for auto swap. Means the usual daily max out does not apply.
+<br>
+<br>**R-Shares Self-Trading Channel: Upon completion of the SSS, R-Shareholder can Buy or Sell their R-Shares via LEGACY TRUST by registering a trust member account with Legacy Trust. ◇Set-up fee is applicable as per Legacy Trust Rules.◇
+<br>
+<br>Let's work hand in hand & heart 2 heart, & Achieve more!!!
+<br>
+<br>Dr. Andrew Lim
+<br>CEO - Maxim
+<br>
+<br>
+<br>因为最近申请超级股票优惠的会员过多，造成系统压力过大而短暂瘫痪，为此我们表示十分的歉意；同时，也为了使得更多的会员可以享受超级股票优惠，公司特决定:
+<br>
+<br>2015.7.1日，所有既行的基金合同(旧合同)都将按照0.8美金/每股的优惠价格自动转成R股(2015.6.29日R股价格为2.1美金/每股)。
+<br>
+<br>超级股票优惠是公司采取的最有效机制，确保所有会员的资产安全，并进一步实现获益。公司的专家顾问团队也对此表示十足的信心，当ROGP于2016年第一季度正式荣登纽交所的时候，一定会为所有股东创造最大化的收益。如果您对R股还有什么疑虑，请联系公司客服中心，您的推荐人或者团队领导人。
+<br>
+<br>2015.7.1日自动股票SSS转换而生成的组织奖金，系统将于2015.8.5日发放至RT账户。
+<br>注: 另外针对此股票转换的组织奖金，系统不设每日上限，没有封顶限制。
+<br>
+<br>*R 股票自行转让管道：所有R股票持有者在认购/转R股以后，在任何时间可以「自行转卖/转移」股权于第三者提前套利。 同时MARATHON传承信托提醒所有R股票持有者必须向该公司注册后方以能够执行以上交易功能。◇注册费用将按照传承信托的规定执行◇
+<br>
+<br>心手相连，再创高峰!!!
+<br>
+<br>Andrew Lim博士
+<br>首席执行官
+<br>
+<br>
+<br>이에 따라 이 때문에 이번 기회를 놓치신 분들을 실망시켜드리기를 원치 않습니다.
+<br>
+<br>2015년 7월 1일, 모든 현존하는 계약들 (오래된 계약들)은 R-쉐어 주당 미화 0.8달러로 SSS 자동 전환됩니다.
+<br>
+<br>SSS는 귀하의 투자를 안전이 운영해야 하는 우리의 의무를 지속시킬 수 있는 가장 방어적이고 안전한 방법이며, 이윤을 현실화 할 수 있는 펀딩 매카니즘으로의 전환입니다.  ROGP와 함께 우리를 도와주고 있는 컨설턴트들은 R-쉐어가 2016년 NYSE에 상장될 때 현실화 될 것이라 확신합니다.
+<br>
+<br>아직 SSS를 결정하지 않으셨다면, 당사의 고객센터에 연락하시거나 상위 회원에게 더 많은 정보와 자세한 설명을 들으시기 바랍니다.
+<br>
+<br>2015년 7월 1일에 자동 SSS가 되면, 당사는 2015년 8월 5일 RT 계좌에 개발 보너스를 입금시킬 예정입니다.
+<br>
+<br>참조 : 자동 전환에서는 보너스를 계산하는데 “일일 최대 한도”가 없습니다.  따라서 일일 출금 한도가 적용되지 않습니다.
+<br>
+<br>**R-쉐어 셀프-트레이딩 채널: SSS가 완료되면, R-쉐어홀더는 리가시 트레이딩에 신뢰 회원 계좌를 등록함으로써 리가시 트러스트를 통해 본인들이 R-쉐어를 구매하거나 판매할 수 있습니다. ◇셋업 비용은 리가시 트러스트의 규칙에 의해 적용됩니다.◇
+<br>
+<br>손과 마음을 모아 함께 최선을 다해 일해서 더욱 더 성취합시다!!!
+<br>
+<br>앤드류 림 박사
+<br>CEO – 맥심
+<br>
+<br>
+<br>現存契約の2015年7月1日のSSSへの自動スワップについて
+<br>
+<br>SSSへの圧倒的な需要により引き起こされた最近のサーバーの不具合について弊社は心よりお詫びします。そのようなことから、また見逃してしまった人を失望させないために。
+<br>
+<br>2015年７月１日より、すべての現存する契約（旧契約）は自動的に0.8USD/Rシェア一株あたり（R-シェアは2015年6月29日の時点で2.10USDの価格です）にてSSSに自動スワップされます。
+<br>
+<br>SSSは、あなたの投資が安全に管理され、高い収益性の投資メカニズムにコンバートされていることを確かにするという弊社の継続的なコミットメントを果たすために、ベストな防御であり、安全ガードです。
+<br>
+<br>弊社とROGPで協業するために従事しているコンサルタントたちは、Rシェアが2016年の第一四半期にNYSEに上場されたときにこのことが達成されると確信しています。
+<br>
+<br>もし、まだあなたがSSSを決定していない場合、カスタマーサービスまたはあなたのアッパー・メンバーにさらなる情報や明確化のため、連絡することができます。
+<br>
+<br>2015年7月1日の自動SSSに関して、弊社では、デヴェロップメント・ボーナスをRTアカウントに2015年8月5日にクレジットします。
+<br>
+<br>注意:　自動スワップに対するボーナス計算に関し、「日ごとの最大リミット」はありません。つまり通常の毎日の最大金額は適用されません。
+<br>
+<br>**R-Sharesセルフトレードチャンネル:SSSが完了すると、R-シェアの株主はR-シェアを、レガシー・トラストにトラストメンバーアカウントを登録することで、レガシー・トラストを通して売り買いできます。◇セットアップ料金は、レガシートラストの規則によって適用されます。◇
+<br>
+<br>手に手を取り、心と心を合わせ、より高いステージへ!!!
+<br>
+<br>アンドリュー・リム博士
+<br>CEO-マキシム
+<br>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+    <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='74'>NEW MCL PAKAGES
+                <br>新的外汇基金配套
+                <br>新MCL パッケージ
+                <br>산 MCL 패키지
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "29 June 2015";
+                ?>
+            </div>
+
+            <div id="page_74" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>From 1st July 2015, only CP4 can be used to sign up New MCL Package(s) with IMMEDIATE Auto Swap SSS @ USD0.80 per R-Share. (MCL Direct Referrer Bonus and Development Bonus will be given as usual and credited into RT account. However, for this New MCL package(s) with Immediate Auto Swap SSS, RT Development Bonus (Second DB) WILL NOT BE given. This Promotion @ USD0.80 per R-Share ENDs on 15th July 2015
+<br>
+<br>NB. The BOD would like for everyone that has helped to build this amazing organization to enjoy the fruits of our hard work over the past 30 months and maximize your investment by taking FULL advantage of SSS.
+<br>
+<br>SUCH A RARE OPPORTUNITY TO MAKE ALL YOUR DREAMS COME THROUGH HAPPENS ONLY ONCE IN A LIFETIME FOR A LUCKY FEW !!!!
+<br>
+<br>Dr. Andrew Lim
+<br>CEO - Maxim
+<br>
+<br>
+<br>自2015.7.1日起，只有通过CP4才可注册基金配套，且立即享受股票优惠自动转换，优惠价格为0.80美金/每股(相关推荐奖金以及组织奖金将如常发放，计入RT账户; 另外此种配套转换至股票，股票系统中的RT组织奖金将不再次发放)。此0.80美金/每股转换优惠截止日期为2015.7.15日。
+<br>
+<br>公司董事会希望所有在过去30个月内帮助公司成长并一步步成功的会员都能充分利用此转换优惠，最大化扩大投资收益。
+<br>
+<br>机会难得，千载难逢，助您实现所有财富梦想!!!
+<br>
+<br>Andrew Lim博士
+<br>首席执行官
+<br>
+<br>
+<br>2015年7月1日より、CP4のみが、ニュー・MCLパッケージ・ウィズ・イミディエイト・オートスワップ・SSSにサインアップする際、Rシェアごと0.80USDで使えるようになります。（MCLダイレクト・リフェラー・ボーナスおよびデベロップメント・ボーナスは通常通り獲得でき、RTアカウントに支払われます。しかしながら、このニュー・MCLパッケージ・ウィズ・イミディエイト・オートスワップ・SSSのため、RTディベロップメント・ボーナス（セコンドDB）は与えられません。この１Rシェアあたり0.80USDのプロモーションは、2015年7月15日に終了します。
+<br>
+<br>注意.　BODは皆さんがこの驚くべき組織が過去30ヶ月におけるハードワークによる果実を楽しみ、SSSの利益を最大限に取ることで、あなたの投資を最大化することを喜んでお手伝いします。
+<br>
+<br>このように、あなたの夢を本当にする珍しい機会は数少ない数名に人生で１度だけ起きるものです!!!
+<br>
+<br>アンドリュー・リム博士
+<br>CEO-マキシム
+<br>
+<br>2015년 7월 1일부로 새로운 맥심 패키지 가입시 주당 미화 0.80달러의 가격으로 R 쉐어를 즉각적으로 SSS 스왑을 하기 위해서는 CP4만 사용하실수 있습니다. (맥심 직추천 보너스와 개발보너스는 변함없으며 RT 계좌로 입금됩니다. 그러나 본 자동 SSS 스왑을 동반한 신 맥심 패키지는 RT 개발 보너스 (두번째 DB)는 없습니다. R 쉐어 주당 미화 0.80달러의 프로모션은 2015년 7월 15일까지 입니다.
+<br>
+<br>참조. 이사진은 모두가 SSS의 모든 혜택을 취허셔서 지난 30여개월 간 노력의 결과와 를 즐기실 수 있도록 이 놀라운 조직을 세울 수있기를 기대합니다.
+<br>인생에 한 번 올까말까한 행운의 추첨권 같은 이 기회를 잡아서 여러분의 꿈을 이루시기를 바랍니다!!!!!
+<br>
+<br>앤드류 림 벅사
+<br>CEO - 맥심
+<br>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+    <?php } ?>
+        <div class="page">
+            <div class="poptitle">
+                <a href='#' class="page_link" ref='76'>INSOLVENT INVESTORS
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "19 June 2015";
+                ?>
+            </div>
+
+            <div id="page_76" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Maxim  Capital Ltd or Maxim Trader (The Company) upon accepting any investment or share placements, herein irrevocably disclaims ANY AND ALL responsibility duly owed  to investors under the Duty of Care Rules, in cases where the investor making his/her placement borrows from a Bank,Finance lnstitution or any third party whatsoever.
+<br>
+<br>Accordingly, investors who fail to observe this Company expectation SHALL be deemed to INVEST AT THEIR OWN RISK without any responsibility owed to them by the company in anyway whatsoever.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+    <div class="page">
             <div class="poptitle">
                 <a href='#' class="page_link" ref='73'>BREAKING NEWS – JUNE 10TH 2015 ROYALE INTEGRATED SMART GLOBAL CITY (R-ISGC) – Hatyai, Thailand
                 <br>重磅新闻—2015年6月10日 家综合智能新城（R-ISGC）开发计划正式启动

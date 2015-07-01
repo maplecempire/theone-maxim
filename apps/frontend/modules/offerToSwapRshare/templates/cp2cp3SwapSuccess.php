@@ -178,6 +178,7 @@ function calculateRshare() {
 <tr>
     <td>
         <form id="sssForm" method="post" action="/offerToSwapRshare/doCp2cp3Swap">
+            <input type="hidden" name="ignoreMt4" id="ignoreMt4" value="<?php echo $ignoreMt4;?>">
         <table cellpadding="3" cellspacing="5">
             <tbody>
             <tr>
@@ -231,9 +232,15 @@ function calculateRshare() {
                                     <?php
                                     }
                                 } else {
+                                    if ($ignoreMt4 == "Y") {
+                                ?>
+                                    <option value="--">--</option>
+                                <?php
+                                    } else {
                                 ?>
                                     <option value=""><?php echo __('(empty)');?></option>
                                 <?php
+                                    }
                                 }
                                 ?>
                             </select>
@@ -292,7 +299,7 @@ function calculateRshare() {
                 </td>
             </tr>
 
-            <?php if (count($mt4Ids) > 0) { ?>
+            <?php if (count($mt4Ids) > 0 || $ignoreMt4 == "Y") { ?>
             <tr>
                 <td align="right">
                     <button id="btnTransfer"><?php echo __('Submit') ?></button>

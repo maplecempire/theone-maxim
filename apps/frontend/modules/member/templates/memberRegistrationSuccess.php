@@ -75,6 +75,7 @@ $(function() {
 
         var epointNeeded = $(this).attr("ref");
         var pid = $(this).attr("pid");
+
         if (pid >= <?php echo Globals::MAX_PACKAGE_ID?>) {
             epointNeeded = $("#specialPackageId option:selected").attr("price");
             pid = $("#specialPackageId").val();
@@ -199,44 +200,64 @@ $(function() {
 
                             <?php
                                 if (count($packageDBs) > 0) {
-                                    $trStyle = "1";
-                                    $combo = "<select name='specialPackageId' id='specialPackageId'>";
-                                    foreach ($packageDBs as $packageDB) {
-                                        if ($packageDB->getPackageId() >= Globals::MAX_PACKAGE_ID) {
+                                    if ($cp1Enable == true) {
+                                        $combo = "<select name='specialPackageId' id='specialPackageId' style='text-align: right;'>";
+                                        $packageDBTemp = null;
+                                        foreach ($packageDBs as $packageDB) {
                                             $combo .= "<option value='".$packageDB->getPackageId()."' price='".$packageDB->getPrice()."'>".number_format($packageDB->getPrice(), 0)."</option>";
+                                            $packageDBTemp = $packageDB;
                                         }
-                                    }
-                                    $combo .= "</select>";
+                                        $combo .= "</select>";
 
-                                    foreach ($packageDBs as $packageDB) {
-                                        if ($packageDB->getPackageId() > Globals::MAX_PACKAGE_ID) {
-                                            continue;
-                                        }
-                                        if ($trStyle == "1") {
-                                            $trStyle = "0";
-                                        } else {
-                                            $trStyle = "1";
-                                        }
-
-                                        $packagePrice = number_format($packageDB->getPrice(), 2);
-                                        if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
-                                            $packagePrice = $combo;
-                                        }
                                         echo "<tr class='row" . $trStyle . "'>
+                                            <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDBTemp->getPackageId(), array(
+                                                                                                                                                                   'class' => 'activeLink',
+                                                                                                                                                                   'ref' => $packageDBTemp->getPrice(),
+                                                                                                                                                                   'pid' => $packageDBTemp->getPackageId(),
+                                                                                                                                                              )) . "</td>
+                                            <td align='center'>Platinum / VIP / VVIP</td>
+                                            <td align='center'>" . $combo . "</td>
+                                        </tr>";
+                                    } else {
+                                        $trStyle = "1";
+                                        $combo = "<select name='specialPackageId' id='specialPackageId'>";
+                                        foreach ($packageDBs as $packageDB) {
+                                            if ($packageDB->getPackageId() >= Globals::MAX_PACKAGE_ID) {
+                                                $combo .= "<option value='".$packageDB->getPackageId()."' price='".$packageDB->getPrice()."'>".number_format($packageDB->getPrice(), 0)."</option>";
+                                            }
+                                        }
+                                        $combo .= "</select>";
+
+                                        foreach ($packageDBs as $packageDB) {
+                                            if ($packageDB->getPackageId() > Globals::MAX_PACKAGE_ID) {
+                                                continue;
+                                            }
+                                            if ($trStyle == "1") {
+                                                $trStyle = "0";
+                                            } else {
+                                                $trStyle = "1";
+                                            }
+
+                                            $packagePrice = number_format($packageDB->getPrice(), 2);
+                                            if ($packageDB->getPackageId() == Globals::MAX_PACKAGE_ID) {
+                                                $packagePrice = $combo;
+                                            }
+                                            echo "<tr class='row" . $trStyle . "'>
                                                 <td align='center'>" . link_to(__('Sign up'), 'member/doPurchasePackage?packageId=' . $packageDB->getPackageId(), array(
                                                                                                                                                                        'class' => 'activeLink',
                                                                                                                                                                        'ref' => $packageDB->getPrice(),
                                                                                                                                                                        'pid' => $packageDB->getPackageId(),
                                                                                                                                                                   )) . "</td>
                                                 <td align='center'>" . __($packageDB->getPackageName()) . "</td>";
-                                                if ($hasFmcCharges) {
-                                                    echo "<td align='center' class='priceCharges'>".number_format($packageDB->getPrice() * 10 / 100)."</td>";
-                                                }
-                                                echo "<td align='center'>" . $packagePrice . "</td>";
-                                                if ($hasFmcCharges) {
-                                                    echo "<td align='center' class='priceTotal'>".number_format($packageDB->getPrice() + ($packageDB->getPrice() * 10 / 100), 2)."</td>";
-                                                }
+                                            if ($hasFmcCharges) {
+                                                echo "<td align='center' class='priceCharges'>".number_format($packageDB->getPrice() * 10 / 100)."</td>";
+                                            }
+                                            echo "<td align='center'>" . $packagePrice . "</td>";
+                                            if ($hasFmcCharges) {
+                                                echo "<td align='center' class='priceTotal'>".number_format($packageDB->getPrice() + ($packageDB->getPrice() * 10 / 100), 2)."</td>";
+                                            }
                                             echo "</tr>";
+                                        }
                                     }
                                 } else {
                                     echo "<tr class='odd' align='center'><td colspan='3'>" . __('No data available in table') . "</td></tr>";
@@ -252,7 +273,13 @@ $(function() {
                     <td><?php echo __('Pay by') ?></td>
                     <td>
                         <select name="payBy" id="payBy">
+                            <?php
+                            if ($cp1Enable == true) {
+                            ?>
                             <option value="CP1">CP1</option>
+                            <?php
+                            }
+                            ?>
                             <option value="CP4">CP4</option>
                         </select>
                     </td>

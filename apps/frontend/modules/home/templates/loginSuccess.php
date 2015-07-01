@@ -389,14 +389,14 @@
                                 <td colspan="3">
 <?php
                                     $closeLogin = false;
-                                    $monthStr = "06";
-                                    $monthEngStr = "June";
-                                    $dayStr = "17";
-                                    $hourStr = "8";
-                                    $totalHourStopStr = "3";
-                                    if ($closeLogin == false) {
+                                    $monthStr = "07";
+                                    $monthEngStr = "July";
+                                    $dayStr = "01";
+                                    $hourStr = "12";
+                                    $totalHourStopStr = "8";
+                                    //if ($closeLogin == false) {
 
-                                    } else {
+                                    //} else {
                                     ?>
 
                                     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -442,7 +442,7 @@
 <br>マキシム・キャピタル・リミテッド
                             </strong>
                                     </p></div>
-<?php } ?>
+<?php //} ?>
                                     <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
                                 </td>
                             </tr>
@@ -450,8 +450,8 @@
                             <tr>
                                 <td class="tbl_content_top">
                                     <?php
-                                    /*$closeLogin = false;
-                                    if (date("d") > 21) {
+                                    $closeLogin = false;
+                                    /*if (date("d") == 1) {
                                         $closeLogin = true;
                                     }*/
                                     if ($closeLogin == false) {

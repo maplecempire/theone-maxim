@@ -224,38 +224,43 @@ class offerToSwapRshareActions extends sfActions
     {
         $distributorDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
         $this->mt4Id = $this->getRequestParameter('mt4Id');
+        $this->ignoreMt4 = $this->getRequestParameter('ignoreMt4');
 
         if (!$this->mt4Id) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err801:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
         }
-        $this->mt4Ids = $this->getSwapedMt4($this->getUser()->getAttribute(Globals::SESSION_DISTID), $this->getRequestParameter('mt4Id'));
+
         $this->mt4Balance = 0;
         $this->remainingRoiAmount = 0;
-
         $mt4UserName = $this->getRequestParameter('mt4Id');
         $distId = $this->getUser()->getAttribute(Globals::SESSION_DISTID);
-        if (count($this->mt4Ids) <= 0) {
-            $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err802:Invalid Action."));
-            return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+
+        if ($this->ignoreMt4 == "N") {
+            $this->mt4Ids = $this->getSwapedMt4($this->getUser()->getAttribute(Globals::SESSION_DISTID), $this->getRequestParameter('mt4Id'));
+            if (count($this->mt4Ids) <= 0) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err802:Invalid Action."));
+                return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
+            }
         }
 
-        $mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+        //$mt4Balance = $this->getMt4Balance($distId, $mt4UserName);
+        $mt4Balance = 0;
 //        $mt4Balance = 5000;
         $roiArr = $this->getRoiInformation($distId, $mt4UserName);
 
-        if ($mt4Balance == null) {
+        /*if ($mt4Balance == null) {
             $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
             return $this->redirect('/offerToSwapRshare/cp2cp3Swap');
-        }
+        }*/
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 0;
-        if ($roiArr['idx'] <= 18) {
+        /*if ($roiArr['idx'] <= 18) {
             $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
         } else {
             $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
-        }
+        }*/
         $remarks = "";
         /*if ($roiRemainingMonth >= 10) {
             $remarks = "ROI:".$roiPercentage."%";
@@ -393,6 +398,7 @@ class offerToSwapRshareActions extends sfActions
         $this->totalRshare = 0;
         $this->roiRemainingMonth = 0;
         $this->roiPercentage = 0;
+        $this->ignoreMt4 = $this->getRequestParameter('ignoreMt4','N');
     }
     public function executeDoAutoConvertEShare()
     {
@@ -1134,9 +1140,6 @@ class offerToSwapRshareActions extends sfActions
     }
     public function executeReport()
     {
-        //RSHARE
-        //SES
-        //ASS
         $swapType = "SSS";
         print_r("SSS");
         print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
@@ -1145,6 +1148,10 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
 
+        return sfView::HEADER_ONLY;
+    }
+    public function executeReport2()
+    {
         $swapType = "SES";
         print_r("<br><br>SES");
         print_r("<br>Total: ".number_format($this->totalCountOfSss($this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
@@ -1152,7 +1159,6 @@ class offerToSwapRshareActions extends sfActions
         print_r("<br>Mt4 (>= 12): ".number_format($this->totalSumOfSssByMonth("mt4_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType, ">="), 2));
         print_r("<br>CP2: ".number_format($this->totalSumOfSss("cp2_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
         print_r("<br>CP3: ".number_format($this->totalSumOfSss("cp3_balance", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo',''), $swapType), 2));
-//        print_r("<br>R-Share Converted: ".number_format($this->totalSumOfSss("total_share_converted", $this->getRequestParameter('dateFrom',''), $this->getRequestParameter('dateTo','')), 2));
 
         return sfView::HEADER_ONLY;
     }
@@ -1568,10 +1574,16 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
+        //$c->add(SssApplicationPeer::SWAP_TYPE, "SES");
+        if ($this->getRequestParameter('q') != "") {
+            $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
+        }
         $c->setLimit(100);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
+        print_r("<br>".count($sssApplications));
         foreach ($sssApplications as $sssApplication) {
+            print_r("<br>SSS::: ".$sssApplication->getSssId().", Dist: ".$sssApplication->getDistId());
             $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
             try {
                 $con->begin();
@@ -1599,6 +1611,7 @@ class offerToSwapRshareActions extends sfActions
                         $remark .= date('Y-m-d H:i:s') .": Notification of Maturity already withdrawn.";
                         $sssApplication->setRemarks($remark);
                         $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                        $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $sssApplication->save();
                         $isValid = false;
                     }
@@ -1625,6 +1638,7 @@ class offerToSwapRshareActions extends sfActions
                         //$remark .= date('Y-m-d H:i:s') .": MT4 Account not exist.";
                         $sssApplication->setRemarks($remark);
                         $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                        $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $sssApplication->save();
                     } else {
                         $comment = $answer["comment"];
@@ -1648,6 +1662,7 @@ class offerToSwapRshareActions extends sfActions
                                 $remark .= date('Y-m-d H:i:s') .": MT4 Account cannot be disabled.";
                                 $sssApplication->setRemarks($remark);
                                 $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sssApplication->save();
                             } else {
                                 $sssApplication->setMt4Balance($mt4Balance);
@@ -1723,6 +1738,7 @@ class offerToSwapRshareActions extends sfActions
                                             }
 
                                             $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                                            $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                             $sssApplication->save();
                                         } else {
                                             $remark = $sssApplication->getRemarks();
@@ -1732,12 +1748,14 @@ class offerToSwapRshareActions extends sfActions
                                             $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
                                             $sssApplication->setRemarks($remark);
                                             $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                            $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                             $sssApplication->save();
                                         }
                                     } else {
                                         $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
                                     }
                                 }
+                                $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sssApplication->save();
                             }
                         } else {
@@ -1748,6 +1766,7 @@ class offerToSwapRshareActions extends sfActions
                             $remark .= date('Y-m-d H:i:s') .": MT4 Account disabled.";
                             $sssApplication->setRemarks($remark);
                             $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                            $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                             $sssApplication->save();
                         }
                     }
@@ -1772,7 +1791,9 @@ class offerToSwapRshareActions extends sfActions
     {
         $c = new Criteria();
         $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PAIRING);
-        //$c->add(SssApplicationPeer::DIST_ID, 260039);
+        if ($this->getRequestParameter('q') != "") {
+            $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
+        }
         $c->setLimit(50);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
@@ -1824,6 +1845,7 @@ class offerToSwapRshareActions extends sfActions
 
                 $sssApplication->setTotalShareConverted($totalRshare);
                 $sssApplication->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
+                $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sssApplication->save();
 
                 $mlm_distributor = $distributorDB;
@@ -2099,6 +2121,7 @@ class offerToSwapRshareActions extends sfActions
                 }
 
                 $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+                $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                 $sssApplication->save();
 
                 $con->commit();

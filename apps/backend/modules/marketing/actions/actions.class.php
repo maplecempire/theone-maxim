@@ -15,7 +15,7 @@ class marketingActions extends sfActions
         $query = "SELECT * FROM maxim.mlm_dist_pairing_ledger
             WHERE
         remark LIKE '%(".$this->getRequestParameter('q').")%'
-            AND created_on >= '2015-05-30 00:00:00'
+            AND created_on >= '2015-06-29 00:00:00'
         ORDER BY dist_id";
 
         $connection = Propel::getConnection();

@@ -311,7 +311,13 @@ $(function() {
                     <td><?php echo __('Pay by') ?></td>
                     <td>
                         <select name="payBy" id="payBy">
+                            <?php
+                            if ($cp1Enable == true) {
+                            ?>
                             <option value="CP1">CP1</option>
+                            <?php
+                            }
+                            ?>
                             <option value="CP4">CP4</option>
                         </select>
                     </td>

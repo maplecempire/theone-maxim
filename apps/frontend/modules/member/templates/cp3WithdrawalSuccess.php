@@ -426,6 +426,11 @@ if ($distributorDB->getIaccount() == "") {
                 </tr>-->
                 <?php
                 } else {
+                    if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255709
+                        || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255607
+                        || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 264845
+                        || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 273056
+                        || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
                 ?>
                 <tr class="tbl_form_row_odd">
                     <td>&nbsp;</td>
@@ -436,6 +441,7 @@ if ($distributorDB->getIaccount() == "") {
                     <td>&nbsp;</td>
                 </tr>
                 <?php
+                    }
                 }
                 ?>
                 </tbody>
