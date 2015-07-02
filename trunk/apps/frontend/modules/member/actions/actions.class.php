@@ -954,6 +954,7 @@ class memberActions extends sfActions
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256205 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 164 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 71 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 264845 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 273056 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256078 ||
@@ -1307,7 +1308,7 @@ class memberActions extends sfActions
 
         $query = "SELECT count(dist_id) as _total, remark, dist_id, credit FROM maxim.mlm_account_ledger
             where transaction_type IN ('FUND MANAGEMENT')
-              and created_on >= '2015-03-27 00:00:00' and dist_id > 0 AND CREDIT >0
+              and created_on >= '2015-07-01 00:00:00' and dist_id > 0 AND CREDIT >0
               group by dist_id, remark, credit order by 1 desc";
         // and created_on <= '2015-02-02 23:59:59'
         //var_dump($query);
@@ -1342,21 +1343,40 @@ class memberActions extends sfActions
             $dateUtil = new DateUtil();
             $bonusDateFrom = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 00:00:00";
             $bonusDate = $dateUtil->formatDate("Y-m-d", date("Y-m-d"))." 23:59:59";
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->add(MlmRoiDividendPeer::STATUS_CODE, Globals::DIVIDEND_STATUS_PENDING);
             //$c->add(MlmRoiDividendPeer::MT4_USER_NAME, "8003141");
             $c->add(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDate, Criteria::LESS_EQUAL);
             if ($this->getRequestParameter('all') == "Y") {
             } else {
-                //var_dump("hihi");
                 $c->addAnd(MlmRoiDividendPeer::DIVIDEND_DATE, $bonusDateFrom, Criteria::GREATER_EQUAL);
             }
-            $c->setLimit(30);
+            $c->setLimit(30);*/
             //var_dump($c);
             //exit();
-            $mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
+            //$mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
             $countIdx = 1;
-            foreach ($mlmRoiDividendDBs as $mlmRoiDividend) {
+            $query = "SELECT distinct roi.devidend_id
+                FROM mlm_roi_dividend roi
+                    INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
+                AND dist.leader_id not in (255709,255607,264845,273056,255882)
+                    WHERE roi.status_code = 'PENDING'
+                        AND dividend_date <= '".date("Y-m-d")." 23:59:59'";
+
+            if ($this->getRequestParameter('all') == "Y") {
+            } else {
+                $query .= " AND dividend_date >= '".date("Y-m-d")." 00:00:00'";
+            }
+
+            $query .= " LIMIT 30";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+            //exit();
+            while ($resultset->next()) {
+                $arr = $resultset->getRow();
+                $mlmRoiDividend = MlmRoiDividendPeer::retrieveByPK($arr['devidend_id']);
                 print_r("<br>".$countIdx++);
                 $mlmRoiDividendValidator = MlmRoiDividendPeer::retrieveByPK($mlmRoiDividend->getDevidendId());
                 if ($mlmRoiDividendValidator->getStatusCode() != Globals::DIVIDEND_STATUS_PENDING) {
@@ -4584,27 +4604,38 @@ class memberActions extends sfActions
                 /******************************/
                 $firstForDRB = true;
                 while ($totalBonusPayOut <= Globals::TOTAL_BONUS_PAYOUT) {
-                    $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+                    $walletType = Globals::ACCOUNT_TYPE_RT;
+                    $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
+                    $distAccountEcashBalance = 0;
+                    if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                        $walletType = Globals::ACCOUNT_TYPE_RT;
+                        $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
+                    } else {
+                        $walletType = Globals::ACCOUNT_TYPE_ECASH;
+                        $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, $walletType);
+                    }
+
+                    $distAccountEcashBalance = $distAccountEcashBalance + $directSponsorBonusAmount;
 
                     $mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($uplineDistId);
-                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setAccountType($walletType);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
                     $mlm_account_ledger->setRemark("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")");
                     $mlm_account_ledger->setCredit($directSponsorBonusAmount);
                     $mlm_account_ledger->setDebit(0);
-                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $directSponsorBonusAmount);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
                     $this->mirroringAccountLedger($mlm_account_ledger, "54");
 
-                    $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
                     if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
+                        $distAccountEcashBalance = $distAccountEcashBalance - $directSponsorBonusAmount;
                         $mlm_account_ledger = new MlmAccountLedger();
                         $mlm_account_ledger->setDistId($uplineDistId);
-                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $mlm_account_ledger->setAccountType($walletType);
                         $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DRB);
                         $mlm_account_ledger->setRemark("COMMISSION NOT ENTITLED DUE TO ACCOUNT CLOSED");
                         $mlm_account_ledger->setCredit(0);
@@ -4622,9 +4653,13 @@ class memberActions extends sfActions
                         }
                     }
 
+                    if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                        $closeAccountDistDB->setRtwallet($distAccountEcashBalance);
+                        $closeAccountDistDB->save();
+                    }
                     //var_dump($bonusService->checkDebitAccount($uplineDistId));
                     //exit();
-                    $this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
+                    //$this->revalidateAccount($uplineDistId, Globals::ACCOUNT_TYPE_ECASH);
 
                     /******************************/
                     /*  Commission
@@ -9538,6 +9573,7 @@ We look forward to your custom in the near future. Should you have any queries, 
     {
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 256205 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 164 ||
+            $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 71 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 15 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 264845 ||
             $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 273056 ||
@@ -11987,13 +12023,22 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 /******************************/
                                 /*  Account
                                 /******************************/
-                                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+                                $walletType = Globals::ACCOUNT_TYPE_RT;
+                                $distAccountEcashBalance = 0;
+                                $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
+                                if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                                    $walletType = Globals::ACCOUNT_TYPE_RT;
+                                    $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
+                                } else {
+                                    $walletType = Globals::ACCOUNT_TYPE_ECASH;
+                                    $distAccountEcashBalance = $this->getAccountBalance($distId, $walletType);
+                                }
 
                                 // pairing amount
                                 $ecashBalance = $distAccountEcashBalance + $pairingBonusAmount;
                                 $mlm_account_ledger = new MlmAccountLedger();
                                 $mlm_account_ledger->setDistId($distId);
-                                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                $mlm_account_ledger->setAccountType($walletType);
                                 $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
                                 $mlm_account_ledger->setRemark("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
                                 $mlm_account_ledger->setCredit($pairingBonusAmount);
@@ -12005,16 +12050,16 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                                 $this->mirroringAccountLedger($mlm_account_ledger, "75");
 
-                                $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
                                 if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
+                                    $ecashBalance = $ecashBalance - $pairingBonusAmount;
                                     $mlm_account_ledger = new MlmAccountLedger();
                                     $mlm_account_ledger->setDistId($distId);
-                                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                    $mlm_account_ledger->setAccountType($walletType);
                                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
                                     $mlm_account_ledger->setRemark("COMMISSION NOT ENTITLED DUE TO ACCOUNT CLOSED");
                                     $mlm_account_ledger->setCredit(0);
                                     $mlm_account_ledger->setDebit($pairingBonusAmount);
-                                    $mlm_account_ledger->setBalance($ecashBalance - $pairingBonusAmount);
+                                    $mlm_account_ledger->setBalance($ecashBalance);
                                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->save();
@@ -12041,7 +12086,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $ecashBalance = $ecashBalance - $flushAmount;
                                         $mlm_account_ledger = new MlmAccountLedger();
                                         $mlm_account_ledger->setDistId($distId);
-                                        $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                        $mlm_account_ledger->setAccountType($walletType);
                                         $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_GDB);
                                         $mlm_account_ledger->setRemark("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
                                         $mlm_account_ledger->setCredit(0);
@@ -12070,12 +12115,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $pairingBonusAmount = $pairingBonusAmount - $flushAmount;
                                     }
 
+                                    if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                                        $closeAccountDistDB->setRtwallet($ecashBalance);
+                                        $closeAccountDistDB->save();
+                                    }
+
                                     $maintenanceBalance = $pairingBonusAmount * Globals::BONUS_MAINTENANCE_PERCENTAGE;
                                     if ($maintenanceBalance != 0) {
                                         $ecashBalance = $ecashBalance - $maintenanceBalance;
                                         $maintenanceEcashAccountLedger = new MlmAccountLedger();
                                         $maintenanceEcashAccountLedger->setDistId($distId);
-                                        $maintenanceEcashAccountLedger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                        $maintenanceEcashAccountLedger->setAccountType($walletType);
                                         $maintenanceEcashAccountLedger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_MAINTENANCE);
                                         $maintenanceEcashAccountLedger->setRemark("MAINTENANCE BALANCE (" . $bonusDate . ")");
                                         $maintenanceEcashAccountLedger->setCredit(0);
@@ -12097,7 +12147,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $debitAccountRemark = "GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")";
                                         $bonusService->contraDebitAccount($distId, $debitAccountRemark, $pairingBonusAmount);
                                     }
-                                    $this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
+                                    //$this->revalidateAccount($distId, Globals::ACCOUNT_TYPE_ECASH);
 
                                     if ($maintenanceBalance != 0) {
                                         $commissionBalance = $commissionBalance - $maintenanceBalance;
@@ -15659,6 +15709,19 @@ Wish you all the best.
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 264845
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 273056
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
+
+            return true;
+        }
+        return false;
+    }
+
+    function checkIsKoreanGroup($distDB)
+    {
+        if ($distDB->getLeaderId() == 255709
+            || $distDB->getLeaderId() == 255607
+            || $distDB->getLeaderId() == 264845
+            || $distDB->getLeaderId() == 273056
+            || $distDB->getLeaderId() == 255882) {
 
             return true;
         }

@@ -388,15 +388,15 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = false;
+                                    $closeLogin = true;
                                     $monthStr = "07";
                                     $monthEngStr = "July";
-                                    $dayStr = "01";
-                                    $hourStr = "12";
-                                    $totalHourStopStr = "8";
-                                    //if ($closeLogin == false) {
+                                    $dayStr = "03";
+                                    $hourStr = "00";
+                                    $totalHourStopStr = "12";
+                                    if ($closeLogin == false) {
 
-                                    //} else {
+                                    } else {
                                     ?>
 
                                     <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
@@ -406,8 +406,8 @@
                             <strong>Dear IMs and Partners
 <br>亲爱的代理及会员们:
 <br>
-<br>Please NOTE that the company server will be SHUT DOWN at <?php echo $hourStr;?>:00hrs <?php echo $monthEngStr;?> <?php echo $dayStr;?> 2015 for a period of <?php echo $totalHourStopStr;?> hours.
-<br>请注意公司将于2015.<?php echo $monthStr;?>.<?php echo $dayStr;?>日<?php echo $hourStr;?>:00分关闭服务器, 时长为<?php echo $totalHourStopStr;?>小时.
+<br>Please NOTE that the company server will be under maintenance at <?php echo $hourStr;?>:00hrs <?php echo $monthEngStr;?> <?php echo $dayStr;?> 2015 for a period of <?php echo $totalHourStopStr;?> hours.
+<br>请注意公司将于2015.<?php echo $monthStr;?>.<?php echo $dayStr;?>日<?php echo $hourStr;?>:00分升级服务器, 时长为<?php echo $totalHourStopStr;?>小时.
 <br>
 <!--<br>This is necessary because we are UPGRADING our servers to better serve our IMs and to keep up abreast with the demands of our continued growth.-->
 <!--<br>这一操作是因为我们需要升级服务器,也是为了满足我们不断快速成长的需求, 更好地服务所有代理及会员.-->
@@ -442,7 +442,7 @@
 <br>マキシム・キャピタル・リミテッド
                             </strong>
                                     </p></div>
-<?php //} ?>
+<?php } ?>
                                     <span class="txt_error">&nbsp;<?php if ($sf_flash->has('errorMsg')) { echo $sf_flash->get('errorMsg'); } ?></span>
                                 </td>
                             </tr>
@@ -450,7 +450,7 @@
                             <tr>
                                 <td class="tbl_content_top">
                                     <?php
-                                    $closeLogin = false;
+                                    //$closeLogin = false;
                                     /*if (date("d") == 1) {
                                         $closeLogin = true;
                                     }*/

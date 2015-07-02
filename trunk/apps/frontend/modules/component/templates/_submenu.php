@@ -42,7 +42,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
-$close = false;
+$close = true;
 if (date("d") == 1 && $close == true) {
 ?>
 <script type="text/javascript">

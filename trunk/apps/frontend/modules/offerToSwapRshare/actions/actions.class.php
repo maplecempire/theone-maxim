@@ -96,18 +96,16 @@ class offerToSwapRshareActions extends sfActions
     public function executeDoAutoConvertSSS()
     {
         $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
-                    INNER JOIN  mlm_roi_dividend roi2 ON roi.mt4_user_name = roi2.mt4_user_name
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
-                AND dist.leader_id not in (255709,264845,273056,255882,682)
-                    AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
-                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";
+                AND dist.leader_id not in (255709,255607,264845,273056,255882,254781,254842,682)
+                  WHERE roi.status_code = 'PENDING' LIMIT 300";
 
-        $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
+        /*$query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
                     INNER JOIN  mlm_roi_dividend roi2 ON roi.mt4_user_name = roi2.mt4_user_name
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
                 AND dist.tree_structure like '%|270844|%'
                     AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
-                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";
+                WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";*/
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
