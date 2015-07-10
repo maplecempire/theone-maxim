@@ -378,6 +378,7 @@ if ($distributorDB->getIaccount() == "") {
                 } else {
                     if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255709
                         || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255607
+                        || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 257700
                         || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 264845
                         || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 273056
                         || $sf_user->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
