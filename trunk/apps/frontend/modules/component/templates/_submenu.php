@@ -293,7 +293,14 @@ if (date("d") == 1 && $close == true) {
     </ul>-->
     <br class="clear"><br>
     <?php
-    if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 258435) {
+    $singaporeGroup = false;
+    $pos = strrpos($distDB->getTreeStructure(), "|258435|");
+    if ($pos === false) { // note: three equal signs
+
+    } else {
+        $singaporeGroup = true;
+    }
+    if ($singaporeGroup == true) {
 
     } else {
     if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $bonusService->hideGenealogy() == false) { ?>
