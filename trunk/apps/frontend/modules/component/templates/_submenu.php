@@ -293,10 +293,17 @@ if (date("d") == 1 && $close == true) {
     </ul>-->
     <br class="clear"><br>
     <?php
+    // success69    258435
+    // doris001     280399
     $singaporeGroup = false;
     $pos = strrpos($distDB->getTreeStructure(), "|258435|");
     if ($pos === false) { // note: three equal signs
+        $pos = strrpos($distDB->getTreeStructure(), "|280399|");
+        if ($pos === false) { // note: three equal signs
 
+        } else {
+            $singaporeGroup = true;
+        }
     } else {
         $singaporeGroup = true;
     }
