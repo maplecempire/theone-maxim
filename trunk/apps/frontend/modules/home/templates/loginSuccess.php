@@ -388,12 +388,12 @@
                             <tr>
                                 <td colspan="3">
 <?php
-                                    $closeLogin = true;
+                                    $closeLogin = false;
                                     $monthStr = "07";
                                     $monthEngStr = "July";
                                     $dayStr = "03";
-                                    $hourStr = "00";
-                                    $totalHourStopStr = "12";
+                                    $hourStr = "12";
+                                    $totalHourStopStr = "6";
                                     if ($closeLogin == false) {
 
                                     } else {
@@ -595,6 +595,19 @@
                             <td></td>
                             <td>
                                 <br>
+                                <div style="margin-top: 10px; margin-bottom: 10px; padding: 0 .7em;"
+                         class="ui-state-highlight ui-corner-all">
+                        <p style="margin: 10px"><span style="float: left; margin-right: .3em;"
+                                                      class="ui-icon ui-icon-info"></span>
+                            <strong>Effective from 4th July 2015, Singaporeans are NOT permitted to participate in any current promotions and/or purchase new packages until further notice.
+<br>
+<br>                                CEO - MCL
+<br>
+<br>从2015.7.4日起，所有新加坡籍客户不得参与公司当前的任何促销活动，也不得购买任何新的配套。稍后有进一步的消息，我们会及时公告。
+<br>
+<br>MCL首席执行官CEO
+                            </strong>
+                                    </p></div>
                                 <br>
                             </td>
                             <td></td>
