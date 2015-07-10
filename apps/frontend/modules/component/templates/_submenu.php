@@ -42,7 +42,7 @@ if ($distDB->getDistributorId() == 595 || $distDB->getDistributorId() == 288 || 
 
 $appUser = AppUserPeer::retrieveByPK($distDB->getUserId());
 
-$close = true;
+$close = false;
 if (date("d") == 1 && $close == true) {
 ?>
 <script type="text/javascript">
@@ -312,7 +312,6 @@ if (date("d") == 1 && $close == true) {
             <a href="/member/changeSponsorB"><span><?php echo __('Change Referrer ID'); ?></span></a>
         </li>
         <?php }
-    }
     ?>
     </ul>
     <br class="clear"><br>
@@ -328,7 +327,9 @@ if (date("d") == 1 && $close == true) {
     </ul>
     <br class="clear"><br>
     <?php   } ?>
-    <?php } ?>
+    <?php }
+        }
+    ?>
 
     <?php
     if ($distDB->getDistributorId() == 1) { ?>
