@@ -293,6 +293,9 @@ if (date("d") == 1 && $close == true) {
     </ul>-->
     <br class="clear"><br>
     <?php
+    if ($sf_user->getAttribute(Globals::SESSION_LEADER_ID, 0) == 258435) {
+
+    } else {
     if ($distDB->getStatusCode() == Globals::STATUS_ACTIVE && $distDB->getPlacementTreeStructure() != null && $bonusService->hideGenealogy() == false) { ?>
     <ul>
         <li class="menu_title"><?php echo __('HIERARCHY'); ?></li>
@@ -308,7 +311,9 @@ if (date("d") == 1 && $close == true) {
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/changeSponsorB"><span><?php echo __('Change Referrer ID'); ?></span></a>
         </li>
-        <?php } ?>
+        <?php }
+    }
+    ?>
     </ul>
     <br class="clear"><br>
 
