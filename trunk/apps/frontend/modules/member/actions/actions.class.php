@@ -1359,7 +1359,7 @@ class memberActions extends sfActions
             $query = "SELECT distinct roi.devidend_id
                 FROM mlm_roi_dividend roi
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
-                AND dist.leader_id not in (255709,255607,264845,273056,255882)
+                AND dist.leader_id in (255709,255607,264845,273056,255882, 257700)
                     WHERE roi.status_code = 'PENDING'
                         AND dividend_date <= '".date("Y-m-d")." 23:59:59'";
 
@@ -4608,11 +4608,11 @@ class memberActions extends sfActions
                     $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($uplineDistId);
                     $distAccountEcashBalance = 0;
                     if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
-                        $walletType = Globals::ACCOUNT_TYPE_RT;
-                        $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
-                    } else {
                         $walletType = Globals::ACCOUNT_TYPE_ECASH;
                         $distAccountEcashBalance = $this->getAccountBalance($uplineDistId, $walletType);
+                    } else {
+                        $walletType = Globals::ACCOUNT_TYPE_RT;
+                        $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
                     }
 
                     $distAccountEcashBalance = $distAccountEcashBalance + $directSponsorBonusAmount;
@@ -4628,6 +4628,18 @@ class memberActions extends sfActions
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
+
+                    if ($walletType == Globals::ACCOUNT_TYPE_RT) {
+                        $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                        $gg_member_rtwallet_record->setUid($uplineDistId);
+                        $gg_member_rtwallet_record->setActionType("DRB FROM MAXIM");
+                        $gg_member_rtwallet_record->setType('c');
+                        $gg_member_rtwallet_record->setAmount($directSponsorBonusAmount);
+                        $gg_member_rtwallet_record->setBal($distAccountEcashBalance);
+                        $gg_member_rtwallet_record->setDescr("PACKAGE PURCHASE (".$packageDB->getPackageName().") ".$directSponsorPercentage."% (" . $mlm_distributor->getDistributorCode() . ")");
+                        $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                        $gg_member_rtwallet_record->save();
+                    }
 
                     $this->mirroringAccountLedger($mlm_account_ledger, "54");
 
@@ -4645,6 +4657,17 @@ class memberActions extends sfActions
                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                         $mlm_account_ledger->save();
 
+                        if ($walletType == Globals::ACCOUNT_TYPE_RT) {
+                            $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                            $gg_member_rtwallet_record->setUid($uplineDistId);
+                            $gg_member_rtwallet_record->setActionType("DRB FROM MAXIM");
+                            $gg_member_rtwallet_record->setType('debit');
+                            $gg_member_rtwallet_record->setAmount($directSponsorBonusAmount);
+                            $gg_member_rtwallet_record->setBal($distAccountEcashBalance);
+                            $gg_member_rtwallet_record->setDescr("COMMISSION NOT ENTITLED DUE TO ACCOUNT CLOSED");
+                            $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                            $gg_member_rtwallet_record->save();
+                        }
                         $this->mirroringAccountLedger($mlm_account_ledger, "55");
                     } else {
                         if ($bonusService->checkDebitAccount($uplineDistId) == true) {
@@ -4653,7 +4676,7 @@ class memberActions extends sfActions
                         }
                     }
 
-                    if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                    if ($walletType == Globals::ACCOUNT_TYPE_RT) {
                         $closeAccountDistDB->setRtwallet($distAccountEcashBalance);
                         $closeAccountDistDB->save();
                     }
@@ -6940,9 +6963,9 @@ We look forward to your custom in the near future. Should you have any queries, 
 <br>これが我々メンバーにとって現在考えられる最高の手段となります。
 <br>何卒よろしくお願いします。";
 
-        if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15) {
+        /*if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 142 || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 15) {
             $this->setFlash('successMsg', $japanMessage);
-        }
+        }*/
 
         if (MUserUtil::init($this)->isMobileUser()) {
             $muObj = new MUserObj();
@@ -11903,7 +11926,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                 print_r("bonusDate=".$bonusDate."::".$this->getRequestParameter('q')."<br>");
 
                 $level = 0;
-                while ($level < 10) {
+                while ($level < 1) {
                     if ($bonusDate == $currentDate) {
                         print_r("break<br>");
                         break;
@@ -11913,7 +11936,7 @@ We look forward to your custom in the near future. Should you have any queries, 
 //                    $c = new Criteria();
 //                    $mlmDistPairingDBs = MlmDistPairingPeer::doSelect($c);
                     $c = new Criteria();
-                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 80);
+                    //$c->add(MlmDistributorPeer::DISTRIBUTOR_ID, 1);
                     $c->add(MlmDistributorPeer::FROM_ABFX, $fromAbfx);
                     $c->setOffset($this->getRequestParameter('q') * $queryRecord);
                     $c->setLimit($queryRecord);
@@ -11922,9 +11945,9 @@ We look forward to your custom in the near future. Should you have any queries, 
                     print_r("total Dist:".count($dists)."<br><br>");
                     foreach ($dists as $dist) {
 //                    foreach ($mlmDistPairingDBs as $mlmDistPairingDB) {
-                        if ($this->isGdbIssue($dist->getDistributorId(), $currentDate) == true) {
+                        /*if ($this->isGdbIssue($dist->getDistributorId(), $currentDate) == true) {
                             continue;
-                        }
+                        }*/
 
                         $c = new Criteria();
                         $c->add(MlmDistPairingPeer::DIST_ID, $dist->getDistributorId());
@@ -11938,10 +11961,11 @@ We look forward to your custom in the near future. Should you have any queries, 
 
                         $flushLimit = $packageDB->getDailyMaxPairing();
                         $legFlushLimit = $packageDB->getDailyMaxPairing() * 10;
-                        print_r("DistId ".$distId."<br>");
+
                         $leftBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_LEFT, $currentDate);
                         $rightBalance = $this->findPairingLedgersBonus($distId, Globals::PLACEMENT_RIGHT, $currentDate);
-
+                        //print_r("DistId ".$distId.", left: ".$leftBalance.", right: ".$rightBalance."<br>");
+                        print_r("DistId ".$distId."<br>");
                         if ($leftBalance > 0 && $rightBalance > 0) {
                             print_r("Start Calculate bonus:".$bonusDate."<br>");
                             // requery for paring ledger
@@ -12027,11 +12051,11 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $distAccountEcashBalance = 0;
                                 $closeAccountDistDB = MlmDistributorPeer::retrieveByPk($distId);
                                 if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
-                                    $walletType = Globals::ACCOUNT_TYPE_RT;
-                                    $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
-                                } else {
                                     $walletType = Globals::ACCOUNT_TYPE_ECASH;
                                     $distAccountEcashBalance = $this->getAccountBalance($distId, $walletType);
+                                } else {
+                                    $walletType = Globals::ACCOUNT_TYPE_RT;
+                                    $distAccountEcashBalance = $closeAccountDistDB->getRtwallet();
                                 }
 
                                 // pairing amount
@@ -12048,6 +12072,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                                 $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $mlm_account_ledger->save();
 
+                                if ($walletType == Globals::ACCOUNT_TYPE_RT) {
+                                    $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                    $gg_member_rtwallet_record->setUid($distId);
+                                    $gg_member_rtwallet_record->setActionType("GDB FROM MAXIM");
+                                    $gg_member_rtwallet_record->setType('c');
+                                    $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
+                                    $gg_member_rtwallet_record->setBal($ecashBalance);
+                                    $gg_member_rtwallet_record->setDescr("GROUP PAIRING BONUS AMOUNT (" . $bonusDate . ")");
+                                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                    $gg_member_rtwallet_record->save();
+                                }
                                 $this->mirroringAccountLedger($mlm_account_ledger, "75");
 
                                 if ($closeAccountDistDB && $closeAccountDistDB->getCloseAccount() == "Y") {
@@ -12064,6 +12099,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                     $mlm_account_ledger->save();
 
+                                    if ($walletType == Globals::ACCOUNT_TYPE_RT) {
+                                        $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                        $gg_member_rtwallet_record->setUid($distId);
+                                        $gg_member_rtwallet_record->setActionType("GDB FROM MAXIM");
+                                        $gg_member_rtwallet_record->setType('debit');
+                                        $gg_member_rtwallet_record->setAmount($pairingBonusAmount);
+                                        $gg_member_rtwallet_record->setBal($ecashBalance);
+                                        $gg_member_rtwallet_record->setDescr("COMMISSION NOT ENTITLED DUE TO ACCOUNT CLOSED");
+                                        $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                        $gg_member_rtwallet_record->save();
+                                    }
                                     $this->mirroringAccountLedger($mlm_account_ledger, "76");
                                 } else {
                                     //commission
@@ -12096,6 +12142,17 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                         $mlm_account_ledger->save();
 
+                                        if ($walletType == Globals::ACCOUNT_TYPE_RT) {
+                                            $gg_member_rtwallet_record = new GgMemberRtwalletRecord();
+                                            $gg_member_rtwallet_record->setUid($distId);
+                                            $gg_member_rtwallet_record->setActionType("GDB FROM MAXIM");
+                                            $gg_member_rtwallet_record->setType('debit');
+                                            $gg_member_rtwallet_record->setAmount($flushAmount);
+                                            $gg_member_rtwallet_record->setBal($ecashBalance);
+                                            $gg_member_rtwallet_record->setDescr("FLUSH " . $pairingBonusAmount . " (" . $bonusDate . ")");
+                                            $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                                            $gg_member_rtwallet_record->save();
+                                        }
                                         $this->mirroringAccountLedger($mlm_account_ledger, "77");
 
                                         $commissionBalance = $commissionBalance - $flushAmount;
@@ -12115,7 +12172,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                                         $pairingBonusAmount = $pairingBonusAmount - $flushAmount;
                                     }
 
-                                    if ($this->checkIsKoreanGroup($closeAccountDistDB) == true) {
+                                    if ($walletType == Globals::ACCOUNT_TYPE_RT) {
                                         $closeAccountDistDB->setRtwallet($ecashBalance);
                                         $closeAccountDistDB->save();
                                     }
@@ -15506,6 +15563,7 @@ Wish you all the best.
 
         // 139 gideon 682 vivian329 1504 cnbiz1
         // 301955 IndoWorld 276722	AsiaMiles
+        // 140 FALCON2000
         if ($this->getUser()->getAttribute(Globals::SESSION_DISTID) == 139
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 682
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 276722
@@ -15530,7 +15588,7 @@ Wish you all the best.
             // 141 Kaseong2, 261620 KASEONG04, 261621 KASEONG03, 276789 KASON1, 279103 fukuoka04 remove FMC
             if (strrpos($distDB->getTreeStructure(), "|1504|") === false) {
                 if (strrpos($distDB->getTreeStructure(), "|61|") === false) {
-                    if (strrpos($distDB->getTreeStructure(), "|141|") === false) {
+                    if (strrpos($distDB->getTreeStructure(), "|140|") === false) {
                         if (strrpos($distDB->getTreeStructure(), "|261620|") === false) {
                             if (strrpos($distDB->getTreeStructure(), "|261621|") === false) {
                                 if (strrpos($distDB->getTreeStructure(), "|276789|") === false) {
@@ -15708,6 +15766,7 @@ Wish you all the best.
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255607
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 264845
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 273056
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 257700
             || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 255882) {
 
             return true;
@@ -15721,6 +15780,7 @@ Wish you all the best.
             || $distDB->getLeaderId() == 255607
             || $distDB->getLeaderId() == 264845
             || $distDB->getLeaderId() == 273056
+            || $distDB->getLeaderId() == 257700
             || $distDB->getLeaderId() == 255882) {
 
             return true;

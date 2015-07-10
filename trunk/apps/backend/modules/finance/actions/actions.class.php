@@ -291,6 +291,177 @@ class financeActions extends sfActions
         print_r("<br>executeAutoRejectTwosasaCp3Withdrawal Done");
         return sfView::HEADER_ONLY;
     }
+
+    public function executeAutoTransferCp2ToLeaderAccount()
+    {
+        $query = "SELECT withdraw_id,
+            dist_id,
+            deduct,
+            amount,
+            bank_in_to,
+            status_code,
+            approve_reject_datetime,
+            remarks,
+            created_by,
+            created_on,
+            updated_by,
+            updated_on,
+            leader_dist_id
+        FROM maxim.mlm_ecash_withdraw
+            WHERE withdraw_id IN (2968,3029,3225,3377)";
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mlm_ecash_withdraw = MlmEcashWithdrawPeer::retrieveByPK($arr['withdraw_id']);
+
+            print_r("<br>".$mlm_ecash_withdraw->getDistId().",Withdrawal:".$mlm_ecash_withdraw->getDistId());
+            $remark = "RETURNED TO forevermaxim128";
+
+            $con = Propel::getConnection(MlmEcashWithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+
+                $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                $distId = $mlm_ecash_withdraw->getDistId();
+                /******************************/
+                /*  Account
+                /******************************/
+                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_ECASH);
+
+                if ($refundEcash > $distAccountEcashBalance) {
+                    print_r("+++ withdrawal id: ".$arr['withdraw_id']);
+                } else {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark("TRANSFER TO forevermaxim128");
+                    $mlm_account_ledger->setInternalRemark("WITHDRAWAL SPECIAL CASE");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($refundEcash);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance - $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $distDB = MlmDistributorPeer::retrieveByPK($distId);
+                    $distAccountEcashBalance = $this->getAccountBalance(256078, Globals::ACCOUNT_TYPE_ECASH);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId(256078);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $mlm_account_ledger->setRemark("TRANSFER FROM ".$distDB->getDistributorCode());
+                    $mlm_account_ledger->setInternalRemark("WITHDRAWAL SPECIAL CASE (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoTransferCp2ToLeaderAccount Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeAutoTransferCp3ToLeaderAccount()
+    {
+        $query = "SELECT withdraw_id,
+            dist_id,
+            deduct,
+            amount,
+            bank_in_to,
+            status_code,
+            approve_reject_datetime,
+            remarks,
+            created_by,
+            created_on,
+            updated_by,
+            updated_on,
+            leader_dist_id
+        FROM maxim.mlm_cp3_withdraw
+            WHERE withdraw_id IN (21452,21674,21691,22035,23269,23574,23579,23580,23736,24232,24840,24853,24952,28534,28923,29979,30231,30240,30289,30295,30317)";
+
+        //var_dump($query);
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            $mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPK($arr['withdraw_id']);
+
+            print_r("<br>".$mlm_ecash_withdraw->getDistId().",Withdrawal:".$mlm_ecash_withdraw->getDistId());
+            $remark = "RETURNED TO forevermaxim128";
+
+            $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                print_r("<br>".$remark);
+
+                $refundEcash = $mlm_ecash_withdraw->getDeduct();
+                $distId = $mlm_ecash_withdraw->getDistId();
+                /******************************/
+                /*  Account
+                /******************************/
+                $distAccountEcashBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                if ($refundEcash > $distAccountEcashBalance) {
+                    print_r("+++ withdrawal id: ".$arr['withdraw_id']);
+                } else {
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId($distId);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
+                    $mlm_account_ledger->setRemark("TRANSFER TO forevermaxim128");
+                    $mlm_account_ledger->setInternalRemark("WITHDRAWAL SPECIAL CASE");
+                    $mlm_account_ledger->setCredit(0);
+                    $mlm_account_ledger->setDebit($refundEcash);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance - $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+
+                    $distDB = MlmDistributorPeer::retrieveByPK($distId);
+                    $distAccountEcashBalance = $this->getAccountBalance(256078, Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                    $mlm_account_ledger = new MlmAccountLedger();
+                    $mlm_account_ledger->setDistId(256078);
+                    $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                    $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_FROM);
+                    $mlm_account_ledger->setRemark("TRANSFER FROM ".$distDB->getDistributorCode());
+                    $mlm_account_ledger->setInternalRemark("WITHDRAWAL SPECIAL CASE (REFERENCE ID " . $mlm_ecash_withdraw->getWithdrawId() . ")");
+                    $mlm_account_ledger->setCredit($refundEcash);
+                    $mlm_account_ledger->setDebit(0);
+                    $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
+                    $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $mlm_account_ledger->save();
+                }
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("<br>executeAutoTransferCp3ToLeaderAccount Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAutoRejectTwosasaCp2Withdrawal()
     {
         /*$cp3IdArray = explode(',', 254837,237,255670,349,1802,764,93,43,164,283,254781,57,260249,595);
@@ -5030,3 +5201,4 @@ class financeActions extends sfActions
         $log_account_ledger->save();
     }
 }
+
