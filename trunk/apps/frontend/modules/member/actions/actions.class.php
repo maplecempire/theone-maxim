@@ -15570,6 +15570,9 @@ Wish you all the best.
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 301955
             || $this->getUser()->getAttribute(Globals::SESSION_DISTID) == 1504) {
 
+        } else if ($this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 60
+            || $this->getUser()->getAttribute(Globals::SESSION_LEADER_ID) == 682) {
+
         } else {
             $distDB = MlmDistributorPeer::retrieveByPK($this->getUser()->getAttribute(Globals::SESSION_DISTID));
 
