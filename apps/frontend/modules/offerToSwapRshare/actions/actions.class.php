@@ -3019,7 +3019,7 @@ class offerToSwapRshareActions extends sfActions
     function getSwapedMt4($distId, $mt4UserName)
     {
         $query = "SELECT sss_id, dist_id, dividend_id, mt4_user_name, cp2_balance, cp3_balance, rt_balance, mt4_balance, roi_remaining_month, roi_percentage, total_amount_converted_with_cp2cp3, share_value, total_share_converted, signature, remarks, status_code, swap_type, created_by, created_on, updated_by, updated_on
-            FROM sss_application where dist_id = ".$distId." AND status_code IN ('SUCCESS','ASSS PAIRING','PENDING','PAIRING','ERROR')";
+            FROM sss_application where dist_id = ".$distId." AND status_code IN ('SUCCESS','ASSS PAIRING','PROCESS','PENDING','PAIRING','ERROR')";
 
         if ($mt4UserName != "") {
             $query = $query . " AND mt4_user_name = ?";
