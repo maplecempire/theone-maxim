@@ -50,6 +50,14 @@ report2:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+reverseErrorToPairing:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
+removeDuplicateErrorRecord:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 updatePairingCreatedDate:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
