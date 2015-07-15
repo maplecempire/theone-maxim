@@ -1780,6 +1780,7 @@ class offerToSwapRshareActions extends sfActions
                         }
 
                         print_r("<br>1. mt4Enable:".$mt4Enable);
+                        print_r("<br>1-1. comment:".$comment);
                         if ($mt4Enable == "0") {
                             $pos = strrpos($comment, "Disabled (SSS)");
                             if ($pos === false) { // note: three equal signs
