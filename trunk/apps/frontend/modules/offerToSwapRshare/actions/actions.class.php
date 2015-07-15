@@ -1782,10 +1782,8 @@ class offerToSwapRshareActions extends sfActions
                         print_r("<br>1. mt4Enable:".$mt4Enable);
                         print_r("<br>1-1. comment:".$comment);
                         if ($mt4Enable == "0") {
-                            $pos = strrpos($comment, "Disabled (SSS)");
+                            $pos = strrpos($comment, "maturity");
                             if ($pos === false) { // note: three equal signs
-
-                            } else {
                                 print_r("<br>2. Enter Disabled (SSS)");
                                 $array = explode(',', "PROCESS,SUCCESS");
 
@@ -1797,7 +1795,15 @@ class offerToSwapRshareActions extends sfActions
                                 if (!$sssApplicationExist) {
                                     print_r("<br>3. MT4Enable");
                                     $mt4Enable = "1";
+
+                                    $remark .= date('Y-m-d H:i:s') .": SSS (SKIP CHECKING)";
+                                    $sssApplication->setRemarks($remark);
+                                    $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                                    $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                    $sssApplication->save();
                                 }
+                            } else {
+
                             }
                         }
 
