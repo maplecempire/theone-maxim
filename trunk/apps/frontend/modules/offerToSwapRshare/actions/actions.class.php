@@ -2116,6 +2116,28 @@ class offerToSwapRshareActions extends sfActions
                         $distributorDB->setRwallet($rwalletBalance);
                         $distributorDB->save();
                     }
+                } else if ($sssApplication->getSwapType() == "ASSS") {
+                    $rwalletBalance = $distributorDB->getRwallet();
+                    /*if ($ggMemberRwalletRecordDB) {
+                        $rwalletBalance = $ggMemberRwalletRecordDB->getBal();
+                    }*/
+                    $rwalletBalance = $rwalletBalance + $totalRshare;
+                    // credited S4
+                    $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                    $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                    $ggMemberRwalletRecord->setAid(0);
+                    $ggMemberRwalletRecord->setActionType("ASSS");
+                    $ggMemberRwalletRecord->setType("credit");
+                    $ggMemberRwalletRecord->setAmount($totalRshare);
+                    $ggMemberRwalletRecord->setBal($rwalletBalance);
+                    $ggMemberRwalletRecord->setDescr("Auto Super Share Swap, REF:".$sssApplication->getSssId());
+                    $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberRwalletRecord->save();
+
+                    if ($distributorDB) {
+                        $distributorDB->setRwallet($rwalletBalance);
+                        $distributorDB->save();
+                    }
                 }
 
                 $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
