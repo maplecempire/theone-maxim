@@ -285,10 +285,14 @@ class offerToSwapRshareActions extends sfActions
 
             $roiPercentage = $roiArr['roi_percentage'];
             $roiRemainingMonth = 0;
-            if ($roiArr['idx'] <= 18) {
-                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            if ($roiArr['idx'] == 18) {
+                $roiRemainingMonth = 18;
             } else {
-                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                if ($roiArr['idx'] < 18) {
+                    $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                } else {
+                    $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                }
             }
             $remarks = "";
             $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
@@ -1233,10 +1237,14 @@ class offerToSwapRshareActions extends sfActions
                 continue;
             }
             var_dump($roiArr);
-            if ($roiArr['idx'] <= 18) {
-                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            if ($roiArr['idx'] == 18) {
+                $roiRemainingMonth = 18;
             } else {
-                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                if ($roiArr['idx'] <= 18) {
+                    $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                } else {
+                    $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                }
             }
             $roiPercentage = $sssApplication->getRoiPercentage();
 
@@ -1977,10 +1985,14 @@ class offerToSwapRshareActions extends sfActions
                     continue;
                 }
                 $entitledPairing = true;
-                if ($roiArr['idx'] <= 18) {
-                    $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                if ($roiArr['idx'] == 18) {
+                    $roiRemainingMonth = 18;
                 } else {
-                    $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                    if ($roiArr['idx'] <= 18) {
+                        $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                    } else {
+                        $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                    }
                 }
                 if ($roiArr['idx'] <= 0) {
                     $roiRemainingMonth = 0;
@@ -2562,10 +2574,14 @@ class offerToSwapRshareActions extends sfActions
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 0;
 
-        if ($roiArr['idx'] <= 18) {
-            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        if ($roiArr['idx'] == 18) {
+            $roiRemainingMonth = 18;
         } else {
-            $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            if ($roiArr['idx'] <= 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            }
         }
         /*if ($roiRemainingMonth >= 10) {
             $roiPercentage = 0;
@@ -2648,10 +2664,14 @@ class offerToSwapRshareActions extends sfActions
 
         $roiPercentage = $roiArr['roi_percentage'];
         $roiRemainingMonth = 0;
-        if ($roiArr['idx'] <= 18) {
-            $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+        if ($roiArr['idx'] == 18) {
+            $roiRemainingMonth = 18;
         } else {
-            $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            if ($roiArr['idx'] <= 18) {
+                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+            } else {
+                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+            }
         }
         $remarks = "";
         /*if ($roiRemainingMonth >= 10) {
@@ -3291,10 +3311,15 @@ class offerToSwapRshareActions extends sfActions
 
             $roiPercentage = $roiArr['roi_percentage'];
             $roiRemainingMonth = 0;
-            if ($roiArr['idx'] <= 18) {
-                $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+
+            if ($roiArr['idx'] == 18) {
+                $roiRemainingMonth = 18;
             } else {
-                $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                if ($roiArr['idx'] <= 18) {
+                    $roiRemainingMonth = 18 - $roiArr['idx'] + 1;
+                } else {
+                    $roiRemainingMonth = 36 - $roiArr['idx'] + 1;
+                }
             }
             /*if ($roiRemainingMonth >= 10) {
                 $roiPercentage = 0;
