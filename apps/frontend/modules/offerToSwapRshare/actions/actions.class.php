@@ -83,7 +83,53 @@ class offerToSwapRshareActions extends sfActions
             }
             $totalRshare = round($totalRshare);
 
+            if ($sssApplication->getSwapType() == "SES") {
+                $sssApplication->setTotalShareConverted($totalRshare);
+                $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
 
+                $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+                $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
+
+                $tbl_account_ledger2 = new MlmAccountLedger();
+                $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
+                $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+                $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+                $tbl_account_ledger2->setCredit($pairingBonusAmount);
+                $tbl_account_ledger2->setDebit(0);
+                $tbl_account_ledger2->setRemark("");
+                $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
+                $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $tbl_account_ledger2->save();
+
+                $c = new Criteria();
+                $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
+                $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
+
+                $balance = 0;
+                if (!$ggMemberWallet) {
+                    $ggMemberWallet = new GgMemberWallet();
+                    $ggMemberWallet->setUid($sssApplication->getDistId());
+                    $ggMemberWallet->setRt2wallet(0);
+                    $ggMemberWallet->setDescr("");
+                    $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberWallet->save();
+                }
+                $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
+
+                $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
+                $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+                $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
+                $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
+                $gg_member_rtwallet_record->setDebit(0);
+                $gg_member_rtwallet_record->setBalance($balance);
+                $gg_member_rtwallet_record->setDescr("");
+                $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                $gg_member_rtwallet_record->save();
+
+                $ggMemberWallet->setRt2wallet($balance);
+                $ggMemberWallet->save();
+            }
         }
         print_r("Done");
         return sfView::HEADER_ONLY;
@@ -1731,6 +1777,25 @@ class offerToSwapRshareActions extends sfActions
                         if ($comment != "") {
                             $comment .= ";";
                         }
+
+                        if ($mt4Enable == "0") {
+                            $pos = strrpos($comment, "Disabled (SSS)");
+                            if ($pos === false) { // note: three equal signs
+
+                            } else {
+                                $array = explode(',', "PROCESS,SUCCESS");
+
+                                $c = new Criteria();
+                                $c->add(SssApplicationPeer::MT4_USER_NAME, $mt4Id);
+                                $c->add(SssApplicationPeer::STATUS_CODE, $array, Criteria::IN);
+                                $sssApplicationExist = SssApplicationPeer::doSelectOne($c);
+
+                                if (!$sssApplicationExist) {
+                                    $mt4Enable = "1";
+                                }
+                            }
+                        }
+
                         if ($mt4Enable == "1") {
                             $comment = $comment . date('Y-m-d H:i:s').": Disabled (SSS)";
                             $params['comment'] = $comment;
