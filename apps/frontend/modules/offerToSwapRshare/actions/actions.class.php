@@ -1703,7 +1703,8 @@ class offerToSwapRshareActions extends sfActions
     public function executeDoDisabledMt4AndCheckForMaturity()
     {
         $c = new Criteria();
-        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_ERROR);
+        //$c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_PENDING);
         //$c->add(SssApplicationPeer::SWAP_TYPE, "SES");
         if ($this->getRequestParameter('q') != "") {
             $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
