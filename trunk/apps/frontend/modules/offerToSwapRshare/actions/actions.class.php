@@ -1785,7 +1785,7 @@ class offerToSwapRshareActions extends sfActions
                             $pos = strrpos($comment, "maturity");
                             if ($pos === false) { // note: three equal signs
                                 print_r("<br>2. Enter Disabled (SSS)");
-                                $array = explode(',', "PROCESS,SUCCESS");
+                                $array = explode(',', "PROCESS,SUCCESS,PAIRING");
 
                                 $c = new Criteria();
                                 $c->add(SssApplicationPeer::MT4_USER_NAME, $mt4Id);
