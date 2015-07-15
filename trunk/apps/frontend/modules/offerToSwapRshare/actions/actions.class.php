@@ -27,7 +27,7 @@ class offerToSwapRshareActions extends sfActions
             $c = new Criteria();
             $c->add(SssApplicationPeer::MT4_USER_NAME, $sssApplication->getMt4UserName());
             $c->add(SssApplicationPeer::SSS_ID, $sssApplication->getSssId(), Criteria::NOT_EQUAL);
-            $c->add(SssApplicationPeer::STATUS_CODE, "SUCCESS", Criteria::NOT_EQUAL);
+            //$c->add(SssApplicationPeer::STATUS_CODE, "SUCCESS", Criteria::NOT_EQUAL);
             $sssApplicationExist = SssApplicationPeer::doSelectOne($c);
 
             if ($sssApplicationExist) {
