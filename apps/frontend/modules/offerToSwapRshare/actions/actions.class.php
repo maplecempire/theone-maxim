@@ -1709,7 +1709,7 @@ class offerToSwapRshareActions extends sfActions
         if ($this->getRequestParameter('q') != "") {
             $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
         }
-        $c->setLimit(100);
+        $c->setLimit(10);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         print_r("<br>".count($sssApplications));
