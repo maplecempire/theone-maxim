@@ -10,6 +10,82 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeRemoveDuplicateErrorRecord()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_ERROR);
+        if ($this->getRequestParameter('q') != "") {
+            $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
+        }
+        $c->setLimit(100);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        print_r("<br>".count($sssApplications));
+        foreach ($sssApplications as $sssApplication) {
+            print_r("<br>SSS::: ".$sssApplication->getSssId().", Dist: ".$sssApplication->getDistId().", mt4: ".$sssApplication->getMt4UserName());
+
+            $c = new Criteria();
+            $c->add(SssApplicationPeer::MT4_USER_NAME, $sssApplication->getMt4UserName());
+            $c->add(SssApplicationPeer::SSS_ID, $sssApplication->getSssId(), Criteria::NOT_EQUAL);
+            $sssApplicationExist = SssApplicationPeer::doSelectOne($c);
+
+            if ($sssApplicationExist) {
+                if ($sssApplicationExist->getTotalShareConverted() == $sssApplication->getTotalShareConverted()) {
+                    print_r("<br>need to remove +++++++");
+                } else {
+                    print_r("<br>exist but not sames ********");
+                }
+            } else {
+                print_r("not exist");
+            }
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeReverseErrorToPairing()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_ERROR);
+        if ($this->getRequestParameter('q') != "") {
+            $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
+        }
+        $c->setLimit(100);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        print_r("<br>".count($sssApplications));
+        foreach ($sssApplications as $sssApplication) {
+            print_r("<br>SSS::: ".$sssApplication->getSssId().", Dist: ".$sssApplication->getDistId().", mt4: ".$sssApplication->getMt4UserName());
+
+            $mt4Balance = $this->getMt4Balance($sssApplication->getDistId(), $sssApplication->getMt4UserName());
+
+            if ($mt4Balance == null) {
+                $this->setFlash('errorMsg', $this->getContext()->getI18N()->__("err803:Invalid Action."));
+                return $this->redirect('/offerToSwapRshare/index');
+            }
+
+            $roiPercentage = $sssApplication->getRoiPercentage();
+            $roiRemainingMonth = $sssApplication->getRoiRemainingMonth();
+            $remarks = "";
+            $remainingRoiAmount = $mt4Balance * $roiRemainingMonth * $roiPercentage / 100;
+
+            if ($sssApplication->getSwapType() == "SES") {
+                $roiRemainingMonth = 0;
+            }
+            $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
+            $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
+            $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
+
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            if ($sssApplication->getSwapType() == "SES") {
+                $totalRshare = $totalAmountConvertedWithCp2Cp3;
+            }
+            $totalRshare = round($totalRshare);
+
+
+        }
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeAutoSwapMemberAction()
     {
         $c = new Criteria();
