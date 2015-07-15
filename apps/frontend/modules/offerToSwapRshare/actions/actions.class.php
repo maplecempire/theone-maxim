@@ -1709,7 +1709,7 @@ class offerToSwapRshareActions extends sfActions
         if ($this->getRequestParameter('q') != "") {
             $c->add(SssApplicationPeer::DIST_ID, $this->getRequestParameter('q'));
         }
-        $c->setLimit(10);
+        $c->setLimit(1);
         $sssApplications = SssApplicationPeer::doSelect($c);
 
         print_r("<br>".count($sssApplications));
@@ -1779,11 +1779,13 @@ class offerToSwapRshareActions extends sfActions
                             $comment .= ";";
                         }
 
+                        print_r("<br>1. mt4Enable:".$mt4Enable);
                         if ($mt4Enable == "0") {
                             $pos = strrpos($comment, "Disabled (SSS)");
                             if ($pos === false) { // note: three equal signs
 
                             } else {
+                                print_r("<br>2. Enter Disabled (SSS)");
                                 $array = explode(',', "PROCESS,SUCCESS");
 
                                 $c = new Criteria();
@@ -1792,12 +1794,14 @@ class offerToSwapRshareActions extends sfActions
                                 $sssApplicationExist = SssApplicationPeer::doSelectOne($c);
 
                                 if (!$sssApplicationExist) {
+                                    print_r("<br>3. MT4Enable");
                                     $mt4Enable = "1";
                                 }
                             }
                         }
 
                         if ($mt4Enable == "1") {
+                            print_r("<br>4. MT4Enable Modified");
                             $comment = $comment . date('Y-m-d H:i:s').": Disabled (SSS)";
                             $params['comment'] = $comment;
                             $params['enable'] = "0";  // 1 = enabled, 0 = disabled
@@ -1815,6 +1819,7 @@ class offerToSwapRshareActions extends sfActions
                                 $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                                 $sssApplication->save();
                             } else {
+                                print_r("<br>5. Update SSS");
                                 $sssApplication->setMt4Balance($mt4Balance);
                                 if ($sssApplication->getSwapType() == "SES") {
                                     $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
