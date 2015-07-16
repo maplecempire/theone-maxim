@@ -1043,6 +1043,39 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='78'>Important Annoucement!!
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "16 July 2015";
+                ?>
+            </div>
+
+            <div id="page_78" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>
+<br>Based on recent developments affecting our banking arrangements, kindly note that with immediate effect, we will be discontinuing the use of iAccount for inward and outward remittances of funds. We apologize for the inconvenience caused.
+<br>
+<br>Thank you,
+<br>CEO
+<br>Maxim Capital Ltd
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='77'>Important Annoucement!!
                 </a><img src="/images/new_icon.gif">
             </div>
