@@ -3262,6 +3262,14 @@ class offerToSwapRshareActions extends sfActions
         if ($resultset->next()) {
             $arr = array();
             $arr = $resultset->getRow();
+
+            if ($arr['package_id'] == 28) {
+                $arr['roi_percentage'] = 6;
+            } else if ($arr['package_id'] == 29) {
+                $arr['roi_percentage'] = 7;
+            } else if ($arr['package_id'] >= 30) {
+                $arr['roi_percentage'] = 8;
+            }
         }
         if ($arr == null) {
             $query = "SELECT count(*) AS _count
@@ -3292,6 +3300,14 @@ class offerToSwapRshareActions extends sfActions
                     if ($resultset->next()) {
                         $arr = array();
                         $arr = $resultset->getRow();
+
+                        if ($arr['package_id'] == 28) {
+                            $arr['roi_percentage'] = 6;
+                        } else if ($arr['package_id'] == 29) {
+                            $arr['roi_percentage'] = 7;
+                        } else if ($arr['package_id'] >= 30) {
+                            $arr['roi_percentage'] = 8;
+                        }
                     }
                 }
             }
