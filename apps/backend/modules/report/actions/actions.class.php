@@ -192,7 +192,7 @@ class reportActions extends sfActions
     }
     public function executeFmcReport()
     {
-        $dateFrom = "2015-05-01 00:00:00";
+        $dateFrom = "2015-01-01 00:00:00";
         $dateTo = "2015-01-26 23:59:59";
         $distDBs = $this->getFmcList($dateFrom, null);
 
