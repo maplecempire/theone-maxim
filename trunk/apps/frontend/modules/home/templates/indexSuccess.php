@@ -1043,6 +1043,44 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='79'>Extending the USD0.80 per R-Share to 31 July 2015
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "16 July 2015";
+                ?>
+            </div>
+
+            <div id="page_79" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>
+<br>Please note that because of numerous requests from members, we are pleased to inform you that we will be extending the USD0.80 per R-Share to 31 July 2015.  All other Terms & Conditions will remain unchanged which are reproduced below for your convenience: Only CP4 can be used to sign up New MCL Package(s) with IMMEDIATE Auto Swap SSS @ USD0.80 per R-Share. MCL Direct Referrer Bonus and Development Bonus will be given as usual and credited into RT account. However, for this New MCL package(s) with Immediate Auto Swap SSS, RT Development Bonus (Second DB) WILL NOT BE given. This Promotion of USD0.80 per R-Share ENDs on 31st July 2015.
+<br>
+<br>Dr. Andrew Lim
+<br>CEO - Maxim Capital Ltd
+<br>
+<br>亲爱的会员，
+<br>
+<br>鉴于广大客户强烈要求，公司特决定将0.8美金的股票转换优惠延至2015.7.31日。所有相关条款保持不变:只有通过CP4才可注册基金配套，且立即享受股票优惠自动转换，优惠价格为0.80美金/每股(相关推荐奖金以及组织奖金将如常发放，计入RT账户; 另外针对此类配套转换至股票的情况，股票系统中的RT组织奖金将不再次发放)。此0.80美金/每股转换优惠截止日期为2015.7.31日。
+<br>
+<br>Andrew Lim博士
+<br>首席执行官
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='78'>Important Annoucement!!
                 </a><img src="/images/new_icon.gif">
             </div>
