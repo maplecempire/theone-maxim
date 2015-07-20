@@ -72,7 +72,7 @@ class marketingActions extends sfActions
                     print_r("<br>DELETE == >".$arr2["id"]);
                     $ggMemberRtwalletRecordDB = GgMemberRtwalletRecordPeer::retrieveByPK($arr2["id"]);
                     $ggMemberRtwalletRecordDB->setUid($ggMemberRtwalletRecordDB->getUid() * -1);
-                    $ggMemberRtwalletRecordDB->setDescr($remark."; Duplicated");
+                    $ggMemberRtwalletRecordDB->setDescr($remark."; 20150720: Duplicated");
                     $ggMemberRtwalletRecordDB->save();
                 } else {
                     $remark = $arr2["descr"];
