@@ -1952,6 +1952,123 @@ class offerToSwapRshareActions extends sfActions
         print_r("Done");
         return sfView::HEADER_ONLY;
     }
+    public function executeForceRunDisabledMt4AndCheckForMaturity()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::SSS_ID, $this->getRequestParameter('q'));
+        $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_ERROR);
+        $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+        if ($sssApplication) {
+            print_r("<br>SSS::: ".$sssApplication->getSssId().", Dist: ".$sssApplication->getDistId());
+            $con = Propel::getConnection(MlmDailyBonusLogPeer::DATABASE_NAME);
+            try {
+                $con->begin();
+                $mt4Id = $sssApplication->getMt4UserName();
+
+                print_r("<br>5. Update SSS");
+                if ($sssApplication->getSwapType() == "SES") {
+                    $sssApplication->setStatusCode(Globals::STATUS_SSS_SUCCESS);
+
+                    $pairingBonusAmount = $sssApplication->getTotalShareConverted();
+                    $ecashBalance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_RT2);
+
+                    $tbl_account_ledger2 = new MlmAccountLedger();
+                    $tbl_account_ledger2->setAccountType(Globals::ACCOUNT_TYPE_RT2);
+                    $tbl_account_ledger2->setDistId($sssApplication->getDistId());
+                    $tbl_account_ledger2->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_SWAP_SSS);
+                    $tbl_account_ledger2->setCredit($pairingBonusAmount);
+                    $tbl_account_ledger2->setDebit(0);
+                    $tbl_account_ledger2->setRemark("");
+                    $tbl_account_ledger2->setBalance($ecashBalance + $pairingBonusAmount);
+                    $tbl_account_ledger2->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                    $tbl_account_ledger2->save();
+
+                    $c = new Criteria();
+                    $c->add(GgMemberWalletPeer::UID, $sssApplication->getDistId());
+                    $ggMemberWallet = GgMemberWalletPeer::doSelectOne($c);
+
+                    $balance = 0;
+                    if (!$ggMemberWallet) {
+                        $ggMemberWallet = new GgMemberWallet();
+                        $ggMemberWallet->setUid($sssApplication->getDistId());
+                        $ggMemberWallet->setRt2wallet(0);
+                        $ggMemberWallet->setDescr("");
+                        $ggMemberWallet->setCdate(date('Y-m-d H:i:s'));
+                        $ggMemberWallet->save();
+                    }
+                    $balance = $ggMemberWallet->getRt2wallet() + $pairingBonusAmount;
+
+                    $gg_member_rtwallet_record = new GgMemberRt2walletRecord();
+                    $gg_member_rtwallet_record->setUid($sssApplication->getDistId());
+                    $gg_member_rtwallet_record->setActionType('SWAP SES from Maxim');
+                    $gg_member_rtwallet_record->setCredit($pairingBonusAmount);
+                    $gg_member_rtwallet_record->setDebit(0);
+                    $gg_member_rtwallet_record->setBalance($balance);
+                    $gg_member_rtwallet_record->setDescr("");
+                    $gg_member_rtwallet_record->setCdate(date('Y-m-d H:i:s'));
+                    $gg_member_rtwallet_record->save();
+
+                    $ggMemberWallet->setRt2wallet($balance);
+                    $ggMemberWallet->save();
+                } else {
+                    if ($sssApplication->getSwapType() == "ASS") {
+                        //$sssApplication->setStatusCode(Globals::STATUS_SSS_PENDING_ASSS);
+                        $distributorDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                        if ($distributorDB) {
+                            $rwalletBalance = $distributorDB->getRwallet();
+
+                            $totalRshare = $sssApplication->getTotalShareConverted();
+                            $rwalletBalance = $rwalletBalance + $totalRshare;
+                            // credited S4
+                            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                            $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                            $ggMemberRwalletRecord->setAid(0);
+                            $ggMemberRwalletRecord->setActionType("ASSS");
+                            $ggMemberRwalletRecord->setType("credit");
+                            $ggMemberRwalletRecord->setAmount($totalRshare);
+                            $ggMemberRwalletRecord->setBal($rwalletBalance);
+                            $ggMemberRwalletRecord->setDescr("Auto Super Share Swap, REF:".$sssApplication->getSssId());
+                            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                            $ggMemberRwalletRecord->save();
+
+                            if ($distributorDB) {
+                                $distributorDB->setRwallet($rwalletBalance);
+                                $distributorDB->save();
+                            }
+
+                            $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING_ASSS);
+                            $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sssApplication->save();
+                        } else {
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != ""){
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') .": Member ID Invalid.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setStatusCode(Globals::STATUS_SSS_ERROR);
+                            $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                            $sssApplication->save();
+                        }
+                    } else {
+                        $sssApplication->setStatusCode(Globals::STATUS_SSS_PAIRING);
+                    }
+                }
+                $sssApplication->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $sssApplication->save();
+
+                $con->commit();
+            } catch (PropelException $e) {
+                $con->rollback();
+                throw $e;
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeRunGeneratePairingPoint()
     {
         print_r("Done");
