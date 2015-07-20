@@ -54,7 +54,7 @@ class marketingActions extends sfActions
 
         while ($resultset->next()) {
             $arr = $resultset->getRow();
-            var_dump("<br>".$arr['uid']);
+            var_dump("<br><br>".$arr['uid']);
             $remark = "";
             $amount = 0;
 
@@ -69,15 +69,16 @@ class marketingActions extends sfActions
                 $arr2 = $resultset2->getRow();
 
                 if ($remark == $arr2["descr"] && $amount == $arr2["amount"]) {
-                    //$ggMemberRtwalletRecordDB = GgMemberRtwalletRecordPeer::retrieveByPK($arr2["id"]);
-                    print_r("DELETE == >".$arr2["id"]);
+                    print_r("<br>DELETE == >".$arr2["id"]);
+                    $ggMemberRtwalletRecordDB = GgMemberRtwalletRecordPeer::retrieveByPK($arr2["id"]);
+                    $ggMemberRtwalletRecordDB->delete();
                 } else {
                     $remark = $arr2["descr"];
                     $amount = $arr2["amount"];
                 }
             }
 
-            break;
+            //break;
         }
 
         echo "ok";
