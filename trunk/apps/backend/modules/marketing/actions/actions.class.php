@@ -44,7 +44,7 @@ class marketingActions extends sfActions
     public function executeCorrectDoubleGdbSss()
     {
         $query = "SELECT count(*) as _total, descr, uid FROM maxim.gg_member_rtwallet_record
-                where action_type = 'GDB SSS FROM MAXIM'
+                where action_type = 'GDB SSS FROM MAXIM' and uid > 0
                 group by descr, uid
                 having _total > 1";
 
