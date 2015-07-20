@@ -41,6 +41,48 @@ class marketingActions extends sfActions
         echo "ok";
         return sfView::HEADER_ONLY;
     }
+    public function executeCorrectDoubleGdbSss()
+    {
+        $query = "SELECT count(*) as _total, descr, uid FROM maxim.gg_member_rtwallet_record
+                where action_type = 'GDB SSS FROM MAXIM'
+                group by descr, uid
+                having _total > 1";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+
+        while ($resultset->next()) {
+            $arr = $resultset->getRow();
+            var_dump("<br>".$arr['uid']);
+            $remark = "";
+            $amount = 0;
+
+            $query2 = "select * from maxim.gg_member_rtwallet_record where uid= ".$arr["uid"]."
+                        and action_type = 'GDB SSS FROM MAXIM'
+                        order by descr";
+
+            $statement2 = $connection->prepareStatement($query2);
+            $resultset2 = $statement2->executeQuery();
+
+            while ($resultset2->next()) {
+                $arr2 = $resultset2->getRow();
+
+                if ($remark == $arr2["descr"] && $amount == $arr2["amount"]) {
+                    //$ggMemberRtwalletRecordDB = GgMemberRtwalletRecordPeer::retrieveByPK($arr2["id"]);
+                    print_r("DELETE == >".$arr2["id"]);
+                } else {
+                    $remark = $arr2["descr"];
+                    $amount = $arr2["amount"];
+                }
+            }
+
+            break;
+        }
+
+        echo "ok";
+        return sfView::HEADER_ONLY;
+    }
     public function executeTestSssApplication()
     {
         $sssApplicationDB = SssApplicationPeer::retrieveByPK(3);
