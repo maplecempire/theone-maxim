@@ -238,6 +238,8 @@ function calculateRshare() {
                     echo "COOLING-OFF PERIOD";
                 } else if ($sssApplication->getStatusCode() == Globals::STATUS_SSS_PAIRING) {
                     echo "PROCESSING";
+                } else if ($sssApplication->getStatusCode() == "PROCESSING") {
+                    echo "SUCCESS";
                 } else {
                     echo $sssApplication->getStatusCode();
                 } ?>
