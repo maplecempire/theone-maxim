@@ -34,6 +34,10 @@ doTestDisabledMt4:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+forceRunDisabledMt4AndCheckForMaturity:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 index:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
