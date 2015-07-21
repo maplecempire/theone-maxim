@@ -307,6 +307,16 @@ if (date("d") == 1 && $close == true) {
     } else {
         $singaporeGroup = true;
     }
+
+    // priscillakwok    265855
+    if ($singaporeGroup == false) {
+        $pos = strrpos($distDB->getTreeStructure(), "|265855|");
+        if ($pos === false) { // note: three equal signs
+
+        } else {
+            $singaporeGroup = true;
+        }
+    }
     if ($singaporeGroup == true) {
 
     } else {
