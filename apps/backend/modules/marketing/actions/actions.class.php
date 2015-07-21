@@ -1367,12 +1367,12 @@ class marketingActions extends sfActions
                     }
                 }
             } else {
-                var_dump(trim($line)."==> Not Exist");
+                print_r("<br><br>".trim($line)."==> Not Exist");
                 print_r("<br>");
             }
             $idx++;
         }
-        print_r("Done");
+        print_r("<br><br>Done");
         return sfView::HEADER_ONLY;
     }
     public function executeDoRoiNoReturn()
