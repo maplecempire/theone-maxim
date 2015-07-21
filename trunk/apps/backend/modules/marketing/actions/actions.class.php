@@ -1349,11 +1349,25 @@ class marketingActions extends sfActions
             $appUserDB = AppUserPeer::doSelectOne($c);
 
             if ($appUserDB) {
-                print_r("<br><br>");
-                print_r($line."<br>P1: ".$appUserDB->getUserpassword()."<br>P2: ".$appUserDB->getUserpassword2()."<br><br>");
+                print_r("<br><br>".$line."<br>P1: ".$appUserDB->getUserpassword()."<br>P2: ".$appUserDB->getUserpassword2());
+
+                $c = new Criteria();
+                $c->add(MlmDistributorPeer::USER_ID, $appUserDB->getUserId());
+                $distDB = MlmDistributorPeer::doSelectOne($c);
+
+                if ($distDB) {
+                    $c = new Criteria();
+                    $c->add(MlmDistMt4Peer::DIST_ID, $distDB->getDistributorId());
+                    $distMt4s = MlmDistMt4Peer::doSelect($c);
+
+                    if (count($distMt4s)) {
+                        foreach ($distMt4s as $distMt4) {
+                            print_r("<br>MT4 ID: ".$distMt4->getMt4UserName()."<br>MT4 Password: ".$distMt4->getMt4Password());
+                        }
+                    }
+                }
             } else {
-                var_dump("=================>");
-                var_dump($strArr);
+                var_dump(trim($line)."==> Not Exist");
                 print_r("<br>");
             }
             $idx++;
