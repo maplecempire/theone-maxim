@@ -26,6 +26,10 @@ doGeneratePairingPoint:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+doGeneratePairingPointProcessing:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 doRerunRshare:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
