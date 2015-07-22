@@ -5524,8 +5524,12 @@ class memberActions extends sfActions
 	</tbody>
 </table>";
 
-            $sendMailService = new SendMailService();
-            $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
+            if ($payBy == "CP4") {
+
+            } else {
+                $sendMailService = new SendMailService();
+                $sendMailService->sendMail($receiverEmail, $receiverFullname, $subject, $body);
+            }
         } catch (PropelException $e) {
             $con->rollback();
             throw $e;
