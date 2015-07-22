@@ -10,6 +10,13 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeTerminateContractAndRemoveShare()
+    {
+        $this->doTerminateContractAndRemoveShare("FXM1");
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeRemoveDuplicateErrorRecord()
     {
         $c = new Criteria();
@@ -238,6 +245,11 @@ class offerToSwapRshareActions extends sfActions
                 AND dist.tree_structure like '%|270844|%'
                     AND roi2.idx = 11 and roi2.status_code =  'SUCCESS'
                 WHERE roi.idx >= 12 and roi.status_code = 'PENDING' LIMIT 300";*/
+
+        $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
+                    INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
+                AND dist.leader_id in (254781,254842)
+                  WHERE roi.status_code = 'PENDING' LIMIT 300";
 
         $connection = Propel::getConnection();
         $statement = $connection->prepareStatement($query);
@@ -4285,5 +4297,27 @@ class offerToSwapRshareActions extends sfActions
 
         $tbl_account->setBalance($balance);
         $tbl_account->save();
+    }
+
+    function doTerminateContractAndRemoveShare($distributorCode)
+    {
+        print_r("<br><br>1. Dist Code:". $distributorCode);
+        $c = new Criteria();
+        $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distributorCode);
+        $distDB = MlmDistributorPeer::doSelectOne($c);
+
+        if ($distDB) {
+            $c = new Criteria();
+            $c->add(SssApplicationPeer::DIST_ID, $distDB->getDistributorId());
+            $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+            if ($sssApplication) {
+                print_r("<br>++ SSS Not Exist");
+            } else {
+                print_r("<br>++ SSS Not Exist");
+            }
+        } else {
+            print_r("<br>++ Distributor Not Exist");
+        }
     }
 }
