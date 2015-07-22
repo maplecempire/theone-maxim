@@ -317,6 +317,9 @@ if (date("d") == 1 && $close == true) {
             $singaporeGroup = true;
         }
     }
+    if ($distDB->getDistributorId() == 308946 || $distDB->getDistributorId() == 300972 || $distDB->getDistributorId() == 265855) {
+        $singaporeGroup = false;
+    }
     if ($singaporeGroup == true) {
 
     } else {
