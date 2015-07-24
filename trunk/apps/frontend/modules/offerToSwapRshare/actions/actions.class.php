@@ -4433,7 +4433,7 @@ class offerToSwapRshareActions extends sfActions
                             $connection = Propel::getConnection();
                             $statement = $connection->prepareStatement($query);
                             $statement->set(1, date('Y-m-d H:i:s'));
-                            $statement->set(2, 0);
+                            $statement->set(2, $distId);
                             $statement->set(3, $mt4UserName);
                             $statement->set(4, $statusCodeUpdated);
                             $statement->executeUpdate();
