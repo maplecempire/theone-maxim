@@ -27,7 +27,7 @@ class offerToSwapRshareActions extends sfActions
                 continue;
             }
             $this->doTerminateContractAndRemoveShare($username);
-            break;
+            //break;
         }
 
         print_r("Done");
