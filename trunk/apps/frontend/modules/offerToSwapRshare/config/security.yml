@@ -66,6 +66,10 @@ removeDuplicateErrorRecord:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+terminateContractAndRemoveShare:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 updatePairingCreatedDate:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
