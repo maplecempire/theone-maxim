@@ -1049,7 +1049,7 @@ $(document).ready(function() {
             <div class="news_date">
                 <?php
                 $dateUtil = new DateUtil();
-                echo "16 July 2015";
+                echo "25 July 2015";
                 ?>
             </div>
 
