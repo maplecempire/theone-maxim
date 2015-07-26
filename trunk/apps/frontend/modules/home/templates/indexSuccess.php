@@ -1043,6 +1043,34 @@ $(document).ready(function() {
     <div class="popinfo1">
         <div class="page">
             <div class="poptitle">
+                <a href='#' class="page_link" ref='80'>Auto Swap SSS Development Bonus will credit into RT account on August 1st, 2015
+                </a><img src="/images/new_icon.gif">
+            </div>
+            <div class="news_date">
+                <?php
+                $dateUtil = new DateUtil();
+                echo "16 July 2015";
+                ?>
+            </div>
+
+            <div id="page_80" class="news_desc" style="text-align: left;">
+                <table bgcolor="#F2F2F2" border="0" cellpadding="10" cellspacing="0" style="font-size:10pt;font-family:Arial,Geneva,Arial,Helvetica,sans-serif;display:table" width="719">
+                    <tbody>
+                    <tr>
+                        <td style="font-size:10pt;font-family:2arial,Geneva,Arial,Helvetica,sans-serif;border-collapse:collapse; padding: 10px;" valign="top">
+<br>Dear Members,
+<br>
+<br>For Auto Swap SSS on 17th June 2015, company shall credit Development Bonus into RT account on August 1st, 2015.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="popdivider"></div>
+        </div>
+        <div class="page">
+            <div class="poptitle">
                 <a href='#' class="page_link" ref='79'>Extending the USD0.80 per R-Share to 31 July 2015
                 </a><img src="/images/new_icon.gif">
             </div>
