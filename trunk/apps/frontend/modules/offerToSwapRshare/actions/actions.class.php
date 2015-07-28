@@ -12,6 +12,308 @@ class offerToSwapRshareActions extends sfActions
 {
     public function executeTerminateContractAndRemoveShare()
     {
+        //$physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "return_sss.xls";
+
+        //error_reporting(E_ALL ^ E_NOTICE);
+        //require_once 'excel_reader2.php';
+        //$data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $sssIds = $this->getRequestParameter('id');
+        $aColumns = explode(",", $sssIds);
+        foreach ($aColumns as $sssId) {
+            print_r("Sss id=".$sssId);
+            print_r("<br>");
+            $c = new Criteria();
+            $c->add(SssApplicationPeer::SSS_ID, $sssId);
+            $c->add(SssApplicationPeer::STATUS_CODE, Globals::STATUS_SSS_SUCCESS);
+            $sssApplication = SssApplicationPeer::doSelectOne($c);
+
+            if ($sssApplication) {
+                $totalRshare = $sssApplication->getTotalShareConverted();
+                $distDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
+                $totalRshare = 0;
+                $rwalletBalance = $distDB->getRwallet();
+
+                if ($totalRshare > $rwalletBalance) {
+                    print_r("<br>++ Not Enough Share");
+
+                    $remark = $sssApplication->getRemarks();
+                    if ($remark != "") {
+                        $remark .= "; ";
+                    }
+                    $remark .= date('Y-m-d H:i:s') . ": Not enough eshare for decline.";
+                    $sssApplication->setRemarks($remark);
+                    $sssApplication->setClientAction("ERROR DECLINE");
+                    $sssApplication->save();
+                    break;
+                }
+                $rwalletBalance = $rwalletBalance - $totalRshare;
+
+                $c = new Criteria();
+                //$c->add(GgMemberRwalletRecordPeer::DESCR, "%REF:". $sssApplication->getSssId(), Criteria::LIKE);
+                $c->add(GgMemberRwalletRecordPeer::UID, $sssApplication->getDistId());
+                $c->add(GgMemberRwalletRecordPeer::AMOUNT, $sssApplication->getTotalShareConverted());
+                $ggMemberRwalletRecord = GgMemberRwalletRecordPeer::doSelectOne($c);
+
+                if ($ggMemberRwalletRecord) {
+                    $remark = $sssApplication->getRemarks();
+                    if ($remark != "") {
+                        $remark .= "; ";
+                    }
+                    $remark .= date('Y-m-d H:i:s') . ": Member requested to cancel SSS.";
+                    $sssApplication->setRemarks($remark);
+                    $sssApplication->setStatusCode("DECLINE");
+                    $sssApplication->save();
+
+                    $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                    $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                    $ggMemberRwalletRecord->setAid(0);
+                    $ggMemberRwalletRecord->setActionType("DECLINE SSS");
+                    $ggMemberRwalletRecord->setType("debit");
+                    $ggMemberRwalletRecord->setAmount($totalRshare);
+                    $ggMemberRwalletRecord->setBal($rwalletBalance);
+                    $ggMemberRwalletRecord->setDescr("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                    $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                    $ggMemberRwalletRecord->save();
+
+                    if ($sssApplication->getCp2Balance() > 0) {
+                        $cp2Balance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                        $tbl_account_ledger = new MlmAccountLedger();
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                        $tbl_account_ledger->setDistId($sssApplication->getDistId());
+                        $tbl_account_ledger->setTransactionType("DECLINE SSS");
+                        $tbl_account_ledger->setRemark("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                        $tbl_account_ledger->setCredit($sssApplication->getCp2Balance());
+                        $tbl_account_ledger->setDebit(0);
+                        $tbl_account_ledger->setBalance($cp2Balance + $sssApplication->getCp2Balance());
+                        $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setRefererId($sssApplication->getSssId());
+                        $tbl_account_ledger->setRefererType("SSS");
+                        $tbl_account_ledger->save();
+                    }
+                    if ($sssApplication->getCp3Balance() > 0) {
+                        $cp3Balance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                        $tbl_account_ledger = new MlmAccountLedger();
+                        $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                        $tbl_account_ledger->setDistId($sssApplication->getDistId());
+                        $tbl_account_ledger->setTransactionType("DECLINE SSS");
+                        $tbl_account_ledger->setRemark("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                        $tbl_account_ledger->setCredit($sssApplication->getCp3Balance());
+                        $tbl_account_ledger->setDebit(0);
+                        $tbl_account_ledger->setBalance($cp3Balance + $sssApplication->getCp3Balance());
+                        $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                        $tbl_account_ledger->setRefererId($sssApplication->getSssId());
+                        $tbl_account_ledger->setRefererType("SSS");
+                        $tbl_account_ledger->save();
+                    }
+
+                    if ($sssApplication->getDividendId() > 0) {
+                        $mlmRoiDividendDB = MlmRoiDividendPeer::retrieveByPK($sssApplication->getDividendId());
+
+                        $mt4UserName = $mlmRoiDividendDB->getMt4UserName();
+                        $distId = $sssApplication->getDistId();
+                        $statusCodeUpdated = $mlmRoiDividendDB->getStatusCode();
+
+                        $query = "UPDATE mlm_roi_dividend SET status_code = 'PENDING', updated_on = ?
+                                , updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                        $query = $query . " AND mt4_user_name = ?";
+                        $query = $query . " AND status_code = ?";
+
+                        $connection = Propel::getConnection();
+                        $statement = $connection->prepareStatement($query);
+                        $statement->set(1, date('Y-m-d H:i:s'));
+                        $statement->set(2, $distId);
+                        $statement->set(3, $mt4UserName);
+                        $statement->set(4, $statusCodeUpdated);
+                        $statement->executeUpdate();
+                    }
+
+                    $distDB->setRwallet($rwalletBalance);
+                    $distDB->save();
+                } else {
+                    $remark = $sssApplication->getRemarks();
+                    if ($remark != "") {
+                        $remark .= "; ";
+                    }
+                    $remark .= date('Y-m-d H:i:s') . ": GG Rwallet ID not exist.";
+                    $sssApplication->setRemarks($remark);
+                    $sssApplication->setClientAction("ERROR DECLINE");
+                    $sssApplication->save();
+                }
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeTerminateContractAndRemoveShareByList()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "return_sss.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 0;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 0; $x <= $totalRow; $x++) {
+            $username = $data->val($x, "A");
+            print_r("<br><br><br>===>" . $x . "::" . $username);
+            if ($username == "") {
+                continue;
+            }
+            print_r("<br>1. Dist Code:" . $distributorCode);
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distributorCode);
+            $distDB = MlmDistributorPeer::doSelectOne($c);
+
+            if ($distDB) {
+                $sssIds = "ASSS,RSHARE";
+                $array = explode(',', $sssIds);
+
+                $c = new Criteria();
+                $c->add(SssApplicationPeer::DIST_ID, $distDB->getDistributorId());
+                $c->add(SssApplicationPeer::SWAP_TYPE, $array, Criteria::IN);
+                $c->add(SssApplicationPeer::STATUS_CODE, "SUCCESS");
+                $sssApplications = SssApplicationPeer::doSelect($c);
+                //var_dump(count($sssApplications));
+                //var_dump($sssApplications);
+                //exit();
+                $totalRshare = 0;
+                $rwalletBalance = $distDB->getRwallet();
+
+                if (count($sssApplications) > 0) {
+                    foreach ($sssApplications as $sssApplication) {
+                        $totalRshare = $sssApplication->getTotalShareConverted();
+
+                        if ($totalRshare > $rwalletBalance) {
+                            print_r("<br>++ Not Enough Share");
+
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != "") {
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') . ": Not enough eshare for decline.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setClientAction("ERROR DECLINE");
+                            $sssApplication->save();
+                            break;
+                        }
+                        $rwalletBalance = $rwalletBalance - $totalRshare;
+
+                        $c = new Criteria();
+                        //$c->add(GgMemberRwalletRecordPeer::DESCR, "%REF:". $sssApplication->getSssId(), Criteria::LIKE);
+                        $c->add(GgMemberRwalletRecordPeer::UID, $sssApplication->getDistId());
+                        $c->add(GgMemberRwalletRecordPeer::AMOUNT, $sssApplication->getTotalShareConverted());
+                        $ggMemberRwalletRecord = GgMemberRwalletRecordPeer::doSelectOne($c);
+
+                        if ($ggMemberRwalletRecord) {
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != "") {
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') . ": Member requested to cancel SSS.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setStatusCode("DECLINE");
+                            $sssApplication->save();
+
+                            $ggMemberRwalletRecord = new GgMemberRwalletRecord();
+                            $ggMemberRwalletRecord->setUid($sssApplication->getDistId());
+                            $ggMemberRwalletRecord->setAid(0);
+                            $ggMemberRwalletRecord->setActionType("DECLINE SSS");
+                            $ggMemberRwalletRecord->setType("debit");
+                            $ggMemberRwalletRecord->setAmount($totalRshare);
+                            $ggMemberRwalletRecord->setBal($rwalletBalance);
+                            $ggMemberRwalletRecord->setDescr("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                            $ggMemberRwalletRecord->setCdate(date('Y-m-d H:i:s'));
+                            $ggMemberRwalletRecord->save();
+
+                            if ($sssApplication->getCp2Balance() > 0) {
+                                $cp2Balance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_ECASH);
+
+                                $tbl_account_ledger = new MlmAccountLedger();
+                                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
+                                $tbl_account_ledger->setDistId($sssApplication->getDistId());
+                                $tbl_account_ledger->setTransactionType("DECLINE SSS");
+                                $tbl_account_ledger->setRemark("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                                $tbl_account_ledger->setCredit($sssApplication->getCp2Balance());
+                                $tbl_account_ledger->setDebit(0);
+                                $tbl_account_ledger->setBalance($cp2Balance + $sssApplication->getCp2Balance());
+                                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger->setRefererId($sssApplication->getSssId());
+                                $tbl_account_ledger->setRefererType("SSS");
+                                $tbl_account_ledger->save();
+                            }
+                            if ($sssApplication->getCp3Balance() > 0) {
+                                $cp3Balance = $this->getAccountBalance($sssApplication->getDistId(), Globals::ACCOUNT_TYPE_MAINTENANCE);
+
+                                $tbl_account_ledger = new MlmAccountLedger();
+                                $tbl_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
+                                $tbl_account_ledger->setDistId($sssApplication->getDistId());
+                                $tbl_account_ledger->setTransactionType("DECLINE SSS");
+                                $tbl_account_ledger->setRemark("DECLINE SSS, REF:" . $sssApplication->getSssId());
+                                $tbl_account_ledger->setCredit($sssApplication->getCp3Balance());
+                                $tbl_account_ledger->setDebit(0);
+                                $tbl_account_ledger->setBalance($cp3Balance + $sssApplication->getCp3Balance());
+                                $tbl_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                                $tbl_account_ledger->setRefererId($sssApplication->getSssId());
+                                $tbl_account_ledger->setRefererType("SSS");
+                                $tbl_account_ledger->save();
+                            }
+
+                            if ($sssApplication->getDividendId() > 0) {
+                                $mlmRoiDividendDB = MlmRoiDividendPeer::retrieveByPK($sssApplication->getDividendId());
+
+                                $mt4UserName = $mlmRoiDividendDB->getMt4UserName();
+                                $distId = $sssApplication->getDistId();
+                                $statusCodeUpdated = $mlmRoiDividendDB->getStatusCode();
+
+                                $query = "UPDATE mlm_roi_dividend SET status_code = 'PENDING', updated_on = ?
+                                        , updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                                $query = $query . " AND mt4_user_name = ?";
+                                $query = $query . " AND status_code = ?";
+
+                                $connection = Propel::getConnection();
+                                $statement = $connection->prepareStatement($query);
+                                $statement->set(1, date('Y-m-d H:i:s'));
+                                $statement->set(2, $distId);
+                                $statement->set(3, $mt4UserName);
+                                $statement->set(4, $statusCodeUpdated);
+                                $statement->executeUpdate();
+                            }
+
+                            $distDB->setRwallet($rwalletBalance);
+                            $distDB->save();
+                        } else {
+                            $remark = $sssApplication->getRemarks();
+                            if ($remark != "") {
+                                $remark .= "; ";
+                            }
+                            $remark .= date('Y-m-d H:i:s') . ": GG Rwallet ID not exist.";
+                            $sssApplication->setRemarks($remark);
+                            $sssApplication->setClientAction("ERROR DECLINE");
+                            $sssApplication->save();
+                        }
+                    }
+                } else {
+                    print_r("<br>++ SSS Not Exist");
+                }
+            } else {
+                print_r("<br>++ Distributor Not Exist");
+            }
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
+    public function executeTerminateContractAndRemoveShare___BAK()
+    {
         $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "return_sss.xls";
 
         error_reporting(E_ALL ^ E_NOTICE);
