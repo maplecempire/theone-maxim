@@ -543,77 +543,58 @@ $(function() {
             <td class="value"><?php echo $tradingCurrencyOnMT4; ?></td>
         </tr>
         <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Bank Name'); ?></strong>
-            </td>
-            <td class="value"><?php //echo $bankName; ?>
-                <select id="bankId" name="bankId">
-                    <option value="1" bankSwiftCodeText="<?php echo $bankSwiftCode; ?>" ibanText="<?php echo $iban; ?>" bankAccountHolderText="<?php echo $bankAccountHolder; ?>" bankAccountNumberText="<?php echo $bankAccountNumber; ?>" cityOfBankText="<?php echo $cityOfBank; ?>" countryOfBankText="<?php echo $countryOfBank; ?>"><?php echo $bankName; ?></option>
-                    <?php
-                    $toHide = true;
-                    if ($distDB->getCountry() != "Thailand" && $toHide == false) {?>
-                        <option value="2" bankSwiftCodeText="<?php echo $bankSwiftCode2; ?>" ibanText="<?php echo $iban2; ?>" bankAccountHolderText="<?php echo $bankAccountHolder2; ?>" bankAccountNumberText="<?php echo $bankAccountNumber2; ?>" cityOfBankText="<?php echo $cityOfBank2; ?>" countryOfBankText="<?php echo $countryOfBank2; ?>"><?php echo $bankName2; ?></option>
-                    <?php } ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Bank Swift Code'); ?></strong>
-            </td>
-            <td class="value" id="bankSwiftCodeText"><?php echo $bankSwiftCode; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('IBAN'); ?></strong>
-            </td>
-            <td class="value" id="ibanText"><?php echo $iban; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Bank Account Holder'); ?></strong>
-            </td>
-            <td class="value" id="bankAccountHolderText"><?php echo $bankAccountHolder; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Bank Account Number'); ?></strong>
-            </td>
-            <td class="value" id="bankAccountNumberText"><?php echo $bankAccountNumber; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('City of Bank'); ?></strong>
-            </td>
-            <td class="value" id="cityOfBankText"><?php echo $cityOfBank; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Country of Bank'); ?></strong>
-            </td>
-            <td class="value" id="countryOfBankText"><?php echo $countryOfBank; ?></td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Global Transaction Services') ?>&nbsp;<?php echo __('Phone Number'); ?></strong>
-            </td>
-            <td class="value">+1 678-264-2350</td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Global Transaction Services') ?>&nbsp;<?php echo __('Beneficiary Address'); ?></strong>
-            </td>
-            <td class="value">820 Marshview Close
-                        <br>Roswell, GA 30076-3285
-                        <br>USA</td>
-        </tr>
-        <tr>
-            <td width="160px" class="caption">
-                <strong><?php echo __('Payment Reference'); ?></strong>
-            </td>
-            <td class="value">
-                <!--<span id="paymentReferenceSpan" style="color: red"><?php /*echo $sf_flash->get('paymentReference'); */?></span>Maxim Capital Limited - 9120028849-->
-            <!--<br><br>-->Note: <br>Please write at REFERENCE : <span style="color: red">Maxim Capital Limited Member ID</span> and payment reference number &nbsp;<span id="paymentReferenceSpan" style="color: red"><?php echo $sf_flash->get('paymentReference'); ?></span>
+            <td colspan="2">
+                 <table border="0" cellspacing="0" width="99%"
+                       style="border-collapse:collapse;border:1px solid rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgb(51,51,51);line-height:15px">
+                    <tbody>
+                    <tr>
+                        <th colspan="2"
+                            style="color:rgb(0,0,0);background-color:rgb(221,221,221);padding:3px 7px;border:1px solid rgb(170,170,170)">
+                            Czech Republic (USD)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td width="30%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">Bank:</td>
+                        <td width="69%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">CESKA SPORITELNA A.S.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Address:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PRAGUE 62, OLBRACHTOVA 14000</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account No:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Name:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Global Transaction Services (HK) Limited
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Holder Address:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Room 2705 Richmond Commercial Building 109
+                            Argyle Street Mongkok, Kowloon, 0000, Hong Kong
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">SWIFT BIC:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">GIBACZPX</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Your Reference:</td>
+                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">9120028849</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding:3px 7px;border:1px solid rgb(170,170,170)"><span
+                                style="font-style:italic;color:rgb(255,0,0)">Your Reference (9120028849) should be entered first in the narrative of the sending bank's payment instructions, before any other references.<span
+                                class="HOEnZb"><font color="#888888"><br><br></font></span></span></td>
+                    </tr>
+                    </tbody>
+                </table>
             </td>
         </tr>
         <tr>
