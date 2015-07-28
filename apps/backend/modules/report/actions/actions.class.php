@@ -10,6 +10,37 @@
  */
 class reportActions extends sfActions
 {
+    public function executeDistributorReport()
+    {
+        $query = "SELECT distributor_code, full_name, email
+                FROM mlm_distributor WHERE from_abfx = 'N'";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $resultset = $statement->executeQuery();
+        //var_dump($query);
+        $arr = array();
+
+        $str = $this->getRequestParameter('id')."<table><tr>
+        <td>#</td>
+        <td>Member ID</td>
+        <td>Full Name</td>
+        <td>Email</td>
+        </tr>";
+        $idx = 1;
+        while ($resultset->next()) {
+            $arr[] = $resultset->getRow();
+
+            $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
+            <td>" . $arr['full_name']."</td>
+            <td>" . $arr['email']."</td></tr>";
+        }
+
+        $str .= "<table>";
+        print_r($str);
+        print_r("<br><br>Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeCompanyCapitalReport()
     {
         $dateFrom = "2015-01-01 00:00:00";
