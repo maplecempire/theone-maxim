@@ -178,7 +178,7 @@
             </table>
 
             <br>
-            <table cellspacing="0" cellpadding="0" class="tbl_form">
+            <table cellspacing="0" cellpadding="0" class="tbl_form" style="display: none;">
                 <colgroup>
                     <col width="1%">
                     <col width="30%">
