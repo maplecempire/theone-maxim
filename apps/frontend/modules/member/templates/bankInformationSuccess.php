@@ -51,7 +51,7 @@
             </tr>
             <tr>
                 <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Address:</td>
-                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PRAGUE 62, OLBRACHTOVA 14000</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PRAGUE 62, OLBRACHTOVA 14000, Czech Republic</td>
             </tr>
             <tr>
                 <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account No:</td>
@@ -77,10 +77,10 @@
                 <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">GIBACZPX</td>
             </tr>
             <tr>
-                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Your Reference:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Please Remark:</td>
                 <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">9120028849</td>
             </tr>
-            <tr>
+            <tr style="display: none;">
                 <td colspan="2" style="padding:3px 7px;border:1px solid rgb(170,170,170)"><span
                         style="font-style:italic;color:rgb(255,0,0)">Your Reference (9120028849) should be entered first in the narrative of the sending bank's payment instructions, before any other references.<span
                         class="HOEnZb"><font color="#888888"><br><br></font></span></span></td>

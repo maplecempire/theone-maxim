@@ -150,56 +150,56 @@
     <tr>
         <td class="caption" colspan="2">
                  <table border="0" cellspacing="0" width="99%"
-                       style="border-collapse:collapse;border:1px solid rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgb(51,51,51);line-height:15px">
-                    <tbody>
-                    <tr>
-                        <th colspan="2"
-                            style="color:rgb(0,0,0);background-color:rgb(221,221,221);padding:3px 7px;border:1px solid rgb(170,170,170)">
-                            Czech Republic (USD)
-                        </th>
-                    </tr>
-                    <tr>
-                        <td width="30%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">Bank:</td>
-                        <td width="69%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">CESKA SPORITELNA A.S.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Address:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PRAGUE 62, OLBRACHTOVA 14000</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account No:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Name:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Global Transaction Services (HK) Limited
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Holder Address:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Room 2705 Richmond Commercial Building 109
-                            Argyle Street Mongkok, Kowloon, 0000, Hong Kong
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">SWIFT BIC:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">GIBACZPX</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Your Reference:</td>
-                        <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">9120028849</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="padding:3px 7px;border:1px solid rgb(170,170,170)"><span
-                                style="font-style:italic;color:rgb(255,0,0)">Your Reference (9120028849) should be entered first in the narrative of the sending bank's payment instructions, before any other references.<span
-                                class="HOEnZb"><font color="#888888"><br><br></font></span></span></td>
-                    </tr>
-                    </tbody>
-                </table>
+               style="border-collapse:collapse;border:1px solid rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgb(51,51,51);line-height:15px">
+            <tbody>
+            <tr>
+                <th colspan="2"
+                    style="color:rgb(0,0,0);background-color:rgb(221,221,221);padding:3px 7px;border:1px solid rgb(170,170,170)">
+                    Czech Republic (USD)
+                </th>
+            </tr>
+            <tr>
+                <td width="30%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">Bank:</td>
+                <td width="69%" style="padding:3px 7px;border:1px solid rgb(170,170,170)">CESKA SPORITELNA A.S.</td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Address:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">PRAGUE 62, OLBRACHTOVA 14000, Czech Republic</td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account No:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Name:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Global Transaction Services (HK) Limited
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Account Holder Address:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Room 2705 Richmond Commercial Building 109
+                    Argyle Street Mongkok, Kowloon, 0000, Hong Kong
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">IBAN:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">CZ77 0800 0000 0000 0635 2242</td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">SWIFT BIC:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">GIBACZPX</td>
+            </tr>
+            <tr>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">Please Remark:</td>
+                <td style="padding:3px 7px;border:1px solid rgb(170,170,170)">9120028849</td>
+            </tr>
+            <tr style="display: none;">
+                <td colspan="2" style="padding:3px 7px;border:1px solid rgb(170,170,170)"><span
+                        style="font-style:italic;color:rgb(255,0,0)">Your Reference (9120028849) should be entered first in the narrative of the sending bank's payment instructions, before any other references.<span
+                        class="HOEnZb"><font color="#888888"><br><br></font></span></span></td>
+            </tr>
+            </tbody>
+        </table>
             </td>
     </tr>
 </table>
