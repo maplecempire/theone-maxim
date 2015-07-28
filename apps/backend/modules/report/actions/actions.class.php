@@ -29,7 +29,7 @@ class reportActions extends sfActions
         </tr>";
         $idx = 1;
         while ($resultset->next()) {
-            $arr[] = $resultset->getRow();
+            $arr = $resultset->getRow();
 
             $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
             <td>" . $arr['full_name']."</td>
