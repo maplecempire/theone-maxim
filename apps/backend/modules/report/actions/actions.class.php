@@ -12,7 +12,7 @@ class reportActions extends sfActions
 {
     public function executeDistributorReport()
     {
-        $query = "SELECT distributor_code, full_name, email
+        $query = "SELECT distributor_code, full_name, email, country, active_datetime
                 FROM mlm_distributor WHERE from_abfx = 'N'";
 
         $connection = Propel::getConnection();
@@ -27,6 +27,7 @@ class reportActions extends sfActions
         <td>Full Name</td>
         <td>Email</td>
         <td>Country</td>
+        <td>Active Datetime</td>
         </tr>";
         $idx = 1;
         while ($resultset->next()) {
@@ -35,7 +36,8 @@ class reportActions extends sfActions
             $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
             <td>" . $arr['full_name']."</td>
             <td>" . $arr['email']."</td>
-            <td>" . $arr['country']."</td></tr>";
+            <td>" . $arr['country']."</td>
+            <td>" . $arr['active_datetime']."</td></tr>";
         }
 
         $str .= "<table>";
