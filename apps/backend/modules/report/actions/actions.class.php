@@ -26,6 +26,7 @@ class reportActions extends sfActions
         <td>Member ID</td>
         <td>Full Name</td>
         <td>Email</td>
+        <td>Country</td>
         </tr>";
         $idx = 1;
         while ($resultset->next()) {
@@ -33,7 +34,8 @@ class reportActions extends sfActions
 
             $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
             <td>" . $arr['full_name']."</td>
-            <td>" . $arr['email']."</td></tr>";
+            <td>" . $arr['email']."</td>
+            <td>" . $arr['country']."</td></tr>";
         }
 
         $str .= "<table>";
