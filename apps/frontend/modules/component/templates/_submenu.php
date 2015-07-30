@@ -320,8 +320,8 @@ if (date("d") == 1 && $close == true) {
 
     if ($distDB->getDistributorId() == 308946
         || $distDB->getDistributorId() == 300972
-        || $distDB->getDistributorId() == 265855
-        || $distDB->getDistributorId() == 265855
+        || $distDB->getDistributorId() == 306137
+        || $distDB->getDistributorId() == 354707
         || $distDB->getDistributorId() == 299634
         || $distDB->getDistributorId() == 300972
         || $distDB->getDistributorId() == 265855
