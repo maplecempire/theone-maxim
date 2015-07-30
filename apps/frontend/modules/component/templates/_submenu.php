@@ -193,20 +193,18 @@ if (date("d") == 1 && $close == true) {
         </li>
         <?php } ?>
         <?php
-        if ($bonusService->hideGenealogy() == false) {
+        if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781 || $distDB->getLeaderId() == 270596) {
         ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
         </li>
-        <?php } else {
-            if ($distDB->getDistributorId() == 1 || $distDB->getDistributorId() == 263611 || $distDB->getDistributorId() == 255180 || $distDB->getDistributorId() == 254828 || $distDB->getDistributorId() == 254781) {
+        <?php
+        } else if ($bonusService->hideGenealogy() == false) {
         ?>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
-                <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
-            </li>
-        <?php }
-        }
-        ?>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
+            <a href="<?php echo url_for("/member/epointLog") ?>"><span><?php echo __('Monetary Wallet'); ?></span></a>
+        </li>
+        <?php } ?>
         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-209">
             <a href="/member/mt4Withdrawal"><span><?php echo __('Withdrawal'); ?></span></a>
         </li>
