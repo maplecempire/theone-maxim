@@ -1355,11 +1355,11 @@ class memberActions extends sfActions
             //var_dump($c);
             //exit();
             //$mlmRoiDividendDBs = MlmRoiDividendPeer::doSelect($c);
+            //AND dist.leader_id in (255709,255607,264845,273056,255882, 257700)
             $countIdx = 1;
             $query = "SELECT distinct roi.devidend_id
                 FROM mlm_roi_dividend roi
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
-                AND dist.leader_id in (255709,255607,264845,273056,255882, 257700)
                     WHERE roi.status_code = 'PENDING'
                         AND dividend_date <= '".date("Y-m-d")." 23:59:59'";
 
