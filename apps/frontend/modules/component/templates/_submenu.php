@@ -324,6 +324,9 @@ if (date("d") == 1 && $close == true) {
         || $distDB->getDistributorId() == 265855
         || $distDB->getDistributorId() == 299634
         || $distDB->getDistributorId() == 300972
+        || $distDB->getDistributorId() == 265855
+        || $distDB->getDistributorId() == 268914
+        || $distDB->getDistributorId() == 268925
         || $distDB->getDistributorId() == 301928) {
         $singaporeGroup = false;
     }
