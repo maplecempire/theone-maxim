@@ -7,6 +7,7 @@ abstract class Globals {
     const COMPANY_NAME = "Maxim Trader";
     const TOTAL_BONUS_PAYOUT = 10;
     const PAIRING_POINT_BV = 0.5;
+    const SHARE_VALUE = 1.2;
     const FIRST_TIME_POP_UP = "FIRST_TIME_POP_UP";
 
     const SF_ENVIRONMENT_PROD = 'prod';
