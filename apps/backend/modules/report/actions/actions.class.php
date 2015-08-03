@@ -19,7 +19,7 @@ class reportActions extends sfActions
             print_r("<br>");
 
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('id'));
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distributorCode);
             $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
 
             if ($mlmDistributor) {
