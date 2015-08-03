@@ -10,6 +10,52 @@
  */
 class financeActions extends sfActions
 {
+    public function executeUploadDebitAccount()
+    {
+        $physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "Rolling Point June 2015.xls";
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        require_once 'excel_reader2.php';
+        $data = new Spreadsheet_Excel_Reader($physicalDirectory);
+
+        $counter = 0;
+        $totalRow = $data->rowcount($sheet_index = 0);
+        for ($x = 0; $x <= $totalRow; $x++) {
+            $counter++;
+            $amount = trim($data->val($x, "B"));
+            $userName = trim($data->val($x, "C"));
+            $remark = trim($data->val($x, "O"));
+            print_r("<br>===>user name:".$userName.":".$amount.":".$remark);
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $userName);
+            $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+            if ($mlmDistributor) {
+                $distId = $mlmDistributor->getDistributorId();
+                $distDebitBalance = $this->getAccountBalance($distId, Globals::ACCOUNT_TYPE_DEBIT);
+
+                $mlm_account_ledger = new MlmAccountLedger();
+                $mlm_account_ledger->setDistId($distId);
+                $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_DEBIT);
+                $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_DEBIT);
+                $mlm_account_ledger->setRollingPoint("Y");
+                $mlm_account_ledger->setRemark($remark);
+                $mlm_account_ledger->setInternalRemark($remark);
+                $mlm_account_ledger->setCredit($amount);
+                $mlm_account_ledger->setDebit(0);
+                $mlm_account_ledger->setBalance($distDebitBalance + $amount);
+                $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
+                $mlm_account_ledger->save();
+            } else {
+                print_r("<br>##### >not exist");
+            }
+        }
+
+        print_r("<br>Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeRevertCp3Withdrawal()
     {
         $cp3IdArray = explode(',', "19760,19801,22980,23037,23038,23041,23043,23045,23047");

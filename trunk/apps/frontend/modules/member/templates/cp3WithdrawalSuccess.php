@@ -259,6 +259,9 @@ if ($distributorDB->getIaccount() == "") {
                             if ($distributorDB->getBankCountry() == "Australia") {
                                 $disable = "";
                             }
+                            if ($distributorDB->getBankCountry() == "Korea South") {
+                                $disable = "";
+                            }
                             // bwhk (chales approved)
                             if ($distributorDB->getDistributorId() == 257749 || $distributorDB->getDistributorId() == 257792) {
                                 $disable = "";
