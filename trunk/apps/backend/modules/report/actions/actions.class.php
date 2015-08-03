@@ -15,7 +15,7 @@ class reportActions extends sfActions
         $distributorCodes = $this->getRequestParameter('id');
         $aColumns = explode(",", $distributorCodes);
         foreach ($aColumns as $distributorCode) {
-            print_r("Dist Code=".$distributorCode);
+            print_r("<br><br><br><br>Dist Code=".$distributorCode);
             print_r("<br>");
 
             $c = new Criteria();
@@ -30,8 +30,22 @@ class reportActions extends sfActions
                 print_r("<br>Active Datetime:".$mlmDistributor->getActiveDatetime());
 
                 $totalCommission = $this->getCommissionBalance($mlmDistributor->getDistributorId());
+                $totalCommission2 = $this->getCommissionBalance20150529($mlmDistributor->getDistributorId());
+                $totalRoi = $this->getRoi($mlmDistributor->getDistributorId());
 
-                print_r("<br>Total Commission:".$totalCommission);
+                print_r("<br>Total Commission 1: ".$totalCommission);
+                print_r("<br>Total Commission 2: ".$totalCommission2);
+                print_r("<br>Total Commission: ".($totalCommission + $totalCommission2));
+                print_r("<br>Total Roi: ".$totalRoi);
+
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::DIST_ID, $mlmDistributor->getDistributorId());
+                $c->add(MlmRoiDividendPeer::IDX, 1);
+                $roiDividends = MlmRoiDividendPeer::doSelect($c);
+
+                foreach ($roiDividends as $roiDividend) {
+                    print_r("<br>Total Investment: ".$roiDividend->getPackagePricer());
+                }
             }
         }
 
@@ -2737,9 +2751,9 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         }
         return 0;
     }
-    function getCommissionBalance($distributorId)
+    function getCommissionBalance20150529($distributorId)
     {
-        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger_20150529
             WHERE dist_id = ? AND commission_type IN (?,?)";
 
         $connection = Propel::getConnection();
@@ -2747,6 +2761,26 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         $statement->set(1, $distributorId);
         $statement->set(2, "DRB");
         $statement->set(3, "GDB");
+        $resultset = $statement->executeQuery();
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    function getRoi($distributorId)
+    {
+        $query = "SELECT SUM(dividend_amount) AS SUB_TOTAL FROM mlm_roi_dividend
+            WHERE dist_id = ? AND status_code IN (?)";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, "SUCCESS");
         $resultset = $statement->executeQuery();
         if ($resultset->next()) {
             $arr = $resultset->getRow();
