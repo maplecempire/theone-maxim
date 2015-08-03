@@ -4516,7 +4516,7 @@ class memberActions extends sfActions
                         $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
                         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConverted);
 
-                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
 
                         $sss_application = new SssApplication();
                         $sss_application->setDistId($sponsorId);
@@ -4527,7 +4527,7 @@ class memberActions extends sfActions
                         $sss_application->setMt4Balance($mt4Balance);
                         $sss_application->setRoiRemainingMonth($roiRemainingMonth);
                         $sss_application->setRoiPercentage($roiPercentage);
-                        $sss_application->setShareValue(0.8);
+                        $sss_application->setShareValue(Globals::SHARE_VALUE);
                         $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
                         $sss_application->setTotalShareConverted($totalRshare);
                         $sss_application->setRemarks("");
@@ -13247,7 +13247,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $totalAmountConverted = $mt4Balance + ($mt4Balance * $roiRemainingMonth * $roiPercentage / 100);
                     $totalAmountConvertedWithCp2Cp3 = round($totalAmountConverted);
 
-                    $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                    $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
 
                     $sss_application = new SssApplication();
                     $sss_application->setDistId($this->getUser()->getAttribute(Globals::SESSION_DISTID));
@@ -13258,7 +13258,7 @@ We look forward to your custom in the near future. Should you have any queries, 
                     $sss_application->setMt4Balance($mt4Balance);
                     $sss_application->setRoiRemainingMonth($roiRemainingMonth);
                     $sss_application->setRoiPercentage($roiPercentage);
-                    $sss_application->setShareValue(0.8);
+                    $sss_application->setShareValue(Globals::SHARE_VALUE);
                     $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
                     $sss_application->setTotalShareConverted($totalRshare);
                     $sss_application->setRemarks("");

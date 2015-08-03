@@ -158,13 +158,13 @@ function calculateRshare() {
     var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
     totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
 
-    var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
+    var totalRshare = totalAmountConvertedWithCp2Cp3 / <?php echo Globals::SHARE_VALUE ?>;
     totalRshare = Math.round(totalRshare);
 
     var spanFormula = "$0K + ($0K x 0 <?php echo __('months');?> x 8%) = $0";
     var spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $0";
     var spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $0";
-    var spanFormulaTotalAmount = "is $0 / 0.80";
+    var spanFormulaTotalAmount = "is $0 / <?php echo Globals::SHARE_VALUE ?>";
     var spanFormulaRshare = "= 0 <?php echo __('R-Shares');?>";
 
     if (isRt == "Y") {
@@ -177,7 +177,7 @@ function calculateRshare() {
         spanFormula = "$" + mt4Balance + " + ($" + mt4Balance + " x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
         spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $" + convertedCp3;
-        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
+        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / <?php echo Globals::SHARE_VALUE ?>";
         spanFormulaRshare = "= " + totalRshare + " <?php echo __('R-Shares');?>";
 
         if (isRt == "Y") {
@@ -284,7 +284,7 @@ function calculateRshare() {
                         <br>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">转换: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">R股 @ <u>每股US$0.80</u></span>
+                        <span style="font-size: 12px; font-weight: bold;">R股 @ <u>每股US$<?php echo Globals::SHARE_VALUE ?>0</u></span>
                     <?php
                     } else if ($culture == "kr") {
                     ?>
@@ -302,7 +302,7 @@ function calculateRshare() {
                         <br>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$<?php echo Globals::SHARE_VALUE ?>0 per share</u></span>
                     <?php
                     } else if ($culture == "jp") {
                     ?>
@@ -320,7 +320,7 @@ function calculateRshare() {
                         <br>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$<?php echo Globals::SHARE_VALUE ?>0 per share</u></span>
                     <?php
                     } else {
                     ?>
@@ -338,7 +338,7 @@ function calculateRshare() {
                         <br>
                         <span class="txt_title" style="font-size: 12px; color: #ff0000;">CONVERT: </span>
                         <br>
-                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$0.80 per share</u></span>
+                        <span style="font-size: 12px; font-weight: bold;">to R-Share @ <u>US$<?php echo Globals::SHARE_VALUE ?>0 per share</u></span>
                     <?php
                     }
                     ?>
@@ -386,7 +386,7 @@ function calculateRshare() {
     <span class="text_red">$30K + ($30K x 6个月 x 8%) = $44,400</span>
     <br>
     <br>
-    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 55,500 R-Shares</span>
     <?php
 
 } else if ($culture == "kr") {
@@ -394,7 +394,7 @@ function calculateRshare() {
     <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
     <br>
     <br>
-    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 55,500 R-Shares</span>
     <?php
 
 } else if ($culture == "jp") {
@@ -402,7 +402,7 @@ function calculateRshare() {
     <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
     <br>
     <br>
-    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 55,500 R-Shares</span>
     <?php
 
 } else {
@@ -410,7 +410,7 @@ function calculateRshare() {
     <span class="text_red">$30K + ($30K x 6 months x 8%) = $44,400</span>
     <br>
     <br>
-    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / 0.80</span> <span class="text_green">= 55,500 R-Shares</span>
+    <span class="text_green">SSS</span> <span class="text_red">is $44,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 55,500 R-Shares</span>
     <?php
 
 }
@@ -459,28 +459,28 @@ function calculateRshare() {
                             <span class="text_red">$10K + ($10K x 6个月 x 8%) = $14,800</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 18,500 R-Shares</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
                             <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 18,500 R-Shares</span>
                         <?php
                         } else if ($culture == "jp") {
                         ?>
                             <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 18,500 R-Shares</span>
                         <?php
                         } else {
                         ?>
                             <span class="text_red">$10K + ($10K x 6 months x 8%) = $14,800</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / 0.80</span> <span class="text_green">= 18,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $14,800 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 18,500 R-Shares</span>
                         <?php
                         }
                         ?>
@@ -520,28 +520,28 @@ function calculateRshare() {
                             <span class="text_red">$30K + ($30K x 3个月  x 8%) = $37,200</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 46,500 R-Shares</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
                             <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 46,500 R-Shares</span>
                         <?php
                         } else if ($culture == "jp") {
                         ?>
                             <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 46,500 R-Shares</span>
                         <?php
                         } else {
                         ?>
                             <span class="text_red">$30K + ($30K x 3 months x 8%) = $37,200</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / 0.80</span> <span class="text_green">= 46,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $37,200 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 46,500 R-Shares</span>
                         <?php
                         }
                         ?>
@@ -581,28 +581,28 @@ function calculateRshare() {
                             <span class="text_red">$10K + ($10K x 3个月 x 8%) = $12,400</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 15,500 R-Shares</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
                             <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 15,500 R-Shares</span>
                         <?php
                         } else if ($culture == "jp") {
                         ?>
                             <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 15,500 R-Shares</span>
                         <?php
                         } else {
                         ?>
                             <span class="text_red">$10K + ($10K x 3 months x 8%) = $12,400</span>
                             <br>
                             <br>
-                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / 0.80</span> <span class="text_green">= 15,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $12,400 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 15,500 R-Shares</span>
                         <?php
                         }
                         ?>
@@ -639,19 +639,19 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 37,500 R-Shares</span>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
-                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 37,500 R-Shares</span>
                         <?php
                         } else if ($culture == "jp") {
                         ?>
-                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 37,500 R-Shares</span>
                         <?php
                         } else {
                         ?>
-                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / 0.80</span> <span class="text_green">= 37,500 R-Shares</span>
+                            <span class="text_green">SSS</span> <span class="text_red">is $30,000 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green">= 37,500 R-Shares</span>
                         <?php
                         }
                         ?>
@@ -823,8 +823,8 @@ function calculateRshare() {
                         ?>
                             <li style="padding-bottom: 10px;">本人已于 [<?php echo " <b><u>" . date("d F Y") . "</u></b> "?>] 完成18个月投资周期中的1个月。</li>
                             <li style="padding-bottom: 10px;">本人知晓该豁免申请时间不得早于2015.5.12日，且不得晚于2015.6.30日。任何此时间段之外的申请，自动无效。</li>
-                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将投资本金(等同于MT4交易账户余额) {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} 及剩余的月投资分红总额USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} 全部用于以0.8美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
-                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将CP2账户{USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} 或/和CP3账户{USD$ <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} 用于以0.8美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
+                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将投资本金(等同于MT4交易账户余额) {USD$ <input type="text" readonly="readonly" style="text-align: right;" id="txtMt4Balance" value="<?php echo number_format($mt4Balance,2);?>">} 及剩余的月投资分红总额USD$ <input type="text" id="txtRemainingRoiAmount" style="text-align: right;" readonly="readonly" value="<?php echo number_format($remainingRoiAmount,2);?>">} 全部用于以<?php echo Globals::SHARE_VALUE ?>美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
+                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将CP2账户{USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} 或/和CP3账户{USD$ <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} 用于以<?php echo Globals::SHARE_VALUE ?>美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
@@ -860,7 +860,7 @@ function calculateRshare() {
                     <span class="text_red" id="spanFormulaCp3">CP3 (<?php echo __('Optional');?>) = $0</span>
                     <br>
                     <br>
-                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 <?php echo __('R-Shares');?></span>
+                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / <?php echo Globals::SHARE_VALUE ?>0</span> <span class="text_green" id="spanFormulaRshare">= 0 <?php echo __('R-Shares');?></span>
                     <br>
                     <br>
                 </td>

@@ -138,13 +138,13 @@ function calculateRshare() {
     var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
     totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
 
-    var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
+    var totalRshare = totalAmountConvertedWithCp2Cp3 / <?php echo Globals::SHARE_VALUE ?>;
     totalRshare = Math.round(totalRshare);
 
     var spanFormula = "$0K + ($0K x 0 months x 8%) = $0";
     var spanFormulaCp2 = "CP2 (Optional) = $0";
     var spanFormulaCp3 = "CP3 (Optional) = $0";
-    var spanFormulaTotalAmount = "is $0 / 0.80";
+    var spanFormulaTotalAmount = "is $0 / <?php echo Globals::SHARE_VALUE ?>";
     var spanFormulaRshare = "= 0 R-Shares";
 
     if (isRt == "Y") {
@@ -158,7 +158,7 @@ function calculateRshare() {
         spanFormula = "$" + mt4Balance + " + ($" + mt4Balance + " x " + roiRemainingMonth + " months x " + roiPercentage + "%) = $" + totalAmountConverted + "";
         spanFormulaCp2 = "CP2 (Optional) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (Optional) = $" + convertedCp3;
-        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
+        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / <?php echo Globals::SHARE_VALUE ?>";
         spanFormulaRshare = "= " + totalRshare + " R-Shares";
 
         if (isRt == "Y") {
@@ -277,7 +277,7 @@ function calculateRshare() {
                     <span class="text_red" id="spanFormulaCp3">CP3 (Optional) = $0</span>
                     <br>
                     <br>
-                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 R-Shares</span>
+                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / <?php echo Globals::SHARE_VALUE ?></span> <span class="text_green" id="spanFormulaRshare">= 0 R-Shares</span>
                     <br>
                     <br>
                 </td>

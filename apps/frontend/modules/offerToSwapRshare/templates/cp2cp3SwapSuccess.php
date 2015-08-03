@@ -116,18 +116,18 @@ function calculateRshare() {
     var totalAmountConvertedWithCp2Cp3 = convertedCp2 + convertedCp3;
     totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
 
-    var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
+    var totalRshare = totalAmountConvertedWithCp2Cp3 / <?php echo Globals::SHARE_VALUE ?>;
     totalRshare = Math.round(totalRshare);
 
     var spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $0";
     var spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $0";
-    var spanFormulaTotalAmount = "is $0 / 0.80";
+    var spanFormulaTotalAmount = "is $0 / <?php echo Globals::SHARE_VALUE ?>";
     var spanFormulaRshare = "= 0 <?php echo __('R-Shares');?>";
 
     if (totalRshare >= 1) {
         spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $" + convertedCp3;
-        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
+        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / <?php echo Globals::SHARE_VALUE ?>";
         spanFormulaRshare = "= " + totalRshare + " <?php echo __('R-Shares');?>";
 
         $("#spanFormulaCp2").html(spanFormulaCp2);
@@ -254,7 +254,7 @@ function calculateRshare() {
                         <?php
                         if ($culture == "cn") {
                         ?>
-                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将CP2账户{USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} 或/和CP3账户{USD$ <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} 用于以0.8美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
+                            <li style="padding-bottom: 10px;">本人同意，于该豁免申请通过的条件下，将CP2账户{USD$ <input type="text" id="convertedCp2" name="convertedCp2" style="text-align: right;" value="<?php echo number_format($cp2Balance,2);?>">} 或/和CP3账户{USD$ <input type="text" id="convertedCp3" style="text-align: right;" name="convertedCp3" value="<?php echo number_format($cp3Balance,2);?>">} 用于以<?php echo Globals::SHARE_VALUE ?>美金一股的价格转换成R股；并相信公司尽快安排股权证的发放。</li>
                         <?php
                         } else if ($culture == "kr") {
                         ?>
@@ -276,7 +276,7 @@ function calculateRshare() {
                     <span class="text_red" id="spanFormulaCp3">CP3 (<?php echo __('Optional');?>) = $0</span>
                     <br>
                     <br>
-                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / 0.80</span> <span class="text_green" id="spanFormulaRshare">= 0 <?php echo __('R-Shares');?></span>
+                    <span class="text_green">SSS</span> <span class="text_red" id="spanFormulaTotalAmount">is $0 / <?php echo Globals::SHARE_VALUE ?></span> <span class="text_green" id="spanFormulaRshare">= 0 <?php echo __('R-Shares');?></span>
                     <br>
                     <br>
                 </td>
