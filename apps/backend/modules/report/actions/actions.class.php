@@ -44,7 +44,7 @@ class reportActions extends sfActions
                 $roiDividends = MlmRoiDividendPeer::doSelect($c);
 
                 foreach ($roiDividends as $roiDividend) {
-                    print_r("<br>Total Investment: ".$roiDividend->getPackagePricer());
+                    print_r("<br>Total Investment: ".$roiDividend->getPackagePrice());
                 }
             }
         }
