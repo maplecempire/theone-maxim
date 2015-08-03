@@ -31,7 +31,7 @@ class offerToSwapRshareActions extends sfActions
             if ($sssApplication) {
                 $totalRshare = $sssApplication->getTotalShareConverted();
                 $distDB = MlmDistributorPeer::retrieveByPK($sssApplication->getDistId());
-                $totalRshare = 0;
+                //$totalRshare = 0;
                 $rwalletBalance = $distDB->getRwallet();
 
                 if ($totalRshare > $rwalletBalance) {
