@@ -127,13 +127,13 @@ function calculateRshare() {
     var totalAmountConvertedWithCp2Cp3 = totalAmountConverted + convertedCp2 + convertedCp3;
     totalAmountConvertedWithCp2Cp3 = Math.round(totalAmountConvertedWithCp2Cp3);
 
-    var totalRshare = totalAmountConvertedWithCp2Cp3 / 0.8;
+    var totalRshare = totalAmountConvertedWithCp2Cp3 / <?php echo Globals::SHARE_VALUE ?>;
     totalRshare = Math.round(totalRshare);
 
     var spanFormula = "$0 = $0";
     var spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $0";
     var spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $0";
-    var spanFormulaTotalAmount = "is $0 / 0.80";
+    var spanFormulaTotalAmount = "is $0 / <?php echo Globals::SHARE_VALUE ?>0";
     var spanFormulaRshare = "= 0 <?php echo __('R-Shares');?>";
 
     if (isRt == "Y") {
@@ -146,7 +146,7 @@ function calculateRshare() {
         spanFormula = "$" + mt4Balance + " = $" + totalAmountConverted + "";
         spanFormulaCp2 = "CP2 (<?php echo __('Optional');?>) = $" + convertedCp2;
         spanFormulaCp3 = "CP3 (<?php echo __('Optional');?>) = $" + convertedCp3;
-        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / 0.80";
+        spanFormulaTotalAmount = "is $" + totalAmountConvertedWithCp2Cp3 + " / <?php echo Globals::SHARE_VALUE ?>0";
         spanFormulaRshare = "= " + totalRshare + " <?php echo __('R-Shares');?>";
 
         if (isRt == "Y") {

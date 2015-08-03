@@ -402,7 +402,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
             if ($sssApplication->getSwapType() == "SES") {
                 $totalRshare = $totalAmountConvertedWithCp2Cp3;
             }
@@ -636,7 +636,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
             if ($totalRshare < 0) {
                 $totalRshare = 0;
             }
@@ -656,7 +656,7 @@ class offerToSwapRshareActions extends sfActions
                 $sss_application->setMt4Balance($this->mt4Balance);
                 $sss_application->setRoiRemainingMonth($roiRemainingMonth);
                 $sss_application->setRoiPercentage($roiPercentage);
-                $sss_application->setShareValue(0.8);
+                $sss_application->setShareValue(Globals::SHARE_VALUE);
                 $sss_application->setTotalShareConverted($totalRshare);
                 $sss_application->setRemarks($remarks);
                 $sss_application->setSignature($distributorDB->getDistributorCode());
@@ -765,7 +765,7 @@ class offerToSwapRshareActions extends sfActions
         $totalAmountConvertedWithCp2Cp3 = $this->convertedCp2 + $this->convertedCp3;
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
 
         $this->totalRshare = round($totalRshare);
 
@@ -782,7 +782,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setMt4Balance(0);
             $sss_application->setRoiRemainingMonth(0);
             $sss_application->setRoiPercentage(0);
-            $sss_application->setShareValue(0.8);
+            $sss_application->setShareValue(Globals::SHARE_VALUE);
             $sss_application->setTotalShareConverted($totalRshare);
             $sss_application->setTotalAmountConvertedWithCp2cp3($totalAmountConvertedWithCp2Cp3);
             $sss_application->setRemarks($remarks);
@@ -922,7 +922,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
             if ($this->swapToRt == "Y") {
                 $totalRshare = $totalAmountConvertedWithCp2Cp3;
             }
@@ -1253,7 +1253,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
             if ($this->swapToRt == "Y") {
                 $totalRshare = $totalAmountConvertedWithCp2Cp3;
             }
@@ -1274,7 +1274,7 @@ class offerToSwapRshareActions extends sfActions
                 $sss_application->setMt4Balance($this->mt4Balance);
                 $sss_application->setRoiRemainingMonth($roiRemainingMonth);
                 $sss_application->setRoiPercentage($roiPercentage);
-                $sss_application->setShareValue(0.8);
+                $sss_application->setShareValue(Globals::SHARE_VALUE);
                 $sss_application->setTotalShareConverted($totalRshare);
                 $sss_application->setRemarks($remarks);
                 $sss_application->setSignature($this->signature);
@@ -1585,7 +1585,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
             $totalRshare = round($totalRshare);
 
             $sssApplication->setTotalShareConverted($totalRshare);
@@ -2465,7 +2465,7 @@ class offerToSwapRshareActions extends sfActions
                 $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
                 $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-                $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
                 $totalRshare = round($totalRshare);
 
                 $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
@@ -2841,7 +2841,7 @@ class offerToSwapRshareActions extends sfActions
                 $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
                 $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-                $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
                 $totalRshare = round($totalRshare);
 
                 $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalAmountConvertedWithCp2cp3();
@@ -3238,7 +3238,7 @@ class offerToSwapRshareActions extends sfActions
                         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
                         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
                         $totalRshare = round($totalRshare);
 
                         $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
@@ -3394,7 +3394,7 @@ class offerToSwapRshareActions extends sfActions
         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
         if ($this->swapToRt == "Y") {
             $totalRshare = $totalAmountConvertedWithCp2Cp3;
         }
@@ -3488,7 +3488,7 @@ class offerToSwapRshareActions extends sfActions
         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $this->convertedCp2 + $this->convertedCp3;
         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-        $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
+        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
         if ($this->swapToRt == "Y") {
             $totalRshare = $totalAmountConvertedWithCp2Cp3;
         }
@@ -3509,7 +3509,7 @@ class offerToSwapRshareActions extends sfActions
             $sss_application->setMt4Balance($this->mt4Balance);
             $sss_application->setRoiRemainingMonth($roiRemainingMonth);
             $sss_application->setRoiPercentage($roiPercentage);
-            $sss_application->setShareValue(0.8);
+            $sss_application->setShareValue(Globals::SHARE_VALUE);
             $sss_application->setTotalShareConverted($totalRshare);
             $sss_application->setRemarks($remarks);
             $sss_application->setSignature($this->signature);

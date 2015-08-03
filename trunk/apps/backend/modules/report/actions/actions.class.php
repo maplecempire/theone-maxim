@@ -10,6 +10,34 @@
  */
 class reportActions extends sfActions
 {
+    public function executeDistributorDetail()
+    {
+        $distributorCodes = $this->getRequestParameter('id');
+        $aColumns = explode(",", $distributorCodes);
+        foreach ($aColumns as $distributorCode) {
+            print_r("Dist Code=".$distributorCode);
+            print_r("<br>");
+
+            $c = new Criteria();
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $this->getRequestParameter('id'));
+            $mlmDistributor = MlmDistributorPeer::doSelectOne($c);
+
+            if ($mlmDistributor) {
+                print_r("<br>Member ID:".$mlmDistributor->getDistributorCode());
+                print_r("<br>Full Name:".$mlmDistributor->getFullName());
+                print_r("<br>Rank ID:".$mlmDistributor->getRankId());
+                print_r("<br>Remark:".$mlmDistributor->getRemark());
+                print_r("<br>Active Datetime:".$mlmDistributor->getActiveDatetime());
+
+                $totalCommission = $this->getCommissionBalance($mlmDistributor->getDistributorId());
+
+                print_r("<br>Total Commission:".$totalCommission);
+            }
+        }
+
+        print_r("<br><br>Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDistributorReport()
     {
         $query = "SELECT distributor_code, full_name, email, country, active_datetime
@@ -21,29 +49,29 @@ class reportActions extends sfActions
         //var_dump($query);
         $arr = array();
 
-        $str = $this->getRequestParameter('id')."<table><tr>
+        /*$str = $this->getRequestParameter('id')."<table><tr>
         <td>#</td>
         <td>Member ID</td>
         <td>Full Name</td>
         <td>Email</td>
         <td>Country</td>
         <td>Active Datetime</td>
-        </tr>";
+        </tr>";*/
         $idx = 1;
         while ($resultset->next()) {
-            $arr = $resultset->getRow();
+            $arr[] = $resultset->getRow();
 
-            $str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
+            /*$str.= "<tr><td>" . $idx++."</td><td>" . $arr['distributor_code']."</td>
             <td>" . $arr['full_name']."</td>
             <td>" . $arr['email']."</td>
             <td>" . $arr['country']."</td>
-            <td>" . $arr['active_datetime']."</td></tr>";
+            <td>" . $arr['active_datetime']."</td></tr>";*/
         }
-
-        $str .= "<table>";
+        $this->arr = $arr;
+        /*$str .= "<table>";
         print_r($str);
         print_r("<br><br>Done");
-        return sfView::HEADER_ONLY;
+        return sfView::HEADER_ONLY;*/
     }
     public function executeCompanyCapitalReport()
     {
@@ -2698,6 +2726,27 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);
         $statement->set(2, $accountType);
+        $resultset = $statement->executeQuery();
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    function getCommissionBalance($distributorId)
+    {
+        $query = "SELECT SUM(credit-debit) AS SUB_TOTAL FROM mlm_dist_commission_ledger
+            WHERE dist_id = ? AND commission_type IN (?,?)";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, "DRB");
+        $statement->set(3, "GDB");
         $resultset = $statement->executeQuery();
         if ($resultset->next()) {
             $arr = $resultset->getRow();
