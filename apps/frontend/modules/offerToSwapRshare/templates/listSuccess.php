@@ -223,12 +223,12 @@ function calculateRshare() {
                         $totalAmountConverted = $sssApplication->getMt4Balance() + ($sssApplication->getMt4Balance() * $sssApplication->getRoiRemainingMonth() * $sssApplication->getRoiPercentage() / 100);
                         $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $sssApplication->getCp2Balance() + $sssApplication->getCp3Balance();
                         $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
-                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
+                        $totalRshare = $totalAmountConvertedWithCp2Cp3 / $sssApplication->getShareValue();
                         $totalRshare = round($totalRshare);
                     echo "$".number_format($sssApplication->getMt4Balance(),2)."K + ($".number_format($sssApplication->getMt4Balance(),2)."K x ".$sssApplication->getRoiRemainingMonth()." months x ". $sssApplication->getRoiPercentage(). "%) = <b>$" . number_format($totalAmountConverted,2)."</b>";
                     echo "<br><br>CP2 (Optional) = <b>$" . number_format($sssApplication->getCp2Balance(),2)."</b>";
                     echo "<br>CP3 (Optional) = <b>$" . number_format($sssApplication->getCp3Balance(),2)."</b>";
-                    echo "<br><br>is $" .number_format($totalAmountConvertedWithCp2Cp3,2). " / ".Globals::SHARE_VALUE." = <b>" . number_format($totalRshare,2) . "</b> R-Shares";
+                    echo "<br><br>is $" .number_format($totalAmountConvertedWithCp2Cp3,2). " / ".$sssApplication->getShareValue()." = <b>" . number_format($totalRshare,2) . "</b> R-Shares";
                     ?>
                     <br>
                 </td>
