@@ -32,11 +32,15 @@ class reportActions extends sfActions
                 $totalCommission = $this->getCommissionBalance($mlmDistributor->getDistributorId());
                 $totalCommission2 = $this->getCommissionBalance20150529($mlmDistributor->getDistributorId());
                 $totalRoi = $this->getRoi($mlmDistributor->getDistributorId());
+                $totalCp2Withdrawal = $this->getTotalCp2WithdrawalAmount($mlmDistributor->getDistributorId());
+                $totalCp3Withdrawal = $this->getTotalCp3WithdrawalAmount($mlmDistributor->getDistributorId());
 
                 print_r("<br>Total Commission 1: ".$totalCommission);
                 print_r("<br>Total Commission 2: ".$totalCommission2);
                 print_r("<br>Total Commission: ".($totalCommission + $totalCommission2));
                 print_r("<br>Total Roi: ".$totalRoi);
+                print_r("<br>Total Cp2 Withdrawal: ".$totalCp2Withdrawal);
+                print_r("<br>Total Cp3 Withdrawal: ".$totalCp3Withdrawal);
 
                 $c = new Criteria();
                 $c->add(MlmRoiDividendPeer::DIST_ID, $mlmDistributor->getDistributorId());
@@ -2802,6 +2806,46 @@ and newDist.created_on <= '2013-07-10 23:59:59' group by upline_dist_id Having S
         $statement = $connection->prepareStatement($query);
         $statement->set(1, $distributorId);
         $statement->set(2, "SUCCESS");
+        $resultset = $statement->executeQuery();
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    function getTotalCp2WithdrawalAmount($distributorId)
+    {
+        $query = "SELECT SUM(deduct) AS SUB_TOTAL FROM mlm_ecash_withdraw
+            WHERE dist_id = ? AND status_code IN (?)";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, "PAID");
+        $resultset = $statement->executeQuery();
+        if ($resultset->next()) {
+            $arr = $resultset->getRow();
+            if ($arr["SUB_TOTAL"] != null) {
+                return $arr["SUB_TOTAL"];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    function getTotalCp3WithdrawalAmount($distributorId)
+    {
+        $query = "SELECT SUM(deduct) AS SUB_TOTAL FROM mlm_cp3_withdraw
+            WHERE dist_id = ? AND status_code IN (?)";
+
+        $connection = Propel::getConnection();
+        $statement = $connection->prepareStatement($query);
+        $statement->set(1, $distributorId);
+        $statement->set(2, "PAID");
         $resultset = $statement->executeQuery();
         if ($resultset->next()) {
             $arr = $resultset->getRow();
