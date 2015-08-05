@@ -10,6 +10,39 @@
  */
 class offerToSwapRshareActions extends sfActions
 {
+    public function executeUpdateShareFromRoiRemaining()
+    {
+        $c = new Criteria();
+        $c->add(SssApplicationPeer::SWAP_TYPE, "SES");
+        $c->add(SssApplicationPeer::SHARE_FROM_ROI_REMAINING, null, Criteria::ISNULL);
+        //$c->setLimit(10);
+        $sssApplications = SssApplicationPeer::doSelect($c);
+
+        $idx = count($sssApplications);
+        print_r("<br>Total Count:".$idx);
+        foreach ($sssApplications as $sssApplication) {
+            print_r("<br>".$idx--."::".$sssApplication->getMt4UserName());
+
+            //$mlmRoiDividend = MlmRoiDividendPeer::retrieveByPK($sssApplication->getDividendId());
+
+            if ($sssApplication->getDividendId() > 0) {
+                $c = new Criteria();
+                $c->add(MlmRoiDividendPeer::MT4_USER_NAME, $sssApplication->getMt4UserName());
+                $c->add(MlmRoiDividendPeer::STATUS_CODE, "SES");
+                $totalRecords = MlmRoiDividendPeer::doCount($c);
+                print_r("<br>Roi %=".$sssApplication->getRoiPercentage()."; Total Record=".$totalRecords);
+                $totalShare = $sssApplication->getMt4Balance() * $sssApplication->getRoiPercentage() / 100 * $totalRecords / 0.8;
+
+                $sssApplication->setSesIdx($totalRecords);
+                $sssApplication->setShareFromRoiRemaining($totalShare);
+                $sssApplication->save();
+            }
+
+        }
+
+        print_r("Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeTerminateContractAndRemoveShare()
     {
         //$physicalDirectory = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . "return_sss.xls";

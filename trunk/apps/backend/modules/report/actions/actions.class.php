@@ -10,6 +10,54 @@
  */
 class reportActions extends sfActions
 {
+    public function executeMonkeyReportRoiReturn()
+    {
+        // 263611   an1399
+        // 256385   tdmc88
+        $distributorIds = "263611,256385";
+        $aColumns = explode(",", $distributorIds);
+        foreach ($aColumns as $distributorIds) {
+            $mlmDistributor = MlmDistributorPeer::retrieveByPK($aColumns);
+
+            print_r("<br><br><br><br><br>Group :".$mlmDistributor->getDistributorCode());
+            $query = "SELECT dist.distributor_code, dist.full_name, sss.mt4_user_name, sss.mt4_balance
+                        , sss.roi_remaining_month, sss.roi_percentage
+                        , sss.total_amount_converted_with_cp2cp3, sss.share_value, sss.total_share_converted
+                        , sss.created_on, sss.cp2_balance, sss.cp3_balance
+                            FROM sss_application sss
+                        INNER JOIN mlm_distributor dist ON sss.dist_id = dist.distributor_id
+                    WHERE dist.tree_structure LIKE '%|".$mlmDistributor->getDistributorId()."|%' AND sss.swap_type = 'SES'";
+
+            $connection = Propel::getConnection();
+            $statement = $connection->prepareStatement($query);
+            $resultset = $statement->executeQuery();
+            var_dump($query);
+
+            $idx = 1;
+            $arr = array();
+            $str = "<table><tr><td>#</td><td>Member ID</td><td>Full Name</td><td>Package</td><td>Upline ID</td><td>Upline Full Name</td><td>Contact</td><td>Email</td><td>Total</td><td>leader</td></a></tr>";
+            while ($resultset->next()) {
+                $arr = $resultset->getRow();
+                $str.= "<tr><td>".$idx++."</td>
+                    <td>" . $arr['distributor_code']."</td>
+                    <td>" . $arr['full_name']."</td>
+                    <td>" . $arr['created_on']."</td>
+                    <td>" . $arr['mt4_user_name']."</td>
+                    <td>" . $arr['mt4_balance']."</td>
+                    <td>" . $arr['roi_remaining_month']."</td>
+                    <td>" . $arr['roi_percentage']."</td>
+                    <td>" . $arr['cp2_balance']."</td>
+                    <td>" . $arr['cp3_balance']."</td>
+                    <td>" . $arr['share_value']."</td>
+                    <td>" . $arr['total_share_converted']."</td>
+                </tr>";
+            }
+            $str .= "<table>";
+            print_r($str);
+        }
+        print_r("<br><br>Done");
+        return sfView::HEADER_ONLY;
+    }
     public function executeDistributorDetail()
     {
         $distributorCodes = $this->getRequestParameter('id');
