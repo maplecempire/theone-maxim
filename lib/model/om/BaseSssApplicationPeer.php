@@ -13,7 +13,7 @@ abstract class BaseSssApplicationPeer {
 	const CLASS_DEFAULT = 'lib.model.SssApplication';
 
 	
-	const NUM_COLUMNS = 22;
+	const NUM_COLUMNS = 24;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -86,23 +86,29 @@ abstract class BaseSssApplicationPeer {
 	const UPDATED_ON = 'sss_application.UPDATED_ON';
 
 	
+	const SHARE_FROM_ROI_REMAINING = 'sss_application.SHARE_FROM_ROI_REMAINING';
+
+	
+	const SES_IDX = 'sss_application.SES_IDX';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('SssId', 'DistId', 'DividendId', 'Mt4UserName', 'Cp2Balance', 'Cp3Balance', 'RtBalance', 'Mt4Balance', 'RoiRemainingMonth', 'RoiPercentage', 'TotalAmountConvertedWithCp2cp3', 'ShareValue', 'TotalShareConverted', 'Signature', 'Remarks', 'StatusCode', 'SwapType', 'ClientAction', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', ),
-		BasePeer::TYPE_COLNAME => array (SssApplicationPeer::SSS_ID, SssApplicationPeer::DIST_ID, SssApplicationPeer::DIVIDEND_ID, SssApplicationPeer::MT4_USER_NAME, SssApplicationPeer::CP2_BALANCE, SssApplicationPeer::CP3_BALANCE, SssApplicationPeer::RT_BALANCE, SssApplicationPeer::MT4_BALANCE, SssApplicationPeer::ROI_REMAINING_MONTH, SssApplicationPeer::ROI_PERCENTAGE, SssApplicationPeer::TOTAL_AMOUNT_CONVERTED_WITH_CP2CP3, SssApplicationPeer::SHARE_VALUE, SssApplicationPeer::TOTAL_SHARE_CONVERTED, SssApplicationPeer::SIGNATURE, SssApplicationPeer::REMARKS, SssApplicationPeer::STATUS_CODE, SssApplicationPeer::SWAP_TYPE, SssApplicationPeer::CLIENT_ACTION, SssApplicationPeer::CREATED_BY, SssApplicationPeer::CREATED_ON, SssApplicationPeer::UPDATED_BY, SssApplicationPeer::UPDATED_ON, ),
-		BasePeer::TYPE_FIELDNAME => array ('sss_id', 'dist_id', 'dividend_id', 'mt4_user_name', 'cp2_balance', 'cp3_balance', 'rt_balance', 'mt4_balance', 'roi_remaining_month', 'roi_percentage', 'total_amount_converted_with_cp2cp3', 'share_value', 'total_share_converted', 'signature', 'remarks', 'status_code', 'swap_type', 'client_action', 'created_by', 'created_on', 'updated_by', 'updated_on', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('SssId', 'DistId', 'DividendId', 'Mt4UserName', 'Cp2Balance', 'Cp3Balance', 'RtBalance', 'Mt4Balance', 'RoiRemainingMonth', 'RoiPercentage', 'TotalAmountConvertedWithCp2cp3', 'ShareValue', 'TotalShareConverted', 'Signature', 'Remarks', 'StatusCode', 'SwapType', 'ClientAction', 'CreatedBy', 'CreatedOn', 'UpdatedBy', 'UpdatedOn', 'ShareFromRoiRemaining', 'SesIdx', ),
+		BasePeer::TYPE_COLNAME => array (SssApplicationPeer::SSS_ID, SssApplicationPeer::DIST_ID, SssApplicationPeer::DIVIDEND_ID, SssApplicationPeer::MT4_USER_NAME, SssApplicationPeer::CP2_BALANCE, SssApplicationPeer::CP3_BALANCE, SssApplicationPeer::RT_BALANCE, SssApplicationPeer::MT4_BALANCE, SssApplicationPeer::ROI_REMAINING_MONTH, SssApplicationPeer::ROI_PERCENTAGE, SssApplicationPeer::TOTAL_AMOUNT_CONVERTED_WITH_CP2CP3, SssApplicationPeer::SHARE_VALUE, SssApplicationPeer::TOTAL_SHARE_CONVERTED, SssApplicationPeer::SIGNATURE, SssApplicationPeer::REMARKS, SssApplicationPeer::STATUS_CODE, SssApplicationPeer::SWAP_TYPE, SssApplicationPeer::CLIENT_ACTION, SssApplicationPeer::CREATED_BY, SssApplicationPeer::CREATED_ON, SssApplicationPeer::UPDATED_BY, SssApplicationPeer::UPDATED_ON, SssApplicationPeer::SHARE_FROM_ROI_REMAINING, SssApplicationPeer::SES_IDX, ),
+		BasePeer::TYPE_FIELDNAME => array ('sss_id', 'dist_id', 'dividend_id', 'mt4_user_name', 'cp2_balance', 'cp3_balance', 'rt_balance', 'mt4_balance', 'roi_remaining_month', 'roi_percentage', 'total_amount_converted_with_cp2cp3', 'share_value', 'total_share_converted', 'signature', 'remarks', 'status_code', 'swap_type', 'client_action', 'created_by', 'created_on', 'updated_by', 'updated_on', 'share_from_roi_remaining', 'ses_idx', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('SssId' => 0, 'DistId' => 1, 'DividendId' => 2, 'Mt4UserName' => 3, 'Cp2Balance' => 4, 'Cp3Balance' => 5, 'RtBalance' => 6, 'Mt4Balance' => 7, 'RoiRemainingMonth' => 8, 'RoiPercentage' => 9, 'TotalAmountConvertedWithCp2cp3' => 10, 'ShareValue' => 11, 'TotalShareConverted' => 12, 'Signature' => 13, 'Remarks' => 14, 'StatusCode' => 15, 'SwapType' => 16, 'ClientAction' => 17, 'CreatedBy' => 18, 'CreatedOn' => 19, 'UpdatedBy' => 20, 'UpdatedOn' => 21, ),
-		BasePeer::TYPE_COLNAME => array (SssApplicationPeer::SSS_ID => 0, SssApplicationPeer::DIST_ID => 1, SssApplicationPeer::DIVIDEND_ID => 2, SssApplicationPeer::MT4_USER_NAME => 3, SssApplicationPeer::CP2_BALANCE => 4, SssApplicationPeer::CP3_BALANCE => 5, SssApplicationPeer::RT_BALANCE => 6, SssApplicationPeer::MT4_BALANCE => 7, SssApplicationPeer::ROI_REMAINING_MONTH => 8, SssApplicationPeer::ROI_PERCENTAGE => 9, SssApplicationPeer::TOTAL_AMOUNT_CONVERTED_WITH_CP2CP3 => 10, SssApplicationPeer::SHARE_VALUE => 11, SssApplicationPeer::TOTAL_SHARE_CONVERTED => 12, SssApplicationPeer::SIGNATURE => 13, SssApplicationPeer::REMARKS => 14, SssApplicationPeer::STATUS_CODE => 15, SssApplicationPeer::SWAP_TYPE => 16, SssApplicationPeer::CLIENT_ACTION => 17, SssApplicationPeer::CREATED_BY => 18, SssApplicationPeer::CREATED_ON => 19, SssApplicationPeer::UPDATED_BY => 20, SssApplicationPeer::UPDATED_ON => 21, ),
-		BasePeer::TYPE_FIELDNAME => array ('sss_id' => 0, 'dist_id' => 1, 'dividend_id' => 2, 'mt4_user_name' => 3, 'cp2_balance' => 4, 'cp3_balance' => 5, 'rt_balance' => 6, 'mt4_balance' => 7, 'roi_remaining_month' => 8, 'roi_percentage' => 9, 'total_amount_converted_with_cp2cp3' => 10, 'share_value' => 11, 'total_share_converted' => 12, 'signature' => 13, 'remarks' => 14, 'status_code' => 15, 'swap_type' => 16, 'client_action' => 17, 'created_by' => 18, 'created_on' => 19, 'updated_by' => 20, 'updated_on' => 21, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('SssId' => 0, 'DistId' => 1, 'DividendId' => 2, 'Mt4UserName' => 3, 'Cp2Balance' => 4, 'Cp3Balance' => 5, 'RtBalance' => 6, 'Mt4Balance' => 7, 'RoiRemainingMonth' => 8, 'RoiPercentage' => 9, 'TotalAmountConvertedWithCp2cp3' => 10, 'ShareValue' => 11, 'TotalShareConverted' => 12, 'Signature' => 13, 'Remarks' => 14, 'StatusCode' => 15, 'SwapType' => 16, 'ClientAction' => 17, 'CreatedBy' => 18, 'CreatedOn' => 19, 'UpdatedBy' => 20, 'UpdatedOn' => 21, 'ShareFromRoiRemaining' => 22, 'SesIdx' => 23, ),
+		BasePeer::TYPE_COLNAME => array (SssApplicationPeer::SSS_ID => 0, SssApplicationPeer::DIST_ID => 1, SssApplicationPeer::DIVIDEND_ID => 2, SssApplicationPeer::MT4_USER_NAME => 3, SssApplicationPeer::CP2_BALANCE => 4, SssApplicationPeer::CP3_BALANCE => 5, SssApplicationPeer::RT_BALANCE => 6, SssApplicationPeer::MT4_BALANCE => 7, SssApplicationPeer::ROI_REMAINING_MONTH => 8, SssApplicationPeer::ROI_PERCENTAGE => 9, SssApplicationPeer::TOTAL_AMOUNT_CONVERTED_WITH_CP2CP3 => 10, SssApplicationPeer::SHARE_VALUE => 11, SssApplicationPeer::TOTAL_SHARE_CONVERTED => 12, SssApplicationPeer::SIGNATURE => 13, SssApplicationPeer::REMARKS => 14, SssApplicationPeer::STATUS_CODE => 15, SssApplicationPeer::SWAP_TYPE => 16, SssApplicationPeer::CLIENT_ACTION => 17, SssApplicationPeer::CREATED_BY => 18, SssApplicationPeer::CREATED_ON => 19, SssApplicationPeer::UPDATED_BY => 20, SssApplicationPeer::UPDATED_ON => 21, SssApplicationPeer::SHARE_FROM_ROI_REMAINING => 22, SssApplicationPeer::SES_IDX => 23, ),
+		BasePeer::TYPE_FIELDNAME => array ('sss_id' => 0, 'dist_id' => 1, 'dividend_id' => 2, 'mt4_user_name' => 3, 'cp2_balance' => 4, 'cp3_balance' => 5, 'rt_balance' => 6, 'mt4_balance' => 7, 'roi_remaining_month' => 8, 'roi_percentage' => 9, 'total_amount_converted_with_cp2cp3' => 10, 'share_value' => 11, 'total_share_converted' => 12, 'signature' => 13, 'remarks' => 14, 'status_code' => 15, 'swap_type' => 16, 'client_action' => 17, 'created_by' => 18, 'created_on' => 19, 'updated_by' => 20, 'updated_on' => 21, 'share_from_roi_remaining' => 22, 'ses_idx' => 23, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
@@ -199,6 +205,10 @@ abstract class BaseSssApplicationPeer {
 		$criteria->addSelectColumn(SssApplicationPeer::UPDATED_BY);
 
 		$criteria->addSelectColumn(SssApplicationPeer::UPDATED_ON);
+
+		$criteria->addSelectColumn(SssApplicationPeer::SHARE_FROM_ROI_REMAINING);
+
+		$criteria->addSelectColumn(SssApplicationPeer::SES_IDX);
 
 	}
 
