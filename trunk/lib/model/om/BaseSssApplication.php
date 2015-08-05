@@ -95,6 +95,14 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 	
 	protected $updated_on;
 
+
+	
+	protected $share_from_roi_remaining;
+
+
+	
+	protected $ses_idx;
+
 	
 	protected $alreadyInSave = false;
 
@@ -283,6 +291,20 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		} else {
 			return date($format, $ts);
 		}
+	}
+
+	
+	public function getShareFromRoiRemaining()
+	{
+
+		return $this->share_from_roi_remaining;
+	}
+
+	
+	public function getSesIdx()
+	{
+
+		return $this->ses_idx;
 	}
 
 	
@@ -568,6 +590,30 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setShareFromRoiRemaining($v)
+	{
+
+		if ($this->share_from_roi_remaining !== $v) {
+			$this->share_from_roi_remaining = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::SHARE_FROM_ROI_REMAINING;
+		}
+
+	} 
+	
+	public function setSesIdx($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->ses_idx !== $v) {
+			$this->ses_idx = $v;
+			$this->modifiedColumns[] = SssApplicationPeer::SES_IDX;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -616,11 +662,15 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 
 			$this->updated_on = $rs->getTimestamp($startcol + 21, null);
 
+			$this->share_from_roi_remaining = $rs->getFloat($startcol + 22);
+
+			$this->ses_idx = $rs->getInt($startcol + 23);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 22; 
+						return $startcol + 24; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating SssApplication object", $e);
 		}
@@ -823,6 +873,12 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			case 21:
 				return $this->getUpdatedOn();
 				break;
+			case 22:
+				return $this->getShareFromRoiRemaining();
+				break;
+			case 23:
+				return $this->getSesIdx();
+				break;
 			default:
 				return null;
 				break;
@@ -855,6 +911,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			$keys[19] => $this->getCreatedOn(),
 			$keys[20] => $this->getUpdatedBy(),
 			$keys[21] => $this->getUpdatedOn(),
+			$keys[22] => $this->getShareFromRoiRemaining(),
+			$keys[23] => $this->getSesIdx(),
 		);
 		return $result;
 	}
@@ -936,6 +994,12 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 			case 21:
 				$this->setUpdatedOn($value);
 				break;
+			case 22:
+				$this->setShareFromRoiRemaining($value);
+				break;
+			case 23:
+				$this->setSesIdx($value);
+				break;
 		} 	}
 
 	
@@ -965,6 +1029,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[19], $arr)) $this->setCreatedOn($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setUpdatedBy($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setUpdatedOn($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setShareFromRoiRemaining($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setSesIdx($arr[$keys[23]]);
 	}
 
 	
@@ -994,6 +1060,8 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(SssApplicationPeer::CREATED_ON)) $criteria->add(SssApplicationPeer::CREATED_ON, $this->created_on);
 		if ($this->isColumnModified(SssApplicationPeer::UPDATED_BY)) $criteria->add(SssApplicationPeer::UPDATED_BY, $this->updated_by);
 		if ($this->isColumnModified(SssApplicationPeer::UPDATED_ON)) $criteria->add(SssApplicationPeer::UPDATED_ON, $this->updated_on);
+		if ($this->isColumnModified(SssApplicationPeer::SHARE_FROM_ROI_REMAINING)) $criteria->add(SssApplicationPeer::SHARE_FROM_ROI_REMAINING, $this->share_from_roi_remaining);
+		if ($this->isColumnModified(SssApplicationPeer::SES_IDX)) $criteria->add(SssApplicationPeer::SES_IDX, $this->ses_idx);
 
 		return $criteria;
 	}
@@ -1065,6 +1133,10 @@ abstract class BaseSssApplication extends BaseObject  implements Persistent {
 		$copyObj->setUpdatedBy($this->updated_by);
 
 		$copyObj->setUpdatedOn($this->updated_on);
+
+		$copyObj->setShareFromRoiRemaining($this->share_from_roi_remaining);
+
+		$copyObj->setSesIdx($this->ses_idx);
 
 
 		$copyObj->setNew(true);

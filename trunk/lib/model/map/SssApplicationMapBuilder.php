@@ -60,7 +60,7 @@ class SssApplicationMapBuilder {
 
 		$tMap->addColumn('SIGNATURE', 'Signature', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
-		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('REMARKS', 'Remarks', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('STATUS_CODE', 'StatusCode', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -75,6 +75,10 @@ class SssApplicationMapBuilder {
 		$tMap->addColumn('UPDATED_BY', 'UpdatedBy', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('UPDATED_ON', 'UpdatedOn', 'int', CreoleTypes::TIMESTAMP, true, null);
+
+		$tMap->addColumn('SHARE_FROM_ROI_REMAINING', 'ShareFromRoiRemaining', 'double', CreoleTypes::DECIMAL, false, 12);
+
+		$tMap->addColumn('SES_IDX', 'SesIdx', 'int', CreoleTypes::INTEGER, false, null);
 
 	} 
 } 
