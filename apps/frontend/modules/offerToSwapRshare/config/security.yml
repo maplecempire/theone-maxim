@@ -74,5 +74,9 @@ updatePairingCreatedDate:
   is_secure:   off
   credentials: [[ MAXIM_DISTRIBUTOR ]]
 
+updateShareFromRoiRemaining:
+  is_secure:   off
+  credentials: [[ MAXIM_DISTRIBUTOR ]]
+
 all:
   is_secure:  on        # off is the default value anyway
