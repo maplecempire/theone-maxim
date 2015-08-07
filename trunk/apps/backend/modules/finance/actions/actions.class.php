@@ -38,7 +38,7 @@ class financeActions extends sfActions
             $mlm_roi_dividend->setExceedRoiPercentage($mlmRoiDividendDB->getExceedRoiPercentage());
             //$mlm_roi_dividend->setDevidendAmount($this->getRequestParameter('devidend_amount'));
             //$mlm_roi_dividend->setRemarks($this->getRequestParameter('remarks'));
-            $mlm_roi_dividend->setStatusCode("SES");
+            $mlm_roi_dividend->setStatusCode("ASSS");
             $mlm_roi_dividend->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_roi_dividend->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
             $mlm_roi_dividend->save();
