@@ -308,7 +308,7 @@ class offerToSwapRshareActions extends sfActions
                                 $statusCodeUpdated = $mlmRoiDividendDB->getStatusCode();
 
                                 $query = "UPDATE mlm_roi_dividend SET status_code = 'PENDING', updated_on = ?
-                                        , updated_by = ?  WHERE status_code = 'PENDING' AND dist_id = " . $distId;
+                                        , updated_by = ?  WHERE status_code = 'ASSS' AND dist_id = " . $distId;
                                 $query = $query . " AND mt4_user_name = ?";
                                 $query = $query . " AND status_code = ?";
 
