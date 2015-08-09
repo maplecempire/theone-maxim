@@ -199,9 +199,9 @@ class offerToSwapRshareActions extends sfActions
             if ($username == "") {
                 continue;
             }
-            print_r("<br>1. Dist Code:" . $distributorCode);
+            print_r("<br>1. Dist Code:" . $username);
             $c = new Criteria();
-            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $distributorCode);
+            $c->add(MlmDistributorPeer::DISTRIBUTOR_CODE, $username);
             $distDB = MlmDistributorPeer::doSelectOne($c);
 
             if ($distDB) {
