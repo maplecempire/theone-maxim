@@ -599,7 +599,7 @@ class offerToSwapRshareActions extends sfActions
 
         $query = "SELECT distinct roi.mt4_user_name, roi.dist_id FROM mlm_roi_dividend roi
                     INNER JOIN  mlm_distributor dist ON roi.dist_id = dist.distributor_id
-                AND dist.leader_id in (254781,254842)
+                AND dist.distributor_id IN (328029,323060,306834,281188,307252,305341,330134,289769,301269,294586,306916,305610,297460,272317,304989,296032,270663,366052,344808,309074,312901,309861,366334,366318,376469,358588,361356,273209,358424,318934,318935,318938,302293,276541,319344,363463,307219,366649,372178,372774,323160,323204,302645,330601,319282,273538,297593,340384,340271,318014,350637,312607,362281,273463,276538,330576,298462,286955,348539,375342,296151,345649,307200,371240,371243,371247,375636,317364,322640,322750,2286,273214,270902,277322,360496,312177,308844,309320,342754,373440,346948,314882,318830,376213,306598,311800,292920,335686,349998,320520,376272,300026,305520,302343,370558,271123,298373,369610,335860,297752,327150,327160,327169,327320,327322,327516,327518,305743,302646,341459,331673,277298,302737,335684,307149,306464,291150,370928,371252,371254,371261,310809,307243,304554,301632,292072,324073,307835,306512,307534,307535,307536,311910,313780,315072,324460,328048,328050,328051,336576,339082,340198,343523,343525,349111,357530,359829,364596,345570,298836,326689,304924,286564,278492,289781,308292,377018,333863,283502,283505,302801,321077,328542,328536,301865,281852,270901,320246,330294,303820,309712,298460,338148,336691,283451,345270,355150,155761,281195,361667)
                   WHERE roi.status_code = 'PENDING' LIMIT 300";
 
         $connection = Propel::getConnection();
@@ -669,7 +669,7 @@ class offerToSwapRshareActions extends sfActions
             $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted;
             $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-            $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
+            $totalRshare = $totalAmountConvertedWithCp2Cp3 / 0.8;
             if ($totalRshare < 0) {
                 $totalRshare = 0;
             }
@@ -689,7 +689,7 @@ class offerToSwapRshareActions extends sfActions
                 $sss_application->setMt4Balance($this->mt4Balance);
                 $sss_application->setRoiRemainingMonth($roiRemainingMonth);
                 $sss_application->setRoiPercentage($roiPercentage);
-                $sss_application->setShareValue(Globals::SHARE_VALUE);
+                $sss_application->setShareValue(0.8);
                 $sss_application->setTotalShareConverted($totalRshare);
                 $sss_application->setRemarks($remarks);
                 $sss_application->setSignature($distributorDB->getDistributorCode());
@@ -2498,7 +2498,9 @@ class offerToSwapRshareActions extends sfActions
                 $totalAmountConvertedWithCp2Cp3 = $totalAmountConverted + $convertedCp2 + $convertedCp3;
                 $totalAmountConvertedWithCp2Cp3 = round($totalAmountConvertedWithCp2Cp3);
 
-                $totalRshare = $totalAmountConvertedWithCp2Cp3 / Globals::SHARE_VALUE;
+                $shareValue = $sssApplication->getShareValue();
+
+                $totalRshare = $totalAmountConvertedWithCp2Cp3 / $shareValue;
                 $totalRshare = round($totalRshare);
 
                 $totalAmountConvertedWithCp2Cp3 = $sssApplication->getTotalShareConverted() * $sssApplication->getShareValue();
