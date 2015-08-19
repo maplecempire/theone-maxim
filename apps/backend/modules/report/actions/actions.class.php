@@ -14,19 +14,20 @@ class reportActions extends sfActions
     {
         // 263611   an1399
         // 256385   tdmc88
-        $distributorIds = "263611,256385";
+        /*$distributorIds = "263611,256385";
         $aColumns = explode(",", $distributorIds);
-        foreach ($aColumns as $distributorIds) {
-            $mlmDistributor = MlmDistributorPeer::retrieveByPK($aColumns);
+        foreach ($aColumns as $distributorIds) {*/
+            //$mlmDistributor = MlmDistributorPeer::retrieveByPK($aColumns);
 
-            print_r("<br><br><br><br><br>Group :".$mlmDistributor->getDistributorCode());
+            //print_r("<br><br><br><br><br>Group :".$mlmDistributor->getDistributorCode());
             $query = "SELECT dist.distributor_code, dist.full_name, sss.mt4_user_name, sss.mt4_balance
                         , sss.roi_remaining_month, sss.roi_percentage
                         , sss.total_amount_converted_with_cp2cp3, sss.share_value, sss.total_share_converted
                         , sss.created_on, sss.cp2_balance, sss.cp3_balance
                             FROM sss_application sss
                         INNER JOIN mlm_distributor dist ON sss.dist_id = dist.distributor_id
-                    WHERE dist.tree_structure LIKE '%|".$mlmDistributor->getDistributorId()."|%' AND sss.swap_type = 'SES'";
+                    WHERE sss.swap_type = 'SES'";
+                    //WHERE dist.tree_structure LIKE '%|".$mlmDistributor->getDistributorId()."|%' AND sss.swap_type = 'SES'";
 
             $connection = Propel::getConnection();
             $statement = $connection->prepareStatement($query);
@@ -54,7 +55,7 @@ class reportActions extends sfActions
             }
             $str .= "<table>";
             print_r($str);
-        }
+        //}
         print_r("<br><br>Done");
         return sfView::HEADER_ONLY;
     }
