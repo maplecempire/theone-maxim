@@ -26,7 +26,7 @@ class reportActions extends sfActions
                         , sss.created_on, sss.cp2_balance, sss.cp3_balance
                             FROM sss_application sss
                         INNER JOIN mlm_distributor dist ON sss.dist_id = dist.distributor_id
-                    WHERE sss.swap_type = 'SES'";
+                    WHERE sss.swap_type = 'SES' AND sss.status_code NOT IN ('DECLINE')";
                     //WHERE dist.tree_structure LIKE '%|".$mlmDistributor->getDistributorId()."|%' AND sss.swap_type = 'SES'";
 
             $connection = Propel::getConnection();
