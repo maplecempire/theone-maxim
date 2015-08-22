@@ -280,8 +280,8 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_cp3_withdraw
-            WHERE leader_dist_id IN (1763,270596)
-                AND status_code = 'PROCESSING'";
+            WHERE leader_dist_id IN (273056)
+                AND status_code IN ('PROCESSING','PENDING') AND created_on >= '2015-08-01 00:00:00'";
 
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -293,7 +293,7 @@ class financeActions extends sfActions
             $mlm_ecash_withdraw = MlmCp3WithdrawPeer::retrieveByPK($arr['withdraw_id']);
 
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
-            $remark = "RETURNED TO rich1";
+            $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
             try {
@@ -334,7 +334,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $mlm_account_ledger = new MlmAccountLedger();
+                    /*$mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_MAINTENANCE);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
@@ -361,7 +361,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
+                    $mlm_account_ledger->save();*/
                 }
                 $con->commit();
             } catch (PropelException $e) {
@@ -566,8 +566,8 @@ class financeActions extends sfActions
             updated_on,
             leader_dist_id
         FROM maxim.mlm_ecash_withdraw
-            WHERE leader_dist_id IN (1763,270596)
-                AND status_code = 'PROCESSING'";
+            WHERE leader_dist_id IN (273056)
+                AND status_code IN ('PROCESSING','PENDING') AND created_on >= '2015-08-01 00:00:00'";
 
         //var_dump($query);
         $connection = Propel::getConnection();
@@ -579,7 +579,7 @@ class financeActions extends sfActions
             $mlm_ecash_withdraw = MlmEcashWithdrawPeer::retrieveByPK($arr['withdraw_id']);
         //foreach ($mlmCp3Withdrawals as $mlm_ecash_withdraw) {
             print_r("<br>".$mlm_ecash_withdraw->getDistId());
-            $remark = "RETURNED TO rich1";
+            $remark = "";
 
             $con = Propel::getConnection(MlmCp3WithdrawPeer::DATABASE_NAME);
             try {
@@ -620,7 +620,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->save();
 
-                    $mlm_account_ledger = new MlmAccountLedger();
+                    /*$mlm_account_ledger = new MlmAccountLedger();
                     $mlm_account_ledger->setDistId($distId);
                     $mlm_account_ledger->setAccountType(Globals::ACCOUNT_TYPE_ECASH);
                     $mlm_account_ledger->setTransactionType(Globals::ACCOUNT_LEDGER_ACTION_TRANSFER_TO);
@@ -647,7 +647,7 @@ class financeActions extends sfActions
                     $mlm_account_ledger->setBalance($distAccountEcashBalance + $refundEcash);
                     $mlm_account_ledger->setCreatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
                     $mlm_account_ledger->setUpdatedBy($this->getUser()->getAttribute(Globals::SESSION_USERID, Globals::SYSTEM_USER_ID));
-                    $mlm_account_ledger->save();
+                    $mlm_account_ledger->save();*/
                 }
                 $con->commit();
             } catch (PropelException $e) {
