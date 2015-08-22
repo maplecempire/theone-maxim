@@ -301,9 +301,9 @@ class financeActions extends sfActions
                 print_r("<br>".$remark);
                 $statusCode = Globals::WITHDRAWAL_REJECTED ;
 
-                if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
+                /*if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
                     continue;
-                }
+                }*/
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
@@ -587,9 +587,9 @@ class financeActions extends sfActions
                 print_r("<br>".$remark);
                 $statusCode = Globals::WITHDRAWAL_REJECTED ;
 
-                if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
+                /*if ($mlm_ecash_withdraw->getStatusCode() <> Globals::WITHDRAWAL_PROCESSING) {
                     continue;
-                }
+                }*/
 
                 $mlm_ecash_withdraw->setStatusCode($statusCode);
                 $mlm_ecash_withdraw->setRemarks($remark);
